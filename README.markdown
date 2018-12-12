@@ -15,8 +15,8 @@
 
 * When you buy a stock, you should sell the basket and vice versa
   * Scenario 1:
-    * Stock is at $100. Copy is at $100.
-    * Copy moves to $105.
+    * Stock is at $100. Basket is at $100.
+    * Basket moves to $105.
     * You buy stock and sell basket.
     * This is called hedging.
     * If both prices moves up, you make more money on the buy, becuase the
@@ -46,7 +46,8 @@
 **Hedging**
 * Take price (cash) * volatility (percenatge) of each stock.
 * Use the ratio of the product to determine hedge ratio.
-* Not hedging increases variance, but the profit over time will be the same
+* Not hedging increases variance, but the profit over time will be the same.
+* You lose money on commissions when you hedge.
 
 # Glossary
 * _basket_ - collection of stocks that are correlated to the stock
@@ -58,6 +59,14 @@
 * 200 biggest companies
 * Last two years of each stock
   * Opening and closing prices
+* Possible APIs
+  * https://iextrading.com/developer/
+    * Seems to have low barrier to entry
+    * Free
+  * https://intrinio.com/
+    * NOT free
+  * https://www.alphavantage.co/
+    * Free
 
 # Database
 * tables
