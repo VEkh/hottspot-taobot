@@ -1,3 +1,5 @@
+# Hottspot Capital
+
 # Questions
 * How large should the basket be?
   * No right answer

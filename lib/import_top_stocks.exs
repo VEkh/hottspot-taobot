@@ -1,7 +1,7 @@
-defmodule ImportTopStocks do
+defmodule HottspotCapital.ImportTopStocks do
   def import do
     IO.puts("I need syntax highlighting")
   end
 end
 
-ImportTopStocks.import()
+HottspotCapital.ImportTopStocks.import()
