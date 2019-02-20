@@ -69,6 +69,7 @@
     * NOT free
   * https://www.alphavantage.co/
     * Free
+    * **Use this**
 
 # Database
 * tables
