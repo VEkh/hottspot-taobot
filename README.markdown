@@ -62,19 +62,24 @@
 * Last two years of each stock
   * Opening and closing prices
 * Possible APIs
+  * https://www.alphavantage.co/
+    * Free
+    * Use for stock quotes and general data
   * https://iextrading.com/developer/
     * Seems to have low barrier to entry
     * Free
+    * Use technical indicators which may be used to calculate volatility
   * https://intrinio.com/
     * NOT free
-  * https://www.alphavantage.co/
-    * Free
-    * **Use this**
 
 # Database
 * tables
   * stock_prices
-    * opening_price | closing_price | current_volatility
+    * columns:
+      * close
+      * current_volatility (calculated; maybe not stored)
+      * open
+      * symbol
     * precision isn't super important
     * percentage moves are important
 
@@ -88,5 +93,9 @@
 ### Resources
 * _Bloomberg_
   * Has everything, but is very expensive
+* Calculating volatility
+  * [Investopedia] (https://www.investopedia.com/ask/answers/021015/what-best-measure-given-stocks-volatility.asp)
+    * Suggests that I'll need technical indicators like SMA, etc.
+  * [Volatility (finance) (Wikipedia)](https://en.m.wikipedia.org/wiki/Volatility_(finance))
 
 
