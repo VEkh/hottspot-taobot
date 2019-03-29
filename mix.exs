@@ -4,11 +4,12 @@ defmodule HottspotCapital.MixProject do
   def project do
     [
       app: :hottspot_capital,
-      version: "0.1.0",
+      deps: deps(),
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
-      deps: deps()
+      version: "0.1.0"
     ]
+    |> Keyword.merge(project_config(Mix.env()))
   end
 
   # Run "mix help compile.app" to learn about applications.
@@ -21,8 +22,16 @@ defmodule HottspotCapital.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      # {:dep_from_hexpm, "~> 0.3.0"},
-      # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
+      {:jason, "~> 1.1"},
+      {:httpoison, "~> 1.5.1"}
     ]
   end
+
+  defp project_config(:test) do
+    [
+      elixirc_paths: ["lib", "test/support"]
+    ]
+  end
+
+  defp project_config(_), do: []
 end
