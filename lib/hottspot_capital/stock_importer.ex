@@ -9,6 +9,14 @@ defmodule HottspotCapital.StockImporter do
     |> Stream.filter(&(!is_nil(&1)))
     |> Enum.sort(fn %{market_cap: a}, %{market_cap: b} -> a > b end)
     |> Enum.take(count)
+    |> Enum.map(fn stock_quote_params ->
+      {:ok, stock_quote} =
+        stock_quote_params
+        |> StockQuote.changeset()
+        |> StockQuote.upsert()
+
+      stock_quote
+    end)
   end
 
   defp get_all_symbols() do
@@ -45,13 +53,14 @@ defmodule HottspotCapital.StockImporter do
     required_props = [close, open]
 
     with true <- required_props |> Enum.all?(&(!is_nil(&1))),
-         {:ok, close_datetime} = DateTime.from_unix(close_epoch, :millisecond),
-         close_date = DateTime.to_date(close_datetime) do
-      %StockQuote{
+         {:ok, close_datetime} <- DateTime.from_unix(close_epoch, :millisecond) do
+      close_date = DateTime.to_date(close_datetime)
+
+      %{
         close: close / 1,
         company_name: company_name,
         date: close_date,
-        market_cap: market_cap / 1,
+        market_cap: market_cap,
         open: open / 1,
         symbol: symbol,
         volume: volume

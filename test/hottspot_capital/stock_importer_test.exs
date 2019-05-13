@@ -1,6 +1,8 @@
 defmodule HottspotCapital.StockImporterTest do
+  use HottspotCapital.Test.DataCase
   use HottspotCapital.Test.MockCase
 
+  alias HottspotCapital.Repo
   alias HottspotCapital.StockImporter
   alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.DynamicMocks

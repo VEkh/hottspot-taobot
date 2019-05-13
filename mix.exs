@@ -15,15 +15,19 @@ defmodule HottspotCapital.MixProject do
   # Run "mix help compile.app" to learn about applications.
   def application do
     [
-      extra_applications: [:logger]
+      extra_applications: [:logger],
+      mod: {HottspotCapital.Application, []}
     ]
   end
 
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
+      {:ecto, "~> 3.1.4"},
+      {:ecto_sql, "~> 3.1.2"},
+      {:httpoison, "~> 1.5.1"},
       {:jason, "~> 1.1"},
-      {:httpoison, "~> 1.5.1"}
+      {:postgrex, "~> 0.14.0"}
     ]
   end
 
