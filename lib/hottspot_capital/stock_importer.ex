@@ -10,6 +10,8 @@ defmodule HottspotCapital.StockImporter do
     |> Enum.sort(fn %{market_cap: a}, %{market_cap: b} -> a > b end)
     |> Enum.take(count)
     |> Enum.map(fn stock_quote_params ->
+      # TODO: save as companies AND stock quotes
+      # TODO: Import historical stock quote data from the two hundred biggest companies
       {:ok, stock_quote} =
         stock_quote_params
         |> StockQuote.changeset()

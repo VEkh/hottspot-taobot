@@ -19,4 +19,13 @@ config(
   module: HottspotCapital.IexApiClient
 )
 
+config(:logger, backends: [{LoggerFileBackend, :file_log}])
+
+config(
+  :logger,
+  :file_log,
+  format: "\n\n$dateT$time [$level] $message",
+  path: Path.join([File.cwd!(), "log", "#{Mix.env()}.log"])
+)
+
 import_config "#{Mix.env()}*.exs"

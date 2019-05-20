@@ -12,7 +12,6 @@ defmodule HottspotCapital.MixProject do
     |> Keyword.merge(project_config(Mix.env()))
   end
 
-  # Run "mix help compile.app" to learn about applications.
   def application do
     [
       extra_applications: [:logger],
@@ -20,13 +19,13 @@ defmodule HottspotCapital.MixProject do
     ]
   end
 
-  # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
       {:ecto, "~> 3.1.4"},
       {:ecto_sql, "~> 3.1.2"},
       {:httpoison, "~> 1.5.1"},
       {:jason, "~> 1.1"},
+      {:logger_file_backend, git: "https://github.com/vekh/logger_file_backend"},
       {:postgrex, "~> 0.14.0"}
     ]
   end
