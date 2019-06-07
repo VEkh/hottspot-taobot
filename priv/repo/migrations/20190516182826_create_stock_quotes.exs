@@ -2,7 +2,7 @@ defmodule HottspotCapital.Repo.Migrations.CreateStockQuotes do
   use Ecto.Migration
 
   def up do
-    execute(~s[
+    execute("""
       CREATE TABLE stock_quotes (
         close float NOT NULL,
         company_name text NOT NULL,
@@ -14,7 +14,7 @@ defmodule HottspotCapital.Repo.Migrations.CreateStockQuotes do
         updated_at timestamptz NOT NULL default NOW(),
         volume bigint NOT NULL
       )
-    ])
+    """)
   end
 
   def down do

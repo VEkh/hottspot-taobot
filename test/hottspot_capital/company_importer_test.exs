@@ -1,45 +1,37 @@
-defmodule HottspotCapital.StockImporterTest do
+defmodule HottspotCapital.CompanyImporterTest do
   use HottspotCapital.Test.DataCase
   use HottspotCapital.Test.MockCase
 
+  alias HottspotCapital.Company
+  alias HottspotCapital.CompanyImporter
   alias HottspotCapital.Repo
-  alias HottspotCapital.StockImporter
-  alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.DynamicMocks
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
   describe ".import_largest" do
-    test "imports and persists stocks" do
-      imported_stocks = StockImporter.import_largest(10)
+    test "imports and persists companies" do
+      imported_companies = CompanyImporter.import_largest(10)
 
-      assert length(imported_stocks) == 10
+      assert length(imported_companies) == 10
 
       assert [
-               %StockQuote{
-                 close: 1788.5,
-                 company_name: _,
-                 date: ~D[2021-06-09],
-                 market_cap: _,
-                 open: 1837.0,
-                 symbol: _,
-                 volume: 3_355_103
-               }
+               %Company{company_name: _, market_cap: _, symbol: _}
                | _
-             ] = imported_stocks
+             ] = imported_companies
 
-      assert Repo.all(StockQuote) |> length() == 10
+      assert Repo.all(Company) |> length() == 10
     end
 
-    test "sorts stocks by market cap" do
-      imported_stocks = StockImporter.import_largest(10)
+    test "sorts companies by market cap" do
+      imported_companies = CompanyImporter.import_largest(10)
 
       [market_cap1, market_cap2, market_cap3 | _] =
-        for %{market_cap: market_cap} <- imported_stocks, do: market_cap
+        for %{market_cap: market_cap} <- imported_companies, do: market_cap
 
       assert market_cap1 > market_cap2 && market_cap2 > market_cap3
     end
 
-    test "does not import stocks with unusable symbols" do
+    test "does not import companies with unusable symbols" do
       base_symbol = IexApiStubs.base_symbol("HOTT")
 
       bad_symbols = [
@@ -54,10 +46,10 @@ defmodule HottspotCapital.StockImporterTest do
         value: bad_symbols
       })
 
-      assert StockImporter.import_largest() == []
+      assert CompanyImporter.import_largest() == []
     end
 
-    test "does not import stocks with unusable data" do
+    test "does not import companies with unusable data" do
       base_symbol = IexApiStubs.base_symbol("HOTT")
 
       bad_symbols =
@@ -70,7 +62,7 @@ defmodule HottspotCapital.StockImporterTest do
         value: [base_symbol] ++ bad_symbols
       })
 
-      assert [%StockQuote{symbol: "HOTT"} | []] = StockImporter.import_largest()
+      assert [%Company{symbol: "HOTT"} | []] = CompanyImporter.import_largest()
     end
   end
 end
