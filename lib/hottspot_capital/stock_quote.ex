@@ -8,10 +8,8 @@ defmodule HottspotCapital.StockQuote do
 
   schema "stock_quotes" do
     field(:close, :float)
-    field(:company_name, :string)
     field(:date, :date)
     field(:inserted_at, :utc_datetime)
-    field(:market_cap, :integer)
     field(:open, :float)
     field(:updated_at, :utc_datetime)
     field(:volume, :integer)
@@ -24,9 +22,7 @@ defmodule HottspotCapital.StockQuote do
   def changeset(%__MODULE__{} = stock_quote, %{} = params) do
     required_fields = [
       :close,
-      :company_name,
       :date,
-      :market_cap,
       :open,
       :symbol,
       :volume
