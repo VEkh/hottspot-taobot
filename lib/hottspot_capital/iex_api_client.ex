@@ -3,8 +3,6 @@ defmodule HottspotCapital.IexApiClient do
     with {:ok, %{body: body, status_code: 200}} <- request(:get, path),
          {:ok, decoded_body} <- parse_response_body(body) do
       decoded_body
-    else
-      _ -> :error
     end
   end
 

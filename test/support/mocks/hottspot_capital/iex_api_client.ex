@@ -16,8 +16,19 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
   end
 
   def get("/stock/" <> rest) do
-    [symbol, "quote" <> _ | _] = rest |> String.split("/")
+    mocked_stock =
+      DynamicMocks.get_in([
+        HottspotCapital.Test.Mocks.IexApiClient,
+        :get_stock
+      ])
 
-    IexApiStubs.stock_quote(symbol)
+    case mocked_stock do
+      nil ->
+        [symbol, "quote" <> _ | _] = rest |> String.split("/")
+        IexApiStubs.stock_quote(symbol)
+
+      stock ->
+        stock
+    end
   end
 end

@@ -64,5 +64,41 @@ defmodule HottspotCapital.CompanyImporterTest do
 
       assert [%Company{symbol: "HOTT"} | []] = CompanyImporter.import_largest()
     end
+
+    test "retries 502 response of GET /stock/<symbol>/quote" do
+      DynamicMocks.update(%{
+        function: :get_symbols,
+        module: HottspotCapital.Test.Mocks.IexApiClient,
+        value: [IexApiStubs.base_symbol("HOTT")]
+      })
+
+      DynamicMocks.update(%{
+        function: :get_stock,
+        module: HottspotCapital.Test.Mocks.IexApiClient,
+        value: {:ok, %{body: %{}, status_code: 502}}
+      })
+
+      with_env(
+        :hottspot_capital,
+        :iex_api_client,
+        [request_retry_wait: 1],
+        fn ->
+          assert [] = CompanyImporter.import_largest()
+        end
+      )
+    end
+  end
+
+  defp with_env(app, key, options, fun) do
+    old_values = Application.get_env(app, key)
+    new_values = Keyword.merge(old_values, options)
+
+    Application.put_env(app, key, new_values)
+
+    try do
+      fun.()
+    after
+      Application.put_env(app, key, old_values)
+    end
   end
 end

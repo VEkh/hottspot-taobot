@@ -1,8 +1,6 @@
 defmodule HottspotCapital.CompanyImporter do
   alias HottspotCapital.Company
 
-  @iex_api_client Application.get_env(:hottspot_capital, :iex_api_client)[:module]
-
   def import_largest(count \\ 200) do
     get_all_symbols()
     |> Stream.map(&get_stock_quote/1)
@@ -19,8 +17,10 @@ defmodule HottspotCapital.CompanyImporter do
     end)
   end
 
+  defp config, do: Application.get_env(:hottspot_capital, :iex_api_client)
+
   defp get_all_symbols() do
-    symbols = @iex_api_client.get("/ref-data/symbols")
+    symbols = iex_api_client().get("/ref-data/symbols")
 
     for %{
           "currency" => currency,
@@ -33,11 +33,24 @@ defmodule HottspotCapital.CompanyImporter do
     end
   end
 
-  defp get_stock_quote(symbol) do
-    "/stock/#{symbol}/quote"
-    |> @iex_api_client.get()
-    |> parse_stock_quote
+  defp get_stock_quote(symbol, attempt \\ 1) do
+    response = iex_api_client().get("/stock/#{symbol}/quote")
+
+    case [response, attempt] do
+      [%{"symbol" => _} = resp, _] ->
+        parse_stock_quote(resp)
+
+      [{:ok, %{status_code: 502}}, current_attempt] when current_attempt < 3 ->
+        retry_wait = config()[:request_retry_wait]
+        Process.sleep(retry_wait)
+        get_stock_quote(symbol, attempt + 1)
+
+      [{:ok, %{status_code: 502}}, _] ->
+        nil
+    end
   end
+
+  defp iex_api_client(), do: config()[:module]
 
   defp parse_stock_quote(stock) do
     %{

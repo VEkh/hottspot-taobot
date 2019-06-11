@@ -16,7 +16,8 @@ config(
 config(
   :hottspot_capital,
   :iex_api_client,
-  module: HottspotCapital.IexApiClient
+  module: HottspotCapital.IexApiClient,
+  request_retry_wait: 1000
 )
 
 config(:logger, backends: [{LoggerFileBackend, :file_log}])
