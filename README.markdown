@@ -64,11 +64,13 @@
 * Possible APIs
   * https://www.alphavantage.co/
     * Free
-    * Use for stock quotes and general data
+    * Free usage is rather limited
+    * Technical indicators
   * https://iextrading.com/developer/
-    * Seems to have low barrier to entry
+    * Detailed stock quote data
     * Free
-    * Use technical indicators which may be used to calculate volatility
+    * Historical data
+    * Low barrier to entry
   * https://intrinio.com/
     * NOT free
 
