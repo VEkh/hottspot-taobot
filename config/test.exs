@@ -9,6 +9,12 @@ config(
 
 config(
   :hottspot_capital,
+  http_client: HottspotCapital.Test.Mocks.HTTPoison
+)
+
+config(
+  :hottspot_capital,
   :iex_api_client,
-  module: HottspotCapital.Test.Mocks.IexApiClient
+  module: HottspotCapital.Test.Mocks.IexApiClient,
+  secret_token: "secret"
 )

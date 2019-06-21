@@ -5,6 +5,12 @@ defmodule HottspotCapital.Test.Stubs.IexApiStubs do
     |> Map.put("symbol", String.upcase(symbol))
   end
 
+  def historical_stock_quote() do
+    Path.join([File.cwd!(), "test", "support", "fixtures", "historical_stock_quote.json"])
+    |> File.read!()
+    |> Jason.decode!()
+  end
+
   def stock_quote("NIL_CLOSE" = symbol) do
     symbol
     |> base_stock_quote()

@@ -4,13 +4,12 @@ defmodule HottspotCapital.StockQuote do
   alias Ecto.Changeset
   alias HottspotCapital.Repo
 
-  @primary_key {:symbol, :string, autogenerate: false}
-
   schema "stock_quotes" do
     field(:close, :float)
     field(:date, :date)
     field(:inserted_at, :utc_datetime)
     field(:open, :float)
+    field(:symbol, :string)
     field(:updated_at, :utc_datetime)
     field(:volume, :integer)
   end
@@ -32,13 +31,17 @@ defmodule HottspotCapital.StockQuote do
     |> Changeset.cast(params, required_fields)
     |> Changeset.validate_required(required_fields)
     |> Changeset.validate_length(:symbol, max: 5)
-    |> Changeset.unique_constraint(:symbol)
+    |> Changeset.unique_constraint(
+      :symbol,
+      message: "there is already a quote for this day",
+      name: :stock_quotes_symbol_date_index
+    )
   end
 
   def upsert(%Changeset{} = changeset) do
     Repo.insert(
       changeset,
-      conflict_target: :symbol,
+      conflict_target: [:date, :symbol],
       on_conflict: :replace_all
     )
   end

@@ -13,9 +13,12 @@ config(
   [HottspotCapital.Repo]
 )
 
+config(:hottspot_capital, http_client: HTTPoison)
+
 config(
   :hottspot_capital,
   :iex_api_client,
+  base_url: "https://cloud.iexapis.com/stable",
   module: HottspotCapital.IexApiClient,
   request_retry_wait: 1000
 )

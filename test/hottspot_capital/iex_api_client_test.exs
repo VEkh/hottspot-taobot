@@ -36,14 +36,17 @@ defmodule HottspotCapital.IexApiClientTest do
 
       DynamicMocks.update(%{
         function: :get_stock,
-        module: HottspotCapital.Test.Mocks.IexApiClient,
+        module: HottspotCapital.Test.Mocks.HTTPoison,
         value: {:ok, %{body: %{}, status_code: 502}}
       })
 
       Utils.with_env(
         :hottspot_capital,
         :iex_api_client,
-        [request_retry_wait: 1],
+        [
+          module: HottspotCapital.IexApiClient,
+          request_retry_wait: 1
+        ],
         fn ->
           assert IexApiClient.fetch_stock_quote("HOTT") == nil
         end
