@@ -1,12 +1,20 @@
 defmodule HottspotCapital.IexApiClient do
-  def client(), do: config()[:module]
+  defmodule StockQuote do
+    defstruct close: nil,
+              company_name: nil,
+              date: nil,
+              market_cap: nil,
+              open: nil,
+              symbol: nil,
+              volume: nil
+  end
 
   def fetch_stock_quote(symbol, attempt \\ 1) do
     response = client().get("/stock/#{symbol}/quote")
 
     case [response, attempt] do
       [%{"symbol" => _} = resp, _] ->
-        resp
+        parse_stock_quote(resp)
 
       [{:ok, %{status_code: 502}}, current_attempt] when current_attempt < 3 ->
         retry_wait = config()[:request_retry_wait]
@@ -25,7 +33,37 @@ defmodule HottspotCapital.IexApiClient do
     end
   end
 
+  def client(), do: config()[:module]
+
   defp config, do: Application.get_env(:hottspot_capital, :iex_api_client)
+
+  defp parse_stock_quote(%{
+         "close" => close,
+         "closeTime" => close_date_epoch,
+         "companyName" => company_name,
+         "latestVolume" => volume,
+         "marketCap" => market_cap,
+         "open" => open,
+         "symbol" => symbol
+       })
+       when nil not in [close, close_date_epoch, open] do
+    close_date =
+      close_date_epoch
+      |> DateTime.from_unix!(:millisecond)
+      |> DateTime.to_date()
+
+    %StockQuote{
+      close: close / 1,
+      company_name: company_name,
+      date: close_date,
+      market_cap: market_cap,
+      open: open / 1,
+      symbol: symbol,
+      volume: volume
+    }
+  end
+
+  defp parse_stock_quote(_), do: nil
 
   defp request(method, path) do
     %{

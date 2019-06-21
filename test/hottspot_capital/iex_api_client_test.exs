@@ -6,6 +6,27 @@ defmodule HottspotCapital.IexApiClientTest do
   alias HottspotCapital.Test.Utils
 
   describe ".fetch_stock_quote" do
+    test "returns nil for invalid stock quotes" do
+      [
+        "close",
+        "closeTime",
+        "open"
+      ]
+      |> Enum.each(fn nil_param_key ->
+        bad_stock_quote =
+          IexApiStubs.stock_quote("HOTT")
+          |> Map.merge(%{nil_param_key => nil})
+
+        DynamicMocks.update(%{
+          function: :get_stock,
+          module: HottspotCapital.Test.Mocks.IexApiClient,
+          value: bad_stock_quote
+        })
+
+        assert IexApiClient.fetch_stock_quote("HOTT") == nil
+      end)
+    end
+
     test "retries 502 response of GET /stock/<symbol>/quote" do
       DynamicMocks.update(%{
         function: :get_symbols,

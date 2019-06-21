@@ -2,23 +2,27 @@ defmodule HottspotCapital.CompanyImporterTest do
   use HottspotCapital.Test.DataCase
   use HottspotCapital.Test.MockCase
 
+  import Ecto.Query, only: [from: 2]
   alias HottspotCapital.Company
   alias HottspotCapital.CompanyImporter
   alias HottspotCapital.Repo
+  alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
   describe ".import_largest" do
     test "imports and persists companies" do
-      imported_companies = CompanyImporter.import_largest(10)
+      CompanyImporter.import_largest(10)
 
-      assert length(imported_companies) == 10
+      company_symbols =
+        from(company in Company, select: company.symbol)
+        |> Repo.all()
 
-      assert [
-               %Company{company_name: _, market_cap: _, symbol: _}
-               | _
-             ] = imported_companies
+      stock_quote_symbols =
+        from(stock_quote in StockQuote, select: stock_quote.symbol)
+        |> Repo.all()
 
-      assert Repo.all(Company) |> length() == 10
+      assert company_symbols == stock_quote_symbols
+      assert length(company_symbols) == 10 && length(stock_quote_symbols) == 10
     end
 
     test "sorts companies by market cap" do
