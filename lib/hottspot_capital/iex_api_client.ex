@@ -18,7 +18,7 @@ defmodule HottspotCapital.IexApiClient do
               volume: nil
   end
 
-  def fetch_historical_stock_quotes(symbol, years: years) do
+  def fetch_historical_stock_quotes(symbol, years: years) when years in [1, 2, 5] do
     case client().get("/stock/#{symbol}/chart/#{years}y") do
       [%{} | _] = historical_stock_quotes ->
         historical_stock_quotes
