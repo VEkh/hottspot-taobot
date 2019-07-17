@@ -3,9 +3,9 @@ defmodule HottspotCapital.Test.Factory do
 
   def create_company(%{} = attributes) do
     defaults = %Company{
-      company_name: "HOTT",
+      company_name: "Hottspot, Inc",
       market_cap: 1_000_000_000,
-      symbol: "Hottspot, Inc"
+      symbol: "HOTT"
     }
 
     Company.changeset(defaults, attributes)

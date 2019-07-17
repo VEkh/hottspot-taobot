@@ -25,22 +25,24 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
   defp get_historical_stock_quotes(range) do
     %{"date" => previous_date} = previous_stock_quote = IexApiStubs.historical_stock_quote()
 
-    earliest_date =
-      case Regex.run(~r/(\d+)(\w)/, range) do
-        [_, years, "y"] ->
-          years_to_subtract = String.to_integer(years)
-          {year, month, date} = Date.from_iso8601!(previous_date) |> Date.to_erl()
-          Date.from_erl!({year - years_to_subtract, month, date}) |> Date.to_string()
+    [_, year_range, "y"] = Regex.run(~r/(\d+)(\w)/, range)
 
-        _ ->
-          previous_date
-      end
+    {previous_year, previous_month, previous_day} =
+      previous_date
+      |> Date.from_iso8601!()
+      |> Date.to_erl()
 
-    earliest_stock_quote =
-      previous_stock_quote
-      |> Map.put("date", earliest_date)
+    earliest_year = previous_year - String.to_integer(year_range)
 
-    [earliest_stock_quote, previous_stock_quote]
+    earliest_year..previous_year
+    |> Enum.map(fn year ->
+      date =
+        {year, previous_month, previous_day}
+        |> Date.from_erl!()
+        |> Date.to_iso8601()
+
+      Map.put(previous_stock_quote, "date", date)
+    end)
   end
 
   defp get_stock_quote(symbol) do

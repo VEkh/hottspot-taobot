@@ -1,4 +1,5 @@
 defmodule HottspotCapital.Company do
+  require Ecto.Query
   use Ecto.Schema
 
   alias Ecto.Changeset
@@ -29,6 +30,18 @@ defmodule HottspotCapital.Company do
     |> Changeset.validate_required(required_fields)
     |> Changeset.validate_length(:symbol, max: 5)
     |> Changeset.unique_constraint(:symbol)
+  end
+
+  def get_largest(count) when is_number(count) do
+    query =
+      Ecto.Query.from(
+        companies in __MODULE__,
+        limit: ^count,
+        order_by: [desc: companies.market_cap],
+        select: companies
+      )
+
+    Repo.all(query)
   end
 
   def upsert(%Changeset{} = changeset) do

@@ -1,4 +1,5 @@
 defmodule HottspotCapital.StockQuoteImporter do
+  alias HottspotCapital.Company
   alias HottspotCapital.IexApiClient
   alias HottspotCapital.StockQuote
 
@@ -18,6 +19,13 @@ defmodule HottspotCapital.StockQuoteImporter do
       resp ->
         resp
     end
+  end
+
+  def import_historical(top_companies: count, years: years) do
+    Company.get_largest(count)
+    |> Enum.flat_map(fn
+      %{symbol: symbol} -> import_historical(symbol, years: years)
+    end)
   end
 
   def import_historical(symbol, years: years) do
