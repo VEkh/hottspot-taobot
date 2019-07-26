@@ -11,6 +11,7 @@
 * This basket is a collection of stocks whose movement most accurately mimics
   the stock's movement. It's not necessarily a collection of the highest
   correlated stocks.
+  * 5-10 stocks in a basked should be a good start
 
 * Make buying decisions based on the relative movement of the basket to
   reference stock
@@ -26,6 +27,18 @@
     * If both prices move down, you make more money on the sell, becuase the
       basket should move down more than the stock.
     * By hedging, you are trading the spread.
+
+* Eventually ensure that the move isn't due to headlines
+
+* You never own a stock pre-trade. This strategy is all about relative value.
+
+* Until you can short, only take the buy side of the trade.
+
+* Weight the basket order price by corrleation
+  * If will buy $100 shares of MSFT, then I should sell $100 total shares in the the basket.
+  * Allocate the order amount of each stock based on correlation
+  * Before placing an order on the basket stock, look at its relative position to _its_ basket and adjust your order.
+    * If want to sell $30 of basket GOOG, because it seems high compared to its reference stock, but I see that it seems low comapred to _its_ basket, then maybe I should sell $25 instead.
 
 **Find the Leader**
 * Find a stock amongst the correlated stocks that moves first
@@ -46,7 +59,7 @@
   * There are inverse S&P indexes that I can buy that are a proxy for shorting.
 
 **Hedging**
-* Take price (cash) * volatility (percenatge) of each stock.
+* Take price (cash) * volatility (percentage) of each stock.
 * Use the ratio of the product to determine hedge ratio.
 * Not hedging increases variance, but the profit over time will be the same.
 * You lose money on commissions when you hedge.
@@ -91,6 +104,8 @@
 * Decisions to buy and sell are based on relative movement, not absolute.
 * S&P is more liquid
   * You can sell $1 billion of S&P, but you can't do that for Apple
+* Take out quotes from quarterly months, (months directly after earnings were reported)
+  * April, July, October, January
 
 ### Resources
 * _Bloomberg_
