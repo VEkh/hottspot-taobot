@@ -130,6 +130,9 @@ defmodule HottspotCapital.IexApiClient do
       [{:ok, %{status_code: status_code}} = resp, _] when status_code in 200..399 ->
         resp
 
+      [{:ok, %{status_code: 404}}, _] ->
+        nil
+
       [{:ok, %{status_code: 502}}, current_attempt] when current_attempt < 3 ->
         Process.sleep(request_retry_wait)
         request(method, path, attempt: attempt + 1)
