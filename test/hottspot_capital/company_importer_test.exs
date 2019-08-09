@@ -43,7 +43,7 @@ defmodule HottspotCapital.CompanyImporterTest do
         base_symbol |> Map.put("currency", "EU")
       ]
 
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_symbols,
         module: HottspotCapital.Test.Mocks.IexApiClient,
         value: bad_symbols
@@ -59,7 +59,7 @@ defmodule HottspotCapital.CompanyImporterTest do
         ["NIL_CLOSE", "NIL_OPEN"]
         |> Enum.map(&Map.put(base_symbol, "symbol", &1))
 
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_symbols,
         module: HottspotCapital.Test.Mocks.IexApiClient,
         value: [base_symbol] ++ bad_symbols

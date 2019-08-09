@@ -1,5 +1,5 @@
 defmodule HottspotCapital.Test.Mocks.HTTPoison do
-  alias HottspotCapital.Test.DynamicMocks
+  alias HottspotCapital.Test.Mocks
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
   def request(
@@ -10,7 +10,7 @@ defmodule HottspotCapital.Test.Mocks.HTTPoison do
         _request_options \\ []
       ) do
     mocked_response =
-      DynamicMocks.get_in([
+      Mocks.get_in([
         HottspotCapital.Test.Mocks.HTTPoison,
         :get_stock
       ])
@@ -18,11 +18,7 @@ defmodule HottspotCapital.Test.Mocks.HTTPoison do
     case mocked_response do
       nil ->
         [symbol, "quote" <> _ | _] = rest |> String.split("/")
-
-        response = %{
-          body: IexApiStubs.stock_quote(symbol),
-          status_code: 200
-        }
+        response = %{body: IexApiStubs.stock_quote(symbol), status_code: 200}
 
         {:ok, response}
 

@@ -1,4 +1,4 @@
-defmodule HottspotCapital.Test.DynamicMocks do
+defmodule HottspotCapital.Test.Mocks do
   use Agent
 
   alias HottspotCapital.Utils

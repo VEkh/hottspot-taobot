@@ -16,7 +16,7 @@ defmodule HottspotCapital.IexApiClientTest do
           IexApiStubs.stock_quote("HOTT")
           |> Map.merge(%{nil_param_key => nil})
 
-        DynamicMocks.update(%{
+        Mocks.update(%{
           function: :get_stock,
           module: HottspotCapital.Test.Mocks.IexApiClient,
           value: bad_stock_quote
@@ -48,13 +48,13 @@ defmodule HottspotCapital.IexApiClientTest do
     end
 
     test "returns nil on 404 response" do
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_symbols,
         module: HottspotCapital.Test.Mocks.IexApiClient,
         value: [IexApiStubs.base_symbol("HOTT")]
       })
 
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_stock,
         module: HottspotCapital.Test.Mocks.HTTPoison,
         value: {:ok, %{body: %{}, status_code: 404}}
@@ -64,13 +64,13 @@ defmodule HottspotCapital.IexApiClientTest do
     end
 
     test "retries 502 response" do
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_symbols,
         module: HottspotCapital.Test.Mocks.IexApiClient,
         value: [IexApiStubs.base_symbol("HOTT")]
       })
 
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_stock,
         module: HottspotCapital.Test.Mocks.HTTPoison,
         value: {:ok, %{body: %{}, status_code: 502}}

@@ -3,15 +3,15 @@ defmodule HottspotCapital.Test.MockCase do
 
   using(_opts) do
     quote do
-      alias HottspotCapital.Test.DynamicMocks
+      alias HottspotCapital.Test.Mocks
 
       setup do
-        DynamicMocks.clear()
+        Mocks.clear()
         :ok
       end
 
       setup_all do
-        {:ok, _pid} = DynamicMocks.start_link()
+        {:ok, _pid} = Mocks.start_link()
         :ok
       end
     end

@@ -1,10 +1,10 @@
 defmodule HottspotCapital.Test.Mocks.IexApiClient do
-  alias HottspotCapital.Test.DynamicMocks
+  alias HottspotCapital.Test.Mocks
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
   def get("/ref-data/symbols") do
     mocked_symbols =
-      DynamicMocks.get_in([
+      Mocks.get_in([
         HottspotCapital.Test.Mocks.IexApiClient,
         :get_symbols
       ])
@@ -47,7 +47,7 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
 
   defp get_stock_quote(symbol) do
     mocked_stock =
-      DynamicMocks.get_in([
+      Mocks.get_in([
         HottspotCapital.Test.Mocks.IexApiClient,
         :get_stock
       ])

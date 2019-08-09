@@ -24,7 +24,7 @@ defmodule HottspotCapital.StockQuoteImporterTest do
     end
 
     test "doesn't persist stock with usesless data" do
-      DynamicMocks.update(%{
+      Mocks.update(%{
         function: :get_stock,
         module: HottspotCapital.Test.Mocks.IexApiClient,
         value: IexApiStubs.stock_quote("NIL_CLOSE")
