@@ -18,11 +18,11 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
   def get("/stock/" <> rest) do
     case String.split(rest, "/") do
       [_symbol, "chart", range] -> get_historical_stock_quotes(range)
-      [symbol, "quote"] -> get_stock_quote(symbol)
+      [symbol, "quote" <> _ | _] -> get_stock_quote(symbol)
     end
   end
 
-  defp get_historical_stock_quotes(range) do
+  def get_historical_stock_quotes(range) do
     %{"date" => previous_date} = previous_stock_quote = IexApiStubs.historical_stock_quote()
 
     [_, year_range, "y"] = Regex.run(~r/(\d+)(\w)/, range)

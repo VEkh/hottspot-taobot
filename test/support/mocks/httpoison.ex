@@ -9,17 +9,49 @@ defmodule HottspotCapital.Test.Mocks.HTTPoison do
         _headers \\ [],
         _request_options \\ []
       ) do
-    mocked_response =
+    case String.split(rest, "/") do
+      [_symbol, "chart", range] -> get_historical_stock_quotes(range)
+      [symbol, "quote" <> _ | _] -> get_stock_quote(symbol)
+    end
+  end
+
+  defp get_historical_stock_quotes(range) do
+    mocked_stock_quotes =
+      Mocks.get_in([
+        HottspotCapital.Test.Mocks.HTTPoison,
+        :get_historical_stock_quotes
+      ])
+
+    case mocked_stock_quotes do
+      nil ->
+        body =
+          range
+          |> Mocks.IexApiClient.get_historical_stock_quotes()
+          |> Jason.encode!()
+
+        response = %{body: body, status_code: 200}
+        {:ok, response}
+
+      response ->
+        response
+    end
+  end
+
+  defp get_stock_quote(symbol) do
+    mocked_stock =
       Mocks.get_in([
         HottspotCapital.Test.Mocks.HTTPoison,
         :get_stock
       ])
 
-    case mocked_response do
+    case mocked_stock do
       nil ->
-        [symbol, "quote" <> _ | _] = rest |> String.split("/")
-        response = %{body: IexApiStubs.stock_quote(symbol), status_code: 200}
+        body =
+          symbol
+          |> IexApiStubs.stock_quote()
+          |> Jason.encode!()
 
+        response = %{body: body, status_code: 200}
         {:ok, response}
 
       response ->

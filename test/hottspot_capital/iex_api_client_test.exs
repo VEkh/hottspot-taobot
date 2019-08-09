@@ -4,6 +4,20 @@ defmodule HottspotCapital.IexApiClientTest do
   alias HottspotCapital.IexApiClient
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
+  describe ".fetch_historical_stock_quotes (unmocked IexApiClient)" do
+    setup :unmock_iex_api_client
+
+    test "returns [] when empty collection is returned" do
+      Mocks.update(%{
+        function: :get_historical_stock_quotes,
+        module: HottspotCapital.Test.Mocks.HTTPoison,
+        value: {:ok, %{body: Jason.encode!([]), status_code: 200}}
+      })
+
+      assert IexApiClient.fetch_historical_stock_quotes("HOTT", years: 5) == []
+    end
+  end
+
   describe ".fetch_stock_quote" do
     test "returns nil for invalid stock quotes" do
       [
@@ -27,25 +41,8 @@ defmodule HottspotCapital.IexApiClientTest do
     end
   end
 
-  describe ".fetch_stock_quote (with HottspotCapital.IexApiClient)" do
-    setup do
-      old_values = Application.get_env(:hottspot_capital, :iex_api_client)
-
-      new_values =
-        Keyword.merge(
-          old_values,
-          module: HottspotCapital.IexApiClient,
-          request_retry_wait: 1
-        )
-
-      Application.put_env(:hottspot_capital, :iex_api_client, new_values)
-
-      on_exit(fn ->
-        Application.put_env(:hottspot_capital, :iex_api_client, old_values)
-      end)
-
-      :ok
-    end
+  describe ".fetch_stock_quote (unmocked IexApiClient)" do
+    setup :unmock_iex_api_client
 
     test "returns nil on 404 response" do
       Mocks.update(%{
@@ -57,7 +54,7 @@ defmodule HottspotCapital.IexApiClientTest do
       Mocks.update(%{
         function: :get_stock,
         module: HottspotCapital.Test.Mocks.HTTPoison,
-        value: {:ok, %{body: %{}, status_code: 404}}
+        value: {:ok, %{body: Jason.encode!(%{}), status_code: 404}}
       })
 
       assert IexApiClient.fetch_stock_quote("HOTT") == nil
@@ -73,10 +70,29 @@ defmodule HottspotCapital.IexApiClientTest do
       Mocks.update(%{
         function: :get_stock,
         module: HottspotCapital.Test.Mocks.HTTPoison,
-        value: {:ok, %{body: %{}, status_code: 502}}
+        value: {:ok, %{body: Jason.encode!(%{}), status_code: 502}}
       })
 
       assert IexApiClient.fetch_stock_quote("HOTT") == nil
     end
+  end
+
+  defp unmock_iex_api_client(_context) do
+    old_values = Application.get_env(:hottspot_capital, :iex_api_client)
+
+    new_values =
+      Keyword.merge(
+        old_values,
+        module: HottspotCapital.IexApiClient,
+        request_retry_wait: 1
+      )
+
+    Application.put_env(:hottspot_capital, :iex_api_client, new_values)
+
+    on_exit(fn ->
+      Application.put_env(:hottspot_capital, :iex_api_client, old_values)
+    end)
+
+    :ok
   end
 end

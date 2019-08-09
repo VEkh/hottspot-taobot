@@ -19,14 +19,11 @@ defmodule HottspotCapital.IexApiClient do
   end
 
   def fetch_historical_stock_quotes(symbol, years: years) when years in [1, 2, 5] do
-    case client().get("/stock/#{symbol}/chart/#{years}y") do
-      [%{} | _] = historical_stock_quotes ->
-        historical_stock_quotes
-        |> Enum.map(&parse_historical_stock_quote/1)
+    client = client()
 
-      nil ->
-        nil
-    end
+    "/stock/#{symbol}/chart/#{years}y"
+    |> client.get()
+    |> Enum.map(&parse_historical_stock_quote/1)
   end
 
   def fetch_stock_quote(symbol) do
