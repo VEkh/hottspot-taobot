@@ -9,6 +9,7 @@ config(
 
 config(
   :hottspot_capital,
+  calendar: HottspotCapital.Test.Mocks.Calendar,
   http_client: HottspotCapital.Test.Mocks.HTTPoison
 )
 

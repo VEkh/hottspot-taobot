@@ -7,13 +7,13 @@ config(
   username: "hottspot_capital"
 )
 
+config(:hottspot_capital, :ecto_repos, [HottspotCapital.Repo])
+
 config(
   :hottspot_capital,
-  :ecto_repos,
-  [HottspotCapital.Repo]
+  calendar: :calendar,
+  http_client: HTTPoison
 )
-
-config(:hottspot_capital, http_client: HTTPoison)
 
 config(
   :hottspot_capital,
