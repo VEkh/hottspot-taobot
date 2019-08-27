@@ -14,7 +14,7 @@ defmodule HottspotCapital.IexApiClientTest do
         value: {:ok, %{body: Jason.encode!([]), status_code: 200}}
       })
 
-      assert IexApiClient.fetch_historical_stock_quotes("HOTT", years: 5) == []
+      assert IexApiClient.fetch_historical_stock_quotes("HOTT", "5y") == []
     end
   end
 

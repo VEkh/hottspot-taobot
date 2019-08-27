@@ -32,7 +32,7 @@ defmodule HottspotCapital.Company do
     |> Changeset.unique_constraint(:symbol)
   end
 
-  def get_largest(count) when is_number(count) do
+  def get_largest(count) do
     query =
       Ecto.Query.from(
         companies in __MODULE__,
