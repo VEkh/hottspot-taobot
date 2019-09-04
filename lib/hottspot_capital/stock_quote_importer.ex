@@ -21,7 +21,8 @@ defmodule HottspotCapital.StockQuoteImporter do
   end
 
   def import_historical(range: range, symbol: symbol) do
-    fetched_historical_quotes = IexApiClient.fetch_historical_stock_quotes(symbol, range)
+    fetched_historical_quotes =
+      IexApiClient.fetch_historical_stock_quotes(range: range, symbol: symbol)
 
     case fetched_historical_quotes do
       [%IexApiClient.HistoricalStockQuote{} | _] ->

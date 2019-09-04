@@ -18,7 +18,9 @@ defmodule HottspotCapital.IexApiClient do
               volume: nil
   end
 
-  def fetch_historical_stock_quotes(symbol, range) do
+  def fetch_historical_stock_quotes(range: :no_missing_data, symbol: _), do: []
+
+  def fetch_historical_stock_quotes(range: range, symbol: symbol) do
     client = client()
 
     "/stock/#{symbol}/chart/#{range}"
