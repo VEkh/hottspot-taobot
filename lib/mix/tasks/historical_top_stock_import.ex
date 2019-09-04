@@ -3,7 +3,7 @@ defmodule Mix.Tasks.HistoricalTopStockImport do
 
   alias HottspotCapital.Company
   alias HottspotCapital.StockQuote
-  alias HottspotCapital.StockQuoteImporter
+  alias HottspotCapital.StockQuote.Importer
 
   @default_options %{
     "companies_limit" => 200
@@ -35,7 +35,7 @@ defmodule Mix.Tasks.HistoricalTopStockImport do
       %{symbol: symbol} ->
         range = StockQuote.missing_data_range(symbol)
         log_import(range: range, symbol: symbol)
-        StockQuoteImporter.import_historical(range: range, symbol: symbol)
+        Importer.import_historical(range: range, symbol: symbol)
     end)
   end
 

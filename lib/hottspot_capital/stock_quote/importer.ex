@@ -1,4 +1,4 @@
-defmodule HottspotCapital.StockQuoteImporter do
+defmodule HottspotCapital.StockQuote.Importer do
   alias HottspotCapital.IexApiClient
   alias HottspotCapital.StockQuote
 
@@ -21,14 +21,13 @@ defmodule HottspotCapital.StockQuoteImporter do
   end
 
   def import_historical(range: range, symbol: symbol) do
-    fetched_historical_quotes =
-      IexApiClient.fetch_historical_stock_quotes(range: range, symbol: symbol)
+    quotes = IexApiClient.fetch_historical_stock_quotes(range: range, symbol: symbol)
 
-    case fetched_historical_quotes do
+    case quotes do
       [%IexApiClient.HistoricalStockQuote{} | _] ->
-        for fetched_historical_quote <- fetched_historical_quotes do
+        for historical_quote <- quotes do
           {:ok, stock_quote} =
-            fetched_historical_quote
+            historical_quote
             |> Map.from_struct()
             |> Map.put(:symbol, symbol)
             |> StockQuote.changeset()

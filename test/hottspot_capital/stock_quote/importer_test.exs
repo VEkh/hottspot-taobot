@@ -1,10 +1,10 @@
-defmodule HottspotCapital.StockQuoteImporterTest do
+defmodule HottspotCapital.StockQuote.ImporterTest do
   use HottspotCapital.Test.DataCase
   use HottspotCapital.Test.MockCase
 
   alias HottspotCapital.Repo
   alias HottspotCapital.StockQuote
-  alias HottspotCapital.StockQuoteImporter
+  alias HottspotCapital.StockQuote.Importer
   alias HottspotCapital.Test.Factory
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
@@ -18,7 +18,7 @@ defmodule HottspotCapital.StockQuoteImporterTest do
                open: _,
                symbol: _,
                volume: _
-             } = StockQuoteImporter.import("HOTT")
+             } = Importer.import("HOTT")
 
       assert Repo.all(StockQuote) |> length() == 1
     end
@@ -30,7 +30,7 @@ defmodule HottspotCapital.StockQuoteImporterTest do
         value: IexApiStubs.stock_quote("NIL_CLOSE")
       })
 
-      assert StockQuoteImporter.import("HOTT") == nil
+      assert Importer.import("HOTT") == nil
     end
   end
 
@@ -38,7 +38,7 @@ defmodule HottspotCapital.StockQuoteImporterTest do
     test "imports daily stock quotes from the last n years" do
       symbol = "HOTT"
       Factory.create_company(%{symbol: symbol})
-      StockQuoteImporter.import_historical(range: "1y", symbol: symbol)
+      Importer.import_historical(range: "1y", symbol: symbol)
 
       imported_stock_quotes = Repo.all(StockQuote)
 
