@@ -125,6 +125,11 @@ defmodule HottspotCapital.IexApiClient do
 
     response = http_client.request(method, url, "", headers, request_options)
 
+    retry = fn new_attempt ->
+      Process.sleep(request_retry_wait)
+      request(method, path, attempt: new_attempt)
+    end
+
     case [response, attempt] do
       [{:ok, %{status_code: status_code}} = resp, _] when status_code in 200..399 ->
         resp
@@ -133,10 +138,15 @@ defmodule HottspotCapital.IexApiClient do
         nil
 
       [{:ok, %{status_code: 502}}, current_attempt] when current_attempt < 3 ->
-        Process.sleep(request_retry_wait)
-        request(method, path, attempt: attempt + 1)
+        retry.(attempt + 1)
 
       [{:ok, %{status_code: 502}}, _] ->
+        nil
+
+      [{:error, %{reason: :timeout}}, current_attempt] when current_attempt < 3 ->
+        retry.(attempt + 1)
+
+      [{:error, %{reason: :timeout}}, _] ->
         nil
     end
   end
