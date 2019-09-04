@@ -1,7 +1,7 @@
-defmodule HottspotCapital.BasketGeneratorTest do
+defmodule HottspotCapital.Basket.GeneratorTest do
   use HottspotCapital.Test.DataCase
 
-  alias HottspotCapital.BasketGenerator
+  alias HottspotCapital.Basket.Generator
   alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.Factory
 
@@ -23,7 +23,7 @@ defmodule HottspotCapital.BasketGeneratorTest do
       end)
 
       [symbols, correlations] =
-        BasketGenerator.generate("HOTT")
+        Generator.generate("HOTT")
         |> Enum.reduce([[], []], fn basket_item, [symbols, correlations] ->
           [{symbol, correlation}] = Map.to_list(basket_item)
           [symbols ++ [symbol], correlations ++ [correlation]]

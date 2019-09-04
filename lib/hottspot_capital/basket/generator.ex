@@ -1,6 +1,4 @@
-defmodule HottspotCapital.BasketGenerator do
-  require Ecto.Query
-
+defmodule HottspotCapital.Basket.Generator do
   alias HottspotCapital.Repo
 
   def generate(symbol) do
