@@ -1,4 +1,4 @@
-defmodule Mix.Tasks.HistoricalTopStockImport do
+defmodule Mix.Tasks.ImportHistoricalTopStocks do
   use Mix.Task
 
   alias HottspotCapital.Company
@@ -9,6 +9,8 @@ defmodule Mix.Tasks.HistoricalTopStockImport do
   @default_options %{
     "companies_limit" => 200
   }
+
+  @name :import_historical_top_stocks
 
   @permitted_options Map.keys(@default_options)
 
@@ -26,7 +28,7 @@ defmodule Mix.Tasks.HistoricalTopStockImport do
 
   Example:
   ```
-  mix historical_top_stock_import --companies_limit=200
+  mix #{@name} --companies_limit=200
   ```
   """
 
@@ -38,7 +40,7 @@ defmodule Mix.Tasks.HistoricalTopStockImport do
         defaults: @default_options,
         options: options,
         permitted: @permitted_options,
-        task_name: "historical_top_stock_import"
+        task_name: @name
       })
 
     Company.get_largest(companies_limit)

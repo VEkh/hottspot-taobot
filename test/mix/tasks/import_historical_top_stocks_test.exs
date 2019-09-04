@@ -1,10 +1,10 @@
-defmodule Mix.Tasks.HistoricalTopStockImportTest do
+defmodule Mix.Tasks.ImportHistoricalTopStocksTest do
   use HottspotCapital.Test.DataCase
 
   alias HottspotCapital.Repo
   alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.Factory
-  alias Mix.Tasks.HistoricalTopStockImport
+  alias Mix.Tasks.ImportHistoricalTopStocks
 
   test "imports historical stocks from top n companies (default options)" do
     [
@@ -16,7 +16,7 @@ defmodule Mix.Tasks.HistoricalTopStockImportTest do
     ]
     |> Enum.each(&Factory.create_company/1)
 
-    HistoricalTopStockImport.run([])
+    ImportHistoricalTopStocks.run([])
 
     assert %{
              "AMZN" => [2013, 2014, 2015, 2016, 2017, 2018],
@@ -37,7 +37,7 @@ defmodule Mix.Tasks.HistoricalTopStockImportTest do
     ]
     |> Enum.each(&Factory.create_company/1)
 
-    HistoricalTopStockImport.run(["--companies_limit=3"])
+    ImportHistoricalTopStocks.run(["--companies_limit=3"])
 
     assert %{
              "AMZN" => [2013, 2014, 2015, 2016, 2017, 2018],
