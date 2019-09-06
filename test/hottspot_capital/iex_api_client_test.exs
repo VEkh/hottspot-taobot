@@ -81,7 +81,7 @@ defmodule HottspotCapital.IexApiClientTest do
       assert IexApiClient.fetch_stock_quote("HOTT") == nil
     end
 
-    test "retries HTTPoison timeout" do
+    test "retries when there are timeout and connection issues" do
       Mocks.update(%{
         function: :get_symbols,
         module: HottspotCapital.Test.Mocks.IexApiClient,
@@ -92,6 +92,14 @@ defmodule HottspotCapital.IexApiClientTest do
         function: :get_stock,
         module: HottspotCapital.Test.Mocks.HTTPoison,
         value: {:error, %{reason: :timeout}}
+      })
+
+      assert IexApiClient.fetch_stock_quote("HOTT") == nil
+
+      Mocks.update(%{
+        function: :get_stock,
+        module: HottspotCapital.Test.Mocks.HTTPoison,
+        value: {:error, %{reason: :closed}}
       })
 
       assert IexApiClient.fetch_stock_quote("HOTT") == nil

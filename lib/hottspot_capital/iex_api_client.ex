@@ -39,6 +39,9 @@ defmodule HottspotCapital.IexApiClient do
     with {:ok, %{body: body, status_code: 200}} <- request(:get, path),
          {:ok, decoded_body} <- Jason.decode(body) do
       decoded_body
+    else
+      {:ok, nil} -> nil
+      resp -> resp
     end
   end
 
@@ -58,6 +61,15 @@ defmodule HottspotCapital.IexApiClient do
       open: open / 1,
       volume: volume
     }
+  end
+
+  defp parse_response(response) do
+    case response do
+      {:ok, %{status_code: status_code}} when status_code in 200..399 -> response
+      {:ok, %{status_code: 404}} -> {:ok, nil}
+      {:ok, %{status_code: 502}} -> {:retry, nil}
+      {:error, %{reason: reason}} when reason in [:closed, :timeout] -> {:retry, nil}
+    end
   end
 
   defp parse_stock_quote(%{
@@ -96,58 +108,50 @@ defmodule HottspotCapital.IexApiClient do
     } = config() |> Enum.into(%{})
 
     http_client = Application.get_env(:hottspot_capital, :http_client)
+    options = [attempt: 1] |> Keyword.merge(options)
 
-    %{attempt: attempt} =
-      [attempt: 1]
-      |> Keyword.merge(options)
-      |> Enum.into(%{})
+    client_request_options = [params: [token: secret_token]]
 
-    headers = [
+    request_headers = [
       {"Accepts", "application/json"},
       {"Content-Type", "application/json"}
     ]
 
-    request_options = [params: [token: secret_token]]
-
-    %{path: root_path} = base_uri = URI.parse(base_url)
-
-    url =
-      base_uri
-      |> Map.put(:path, Path.join(root_path, path))
-      |> URI.to_string()
+    url = to_request_url(base_url: base_url, path: path)
 
     RequestLogger.log(%HTTPoison.Request{
-      headers: headers,
+      headers: request_headers,
       method: method,
-      options: request_options,
+      options: client_request_options,
       url: url
     })
 
-    response = http_client.request(method, url, "", headers, request_options)
+    response =
+      http_client.request(method, url, "", request_headers, client_request_options)
+      |> parse_response()
 
-    retry = fn new_attempt ->
-      Process.sleep(request_retry_wait)
-      request(method, path, attempt: new_attempt)
+    case response do
+      {:ok, _} ->
+        response
+
+      {:retry, resp} ->
+        case Keyword.get(options, :attempt) do
+          attempt when attempt < 3 ->
+            Process.sleep(request_retry_wait)
+            retry_options = Keyword.put(options, :attempt, attempt + 1)
+            request(method, path, retry_options)
+
+          _ ->
+            {:ok, resp}
+        end
     end
+  end
 
-    case [response, attempt] do
-      [{:ok, %{status_code: status_code}} = resp, _] when status_code in 200..399 ->
-        resp
+  defp to_request_url(base_url: base_url, path: path) do
+    %{path: root_path} = base_uri = URI.parse(base_url)
 
-      [{:ok, %{status_code: 404}}, _] ->
-        nil
-
-      [{:ok, %{status_code: 502}}, current_attempt] when current_attempt < 3 ->
-        retry.(attempt + 1)
-
-      [{:ok, %{status_code: 502}}, _] ->
-        nil
-
-      [{:error, %{reason: :timeout}}, current_attempt] when current_attempt < 3 ->
-        retry.(attempt + 1)
-
-      [{:error, %{reason: :timeout}}, _] ->
-        nil
-    end
+    base_uri
+    |> Map.put(:path, Path.join(root_path, path))
+    |> URI.to_string()
   end
 end
