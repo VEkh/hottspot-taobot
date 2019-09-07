@@ -11,7 +11,7 @@
 * This basket is a collection of stocks whose movement most accurately mimics
   the stock's movement. It's not necessarily a collection of the highest
   correlated stocks.
-  * 5-10 stocks in a basked should be a good start
+  * 5-10 stocks in a basket should be a good start
 
 * Make buying decisions based on the relative movement of the basket to
   reference stock

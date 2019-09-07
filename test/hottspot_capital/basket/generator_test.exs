@@ -67,9 +67,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
       118.369   928.406   367.049   370.311    58.182
     ]
     |> Enum.map(fn num ->
-      num
-      |> String.to_float()
-      |> Float.round(2)
+      num |> String.to_float() |> Float.round(2)
     end)
     |> Enum.chunk_every(5)
   end
