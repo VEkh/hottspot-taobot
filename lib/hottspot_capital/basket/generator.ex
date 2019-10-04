@@ -9,11 +9,19 @@ defmodule HottspotCapital.Basket.Generator do
       basket_item.symbol AS basket_item_symbol,
       CORR(reference.close, basket_item.close) AS correlation
 
-      FROM stock_quotes AS reference
-      JOIN stock_quotes AS basket_item
+      FROM (
+        SELECT close, date, symbol FROM stock_quotes
+        WHERE symbol = $symbol
+        AND EXTRACT(month from date) NOT IN (1,4,7,10)
+      ) AS reference
+
+      JOIN (
+        SELECT close, date, symbol FROM stock_quotes
+        WHERE symbol != $symbol
+        AND EXTRACT(month from date) NOT IN (1,4,7,10)
+      ) AS basket_item
         ON reference.date = basket_item.date
-        AND reference.symbol != basket_item.symbol
-      WHERE reference.symbol = $symbol
+
       GROUP BY reference.symbol, basket_item.symbol
       ORDER BY 3 DESC
       LIMIT 10

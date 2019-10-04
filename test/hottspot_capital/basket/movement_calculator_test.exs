@@ -17,7 +17,7 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
         |> Enum.each(fn {[close, volume], index} ->
           Factory.create_stock_quote(%{
             close: close,
-            date: Date.utc_today() |> Date.add(-index),
+            date: Date.from_erl!({2019, 08, 26 - index}),
             symbol: symbol,
             volume: volume
           })

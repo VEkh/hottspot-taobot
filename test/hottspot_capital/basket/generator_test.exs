@@ -7,6 +7,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
   describe ".generate" do
     test "returns list of companies with most correlated closing stock prices" do
+      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
       stubbed_quotes = stub_stock_quotes()
 
       [
@@ -19,15 +20,19 @@ defmodule HottspotCapital.Basket.GeneratorTest do
       |> Enum.each(fn {%{symbol: symbol} = company, rank} ->
         Factory.create_company(company)
         quotes = Enum.at(stubbed_quotes, rank - 1)
-        create_historical_quotes(quotes: quotes, symbol: symbol)
+
+        quotes
+        |> Enum.with_index()
+        |> Enum.each(fn {close, index} ->
+          date = Date.from_erl!({current_year - index, 8, 26})
+          create_stock_quote(%{close: close, date: date, symbol: symbol})
+        end)
       end)
 
       [symbols, correlations] =
-        Generator.generate("HOTT")
-        |> Enum.reduce([[], []], fn basket_item, [symbols, correlations] ->
-          [{symbol, correlation}] = Map.to_list(basket_item)
-          [symbols ++ [symbol], correlations ++ [correlation]]
-        end)
+        "HOTT"
+        |> Generator.generate()
+        |> parse_basket()
 
       assert symbols == ["FB", "GOOG", "MSFT", "DIS"]
 
@@ -35,25 +40,75 @@ defmodule HottspotCapital.Basket.GeneratorTest do
                correlation < 1 && correlation > -1
              end)
     end
+
+    test "excludes quotes from quarterly months" do
+      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
+      quarterly_months = [1, 4, 7, 10]
+
+      companies = [
+        %{symbol: "HOTT"},
+        %{symbol: "DIS"},
+        %{symbol: "FB"},
+        %{symbol: "GOOG"},
+        %{symbol: "MSFT"}
+      ]
+
+      [companies, stub_stock_quotes(), 1..length(companies)]
+      |> Enum.zip()
+      |> Enum.each(fn {%{symbol: symbol} = company, quotes, company_index} ->
+        is_excluded_company = rem(company_index, 2) == 0
+
+        Factory.create_company(company)
+
+        stock_quote_symbols =
+          if is_excluded_company do
+            ["HOTT", symbol]
+          else
+            [symbol]
+          end
+
+        quotes
+        |> Enum.with_index()
+        |> Enum.each(fn {close, quote_index} ->
+          stock_quote_month =
+            if is_excluded_company do
+              month_index = rem(quote_index, length(quarterly_months))
+              quarterly_months |> Enum.at(month_index)
+            else
+              8
+            end
+
+          date = Date.from_erl!({current_year - quote_index, stock_quote_month, 15})
+
+          stock_quote_symbols
+          |> Enum.each(fn stock_quote_symbol ->
+            create_stock_quote(%{close: close, date: date, symbol: stock_quote_symbol})
+          end)
+        end)
+      end)
+
+      [symbols, _] = Generator.generate("HOTT") |> parse_basket()
+      assert symbols == ["FB", "MSFT"]
+    end
   end
 
-  defp create_historical_quotes(quotes: quotes, symbol: symbol) do
-    {current_year, current_month, current_day} = Date.utc_today() |> Date.to_erl()
+  defp create_stock_quote(%{close: close, date: date, symbol: symbol}) do
+    %{
+      close: close,
+      date: date,
+      open: close,
+      symbol: symbol,
+      volume: 100_000
+    }
+    |> StockQuote.changeset()
+    |> StockQuote.upsert()
+  end
 
-    quotes
-    |> Enum.with_index()
-    |> Enum.each(fn {close_price, index} ->
-      date = Date.from_erl!({current_year - index, current_month, current_day})
-
-      %{
-        close: close_price,
-        date: date,
-        open: close_price,
-        symbol: symbol,
-        volume: 100_000
-      }
-      |> StockQuote.changeset()
-      |> StockQuote.upsert()
+  defp parse_basket(basket) do
+    basket
+    |> Enum.reduce([[], []], fn basket_item, [symbols, correlations] ->
+      [{symbol, correlation}] = Map.to_list(basket_item)
+      [symbols ++ [symbol], correlations ++ [correlation]]
     end)
   end
 

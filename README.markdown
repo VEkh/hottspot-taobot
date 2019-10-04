@@ -105,7 +105,7 @@
 * S&P is more liquid
   * You can sell $1 billion of S&P, but you can't do that for Apple
 * Take out quotes from quarterly months, (months directly after earnings were reported)
-  * April, July, October, January
+  * January, April, July, October
 
 ### Resources
 * _Bloomberg_
