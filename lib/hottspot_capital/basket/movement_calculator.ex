@@ -21,7 +21,7 @@ defmodule HottspotCapital.Basket.MovementCalculator do
         total_weights: weigh_stock_quotes(basket)
       )
 
-    movement(penultimate_weighted_close, last_weighted_close)
+    movement(from: penultimate_weighted_close, to: last_weighted_close)
   end
 
   defp get_last_two_stock_quotes(symbol) do
@@ -62,8 +62,8 @@ defmodule HottspotCapital.Basket.MovementCalculator do
     end)
   end
 
-  defp movement(a, b) do
-    ((b - a) / a)
+  defp movement(from: from, to: to) do
+    ((to - from) / from)
     |> Float.round(6)
   end
 
@@ -79,7 +79,7 @@ defmodule HottspotCapital.Basket.MovementCalculator do
         acc,
         %{
           "last_two_closes" => closes,
-          "movement" => movement(penultimate_close, last_close),
+          "movement" => movement(from: penultimate_close, to: last_close),
           "symbol" => symbol
         }
       )
