@@ -28,25 +28,28 @@ defmodule HottspotCapital.Basket.MovementCalculator do
     {query, params} =
       """
       SELECT
-        stock_quotes.symbol,
-        (ARRAY_AGG(
+        last_two_quotes.symbol,
+        ARRAY_AGG(
           JSON_BUILD_OBJECT(
-            'date', stock_quotes.date,
-            'close', stock_quotes.close,
-            'volume', stock_quotes.volume
+            'date', last_two_quotes.date,
+            'close', last_two_quotes.close,
+            'volume', last_two_quotes.volume
           )
-          ORDER BY stock_quotes.date DESC
-        ))[1:2] AS last_two_quotes
+          ORDER BY last_two_quotes.date DESC
+        )
       FROM (
-        SELECT (
-          basket_query.reference_symbol ||
-          ARRAY_AGG(basket_query.basket_item_symbol)
-        ) AS symbols
+        SELECT basket_query.basket_item_symbol AS symbol
         FROM #{Generator.basket_query()} AS basket_query
-        GROUP BY basket_query.reference_symbol
+        UNION
+        SELECT $symbol AS symbol
       ) AS reference_and_basket
-      JOIN stock_quotes
-        ON ARRAY[stock_quotes.symbol] <@ reference_and_basket.symbols
+      JOIN LATERAL (
+        SELECT close, date, symbol, volume FROM stock_quotes
+        WHERE symbol = reference_and_basket.symbol
+        ORDER BY date DESC
+        LIMIT 2
+      ) AS last_two_quotes
+        ON last_two_quotes.symbol = reference_and_basket.symbol
       GROUP BY 1
       """
       |> SQLQueryParser.named_to_ordered_params(symbol: symbol)
