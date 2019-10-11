@@ -38,7 +38,11 @@ defmodule HottspotCapital.StockQuote.MissingRangeCalculator do
       |> List.first()
       |> Date.to_iso8601(:basic)
 
-    previous_weekdate <> "?chartByDay=true"
+    %URI{
+      path: Path.join(["date", previous_weekdate]),
+      query: URI.encode_query(chartByDay: true)
+    }
+    |> URI.to_string()
   end
 
   defp weekday_difference(date_1, date_2) do

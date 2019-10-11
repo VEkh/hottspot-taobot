@@ -22,7 +22,7 @@ defmodule HottspotCapital.StockQuoteTest do
       Calendar.set_datetime({{2019, 08, 19}, {0, 0, 0}})
 
       Factory.create_stock_quote(%{date: ~D[2019-08-15], symbol: symbol})
-      assert StockQuote.missing_data_range("HOTT") == "20190816?chartByDay=true"
+      assert StockQuote.missing_data_range("HOTT") == "date/20190816?chartByDay=true"
 
       Factory.create_stock_quote(%{date: ~D[2019-08-16], symbol: symbol})
       assert StockQuote.missing_data_range("HOTT") == :no_missing_data

@@ -41,7 +41,7 @@ defmodule HottspotCapital.StockQuote.MissingRangeCalculatorTest do
         Calendar.set_datetime({date, {0, 0, 0}})
 
         assert MissingRangeCalculator.calculate(~D[2019-08-15]) ==
-                 "20190816?chartByDay=true"
+                 "date/20190816?chartByDay=true"
       end)
     end
 
@@ -50,13 +50,13 @@ defmodule HottspotCapital.StockQuote.MissingRangeCalculatorTest do
       Calendar.set_datetime({{2019, 08, 21}, {0, 0, 0}})
 
       assert MissingRangeCalculator.calculate(~D[2019-08-19]) ==
-               "20190820?chartByDay=true"
+               "date/20190820?chartByDay=true"
 
       # Friday
       Calendar.set_datetime({{2019, 08, 23}, {0, 0, 0}})
 
       assert MissingRangeCalculator.calculate(~D[2019-08-21]) ==
-               "20190822?chartByDay=true"
+               "date/20190822?chartByDay=true"
     end
 
     test "returns 5d when last quote was 3-5 weekdays ago" do
