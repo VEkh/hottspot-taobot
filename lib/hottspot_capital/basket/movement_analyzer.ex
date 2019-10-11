@@ -20,6 +20,7 @@ defmodule HottspotCapital.Basket.MovementAnalyzer do
       IO.puts("Calculating movement for: #{symbol}")
       MovementCalculator.calculate(symbol)
     end)
+    |> filter_ordered_movements()
     |> Enum.sort(fn a, b ->
       [a_last_close, b_last_close] =
         [a, b]
