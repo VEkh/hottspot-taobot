@@ -94,6 +94,57 @@ defmodule HottspotCapital.Basket.GeneratorTest do
       [symbols, _] = Generator.generate("HOTT") |> parse_basket()
       assert symbols == ["FB", "MSFT"]
     end
+
+    test "accepts date limit" do
+      stubbed_quotes = stub_stock_quotes()
+      date_limit = ~D[2017-02-14]
+
+      [
+        [
+          %{is_within_date_limit: true, symbol: "HOTT"},
+          %{is_within_date_limit: false, symbol: "DIS"},
+          %{is_within_date_limit: true, symbol: "FB"},
+          %{is_within_date_limit: false, symbol: "GOOG"},
+          %{is_within_date_limit: false, symbol: "MSFT"}
+        ],
+        stubbed_quotes
+      ]
+      |> Enum.zip()
+      |> Enum.each(fn {%{is_within_date_limit: is_within_date_limit, symbol: symbol}, quotes} ->
+        Factory.create_company(%{symbol: symbol})
+
+        quotes
+        |> Enum.with_index()
+        |> Enum.each(fn {close, index} ->
+          dates =
+            case [symbol, is_within_date_limit] do
+              ["HOTT", _] ->
+                [
+                  Date.from_erl!({2017 - index, 8, 26}),
+                  Date.from_erl!({2019, 8 - index, 26})
+                ]
+
+              [_, true] ->
+                [Date.from_erl!({2017 - index, 8, 26})]
+
+              [_, false] ->
+                [Date.from_erl!({2019, 8 - index, 26})]
+            end
+
+          dates
+          |> Enum.each(fn date ->
+            create_stock_quote(%{close: close, date: date, symbol: symbol})
+          end)
+        end)
+      end)
+
+      [symbols, _] =
+        "HOTT"
+        |> Generator.generate(date_limit: date_limit)
+        |> parse_basket()
+
+      assert symbols == ["FB"]
+    end
   end
 
   defp create_stock_quote(%{close: close, date: date, symbol: symbol}) do

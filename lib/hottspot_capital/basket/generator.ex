@@ -13,12 +13,14 @@ defmodule HottspotCapital.Basket.Generator do
         SELECT close, date, symbol FROM stock_quotes
         WHERE symbol = $symbol
         AND EXTRACT(month from date) NOT IN (1,4,7,10)
+        AND date < $date_limit
       ) AS reference
 
       JOIN (
         SELECT close, date, symbol FROM stock_quotes
         WHERE symbol != $symbol
         AND EXTRACT(month from date) NOT IN (1,4,7,10)
+        AND date < $date_limit
       ) AS basket_item
         ON reference.date = basket_item.date
 
@@ -29,7 +31,9 @@ defmodule HottspotCapital.Basket.Generator do
     """
   end
 
-  def generate(symbol) do
+  def generate(symbol, options \\ []) do
+    %{date_limit: date_limit} = merge_options(options)
+
     {query, params} =
       """
       SELECT
@@ -43,7 +47,10 @@ defmodule HottspotCapital.Basket.Generator do
       FROM #{basket_query()} AS basket_query
       GROUP BY basket_query.reference_symbol
       """
-      |> SQLQueryParser.named_to_ordered_params(symbol: symbol)
+      |> SQLQueryParser.named_to_ordered_params(
+        date_limit: date_limit,
+        symbol: symbol
+      )
 
     %Postgrex.Result{rows: rows} = Repo.query!(query, params)
 
@@ -51,5 +58,15 @@ defmodule HottspotCapital.Basket.Generator do
       [[^symbol, basket]] -> basket
       [] -> []
     end
+  end
+
+  def merge_options(options) do
+    defaults = [
+      date_limit: Date.utc_today()
+    ]
+
+    defaults
+    |> Keyword.merge(options)
+    |> Enum.into(%{})
   end
 end
