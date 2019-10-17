@@ -6,6 +6,10 @@ defmodule HottspotCapital.Basket.GeneratorTest do
   alias HottspotCapital.Test.Factory
 
   describe ".generate" do
+    test "returns [] if no basket is generated" do
+      assert Generator.generate("HOTT") == []
+    end
+
     test "returns list of companies with most correlated closing stock prices" do
       {current_year, _, _} = Date.utc_today() |> Date.to_erl()
       stubbed_quotes = stub_stock_quotes()

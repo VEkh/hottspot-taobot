@@ -45,8 +45,11 @@ defmodule HottspotCapital.Basket.Generator do
       """
       |> SQLQueryParser.named_to_ordered_params(symbol: symbol)
 
-    %Postgrex.Result{rows: [[^symbol, basket]]} = Repo.query!(query, params)
+    %Postgrex.Result{rows: rows} = Repo.query!(query, params)
 
-    basket
+    case rows do
+      [[^symbol, basket]] -> basket
+      [] -> []
+    end
   end
 end
