@@ -1,18 +1,6 @@
-defmodule HottspotCapital.Basket.MovementAnalyzer do
+defmodule HottspotCapital.Basket.Recommender do
   alias HottspotCapital.Basket.MovementCalculator
   alias HottspotCapital.Company
-
-  def filter_ordered_movements(movements) do
-    movements
-    |> Enum.filter(fn movement ->
-      %{
-        "basket_movement" => basket_movement,
-        "reference" => %{"movement" => reference_movement}
-      } = movement
-
-      basket_movement >= 0.1 && reference_movement <= 0
-    end)
-  end
 
   def order_movements_by_last_close() do
     Company.get_largest(200)
@@ -32,6 +20,18 @@ defmodule HottspotCapital.Basket.MovementAnalyzer do
         end)
 
       a_last_close <= b_last_close
+    end)
+  end
+
+  defp filter_ordered_movements(movements) do
+    movements
+    |> Enum.filter(fn movement ->
+      %{
+        "basket_movement" => basket_movement,
+        "reference" => %{"movement" => reference_movement}
+      } = movement
+
+      basket_movement >= 0.1 && reference_movement <= 0
     end)
   end
 end

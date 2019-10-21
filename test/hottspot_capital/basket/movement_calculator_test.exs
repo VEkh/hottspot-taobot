@@ -36,6 +36,70 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
                }
              } = MovementCalculator.calculate("HOTT")
     end
+
+    test "accepts date_limit" do
+      date_limit = ~D[2016-08-27]
+
+      [
+        %{symbol: "HOTT", is_within_date_limit: true},
+        %{symbol: "MSFT", is_within_date_limit: false},
+        %{symbol: "AMZN", is_within_date_limit: true},
+        %{symbol: "GOOG", is_within_date_limit: false},
+        %{symbol: "FB", is_within_date_limit: true},
+        %{symbol: "APPL", is_within_date_limit: false}
+      ]
+      |> Enum.zip(stubbed_stock_quotes())
+      |> Enum.each(fn {
+                        %{is_within_date_limit: is_within_date_limit, symbol: symbol},
+                        data
+                      } ->
+        Factory.create_company(%{symbol: symbol})
+
+        data
+        |> Enum.chunk_every(2)
+        |> Enum.with_index()
+        |> Enum.each(fn {[close, volume], index} ->
+          dates =
+            case [symbol, is_within_date_limit] do
+              ["HOTT", _] ->
+                [
+                  Date.from_erl!({2016, 08, 26 - index}),
+                  Date.from_erl!({2019, 08, 26 - index})
+                ]
+
+              [_, true] ->
+                [
+                  Date.from_erl!({2016, 08, 26 - index})
+                ]
+
+              [_, false] ->
+                [Date.from_erl!({2019, 08, 26 - index})]
+            end
+
+          dates
+          |> Enum.each(fn date ->
+            Factory.create_stock_quote(%{
+              close: close,
+              date: date,
+              symbol: symbol,
+              volume: volume
+            })
+          end)
+        end)
+      end)
+
+      assert %{
+               "basket_movement" => -0.289443,
+               "reference" => %{
+                 "last_two_closes" => [
+                   %{"close" => 372.06},
+                   %{"close" => 933.57}
+                 ],
+                 "movement" => -0.601465,
+                 "symbol" => "HOTT"
+               }
+             } = MovementCalculator.calculate("HOTT", date_limit: date_limit)
+    end
   end
 
   defp stubbed_stock_quotes do

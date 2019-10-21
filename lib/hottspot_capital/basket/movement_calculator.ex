@@ -3,8 +3,8 @@ defmodule HottspotCapital.Basket.MovementCalculator do
   alias HottspotCapital.Repo
   alias HottspotCapital.SQLQueryParser
 
-  def calculate(symbol) do
-    {reference, basket} = get_last_two_stock_quotes(symbol)
+  def calculate(symbol, options \\ []) do
+    {reference, basket} = get_last_two_stock_quotes(symbol, options)
 
     %{
       "basket_movement" => calculate_basket_movement(basket),
@@ -24,7 +24,9 @@ defmodule HottspotCapital.Basket.MovementCalculator do
     movement(from: penultimate_weighted_close, to: last_weighted_close)
   end
 
-  defp get_last_two_stock_quotes(symbol) do
+  defp get_last_two_stock_quotes(symbol, options) do
+    %{date_limit: date_limit} = Generator.merge_options(options)
+
     {query, params} =
       """
       SELECT
@@ -46,13 +48,17 @@ defmodule HottspotCapital.Basket.MovementCalculator do
       JOIN LATERAL (
         SELECT close, date, symbol, volume FROM stock_quotes
         WHERE symbol = reference_and_basket.symbol
+        AND date < $date_limit
         ORDER BY date DESC
         LIMIT 2
       ) AS last_two_quotes
         ON last_two_quotes.symbol = reference_and_basket.symbol
       GROUP BY 1
       """
-      |> SQLQueryParser.named_to_ordered_params(symbol: symbol)
+      |> SQLQueryParser.named_to_ordered_params(
+        date_limit: date_limit,
+        symbol: symbol
+      )
 
     query
     |> Repo.query!(params)
