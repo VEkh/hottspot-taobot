@@ -9,7 +9,7 @@ defmodule HottspotCapital.Basket.Recommender do
       MovementCalculator.calculate(symbol)
     end)
     |> Enum.map(&Kernel.elem(&1, 1))
-    |> filter_ordered_movements()
+    |> apply_buy_filter()
     |> Enum.sort(fn a, b ->
       [a_last_close, b_last_close] =
         [a, b]
@@ -22,9 +22,10 @@ defmodule HottspotCapital.Basket.Recommender do
 
       a_last_close <= b_last_close
     end)
+    |> extract_symbols()
   end
 
-  defp filter_ordered_movements(movements) do
+  defp apply_buy_filter(movements) do
     movements
     |> Enum.filter(fn movement ->
       %{
@@ -33,6 +34,13 @@ defmodule HottspotCapital.Basket.Recommender do
       } = movement
 
       basket_movement >= 0.1 && reference_movement <= 0
+    end)
+  end
+
+  defp extract_symbols(movements) do
+    movements
+    |> Enum.map(fn movement ->
+      get_in(movement, ["reference", "symbol"])
     end)
   end
 end

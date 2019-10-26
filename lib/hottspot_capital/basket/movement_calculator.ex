@@ -6,10 +6,16 @@ defmodule HottspotCapital.Basket.MovementCalculator do
   def calculate(symbol, options \\ []) do
     {reference, basket} = get_last_two_stock_quotes(symbol, options)
 
-    %{
-      "basket_movement" => calculate_basket_movement(basket),
-      "reference" => reference_with_movement(reference)
-    }
+    case Map.keys(basket) do
+      [] ->
+        {:error, "Failed to get last two quotes for #{symbol}"}
+
+      _ ->
+        %{
+          "basket_movement" => calculate_basket_movement(basket),
+          "reference" => reference_with_movement(reference)
+        }
+    end
   end
 
   defp calculate_basket_movement(basket) do

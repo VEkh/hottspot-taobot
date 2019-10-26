@@ -3,11 +3,12 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
 
   alias HottspotCapital.Basket.MovementCalculator
   alias HottspotCapital.Test.Factory
+  alias HottspotCapital.Test.Stubs.StockQuoteStubs
 
   describe ".calculate" do
     test "returns relative movement of reference stock to its basket" do
       ["HOTT", "MSFT", "AMZN", "GOOG", "FB", "APPL"]
-      |> Enum.zip(stubbed_stock_quotes())
+      |> Enum.zip(stubbed_closes_and_volumes())
       |> Enum.each(fn {symbol, data} ->
         Factory.create_company(%{symbol: symbol})
 
@@ -48,7 +49,7 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
         %{symbol: "FB", is_within_date_limit: true},
         %{symbol: "APPL", is_within_date_limit: false}
       ]
-      |> Enum.zip(stubbed_stock_quotes())
+      |> Enum.zip(stubbed_closes_and_volumes())
       |> Enum.each(fn {
                         %{is_within_date_limit: is_within_date_limit, symbol: symbol},
                         data
@@ -102,8 +103,8 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
     end
   end
 
-  defp stubbed_stock_quotes do
-    # last_quote_close, last_quote_vol, penultimate_quote_close, penultimate_quote_vol, third_close, third_volume
+  defp stubbed_closes_and_volumes do
+    # close_1      volume_1     close_2      volume_2     close_3      volume_3
     ~w[
       3.7206e+02   2.6224e+05   9.3357e+02   6.3718e+05   6.5232e+02   4.8821e+05
       2.3723e+02   4.9149e+05   3.0500e+02   1.3373e+04   8.4866e+02   1.1450e+05
@@ -112,21 +113,6 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
       2.1186e+02   1.2202e+05   9.4379e+02   9.2037e+05   9.3438e+02   1.4152e+05
       3.0376e+02   6.5843e+05   9.2867e+02   6.0538e+04   4.9273e+01   3.8233e+05
     ]
-    |> Enum.map(fn num ->
-      magnitude =
-        num
-        |> String.split(~r/e\+/)
-        |> Enum.at(1)
-        |> String.to_integer()
-
-      cond do
-        magnitude <= 2 ->
-          num |> String.to_float() |> Float.round(2)
-
-        true ->
-          num |> String.to_float() |> Kernel.trunc()
-      end
-    end)
-    |> Enum.chunk_every(6)
+    |> StockQuoteStubs.group_closes_and_volumes(chunk_size: 6)
   end
 end
