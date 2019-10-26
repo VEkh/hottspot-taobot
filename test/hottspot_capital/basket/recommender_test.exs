@@ -1,6 +1,7 @@
 defmodule HottspotCapital.Basket.RecommenderTest do
   use HottspotCapital.Test.DataCase
 
+  alias HottspotCapital.Basket.MovementCalculator.Movement
   alias HottspotCapital.Basket.Recommender
   alias HottspotCapital.Repo
   alias HottspotCapital.Test.Factory
@@ -8,7 +9,9 @@ defmodule HottspotCapital.Basket.RecommenderTest do
 
   describe ".recommend" do
     setup do
-      ["HOTT", "T", "VZ", "UBER", "NFLX"]
+      symbols = ["HOTT", "T", "VZ", "UBER", "NFLX"]
+
+      symbols
       |> Enum.zip(stubbed_closes_and_volumes())
       |> Enum.each(fn {symbol, data} ->
         Factory.create_company(%{symbol: symbol})
@@ -27,10 +30,34 @@ defmodule HottspotCapital.Basket.RecommenderTest do
       end)
 
       Ecto.Adapters.SQL.Sandbox.mode(Repo, {:shared, self()})
+
+      [symbols: symbols]
     end
 
-    test "returns list of buy recommendations" do
-      assert ["NFLX"] = Recommender.recommend()
+    test "returns list of buy recommendation movements", %{symbols: symbols} do
+      Recommender.recommend()
+      |> Enum.each(fn movement ->
+        %Movement{
+          basket_movement: basket_movement,
+          reference: %{
+            movement: reference_movement,
+            symbol: symbol
+          }
+        } = movement
+
+        assert is_float(basket_movement)
+        assert is_float(reference_movement)
+        assert symbol in symbols
+      end)
+    end
+
+    test "returns list of buy recommendation symbols", %{symbols: symbols} do
+      [format: :symbol]
+      |> Recommender.recommend()
+      |> Enum.each(fn symbol ->
+        assert is_binary(symbol)
+        assert symbol in symbols
+      end)
     end
   end
 

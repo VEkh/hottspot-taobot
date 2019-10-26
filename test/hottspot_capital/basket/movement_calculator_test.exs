@@ -2,6 +2,7 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
   use HottspotCapital.Test.DataCase
 
   alias HottspotCapital.Basket.MovementCalculator
+  alias HottspotCapital.Basket.MovementCalculator.Movement
   alias HottspotCapital.Test.Factory
   alias HottspotCapital.Test.Stubs.StockQuoteStubs
 
@@ -25,15 +26,15 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
         end)
       end)
 
-      assert %{
-               "basket_movement" => -0.459617,
-               "reference" => %{
-                 "last_two_closes" => [
+      assert %Movement{
+               basket_movement: -0.459617,
+               reference: %{
+                 last_two_closes: [
                    %{"close" => 372.06},
                    %{"close" => 933.57}
                  ],
-                 "movement" => -0.601465,
-                 "symbol" => "HOTT"
+                 movement: -0.601465,
+                 symbol: "HOTT"
                }
              } = MovementCalculator.calculate("HOTT")
     end
@@ -89,15 +90,15 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
         end)
       end)
 
-      assert %{
-               "basket_movement" => -0.289443,
-               "reference" => %{
-                 "last_two_closes" => [
+      assert %Movement{
+               basket_movement: -0.289443,
+               reference: %{
+                 last_two_closes: [
                    %{"close" => 372.06},
                    %{"close" => 933.57}
                  ],
-                 "movement" => -0.601465,
-                 "symbol" => "HOTT"
+                 movement: -0.601465,
+                 symbol: "HOTT"
                }
              } = MovementCalculator.calculate("HOTT", date_limit: date_limit)
     end
