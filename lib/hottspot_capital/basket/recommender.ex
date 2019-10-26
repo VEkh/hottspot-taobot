@@ -2,12 +2,13 @@ defmodule HottspotCapital.Basket.Recommender do
   alias HottspotCapital.Basket.MovementCalculator
   alias HottspotCapital.Company
 
-  def order_movements_by_last_close() do
+  def recommend() do
     Company.get_largest(200)
-    |> Stream.map(fn %{symbol: symbol} ->
+    |> Task.async_stream(fn %{symbol: symbol} ->
       IO.puts("Calculating movement for: #{symbol}")
       MovementCalculator.calculate(symbol)
     end)
+    |> Enum.map(&Kernel.elem(&1, 1))
     |> filter_ordered_movements()
     |> Enum.sort(fn a, b ->
       [a_last_close, b_last_close] =
