@@ -1,4 +1,4 @@
-defmodule HottspotCapital.Basket.Recommender do
+defmodule HottspotCapital.Basket.BuyRecommender do
   alias HottspotCapital.Basket.MovementCalculator
   alias HottspotCapital.Basket.MovementCalculator.Movement
   alias HottspotCapital.Company
@@ -40,15 +40,6 @@ defmodule HottspotCapital.Basket.Recommender do
     end)
   end
 
-  defp respond(movements, %{format: :symbol}) do
-    movements
-    |> Enum.map(fn movement ->
-      get_in(movement, [:reference, :symbol])
-    end)
-  end
-
-  defp respond(movements, _), do: movements
-
   defp log(message, %{verbose: true}), do: IO.puts(message)
   defp log(_message, _), do: nil
 
@@ -62,4 +53,13 @@ defmodule HottspotCapital.Basket.Recommender do
     |> Keyword.merge(options)
     |> Enum.into(%{})
   end
+
+  defp respond(movements, %{format: :symbol}) do
+    movements
+    |> Enum.map(fn movement ->
+      get_in(movement, [:reference, :symbol])
+    end)
+  end
+
+  defp respond(movements, _), do: movements
 end

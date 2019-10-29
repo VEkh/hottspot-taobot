@@ -1,8 +1,8 @@
-defmodule HottspotCapital.Basket.RecommenderTest do
+defmodule HottspotCapital.Basket.BuyRecommenderTest do
   use HottspotCapital.Test.DataCase
 
+  alias HottspotCapital.Basket.BuyRecommender
   alias HottspotCapital.Basket.MovementCalculator.Movement
-  alias HottspotCapital.Basket.Recommender
   alias HottspotCapital.Repo
   alias HottspotCapital.Test.Factory
   alias HottspotCapital.Test.Stubs.StockQuoteStubs
@@ -35,7 +35,7 @@ defmodule HottspotCapital.Basket.RecommenderTest do
     end
 
     test "returns list of buy recommendation movements", %{symbols: symbols} do
-      Recommender.recommend()
+      BuyRecommender.recommend()
       |> Enum.each(fn movement ->
         %Movement{
           basket_movement: basket_movement,
@@ -53,7 +53,7 @@ defmodule HottspotCapital.Basket.RecommenderTest do
 
     test "returns list of buy recommendation symbols", %{symbols: symbols} do
       [format: :symbol]
-      |> Recommender.recommend()
+      |> BuyRecommender.recommend()
       |> Enum.each(fn symbol ->
         assert is_binary(symbol)
         assert symbol in symbols
