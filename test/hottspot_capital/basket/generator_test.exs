@@ -2,8 +2,8 @@ defmodule HottspotCapital.Basket.GeneratorTest do
   use HottspotCapital.Test.DataCase
 
   alias HottspotCapital.Basket.Generator
-  alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.Factory
+  alias HottspotCapital.Test.Stubs.StockQuoteStubs
 
   describe ".generate" do
     test "returns [] if no basket is generated" do
@@ -12,7 +12,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
     test "returns list of companies with most correlated closing stock prices" do
       {current_year, _, _} = Date.utc_today() |> Date.to_erl()
-      stubbed_quotes = stub_stock_quotes()
+      stubbed_quotes = stubbed_closes_and_volumes()
 
       [
         {%{symbol: "DIS"}, 5},
@@ -27,9 +27,13 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
         quotes
         |> Enum.with_index()
-        |> Enum.each(fn {close, index} ->
-          date = Date.from_erl!({current_year - index, 8, 26})
-          create_stock_quote(%{close: close, date: date, symbol: symbol})
+        |> Enum.each(fn {[close, volume], index} ->
+          Factory.create_stock_quote(%{
+            close: close,
+            date: Date.from_erl!({current_year - index, 8, 26}),
+            symbol: symbol,
+            volume: volume
+          })
         end)
       end)
 
@@ -57,7 +61,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
         %{symbol: "MSFT"}
       ]
 
-      [companies, stub_stock_quotes(), 1..length(companies)]
+      [companies, stubbed_closes_and_volumes(), 1..length(companies)]
       |> Enum.zip()
       |> Enum.each(fn {%{symbol: symbol} = company, quotes, company_index} ->
         is_excluded_company = rem(company_index, 2) == 0
@@ -73,7 +77,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
         quotes
         |> Enum.with_index()
-        |> Enum.each(fn {close, quote_index} ->
+        |> Enum.each(fn {[close, volume], quote_index} ->
           stock_quote_month =
             if is_excluded_company do
               month_index = rem(quote_index, length(quarterly_months))
@@ -86,7 +90,12 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
           stock_quote_symbols
           |> Enum.each(fn stock_quote_symbol ->
-            create_stock_quote(%{close: close, date: date, symbol: stock_quote_symbol})
+            Factory.create_stock_quote(%{
+              close: close,
+              date: date,
+              symbol: stock_quote_symbol,
+              volume: volume
+            })
           end)
         end)
       end)
@@ -96,7 +105,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
     end
 
     test "accepts date limit" do
-      stubbed_quotes = stub_stock_quotes()
+      stubbed_quotes = stubbed_closes_and_volumes()
       date_limit = ~D[2017-02-14]
 
       [
@@ -115,7 +124,7 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
         quotes
         |> Enum.with_index()
-        |> Enum.each(fn {close, index} ->
+        |> Enum.each(fn {[close, volume], index} ->
           dates =
             case [symbol, is_within_date_limit] do
               ["HOTT", _] ->
@@ -133,7 +142,12 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
           dates
           |> Enum.each(fn date ->
-            create_stock_quote(%{close: close, date: date, symbol: symbol})
+            Factory.create_stock_quote(%{
+              close: close,
+              date: date,
+              symbol: symbol,
+              volume: volume
+            })
           end)
         end)
       end)
@@ -145,18 +159,27 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
       assert symbols == ["FB"]
     end
-  end
 
-  defp create_stock_quote(%{close: close, date: date, symbol: symbol}) do
-    %{
-      close: close,
-      date: date,
-      open: close,
-      symbol: symbol,
-      volume: 100_000
-    }
-    |> StockQuote.changeset()
-    |> StockQuote.upsert()
+    test "exclude company from basket if it has no quotes prior to date limit" do
+      ["HOTT", "MSFT", "AMZN", "GOOG", "FB", "APPL"]
+      |> Enum.zip(stubbed_closes_and_volumes())
+      |> Enum.each(fn {symbol, data} ->
+        Factory.create_company(%{symbol: symbol})
+
+        data
+        |> Enum.with_index()
+        |> Enum.each(fn {[close, volume], index} ->
+          Factory.create_stock_quote(%{
+            close: close,
+            date: Date.from_erl!({2019, 08, 26 - index}),
+            symbol: symbol,
+            volume: volume
+          })
+        end)
+      end)
+
+      assert Generator.generate("HOTT", date_limit: ~D[2019-08-23]) == []
+    end
   end
 
   defp parse_basket(basket) do
@@ -168,17 +191,38 @@ defmodule HottspotCapital.Basket.GeneratorTest do
   end
 
   # Sorted in descending order of correlation to the first row
-  defp stub_stock_quotes() do
+  defp stubbed_closes_and_volumes() do
     ~w[
-      248.647   143.316   241.085   283.310   988.603
-      555.341   418.366   216.946   707.539   954.135
-      763.177   475.570   703.831   259.764   830.914
-      554.855   254.909   459.352   229.249   291.113
-      118.369   928.406   367.049   370.311    58.182
+      248.647   1.000e+5
+      143.316   1.000e+5
+      241.085   1.000e+5
+      283.310   1.000e+5
+      988.603   1.000e+5
+
+      555.341   1.000e+5
+      418.366   1.000e+5
+      216.946   1.000e+5
+      707.539   1.000e+5
+      954.135   1.000e+5
+
+      763.177   1.000e+5
+      475.570   1.000e+5
+      703.831   1.000e+5
+      259.764   1.000e+5
+      830.914   1.000e+5
+
+      554.855   1.000e+5
+      254.909   1.000e+5
+      459.352   1.000e+5
+      229.249   1.000e+5
+      291.113   1.000e+5
+
+      118.369   1.000e+5
+      928.406   1.000e+5
+      367.049   1.000e+5
+      370.311   1.000e+5
+       58.182   1.000e+5
     ]
-    |> Enum.map(fn num ->
-      num |> String.to_float() |> Float.round(2)
-    end)
-    |> Enum.chunk_every(5)
+    |> StockQuoteStubs.group_closes_and_volumes(days: 5)
   end
 end

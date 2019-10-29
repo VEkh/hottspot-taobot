@@ -1,19 +1,12 @@
 defmodule HottspotCapital.Test.Stubs.StockQuoteStubs do
-  def group_closes_and_volumes(closes_and_volumes, chunk_size: chunk_size) do
+  def group_closes_and_volumes(closes_and_volumes, days: days) do
     closes_and_volumes
-    |> Enum.map(fn num ->
-      magnitude =
-        num
-        |> String.split(~r/e\+/)
-        |> Enum.at(1)
-        |> String.to_integer()
-
-      if magnitude <= 2 do
-        num |> String.to_float() |> Float.round(2)
-      else
-        num |> String.to_float() |> Kernel.trunc()
-      end
+    |> Enum.chunk_every(2)
+    |> Enum.map(fn [close, volume] ->
+      close = close |> String.to_float() |> Float.round(2)
+      volume = volume |> String.to_float() |> Kernel.trunc()
+      [close, volume]
     end)
-    |> Enum.chunk_every(chunk_size)
+    |> Enum.chunk_every(days)
   end
 end

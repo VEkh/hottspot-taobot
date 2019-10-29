@@ -25,6 +25,7 @@ defmodule HottspotCapital.Basket.Generator do
         ON reference.date = basket_item.date
 
       GROUP BY reference.symbol, basket_item.symbol
+      HAVING CORR(reference.close, basket_item.close) IS NOT NULL
       ORDER BY 3 DESC
       LIMIT 10
     )
