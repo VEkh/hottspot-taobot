@@ -2,7 +2,7 @@ defmodule HottspotCapital.Basket.BuyRecommenderTest do
   use HottspotCapital.Test.DataCase
 
   alias HottspotCapital.Basket.BuyRecommender
-  alias HottspotCapital.Basket.MovementCalculator.Movement
+  alias HottspotCapital.Basket.Movement
   alias HottspotCapital.Repo
   alias HottspotCapital.Test.Factory
   alias HottspotCapital.Test.Stubs.StockQuoteStubs

@@ -1,6 +1,5 @@
 defmodule HottspotCapital.Basket.BuyRecommender do
-  alias HottspotCapital.Basket.MovementCalculator
-  alias HottspotCapital.Basket.MovementCalculator.Movement
+  alias HottspotCapital.Basket.Movement
   alias HottspotCapital.Company
 
   def recommend(options \\ []) do
@@ -9,7 +8,7 @@ defmodule HottspotCapital.Basket.BuyRecommender do
     Company.get_largest(200)
     |> Task.async_stream(fn %{symbol: symbol} ->
       log("Calculating movement for: #{symbol}", merged_options)
-      MovementCalculator.calculate(symbol)
+      Movement.calculate(symbol)
     end)
     |> Enum.map(&Kernel.elem(&1, 1))
     |> apply_buy_filter()

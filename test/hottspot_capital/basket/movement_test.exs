@@ -1,8 +1,7 @@
-defmodule HottspotCapital.Basket.MovementCalculatorTest do
+defmodule HottspotCapital.Basket.MovementTest do
   use HottspotCapital.Test.DataCase
 
-  alias HottspotCapital.Basket.MovementCalculator
-  alias HottspotCapital.Basket.MovementCalculator.Movement
+  alias HottspotCapital.Basket.Movement
   alias HottspotCapital.Test.Factory
   alias HottspotCapital.Test.Stubs.StockQuoteStubs
 
@@ -36,7 +35,7 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
                  movement: -0.601465,
                  symbol: "HOTT"
                }
-             } = MovementCalculator.calculate("HOTT")
+             } = Movement.calculate("HOTT")
     end
 
     test "accepts date_limit" do
@@ -100,7 +99,7 @@ defmodule HottspotCapital.Basket.MovementCalculatorTest do
                  movement: -0.601465,
                  symbol: "HOTT"
                }
-             } = MovementCalculator.calculate("HOTT", date_limit: date_limit)
+             } = Movement.calculate("HOTT", date_limit: date_limit)
     end
   end
 

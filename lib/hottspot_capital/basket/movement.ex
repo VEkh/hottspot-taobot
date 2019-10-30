@@ -1,18 +1,16 @@
-defmodule HottspotCapital.Basket.MovementCalculator do
+defmodule HottspotCapital.Basket.Movement do
   alias HottspotCapital.Basket.Generator
   alias HottspotCapital.Repo
   alias HottspotCapital.SQLQueryParser
 
-  defmodule Movement do
-    defstruct basket_movement: nil,
-              reference: %{
-                last_two_closes: [],
-                movement: nil,
-                symbol: nil
-              }
+  defstruct basket_movement: nil,
+            reference: %{
+              last_two_closes: [],
+              movement: nil,
+              symbol: nil
+            }
 
-    defdelegate fetch(map, keys), to: Map
-  end
+  defdelegate fetch(map, keys), to: Map
 
   def calculate(symbol, options \\ []) do
     {reference, basket} = get_last_two_stock_quotes(symbol, options)
@@ -22,7 +20,7 @@ defmodule HottspotCapital.Basket.MovementCalculator do
         {:error, "Failed to get last two quotes for #{symbol}"}
 
       _ ->
-        %Movement{
+        %__MODULE__{
           basket_movement: calculate_basket_movement(basket),
           reference: reference_with_movement(reference)
         }
