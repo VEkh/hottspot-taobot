@@ -4,6 +4,7 @@ defmodule HottspotCapital.MixProject do
   def project do
     [
       app: :hottspot_capital,
+      aliases: aliases(),
       deps: deps(),
       elixir: "~> 1.8",
       start_permanent: Mix.env() == :prod,
@@ -16,6 +17,12 @@ defmodule HottspotCapital.MixProject do
     [
       extra_applications: [:logger],
       mod: {HottspotCapital.Application, []}
+    ]
+  end
+
+  defp aliases() do
+    [
+      "ecto.migrate": ["ecto.migrate", "ecto.dump"]
     ]
   end
 
