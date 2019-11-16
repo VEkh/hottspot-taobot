@@ -4,6 +4,7 @@ config(
   :hottspot_capital,
   HottspotCapital.Repo,
   hostname: "localhost",
+  pool_size: System.schedulers_online(),
   username: "hottspot_capital"
 )
 

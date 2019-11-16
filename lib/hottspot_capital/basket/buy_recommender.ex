@@ -1,15 +1,23 @@
 defmodule HottspotCapital.Basket.BuyRecommender do
   alias HottspotCapital.Basket.Movement
   alias HottspotCapital.Company
+  alias HottspotCapital.Repo
+
+  @max_concurrency Repo.config() |> Keyword.get(:pool_size)
 
   def recommend(options \\ []) do
     %{date_limit: date_limit} = merged_options = merge_options(options)
 
     Company.get_largest(200)
-    |> Enum.map(fn %{symbol: symbol} ->
-      log("Calculating movement for: #{symbol}", merged_options)
-      Movement.calculate(symbol, date_limit: date_limit)
-    end)
+    |> Task.async_stream(
+      fn %{symbol: symbol} ->
+        log("Calculating movement for: #{symbol}", merged_options)
+        Movement.calculate(symbol, date_limit: date_limit)
+      end,
+      max_concurrency: @max_concurrency,
+      timeout: :infinity
+    )
+    |> Enum.map(&Kernel.elem(&1, 1))
     |> apply_buy_filter()
     |> Enum.sort(fn a, b ->
       [a_last_close, b_last_close] =

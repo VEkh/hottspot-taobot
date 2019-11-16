@@ -1,8 +1,7 @@
 defmodule HottspotCapital.Basket.BuyRecommender.BackTesterTest do
-  use HottspotCapital.Test.DataCase
+  use HottspotCapital.Test.DataCase, concurrent: true
 
   alias HottspotCapital.Basket.BuyRecommender.BackTester
-  alias HottspotCapital.Repo
   alias HottspotCapital.Test.Factory
   alias HottspotCapital.Test.Stubs.StockQuoteStubs
 
