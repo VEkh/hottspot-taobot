@@ -5,6 +5,7 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
 
   alias HottspotCapital.Basket.BuyRecommender
   alias HottspotCapital.Repo
+  alias HottspotCapital.SQLQueryParser
   alias HottspotCapital.StockQuote
 
   defdelegate get_and_update(map, key, fun), to: Map
@@ -27,29 +28,45 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
     correct_count / (correct_count + length(incorrect))
   end
 
-  defp calculate_movement(date_with_index: date_with_index, symbol: symbol) do
-    {current_date, current_date_index} = date_with_index
-    %{dates: dates} = get_state()
+  defp calculate_movement(date: date, symbol: symbol) do
+    {query, params} =
+      """
+      SELECT
+        from_date_stock_quotes.symbol,
+        from_date_stock_quotes.close AS from,
+        to_date_stock_quotes.close AS to
+      FROM (
+        SELECT close, symbol FROM stock_quotes
+        WHERE symbol = $symbol AND date = $date
+      ) from_date_stock_quotes
+      JOIN (
+        SELECT close, date, symbol FROM stock_quotes
+        WHERE date > $date
+      ) to_date_stock_quotes
+        ON to_date_stock_quotes.symbol = from_date_stock_quotes.symbol
+      ORDER BY to_date_stock_quotes.date ASC
+      LIMIT 1
+      ;
+      """
+      |> SQLQueryParser.named_to_ordered_params(
+        date: date,
+        symbol: symbol
+      )
 
-    next_date = Enum.at(dates, current_date_index + 1)
+    [[^symbol, from, to]] =
+      query
+      |> Repo.query!(params)
+      |> Map.get(:rows)
 
-    Ecto.Query.from(
-      stock_quotes in StockQuote,
-      select: stock_quotes.close,
-      order_by: [desc: :date],
-      where:
-        stock_quotes.date in [^current_date, ^next_date] and
-          stock_quotes.symbol == ^symbol
-    )
-    |> Repo.all()
+    [from, to]
   end
 
   defp calculate_date_accuracy([], _options), do: nil
 
-  defp calculate_date_accuracy(symbols, date_with_index: date_with_index) do
+  defp calculate_date_accuracy(symbols, date: date) do
     symbols
     |> Enum.reduce(%{correct: [], incorrect: []}, fn symbol, acc ->
-      [to, from] = calculate_movement(date_with_index: date_with_index, symbol: symbol)
+      [from, to] = calculate_movement(date: date, symbol: symbol)
 
       key =
         if to > from do
@@ -130,9 +147,7 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
     %{context | dates: dates, excluded_dates: excluded_dates}
   end
 
-  defp test_date(date_with_index) do
-    {date, _date_index} = date_with_index
-
+  defp test_date(date) do
     log_test(date: date, env: Mix.env())
 
     [
@@ -141,7 +156,7 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
       verbose: false
     ]
     |> BuyRecommender.recommend()
-    |> calculate_date_accuracy(date_with_index: date_with_index)
+    |> calculate_date_accuracy(date: date)
   end
 
   defp test_dates() do
@@ -152,8 +167,7 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
     } = get_state()
 
     dates
-    |> Enum.with_index()
-    |> Enum.filter(fn {date, _index} -> date not in excluded_dates end)
+    |> Enum.filter(fn date -> date not in excluded_dates end)
     |> Enum.shuffle()
     |> Enum.take(test_count)
     |> Enum.each(&test_date/1)
