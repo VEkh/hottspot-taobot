@@ -12,14 +12,12 @@ defmodule HottspotCapital.Basket.Generator do
       FROM (
         SELECT close, date, symbol FROM stock_quotes
         WHERE symbol = $symbol
-        AND EXTRACT(month from date) NOT IN (1,4,7,10)
         AND date < $date_limit
       ) AS reference
 
       JOIN (
         SELECT close, date, symbol FROM stock_quotes
         WHERE symbol != $symbol
-        AND EXTRACT(month from date) NOT IN (1,4,7,10)
         AND date < $date_limit
       ) AS basket_item
         ON reference.date = basket_item.date

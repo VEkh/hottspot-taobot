@@ -49,61 +49,6 @@ defmodule HottspotCapital.Basket.GeneratorTest do
              end)
     end
 
-    test "excludes quotes from quarterly months" do
-      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
-      quarterly_months = [1, 4, 7, 10]
-
-      companies = [
-        %{symbol: "HOTT"},
-        %{symbol: "DIS"},
-        %{symbol: "FB"},
-        %{symbol: "GOOG"},
-        %{symbol: "MSFT"}
-      ]
-
-      [companies, stubbed_closes_and_volumes(), 1..length(companies)]
-      |> Enum.zip()
-      |> Enum.each(fn {%{symbol: symbol} = company, quotes, company_index} ->
-        is_excluded_company = rem(company_index, 2) == 0
-
-        Factory.create_company(company)
-
-        stock_quote_symbols =
-          if is_excluded_company do
-            ["HOTT", symbol]
-          else
-            [symbol]
-          end
-
-        quotes
-        |> Enum.with_index()
-        |> Enum.each(fn {[close, volume], quote_index} ->
-          stock_quote_month =
-            if is_excluded_company do
-              month_index = rem(quote_index, length(quarterly_months))
-              quarterly_months |> Enum.at(month_index)
-            else
-              8
-            end
-
-          date = Date.from_erl!({current_year - quote_index, stock_quote_month, 15})
-
-          stock_quote_symbols
-          |> Enum.each(fn stock_quote_symbol ->
-            Factory.create_stock_quote(%{
-              close: close,
-              date: date,
-              symbol: stock_quote_symbol,
-              volume: volume
-            })
-          end)
-        end)
-      end)
-
-      [symbols, _] = Generator.generate("HOTT") |> parse_basket()
-      assert symbols == ["FB", "MSFT"]
-    end
-
     test "accepts date limit" do
       stubbed_quotes = stubbed_closes_and_volumes()
       date_limit = ~D[2017-02-14]
