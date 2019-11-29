@@ -20,8 +20,15 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
   def backtest(test_count) do
     init(test_count)
     test_dates()
-    get_state() |> Map.get(:accuracy) |> calculate_accuracy()
+
+    get_state()
+    |> Map.get(:accuracy)
+    |> calculate_accuracy()
+    |> log_total_accuracy(env: Mix.env())
   end
+
+  defp calculate_accuracy(%{correct: [], incorrect: []}),
+    do: "Inconclusive -- No (in)correct recommendations."
 
   defp calculate_accuracy(%{correct: correct, incorrect: incorrect}) do
     correct_count = length(correct)
@@ -91,6 +98,16 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
     [:yellow, "Accuracy: #{accuracy}\n"]
     |> IO.ANSI.format()
     |> IO.puts()
+  end
+
+  defp log_total_accuracy(accuracy, env: :test), do: accuracy
+
+  defp log_total_accuracy(accuracy, env: _) do
+    [:green, "Total Accuracy: #{accuracy}\n"]
+    |> IO.ANSI.format()
+    |> IO.puts()
+
+    accuracy
   end
 
   defp increment_test_counter() do

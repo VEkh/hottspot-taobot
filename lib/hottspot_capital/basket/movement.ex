@@ -2,6 +2,7 @@ defmodule HottspotCapital.Basket.Movement do
   alias HottspotCapital.Basket.Generator
   alias HottspotCapital.Repo
   alias HottspotCapital.SQLQueryParser
+  alias HottspotCapital.Utils
 
   defstruct basket_movement: nil,
             reference: %{
@@ -42,50 +43,41 @@ defmodule HottspotCapital.Basket.Movement do
   defp get_last_two_stock_quotes(symbol, options) do
     %{date_limit: date_limit} = Generator.merge_options(options)
 
+    previous_weekdate = Utils.previous_weekdate(date_limit)
+
     {query, params} =
       """
-      SELECT
-        last_two_quotes.symbol,
-        ARRAY_AGG(
-          JSON_BUILD_OBJECT(
-            'date', last_two_quotes.date,
-            'close', last_two_quotes.close,
-            'volume', last_two_quotes.volume
-          )
-          ORDER BY last_two_quotes.date DESC
-        )
+      SELECT last_two_quotes.symbol, last_two_quotes.quotes
+
       FROM (
         SELECT basket_query.basket_item_symbol AS symbol
         FROM #{Generator.basket_query()} AS basket_query
         UNION
         SELECT $symbol AS symbol
       ) AS reference_and_basket
+
       JOIN LATERAL (
         SELECT
-          past_quotes.close,
-          past_quotes.date,
-          past_quotes.symbol,
-          past_quotes.volume
-        FROM (
-          SELECT date, symbol FROM stock_quotes
-          WHERE symbol = reference_and_basket.symbol
-            AND date = $date_limit
-          ORDER BY date DESC
-          LIMIT 1
-        ) AS last_quotes
-        JOIN LATERAL (
-          SELECT close, date, symbol, volume FROM stock_quotes
-          WHERE symbol = last_quotes.symbol AND date <= last_quotes.date
-        ) AS past_quotes
-          ON last_quotes.symbol = past_quotes.symbol
-        ORDER BY past_quotes.date DESC
-        LIMIT 2
+          symbol,
+          ARRAY_AGG(
+            JSON_BUILD_OBJECT(
+              'date', date,
+              'close', close,
+              'volume', volume
+            )
+            ORDER BY date DESC
+          ) AS quotes
+        FROM stock_quotes
+        WHERE symbol = reference_and_basket.symbol
+          AND date IN ($date_limit, $previous_weekdate)
+        GROUP BY symbol
+        HAVING count(close) = 2
       ) AS last_two_quotes
         ON last_two_quotes.symbol = reference_and_basket.symbol
-      GROUP BY 1
       """
       |> SQLQueryParser.named_to_ordered_params(
         date_limit: date_limit,
+        previous_weekdate: previous_weekdate,
         symbol: symbol
       )
 
