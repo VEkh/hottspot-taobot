@@ -1,4 +1,6 @@
 defmodule HottspotCapital.StockQuote.MissingRangeCalculator do
+  alias HottspotCapital.Utils
+
   def calculate(nil), do: "5y"
 
   def calculate(date) do
@@ -31,11 +33,7 @@ defmodule HottspotCapital.StockQuote.MissingRangeCalculator do
 
     previous_weekdate =
       current_date
-      |> Date.range(Date.add(current_date, -7))
-      |> Enum.filter(fn date ->
-        Date.day_of_week(date) in 1..5 && date != current_date
-      end)
-      |> List.first()
+      |> Utils.previous_weekdate()
       |> Date.to_iso8601(:basic)
 
     %URI{

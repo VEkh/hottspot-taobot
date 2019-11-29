@@ -1,4 +1,13 @@
 defmodule HottspotCapital.Utils do
+  def previous_weekdate(current_date) do
+    current_date
+    |> Date.range(Date.add(current_date, -7))
+    |> Enum.filter(fn date ->
+      Date.day_of_week(date) in 1..5 && date != current_date
+    end)
+    |> List.first()
+  end
+
   def update_in_and_build(map, list, update_path \\ [])
   def update_in_and_build(map, [], _update_path), do: map
   def update_in_and_build(map, [_ | []], _update_path), do: map

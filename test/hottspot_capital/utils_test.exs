@@ -3,6 +3,12 @@ defmodule HottspotCapital.Test.UtilsTest do
 
   alias HottspotCapital.Utils
 
+  describe ".previous_weekdate" do
+    test "returns previous weekdate" do
+      assert Utils.previous_weekdate(~D[2019-10-21]) == ~D[2019-10-18]
+    end
+  end
+
   describe ".update_in_and_build" do
     test "builds empty map" do
       subject = %{}

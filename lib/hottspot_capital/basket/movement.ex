@@ -61,10 +61,24 @@ defmodule HottspotCapital.Basket.Movement do
         SELECT $symbol AS symbol
       ) AS reference_and_basket
       JOIN LATERAL (
-        SELECT close, date, symbol, volume FROM stock_quotes
-        WHERE symbol = reference_and_basket.symbol
-        AND date < $date_limit
-        ORDER BY date DESC
+        SELECT
+          past_quotes.close,
+          past_quotes.date,
+          past_quotes.symbol,
+          past_quotes.volume
+        FROM (
+          SELECT date, symbol FROM stock_quotes
+          WHERE symbol = reference_and_basket.symbol
+            AND date = $date_limit
+          ORDER BY date DESC
+          LIMIT 1
+        ) AS last_quotes
+        JOIN LATERAL (
+          SELECT close, date, symbol, volume FROM stock_quotes
+          WHERE symbol = last_quotes.symbol AND date <= last_quotes.date
+        ) AS past_quotes
+          ON last_quotes.symbol = past_quotes.symbol
+        ORDER BY past_quotes.date DESC
         LIMIT 2
       ) AS last_two_quotes
         ON last_two_quotes.symbol = reference_and_basket.symbol

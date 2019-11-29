@@ -34,7 +34,7 @@ defmodule HottspotCapital.Basket.MovementTest do
                  movement: -0.601465,
                  symbol: "HOTT"
                }
-             } = Movement.calculate("HOTT")
+             } = Movement.calculate("HOTT", date_limit: ~D[2019-08-26])
     end
 
     test "accepts date_limit" do
@@ -98,6 +98,29 @@ defmodule HottspotCapital.Basket.MovementTest do
                  symbol: "HOTT"
                }
              } = Movement.calculate("HOTT", date_limit: date_limit)
+    end
+
+    test "returns nil if `date_limit` is too far in the future" do
+      date_limit = ~D[2019-08-28]
+
+      ["HOTT", "DIS", "NFLX", "T", "UBER"]
+      |> Enum.zip(stubbed_closes_and_volumes())
+      |> Enum.each(fn {symbol, data} ->
+        Factory.create_company(%{symbol: symbol})
+
+        data
+        |> Enum.with_index()
+        |> Enum.each(fn {[close, volume], index} ->
+          Factory.create_stock_quote(%{
+            close: close,
+            date: Date.from_erl!({2019, 08, 26 - index}),
+            symbol: symbol,
+            volume: volume
+          })
+        end)
+      end)
+
+      assert {:error, _} = Movement.calculate("HOTT", date_limit: date_limit)
     end
   end
 
