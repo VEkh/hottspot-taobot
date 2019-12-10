@@ -1,6 +1,9 @@
 defmodule HottspotCapital.Basket.Generator do
+  require Ecto.Query
+
   alias HottspotCapital.Repo
   alias HottspotCapital.SQLQueryParser
+  alias HottspotCapital.StockQuote
 
   def basket_query() do
     """
@@ -31,7 +34,10 @@ defmodule HottspotCapital.Basket.Generator do
   end
 
   def generate(symbol, options \\ []) do
-    %{date_limit: date_limit} = merge_options(options)
+    %{date_limit: date_limit} =
+      options
+      |> Keyword.put(:symbol, symbol)
+      |> merge_options()
 
     {query, params} =
       """
@@ -59,13 +65,30 @@ defmodule HottspotCapital.Basket.Generator do
     end
   end
 
-  def merge_options(options) do
-    defaults = [
-      date_limit: Date.utc_today()
-    ]
-
-    defaults
-    |> Keyword.merge(options)
+  def merge_options([_ | _] = options) do
+    options
     |> Enum.into(%{})
+    |> merge_options()
+  end
+
+  def merge_options(%{date_limit: _date_limit} = options), do: options
+
+  def merge_options(%{symbol: symbol} = options) do
+    date_limit = most_recent_stock_quote_date(symbol)
+
+    options
+    |> Map.put(:date_limit, date_limit)
+    |> merge_options()
+  end
+
+  defp most_recent_stock_quote_date(symbol) do
+    Ecto.Query.from(
+      stock_quotes in StockQuote,
+      limit: 1,
+      order_by: [desc: :date],
+      select: stock_quotes.date,
+      where: stock_quotes.symbol == ^symbol
+    )
+    |> Repo.one()
   end
 end

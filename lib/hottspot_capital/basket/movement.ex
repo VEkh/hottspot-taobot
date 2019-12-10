@@ -41,7 +41,10 @@ defmodule HottspotCapital.Basket.Movement do
   end
 
   defp get_last_two_stock_quotes(symbol, options) do
-    %{date_limit: date_limit} = Generator.merge_options(options)
+    %{date_limit: date_limit} =
+      options
+      |> Keyword.put(:symbol, symbol)
+      |> Generator.merge_options()
 
     previous_weekdate = Utils.previous_weekdate(date_limit)
 
