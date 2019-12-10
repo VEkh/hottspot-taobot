@@ -1,5 +1,5 @@
 defmodule HottspotCapital.Basket.BuyRecommender do
-  alias HottspotCapital.Basket.Movement
+  alias HottspotCapital.Basket.Movement.VectorMagnitude, as: Movement
   alias HottspotCapital.Company
   alias HottspotCapital.Repo
 
@@ -41,7 +41,34 @@ defmodule HottspotCapital.Basket.BuyRecommender do
         basket_movement: basket_movement,
         reference: %{movement: reference_movement}
       } ->
-        basket_movement >= 0.1 && reference_movement <= 0
+        IO.inspect(%{basket_movement: basket_movement, reference_movement: reference_movement})
+        # .0.5704697986577181 (weighted average basket movement)
+        # basket_movement >= 0.1 && reference_movement <= 0
+
+        # 0.6568933250155957 (wrong sum basket movement)
+        # basket_movement >= 0.005 && reference_movement <= 0
+
+        # Lenny Production
+        # Average                     => Total Accuracy: 0.5107604017216643
+        # Movement (Weighted Average) => Total Accuracy: 0.544014904517932
+        # Sum                         => Total Accuracy: 0.569060773480663
+        # Sum (Inverted)              => Total Accuracy: 0.5236348818255909
+        # Vector Magnitude            => Total Accuracy: 0.5503931379556827
+        # basket_movement >= 0.005 && reference_movement <= 0
+
+        # Lenny Production Vector Magnitude (50 tests)
+        # Trial 1 => Total Accuracy: 0.6808510638297872
+        # Trial 2 => Total Accuracy: 0.6578947368421053
+
+        # Lenny Production Vector Magnitude (100 tests)
+        # Trial 1 => Total Accuracy: 0.49019607843137253
+        # basket_movement > 0.02 && reference_movement <= 0
+
+        # TODO: Go backwards. On the days where a stock's price increased from
+        # one day to the next, what did it's basket do?
+        # Lenny Production Vector Magnitude (100 tests)
+        # Trial 1 => Total Accuracy: 0.34210526315789475
+        basket_movement > 0.03 && reference_movement <= 0
 
       _ ->
         false
