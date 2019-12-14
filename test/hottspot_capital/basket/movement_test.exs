@@ -25,7 +25,7 @@ defmodule HottspotCapital.Basket.MovementTest do
       end)
 
       assert %Movement{
-               basket_movement: -0.459617,
+               basket_movement: -0.225253,
                reference: %{
                  last_two_closes: [
                    %{"close" => 372.06},
@@ -86,7 +86,7 @@ defmodule HottspotCapital.Basket.MovementTest do
       end)
 
       assert %Movement{
-               basket_movement: -0.289443,
+               basket_movement: -0.304079,
                reference: %{
                  last_two_closes: [
                    %{"close" => 372.06},

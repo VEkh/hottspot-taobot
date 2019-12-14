@@ -1,5 +1,5 @@
 defmodule HottspotCapital.Basket.BuyRecommender do
-  alias HottspotCapital.Basket.Movement.VectorMagnitude, as: Movement
+  alias HottspotCapital.Basket.Movement
   alias HottspotCapital.Company
   alias HottspotCapital.Repo
 
@@ -41,7 +41,6 @@ defmodule HottspotCapital.Basket.BuyRecommender do
         basket_movement: basket_movement,
         reference: %{movement: reference_movement}
       } ->
-        IO.inspect(%{basket_movement: basket_movement, reference_movement: reference_movement})
         # .0.5704697986577181 (weighted average basket movement)
         # basket_movement >= 0.1 && reference_movement <= 0
 
