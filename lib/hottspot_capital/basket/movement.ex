@@ -29,19 +29,16 @@ defmodule HottspotCapital.Basket.Movement do
   end
 
   defp calculate_basket_movement(basket) do
-    [from_magnitude, to_magnitude] =
+    movements =
       basket
-      |> Enum.reduce(
-        [[], []],
-        fn
-          {_symbol, quotes}, [from_vector, to_vector] ->
-            [%{"close" => to}, %{"close" => from}] = quotes
-            [from_vector ++ [from], to_vector ++ [to]]
-        end
-      )
-      |> Enum.map(&vector_magnitude/1)
+      |> Enum.map(fn
+        {_symbol, [%{"close" => to}, %{"close" => from}]} ->
+          movement(from: from, to: to)
+      end)
 
-    movement(from: from_magnitude, to: to_magnitude)
+    movements
+    |> Enum.sum()
+    |> Kernel./(length(movements))
   end
 
   defp get_last_two_stock_quotes(symbol, options) do
@@ -121,13 +118,5 @@ defmodule HottspotCapital.Basket.Movement do
         }
       )
     end)
-  end
-
-  defp vector_magnitude(vector) do
-    vector
-    |> Enum.reduce(0, fn number, sum ->
-      sum + :math.pow(number, 2)
-    end)
-    |> :math.sqrt()
   end
 end
