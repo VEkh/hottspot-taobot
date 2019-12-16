@@ -33,7 +33,7 @@ defmodule HottspotCapital.Basket.Movement do
       basket
       |> Enum.map(fn
         {_symbol, [%{"close" => to}, %{"close" => from}]} ->
-          movement(from: from, to: to)
+          Utils.price_movement(from: from, to: to)
       end)
 
     movements
@@ -96,11 +96,6 @@ defmodule HottspotCapital.Basket.Movement do
     end)
   end
 
-  defp movement(from: from, to: to) do
-    ((to - from) / from)
-    |> Float.round(6)
-  end
-
   defp reference_with_movement(reference) do
     reference
     |> Enum.reduce(%{}, fn {symbol, closes}, acc ->
@@ -113,7 +108,7 @@ defmodule HottspotCapital.Basket.Movement do
         acc,
         %{
           last_two_closes: closes,
-          movement: movement(from: penultimate_close, to: last_close),
+          movement: Utils.price_movement(from: penultimate_close, to: last_close),
           symbol: symbol
         }
       )

@@ -8,6 +8,11 @@ defmodule HottspotCapital.Utils do
     |> List.first()
   end
 
+  def price_movement(from: from, to: to) do
+    ((to - from) / from)
+    |> Float.round(6)
+  end
+
   def update_in_and_build(map, list, update_path \\ [])
   def update_in_and_build(map, [], _update_path), do: map
   def update_in_and_build(map, [_ | []], _update_path), do: map

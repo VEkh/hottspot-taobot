@@ -6,6 +6,7 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
   alias HottspotCapital.Basket.BuyRecommender
   alias HottspotCapital.Repo
   alias HottspotCapital.StockQuote
+  alias HottspotCapital.Utils
 
   defdelegate get_and_update(map, key, fun), to: Map
 

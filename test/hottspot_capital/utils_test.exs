@@ -9,6 +9,13 @@ defmodule HottspotCapital.Test.UtilsTest do
     end
   end
 
+  describe ".price_movement" do
+    test "returns price movement as fraction of start" do
+      assert Utils.price_movement(from: 1, to: 2) == 1.0
+      assert Utils.price_movement(from: 1, to: 0.5) == -0.5
+    end
+  end
+
   describe ".update_in_and_build" do
     test "builds empty map" do
       subject = %{}
