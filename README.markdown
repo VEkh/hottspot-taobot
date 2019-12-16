@@ -7,11 +7,18 @@
 
 # Strategy
 * Build a basket of correlated stocks to each of the stocks I pull down.
+  * Basket shouldn't have too many companies in the same industry
 
 * This basket is a collection of stocks whose movement most accurately mimics
   the stock's movement. It's not necessarily a collection of the highest
   correlated stocks.
   * 5-10 stocks in a basket should be a good start
+  * Need to account for volatility (beta)
+    * Volatile stocks have an outsized influence on the movement of the basket
+    * Weight the movement inversely with the implied volatility (IV)
+  * Calculate movement as follows:
+    * mn = ((close_2 - close_1) / close_1) / volatility
+    * [m1, m2, m3, ...] => Take the average of this
 
 * Make buying decisions based on the relative movement of the basket to
   reference stock
@@ -28,6 +35,14 @@
       basket should move down more than the stock.
     * By hedging, you are trading the spread.
 
+* Timeframe -- The time over which I expect a win
+  * If it's one day, the strategy may always suggest that I sell the following day.
+  * 5 days -- The reference should catch up to the basket within 5 days
+
+* Wins and Loss Magnitude
+  * Form arbitrary boundry and time horizons for when I should exit a trade.
+    * After what return should I exit the trade? +0.5%, +0.3%, -0.2%
+
 * Eventually ensure that the move isn't due to headlines
 
 * You never own a stock pre-trade. This strategy is all about relative value.
@@ -40,11 +55,15 @@
   * Before placing an order on the basket stock, look at its relative position to _its_ basket and adjust your order.
     * If want to sell $30 of basket GOOG, because it seems high compared to its reference stock, but I see that it seems low comapred to _its_ basket, then maybe I should sell $25 instead.
 
-**Find the Leader**
+*Back Testing*
+* Back test your recommendation algorithms to determine how effective they will be.
+* An accurracy of 65% is amazing.
+
+*Find the Leader*
 * Find a stock amongst the correlated stocks that moves first
 * S&P will move first 98% time.
 
-**Correlation**
+*Correlation*
 * There are available functions that calculate the correlation of two
   collections
 * Write a function that generates a basket for each stock by calculating the
@@ -58,7 +77,7 @@
   long positions.
   * There are inverse S&P indexes that I can buy that are a proxy for shorting.
 
-**Hedging**
+*Hedging*
 * Take price (cash) * volatility (percentage) of each stock.
 * Use the ratio of the product to determine hedge ratio.
 * Not hedging increases variance, but the profit over time will be the same.

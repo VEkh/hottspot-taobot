@@ -35,7 +35,7 @@ Figure out a way to find out when the stocks had special events and take those d
 
 So the way this would look would be M-T-W-Th-F are the trading days, and if apple had earnings on Thursday then you would simply delete that day from data set. 
 
-*note, make sure you know what time of day the events take place, since it could effect the day before or day after (10am event vs 5pm event).
+* note, make sure you know what time of day the events take place, since it could effect the day before or day after (10am event vs 5pm event).
 
 Now the model is built-
 we can recreate a basket of stocks that we expect to mimic apple’s move in price (all 20 stocks contribute a ratio of the total)
@@ -47,5 +47,3 @@ It will be important to note how your trades performed, because if the market go
 
 Apple- 15 stocks with high correlations
 Figure out what combination of the stocks (needs to add to 100% of apple) makes the highest correlation
-
-
