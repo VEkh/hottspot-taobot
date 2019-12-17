@@ -35,6 +35,10 @@ defmodule HottspotCapital.IexApiClient do
     end
   end
 
+  def fetch_stock_beta(symbol) do
+    client().get("/stock/#{symbol}/stats/beta")
+  end
+
   def get(path) do
     with {:ok, %{body: body, status_code: 200}} <- request(:get, path),
          {:ok, decoded_body} <- Jason.decode(body) do

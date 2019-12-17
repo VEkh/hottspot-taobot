@@ -19,6 +19,7 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
     case String.split(rest, "/") do
       [_symbol, "chart", range] -> get_historical_stock_quotes(range)
       [symbol, "quote" <> _ | _] -> get_stock_quote(symbol)
+      [_symbol, "stats", "beta"] -> get_stock_beta()
     end
   end
 
@@ -55,6 +56,19 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
     case mocked_stock do
       nil -> IexApiStubs.stock_quote(symbol)
       stock -> stock
+    end
+  end
+
+  defp get_stock_beta() do
+    mocked_volatility =
+      Mocks.get_in([
+        HottspotCapital.Test.Mocks.IexApiClient,
+        :get_stock_beta
+      ])
+
+    case mocked_volatility do
+      nil -> -0.66666
+      volatility -> volatility
     end
   end
 end

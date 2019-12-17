@@ -106,6 +106,18 @@ defmodule HottspotCapital.IexApiClientTest do
     end
   end
 
+  describe ".fetch_stock_volatility" do
+    test "fetches stock's 1-year historical volatility compared to SPY" do
+      Mocks.update(%{
+        function: :get_stock_beta,
+        module: HottspotCapital.Test.Mocks.IexApiClient,
+        value: -0.444
+      })
+
+      assert IexApiClient.fetch_stock_beta("HOTT") == -0.444
+    end
+  end
+
   defp unmock_iex_api_client(_context) do
     old_values = Application.get_env(:hottspot_capital, :iex_api_client)
 
