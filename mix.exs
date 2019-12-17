@@ -30,7 +30,7 @@ defmodule HottspotCapital.MixProject do
     [
       {:ecto, "~> 3.1.4"},
       {:ecto_sql, "~> 3.1.2"},
-      {:httpoison, "~> 1.5.1"},
+      {:httpoison, "~> 1.6.2"},
       {:jason, "~> 1.1"},
       {:logger_file_backend, git: "https://github.com/vekh/logger_file_backend"},
       {:postgrex, "~> 0.14.0"}
