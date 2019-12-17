@@ -15,6 +15,7 @@ defmodule HottspotCapital.Test.Factory do
 
   def create_stock_quote(%{} = attributes) do
     defaults = %StockQuote{
+      beta: 1.0,
       close: 1000.00,
       date: Date.utc_today(),
       open: 1000.00,

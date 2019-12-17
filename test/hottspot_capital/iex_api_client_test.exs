@@ -106,7 +106,7 @@ defmodule HottspotCapital.IexApiClientTest do
     end
   end
 
-  describe ".fetch_stock_volatility" do
+  describe ".fetch_stock_beta" do
     test "fetches stock's 1-year historical volatility compared to SPY" do
       Mocks.update(%{
         function: :get_stock_beta,

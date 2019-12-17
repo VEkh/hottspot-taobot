@@ -55,7 +55,8 @@ CREATE TABLE public.stock_quotes (
     symbol character varying(5) NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     volume bigint NOT NULL,
-    id integer NOT NULL
+    id integer NOT NULL,
+    beta double precision DEFAULT 1.0 NOT NULL
 );
 
 
@@ -130,5 +131,5 @@ ALTER TABLE ONLY public.stock_quotes
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017);
+INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105);
 

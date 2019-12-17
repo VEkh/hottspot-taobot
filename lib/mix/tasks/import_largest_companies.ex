@@ -48,7 +48,7 @@ defmodule Mix.Tasks.ImportLargestCompanies do
     |> Stream.filter(&(!is_nil(&1)))
     |> Enum.sort(fn %{market_cap: a}, %{market_cap: b} -> a > b end)
     |> Enum.take(limit)
-    |> Enum.map(fn %IexApiClient.StockQuote{} = stock_quote_params ->
+    |> Enum.map(fn %IexApiClient.StockQuote{symbol: symbol} = stock_quote_params ->
       params = Map.from_struct(stock_quote_params)
 
       {:ok, company} =
@@ -56,8 +56,11 @@ defmodule Mix.Tasks.ImportLargestCompanies do
         |> Company.changeset()
         |> Company.upsert()
 
+      beta = IexApiClient.fetch_stock_beta(symbol)
+
       {:ok, _stock_quote} =
         params
+        |> Map.put(:beta, beta)
         |> StockQuote.changeset()
         |> StockQuote.upsert()
 

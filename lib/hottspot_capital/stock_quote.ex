@@ -7,6 +7,7 @@ defmodule HottspotCapital.StockQuote do
   alias HottspotCapital.StockQuote.MissingRangeCalculator
 
   schema "stock_quotes" do
+    field(:beta, :float)
     field(:close, :float)
     field(:date, :date)
     field(:inserted_at, :utc_datetime)
@@ -22,6 +23,7 @@ defmodule HottspotCapital.StockQuote do
 
   def changeset(%__MODULE__{} = stock_quote, %{} = params) do
     required_fields = [
+      :beta,
       :close,
       :date,
       :open,

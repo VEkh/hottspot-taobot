@@ -1,5 +1,6 @@
 defmodule Mix.Tasks.ImportHistoricalTopStocksTest do
   use HottspotCapital.Test.DataCase
+  use HottspotCapital.Test.MockCase
 
   alias HottspotCapital.Repo
   alias HottspotCapital.StockQuote
