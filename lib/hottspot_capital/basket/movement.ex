@@ -32,8 +32,13 @@ defmodule HottspotCapital.Basket.Movement do
     movements =
       basket
       |> Enum.map(fn
-        {_symbol, [%{"close" => to}, %{"close" => from}]} ->
-          Utils.price_movement(from: from, to: to)
+        {_symbol, quotes} ->
+          [
+            %{"beta" => to_beta, "close" => to},
+            %{"beta" => from_beta, "close" => from}
+          ] = quotes
+
+          Utils.price_movement(from: from / from_beta, to: to / to_beta)
       end)
 
     movements
@@ -65,8 +70,9 @@ defmodule HottspotCapital.Basket.Movement do
           symbol,
           ARRAY_AGG(
             JSON_BUILD_OBJECT(
-              'date', date,
+              'beta', beta,
               'close', close,
+              'date', date,
               'volume', volume
             )
             ORDER BY date DESC
@@ -100,15 +106,21 @@ defmodule HottspotCapital.Basket.Movement do
     reference
     |> Enum.reduce(%{}, fn {symbol, closes}, acc ->
       [
-        %{"close" => last_close},
-        %{"close" => penultimate_close}
+        %{"beta" => to_close_beta, "close" => to_close},
+        %{"beta" => from_close_beta, "close" => from_close}
       ] = closes
+
+      movement =
+        Utils.price_movement(
+          from: from_close / from_close_beta,
+          to: to_close / to_close_beta
+        )
 
       Map.merge(
         acc,
         %{
           last_two_closes: closes,
-          movement: Utils.price_movement(from: penultimate_close, to: last_close),
+          movement: movement,
           symbol: symbol
         }
       )
