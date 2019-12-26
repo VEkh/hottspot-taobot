@@ -5,6 +5,13 @@ defmodule HottspotCapital.Test.Stubs.IexApiStubs do
     |> Map.put("symbol", String.upcase(symbol))
   end
 
+  def company(symbol) do
+    Path.join([File.cwd!(), "test", "support", "fixtures", "company.json"])
+    |> File.read!()
+    |> Jason.decode!()
+    |> Map.put("symbol", String.upcase(symbol))
+  end
+
   def historical_stock_quote() do
     Path.join([File.cwd!(), "test", "support", "fixtures", "historical_stock_quote.json"])
     |> File.read!()
@@ -14,13 +21,13 @@ defmodule HottspotCapital.Test.Stubs.IexApiStubs do
   def stock_quote("NIL_CLOSE" = symbol) do
     symbol
     |> base_stock_quote()
-    |> Map.merge(%{"close" => nil})
+    |> Map.put("close", nil)
   end
 
   def stock_quote("NIL_OPEN" = symbol) do
     symbol
     |> base_stock_quote()
-    |> Map.merge(%{"open" => nil})
+    |> Map.put("open", nil)
   end
 
   def stock_quote(symbol) do

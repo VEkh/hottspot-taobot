@@ -1,6 +1,11 @@
 defmodule HottspotCapital.IexApiClient do
   alias HottspotCapital.RequestLogger
 
+  defmodule Company do
+    defstruct sector: nil,
+              symbol: nil
+  end
+
   defmodule HistoricalStockQuote do
     defstruct close: nil,
               date: nil,
@@ -16,6 +21,13 @@ defmodule HottspotCapital.IexApiClient do
               open: nil,
               symbol: nil,
               volume: nil
+  end
+
+  def fetch_company(symbol) do
+    case client().get("/stock/#{symbol}/company") do
+      %{} = company -> parse_company(company)
+      nil -> nil
+    end
   end
 
   def fetch_historical_stock_quotes(range: :no_missing_data, symbol: _), do: []
@@ -52,6 +64,15 @@ defmodule HottspotCapital.IexApiClient do
   def client(), do: config()[:module]
 
   defp config(), do: Application.get_env(:hottspot_capital, :iex_api_client)
+
+  defp parse_company(%{
+         "sector" => <<_::binary>> = sector,
+         "symbol" => <<_::binary>> = symbol
+       }) do
+    %Company{sector: sector, symbol: symbol}
+  end
+
+  defp parse_company(_), do: nil
 
   defp parse_historical_stock_quote(%{
          "close" => close,

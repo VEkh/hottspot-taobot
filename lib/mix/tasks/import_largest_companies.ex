@@ -48,21 +48,11 @@ defmodule Mix.Tasks.ImportLargestCompanies do
     |> Stream.filter(&(!is_nil(&1)))
     |> Enum.sort(fn %{market_cap: a}, %{market_cap: b} -> a > b end)
     |> Enum.take(limit)
-    |> Enum.map(fn %IexApiClient.StockQuote{symbol: symbol} = stock_quote_params ->
+    |> Enum.map(fn %IexApiClient.StockQuote{} = stock_quote_params ->
       params = Map.from_struct(stock_quote_params)
 
-      {:ok, company} =
-        params
-        |> Company.changeset()
-        |> Company.upsert()
-
-      beta = IexApiClient.fetch_stock_beta(symbol)
-
-      {:ok, _stock_quote} =
-        params
-        |> Map.put(:beta, beta)
-        |> StockQuote.changeset()
-        |> StockQuote.upsert()
+      {:ok, company} = upsert_company(params)
+      {:ok, _stock_quote} = upsert_stock_quote(params)
 
       company
     end)
@@ -89,6 +79,30 @@ defmodule Mix.Tasks.ImportLargestCompanies do
         } <- symbols,
         currency === "USD" && is_enabled === true && type === "cs" do
       symbol
+    end
+  end
+
+  defp upsert_company(%{symbol: symbol} = params) do
+    %IexApiClient.Company{
+      sector: <<_::binary>> = sector
+    } = IexApiClient.fetch_company(symbol)
+
+    params
+    |> Map.put(:sector, sector)
+    |> Company.changeset()
+    |> Company.upsert()
+  end
+
+  defp upsert_stock_quote(%{symbol: symbol} = params) do
+    case IexApiClient.fetch_stock_beta(symbol) do
+      beta when is_float(beta) ->
+        params
+        |> Map.put(:beta, beta)
+        |> StockQuote.changeset()
+        |> StockQuote.upsert()
+
+      _ ->
+        :error
     end
   end
 end

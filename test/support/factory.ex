@@ -6,6 +6,7 @@ defmodule HottspotCapital.Test.Factory do
     defaults = %Company{
       company_name: "Hottspot, Inc",
       market_cap: 1_000_000_000,
+      sector: "Technology",
       symbol: "HOTT"
     }
 

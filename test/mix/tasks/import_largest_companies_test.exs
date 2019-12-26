@@ -13,9 +13,9 @@ defmodule Mix.Tasks.ImportLargestCompaniesTest do
   test "imports and persists companies" do
     ImportLargestCompanies.run(["--limit=10"])
 
-    company_symbols =
-      Ecto.Query.from(company in Company, select: company.symbol)
-      |> Repo.all()
+    companies = [%Company{sector: <<_::binary>>} | _] = Repo.all(Company)
+
+    company_symbols = companies |> Enum.map(&Map.get(&1, :symbol))
 
     stock_quote_symbols =
       Ecto.Query.from(stock_quote in StockQuote, select: stock_quote.symbol)

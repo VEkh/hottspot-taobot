@@ -11,6 +11,7 @@ defmodule HottspotCapital.Company do
     field(:company_name, :string)
     field(:inserted_at, :utc_datetime)
     field(:market_cap, :integer)
+    field(:sector, :string)
     field(:updated_at, :utc_datetime)
   end
 
@@ -22,6 +23,7 @@ defmodule HottspotCapital.Company do
     required_fields = [
       :company_name,
       :market_cap,
+      :sector,
       :symbol
     ]
 

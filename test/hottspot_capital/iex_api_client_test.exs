@@ -4,6 +4,15 @@ defmodule HottspotCapital.IexApiClientTest do
   alias HottspotCapital.IexApiClient
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
+  describe ".fetch_company" do
+    test "fetches company" do
+      assert %HottspotCapital.IexApiClient.Company{
+               sector: <<_::binary>>,
+               symbol: "HOTT"
+             } = IexApiClient.fetch_company("HOTT")
+    end
+  end
+
   describe ".fetch_historical_stock_quotes (unmocked IexApiClient)" do
     setup :unmock_iex_api_client
 

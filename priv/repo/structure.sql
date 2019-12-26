@@ -16,6 +16,20 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+--
+-- Name: pgcrypto; Type: EXTENSION; Schema: -; Owner: -
+--
+
+CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
+
+
+--
+-- Name: EXTENSION pgcrypto; Type: COMMENT; Schema: -; Owner: -
+--
+
+COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
+
+
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -29,7 +43,8 @@ CREATE TABLE public.companies (
     inserted_at timestamp with time zone DEFAULT now() NOT NULL,
     market_cap bigint NOT NULL,
     symbol character varying(5) NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL
+    updated_at timestamp with time zone DEFAULT now() NOT NULL,
+    sector text DEFAULT public.gen_random_uuid() NOT NULL
 );
 
 
@@ -120,6 +135,13 @@ ALTER TABLE ONLY public.stock_quotes
 
 
 --
+-- Name: companies_sector_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX companies_sector_idx ON public.companies USING btree (sector);
+
+
+--
 -- Name: stock_quotes stock_quotes_symbol_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -131,5 +153,5 @@ ALTER TABLE ONLY public.stock_quotes
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105);
+INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955);
 
