@@ -8,26 +8,51 @@ defmodule HottspotCapital.Basket.Generator do
   def basket_query() do
     """
     (
-      SELECT reference.symbol AS reference_symbol,
-      basket_item.symbol AS basket_item_symbol,
-      CORR(reference.close, basket_item.close) AS correlation
+      SELECT
+        sorted_basket.basket_item_symbol,
+        sorted_basket.reference_symbol,
+        sorted_basket.correlation
 
       FROM (
-        SELECT close, date, symbol FROM stock_quotes
-        WHERE symbol = $symbol
-        AND date < $date_limit
-      ) AS reference
+        SELECT
+          DISTINCT ON (basket_item.sector)
+          reference.symbol AS reference_symbol,
+          basket_item.symbol AS basket_item_symbol,
+          CORR(reference.close, basket_item.close) AS correlation
 
-      JOIN (
-        SELECT close, date, symbol FROM stock_quotes
-        WHERE symbol != $symbol
-        AND date < $date_limit
-      ) AS basket_item
-        ON reference.date = basket_item.date
+        FROM (
+          SELECT close, date, symbol FROM stock_quotes
+          WHERE symbol = $symbol
+          AND date < $date_limit
+        ) AS reference
 
-      GROUP BY reference.symbol, basket_item.symbol
-      HAVING CORR(reference.close, basket_item.close) IS NOT NULL
-      ORDER BY 3 DESC
+        JOIN (
+          SELECT
+            companies.sector,
+            stock_quotes.close,
+            stock_quotes.date,
+            stock_quotes.symbol
+
+          FROM (
+            SELECT close, date, symbol FROM stock_quotes
+            WHERE symbol != $symbol
+            AND date < $date_limit
+          ) AS stock_quotes
+
+          JOIN companies on companies.symbol = stock_quotes.symbol
+        ) AS basket_item
+          ON reference.date = basket_item.date
+
+        GROUP BY
+          reference.symbol,
+          basket_item.symbol,
+          basket_item.sector
+
+        HAVING CORR(reference.close, basket_item.close) IS NOT NULL
+        ORDER BY basket_item.sector, 3 DESC
+      ) AS sorted_basket
+
+      ORDER BY sorted_basket.correlation DESC
       LIMIT 10
     )
     """

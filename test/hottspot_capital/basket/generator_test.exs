@@ -125,6 +125,40 @@ defmodule HottspotCapital.Basket.GeneratorTest do
 
       assert Generator.generate("HOTT", date_limit: ~D[2019-08-23]) == []
     end
+
+    test "basket company sectors are unique" do
+      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
+
+      [
+        %{symbol: "HOTT", sector: "Technology"},
+        %{symbol: "DIS", sector: "Entertainment"},
+        %{symbol: "GOOG", sector: "Technology"},
+        %{symbol: "FB", sector: "Technology"},
+        %{symbol: "JPM", sector: "Finance"}
+      ]
+      |> Enum.zip(stubbed_closes_and_volumes())
+      |> Enum.each(fn {%{symbol: symbol} = company, stock_quotes} ->
+        Factory.create_company(company)
+
+        stock_quotes
+        |> Enum.with_index()
+        |> Enum.each(fn {[close, volume], index} ->
+          Factory.create_stock_quote(%{
+            close: close,
+            date: Date.from_erl!({current_year - index, 8, 26}),
+            symbol: symbol,
+            volume: volume
+          })
+        end)
+      end)
+
+      [symbols, _] =
+        "HOTT"
+        |> Generator.generate()
+        |> parse_basket()
+
+      assert symbols == ["DIS", "GOOG", "JPM"]
+    end
   end
 
   defp parse_basket(basket) do
