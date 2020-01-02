@@ -21,12 +21,22 @@ defmodule HottspotCapital.Basket.Generator do
           CORR(reference.close, basket_item.close) AS correlation
 
         FROM (
-          SELECT close, date, symbol FROM stock_quotes
-          WHERE symbol = $symbol
-          AND date < $date_limit
+          SELECT
+            companies.name AS company_name,
+            stock_quotes.close,
+            stock_quotes.date,
+            stock_quotes.symbol
+
+          FROM (
+            SELECT close, date, symbol FROM stock_quotes
+            WHERE symbol = $symbol
+            AND date < $date_limit
+          ) AS stock_quotes
+
+          JOIN companies on companies.symbol = stock_quotes.symbol
         ) AS reference
 
-        JOIN (
+        JOIN LATERAL (
           SELECT
             companies.sector,
             stock_quotes.close,
@@ -35,18 +45,21 @@ defmodule HottspotCapital.Basket.Generator do
 
           FROM (
             SELECT close, date, symbol FROM stock_quotes
-            WHERE symbol != $symbol
+            WHERE symbol != reference.symbol
             AND date < $date_limit
           ) AS stock_quotes
 
-          JOIN companies on companies.symbol = stock_quotes.symbol
-        ) AS basket_item
-          ON reference.date = basket_item.date
+          JOIN (
+            SELECT sector, symbol FROM companies
+            WHERE name != reference.company_name
+             AND symbol != reference.symbol
+          ) AS companies on companies.symbol = stock_quotes.symbol
+        ) AS basket_item ON reference.date = basket_item.date
 
         GROUP BY
-          reference.symbol,
+          basket_item.sector,
           basket_item.symbol,
-          basket_item.sector
+          reference.symbol
 
         HAVING CORR(reference.close, basket_item.close) IS NOT NULL
         ORDER BY basket_item.sector, 3 DESC

@@ -6,12 +6,18 @@ defmodule HottspotCapital.Basket.GeneratorTest do
   alias HottspotCapital.Test.Stubs.StockQuoteStubs
 
   describe ".generate" do
+    setup _ do
+      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
+      [current_year: current_year]
+    end
+
     test "returns [] if no basket is generated" do
       assert Generator.generate("HOTT") == []
     end
 
-    test "returns list of companies with most correlated closing stock prices" do
-      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
+    test "returns list of companies with most correlated closing stock prices", %{
+      current_year: current_year
+    } do
       stubbed_quotes = stubbed_closes_and_volumes()
 
       [
@@ -126,15 +132,45 @@ defmodule HottspotCapital.Basket.GeneratorTest do
       assert Generator.generate("HOTT", date_limit: ~D[2019-08-23]) == []
     end
 
-    test "basket company sectors are unique" do
-      {current_year, _, _} = Date.utc_today() |> Date.to_erl()
-
+    test "basket company sectors are unique", %{current_year: current_year} do
       [
         %{symbol: "HOTT", sector: "Technology"},
         %{symbol: "DIS", sector: "Entertainment"},
         %{symbol: "GOOG", sector: "Technology"},
         %{symbol: "FB", sector: "Technology"},
         %{symbol: "JPM", sector: "Finance"}
+      ]
+      |> Enum.zip(stubbed_closes_and_volumes())
+      |> Enum.each(fn {%{symbol: symbol} = company, stock_quotes} ->
+        Factory.create_company(company)
+
+        stock_quotes
+        |> Enum.with_index()
+        |> Enum.each(fn {[close, volume], index} ->
+          Factory.create_stock_quote(%{
+            close: close,
+            date: Date.from_erl!({current_year - index, 8, 26}),
+            symbol: symbol,
+            volume: volume
+          })
+        end)
+      end)
+
+      [symbols, _] =
+        "HOTT"
+        |> Generator.generate()
+        |> parse_basket()
+
+      assert symbols == ["DIS", "GOOG", "JPM"]
+    end
+
+    test "excludes companies of the same name", %{current_year: current_year} do
+      [
+        %{symbol: "HOTT", name: "Hottspot, Inc"},
+        %{symbol: "HOTT.A", name: "Hottspot, Inc"},
+        %{symbol: "DIS", name: "Disney"},
+        %{symbol: "GOOG", name: "Alphabet, Inc"},
+        %{symbol: "JPM", name: "JPMorgan Chase & Co."}
       ]
       |> Enum.zip(stubbed_closes_and_volumes())
       |> Enum.each(fn {%{symbol: symbol} = company, stock_quotes} ->
