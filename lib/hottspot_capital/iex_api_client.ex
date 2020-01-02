@@ -2,7 +2,9 @@ defmodule HottspotCapital.IexApiClient do
   alias HottspotCapital.RequestLogger
 
   defmodule Company do
-    defstruct name: nil, sector: nil, symbol: nil
+    defstruct name: nil,
+              sector: nil,
+              symbol: nil
   end
 
   defmodule HistoricalStockQuote do

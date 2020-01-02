@@ -6,23 +6,16 @@ defmodule Mix.Tasks.ImportLargestCompaniesTest do
 
   alias HottspotCapital.Company
   alias HottspotCapital.Repo
-  alias HottspotCapital.StockQuote
   alias HottspotCapital.Test.Stubs.IexApiStubs
   alias Mix.Tasks.ImportLargestCompanies
 
   test "imports and persists companies" do
     ImportLargestCompanies.run(["--limit=10"])
 
-    companies = [%Company{sector: <<_::binary>>} | _] = Repo.all(Company)
+    companies = Repo.all(Company)
 
-    company_symbols = companies |> Enum.map(&Map.get(&1, :symbol))
-
-    stock_quote_symbols =
-      Ecto.Query.from(stock_quote in StockQuote, select: stock_quote.symbol)
-      |> Repo.all()
-
-    assert company_symbols == stock_quote_symbols
-    assert length(company_symbols) == 10 && length(stock_quote_symbols) == 10
+    assert [%Company{sector: <<_::binary>>} | _] = companies
+    assert length(companies) == 10
   end
 
   test "sorts companies by market cap" do
@@ -53,18 +46,16 @@ defmodule Mix.Tasks.ImportLargestCompaniesTest do
   end
 
   test "does not import companies with unusable data" do
-    base_symbol = IexApiStubs.base_symbol("HOTT")
-
-    bad_symbols =
-      ["NIL_CLOSE", "NIL_OPEN"]
-      |> Enum.map(&Map.put(base_symbol, "symbol", &1))
+    bad_stats =
+      IexApiStubs.company_stats()
+      |> Map.put("marketcap", nil)
 
     Mocks.update(%{
-      function: :get_symbols,
+      function: :get_company_stats,
       module: HottspotCapital.Test.Mocks.IexApiClient,
-      value: [base_symbol] ++ bad_symbols
+      value: bad_stats
     })
 
-    assert [%Company{symbol: "HOTT"} | []] = ImportLargestCompanies.run()
+    assert ImportLargestCompanies.run() == []
   end
 end

@@ -3,16 +3,10 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
   alias HottspotCapital.Test.Stubs.IexApiStubs
 
   def get("/ref-data/symbols") do
-    mocked_symbols =
-      Mocks.get_in([
-        HottspotCapital.Test.Mocks.IexApiClient,
-        :get_symbols
-      ])
-
-    case mocked_symbols do
-      nil -> IexApiStubs.symbols()
-      symbols -> symbols
-    end
+    Mocks.get_in([
+      HottspotCapital.Test.Mocks.IexApiClient,
+      :get_symbols
+    ]) || IexApiStubs.symbols()
   end
 
   def get("/stock/" <> rest) do
@@ -48,29 +42,10 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
   end
 
   defp get_company(symbol) do
-    mocked_company =
-      Mocks.get_in([
-        HottspotCapital.Test.Mocks.IexApiClient,
-        :get_company
-      ])
-
-    case mocked_company do
-      nil -> IexApiStubs.company(symbol)
-      company -> company
-    end
-  end
-
-  defp get_stock_quote(symbol) do
-    mocked_stock =
-      Mocks.get_in([
-        HottspotCapital.Test.Mocks.IexApiClient,
-        :get_stock
-      ])
-
-    case mocked_stock do
-      nil -> IexApiStubs.stock_quote(symbol)
-      stock -> stock
-    end
+    Mocks.get_in([
+      HottspotCapital.Test.Mocks.IexApiClient,
+      :get_company
+    ]) || IexApiStubs.company(symbol)
   end
 
   defp get_company_stat(stat) do
@@ -81,5 +56,12 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
       ]) || IexApiStubs.company_stats()
 
     Map.get(mocked_stats, stat)
+  end
+
+  defp get_stock_quote(symbol) do
+    Mocks.get_in([
+      HottspotCapital.Test.Mocks.IexApiClient,
+      :get_stock
+    ]) || IexApiStubs.stock_quote(symbol)
   end
 end

@@ -3,7 +3,6 @@ defmodule Mix.Tasks.ImportLargestCompanies do
 
   alias HottspotCapital.Company
   alias HottspotCapital.IexApiClient
-  alias HottspotCapital.StockQuote
   alias Mix.Tasks.OptionsParser
 
   @default_options %{
@@ -44,18 +43,20 @@ defmodule Mix.Tasks.ImportLargestCompanies do
       |> cast_options()
 
     get_all_symbols()
-    |> Stream.map(&IexApiClient.fetch_stock_quote/1)
-    |> Stream.filter(&(!is_nil(&1)))
+    |> Enum.flat_map(&init_company/1)
     |> Enum.sort(fn %{market_cap: a}, %{market_cap: b} -> a > b end)
     |> Enum.take(limit)
-    |> Enum.map(fn %IexApiClient.StockQuote{} = stock_quote_params ->
-      params = Map.from_struct(stock_quote_params)
+    |> Enum.map(&upsert_company/1)
+  end
 
-      {:ok, company} = upsert_company(params)
-      {:ok, _stock_quote} = upsert_stock_quote(params)
-
+  defp build_company_params(%{symbol: symbol} = company) do
+    symbol
+    |> IexApiClient.fetch_company()
+    |> Map.merge(%{
       company
-    end)
+      | beta: IexApiClient.fetch_company_stat(stat: :beta, symbol: symbol)
+    })
+    |> Map.from_struct()
   end
 
   defp cast_options(options) do
@@ -82,27 +83,20 @@ defmodule Mix.Tasks.ImportLargestCompanies do
     end
   end
 
-  defp upsert_company(%{company_name: name, symbol: symbol} = params) do
-    %IexApiClient.Company{
-      sector: <<_::binary>> = sector
-    } = IexApiClient.fetch_company(symbol)
-
-    params
-    |> Map.merge(%{name: name, sector: sector})
-    |> Company.changeset()
-    |> Company.upsert()
+  defp init_company(symbol) do
+    case IexApiClient.fetch_company_stat(stat: :marketcap, symbol: symbol) do
+      nil -> []
+      market_cap -> [%{beta: nil, market_cap: market_cap, symbol: symbol}]
+    end
   end
 
-  defp upsert_stock_quote(%{symbol: symbol} = params) do
-    case IexApiClient.fetch_company_stat(stat: "beta", symbol: symbol) do
-      beta when is_float(beta) ->
-        params
-        |> Map.put(:beta, beta)
-        |> StockQuote.changeset()
-        |> StockQuote.upsert()
+  defp upsert_company(params) do
+    {:ok, company} =
+      params
+      |> build_company_params()
+      |> Company.changeset()
+      |> Company.upsert()
 
-      _ ->
-        :error
-    end
+    company
   end
 end
