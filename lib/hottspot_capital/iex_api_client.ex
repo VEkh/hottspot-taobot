@@ -2,8 +2,7 @@ defmodule HottspotCapital.IexApiClient do
   alias HottspotCapital.RequestLogger
 
   defmodule Company do
-    defstruct sector: nil,
-              symbol: nil
+    defstruct name: nil, sector: nil, symbol: nil
   end
 
   defmodule HistoricalStockQuote do
@@ -66,10 +65,15 @@ defmodule HottspotCapital.IexApiClient do
   defp config(), do: Application.get_env(:hottspot_capital, :iex_api_client)
 
   defp parse_company(%{
+         "companyName" => <<_::binary>> = name,
          "sector" => <<_::binary>> = sector,
          "symbol" => <<_::binary>> = symbol
        }) do
-    %Company{sector: sector, symbol: symbol}
+    %Company{
+      name: name,
+      sector: sector,
+      symbol: symbol
+    }
   end
 
   defp parse_company(_), do: nil

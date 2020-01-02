@@ -7,6 +7,7 @@ defmodule HottspotCapital.IexApiClientTest do
   describe ".fetch_company" do
     test "fetches company" do
       assert %HottspotCapital.IexApiClient.Company{
+               name: <<_::binary>>,
                sector: <<_::binary>>,
                symbol: "HOTT"
              } = IexApiClient.fetch_company("HOTT")
