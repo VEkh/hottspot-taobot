@@ -39,7 +39,7 @@ SET default_table_access_method = heap;
 --
 
 CREATE TABLE public.companies (
-    company_name text NOT NULL,
+    name text NOT NULL,
     inserted_at timestamp with time zone DEFAULT now() NOT NULL,
     market_cap bigint NOT NULL,
     symbol character varying(5) NOT NULL,
@@ -135,6 +135,13 @@ ALTER TABLE ONLY public.stock_quotes
 
 
 --
+-- Name: companies_name_idx; Type: INDEX; Schema: public; Owner: -
+--
+
+CREATE INDEX companies_name_idx ON public.companies USING btree (name);
+
+
+--
 -- Name: companies_sector_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -153,5 +160,5 @@ ALTER TABLE ONLY public.stock_quotes
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955);
+INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459);
 

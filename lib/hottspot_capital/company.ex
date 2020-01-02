@@ -8,9 +8,9 @@ defmodule HottspotCapital.Company do
   @primary_key {:symbol, :string, autogenerate: false}
 
   schema "companies" do
-    field(:company_name, :string)
     field(:inserted_at, :utc_datetime)
     field(:market_cap, :integer)
+    field(:name, :string)
     field(:sector, :string)
     field(:updated_at, :utc_datetime)
   end
@@ -21,8 +21,8 @@ defmodule HottspotCapital.Company do
 
   def changeset(%__MODULE__{} = company, %{} = params) do
     required_fields = [
-      :company_name,
       :market_cap,
+      :name,
       :sector,
       :symbol
     ]

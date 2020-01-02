@@ -4,8 +4,8 @@ defmodule HottspotCapital.Test.Factory do
 
   def create_company(%{} = attributes) do
     defaults = %Company{
-      company_name: "Hottspot, Inc",
       market_cap: 1_000_000_000,
+      name: "Hottspot, Inc",
       sector: Ecto.UUID.generate(),
       symbol: "HOTT"
     }

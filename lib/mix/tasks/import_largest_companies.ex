@@ -82,13 +82,13 @@ defmodule Mix.Tasks.ImportLargestCompanies do
     end
   end
 
-  defp upsert_company(%{symbol: symbol} = params) do
+  defp upsert_company(%{company_name: name, symbol: symbol} = params) do
     %IexApiClient.Company{
       sector: <<_::binary>> = sector
     } = IexApiClient.fetch_company(symbol)
 
     params
-    |> Map.put(:sector, sector)
+    |> Map.merge(%{name: name, sector: sector})
     |> Company.changeset()
     |> Company.upsert()
   end
