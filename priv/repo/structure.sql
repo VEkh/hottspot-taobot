@@ -59,6 +59,39 @@ CREATE TABLE public.companies (
 
 
 --
+-- Name: fund_transactions; Type: TABLE; Schema: public; Owner: -
+--
+
+CREATE TABLE public.fund_transactions (
+    amount integer NOT NULL,
+    description text NOT NULL,
+    id integer NOT NULL,
+    inserted_at timestamp with time zone DEFAULT now() NOT NULL,
+    updated_at timestamp with time zone DEFAULT now() NOT NULL
+);
+
+
+--
+-- Name: fund_transactions_id_seq; Type: SEQUENCE; Schema: public; Owner: -
+--
+
+CREATE SEQUENCE public.fund_transactions_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+--
+-- Name: fund_transactions_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
+--
+
+ALTER SEQUENCE public.fund_transactions_id_seq OWNED BY public.fund_transactions.id;
+
+
+--
 -- Name: schema_migrations; Type: TABLE; Schema: public; Owner: -
 --
 
@@ -142,6 +175,13 @@ ALTER SEQUENCE public.stock_trades_id_seq OWNED BY public.stock_trades.id;
 
 
 --
+-- Name: fund_transactions id; Type: DEFAULT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fund_transactions ALTER COLUMN id SET DEFAULT nextval('public.fund_transactions_id_seq'::regclass);
+
+
+--
 -- Name: stock_quotes id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -161,6 +201,14 @@ ALTER TABLE ONLY public.stock_trades ALTER COLUMN id SET DEFAULT nextval('public
 
 ALTER TABLE ONLY public.companies
     ADD CONSTRAINT companies_pkey PRIMARY KEY (symbol);
+
+
+--
+-- Name: fund_transactions fund_transactions_pkey; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.fund_transactions
+    ADD CONSTRAINT fund_transactions_pkey PRIMARY KEY (id);
 
 
 --
@@ -236,5 +284,5 @@ ALTER TABLE ONLY public.stock_trades
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459), (20200102023134), (20200102061625);
+INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459), (20200102023134), (20200102061625), (20200102061635);
 
