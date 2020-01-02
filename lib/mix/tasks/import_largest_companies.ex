@@ -94,7 +94,7 @@ defmodule Mix.Tasks.ImportLargestCompanies do
   end
 
   defp upsert_stock_quote(%{symbol: symbol} = params) do
-    case IexApiClient.fetch_stock_beta(symbol) do
+    case IexApiClient.fetch_company_stat(stat: "beta", symbol: symbol) do
       beta when is_float(beta) ->
         params
         |> Map.put(:beta, beta)

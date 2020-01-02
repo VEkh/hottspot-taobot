@@ -29,6 +29,10 @@ defmodule HottspotCapital.IexApiClient do
     end
   end
 
+  def fetch_company_stat(stat: stat, symbol: symbol) do
+    client().get("/stock/#{symbol}/stats/#{stat}")
+  end
+
   def fetch_historical_stock_quotes(range: :no_missing_data, symbol: _), do: []
 
   def fetch_historical_stock_quotes(range: range, symbol: symbol) do
@@ -44,10 +48,6 @@ defmodule HottspotCapital.IexApiClient do
       %{} = stock_quote -> parse_stock_quote(stock_quote)
       nil -> nil
     end
-  end
-
-  def fetch_stock_beta(symbol) do
-    client().get("/stock/#{symbol}/stats/beta")
   end
 
   def get(path) do

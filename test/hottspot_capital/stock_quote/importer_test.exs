@@ -38,9 +38,9 @@ defmodule HottspotCapital.StockQuote.ImporterTest do
       Factory.create_company(%{symbol: "HOTT"})
 
       Mocks.update(%{
-        function: :get_stock_beta,
+        function: :get_company_stats,
         module: HottspotCapital.Test.Mocks.IexApiClient,
-        value: -0.4444
+        value: %{"beta" => -0.4444}
       })
 
       assert %StockQuote{beta: -0.4444} = Importer.import("HOTT")

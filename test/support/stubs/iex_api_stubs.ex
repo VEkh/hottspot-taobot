@@ -12,6 +12,12 @@ defmodule HottspotCapital.Test.Stubs.IexApiStubs do
     |> Map.put("symbol", String.upcase(symbol))
   end
 
+  def company_stats() do
+    Path.join([File.cwd!(), "test", "support", "fixtures", "company_stats.json"])
+    |> File.read!()
+    |> Jason.decode!()
+  end
+
   def historical_stock_quote() do
     Path.join([File.cwd!(), "test", "support", "fixtures", "historical_stock_quote.json"])
     |> File.read!()

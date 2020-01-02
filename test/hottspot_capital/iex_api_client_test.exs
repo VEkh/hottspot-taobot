@@ -14,6 +14,29 @@ defmodule HottspotCapital.IexApiClientTest do
     end
   end
 
+  describe ".fetch_company_stat" do
+    test "fetches company's single stat" do
+      Mocks.update(%{
+        function: :get_company_stats,
+        module: HottspotCapital.Test.Mocks.IexApiClient,
+        value: %{
+          "beta" => -0.444,
+          "marketcap" => 444_444_444_444
+        }
+      })
+
+      assert IexApiClient.fetch_company_stat(
+               stat: "beta",
+               symbol: "HOTT"
+             ) == -0.444
+
+      assert IexApiClient.fetch_company_stat(
+               stat: "marketcap",
+               symbol: "HOTT"
+             ) == 444_444_444_444
+    end
+  end
+
   describe ".fetch_historical_stock_quotes (unmocked IexApiClient)" do
     setup :unmock_iex_api_client
 
@@ -113,18 +136,6 @@ defmodule HottspotCapital.IexApiClientTest do
       })
 
       assert IexApiClient.fetch_stock_quote("HOTT") == nil
-    end
-  end
-
-  describe ".fetch_stock_beta" do
-    test "fetches stock's 1-year historical volatility compared to SPY" do
-      Mocks.update(%{
-        function: :get_stock_beta,
-        module: HottspotCapital.Test.Mocks.IexApiClient,
-        value: -0.444
-      })
-
-      assert IexApiClient.fetch_stock_beta("HOTT") == -0.444
     end
   end
 
