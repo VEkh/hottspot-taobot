@@ -34,7 +34,6 @@ defmodule HottspotCapital.StockQuote do
     stock_quote
     |> Changeset.cast(params, required_fields)
     |> Changeset.validate_required(required_fields)
-    |> Changeset.validate_length(:symbol, max: 5)
     |> Changeset.unique_constraint(
       :symbol,
       message: "there is already a quote for this day",

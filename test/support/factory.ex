@@ -5,13 +5,15 @@ defmodule HottspotCapital.Test.Factory do
   def create_company(%{} = attributes) do
     defaults = %Company{
       market_cap: 1_000_000_000,
-      name: "Hottspot, Inc",
+      name: Ecto.UUID.generate(),
       sector: Ecto.UUID.generate(),
       symbol: "HOTT"
     }
 
-    Company.changeset(defaults, attributes)
-    |> Company.upsert()
+    {:ok, _} =
+      defaults
+      |> Company.changeset(attributes)
+      |> Company.upsert()
   end
 
   def create_stock_quote(%{} = attributes) do
@@ -24,7 +26,9 @@ defmodule HottspotCapital.Test.Factory do
       volume: 1_000_000
     }
 
-    StockQuote.changeset(defaults, attributes)
-    |> StockQuote.upsert()
+    {:ok, _} =
+      defaults
+      |> StockQuote.changeset(attributes)
+      |> StockQuote.upsert()
   end
 end

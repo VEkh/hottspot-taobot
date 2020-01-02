@@ -30,7 +30,6 @@ defmodule HottspotCapital.Company do
     company
     |> Changeset.cast(params, required_fields)
     |> Changeset.validate_required(required_fields)
-    |> Changeset.validate_length(:symbol, max: 5)
     |> Changeset.unique_constraint(:symbol)
   end
 

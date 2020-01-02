@@ -42,7 +42,7 @@ CREATE TABLE public.companies (
     name text NOT NULL,
     inserted_at timestamp with time zone DEFAULT now() NOT NULL,
     market_cap bigint NOT NULL,
-    symbol character varying(5) NOT NULL,
+    symbol text NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     sector text DEFAULT public.gen_random_uuid() NOT NULL
 );
@@ -67,7 +67,7 @@ CREATE TABLE public.stock_quotes (
     date date NOT NULL,
     inserted_at timestamp with time zone DEFAULT now() NOT NULL,
     open double precision NOT NULL,
-    symbol character varying(5) NOT NULL,
+    symbol text NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL,
     volume bigint NOT NULL,
     id integer NOT NULL,
@@ -160,5 +160,5 @@ ALTER TABLE ONLY public.stock_quotes
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459);
+INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459), (20200102023134);
 
