@@ -14,7 +14,6 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
       [_symbol, "chart", range] -> get_historical_stock_quotes(range)
       [_symbol, "stats", stat] -> get_company_stat(stat)
       [symbol, "company"] -> get_company(symbol)
-      [symbol, "quote" <> _ | _] -> get_stock_quote(symbol)
     end
   end
 
@@ -56,12 +55,5 @@ defmodule HottspotCapital.Test.Mocks.IexApiClient do
       ]) || IexApiStubs.company_stats()
 
     Map.get(mocked_stats, stat)
-  end
-
-  defp get_stock_quote(symbol) do
-    Mocks.get_in([
-      HottspotCapital.Test.Mocks.IexApiClient,
-      :get_stock
-    ]) || IexApiStubs.stock_quote(symbol)
   end
 end

@@ -14,16 +14,6 @@ defmodule HottspotCapital.IexApiClient do
               volume: nil
   end
 
-  defmodule StockQuote do
-    defstruct close: nil,
-              company_name: nil,
-              date: nil,
-              market_cap: nil,
-              open: nil,
-              symbol: nil,
-              volume: nil
-  end
-
   def fetch_company(symbol) do
     case client().get("/stock/#{symbol}/company") do
       %{} = company -> parse_company(company)
@@ -43,13 +33,6 @@ defmodule HottspotCapital.IexApiClient do
     "/stock/#{symbol}/chart/#{range}"
     |> client.get()
     |> Enum.map(&parse_historical_stock_quote/1)
-  end
-
-  def fetch_stock_quote(symbol) do
-    case client().get("/stock/#{symbol}/quote") do
-      %{} = stock_quote -> parse_stock_quote(stock_quote)
-      nil -> nil
-    end
   end
 
   def get(path) do
@@ -102,34 +85,6 @@ defmodule HottspotCapital.IexApiClient do
       {:error, %{reason: reason}} when reason in [:closed, :timeout] -> {:retry, nil}
     end
   end
-
-  defp parse_stock_quote(%{
-         "close" => close,
-         "closeTime" => close_date_epoch,
-         "companyName" => company_name,
-         "latestVolume" => volume,
-         "marketCap" => market_cap,
-         "open" => open,
-         "symbol" => symbol
-       })
-       when nil not in [close, close_date_epoch, open] do
-    close_date =
-      close_date_epoch
-      |> DateTime.from_unix!(:millisecond)
-      |> DateTime.to_date()
-
-    %StockQuote{
-      close: close / 1,
-      company_name: company_name,
-      date: close_date,
-      market_cap: market_cap,
-      open: open / 1,
-      symbol: symbol,
-      volume: volume
-    }
-  end
-
-  defp parse_stock_quote(_), do: nil
 
   defp request(method, path, options \\ []) do
     %{
