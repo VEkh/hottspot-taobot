@@ -30,7 +30,7 @@ defmodule HottspotCapital.Basket.BuyRecommender do
         basket_movement: basket_movement,
         reference: %{movement: reference_movement}
       } ->
-        basket_movement - reference_movement > 0.001
+        basket_movement > 0 && basket_movement - reference_movement > 0.001
 
       _ ->
         false
