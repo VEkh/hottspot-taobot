@@ -19,18 +19,7 @@ defmodule HottspotCapital.Basket.BuyRecommender do
     )
     |> Enum.map(&Kernel.elem(&1, 1))
     |> apply_buy_filter()
-    |> Enum.sort(fn a, b ->
-      [a_last_close, b_last_close] =
-        [a, b]
-        |> Enum.map(fn movement ->
-          get_in(
-            movement,
-            [:reference, :last_two_closes, Access.at(0), "close"]
-          )
-        end)
-
-      a_last_close <= b_last_close
-    end)
+    |> Enum.sort(&sort_by_basket_movement/2)
     |> respond(merged_options)
   end
 
@@ -71,4 +60,14 @@ defmodule HottspotCapital.Basket.BuyRecommender do
   end
 
   defp respond(movements, _), do: movements
+
+  defp sort_by_basket_movement(a, b) do
+    [a, b] =
+      [a, b]
+      |> Enum.map(fn %{basket_movement: basket_movement} ->
+        basket_movement
+      end)
+
+    b <= a
+  end
 end
