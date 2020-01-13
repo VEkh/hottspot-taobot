@@ -30,16 +30,6 @@ CREATE EXTENSION IF NOT EXISTS pgcrypto WITH SCHEMA public;
 COMMENT ON EXTENSION pgcrypto IS 'cryptographic functions';
 
 
---
--- Name: stock_trade_action; Type: TYPE; Schema: public; Owner: -
---
-
-CREATE TYPE public.stock_trade_action AS ENUM (
-    'buy',
-    'sell'
-);
-
-
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
@@ -140,42 +130,6 @@ ALTER SEQUENCE public.stock_quotes_id_seq OWNED BY public.stock_quotes.id;
 
 
 --
--- Name: stock_trades; Type: TABLE; Schema: public; Owner: -
---
-
-CREATE TABLE public.stock_trades (
-    action public.stock_trade_action NOT NULL,
-    filled_at timestamp with time zone NOT NULL,
-    id integer NOT NULL,
-    inserted_at timestamp with time zone DEFAULT now() NOT NULL,
-    price integer NOT NULL,
-    symbol text NOT NULL,
-    updated_at timestamp with time zone DEFAULT now() NOT NULL,
-    volume integer NOT NULL
-);
-
-
---
--- Name: stock_trades_id_seq; Type: SEQUENCE; Schema: public; Owner: -
---
-
-CREATE SEQUENCE public.stock_trades_id_seq
-    AS integer
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
---
--- Name: stock_trades_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
---
-
-ALTER SEQUENCE public.stock_trades_id_seq OWNED BY public.stock_trades.id;
-
-
---
 -- Name: fund_transactions id; Type: DEFAULT; Schema: public; Owner: -
 --
 
@@ -187,13 +141,6 @@ ALTER TABLE ONLY public.fund_transactions ALTER COLUMN id SET DEFAULT nextval('p
 --
 
 ALTER TABLE ONLY public.stock_quotes ALTER COLUMN id SET DEFAULT nextval('public.stock_quotes_id_seq'::regclass);
-
-
---
--- Name: stock_trades id; Type: DEFAULT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.stock_trades ALTER COLUMN id SET DEFAULT nextval('public.stock_trades_id_seq'::regclass);
 
 
 --
@@ -237,14 +184,6 @@ ALTER TABLE ONLY public.stock_quotes
 
 
 --
--- Name: stock_trades stock_trades_pkey; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.stock_trades
-    ADD CONSTRAINT stock_trades_pkey PRIMARY KEY (id);
-
-
---
 -- Name: companies_name_idx; Type: INDEX; Schema: public; Owner: -
 --
 
@@ -259,13 +198,6 @@ CREATE INDEX companies_sector_idx ON public.companies USING btree (sector);
 
 
 --
--- Name: stock_trades_symbol_idx; Type: INDEX; Schema: public; Owner: -
---
-
-CREATE INDEX stock_trades_symbol_idx ON public.stock_trades USING btree (symbol);
-
-
---
 -- Name: stock_quotes stock_quotes_symbol_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -274,16 +206,8 @@ ALTER TABLE ONLY public.stock_quotes
 
 
 --
--- Name: stock_trades stock_trades_symbol_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.stock_trades
-    ADD CONSTRAINT stock_trades_symbol_fkey FOREIGN KEY (symbol) REFERENCES public.companies(symbol);
-
-
---
 -- PostgreSQL database dump complete
 --
 
-INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459), (20200102023134), (20200102061625), (20200102061635);
+INSERT INTO public."schema_migrations" (version) VALUES (20190516182826), (20190607210017), (20191217183105), (20191226180955), (20200102012459), (20200102023134), (20200102061635);
 
