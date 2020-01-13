@@ -8,6 +8,7 @@ defmodule HottspotCapital.Repo.Migrations.CreateFundTransactions do
         description text NOT NULL,
         id serial PRIMARY KEY,
         inserted_at timestamptz NOT NULL DEFAULT now(),
+        transacted_at timestamptz NOT NULL,
         updated_at timestamptz NOT NULL DEFAULT now()
       )
     """)

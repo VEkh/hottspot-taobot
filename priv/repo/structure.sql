@@ -67,6 +67,7 @@ CREATE TABLE public.fund_transactions (
     description text NOT NULL,
     id integer NOT NULL,
     inserted_at timestamp with time zone DEFAULT now() NOT NULL,
+    transacted_at timestamp with time zone NOT NULL,
     updated_at timestamp with time zone DEFAULT now() NOT NULL
 );
 
