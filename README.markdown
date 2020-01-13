@@ -93,18 +93,84 @@
 * 200 biggest companies
 * Last two years of each stock
   * Opening and closing prices
-* Possible APIs
-  * https://www.alphavantage.co/
-    * Free
-    * Free usage is rather limited
-    * Technical indicators
-  * https://iextrading.com/developer/
+
+# Services
+## Market Data
+  * IEx Trading (https://iextrading.com/developer/)
     * Detailed stock quote data
     * Free
     * Historical data
     * Low barrier to entry
-  * https://intrinio.com/
-    * NOT free
+
+## API-Executed Market Orders
+### Requirements
+  * $0 commissions on stock trades
+  * Accepts JSON data in requests
+  * Can short, if not immediately, then after certain requirements are met
+  * Can execute after market trades
+  * No, or otherwise very generous, rate limit
+  * Can access and execute trades via web _and_ mobile app
+  * API offers historical data
+
+#### Disqualified
+  * Ally Invest
+    * Order POST request data must be FIXML
+
+#### Candidates
+  * Alpaca Trading
+    * Rate limit is 200 request / minute / API key
+    * All API. You have to use third-party software, TradingView, to execute trades.
+  * E * Trade
+    * $0 commissions on stock trades
+    * JSON data format is accepted
+    * Can execute after-hours trades
+    * No rate limits that I can see.
+    * Can short sell
+    * May offer historical data
+    * Can access and execute trades via their app
+    * Mobile app
+  * Interactive Brokers
+    * $0 commissions on stock trades
+    * No rate limits that I can see.
+    * Seems that you must use one of their sanctioned language API clients
+      * As a result, request arguments seem to be determined by the language
+    * Docs are very dense. It will take time to learn and navigate them easily.
+    * Mobile app
+  * TD Ameritrade
+    * $0 commissions on stock trades
+    * Accepts JSON data in requests
+    * Offers historical prices
+    * Very clean api docs
+      * Can test requests online
+    * Limited to 120 requests / minute
+    * Mobile app
+  * Tradestation
+    * $0 commissions on stock trades
+    * All data sent and received as JSON
+    * Pretty stringent rate limits: a few hundred every five minutes
+    * Very clean API. Easy to navigate
+    * Can trade on their web platform as well
+    * Can get historical quote data
+    * Mobile app
+
+
+  * Ally Invest
+    * $0 commission on stock orders
+    * JSON requests and responses are available
+    * Would be integrated with my savings accounts.
+    * Stock order requests do not accept JSON
+
+  * Alpaca Trading
+    * $0 commission on stock orders
+    * JSON requests and responses are available
+    * Can short sell (???)
+    * 200 req/min limit
+
+  * eTrade
+    * $0 commission on stock orders
+    * JSON requests and responses are available
+
+  * Tradestation (https://tradestation.github.io/api-docs)
 
 # Database
 * tables
