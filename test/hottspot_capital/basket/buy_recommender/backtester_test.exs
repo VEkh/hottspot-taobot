@@ -25,7 +25,8 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTesterTest do
       end)
 
       accuracy = BackTester.backtest(10)
-      assert accuracy > 0 && accuracy < 1
+
+      assert accuracy >= 0 && accuracy <= 1
     end
   end
 
