@@ -24,11 +24,10 @@ defmodule Mix.Tasks.ImportHistoricalStockQuotes do
 
     Company
     |> Repo.all()
-    |> Enum.flat_map(fn
-      %{symbol: symbol} ->
-        range = StockQuote.missing_data_range(symbol)
-        log_import(env: Mix.env(), range: range, symbol: symbol)
-        Importer.import_historical(range: range, symbol: symbol)
+    |> Enum.each(fn %{symbol: symbol} ->
+      range = StockQuote.missing_data_range(symbol)
+      log_import(env: Mix.env(), range: range, symbol: symbol)
+      Importer.import_historical(range: range, symbol: symbol)
     end)
   end
 

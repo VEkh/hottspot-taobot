@@ -24,7 +24,7 @@ defmodule HottspotCapital.StockQuote.Importer do
       end
     else
       resp ->
-        resp
+        List.wrap(resp)
     end
   end
 end
