@@ -18,6 +18,8 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
             tests_run: 0,
             timeframe_days: 5
 
+  @target_daily_return BuyRecommender.calculate_target_daily_return()
+
   def backtest(test_count) do
     init(test_count)
     test_dates()
@@ -84,7 +86,7 @@ defmodule HottspotCapital.Basket.BuyRecommender.BackTester do
     closes
     |> Enum.any?(fn close ->
       movement = Utils.price_movement(from: from, to: close)
-      movement >= 0.00807739012649
+      movement >= @target_daily_return
     end)
   end
 

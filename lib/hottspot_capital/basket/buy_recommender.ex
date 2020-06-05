@@ -5,6 +5,20 @@ defmodule HottspotCapital.Basket.BuyRecommender do
 
   @max_concurrency Repo.config() |> Keyword.get(:pool_size)
 
+  # 1 + target_yearly_return = trading_days ^ target_daily_return * (target_success_rate - target_failure_rate)
+  def calculate_target_daily_return() do
+    target_success_rate = 0.6
+    target_yearly_return = 0.50
+    target_failure_rate = 1 - target_success_rate
+    trading_days = 252
+
+    # 0.00807739012649
+    :math.exp(
+      :math.log(1 + target_yearly_return) /
+        (trading_days * (target_success_rate - target_failure_rate))
+    ) - 1
+  end
+
   def recommend(options \\ []) do
     %{date_limit: date_limit} = merged_options = merge_options(options)
 
@@ -32,7 +46,7 @@ defmodule HottspotCapital.Basket.BuyRecommender do
       } ->
         basket_movement > 0 &&
           basket_movement <= 0.05 &&
-          basket_movement - reference_movement >= 0.008
+          basket_movement - reference_movement >= calculate_target_daily_return()
 
       _ ->
         false
