@@ -1,0 +1,6 @@
+#!/bin/bash
+
+file="${1:-./sandbox.cpp}"
+
+g++ -o ./.sandbox $file && ./.sandbox;
+\rm -f ./.sandbox
