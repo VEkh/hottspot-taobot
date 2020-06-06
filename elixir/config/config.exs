@@ -18,6 +18,12 @@ config(
 
 config(
   :hottspot_capital,
+  :etrade_api_client,
+  base_url: "https://apisb.etrade.com"
+)
+
+config(
+  :hottspot_capital,
   :iex_api_client,
   base_url: "https://cloud.iexapis.com/stable",
   module: HottspotCapital.IexApiClient,

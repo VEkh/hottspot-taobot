@@ -1,6 +1,6 @@
 #!/bin/bash
 
-file="${1:-./sandbox.cpp}"
+args="${@:-./sandbox.cpp}"
 
-g++ -o ./.sandbox $file && ./.sandbox;
-\rm -f ./.sandbox
+g++ -o ./.output $args && ./.output;
+\rm -f ./.output
