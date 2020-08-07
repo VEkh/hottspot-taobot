@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Real
+
+CONSUMER_KEY="59a8ce75cf8bc55992a77f08cf1930b3" \
+CONSUMER_SECRET="bd0783af928df9a340dd9e73deb3cba196e6a3864ff6fc8a20ff465e25e54644" \
+./run etrade_header.cpp -lcrypto -lcurl

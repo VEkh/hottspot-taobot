@@ -34,7 +34,22 @@ std::string toHexString(unsigned char *input) {
   return ss.str();
 }
 
-std::string uriEscape(const char *str) {
+std::string percentDecode(const char *str) {
+  if (str == NULL) {
+    return "";
+  }
+
+  CURL *curl = curl_easy_init();
+  int output_length;
+  const char *unescaped =
+      curl_easy_unescape(curl, str, strlen(str), &output_length);
+
+  std::cout << unescaped << std::endl;
+
+  return (std::string)unescaped;
+}
+
+std::string percentEncode(const char *str) {
   if (str == NULL) {
     return "";
   }
@@ -45,7 +60,9 @@ std::string uriEscape(const char *str) {
   return (std::string)escaped;
 }
 
-std::string uriEscape(std::string str) { return uriEscape(str.c_str()); }
+std::string percentEncode(std::string str) {
+  return percentEncode(str.c_str());
+}
 
 std::string computeNonce(std::time_t timestamp) {
   const unsigned char *timestamp_str =
@@ -64,15 +81,16 @@ std::string buildSignatureBaseString(std::time_t timestamp) {
   std::stringstream params;
   std::stringstream signature_base_string;
 
-  params << "oauth_callback=" << uriEscape(OAUTH["CALLBACK"])
-         << "&oauth_consumer_key=" << uriEscape(OAUTH["CONSUMER_KEY"])
-         << "&oauth_nonce=" << uriEscape(computeNonce(timestamp))
-         << "&oauth_signature_method=" << uriEscape(OAUTH["SIGNATURE_METHOD"])
+  params << "oauth_callback=" << percentEncode(OAUTH["CALLBACK"])
+         << "&oauth_consumer_key=" << percentEncode(OAUTH["CONSUMER_KEY"])
+         << "&oauth_nonce=" << percentEncode(computeNonce(timestamp))
+         << "&oauth_signature_method="
+         << percentEncode(OAUTH["SIGNATURE_METHOD"])
          << "&oauth_timestamp=" << timestamp;
 
   signature_base_string << "GET"
-                        << "&" << uriEscape(query_uri) << "&"
-                        << uriEscape(params.str());
+                        << "&" << percentEncode(query_uri) << "&"
+                        << percentEncode(params.str());
 
   return signature_base_string.str();
 }
@@ -128,8 +146,8 @@ int main() {
   header << "Authorization: OAuth realm=\"\","
          << "oauth_callback=\"" << OAUTH["CALLBACK"] << "\","
          << "oauth_consumer_key=\"" << OAUTH["CONSUMER_KEY"] << "\","
-         << "oauth_nonce=\"" << uriEscape(computeNonce(timestamp)) << "\","
-         << "oauth_signature=\"" << uriEscape(signature) << "\","
+         << "oauth_nonce=\"" << percentEncode(computeNonce(timestamp)) << "\","
+         << "oauth_signature=\"" << percentEncode(signature) << "\","
          << "oauth_signature_method=\"" << OAUTH["SIGNATURE_METHOD"] << "\","
          << "oauth_timestamp=\"" << timestamp << "\"";
 
