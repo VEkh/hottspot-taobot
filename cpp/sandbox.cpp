@@ -22,11 +22,13 @@ std::string uriEscape(const char *str) {
 }
 
 int main() {
-  // oauth_token="pFbP03i64OjRzhOPTx/gO1KjwRJI2xE4q7mVe/IpGIw="
-  // oauth_token_secret="ZFKfxqtX6lTDRtrzGUdlvx5gMPuSb9qzu8Ea/H1K7sE="
+  const char *key = "59a8ce75cf8bc55992a77f08cf1930b3";
+  const char *oauth_token =
+      "Uf9qeY%2BPJz6q4GCuSuN%2Bp%2F7sRKpKbwiUTiPDhrW3p%2F8%3D";
 
   std::stringstream url_stream;
   url_stream << "https://us.etrade.com/e/t/etws/authorize?"
-             << "key=59a8ce75cf8bc55992a77f08cf1930b3"
-             << "token=" << uriEscape("tR3+Ty81lMeYAr/Fid0kMTYa/WPvfw==");
+             << "key=" << key << "&token=" << oauth_token;
+
+  std::cout << url_stream.str() << std::endl;
 }

@@ -76,20 +76,28 @@ std::string computeNonce(std::time_t timestamp) {
 }
 
 std::string buildSignatureBaseString(std::time_t timestamp) {
-  const char *query_uri = "https://apisb.etrade.com/oauth/request_token";
+  const char *request_url = std::getenv("REQUEST_URL");
 
   std::stringstream params;
   std::stringstream signature_base_string;
 
   params << "oauth_callback=" << percentEncode(OAUTH["CALLBACK"])
          << "&oauth_consumer_key=" << percentEncode(OAUTH["CONSUMER_KEY"])
-         << "&oauth_nonce=" << percentEncode(computeNonce(timestamp))
+         << "&oauth_nonce=" << computeNonce(timestamp)
          << "&oauth_signature_method="
          << percentEncode(OAUTH["SIGNATURE_METHOD"])
          << "&oauth_timestamp=" << timestamp;
 
+  if (OAUTH["TOKEN"]) {
+    params << "&oauth_token=" << OAUTH["TOKEN"];
+  }
+
+  if (OAUTH["VERIFER"]) {
+    params << "&oauth_verifier=" << OAUTH["VERIFER"];
+  }
+
   signature_base_string << "GET"
-                        << "&" << percentEncode(query_uri) << "&"
+                        << "&" << percentEncode(request_url) << "&"
                         << percentEncode(params.str());
 
   return signature_base_string.str();
@@ -98,7 +106,8 @@ std::string buildSignatureBaseString(std::time_t timestamp) {
 std::string buildOauthSignature(time_t timestamp) {
   std::stringstream key_stream;
 
-  key_stream << OAUTH["CONSUMER_SECRET"] << "&" << OAUTH["OAUTH_TOKEN_SECRET"];
+  key_stream << OAUTH["CONSUMER_SECRET"] << "&" << OAUTH["TOKEN_SECRET"];
+
   std::string key = key_stream.str();
 
   const std::string data = buildSignatureBaseString(timestamp);
@@ -120,13 +129,15 @@ std::string buildOauthSignature(time_t timestamp) {
 }
 
 void setSecretCredentials() {
-  char *consumer_key = std::getenv("CONSUMER_KEY");
+  char *consumer_key = std::getenv("OAUTH_CONSUMER_KEY");
+  char *consumer_secret = std::getenv("OAUTH_CONSUMER_SECRET");
+  char *token = std::getenv("OAUTH_TOKEN");
+  char *token_secret = std::getenv("OAUTH_TOKEN_SECRET");
+  char *verfier = std::getenv("OAUTH_VERIFIER");
 
   if (consumer_key == NULL) {
     throw std::invalid_argument("CONSUMER_KEY must be provided");
   }
-
-  char *consumer_secret = std::getenv("CONSUMER_SECRET");
 
   if (consumer_secret == NULL) {
     throw std::invalid_argument("CONSUMER_SECRET must be provided");
@@ -134,6 +145,9 @@ void setSecretCredentials() {
 
   OAUTH["CONSUMER_KEY"] = consumer_key;
   OAUTH["CONSUMER_SECRET"] = consumer_secret;
+  OAUTH["TOKEN"] = token;
+  OAUTH["TOKEN_SECRET"] = token_secret;
+  OAUTH["VERIFER"] = verfier;
 }
 
 int main() {
@@ -146,10 +160,18 @@ int main() {
   header << "Authorization: OAuth realm=\"\","
          << "oauth_callback=\"" << OAUTH["CALLBACK"] << "\","
          << "oauth_consumer_key=\"" << OAUTH["CONSUMER_KEY"] << "\","
-         << "oauth_nonce=\"" << percentEncode(computeNonce(timestamp)) << "\","
+         << "oauth_nonce=\"" << computeNonce(timestamp) << "\","
          << "oauth_signature=\"" << percentEncode(signature) << "\","
          << "oauth_signature_method=\"" << OAUTH["SIGNATURE_METHOD"] << "\","
          << "oauth_timestamp=\"" << timestamp << "\"";
+
+  if (OAUTH["TOKEN"]) {
+    header << ",oauth_token=\"" << OAUTH["TOKEN"] << "\"";
+  }
+
+  if (OAUTH["VERIFER"]) {
+    header << ",oauth_verifier=\"" << OAUTH["VERIFER"] << "\"";
+  }
 
   std::cout << header.str() << std::endl;
 

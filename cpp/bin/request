@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Commands
+# ./bin/request_token | tail -n1 - | xargs ./bin/parse_response
+
+# REQUEST_URL="https://apisb.etrade.com/oauth/access_token"
+# REQUEST_URL="https://apisb.etrade.com/oauth/renew_access_token"
+# REQUEST_URL="https://apisb.etrade.com/oauth/revoke_access_token"
+# REQUEST_URL="https://apisb.etrade.com/oauth/request_token"
+REQUEST_URL="https://apisb.etrade.com/v1/accounts/list"
+current_directory="`dirname "$0"`"
+headers=`REQUEST_URL=$REQUEST_URL ./bin/build_request_header`
+
+curl -H "$headers" $REQUEST_URL

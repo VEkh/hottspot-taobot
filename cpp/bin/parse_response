@@ -1,6 +1,4 @@
 #!/bin/bash
 
-args="${@}"
-
-g++ -o ./.output parse_response.cpp -lcurl && ./.output $args;
+g++ -o ./.output parse_response.cpp -lcurl && ./.output $@;
 \rm -f ./.output

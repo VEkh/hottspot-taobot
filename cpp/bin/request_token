@@ -1,9 +1,0 @@
-#!/bin/bash
-
-# Commands
-# ./bin/request_token | tail -n1 - | xargs ./bin/parse_response
-
-current_directory="`dirname "$0"`"
-headers=`$current_directory/generate_headers`
-
-curl -H "$headers" "https://apisb.etrade.com/oauth/request_token"
