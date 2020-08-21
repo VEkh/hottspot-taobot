@@ -1,5 +1,15 @@
 # Hottspot Capital
 
+# App
+## Purpose
+1. Recommend buy and sell decisions with various algorithms
+2. Analyze performance of buy and sell decisions
+  * By reading from APIs of trading platforms where I make orders
+  * In C++ app:
+    * Build recommendation algorithms
+    * Fetch data from APIs and present JSON to Phoenix app
+      * This may better be done in the Phoenix app
+
 # Questions
 * How large should the basket be?
   * No right answer
@@ -199,5 +209,3 @@
   * [Investopedia] (https://www.investopedia.com/ask/answers/021015/what-best-measure-given-stocks-volatility.asp)
     * Suggests that I'll need technical indicators like SMA, etc.
   * [Volatility (finance) (Wikipedia)](https://en.m.wikipedia.org/wiki/Volatility_(finance))
-
-
