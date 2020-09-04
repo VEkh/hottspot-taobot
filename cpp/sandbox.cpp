@@ -31,4 +31,6 @@ int main() {
              << "key=" << key << "&token=" << oauth_token;
 
   std::cout << url_stream.str() << std::endl;
+
+  std::cout << uriEscape("XC6ZL24fMrZlE+ADtSWll7mP8yA=") << std::endl;
 }
