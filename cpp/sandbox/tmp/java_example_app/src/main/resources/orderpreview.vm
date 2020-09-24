@@ -1,0 +1,27 @@
+{
+   "PreviewOrderRequest":{
+      "orderType":"$DATA_MAP.get("ORDER_TYPE")",
+      "clientOrderId":"$DATA_MAP.get("CLIENT_ID")",
+      "Order":[
+         {
+            "allOrNone":"false",
+            "priceType":"$DATA_MAP.get("PRICE_TYPE")",
+            "orderTerm":"$DATA_MAP.get("ORDER_TERM")",
+            "marketSession":"$DATA_MAP.get("MARKET_SESSION")",
+            "stopPrice":"$DATA_MAP.get("STOP_VALUE")",
+            "limitPrice":"$DATA_MAP.get("LIMIT_PRICE")",
+            "Instrument":[
+               {
+                  "Product":{
+                     "securityType":"$DATA_MAP.get("SECURITY_TYPE")",
+                     "symbol":"$DATA_MAP.get("SYMBOL")"
+                  },
+                  "orderAction":"$DATA_MAP.get("ACTION")",
+                  "quantityType":"$DATA_MAP.get("QUANTITY_TYPE")",
+                  "quantity":"$DATA_MAP.get("QUANTITY")"
+               }
+            ]
+         }
+      ]
+   }
+}
