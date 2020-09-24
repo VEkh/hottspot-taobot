@@ -1,0 +1,5 @@
+#!/bin/bash
+
+\rm -rf ./build/*
+g++ -o ./build/trailing_stop_to_secure_profit ./src/trailing_stop_to_secure_profit.cpp
+g++ -o ./build/trailing_stop_to_open ./src/trailing_stop_to_open.cpp
