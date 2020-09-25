@@ -1,14 +1,18 @@
-#include <iomanip>
-#include <iostream>
-#include <sstream>
+#include "src/utils/debugger.cpp" // utils::debugger::inspect
+#include "src/utils/string.cpp"   // utils::string::split
+#include <iostream>               // std::cout, std::endl
+#include <string>                 // std::string
+#include <vector>                 // std::vector
 
 int main() {
-  double val = 3.14159;
-  std::stringstream tmp;
-  tmp << std::setprecision(4) << std::fixed << val;
+  std::vector<std::string> split_string;
 
-  std::cout << tmp.str() << std::endl;
-  double new_val = std::stod(tmp.str()); // new_val = 3.143
+  split_string = utils::string::split("foo;bar;baz", ";");
 
-  std::cout << new_val << std::endl;
+  utils::debugger::inspect(split_string);
+
+  split_string =
+      utils::string::split("https://example.com?foo=foo&bar=bar", "?");
+
+  utils::debugger::inspect(split_string);
 }

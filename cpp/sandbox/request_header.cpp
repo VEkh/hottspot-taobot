@@ -17,6 +17,7 @@
 #include <stdlib.h>                   // getenv, rand, srand
 #include <string.h>                   // strlen
 #include <string>                     // std::string, std::to_string
+#include <vector>                     // std::vector
 
 std::map<const char *, const char *> OAUTH = {
     {"CALLBACK", "oob"}, {"SIGNATURE_METHOD", "HMAC-SHA1"}, {"VERSION", "1.0"}};
@@ -75,30 +76,63 @@ std::string computeNonce(std::time_t timestamp) {
   return toHexString(output);
 }
 
+std::string *parseRequestUrl(std::string request_url) {
+  int position = request_url.find("?");
+  std::string base_url = request_url.substr(0, position);
+  std::string params = request_url.substr(position + 1, request_url.size());
+
+  std::cout << "position: " << position << std::endl;
+  std::cout << "base_url: " << base_url << std::endl;
+  std::cout << "params: " << params << std::endl;
+
+  static std::string strs[] = {"foo", "bar"};
+  return strs;
+}
+
+std::string buildParamsString(std::time_t timestamp, const char *request_url) {
+  std::stringstream output;
+  std::map<std::string, std::string> params = {
+      {"oauth_callback", percentEncode(OAUTH["CALLBACK"])},
+      {"oauth_consumer_key", percentEncode(OAUTH["CONSUMER_KEY"])},
+      {"oauth_nonce", computeNonce(timestamp)},
+      {"oauth_signature_method", percentEncode(OAUTH["SIGNATURE_METHOD"])},
+      {"oauth_timestamp", std::to_string(timestamp)},
+      {"oauth_token", OAUTH["TOKEN"] ? OAUTH["TOKEN"] : ""},
+      {"oauth_verifier", OAUTH["VERIFER"] ? OAUTH["VERIFER"] : ""}};
+
+  std::string *base_request_url = parseRequestUrl(request_url);
+
+  std::cout << "\n\n\nrequest base url: " << base_request_url[0] << std::endl;
+  std::cout << "\n\n\nrequest url params: " << base_request_url[1] << std::endl;
+
+  std::map<std::string, std::string>::iterator it;
+
+  for (it = params.begin(); it != params.end(); it++) {
+    std::string value = it->second;
+
+    if (value.empty()) {
+      continue;
+    }
+
+    if (!output.str().empty()) {
+      output << "&";
+    }
+
+    output << it->first << "=" << value;
+  }
+
+  return output.str();
+}
+
 std::string buildSignatureBaseString(std::time_t timestamp) {
   const char *request_url = std::getenv("REQUEST_URL");
 
-  std::stringstream params;
+  std::string params = buildParamsString(timestamp, request_url);
   std::stringstream signature_base_string;
-
-  params << "oauth_callback=" << percentEncode(OAUTH["CALLBACK"])
-         << "&oauth_consumer_key=" << percentEncode(OAUTH["CONSUMER_KEY"])
-         << "&oauth_nonce=" << computeNonce(timestamp)
-         << "&oauth_signature_method="
-         << percentEncode(OAUTH["SIGNATURE_METHOD"])
-         << "&oauth_timestamp=" << timestamp;
-
-  if (OAUTH["TOKEN"]) {
-    params << "&oauth_token=" << OAUTH["TOKEN"];
-  }
-
-  if (OAUTH["VERIFER"]) {
-    params << "&oauth_verifier=" << OAUTH["VERIFER"];
-  }
 
   signature_base_string << "GET"
                         << "&" << percentEncode(request_url) << "&"
-                        << percentEncode(params.str());
+                        << percentEncode(params);
 
   return signature_base_string.str();
 }
