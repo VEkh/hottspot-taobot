@@ -2,5 +2,5 @@
 
 args="${@:-./sandbox.cpp}"
 
-g++ -o ./.output $args && ./.output;
+g++ -std=c++17 -o ./.output $args && ./.output;
 \rm -f ./.output

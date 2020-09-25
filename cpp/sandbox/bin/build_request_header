@@ -1,9 +1,17 @@
 #!/bin/bash
 
-# OAUTH_VERIFIER="$OAUTH_TOKEN_SECRET" \
-OAUTH_TOKEN_SECRET="$OAUTH_TOKEN_SECRET" \
-OAUTH_TOKEN="$OAUTH_TOKEN" \
+source ./.env.development
+# source ./.env.production
+
+echo $REQUEST_URL
+
+# REQUEST_URL="https://api.etrade.com/oauth/request_token"
+REQUEST_URL="https://api.etrade.com/v1/market/quote/TSLA?detailFlag=WEEK_52"
+
+# OAUTH_VERIFIER="$OAUTH_VERIFIER" \
+# OAUTH_TOKEN_SECRET="$OAUTH_TOKEN_SECRET" \
+# OAUTH_TOKEN="$OAUTH_TOKEN" \
 OAUTH_CONSUMER_SECRET="$OAUTH_CONSUMER_SECRET" \
 OAUTH_CONSUMER_KEY="$OAUTH_CONSUMER_KEY" \
 REQUEST_URL="$REQUEST_URL" \
-./bin/run request_header.cpp -lcrypto -lcurl
+./bin/run ./src/etrade_request_header.cpp -lcrypto -lcurl
