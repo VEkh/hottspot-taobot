@@ -52,24 +52,44 @@ int main() {
   float low = std::stof(stripCommas(low_input));
 
   // Old percentage:  0.12954141515764692
-  float target_stop_to_open = ((high - low) * 0.1) / current_price;
-  float target_stop_to_close = ((high - low) * 0.7) / current_price;
+  // float target_stop_to_open = ((high - low) * 0.15) / current_price;
+  // float target_stop_to_close = ((high - low) * 0.7) / current_price;
 
-  std::cout << "\n***OPEN***" << std::endl;
+  // std::cout << "\n***OPEN***" << std::endl;
 
-  std::cout << "Trailing stop %: " << toRoundedPercentage(target_stop_to_open)
+  // std::cout << "Trailing stop %: " <<
+  // toRoundedPercentage(target_stop_to_open)
+  //           << std::endl;
+
+  // std::cout << "BUY target price: "
+  //           << toCurrency(current_price * (1 + target_stop_to_open))
+  //           << std::endl;
+
+  // std::cout << "SHORT SELL target price: "
+  //           << toCurrency(current_price * (1 - target_stop_to_open))
+  //           << std::endl;
+
+  // std::cout << "\n\n***CLOSE***" << std::endl;
+
+  // std::cout << "Trailing stop %: " <<
+  // toRoundedPercentage(target_stop_to_close)
+  //           << std::endl;
+
+  // 1. Wait for threshold movement
+  // 2. Look for the right kind of momentum before closing the losing side
+  // 3. Close losing side.
+  // 4. Wait until winning side reaches 1.25 x the threshold percentage movement
+  // (??)
+  //    * Be more decisive about the exit and what to do if it isn't raeched
+  //    * Maybe re-create a trailing stop when the price reaches the target
+  float loser_trailing_stop = ((high - low) * 0.25) / current_price;
+  float target_movement = 1.15 * loser_trailing_stop;
+
+  std::cout << "\n=======================\n" << std::endl;
+
+  std::cout << "Trailing Stop %: " << toRoundedPercentage(loser_trailing_stop)
             << std::endl;
 
-  std::cout << "BUY target price: "
-            << toCurrency(current_price * (1 + target_stop_to_open))
-            << std::endl;
-
-  std::cout << "SHORT SELL target price: "
-            << toCurrency(current_price * (1 - target_stop_to_open))
-            << std::endl;
-
-  std::cout << "\n\n***CLOSE***" << std::endl;
-
-  std::cout << "Trailing stop %: " << toRoundedPercentage(target_stop_to_close)
+  std::cout << "Target Movement %: " << toRoundedPercentage(target_movement)
             << std::endl;
 }
