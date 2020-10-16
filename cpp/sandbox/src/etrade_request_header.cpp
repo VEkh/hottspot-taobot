@@ -5,7 +5,9 @@
 
 #include "../deps/cpp-base64/base64.cpp" // base64_encode
 #include "utils/debugger.cpp"            // utils::debugger::inspect
+#include "utils/map.cpp"                 // utils::map::merge
 #include "utils/string.cpp"              // utils::string::split
+#include "utils/uri.cpp"                 // utils::string::split
 #include <any>                           // std::any
 #include <ctime>                         // std::time
 #include <curl/curl.h>                   // curl_easy_escape, curl_easy_init
@@ -79,20 +81,17 @@ std::string computeNonce(std::time_t timestamp) {
   return toHexString(output);
 }
 
-std::map<std::string, std::string> parseQueryParams(std::string query_string) {
-  if (query_string == "") {
-  }
-
-  return (std::map<std::string, std::string>){};
-}
-
 std::map<const char *, std::any> parseRequestUrl(std::string request_url) {
-  std::map<const char *, std::any> result;
+  std::map<const char *, std::any> result = {
+      {"query_params", (std::map<std::string, std::string>){}}};
+
   std::vector<std::string> url_parts = utils::string::split(request_url, "?");
 
   result["base_url"] = url_parts[0];
 
-  result["query_params"] = parseQueryParams(url_parts[1]);
+  if (url_parts.size() > 1) {
+    result["query_params"] = utils::uri::parseQueryParams(url_parts[1]);
+  }
 
   return result;
 }
@@ -111,18 +110,13 @@ std::string buildParamsString(std::time_t timestamp, const char *request_url) {
   std::map<const char *, std::any> parsed_request_url =
       parseRequestUrl(request_url);
 
-  std::string base_url =
-      std::any_cast<std::string>(parsed_request_url["base_url"]);
-
   std::map<std::string, std::string> query_params =
       std::any_cast<std::map<std::string, std::string>>(
           parsed_request_url["query_params"]);
 
-  utils::debugger::inspect(base_url);
-  utils::debugger::inspect(query_params);
+  params = utils::map::merge(params, query_params);
 
   std::map<std::string, std::string>::iterator it;
-
   for (it = params.begin(); it != params.end(); it++) {
     std::string value = it->second;
 
@@ -143,11 +137,12 @@ std::string buildParamsString(std::time_t timestamp, const char *request_url) {
 std::string buildSignatureBaseString(std::time_t timestamp) {
   const char *request_url = std::getenv("REQUEST_URL");
 
+  std::string base_url = utils::string::split(request_url, "?")[0];
   std::string params = buildParamsString(timestamp, request_url);
   std::stringstream signature_base_string;
 
   signature_base_string << "GET"
-                        << "&" << percentEncode(request_url) << "&"
+                        << "&" << percentEncode(base_url) << "&"
                         << percentEncode(params);
 
   return signature_base_string.str();
@@ -223,7 +218,7 @@ int main() {
     header << ",oauth_verifier=\"" << OAUTH["VERIFER"] << "\"";
   }
 
-  // std::cout << header.str() << std::endl;
+  std::cout << header.str() << std::endl;
 
   return 0;
 }

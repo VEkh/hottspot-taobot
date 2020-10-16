@@ -1,3 +1,6 @@
+#if !defined(UTILS_DEBUGGER)
+#define UTILS_DEBUGGER
+
 #include <iostream> // std::cout, std;:endl
 #include <map>      // std::map
 #include <string>   // std::string
@@ -30,3 +33,4 @@ void inspect(std::map<std::string, std::string> collection) {
 }
 } // namespace debugger
 } // namespace utils
+#endif

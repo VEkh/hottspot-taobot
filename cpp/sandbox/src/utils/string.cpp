@@ -1,3 +1,6 @@
+#if !defined(UTILS_STRING)
+#define UTILS_STRING
+
 #include <algorithm> // std::max, std::replace
 #include <cstring>   // strlen
 #include <string>    // std::string
@@ -34,3 +37,4 @@ std::vector<std::string> split(std::string input, const char *delimiter) {
 }
 } // namespace string
 } // namespace utils
+#endif
