@@ -1,10 +1,13 @@
 #if !defined(UTILS_URI)
 #define UTILS_URI
 
-#include "string.cpp" // utils::string::split
-#include <map>        // std::map
-#include <string>     // std::string
-#include <vector>     // std::vector
+#include "string.cpp"  // utils::string::split
+#include <curl/curl.h> // curl_easy_escape, curl_easy_init
+#include <map>         // std::map
+#include <sstream>     // std::stringstream
+#include <string.h>    // strlen
+#include <string>      // std::string
+#include <vector>      // std::vector
 
 namespace utils {
 namespace uri {
@@ -29,6 +32,51 @@ std::map<std::string, std::string> parseQueryParams(std::string query_string) {
   }
 
   return query_params;
+}
+
+std::string percentDecode(const char *str) {
+  if (str == NULL) {
+    return "";
+  }
+
+  CURL *curl = curl_easy_init();
+  int output_length;
+  const char *unescaped =
+      curl_easy_unescape(curl, str, strlen(str), &output_length);
+
+  return (std::string)unescaped;
+}
+
+std::string percentEncode(const char *str) {
+  if (str == NULL) {
+    return "";
+  }
+
+  CURL *curl = curl_easy_init();
+  const char *escaped = curl_easy_escape(curl, str, strlen(str));
+
+  return (std::string)escaped;
+}
+
+std::string percentEncode(std::string str) {
+  return percentEncode(str.c_str());
+}
+
+std::string buildQueryParams(std::map<std::string, std::string> params) {
+  std::stringstream output;
+
+  output << "?";
+
+  std::map<std::string, std::string>::iterator it;
+  for (it = params.begin(); it != params.end(); it++) {
+    if (it != params.begin()) {
+      output << "&";
+    }
+
+    output << it->first << "=" << percentEncode(it->second);
+  }
+
+  return output.str();
 }
 
 } // namespace uri

@@ -7,7 +7,7 @@
 #include "utils/debugger.cpp"            // utils::debugger::inspect
 #include "utils/map.cpp"                 // utils::map::merge
 #include "utils/string.cpp"              // utils::string::split
-#include "utils/uri.cpp"                 // utils::string::split
+#include "utils/uri.cpp"                 // utils::uri::percentEncode
 #include <any>                           // std::any
 #include <ctime>                         // std::time
 #include <curl/curl.h>                   // curl_easy_escape, curl_easy_init
@@ -40,36 +40,6 @@ std::string toHexString(unsigned char *input) {
   return ss.str();
 }
 
-std::string percentDecode(const char *str) {
-  if (str == NULL) {
-    return "";
-  }
-
-  CURL *curl = curl_easy_init();
-  int output_length;
-  const char *unescaped =
-      curl_easy_unescape(curl, str, strlen(str), &output_length);
-
-  std::cout << unescaped << std::endl;
-
-  return (std::string)unescaped;
-}
-
-std::string percentEncode(const char *str) {
-  if (str == NULL) {
-    return "";
-  }
-
-  CURL *curl = curl_easy_init();
-  const char *escaped = curl_easy_escape(curl, str, strlen(str));
-
-  return (std::string)escaped;
-}
-
-std::string percentEncode(std::string str) {
-  return percentEncode(str.c_str());
-}
-
 std::string computeNonce(std::time_t timestamp) {
   const unsigned char *timestamp_str =
       (unsigned char *)std::to_string(timestamp).c_str();
@@ -99,10 +69,11 @@ std::map<const char *, std::any> parseRequestUrl(std::string request_url) {
 std::string buildParamsString(std::time_t timestamp, const char *request_url) {
   std::stringstream output;
   std::map<std::string, std::string> params = {
-      {"oauth_callback", percentEncode(OAUTH["CALLBACK"])},
-      {"oauth_consumer_key", percentEncode(OAUTH["CONSUMER_KEY"])},
+      {"oauth_callback", utils::uri::percentEncode(OAUTH["CALLBACK"])},
+      {"oauth_consumer_key", utils::uri::percentEncode(OAUTH["CONSUMER_KEY"])},
       {"oauth_nonce", computeNonce(timestamp)},
-      {"oauth_signature_method", percentEncode(OAUTH["SIGNATURE_METHOD"])},
+      {"oauth_signature_method",
+       utils::uri::percentEncode(OAUTH["SIGNATURE_METHOD"])},
       {"oauth_timestamp", std::to_string(timestamp)},
       {"oauth_token", OAUTH["TOKEN"] ? OAUTH["TOKEN"] : ""},
       {"oauth_verifier", OAUTH["VERIFER"] ? OAUTH["VERIFER"] : ""}};
@@ -142,8 +113,8 @@ std::string buildSignatureBaseString(std::time_t timestamp) {
   std::stringstream signature_base_string;
 
   signature_base_string << "GET"
-                        << "&" << percentEncode(base_url) << "&"
-                        << percentEncode(params);
+                        << "&" << utils::uri::percentEncode(base_url) << "&"
+                        << utils::uri::percentEncode(params);
 
   return signature_base_string.str();
 }
@@ -206,7 +177,8 @@ int main() {
          << "oauth_callback=\"" << OAUTH["CALLBACK"] << "\","
          << "oauth_consumer_key=\"" << OAUTH["CONSUMER_KEY"] << "\","
          << "oauth_nonce=\"" << computeNonce(timestamp) << "\","
-         << "oauth_signature=\"" << percentEncode(signature) << "\","
+         << "oauth_signature=\"" << utils::uri::percentEncode(signature)
+         << "\","
          << "oauth_signature_method=\"" << OAUTH["SIGNATURE_METHOD"] << "\","
          << "oauth_timestamp=\"" << timestamp << "\"";
 
