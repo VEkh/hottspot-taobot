@@ -1,18 +1,19 @@
 #include "src/utils/debugger.cpp" // utils::debugger::inspect
 #include "src/utils/string.cpp"   // utils::string::split
-#include <any>                    // std::any
-#include <iostream>               // std::cout, std::endl
-#include <map>                    // std::map
+#include "src/utils/uri.cpp"      // utils::string::percentEncode
+#include <sstream>                // std::stringstream
 #include <string>                 // std::string
-#include <vector>                 // std::vector
 
 int main() {
-  std::vector<std::string> strs = {};
-  std::string str;
+  std::stringstream url;
+  url << "https://auth.tdameritrade.com/auth?response_type=code"
+      << "&redirect_uri=" << utils::uri::percentEncode("https://127.0.0.1")
+      << "&client_id="
+      << "%40AMER.OAUTHAP";
 
-  if (strs.size() > 0) {
-    str = strs[0];
-  }
+  utils::debugger::inspect(url.str());
 
-  std::cout << "str: " << str << std::endl;
+  const char *code = "";
+
+  utils::debugger::inspect(utils::uri::percentDecode(code));
 }

@@ -1,7 +1,8 @@
 #if !defined(UTILS_MAP)
 #define UTILS_MAP
 
-#include <map> // std::map
+#include <map>    // std::map
+#include <string> // std::string
 
 namespace utils {
 namespace map {
