@@ -45,7 +45,7 @@ int main() {
 
   float win_open_price = std::stof(stripCommas(win_open_price_string));
 
-  float target_gain = 1.15 * loss * quantity;
+  float target_gain = 1.3 * loss * quantity;
   float win_target_price;
 
   if (win_order_type == "BUY") {
