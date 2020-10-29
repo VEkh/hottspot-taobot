@@ -14,8 +14,18 @@ std::string stripCommas(std::string input) {
   return input;
 }
 
+void log_symbol(std::string symbol) {
+  std::cout << "\n=========================\n" << std::endl;
+  std::cout << symbol << std::endl;
+
+  for (int i = 0; i < symbol.size(); i++) {
+    std::cout << "-";
+  }
+
+  std::cout << std::endl;
+}
+
 int main() {
-  int quantity;
   std::string loss_close_price_string;
   std::string loss_open_price_string;
   std::string win_order_type;
@@ -24,9 +34,6 @@ int main() {
 
   std::cout << "Symbol: ";
   std::cin >> symbol;
-
-  std::cout << "Quantity: ";
-  std::cin >> quantity;
 
   std::cout << "Win Order Type (BUY | SELL_SHORT): ";
   std::cin >> win_order_type;
@@ -45,21 +52,37 @@ int main() {
 
   float win_open_price = std::stof(stripCommas(win_open_price_string));
 
-  float target_gain = 1.3 * loss * quantity;
-  float win_target_price;
+  float adjusted_stop_loss;
+  float adjusted_stop_loss_limit;
+  float cancel_stop_loss_price;
+  float limit_price;
+  float target_gain = 1.2 * loss;
 
   if (win_order_type == "BUY") {
-    win_target_price = win_open_price + (target_gain / quantity);
+    adjusted_stop_loss = win_open_price + (0.2 * 0.9 * target_gain);
+    adjusted_stop_loss_limit = win_open_price + (0.2 * target_gain);
+    cancel_stop_loss_price = win_open_price + (0.9 * target_gain);
+    limit_price = win_open_price + target_gain;
   } else if (win_order_type == "SELL_SHORT") {
-    win_target_price = win_open_price - (target_gain / quantity);
+    adjusted_stop_loss = win_open_price - (0.2 * 0.9 * target_gain);
+    adjusted_stop_loss_limit = win_open_price - (0.2 * target_gain);
+    cancel_stop_loss_price = win_open_price - (0.9 * target_gain);
+    limit_price = win_open_price - target_gain;
   }
 
-  std::cout << "\n=======================\n" << std::endl;
+  log_symbol(symbol);
 
-  std::cout << symbol
-            << " target gain amount: " << utils::float_::toCurrency(target_gain)
+  std::cout << "TARGET GAIN:         " << utils::float_::toCurrency(target_gain)
             << std::endl;
-  std::cout << symbol
-            << " target price: " << utils::float_::toCurrency(win_target_price)
+
+  std::cout << "ADJUSTED STOP LOSS:  Stop Limit: "
+            << utils::float_::toCurrency(adjusted_stop_loss_limit)
+            << " • Stop: " << utils::float_::toCurrency(adjusted_stop_loss)
+            << std::endl;
+
+  std::cout << "CANCEL STOP LOSS AT: "
+            << utils::float_::toCurrency(cancel_stop_loss_price) << std::endl;
+
+  std::cout << "LIMIT PRICE:         " << utils::float_::toCurrency(limit_price)
             << std::endl;
 }
