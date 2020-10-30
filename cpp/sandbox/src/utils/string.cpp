@@ -35,6 +35,17 @@ std::vector<std::string> split(std::string input, const char *delimiter) {
 
   return result;
 }
+
+std::string stripCommas(std::string input) {
+  int position = input.find(",");
+
+  while (position != -1) {
+    input.erase(position, 1);
+    position = input.find(",");
+  }
+
+  return input;
+}
 } // namespace string
 } // namespace utils
 #endif

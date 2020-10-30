@@ -1,18 +1,8 @@
-#include "utils/float.cpp" // utils::float_::toCurrency
-#include <cmath>           // std::abs
-#include <iostream>        // std::cout, std::endl, std::fixed
-#include <string>          // std::stof, std::string
-
-std::string stripCommas(std::string input) {
-  int position = input.find(",");
-
-  while (position != -1) {
-    input.erase(position, 1);
-    position = input.find(",");
-  }
-
-  return input;
-}
+#include "utils/float.cpp"  // utils::float_::toCurrency
+#include "utils/string.cpp" // utils::string::stripCommas
+#include <cmath>            // std::abs
+#include <iostream>         // std::cout, std::endl, std::fixed
+#include <string>           // std::stof, std::string
 
 void log_symbol(std::string symbol) {
   std::cout << "\n=========================\n" << std::endl;
@@ -47,10 +37,12 @@ int main() {
   std::cout << "Loss Close: ";
   std::cin >> loss_close_price_string;
 
-  float loss = std::abs(std::stof(stripCommas(loss_open_price_string)) -
-                        std::stof(stripCommas(loss_close_price_string)));
+  float loss =
+      std::abs(std::stof(utils::string::stripCommas(loss_open_price_string)) -
+               std::stof(utils::string::stripCommas(loss_close_price_string)));
 
-  float win_open_price = std::stof(stripCommas(win_open_price_string));
+  float win_open_price =
+      std::stof(utils::string::stripCommas(win_open_price_string));
 
   float adjusted_stop_loss;
   float adjusted_stop_loss_limit;

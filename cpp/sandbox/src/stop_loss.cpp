@@ -1,18 +1,8 @@
-#include "utils/float.cpp" // utils::float::toCurrency
-#include <ctime>           // std::localtime, std::time, std::time_t, std::tm
-#include <iostream>        // std::cout, std::endl, std::fixed
+#include "utils/float.cpp"  // utils::float::toCurrency
+#include "utils/string.cpp" // utils::string::stripCommas
+#include <ctime>            // std::localtime, std::time, std::time_t, std::tm
+#include <iostream>         // std::cout, std::endl, std::fixed
 #include <string> // std::stof, std::string, std::string::erase, std::string::find
-
-std::string stripCommas(std::string input) {
-  int position = input.find(",");
-
-  while (position != -1) {
-    input.erase(position, 1);
-    position = input.find(",");
-  }
-
-  return input;
-}
 
 void log_stop_loss_percentage(float stop_loss, bool is_market_open) {
   std::cout << "Stop %";
@@ -54,9 +44,10 @@ int main() {
   std::cout << "Price Executed of Loser: ";
   std::cin >> price_executed_input;
 
-  float price_executed = std::stof(stripCommas(price_executed_input));
-  float high = std::stof(stripCommas(high_input));
-  float low = std::stof(stripCommas(low_input));
+  float price_executed =
+      std::stof(utils::string::stripCommas(price_executed_input));
+  float high = std::stof(utils::string::stripCommas(high_input));
+  float low = std::stof(utils::string::stripCommas(low_input));
   float range_movement = 0.125;
 
   std::time_t t = std::time(0);

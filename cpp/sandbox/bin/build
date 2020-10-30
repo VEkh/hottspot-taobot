@@ -1,5 +1,14 @@
 #!/bin/bash
 
 \rm -rf ./build/*
-g++ -o ./build/stop_loss ./src/stop_loss.cpp
-g++ -o ./build/target_profit ./src/target_profit.cpp
+
+sources=(
+  "momentum"
+  "stop_loss"
+  "target_profit"
+)
+
+for src in "${sources[@]}"
+do
+  g++ -o ./build/$src ./src/$src.cpp
+done
