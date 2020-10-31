@@ -1,6 +1,8 @@
 #include "curl_builder.h"
 #include "../utils/debugger.cpp" // utils::debugger::inspect
+#include "../utils/uri.cpp"      // utils::uri::percentEncode
 #include "../utils/vector.cpp"   // utils::vector::join
+#include <algorithm>             // std::for_each
 #include <map>                   // std::map
 #include <sstream>               // std::stringstream
 #include <stdexcept>             // std::invalid_argument
