@@ -49,18 +49,18 @@ int main() {
       std::stof(utils::string::stripCommas(current_price_input));
   float high = std::stof(utils::string::stripCommas(high_input));
   float low = std::stof(utils::string::stripCommas(low_input));
-  float range_movement = 0.125;
+  float range_movement = 0.15;
 
   std::time_t t = std::time(0);
   std::tm *now = std::localtime(&t);
-  bool is_market_open = (now->tm_hour - 5) < 10;
+  bool is_market_open = (now->tm_hour - 6) < 10;
 
   if (is_market_open) {
     range_movement *= 2;
   }
 
   float target_movement = ((high - low) * range_movement) / current_price;
-  float target_profit_ratio = 1.2;
+  float target_profit_ratio = 1.25;
   float open_stop_price_change = 0.9 * (target_movement * current_price);
   float open_stop_limit_price_change = target_movement * current_price;
 
