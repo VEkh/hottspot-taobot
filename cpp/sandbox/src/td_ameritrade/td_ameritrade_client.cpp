@@ -1,11 +1,26 @@
-#include "./td_ameritrade_client.h"
-#include "../utils/debugger.cpp" // utils::debugger::inspect
-#include "./curl_builder.cpp"    // CurlBuilder
-#include <string>                // std::string
+#include "td_ameritrade_client.h"
+#include "curl_client.cpp"    // CurlClient
+#include "utils/debugger.cpp" // utils::debugger::inspect
+#include <string>             // std::string
+
+// TODO
+void TdAmeritradeClient::get_acces_token() {
+  std::stringstream url;
+  url << "https://auth.tdameritrade.com/auth?response_type=code"
+      << "&redirect_uri="
+      << "&client_id="
+      << "%40AMER.OAUTHAP";
+
+  utils::debugger::inspect(url.str());
+
+  const char *code = "";
+
+  utils::debugger::inspect(utils::uri::percentDecode(code));
+}
 
 void TdAmeritradeClient::get_quote(std::string symbol) {
-  CurlBuilder::props_t props = {
-      .method = "GET",
+  CurlClient::props_t props = {
+      .method = CurlClient::http_method_t::GET,
       .url = "https://api.tdameritrade.com/v1/marketdata/" + symbol + "/quotes",
   };
 
@@ -24,15 +39,14 @@ void TdAmeritradeClient::get_quote(std::string symbol) {
       {"periodType", "month"},
   };
 
-  CurlBuilder curl_builder(props);
-  std::string request = curl_builder.build();
-
-  utils::debugger::inspect(request);
+  CurlClient curl_client(props);
+  curl_client.print_request();
+  curl_client.request();
 }
 
 void TdAmeritradeClient::refresh_token() {
-  CurlBuilder::props_t props = {
-      .method = "POST",
+  CurlClient::props_t props = {
+      .method = CurlClient::http_method_t::POST,
       .url = "https://api.tdameritrade.com/v1/oauth2/token",
   };
 
@@ -53,8 +67,7 @@ void TdAmeritradeClient::refresh_token() {
                        {"redirect_uri", redirect_uri},
                        {"refresh_token", refresh_token}};
 
-  CurlBuilder curl_builder(props);
-  std::string request = curl_builder.build();
-
-  utils::debugger::inspect(request);
+  CurlClient curl_client(props);
+  curl_client.print_request();
+  curl_client.request();
 }

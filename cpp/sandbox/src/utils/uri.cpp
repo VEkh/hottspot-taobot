@@ -2,7 +2,7 @@
 #define UTILS_URI
 
 #include "string.cpp"  // utils::string::split
-#include <curl/curl.h> // curl_easy_escape, curl_easy_init
+#include <curl/curl.h> // curl_easy_escape, curl_free, curl_easy_init
 #include <map>         // std::map
 #include <sstream>     // std::stringstream
 #include <string.h>    // strlen
@@ -53,9 +53,12 @@ std::string percentEncode(const char *str) {
   }
 
   CURL *curl = curl_easy_init();
-  const char *escaped = curl_easy_escape(curl, str, strlen(str));
+  char *escaped = curl_easy_escape(curl, str, strlen(str));
+  std::string result = (std::string)escaped;
 
-  return (std::string)escaped;
+  curl_free(escaped);
+
+  return result;
 }
 
 std::string percentEncode(std::string str) {

@@ -9,6 +9,7 @@ private:
   simdjson::dom::parser json_parser;
 
 public:
+  void get_acces_token();
   void get_quote(std::string);
   void refresh_token();
 };
