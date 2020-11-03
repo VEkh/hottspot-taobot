@@ -2,9 +2,8 @@
 #include <sstream>  // std::stringstream
 
 int main() {
-  const char *key = "59a8ce75cf8bc55992a77f08cf1930b3";
-  const char *oauth_token =
-      "%2FHucVYkr2I3QnnPHHYXECAYFcq78v%2FOlcvc94plwc%2B0%3D";
+  const char *key = "";
+  const char *oauth_token = "";
 
   std::stringstream url_stream;
   url_stream << "https://us.etrade.com/e/t/etws/authorize?"

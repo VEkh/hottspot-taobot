@@ -12,4 +12,4 @@ OAUTH_TOKEN="$OAUTH_TOKEN" \
 OAUTH_CONSUMER_SECRET="$OAUTH_CONSUMER_SECRET" \
 OAUTH_CONSUMER_KEY="$OAUTH_CONSUMER_KEY" \
 REQUEST_URL="$REQUEST_URL" \
-./bin/run ./src/etrade_request_header.cpp -lcrypto -lcurl
+./bin/run ./src/etrade/request_header.cpp -lcrypto -lcurl
