@@ -16,6 +16,7 @@
  * CURLOPT_HTTPGET
  * CURLOPT_HTTPHEADER
  * CURLOPT_URL
+ * CURLOPT_WRITEDATA
  * CURLOPT_WRITEFUNCTION
  * curl_easy_init
  * curl_easy_perform
@@ -45,9 +46,13 @@ void CurlClient::print_request() {
 
 void CurlClient::request() {
   curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
+  curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_response);
+  curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&response);
   curl_easy_perform(curl);
   curl_easy_cleanup(curl);
 }
+
+// private
 
 std::string CurlClient::build_query_params() {
   std::map<std::string, std::string> params = props.query_params;
@@ -68,25 +73,6 @@ std::string CurlClient::build_query_params() {
 
   transformed_props.query_params = query_params;
   return "?" + query_params;
-}
-
-std::string CurlClient::to_string() {
-  std::vector<std::string> request_parts = {
-      "curl",
-      "-X" + transformed_props.method,
-      transformed_props.headers,
-  };
-
-  if (!transformed_props.body_params.empty()) {
-    request_parts.push_back("--data \"" + transformed_props.body_params + "\"");
-  }
-
-  request_parts.push_back("\"" + transformed_props.url + "\"");
-
-  std::vector<std::string> filtered_request_parts = utils::vector::filter(
-      request_parts, [](std::string part) -> bool { return !part.empty(); });
-
-  return utils::vector::join(filtered_request_parts, " ");
 }
 
 void CurlClient::set_body_params() {
@@ -157,4 +143,34 @@ void CurlClient::set_url() {
 
   transformed_props.url = url;
   curl_easy_setopt(curl, CURLOPT_URL, url.c_str());
+}
+
+std::string CurlClient::to_string() {
+  std::vector<std::string> request_parts = {
+      "curl",
+      "-X" + transformed_props.method,
+      transformed_props.headers,
+  };
+
+  if (!transformed_props.body_params.empty()) {
+    request_parts.push_back("--data \"" + transformed_props.body_params + "\"");
+  }
+
+  request_parts.push_back("\"" + transformed_props.url + "\"");
+
+  std::vector<std::string> filtered_request_parts = utils::vector::filter(
+      request_parts, [](std::string part) -> bool { return !part.empty(); });
+
+  return utils::vector::join(filtered_request_parts, " ");
+}
+
+size_t CurlClient::write_response(char *buffer, size_t size, size_t data_size,
+                                  void *userdata) {
+  size_t real_size = size * data_size;
+  response_t *res = (response_t *)userdata;
+
+  res->body = buffer;
+  res->size = real_size;
+
+  return real_size;
 }
