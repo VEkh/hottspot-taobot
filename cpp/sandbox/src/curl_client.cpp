@@ -33,6 +33,7 @@ CurlClient::CurlClient(props_t props_) {
 
 void CurlClient::prepare_request() {
   set_body_params();
+  set_debug();
   set_headers();
   set_method();
   set_url();
@@ -45,7 +46,6 @@ void CurlClient::print_request() {
 }
 
 void CurlClient::request() {
-  curl_easy_setopt(curl, CURLOPT_VERBOSE, 1);
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_response);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&response);
   curl_easy_perform(curl);
@@ -97,6 +97,10 @@ void CurlClient::set_body_params() {
   curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, params_string.size());
   curl_easy_setopt(curl, CURLOPT_POSTFIELDS,
                    transformed_props.body_params.c_str());
+}
+
+void CurlClient::set_debug() {
+  curl_easy_setopt(curl, CURLOPT_VERBOSE, (long)props.debug_flag);
 }
 
 void CurlClient::set_headers() {

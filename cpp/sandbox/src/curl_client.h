@@ -53,6 +53,7 @@ private:
 
   void prepare_request();
   void set_body_params();
+  void set_debug();
   void set_headers();
   void set_method();
   void set_url();
