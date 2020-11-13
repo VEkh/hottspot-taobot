@@ -22,11 +22,9 @@ public:
   struct response_t {
     std::string body;
     size_t size;
-  };
+  } response;
 
   CurlClient(CurlClient::props_t);
-
-  CurlClient::response_t response;
 
   void print_request();
   void request();
@@ -38,12 +36,11 @@ private:
     std::string method;
     std::string query_params;
     std::string url;
-  };
+  } transformed_props;
 
   CURL *curl = curl_easy_init();
 
   CurlClient::props_t props;
-  CurlClient::transformed_props_t transformed_props;
 
   static size_t write_response(char *, size_t, size_t, void *);
 

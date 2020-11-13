@@ -1,11 +1,14 @@
-#include "td_ameritrade_client.h" // TOKENS_PATH, json_parser
-#include "curl_client.cpp"        // CurlClient
-#include "utils/debugger.cpp"     // utils::debugger::inspect
+#include "td_ameritrade_client.h"           // TOKENS_PATH, json_parser
+#include "curl_client.cpp"                  // CurlClient
+#include "utils/debugger.cpp"               // utils::debugger::inspect
+#include "utils/stream_format_modifier.cpp" // StreamFormatModifier
 #include <fstream>  // std::ios::out, std::ios::trunc, std::ofstream
 #include <iostream> // std::cout
+#include <sstream>  // std::stringstream
 #include <string>   // std::string
 
-// TODO
+TdAmeritradeClient::TdAmeritradeClient() { load_client_config(); }
+
 void TdAmeritradeClient::get_acces_token() {
   std::stringstream url;
   url << "https://auth.tdameritrade.com/auth?response_type=code"
@@ -88,6 +91,27 @@ void TdAmeritradeClient::refresh_token() {
   std::cout << "Writing to: " << TOKENS_PATH << std::endl;
 
   write_response_to_file(curl_client.response.body, TOKENS_PATH);
+}
+
+// private
+
+void TdAmeritradeClient::load_client_config() {
+  std::string config_path = "./config/td_ameritrade/credentials.json";
+  std::ifstream config_file(config_path, std::ios::in);
+
+  if (!config_file.good()) {
+    StreamFormatModifier format({
+        StreamFormatModifier::code_t::FONT_BOLD,
+        StreamFormatModifier::code_t::FG_RED,
+    });
+
+    StreamFormatModifier reset({StreamFormatModifier::code_t::RESET});
+
+    std::stringstream message;
+
+    message << format << "Config file missing at " << config_path << reset;
+    throw std::invalid_argument(message.str());
+  }
 }
 
 void TdAmeritradeClient::write_response_to_file(std::string body,

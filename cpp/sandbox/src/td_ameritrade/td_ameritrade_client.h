@@ -5,17 +5,25 @@
 #include <string>                     // std::string
 
 class TdAmeritradeClient {
-private:
-  const char *TOKENS_PATH = "./config/td_ameritrade/tokens.json";
-
-  simdjson::dom::parser json_parser;
-
-  void write_response_to_file(std::string, const char *);
-
 public:
   void get_acces_token();
   void get_quote(std::string);
   void refresh_token();
+
+  TdAmeritradeClient();
+
+private:
+  struct client_config_t {
+    std::string client_id;
+    std::string redirect_uri;
+  } client_config;
+
+  const char *TOKENS_PATH = "./config/td_ameritrade/tokens.json";
+
+  simdjson::dom::parser json_parser;
+
+  void load_client_config();
+  void write_response_to_file(std::string, const char *);
 };
 
 #endif // TD_AMERITRADE_CLIENT
