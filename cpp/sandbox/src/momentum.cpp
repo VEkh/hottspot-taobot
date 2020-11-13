@@ -56,7 +56,7 @@ int main() {
   bool is_market_open = (now->tm_hour - 6) < 10;
 
   if (is_market_open) {
-    range_movement *= 2;
+    range_movement *= 1.5;
   }
 
   float target_movement = ((high - low) * range_movement) / current_price;
@@ -69,9 +69,6 @@ int main() {
   float buy_open_stop_limit = current_price + open_stop_limit_price_change;
   float buy_close_limit =
       current_price + (target_profit_ratio * open_stop_limit_price_change);
-  float buy_close_stop = current_price + (0.2 * open_stop_price_change);
-  float buy_close_stop_limit =
-      current_price + (0.9 * 0.2 * open_stop_price_change);
 
   // Sell Short
   float sell_short_open_stop = current_price - open_stop_price_change;
@@ -79,9 +76,6 @@ int main() {
       current_price - open_stop_limit_price_change;
   float sell_short_close_limit =
       current_price - (target_profit_ratio * open_stop_limit_price_change);
-  float sell_short_close_stop = current_price - (0.2 * open_stop_price_change);
-  float sell_short_close_stop_limit =
-      current_price - (0.9 * 0.2 * open_stop_price_change);
 
   log_symbol(symbol);
   log_target_movement_percentage(target_movement, is_market_open);
@@ -93,11 +87,6 @@ int main() {
             << " • Stop: " << utils::float_::toCurrency(buy_open_stop)
             << std::endl;
 
-  std::cout << "BUY (CLOSE)                 => Stop Limit: "
-            << utils::float_::toCurrency(buy_close_stop_limit)
-            << " • Stop: " << utils::float_::toCurrency(buy_close_stop)
-            << std::endl;
-
   std::cout << "BUY (CLOSE) (PROFIT)        =>      Limit: "
             << utils::float_::toCurrency(buy_close_limit) << std::endl;
 
@@ -106,11 +95,6 @@ int main() {
   std::cout << "SELL SHORT (OPEN)           => Stop Limit: "
             << utils::float_::toCurrency(sell_short_open_stop_limit)
             << " • Stop: " << utils::float_::toCurrency(sell_short_open_stop)
-            << std::endl;
-
-  std::cout << "SELL SHORT (CLOSE)          => Stop Limit: "
-            << utils::float_::toCurrency(sell_short_close_stop_limit)
-            << " • Stop: " << utils::float_::toCurrency(sell_short_close_stop)
             << std::endl;
 
   std::cout << "SELL SHORT (CLOSE) (PROFIT) =>      Limit: "
