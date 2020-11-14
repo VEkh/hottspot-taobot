@@ -1,38 +1,52 @@
-#include "td_ameritrade_client.h"           // TOKENS_PATH, json_parser
-#include "curl_client.cpp"                  // CurlClient
-#include "utils/debugger.cpp"               // utils::debugger::inspect
-#include "utils/stream_format_modifier.cpp" // StreamFormatModifier
+#include "td_ameritrade_client.h"     // TOKENS_PATH, json_parser
+#include "curl_client.cpp"            // CurlClient
+#include "utils/debugger.cpp"         // utils::debugger::inspect
+#include "utils/stream_formatter.cpp" // StreamFormatter, StreamFormatter::code_t
+#include "utils/uri.cpp"              // utils::uri::percentEncode
 #include <fstream>  // std::ios::out, std::ios::trunc, std::ofstream
-#include <iostream> // std::cout
-#include <sstream>  // std::stringstream
+#include <iostream> // std::cin, std::cout, std::endl
+#include <sstream>  // std::ostringstream, std::stringstream
 #include <string>   // std::string
 
 TdAmeritradeClient::TdAmeritradeClient() { load_client_config(); }
 
-void TdAmeritradeClient::get_acces_token() {
+void TdAmeritradeClient::get_access_token() {
+  std::string code;
   std::stringstream url;
+
   url << "https://auth.tdameritrade.com/auth?response_type=code"
       << "&redirect_uri="
-      << "&client_id="
-      << "%40AMER.OAUTHAP";
+      << utils::uri::percentEncode(client_config.redirect_uri)
+      << "&client_id=" << client_config.client_id << "%40AMER.OAUTHAP";
 
-  utils::debugger::inspect(url.str());
+  std::cout << stream_format.cyan
+            << "Your authorization URL: " << stream_format.reset << url.str()
+            << std::endl;
 
-  const char *code = "";
+  std::cout << stream_format.yellow
+            << "\nEnter the response code: " << stream_format.reset;
 
-  utils::debugger::inspect(utils::uri::percentDecode(code));
+  std::cin >> code;
+  std::cout << std::endl;
+
+  fetch_tokens({
+      {"access_type", "offline"},
+      {"client_id", client_config.client_id},
+      {"code", utils::uri::percentDecode(code)},
+      {"grant_type", "authorization_code"},
+      {"redirect_uri", client_config.redirect_uri},
+  });
 }
 
 void TdAmeritradeClient::get_quote(std::string symbol) {
-  simdjson::dom::element tokens = json_parser.load("./tmp/td_auth/tokens.json");
-  std::string access_token = std::string(tokens["access_token"]);
+  load_tokens();
 
   CurlClient::props_t props = {
       .body_params = {},
       .debug_flag = CurlClient::debug_t::OFF,
       .headers =
           {
-              {"Authorization", "Bearer " + access_token},
+              {"Authorization", "Bearer " + tokens.access_token},
               {"Content-Type", "application/json"},
           },
       .method = CurlClient::http_method_t::GET,
@@ -51,22 +65,32 @@ void TdAmeritradeClient::get_quote(std::string symbol) {
   curl_client.request();
 }
 
-void TdAmeritradeClient::refresh_token() {
-  simdjson::dom::element client_config =
-      json_parser.load("./config/td_ameritrade/credentials.json");
+void TdAmeritradeClient::refresh_tokens() {
+  load_tokens();
 
-  std::string client_id = std::string(client_config["client_id"]);
-  std::string redirect_uri = std::string(client_config["redirect_uri"]);
+  fetch_tokens({
+      {"access_type", "offline"},
+      {"client_id", client_config.client_id},
+      {"grant_type", "refresh_token"},
+      {"redirect_uri", client_config.redirect_uri},
+      {"refresh_token", tokens.refresh_token},
+  });
+}
 
-  simdjson::dom::element tokens = json_parser.load(TOKENS_PATH);
-  std::string refresh_token = std::string(tokens["refresh_token"]);
+// private
 
-  CurlClient::props_t props = {
-      .body_params = {{"access_type", "offline"},
-                      {"client_id", client_id},
-                      {"grant_type", "refresh_token"},
-                      {"redirect_uri", redirect_uri},
-                      {"refresh_token", refresh_token}},
+std::string TdAmeritradeClient::build_error_message(std::string message) {
+  std::ostringstream formatted_message;
+
+  formatted_message << stream_format.red << message << stream_format.reset;
+
+  return formatted_message.str();
+}
+
+void TdAmeritradeClient::fetch_tokens(
+    std::map<std::string, std::string> body_params) {
+  CurlClient::props_t curl_props = {
+      .body_params = body_params,
       .debug_flag = CurlClient::debug_t::OFF,
       .headers = {{"Content-Type", "application/x-www-form-urlencoded"}},
       .method = CurlClient::http_method_t::POST,
@@ -74,44 +98,66 @@ void TdAmeritradeClient::refresh_token() {
       .url = "https://api.tdameritrade.com/v1/oauth2/token",
   };
 
-  CurlClient curl_client(props);
+  CurlClient curl_client(curl_props);
   curl_client.request();
 
-  simdjson::dom::element response =
-      json_parser.parse(curl_client.response.body);
+  std::string response_body = curl_client.response.body;
+  simdjson::dom::element response = json_parser.parse(response_body);
 
-  if (!std::string(response["error"]).empty()) {
+  simdjson::dom::element error_message;
+  auto json_error = response["error"].get(error_message);
+
+  if (!json_error) {
+    std::string error_message = build_error_message("Request FAILED");
+
+    utils::debugger::inspect(error_message);
     std::cout << response << std::endl;
-    return;
+
+    exit(1);
   }
 
-  std::cout << "Successfully refreshed tokens: \n"
-            << curl_client.response.body << std::endl;
+  std::cout << stream_format.green << "Successfully fetched tokens: \n"
+            << stream_format.reset << response_body << std::endl;
 
   std::cout << "Writing to: " << TOKENS_PATH << std::endl;
 
-  write_response_to_file(curl_client.response.body, TOKENS_PATH);
+  write_response_to_file(response_body, TOKENS_PATH);
 }
 
-// private
-
 void TdAmeritradeClient::load_client_config() {
-  std::string config_path = "./config/td_ameritrade/credentials.json";
-  std::ifstream config_file(config_path, std::ios::in);
+  std::ifstream config_file(CONFIG_PATH, std::ios::in);
 
   if (!config_file.good()) {
-    StreamFormatModifier format({
-        StreamFormatModifier::code_t::FONT_BOLD,
-        StreamFormatModifier::code_t::FG_RED,
-    });
-
-    StreamFormatModifier reset({StreamFormatModifier::code_t::RESET});
-
-    std::stringstream message;
-
-    message << format << "Config file missing at " << config_path << reset;
-    throw std::invalid_argument(message.str());
+    std::string error_message = build_error_message("Config file missing at " +
+                                                    std::string(CONFIG_PATH));
+    throw std::invalid_argument(error_message);
   }
+
+  simdjson::dom::element config_json = json_parser.load(CONFIG_PATH);
+
+  client_config = {
+      .client_id = std::string(config_json["client_id"]),
+      .redirect_uri = std::string(config_json["redirect_uri"]),
+  };
+}
+
+void TdAmeritradeClient::load_tokens() {
+  std::ifstream tokens_file(TOKENS_PATH, std::ios::in);
+
+  if (!tokens_file.good()) {
+    std::string error_message =
+        build_error_message("Tokens missing at " + std::string(TOKENS_PATH) +
+                            ". Run `TdAmeritradeClient::fetch_tokens` first.");
+
+    throw std::invalid_argument(error_message);
+  }
+
+  simdjson::dom::element tokens_json = json_parser.load(TOKENS_PATH);
+
+  tokens = {
+      .access_token = std::string(tokens_json["access_token"]),
+      .refresh_token = std::string(tokens_json["refresh_token"]),
+  };
 }
 
 void TdAmeritradeClient::write_response_to_file(std::string body,

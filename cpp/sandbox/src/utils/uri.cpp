@@ -47,6 +47,10 @@ std::string percentDecode(const char *str) {
   return (std::string)unescaped;
 }
 
+std::string percentDecode(std::string str) {
+  return percentDecode(str.c_str());
+}
+
 std::string percentEncode(const char *str) {
   if (str == NULL) {
     return "";
