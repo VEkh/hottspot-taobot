@@ -1,8 +1,9 @@
 #include "utils/float.cpp"  // utils::float::toCurrency
-#include "utils/string.cpp" // utils::string::stripCommas
+#include "utils/string.cpp" // utils::string::split, utils::string::stripCommas
 #include <ctime>            // std::localtime, std::time, std::time_t, std::tm
 #include <iostream>         // std::cout, std::endl, std::fixed
-#include <string> // std::stof, std::string, std::string::erase, std::string::find
+#include <string> // std::string::erase, std::string::find, std::getline, std::stof, std::string,
+#include <vector> // std::vector
 
 void log_target_movement_percentage(float target_movement,
                                     bool is_market_open) {
@@ -29,26 +30,25 @@ void log_symbol(std::string symbol) {
 
 int main() {
   std::string current_price_input;
-  std::string high_input;
-  std::string low_input;
+  std::string day_range_input;
   std::string symbol;
 
   std::cout << "Symbol: ";
-  std::cin >> symbol;
+  std::getline(std::cin, symbol);
 
   std::cout << "Current: ";
-  std::cin >> current_price_input;
+  std::getline(std::cin, current_price_input);
 
-  std::cout << "Low: ";
-  std::cin >> low_input;
+  std::cout << "Day Range: ";
+  std::getline(std::cin, day_range_input);
 
-  std::cout << "High: ";
-  std::cin >> high_input;
+  std::vector<std::string> day_range =
+      utils::string::split(day_range_input, "-");
 
   float current_price =
       std::stof(utils::string::stripCommas(current_price_input));
-  float high = std::stof(utils::string::stripCommas(high_input));
-  float low = std::stof(utils::string::stripCommas(low_input));
+  float high = std::stof(utils::string::stripCommas(day_range[1]));
+  float low = std::stof(utils::string::stripCommas(day_range[0]));
   float range_movement = 0.15;
 
   std::time_t t = std::time(0);
@@ -60,7 +60,7 @@ int main() {
   }
 
   float target_movement = ((high - low) * range_movement) / current_price;
-  float target_profit_ratio = 1.25;
+  float target_profit_ratio = 1.2;
   float open_stop_price_change = 0.9 * (target_movement * current_price);
   float open_stop_limit_price_change = target_movement * current_price;
 
