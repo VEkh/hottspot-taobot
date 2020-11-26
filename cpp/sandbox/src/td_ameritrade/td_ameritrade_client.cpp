@@ -63,6 +63,8 @@ void TdAmeritradeClient::get_quote(std::string symbol) {
   CurlClient curl_client(props);
   curl_client.print_request();
   curl_client.request();
+
+  utils::debugger::inspect(curl_client.response.body);
 }
 
 void TdAmeritradeClient::refresh_tokens() {

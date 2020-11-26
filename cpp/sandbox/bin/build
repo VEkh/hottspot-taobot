@@ -2,11 +2,13 @@
 
 \rm -rf ./build/*
 
-sources=(
+src_sources=(
   "momentum"
 )
 
-for src in "${sources[@]}"
+for src in "${src_sources[@]}"
 do
-  g++ -o ./build/$src ./src/$src.cpp
+  g++ -iquote. -iquote./src -std=c++17 -o ./build/$src ./src/$src.cpp
 done
+
+. ./bin/td_ameritrade/build

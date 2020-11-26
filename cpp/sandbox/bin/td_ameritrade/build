@@ -1,0 +1,22 @@
+#! /bin/bash
+
+# ./bin/run ./src/td_ameritrade/td_ameritrade.cpp -lcurl
+
+\rm -rf ./build/td_ameritrade/*
+
+mkdir -p ./build/td_ameritrade/
+
+td_ameritrade_sources=(
+  "td_ameritrade"
+)
+
+for src in "${td_ameritrade_sources[@]}"
+do
+  g++ \
+    -iquote. \
+    -iquote./src \
+    -std=c++17 \
+    -o ./build/td_ameritrade/$src \
+    ./src/td_ameritrade/$src.cpp \
+    -lcurl
+done
