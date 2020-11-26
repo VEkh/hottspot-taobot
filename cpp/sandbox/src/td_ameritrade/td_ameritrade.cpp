@@ -1,14 +1,34 @@
 #include "td_ameritrade_client.cpp" // TdAmeritradeClient
-#include <iostream>                 // std::cout, std::endl
-#include <string>                   // std::string
+#include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include <iostream>            // std::cout, std::endl
+#include <map>                 // std::map
+#include <sstream>             // std::ostringstream
+#include <string>              // std::string
+
+void print_usage() {
+  std::map<std::string, const char *> commands = {
+      {"get_access_token  ", "Get authorization tokens"},
+      {"get_quote <SYMBOL>", "Get quote for the given symbol"},
+      {"refresh_tokens    ", "Refresh authorization tokens"},
+  };
+
+  Formatted::fmt_stream_t fmt = Formatted::stream();
+  std::ostringstream message;
+
+  message << fmt.bold << fmt.cyan << "TDAmeritrade Client Usage:" << std::endl;
+
+  std::map<std::string, const char *>::iterator it;
+  for (it = commands.begin(); it != commands.end(); ++it) {
+    message << fmt.bold << fmt.yellow << it->first << fmt.reset << " | "
+            << it->second << std::endl;
+  }
+
+  std::cout << message.str();
+}
 
 int main(int argc, char *argv[]) {
   if (argc < 2) {
-    std::cout << "TDAmeritrade Client Usage: " << std::endl
-              << "get_access_token -- Get authorization tokens\n"
-              << "get_quote <SYMBOL> -- Get quote for the given symbol\n"
-              << "refresh_tokens -- Refresh authorization tokens " << std::endl;
-
+    print_usage();
     exit(1);
   }
 

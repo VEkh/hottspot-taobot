@@ -1,8 +1,7 @@
-#include "utils/debugger.cpp" // utils::debugger::inspect_type
-#include <iostream>           // std::cout
+#include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include <iostream>            // std::cout
 
 int main() {
-  char *str = nullptr;
-  std::string type = utils::debugger::inspect_type(typeid(str).name());
-  std::cout << type << std::endl;
+  Formatted::fmt_stream_t fmt = Formatted::stream();
+  std::cout << fmt.green << "SUCCESS" << std::endl;
 }

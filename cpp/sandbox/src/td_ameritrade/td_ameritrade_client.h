@@ -2,9 +2,9 @@
 #define TD_AMERITRADE_CLIENT
 
 #include "deps/simdjson/simdjson.cpp" // simdjson::dom::parser
-#include "utils/stream_formatter.cpp" // StreamFormatter, StreamFormatter::code_t
-#include <map>                        // std::map
-#include <string>                     // std::string
+#include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include <map>                 // std::map
+#include <string>              // std::string
 
 class TdAmeritradeClient {
 public:
@@ -21,32 +21,6 @@ private:
     std::string redirect_uri;
   } client_config;
 
-  struct stream_format_t {
-    StreamFormatter cyan;
-    StreamFormatter green;
-    StreamFormatter red;
-    StreamFormatter reset;
-    StreamFormatter yellow;
-  } stream_format = {
-      .cyan = StreamFormatter({
-          StreamFormatter::code_t::FONT_BOLD,
-          StreamFormatter::code_t::FG_CYAN,
-      }),
-      .green = StreamFormatter({
-          StreamFormatter::code_t::FONT_BOLD,
-          StreamFormatter::code_t::FG_GREEN,
-      }),
-      .red = StreamFormatter({
-          StreamFormatter::code_t::FONT_BOLD,
-          StreamFormatter::code_t::FG_RED,
-      }),
-      .reset = StreamFormatter({StreamFormatter::code_t::RESET}),
-      .yellow = StreamFormatter({
-          StreamFormatter::code_t::FONT_BOLD,
-          StreamFormatter::code_t::FG_YELLOW,
-      }),
-  };
-
   struct tokens_t {
     std::string access_token;
     std::string refresh_token;
@@ -54,8 +28,8 @@ private:
 
   const char *CONFIG_PATH = "./config/td_ameritrade/credentials.json";
   const char *TOKENS_PATH = "./config/td_ameritrade/tokens.json";
-
   simdjson::dom::parser json_parser;
+  Formatted::fmt_stream_t stream_format = Formatted::stream();
 
   std::string build_error_message(std::string message);
   void fetch_tokens(const std::map<std::string, std::string> body_params);

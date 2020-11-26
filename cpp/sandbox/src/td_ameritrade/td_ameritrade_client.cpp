@@ -19,11 +19,11 @@ void TdAmeritradeClient::get_access_token() {
       << utils::uri::percentEncode(client_config.redirect_uri)
       << "&client_id=" << client_config.client_id << "%40AMER.OAUTHAP";
 
-  std::cout << stream_format.cyan
+  std::cout << stream_format.bold << stream_format.cyan
             << "Your authorization URL: " << stream_format.reset << url.str()
             << std::endl;
 
-  std::cout << stream_format.yellow
+  std::cout << stream_format.bold << stream_format.yellow
             << "\nEnter the response code: " << stream_format.reset;
 
   std::cin >> code;
@@ -94,7 +94,8 @@ void TdAmeritradeClient::refresh_tokens() {
 std::string TdAmeritradeClient::build_error_message(std::string message) {
   std::ostringstream formatted_message;
 
-  formatted_message << stream_format.red << message << stream_format.reset;
+  formatted_message << stream_format.bold << stream_format.red << message
+                    << stream_format.reset;
 
   return formatted_message.str();
 }
@@ -128,7 +129,8 @@ void TdAmeritradeClient::fetch_tokens(
     exit(1);
   }
 
-  std::cout << stream_format.green << "Successfully fetched tokens: \n"
+  std::cout << stream_format.bold << stream_format.green
+            << "Successfully fetched tokens: \n"
             << stream_format.reset << response_body << std::endl;
 
   std::cout << "Writing to: " << TOKENS_PATH << std::endl;

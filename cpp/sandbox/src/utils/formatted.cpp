@@ -1,13 +1,14 @@
-#if !defined(STREAM_FORMATTER)
-#define STREAM_FORMATTER
+#if !defined(FORMATTED_STREAM)
+#define FORMATTED_STREAM
 
 #include <ostream> // std::ostream
 #include <string>  // std::string, std::to_string
 #include <vector>  // std::vector
 
+namespace Formatted {
 // Borrowed from @Joel Sjögren
 // https://stackoverflow.com/questions/2616906/how-do-i-output-coloured-text-to-a-linux-terminal
-class StreamFormatter {
+class Stream {
 public:
   enum code_t {
     BG_BLUE = 44,
@@ -24,8 +25,7 @@ public:
     RESET = 0,
   };
 
-  friend std::ostream &operator<<(std::ostream &os,
-                                  const StreamFormatter &modifier) {
+  friend std::ostream &operator<<(std::ostream &os, const Stream &modifier) {
     std::string modifier_string;
     std::vector<code_t> codes = modifier.codes;
 
@@ -40,10 +40,31 @@ public:
     return os << "\33[" << modifier_string << "m";
   }
 
-  StreamFormatter(std::vector<code_t> codes_) : codes(codes_) {}
+  Stream(std::vector<code_t> codes_) : codes(codes_){};
 
 private:
   std::vector<code_t> codes;
 };
+
+struct fmt_stream_t {
+  Stream bold;
+  Stream cyan;
+  Stream green;
+  Stream red;
+  Stream reset;
+  Stream yellow;
+};
+
+fmt_stream_t stream() {
+  return {
+      .bold = Stream({Stream::code_t::FONT_BOLD}),
+      .cyan = Stream({Stream::code_t::FG_CYAN}),
+      .green = Stream({Stream::code_t::FG_GREEN}),
+      .red = Stream({Stream::code_t::FG_RED}),
+      .reset = Stream({Stream::code_t::RESET}),
+      .yellow = Stream({Stream::code_t::FG_YELLOW}),
+  };
+}
+} // namespace Formatted
 
 #endif
