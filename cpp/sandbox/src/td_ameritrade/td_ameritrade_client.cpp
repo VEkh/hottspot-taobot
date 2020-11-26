@@ -1,12 +1,12 @@
-#include "td_ameritrade_client.h"     // TOKENS_PATH, json_parser
-#include "curl_client.cpp"            // CurlClient
-#include "utils/debugger.cpp"         // utils::debugger::inspect
-#include "utils/stream_formatter.cpp" // StreamFormatter, StreamFormatter::code_t
-#include "utils/uri.cpp"              // utils::uri::percentEncode
-#include <fstream>  // std::ios::out, std::ios::trunc, std::ofstream
-#include <iostream> // std::cin, std::cout, std::endl
-#include <sstream>  // std::ostringstream, std::stringstream
-#include <string>   // std::string
+#include "td_ameritrade_client.h" // TOKENS_PATH, json_parser
+#include "curl_client.cpp"        // CurlClient
+#include "utils/debugger.cpp"     // utils::debugger::inspect
+#include "utils/uri.cpp"          // utils::uri::percentEncode
+#include <fstream>   // std::ios::out, std::ios::trunc, std::ofstream
+#include <iostream>  // std::cin, std::cout, std::endl
+#include <sstream>   // std::ostringstream, std::stringstream
+#include <stdexcept> // std::invalid_argument
+#include <string>    // std::string
 
 TdAmeritradeClient::TdAmeritradeClient() { load_client_config(); }
 
@@ -61,7 +61,6 @@ void TdAmeritradeClient::get_quote(std::string symbol) {
   };
 
   CurlClient curl_client(props);
-  curl_client.print_request();
   curl_client.request();
 
   utils::debugger::inspect(curl_client.response.body);
