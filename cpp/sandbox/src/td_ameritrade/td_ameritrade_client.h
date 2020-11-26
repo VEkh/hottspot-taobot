@@ -9,7 +9,8 @@
 class TdAmeritradeClient {
 public:
   void get_access_token();
-  void get_quote(std::string symbol);
+  void get_quote(char *);
+  void get_quote(std::string);
   void refresh_tokens();
 
   TdAmeritradeClient();

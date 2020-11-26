@@ -2,13 +2,9 @@
 
 # ./bin/run ./src/td_ameritrade/td_ameritrade.cpp -lcurl
 
-\rm -rf ./build/td_ameritrade/*
+mkdir -p ./build/
 
-mkdir -p ./build/td_ameritrade/
-
-td_ameritrade_sources=(
-  "td_ameritrade"
-)
+td_ameritrade_sources=("td_ameritrade")
 
 for src in "${td_ameritrade_sources[@]}"
 do
@@ -16,7 +12,7 @@ do
     -iquote. \
     -iquote./src \
     -std=c++17 \
-    -o ./build/td_ameritrade/$src \
+    -o ./build/td_ameritrade \
     ./src/td_ameritrade/$src.cpp \
     -lcurl
 done

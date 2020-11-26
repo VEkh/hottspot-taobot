@@ -38,6 +38,17 @@ void TdAmeritradeClient::get_access_token() {
   });
 }
 
+void TdAmeritradeClient::get_quote(char *symbol) {
+  if (symbol == nullptr) {
+    std::string error_message =
+        build_error_message("Please provide a stock symbol");
+
+    throw std::invalid_argument(error_message);
+  }
+
+  get_quote(std::string(symbol));
+}
+
 void TdAmeritradeClient::get_quote(std::string symbol) {
   load_tokens();
 

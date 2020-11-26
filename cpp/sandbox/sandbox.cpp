@@ -1,6 +1,8 @@
-#include <iostream> // std::cout
+#include "utils/debugger.cpp" // utils::debugger::inspect_type
+#include <iostream>           // std::cout
 
-int main(int argc, char *argv[]) {
-  std::cout << "argc: " << argc << std::endl;
-  std::cout << argv[2] << std::endl;
+int main() {
+  char *str = nullptr;
+  std::string type = utils::debugger::inspect_type(typeid(str).name());
+  std::cout << type << std::endl;
 }

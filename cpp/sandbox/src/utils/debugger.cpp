@@ -1,6 +1,7 @@
 #if !defined(UTILS_DEBUGGER)
 #define UTILS_DEBUGGER
 
+#include <cxxabi.h> // abi::__cxa_demangle
 #include <iostream> // std::cout, std;:endl
 #include <map>      // std::map
 #include <string>   // std::string
@@ -30,6 +31,13 @@ void inspect(std::map<std::string, std::string> collection) {
   }
 
   std::cout << "}" << std::endl;
+}
+
+/* @param type_name: typeid(obj).name() */
+std::string inspect_type(const char *type_name) {
+  int status;
+  char *demangled_name = abi::__cxa_demangle(type_name, NULL, NULL, &status);
+  return std::string(demangled_name);
 }
 } // namespace debugger
 } // namespace utils
