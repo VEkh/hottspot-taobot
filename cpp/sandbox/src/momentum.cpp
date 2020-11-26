@@ -1,19 +1,11 @@
 #include "utils/float.cpp"  // utils::float::toCurrency
 #include "utils/string.cpp" // utils::string::split, utils::string::stripCommas
-#include <ctime>            // std::localtime, std::time, std::time_t, std::tm
-#include <iostream>         // std::cout, std::endl, std::fixed
-#include <string> // std::string::erase, std::string::find, std::getline, std::stof, std::string,
-#include <vector> // std::vector
+#include <iostream>         // std::cout, std::endl
+#include <string>           // std::getline, std::stof, std::string,
+#include <vector>           // std::vector
 
-void log_target_movement_percentage(float target_movement,
-                                    bool is_market_open) {
-  std::cout << "Stop %";
-
-  if (is_market_open) {
-    std::cout << " (At Market Open)";
-  }
-
-  std::cout << ": " << utils::float_::toRoundedPercentage(target_movement)
+void log_target_movement_percentage(float target_movement) {
+  std::cout << "Stop %: " << utils::float_::toRoundedPercentage(target_movement)
             << std::endl;
 }
 
@@ -49,18 +41,11 @@ int main() {
       std::stof(utils::string::stripCommas(current_price_input));
   float high = std::stof(utils::string::stripCommas(day_range[1]));
   float low = std::stof(utils::string::stripCommas(day_range[0]));
-  float range_movement = 0.15;
-
-  std::time_t t = std::time(0);
-  std::tm *now = std::localtime(&t);
-  bool is_market_open = (now->tm_hour - 6) < 10;
-
-  if (is_market_open) {
-    range_movement *= 1.5;
-  }
+  float target_profit_ratio = 1.15;
+  float target_total_movement = 0.15;
+  float range_movement = target_total_movement / target_profit_ratio;
 
   float target_movement = ((high - low) * range_movement) / current_price;
-  float target_profit_ratio = 1.2;
   float open_stop_price_change = 0.9 * (target_movement * current_price);
   float open_stop_limit_price_change = target_movement * current_price;
 
@@ -78,7 +63,7 @@ int main() {
       current_price - (target_profit_ratio * open_stop_limit_price_change);
 
   log_symbol(symbol);
-  log_target_movement_percentage(target_movement, is_market_open);
+  log_target_movement_percentage(target_movement);
 
   std::cout << "\n=========================\n" << std::endl;
 
