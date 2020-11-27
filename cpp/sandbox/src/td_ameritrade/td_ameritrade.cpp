@@ -1,10 +1,9 @@
-#include "libraries.cpp"
-#include "td_ameritrade_client.cpp" // TdAmeritradeClient
-#include "utils/formatted.cpp"      // Formatted
-#include <iostream>                 // std::cout, std::endl
-#include <map>                      // std::map
-#include <sstream>                  // std::ostringstream
-#include <string>                   // std::string
+#include "client/client.cpp"   // TdAmeritrade::Client
+#include "utils/formatted.cpp" // Formatted
+#include <iostream>            // std::cout, std::endl
+#include <map>                 // std::map
+#include <sstream>             // std::ostringstream
+#include <string>              // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -34,23 +33,36 @@ int main(int argc, char *argv[]) {
   }
 
   std::string command = argv[1];
-  TdAmeritradeClient td_ameritrade_client;
 
   if (command == "get_access_token") {
+    TdAmeritrade::Client td_ameritrade_client;
     td_ameritrade_client.get_access_token();
-  } else if (command == "get_quote") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    td_ameritrade_client.get_quote(symbol);
-  } else if (command == "refresh_tokens") {
-    td_ameritrade_client.refresh_tokens();
-  } else {
-    Formatted::fmt_stream_t fmt = Formatted::stream();
 
-    std::cout << fmt.bold << fmt.red << "Unknown command <" << command
-              << ">. Please refer to usage👇🏾\n"
-              << fmt.reset << std::endl;
-
-    print_usage();
-    exit(1);
+    exit(0);
   }
+
+  if (command == "get_quote") {
+    TdAmeritrade::Client td_ameritrade_client;
+    char *symbol = argc < 3 ? nullptr : argv[2];
+
+    td_ameritrade_client.get_quote(symbol);
+
+    exit(0);
+  }
+
+  if (command == "refresh_tokens") {
+    TdAmeritrade::Client td_ameritrade_client;
+    td_ameritrade_client.refresh_tokens();
+
+    exit(0);
+  }
+
+  Formatted::fmt_stream_t fmt = Formatted::stream();
+
+  std::cout << fmt.bold << fmt.red << "Unknown command <" << command
+            << ">. Please refer to usage👇🏾\n"
+            << fmt.reset << std::endl;
+
+  print_usage();
+  exit(1);
 }

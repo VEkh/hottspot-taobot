@@ -1,14 +1,14 @@
-#if !defined TD_AMERITRADE_CLIENT__GET_ACCESS_TOKEN
-#define TD_AMERITRADE_CLIENT__GET_ACCESS_TOKEN
+#if !defined TD_AMERITRADE__CLIENT_get_access_token
+#define TD_AMERITRADE__CLIENT_get_access_token
 
+#include "client.h" // TdAmeritrade::Client, client_config, stream_format
 #include "fetch_tokens.cpp" // fetch_tokens
-#include "td_ameritrade_client.h" // TdAmeritradeClient, client_config, stream_format
-#include "utils/uri.cpp"            // utils::uri
-#include <iostream>                 // std::cin, std::cout, std::endl
-#include <sstream>                  // std::stringstream
-#include <string>                   // std::string
+#include "utils/uri.cpp"    // utils::uri
+#include <iostream>         // std::cin, std::cout, std::endl
+#include <sstream>          // std::stringstream
+#include <string>           // std::string
 
-void TdAmeritradeClient::get_access_token() {
+void TdAmeritrade::Client::get_access_token() {
   std::string code;
   std::stringstream url;
 

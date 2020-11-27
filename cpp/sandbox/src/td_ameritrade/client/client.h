@@ -1,22 +1,20 @@
-#if !defined(TD_AMERITRADE_CLIENT_H)
-#define TD_AMERITRADE_CLIENT_H
+#if !defined(TD_AMERITRADE__CLIENT_H)
+#define TD_AMERITRADE__CLIENT_H
 
-#if !defined DEPENDENCY_SIMDJSON
-#include "deps/simdjson/simdjson.cpp" // simdjson
-#endif
+#include "td_ameritrade/deps.cpp" // simdjson
+#include "utils/formatted.cpp"    // Formatted::stream, Formatted::fmt_stream_t
+#include <map>                    // std::map
+#include <string>                 // std::string
 
-#include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include <map>                 // std::map
-#include <string>              // std::string
-
-class TdAmeritradeClient {
+namespace TdAmeritrade {
+class Client {
 public:
   void get_access_token();
   void get_quote(char *);
   void get_quote(std::string);
   void refresh_tokens();
 
-  TdAmeritradeClient();
+  Client();
 
 private:
   struct client_config_t {
@@ -40,5 +38,6 @@ private:
   void load_tokens();
   void write_response_to_file(std::string content, const char *file_path);
 };
+} // namespace TdAmeritrade
 
-#endif // TD_AMERITRADE_CLIENT
+#endif

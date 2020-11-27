@@ -1,19 +1,16 @@
-#if !defined TD_AMERITRADE_CLIENT__FETCH_TOKENS
-#define TD_AMERITRADE_CLIENT__FETCH_TOKENS
+#if !defined TD_AMERITRADE__CLIENT_fetch_tokens
+#define TD_AMERITRADE__CLIENT_fetch_tokens
 
-#if !defined DEPENDENCY_SIMDJSON
-#include "deps/simdjson/simdjson.cpp" // simdjson
-#endif
-
-#include "curl_client.cpp"        // CurlClient
-#include "td_ameritrade_client.h" // TOKENS_PATH, TdAmeritradeClient, stream_format
-#include "utils/uri.cpp"          // utils::debugger
+#include "client.h"        // TOKENS_PATH, TdAmeritrade::Client, stream_format
+#include "curl_client.cpp" // CurlClient
+#include "td_ameritrade/deps.cpp"     // simdjson
+#include "utils/uri.cpp"              // utils::debugger
 #include "write_response_to_file.cpp" // write_response_to_file
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
 #include <string>                     // std::string
 
-void TdAmeritradeClient::fetch_tokens(
+void TdAmeritrade::Client::fetch_tokens(
     std::map<std::string, std::string> body_params) {
   CurlClient::props_t curl_props = {
       .body_params = body_params,

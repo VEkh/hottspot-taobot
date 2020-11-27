@@ -1,15 +1,15 @@
-#if !defined TD_AMERITRADE_CLIENT__GET_QUOTE
-#define TD_AMERITRADE_CLIENT__GET_QUOTE
+#if !defined TD_AMERITRADE__CLIENT_get_quote
+#define TD_AMERITRADE__CLIENT_get_quote
 
 #include "build_error_message.cpp" // build_error_message
+#include "client.h"                // TdAmeritrade::Client, tokens
 #include "curl_client.cpp"         // CurlClient
 #include "load_tokens.cpp"         // load_tokens
-#include "td_ameritrade_client.h"  // TdAmeritradeClient, tokens
 #include "utils/debugger.cpp"      // utils::debugger
 #include <stdexcept>               // std::invalid_argument
 #include <string>                  // std::string
 
-void TdAmeritradeClient::get_quote(char *symbol) {
+void TdAmeritrade::Client::get_quote(char *symbol) {
   if (symbol == nullptr) {
     std::string error_message =
         build_error_message("Please provide a stock symbol");
@@ -20,7 +20,7 @@ void TdAmeritradeClient::get_quote(char *symbol) {
   get_quote(std::string(symbol));
 }
 
-void TdAmeritradeClient::get_quote(std::string symbol) {
+void TdAmeritrade::Client::get_quote(std::string symbol) {
   load_tokens();
 
   CurlClient::props_t props = {
