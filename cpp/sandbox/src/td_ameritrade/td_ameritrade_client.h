@@ -1,7 +1,10 @@
-#if !defined(TD_AMERITRADE_CLIENT)
-#define TD_AMERITRADE_CLIENT
+#if !defined(TD_AMERITRADE_CLIENT_H)
+#define TD_AMERITRADE_CLIENT_H
 
-#include "deps/simdjson/simdjson.cpp" // simdjson::dom::parser
+#if !defined DEPENDENCY_SIMDJSON
+#include "deps/simdjson/simdjson.cpp" // simdjson
+#endif
+
 #include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
 #include <map>                 // std::map
 #include <string>              // std::string

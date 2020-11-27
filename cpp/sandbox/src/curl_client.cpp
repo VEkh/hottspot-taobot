@@ -1,3 +1,6 @@
+#if !defined(CURL_CLIENT)
+#define CURL_CLIENT
+
 #include "curl_client.h"
 #include "utils/debugger.cpp" // utils::debugger::inspect
 #include "utils/uri.cpp"      // utils::uri::percentEncode
@@ -178,3 +181,4 @@ size_t CurlClient::write_response(char *buffer, size_t size, size_t data_size,
 
   return real_size;
 }
+#endif

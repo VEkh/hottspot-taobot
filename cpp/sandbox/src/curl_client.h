@@ -1,5 +1,5 @@
-#if !defined(CURL_BUILDER)
-#define CURL_BUILDER
+#if !defined(CURL_CLIENT_H)
+#define CURL_CLIENT_H
 
 #include <curl/curl.h> // CURL, curl_easy_init
 #include <map>         // std::map

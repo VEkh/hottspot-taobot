@@ -1,15 +1,16 @@
+#include "libraries.cpp"
 #include "td_ameritrade_client.cpp" // TdAmeritradeClient
-#include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include <iostream>            // std::cout, std::endl
-#include <map>                 // std::map
-#include <sstream>             // std::ostringstream
-#include <string>              // std::string
+#include "utils/formatted.cpp"      // Formatted
+#include <iostream>                 // std::cout, std::endl
+#include <map>                      // std::map
+#include <sstream>                  // std::ostringstream
+#include <string>                   // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"get_access_token  ", "Get authorization tokens"},
-      {"get_quote <SYMBOL>", "Get quote for the given symbol"},
-      {"refresh_tokens    ", "Refresh authorization tokens"},
+      {"get_access_token            ", "Get authorization tokens"},
+      {"get_quote <SYMBOL>          ", "Get quote for the given symbol"},
+      {"refresh_tokens              ", "Refresh authorization tokens"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -42,5 +43,14 @@ int main(int argc, char *argv[]) {
     td_ameritrade_client.get_quote(symbol);
   } else if (command == "refresh_tokens") {
     td_ameritrade_client.refresh_tokens();
+  } else {
+    Formatted::fmt_stream_t fmt = Formatted::stream();
+
+    std::cout << fmt.bold << fmt.red << "Unknown command <" << command
+              << ">. Please refer to usage👇🏾\n"
+              << fmt.reset << std::endl;
+
+    print_usage();
+    exit(1);
   }
 }
