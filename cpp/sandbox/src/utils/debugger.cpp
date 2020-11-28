@@ -1,5 +1,5 @@
-#if !defined(UTILS_DEBUGGER)
-#define UTILS_DEBUGGER
+#if !defined UTILS__DEBUGGER
+#define UTILS__DEBUGGER
 
 #include <cxxabi.h> // abi::__cxa_demangle
 #include <iostream> // std::cout, std;:endl

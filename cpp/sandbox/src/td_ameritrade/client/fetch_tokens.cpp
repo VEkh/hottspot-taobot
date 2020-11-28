@@ -1,10 +1,11 @@
 #if !defined TD_AMERITRADE__CLIENT_fetch_tokens
 #define TD_AMERITRADE__CLIENT_fetch_tokens
 
-#include "client.h"        // TOKENS_PATH, TdAmeritrade::Client, stream_format
-#include "curl_client.cpp" // CurlClient
+#include "client.h"          // TOKENS_PATH, TdAmeritrade::Client, stream_format
+#include "curl_client.cpp"   // CurlClient
+#include "lib/formatted.cpp" // Formatted::error_message
 #include "td_ameritrade/deps.cpp"     // simdjson
-#include "utils/uri.cpp"              // utils::debugger
+#include "utils/debugger.cpp"         // utils::debugger
 #include "write_response_to_file.cpp" // write_response_to_file
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
@@ -31,7 +32,7 @@ void TdAmeritrade::Client::fetch_tokens(
   auto json_error = response["error"].get(error_message);
 
   if (!json_error) {
-    std::string error_message = build_error_message("Request FAILED");
+    std::string error_message = Formatted::error_message("Request FAILED");
 
     utils::debugger::inspect(error_message);
     std::cout << response << std::endl;

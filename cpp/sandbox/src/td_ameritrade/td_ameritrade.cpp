@@ -1,15 +1,19 @@
-#include "client/client.cpp"   // TdAmeritrade::Client
-#include "utils/formatted.cpp" // Formatted
-#include <iostream>            // std::cout, std::endl
-#include <map>                 // std::map
-#include <sstream>             // std::ostringstream
-#include <string>              // std::string
+#include "client/client.cpp"     // TdAmeritrade::Client
+#include "lib/formatted.cpp"     // Formatted
+#include "straddle/straddle.cpp" // TdAmeritrade::Straddle
+#include <iostream>              // std::cout, std::endl
+#include <map>                   // std::map
+#include <sstream>               // std::ostringstream
+#include <stdlib.h>              // strtol
+#include <string>                // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"get_access_token            ", "Get authorization tokens"},
       {"get_quote <SYMBOL>          ", "Get quote for the given symbol"},
       {"refresh_tokens              ", "Refresh authorization tokens"},
+      {"straddle <SYMBOL> <QUANTITY>",
+       "Launch straddle strategy for the given symbol"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -53,6 +57,16 @@ int main(int argc, char *argv[]) {
   if (command == "refresh_tokens") {
     TdAmeritrade::Client td_ameritrade_client;
     td_ameritrade_client.refresh_tokens();
+
+    exit(0);
+  }
+
+  if (command == "straddle") {
+    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
+    char *symbol = argc < 3 ? nullptr : argv[2];
+
+    TdAmeritrade::Straddle straddle = TdAmeritrade::Straddle(symbol, quantity);
+    straddle.run();
 
     exit(0);
   }

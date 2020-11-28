@@ -1,7 +1,8 @@
-#include "utils/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include <iostream>            // std::cout
+#include <iostream> // std::cout
+#include <stdlib.h> // strtol
+#include <string>   // stoi
 
 int main() {
-  Formatted::fmt_stream_t fmt = Formatted::stream();
-  std::cout << fmt.green << "SUCCESS" << std::endl;
+  int i = strtol("1", nullptr, 10);
+  std::cout << i << std::endl;
 }

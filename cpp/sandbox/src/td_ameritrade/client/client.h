@@ -1,8 +1,8 @@
 #if !defined(TD_AMERITRADE__CLIENT_H)
 #define TD_AMERITRADE__CLIENT_H
 
+#include "lib/formatted.cpp"      // Formatted::stream, Formatted::fmt_stream_t
 #include "td_ameritrade/deps.cpp" // simdjson
-#include "utils/formatted.cpp"    // Formatted::stream, Formatted::fmt_stream_t
 #include <map>                    // std::map
 #include <string>                 // std::string
 
@@ -32,7 +32,6 @@ private:
   simdjson::dom::parser json_parser;
   Formatted::fmt_stream_t stream_format = Formatted::stream();
 
-  std::string build_error_message(std::string message);
   void fetch_tokens(const std::map<std::string, std::string> body_params);
   void load_client_config();
   void load_tokens();

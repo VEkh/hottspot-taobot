@@ -1,5 +1,5 @@
-#if !defined(UTILS_URI)
-#define UTILS_URI
+#if !defined(UTILS__URI)
+#define UTILS__URI
 
 #include "string.cpp"  // utils::string::split
 #include <curl/curl.h> // curl_easy_escape, curl_free, curl_easy_init

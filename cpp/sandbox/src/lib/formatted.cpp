@@ -2,6 +2,7 @@
 #define FORMATTED_STREAM
 
 #include <ostream> // std::ostream
+#include <sstream> // std::ostringstream
 #include <string>  // std::string, std::to_string
 #include <vector>  // std::vector
 
@@ -65,6 +66,14 @@ fmt_stream_t stream() {
       .yellow = Stream({Stream::code_t::FG_YELLOW}),
   };
 }
-} // namespace Formatted
 
+std::string error_message(std::string message) {
+  fmt_stream_t fmt = stream();
+  std::ostringstream output;
+
+  output << fmt.bold << fmt.red << message << fmt.reset;
+
+  return output.str();
+}
+} // namespace Formatted
 #endif
