@@ -1,7 +1,7 @@
 #if !defined TD_AMERITRADE__STRADDLE
 #define TD_AMERITRADE__STRADDLE
 
-#include "straddle.h"        // TdAmeritrade::Straddle
+#include "straddle.h"        // TdAmeritrade::Straddle, stream_format
 #include "lib/formatted.cpp" // Formatted::error_message
 #include <iostream>          // std::cout, std::endl
 #include <stdexcept>         // std::invalid_argument
@@ -24,8 +24,10 @@ TdAmeritrade::Straddle::Straddle(char *symbol_, int quantity_) {
 }
 
 void TdAmeritrade::Straddle::run() {
-  std::cout << "Executing straddle for " << quantity << " shares of " << symbol
-            << std::endl;
+  std::cout << stream_format.bold << stream_format.cyan << "Straddling "
+            << stream_format.yellow << quantity << stream_format.cyan
+            << " shares of " << stream_format.yellow << symbol
+            << stream_format.reset << std::endl;
 }
 
 #endif

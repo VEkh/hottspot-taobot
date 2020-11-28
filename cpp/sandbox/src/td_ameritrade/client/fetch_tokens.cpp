@@ -5,7 +5,7 @@
 #include "curl_client.cpp"   // CurlClient
 #include "lib/formatted.cpp" // Formatted::error_message
 #include "td_ameritrade/deps.cpp"     // simdjson
-#include "utils/debug.cpp"         // utils::debug
+#include "utils/debug.cpp"            // utils::debug
 #include "write_response_to_file.cpp" // write_response_to_file
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
