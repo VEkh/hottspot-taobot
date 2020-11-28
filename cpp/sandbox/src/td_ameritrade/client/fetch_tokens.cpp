@@ -5,7 +5,7 @@
 #include "curl_client.cpp"   // CurlClient
 #include "lib/formatted.cpp" // Formatted::error_message
 #include "td_ameritrade/deps.cpp"     // simdjson
-#include "utils/debugger.cpp"         // utils::debugger
+#include "utils/debug.cpp"         // utils::debug
 #include "write_response_to_file.cpp" // write_response_to_file
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
@@ -34,7 +34,7 @@ void TdAmeritrade::Client::fetch_tokens(
   if (!json_error) {
     std::string error_message = Formatted::error_message("Request FAILED");
 
-    utils::debugger::inspect(error_message);
+    utils::debug::inspect(error_message);
     std::cout << response << std::endl;
 
     exit(1);

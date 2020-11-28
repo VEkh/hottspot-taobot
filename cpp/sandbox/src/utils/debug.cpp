@@ -1,5 +1,5 @@
-#if !defined UTILS__DEBUGGER
-#define UTILS__DEBUGGER
+#if !defined UTILS__DEBUG
+#define UTILS__DEBUG
 
 #include <cxxabi.h> // abi::__cxa_demangle
 #include <iostream> // std::cout, std;:endl
@@ -8,7 +8,7 @@
 #include <vector>   // std::vector
 
 namespace utils {
-namespace debugger {
+namespace debug {
 void inspect(std::string str) { std::cout << str << std::endl; }
 
 void inspect(std::vector<std::string> collection) {
@@ -39,6 +39,6 @@ std::string inspect_type(const char *type_name) {
   char *demangled_name = abi::__cxa_demangle(type_name, NULL, NULL, &status);
   return std::string(demangled_name);
 }
-} // namespace debugger
+} // namespace debug
 } // namespace utils
 #endif

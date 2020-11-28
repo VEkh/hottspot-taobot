@@ -2,7 +2,7 @@
 #define CURL_CLIENT
 
 #include "curl_client.h"
-#include "utils/debugger.cpp" // utils::debugger::inspect
+#include "utils/debug.cpp" // utils::debug::inspect
 #include "utils/uri.cpp"      // utils::uri::percentEncode
 #include "utils/vector.cpp"   // utils::vector::join
 #include <algorithm>          // std::for_each
@@ -43,7 +43,7 @@ void CurlClient::prepare_request() {
 }
 
 void CurlClient::print_request() {
-  utils::debugger::inspect("\n===========================================\n\n" +
+  utils::debug::inspect("\n===========================================\n\n" +
                            to_string() +
                            "\n\n===========================================\n");
 }

@@ -4,7 +4,7 @@
  */
 
 #include "../../deps/cpp-base64/base64.cpp" // base64_encode
-#include "utils/debugger.cpp"               // utils::debugger::inspect
+#include "utils/debug.cpp"               // utils::debug::inspect
 #include "utils/map.cpp"                    // utils::map::merge
 #include "utils/string.cpp"                 // utils::string::split
 #include "utils/uri.cpp"                    // utils::uri::percentEncode

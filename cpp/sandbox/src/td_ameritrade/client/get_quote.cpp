@@ -5,7 +5,7 @@
 #include "curl_client.cpp"    // CurlClient
 #include "lib/formatted.cpp"  // Formatted::error_message
 #include "load_tokens.cpp"    // load_tokens
-#include "utils/debugger.cpp" // utils::debugger
+#include "utils/debug.cpp" // utils::debug
 #include <stdexcept>          // std::invalid_argument
 #include <string>             // std::string
 
@@ -45,7 +45,7 @@ void TdAmeritrade::Client::get_quote(std::string symbol) {
   CurlClient curl_client(props);
   curl_client.request();
 
-  utils::debugger::inspect(curl_client.response.body);
+  utils::debug::inspect(curl_client.response.body);
 }
 
 #endif
