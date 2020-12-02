@@ -2,8 +2,8 @@
 #define TD_AMERITRADE__CLIENT_fetch_tokens
 
 #include "client.h"          // TOKENS_PATH, TdAmeritrade::Client, stream_format
-#include "curl_client.cpp"   // CurlClient
 #include "lib/formatted.cpp" // Formatted::error_message
+#include "lib/curl_client.cpp"        // CurlClient
 #include "td_ameritrade/deps.cpp"     // simdjson
 #include "utils/debug.cpp"            // utils::debug
 #include "write_response_to_file.cpp" // write_response_to_file
