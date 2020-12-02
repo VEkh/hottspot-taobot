@@ -9,4 +9,9 @@
 
 TdAmeritrade::Client::Client() { load_client_config(); }
 
+TdAmeritrade::Client::Client(props_t props_) {
+  props = props_;
+  load_client_config();
+}
+
 #endif

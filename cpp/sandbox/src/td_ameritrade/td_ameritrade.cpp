@@ -1,6 +1,7 @@
 #include "client/client.cpp"     // TdAmeritrade::Client
 #include "lib/formatted.cpp"     // Formatted
 #include "straddle/straddle.cpp" // TdAmeritrade::Straddle
+#include "utils/debug.cpp"       // utils::debug
 #include <iostream>              // std::cout, std::endl
 #include <map>                   // std::map
 #include <sstream>               // std::ostringstream
@@ -49,7 +50,8 @@ int main(int argc, char *argv[]) {
     TdAmeritrade::Client td_ameritrade_client;
     char *symbol = argc < 3 ? nullptr : argv[2];
 
-    td_ameritrade_client.get_quote(symbol);
+    std::string quote = td_ameritrade_client.get_quote(symbol);
+    utils::debug::inspect(quote);
 
     exit(0);
   }

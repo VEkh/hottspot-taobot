@@ -9,12 +9,19 @@
 namespace TdAmeritrade {
 class Client {
 public:
+  enum debug_t { OFF, ON };
+
+  struct props_t {
+    debug_t debug_flag;
+  };
+
   void get_access_token();
-  void get_quote(char *);
-  void get_quote(std::string);
+  std::string get_quote(char *);
+  std::string get_quote(std::string);
   void refresh_tokens();
 
   Client();
+  Client(props_t);
 
 private:
   struct client_config_t {
@@ -30,6 +37,7 @@ private:
   const char *CONFIG_PATH = "./config/td_ameritrade/credentials.json";
   const char *TOKENS_PATH = "./config/td_ameritrade/tokens.json";
   simdjson::dom::parser json_parser;
+  props_t props;
   Formatted::fmt_stream_t stream_format = Formatted::stream();
 
   void fetch_tokens(const std::map<std::string, std::string> body_params);

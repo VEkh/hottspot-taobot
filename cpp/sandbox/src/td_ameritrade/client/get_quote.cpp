@@ -17,10 +17,10 @@ std::string TdAmeritrade::Client::get_quote(char *symbol) {
     throw std::invalid_argument(error_message);
   }
 
-  get_quote(std::string(symbol));
+  return get_quote(std::string(symbol));
 }
 
-void TdAmeritrade::Client::get_quote(std::string symbol) {
+std::string TdAmeritrade::Client::get_quote(std::string symbol) {
   load_tokens();
 
   CurlClient::props_t props = {
@@ -45,7 +45,7 @@ void TdAmeritrade::Client::get_quote(std::string symbol) {
   CurlClient curl_client(props);
   curl_client.request();
 
-  utils::debug::inspect(curl_client.response.body);
+  return curl_client.response.body;
 }
 
 #endif
