@@ -1,19 +1,10 @@
 #if !defined TD_AMERITRADE__STRADDLE_run
 #define TD_AMERITRADE__STRADDLE_run
 
-#include "lib/formatted.cpp" // Formatted
-#include "straddle.h"        // TdAmeritrade::Straddle, stream_format
-#include "td_ameritrade/client/client.cpp" // TdAmeritrade::Client
-#include <iostream>                        // std::cout, std::endl
-
-void TdAmeritrade::Straddle::fetch_current_quote() {
-  Formatted::fmt_stream_t fmt = stream_format;
-
-  std::string quote = td_ameritrade_client.get_quote(symbol);
-
-  std::cout << fmt.bold << fmt.yellow << symbol << fmt.reset
-            << " quote: " << quote;
-}
+#include "fetch_current_quote.cpp" // fetch_current_quote
+#include "lib/formatted.cpp"       // Formatted
+#include "straddle.h" // TdAmeritrade::Straddle, quantity, stream_format, symbol
+#include <iostream>   // std::cout, std::endl
 
 void TdAmeritrade::Straddle::log_start_message() {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -27,6 +18,7 @@ void TdAmeritrade::Straddle::log_start_message() {
 void TdAmeritrade::Straddle::run() {
   log_start_message();
   fetch_current_quote();
+  // calculate stop limit prices
 }
 
 #endif
