@@ -3,7 +3,6 @@
 
 #include "lib/formatted.cpp"             // Formatted
 #include "td_ameritrade/client/client.h" // TdAmeritrade::Client
-#include "td_ameritrade/deps.cpp"        // simdjson
 #include <string>                        // std::string
 
 namespace TdAmeritrade {
@@ -18,7 +17,6 @@ private:
   TdAmeritrade::Client td_ameritrade_client;
   char *symbol;
   int quantity;
-  simdjson::dom::parser json_parser;
   std::string quote;
 
   std::string condensed_quote();

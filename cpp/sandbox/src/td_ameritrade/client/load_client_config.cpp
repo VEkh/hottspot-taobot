@@ -3,7 +3,7 @@
 
 #include "client.h" // CONFIG_PATH, TdAmeritrade::Client, client_config, json_parser
 #include "lib/formatted.cpp"      // Formatted::error_message
-#include "td_ameritrade/deps.cpp" // simdjson
+#include "td_ameritrade/deps.cpp" // json
 
 #include <fstream>   // std::ifstream, std::ios, std::ofstream
 #include <stdexcept> // std::invalid_argument
@@ -18,7 +18,8 @@ void TdAmeritrade::Client::load_client_config() {
     throw std::invalid_argument(error_message);
   }
 
-  simdjson::dom::element config_json = json_parser.load(CONFIG_PATH);
+  json config_json;
+  config_file >> config_json;
 
   client_config = {
       .client_id = std::string(config_json["client_id"]),

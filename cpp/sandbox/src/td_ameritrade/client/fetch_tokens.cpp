@@ -4,7 +4,7 @@
 #include "client.h" // TOKENS_PATH, TdAmeritrade::Client, debug_t, props, stream_format
 #include "lib/curl_client.cpp"        // CurlClient
 #include "lib/formatted.cpp"          // Formatted::error_message
-#include "td_ameritrade/deps.cpp"     // simdjson
+#include "td_ameritrade/deps.cpp"     // json
 #include "utils/debug.cpp"            // utils::debug
 #include "write_response_to_file.cpp" // write_response_to_file
 #include <iostream>                   // std::cout, std::endl
@@ -26,12 +26,9 @@ void TdAmeritrade::Client::fetch_tokens(
   curl_client.request();
 
   std::string response_body = curl_client.response.body;
-  simdjson::dom::element response = json_parser.parse(response_body);
+  json response = json::parse(response_body);
 
-  simdjson::dom::element error_message;
-  auto json_error = response["error"].get(error_message);
-
-  if (!json_error) {
+  if (response.contains("error")) {
     std::string error_message = Formatted::error_message("Request FAILED");
 
     utils::debug::inspect(error_message);

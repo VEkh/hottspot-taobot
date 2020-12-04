@@ -1,8 +1,16 @@
+#include "deps/nlohmann/json.hpp"
+#include <fstream>  // std::ifstream, std::ios
 #include <iostream> // std::cout
-#include <stdlib.h> // strtol
 #include <string>   // stoi
 
+using json = nlohmann::json;
+
 int main() {
-  int i = strtol("1", nullptr, 10);
-  std::cout << i << std::endl;
+  json j;
+
+  std::ifstream tokens_file("./config/td_ameritrade/tokens.json", std::ios::in);
+
+  tokens_file >> j;
+
+  std::cout << j << std::endl;
 }

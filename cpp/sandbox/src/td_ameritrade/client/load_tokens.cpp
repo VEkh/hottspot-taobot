@@ -3,7 +3,7 @@
 
 #include "client.h" // TOKENS_PATH, TdAmeritrade::Client, json_parser, tokens
 #include "lib/formatted.cpp"      // Formatted::error_message
-#include "td_ameritrade/deps.cpp" // simdjson
+#include "td_ameritrade/deps.cpp" // json
 #include <fstream>                // std::ifstream, std::ios
 #include <string>                 // std::string
 
@@ -18,7 +18,8 @@ void TdAmeritrade::Client::load_tokens() {
     throw std::invalid_argument(error_message);
   }
 
-  simdjson::dom::element tokens_json = json_parser.load(TOKENS_PATH);
+  json tokens_json;
+  tokens_file >> tokens_json;
 
   tokens = {
       .access_token = std::string(tokens_json["access_token"]),

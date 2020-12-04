@@ -1,10 +1,9 @@
 #if !defined(TD_AMERITRADE__CLIENT_H)
 #define TD_AMERITRADE__CLIENT_H
 
-#include "lib/formatted.cpp"      // Formatted::stream, Formatted::fmt_stream_t
-#include "td_ameritrade/deps.cpp" // simdjson
-#include <map>                    // std::map
-#include <string>                 // std::string
+#include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include <map>               // std::map
+#include <string>            // std::string
 
 namespace TdAmeritrade {
 class Client {
@@ -36,7 +35,6 @@ private:
 
   const char *CONFIG_PATH = "./config/td_ameritrade/credentials.json";
   const char *TOKENS_PATH = "./config/td_ameritrade/tokens.json";
-  simdjson::dom::parser json_parser;
   props_t props;
   Formatted::fmt_stream_t stream_format = Formatted::stream();
 
