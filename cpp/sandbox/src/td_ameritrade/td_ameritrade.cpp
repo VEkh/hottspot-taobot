@@ -12,6 +12,8 @@ void print_usage() {
   std::map<std::string, const char *> commands = {
       {"get_access_token            ", "Get authorization tokens"},
       {"get_quote <SYMBOL>          ", "Get quote for the given symbol"},
+      {"manual_straddle <SYMBOL>    ",
+       "Return straddle prices for manual entry"},
       {"refresh_tokens              ", "Refresh authorization tokens"},
       {"straddle <SYMBOL> <QUANTITY>",
        "Launch straddle strategy for the given symbol"},
@@ -56,6 +58,14 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
+  if (command == "manual_straddle") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    TdAmeritrade::Straddle straddle = TdAmeritrade::Straddle(symbol);
+    straddle.manual_run();
+
+    exit(0);
+  }
+
   if (command == "refresh_tokens") {
     TdAmeritrade::Client td_ameritrade_client;
     td_ameritrade_client.refresh_tokens();
@@ -64,8 +74,8 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "straddle") {
-    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
     char *symbol = argc < 3 ? nullptr : argv[2];
+    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
 
     TdAmeritrade::Straddle straddle = TdAmeritrade::Straddle(symbol, quantity);
     straddle.run();

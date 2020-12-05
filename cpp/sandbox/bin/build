@@ -2,11 +2,4 @@
 
 \rm -rf ./build/*
 
-src_sources=("manual_straddle")
-
-for src in "${src_sources[@]}"
-do
-  g++ -iquote. -iquote./src -std=c++17 -o ./build/$src ./src/$src.cpp
-done
-
 . ./bin/td_ameritrade/build

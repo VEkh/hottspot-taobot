@@ -3,8 +3,9 @@
 
 #include "fetch_current_quote.cpp" // fetch_current_quote
 #include "lib/formatted.cpp"       // Formatted
-#include "straddle.h" // TdAmeritrade::Straddle, quantity, stream_format, symbol
-#include <iostream>   // std::cout, std::endl
+#include "set_order_prices.cpp"    // set_order_prices
+#include "straddle.h" // TdAmeritrade::Straddle, quantity, stream_format, symbol, td_ameritrade_client
+#include <iostream> // std::cout, std::endl
 
 void TdAmeritrade::Straddle::log_start_message() {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -16,9 +17,10 @@ void TdAmeritrade::Straddle::log_start_message() {
 }
 
 void TdAmeritrade::Straddle::run() {
+  td_ameritrade_client.refresh_tokens();
   log_start_message();
   fetch_current_quote();
-  // calculate stop limit prices
+  set_order_prices();
 }
 
 #endif

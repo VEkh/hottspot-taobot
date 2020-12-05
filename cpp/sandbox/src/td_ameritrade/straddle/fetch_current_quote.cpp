@@ -24,10 +24,15 @@ void TdAmeritrade::Straddle::fetch_current_quote() {
 
   std::string quote_string = td_ameritrade_client.get_quote(symbol);
 
-  quote = json::parse(quote_string)[symbol];
-  json condensed_quote = slice(quote, {"highPrice", "lastPrice", "lowPrice"});
+  if (original_quote.empty()) {
+    original_quote = json::parse(quote_string)[symbol];
+  }
 
-  std::cout << fmt.bold << fmt.yellow << symbol << " quote: " << condensed_quote
+  quote = json::parse(quote_string)[symbol];
+
+  json quote_snapshot = slice(quote, {"highPrice", "lastPrice", "lowPrice"});
+
+  std::cout << fmt.bold << fmt.yellow << symbol << " quote: " << quote_snapshot
             << fmt.reset << std::endl;
 }
 
