@@ -8,9 +8,10 @@ using json = nlohmann::json;
 int main() {
   json j;
 
-  std::ifstream tokens_file("./config/td_ameritrade/tokens.json", std::ios::in);
+  std::string k = "foo";
+  std::string v = "bar";
 
-  tokens_file >> j;
+  j[k] = v;
 
   std::cout << j << std::endl;
 }

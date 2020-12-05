@@ -1,13 +1,14 @@
 #if !defined TD_AMERITRADE__CLIENT_get_quote
 #define TD_AMERITRADE__CLIENT_get_quote
 
-#include "client.h"            // TdAmeritrade::Client, tokens
-#include "lib/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"   // Formatted::error_message
-#include "load_tokens.cpp"     // load_tokens
-#include "utils/debug.cpp"     // utils::debug
-#include <stdexcept>           // std::invalid_argument
-#include <string>              // std::string
+#include "client.h"               // TdAmeritrade::Client, tokens
+#include "lib/curl_client.cpp"    // CurlClient
+#include "lib/formatted.cpp"      // Formatted::error_message
+#include "load_tokens.cpp"        // load_tokens
+#include "td_ameritrade/deps.cpp" // json
+#include <iostream>               // std::cout, std::endl
+#include <stdexcept>              // std::invalid_argument
+#include <string>                 // std::string
 
 std::string TdAmeritrade::Client::get_quote(char *symbol) {
   if (symbol == nullptr) {
@@ -45,7 +46,20 @@ std::string TdAmeritrade::Client::get_quote(std::string symbol) {
   CurlClient curl_client(props);
   curl_client.request();
 
-  return curl_client.response.body;
+  json response = json::parse(curl_client.response.body);
+
+  if (response.contains(symbol)) {
+    return curl_client.response.body;
+  }
+
+  std::string error_message = Formatted::error_message(
+      "There was a problem fetching " + symbol + "'s quote");
+
+  std::cout << error_message
+            << "here's the response: " << curl_client.response.body
+            << std::endl;
+
+  exit(1);
 }
 
 #endif

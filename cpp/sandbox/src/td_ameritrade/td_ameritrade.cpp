@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
     char *symbol = argc < 3 ? nullptr : argv[2];
 
     std::string quote = td_ameritrade_client.get_quote(symbol);
-    utils::debug::inspect(quote);
+    std::cout << quote;
 
     exit(0);
   }

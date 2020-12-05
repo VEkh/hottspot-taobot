@@ -20,6 +20,7 @@ public:
     FG_CYAN = 36,
     FG_DEFAULT = 39,
     FG_GREEN = 32,
+    FG_MAGENTA = 35,
     FG_RED = 31,
     FG_YELLOW = 33,
     FONT_BOLD = 1,
@@ -49,8 +50,10 @@ private:
 
 struct fmt_stream_t {
   Stream bold;
+  Stream blue;
   Stream cyan;
   Stream green;
+  Stream magenta;
   Stream red;
   Stream reset;
   Stream yellow;
@@ -59,8 +62,10 @@ struct fmt_stream_t {
 fmt_stream_t stream() {
   return {
       .bold = Stream({Stream::code_t::FONT_BOLD}),
+      .blue = Stream({Stream::code_t::FG_BLUE}),
       .cyan = Stream({Stream::code_t::FG_CYAN}),
       .green = Stream({Stream::code_t::FG_GREEN}),
+      .magenta = Stream({Stream::code_t::FG_MAGENTA}),
       .red = Stream({Stream::code_t::FG_RED}),
       .reset = Stream({Stream::code_t::RESET}),
       .yellow = Stream({Stream::code_t::FG_YELLOW}),

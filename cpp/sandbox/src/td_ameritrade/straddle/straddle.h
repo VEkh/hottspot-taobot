@@ -3,7 +3,7 @@
 
 #include "lib/formatted.cpp"             // Formatted
 #include "td_ameritrade/client/client.h" // TdAmeritrade::Client
-#include <string>                        // std::string
+#include "td_ameritrade/deps.cpp"        // json
 
 namespace TdAmeritrade {
 class Straddle {
@@ -17,9 +17,8 @@ private:
   TdAmeritrade::Client td_ameritrade_client;
   char *symbol;
   int quantity;
-  std::string quote;
+  json quote;
 
-  std::string condensed_quote();
   void fetch_current_quote();
   void log_start_message();
 };

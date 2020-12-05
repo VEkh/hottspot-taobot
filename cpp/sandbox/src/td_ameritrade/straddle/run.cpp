@@ -10,8 +10,8 @@ void TdAmeritrade::Straddle::log_start_message() {
   Formatted::fmt_stream_t fmt = stream_format;
   const char *shareString = quantity == 1 ? "share" : "shares";
 
-  std::cout << fmt.bold << fmt.cyan << "Straddling " << fmt.yellow << quantity
-            << fmt.cyan << " " << shareString << " of " << fmt.yellow << symbol
+  std::cout << fmt.bold << fmt.cyan << "Straddling " << fmt.blue << quantity
+            << fmt.cyan << " " << shareString << " of " << fmt.blue << symbol
             << fmt.reset << std::endl;
 }
 
