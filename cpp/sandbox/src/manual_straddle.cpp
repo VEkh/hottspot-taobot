@@ -4,11 +4,6 @@
 #include <string>           // std::getline, std::stof, std::string,
 #include <vector>           // std::vector
 
-void log_target_movement_percentage(float target_movement) {
-  std::cout << "Stop %: " << utils::float_::toRoundedPercentage(target_movement)
-            << std::endl;
-}
-
 void log_symbol(std::string symbol) {
   std::cout << "\n=========================\n" << std::endl;
   std::cout << symbol << std::endl;
@@ -17,7 +12,7 @@ void log_symbol(std::string symbol) {
     std::cout << "-";
   }
 
-  std::cout << "\n" << std::endl;
+  std::cout << std::endl;
 }
 
 int main() {
@@ -41,6 +36,7 @@ int main() {
       std::stof(utils::string::stripCommas(current_price_input));
   float high = std::stof(utils::string::stripCommas(day_range[1]));
   float low = std::stof(utils::string::stripCommas(day_range[0]));
+
   float target_profit_ratio = 1.15;
   float target_total_movement = 0.15;
   float range_movement = target_total_movement / target_profit_ratio;
@@ -63,7 +59,6 @@ int main() {
       current_price - (target_profit_ratio * open_stop_limit_price_change);
 
   log_symbol(symbol);
-  log_target_movement_percentage(target_movement);
 
   std::cout << "\n=========================\n" << std::endl;
 

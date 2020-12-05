@@ -2,9 +2,7 @@
 
 \rm -rf ./build/*
 
-src_sources=(
-  "momentum"
-)
+src_sources=("manual_straddle")
 
 for src in "${src_sources[@]}"
 do
