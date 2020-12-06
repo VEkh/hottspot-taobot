@@ -5,6 +5,7 @@
 #include "lib/curl_client.cpp"    // CurlClient
 #include "lib/formatted.cpp"      // Formatted::error_message
 #include "load_tokens.cpp"        // load_tokens
+#include "refresh_tokens.cpp"     // refresh_tokens
 #include "td_ameritrade/deps.cpp" // json
 #include <iostream>               // std::cout, std::endl
 #include <stdexcept>              // std::invalid_argument
@@ -24,9 +25,9 @@ std::string TdAmeritrade::Client::get_quote(char *symbol) {
 std::string TdAmeritrade::Client::get_quote(std::string symbol) {
   load_tokens();
 
-  CurlClient::props_t props = {
+  CurlClient::props_t curl_props = {
       .body_params = {},
-      .debug_flag = CurlClient::debug_t::OFF,
+      .debug_flag = (CurlClient::debug_t)props.debug_flag,
       .headers =
           {
               {"Authorization", "Bearer " + tokens.access_token},
@@ -43,7 +44,7 @@ std::string TdAmeritrade::Client::get_quote(std::string symbol) {
       .url = "https://api.tdameritrade.com/v1/marketdata/" + symbol + "/quotes",
   };
 
-  CurlClient curl_client(props);
+  CurlClient curl_client(curl_props);
   curl_client.request();
 
   json response = json::parse(curl_client.response.body);
@@ -52,12 +53,13 @@ std::string TdAmeritrade::Client::get_quote(std::string symbol) {
     return curl_client.response.body;
   }
 
-  std::string error_message = Formatted::error_message(
-      "There was a problem fetching " + symbol + "'s quote");
+  Formatted::fmt_stream_t fmt = stream_format;
 
-  std::cout << error_message
-            << "here's the response: " << curl_client.response.body
-            << std::endl;
+  std::cout << fmt.bold << fmt.red;
+  std::cout << "There was a problem fetching " << symbol
+            << "'s quote. Here's the response:" << std::endl;
+  std::cout << fmt.reset;
+  std::cout << curl_client.response.body << std::endl;
 
   exit(1);
 }

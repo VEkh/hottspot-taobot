@@ -2,16 +2,18 @@
 #define CURL_CLIENT
 
 #include "curl_client.h"
-#include "utils/debug.cpp" // utils::debug::inspect
-#include "utils/uri.cpp"      // utils::uri::percentEncode
-#include "utils/vector.cpp"   // utils::vector::join
-#include <algorithm>          // std::for_each
-#include <map>                // std::map
-#include <sstream>            // std::stringstream
-#include <stdexcept>          // std::invalid_argument
-#include <string>             // std::string
-#include <utility>            // std::pair
-#include <vector>             // std::vector
+#include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include "utils/debug.cpp"   // utils::debug::inspect
+#include "utils/uri.cpp"     // utils::uri::percentEncode
+#include "utils/vector.cpp"  // utils::vector::join
+#include <algorithm>         // std::for_each
+#include <iostream>          // std::cout, std::endl
+#include <map>               // std::map
+#include <sstream>           // std::stringstream
+#include <stdexcept>         // std::invalid_argument
+#include <string>            // std::string
+#include <utility>           // std::pair
+#include <vector>            // std::vector
 
 /*
  * CURL
@@ -42,10 +44,12 @@ void CurlClient::prepare_request() {
   set_url();
 }
 
-void CurlClient::print_request() {
-  utils::debug::inspect("\n===========================================\n\n" +
-                           to_string() +
-                           "\n\n===========================================\n");
+void CurlClient::log_request() {
+  Formatted::fmt_stream_t fmt = stream_format;
+
+  std::cout << fmt.bold << fmt.yellow;
+  std::cout << std::endl << to_string() << std::endl << std::endl;
+  std::cout << fmt.reset;
 }
 
 void CurlClient::request() {
@@ -53,6 +57,10 @@ void CurlClient::request() {
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&response);
   curl_easy_perform(curl);
   curl_easy_cleanup(curl);
+
+  if (props.debug_flag == debug_t::ON) {
+    log_request();
+  }
 }
 
 // private

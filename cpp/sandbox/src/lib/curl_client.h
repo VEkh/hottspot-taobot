@@ -1,9 +1,10 @@
 #if !defined(CURL_CLIENT_H)
 #define CURL_CLIENT_H
 
-#include <curl/curl.h> // CURL, curl_easy_init
-#include <map>         // std::map
-#include <string>      // std::string
+#include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include <curl/curl.h>       // CURL, curl_easy_init
+#include <map>               // std::map
+#include <string>            // std::string
 
 class CurlClient {
 public:
@@ -26,7 +27,7 @@ public:
 
   CurlClient(CurlClient::props_t);
 
-  void print_request();
+  void log_request();
   void request();
 
 private:
@@ -40,13 +41,17 @@ private:
 
   CURL *curl = curl_easy_init();
 
-  CurlClient::props_t props;
+  CurlClient::props_t props = {
+      .body_params = {},
+      .debug_flag = debug_t::OFF,
+  };
 
-  static size_t write_response(char *, size_t, size_t, void *);
-
+  Formatted::fmt_stream_t stream_format = Formatted::stream();
   std::string HTTP_METHODS[2] = {"GET", "POST"};
   std::string build_query_params();
   std::string to_string();
+
+  static size_t write_response(char *, size_t, size_t, void *);
 
   void prepare_request();
   void set_body_params();

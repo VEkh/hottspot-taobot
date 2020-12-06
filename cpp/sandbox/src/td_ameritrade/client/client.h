@@ -33,10 +33,13 @@ private:
     std::string refresh_token;
   } tokens;
 
+  Formatted::fmt_stream_t stream_format = Formatted::stream();
   const char *CONFIG_PATH = "./config/td_ameritrade/credentials.json";
   const char *TOKENS_PATH = "./config/td_ameritrade/tokens.json";
-  props_t props;
-  Formatted::fmt_stream_t stream_format = Formatted::stream();
+
+  props_t props = {
+      .debug_flag = debug_t::OFF,
+  };
 
   void fetch_tokens(const std::map<std::string, std::string> body_params);
   void load_client_config();
