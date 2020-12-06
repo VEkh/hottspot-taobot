@@ -24,6 +24,7 @@ public:
 
 private:
   struct client_config_t {
+    int account_id;
     std::string client_id;
     std::string redirect_uri;
   } client_config;
