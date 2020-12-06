@@ -12,6 +12,7 @@ public:
   enum http_method_t { GET, POST };
 
   struct props_t {
+    std::string body;
     std::map<std::string, std::string> body_params;
     debug_t debug_flag;
     std::map<std::string, std::string> headers;
@@ -42,6 +43,7 @@ private:
   CURL *curl = curl_easy_init();
 
   CurlClient::props_t props = {
+      .body = "",
       .body_params = {},
       .debug_flag = debug_t::OFF,
   };

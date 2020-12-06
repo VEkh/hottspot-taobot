@@ -32,8 +32,9 @@ void TdAmeritrade::Straddle::fetch_current_quote() {
 
   json quote_snapshot = slice(quote, {"highPrice", "lastPrice", "lowPrice"});
 
-  std::cout << fmt.bold << fmt.yellow << symbol << " quote: " << quote_snapshot
-            << fmt.reset << std::endl;
+  std::cout << fmt.bold << fmt.yellow << std::endl;
+  std::cout << symbol << " quote: " << quote_snapshot << std::endl;
+  std::cout << fmt.reset;
 }
 
 #endif

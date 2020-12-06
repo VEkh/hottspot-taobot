@@ -53,14 +53,15 @@ void CurlClient::log_request() {
 }
 
 void CurlClient::request() {
+  if (props.debug_flag == debug_t::ON) {
+    log_request();
+    std::cout << stream_format.reset;
+  }
+
   curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_response);
   curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *)&response);
   curl_easy_perform(curl);
   curl_easy_cleanup(curl);
-
-  if (props.debug_flag == debug_t::ON) {
-    log_request();
-  }
 }
 
 // private
@@ -87,22 +88,26 @@ std::string CurlClient::build_query_params() {
 }
 
 void CurlClient::set_body_params() {
-  std::map<std::string, std::string> params = props.body_params;
+  std::string params_string = props.body;
 
-  if (params.size() == 0) {
+  std::map<std::string, std::string> body_params = props.body_params;
+
+  if (params_string.empty() && body_params.empty()) {
     return;
   }
 
-  std::vector<std::string> param_pairs;
+  if (!body_params.empty()) {
+    std::vector<std::string> param_pairs;
 
-  std::for_each(params.begin(), params.end(),
-                [&](std::pair<std::string, std::string> param) -> void {
-                  param_pairs.push_back(
-                      utils::uri::percentEncode(param.first) + "=" +
-                      utils::uri::percentEncode(param.second));
-                });
+    std::for_each(body_params.begin(), body_params.end(),
+                  [&](std::pair<std::string, std::string> param) -> void {
+                    param_pairs.push_back(
+                        utils::uri::percentEncode(param.first) + "=" +
+                        utils::uri::percentEncode(param.second));
+                  });
 
-  std::string params_string = utils::vector::join(param_pairs, "&");
+    params_string = utils::vector::join(param_pairs, "&");
+  }
 
   transformed_props.body_params = params_string;
   curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, params_string.size());

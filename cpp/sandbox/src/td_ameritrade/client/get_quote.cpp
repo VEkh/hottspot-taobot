@@ -26,6 +26,7 @@ std::string TdAmeritrade::Client::get_quote(std::string symbol) {
   load_tokens();
 
   CurlClient::props_t curl_props = {
+      .body = "",
       .body_params = {},
       .debug_flag = (CurlClient::debug_t)props.debug_flag,
       .headers =
@@ -55,7 +56,7 @@ std::string TdAmeritrade::Client::get_quote(std::string symbol) {
 
   Formatted::fmt_stream_t fmt = stream_format;
 
-  std::cout << fmt.bold << fmt.red;
+  std::cout << fmt.bold << fmt.red << std::endl;
   std::cout << "There was a problem fetching " << symbol
             << "'s quote. Here's the response:" << std::endl;
   std::cout << fmt.reset;

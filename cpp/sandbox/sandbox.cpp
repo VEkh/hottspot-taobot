@@ -1,17 +1,8 @@
-#include "deps/nlohmann/json.hpp"
-#include <fstream>  // std::ifstream, std::ios
-#include <iostream> // std::cout
-#include <string>   // stoi
-
-using json = nlohmann::json;
+#include "lib/utils/float.cpp" // utils::float_
+#include <iostream>            // std::cout
 
 int main() {
-  json j;
+  float f = 1.239182391;
 
-  std::string k = "foo";
-  std::string v = "bar";
-
-  j[k] = v;
-
-  std::cout << j << std::endl;
+  std::cout << utils::float_::to_currency(f) << std::endl;
 }

@@ -2,19 +2,20 @@
 #define UTILS__FLOAT
 
 #include <iomanip> // std::setprecision
+#include <math.h>  // pow, round
 #include <sstream> // std::stringstream
-#include <string>  // std::stof, std::string
+#include <string>  // std::string
 
 namespace utils {
 namespace float_ {
-std::string toCurrency(float val) {
-  std::stringstream result;
-
-  result << std::setprecision(2) << std::fixed << val;
-  return result.str();
+double round_to(double input, int precision) {
+  int normalizer = pow(10, precision);
+  return round(input * normalizer) / normalizer;
 }
 
-std::string toRoundedPercentage(float val) {
+double to_currency(float val) { return round_to(val, 2); }
+
+std::string to_rounded_percentage(float val) {
   std::stringstream result;
 
   result << std::setprecision(4) << std::fixed << (val * 100.0);

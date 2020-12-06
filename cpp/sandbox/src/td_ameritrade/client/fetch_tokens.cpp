@@ -14,8 +14,9 @@
 void TdAmeritrade::Client::fetch_tokens(
     std::map<std::string, std::string> body_params) {
   CurlClient::props_t curl_props = {
+      .body = "",
       .body_params = body_params,
-      .debug_flag = CurlClient::debug_t::OFF,
+      .debug_flag = (CurlClient::debug_t)props.debug_flag,
       .headers = {{"Content-Type", "application/x-www-form-urlencoded"}},
       .method = CurlClient::http_method_t::POST,
       .query_params = {},
@@ -39,7 +40,7 @@ void TdAmeritrade::Client::fetch_tokens(
 
   Formatted::fmt_stream_t fmt = stream_format;
 
-  std::cout << fmt.bold << fmt.green << "Successfully fetched tokens"
+  std::cout << fmt.bold << fmt.green << "✅ Successfully fetched tokens"
             << fmt.reset << std::endl;
 
   if (props.debug_flag == debug_t::ON) {

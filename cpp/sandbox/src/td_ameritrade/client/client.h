@@ -1,9 +1,10 @@
 #if !defined(TD_AMERITRADE__CLIENT_H)
 #define TD_AMERITRADE__CLIENT_H
 
-#include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include <map>               // std::map
-#include <string>            // std::string
+#include "lib/formatted.cpp"      // Formatted::stream, Formatted::fmt_stream_t
+#include "td_ameritrade/deps.cpp" // json
+#include <map>                    // std::map
+#include <string>                 // std::string
 
 namespace TdAmeritrade {
 class Client {
@@ -14,9 +15,10 @@ public:
     debug_t debug_flag;
   };
 
-  void get_access_token();
   std::string get_quote(char *);
   std::string get_quote(std::string);
+  void get_access_token();
+  void place_order(json);
   void refresh_tokens();
 
   Client();
