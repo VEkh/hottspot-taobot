@@ -1,5 +1,5 @@
-#if !defined(UTILS_FLOAT)
-#define UTILS_FLOAT
+#if !defined UTILS__FLOAT
+#define UTILS__FLOAT
 
 #include <iomanip> // std::setprecision
 #include <sstream> // std::stringstream

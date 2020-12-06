@@ -2,18 +2,18 @@
 #define CURL_CLIENT
 
 #include "curl_client.h"
-#include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include "utils/debug.cpp"   // utils::debug::inspect
-#include "utils/uri.cpp"     // utils::uri::percentEncode
-#include "utils/vector.cpp"  // utils::vector::join
-#include <algorithm>         // std::for_each
-#include <iostream>          // std::cout, std::endl
-#include <map>               // std::map
-#include <sstream>           // std::stringstream
-#include <stdexcept>         // std::invalid_argument
-#include <string>            // std::string
-#include <utility>           // std::pair
-#include <vector>            // std::vector
+#include "lib/formatted.cpp"    // Formatted::stream, Formatted::fmt_stream_t
+#include "lib/utils/debug.cpp"  // utils::debug::inspect
+#include "lib/utils/uri.cpp"    // utils::uri::percentEncode
+#include "lib/utils/vector.cpp" // utils::vector::join
+#include <algorithm>            // std::for_each
+#include <iostream>             // std::cout, std::endl
+#include <map>                  // std::map
+#include <sstream>              // std::stringstream
+#include <stdexcept>            // std::invalid_argument
+#include <string>               // std::string
+#include <utility>              // std::pair
+#include <vector>               // std::vector
 
 /*
  * CURL

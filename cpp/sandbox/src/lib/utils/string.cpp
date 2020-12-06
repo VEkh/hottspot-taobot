@@ -1,5 +1,5 @@
-#if !defined(UTILS_STRING)
-#define UTILS_STRING
+#if !defined UTILS__STRING
+#define UTILS__STRING
 
 #include <algorithm> // std::max, std::replace
 #include <cstring>   // strlen

@@ -2,11 +2,11 @@
 #define TD_AMERITRADE__CLIENT_get_access_token
 
 #include "client.h" // TdAmeritrade::Client, client_config, stream_format
-#include "fetch_tokens.cpp" // fetch_tokens
-#include "utils/uri.cpp"    // utils::uri
-#include <iostream>         // std::cin, std::cout, std::endl
-#include <sstream>          // std::stringstream
-#include <string>           // std::string
+#include "fetch_tokens.cpp"  // fetch_tokens
+#include "lib/utils/uri.cpp" // utils::uri
+#include <iostream>          // std::cin, std::cout, std::endl
+#include <sstream>           // std::stringstream
+#include <string>            // std::string
 
 void TdAmeritrade::Client::get_access_token() {
   std::string code;

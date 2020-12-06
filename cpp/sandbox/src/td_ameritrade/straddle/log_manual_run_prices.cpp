@@ -1,11 +1,11 @@
 #if !defined TD_AMERITRADE__STRADDLE_log_manual_run_prices
 #define TD_AMERITRADE__STRADDLE_log_manual_run_prices
 
-#include "lib/formatted.cpp" // Formatted
-#include "straddle.h"        // TdAmeritrade::Straddle, stream_format, symbol
-#include "utils/float.cpp"   // utils::float::toCurrency
-#include <iostream>          // std::cout, std::endl
-#include <string>            // std::string
+#include "lib/formatted.cpp"   // Formatted
+#include "lib/utils/float.cpp" // utils::float::toCurrency
+#include "straddle.h"          // TdAmeritrade::Straddle, stream_format, symbol
+#include <iostream>            // std::cout, std::endl
+#include <string>              // std::string
 
 void TdAmeritrade::Straddle::log_manual_run_prices() {
   Formatted::fmt_stream_t fmt = stream_format;

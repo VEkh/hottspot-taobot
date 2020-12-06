@@ -1,4 +1,4 @@
-#if !defined(UTILS__URI)
+#if !defined UTILS__URI
 #define UTILS__URI
 
 #include "string.cpp"  // utils::string::split

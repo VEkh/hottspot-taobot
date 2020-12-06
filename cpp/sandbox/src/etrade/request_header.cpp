@@ -4,10 +4,10 @@
  */
 
 #include "../../deps/cpp-base64/base64.cpp" // base64_encode
-#include "utils/debug.cpp"               // utils::debug::inspect
-#include "utils/map.cpp"                    // utils::map::merge
-#include "utils/string.cpp"                 // utils::string::split
-#include "utils/uri.cpp"                    // utils::uri::percentEncode
+#include "lib/utils/debug.cpp"              // utils::debug::inspect
+#include "lib/utils/map.cpp"                // utils::map::merge
+#include "lib/utils/string.cpp"             // utils::string::split
+#include "lib/utils/uri.cpp"                // utils::uri::percentEncode
 #include <any>                              // std::any
 #include <ctime>                            // std::time
 #include <curl/curl.h>                      // curl_easy_escape, curl_easy_init

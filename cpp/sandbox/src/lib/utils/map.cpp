@@ -1,5 +1,5 @@
-#if !defined(UTILS_MAP)
-#define UTILS_MAP
+#if !defined UTILS__MAP
+#define UTILS__MAP
 
 #include <map>    // std::map
 #include <string> // std::string

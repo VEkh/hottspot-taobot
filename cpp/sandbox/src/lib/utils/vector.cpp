@@ -1,5 +1,5 @@
-#if !defined UTILS_VECTOR
-#define UTILS_VECTOR
+#if !defined UTILS__VECTOR
+#define UTILS__VECTOR
 
 #include <string> // std::string
 #include <vector> // std::vector

@@ -4,8 +4,8 @@
 #include "client.h" // TOKENS_PATH, TdAmeritrade::Client, debug_t, props, stream_format
 #include "lib/curl_client.cpp"        // CurlClient
 #include "lib/formatted.cpp"          // Formatted::error_message
+#include "lib/utils/debug.cpp"        // utils::debug
 #include "td_ameritrade/deps.cpp"     // json
-#include "utils/debug.cpp"            // utils::debug
 #include "write_response_to_file.cpp" // write_response_to_file
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
