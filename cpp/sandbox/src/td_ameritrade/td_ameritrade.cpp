@@ -1,6 +1,5 @@
 #include "client/client.cpp"     // TdAmeritrade::Client
 #include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/debug.cpp"   // utils::debug
 #include "straddle/straddle.cpp" // TdAmeritrade::Straddle
 #include <iostream>              // std::cout, std::endl
 #include <map>                   // std::map

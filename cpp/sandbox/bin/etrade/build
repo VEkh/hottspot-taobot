@@ -2,7 +2,7 @@
 
 mkdir -p ./build/
 
-sources=("td_ameritrade")
+sources=("etrade")
 
 for src in "${sources[@]}"
 do
