@@ -1,16 +1,19 @@
-#if !defined ETRADE__CLIENT_get_access_token
-#define ETRADE__CLIENT_get_access_token
+#if !defined ETRADE__CLIENT_fetch_access_token
+#define ETRADE__CLIENT_fetch_access_token
 
-#include "client.h"          // ETrade::Client, client_config, stream_format
-#include "lib/formatted.cpp" // Formatted
-#include <iostream>          // std::cin, std::cout, std::endl
-#include <sstream>           // std::stringstream
-#include <string>            // std::string
+#include "client.h" // ETrade::Client, client_config, stream_format
+#include "fetch_request_token.cpp" // fetch_request_token
+#include "lib/formatted.cpp"       // Formatted
+#include <iostream>                // std::cin, std::cout, std::endl
+#include <sstream>                 // std::stringstream
+#include <string>                  // std::string
 
-void ETrade::Client::get_access_token() {
+void ETrade::Client::fetch_access_token() {
   Formatted::fmt_stream_t fmt = stream_format;
   std::string verifier;
   std::stringstream url;
+
+  std::string request_token = fetch_request_token();
 
   url << "https://us.etrade.com/e/t/etws/authorize?"
       << "key=" << client_config.oauth_consumer_key << "&token=";

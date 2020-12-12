@@ -17,7 +17,7 @@ public:
 
   std::string get_quote(char *);
   std::string get_quote(std::string);
-  void get_access_token();
+  void fetch_access_token();
   void place_order(json);
   void refresh_tokens();
 

@@ -1,7 +1,8 @@
-#if !defined(ETRADE__CLIENT_H)
+#if !defined ETRADE__CLIENT_H
 #define ETRADE__CLIENT_H
 
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include <map>               // std::map
 #include <string>            // std::string
 
 namespace ETrade {
@@ -13,7 +14,7 @@ public:
     debug_t debug_flag;
   };
 
-  void get_access_token();
+  void fetch_access_token();
 
   Client();
   Client(props_t);
@@ -32,6 +33,9 @@ private:
       .debug_flag = debug_t::OFF,
   };
 
+  std::string build_request_header(std::string,
+                                   std::map<std::string, std::string>);
+  std::string fetch_request_token();
   void load_client_config();
 };
 } // namespace ETrade

@@ -4,7 +4,7 @@
 #include "curl_client.h"
 #include "lib/formatted.cpp"    // Formatted::stream, Formatted::fmt_stream_t
 #include "lib/utils/debug.cpp"  // utils::debug::inspect
-#include "lib/utils/uri.cpp"    // utils::uri::percentEncode
+#include "lib/utils/uri.cpp"    // utils::uri::percent_encode
 #include "lib/utils/vector.cpp" // utils::vector::join
 #include <algorithm>            // std::for_each
 #include <iostream>             // std::cout, std::endl
@@ -77,8 +77,8 @@ std::string CurlClient::build_query_params() {
   std::map<std::string, std::string>::iterator it;
 
   for (it = params.begin(); it != params.end(); it++) {
-    param_pairs.push_back(utils::uri::percentEncode(it->first) + "=" +
-                          utils::uri::percentEncode(it->second));
+    param_pairs.push_back(utils::uri::percent_encode(it->first) + "=" +
+                          utils::uri::percent_encode(it->second));
   }
 
   std::string query_params = utils::vector::join(param_pairs, "&");
@@ -102,8 +102,8 @@ void CurlClient::set_body_params() {
     std::for_each(body_params.begin(), body_params.end(),
                   [&](std::pair<std::string, std::string> param) -> void {
                     param_pairs.push_back(
-                        utils::uri::percentEncode(param.first) + "=" +
-                        utils::uri::percentEncode(param.second));
+                        utils::uri::percent_encode(param.first) + "=" +
+                        utils::uri::percent_encode(param.second));
                   });
 
     params_string = utils::vector::join(param_pairs, "&");

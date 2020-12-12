@@ -12,7 +12,8 @@
 namespace utils {
 namespace uri {
 
-std::map<std::string, std::string> parseQueryParams(std::string query_string) {
+std::map<std::string, std::string>
+parse_query_params(std::string query_string) {
   if (query_string.empty()) {
     return (std::map<std::string, std::string>){};
   }
@@ -34,7 +35,7 @@ std::map<std::string, std::string> parseQueryParams(std::string query_string) {
   return query_params;
 }
 
-std::string percentDecode(const char *str) {
+std::string percent_decode(const char *str) {
   if (str == NULL) {
     return "";
   }
@@ -47,11 +48,11 @@ std::string percentDecode(const char *str) {
   return (std::string)unescaped;
 }
 
-std::string percentDecode(std::string str) {
-  return percentDecode(str.c_str());
+std::string percent_decode(std::string str) {
+  return percent_decode(str.c_str());
 }
 
-std::string percentEncode(const char *str) {
+std::string percent_encode(const char *str) {
   if (str == NULL) {
     return "";
   }
@@ -65,8 +66,8 @@ std::string percentEncode(const char *str) {
   return result;
 }
 
-std::string percentEncode(std::string str) {
-  return percentEncode(str.c_str());
+std::string percent_encode(std::string str) {
+  return percent_encode(str.c_str());
 }
 
 std::string buildQueryParams(std::map<std::string, std::string> params) {
@@ -80,7 +81,7 @@ std::string buildQueryParams(std::map<std::string, std::string> params) {
       output << "&";
     }
 
-    output << it->first << "=" << percentEncode(it->second);
+    output << it->first << "=" << percent_encode(it->second);
   }
 
   return output.str();

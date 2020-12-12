@@ -12,5 +12,6 @@ do
     -std=c++17 \
     -o ./build/$src \
     ./src/$src/$src.cpp \
+    -lcrypto \
     -lcurl
 done

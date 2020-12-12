@@ -9,7 +9,7 @@
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"get_access_token            ", "Get authorization tokens"},
+      {"fetch_access_token          ", "Fetch authorization token"},
       {"get_quote <SYMBOL>          ", "Get quote for the given symbol"},
       {"manual_straddle <SYMBOL>    ",
        "Return straddle prices for manual entry"},
@@ -40,9 +40,9 @@ int main(int argc, char *argv[]) {
 
   std::string command = argv[1];
 
-  if (command == "get_access_token") {
+  if (command == "fetch_access_token") {
     TdAmeritrade::Client td_ameritrade_client;
-    td_ameritrade_client.get_access_token();
+    td_ameritrade_client.fetch_access_token();
 
     exit(0);
   }
