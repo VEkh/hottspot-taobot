@@ -4,6 +4,7 @@
 #include "build_request_header.cpp" // build_request_header
 #include "client.h"                 // ETrade::Client, props
 #include "lib/curl_client.cpp"      // CurlClient
+#include "lib/utils/debug.cpp"      // utils::debug::inspect
 #include <string>                   // std::string
 
 std::string ETrade::Client::fetch_request_token() {
@@ -25,6 +26,7 @@ std::string ETrade::Client::fetch_request_token() {
   curl_client.request();
 
   std::string request_token = curl_client.response.body;
+  utils::debug::inspect(curl_client.response.headers);
 
   return request_token;
 }

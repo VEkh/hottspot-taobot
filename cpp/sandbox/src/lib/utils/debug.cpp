@@ -27,7 +27,8 @@ void inspect(std::map<std::string, std::string> collection) {
   std::cout << "{" << std::endl;
 
   for (it = collection.begin(); it != collection.end(); it++) {
-    std::cout << "  " << it->first << ": " << it->second << "," << std::endl;
+    std::cout << "  \"" << it->first << "\": \"" << it->second << "\","
+              << std::endl;
   }
 
   std::cout << "}" << std::endl;

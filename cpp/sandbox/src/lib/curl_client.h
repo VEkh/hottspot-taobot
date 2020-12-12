@@ -23,6 +23,7 @@ public:
 
   struct response_t {
     std::string body;
+    std::map<std::string, std::string> headers;
     size_t size;
   } response;
 
@@ -54,6 +55,8 @@ private:
   std::string to_string();
 
   static size_t write_response(char *, size_t, size_t, void *);
+  static size_t write_response_headers(char *, size_t, size_t, void *);
+  static std::vector<std::string> extract_header_pair(const char *header);
 
   void prepare_request();
   void set_body_params();
