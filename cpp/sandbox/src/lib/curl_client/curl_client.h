@@ -29,6 +29,7 @@ public:
 
   CurlClient(CurlClient::props_t);
 
+  bool is_xml_response();
   void log_request();
   void request();
 

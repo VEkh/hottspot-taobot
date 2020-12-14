@@ -2,6 +2,7 @@
 #define CURL_CLIENT
 
 #include "curl_client.h" // CurlClient, props
+#include "is_xml_response.cpp"
 #include "request.cpp"
 #include "set_body_params.cpp" // set_body_params
 #include "set_debug.cpp"       // set_debug

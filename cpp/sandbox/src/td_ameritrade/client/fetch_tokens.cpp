@@ -2,14 +2,14 @@
 #define TD_AMERITRADE__CLIENT_fetch_tokens
 
 #include "client.h" // TOKENS_PATH, TdAmeritrade::Client, debug_t, props, stream_format
-#include "lib/curl_client/curl_client.cpp"        // CurlClient
-#include "lib/formatted.cpp"          // Formatted::error_message
-#include "lib/utils/debug.cpp"        // utils::debug
-#include "td_ameritrade/deps.cpp"     // json
-#include "write_response_to_file.cpp" // write_response_to_file
-#include <iostream>                   // std::cout, std::endl
-#include <map>                        // std::map
-#include <string>                     // std::string
+#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/formatted.cpp"               // Formatted::error_message
+#include "lib/utils/debug.cpp"             // utils::debug
+#include "td_ameritrade/deps.cpp"          // json
+#include "write_response_to_file.cpp"      // write_response_to_file
+#include <iostream>                        // std::cout, std::endl
+#include <map>                             // std::map
+#include <string>                          // std::string
 
 void TdAmeritrade::Client::fetch_tokens(
     std::map<std::string, std::string> body_params) {
@@ -40,8 +40,9 @@ void TdAmeritrade::Client::fetch_tokens(
 
   Formatted::fmt_stream_t fmt = stream_format;
 
-  std::cout << fmt.bold << fmt.green << "✅ Successfully fetched tokens"
-            << fmt.reset << std::endl;
+  std::cout << fmt.bold << fmt.green;
+  std::cout << "✅ Successfully fetched tokens" << std::endl;
+  std::cout << fmt.reset;
 
   if (props.debug_flag == debug_t::ON) {
     std::cout << response_body << std::endl;

@@ -47,7 +47,7 @@ private:
   void fetch_tokens(const std::map<std::string, std::string> body_params);
   void load_client_config();
   void load_tokens();
-  void write_response_to_file(std::string content, const char *file_path);
+  void write_response_to_file(std::string, const char *);
 };
 } // namespace TdAmeritrade
 

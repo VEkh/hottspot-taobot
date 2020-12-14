@@ -31,6 +31,7 @@ private:
 
   Formatted::fmt_stream_t stream_format = Formatted::stream();
   const char *CONFIG_PATH = "./config/etrade/credentials.json";
+  const char *TOKENS_PATH = "./config/etrade/tokens.json";
 
   props_t props = {
       .debug_flag = debug_t::OFF,
@@ -38,8 +39,10 @@ private:
 
   std::string build_request_header(std::string,
                                    std::map<std::string, std::string>);
+  void authorized_fetch_access_token();
   void fetch_request_token();
   void load_client_config();
+  void write_response_to_file(std::string, const char *);
 };
 } // namespace ETrade
 

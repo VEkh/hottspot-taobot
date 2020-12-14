@@ -35,7 +35,7 @@ int main(int argc, char *argv[]) {
 
   if (command == "fetch_access_token") {
     ETrade::Client etrade_client = ETrade::Client({
-        .debug_flag = ETrade::Client::debug_t::ON,
+        .debug_flag = ETrade::Client::debug_t::OFF,
     });
 
     etrade_client.fetch_access_token();

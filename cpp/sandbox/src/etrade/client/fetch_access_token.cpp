@@ -1,6 +1,7 @@
 #if !defined ETRADE__CLIENT_fetch_access_token
 #define ETRADE__CLIENT_fetch_access_token
 
+#include "authorized_fetch_access_token.cpp" // authorized_fetch_access_token
 #include "client.h" // ETrade::Client, client_config, stream_format
 #include "fetch_request_token.cpp" // fetch_request_token
 #include "lib/formatted.cpp"       // Formatted
@@ -19,7 +20,7 @@ void ETrade::Client::fetch_access_token() {
       << "key=" << client_config.oauth_consumer_key
       << "&token=" << client_config.oauth_token;
 
-  std::cout << fmt.bold << fmt.cyan;
+  std::cout << fmt.bold << fmt.cyan << std::endl;
   std::cout << "Your authorization URL: " << fmt.reset << url.str()
             << std::endl;
 
@@ -29,6 +30,8 @@ void ETrade::Client::fetch_access_token() {
 
   std::cin >> client_config.oauth_verifier;
   std::cout << std::endl;
+
+  authorized_fetch_access_token();
 }
 
 #endif
