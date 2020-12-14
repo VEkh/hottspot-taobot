@@ -24,6 +24,9 @@ private:
     std::string account_id;
     std::string oauth_consumer_key;
     std::string oauth_consumer_secret;
+    std::string oauth_token;
+    std::string oauth_token_secret;
+    std::string oauth_verifier;
   } client_config;
 
   Formatted::fmt_stream_t stream_format = Formatted::stream();
@@ -35,7 +38,7 @@ private:
 
   std::string build_request_header(std::string,
                                    std::map<std::string, std::string>);
-  std::string fetch_request_token();
+  void fetch_request_token();
   void load_client_config();
 };
 } // namespace ETrade

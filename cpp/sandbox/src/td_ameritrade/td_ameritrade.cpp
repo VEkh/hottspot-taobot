@@ -89,5 +89,5 @@ int main(int argc, char *argv[]) {
             << fmt.reset << std::endl;
 
   print_usage();
-  exit(1);
+  exit(127);
 }
