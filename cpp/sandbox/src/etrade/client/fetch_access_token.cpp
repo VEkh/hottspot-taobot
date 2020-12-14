@@ -30,4 +30,5 @@ void ETrade::Client::fetch_access_token() {
   std::cin >> client_config.oauth_verifier;
   std::cout << std::endl;
 }
+
 #endif
