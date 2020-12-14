@@ -1,4 +1,4 @@
-#if !defined(CURL_CLIENT_H)
+#if !defined CURL_CLIENT_H
 #define CURL_CLIENT_H
 
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
@@ -54,9 +54,8 @@ private:
   std::string build_query_params();
   std::string to_string();
 
-  static size_t write_response(char *, size_t, size_t, void *);
+  static size_t write_response_body(char *, size_t, size_t, void *);
   static size_t write_response_headers(char *, size_t, size_t, void *);
-  static std::vector<std::string> extract_header_pair(const char *header);
 
   void prepare_request();
   void set_body_params();

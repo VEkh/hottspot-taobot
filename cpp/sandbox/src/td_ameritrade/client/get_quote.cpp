@@ -1,15 +1,15 @@
 #if !defined TD_AMERITRADE__CLIENT_get_quote
 #define TD_AMERITRADE__CLIENT_get_quote
 
-#include "client.h"               // TdAmeritrade::Client, tokens
-#include "lib/curl_client.cpp"    // CurlClient
-#include "lib/formatted.cpp"      // Formatted::error_message
-#include "load_tokens.cpp"        // load_tokens
-#include "refresh_tokens.cpp"     // refresh_tokens
-#include "td_ameritrade/deps.cpp" // json
-#include <iostream>               // std::cout, std::endl
-#include <stdexcept>              // std::invalid_argument
-#include <string>                 // std::string
+#include "client.h"                        // TdAmeritrade::Client, tokens
+#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/formatted.cpp"               // Formatted::error_message
+#include "load_tokens.cpp"                 // load_tokens
+#include "refresh_tokens.cpp"              // refresh_tokens
+#include "td_ameritrade/deps.cpp"          // json
+#include <iostream>                        // std::cout, std::endl
+#include <stdexcept>                       // std::invalid_argument
+#include <string>                          // std::string
 
 std::string TdAmeritrade::Client::get_quote(char *symbol) {
   if (symbol == nullptr) {

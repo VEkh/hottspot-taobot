@@ -2,11 +2,11 @@
 #define TD_AMERITRADE__CLIENT_place_order
 
 #include "client.h" // TdAmeritrade::Client, stream_format, client_config, tokens
-#include "lib/curl_client.cpp"    // CurlClient
-#include "lib/formatted.cpp"      // Formatted
-#include "td_ameritrade/deps.cpp" // json
-#include <iostream>               // std::cout, std::endl
-#include <string>                 // std::string, std::to_string
+#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/formatted.cpp"               // Formatted
+#include "td_ameritrade/deps.cpp"          // json
+#include <iostream>                        // std::cout, std::endl
+#include <string>                          // std::string, std::to_string
 
 void TdAmeritrade::Client::place_order(json payload) {
   Formatted::fmt_stream_t fmt = stream_format;

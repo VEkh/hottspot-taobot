@@ -3,7 +3,7 @@
 
 #include "build_request_header.cpp" // build_request_header
 #include "client.h"                 // ETrade::Client, props
-#include "lib/curl_client.cpp"      // CurlClient
+#include "lib/curl_client/curl_client.cpp"      // CurlClient
 #include "lib/utils/debug.cpp"      // utils::debug::inspect
 #include <string>                   // std::string
 
