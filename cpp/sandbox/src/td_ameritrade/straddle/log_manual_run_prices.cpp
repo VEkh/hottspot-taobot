@@ -22,6 +22,12 @@ void TdAmeritrade::Straddle::log_manual_run_prices() {
             << utils::float_::to_currency(order_prices.buy.open_stop)
             << std::endl;
 
+  std::cout << "Buy (Close)        => Stop Limit: "
+            << utils::float_::to_currency(order_prices.buy.close_stop_limit)
+            << " • Stop: "
+            << utils::float_::to_currency(order_prices.buy.close_stop)
+            << std::endl;
+
   std::cout << "Buy (Close)        =>      Limit: "
             << utils::float_::to_currency(order_prices.buy.close_limit)
             << std::endl;
@@ -33,6 +39,13 @@ void TdAmeritrade::Straddle::log_manual_run_prices() {
                    order_prices.sell_short.open_stop_limit)
             << " • Stop: "
             << utils::float_::to_currency(order_prices.sell_short.open_stop)
+            << std::endl;
+
+  std::cout << "Sell Short (Close) => Stop Limit: "
+            << utils::float_::to_currency(
+                   order_prices.sell_short.close_stop_limit)
+            << " • Stop: "
+            << utils::float_::to_currency(order_prices.sell_short.close_stop)
             << std::endl;
 
   std::cout << "Sell Short (Close) =>      Limit: "

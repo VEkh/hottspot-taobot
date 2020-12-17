@@ -17,6 +17,8 @@ public:
 private:
   struct prices_t {
     float close_limit;
+    float close_stop;
+    float close_stop_limit;
     float open_stop;
     float open_stop_limit;
   };

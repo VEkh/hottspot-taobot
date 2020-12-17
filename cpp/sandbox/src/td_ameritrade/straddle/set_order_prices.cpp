@@ -23,12 +23,22 @@ void TdAmeritrade::Straddle::set_order_prices() {
       current_price + open_stop_limit_price_change;
   order_prices.buy.close_limit =
       current_price + (target_profit_ratio * open_stop_limit_price_change);
+  order_prices.buy.close_stop =
+      current_price - (target_profit_ratio * open_stop_limit_price_change);
+  order_prices.buy.close_stop_limit =
+      current_price -
+      (1.01 * target_profit_ratio * open_stop_limit_price_change);
 
   order_prices.sell_short.open_stop = current_price - open_stop_price_change;
   order_prices.sell_short.open_stop_limit =
       current_price - open_stop_limit_price_change;
   order_prices.sell_short.close_limit =
       current_price - (target_profit_ratio * open_stop_limit_price_change);
+  order_prices.sell_short.close_stop =
+      current_price + (target_profit_ratio * open_stop_limit_price_change);
+  order_prices.sell_short.close_stop_limit =
+      current_price +
+      (1.01 * target_profit_ratio * open_stop_limit_price_change);
 }
 
 #endif
