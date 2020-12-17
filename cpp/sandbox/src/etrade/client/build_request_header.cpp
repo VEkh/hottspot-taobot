@@ -10,11 +10,10 @@
 std::string ETrade::Client::build_request_header(
     std::string request_url, std::map<std::string, std::string> params) {
   std::map<std::string, std::string> merged_params = utils::map::merge(
-      params,
-      {
-          {"oauth_consumer_key", client_config.oauth_consumer_key},
-          {"oauth_consumer_secret", client_config.oauth_consumer_secret},
-      });
+      params, {
+                  {"oauth_consumer_key", oauth.consumer_key},
+                  {"oauth_consumer_secret", oauth.consumer_secret},
+              });
 
   ETrade::OAuthHeader oauth_header = ETrade::OAuthHeader({
       .params = merged_params,

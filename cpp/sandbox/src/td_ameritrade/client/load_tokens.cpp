@@ -1,7 +1,7 @@
 #if !defined TD_AMERITRADE__CLIENT_load_tokens
 #define TD_AMERITRADE__CLIENT_load_tokens
 
-#include "client.h" // TOKENS_PATH, TdAmeritrade::Client, json_parser, tokens
+#include "client.h"               // TOKENS_PATH, TdAmeritrade::Client, tokens
 #include "lib/formatted.cpp"      // Formatted::error_message
 #include "td_ameritrade/deps.cpp" // json
 #include <fstream>                // std::ifstream, std::ios

@@ -8,7 +8,8 @@
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"fetch_access_token            ", "Get authorization token"},
+      {"fetch_access_token          ", "Get authorization token"},
+      {"refresh_token               ", "Refresh authorization tokens"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -34,11 +35,15 @@ int main(int argc, char *argv[]) {
   std::string command = argv[1];
 
   if (command == "fetch_access_token") {
-    ETrade::Client etrade_client = ETrade::Client({
-        .debug_flag = ETrade::Client::debug_t::OFF,
-    });
-
+    ETrade::Client etrade_client;
     etrade_client.fetch_access_token();
+
+    exit(0);
+  }
+
+  if (command == "refresh_token") {
+    ETrade::Client etrade_client;
+    etrade_client.refresh_token();
 
     exit(0);
   }

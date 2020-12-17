@@ -28,11 +28,8 @@ void TdAmeritrade::Client::fetch_access_token() {
   std::cout << std::endl;
 
   fetch_tokens({
-      {"access_type", "offline"},
-      {"client_id", client_config.client_id},
       {"code", utils::uri::percent_decode(code)},
       {"grant_type", "authorization_code"},
-      {"redirect_uri", client_config.redirect_uri},
   });
 }
 #endif

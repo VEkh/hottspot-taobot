@@ -41,8 +41,11 @@ void ETrade::Client::load_client_config() {
 
   client_config = {
       .account_id = config_json["account_id"],
-      .oauth_consumer_key = config_json["oauth_consumer_key"],
-      .oauth_consumer_secret = config_json["oauth_consumer_secret"],
+  };
+
+  oauth = {
+      .consumer_key = config_json["oauth_consumer_key"],
+      .consumer_secret = config_json["oauth_consumer_secret"],
   };
 }
 

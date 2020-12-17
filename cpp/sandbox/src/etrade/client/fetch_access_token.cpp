@@ -1,10 +1,11 @@
 #if !defined ETRADE__CLIENT_fetch_access_token
 #define ETRADE__CLIENT_fetch_access_token
 
-#include "authorized_fetch_access_token.cpp" // authorized_fetch_access_token
 #include "client.h" // ETrade::Client, client_config, stream_format
 #include "fetch_request_token.cpp" // fetch_request_token
+#include "fetch_token.cpp"         // fetch_token
 #include "lib/formatted.cpp"       // Formatted
+#include "write_token.cpp"         // write_token
 #include <iostream>                // std::cin, std::cout, std::endl
 #include <map>                     // std::map
 #include <sstream>                 // std::stringstream
@@ -17,8 +18,7 @@ void ETrade::Client::fetch_access_token() {
   fetch_request_token();
 
   url << "https://us.etrade.com/e/t/etws/authorize?"
-      << "key=" << client_config.oauth_consumer_key
-      << "&token=" << client_config.oauth_token;
+      << "key=" << oauth.consumer_key << "&token=" << oauth.token;
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
   std::cout << "Your authorization URL: " << fmt.reset << url.str()
@@ -28,10 +28,13 @@ void ETrade::Client::fetch_access_token() {
   std::cout << "Enter the response verifier: ";
   std::cout << fmt.reset;
 
-  std::cin >> client_config.oauth_verifier;
+  std::cin >> oauth.verifier;
   std::cout << std::endl;
 
-  authorized_fetch_access_token();
+  std::string token_response =
+      fetch_token("https://api.etrade.com/oauth/access_token");
+
+  write_token(token_response);
 }
 
 #endif

@@ -2,6 +2,7 @@
 #define UTILS__STRING
 
 #include <algorithm> // std::max, std::replace
+#include <cctype>    // std::isspace
 #include <cstring>   // strlen
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -36,15 +37,59 @@ std::vector<std::string> split(std::string input, const char *delimiter) {
   return result;
 }
 
-std::string stripCommas(std::string input) {
-  int position = input.find(",");
+std::string ltrim(std::string in) {
+  bool nonspace_found = false;
+  std::string out;
+  std::string::iterator i;
+  i = in.begin();
 
-  while (position != -1) {
-    input.erase(position, 1);
-    position = input.find(",");
+  while (i != in.end()) {
+    if (std::isspace(*i)) {
+      if (nonspace_found) {
+        out += *i;
+      }
+    } else {
+      out += *i;
+
+      if (!nonspace_found) {
+        nonspace_found = true;
+      }
+    }
+
+    i++;
   }
 
-  return input;
+  return out;
+}
+
+std::string rtrim(std::string in) {
+  bool nonspace_found = false;
+  std::string out;
+  std::string::reverse_iterator i;
+  i = in.rbegin();
+
+  while (i != in.rend()) {
+    if (std::isspace(*i)) {
+      if (nonspace_found) {
+        out = *i + out;
+      }
+    } else {
+      out = *i + out;
+
+      if (!nonspace_found) {
+        nonspace_found = true;
+      }
+    }
+
+    i++;
+  }
+
+  return out;
+}
+
+std::string trim(std::string in) {
+  std::string out = ltrim(in);
+  return rtrim(out);
 }
 } // namespace string
 } // namespace utils

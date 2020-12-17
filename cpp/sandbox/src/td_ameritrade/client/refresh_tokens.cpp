@@ -9,10 +9,7 @@ void TdAmeritrade::Client::refresh_tokens() {
   load_tokens();
 
   fetch_tokens({
-      {"access_type", "offline"},
-      {"client_id", client_config.client_id},
       {"grant_type", "refresh_token"},
-      {"redirect_uri", client_config.redirect_uri},
       {"refresh_token", tokens.refresh_token},
   });
 }
