@@ -15,8 +15,8 @@ public:
     debug_t debug_flag;
   };
 
-  std::string get_quote(char *);
-  std::string get_quote(std::string);
+  std::string fetch_quote(char *);
+  std::string fetch_quote(std::string);
   void fetch_access_token();
   void place_order(json);
   void refresh_tokens();

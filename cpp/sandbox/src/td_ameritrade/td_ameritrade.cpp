@@ -10,7 +10,7 @@
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"fetch_access_token          ", "Fetch authorization token"},
-      {"get_quote <SYMBOL>          ", "Get quote for the given symbol"},
+      {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
       {"manual_straddle <SYMBOL>    ",
        "Return straddle prices for manual entry"},
       {"refresh_tokens              ", "Refresh authorization tokens"},
@@ -47,11 +47,11 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "get_quote") {
+  if (command == "fetch_quote") {
     TdAmeritrade::Client td_ameritrade_client;
     char *symbol = argc < 3 ? nullptr : argv[2];
 
-    std::string quote = td_ameritrade_client.get_quote(symbol);
+    std::string quote = td_ameritrade_client.fetch_quote(symbol);
     std::cout << quote;
 
     exit(0);

@@ -22,7 +22,7 @@ json slice(json input, std::vector<const char *> keys) {
 void TdAmeritrade::Straddle::fetch_current_quote() {
   Formatted::fmt_stream_t fmt = stream_format;
 
-  std::string quote_string = td_ameritrade_client.get_quote(symbol);
+  std::string quote_string = td_ameritrade_client.fetch_quote(symbol);
 
   if (original_quote.empty()) {
     original_quote = json::parse(quote_string)[symbol];
