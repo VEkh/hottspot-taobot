@@ -1,12 +1,11 @@
 #if !defined ETRADE__CLIENT_fetch_quote
 #define ETRADE__CLIENT_fetch_quote
 
-#include "build_request_header.cpp"        // build_request_header
-#include "client.h"                        // ETrade::Client, oauth
+#include "client.h"                        // ETrade::Client
 #include "etrade/deps.cpp"                 // json, xmlpp
+#include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
-#include "load_token.cpp"                  // load_token
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <stdexcept>                       // std::invalid_argument
@@ -73,28 +72,9 @@ std::string ETrade::Client::fetch_quote(char *symbol) {
 }
 
 std::string ETrade::Client::fetch_quote(std::string symbol) {
-  load_token();
   std::string request_url = "https://api.etrade.com/v1/market/quote/" + symbol;
 
-  std::string request_header = build_request_header(
-      request_url, {
-                       {"oauth_token", oauth.token},
-                       {"oauth_token_secret", oauth.token_secret},
-                   });
-
-  CurlClient::props_t curl_props = {
-      .body = "",
-      .body_params = {},
-      .debug_flag = (CurlClient::debug_t)props.debug_flag,
-      .headers = {{"Authorization", request_header}},
-      .method = CurlClient::http_method_t::GET,
-      .query_params = {},
-      .url = request_url,
-  };
-
-  CurlClient curl_client(curl_props);
-  curl_client.request();
-
+  CurlClient curl_client = fetch(request_url);
   std::string response_body = curl_client.response.body;
 
   xmlpp::DomParser parser;

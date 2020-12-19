@@ -7,6 +7,7 @@
 #include "lib/formatted.cpp"               // Formatted::error_message
 #include "load_token.cpp"                  // load_token
 #include <iostream>                        // std::cout, std::endl
+#include <map>                             // std::map
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::stod, std::string
 
@@ -24,11 +25,14 @@ CurlClient ETrade::Client::fetch(char *url) {
 CurlClient ETrade::Client::fetch(std::string url) {
   load_token();
 
-  std::string request_header =
-      build_request_header(url, {
-                                    {"oauth_token", oauth.token},
-                                    {"oauth_token_secret", oauth.token_secret},
-                                });
+  return fetch(url, {
+                        {"oauth_token", oauth.token},
+                        {"oauth_token_secret", oauth.token_secret},
+                    });
+}
+CurlClient ETrade::Client::fetch(
+    std::string url, std::map<std::string, std::string> request_header_params) {
+  std::string request_header = build_request_header(url, request_header_params);
 
   CurlClient::props_t curl_props = {
       .body = "",

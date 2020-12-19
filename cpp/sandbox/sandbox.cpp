@@ -1,17 +1,13 @@
 #include <iostream> // std::cout, std::endl
 #include <string>   // std::string
 
-int main() {
-  std::string str = "foo";
+const char *fallback() { return "skrilla"; }
 
-  switch (str) {
-  case "bar": {
-    std::cout << "bar none" << std::endl;
-    break;
-  }
-  case "foo": {
-    std::cout << "yerrr" << std::endl;
-    break;
-  }
-  }
+void fn(const char *required) { fn(required, fallback()) }
+
+void fn(const char *required, const char *optional) {
+  std::cout << "required: " << required << std::endl;
+  std::cout << "optional: " << optional << std::endl;
 }
+
+int main() { fn("yerrr"); }

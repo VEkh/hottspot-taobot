@@ -17,6 +17,7 @@ public:
 
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
+  CurlClient fetch(std::string, std::map<std::string, std::string>);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();
