@@ -3,6 +3,7 @@
 
 #include "client.h" // ETrade::Client
 #include "fetch_access_token.cpp"
+#include "fetch_quote.cpp"
 #include "load_client_config.cpp" // load_client_config
 #include "refresh_token.cpp"
 

@@ -1,12 +1,17 @@
-#include "lib/utils/string.cpp" // utils::string
-#include <iostream>             // std::cout, std::endl
-#include <string>               // std::string
-
-void log(std::string str) { std::cout << "\"" << str << "\"" << std::endl; }
+#include <iostream> // std::cout, std::endl
+#include <string>   // std::string
 
 int main() {
-  std::string str = "    \r\t\nfo o bar is the shiznit\r \n\n\t";
+  std::string str = "foo";
 
-  str = utils::string::trim(str);
-  log(str);
+  switch (str) {
+  case "bar": {
+    std::cout << "bar none" << std::endl;
+    break;
+  }
+  case "foo": {
+    std::cout << "yerrr" << std::endl;
+    break;
+  }
+  }
 }

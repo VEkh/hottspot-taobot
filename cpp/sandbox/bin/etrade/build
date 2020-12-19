@@ -13,5 +13,6 @@ do
     -o ./build/$src \
     ./src/$src/$src.cpp \
     -lcrypto \
-    -lcurl
-done
+    -lcurl \
+    `PKG_CONFIG_PATH=/usr/local/lib/pkgconfig pkg-config --libs --cflags libxml++-3.0`
+  done

@@ -2,7 +2,7 @@
 #define TD_AMERITRADE__STRADDLE_fetch_current_quote
 
 #include "lib/formatted.cpp" // Formatted
-#include "straddle.h" // TdAmeritrade::Straddle, stream_format, symbol, td_ameritrade_client
+#include "straddle.h" // TdAmeritrade::Straddle, original_quote, stream_format, symbol, td_ameritrade_client
 #include "td_ameritrade/deps.cpp" // json
 #include <iostream>               // std::cout, std::endl
 

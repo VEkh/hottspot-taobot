@@ -9,6 +9,7 @@
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"fetch_access_token          ", "Get authorization token"},
+      {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
       {"refresh_token               ", "Refresh authorization tokens"},
   };
 
@@ -37,6 +38,16 @@ int main(int argc, char *argv[]) {
   if (command == "fetch_access_token") {
     ETrade::Client etrade_client;
     etrade_client.fetch_access_token();
+
+    exit(0);
+  }
+
+  if (command == "fetch_quote") {
+    ETrade::Client etrade_client;
+    char *symbol = argc < 3 ? nullptr : argv[2];
+
+    std::string quote = etrade_client.fetch_quote(symbol);
+    std::cout << quote;
 
     exit(0);
   }
