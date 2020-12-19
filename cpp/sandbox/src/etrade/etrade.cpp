@@ -1,13 +1,15 @@
-#include "client/client.cpp"   // ETrade::Client
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/debug.cpp" // utils::debug
-#include <iostream>            // std::cout, std::endl
-#include <map>                 // std::map
-#include <sstream>             // std::ostringstream
-#include <string>              // std::string
+#include "client/client.cpp"               // ETrade::Client
+#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/formatted.cpp"               // Formatted
+#include "lib/utils/debug.cpp"             // utils::debug
+#include <iostream>                        // std::cout, std::endl
+#include <map>                             // std::map
+#include <sstream>                         // std::ostringstream
+#include <string>                          // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
+      {"fetch <URL>                 ", "Generic authorized request"},
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
       {"refresh_token               ", "Refresh authorization tokens"},
@@ -34,6 +36,16 @@ int main(int argc, char *argv[]) {
   }
 
   std::string command = argv[1];
+
+  if (command == "fetch") {
+    ETrade::Client etrade_client;
+    char *url = argc < 3 ? nullptr : argv[2];
+
+    CurlClient curl_client = etrade_client.fetch(url);
+    std::cout << curl_client.response.body << std::endl;
+
+    exit(0);
+  }
 
   if (command == "fetch_access_token") {
     ETrade::Client etrade_client;

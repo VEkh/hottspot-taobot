@@ -1,6 +1,7 @@
 #if !defined ETRADE__CLIENT_H
 #define ETRADE__CLIENT_H
 
+#include "lib/curl_client/curl_client.h" // CurlClient
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
 #include <map>               // std::map
 #include <string>            // std::string
@@ -14,6 +15,8 @@ public:
     debug_t debug_flag;
   };
 
+  CurlClient fetch(char *);
+  CurlClient fetch(std::string);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();

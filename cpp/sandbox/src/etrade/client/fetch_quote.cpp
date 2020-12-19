@@ -1,10 +1,11 @@
 #if !defined ETRADE__CLIENT_fetch_quote
 #define ETRADE__CLIENT_fetch_quote
 
-#include "client.h"                        // ETrade::Client, tokens
-#include "etrade/deps.cpp"                 // json, xmlpp::DomParser
+#include "build_request_header.cpp"        // build_request_header
+#include "client.h"                        // ETrade::Client, oauth
+#include "etrade/deps.cpp"                 // json, xmlpp
 #include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted::error_message
+#include "lib/formatted.cpp"               // Formatted
 #include "load_token.cpp"                  // load_token
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
@@ -63,7 +64,7 @@ std::string xml_to_json(xmlpp::Element *document, std::string symbol) {
 std::string ETrade::Client::fetch_quote(char *symbol) {
   if (symbol == nullptr) {
     std::string error_message =
-        Formatted::error_message("Please provide a stock symbol");
+        Formatted::error_message("Please provide a stock symbol.");
 
     throw std::invalid_argument(error_message);
   }
