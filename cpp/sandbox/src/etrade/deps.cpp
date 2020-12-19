@@ -12,12 +12,6 @@
 using json = nlohmann::json;
 #endif
 
-#if !defined DEPENDENCY__LIBXMLPP
-#define DEPENDENCY__LIBXMLPP
-// http://libxmlplusplus.sourceforge.net/
-#include <libxml++/libxml++.h> // xmlpp::DomParser
-#endif
-
 // Package: openssl
 #if !defined DEPENDENCY__OPENSSL__EVP
 #define DEPENDENCY__OPENSSL__EVP

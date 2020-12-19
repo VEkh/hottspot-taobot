@@ -2,17 +2,19 @@
 #define ETRADE__CLIENT_fetch_quote
 
 #include "client.h"                        // ETrade::Client
-#include "etrade/deps.cpp"                 // json, xmlpp
+#include "etrade/deps.cpp"                 // json
 #include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <stdexcept>                       // std::invalid_argument
-#include <string>                          // std::stod, std::string
+#include <string>                          // std::string
 
-bool is_valid_response(xmlpp::Element *document) {
-  return !(document->find("//QuoteData//All").empty());
+bool is_valid_response(std::string response_body) {
+  json response_json = json::parse(response_body);
+
+  return response_json["QuoteResponse"].contains("QuoteData");
 }
 
 void terminate(std::string response_body, std::string symbol) {
@@ -28,36 +30,22 @@ void terminate(std::string response_body, std::string symbol) {
 }
 
 // TODO: Move to straddle
-std::string xml_to_json(xmlpp::Element *document, std::string symbol) {
-  xmlpp::Node *current_price_node =
-      document->find("//QuoteData//All//lastTrade").at(0)->get_first_child();
-
-  xmlpp::Node *high_price_node =
-      document->find("//QuoteData//All//high").at(0)->get_first_child();
-
-  xmlpp::Node *low_price_node =
-      document->find("//QuoteData//All//low").at(0)->get_first_child();
-
-  xmlpp::ContentNode *current_price_content =
-      dynamic_cast<xmlpp::ContentNode *>(current_price_node);
-
-  xmlpp::ContentNode *high_price_content =
-      dynamic_cast<xmlpp::ContentNode *>(high_price_node);
-
-  xmlpp::ContentNode *low_price_content =
-      dynamic_cast<xmlpp::ContentNode *>(low_price_node);
-
+json extract_snapshot(std::string response_body, std::string symbol) {
+  json input = json::parse(response_body);
+  json full_quote = input["QuoteResponse"]["QuoteData"].at(0)["All"];
   json output;
 
   std::map<std::string, double> quote = {
-      {"highPrice", std::stod(high_price_content->get_content())},
-      {"lastPrice", std::stod(current_price_content->get_content())},
-      {"lowPrice", std::stod(low_price_content->get_content())},
+      {"highPrice", full_quote["high"]},
+      {"lastPrice", full_quote["lastTrade"]},
+      {"lowPrice", full_quote["low"]},
   };
 
   output[symbol] = quote;
 
-  return output.dump(2);
+  std::cout << "Quote Snapshot: " << output.dump(2) << std::endl;
+
+  return output;
 }
 
 std::string ETrade::Client::fetch_quote(char *symbol) {
@@ -72,16 +60,13 @@ std::string ETrade::Client::fetch_quote(char *symbol) {
 }
 
 std::string ETrade::Client::fetch_quote(std::string symbol) {
-  std::string request_url = "https://api.etrade.com/v1/market/quote/" + symbol;
+  std::string request_url =
+      "https://api.etrade.com/v1/market/quote/" + symbol + ".json";
 
   CurlClient curl_client = fetch(request_url);
   std::string response_body = curl_client.response.body;
 
-  xmlpp::DomParser parser;
-  parser.parse_memory(response_body);
-  xmlpp::Element *document = parser.get_document()->get_root_node();
-
-  if (!is_valid_response(document)) {
+  if (!is_valid_response(response_body)) {
     terminate(response_body, symbol);
   }
 
