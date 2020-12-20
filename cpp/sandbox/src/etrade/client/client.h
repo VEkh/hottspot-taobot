@@ -29,6 +29,7 @@ public:
 private:
   struct client_config_t {
     std::string account_id;
+    std::string account_id_key;
   } client_config;
 
   struct oauth_params_t {
