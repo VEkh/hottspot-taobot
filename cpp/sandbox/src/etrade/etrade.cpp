@@ -2,6 +2,7 @@
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "lib/utils/debug.cpp"             // utils::debug
+#include "straddle/straddle.cpp"           // ETrade::Straddle
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <sstream>                         // std::ostringstream
@@ -12,6 +13,8 @@ void print_usage() {
       {"fetch <URL>                 ", "Generic authorized request"},
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
+      {"manual_straddle <SYMBOL>    ",
+       "Return straddle prices for manual entry"},
       {"refresh_token               ", "Refresh authorization tokens"},
   };
 
@@ -60,6 +63,14 @@ int main(int argc, char *argv[]) {
 
     std::string quote = etrade_client.fetch_quote(symbol);
     std::cout << quote;
+
+    exit(0);
+  }
+
+  if (command == "manual_straddle") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    ETrade::Straddle straddle = ETrade::Straddle(symbol);
+    straddle.manual_run();
 
     exit(0);
   }

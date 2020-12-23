@@ -29,25 +29,6 @@ void terminate(std::string response_body, std::string symbol) {
   exit(1);
 }
 
-// TODO: Move to straddle
-json extract_snapshot(std::string response_body, std::string symbol) {
-  json input = json::parse(response_body);
-  json full_quote = input["QuoteResponse"]["QuoteData"].at(0)["All"];
-  json output;
-
-  std::map<std::string, double> quote = {
-      {"highPrice", full_quote["high"]},
-      {"lastPrice", full_quote["lastTrade"]},
-      {"lowPrice", full_quote["low"]},
-  };
-
-  output[symbol] = quote;
-
-  std::cout << "Quote Snapshot: " << output.dump(2) << std::endl;
-
-  return output;
-}
-
 std::string ETrade::Client::fetch_quote(char *symbol) {
   if (symbol == nullptr) {
     std::string error_message =

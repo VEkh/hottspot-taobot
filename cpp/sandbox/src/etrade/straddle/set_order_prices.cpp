@@ -1,12 +1,12 @@
-#if !defined TD_AMERITRADE__STRADDLE_set_order_prices
-#define TD_AMERITRADE__STRADDLE_set_order_prices
+#if !defined ETRADE__STRADDLE_set_order_prices
+#define ETRADE__STRADDLE_set_order_prices
 
-#include "straddle.h" // TdAmeritrade::Straddle, quote
+#include "straddle.h" // ETrade::Straddle, quote
 
 float TARGET_PROFIT = 0.15;
 float TARGET_TOTAL_MOVEMENT = 0.10;
 
-void TdAmeritrade::Straddle::set_order_prices() {
+void ETrade::Straddle::set_order_prices() {
   float current_price = quote["lastPrice"];
   float high = quote["highPrice"];
   float low = quote["lowPrice"];
