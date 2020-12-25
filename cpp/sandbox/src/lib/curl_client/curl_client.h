@@ -9,7 +9,7 @@
 class CurlClient {
 public:
   enum debug_t { OFF, ON };
-  enum http_method_t { GET, POST };
+  enum http_method_t { GET, POST, PUT };
 
   struct props_t {
     std::string body;
@@ -56,7 +56,7 @@ private:
   std::string build_query_params();
   std::string to_string();
 
-  static constexpr const char *HTTP_METHODS[2] = {"GET", "POST"};
+  static constexpr const char *HTTP_METHODS[3] = {"GET", "POST", "PUT"};
   static size_t write_response_body(char *, size_t, size_t, void *);
   static size_t write_response_headers(char *, size_t, size_t, void *);
 

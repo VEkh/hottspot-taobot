@@ -32,6 +32,10 @@ void CurlClient::set_method() {
     curl_easy_setopt(curl, CURLOPT_POST, 1L);
     break;
   }
+  case http_method_t::PUT: {
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "PUT");
+    break;
+  }
   }
 
   transformed_props.method = method_to_string(props.method);

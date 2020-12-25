@@ -2,6 +2,7 @@
 #define ETRADE__CLIENT
 
 #include "client.h" // ETrade::Client
+#include "cancel_order.cpp"
 #include "fetch.cpp"
 #include "fetch_access_token.cpp"
 #include "fetch_quote.cpp"

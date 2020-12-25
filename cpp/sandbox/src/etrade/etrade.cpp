@@ -10,6 +10,7 @@
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
+      {"cancel_order <ORDER_ID>     ", "Cancel an outsanding order"},
       {"fetch <URL>                 ", "Generic authorized request"},
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
@@ -41,6 +42,17 @@ int main(int argc, char *argv[]) {
   }
 
   std::string command = argv[1];
+
+  if (command == "cancel_order") {
+    ETrade::Client etrade_client;
+
+    int order_id = argc < 3 ? 0 : strtol(argv[2], nullptr, 10);
+
+    CurlClient curl_client = etrade_client.cancel_order(order_id);
+    std::cout << curl_client.response.body << std::endl;
+
+    exit(0);
+  }
 
   if (command == "fetch") {
     ETrade::Client etrade_client;

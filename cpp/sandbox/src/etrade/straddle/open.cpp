@@ -52,11 +52,17 @@ void ETrade::Straddle::open() {
   std::string preview_sell_short_payload =
       build_preview_order_payload("SELL_SHORT", order_prices.sell_short);
 
-  CurlClient preview_buy_curl_client =
-      etrade_client.post(preview_order_url, preview_buy_payload);
+  CurlClient preview_buy_curl_client = etrade_client.post({
+      .body = preview_buy_payload,
+      .method = CurlClient::http_method_t::POST,
+      .url = preview_order_url,
+  });
 
-  CurlClient preview_sell_short_curl_client =
-      etrade_client.post(preview_order_url, preview_sell_short_payload);
+  CurlClient preview_sell_short_curl_client = etrade_client.post({
+      .body = preview_sell_short_payload,
+      .method = CurlClient::http_method_t::POST,
+      .url = preview_order_url,
+  });
 
   handle_request_error(preview_buy_curl_client, "BUY", "Preview");
   handle_request_error(preview_sell_short_curl_client, "SELL_SHORT", "Preview");
@@ -67,11 +73,17 @@ void ETrade::Straddle::open() {
   std::string place_sell_short_payload =
       build_place_order_payload(preview_sell_short_curl_client.response.body);
 
-  CurlClient place_sell_short_curl_client =
-      etrade_client.post(place_order_url, place_sell_short_payload);
+  CurlClient place_sell_short_curl_client = etrade_client.post({
+      .body = place_sell_short_payload,
+      .method = CurlClient::http_method_t::POST,
+      .url = place_order_url,
+  });
 
-  CurlClient place_buy_curl_client =
-      etrade_client.post(place_order_url, place_buy_payload);
+  CurlClient place_buy_curl_client = etrade_client.post({
+      .body = place_buy_payload,
+      .method = CurlClient::http_method_t::POST,
+      .url = place_order_url,
+  });
 
   handle_request_error(place_buy_curl_client, "BUY", "Place");
   handle_request_error(place_sell_short_curl_client, "SELL_SHORT", "Place");

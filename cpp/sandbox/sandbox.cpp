@@ -1,8 +1,14 @@
 #include "lib/utils/string.cpp"
 #include <iostream>
 
-int main() {
-  int num;
+struct structure {
+  int foo = 1;
+  int bar;
+};
 
-  std::cout << num << std::endl;
+int main() {
+  structure yerr = {.foo = 2, .bar = 100};
+
+  std::cout << "foo: " << yerr.foo << std::endl;
+  std::cout << "bar: " << yerr.bar << std::endl;
 }

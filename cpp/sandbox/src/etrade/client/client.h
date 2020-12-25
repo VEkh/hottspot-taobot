@@ -13,14 +13,26 @@ class Client {
 public:
   enum debug_t { OFF, ON };
 
+  struct client_config_t {
+    std::string account_id;
+    std::string account_id_key;
+  } client_config;
+
+  struct post_params_t {
+    std::string body;
+    CurlClient::http_method_t method = CurlClient::http_method_t::POST;
+    std::string url;
+  };
+
   struct props_t {
     debug_t debug_flag;
   };
 
+  CurlClient cancel_order(int);
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
   CurlClient fetch(std::string, std::map<std::string, std::string>);
-  CurlClient post(std::string, std::string);
+  CurlClient post(post_params_t);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();
@@ -28,11 +40,6 @@ public:
 
   Client();
   Client(props_t);
-
-  struct client_config_t {
-    std::string account_id;
-    std::string account_id_key;
-  } client_config;
 
 private:
   struct oauth_params_t {
