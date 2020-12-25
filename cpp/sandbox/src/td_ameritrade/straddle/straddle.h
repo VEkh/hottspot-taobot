@@ -12,7 +12,6 @@ public:
   Straddle(char *, int);
 
   void manual_run();
-  void run();
 
 private:
   struct prices_t {

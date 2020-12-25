@@ -14,8 +14,6 @@ void print_usage() {
       {"manual_straddle <SYMBOL>    ",
        "Return straddle prices for manual entry"},
       {"refresh_tokens              ", "Refresh authorization tokens"},
-      {"straddle <SYMBOL> <QUANTITY>",
-       "Launch straddle strategy for the given symbol"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -68,16 +66,6 @@ int main(int argc, char *argv[]) {
   if (command == "refresh_tokens") {
     TdAmeritrade::Client td_ameritrade_client;
     td_ameritrade_client.refresh_tokens();
-
-    exit(0);
-  }
-
-  if (command == "straddle") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
-
-    TdAmeritrade::Straddle straddle = TdAmeritrade::Straddle(symbol, quantity);
-    straddle.run();
 
     exit(0);
   }

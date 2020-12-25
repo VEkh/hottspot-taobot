@@ -4,7 +4,6 @@
 #include "straddle.h" // TdAmeritrade::Straddle, quantity, symbol, td_ameritrade_client
 #include "lib/formatted.cpp" // Formatted::error_message
 #include "manual_run.cpp"
-#include "run.cpp"
 #include <stdexcept> // std::invalid_argument
 
 TdAmeritrade::Straddle::Straddle(char *symbol_) {
