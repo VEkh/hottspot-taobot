@@ -6,6 +6,7 @@
 #include "fetch_access_token.cpp"
 #include "fetch_quote.cpp"
 #include "load_client_config.cpp" // load_client_config
+#include "post.cpp"
 #include "refresh_token.cpp"
 
 ETrade::Client::Client() { load_client_config(); }

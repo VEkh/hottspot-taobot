@@ -13,8 +13,8 @@ std::string CurlClient::to_string() {
       transformed_props.headers,
   };
 
-  if (!transformed_props.body_params.empty()) {
-    request_parts.push_back("--data '" + transformed_props.body_params + "'");
+  if (!transformed_props.body.empty()) {
+    request_parts.push_back("--data '" + transformed_props.body + "'");
   }
 
   request_parts.push_back("\"" + transformed_props.url + "\"");

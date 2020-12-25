@@ -8,7 +8,6 @@
 
 /*
  * CurlClient
- * HTTP_METHODS
  * curl
  * http_method_t
  * props
@@ -35,7 +34,7 @@ void CurlClient::set_method() {
   }
   }
 
-  transformed_props.method = HTTP_METHODS[props.method];
+  transformed_props.method = method_to_string(props.method);
 }
 
 #endif

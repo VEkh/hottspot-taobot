@@ -16,6 +16,8 @@ void print_usage() {
       {"manual_straddle <SYMBOL>    ",
        "Return straddle prices for manual entry"},
       {"refresh_token               ", "Refresh authorization tokens"},
+      {"straddle <SYMBOL> <QUANTITY>",
+       "Launch straddle strategy for the given symbol"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -69,7 +71,7 @@ int main(int argc, char *argv[]) {
 
   if (command == "manual_straddle") {
     char *symbol = argc < 3 ? nullptr : argv[2];
-    ETrade::Straddle straddle = ETrade::Straddle(symbol);
+    ETrade::Straddle straddle(symbol);
     straddle.manual_run();
 
     exit(0);
@@ -78,6 +80,16 @@ int main(int argc, char *argv[]) {
   if (command == "refresh_token") {
     ETrade::Client etrade_client;
     etrade_client.refresh_token();
+
+    exit(0);
+  }
+
+  if (command == "straddle") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
+
+    ETrade::Straddle straddle(symbol, quantity);
+    straddle.run();
 
     exit(0);
   }

@@ -1,13 +1,8 @@
-#include <iostream> // std::cout, std::endl
-#include <string>   // std::string
+#include "lib/utils/string.cpp"
+#include <iostream>
 
-const char *fallback() { return "skrilla"; }
+int main() {
+  int num;
 
-void fn(const char *required) { fn(required, fallback()) }
-
-void fn(const char *required, const char *optional) {
-  std::cout << "required: " << required << std::endl;
-  std::cout << "optional: " << optional << std::endl;
+  std::cout << num << std::endl;
 }
-
-int main() { fn("yerrr"); }

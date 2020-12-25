@@ -9,7 +9,7 @@
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <stdexcept>                       // std::invalid_argument
-#include <string>                          // std::stod, std::string
+#include <string>                          // std::string
 
 CurlClient ETrade::Client::fetch(char *url) {
   if (url == nullptr) {
@@ -32,9 +32,13 @@ CurlClient ETrade::Client::fetch(std::string url) {
 }
 CurlClient ETrade::Client::fetch(
     std::string url, std::map<std::string, std::string> request_header_params) {
-  std::string request_header = build_request_header(url, request_header_params);
+  std::string request_header = build_request_header({
+      .method = CurlClient::http_method_t::GET,
+      .params = request_header_params,
+      .request_url = url,
+  });
 
-  CurlClient::props_t curl_props = {
+  CurlClient curl_client = CurlClient({
       .body = "",
       .body_params = {},
       .debug_flag = (CurlClient::debug_t)props.debug_flag,
@@ -42,9 +46,8 @@ CurlClient ETrade::Client::fetch(
       .method = CurlClient::http_method_t::GET,
       .query_params = {},
       .url = url,
-  };
+  });
 
-  CurlClient curl_client(curl_props);
   curl_client.request();
 
   return curl_client;

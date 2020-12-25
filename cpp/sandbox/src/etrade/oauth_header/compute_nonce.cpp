@@ -3,6 +3,7 @@
 
 #include "etrade/deps.cpp" // SHA1, SHA_DIGEST_LENGTH
 #include "oauth_header.h"  // ETrade::OAuthHeader, timestamp
+#include <chrono>          // std::chrono
 #include <iomanip>         // std::hex, std::setfill, std::setw
 #include <sstream>         // std::stringstream
 #include <string>          // std::to_string
@@ -21,8 +22,12 @@ std::string to_hex_string(unsigned char *input) {
 }
 
 std::string ETrade::OAuthHeader::compute_nonce() {
+  unsigned long now = std::chrono::duration_cast<std::chrono::milliseconds>(
+                          std::chrono::system_clock::now().time_since_epoch())
+                          .count();
+
   const unsigned char *timestamp_str =
-      (unsigned char *)std::to_string(timestamp).c_str();
+      (unsigned char *)std::to_string(now).c_str();
 
   unsigned char output[SHA_DIGEST_LENGTH];
 

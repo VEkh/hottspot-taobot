@@ -8,13 +8,6 @@
 namespace ETrade {
 class Straddle {
 public:
-  Straddle(char *);
-  Straddle(char *, int);
-
-  void manual_run();
-  void run();
-
-private:
   struct prices_t {
     float close_limit;
     float close_stop;
@@ -23,22 +16,39 @@ private:
     float open_stop_limit;
   };
 
+  Straddle(char *);
+  Straddle(char *, int);
+
+  void manual_run();
+  void run();
+
+private:
   struct order_prices_t {
     prices_t buy;
     prices_t sell_short;
   } order_prices;
 
-  Formatted::fmt_stream_t stream_format = Formatted::stream();
+  struct position_order_ids_t {
+    int open_order_id;
+    int profit_order_id;
+    int stop_loss_order_id;
+  };
+
   ETrade::Client etrade_client;
+  Formatted::fmt_stream_t stream_format = Formatted::stream();
   char *symbol;
   int quantity;
   json original_quote;
   json quote;
+  position_order_ids_t buy_position_order_ids;
+  position_order_ids_t sell_short_position_order_ids;
 
-  json build_order_open_payload(const char *, prices_t);
+  std::string build_place_order_payload(std::string);
+  std::string build_preview_order_payload(const char *, prices_t);
+  std::string compute_client_order_id();
   void log_manual_run_prices();
   void log_start_message();
-  void open_straddle();
+  void open();
   void set_current_quote();
   void set_order_prices();
 };

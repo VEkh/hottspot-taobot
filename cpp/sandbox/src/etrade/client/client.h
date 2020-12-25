@@ -1,7 +1,9 @@
 #if !defined ETRADE__CLIENT_H
 #define ETRADE__CLIENT_H
 
-#include "lib/curl_client/curl_client.h" // CurlClient
+#include "etrade/deps.cpp"                    // json
+#include "etrade/oauth_header/oauth_header.h" // ETrade::OAuthHeader
+#include "lib/curl_client/curl_client.h"      // CurlClient
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
 #include <map>               // std::map
 #include <string>            // std::string
@@ -18,6 +20,7 @@ public:
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
   CurlClient fetch(std::string, std::map<std::string, std::string>);
+  CurlClient post(std::string, std::string);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();
@@ -26,12 +29,12 @@ public:
   Client();
   Client(props_t);
 
-private:
   struct client_config_t {
     std::string account_id;
     std::string account_id_key;
   } client_config;
 
+private:
   struct oauth_params_t {
     std::string consumer_key;
     std::string consumer_secret;
@@ -48,8 +51,7 @@ private:
       .debug_flag = debug_t::OFF,
   };
 
-  std::string build_request_header(std::string,
-                                   std::map<std::string, std::string>);
+  std::string build_request_header(OAuthHeader::props_t);
   std::string fetch_token(std::string);
 
   void fetch_request_token();

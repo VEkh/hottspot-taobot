@@ -1,5 +1,5 @@
-#if !defined CURL_CLIENT_set_body_params
-#define CURL_CLIENT_set_body_params
+#if !defined CURL_CLIENT_set_request_body
+#define CURL_CLIENT_set_request_body
 
 #include "curl_client.h"        // CurlClient, curl, props, transformed_props
 #include "lib/utils/uri.cpp"    // utils::uri
@@ -11,12 +11,12 @@
 #include <utility> // std::pair
 #include <vector>  // std::vector
 
-void CurlClient::set_body_params() {
-  std::string params_string = props.body;
+void CurlClient::set_request_body() {
+  std::string body = props.body;
 
   std::map<std::string, std::string> body_params = props.body_params;
 
-  if (params_string.empty() && body_params.empty()) {
+  if (body.empty() && body_params.empty()) {
     return;
   }
 
@@ -30,13 +30,12 @@ void CurlClient::set_body_params() {
                         utils::uri::percent_encode(param.second));
                   });
 
-    params_string = utils::vector::join(param_pairs, "&");
+    body = utils::vector::join(param_pairs, "&");
   }
 
-  transformed_props.body_params = params_string;
-  curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, params_string.size());
-  curl_easy_setopt(curl, CURLOPT_POSTFIELDS,
-                   transformed_props.body_params.c_str());
+  transformed_props.body = body;
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDSIZE, body.size());
+  curl_easy_setopt(curl, CURLOPT_POSTFIELDS, transformed_props.body.c_str());
 }
 
 #endif

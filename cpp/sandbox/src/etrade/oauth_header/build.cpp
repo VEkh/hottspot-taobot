@@ -8,6 +8,8 @@
 #include <string>              // std::string, std::to_string
 
 std::string ETrade::OAuthHeader::build() {
+  nonce = compute_nonce();
+
   params = {
       {"oauth_callback", props.params["oauth_callback"]},
       {"oauth_consumer_key", props.params["oauth_consumer_key"]},
