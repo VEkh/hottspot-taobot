@@ -45,14 +45,14 @@ private:
   } transformed_props;
 
   CURL *curl = curl_easy_init();
+  Formatted::fmt_stream_t stream_format = Formatted::stream();
 
-  CurlClient::props_t props = {
+  props_t props = {
       .body = "",
       .body_params = {},
       .debug_flag = debug_t::OFF,
   };
 
-  Formatted::fmt_stream_t stream_format = Formatted::stream();
   std::string build_query_params();
   std::string to_string();
 

@@ -18,27 +18,42 @@ void ETrade::Straddle::set_order_prices() {
   float open_stop_limit_price_change = target_movement * current_price;
   float open_stop_price_change = 0.9 * open_stop_limit_price_change;
 
-  order_prices.buy.open_stop = current_price + open_stop_price_change;
-  order_prices.buy.open_stop_limit =
-      current_price + open_stop_limit_price_change;
-  order_prices.buy.close_limit =
+  buy_open_order.action = order_action_t::BUY;
+  buy_open_order.limit_price = current_price + open_stop_limit_price_change;
+  buy_open_order.stop_price = current_price + open_stop_price_change;
+  buy_open_order.type = order_type_t::STOP_LIMIT;
+
+  buy_profit_order.action = order_action_t::SELL;
+  buy_profit_order.limit_price =
       current_price + (target_profit_ratio * open_stop_limit_price_change);
-  order_prices.buy.close_stop =
-      current_price - (target_profit_ratio * open_stop_limit_price_change);
-  order_prices.buy.close_stop_limit =
+  buy_profit_order.type = order_type_t::LIMIT;
+
+  buy_stop_loss_order.action = order_action_t::SELL;
+  buy_stop_loss_order.limit_price =
       current_price -
       (1.01 * target_profit_ratio * open_stop_limit_price_change);
-
-  order_prices.sell_short.open_stop = current_price - open_stop_price_change;
-  order_prices.sell_short.open_stop_limit =
-      current_price - open_stop_limit_price_change;
-  order_prices.sell_short.close_limit =
+  buy_stop_loss_order.stop_price =
       current_price - (target_profit_ratio * open_stop_limit_price_change);
-  order_prices.sell_short.close_stop =
-      current_price + (target_profit_ratio * open_stop_limit_price_change);
-  order_prices.sell_short.close_stop_limit =
+  buy_stop_loss_order.type = order_type_t::STOP_LIMIT;
+
+  sell_short_open_order.action = order_action_t::SELL_SHORT;
+  sell_short_open_order.limit_price =
+      current_price - open_stop_limit_price_change;
+  sell_short_open_order.stop_price = current_price - open_stop_price_change;
+  sell_short_open_order.type = order_type_t::STOP_LIMIT;
+
+  sell_short_profit_order.action = order_action_t::BUY_TO_COVER;
+  sell_short_profit_order.limit_price =
+      current_price - (target_profit_ratio * open_stop_limit_price_change);
+  sell_short_profit_order.type = order_type_t::LIMIT;
+
+  sell_short_stop_loss_order.action = order_action_t::BUY_TO_COVER;
+  sell_short_stop_loss_order.limit_price =
       current_price +
       (1.01 * target_profit_ratio * open_stop_limit_price_change);
+  sell_short_stop_loss_order.stop_price =
+      current_price + (target_profit_ratio * open_stop_limit_price_change);
+  sell_short_stop_loss_order.type = order_type_t::STOP_LIMIT;
 }
 
 #endif

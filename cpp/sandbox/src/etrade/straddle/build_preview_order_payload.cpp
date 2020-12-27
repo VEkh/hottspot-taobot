@@ -4,12 +4,19 @@
 #include "compute_client_order_id.cpp" // compute_client_order_id
 #include "etrade/deps.cpp"             // json, _json
 #include "lib/utils/float.cpp"         // utils::float_
-#include "straddle.h" // ETrade::Straddle, prices_t, quantity, symbol
-#include <string>     // std::string
+#include <string>                      // std::string
 
-std::string
-ETrade::Straddle::build_preview_order_payload(const char *order_type,
-                                              prices_t prices) {
+/*
+ * ETrade::Straddle
+ * ORDER_ACTIONS
+ * ORDER_TYPES
+ * order_t
+ * quantity
+ * symbol
+ */
+#include "straddle.h"
+
+std::string ETrade::Straddle::build_preview_order_payload(order_t order) {
   json payload = R"(
     {
       "PreviewOrderRequest":{
@@ -20,7 +27,7 @@ ETrade::Straddle::build_preview_order_payload(const char *order_type,
     }
   )"_json;
 
-  json order = R"(
+  json order_json = R"(
     {
       "Instrument":[
         {
@@ -42,14 +49,17 @@ ETrade::Straddle::build_preview_order_payload(const char *order_type,
     }
   )"_json;
 
-  order["Instrument"][0]["Product"]["symbol"] = symbol;
-  order["Instrument"][0]["orderAction"] = order_type;
-  order["Instrument"][0]["quantity"] = quantity;
-  order["limitPrice"] = utils::float_::to_currency(prices.open_stop_limit);
-  order["stopPrice"] = utils::float_::to_currency(prices.open_stop);
+  order_json["Instrument"][0]["Product"]["symbol"] = symbol;
+  order_json["Instrument"][0]["orderAction"] = ORDER_ACTIONS[order.action];
+  order_json["Instrument"][0]["quantity"] = quantity;
+  order_json["limitPrice"] = utils::float_::to_currency(order.limit_price);
+  order_json["priceType"] = ORDER_TYPES[order.type];
+  order_json["stopPrice"] = utils::float_::to_currency(order.stop_price);
 
-  payload["PreviewOrderRequest"]["Order"].push_back(order);
-  payload["PreviewOrderRequest"]["clientOrderId"] = compute_client_order_id();
+  payload["PreviewOrderRequest"]["Order"].push_back(order_json);
+
+  payload["PreviewOrderRequest"]["clientOrderId"] =
+      compute_client_order_id(payload.dump());
 
   return payload.dump();
 }

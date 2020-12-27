@@ -17,39 +17,38 @@ void ETrade::Straddle::log_manual_run_prices() {
   std::cout << std::endl;
   std::cout << fmt.bold << fmt.green;
   std::cout << "Buy (Open)         => Stop Limit: "
-            << utils::float_::to_currency(order_prices.buy.open_stop_limit)
+            << utils::float_::to_currency(buy_open_order.limit_price)
             << " • Stop: "
-            << utils::float_::to_currency(order_prices.buy.open_stop)
+            << utils::float_::to_currency(buy_open_order.stop_price)
             << std::endl;
 
   std::cout << "Buy (Close)        => Stop Limit: "
-            << utils::float_::to_currency(order_prices.buy.close_stop_limit)
+            << utils::float_::to_currency(buy_stop_loss_order.limit_price)
             << " • Stop: "
-            << utils::float_::to_currency(order_prices.buy.close_stop)
+            << utils::float_::to_currency(buy_stop_loss_order.stop_price)
             << std::endl;
 
   std::cout << "Buy (Close)        =>      Limit: "
-            << utils::float_::to_currency(order_prices.buy.close_limit)
+            << utils::float_::to_currency(buy_profit_order.limit_price)
             << std::endl;
 
   std::cout << std::endl;
   std::cout << fmt.bold << fmt.red;
   std::cout << "Sell Short (Open)  => Stop Limit: "
-            << utils::float_::to_currency(
-                   order_prices.sell_short.open_stop_limit)
+            << utils::float_::to_currency(sell_short_open_order.limit_price)
             << " • Stop: "
-            << utils::float_::to_currency(order_prices.sell_short.open_stop)
+            << utils::float_::to_currency(sell_short_open_order.stop_price)
             << std::endl;
 
   std::cout << "Sell Short (Close) => Stop Limit: "
             << utils::float_::to_currency(
-                   order_prices.sell_short.close_stop_limit)
+                   sell_short_stop_loss_order.limit_price)
             << " • Stop: "
-            << utils::float_::to_currency(order_prices.sell_short.close_stop)
+            << utils::float_::to_currency(sell_short_stop_loss_order.stop_price)
             << std::endl;
 
   std::cout << "Sell Short (Close) =>      Limit: "
-            << utils::float_::to_currency(order_prices.sell_short.close_limit)
+            << utils::float_::to_currency(sell_short_profit_order.limit_price)
             << std::endl;
 
   std::cout << fmt.reset;

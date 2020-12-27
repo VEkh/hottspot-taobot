@@ -2,6 +2,7 @@
 #define ETRADE__OAUTH_HEADER_build
 
 #include "build_signature.cpp" // build_signature
+#include "compute_nonce.cpp"   // compute_nonce
 #include "oauth_header.h"      // ETrade::OAuthHeader,, timestamp timestamp
 #include <map>                 // std::map
 #include <sstream>             // std::stringstream

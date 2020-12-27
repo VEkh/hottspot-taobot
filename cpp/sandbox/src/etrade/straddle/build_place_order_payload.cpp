@@ -15,7 +15,8 @@ ETrade::Straddle::build_place_order_payload(std::string preview_response) {
   payload["PlaceOrderRequest"] =
       utils::json::jslice(preview, {"Order", "PreviewIds", "orderType"});
 
-  payload["PlaceOrderRequest"]["clientOrderId"] = compute_client_order_id();
+  payload["PlaceOrderRequest"]["clientOrderId"] =
+      compute_client_order_id(payload.dump());
 
   return payload.dump();
 }

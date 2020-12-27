@@ -7,32 +7,45 @@
 #include "lib/formatted.cpp"               // Formatted
 #include "lib/utils/float.cpp"             // utils::float_
 #include "lib/utils/string.cpp"            // utils::string
-#include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol, etrade_client
-#include <iostream> // std::cout, std::endl
+#include <chrono>                          // std::chrono
+#include <cmath>                           // pow
+#include <iostream>                        // std::cout, std::endl
+#include <thread>                          // std::this_thread
 
-void handle_request_error(CurlClient curl_client, const char *order_type,
-                          std::string action) {
-  json preview_response = json::parse(curl_client.response.body);
+/*
+ * ETrade::Straddle
+ * etrade_client
+ * order_status_t
+ * order_t
+ * stream_format
+ */
+#include "straddle.h"
 
-  if (preview_response.contains(action + "OrderResponse")) {
-    return;
+CurlClient handle_request_error(CurlClient curl_client, const char *order_type,
+                                std::string action) {
+  json response_body = json::parse(curl_client.response.body);
+
+  if (response_body.contains(action + "OrderResponse")) {
+    return curl_client;
   }
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   std::cout << fmt.bold << fmt.red;
-  std::cout << "❌ Something went wrong while "
-            << utils::string::downcase(action) << "ing the " << order_type
+  std::cout << "❌ Something went wrong while trying to "
+            << utils::string::downcase(action) << " the " << order_type
             << " order: " << std::endl;
-  std::cout << preview_response.dump(2) << std::endl;
+  std::cout << response_body.dump(2) << std::endl;
   std::cout << fmt.reset;
 
   exit(1);
 }
 
-int extract_order_id(std::string response_body) {
+void update_order(ETrade::Straddle::order_t order, std::string response_body) {
   json response = json::parse(response_body);
-  return response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
+
+  order.id = response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
+  order.status = ETrade::Straddle::order_status_t::ORDER_OPEN;
 }
 
 void ETrade::Straddle::open() {
@@ -46,11 +59,10 @@ void ETrade::Straddle::open() {
                                 etrade_client.client_config.account_id_key +
                                 "/orders/place.json";
 
-  std::string preview_buy_payload =
-      build_preview_order_payload("BUY", order_prices.buy);
+  std::string preview_buy_payload = build_preview_order_payload(buy_open_order);
 
   std::string preview_sell_short_payload =
-      build_preview_order_payload("SELL_SHORT", order_prices.sell_short);
+      build_preview_order_payload(sell_short_open_order);
 
   CurlClient preview_buy_curl_client = etrade_client.post({
       .body = preview_buy_payload,
@@ -85,23 +97,12 @@ void ETrade::Straddle::open() {
       .url = place_order_url,
   });
 
-  handle_request_error(place_buy_curl_client, "BUY", "Place");
-  handle_request_error(place_sell_short_curl_client, "SELL_SHORT", "Place");
-
-  buy_position_order_ids.open_order_id =
-      extract_order_id(place_buy_curl_client.response.body);
-  sell_short_position_order_ids.open_order_id =
-      extract_order_id(place_sell_short_curl_client.response.body);
+  update_order(buy_open_order, place_buy_curl_client.response.body);
+  update_order(sell_short_open_order,
+               place_sell_short_curl_client.response.body);
 
   std::cout << fmt.bold << fmt.green << std::endl;
   std::cout << "✅ Straddle successfully opened!" << std::endl;
-
-  std::cout << "Place Buy Response: " << place_buy_curl_client.response.body
-            << std::endl;
-
-  std::cout << "Place Sell Short Response: "
-            << place_sell_short_curl_client.response.body << std::endl;
-
   std::cout << fmt.reset;
 }
 

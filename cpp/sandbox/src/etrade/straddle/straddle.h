@@ -8,12 +8,44 @@
 namespace ETrade {
 class Straddle {
 public:
-  struct prices_t {
-    float close_limit;
-    float close_stop;
-    float close_stop_limit;
-    float open_stop;
-    float open_stop_limit;
+  enum order_action_t {
+    BUY,
+    BUY_TO_COVER,
+    SELL,
+    SELL_SHORT,
+  };
+
+  enum order_status_t {
+    ORDER_CANCELLED,
+    ORDER_EXECUTED,
+    ORDER_OPEN,
+  };
+
+  enum order_type_t {
+    LIMIT,
+    STOP_LIMIT,
+  };
+
+  enum status_t {
+    CLOSED,
+    COMPLETE,
+    OPEN,
+    PENDING,
+  };
+
+  struct order_t {
+    order_action_t action;
+    int id;
+    double limit_price;
+    order_status_t status;
+    double stop_price;
+    order_type_t type;
+  };
+
+  const char *ORDER_STATUSES[3] = {
+      "CANCELLED",
+      "EXECUTED",
+      "OPEN",
   };
 
   Straddle(char *);
@@ -23,29 +55,37 @@ public:
   void run();
 
 private:
-  struct order_prices_t {
-    prices_t buy;
-    prices_t sell_short;
-  } order_prices;
+  const char *ORDER_ACTIONS[4] = {
+      "BUY",
+      "BUY_TO_COVER",
+      "SELL",
+      "SELL_SHORT",
+  };
 
-  struct position_order_ids_t {
-    int open_order_id;
-    int profit_order_id;
-    int stop_loss_order_id;
+  const char *ORDER_TYPES[2] = {
+      "LIMIT",
+      "STOP_LIMIT",
   };
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t stream_format = Formatted::stream();
   char *symbol;
   int quantity;
+
   json original_quote;
   json quote;
-  position_order_ids_t buy_position_order_ids;
-  position_order_ids_t sell_short_position_order_ids;
 
+  order_t buy_open_order;
+  order_t buy_profit_order;
+  order_t buy_stop_loss_order;
+  order_t sell_short_open_order;
+  order_t sell_short_profit_order;
+  order_t sell_short_stop_loss_order;
+
+  status_t status();
   std::string build_place_order_payload(std::string);
-  std::string build_preview_order_payload(const char *, prices_t);
-  std::string compute_client_order_id();
+  std::string build_preview_order_payload(order_t);
+  std::string compute_client_order_id(std::string);
   void log_manual_run_prices();
   void log_start_message();
   void open();

@@ -18,7 +18,7 @@ public:
   OAuthHeader(){};
   OAuthHeader(props_t);
   std::string build();
-  std::string compute_nonce();
+  std::string compute_nonce(std::string);
 
 private:
   props_t props;
