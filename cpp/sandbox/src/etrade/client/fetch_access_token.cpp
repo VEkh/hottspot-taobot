@@ -32,7 +32,7 @@ void ETrade::Client::fetch_access_token() {
   std::cout << std::endl;
 
   std::string token_response =
-      fetch_token("https://api.etrade.com/oauth/access_token");
+      fetch_token(client_config.base_url + "/oauth/access_token");
 
   write_token(token_response);
 }

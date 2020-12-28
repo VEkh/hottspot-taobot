@@ -1,7 +1,7 @@
 #if !defined ETRADE__CLIENT_fetch_request_token
 #define ETRADE__CLIENT_fetch_request_token
 
-#include "client.h"  // ETrade::Client, props, stream_format
+#include "client.h"  // ETrade::Client, client_config, props, stream_format
 #include "fetch.cpp" // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
@@ -13,7 +13,7 @@
 void ETrade::Client::fetch_request_token() {
   Formatted::fmt_stream_t fmt = stream_format;
   CurlClient curl_client =
-      fetch("https://api.etrade.com/oauth/request_token", {});
+      fetch(client_config.base_url + "/oauth/request_token", {});
 
   std::string response_body = curl_client.response.body;
 

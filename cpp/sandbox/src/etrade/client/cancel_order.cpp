@@ -17,7 +17,7 @@ CurlClient ETrade::Client::cancel_order(int order_id) {
     throw std::invalid_argument(message);
   }
 
-  std::string url = "https://api.etrade.com/v1/accounts/" +
+  std::string url = client_config.base_url + "/accounts/" +
                     client_config.account_id_key + "/orders/cancel.json";
 
   json body = R"(

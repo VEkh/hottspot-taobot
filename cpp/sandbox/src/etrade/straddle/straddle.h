@@ -82,10 +82,16 @@ private:
   order_t sell_short_profit_order;
   order_t sell_short_stop_loss_order;
 
+  CurlClient handle_request_error(CurlClient, order_action_t, std::string);
+  CurlClient place_order(order_t);
+  CurlClient preview_order(order_t);
+
   status_t status();
+
   std::string build_place_order_payload(std::string);
   std::string build_preview_order_payload(order_t);
   std::string compute_client_order_id(std::string);
+
   void log_manual_run_prices();
   void log_start_message();
   void open();

@@ -1,4 +1,0 @@
-#!/bin/bash
-
-g++ -o ./.output parse_response.cpp -lcurl && ./.output $@;
-\rm -f ./.output

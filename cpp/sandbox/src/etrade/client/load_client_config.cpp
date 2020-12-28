@@ -21,10 +21,8 @@ void ETrade::Client::load_client_config() {
   config_file >> config_json;
 
   const char *required_keys[] = {
-      "account_id",
-      "account_id_key",
-      "oauth_consumer_key",
-      "oauth_consumer_secret",
+      "account_id",         "account_id_key",        "base_url",
+      "oauth_consumer_key", "oauth_consumer_secret",
   };
 
   for (const char *key : required_keys) {
@@ -43,6 +41,7 @@ void ETrade::Client::load_client_config() {
   client_config = {
       .account_id = config_json["account_id"],
       .account_id_key = config_json["account_id_key"],
+      .base_url = config_json["base_url"],
   };
 
   oauth = {

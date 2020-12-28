@@ -1,7 +1,7 @@
 #if !defined ETRADE__CLIENT_fetch_quote
 #define ETRADE__CLIENT_fetch_quote
 
-#include "client.h"                        // ETrade::Client
+#include "client.h"                        // ETrade::Client, client_config
 #include "etrade/deps.cpp"                 // json
 #include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
@@ -42,7 +42,7 @@ std::string ETrade::Client::fetch_quote(char *symbol) {
 
 std::string ETrade::Client::fetch_quote(std::string symbol) {
   std::string request_url =
-      "https://api.etrade.com/v1/market/quote/" + symbol + ".json";
+      client_config.base_url + "/market/quote/" + symbol + ".json";
 
   CurlClient curl_client = fetch(request_url);
   std::string response_body = curl_client.response.body;

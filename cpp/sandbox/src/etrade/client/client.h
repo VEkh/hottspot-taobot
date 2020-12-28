@@ -16,6 +16,7 @@ public:
   struct client_config_t {
     std::string account_id;
     std::string account_id_key;
+    std::string base_url;
   } client_config;
 
   struct post_params_t {
