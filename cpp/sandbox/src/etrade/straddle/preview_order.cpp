@@ -8,7 +8,7 @@
 
 CurlClient ETrade::Straddle::preview_order(order_t order) {
   std::string request_url =
-      etrade_client.client_config.base_url + "/accounts/" +
+      etrade_client.client_config.base_url + "/v1/accounts/" +
       etrade_client.client_config.account_id_key + "/orders/preview.json";
 
   std::string payload = build_preview_order_payload(order);

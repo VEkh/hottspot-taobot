@@ -1,4 +1,8 @@
-#include "lib/utils/time.cpp"
 #include <iostream>
+#include <string>
 
-int main() { std::cout << utils::time::epoch("milliseconds") << std::endl; }
+int main() {
+  std::string str = "foobar";
+  size_t size = 1;
+  std::cout << (size + 1) << std::endl;
+}

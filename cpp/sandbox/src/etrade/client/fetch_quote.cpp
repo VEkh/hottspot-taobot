@@ -42,7 +42,7 @@ std::string ETrade::Client::fetch_quote(char *symbol) {
 
 std::string ETrade::Client::fetch_quote(std::string symbol) {
   std::string request_url =
-      client_config.base_url + "/market/quote/" + symbol + ".json";
+      client_config.base_url + "/v1/market/quote/" + symbol + ".json";
 
   CurlClient curl_client = fetch(request_url);
   std::string response_body = curl_client.response.body;

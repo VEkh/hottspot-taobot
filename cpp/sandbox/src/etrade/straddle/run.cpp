@@ -6,7 +6,8 @@
 #include "set_current_quote.cpp" // set_current_quote
 #include "set_order_prices.cpp"  // set_order_prices
 #include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol, etrade_client
-#include <iostream> // std::cout, std::endl
+#include "watch.cpp" // watch
+#include <iostream>  // std::cout, std::endl
 
 void ETrade::Straddle::log_start_message() {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -23,6 +24,7 @@ void ETrade::Straddle::run() {
   set_current_quote();
   set_order_prices();
   open();
+  watch();
 }
 
 #endif

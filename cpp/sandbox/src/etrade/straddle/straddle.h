@@ -73,6 +73,7 @@ private:
   int quantity;
 
   json original_quote;
+  json placed_orders;
   json quote;
 
   order_t buy_open_order;
@@ -92,11 +93,14 @@ private:
   std::string build_preview_order_payload(order_t);
   std::string compute_client_order_id(std::string);
 
+  void fetch_orders();
   void log_manual_run_prices();
   void log_start_message();
   void open();
   void set_current_quote();
   void set_order_prices();
+  void watch();
+  void watch_buy_positions();
 };
 } // namespace ETrade
 
