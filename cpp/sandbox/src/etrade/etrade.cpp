@@ -6,11 +6,13 @@
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <sstream>                         // std::ostringstream
+#include <stdexcept>                       // std::invalid_argument
+#include <stdlib.h>                        // strtol
 #include <string>                          // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"cancel_order <ORDER_ID>     ", "Cancel an outsanding order"},
+      {"cancel_orders <ORDER_IDS>   ", "Cancel outsanding orders"},
       {"fetch <URL>                 ", "Generic authorized request"},
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
@@ -43,13 +45,22 @@ int main(int argc, char *argv[]) {
 
   std::string command = argv[1];
 
-  if (command == "cancel_order") {
+  if (command == "cancel_orders") {
     ETrade::Client etrade_client;
 
-    int order_id = argc < 3 ? 0 : strtol(argv[2], nullptr, 10);
+    if (argc < 3) {
+      std::string message =
+          Formatted::error_message("Please provide at least one order id.");
 
-    CurlClient curl_client = etrade_client.cancel_order(order_id);
-    std::cout << curl_client.response.body << std::endl;
+      throw std::invalid_argument(message);
+    }
+
+    for (int i = 2; i < argc; i++) {
+      int order_id = strtol(argv[i], nullptr, 10);
+
+      CurlClient curl_client = etrade_client.cancel_order(order_id);
+      std::cout << curl_client.response.body << std::endl;
+    }
 
     exit(0);
   }
