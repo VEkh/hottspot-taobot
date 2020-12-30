@@ -89,7 +89,7 @@ void ETrade::Straddle::watch_sell_short() {
     const char *status = get_order_status(sell_short_stop_loss_order);
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
-      sell_short_stop_loss_order.status == order_status_t::ORDER_EXECUTED;
+      sell_short_stop_loss_order.status = order_status_t::ORDER_EXECUTED;
 
       std::cout << fmt.bold << fmt.red << std::endl;
       std::cout << "😭 SELL_SHORT: Stop loss order executed: \n" << std::endl;

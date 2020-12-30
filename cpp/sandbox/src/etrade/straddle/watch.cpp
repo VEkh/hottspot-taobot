@@ -26,6 +26,9 @@ void ETrade::Straddle::watch() {
     std::this_thread::sleep_for(std::chrono::seconds(1));
   }
 
+  std::cout << fmt.bold << fmt.cyan << std::endl;
+  std::cout << "☑ Completed straddling " << fmt.blue << quantity << fmt.cyan
+            << " share(s) of " << fmt.blue << symbol << std::endl;
   std::cout << fmt.reset;
 }
 

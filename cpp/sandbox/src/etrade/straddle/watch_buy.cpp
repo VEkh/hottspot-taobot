@@ -87,7 +87,7 @@ void ETrade::Straddle::watch_buy() {
     const char *status = get_order_status(buy_stop_loss_order);
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
-      buy_stop_loss_order.status == order_status_t::ORDER_EXECUTED;
+      buy_stop_loss_order.status = order_status_t::ORDER_EXECUTED;
 
       std::cout << fmt.bold << fmt.red << std::endl;
       std::cout << "😭 BUY: Stop loss order executed: \n" << std::endl;

@@ -1,10 +1,10 @@
 #if !defined ETRADE__STRADDLE_run
 #define ETRADE__STRADDLE_run
 
-#include "lib/formatted.cpp"     // Formatted
-#include "open.cpp"              // open
 #include "fetch_and_set_quote.cpp" // fetch_and_set_quote
-#include "set_order_prices.cpp"  // set_order_prices
+#include "lib/formatted.cpp"       // Formatted
+#include "open.cpp"                // open
+#include "set_order_prices.cpp"    // set_order_prices
 #include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol, etrade_client
 #include "watch.cpp" // watch
 #include <iostream>  // std::cout, std::endl
