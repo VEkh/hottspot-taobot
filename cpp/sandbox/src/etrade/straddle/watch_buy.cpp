@@ -1,5 +1,5 @@
-#if !defined ETRADE__STRADDLE_watch_buy_positions
-#define ETRADE__STRADDLE_watch_buy_positions
+#if !defined ETRADE__STRADDLE_watch_buy
+#define ETRADE__STRADDLE_watch_buy
 
 /*
  * ETrade::Straddle
@@ -17,7 +17,7 @@
 #include "place_order.cpp"      // place_order
 #include <iostream>             // std::cout, std::endl
 
-void ETrade::Straddle::watch_buy_positions() {
+void ETrade::Straddle::watch_buy() {
   Formatted::fmt_stream_t fmt = stream_format;
 
   if (buy_open_order.id &&

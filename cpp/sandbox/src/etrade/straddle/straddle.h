@@ -107,7 +107,8 @@ private:
   void open();
   void set_order_prices();
   void watch();
-  void watch_buy_positions();
+  void watch_buy();
+  void watch_sell_short();
 };
 } // namespace ETrade
 
