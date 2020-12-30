@@ -2,12 +2,9 @@
 #include <iostream>
 
 int main() {
-  json j = {
-      {"id", 1},
-      {"foo", "bar"},
-  };
+  json j;
 
-  if (0.0) {
-    std::cout << j.dump() << std::endl;
+  if (j["yerr"]["foo"]) {
+    std::cout << "😲" << std::endl;
   }
 }
