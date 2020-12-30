@@ -45,8 +45,7 @@ ETrade::Straddle::build_preview_order_payload(const order_t &order) {
       "limitPrice":444.44,
       "marketSession":"REGULAR",
       "orderTerm":"GOOD_FOR_DAY",
-      "priceType":"STOP_LIMIT",
-      "stopPrice":444.40
+      "priceType":"STOP_LIMIT"
     }
   )"_json;
 
@@ -55,7 +54,10 @@ ETrade::Straddle::build_preview_order_payload(const order_t &order) {
   order_json["Instrument"][0]["quantity"] = quantity;
   order_json["limitPrice"] = utils::float_::to_currency(order.limit_price);
   order_json["priceType"] = ORDER_TYPES[order.type];
-  order_json["stopPrice"] = utils::float_::to_currency(order.stop_price);
+
+  if (order.type == order_type_t::STOP_LIMIT) {
+    order_json["stopPrice"] = utils::float_::to_currency(order.stop_price);
+  }
 
   payload["PreviewOrderRequest"]["Order"].push_back(order_json);
 

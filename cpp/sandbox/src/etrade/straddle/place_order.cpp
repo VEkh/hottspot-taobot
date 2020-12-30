@@ -5,13 +5,10 @@
 #include "etrade/deps.cpp"                 // json
 #include "handle_request_error.cpp"        // handle_request_error
 #include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
 #include "preview_order.cpp"               // preview_order
 #include "straddle.h" // ETrade::Straddle, etrade_client, order_t
 
 CurlClient ETrade::Straddle::place_order(order_t &order) {
-  Formatted::fmt_stream_t fmt = stream_format;
-
   std::string request_url =
       etrade_client.client_config.base_url + "/v1/accounts/" +
       etrade_client.client_config.account_id_key + "/orders/place.json";

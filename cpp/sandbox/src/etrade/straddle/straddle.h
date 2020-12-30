@@ -85,6 +85,7 @@ private:
   order_t sell_short_profit_order;
   order_t sell_short_stop_loss_order;
 
+  CurlClient cancel_order(order_t &);
   CurlClient handle_request_error(const CurlClient &, const order_action_t &,
                                   const std::string &);
   CurlClient place_order(order_t &);

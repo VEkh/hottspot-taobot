@@ -50,7 +50,7 @@ void ETrade::Straddle::set_order_prices() {
       (1.01 * target_profit_ratio * open_stop_limit_price_change));
   buy_stop_loss_order.stop_price = utils::float_::to_currency(
       current_price - (target_profit_ratio * open_stop_limit_price_change));
-  buy_stop_loss_order.type = order_type_t::STOP_LIMIT;
+  buy_stop_loss_order.type = order_type_t::LIMIT;
 
   sell_short_open_order.action = order_action_t::SELL_SHORT;
   sell_short_open_order.limit_price =
@@ -70,7 +70,7 @@ void ETrade::Straddle::set_order_prices() {
       (1.01 * target_profit_ratio * open_stop_limit_price_change));
   sell_short_stop_loss_order.stop_price = utils::float_::to_currency(
       current_price + (target_profit_ratio * open_stop_limit_price_change));
-  sell_short_stop_loss_order.type = order_type_t::STOP_LIMIT;
+  sell_short_stop_loss_order.type = order_type_t::LIMIT;
 }
 
 #endif
