@@ -11,13 +11,13 @@
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string
 
-bool is_valid_response(std::string response_body) {
+bool is_valid_response(const std::string &response_body) {
   json response_json = json::parse(response_body);
 
   return response_json["QuoteResponse"].contains("QuoteData");
 }
 
-void terminate(std::string response_body, std::string symbol) {
+void terminate(const std::string &response_body, const std::string &symbol) {
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   std::cout << fmt.bold << fmt.red << std::endl;
@@ -45,6 +45,8 @@ std::string ETrade::Client::fetch_quote(std::string symbol) {
       client_config.base_url + "/v1/market/quote/" + symbol + ".json";
 
   CurlClient curl_client = fetch(request_url);
+  curl_client = handle_invalid_symbol_error(curl_client);
+
   std::string response_body = curl_client.response.body;
 
   if (!is_valid_response(response_body)) {
@@ -52,6 +54,18 @@ std::string ETrade::Client::fetch_quote(std::string symbol) {
   }
 
   return response_body;
+}
+
+CurlClient
+ETrade::Client::handle_invalid_symbol_error(const CurlClient &curl_client) {
+  json response = json::parse(curl_client.response.body);
+
+  if (response["QuoteResponse"].contains("Messages") &&
+      response["QuoteResponse"]["Messages"]["Message"][0]["code"] == 1002) {
+    return handle_invalid_symbol_error(fetch(curl_client.props.url));
+  }
+
+  return curl_client;
 }
 
 #endif
