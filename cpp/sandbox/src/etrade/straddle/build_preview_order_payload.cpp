@@ -16,7 +16,8 @@
  */
 #include "straddle.h"
 
-std::string ETrade::Straddle::build_preview_order_payload(order_t order) {
+std::string
+ETrade::Straddle::build_preview_order_payload(const order_t &order) {
   json payload = R"(
     {
       "PreviewOrderRequest":{

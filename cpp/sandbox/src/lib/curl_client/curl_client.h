@@ -19,6 +19,10 @@ public:
     http_method_t method;
     std::map<std::string, std::string> query_params;
     std::string url;
+  } props = {
+      .body = "",
+      .body_params = {},
+      .debug_flag = debug_t::OFF,
   };
 
   struct response_t {
@@ -46,12 +50,6 @@ private:
 
   CURL *curl = curl_easy_init();
   Formatted::fmt_stream_t stream_format = Formatted::stream();
-
-  props_t props = {
-      .body = "",
-      .body_params = {},
-      .debug_flag = debug_t::OFF,
-  };
 
   std::string build_query_params();
   std::string to_string();

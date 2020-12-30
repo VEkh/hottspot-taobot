@@ -1,8 +1,13 @@
+#include "deps.cpp" // json
 #include <iostream>
-#include <string>
 
 int main() {
-  std::string str = "foobar";
-  size_t size = 1;
-  std::cout << (size + 1) << std::endl;
+  json j = {
+      {"id", 1},
+      {"foo", "bar"},
+  };
+
+  if (0.0) {
+    std::cout << j.dump() << std::endl;
+  }
 }

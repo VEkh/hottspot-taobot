@@ -19,6 +19,7 @@ public:
     ORDER_CANCELLED,
     ORDER_EXECUTED,
     ORDER_OPEN,
+    ORDER_PENDING,
   };
 
   enum order_type_t {
@@ -35,17 +36,18 @@ public:
 
   struct order_t {
     order_action_t action;
-    int id;
-    double limit_price;
-    order_status_t status;
-    double stop_price;
+    int id = 0;
+    double limit_price = 0.00;
+    order_status_t status = order_status_t::ORDER_PENDING;
+    double stop_price = 0.00;
     order_type_t type;
   };
 
-  const char *ORDER_STATUSES[3] = {
+  const char *ORDER_STATUSES[4] = {
       "CANCELLED",
       "EXECUTED",
       "OPEN",
+      "PENDING",
   };
 
   Straddle(char *);
@@ -83,21 +85,25 @@ private:
   order_t sell_short_profit_order;
   order_t sell_short_stop_loss_order;
 
-  CurlClient handle_request_error(CurlClient, order_action_t, std::string);
-  CurlClient place_order(order_t);
-  CurlClient preview_order(order_t);
+  CurlClient handle_request_error(const CurlClient &, const order_action_t &,
+                                  const std::string &);
+  CurlClient place_order(order_t &);
+  CurlClient preview_order(const order_t &);
 
   status_t status();
 
-  std::string build_place_order_payload(std::string);
-  std::string build_preview_order_payload(order_t);
-  std::string compute_client_order_id(std::string);
+  std::string build_place_order_payload(std::string &);
+  std::string build_preview_order_payload(const order_t &);
+  std::string compute_client_order_id(const std::string);
+  std::string order_to_string(const order_t &);
 
-  void fetch_orders();
+  const char *get_order_status(const order_t &);
+
+  void fetch_and_set_orders();
+  void fetch_and_set_quote();
   void log_manual_run_prices();
   void log_start_message();
   void open();
-  void set_current_quote();
   void set_order_prices();
   void watch();
   void watch_buy_positions();

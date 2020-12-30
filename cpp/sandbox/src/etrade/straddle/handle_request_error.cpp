@@ -9,9 +9,10 @@
 
 #include "straddle.h" // ETrade::Straddle, ORDER_ACTIONS, stream_format
 
-CurlClient ETrade::Straddle::handle_request_error(CurlClient curl_client,
-                                                  order_action_t order_action,
-                                                  std::string action) {
+CurlClient
+ETrade::Straddle::handle_request_error(const CurlClient &curl_client,
+                                       const order_action_t &order_action,
+                                       const std::string &action) {
   json response_body = json::parse(curl_client.response.body);
 
   if (response_body.contains(action + "OrderResponse")) {

@@ -6,7 +6,8 @@
 #include "straddle.h" // ETrade::Straddle, etrade_client
 #include <string>     // string
 
-std::string ETrade::Straddle::compute_client_order_id(std::string key_base) {
+std::string
+ETrade::Straddle::compute_client_order_id(const std::string key_base) {
   ETrade::OAuthHeader oauth_header;
 
   std::string nonce_key =

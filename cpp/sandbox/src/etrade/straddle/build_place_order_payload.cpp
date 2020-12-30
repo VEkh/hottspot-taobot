@@ -8,7 +8,7 @@
 #include <string>                      // std::string
 
 std::string
-ETrade::Straddle::build_place_order_payload(std::string preview_response) {
+ETrade::Straddle::build_place_order_payload(std::string &preview_response) {
   json payload;
   json preview = json::parse(preview_response)["PreviewOrderResponse"];
 

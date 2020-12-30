@@ -6,7 +6,7 @@
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "straddle.h" // ETrade::Straddle, etrade_client, order_t
 
-CurlClient ETrade::Straddle::preview_order(order_t order) {
+CurlClient ETrade::Straddle::preview_order(const order_t &order) {
   std::string request_url =
       etrade_client.client_config.base_url + "/v1/accounts/" +
       etrade_client.client_config.account_id_key + "/orders/preview.json";

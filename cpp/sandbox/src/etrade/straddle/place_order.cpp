@@ -2,13 +2,14 @@
 #define ETRADE__STRADDLE_place_order
 
 #include "build_place_order_payload.cpp"   // build_place_order_payload
+#include "etrade/deps.cpp"                 // json
 #include "handle_request_error.cpp"        // handle_request_error
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "preview_order.cpp"               // preview_order
 #include "straddle.h" // ETrade::Straddle, etrade_client, order_t
 
-CurlClient ETrade::Straddle::place_order(order_t order) {
+CurlClient ETrade::Straddle::place_order(order_t &order) {
   Formatted::fmt_stream_t fmt = stream_format;
 
   std::string request_url =
@@ -26,7 +27,14 @@ CurlClient ETrade::Straddle::place_order(order_t order) {
       .url = request_url,
   });
 
-  return handle_request_error(curl_client, order.action, "Place");
+  curl_client = handle_request_error(curl_client, order.action, "Place");
+
+  json response = json::parse(curl_client.response.body);
+
+  order.id = response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
+  order.status = order_status_t::ORDER_OPEN;
+
+  return curl_client;
 }
 
 #endif

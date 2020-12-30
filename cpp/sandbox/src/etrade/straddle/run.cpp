@@ -3,7 +3,7 @@
 
 #include "lib/formatted.cpp"     // Formatted
 #include "open.cpp"              // open
-#include "set_current_quote.cpp" // set_current_quote
+#include "fetch_and_set_quote.cpp" // fetch_and_set_quote
 #include "set_order_prices.cpp"  // set_order_prices
 #include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol, etrade_client
 #include "watch.cpp" // watch
@@ -21,7 +21,7 @@ void ETrade::Straddle::log_start_message() {
 void ETrade::Straddle::run() {
   etrade_client.refresh_token();
   log_start_message();
-  set_current_quote();
+  fetch_and_set_quote();
   set_order_prices();
   open();
   watch();
