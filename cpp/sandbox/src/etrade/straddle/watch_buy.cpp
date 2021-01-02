@@ -24,6 +24,12 @@ void ETrade::Straddle::watch_buy() {
       buy_open_order.status == order_status_t::ORDER_OPEN) {
     std::string status = get_order_status(buy_open_order);
 
+    if (status == ORDER_STATUSES[order_status_t::ORDER_CANCELLED]) {
+      buy_open_order.status = order_status_t::ORDER_CANCELLED;
+
+      return;
+    }
+
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
       buy_open_order.status = order_status_t::ORDER_EXECUTED;
 
@@ -47,6 +53,12 @@ void ETrade::Straddle::watch_buy() {
       buy_profit_order.status == order_status_t::ORDER_OPEN) {
     std::string status = get_order_status(buy_profit_order);
     double current_price = quote["lastPrice"];
+
+    if (status == ORDER_STATUSES[order_status_t::ORDER_CANCELLED]) {
+      buy_profit_order.status = order_status_t::ORDER_CANCELLED;
+
+      return;
+    }
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
       buy_profit_order.status = order_status_t::ORDER_EXECUTED;
@@ -85,6 +97,12 @@ void ETrade::Straddle::watch_buy() {
   if (buy_stop_loss_order.id &&
       buy_stop_loss_order.status == order_status_t::ORDER_OPEN) {
     std::string status = get_order_status(buy_stop_loss_order);
+
+    if (status == ORDER_STATUSES[order_status_t::ORDER_CANCELLED]) {
+      buy_stop_loss_order.status = order_status_t::ORDER_CANCELLED;
+
+      return;
+    }
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
       buy_stop_loss_order.status = order_status_t::ORDER_EXECUTED;
