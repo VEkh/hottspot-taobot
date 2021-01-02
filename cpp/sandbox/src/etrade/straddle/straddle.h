@@ -5,9 +5,18 @@
 #include "etrade/deps.cpp"        // json
 #include "lib/formatted.cpp"      // Formatted
 
+#include <vector>
+
 namespace ETrade {
 class Straddle {
 public:
+  static constexpr const char *ORDER_STATUSES[] = {
+      "CANCELLED",
+      "EXECUTED",
+      "OPEN",
+      "PENDING",
+  };
+
   enum order_action_t {
     BUY,
     BUY_TO_COVER,
@@ -41,13 +50,6 @@ public:
     order_status_t status = order_status_t::ORDER_PENDING;
     double stop_price = 0.00;
     order_type_t type;
-  };
-
-  const char *ORDER_STATUSES[4] = {
-      "CANCELLED",
-      "EXECUTED",
-      "OPEN",
-      "PENDING",
   };
 
   Straddle(char *);
@@ -91,12 +93,13 @@ private:
   CurlClient place_order(order_t &);
   CurlClient preview_order(const order_t &);
 
+  order_status_t get_order_status(const order_t &);
+
   status_t status();
 
   std::string build_place_order_payload(std::string &);
   std::string build_preview_order_payload(const order_t &);
   std::string compute_client_order_id(const std::string);
-  std::string get_order_status(const order_t &);
   std::string order_to_string(const order_t &);
 
   void fetch_and_set_orders();
