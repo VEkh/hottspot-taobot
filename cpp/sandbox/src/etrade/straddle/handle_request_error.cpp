@@ -1,13 +1,12 @@
 #if !defined ETRADE__STRADDLE_handle_request_error
 #define ETRADE__STRADDLE_handle_request_error
 
-#include "etrade/deps.cpp"                 // json
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include "lib/utils/string.cpp"            // utils::string
-#include <iostream>                        // std::cout, std::endl
-
+#include "etrade/deps.cpp"               // json
+#include "lib/curl_client/curl_client.h" // CurlClient
+#include "lib/formatted.cpp"             // Formatted
+#include "lib/utils/string.cpp"          // utils::string
 #include "straddle.h" // ETrade::Straddle, ORDER_ACTIONS, stream_format
+#include <iostream>   // std::cout, std::endl
 
 CurlClient
 ETrade::Straddle::handle_request_error(const CurlClient &curl_client,

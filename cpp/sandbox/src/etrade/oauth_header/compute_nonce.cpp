@@ -22,7 +22,7 @@ std::string to_hex_string(unsigned char *input) {
 }
 
 std::string ETrade::OAuthHeader::compute_nonce(
-    std::string key = std::to_string(utils::time::epoch("milliseconds"))) {
+    std::string key = std::to_string(utils::time::epoch("nanoseconds"))) {
   const unsigned char *key_c_string = (unsigned char *)key.c_str();
 
   unsigned char out[SHA_DIGEST_LENGTH];

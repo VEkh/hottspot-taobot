@@ -1,10 +1,8 @@
-#include "deps.cpp" // json
+#include "deps.cpp"
 #include <iostream>
+#include <string>
 
 int main() {
-  json j;
-
-  if (j["yerr"]["foo"]) {
-    std::cout << "😲" << std::endl;
-  }
+  std::string str = "null";
+  std::cout << json::parse(str).is_null() << std::endl;
 }

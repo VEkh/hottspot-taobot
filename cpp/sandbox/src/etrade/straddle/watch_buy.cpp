@@ -22,7 +22,7 @@ void ETrade::Straddle::watch_buy() {
 
   if (buy_open_order.id &&
       buy_open_order.status == order_status_t::ORDER_OPEN) {
-    const char *status = get_order_status(buy_open_order);
+    std::string status = get_order_status(buy_open_order);
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
       buy_open_order.status = order_status_t::ORDER_EXECUTED;
@@ -45,7 +45,7 @@ void ETrade::Straddle::watch_buy() {
 
   if (buy_profit_order.id &&
       buy_profit_order.status == order_status_t::ORDER_OPEN) {
-    const char *status = get_order_status(buy_profit_order);
+    std::string status = get_order_status(buy_profit_order);
     double current_price = quote["lastPrice"];
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
@@ -84,7 +84,7 @@ void ETrade::Straddle::watch_buy() {
 
   if (buy_stop_loss_order.id &&
       buy_stop_loss_order.status == order_status_t::ORDER_OPEN) {
-    const char *status = get_order_status(buy_stop_loss_order);
+    std::string status = get_order_status(buy_stop_loss_order);
 
     if (status == ORDER_STATUSES[order_status_t::ORDER_EXECUTED]) {
       buy_stop_loss_order.status = order_status_t::ORDER_EXECUTED;

@@ -33,7 +33,6 @@ public:
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
   CurlClient fetch(std::string, std::map<std::string, std::string>);
-  CurlClient handle_invalid_symbol_error(const CurlClient &curl_client);
   CurlClient post(post_params_t);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);

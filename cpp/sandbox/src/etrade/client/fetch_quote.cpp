@@ -5,16 +5,42 @@
 #include "etrade/deps.cpp"                 // json
 #include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include <iostream>                        // std::cout, std::endl
-#include <map>                             // std::map
-#include <stdexcept>                       // std::invalid_argument
-#include <string>                          // std::string
+#include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/formatted.cpp"                      // Formatted
+#include <iostream>                               // std::cout, std::endl
+#include <map>                                    // std::map
+#include <regex>     // std::regex, std::regex_search
+#include <stdexcept> // std::invalid_argument
+#include <string>    // std::string
+
+namespace ETrade {
+namespace fetch_quote {
+bool is_retriable_response(const std::string &response_body) {
+  std::cout << Formatted::stream().bold << Formatted::stream().yellow;
+  std::cout << "Quote Response: " << response_body << std::endl;
+  std::cout << Formatted::stream().reset;
+
+  json response = json::parse(response_body);
+
+  if (response["QuoteResponse"].contains("Messages") &&
+      response["QuoteResponse"]["Messages"]["Message"][0]["code"] == 1002) {
+    return true;
+  }
+
+  if (std::regex_search(response_body,
+                        std::regex("oauth_parameters_absent=oauth_nonce"))) {
+    return true;
+  }
+
+  return false;
+}
+} // namespace fetch_quote
+} // namespace ETrade
 
 bool is_valid_response(const std::string &response_body) {
-  json response_json = json::parse(response_body);
+  json response = json::parse(response_body);
 
-  return response_json["QuoteResponse"].contains("QuoteData");
+  return response["QuoteResponse"].contains("QuoteData");
 }
 
 void terminate(const std::string &response_body, const std::string &symbol) {
@@ -44,8 +70,9 @@ std::string ETrade::Client::fetch_quote(std::string symbol) {
   std::string request_url =
       client_config.base_url + "/v1/market/quote/" + symbol + ".json";
 
-  CurlClient curl_client = fetch(request_url);
-  curl_client = handle_invalid_symbol_error(curl_client);
+  CurlClient curl_client = CurlClient::request_with_retry(
+      [&]() -> CurlClient { return fetch(request_url); },
+      ETrade::fetch_quote::is_retriable_response);
 
   std::string response_body = curl_client.response.body;
 
@@ -54,18 +81,6 @@ std::string ETrade::Client::fetch_quote(std::string symbol) {
   }
 
   return response_body;
-}
-
-CurlClient
-ETrade::Client::handle_invalid_symbol_error(const CurlClient &curl_client) {
-  json response = json::parse(curl_client.response.body);
-
-  if (response["QuoteResponse"].contains("Messages") &&
-      response["QuoteResponse"]["Messages"]["Message"][0]["code"] == 1002) {
-    return handle_invalid_symbol_error(fetch(curl_client.props.url));
-  }
-
-  return curl_client;
 }
 
 #endif

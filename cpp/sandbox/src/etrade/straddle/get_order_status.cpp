@@ -8,7 +8,7 @@
 #include <iostream>          // std::cout, std::endl
 #include <string>            // std::string
 
-const char *ETrade::Straddle::get_order_status(const order_t &order) {
+std::string ETrade::Straddle::get_order_status(const order_t &order) {
   json::iterator order_iterator =
       std::find_if(placed_orders.begin(), placed_orders.end(),
                    [&order](json order_json) -> bool {
@@ -29,7 +29,7 @@ const char *ETrade::Straddle::get_order_status(const order_t &order) {
 
   std::string status = (*order_iterator)["OrderDetail"][0]["status"];
 
-  return status.c_str();
+  return status;
 }
 
 #endif

@@ -96,9 +96,8 @@ private:
   std::string build_place_order_payload(std::string &);
   std::string build_preview_order_payload(const order_t &);
   std::string compute_client_order_id(const std::string);
+  std::string get_order_status(const order_t &);
   std::string order_to_string(const order_t &);
-
-  const char *get_order_status(const order_t &);
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();
