@@ -22,16 +22,25 @@ json translate_quote(const std::string &response_body) {
 
 void ETrade::Straddle::fetch_and_set_quote() {
   Formatted::fmt_stream_t fmt = stream_format;
+  Formatted::Stream quote_color = fmt.yellow;
   std::string quote_string = etrade_client.fetch_quote(symbol);
   json translated_quote = translate_quote(quote_string);
 
-  quote = translated_quote;
+  if (!quote.empty()) {
+    if (translated_quote["lastPrice"] > quote["lastPrice"]) {
+      quote_color = fmt.green;
+    } else if (translated_quote["lastPrice"] < quote["lastPrice"]) {
+      quote_color = fmt.red;
+    }
+  }
 
   if (original_quote.empty()) {
     original_quote = translated_quote;
   }
 
-  std::cout << fmt.bold << fmt.yellow << std::endl;
+  quote = translated_quote;
+
+  std::cout << fmt.bold << quote_color << std::endl;
   std::cout << symbol << " quote: " << quote << std::endl;
   std::cout << fmt.reset;
 }
