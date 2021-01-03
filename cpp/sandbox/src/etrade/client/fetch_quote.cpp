@@ -16,10 +16,6 @@
 namespace ETrade {
 namespace fetch_quote {
 bool is_retriable_response(const std::string &response_body) {
-  std::cout << Formatted::stream().bold << Formatted::stream().yellow;
-  std::cout << "Quote Response: " << response_body << std::endl;
-  std::cout << Formatted::stream().reset;
-
   json response = json::parse(response_body);
 
   if (response["QuoteResponse"].contains("Messages") &&

@@ -36,7 +36,7 @@ private:
 
   json build_order_open_payload(const char *, prices_t);
   void fetch_current_quote();
-  void log_manual_run_prices();
+  void log_prices();
   void log_start_message();
   void open_straddle();
   void set_order_prices();

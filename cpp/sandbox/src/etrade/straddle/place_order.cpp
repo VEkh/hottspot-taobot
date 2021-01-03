@@ -18,6 +18,11 @@ bool is_retriable_response(const std::string &response_body) {
     return true;
   }
 
+  if (std::regex_search(response_body,
+                        std::regex("oauth_parameters_absent=oauth_nonce"))) {
+    return true;
+  }
+
   return false;
 }
 } // namespace place_order

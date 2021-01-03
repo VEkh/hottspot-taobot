@@ -4,6 +4,8 @@
 #include "fetch_and_set_orders.cpp" // fetch_and_set_orders
 #include "fetch_and_set_quote.cpp"  // fetch_and_set_quote
 #include "lib/formatted.cpp"        // Formatted
+#include "log_order_statuses.cpp"   // log_order_statuses
+#include "log_prices.cpp"           // log_prices
 #include "status.cpp"               // status
 #include "straddle.h"               // ETrade::Straddle, stream_format, symbol
 #include "watch_buy.cpp"            // watch_buy
@@ -20,6 +22,8 @@ void ETrade::Straddle::watch() {
   while (status() != status_t::CLOSED) {
     fetch_and_set_quote();
     fetch_and_set_orders();
+    log_prices();
+    log_order_statuses();
     watch_buy();
     watch_sell_short();
 
@@ -27,8 +31,8 @@ void ETrade::Straddle::watch() {
   }
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
-  std::cout << "☑ Completed straddling " << fmt.blue << quantity << fmt.cyan
-            << " share(s) of " << fmt.blue << symbol << std::endl;
+  std::cout << "👋🏾 Completed straddling " << fmt.blue << quantity
+            << fmt.cyan << " share(s) of " << fmt.blue << symbol << std::endl;
   std::cout << fmt.reset;
 }
 

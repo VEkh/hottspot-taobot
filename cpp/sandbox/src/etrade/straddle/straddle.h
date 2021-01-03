@@ -104,7 +104,8 @@ private:
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();
-  void log_manual_run_prices();
+  void log_order_statuses();
+  void log_prices();
   void log_start_message();
   void open();
   void set_order_prices();

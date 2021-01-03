@@ -1,5 +1,5 @@
-#if !defined TD_AMERITRADE__STRADDLE_log_manual_run_prices
-#define TD_AMERITRADE__STRADDLE_log_manual_run_prices
+#if !defined TD_AMERITRADE__STRADDLE_log_prices
+#define TD_AMERITRADE__STRADDLE_log_prices
 
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/float.cpp" // utils::float::to_currency
@@ -7,7 +7,7 @@
 #include <iostream>            // std::cout, std::endl
 #include <string>              // std::string
 
-void TdAmeritrade::Straddle::log_manual_run_prices() {
+void TdAmeritrade::Straddle::log_prices() {
   Formatted::fmt_stream_t fmt = stream_format;
 
   std::cout << std::endl
