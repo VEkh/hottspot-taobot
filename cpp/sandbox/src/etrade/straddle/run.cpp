@@ -23,7 +23,6 @@ void ETrade::Straddle::run() {
   log_start_message();
   fetch_and_set_quote();
   set_order_prices();
-  open();
   watch();
 }
 

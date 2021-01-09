@@ -11,10 +11,7 @@ namespace ETrade {
 class Straddle {
 public:
   static constexpr const char *ORDER_STATUSES[] = {
-      "CANCELLED",
-      "EXECUTED",
-      "OPEN",
-      "PENDING",
+      "CANCELLED", "CANCEL_REQUESTED", "EXECUTED", "OPEN", "PARTIAL", "PENDING",
   };
 
   enum order_action_t {
@@ -26,13 +23,16 @@ public:
 
   enum order_status_t {
     ORDER_CANCELLED,
+    ORDER_CANCEL_REQUESTED,
     ORDER_EXECUTED,
     ORDER_OPEN,
+    ORDER_PARTIAL,
     ORDER_PENDING,
   };
 
   enum order_type_t {
     LIMIT,
+    MARKET,
     STOP_LIMIT,
   };
 
@@ -45,6 +45,8 @@ public:
 
   struct order_t {
     order_action_t action;
+    double adjusted_limit_price = 0.00;
+    double execution_price = 0.00;
     int id = 0;
     double limit_price = 0.00;
     order_status_t status = order_status_t::ORDER_PENDING;
@@ -66,8 +68,9 @@ private:
       "SELL_SHORT",
   };
 
-  const char *ORDER_TYPES[2] = {
+  const char *ORDER_TYPES[3] = {
       "LIMIT",
+      "MARKET",
       "STOP_LIMIT",
   };
 
@@ -93,7 +96,7 @@ private:
   CurlClient place_order(order_t &);
   CurlClient preview_order(const order_t &);
 
-  order_status_t get_order_status(const order_t &);
+  json get_order_json(const order_t &);
 
   status_t status();
 
@@ -102,13 +105,16 @@ private:
   std::string compute_client_order_id(const std::string);
   std::string order_to_string(const order_t &);
 
+  void adjust_limit_price(order_t &, const order_t &);
   void fetch_and_set_orders();
   void fetch_and_set_quote();
   void log_order_statuses();
   void log_prices();
   void log_start_message();
   void open();
+  void set_order_execution_price(order_t &);
   void set_order_prices();
+  void set_order_status(order_t &);
   void watch();
   void watch_buy();
   void watch_sell_short();

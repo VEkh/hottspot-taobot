@@ -111,8 +111,11 @@ int main(int argc, char *argv[]) {
     char *symbol = argc < 3 ? nullptr : argv[2];
     int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
 
-    ETrade::Straddle straddle(symbol, quantity);
-    straddle.run();
+    while (true) {
+      ETrade::Straddle straddle(symbol, quantity);
+      straddle.run();
+      std::cout << "Finished stradding. Re-running." << std::endl;
+    }
 
     exit(0);
   }

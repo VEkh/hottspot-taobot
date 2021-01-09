@@ -17,8 +17,6 @@
 void ETrade::Straddle::watch() {
   Formatted::fmt_stream_t fmt = stream_format;
 
-  std::cout << fmt.bold << fmt.yellow << std::endl;
-
   while (status() != status_t::CLOSED) {
     fetch_and_set_quote();
     fetch_and_set_orders();
@@ -27,7 +25,7 @@ void ETrade::Straddle::watch() {
     watch_buy();
     watch_sell_short();
 
-    std::this_thread::sleep_for(std::chrono::seconds(1));
+    std::this_thread::sleep_for(std::chrono::milliseconds(500));
   }
 
   std::cout << fmt.bold << fmt.cyan << std::endl;

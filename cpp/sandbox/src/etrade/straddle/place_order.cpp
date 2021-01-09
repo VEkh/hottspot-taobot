@@ -8,6 +8,7 @@
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "preview_order.cpp"                      // preview_order
 #include "straddle.h" // ETrade::Straddle, etrade_client, order_t
+#include <regex>      // std::regex, std::regex_search
 
 namespace ETrade {
 namespace place_order {

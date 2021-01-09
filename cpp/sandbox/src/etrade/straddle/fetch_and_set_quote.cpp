@@ -12,8 +12,8 @@ json translate_quote(const std::string &response_body) {
   json input = json::parse(response_body);
   json full_quote = input["QuoteResponse"]["QuoteData"].at(0)["All"];
   json output = {
-      {"highPrice", full_quote["high"]},
-      {"lastPrice", full_quote["lastTrade"]},
+      {"ask", full_quote["ask"]},        {"bid", full_quote["bid"]},
+      {"highPrice", full_quote["high"]}, {"lastPrice", full_quote["lastTrade"]},
       {"lowPrice", full_quote["low"]},
   };
 
