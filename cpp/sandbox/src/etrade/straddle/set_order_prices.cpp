@@ -15,62 +15,59 @@
 
 #include "lib/utils/float.cpp" // utils::float_
 
-double TARGET_PROFIT = 0.15;
-double TARGET_TOTAL_MOVEMENT = 0.10;
+double MINIMUM_CURRENT_PRICE_DELTA = 0.005;
+double TARGET_PROFIT = 0.05;
+double TARGET_TOTAL_MOVEMENT = 0.05;
 
 void ETrade::Straddle::set_order_prices() {
   double current_price = quote["lastPrice"];
-  double high = (double)quote["highPrice"] ? (double)quote["highPrice"]
-                                           : current_price * 1.002;
-  double low = (double)quote["lowPrice"] ? (double)quote["lowPrice"]
-                                         : current_price * 0.998;
 
-  double target_profit_ratio = 1 + TARGET_PROFIT;
-  double range_movement = TARGET_TOTAL_MOVEMENT / target_profit_ratio;
+  double default_high = current_price * (1 + MINIMUM_CURRENT_PRICE_DELTA);
+  double default_low = current_price * (1 - MINIMUM_CURRENT_PRICE_DELTA);
 
-  double target_movement = ((high - low) * range_movement) / current_price;
-  double open_stop_limit_price_change = target_movement * current_price;
-  double open_stop_price_change = 0.9 * open_stop_limit_price_change;
+  double high =
+      (double)quote["highPrice"] ? (double)quote["highPrice"] : default_high;
+
+  double low =
+      (double)quote["lowPrice"] ? (double)quote["lowPrice"] : default_low;
+
+  double target_movement = (high - low) * TARGET_TOTAL_MOVEMENT;
+  double open_stop_limit_price_change = (1 - TARGET_PROFIT) * target_movement;
+  double open_stop_price_change = 0.8 * open_stop_limit_price_change;
 
   buy_open_order.action = order_action_t::BUY;
   buy_open_order.limit_price =
       utils::float_::to_currency(current_price + open_stop_limit_price_change);
   buy_open_order.stop_price =
       utils::float_::to_currency(current_price + open_stop_price_change);
-  buy_open_order.type = order_type_t::STOP_LIMIT;
+  buy_open_order.type = order_type_t::MARKET;
 
   buy_profit_order.action = order_action_t::SELL;
-  buy_profit_order.limit_price = utils::float_::to_currency(
-      current_price + (target_profit_ratio * open_stop_limit_price_change));
+  buy_profit_order.limit_price =
+      utils::float_::to_currency(current_price + target_movement);
   buy_profit_order.type = order_type_t::LIMIT;
-
-  buy_stop_loss_order.action = order_action_t::SELL;
-  buy_stop_loss_order.limit_price = utils::float_::to_currency(
-      current_price -
-      (1.01 * target_profit_ratio * open_stop_limit_price_change));
-  buy_stop_loss_order.stop_price = utils::float_::to_currency(
-      current_price - (target_profit_ratio * open_stop_limit_price_change));
-  buy_stop_loss_order.type = order_type_t::LIMIT;
 
   sell_short_open_order.action = order_action_t::SELL_SHORT;
   sell_short_open_order.limit_price =
       utils::float_::to_currency(current_price - open_stop_limit_price_change);
   sell_short_open_order.stop_price =
       utils::float_::to_currency(current_price - open_stop_price_change);
-  sell_short_open_order.type = order_type_t::STOP_LIMIT;
+  sell_short_open_order.type = order_type_t::MARKET;
 
   sell_short_profit_order.action = order_action_t::BUY_TO_COVER;
-  sell_short_profit_order.limit_price = utils::float_::to_currency(
-      current_price - (target_profit_ratio * open_stop_limit_price_change));
+  sell_short_profit_order.limit_price =
+      utils::float_::to_currency(current_price - target_movement);
   sell_short_profit_order.type = order_type_t::LIMIT;
 
+  buy_stop_loss_order.action = order_action_t::SELL;
+  buy_stop_loss_order.limit_price = sell_short_open_order.limit_price;
+  buy_stop_loss_order.stop_price = sell_short_open_order.stop_price;
+  buy_stop_loss_order.type = order_type_t::MARKET;
+
   sell_short_stop_loss_order.action = order_action_t::BUY_TO_COVER;
-  sell_short_stop_loss_order.limit_price = utils::float_::to_currency(
-      current_price +
-      (1.01 * target_profit_ratio * open_stop_limit_price_change));
-  sell_short_stop_loss_order.stop_price = utils::float_::to_currency(
-      current_price + (target_profit_ratio * open_stop_limit_price_change));
-  sell_short_stop_loss_order.type = order_type_t::LIMIT;
+  sell_short_stop_loss_order.limit_price = buy_open_order.limit_price;
+  sell_short_stop_loss_order.stop_price = buy_open_order.stop_price;
+  sell_short_stop_loss_order.type = order_type_t::MARKET;
 }
 
 #endif
