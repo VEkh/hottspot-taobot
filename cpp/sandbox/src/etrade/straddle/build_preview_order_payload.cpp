@@ -21,8 +21,6 @@
 
 std::string
 ETrade::Straddle::build_preview_order_payload(const order_t &order) {
-  double ask = quote["ask"];
-  double bid = quote["bid"];
   double limit_price = order.adjusted_limit_price ? order.adjusted_limit_price
                                                   : order.limit_price;
 
@@ -62,24 +60,6 @@ ETrade::Straddle::build_preview_order_payload(const order_t &order) {
   order_json["Instrument"][0]["quantity"] = quantity;
   order_json["limitPrice"] = utils::float_::to_currency(limit_price);
   order_json["priceType"] = ORDER_TYPES[order.type];
-
-  if (order.type == order_type_t::STOP_LIMIT) {
-    double stop_price;
-    double stop_limit_delta = abs(order.limit_price - order.stop_price);
-
-    if (order.action == order_action_t::BUY ||
-        order.action == order_action_t::BUY_TO_COVER) {
-      stop_price = std::max(order.stop_price, ask + 0.03);
-      limit_price = stop_price + stop_limit_delta;
-    } else if (order.action == order_action_t::SELL ||
-               order.action == order_action_t::SELL_SHORT) {
-      stop_price = std::min(order.stop_price, bid - 0.03);
-      limit_price = stop_price - stop_limit_delta;
-    }
-
-    order_json["stopPrice"] = utils::float_::to_currency(stop_price);
-    order_json["limitPrice"] = utils::float_::to_currency(limit_price);
-  }
 
   payload["PreviewOrderRequest"]["Order"].push_back(order_json);
 
