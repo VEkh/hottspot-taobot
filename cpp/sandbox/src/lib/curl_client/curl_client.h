@@ -36,13 +36,16 @@ public:
   static std::string method_to_string(http_method_t);
 
   template <typename RequestPredicate, typename ResponsePredicate>
-  static CurlClient request_with_retry(RequestPredicate, ResponsePredicate);
+  static CurlClient request_with_retry(RequestPredicate, ResponsePredicate,
+                                       double = INFINITY, int = 0);
 
   template <typename RequestPredicate, typename ResponsePredicate>
-  static CurlClient request_with_retry(RequestPredicate, ResponsePredicate *);
+  static CurlClient request_with_retry(RequestPredicate, ResponsePredicate *,
+                                       double = INFINITY, int = 0);
 
   template <typename RequestPredicate, typename ResponsePredicate>
-  static CurlClient request_with_retry(RequestPredicate *, ResponsePredicate *);
+  static CurlClient request_with_retry(RequestPredicate *, ResponsePredicate *,
+                                       double = INFINITY, int = 0);
 
   bool is_xml_response();
   void log_request();

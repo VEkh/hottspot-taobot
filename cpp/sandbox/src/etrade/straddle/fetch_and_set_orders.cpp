@@ -16,6 +16,15 @@ void ETrade::Straddle::fetch_and_set_orders() {
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return etrade_client.fetch(url); },
       [](const std::string &response) -> bool {
+        if (response.empty()) {
+          return true;
+        }
+
+        if (std::regex_search(response,
+                              std::regex("oauth_problem=nonce_used"))) {
+          return true;
+        }
+
         return std::regex_search(
             response, std::regex("oauth_parameters_absent=oauth_nonce"));
       });

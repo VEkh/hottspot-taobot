@@ -5,27 +5,30 @@
 #include <string>        // std::string
 
 template <typename RequestPredicate, typename ResponsePredicate>
-CurlClient
-CurlClient::request_with_retry(RequestPredicate request_predicate,
-                               ResponsePredicate response_predicate) {
-  return request_with_retry(&request_predicate, &response_predicate);
+CurlClient CurlClient::request_with_retry(RequestPredicate request_predicate,
+                                          ResponsePredicate response_predicate,
+                                          double maxRetries, int retry) {
+  return request_with_retry(&request_predicate, &response_predicate, maxRetries,
+                            retry);
 }
 
 template <typename RequestPredicate, typename ResponsePredicate>
-CurlClient
-CurlClient::request_with_retry(RequestPredicate request_predicate,
-                               ResponsePredicate *response_predicate) {
-  return request_with_retry(&request_predicate, response_predicate);
+CurlClient CurlClient::request_with_retry(RequestPredicate request_predicate,
+                                          ResponsePredicate *response_predicate,
+                                          double maxRetries, int retry) {
+  return request_with_retry(&request_predicate, response_predicate, maxRetries,
+                            retry);
 }
 
 template <typename RequestPredicate, typename ResponsePredicate>
-CurlClient
-CurlClient::request_with_retry(RequestPredicate *request_predicate,
-                               ResponsePredicate *response_predicate) {
+CurlClient CurlClient::request_with_retry(RequestPredicate *request_predicate,
+                                          ResponsePredicate *response_predicate,
+                                          double maxRetries, int retry) {
   CurlClient curl_client = (*request_predicate)();
 
-  if ((*response_predicate)(curl_client.response.body)) {
-    return request_with_retry(request_predicate, response_predicate);
+  if ((*response_predicate)(curl_client.response.body) && retry < maxRetries) {
+    return request_with_retry(request_predicate, response_predicate, maxRetries,
+                              retry + 1);
   }
 
   return curl_client;

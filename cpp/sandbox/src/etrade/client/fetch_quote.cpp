@@ -16,6 +16,10 @@
 namespace ETrade {
 namespace fetch_quote {
 bool is_retriable_response(const std::string &response_body) {
+  if (response_body.empty()) {
+    return true;
+  }
+
   json response = json::parse(response_body);
 
   if (response["QuoteResponse"].contains("Messages") &&
@@ -25,6 +29,11 @@ bool is_retriable_response(const std::string &response_body) {
 
   if (std::regex_search(response_body,
                         std::regex("oauth_parameters_absent=oauth_nonce"))) {
+    return true;
+  }
+
+  if (std::regex_search(response_body,
+                        std::regex("oauth_problem=nonce_used"))) {
     return true;
   }
 
