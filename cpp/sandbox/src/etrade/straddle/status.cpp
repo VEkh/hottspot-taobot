@@ -8,6 +8,17 @@ ETrade::Straddle::status_t ETrade::Straddle::status() {
     return status_t::PENDING;
   }
 
+  if (((buy_profit_order.status == order_status_t::ORDER_EXECUTED ||
+        buy_profit_order.status == order_status_t::ORDER_OPEN) &&
+       sell_short_open_order.status == order_status_t::ORDER_EXECUTED &&
+       sell_short_profit_order.status != order_status_t::ORDER_EXECUTED) ||
+      ((sell_short_profit_order.status == order_status_t::ORDER_EXECUTED ||
+        sell_short_profit_order.status == order_status_t::ORDER_OPEN) &&
+       buy_open_order.status == order_status_t::ORDER_EXECUTED &&
+       (buy_profit_order.status != order_status_t::ORDER_EXECUTED))) {
+    return status_t::LIMBO;
+  }
+
   bool both_won =
       (buy_profit_order.status == order_status_t::ORDER_EXECUTED &&
        sell_short_profit_order.status == order_status_t::ORDER_EXECUTED);
@@ -17,31 +28,20 @@ ETrade::Straddle::status_t ETrade::Straddle::status() {
        (sell_short_open_order.status == order_status_t::ORDER_CANCELLED ||
         sell_short_open_order.status == order_status_t::ORDER_PENDING));
 
-  bool buy_lost_sell_short_won =
-      (buy_stop_loss_order.status == order_status_t::ORDER_EXECUTED &&
-       sell_short_profit_order.status == order_status_t::ORDER_EXECUTED);
-
   bool sell_short_won =
       (sell_short_profit_order.status == order_status_t::ORDER_EXECUTED &&
        (buy_open_order.status == order_status_t::ORDER_CANCELLED ||
         buy_open_order.status == order_status_t::ORDER_PENDING));
 
-  bool sell_short_lost_buy_won =
-      (sell_short_stop_loss_order.status == order_status_t::ORDER_EXECUTED &&
-       buy_profit_order.status == order_status_t::ORDER_EXECUTED);
-
   bool cancelled =
       ((buy_open_order.status == order_status_t::ORDER_CANCELLED ||
         buy_open_order.status == order_status_t::ORDER_PENDING ||
-        buy_profit_order.status == order_status_t::ORDER_CANCELLED ||
-        buy_stop_loss_order.status == order_status_t::ORDER_CANCELLED) &&
+        buy_profit_order.status == order_status_t::ORDER_CANCELLED) &&
        (sell_short_open_order.status == order_status_t::ORDER_CANCELLED ||
         sell_short_open_order.status == order_status_t::ORDER_PENDING ||
-        sell_short_profit_order.status == order_status_t::ORDER_CANCELLED ||
-        sell_short_stop_loss_order.status == order_status_t::ORDER_CANCELLED));
+        sell_short_profit_order.status == order_status_t::ORDER_CANCELLED));
 
-  if (both_won || buy_won || sell_short_won || buy_lost_sell_short_won ||
-      sell_short_lost_buy_won || cancelled) {
+  if (both_won || buy_won || sell_short_won || cancelled) {
     return status_t::CLOSED;
   }
 

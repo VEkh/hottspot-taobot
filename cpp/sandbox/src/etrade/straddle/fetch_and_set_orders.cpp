@@ -11,7 +11,7 @@
 void ETrade::Straddle::fetch_and_set_orders() {
   std::string url = etrade_client.client_config.base_url + "/v1/accounts/" +
                     etrade_client.client_config.account_id_key +
-                    "/orders.json?symbol=" + std::string(symbol);
+                    "/orders.json?count=100&symbol=" + std::string(symbol);
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return etrade_client.fetch(url); },

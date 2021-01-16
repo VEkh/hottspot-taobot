@@ -1,9 +1,9 @@
 #include <iostream>
+#include <numeric>
+#include <vector>
 
 int main() {
-  double num = 0.00;
+  std::vector<double> nums = {};
 
-  if (num) {
-    std::cout << "YERRR" << std::endl;
-  }
+  std::cout << nums.back() << std::endl;
 }

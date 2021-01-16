@@ -5,7 +5,6 @@
 #include "etrade/deps.cpp"             // json, _json
 #include "lib/utils/float.cpp"         // utils::float_
 #include <algorithm>                   // std::max, std::min
-#include <cmath>                       // abs
 #include <string>                      // std::string
 
 /*
@@ -21,9 +20,6 @@
 
 std::string
 ETrade::Straddle::build_preview_order_payload(const order_t &order) {
-  double limit_price = order.adjusted_limit_price ? order.adjusted_limit_price
-                                                  : order.limit_price;
-
   json payload = R"(
     {
       "PreviewOrderRequest":{
@@ -58,7 +54,7 @@ ETrade::Straddle::build_preview_order_payload(const order_t &order) {
   order_json["Instrument"][0]["Product"]["symbol"] = symbol;
   order_json["Instrument"][0]["orderAction"] = ORDER_ACTIONS[order.action];
   order_json["Instrument"][0]["quantity"] = quantity;
-  order_json["limitPrice"] = utils::float_::to_currency(limit_price);
+  order_json["limitPrice"] = utils::float_::to_currency(order.limit_price);
   order_json["priceType"] = ORDER_TYPES[order.type];
 
   payload["PreviewOrderRequest"]["Order"].push_back(order_json);

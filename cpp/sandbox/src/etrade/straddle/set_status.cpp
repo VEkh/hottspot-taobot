@@ -1,5 +1,5 @@
-#if !defined ETRADE__STRADDLE_set_order_status
-#define ETRADE__STRADDLE_set_order_status
+#if !defined ETRADE__STRADDLE_set_status
+#define ETRADE__STRADDLE_set_status
 
 #include "etrade/deps.cpp"    // json
 #include "get_order_json.cpp" // get_order_json
@@ -28,7 +28,7 @@ ETrade::Straddle::order_status_t string_to_enum(const std::string &in) {
   exit(1);
 }
 
-void ETrade::Straddle::set_order_status(order_t &order) {
+void ETrade::Straddle::set_status(order_t &order) {
   json order_json = get_order_json(order);
 
   if (order_json.empty()) {

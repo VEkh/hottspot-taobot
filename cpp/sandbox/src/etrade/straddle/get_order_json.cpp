@@ -9,9 +9,10 @@
 #include <string>            // std::string
 
 json ETrade::Straddle::get_order_json(const order_t &order) {
+  json empty_order;
+
   if (!order.id) {
-    json order_json;
-    return order_json;
+    return empty_order;
   }
 
   json::iterator order_iterator =
@@ -29,7 +30,7 @@ json ETrade::Straddle::get_order_json(const order_t &order) {
               << std::endl;
     std::cout << fmt.reset;
 
-    exit(1);
+    return empty_order;
   }
 
   return *order_iterator;

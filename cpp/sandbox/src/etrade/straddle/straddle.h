@@ -4,8 +4,7 @@
 #include "etrade/client/client.h" // ETrade::Client
 #include "etrade/deps.cpp"        // json
 #include "lib/formatted.cpp"      // Formatted
-
-#include <vector>
+#include <vector>                 // std::vector
 
 namespace ETrade {
 class Straddle {
@@ -39,16 +38,17 @@ public:
   enum status_t {
     CLOSED,
     COMPLETE,
+    LIMBO,
     OPEN,
     PENDING,
   };
 
   struct order_t {
     order_action_t action;
-    double adjusted_limit_price = 0.00;
     double execution_price = 0.00;
     int id = 0;
     double limit_price = 0.00;
+    double profit = 0.00;
     order_status_t status = order_status_t::ORDER_PENDING;
     double stop_price = 0.00;
     order_type_t type;
@@ -77,9 +77,10 @@ private:
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t stream_format = Formatted::stream();
   char *symbol;
+  int POLLING_INTERVAL_SECONDS = 5;
+  int day_range;
   int quantity;
 
-  json original_quote;
   json placed_orders;
   json quote;
 
@@ -103,18 +104,19 @@ private:
   std::string build_place_order_payload(std::string &);
   std::string build_preview_order_payload(const order_t &);
   std::string compute_client_order_id(const std::string);
-  std::string order_to_string(const order_t &);
 
-  void adjust_limit_price(order_t &, const order_t &);
   void fetch_and_set_orders();
   void fetch_and_set_quote();
   void log_order_statuses();
   void log_prices();
   void log_start_message();
+  void log_status();
   void open();
-  void set_order_execution_price(order_t &);
   void set_order_prices();
-  void set_order_status(order_t &);
+  void set_execution_price(order_t &);
+  void set_profit(order_t &);
+  void set_status(order_t &);
+  void set_trailing_stop_price(order_t &, const order_t &);
   void watch();
   void watch_buy();
   void watch_sell_short();
