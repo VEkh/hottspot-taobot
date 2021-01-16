@@ -92,10 +92,8 @@ private:
 
   order_t buy_open_order;
   order_t buy_profit_order;
-  order_t buy_stop_loss_order;
   order_t sell_short_open_order;
   order_t sell_short_profit_order;
-  order_t sell_short_stop_loss_order;
 
   CurlClient cancel_order(order_t &);
   CurlClient handle_request_error(const CurlClient &, const order_action_t &,

@@ -5,11 +5,9 @@
  * ETrade::Straddle
  * buy_open_order
  * buy_profit_order
- * buy_stop_loss_order
  * quote
  * sell_short_open_order
  * sell_short_profit_order
- * sell_short_stop_loss_order
  */
 #include "straddle.h"
 
@@ -61,16 +59,6 @@ void ETrade::Straddle::set_order_prices() {
   sell_short_profit_order.limit_price = INFINITY;
   sell_short_profit_order.stop_price = INFINITY;
   sell_short_profit_order.type = order_type_t::LIMIT;
-
-  buy_stop_loss_order.action = order_action_t::SELL;
-  buy_stop_loss_order.limit_price = sell_short_open_order.limit_price;
-  buy_stop_loss_order.stop_price = sell_short_open_order.stop_price;
-  buy_stop_loss_order.type = order_type_t::MARKET;
-
-  sell_short_stop_loss_order.action = order_action_t::BUY_TO_COVER;
-  sell_short_stop_loss_order.limit_price = buy_open_order.limit_price;
-  sell_short_stop_loss_order.stop_price = buy_open_order.stop_price;
-  sell_short_stop_loss_order.type = order_type_t::MARKET;
 }
 
 #endif

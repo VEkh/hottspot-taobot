@@ -1,9 +1,19 @@
 #if !defined ETRADE__STRADDLE_log_prices
 #define ETRADE__STRADDLE_log_prices
 
+/*
+ * ETrade::Straddle
+ * buy_open_order
+ * buy_profit_order
+ * sell_short_open_order
+ * sell_short_profit_order
+ * stream_format
+ * symbol
+ */
+#include "straddle.h"
+
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/float.cpp" // utils::float::to_currency
-#include "straddle.h"          // ETrade::Straddle, stream_format, symbol
 #include <iomanip>             // std::setprecision
 #include <iostream>            // std::cout, std::endl, std::fixed
 #include <string>              // std::string
@@ -26,13 +36,7 @@ void ETrade::Straddle::log_prices() {
             << " • Profit: "
             << utils::float_::to_currency(buy_open_order.profit) << std::endl;
 
-  std::cout << "Stop Loss => Stop: "
-            << utils::float_::to_currency(buy_stop_loss_order.limit_price)
-            << " • Limit: "
-            << utils::float_::to_currency(buy_stop_loss_order.stop_price)
-            << std::endl;
-
-  std::cout << "Profit    => Stop: "
+  std::cout << "Close     => Stop: "
             << utils::float_::to_currency(buy_profit_order.stop_price)
             << " • Limit: "
             << utils::float_::to_currency(buy_profit_order.limit_price)
@@ -55,14 +59,7 @@ void ETrade::Straddle::log_prices() {
             << utils::float_::to_currency(sell_short_open_order.profit)
             << std::endl;
 
-  std::cout << "Stop Loss => Stop: "
-            << utils::float_::to_currency(
-                   sell_short_stop_loss_order.limit_price)
-            << " • Limit: "
-            << utils::float_::to_currency(sell_short_stop_loss_order.stop_price)
-            << std::endl;
-
-  std::cout << "Profit    => Stop: "
+  std::cout << "Close     => Stop: "
             << utils::float_::to_currency(sell_short_profit_order.stop_price)
             << " • Limit: "
             << utils::float_::to_currency(sell_short_profit_order.limit_price)

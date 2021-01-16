@@ -1,4 +1,3 @@
-// NOTE: This is deprecated. Remove after winning strategy is finalized.
 #if !defined ETRADE__STRADDLE_open
 #define ETRADE__STRADDLE_open
 
