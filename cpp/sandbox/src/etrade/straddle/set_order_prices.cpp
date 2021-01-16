@@ -39,25 +39,33 @@ void ETrade::Straddle::set_order_prices() {
   buy_open_order.action = order_action_t::BUY;
   buy_open_order.limit_price =
       utils::float_::to_currency(current_price + open_stop_limit_price_change);
+  buy_open_order.quantity = quantity;
   buy_open_order.stop_price =
       utils::float_::to_currency(current_price + open_stop_price_change);
+  buy_open_order.symbol = symbol;
   buy_open_order.type = order_type_t::MARKET;
 
   buy_profit_order.action = order_action_t::SELL;
   buy_profit_order.limit_price = -INFINITY;
+  buy_profit_order.quantity = quantity;
   buy_profit_order.stop_price = -INFINITY;
+  buy_profit_order.symbol = symbol;
   buy_profit_order.type = order_type_t::LIMIT;
 
   sell_short_open_order.action = order_action_t::SELL_SHORT;
   sell_short_open_order.limit_price =
       utils::float_::to_currency(current_price - open_stop_limit_price_change);
+  sell_short_open_order.quantity = quantity;
   sell_short_open_order.stop_price =
       utils::float_::to_currency(current_price - open_stop_price_change);
+  sell_short_open_order.symbol = symbol;
   sell_short_open_order.type = order_type_t::MARKET;
 
   sell_short_profit_order.action = order_action_t::BUY_TO_COVER;
   sell_short_profit_order.limit_price = INFINITY;
+  sell_short_profit_order.quantity = quantity;
   sell_short_profit_order.stop_price = INFINITY;
+  sell_short_profit_order.symbol = symbol;
   sell_short_profit_order.type = order_type_t::LIMIT;
 }
 

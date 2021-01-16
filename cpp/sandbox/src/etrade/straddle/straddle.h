@@ -6,52 +6,20 @@
 #include "lib/formatted.cpp"      // Formatted
 #include <vector>                 // std::vector
 
+using order_action_t = ETrade::Client::order_action_t;
+using order_status_t = ETrade::Client::order_status_t;
+using order_t = ETrade::Client::order_t;
+using order_type_t = ETrade::Client::order_type_t;
+
 namespace ETrade {
 class Straddle {
 public:
-  static constexpr const char *ORDER_STATUSES[] = {
-      "CANCELLED", "CANCEL_REQUESTED", "EXECUTED", "OPEN", "PARTIAL", "PENDING",
-  };
-
-  enum order_action_t {
-    BUY,
-    BUY_TO_COVER,
-    SELL,
-    SELL_SHORT,
-  };
-
-  enum order_status_t {
-    ORDER_CANCELLED,
-    ORDER_CANCEL_REQUESTED,
-    ORDER_EXECUTED,
-    ORDER_OPEN,
-    ORDER_PARTIAL,
-    ORDER_PENDING,
-  };
-
-  enum order_type_t {
-    LIMIT,
-    MARKET,
-    STOP_LIMIT,
-  };
-
   enum status_t {
     CLOSED,
     COMPLETE,
     LIMBO,
     OPEN,
     PENDING,
-  };
-
-  struct order_t {
-    order_action_t action;
-    double execution_price = 0.00;
-    int id = 0;
-    double limit_price = 0.00;
-    double profit = 0.00;
-    order_status_t status = order_status_t::ORDER_PENDING;
-    double stop_price = 0.00;
-    order_type_t type;
   };
 
   Straddle(char *);
@@ -61,19 +29,6 @@ public:
   void run();
 
 private:
-  const char *ORDER_ACTIONS[4] = {
-      "BUY",
-      "BUY_TO_COVER",
-      "SELL",
-      "SELL_SHORT",
-  };
-
-  const char *ORDER_TYPES[3] = {
-      "LIMIT",
-      "MARKET",
-      "STOP_LIMIT",
-  };
-
   struct odometer_t {
     std::vector<double> accelerations;
     double momentum = 0.00;
@@ -95,19 +50,9 @@ private:
   order_t sell_short_open_order;
   order_t sell_short_profit_order;
 
-  CurlClient cancel_order(order_t &);
-  CurlClient handle_request_error(const CurlClient &, const order_action_t &,
-                                  const std::string &);
-  CurlClient place_order(order_t &);
-  CurlClient preview_order(const order_t &);
-
   json get_order_json(const order_t &);
 
   status_t status();
-
-  std::string build_place_order_payload(std::string &);
-  std::string build_preview_order_payload(const order_t &);
-  std::string compute_client_order_id(const std::string);
 
   double compute_odometer_average(const std::vector<double> &, const int);
 

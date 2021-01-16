@@ -3,6 +3,7 @@
 
 /*
  * ETrade::Straddle
+ * etrade_client
  * sell_short_open_order
  * sell_short_profit_order
  * sell_short_stop_loss_order
@@ -11,10 +12,8 @@
  */
 #include "straddle.h"
 
-#include "cancel_order.cpp"            // cancel_order
 #include "fetch_and_set_orders.cpp"    // fetch_and_set_orders
 #include "lib/formatted.cpp"           // Formatted
-#include "place_order.cpp"             // place_order
 #include "set_execution_price.cpp"     // set_execution_price
 #include "set_status.cpp"              // set_status
 #include "set_trailing_stop_price.cpp" // set_trailing_stop_price
@@ -33,7 +32,7 @@ void ETrade::Straddle::watch_sell_short() {
     std::cout << "📉 SELL_SHORT: Placing open order." << std::endl;
     std::cout << fmt.reset;
 
-    place_order(sell_short_open_order);
+    etrade_client.place_order(sell_short_open_order);
 
     std::cout << fmt.bold << fmt.cyan << std::endl;
     std::cout << "📉 SELL_SHORT: Placed open order." << std::endl;
@@ -61,7 +60,7 @@ void ETrade::Straddle::watch_sell_short() {
     set_trailing_stop_price(sell_short_profit_order, sell_short_open_order);
 
     if (current_price > sell_short_profit_order.stop_price) {
-      place_order(sell_short_profit_order);
+      etrade_client.place_order(sell_short_profit_order);
 
       std::cout << fmt.bold << fmt.cyan << std::endl;
       std::cout << "📉 SELL_SHORT: Placed closing order." << std::endl;
@@ -94,7 +93,7 @@ void ETrade::Straddle::watch_sell_short() {
           << std::endl;
 
       if (buy_open_order.status == order_status_t::ORDER_PENDING) {
-        place_order(buy_open_order);
+        etrade_client.place_order(buy_open_order);
         buy_open_order.status = order_status_t::ORDER_OPEN;
 
         std::cout << fmt.bold << fmt.cyan << std::endl;

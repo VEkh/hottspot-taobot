@@ -13,11 +13,46 @@ class Client {
 public:
   enum debug_t { OFF, ON };
 
+  enum order_action_t {
+    BUY,
+    BUY_TO_COVER,
+    SELL,
+    SELL_SHORT,
+  };
+
+  enum order_status_t {
+    ORDER_CANCELLED,
+    ORDER_CANCEL_REQUESTED,
+    ORDER_EXECUTED,
+    ORDER_OPEN,
+    ORDER_PARTIAL,
+    ORDER_PENDING,
+  };
+
+  enum order_type_t {
+    LIMIT,
+    MARKET,
+    STOP_LIMIT,
+  };
+
   struct client_config_t {
     std::string account_id;
     std::string account_id_key;
     std::string base_url;
   } client_config;
+
+  struct order_t {
+    order_action_t action;
+    double execution_price = 0.00;
+    int id = 0;
+    double limit_price = 0.00;
+    double profit = 0.00;
+    int quantity;
+    order_status_t status = order_status_t::ORDER_PENDING;
+    double stop_price = 0.00;
+    const char *symbol;
+    order_type_t type;
+  };
 
   struct post_params_t {
     std::string body;
@@ -29,11 +64,25 @@ public:
     debug_t debug_flag;
   };
 
+  static constexpr const char *ORDER_STATUSES[6] = {
+      "CANCELLED", "CANCEL_REQUESTED", "EXECUTED", "OPEN", "PARTIAL", "PENDING",
+  };
+
+  static constexpr const char *ORDER_ACTIONS[4] = {
+      "BUY",
+      "BUY_TO_COVER",
+      "SELL",
+      "SELL_SHORT",
+  };
+
   CurlClient cancel_order(int);
+  CurlClient cancel_order(order_t &);
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
   CurlClient fetch(std::string, std::map<std::string, std::string>);
-  CurlClient post(post_params_t);
+  CurlClient place_order(order_t &);
+  CurlClient preview_order(const order_t &);
+
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();
@@ -55,11 +104,25 @@ private:
   const char *CONFIG_PATH = "./config/etrade/credentials.json";
   const char *TOKENS_PATH = "./config/etrade/tokens.json";
 
+  const char *ORDER_TYPES[3] = {
+      "LIMIT",
+      "MARKET",
+      "STOP_LIMIT",
+  };
+
   props_t props = {
       .debug_flag = debug_t::OFF,
   };
 
+  CurlClient handle_place_order_error(const CurlClient &,
+                                      const order_action_t &,
+                                      const std::string &);
+  CurlClient post(post_params_t);
+
+  std::string build_place_order_payload(std::string &);
+  std::string build_preview_order_payload(const order_t &);
   std::string build_request_header(OAuthHeader::props_t);
+  std::string compute_client_order_id(const std::string);
   std::string fetch_token(std::string);
 
   void fetch_request_token();

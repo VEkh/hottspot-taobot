@@ -1,17 +1,17 @@
-#if !defined ETRADE__STRADDLE_handle_request_error
-#define ETRADE__STRADDLE_handle_request_error
+#if !defined ETRADE__CLIENT_handle_place_order_error
+#define ETRADE__CLIENT_handle_place_order_error
 
-#include "etrade/deps.cpp"               // json
+#include "client.h"        // ETrade::Client, ORDER_ACTIONS, stream_format
+#include "etrade/deps.cpp" // json
 #include "lib/curl_client/curl_client.h" // CurlClient
 #include "lib/formatted.cpp"             // Formatted
 #include "lib/utils/string.cpp"          // utils::string
-#include "straddle.h" // ETrade::Straddle, ORDER_ACTIONS, stream_format
-#include <iostream>   // std::cout, std::endl
+#include <iostream>                      // std::cout, std::endl
 
 CurlClient
-ETrade::Straddle::handle_request_error(const CurlClient &curl_client,
-                                       const order_action_t &order_action,
-                                       const std::string &action) {
+ETrade::Client::handle_place_order_error(const CurlClient &curl_client,
+                                         const order_action_t &order_action,
+                                         const std::string &action) {
   json response_body = json::parse(curl_client.response.body);
 
   if (response_body.contains(action + "OrderResponse")) {

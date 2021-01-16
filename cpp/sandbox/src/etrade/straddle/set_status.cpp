@@ -1,20 +1,21 @@
 #if !defined ETRADE__STRADDLE_set_status
 #define ETRADE__STRADDLE_set_status
 
-#include "etrade/deps.cpp"    // json
-#include "get_order_json.cpp" // get_order_json
-#include "lib/formatted.cpp"  // Formatted
-#include "straddle.h"         // ETrade::Straddle, order_t
-#include <iostream>           // std::cout, std::endl
-#include <string>             // std::string
+#include "etrade/client/client.h" // ETrade::Client
+#include "etrade/deps.cpp"        // json
+#include "get_order_json.cpp"     // get_order_json
+#include "lib/formatted.cpp"      // Formatted
+#include "straddle.h"             // ETrade::Straddle, order_status_t, order_t
+#include <iostream>               // std::cout, std::endl
+#include <string>                 // std::string
 
-ETrade::Straddle::order_status_t string_to_enum(const std::string &in) {
-  int length = sizeof(ETrade::Straddle::ORDER_STATUSES) /
-               sizeof(*ETrade::Straddle::ORDER_STATUSES);
+order_status_t string_to_enum(const std::string &in) {
+  int length = sizeof(ETrade::Client::ORDER_STATUSES) /
+               sizeof(*ETrade::Client::ORDER_STATUSES);
 
   for (int i = 0; i < length; i++) {
-    if (ETrade::Straddle::ORDER_STATUSES[i] == in) {
-      return (ETrade::Straddle::order_status_t)i;
+    if (ETrade::Client::ORDER_STATUSES[i] == in) {
+      return (order_status_t)i;
     }
   }
 

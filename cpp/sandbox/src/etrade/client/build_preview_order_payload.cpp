@@ -1,5 +1,5 @@
-#if !defined ETRADE__STRADDLE_build_preview_order_payload
-#define ETRADE__STRADDLE_build_preview_order_payload
+#if !defined ETRADE__CLIENT_build_preview_order_payload
+#define ETRADE__CLIENT_build_preview_order_payload
 
 #include "compute_client_order_id.cpp" // compute_client_order_id
 #include "etrade/deps.cpp"             // json, _json
@@ -8,7 +8,7 @@
 #include <string>                      // std::string
 
 /*
- * ETrade::Straddle
+ * ETrade::Client
  * ORDER_ACTIONS
  * ORDER_TYPES
  * order_t
@@ -16,10 +16,9 @@
  * quote
  * symbol
  */
-#include "straddle.h"
+#include "client.h"
 
-std::string
-ETrade::Straddle::build_preview_order_payload(const order_t &order) {
+std::string ETrade::Client::build_preview_order_payload(const order_t &order) {
   json payload = R"(
     {
       "PreviewOrderRequest":{
@@ -51,9 +50,9 @@ ETrade::Straddle::build_preview_order_payload(const order_t &order) {
     }
   )"_json;
 
-  order_json["Instrument"][0]["Product"]["symbol"] = symbol;
+  order_json["Instrument"][0]["Product"]["symbol"] = order.symbol;
   order_json["Instrument"][0]["orderAction"] = ORDER_ACTIONS[order.action];
-  order_json["Instrument"][0]["quantity"] = quantity;
+  order_json["Instrument"][0]["quantity"] = order.quantity;
   order_json["limitPrice"] = utils::float_::to_currency(order.limit_price);
   order_json["priceType"] = ORDER_TYPES[order.type];
 
