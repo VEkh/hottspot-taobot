@@ -4,6 +4,7 @@
 #include "fetch_and_set_orders.cpp" // fetch_and_set_orders
 #include "fetch_and_set_quote.cpp"  // fetch_and_set_quote
 #include "lib/formatted.cpp"        // Formatted
+#include "log_odometer.cpp"         // log_odometer
 #include "log_order_statuses.cpp"   // log_order_statuses
 #include "log_prices.cpp"           // log_prices
 #include "log_status.cpp"           // log_status
@@ -22,6 +23,7 @@ void ETrade::Straddle::watch() {
   while (status() != status_t::CLOSED) {
     fetch_and_set_quote();
     fetch_and_set_orders();
+    log_odometer();
     log_prices();
     log_order_statuses();
     watch_buy();

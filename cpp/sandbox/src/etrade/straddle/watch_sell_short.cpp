@@ -26,6 +26,7 @@ void ETrade::Straddle::watch_sell_short() {
 
   set_status(sell_short_open_order);
   set_status(sell_short_profit_order);
+  // set_status(sell_short_stop_loss_order); // TODO: Delete
 
   if (sell_short_open_order.status == order_status_t::ORDER_PENDING &&
       current_price <= sell_short_open_order.stop_price) {
@@ -110,6 +111,40 @@ void ETrade::Straddle::watch_sell_short() {
     return;
   }
 
+  // TODO: Delete
+  // if (sell_short_profit_order.status == order_status_t::ORDER_OPEN &&
+  //     current_price >= sell_short_stop_loss_order.stop_price) {
+  //   std::cout << fmt.bold << fmt.red << std::endl;
+  //   std::cout
+  //       << "😱 SELL_SHORT: Price passed stop loss threshold. Cancelling profit
+  //       "
+  //          "order."
+  //       << std::endl;
+  //   std::cout << fmt.reset;
+
+  //   cancel_order(sell_short_profit_order);
+
+  //   return;
+  // }
+
+  // if (sell_short_profit_order.status == order_status_t::ORDER_CANCELLED &&
+  //     sell_short_stop_loss_order.status == order_status_t::ORDER_PENDING) {
+  //   place_order(sell_short_stop_loss_order);
+
+  //   std::cout << fmt.bold << fmt.cyan << std::endl;
+  //   std::cout << "SELL_SHORT: Placed the stop loss order." << std::endl;
+  //   std::cout << fmt.reset;
+
+  //   return;
+  // }
+
+  // if (sell_short_stop_loss_order.status == order_status_t::ORDER_EXECUTED) {
+  //   std::cout << fmt.bold << fmt.red << std::endl;
+  //   std::cout
+  //       << "😭 SELL_SHORT: Executed stop loss order. Better luck next time!"
+  //       << std::endl;
+  //   std::cout << fmt.reset;
+  // }
 }
 
 #endif

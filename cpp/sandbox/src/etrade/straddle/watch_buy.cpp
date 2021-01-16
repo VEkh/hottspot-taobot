@@ -108,6 +108,38 @@ void ETrade::Straddle::watch_buy() {
     return;
   }
 
+  // TODO: Delete
+  // if (buy_profit_order.status == order_status_t::ORDER_OPEN &&
+  //     current_price <= buy_stop_loss_order.stop_price) {
+  //   std::cout << fmt.bold << fmt.red << std::endl;
+  //   std::cout << "😱 BUY: Price passed stop loss threshold. Cancelling profit
+  //   "
+  //                "order."
+  //             << std::endl;
+  //   std::cout << fmt.reset;
+
+  //   cancel_order(buy_profit_order);
+
+  //   return;
+  // }
+
+  // if (buy_profit_order.status == order_status_t::ORDER_CANCELLED &&
+  //     buy_stop_loss_order.status == order_status_t::ORDER_PENDING) {
+  //   place_order(buy_stop_loss_order);
+
+  //   std::cout << fmt.bold << fmt.cyan << std::endl;
+  //   std::cout << "BUY: Placed the stop loss order." << std::endl;
+  //   std::cout << fmt.reset;
+
+  //   return;
+  // }
+
+  // if (buy_stop_loss_order.status == order_status_t::ORDER_EXECUTED) {
+  //   std::cout << fmt.bold << fmt.red << std::endl;
+  //   std::cout << "😭 BUY: Executed stop loss order. Better luck next time!"
+  //             << std::endl;
+  //   std::cout << fmt.reset;
+  // }
 }
 
 #endif

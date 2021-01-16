@@ -74,6 +74,12 @@ private:
       "STOP_LIMIT",
   };
 
+  struct odometer_t {
+    std::vector<double> accelerations;
+    double momentum = 0.00;
+    std::vector<double> velocities;
+  } odometer;
+
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t stream_format = Formatted::stream();
   char *symbol;
@@ -105,12 +111,16 @@ private:
   std::string build_preview_order_payload(const order_t &);
   std::string compute_client_order_id(const std::string);
 
+  double compute_odometer_average(const std::vector<double> &, const int);
+
   void fetch_and_set_orders();
   void fetch_and_set_quote();
   void log_order_statuses();
+  void log_odometer();
   void log_prices();
   void log_start_message();
   void log_status();
+  void odometer_tick(const double &, const double &);
   void open();
   void set_order_prices();
   void set_execution_price(order_t &);

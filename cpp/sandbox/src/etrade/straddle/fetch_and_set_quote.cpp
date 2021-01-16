@@ -33,6 +33,7 @@ void ETrade::Straddle::fetch_and_set_quote() {
       quote_color = fmt.red;
     }
 
+    odometer_tick(quote["currentPrice"], current_quote["currentPrice"]);
   }
 
   quote = current_quote;
