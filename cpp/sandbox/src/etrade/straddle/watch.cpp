@@ -1,20 +1,27 @@
 #if !defined ETRADE__STRADDLE_watch
 #define ETRADE__STRADDLE_watch
 
+/*
+ * ETrade::Straddle
+ * POLLING_INTERVAL_SECONDS
+ * speedometer
+ * stream_format
+ * symbol
+ */
+#include "straddle.h"
+
 #include "fetch_and_set_orders.cpp" // fetch_and_set_orders
 #include "fetch_and_set_quote.cpp"  // fetch_and_set_quote
 #include "lib/formatted.cpp"        // Formatted
-#include "log_odometer.cpp"         // log_odometer
 #include "log_order_statuses.cpp"   // log_order_statuses
 #include "log_prices.cpp"           // log_prices
 #include "log_status.cpp"           // log_status
 #include "status.cpp"               // status
-#include "straddle.h" // ETrade::Straddle, POLLING_INTERVAL_SECONDS, stream_format, symbol
-#include "watch_buy.cpp"        // watch_buy
-#include "watch_sell_short.cpp" // watch_sell_short
-#include <chrono>               // std::chrono
-#include <iostream>             // std::cout, std::endl
-#include <thread>               // std::this_thread
+#include "watch_buy.cpp"            // watch_buy
+#include "watch_sell_short.cpp"     // watch_sell_short
+#include <chrono>                   // std::chrono
+#include <iostream>                 // std::cout, std::endl
+#include <thread>                   // std::this_thread
 
 void ETrade::Straddle::watch() {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -23,7 +30,7 @@ void ETrade::Straddle::watch() {
   while (status() != status_t::CLOSED) {
     fetch_and_set_quote();
     fetch_and_set_orders();
-    log_odometer();
+    speedometer.log();
     log_prices();
     log_order_statuses();
     watch_buy();

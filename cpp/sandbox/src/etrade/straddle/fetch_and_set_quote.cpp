@@ -3,10 +3,9 @@
 
 #include "etrade/deps.cpp"   // json
 #include "lib/formatted.cpp" // Formatted
-#include "odometer_tick.cpp" // odometer_tick
-#include "straddle.h" // ETrade::Straddle, etrade_client, stream_format, symbol
-#include <iostream>   // std::cout, std::endl
-#include <string>     // std::string
+#include "straddle.h" // ETrade::Straddle, etrade_client, speedometer, stream_format, symbol
+#include <iostream> // std::cout, std::endl
+#include <string>   // std::string
 
 json translate_quote(const std::string &response_body) {
   json input = json::parse(response_body);
@@ -33,7 +32,7 @@ void ETrade::Straddle::fetch_and_set_quote() {
       quote_color = fmt.red;
     }
 
-    odometer_tick(quote["currentPrice"], current_quote["currentPrice"]);
+    speedometer.tick(quote["currentPrice"], current_quote["currentPrice"]);
   }
 
   quote = current_quote;

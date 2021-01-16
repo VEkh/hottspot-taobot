@@ -1,10 +1,10 @@
 #if !defined ETRADE__STRADDLE_H
 #define ETRADE__STRADDLE_H
 
-#include "etrade/client/client.h" // ETrade::Client
-#include "etrade/deps.cpp"        // json
-#include "lib/formatted.cpp"      // Formatted
-#include <vector>                 // std::vector
+#include "etrade/client/client.h"             // ETrade::Client
+#include "etrade/deps.cpp"                    // json
+#include "etrade/speedometer/speedometer.cpp" // ETrade::Speedometer
+#include "lib/formatted.cpp"                  // Formatted
 
 using order_action_t = ETrade::Client::order_action_t;
 using order_status_t = ETrade::Client::order_status_t;
@@ -29,18 +29,15 @@ public:
   void run();
 
 private:
-  struct odometer_t {
-    std::vector<double> accelerations;
-    double momentum = 0.00;
-    std::vector<double> velocities;
-  } odometer;
-
-  ETrade::Client etrade_client;
-  Formatted::fmt_stream_t stream_format = Formatted::stream();
   char *symbol;
   int POLLING_INTERVAL_SECONDS = 5;
   int day_range;
   int quantity;
+
+  ETrade::Client etrade_client;
+  ETrade::Speedometer speedometer =
+      ETrade::Speedometer(POLLING_INTERVAL_SECONDS);
+  Formatted::fmt_stream_t stream_format = Formatted::stream();
 
   json placed_orders;
   json quote;
@@ -54,16 +51,12 @@ private:
 
   status_t status();
 
-  double compute_odometer_average(const std::vector<double> &, const int);
-
   void fetch_and_set_orders();
   void fetch_and_set_quote();
   void log_order_statuses();
-  void log_odometer();
   void log_prices();
   void log_start_message();
   void log_status();
-  void odometer_tick(const double &, const double &);
   void open();
   void set_order_prices();
   void set_execution_price(order_t &);
