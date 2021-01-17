@@ -4,6 +4,7 @@
 #include "etrade/deps.cpp" // json
 #include "speedometer.h"   // ETrade::Speedometer, polling_interval, speedometer
 #include <cmath>           // abs
+#include <math.h>          // INFINITY
 
 void ETrade::Speedometer::tick(const json &quotes) {
 
@@ -21,7 +22,8 @@ void ETrade::Speedometer::tick(const json &quotes) {
 
   const int current_timestamp = current_quote["timestamp"];
   const int previous_timestamp = previous_quote["timestamp"];
-  const int time_change = current_timestamp - previous_timestamp;
+  int time_change = current_timestamp - previous_timestamp;
+  time_change = time_change ? time_change : INFINITY;
 
   const double price_percent_change = current_price - previous_price;
   const double current_velocity = price_percent_change / time_change;
@@ -32,6 +34,7 @@ void ETrade::Speedometer::tick(const json &quotes) {
 
   accelerations.push_back(current_acceleration);
   velocities.push_back(current_velocity);
+  displacement = (current_price - reference_price) / reference_price;
   momentum = abs(reference_price) * current_velocity;
 }
 

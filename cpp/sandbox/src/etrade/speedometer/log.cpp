@@ -1,9 +1,17 @@
 #if !defined ETRADE__SPEEDOMETER_log
 #define ETRADE__SPEEDOMETER_log
 
+/*
+ * ETrade::Speedometer
+ * accelerations
+ * displacement
+ * stream_format
+ * velocities
+ */
+#include "speedometer.h"
+
 #include "compute_average.cpp" // compute_average
 #include "lib/formatted.cpp"   // Formatted
-#include "speedometer.h"       // ETrade::Speedometer, stream_format
 #include <iomanip>             // std::setprecision
 #include <iostream>            // std::cout, std::endl, std::fixed
 
@@ -13,9 +21,10 @@ void ETrade::Speedometer::log() {
   const double current_acceleration =
       accelerations.empty() ? 0 : accelerations.back();
   const double current_velocity = velocities.empty() ? 0 : velocities.back();
-  const char *acceleration_units = " ($/s^2)";
-  const char *momentum_units = " ($^2/s)";
-  const char *velocity_units = " ($/s)  ";
+  const char *acceleration_units = " (%/s^2)";
+  const char *displacement_units = " (%)    ";
+  const char *momentum_units = " (%^2/s)";
+  const char *velocity_units = " (%/s)  ";
 
   std::cout << std::setprecision(6) << std::fixed;
   std::cout << fmt.bold << fmt.magenta << std::endl;
@@ -25,6 +34,8 @@ void ETrade::Speedometer::log() {
             << current_acceleration << std::endl;
   std::cout << "Current Velocity       " << velocity_units << ": "
             << current_velocity << std::endl;
+  std::cout << "Displacement           " << displacement_units << ": "
+            << displacement << std::endl;
   std::cout << "Momentum               " << momentum_units << ": " << momentum
             << std::endl
             << std::endl;

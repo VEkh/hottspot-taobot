@@ -8,8 +8,9 @@
 namespace ETrade {
 class Speedometer {
 public:
-  std::vector<double> accelerations;
+  double displacement = 0.00;
   double momentum = 0.00;
+  std::vector<double> accelerations;
   std::vector<double> velocities;
 
   void log();
