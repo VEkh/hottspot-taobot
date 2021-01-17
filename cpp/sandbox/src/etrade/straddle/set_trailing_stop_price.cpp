@@ -19,7 +19,7 @@ void ETrade::Straddle::set_trailing_stop_price(order_t &close_order,
 
   json current_quote = quotes.back();
 
-  double beta = first_quote["beta"];
+  double beta = current_quote["beta"];
   double current_price = current_quote["currentPrice"];
   double trailing_stop = TRAILING_STOP_PERCENT * beta * execution_price;
   double trailing_stop_price;

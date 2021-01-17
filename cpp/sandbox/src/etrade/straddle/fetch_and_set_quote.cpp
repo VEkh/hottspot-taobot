@@ -41,11 +41,10 @@ void ETrade::Straddle::fetch_and_set_quote() {
     } else if (current_quote["currentPrice"] < last_quote["currentPrice"]) {
       log_color = fmt.red;
     }
-
-    speedometer.tick(last_quote["currentPrice"], current_quote["currentPrice"]);
   }
 
   quotes.push_back(current_quote);
+  speedometer.tick(quotes);
 
   std::cout << fmt.bold << log_color << std::endl;
   std::cout << symbol << " quote: " << logged_quote << std::endl;

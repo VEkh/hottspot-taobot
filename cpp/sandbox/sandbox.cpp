@@ -4,5 +4,5 @@
 int main() {
   json array = R"([1,2,3])"_json;
 
-  std::cout << array.back() << std::endl;
+  std::cout << *(array.end() - 2) << std::endl;
 }

@@ -1,6 +1,7 @@
 #if !defined ETRADE__SPEEDOMETER_H
 #define ETRADE__SPEEDOMETER_H
 
+#include "etrade/deps.cpp"   // json
 #include "lib/formatted.cpp" // Formatted
 #include <vector>            // std::vector
 
@@ -12,7 +13,7 @@ public:
   std::vector<double> velocities;
 
   void log();
-  void tick(const double &, const double &);
+  void tick(const json &);
 
   Speedometer(int interval) : polling_interval(interval){};
 
