@@ -2,7 +2,8 @@
 #define ETRADE__STRADDLE_set_trailing_stop_price
 
 #include "etrade/client/client.h" // ETrade::Client
-#include "straddle.h"             // ETrade::Straddle, day_range, order_t, quote
+#include "etrade/deps.cpp"        // json
+#include "straddle.h"             // ETrade::Straddle, order_t, quote
 #include <algorithm>              // std::max, std::min
 #include <math.h>                 // INFINITY
 
@@ -15,7 +16,7 @@ void ETrade::Straddle::set_trailing_stop_price(order_t &close_order,
   }
 
   const char *order_action = ETrade::Client::ORDER_ACTIONS[open_order.action];
-  double current_price = quote["currentPrice"];
+  double current_price = quotes.back()["currentPrice"];
   double profit_threshold = PROFIT_THRESHOLD_DAY_RANGE_RATIO * day_range;
   double trailing_limit_price;
   double trailing_stop_price;

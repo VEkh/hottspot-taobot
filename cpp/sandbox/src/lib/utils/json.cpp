@@ -6,7 +6,8 @@
 
 namespace utils {
 namespace json {
-nlohmann::json jslice(nlohmann::json input, std::vector<const char *> keys) {
+nlohmann::json jslice(const nlohmann::json &input,
+                      const std::vector<const char *> keys) {
   nlohmann::json output;
 
   for (const char *key : keys) {

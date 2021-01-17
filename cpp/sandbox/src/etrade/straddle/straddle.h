@@ -2,7 +2,7 @@
 #define ETRADE__STRADDLE_H
 
 #include "etrade/client/client.h"             // ETrade::Client
-#include "etrade/deps.cpp"                    // json
+#include "etrade/deps.cpp"                    // json, _json
 #include "etrade/speedometer/speedometer.cpp" // ETrade::Speedometer
 #include "lib/formatted.cpp"                  // Formatted
 
@@ -31,7 +31,6 @@ public:
 private:
   char *symbol;
   int POLLING_INTERVAL_SECONDS = 5;
-  int day_range;
   int quantity;
 
   ETrade::Client etrade_client;
@@ -40,12 +39,12 @@ private:
   Formatted::fmt_stream_t stream_format = Formatted::stream();
 
   json placed_orders;
-  json quote;
+  json quotes = R"([])"_json;
 
   order_t buy_open_order;
-  order_t buy_profit_order;
+  order_t buy_close_order;
   order_t sell_short_open_order;
-  order_t sell_short_profit_order;
+  order_t sell_short_close_order;
 
   json get_order_json(const order_t &);
 
@@ -53,7 +52,6 @@ private:
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();
-  void log_order_statuses();
   void log_prices();
   void log_start_message();
   void log_status();

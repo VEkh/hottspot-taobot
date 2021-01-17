@@ -4,69 +4,52 @@
 /*
  * ETrade::Straddle
  * buy_open_order
- * buy_profit_order
- * quote
+ * buy_close_order
+ * quotes
  * sell_short_open_order
- * sell_short_profit_order
+ * sell_short_close_order
  */
 #include "straddle.h"
 
+#include "etrade/deps.cpp"     // json
 #include "lib/utils/float.cpp" // utils::float_
 #include <math.h>              // INFINITY
 
-double MINIMUM_CURRENT_PRICE_DELTA = 0.005;
-double TARGET_PROFIT = 0.05;
-double TARGET_TOTAL_MOVEMENT = 0.07;
+double ENTRY_THRESHOLD = 0.001;
 
 void ETrade::Straddle::set_order_prices() {
-  double current_price = quote["currentPrice"];
+  json first_quote = quotes.front();
 
-  double default_high = current_price * (1 + MINIMUM_CURRENT_PRICE_DELTA);
-  double default_low = current_price * (1 - MINIMUM_CURRENT_PRICE_DELTA);
+  double reference_price = first_quote["currentPrice"];
+  double beta = first_quote["beta"];
 
-  double high =
-      (double)quote["highPrice"] ? (double)quote["highPrice"] : default_high;
-
-  double low =
-      (double)quote["lowPrice"] ? (double)quote["lowPrice"] : default_low;
-
-  day_range = high - low;
-
-  double target_movement = day_range * TARGET_TOTAL_MOVEMENT;
-  double open_stop_limit_price_change = (1 - TARGET_PROFIT) * target_movement;
-  double open_stop_price_change = 0.9 * open_stop_limit_price_change;
+  double entry_delta = reference_price * beta * ENTRY_THRESHOLD;
 
   buy_open_order.action = order_action_t::BUY;
-  buy_open_order.limit_price =
-      utils::float_::to_currency(current_price + open_stop_limit_price_change);
   buy_open_order.quantity = quantity;
   buy_open_order.stop_price =
-      utils::float_::to_currency(current_price + open_stop_price_change);
+      utils::float_::to_currency(reference_price + entry_delta);
   buy_open_order.symbol = symbol;
   buy_open_order.type = order_type_t::MARKET;
 
-  buy_profit_order.action = order_action_t::SELL;
-  buy_profit_order.limit_price = -INFINITY;
-  buy_profit_order.quantity = quantity;
-  buy_profit_order.stop_price = -INFINITY;
-  buy_profit_order.symbol = symbol;
-  buy_profit_order.type = order_type_t::LIMIT;
+  buy_close_order.action = order_action_t::SELL;
+  buy_close_order.quantity = quantity;
+  buy_close_order.stop_price = -INFINITY;
+  buy_close_order.symbol = symbol;
+  buy_close_order.type = order_type_t::MARKET;
 
   sell_short_open_order.action = order_action_t::SELL_SHORT;
-  sell_short_open_order.limit_price =
-      utils::float_::to_currency(current_price - open_stop_limit_price_change);
   sell_short_open_order.quantity = quantity;
   sell_short_open_order.stop_price =
-      utils::float_::to_currency(current_price - open_stop_price_change);
+      utils::float_::to_currency(reference_price - entry_delta);
   sell_short_open_order.symbol = symbol;
   sell_short_open_order.type = order_type_t::MARKET;
 
-  sell_short_profit_order.action = order_action_t::BUY_TO_COVER;
-  sell_short_profit_order.limit_price = INFINITY;
-  sell_short_profit_order.quantity = quantity;
-  sell_short_profit_order.stop_price = INFINITY;
-  sell_short_profit_order.symbol = symbol;
-  sell_short_profit_order.type = order_type_t::LIMIT;
+  sell_short_close_order.action = order_action_t::BUY_TO_COVER;
+  sell_short_close_order.quantity = quantity;
+  sell_short_close_order.stop_price = INFINITY;
+  sell_short_close_order.symbol = symbol;
+  sell_short_close_order.type = order_type_t::MARKET;
 }
 
 #endif

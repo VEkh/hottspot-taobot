@@ -5,7 +5,7 @@
  * ETrade::Straddle
  * etrade_client
  * sell_short_open_order
- * sell_short_profit_order
+ * sell_short_close_order
  * sell_short_stop_loss_order
  * order_status_t
  * symbol
@@ -21,12 +21,13 @@
 
 void ETrade::Straddle::watch_sell_short() {
   Formatted::fmt_stream_t fmt = stream_format;
-  double current_price = quote["currentPrice"];
+  double current_price = quotes.back()["currentPrice"];
 
   set_status(sell_short_open_order);
-  set_status(sell_short_profit_order);
+  set_status(sell_short_close_order);
 
   if (sell_short_open_order.status == order_status_t::ORDER_PENDING &&
+      buy_open_order.status == order_status_t::ORDER_PENDING &&
       current_price <= sell_short_open_order.stop_price) {
     std::cout << fmt.bold << fmt.green << std::endl;
     std::cout << "📉 SELL_SHORT: Placing open order." << std::endl;
@@ -50,17 +51,17 @@ void ETrade::Straddle::watch_sell_short() {
       set_execution_price(sell_short_open_order);
     }
 
-    if (sell_short_profit_order.status != order_status_t::ORDER_EXECUTED) {
+    if (sell_short_close_order.status != order_status_t::ORDER_EXECUTED) {
       set_profit(sell_short_open_order);
     }
   }
 
   if (sell_short_open_order.status == order_status_t::ORDER_EXECUTED &&
-      sell_short_profit_order.status == order_status_t::ORDER_PENDING) {
-    set_trailing_stop_price(sell_short_profit_order, sell_short_open_order);
+      sell_short_close_order.status == order_status_t::ORDER_PENDING) {
+    set_trailing_stop_price(sell_short_close_order, sell_short_open_order);
 
-    if (current_price > sell_short_profit_order.stop_price) {
-      etrade_client.place_order(sell_short_profit_order);
+    if (current_price > sell_short_close_order.stop_price) {
+      etrade_client.place_order(sell_short_close_order);
 
       std::cout << fmt.bold << fmt.cyan << std::endl;
       std::cout << "📉 SELL_SHORT: Placed closing order." << std::endl;
@@ -70,18 +71,18 @@ void ETrade::Straddle::watch_sell_short() {
     }
   }
 
-  if (sell_short_profit_order.status == order_status_t::ORDER_EXECUTED) {
-    set_execution_price(sell_short_profit_order);
+  if (sell_short_close_order.status == order_status_t::ORDER_EXECUTED) {
+    set_execution_price(sell_short_close_order);
 
-    if (!sell_short_profit_order.profit) {
-      set_profit(sell_short_profit_order);
+    if (!sell_short_close_order.profit) {
+      set_profit(sell_short_close_order);
     }
 
-    if (sell_short_profit_order.execution_price <
+    if (sell_short_close_order.execution_price <
         sell_short_open_order.execution_price) {
       std::cout << fmt.bold << fmt.green << std::endl;
       std::cout << "🎉 SELL_SHORT: Closed order at a gain." << std::endl;
-    } else if (sell_short_profit_order.execution_price ==
+    } else if (sell_short_close_order.execution_price ==
                sell_short_open_order.execution_price) {
       std::cout << fmt.bold << fmt.yellow << std::endl;
       std::cout << "😅 SELL_SHORT: Closed order at no loss, no gain."

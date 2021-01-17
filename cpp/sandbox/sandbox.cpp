@@ -1,9 +1,8 @@
+#include "deps.cpp"
 #include <iostream>
-#include <numeric>
-#include <vector>
 
 int main() {
-  std::vector<double> nums = {};
+  json array = R"([1,2,3])"_json;
 
-  std::cout << nums.back() << std::endl;
+  std::cout << array.back() << std::endl;
 }

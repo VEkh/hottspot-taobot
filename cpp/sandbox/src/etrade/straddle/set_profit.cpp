@@ -4,7 +4,7 @@
 #include "straddle.h" // ETrade::Straddle, order_t, quote
 
 void ETrade::Straddle::set_profit(order_t &order) {
-  double current_price = quote["currentPrice"];
+  double current_price = quotes.back()["currentPrice"];
   double profit;
 
   bool is_long_position = order.action == order_action_t::BUY ||
