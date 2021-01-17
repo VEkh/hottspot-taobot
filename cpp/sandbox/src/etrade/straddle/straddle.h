@@ -59,6 +59,7 @@ private:
   void set_order_prices();
   void set_execution_price(order_t &);
   void set_profit(order_t &);
+  void set_profit(order_t &, const order_t &);
   void set_status(order_t &);
   void set_trailing_stop_price(order_t &, const order_t &);
   void watch();

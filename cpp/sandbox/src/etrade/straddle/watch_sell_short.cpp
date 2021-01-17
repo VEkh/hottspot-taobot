@@ -15,6 +15,7 @@
 #include "fetch_and_set_orders.cpp"    // fetch_and_set_orders
 #include "lib/formatted.cpp"           // Formatted
 #include "set_execution_price.cpp"     // set_execution_price
+#include "set_profit.cpp"              // set_profit
 #include "set_status.cpp"              // set_status
 #include "set_trailing_stop_price.cpp" // set_trailing_stop_price
 #include <iostream>                    // std::cout, std::endl
@@ -73,10 +74,7 @@ void ETrade::Straddle::watch_sell_short() {
 
   if (sell_short_close_order.status == order_status_t::ORDER_EXECUTED) {
     set_execution_price(sell_short_close_order);
-
-    if (!sell_short_close_order.profit) {
-      set_profit(sell_short_close_order);
-    }
+    set_profit(sell_short_close_order, sell_short_open_order);
 
     if (sell_short_close_order.execution_price <
         sell_short_open_order.execution_price) {

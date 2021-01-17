@@ -74,10 +74,7 @@ void ETrade::Straddle::watch_buy() {
 
   if (buy_close_order.status == order_status_t::ORDER_EXECUTED) {
     set_execution_price(buy_close_order);
-
-    if (!buy_close_order.profit) {
-      set_profit(buy_close_order);
-    }
+    set_profit(buy_close_order, buy_open_order);
 
     if (buy_close_order.execution_price > buy_open_order.execution_price) {
       std::cout << fmt.bold << fmt.green << std::endl;
