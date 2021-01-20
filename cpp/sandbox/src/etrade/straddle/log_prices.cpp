@@ -80,8 +80,8 @@ void ETrade::Straddle::log_prices() {
             << utils::float_::to_currency(sell_short_close_order.profit)
             << std::endl;
 
-  std::cout << "Status    => " << utils::vector::join(buy_statuses, " • ")
-            << std::endl;
+  std::cout << "Status    => "
+            << utils::vector::join(sell_short_statuses, " • ") << std::endl;
 
   std::cout << fmt.reset;
 }

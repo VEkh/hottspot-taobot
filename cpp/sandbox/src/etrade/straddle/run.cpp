@@ -3,7 +3,6 @@
 
 #include "fetch_and_set_quote.cpp" // fetch_and_set_quote
 #include "lib/formatted.cpp"       // Formatted
-#include "open.cpp"                // open
 #include "set_order_prices.cpp"    // set_order_prices
 #include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol, etrade_client
 #include "watch.cpp" // watch

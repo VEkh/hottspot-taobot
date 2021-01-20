@@ -29,11 +29,11 @@ bool is_retriable_response(const std::string &response_body) {
 } // namespace place_order
 } // namespace ETrade
 
-CurlClient ETrade::Client::place_order(order_t &order) {
+CurlClient ETrade::Client::place_order(order_t *order) {
   std::string request_url = client_config.base_url + "/v1/accounts/" +
                             client_config.account_id_key + "/orders/place.json";
 
-  CurlClient preview_curl_client = preview_order(order);
+  CurlClient preview_curl_client = preview_order(*order);
 
   std::string payload =
       build_place_order_payload(preview_curl_client.response.body);
@@ -48,12 +48,12 @@ CurlClient ETrade::Client::place_order(order_t &order) {
       },
       ETrade::place_order::is_retriable_response);
 
-  curl_client = handle_place_order_error(curl_client, order.action, "Place");
+  curl_client = handle_place_order_error(curl_client, order->action, "Place");
 
   json response = json::parse(curl_client.response.body);
 
-  order.id = response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
-  order.status = order_status_t::ORDER_OPEN;
+  order->id = response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
+  order->status = order_status_t::ORDER_OPEN;
 
   return curl_client;
 }

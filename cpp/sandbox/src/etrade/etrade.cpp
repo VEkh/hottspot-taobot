@@ -43,6 +43,7 @@ int main(int argc, char *argv[]) {
     exit(1);
   }
 
+  Formatted::fmt_stream_t fmt = Formatted::stream();
   std::string command = argv[1];
 
   if (command == "cancel_orders") {
@@ -114,13 +115,13 @@ int main(int argc, char *argv[]) {
     while (true) {
       ETrade::Straddle straddle(symbol, quantity);
       straddle.run();
-      std::cout << "Finished stradding. Re-running." << std::endl;
+      std::cout << fmt.bold << fmt.blue;
+      std::cout << "\n🔃 Finished stradding. Re-running.\n" << std::endl;
+      std::cout << fmt.reset << fmt.blue;
     }
 
     exit(0);
   }
-
-  Formatted::fmt_stream_t fmt = Formatted::stream();
 
   std::cout << fmt.bold << fmt.red << "Unknown command <" << command
             << ">. Please refer to usage👇🏾\n"

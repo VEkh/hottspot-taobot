@@ -21,10 +21,10 @@ void ETrade::Speedometer::log() {
   const double current_acceleration =
       accelerations.empty() ? 0 : accelerations.back();
   const double current_velocity = velocities.empty() ? 0 : velocities.back();
-  const char *acceleration_units = " (%/s^2)";
-  const char *displacement_units = " (%)    ";
-  const char *momentum_units = " (%^2/s)";
-  const char *velocity_units = " (%/s)  ";
+  const char *acceleration_units = " (%/s^2)       ";
+  const char *displacement_units = " (%)           ";
+  const char *momentum_units = " (ref. $ * %/s)";
+  const char *velocity_units = " (%/s)         ";
 
   std::cout << std::setprecision(6) << std::fixed;
   std::cout << fmt.bold << fmt.magenta << std::endl;

@@ -4,6 +4,7 @@
 #include "etrade/deps.cpp"                        // json
 #include "lib/curl_client/curl_client.h"          // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // request_with_retry
+#include "lib/utils/string.cpp"                   // utils::string
 #include "straddle.h" // ETrade::Straddle, etrade_client, placed_orders, symbol
 #include <regex>      // std::regex, std::regex_search
 #include <string>     // std::string
@@ -16,7 +17,7 @@ void ETrade::Straddle::fetch_and_set_orders() {
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return etrade_client.fetch(url); },
       [](const std::string &response) -> bool {
-        if (response.empty()) {
+        if (utils::string::trim(response).empty()) {
           return true;
         }
 

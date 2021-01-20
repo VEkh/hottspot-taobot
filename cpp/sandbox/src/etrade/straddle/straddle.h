@@ -55,16 +55,14 @@ private:
   void log_prices();
   void log_start_message();
   void log_status();
-  void open();
   void set_order_prices();
-  void set_execution_price(order_t &);
-  void set_profit(order_t &);
-  void set_profit(order_t &, const order_t &);
-  void set_status(order_t &);
-  void set_trailing_stop_price(order_t &, const order_t &);
+  void set_execution_price(order_t *);
+  void set_profit(order_t *);
+  void set_profit(order_t *, const order_t *);
+  void set_status(order_t *);
+  void set_trailing_stop_price(order_t *, const order_t *);
   void watch();
-  void watch_buy();
-  void watch_sell_short();
+  void watch_side(const order_action_t &);
 };
 } // namespace ETrade
 

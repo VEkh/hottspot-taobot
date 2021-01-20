@@ -81,7 +81,7 @@ public:
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
   CurlClient fetch(std::string, std::map<std::string, std::string>);
-  CurlClient place_order(order_t &);
+  CurlClient place_order(order_t *);
   CurlClient preview_order(const order_t &);
 
   std::string fetch_quote(char *);

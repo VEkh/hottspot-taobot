@@ -29,8 +29,8 @@ order_status_t string_to_enum(const std::string &in) {
   exit(1);
 }
 
-void ETrade::Straddle::set_status(order_t &order) {
-  json order_json = get_order_json(order);
+void ETrade::Straddle::set_status(order_t *order) {
+  json order_json = get_order_json(*order);
 
   if (order_json.empty()) {
     return;
@@ -38,7 +38,7 @@ void ETrade::Straddle::set_status(order_t &order) {
 
   std::string status = order_json["OrderDetail"][0]["status"];
 
-  order.status = string_to_enum(status);
+  order->status = string_to_enum(status);
 }
 
 #endif

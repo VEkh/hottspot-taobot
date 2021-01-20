@@ -7,9 +7,9 @@
 #include "straddle.h"         // ETrade::Straddle, order_t
 #include <iostream>           // std::cout, std::endl
 
-void ETrade::Straddle::set_execution_price(order_t &order) {
+void ETrade::Straddle::set_execution_price(order_t *order) {
   Formatted::fmt_stream_t fmt = stream_format;
-  json order_json = get_order_json(order);
+  json order_json = get_order_json(*order);
 
   if (order_json.empty() ||
       !order_json["OrderDetail"][0]["Instrument"][0].contains(
@@ -21,7 +21,7 @@ void ETrade::Straddle::set_execution_price(order_t &order) {
     return;
   }
 
-  order.execution_price =
+  order->execution_price =
       order_json["OrderDetail"][0]["Instrument"][0]["averageExecutionPrice"];
 }
 

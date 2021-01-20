@@ -16,8 +16,7 @@
 #include "log_prices.cpp"           // log_prices
 #include "log_status.cpp"           // log_status
 #include "status.cpp"               // status
-#include "watch_buy.cpp"            // watch_buy
-#include "watch_sell_short.cpp"     // watch_sell_short
+#include "watch_side.cpp"           // watch_side
 #include <chrono>                   // std::chrono
 #include <iostream>                 // std::cout, std::endl
 #include <thread>                   // std::this_thread
@@ -31,8 +30,8 @@ void ETrade::Straddle::watch() {
     fetch_and_set_orders();
     speedometer.log();
     log_prices();
-    watch_buy();
-    watch_sell_short();
+    watch_side(order_action_t::BUY);
+    watch_side(order_action_t::SELL_SHORT);
     log_status();
 
     std::this_thread::sleep_for(std::chrono::seconds(POLLING_INTERVAL_SECONDS));
