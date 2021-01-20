@@ -39,6 +39,7 @@ public:
     std::string account_id;
     std::string account_id_key;
     std::string base_url;
+    std::map<const char *, std::string> paths;
   } client_config;
 
   struct order_t {
@@ -101,8 +102,6 @@ private:
   } oauth;
 
   Formatted::fmt_stream_t stream_format = Formatted::stream();
-  const char *CONFIG_PATH = "./config/etrade/credentials.json";
-  const char *TOKENS_PATH = "./config/etrade/tokens.json";
 
   const char *ORDER_TYPES[3] = {
       "LIMIT",
@@ -118,6 +117,8 @@ private:
                                       const order_action_t &,
                                       const std::string &);
   CurlClient post(post_params_t);
+
+  std::string get_config_filepath(const char *);
 
   std::string build_place_order_payload(std::string &);
   std::string build_preview_order_payload(const order_t &);
