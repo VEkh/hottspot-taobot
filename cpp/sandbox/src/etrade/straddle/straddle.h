@@ -30,7 +30,7 @@ public:
 
 private:
   char *symbol;
-  int POLLING_INTERVAL_SECONDS = 5;
+  int POLLING_INTERVAL_SECONDS = 1;
   int quantity;
 
   ETrade::Client etrade_client;
