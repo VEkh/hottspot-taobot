@@ -68,36 +68,33 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
       opposite_open_order->status == order_status_t::ORDER_PENDING &&
       should_open) {
     std::cout << fmt.bold << fmt.green << std::endl;
-    std::cout << log_icon << order_action << ": Placing open order."
+    std::cout << log_icon << order_action << ": Placing (opposite) open order."
               << std::endl;
     std::cout << fmt.reset;
 
-    etrade_client.place_order(open_order);
+    etrade_client.place_order(opposite_open_order);
 
     std::cout << fmt.bold << fmt.cyan << std::endl;
-    std::cout << "📈 " << order_action << ": Placed open order." << std::endl;
+    std::cout << "📈 " << order_action << ": Placed (opposite) open order."
+              << std::endl;
     std::cout << fmt.reset;
 
     return;
   }
 
-  if (open_order->status == order_status_t::ORDER_EXECUTED) {
-    if (!open_order->execution_price) {
-      std::cout << fmt.bold << fmt.green << std::endl;
-      std::cout << log_icon << order_action << ": Executed open order."
-                << std::endl;
-      std::cout << fmt.reset;
+  if (open_order->status == order_status_t::ORDER_EXECUTED &&
+      !open_order->execution_price) {
+    std::cout << fmt.bold << fmt.green << std::endl;
+    std::cout << log_icon << order_action << ": Executed open order."
+              << std::endl;
+    std::cout << fmt.reset;
 
-      set_execution_price(open_order);
-    }
-
-    if (close_order->status != order_status_t::ORDER_EXECUTED) {
-      set_profit(open_order);
-    }
+    set_execution_price(open_order);
   }
 
   if (open_order->status == order_status_t::ORDER_EXECUTED &&
       close_order->status == order_status_t::ORDER_PENDING) {
+    set_profit(open_order);
     set_trailing_stop_price(close_order, open_order);
 
     if (should_close) {
