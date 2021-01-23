@@ -15,15 +15,14 @@
 #include "lib/utils/float.cpp" // utils::float_
 #include <math.h>              // INFINITY
 
-double ENTRY_THRESHOLD = 0.001;
+double ENTRY_THRESHOLD = 0.0005;
 
 void ETrade::Straddle::set_order_prices() {
   json first_quote = quotes.front();
 
   double reference_price = first_quote["currentPrice"];
-  double beta = first_quote["beta"];
 
-  double entry_delta = reference_price * beta * ENTRY_THRESHOLD;
+  double entry_delta = reference_price * ENTRY_THRESHOLD;
 
   buy_open_order.action = order_action_t::BUY;
   buy_open_order.quantity = quantity;

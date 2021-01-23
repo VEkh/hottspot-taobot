@@ -1,6 +1,4 @@
 #include <iostream>
+#include <math.h>
 
-int main() {
-  bool boolean;
-  std::cout << boolean << std::endl;
-}
+int main() { std::cout << log10(2) << std::endl; }
