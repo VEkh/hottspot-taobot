@@ -44,7 +44,6 @@ void ETrade::Straddle::fetch_and_set_quote() {
   }
 
   quotes.push_back(current_quote);
-  speedometer.tick(quotes);
 
   std::cout << fmt.bold << log_color << std::endl;
   std::cout << symbol << " quote: " << logged_quote << std::endl;

@@ -1,4 +1,4 @@
 #include <iostream>
-#include <math.h>
+#include <utility> // std::pair
 
-int main() { std::cout << log10(2) << std::endl; }
+int main() { std::cout << 5 % 60 << std::endl; }

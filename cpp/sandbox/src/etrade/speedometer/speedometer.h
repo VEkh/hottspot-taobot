@@ -3,26 +3,19 @@
 
 #include "etrade/deps.cpp"   // json
 #include "lib/formatted.cpp" // Formatted
-#include <vector>            // std::vector
 
 namespace ETrade {
 class Speedometer {
 public:
-  double displacement = 0.00;
-  double momentum = 0.00;
-  std::vector<double> accelerations;
-  std::vector<double> velocities;
-
   void log();
-  void tick(const json &);
 
-  Speedometer(int interval) : polling_interval(interval){};
+  Speedometer(json *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
 
 private:
   Formatted::fmt_stream_t stream_format = Formatted::stream();
-  int polling_interval;
+  json *quotes_ptr;
 
-  double compute_average(const std::vector<double> &, const int);
+  void log_average(const int);
 };
 } // namespace ETrade
 

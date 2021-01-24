@@ -34,8 +34,7 @@ private:
   int quantity;
 
   ETrade::Client etrade_client;
-  ETrade::Speedometer speedometer =
-      ETrade::Speedometer(POLLING_INTERVAL_SECONDS);
+  ETrade::Speedometer speedometer = ETrade::Speedometer(&quotes);
   Formatted::fmt_stream_t stream_format = Formatted::stream();
 
   json placed_orders;

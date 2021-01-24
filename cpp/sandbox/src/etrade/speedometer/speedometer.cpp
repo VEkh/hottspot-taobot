@@ -3,6 +3,5 @@
 
 #include "speedometer.h"
 #include "log.cpp"
-#include "tick.cpp"
 
 #endif
