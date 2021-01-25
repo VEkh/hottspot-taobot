@@ -68,14 +68,14 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
       opposite_open_order->status == order_status_t::ORDER_PENDING &&
       should_open) {
     std::cout << fmt.bold << fmt.green << std::endl;
-    std::cout << log_icon << order_action << ": Placing (opposite) open order."
+    std::cout << log_icon << order_action << ": Placing open order."
               << std::endl;
     std::cout << fmt.reset;
 
-    etrade_client.place_order(opposite_open_order);
+    etrade_client.place_order(open_order);
 
     std::cout << fmt.bold << fmt.cyan << std::endl;
-    std::cout << "📈 " << order_action << ": Placed (opposite) open order."
+    std::cout << log_icon << order_action << ": Placed open order."
               << std::endl;
     std::cout << fmt.reset;
 
