@@ -31,6 +31,9 @@ void ETrade::Speedometer::log() {
   log_average(2 * 60);
   log_average(5 * 60);
   log_average(10 * 60);
+  log_average(15 * 60);
+  log_average(20 * 60);
+  log_average(30 * 60);
 
   std::cout << fmt.reset;
 }

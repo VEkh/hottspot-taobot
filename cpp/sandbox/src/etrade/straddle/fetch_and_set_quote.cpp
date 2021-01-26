@@ -7,8 +7,12 @@
 #include "straddle.h" // ETrade::Straddle, etrade_client, speedometer, stream_format, symbol
 #include <iostream> // std::cout, std::endl
 #include <string>   // std::string
+#include <time.h>   // time, time_t
 
 json quote_summary(const std::string &response_body) {
+  time_t now;
+  time(&now);
+
   json input = json::parse(response_body);
   json full_quote = input["QuoteResponse"]["QuoteData"].at(0);
 
@@ -17,7 +21,7 @@ json quote_summary(const std::string &response_body) {
       {"currentPrice", full_quote["All"]["lastTrade"]},
       {"highPrice", full_quote["All"]["high"]},
       {"lowPrice", full_quote["All"]["low"]},
-      {"timestamp", full_quote["dateTimeUTC"]},
+      {"timestamp", now},
   };
 
   return output;

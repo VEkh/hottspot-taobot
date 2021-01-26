@@ -1,4 +1,8 @@
 #include <iostream>
-#include <utility> // std::pair
+#include <time.h>
 
-int main() { std::cout << 5 % 60 << std::endl; }
+int main() {
+  time_t timer;
+  time(&timer);
+  std::cout << timer << std::endl;
+}

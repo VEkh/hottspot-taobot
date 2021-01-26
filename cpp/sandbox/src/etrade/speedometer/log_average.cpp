@@ -25,8 +25,7 @@ void ETrade::Speedometer::log_average(const int ticks) {
 
   const int time_delta = current_timestamp - past_timestamp;
   const double average =
-      time_delta > 0 ? ((current_price - past_price) / first_price) / time_delta
-                     : 0;
+      ((current_price - past_price) / first_price) / time_delta;
 
   std::cout << ticks << tick_spacing << "Tick"
             << " (" << time_delta << "-Sec) Velocity" << velocity_units << ": "
