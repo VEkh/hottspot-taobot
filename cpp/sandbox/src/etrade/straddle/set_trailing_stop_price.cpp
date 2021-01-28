@@ -7,15 +7,16 @@
 #include <iostream>        // std::cout, std::endl
 #include <math.h>          // INFINITY
 
-double LOSS_TRAILING_STOP_RATIO = 0.001;
+const double LOSS_TRAILING_STOP_RATIO = 0.002;
+const double SECURE_PROFIT_PRICE = 0.50;
 
 double compute_trailing_stop(const double open_execution_price,
                              const double profit) {
-  if (profit <= 0) {
+  if (profit <= SECURE_PROFIT_PRICE) {
     return LOSS_TRAILING_STOP_RATIO * open_execution_price;
   }
 
-  return log10(profit + 1);
+  return log10(profit + 1 + SECURE_PROFIT_PRICE);
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
