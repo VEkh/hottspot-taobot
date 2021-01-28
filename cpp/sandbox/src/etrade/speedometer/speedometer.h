@@ -3,10 +3,12 @@
 
 #include "etrade/deps.cpp"   // json
 #include "lib/formatted.cpp" // Formatted
+#include <utility>           // std::pair
 
 namespace ETrade {
 class Speedometer {
 public:
+  std::pair<int, double> average_velocity(const int);
   void log();
 
   Speedometer(json *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
