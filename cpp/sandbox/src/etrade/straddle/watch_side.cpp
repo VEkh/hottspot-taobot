@@ -11,6 +11,7 @@
  * position_t
  * sell_short_close_order
  * sell_short_open_order
+ * speedometer
  * symbol
  */
 #include "straddle.h"
@@ -23,6 +24,8 @@
 #include "set_trailing_stop_price.cpp" // set_trailing_stop_price
 #include <iostream>                    // std::cout, std::endl
 #include <string>                      // std::string
+
+const double ENTRY_VELOCITY = 0.001;
 
 void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -44,7 +47,9 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &sell_short_open_order;
 
     should_close = current_price < close_order->stop_price;
-    should_open = current_price >= open_order->stop_price;
+    should_open = current_price >= open_order->stop_price &&
+                  speedometer.average_velocity(10).second >= ENTRY_VELOCITY &&
+                  speedometer.average_velocity(30).second >= ENTRY_VELOCITY;
 
     break;
   }
@@ -55,7 +60,9 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &buy_open_order;
 
     should_close = current_price > close_order->stop_price;
-    should_open = current_price <= open_order->stop_price;
+    should_open = current_price <= open_order->stop_price &&
+                  speedometer.average_velocity(10).second <= -ENTRY_VELOCITY &&
+                  speedometer.average_velocity(30).second <= -ENTRY_VELOCITY;
 
     break;
   }
