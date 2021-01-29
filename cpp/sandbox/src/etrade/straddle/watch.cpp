@@ -34,7 +34,8 @@ void ETrade::Straddle::watch() {
     watch_side(order_action_t::SELL_SHORT);
     log_status();
 
-    std::this_thread::sleep_for(std::chrono::seconds(POLLING_INTERVAL_SECONDS));
+    std::this_thread::sleep_for(
+        std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));
   }
 
   log_prices();

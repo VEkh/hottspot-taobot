@@ -1,6 +1,6 @@
 #include <iostream>
 
 int main() {
-  const double num = 1;
-  std::cout << -num << std::endl;
+  const double num = 0.5;
+  std::cout << (int)(num * 1000) << std::endl;
 }
