@@ -11,12 +11,14 @@ const double LOSS_TRAILING_STOP_RATIO = 0.002;
 const double SECURE_PROFIT_PRICE = 0.50;
 
 double compute_trailing_stop(const double open_execution_price,
-                             const double profit) {
+                             const double profit,
+                             const double ten_tick_velocity) {
   if (profit <= SECURE_PROFIT_PRICE) {
     return LOSS_TRAILING_STOP_RATIO * open_execution_price;
   }
 
-  return log10(profit + 1 + SECURE_PROFIT_PRICE);
+  return log10(profit + 1 + SECURE_PROFIT_PRICE) *
+         (1 + (ten_tick_velocity * 100));
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
@@ -32,7 +34,8 @@ void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
   double current_price = current_quote["currentPrice"];
 
   double trailing_stop =
-      compute_trailing_stop(execution_price, open_order->profit);
+      compute_trailing_stop(execution_price, open_order->profit,
+                            speedometer.average_velocity(10).second);
 
   double trailing_stop_price;
 
