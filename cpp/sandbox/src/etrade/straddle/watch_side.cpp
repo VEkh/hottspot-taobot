@@ -47,9 +47,8 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &sell_short_open_order;
 
     should_close = current_price < close_order->stop_price;
-    should_open = current_price >= open_order->stop_price &&
-                  speedometer.average_velocity(10).second >= ENTRY_VELOCITY &&
-                  speedometer.average_velocity(30).second >= ENTRY_VELOCITY;
+
+    should_open = current_price >= open_order->stop_price;
 
     break;
   }
@@ -60,9 +59,7 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &buy_open_order;
 
     should_close = current_price > close_order->stop_price;
-    should_open = current_price <= open_order->stop_price &&
-                  speedometer.average_velocity(10).second <= -ENTRY_VELOCITY &&
-                  speedometer.average_velocity(30).second <= -ENTRY_VELOCITY;
+    should_open = current_price <= open_order->stop_price;
 
     break;
   }
