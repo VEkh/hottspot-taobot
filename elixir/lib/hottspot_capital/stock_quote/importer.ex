@@ -1,4 +1,5 @@
 defmodule HottspotCapital.StockQuote.Importer do
+  alias HottspotCapital.ETradeClient
   alias HottspotCapital.IexApiClient
   alias HottspotCapital.StockQuote
 
@@ -10,8 +11,7 @@ defmodule HottspotCapital.StockQuote.Importer do
       )
 
     with [%IexApiClient.HistoricalStockQuote{} | _] <- quotes,
-         beta when is_float(beta) <-
-           IexApiClient.fetch_company_stat(stat: "beta", symbol: symbol) do
+         %{beta: beta} when is_float(beta) <- ETradeClient.fetch_quote(symbol) do
       for historical_quote <- quotes do
         {:ok, stock_quote} =
           historical_quote
