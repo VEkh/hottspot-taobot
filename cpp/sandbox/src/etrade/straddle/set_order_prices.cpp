@@ -15,7 +15,7 @@
 #include "lib/utils/float.cpp" // utils::float_
 #include <math.h>              // INFINITY
 
-double ENTRY_THRESHOLD = 0.0015;
+double ENTRY_THRESHOLD = 0.0025;
 
 void ETrade::Straddle::set_order_prices() {
   json first_quote = quotes.front();
