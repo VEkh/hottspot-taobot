@@ -28,9 +28,7 @@ double compute_trailing_stop(const double open_execution_price,
   const double x_shift = 1 - secure_profit;
   const double y_multiplier = 1 + (ten_tick_velocity * 100);
 
-  const double computed_trailing_stop = log10(x + x_shift) * y_multiplier;
-
-  return std::max(computed_trailing_stop, min_trailing_top);
+  return y_multiplier * log10(x + x_shift) + min_trailing_top;
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
