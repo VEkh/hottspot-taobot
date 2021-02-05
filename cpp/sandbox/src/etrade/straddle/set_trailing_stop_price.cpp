@@ -9,7 +9,8 @@
 #include <math.h>            // INFINITY
 
 const double LOSS_TRAILING_STOP_RATIO = 0.005;
-const double SECURE_PROFIT_RATIO = 0.001;
+const double SECURE_PROFIT_RATIO = 0.0005;
+const double STOP_VELOCITY = -0.001;
 
 double compute_trailing_stop(const double open_execution_price,
                              const double profit,
@@ -18,6 +19,10 @@ double compute_trailing_stop(const double open_execution_price,
 
   if (profit <= secure_profit) {
     return LOSS_TRAILING_STOP_RATIO * open_execution_price;
+  }
+
+  if (ten_tick_velocity <= STOP_VELOCITY) {
+    return 0;
   }
 
   const double min_trailing_stop_ratio = SECURE_PROFIT_RATIO * 0.5;

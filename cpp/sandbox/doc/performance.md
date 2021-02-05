@@ -9,13 +9,13 @@
 ### .15% Displacement | 10-tick Velocity | Trailing Stop Algorithm v0.1 | 1 sec interval
 26/42 => 0.6190476190476191 (2021-01-28)
 
-### .15% Displacement | 10-tick Velocity | Trailing Stop Algorithm v0.2 | 1 sec interval (2021-01-29, am)
+### 2021-01-29 (AM): .15% Displacement | 10-tick Velocity | Trailing Stop Algorithm v0.2 | 1 sec interval
 6/17 (In the morning)
 
-### .15% Displacement | 10-tick Velocity | Trailing Stop Algorithm v0.2 | 1 min interval (2021-01-29, am)
+### 2021-01-29 (AM): .15% Displacement | 10-tick Velocity | Trailing Stop Algorithm v0.2 | 1 min interval
 2/9
 
-### 15% Displacement | Trailing Stop Algorithm v0.2 | 500 ms interval (2021-01-29, pm)
+### 2021-01-29 (PM): .15% Displacement | Trailing Stop Algorithm v0.2 | 500 ms interval
 *Raw*
 18/30 => 0.6
 
@@ -32,15 +32,22 @@ This is the greates the price moved in the losing direction before ultimately wi
 *Avg Max Potential Loss*
 1.1899999999999997
 
-\* Potential loss of $2.81 resulted in one of biggest wins
-
 *Max Loss Magnitude*
 6.77
 
-## Closes
-### How often price reversal continue in reversal direction?
-23/37 => 0.6216216216216216
+\* Potential loss of $2.81 resulted in one of biggest wins
 
-## Experimental
-### > .1% && (10 && 30-tick Velocities) as indicator
-9/15
+### 2021-02-02: .25% Displacement | Trailing Stop Algorithm v0.4 | 500 ms interval
+TLSA: 28/31 => 0.903226
+
+### 2021-02-03: .25% Displacement | Trailing Stop Algorithm v0.4.1 | 500 ms interval
+Trading TSLA
+TSLA: 25/30 => 0.833333
+
+### 2021-02-04: .25% Displacement | Trailing Stop Algorithm v0.4.1 | 500 ms interval
+AMZN ($15.46): 9/11 => 0.818182
+GOOG (-$31.62): 5/10 => 0.5
+TSLA (-$7.39): 12/18 => 0.666667
+
+Number of times velocity reversal represented (near) peak profit
+4/4
