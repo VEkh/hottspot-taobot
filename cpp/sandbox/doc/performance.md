@@ -49,5 +49,22 @@ AMZN ($15.46): 9/11 => 0.818182
 GOOG (-$31.62): 5/10 => 0.5
 TSLA (-$7.39): 12/18 => 0.666667
 
+### 2021-02-05: .25% Displacement | Trailing Stop Algorithm v0.4.1 | 500 ms interval
+AMZN ($3.71):
+  * Premature Win Close Rate: 9/14 => 0.642857
+  * Win Rate: 14/17 => 0.823529
+
+FB   (-$2.15):
+  * Premature Win Close Rate: 3/5 => 0.6
+  * Win Rate: 5/7 => 0.714286
+
+MSFT (-$0.99):
+  * Premature Win Close Rate: 1/2 => 0.5
+  * Win Rate: 2/4 => 0.5
+
+TSLA (-$13.68):
+  * Premature Win Close Rate: 13/19 => 0.684211
+  * Win Rate: 18/27 => 0.666667
+
 Number of times velocity reversal represented (near) peak profit
 4/4

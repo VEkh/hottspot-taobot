@@ -25,8 +25,6 @@
 #include <iostream>                    // std::cout, std::endl
 #include <string>                      // std::string
 
-const double ENTRY_VELOCITY = 0.001;
-
 void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
   Formatted::fmt_stream_t fmt = stream_format;
   const char *order_action = ETrade::Client::ORDER_ACTIONS[order_action_type];
@@ -46,8 +44,7 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     open_order = &buy_open_order;
     opposite_open_order = &sell_short_open_order;
 
-    should_close = current_price < close_order->stop_price;
-
+    should_close = current_price <= close_order->stop_price;
     should_open = current_price >= open_order->stop_price;
 
     break;
@@ -58,7 +55,7 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     open_order = &sell_short_open_order;
     opposite_open_order = &buy_open_order;
 
-    should_close = current_price > close_order->stop_price;
+    should_close = current_price >= close_order->stop_price;
     should_open = current_price <= open_order->stop_price;
 
     break;
