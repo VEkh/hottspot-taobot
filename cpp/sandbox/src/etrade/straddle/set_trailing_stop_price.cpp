@@ -8,8 +8,8 @@
 #include <iostream>          // std::cout, std::endl
 #include <math.h>            // INFINITY
 
-const double LOSS_TRAILING_STOP_RATIO = 0.0025;
-const double SECURE_PROFIT_RATIO = 0.0025;
+const double LOSS_TRAILING_STOP_RATIO = 0.005;
+const double SECURE_PROFIT_RATIO = 0.001;
 
 double compute_trailing_stop(const double open_execution_price,
                              const double profit,
