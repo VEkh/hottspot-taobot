@@ -1,5 +1,6 @@
 #include <iostream>
 
 int main() {
-  std::cout << (0.0025 / ((3338.000 - 3297.840) / 3312.490)) << std::endl;
+  std::cout << ((0.0025 * 3314.0) / -(3254 - 3318)) << std::endl;
+  // std::cout << (-(3254 - 3318) / 3314.0) << std::endl;
 }

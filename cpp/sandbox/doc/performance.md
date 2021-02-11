@@ -85,9 +85,38 @@ TSLA (-$22.57):
     * Win Rate: 7/10 => 0.7
 
 ### 2021-02-09: Trailing Stop Algorithm v0.6.1 | 500 ms interval
-TSLA ():
+TSLA (-$0.67):
   * .25% Entry, 0.5% Loss, 0.125% Win
     * Win Rate: 3/5 => 0.6
 
   * .15% Entry, 0.5% Loss, 0.1% Win
     * Win Rate: 16/17 => 0.941176
+
+### 2021-02-09: Trailing Stop Algorithm v0.6.1 | 500 ms interval
+TSLA (-$0.67):
+  * Day Range: 841.75 - 859.80, (2.11081% of open)
+  * Open: 855.12
+  * .15% Entry, 0.5% Loss, 0.1% Win
+    * Win Rate: 16/17 => 0.941176
+  * Notes:
+    * .25% price = `target_total_movement`
+    * .25% price ~ 11.8438% of the day range
+
+### 2021-02-10: Trailing Stop Algorithm v0.6.1 | 500 ms interval
+AMZN (-$62.69):
+  * Day Range: 3254 - 3318, (1.9312% of open)
+  * Open: 3314
+  * .15% Entry, 0.5% Loss, 0.1% Win
+    * Win Rate: 5/10 => 0.5
+  * Notes:
+    * .25% price = `target_total_movement`
+    * .25% price ~ 12.9453% of the day range
+
+TSLA (-$27.15):
+  * Day Range: 800.02 - 844.82, (5.31032% of open)
+  * Open: 843.64
+  * .15% Entry, 0.5% Loss, 0.1% Win
+    * Win Rate: 58/81 => 0.716049
+  * Notes:
+    * .25% price = `target_total_movement`
+    * .25% price ~ 4.70781% of the day range
