@@ -120,3 +120,15 @@ TSLA (-$27.15):
   * Notes:
     * .25% price = `target_total_movement`
     * .25% price ~ 4.70781% of the day range
+
+### 2021-02-11: Entry Algorithm v0.1 | T-Stop Algorithm v0.7 | 500 ms interval
+Entry Algorithm v0.1:
+  * Enter: 6% Day Range
+
+T-Stop Algorithm v0.7:
+  * Loss: 0.4% Price
+  * Secure Profit: 4% Day Range
+
+TSLA (-$8.35):
+  * Premature Loss Reversals: 8/15 => 0.533333
+  * Win Rate: 38/53 => 0.716981

@@ -25,16 +25,26 @@
 #include <iostream>                    // std::cout, std::endl
 #include <string>                      // std::string
 
+bool should_close(const order_t *close_order, const double current_price) {
+  switch (close_order->action) {
+  case order_action_t::BUY_TO_COVER: {
+    return current_price >= close_order->stop_price;
+  }
+  case order_action_t::SELL: {
+    return current_price <= close_order->stop_price;
+  }
+  }
+}
+
 void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
   Formatted::fmt_stream_t fmt = stream_format;
   const char *order_action = ETrade::Client::ORDER_ACTIONS[order_action_type];
-  double current_price = quotes.back()["currentPrice"];
+  const double current_price = quotes.back()["currentPrice"];
 
   order_t *close_order;
   std::string log_icon;
   order_t *open_order;
   order_t *opposite_open_order;
-  bool should_close;
   bool should_open;
 
   switch (order_action_type) {
@@ -44,7 +54,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     open_order = &buy_open_order;
     opposite_open_order = &sell_short_open_order;
 
-    should_close = current_price <= close_order->stop_price;
     should_open = current_price >= open_order->stop_price;
 
     break;
@@ -55,7 +64,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     open_order = &sell_short_open_order;
     opposite_open_order = &buy_open_order;
 
-    should_close = current_price >= close_order->stop_price;
     should_open = current_price <= open_order->stop_price;
 
     break;
@@ -98,7 +106,7 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     set_profit(open_order);
     set_trailing_stop_price(close_order, open_order);
 
-    if (should_close) {
+    if (should_close(close_order, current_price)) {
       etrade_client.place_order(close_order);
 
       std::cout << fmt.bold << fmt.cyan << std::endl;
