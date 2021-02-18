@@ -13,9 +13,11 @@
 
 #include "etrade/deps.cpp"     // json
 #include "lib/utils/float.cpp" // utils::float_
+#include <algorithm>           // std::max, std::min
 #include <math.h>              // INFINITY
 
-const double ENTRY_THRESHOLD = 0.06;
+const double ENTRY_DAY_RANGE_RATIO = 0.06;
+const double ENTRY_PRICE_RATIO = 0.0015;
 
 void ETrade::Straddle::set_order_prices() {
   const json first_quote = quotes.front();
@@ -24,7 +26,8 @@ void ETrade::Straddle::set_order_prices() {
   const double day_range =
       (double)first_quote["highPrice"] - (double)first_quote["lowPrice"];
 
-  const double entry_delta = day_range * ENTRY_THRESHOLD;
+  const double entry_delta = std::min(day_range * ENTRY_DAY_RANGE_RATIO,
+                                      reference_price * ENTRY_PRICE_RATIO);
 
   buy_open_order.action = order_action_t::BUY;
   buy_open_order.quantity = quantity;

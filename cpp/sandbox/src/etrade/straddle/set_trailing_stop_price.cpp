@@ -9,7 +9,7 @@
 #include <math.h>            // INFINITY
 
 const double LOSS_TRAILING_STOP_RATIO = 0.004;
-const double SECURE_PROFIT_DAY_RANGE_RATIO = 0.04;
+const double SECURE_PROFIT_DAY_RANGE_RATIO = 0;
 
 double compute_trailing_stop(const double day_range, const order_t *open_order,
                              const double ten_tick_velocity) {

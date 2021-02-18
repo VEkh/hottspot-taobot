@@ -132,3 +132,44 @@ T-Stop Algorithm v0.7:
 TSLA (-$8.35):
   * Premature Loss Reversals: 8/15 => 0.533333
   * Win Rate: 38/53 => 0.716981
+
+### 2021-02-12: Entry Algorithm v0.1 | T-Stop Algorithm v0.7 | 500 ms interval
+Entry Algorithm v0.1:
+  * Enter: 6% Day Range
+
+T-Stop Algorithm v0.7:
+  * Loss: 0.4% Price
+  * Secure Profit: 4% Day Range
+
+TSLA ($1.63):
+  * Premature Loss Reversals: 6/8 => 0.75
+  * Win Rate: 29/39 => 0.74359
+
+### 2021-02-16: Entry Algorithm v0.1 | T-Stop Algorithm v0.7 | 500 ms interval
+Entry Algorithm v0.1:
+  * Enter: 6% Day Range
+
+T-Stop Algorithm v0.7:
+  * Loss: 0.4% Price
+  * Secure Profit: 4% Day Range
+
+TSLA ($0.64):
+  * Premature Loss Reversals: 1/8 => 0.125
+  * Win Rate: 27/35 => 0.771429
+
+### 2021-02-17: Entry Algorithm v0.1 | T-Stop Algorithm v0.7 | 500 ms interval
+Entry Algorithm v0.1:
+  * Enter: 6% Day Range
+    * Average of ~0.2% - 0.25%
+
+T-Stop Algorithm v0.7:
+  * Loss: 0.4% Price
+  * Secure Profit: 4% Day Range
+
+TSLA (-$20.92):
+  * Premature Loss Reversals: 8/14 => 0.571429
+  * Win Rate: 23/39 => 0.589744
+  * Losses that missed profits > $0.50: 5/14 => 0.357143
+
+Conclusions:
+  * Entry point too late
