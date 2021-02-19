@@ -111,12 +111,16 @@ int main(int argc, char *argv[]) {
   if (command == "straddle") {
     char *symbol = argc < 3 ? nullptr : argv[2];
     int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
+    char *action = argc < 5 ? nullptr : argv[4];
 
     while (true) {
-      ETrade::Straddle straddle(symbol, quantity);
+      ETrade::Straddle straddle(symbol, quantity, action);
       straddle.run();
+      action = straddle.next_order_action;
+
       std::cout << fmt.bold << fmt.blue;
-      std::cout << "\n🔃 Finished stradding. Re-running.\n" << std::endl;
+      std::cout << "\n🔃 Finished stradding. Re-running with " << action << "\n"
+                << std::endl;
       std::cout << fmt.reset << fmt.blue;
     }
 

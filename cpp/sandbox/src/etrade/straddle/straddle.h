@@ -24,11 +24,14 @@ public:
 
   Straddle(char *);
   Straddle(char *, int);
+  Straddle(char *, int, char *);
 
+  char *next_order_action = nullptr;
   void manual_run();
   void run();
 
 private:
+  char *init_order_action = nullptr;
   char *symbol;
   double POLLING_INTERVAL_SECONDS = 0.5;
   int quantity;
@@ -51,6 +54,7 @@ private:
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();
+  void initialize(char *, int);
   void log_prices();
   void log_start_message();
   void log_status();

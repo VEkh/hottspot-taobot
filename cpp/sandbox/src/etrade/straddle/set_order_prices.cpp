@@ -5,6 +5,7 @@
  * ETrade::Straddle
  * buy_open_order
  * buy_close_order
+ * init_order_action
  * quotes
  * sell_short_open_order
  * sell_short_close_order
@@ -15,6 +16,7 @@
 #include "lib/utils/float.cpp" // utils::float_
 #include <algorithm>           // std::max, std::min
 #include <math.h>              // INFINITY
+#include <string>              // string
 
 const double ENTRY_DAY_RANGE_RATIO = 0.06;
 const double ENTRY_PRICE_RATIO = 0.0015;
@@ -54,6 +56,17 @@ void ETrade::Straddle::set_order_prices() {
   sell_short_close_order.stop_price = INFINITY;
   sell_short_close_order.symbol = symbol;
   sell_short_close_order.type = order_type_t::MARKET;
+
+  if (init_order_action != nullptr) {
+    order_action_t init_order_action_t =
+        ETrade::Client::to_order_action_t(init_order_action);
+
+    if (init_order_action_t == order_action_t::BUY) {
+      buy_open_order.stop_price = -INFINITY;
+    } else if (init_order_action_t == order_action_t::SELL_SHORT) {
+      sell_short_open_order.stop_price = INFINITY;
+    }
+  }
 }
 
 #endif

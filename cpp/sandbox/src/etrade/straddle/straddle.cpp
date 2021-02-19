@@ -17,6 +17,16 @@ ETrade::Straddle::Straddle(char *symbol_) {
 }
 
 ETrade::Straddle::Straddle(char *symbol_, int quantity_) {
+  initialize(symbol_, quantity_);
+}
+
+ETrade::Straddle::Straddle(char *symbol_, int quantity_,
+                           char *init_order_action_) {
+  init_order_action = init_order_action_;
+  initialize(symbol_, quantity_);
+}
+
+void ETrade::Straddle::initialize(char *symbol_, int quantity_) {
   if (symbol_ == nullptr) {
     std::string message = Formatted::error_message("Must provide a symbol");
     throw std::invalid_argument(message);
