@@ -6,24 +6,23 @@
 #include "straddle.h"        // ETrade::Straddle, order_t, quote, stream_format
 #include <algorithm>         // std::max, std::min
 #include <iostream>          // std::cout, std::endl
-#include <math.h>            // INFINITY
+#include <math.h>            // INFINITY, exp
 
 const double LOSS_TRAILING_STOP_RATIO = 0.004;
-const double SECURE_PROFIT_DAY_RANGE_RATIO = 0;
+const double MAX_STOP_PROFIT_DAY_RANGE_RATIO = 0.08;
 
 double compute_trailing_stop(const double day_range, const order_t *open_order,
                              const double ten_tick_velocity) {
-  const double secure_profit = SECURE_PROFIT_DAY_RANGE_RATIO * day_range;
-
-  if (open_order->profit < secure_profit) {
+  if (open_order->profit < 0) {
     return LOSS_TRAILING_STOP_RATIO * open_order->execution_price;
   }
 
   const double x = open_order->profit;
-  const double x_shift = 1 - secure_profit;
-  const double y_multiplier = 1 + (ten_tick_velocity * 100);
+  const double velocity_coefficient = 1 + (ten_tick_velocity * 100);
+  const double y_multiplier =
+      MAX_STOP_PROFIT_DAY_RANGE_RATIO * day_range * velocity_coefficient;
 
-  return y_multiplier * log10(x + x_shift);
+  return y_multiplier * (1 / (1 + exp(-x)));
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
