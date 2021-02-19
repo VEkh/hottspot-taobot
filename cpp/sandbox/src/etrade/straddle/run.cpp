@@ -4,9 +4,9 @@
 #include "fetch_and_set_quote.cpp" // fetch_and_set_quote
 #include "lib/formatted.cpp"       // Formatted
 #include "set_order_prices.cpp"    // set_order_prices
-#include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol, etrade_client
-#include "watch.cpp" // watch
-#include <iostream>  // std::cout, std::endl
+#include "straddle.h" // ETrade::Straddle, quantity, stream_format, symbol
+#include "watch.cpp"  // watch
+#include <iostream>   // std::cout, std::endl
 
 void ETrade::Straddle::log_start_message() {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -18,7 +18,6 @@ void ETrade::Straddle::log_start_message() {
 }
 
 void ETrade::Straddle::run() {
-  etrade_client.refresh_token();
   log_start_message();
   fetch_and_set_quote();
   set_order_prices();
