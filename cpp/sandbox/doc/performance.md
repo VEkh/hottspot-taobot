@@ -173,3 +173,25 @@ TSLA (-$20.92):
 
 Conclusions:
   * Entry point too late
+
+### 2021-02-19:
+* Interval: 500ms
+
+* Entry Algorithm v0.2:
+  * Enter: Min of 6% Day Range and 0.15% price
+
+* Accepts initial open trade as an argument
+
+* Enters opposite trade upon close
+
+* T-Stop Algorithm v0.8 (Start):
+  * Loss: 0.4% Price
+  * Profit: Sigmoidal function
+    * y coefficient: `MAX_STOP_PROFIT_DAY_RANGE_RATIO * day_range * velocity_coefficient`
+
+* T-Stop Algorithm v0.9 (End):
+  * Loss: 0.4% Price
+  * Profit: Y and X-scaled Reverse Sigmoid
+
+* TSLA (-$8.75):
+  * Win Rate: 45/105 => 0.428571

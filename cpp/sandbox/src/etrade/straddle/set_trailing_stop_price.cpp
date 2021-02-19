@@ -13,16 +13,18 @@ const double MAX_STOP_PROFIT_DAY_RANGE_RATIO = 0.08;
 
 double compute_trailing_stop(const double day_range, const order_t *open_order,
                              const double ten_tick_velocity) {
+  const double max_loss =
+      LOSS_TRAILING_STOP_RATIO * open_order->execution_price;
+
   if (open_order->profit < 0) {
-    return LOSS_TRAILING_STOP_RATIO * open_order->execution_price;
+    return max_loss;
   }
 
   const double x = open_order->profit;
   const double velocity_coefficient = 1 + (ten_tick_velocity * 100);
-  const double y_multiplier =
-      MAX_STOP_PROFIT_DAY_RANGE_RATIO * day_range * velocity_coefficient;
+  const double y_multiplier = 2 * max_loss;
 
-  return y_multiplier * (1 / (1 + exp(-x)));
+  return y_multiplier * (1 / (1 + exp(4 * x / velocity_coefficient)));
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
