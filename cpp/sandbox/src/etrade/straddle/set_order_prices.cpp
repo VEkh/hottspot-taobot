@@ -18,7 +18,7 @@
 #include <math.h>              // INFINITY
 #include <string>              // string
 
-const double ENTRY_DAY_RANGE_RATIO = 0.06;
+const double ENTRY_DAY_RANGE_RATIO = 0.05;
 const double ENTRY_PRICE_RATIO = 0.0015;
 
 void ETrade::Straddle::set_order_prices() {

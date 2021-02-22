@@ -195,3 +195,20 @@ Conclusions:
 
 * TSLA (-$8.75):
   * Win Rate: 45/105 => 0.428571
+
+### 2021-02-22:
+
+* Started with oscillating entry sides.
+  * This didn't go well. I lost about $20-30 in the first couple of hours.
+
+* Then I changed to a strategy that re-entered win side, entered the opposite
+  of the loss side.
+  * This continued losses down to $34
+
+* Then I reverted to Entry Algorithm v0.2.1 and modified the T-Stop profit
+  algorithm's x-coefficient from 4 to 2.5.
+  * Loss reduced to $29.15
+  * Will continue with this tomorrow
+
+* TSLA (-$29.15):
+  * Win Rate: 78/134 => 0.58209
