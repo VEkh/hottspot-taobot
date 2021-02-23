@@ -19,7 +19,6 @@
 #include <string>              // string
 
 const double ENTRY_DAY_RANGE_RATIO = 0.05;
-const double ENTRY_PRICE_RATIO = 0.0015;
 
 void ETrade::Straddle::set_order_prices() {
   const json first_quote = quotes.front();
@@ -28,8 +27,7 @@ void ETrade::Straddle::set_order_prices() {
   const double day_range =
       (double)first_quote["highPrice"] - (double)first_quote["lowPrice"];
 
-  const double entry_delta = std::min(day_range * ENTRY_DAY_RANGE_RATIO,
-                                      reference_price * ENTRY_PRICE_RATIO);
+  const double entry_delta = day_range * ENTRY_DAY_RANGE_RATIO;
 
   buy_open_order.action = order_action_t::BUY;
   buy_open_order.quantity = quantity;

@@ -9,7 +9,6 @@
 #include <math.h>            // INFINITY, exp
 
 const double LOSS_TRAILING_STOP_RATIO = 0.004;
-const double MAX_STOP_PROFIT_DAY_RANGE_RATIO = 0.08;
 
 double compute_trailing_stop(const double day_range, const order_t *open_order,
                              const double ten_tick_velocity) {
@@ -51,7 +50,7 @@ void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
         compute_trailing_stop(day_range, open_order, ten_tick_velocity);
 
     trailing_stop_price =
-        close_order->stop_price != -INFINITY
+        close_order->stop_price != -INFINITY || open_order->profit < 0
             ? std::max(close_order->stop_price, (current_price - trailing_stop))
             : open_order->execution_price - trailing_stop;
   } else if (close_order->action == order_action_t::BUY_TO_COVER) {
@@ -59,7 +58,7 @@ void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
         compute_trailing_stop(day_range, open_order, -ten_tick_velocity);
 
     trailing_stop_price =
-        close_order->stop_price != INFINITY
+        close_order->stop_price != INFINITY || open_order->profit < 0
             ? std::min(close_order->stop_price, (current_price + trailing_stop))
             : open_order->execution_price + trailing_stop;
   }

@@ -197,7 +197,6 @@ Conclusions:
   * Win Rate: 45/105 => 0.428571
 
 ### 2021-02-22:
-
 * Started with oscillating entry sides.
   * This didn't go well. I lost about $20-30 in the first couple of hours.
 
@@ -211,4 +210,27 @@ Conclusions:
   * Will continue with this tomorrow
 
 * TSLA (-$29.15):
+  * Win Rate: 78/134 => 0.58209
+
+### 2021-02-23:
+**NOTE**
+* This was the day after TSLA's -6.31228% drop off. It opened 7.3296% down. As
+  a result, volatility and volume were enormous.
+
+* Intervals:
+  * 500ms - Lost ~$20 by 10:30am
+  * 1.5s  - Worked the best but still lost money
+  * 1m    - Also performed very porly
+
+* Entry Algorithm v0.2.1:
+  * Enter: 5% Day Range
+
+* T-Stop Algorithm v0.9.1
+  * Max Loss: 0.4% Price
+  * Profit: Y and X-scaled Reverse Sigmoid
+
+* AMZN (-$29.15):
+  * Win Rate: 78/134 => 0.58209
+
+* TSLA (-$51.59):
   * Win Rate: 78/134 => 0.58209
