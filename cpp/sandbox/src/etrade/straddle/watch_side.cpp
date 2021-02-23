@@ -139,9 +139,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
 
     std::cout << fmt.reset;
 
-    next_order_action =
-        (char *)ETrade::Client::ORDER_ACTIONS[opposite_open_order->action];
-
     return;
   }
 }

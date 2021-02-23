@@ -116,11 +116,10 @@ int main(int argc, char *argv[]) {
     while (true) {
       ETrade::Straddle straddle(symbol, quantity, action);
       straddle.run();
-      action = straddle.next_order_action;
+      action = nullptr;
 
       std::cout << fmt.bold << fmt.blue;
-      std::cout << "\n🔃 Finished stradding. Re-running with " << action << "\n"
-                << std::endl;
+      std::cout << "\n🔃 Finished stradding. Re-running" << std::endl;
       std::cout << fmt.reset << fmt.blue;
     }
 
