@@ -32,7 +32,6 @@ public:
 private:
   char *init_order_action = nullptr;
   char *symbol;
-  double POLLING_INTERVAL_SECONDS = 0.5;
   int quantity;
 
   ETrade::Client etrade_client;
@@ -50,6 +49,8 @@ private:
   json get_order_json(const order_t &);
 
   status_t status();
+
+  double compute_polling_interval();
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();
