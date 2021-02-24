@@ -234,3 +234,45 @@ Conclusions:
 
 * TSLA (-$51.59):
   * Win Rate: 78/134 => 0.58209
+
+### 2021-02-24:
+* Intervals:
+  * 500ms
+    * Similarly lost ~$10+ in the first couple of hours
+  * 20s for entry, 500ms for exit
+    * This made a BIG difference. By extending the polling interval when
+      waiting to open a trade, we were far less susceptible to wild price
+      fluctuations that have characterized these last few days of increased
+      volatility.
+
+    * It may be a good guard against securities with large price swings.
+
+    * Polling 500ms once the trade opens is important, because we don't want to
+      miss our (profit or loss) exit opportunities
+
+* Entry Algorithm v0.2.1:
+  * Enter: 5% Day Range
+
+* T-Stop Algorithm v0.9.2
+  * Max Loss: 0.4% Price
+  * Resets t-stop to max loss when profit falls below $0.00
+    * This was important. It prevents premature exit as the t-stop shifts the
+      stop loss in the profit direction.
+  * Profit: Y and X-scaled Reverse Sigmoid
+  * After lunch I changed the x-scale from 2.5 to 2. This slowed the descent of
+    the t-stop and allowed more room for highly profitable trades to grow.
+
+**NOTES**
+* This was two days after TSLA's -6.31228% drop off. Volatility and volume were
+  still higher than average.
+
+* Two big positive changes were:
+  1. Dynamic polling interval
+  2. Resetting trailing stop to max when profit < $0.00
+
+* Overall the end of the day was very encouraging. The two above-mentioned
+  changes led to a gain of ~$13 and near 100% success rate. The dynamic polling
+  interval may be a game changer.
+
+* TSLA (-$7.31):
+  * Win Rate: 29/46 => 0.630435

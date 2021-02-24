@@ -23,7 +23,7 @@ double compute_trailing_stop(const double day_range, const order_t *open_order,
   const double velocity_coefficient = 1 + (ten_tick_velocity * 100);
   const double y_multiplier = 2 * max_loss;
 
-  return y_multiplier * (1 / (1 + exp(2.5 * x / velocity_coefficient)));
+  return y_multiplier * (1 / (1 + exp(2 * x / velocity_coefficient)));
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
@@ -50,7 +50,7 @@ void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
         compute_trailing_stop(day_range, open_order, ten_tick_velocity);
 
     trailing_stop_price =
-        close_order->stop_price != -INFINITY || open_order->profit < 0
+        close_order->stop_price != -INFINITY && open_order->profit > 0
             ? std::max(close_order->stop_price, (current_price - trailing_stop))
             : open_order->execution_price - trailing_stop;
   } else if (close_order->action == order_action_t::BUY_TO_COVER) {
@@ -58,7 +58,7 @@ void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
         compute_trailing_stop(day_range, open_order, -ten_tick_velocity);
 
     trailing_stop_price =
-        close_order->stop_price != INFINITY || open_order->profit < 0
+        close_order->stop_price != INFINITY && open_order->profit > 0
             ? std::min(close_order->stop_price, (current_price + trailing_stop))
             : open_order->execution_price + trailing_stop;
   }
