@@ -262,7 +262,11 @@ Conclusions:
   * After lunch I changed the x-scale from 2.5 to 2. This slowed the descent of
     the t-stop and allowed more room for highly profitable trades to grow.
 
-**NOTES**
+#### Performance
+* TSLA (-$7.31):
+  * Win Rate: 29/46 => 0.630435
+
+#### Remarks
 * This was two days after TSLA's -6.31228% drop off. Volatility and volume were
   still higher than average.
 
@@ -274,5 +278,57 @@ Conclusions:
   changes led to a gain of ~$13 and near 100% success rate. The dynamic polling
   interval may be a game changer.
 
-* TSLA (-$7.31):
-  * Win Rate: 29/46 => 0.630435
+### 2021-02-25:
+* Intervals
+  * Dynamic: 20s entry, 500ms close
+
+* Entry Algorithm v0.2.1:
+  * Enter: 5% Day Range
+
+* T-Stop Algorithm v0.10
+  * Max Loss: 0.4% Price
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / velocity_coefficient
+    * y-scale: 2 * max_loss
+
+#### Performance
+* TSLA ($2.18):
+  * Win Rate: 44/70 => 0.628571
+  * Premature Reversals: 10/21 => 0.47619
+
+#### Remarks
+* This was three days after TSLA's -6.31228% drop off. Volatility and volume
+  were still higher than average.
+
+* CONGRATS! This was the biggest win all month. The dynamic polling interval
+  and t-stop reset paid off.
+
+* ETrade API still hangs occasionally. It resulted in a loss of $4.66. Not a
+  problem now, but when I have larger orders, it could result in HEAVY loss.
+  More reason why I may need to switch to a more reliable API (IBKR?)
+
+* Keep an eye on premature reversals. My emotions tell me that it should depend
+  on day range and be larger, but the data is saying that it's only wrong half
+  the time. If you increase it too much, the losses will be larger.
+
+* I'm still missing out on potentially larger profits. I'll reduce the x-scale
+
+### 2021-02-26:
+* Intervals
+  * Dynamic: 20s entry, 500ms close
+
+* Entry Algorithm v0.2.1:
+  * Enter: 5% Day Range
+
+* T-Stop Algorithm v0.10.1
+  * Max Loss: 0.4% Price
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 1 / velocity_coefficient
+    * y-scale: 2 * max_loss
+
+#### Changelog
+* T-Stop Algorithm v0.10 -> v0.10.1
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / velocity_coefficient -> 1 / velocity_coefficient

@@ -21,9 +21,10 @@ double compute_trailing_stop(const double day_range, const order_t *open_order,
 
   const double x = open_order->profit;
   const double velocity_coefficient = 1 + (ten_tick_velocity * 100);
-  const double y_multiplier = 2 * max_loss;
+  const double x_scale = 1.0 / velocity_coefficient;
+  const double y_scale = 2 * max_loss;
 
-  return y_multiplier * (1 / (1 + exp(2 * x / velocity_coefficient)));
+  return y_scale * (1 / (1 + exp(x_scale * x)));
 }
 
 void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
