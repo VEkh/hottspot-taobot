@@ -322,7 +322,7 @@ Conclusions:
   * Enter: 5% Day Range
 
 * T-Stop Algorithm v0.10.1
-  * Max Loss: 0.4% Price
+  * Max Loss: 20% Day Range (Start), 12.5% Day Range (End)
   * Loss: Max Loss
   * Profit: Y and X-scaled Reverse Sigmoid
     * x-scale: 1 / velocity_coefficient
@@ -332,3 +332,27 @@ Conclusions:
 * T-Stop Algorithm v0.10 -> v0.10.1
   * Profit: Y and X-scaled Reverse Sigmoid
     * x-scale: 2 / velocity_coefficient -> 1 / velocity_coefficient
+
+#### Performance
+* TSLA (-$13.48):
+  * Win Rate: 23/35 => 0.657143
+  * Premature Reversals: 5/8 => 0.625
+
+#### Remarks
+* This was four days after TSLA's -6.31228% drop off. Volatility and volume
+  were still higher than average.
+
+* Started the day with a max loss of 20% day range. This was too large so I
+  changed to 12.5% day range.
+
+  This only modestly increased the win rate and actually increased the premature stop loss rate.
+
+  It also increased the magnitude of the losses. I'll reduce the max loss
+
+* There were 2-3 times where ETrade crapped out. It either stopped respondng,
+  hanged when opening an order, or held a close / open order in `OPEN` without
+  executing it. This costs money and can be the differnece between an profit
+  and loss day. It may seriously be time to switch APIs.
+
+* IBKR's Client Portal has BY FAR the best web UI. I think this is the play.
+  Hopefully they're API is not as buggy.

@@ -8,12 +8,11 @@
 #include <iostream>          // std::cout, std::endl
 #include <math.h>            // INFINITY, exp
 
-const double LOSS_TRAILING_STOP_RATIO = 0.004;
+const double TRAILING_STOP_LOSS_RATIO = 0.125;
 
 double compute_trailing_stop(const double day_range, const order_t *open_order,
                              const double ten_tick_velocity) {
-  const double max_loss =
-      LOSS_TRAILING_STOP_RATIO * open_order->execution_price;
+  const double max_loss = TRAILING_STOP_LOSS_RATIO * day_range;
 
   if (open_order->profit < 0) {
     return max_loss;
