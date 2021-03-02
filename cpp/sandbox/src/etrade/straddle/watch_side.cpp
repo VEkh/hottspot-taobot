@@ -135,6 +135,9 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
       std::cout << "😭 " << order_action
                 << ": Closed order at a loss. Better luck next time!"
                 << std::endl;
+
+      next_order_action =
+          (char *)ETrade::Client::ORDER_ACTIONS[opposite_open_order->action];
     }
 
     std::cout << fmt.reset;

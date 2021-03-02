@@ -26,6 +26,7 @@ public:
   Straddle(char *, int);
   Straddle(char *, int, char *);
 
+  char *next_order_action = nullptr;
   void manual_run();
   void run();
 
