@@ -6,7 +6,7 @@
 
 double ETrade::Straddle::compute_polling_interval() {
   if (status() == status_t::PENDING) {
-    return 20;
+    return 30;
   }
 
   return 0.5;

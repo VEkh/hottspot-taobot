@@ -356,3 +356,32 @@ Conclusions:
 
 * IBKR's Client Portal has BY FAR the best web UI. I think this is the play.
   Hopefully they're API is not as buggy.
+
+### 2021-03-01:
+* Intervals
+  * Dynamic: 20s entry, 500ms close
+
+* Entry Algorithm v0.2.1:
+  * Enter: 5% Day Range
+
+* T-Stop Algorithm v0.10.2
+  * Max Loss: 10% Day Range
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / velocity_coefficient ^ 2
+    * y-scale: 2 * max_loss
+
+#### Changelog
+* T-Stop Algorithm v0.10.1 -> v0.10.2
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 1 / velocity_coefficient -> 2 / velocity_coefficient ^ 2
+
+#### Performance
+* TSLA (-$31.27):
+  * Win Rate: 23/43 => 0.534884
+    * Max Loss 10% Day Range: 18/35 => 0.514286
+    * Max Loss 15% Day Range: 5/7 => 0.714286
+  * Premature Reversals:
+    * Max Loss 10% Day Range: 11/15 => 0.733333
+    * Max Loss 15% Day Range: 1/3 => 0.333333
+  * Entry reversals to stop: 3/4
