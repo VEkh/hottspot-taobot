@@ -28,13 +28,17 @@ void ETrade::Straddle::set_order_prices() {
       (double)first_quote["highPrice"] - (double)first_quote["lowPrice"];
 
   const double entry_delta = day_range * ENTRY_DAY_RANGE_RATIO;
+  const double entry_limit_delta = entry_delta;
+  const double entry_stop_delta = 0.8 * entry_limit_delta;
 
   buy_open_order.action = order_action_t::BUY;
+  buy_open_order.limit_price =
+      utils::float_::to_currency(reference_price + entry_limit_delta);
   buy_open_order.quantity = quantity;
   buy_open_order.stop_price =
-      utils::float_::to_currency(reference_price + entry_delta);
+      utils::float_::to_currency(reference_price + entry_stop_delta);
   buy_open_order.symbol = symbol;
-  buy_open_order.type = order_type_t::MARKET;
+  buy_open_order.type = order_type_t::LIMIT;
 
   buy_close_order.action = order_action_t::SELL;
   buy_close_order.quantity = quantity;
@@ -43,11 +47,13 @@ void ETrade::Straddle::set_order_prices() {
   buy_close_order.type = order_type_t::MARKET;
 
   sell_short_open_order.action = order_action_t::SELL_SHORT;
+  sell_short_open_order.limit_price =
+      utils::float_::to_currency(reference_price - entry_limit_delta);
   sell_short_open_order.quantity = quantity;
   sell_short_open_order.stop_price =
-      utils::float_::to_currency(reference_price - entry_delta);
+      utils::float_::to_currency(reference_price - entry_stop_delta);
   sell_short_open_order.symbol = symbol;
-  sell_short_open_order.type = order_type_t::MARKET;
+  sell_short_open_order.type = order_type_t::LIMIT;
 
   sell_short_close_order.action = order_action_t::BUY_TO_COVER;
   sell_short_close_order.quantity = quantity;

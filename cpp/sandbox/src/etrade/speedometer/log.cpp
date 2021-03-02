@@ -15,8 +15,7 @@ void ETrade::Speedometer::log() {
 
   const double current_price = quotes.back()["currentPrice"];
   const double first_price = quotes.front()["currentPrice"];
-  const double displacement =
-      100 * ((current_price - first_price) / first_price);
+  displacement = 100 * ((current_price - first_price) / first_price);
 
   std::cout << std::setprecision(6) << std::fixed;
   std::cout << fmt.bold << fmt.magenta << std::endl;

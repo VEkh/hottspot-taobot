@@ -79,7 +79,7 @@ public:
   static order_action_t to_order_action_t(const char *);
 
   CurlClient cancel_order(int);
-  CurlClient cancel_order(order_t &);
+  CurlClient cancel_order(order_t *);
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
   CurlClient fetch(std::string, std::map<std::string, std::string>);

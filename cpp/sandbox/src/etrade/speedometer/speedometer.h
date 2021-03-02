@@ -8,10 +8,12 @@
 namespace ETrade {
 class Speedometer {
 public:
+  Speedometer(json *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
+
+  double displacement = 0.00;
+
   std::pair<int, double> average_velocity(const int);
   void log();
-
-  Speedometer(json *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
 
 private:
   Formatted::fmt_stream_t stream_format = Formatted::stream();
