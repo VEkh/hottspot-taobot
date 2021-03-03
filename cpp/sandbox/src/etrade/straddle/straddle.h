@@ -31,6 +31,8 @@ public:
   void run();
 
 private:
+  const double POLLING_INTERVAL_SECONDS = 0.5;
+
   char *init_order_action = nullptr;
   char *symbol;
   int quantity;
@@ -50,8 +52,6 @@ private:
   json get_order_json(const order_t &);
 
   status_t status();
-
-  double compute_polling_interval();
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();
