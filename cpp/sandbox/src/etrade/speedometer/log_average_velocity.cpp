@@ -1,12 +1,12 @@
-#if !defined ETRADE__SPEEDOMETER_log_average
-#define ETRADE__SPEEDOMETER_log_average
+#if !defined ETRADE__SPEEDOMETER_log_average_velocity
+#define ETRADE__SPEEDOMETER_log_average_velocity
 
 #include "average_velocity.cpp" // average_velocity
 #include "speedometer.h"        // ETrade::Speedometer
 #include <iostream>             // std::cout, std::endl
 #include <utility>              // std::pair
 
-void ETrade::Speedometer::log_average(const int ticks) {
+void ETrade::Speedometer::log_average_velocity(const int ticks) {
   const std::pair<int, double> velocity_pair = average_velocity(ticks);
 
   if (!velocity_pair.second) {
@@ -17,8 +17,8 @@ void ETrade::Speedometer::log_average(const int ticks) {
   const char *velocity_units = " (%/s)";
 
   std::cout << ticks << tick_spacing << "Tick"
-            << " (" << velocity_pair.first << "-Sec) Velocity" << velocity_units
-            << ": " << velocity_pair.second << std::endl;
+            << " (" << velocity_pair.first << "-Sec)" << velocity_units << ": "
+            << velocity_pair.second << std::endl;
 }
 
 #endif
