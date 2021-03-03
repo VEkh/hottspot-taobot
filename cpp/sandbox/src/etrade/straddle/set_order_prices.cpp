@@ -38,7 +38,7 @@ void ETrade::Straddle::set_order_prices() {
   buy_open_order.stop_price =
       utils::float_::to_currency(reference_price + entry_stop_delta);
   buy_open_order.symbol = symbol;
-  buy_open_order.type = order_type_t::LIMIT;
+  buy_open_order.type = order_type_t::MARKET;
 
   buy_close_order.action = order_action_t::SELL;
   buy_close_order.quantity = quantity;
@@ -53,7 +53,7 @@ void ETrade::Straddle::set_order_prices() {
   sell_short_open_order.stop_price =
       utils::float_::to_currency(reference_price - entry_stop_delta);
   sell_short_open_order.symbol = symbol;
-  sell_short_open_order.type = order_type_t::LIMIT;
+  sell_short_open_order.type = order_type_t::MARKET;
 
   sell_short_close_order.action = order_action_t::BUY_TO_COVER;
   sell_short_close_order.quantity = quantity;

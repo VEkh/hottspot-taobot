@@ -49,7 +49,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
   order_t *open_order;
   order_t *opposite_open_order;
   bool should_open;
-  bool should_reset_open;
 
   switch (order_action_type) {
   case order_action_t::BUY: {
@@ -59,9 +58,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &sell_short_open_order;
 
     should_open = current_price >= open_order->stop_price;
-    should_reset_open =
-        speedometer.displacement <= 0 ||
-        (current_price - open_order->stop_price) >= 0.025 * day_range;
 
     break;
   }
@@ -72,9 +68,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &buy_open_order;
 
     should_open = current_price <= open_order->stop_price;
-    should_reset_open =
-        speedometer.displacement >= 0 ||
-        -(current_price - open_order->stop_price) >= 0.025 * day_range;
 
     break;
   }
@@ -97,17 +90,6 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     std::cout << log_icon << order_action << ": Placed open order."
               << std::endl;
     std::cout << fmt.reset;
-
-    return;
-  }
-
-  if (open_order->status == order_status_t::ORDER_OPEN && should_reset_open) {
-    std::cout << fmt.bold << fmt.cyan << std::endl;
-    std::cout << log_icon << order_action << ": Cancelling open order."
-              << std::endl;
-    std::cout << fmt.reset;
-
-    etrade_client.cancel_order(open_order);
 
     return;
   }
