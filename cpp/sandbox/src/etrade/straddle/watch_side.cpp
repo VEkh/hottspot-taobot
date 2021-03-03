@@ -2,10 +2,12 @@
 #define ETRADE__STRADDLE_watch_side
 
 /*
+ * ENTRY_DAY_RANGE_RATIO
  * ETrade::Straddle
  * buy_close_order
  * buy_open_order
  * etrade_client
+ * init_order_action
  * order_status_t
  * order_t
  * position_t
@@ -23,6 +25,7 @@
 #include "set_status.cpp"              // set_status
 #include "set_trailing_stop_price.cpp" // set_trailing_stop_price
 #include <iostream>                    // std::cout, std::endl
+#include <math.h>                      // INFINITY
 #include <string>                      // std::string
 
 bool should_close(const order_t *close_order, const double current_price) {
@@ -43,6 +46,8 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
   const double current_price = quotes.back()["currentPrice"];
   const double day_range = (double)reference_quote["highPrice"] -
                            (double)reference_quote["lowPrice"];
+  const double average_displacement =
+      speedometer.average_displacement(30).second;
 
   order_t *close_order;
   std::string log_icon;
@@ -57,7 +62,8 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     open_order = &buy_open_order;
     opposite_open_order = &sell_short_open_order;
 
-    should_open = current_price >= open_order->stop_price;
+    should_open = open_order->stop_price == -INFINITY ||
+                  average_displacement >= ENTRY_DAY_RANGE_RATIO * day_range;
 
     break;
   }
@@ -67,7 +73,8 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
     open_order = &sell_short_open_order;
     opposite_open_order = &buy_open_order;
 
-    should_open = current_price <= open_order->stop_price;
+    should_open = open_order->stop_price == INFINITY ||
+                  average_displacement <= -(ENTRY_DAY_RANGE_RATIO * day_range);
 
     break;
   }

@@ -2,6 +2,7 @@
 #define ETRADE__STRADDLE_set_order_prices
 
 /*
+ * ENTRY_DAY_RANGE_RATIO
  * ETrade::Straddle
  * buy_open_order
  * buy_close_order
@@ -17,8 +18,6 @@
 #include <algorithm>           // std::max, std::min
 #include <math.h>              // INFINITY
 #include <string>              // string
-
-const double ENTRY_DAY_RANGE_RATIO = 0.05;
 
 void ETrade::Straddle::set_order_prices() {
   const json first_quote = quotes.front();

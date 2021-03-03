@@ -10,8 +10,9 @@ class Speedometer {
 public:
   Speedometer(json *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
 
-  double displacement = 0.00;
+  double current_displacement = 0.00;
 
+  std::pair<int, double> average_displacement(const int);
   std::pair<int, double> average_velocity(const int);
   void log();
 

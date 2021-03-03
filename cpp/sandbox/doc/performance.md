@@ -385,3 +385,45 @@ Conclusions:
     * Max Loss 10% Day Range: 11/15 => 0.733333
     * Max Loss 15% Day Range: 1/3 => 0.333333
   * Entry reversals to stop: 3/4
+
+### 2021-03-02:
+* Intervals
+  * Dynamic: 20s entry, 500ms close
+
+* Entry Algorithm v0.3.0:
+  * Enter: 20-Tick Displacement 5% Day Range
+
+* T-Stop Algorithm v0.10.3
+  * Max Loss: 15% Day Range
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / velocity_coefficient ^ 2
+    * y-scale: 2 * max_loss
+
+#### Changelog
+* Entry Algorithm v0.2.2 -> v0.3.0
+  * Enter: `5% Day Range` -> `20-Tick Displacement 5% Day Range`
+
+* T-Stop Algorithm v0.10.2 -> v0.10.3
+  * Max Loss: `10%` -> `15%` Day Range
+
+* Open order is MARKET order with bail out if it hangs in OPEN state
+
+#### Performance
+* TSLA (-$10.91):
+  * Win Rate: 30/45 => 0.6666667
+    * Entry at Init: 4/4 => 1.0
+  * Premature Losses: 4/8 => 0.5
+  * Big losses that could have profited ~> $0.50: 2/8 => 0.25
+
+#### Remarks
+* One of the better Premature Loss rates (0.5).
+  * This might suggest a smaller max loss is in order, but I'll keep it the same for now.
+* Though the sample size was small, it seems immediately opening the opposite
+  side upon losing may be a good idea.
+* Only 25% of big losses could have even profited. This is good news. It suggests that:
+  1. The profit algorithm is pretty sound
+  2. If I had waited a little longer, Ie may not have entered.
+    * This suggests that if I extend the average displacement period, the price
+      direction will have to be more certain before entering.
+    * As a first step, I'll increase it from 15 ticks to 30 ticks.
