@@ -11,7 +11,8 @@
 const double TRAILING_STOP_LOSS_RATIO = 0.15;
 
 double compute_trailing_stop(const double day_range, const order_t *open_order,
-                             const double ten_tick_velocity) {
+                             const double tick_velocity_10,
+                             const double tick_velocity_30) {
   const double max_loss = TRAILING_STOP_LOSS_RATIO * day_range;
 
   if (open_order->profit < 0) {
@@ -19,8 +20,10 @@ double compute_trailing_stop(const double day_range, const order_t *open_order,
   }
 
   const double x = open_order->profit;
-  const double velocity_coefficient = 1 + (ten_tick_velocity * 100);
-  const double x_scale = 2.0 / pow(velocity_coefficient, 2);
+  const double velocity_coefficient_10 = 1 + (tick_velocity_10 * 100);
+  const double velocity_coefficient_30 = 1 + (tick_velocity_30 * 100);
+  const double x_scale =
+      2.0 / (velocity_coefficient_10 * 2 * velocity_coefficient_30);
   const double y_scale = 2 * max_loss;
 
   return y_scale * (1 / (1 + exp(x_scale * x)));
@@ -40,22 +43,23 @@ void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
   const double current_price = current_quote["currentPrice"];
   const double day_range = (double)reference_quote["highPrice"] -
                            (double)reference_quote["lowPrice"];
-  const double ten_tick_velocity = speedometer.average_velocity(10).second;
+  const double tick_velocity_10 = speedometer.average_velocity(10).second;
+  const double tick_velocity_30 = speedometer.average_velocity(30).second;
 
   double trailing_stop;
   double trailing_stop_price;
 
   if (close_order->action == order_action_t::SELL) {
-    trailing_stop =
-        compute_trailing_stop(day_range, open_order, ten_tick_velocity);
+    trailing_stop = compute_trailing_stop(day_range, open_order,
+                                          tick_velocity_10, tick_velocity_30);
 
     trailing_stop_price =
         close_order->stop_price != -INFINITY && open_order->profit > 0
             ? std::max(close_order->stop_price, (current_price - trailing_stop))
             : open_order->execution_price - trailing_stop;
   } else if (close_order->action == order_action_t::BUY_TO_COVER) {
-    trailing_stop =
-        compute_trailing_stop(day_range, open_order, -ten_tick_velocity);
+    trailing_stop = compute_trailing_stop(day_range, open_order,
+                                          -tick_velocity_10, -tick_velocity_30);
 
     trailing_stop_price =
         close_order->stop_price != INFINITY && open_order->profit > 0
