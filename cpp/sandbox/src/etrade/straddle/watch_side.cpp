@@ -145,11 +145,14 @@ void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
       std::cout << "😭 " << order_action
                 << ": Closed order at a loss. Better luck next time!"
                 << std::endl;
+    }
 
-      if (close_order->profit > 0.01 * day_range) {
-        next_order_action =
-            (char *)ETrade::Client::ORDER_ACTIONS[opposite_open_order->action];
-      }
+    if (close_order->profit < -0.1 * day_range) {
+      next_order_action =
+          (char *)ETrade::Client::ORDER_ACTIONS[opposite_open_order->action];
+    } else if (close_order->profit > 0.07 * day_range) {
+      next_order_action =
+          (char *)ETrade::Client::ORDER_ACTIONS[open_order->action];
     }
 
     std::cout << fmt.reset;

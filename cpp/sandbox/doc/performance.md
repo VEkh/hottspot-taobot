@@ -427,3 +427,35 @@ Conclusions:
     * This suggests that if I extend the average displacement period, the price
       direction will have to be more certain before entering.
     * As a first step, I'll increase it from 15 ticks to 30 ticks.
+
+### 2021-03-03:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.3.1:
+  * Enter: 30-Tick Displacement 5% Day Range
+
+* T-Stop Algorithm v0.10.3
+  * Max Loss: 15% Day Range
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / velocity_coefficient ^ 2
+    * y-scale: 2 * max_loss
+
+#### Changelog
+* Entry Algorithm v0.3.0 -> v0.3.1
+  * Enter: `20-Tick Displacement 5% Day Range` -> `30-Tick Displacement 5% Day Range`
+
+#### Performance
+* TSLA ($22.08):
+  * Win Rate: 47/56 => 0.839286
+    * Entry at Init: 5/6 => 0.833333
+      * Two were after a small loss, which was really a win that failed to
+        capture the profit.
+  * Premature Losses: 1/4 => 0.25
+
+#### Remarks
+* This was the BEST performance with the fully automated algorithm.
+* I believe using the 30-tick entry signal was the big game changer.
+* I'll modify the trailing stop algorithm by factoring in the 30-tick velocity
+* I'll also re-enter trades in the same direction as big win. The logic is that
+  if a big loss seems to signal a trend, a big win should as well.
