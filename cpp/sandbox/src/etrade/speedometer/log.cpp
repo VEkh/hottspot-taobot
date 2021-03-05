@@ -29,12 +29,6 @@ void ETrade::Speedometer::log() {
   log_average_velocity(10);
   log_average_velocity(30);
   log_average_velocity(60);
-  log_average_velocity(2 * 60);
-  log_average_velocity(5 * 60);
-  log_average_velocity(10 * 60);
-  log_average_velocity(15 * 60);
-  log_average_velocity(20 * 60);
-  log_average_velocity(30 * 60);
 
   std::cout << fmt.reset;
 }
