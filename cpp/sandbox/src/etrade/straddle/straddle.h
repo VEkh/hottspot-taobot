@@ -36,6 +36,7 @@ private:
 
   char *init_order_action = nullptr;
   char *symbol;
+  double day_range;
   int quantity;
 
   ETrade::Client etrade_client;
@@ -53,6 +54,9 @@ private:
   json get_order_json(const order_t &);
 
   status_t status();
+
+  double compute_max_loss();
+  double compute_trailing_stop(const order_t *, const double);
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();

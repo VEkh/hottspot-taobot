@@ -23,7 +23,7 @@ void ETrade::Straddle::set_order_prices() {
   const json first_quote = quotes.front();
   const double reference_price = first_quote["currentPrice"];
 
-  const double day_range =
+  day_range =
       (double)first_quote["highPrice"] - (double)first_quote["lowPrice"];
 
   const double entry_delta = day_range * ENTRY_DAY_RANGE_RATIO;

@@ -18,6 +18,7 @@
  */
 #include "straddle.h"
 
+#include "compute_max_loss.cpp"        // compute_max_loss
 #include "etrade/client/client.h"      // ETrade::Client
 #include "lib/formatted.cpp"           // Formatted
 #include "set_execution_price.cpp"     // set_execution_price
