@@ -454,8 +454,78 @@ Conclusions:
   * Premature Losses: 1/4 => 0.25
 
 #### Remarks
-* This was the BEST performance with the fully automated algorithm.
+* This was the BEST performance this year with the fully automated algorithm.
 * I believe using the 30-tick entry signal was the big game changer.
 * I'll modify the trailing stop algorithm by factoring in the 30-tick velocity
 * I'll also re-enter trades in the same direction as big win. The logic is that
   if a big loss seems to signal a trend, a big win should as well.
+
+### 2021-03-04:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.3.2:
+  * Enter: 30-Tick Displacement 5% Day Range
+  * Enter with init trade when:
+    * Loss exceeds 10% day range
+    * Profit exceeds 7% day range
+
+* T-Stop Algorithm v0.10.4
+  * Max Loss: 15% Day Range
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / (velocity_coefficient_10 * 2 * velocity_coefficient_30)
+    * y-scale: 2 * max_loss
+
+#### Changelog
+* Entry Algorithm v0.3.1 -> v0.3.2
+* Trailing Stop Algorithm v0.10.3 -> v0.10.4
+
+#### Performance
+* TSLA (-$57.44):
+  * Win Rate: 24/38 => 0.631579
+    * Entry at Init: 9/11 => 0.818182
+  * Premature Losses: 2/8 => 0.25
+  * Losses with profit potential: 5/10
+
+#### Remarks
+  * If a big loss seems to signal a trend, a big win should as well.
+  * Win percentage was still strong, but max loss seemed too big.
+  * Entry at init (especially as a reaction to loss) is still mostly effective,
+    there were just huge losses that made them feel painful
+  * Max loss was too big today. I need an algorithm for computing it.
+
+### 2021-03-05:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.3.3:
+  * Enter: 30(/45)-Tick Displacement 5% Day Range
+  * Enter with init trade when:
+    * Loss exceeds 10% day range
+      * For half the day
+    * Profit exceeds 7% day range
+
+* T-Stop Algorithm v0.11.0
+  * Max Loss: X and Y-scaled Sigmoid
+    * x: Day range as % of reference price
+    * x-shift: -3
+    * y-scale: 0.5% price
+  * Loss: Max Loss
+  * Profit: Y and X-scaled Reverse Sigmoid
+    * x-scale: 2 / (velocity_coefficient_10 * 2 * velocity_coefficient_30)
+    * y-scale: 2 * max_loss
+
+#### Changelog
+* Entry Algorithm v0.3.2 -> v0.3.3
+* Trailing Stop Algorithm v0.10.4 -> v0.11.0
+
+#### Performance
+* TSLA (-$25.38):
+  * Win Rate: 50/82 => 0.609756
+
+#### Remarks
+* Still a decently high win rate, but the losses were often too preamture
+* I need a algorithm for exiting. It should match the entry algorithm, using
+  the open order's execution price as the reference price.
+* The stop loss algorithm should be a mirror of the entry algorithm
+* The new entry algorithm will use a simple moving average as its entry and
+  stop-loss indicator
