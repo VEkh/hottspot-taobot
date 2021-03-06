@@ -1,11 +1,10 @@
 #if !defined ETRADE__STOCK_BOT
 #define ETRADE__STOCK_BOT
 
-#include "lib/formatted.cpp" // Formatted::error_message
-#include "manual_run.cpp"
-#include "run.cpp"
 #include "stock_bot.h" // ETrade::StockBot, quantity, symbol, etrade_client
-#include <stdexcept>   // std::invalid_argument
+#include "lib/formatted.cpp" // Formatted::error_message
+#include "run.cpp"
+#include <stdexcept> // std::invalid_argument
 
 ETrade::StockBot::StockBot(char *symbol_) {
   if (symbol_ == nullptr) {

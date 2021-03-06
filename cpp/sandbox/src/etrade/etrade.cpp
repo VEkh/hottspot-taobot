@@ -16,7 +16,6 @@ void print_usage() {
       {"fetch <URL>                 ", "Generic authorized request"},
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
-      {"manual_stock_bot <SYMBOL>    ", "Return prices for manual entry"},
       {"refresh_token               ", "Refresh authorization tokens"},
       {"stock_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given symbol"},
@@ -88,14 +87,6 @@ int main(int argc, char *argv[]) {
 
     std::string quote = etrade_client.fetch_quote(symbol);
     std::cout << quote;
-
-    exit(0);
-  }
-
-  if (command == "manual_stock_bot") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    ETrade::StockBot stock_bot(symbol);
-    stock_bot.manual_run();
 
     exit(0);
   }

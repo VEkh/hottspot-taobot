@@ -27,7 +27,6 @@ public:
   StockBot(char *, int, char *);
 
   char *next_order_action = nullptr;
-  void manual_run();
   void run();
 
 private:
