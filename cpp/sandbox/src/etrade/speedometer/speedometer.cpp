@@ -2,7 +2,9 @@
 #define ETRADE__SPEEDOMETER
 
 #include "speedometer.h"
+#include "average_displacement.cpp"
 #include "average_velocity.cpp"
 #include "log.cpp"
+#include "simple_moving_average.cpp"
 
 #endif

@@ -8,6 +8,10 @@
 #include <utility>                  // std::pair
 
 void ETrade::Speedometer::log_displacement() {
+  std::cout << fmt.underline;
+  std::cout << "📏 Displacement" << std::endl;
+  std::cout << fmt.reset << fmt.bold << fmt.magenta;
+
   const json quotes = *quotes_ptr;
 
   const double current_price = quotes.back()["currentPrice"];

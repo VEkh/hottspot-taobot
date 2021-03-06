@@ -12,14 +12,17 @@ public:
 
   std::pair<int, double> average_displacement(const int);
   std::pair<int, double> average_velocity(const int);
+  std::pair<int, double> simple_moving_average(const int);
+
   void log();
 
 private:
-  Formatted::fmt_stream_t stream_format = Formatted::stream();
+  Formatted::fmt_stream_t fmt = Formatted::stream();
   json *quotes_ptr;
 
-  void log_displacement();
   void log_average_velocity(const int);
+  void log_displacement();
+  void log_simple_moving_average();
 };
 } // namespace ETrade
 
