@@ -1,9 +1,9 @@
-#if !defined ETRADE__STRADDLE_set_order_prices
-#define ETRADE__STRADDLE_set_order_prices
+#if !defined ETRADE__STOCK_BOT_set_order_prices
+#define ETRADE__STOCK_BOT_set_order_prices
 
 /*
  * ENTRY_DAY_RANGE_RATIO
- * ETrade::Straddle
+ * ETrade::StockBot
  * buy_open_order
  * buy_close_order
  * init_order_action
@@ -11,7 +11,7 @@
  * sell_short_open_order
  * sell_short_close_order
  */
-#include "straddle.h"
+#include "stock_bot.h"
 
 #include "etrade/deps.cpp"     // json
 #include "lib/utils/float.cpp" // utils::float_
@@ -19,7 +19,7 @@
 #include <math.h>              // INFINITY
 #include <string>              // string
 
-void ETrade::Straddle::set_order_prices() {
+void ETrade::StockBot::set_order_prices() {
   const json first_quote = quotes.front();
   const double reference_price = first_quote["currentPrice"];
 

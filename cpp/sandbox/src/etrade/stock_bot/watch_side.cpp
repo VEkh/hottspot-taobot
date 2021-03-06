@@ -1,9 +1,9 @@
-#if !defined ETRADE__STRADDLE_watch_side
-#define ETRADE__STRADDLE_watch_side
+#if !defined ETRADE__STOCK_BOT_watch_side
+#define ETRADE__STOCK_BOT_watch_side
 
 /*
  * ENTRY_DAY_RANGE_RATIO
- * ETrade::Straddle
+ * ETrade::StockBot
  * buy_close_order
  * buy_open_order
  * etrade_client
@@ -16,7 +16,7 @@
  * speedometer
  * symbol
  */
-#include "straddle.h"
+#include "stock_bot.h"
 
 #include "compute_max_loss.cpp"        // compute_max_loss
 #include "etrade/client/client.h"      // ETrade::Client
@@ -40,7 +40,7 @@ bool should_close(const order_t *close_order, const double current_price) {
   }
 }
 
-void ETrade::Straddle::watch_side(const order_action_t &order_action_type) {
+void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
   Formatted::fmt_stream_t fmt = stream_format;
   json reference_quote = quotes.front();
   const char *order_action = ETrade::Client::ORDER_ACTIONS[order_action_type];

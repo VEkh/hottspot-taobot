@@ -1,11 +1,11 @@
-#if !defined ETRADE__STRADDLE_compute_trailing_stop
-#define ETRADE__STRADDLE_compute_trailing_stop
+#if !defined ETRADE__STOCK_BOT_compute_trailing_stop
+#define ETRADE__STOCK_BOT_compute_trailing_stop
 
 #include "compute_max_loss.cpp" // compute_max_loss
-#include "straddle.h"           // ETrade::Straddle,  order_t
+#include "stock_bot.h"          // ETrade::StockBot,  order_t
 #include <math.h>               // exp
 
-double ETrade::Straddle::compute_trailing_stop(const order_t *open_order,
+double ETrade::StockBot::compute_trailing_stop(const order_t *open_order,
                                                const double tick_velocity) {
   const double max_loss = compute_max_loss();
 

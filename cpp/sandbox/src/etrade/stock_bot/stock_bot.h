@@ -1,5 +1,5 @@
-#if !defined ETRADE__STRADDLE_H
-#define ETRADE__STRADDLE_H
+#if !defined ETRADE__STOCK_BOT_H
+#define ETRADE__STOCK_BOT_H
 
 #include "etrade/client/client.h"             // ETrade::Client
 #include "etrade/deps.cpp"                    // json, _json
@@ -12,7 +12,7 @@ using order_t = ETrade::Client::order_t;
 using order_type_t = ETrade::Client::order_type_t;
 
 namespace ETrade {
-class Straddle {
+class StockBot {
 public:
   enum status_t {
     CLOSED,
@@ -22,9 +22,9 @@ public:
     PENDING,
   };
 
-  Straddle(char *);
-  Straddle(char *, int);
-  Straddle(char *, int, char *);
+  StockBot(char *);
+  StockBot(char *, int);
+  StockBot(char *, int, char *);
 
   char *next_order_action = nullptr;
   void manual_run();

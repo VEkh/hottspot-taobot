@@ -1,9 +1,9 @@
-#if !defined ETRADE__STRADDLE_set_profit
-#define ETRADE__STRADDLE_set_profit
+#if !defined ETRADE__STOCK_BOT_set_profit
+#define ETRADE__STOCK_BOT_set_profit
 
-#include "straddle.h" // ETrade::Straddle, order_t, quotes
+#include "stock_bot.h" // ETrade::StockBot, order_t, quotes
 
-void ETrade::Straddle::set_profit(order_t *order) {
+void ETrade::StockBot::set_profit(order_t *order) {
   double current_price = quotes.back()["currentPrice"];
   double profit;
 
@@ -19,7 +19,7 @@ void ETrade::Straddle::set_profit(order_t *order) {
   order->profit = profit;
 }
 
-void ETrade::Straddle::set_profit(order_t *close_order,
+void ETrade::StockBot::set_profit(order_t *close_order,
                                   const order_t *open_order) {
   double profit;
 

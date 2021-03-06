@@ -1,9 +1,9 @@
-#if !defined ETRADE__STRADDLE_status
-#define ETRADE__STRADDLE_status
+#if !defined ETRADE__STOCK_BOT_status
+#define ETRADE__STOCK_BOT_status
 
-#include "straddle.h" // ETrade::Straddle, status_t
+#include "stock_bot.h" // ETrade::StockBot, status_t
 
-ETrade::Straddle::status_t ETrade::Straddle::status() {
+ETrade::StockBot::status_t ETrade::StockBot::status() {
   if (!buy_open_order.id && !sell_short_open_order.id) {
     return status_t::PENDING;
   }

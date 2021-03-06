@@ -1,10 +1,10 @@
-#if !defined ETRADE__STRADDLE_compute_max_loss
-#define ETRADE__STRADDLE_compute_max_loss
+#if !defined ETRADE__STOCK_BOT_compute_max_loss
+#define ETRADE__STOCK_BOT_compute_max_loss
 
 #include "compute_max_loss.cpp" // compute_max_loss
-#include "straddle.h"           // ETrade::Straddle,  day_range
+#include "stock_bot.h"          // ETrade::StockBot,  day_range
 
-double ETrade::Straddle::compute_max_loss() {
+double ETrade::StockBot::compute_max_loss() {
   json reference_quote = quotes.front();
 
   const double MAX_LOSS_PERCENT_PRICE = 0.005;

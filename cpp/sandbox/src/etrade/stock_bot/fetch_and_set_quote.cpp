@@ -1,10 +1,10 @@
-#if !defined ETRADE__STRADDLE_fetch_and_set_quote
-#define ETRADE__STRADDLE_fetch_and_set_quote
+#if !defined ETRADE__STOCK_BOT_fetch_and_set_quote
+#define ETRADE__STOCK_BOT_fetch_and_set_quote
 
 #include "etrade/deps.cpp"    // json
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/utils/json.cpp" // utils::json
-#include "straddle.h" // ETrade::Straddle, etrade_client, speedometer, stream_format, symbol
+#include "stock_bot.h" // ETrade::StockBot, etrade_client, speedometer, stream_format, symbol
 #include <iostream> // std::cout, std::endl
 #include <string>   // std::string
 #include <time.h>   // time, time_t
@@ -27,7 +27,7 @@ json quote_summary(const std::string &response_body) {
   return output;
 }
 
-void ETrade::Straddle::fetch_and_set_quote() {
+void ETrade::StockBot::fetch_and_set_quote() {
   Formatted::fmt_stream_t fmt = stream_format;
   Formatted::Stream log_color = fmt.yellow;
 

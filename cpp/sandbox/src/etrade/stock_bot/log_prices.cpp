@@ -1,8 +1,8 @@
-#if !defined ETRADE__STRADDLE_log_prices
-#define ETRADE__STRADDLE_log_prices
+#if !defined ETRADE__STOCK_BOT_log_prices
+#define ETRADE__STOCK_BOT_log_prices
 
 /*
- * ETrade::Straddle
+ * ETrade::StockBot
  * buy_open_order
  * buy_close_order
  * sell_short_open_order
@@ -10,7 +10,7 @@
  * stream_format
  * symbol
  */
-#include "straddle.h"
+#include "stock_bot.h"
 
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/float.cpp" // utils::float::to_currency
@@ -19,7 +19,7 @@
 #include <string>              // std::string
 #include <vector>              // std::vector
 
-void ETrade::Straddle::log_prices() {
+void ETrade::StockBot::log_prices() {
   Formatted::fmt_stream_t fmt = stream_format;
 
   std::vector<std::string> buy_statuses = {

@@ -1,14 +1,14 @@
-#if !defined ETRADE__STRADDLE_set_trailing_stop_price
-#define ETRADE__STRADDLE_set_trailing_stop_price
+#if !defined ETRADE__STOCK_BOT_set_trailing_stop_price
+#define ETRADE__STOCK_BOT_set_trailing_stop_price
 
 /*
- * ETrade::Straddle
+ * ETrade::StockBot
  * day_range
  * order_t
  * quote
  * stream_format
  */
-#include "straddle.h"
+#include "stock_bot.h"
 
 #include "compute_trailing_stop.cpp" // compute_trailing_stop
 #include "etrade/deps.cpp"           // json
@@ -17,7 +17,7 @@
 #include <iostream>                  // std::cout, std::endl
 #include <math.h>                    // INFINITY
 
-void ETrade::Straddle::set_trailing_stop_price(order_t *close_order,
+void ETrade::StockBot::set_trailing_stop_price(order_t *close_order,
                                                const order_t *open_order) {
   const double execution_price = open_order->execution_price;
 

@@ -1,11 +1,11 @@
-#if !defined ETRADE__STRADDLE_set_status
-#define ETRADE__STRADDLE_set_status
+#if !defined ETRADE__STOCK_BOT_set_status
+#define ETRADE__STOCK_BOT_set_status
 
 #include "etrade/client/client.h" // ETrade::Client
 #include "etrade/deps.cpp"        // json
 #include "get_order_json.cpp"     // get_order_json
 #include "lib/formatted.cpp"      // Formatted
-#include "straddle.h"             // ETrade::Straddle, order_status_t, order_t
+#include "stock_bot.h"            // ETrade::StockBot, order_status_t, order_t
 #include <iostream>               // std::cout, std::endl
 #include <string>                 // std::string
 
@@ -29,7 +29,7 @@ order_status_t string_to_enum(const std::string &in) {
   exit(1);
 }
 
-void ETrade::Straddle::set_status(order_t *order) {
+void ETrade::StockBot::set_status(order_t *order) {
   json order_json = get_order_json(*order);
 
   if (order_json.empty()) {

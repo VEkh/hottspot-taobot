@@ -1,14 +1,14 @@
-#if !defined ETRADE__STRADDLE_get_order_json
-#define ETRADE__STRADDLE_get_order_json
+#if !defined ETRADE__STOCK_BOT_get_order_json
+#define ETRADE__STOCK_BOT_get_order_json
 
 #include "etrade/deps.cpp"   // json
 #include "lib/formatted.cpp" // Formatted
-#include "straddle.h"        // ETrade::Straddle, order_t, placed_orders
+#include "stock_bot.h"       // ETrade::StockBot, order_t, placed_orders
 #include <algorithm>         // std::find_if
 #include <iostream>          // std::cout, std::endl
 #include <string>            // std::string
 
-json ETrade::Straddle::get_order_json(const order_t &order) {
+json ETrade::StockBot::get_order_json(const order_t &order) {
   json empty_order;
 
   if (!order.id) {

@@ -1,15 +1,15 @@
-#if !defined ETRADE__STRADDLE_fetch_and_set_orders
-#define ETRADE__STRADDLE_fetch_and_set_orders
+#if !defined ETRADE__STOCK_BOT_fetch_and_set_orders
+#define ETRADE__STOCK_BOT_fetch_and_set_orders
 
 #include "etrade/deps.cpp"                        // json
 #include "lib/curl_client/curl_client.h"          // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // request_with_retry
 #include "lib/utils/string.cpp"                   // utils::string
-#include "straddle.h" // ETrade::Straddle, etrade_client, placed_orders, symbol
-#include <regex>      // std::regex, std::regex_search
-#include <string>     // std::string
+#include "stock_bot.h" // ETrade::StockBot, etrade_client, placed_orders, symbol
+#include <regex>       // std::regex, std::regex_search
+#include <string>      // std::string
 
-void ETrade::Straddle::fetch_and_set_orders() {
+void ETrade::StockBot::fetch_and_set_orders() {
   std::string url = etrade_client.client_config.base_url + "/v1/accounts/" +
                     etrade_client.client_config.account_id_key +
                     "/orders.json?count=100&symbol=" + std::string(symbol);

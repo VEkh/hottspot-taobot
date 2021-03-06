@@ -1,12 +1,12 @@
-#if !defined ETRADE__STRADDLE_log_status
-#define ETRADE__STRADDLE_log_status
+#if !defined ETRADE__STOCK_BOT_log_status
+#define ETRADE__STOCK_BOT_log_status
 
 #include "lib/formatted.cpp" // Formatted
 #include "status.cpp"        // status
-#include "straddle.h"        // ETrade::Straddle, status_t
+#include "stock_bot.h"       // ETrade::StockBot, status_t
 #include <iostream>          // std::cout, std::endl
 
-void ETrade::Straddle::log_status() {
+void ETrade::StockBot::log_status() {
   Formatted::fmt_stream_t fmt = stream_format;
 
   if (status() == status_t::LIMBO) {

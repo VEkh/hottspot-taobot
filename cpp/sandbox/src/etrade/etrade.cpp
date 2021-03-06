@@ -2,7 +2,7 @@
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "lib/utils/debug.cpp"             // utils::debug
-#include "straddle/straddle.cpp"           // ETrade::Straddle
+#include "stock_bot/stock_bot.cpp"         // ETrade::StockBot
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <sstream>                         // std::ostringstream
@@ -16,11 +16,10 @@ void print_usage() {
       {"fetch <URL>                 ", "Generic authorized request"},
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
-      {"manual_straddle <SYMBOL>    ",
-       "Return straddle prices for manual entry"},
+      {"manual_stock_bot <SYMBOL>    ", "Return prices for manual entry"},
       {"refresh_token               ", "Refresh authorization tokens"},
-      {"straddle <SYMBOL> <QUANTITY>",
-       "Launch straddle strategy for the given symbol"},
+      {"stock_bot <SYMBOL> <QUANTITY>",
+       "Launch trading bot for the given symbol"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -93,10 +92,10 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "manual_straddle") {
+  if (command == "manual_stock_bot") {
     char *symbol = argc < 3 ? nullptr : argv[2];
-    ETrade::Straddle straddle(symbol);
-    straddle.manual_run();
+    ETrade::StockBot stock_bot(symbol);
+    stock_bot.manual_run();
 
     exit(0);
   }
@@ -108,16 +107,16 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "straddle") {
+  if (command == "stock_bot") {
     char *symbol = argc < 3 ? nullptr : argv[2];
     int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
     char *action = argc < 5 ? nullptr : argv[4];
 
     while (true) {
-      ETrade::Straddle straddle(symbol, quantity, action);
-      straddle.run();
+      ETrade::StockBot stock_bot(symbol, quantity, action);
+      stock_bot.run();
 
-      action = straddle.next_order_action;
+      action = stock_bot.next_order_action;
       const char *action_text = action ? action : "NEUTRAL";
 
       std::cout << fmt.bold << fmt.blue;

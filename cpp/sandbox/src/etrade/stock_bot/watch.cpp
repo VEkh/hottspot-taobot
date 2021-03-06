@@ -1,14 +1,14 @@
-#if !defined ETRADE__STRADDLE_watch
-#define ETRADE__STRADDLE_watch
+#if !defined ETRADE__STOCK_BOT_watch
+#define ETRADE__STOCK_BOT_watch
 
 /*
- * ETrade::Straddle
+ * ETrade::StockBot
  * POLLING_INTERVAL_SECONDS
  * speedometer
  * stream_format
  * symbol
  */
-#include "straddle.h"
+#include "stock_bot.h"
 
 #include "fetch_and_set_orders.cpp" // fetch_and_set_orders
 #include "fetch_and_set_quote.cpp"  // fetch_and_set_quote
@@ -21,7 +21,7 @@
 #include <iostream>                 // std::cout, std::endl
 #include <thread>                   // std::this_thread
 
-void ETrade::Straddle::watch() {
+void ETrade::StockBot::watch() {
   Formatted::fmt_stream_t fmt = stream_format;
   log_prices();
 
