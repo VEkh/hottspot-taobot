@@ -2,7 +2,6 @@
 #define ETRADE__STOCK_BOT_set_order_prices
 
 /*
- * ENTRY_DAY_RANGE_RATIO
  * ETrade::StockBot
  * buy_open_order
  * buy_close_order
@@ -26,7 +25,7 @@ void ETrade::StockBot::set_order_prices() {
   day_range =
       (double)first_quote["highPrice"] - (double)first_quote["lowPrice"];
 
-  const double entry_delta = day_range * ENTRY_DAY_RANGE_RATIO;
+  const double entry_delta = compute_door_delta();
   const double entry_limit_delta = entry_delta;
   const double entry_stop_delta = 0.8 * entry_limit_delta;
 

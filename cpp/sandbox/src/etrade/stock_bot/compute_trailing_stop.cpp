@@ -1,13 +1,13 @@
 #if !defined ETRADE__STOCK_BOT_compute_trailing_stop
 #define ETRADE__STOCK_BOT_compute_trailing_stop
 
-#include "compute_max_loss.cpp" // compute_max_loss
-#include "stock_bot.h"          // ETrade::StockBot,  order_t
-#include <math.h>               // exp
+#include "compute_door_delta.cpp" // compute_door_delta
+#include "stock_bot.h"            // ETrade::StockBot,  order_t
+#include <math.h>                 // exp
 
 double ETrade::StockBot::compute_trailing_stop(const order_t *open_order,
                                                const double tick_velocity) {
-  const double max_loss = compute_max_loss();
+  const double max_loss = compute_door_delta();
 
   if (open_order->profit < 0) {
     return max_loss;

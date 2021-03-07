@@ -2,7 +2,6 @@
 #define ETRADE__STOCK_BOT_watch_side
 
 /*
- * ENTRY_DAY_RANGE_RATIO
  * ETrade::StockBot
  * buy_close_order
  * buy_open_order
@@ -18,7 +17,6 @@
  */
 #include "stock_bot.h"
 
-#include "compute_max_loss.cpp"        // compute_max_loss
 #include "etrade/client/client.h"      // ETrade::Client
 #include "lib/formatted.cpp"           // Formatted
 #include "set_execution_price.cpp"     // set_execution_price
@@ -29,13 +27,18 @@
 #include <math.h>                      // INFINITY
 #include <string>                      // std::string
 
-bool should_close(const order_t *close_order, const double current_price) {
+bool should_close(const order_t *close_order, const order_t *open_order,
+                  const double current_price,
+                  const double simple_moving_average) {
+  const double action_price =
+      open_order->profit <= 0 ? simple_moving_average : current_price;
+
   switch (close_order->action) {
   case order_action_t::BUY_TO_COVER: {
-    return current_price >= close_order->stop_price;
+    return action_price >= close_order->stop_price;
   }
   case order_action_t::SELL: {
-    return current_price <= close_order->stop_price;
+    return action_price <= close_order->stop_price;
   }
   }
 }
@@ -47,8 +50,8 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
   const double current_price = quotes.back()["currentPrice"];
   const double day_range = (double)reference_quote["highPrice"] -
                            (double)reference_quote["lowPrice"];
-  const double average_displacement =
-      speedometer.average_displacement(30).second;
+  const double simple_moving_average =
+      speedometer.simple_moving_average(30).second;
 
   order_t *close_order;
   std::string log_icon;
@@ -64,7 +67,7 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &sell_short_open_order;
 
     should_open = open_order->stop_price == -INFINITY ||
-                  average_displacement >= ENTRY_DAY_RANGE_RATIO * day_range;
+                  simple_moving_average >= open_order->stop_price;
 
     break;
   }
@@ -75,7 +78,7 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &buy_open_order;
 
     should_open = open_order->stop_price == INFINITY ||
-                  average_displacement <= -(ENTRY_DAY_RANGE_RATIO * day_range);
+                  simple_moving_average <= open_order->stop_price;
 
     break;
   }
@@ -117,7 +120,8 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
     set_profit(open_order);
     set_trailing_stop_price(close_order, open_order);
 
-    if (should_close(close_order, current_price)) {
+    if (should_close(close_order, open_order, current_price,
+                     simple_moving_average)) {
       etrade_client.place_order(close_order);
 
       std::cout << fmt.bold << fmt.cyan << std::endl;

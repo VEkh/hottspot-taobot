@@ -30,7 +30,6 @@ public:
   void run();
 
 private:
-  const double ENTRY_DAY_RANGE_RATIO = 0.05;
   const double POLLING_INTERVAL_SECONDS = 0.5;
 
   char *init_order_action = nullptr;
@@ -54,7 +53,7 @@ private:
 
   status_t status();
 
-  double compute_max_loss();
+  double compute_door_delta();
   double compute_trailing_stop(const order_t *, const double);
 
   void fetch_and_set_orders();
