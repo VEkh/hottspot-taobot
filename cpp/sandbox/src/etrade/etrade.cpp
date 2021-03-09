@@ -1,14 +1,15 @@
-#include "client/client.cpp"               // ETrade::Client
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include "lib/utils/debug.cpp"             // utils::debug
-#include "stock_bot/stock_bot.cpp"         // ETrade::StockBot
-#include <iostream>                        // std::cout, std::endl
-#include <map>                             // std::map
-#include <sstream>                         // std::ostringstream
-#include <stdexcept>                       // std::invalid_argument
-#include <stdlib.h>                        // strtol
-#include <string>                          // std::string
+#include "client/client.cpp"                 // ETrade::Client
+#include "lib/curl_client/curl_client.cpp"   // CurlClient
+#include "lib/formatted.cpp"                 // Formatted
+#include "lib/utils/debug.cpp"               // utils::debug
+#include "stock_bot/stock_bot.cpp"           // ETrade::StockBot
+#include "stock_bot_beta/stock_bot_beta.cpp" // ETrade::StockBotBeta
+#include <iostream>                          // std::cout, std::endl
+#include <map>                               // std::map
+#include <sstream>                           // std::ostringstream
+#include <stdexcept>                         // std::invalid_argument
+#include <stdlib.h>                          // strtol
+#include <string>                            // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -19,6 +20,8 @@ void print_usage() {
       {"refresh_token               ", "Refresh authorization tokens"},
       {"stock_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given symbol"},
+      {"stock_bot_beta <SYMBOL> <QUANTITY>",
+       "Launch (beta) trading bot for the given symbol"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -116,6 +119,16 @@ int main(int argc, char *argv[]) {
                 << std::endl;
       std::cout << fmt.reset << fmt.blue;
     }
+
+    exit(0);
+  }
+
+  if (command == "stock_bot_beta") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
+
+    ETrade::StockBotBeta stock_bot_beta(symbol, quantity);
+    stock_bot_beta.run();
 
     exit(0);
   }
