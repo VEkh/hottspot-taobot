@@ -49,6 +49,9 @@ public:
     double limit_price = 0.00;
     double profit = 0.00;
     int quantity;
+    double sma_execution_price = 0.00;
+    double sma_profit = 0.00;
+    double sma_stop_price = 0.00;
     order_status_t status = order_status_t::ORDER_PENDING;
     double stop_price = 0.00;
     const char *symbol;

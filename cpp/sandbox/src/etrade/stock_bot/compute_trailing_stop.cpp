@@ -5,15 +5,14 @@
 #include "stock_bot.h"            // ETrade::StockBot,  order_t
 #include <math.h>                 // exp
 
-double ETrade::StockBot::compute_trailing_stop(const order_t *open_order,
+double ETrade::StockBot::compute_trailing_stop(const double x,
                                                const double tick_velocity) {
-  const double max_loss = compute_door_delta();
+  const double max_loss = 2 * compute_door_delta();
 
-  if (open_order->profit < 0) {
+  if (x < 0) {
     return max_loss;
   }
 
-  const double x = open_order->profit;
   const double velocity_coefficient = 1 + (tick_velocity * 100);
   const double x_scale = 2.0 / velocity_coefficient;
   const double y_scale = 2 * max_loss;

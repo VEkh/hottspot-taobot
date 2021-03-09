@@ -4,8 +4,8 @@
 #include "etrade/deps.cpp"    // json
 #include "get_order_json.cpp" // get_order_json
 #include "lib/formatted.cpp"  // Formatted
-#include "stock_bot.h"        // ETrade::StockBot, order_t
-#include <iostream>           // std::cout, std::endl
+#include "stock_bot.h" // ETrade::StockBot, order_t, simple_moving_average
+#include <iostream>    // std::cout, std::endl
 
 void ETrade::StockBot::set_execution_price(order_t *order) {
   Formatted::fmt_stream_t fmt = stream_format;
@@ -23,6 +23,8 @@ void ETrade::StockBot::set_execution_price(order_t *order) {
 
   order->execution_price =
       order_json["OrderDetail"][0]["Instrument"][0]["averageExecutionPrice"];
+
+  order->sma_execution_price = simple_moving_average;
 }
 
 #endif

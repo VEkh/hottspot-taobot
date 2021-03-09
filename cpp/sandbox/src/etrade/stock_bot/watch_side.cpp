@@ -12,6 +12,7 @@
  * position_t
  * sell_short_close_order
  * sell_short_open_order
+ * simple_moving_average
  * speedometer
  * symbol
  */
@@ -30,15 +31,12 @@
 bool should_close(const order_t *close_order, const order_t *open_order,
                   const double current_price,
                   const double simple_moving_average) {
-  const double action_price =
-      open_order->profit <= 0 ? simple_moving_average : current_price;
-
   switch (close_order->action) {
   case order_action_t::BUY_TO_COVER: {
-    return action_price >= close_order->stop_price;
+    return simple_moving_average >= close_order->sma_stop_price;
   }
   case order_action_t::SELL: {
-    return action_price <= close_order->stop_price;
+    return simple_moving_average <= close_order->sma_stop_price;
   }
   }
 }
@@ -50,8 +48,9 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
   const double current_price = quotes.back()["currentPrice"];
   const double day_range = (double)reference_quote["highPrice"] -
                            (double)reference_quote["lowPrice"];
-  const double simple_moving_average =
-      speedometer.simple_moving_average(30).second;
+
+  simple_moving_average =
+      speedometer.simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD).second;
 
   order_t *close_order;
   std::string log_icon;
@@ -67,7 +66,8 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &sell_short_open_order;
 
     should_open = open_order->stop_price == -INFINITY ||
-                  simple_moving_average >= open_order->stop_price;
+                  simple_moving_average != 0 &&
+                      simple_moving_average >= open_order->stop_price;
 
     break;
   }
@@ -78,7 +78,8 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
     opposite_open_order = &buy_open_order;
 
     should_open = open_order->stop_price == INFINITY ||
-                  simple_moving_average <= open_order->stop_price;
+                  simple_moving_average != 0 &&
+                      simple_moving_average <= open_order->stop_price;
 
     break;
   }
@@ -150,11 +151,6 @@ void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
       std::cout << "😭 " << order_action
                 << ": Closed order at a loss. Better luck next time!"
                 << std::endl;
-    }
-
-    if (close_order->profit > 0.04 * day_range) {
-      next_order_action =
-          (char *)ETrade::Client::ORDER_ACTIONS[open_order->action];
     }
 
     std::cout << fmt.reset;

@@ -12,10 +12,10 @@ void ETrade::Speedometer::log_simple_moving_average() {
   std::cout << "💲 Simple Moving Average" << std::endl;
   std::cout << fmt.reset << fmt.bold << fmt.magenta;
 
-  std::pair<int, double> simple_moving_average_30 = simple_moving_average(30);
+  std::pair<int, double> simple_moving_average_45 = simple_moving_average(45);
 
-  std::cout << "30 Tick (" << simple_moving_average_30.first
-            << "-Sec) Average ($): " << simple_moving_average_30.second
+  std::cout << "45 Tick (" << simple_moving_average_45.first
+            << "-Sec) Average ($): " << simple_moving_average_45.second
             << std::endl
             << std::endl;
 }

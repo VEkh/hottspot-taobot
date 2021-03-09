@@ -42,19 +42,35 @@ void ETrade::StockBot::log_prices() {
   std::cout << fmt.bold << fmt.green;
   std::cout << "BUY" << std::endl;
   std::cout << "---" << std::endl;
-  std::cout << "Open      => Stop: "
+  std::cout << "Open        => Stop: "
             << utils::float_::to_currency(buy_open_order.stop_price)
             << " • Execution: "
             << utils::float_::to_currency(buy_open_order.execution_price)
             << " • Profit: "
             << utils::float_::to_currency(buy_open_order.profit) << std::endl;
 
-  std::cout << "Close     => Stop: "
+  std::cout << "Open (SMA)  => Stop: "
+            << utils::float_::to_currency(buy_open_order.sma_stop_price)
+            << " • Execution: "
+            << utils::float_::to_currency(buy_open_order.sma_execution_price)
+            << " • Profit: "
+            << utils::float_::to_currency(buy_open_order.sma_profit)
+            << std::endl;
+
+  std::cout << "Close       => Stop: "
             << utils::float_::to_currency(buy_close_order.stop_price)
             << " • Execution: "
             << utils::float_::to_currency(buy_close_order.execution_price)
             << " • Profit: "
             << utils::float_::to_currency(buy_close_order.profit) << std::endl;
+
+  std::cout << "Close (SMA) => Stop: "
+            << utils::float_::to_currency(buy_close_order.sma_stop_price)
+            << " • Execution: "
+            << utils::float_::to_currency(buy_close_order.sma_execution_price)
+            << " • Profit: "
+            << utils::float_::to_currency(buy_close_order.sma_profit)
+            << std::endl;
 
   std::cout << "Status    => " << utils::vector::join(buy_statuses, " • ")
             << std::endl;
@@ -63,7 +79,7 @@ void ETrade::StockBot::log_prices() {
   std::cout << fmt.bold << fmt.red;
   std::cout << "SELL SHORT" << std::endl;
   std::cout << "----------" << std::endl;
-  std::cout << "Open      => Stop: "
+  std::cout << "Open       => Stop: "
             << utils::float_::to_currency(sell_short_open_order.stop_price)
             << " • Execution: "
             << utils::float_::to_currency(sell_short_open_order.execution_price)
@@ -71,7 +87,7 @@ void ETrade::StockBot::log_prices() {
             << utils::float_::to_currency(sell_short_open_order.profit)
             << std::endl;
 
-  std::cout << "Close     => Stop: "
+  std::cout << "Close      => Stop: "
             << utils::float_::to_currency(sell_short_close_order.stop_price)
             << " • Execution: "
             << utils::float_::to_currency(

@@ -529,3 +529,63 @@ Conclusions:
 * The stop loss algorithm should be a mirror of the entry algorithm
 * The new entry algorithm will use a simple moving average as its entry and
   stop-loss indicator
+
+### 2021-03-08:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.4.0:
+  * Enter: 30-Tick Displaces by Door Delta
+  * Enter with init trade when:
+    * Profit exceeds 7% day range
+
+* T-Stop Algorithm v0.12.0
+  * Loss: Door Delta, Simple Moving Average
+  * Profit: Y and X-scaled Reverse Sigmoid, Current Price
+
+#### Changelog
+* Entry Algorithm v0.3.3 -> v0.4.0
+* Trailing Stop Algorithm v0.11.0 -> v0.12.0
+
+#### Performance
+* TSLA (-$19.29):
+  * Win Rate: 50/72 => 0.694444
+
+#### Remarks
+* Despite a few mishaps (early big loss due to bad math, API hanging),
+  performance was not that bad.
+* I'm basing the profit algorithm off the simple moving average. I think this
+  will increase profits and better offset losses.
+
+### 2021-03-09:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.5.0:
+  * Enter: 45-Tick Simple Moving Average Displaces by Door Delta
+
+* T-Stop Algorithm v0.12.1
+  * Loss: 2x Door Delta, Simple Moving Average (SMA)
+  * Profit: Y and X-scaled Reverse Sigmoid, Current Price
+
+* Ride Simple Moving Average (Beta)
+  * Eyeball 10 minute SMA and time entry and exit
+
+#### Changelog
+* Entry Algorithm v0.4.0 -> v0.5.0
+* Trailing Stop Algorithm v0.12.0 -> v0.12.1
+* Ride Simple Moving Average (Beta)
+
+#### Performance
+* TSLA (-$3.80):
+  * Win Rate: 7/18 => 0.388889
+
+#### Remarks
+* I employed the Entry Algorithm v0.5.0 during the first half of the day and it
+  performed horribly.
+
+* It kept signaling entry too late.
+
+* During the second half of the day, I started eyeballing the 10-minute SMA and
+  made enough money to almost break even.
+
+* I'm going to embark on a new algorithm to ride the 10-minute SMA. As I build
+  its beta, I'll continue to trade by eyeballing it.

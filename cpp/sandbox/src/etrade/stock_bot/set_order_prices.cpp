@@ -40,6 +40,7 @@ void ETrade::StockBot::set_order_prices() {
 
   buy_close_order.action = order_action_t::SELL;
   buy_close_order.quantity = quantity;
+  buy_close_order.sma_stop_price = -INFINITY;
   buy_close_order.stop_price = -INFINITY;
   buy_close_order.symbol = symbol;
   buy_close_order.type = order_type_t::MARKET;
@@ -55,6 +56,7 @@ void ETrade::StockBot::set_order_prices() {
 
   sell_short_close_order.action = order_action_t::BUY_TO_COVER;
   sell_short_close_order.quantity = quantity;
+  sell_short_close_order.sma_stop_price = INFINITY;
   sell_short_close_order.stop_price = INFINITY;
   sell_short_close_order.symbol = symbol;
   sell_short_close_order.type = order_type_t::MARKET;
@@ -65,8 +67,10 @@ void ETrade::StockBot::set_order_prices() {
 
     if (init_order_action_t == order_action_t::BUY) {
       buy_open_order.stop_price = -INFINITY;
+      buy_open_order.sma_stop_price = -INFINITY;
     } else if (init_order_action_t == order_action_t::SELL_SHORT) {
       sell_short_open_order.stop_price = INFINITY;
+      sell_short_open_order.sma_stop_price = INFINITY;
     }
   }
 }

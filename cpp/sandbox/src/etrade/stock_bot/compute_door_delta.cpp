@@ -14,7 +14,7 @@ double ETrade::StockBot::compute_door_delta() {
 
   const double y = (y_scale / (1 + exp(x_scale * x))) + y_shift;
 
-  return y * day_range;
+  return (y / 100) * day_range;
 }
 
 #endif

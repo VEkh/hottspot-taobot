@@ -31,10 +31,12 @@ public:
 
 private:
   const double POLLING_INTERVAL_SECONDS = 0.5;
+  const int SIMPLE_MOVING_AVERAGE_PERIOD = 45;
 
   char *init_order_action = nullptr;
   char *symbol;
   double day_range;
+  double simple_moving_average;
   int quantity;
 
   ETrade::Client etrade_client;
@@ -54,7 +56,7 @@ private:
   status_t status();
 
   double compute_door_delta();
-  double compute_trailing_stop(const order_t *, const double);
+  double compute_trailing_stop(const double, const double);
 
   void fetch_and_set_orders();
   void fetch_and_set_quote();

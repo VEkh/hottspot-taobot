@@ -24,10 +24,10 @@ void ETrade::Speedometer::log_displacement() {
   std::cout << "Current (%): " << current_displacement_percent << std::endl;
   std::cout << "Current ($): " << current_displacement << std::endl;
 
-  std::pair<int, double> average_displacement_30 = average_displacement(30);
+  std::pair<int, double> average_displacement_45 = average_displacement(45);
 
-  std::cout << "30 Tick (" << average_displacement_30.first
-            << "-Sec) Average ($): " << average_displacement_30.second
+  std::cout << "45 Tick (" << average_displacement_45.first
+            << "-Sec) Average ($): " << average_displacement_45.second
             << std::endl;
 }
 
