@@ -89,6 +89,8 @@ public:
   CurlClient place_order(order_t *);
   CurlClient preview_order(const order_t &);
 
+  json summarize_quote(const std::string &);
+
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();

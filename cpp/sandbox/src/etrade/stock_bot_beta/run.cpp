@@ -3,7 +3,11 @@
 
 #include "log_start_message.cpp" // log_start_message
 #include "stock_bot_beta.h"      // ETrade::StockBotBeta, fmt, quantity, symbol
+#include "watch.cpp"             // watch
 
-void ETrade::StockBotBeta::run() { log_start_message(); }
+void ETrade::StockBotBeta::run() {
+  log_start_message();
+  watch();
+}
 
 #endif
