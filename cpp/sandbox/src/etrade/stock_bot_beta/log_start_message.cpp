@@ -7,7 +7,8 @@
 void ETrade::StockBotBeta::log_start_message() {
   std::cout << fmt.bold << fmt.cyan;
   std::cout << "Trading " << fmt.blue << quantity << fmt.cyan << " share(s) of "
-            << fmt.blue << symbol << std::endl;
+            << fmt.blue << symbol << std::endl
+            << std::endl;
   std::cout << fmt.reset;
 }
 
