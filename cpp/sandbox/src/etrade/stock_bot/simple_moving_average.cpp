@@ -1,12 +1,12 @@
-#if !defined ETRADE__STOCK_BOT_BETA_simple_moving_average
-#define ETRADE__STOCK_BOT_BETA_simple_moving_average
+#if !defined ETRADE__STOCK_BOT_simple_moving_average
+#define ETRADE__STOCK_BOT_simple_moving_average
 
-#include "stock_bot_beta.h" // ETrade::StockBotBeta, quote_t, quotes
+#include "stock_bot.h" // ETrade::StockBot, quote_t, quotes
 #include <utility>          // std::pair
 #include <vector>           // std::vector
 
 std::pair<int, double>
-ETrade::StockBotBeta::simple_moving_average(const int ticks) {
+ETrade::StockBot::simple_moving_average(const int ticks) {
   if (quotes.size() < ticks) {
     return std::pair<int, double>(0, 0);
   }

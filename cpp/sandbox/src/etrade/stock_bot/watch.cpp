@@ -1,19 +1,19 @@
-#if !defined ETRADE__STOCK_BOT_BETA_watch
-#define ETRADE__STOCK_BOT_BETA_watch
+#if !defined ETRADE__STOCK_BOT_watch
+#define ETRADE__STOCK_BOT_watch
 
 /*
- * ETrade::StockBotBeta
+ * ETrade::StockBot
  * POLLING_INTERVAL_SECONDS
  * speedometer
  */
-#include "stock_bot_beta.h"
+#include "stock_bot.h"
 
 #include "fetch_quote.cpp" // fetch_quote
 #include "log_quote.cpp"   // log_quote
 #include <chrono>          // std::chrono
 #include <thread>          // std::this_thread
 
-void ETrade::StockBotBeta::watch() {
+void ETrade::StockBot::watch() {
   while (true) {
     fetch_quote();
     log_quote();

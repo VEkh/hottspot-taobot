@@ -1,15 +1,15 @@
-#if !defined ETRADE__STOCK_BOT_BETA_log_quote
-#define ETRADE__STOCK_BOT_BETA_log_quote
+#if !defined ETRADE__STOCK_BOT_log_quote
+#define ETRADE__STOCK_BOT_log_quote
 
 /*
- * ETrade::StockBotBeta
+ * ETrade::StockBot
  * etrade_client
  * fmt
  * quote_t
  * quotes
  * symbol
  */
-#include "stock_bot_beta.h"
+#include "stock_bot.h"
 
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/float.cpp"   // utils::float
@@ -20,7 +20,7 @@
 #include <string>                // std::string
 #include <utility>               // std::pair
 
-void ETrade::StockBotBeta::log_quote() {
+void ETrade::StockBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
   const int ticks = quotes.size();
 

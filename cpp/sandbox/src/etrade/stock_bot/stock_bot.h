@@ -1,5 +1,5 @@
-#if !defined ETRADE__STOCK_BOT_BETA_H
-#define ETRADE__STOCK_BOT_BETA_H
+#if !defined ETRADE__STOCK_BOT_H
+#define ETRADE__STOCK_BOT_H
 
 #include "etrade/speedometer/speedometer.cpp" // ETrade::Speedometer
 #include "etrade/types.cpp"                   // ETrade::t
@@ -9,11 +9,11 @@
 using quote_t = ETrade::t::quote_t;
 
 namespace ETrade {
-class StockBotBeta {
+class StockBot {
 public:
   void run();
 
-  StockBotBeta(char *, int);
+  StockBot(char *, int);
 
 private:
   const double POLLING_INTERVAL_SECONDS = 0.5;
