@@ -16,7 +16,6 @@ public:
 
   std::pair<int, double> simple_moving_average(const int);
 
-  std::string seconds_to_time(const int);
   void log();
 
 private:

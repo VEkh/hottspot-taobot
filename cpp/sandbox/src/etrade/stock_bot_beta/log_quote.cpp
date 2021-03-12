@@ -11,13 +11,14 @@
  */
 #include "stock_bot_beta.h"
 
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/float.cpp" // utils::float::to_currency
-#include "parse_quote.cpp"     // parse_quote
-#include <iomanip>             // std::setprecision
-#include <iostream>            // std::cout, std::endl, std::fixed
-#include <string>              // std::string
-#include <utility>             // std::pair
+#include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/float.cpp"   // utils::float
+#include "lib/utils/integer.cpp" // utils::integer
+#include "parse_quote.cpp"       // parse_quote
+#include <iomanip>               // std::setprecision
+#include <iostream>              // std::cout, std::endl, std::fixed
+#include <string>                // std::string
+#include <utility>               // std::pair
 
 void ETrade::StockBotBeta::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
@@ -48,13 +49,13 @@ void ETrade::StockBotBeta::log_quote() {
   std::cout << "Current Price: "
             << utils::float_::to_currency(current_quote.current_price)
             << std::endl;
+  std::cout << "Simple Moving Average ("
+            << utils::integer_::seconds_to_clock(simple_moving_average.first)
+            << "): " << utils::float_::to_currency(simple_moving_average.second)
+            << std::endl;
   std::cout << "High: " << utils::float_::to_currency(current_quote.high)
             << std::endl;
   std::cout << "Low: " << utils::float_::to_currency(current_quote.low)
-            << std::endl;
-  std::cout << "Simple Moving Average ("
-            << speedometer.seconds_to_time(simple_moving_average.first)
-            << "): " << utils::float_::to_currency(simple_moving_average.second)
             << std::endl;
   std::cout << fmt.reset << std::endl;
 }
