@@ -6,12 +6,12 @@
  * day_range
  * order_t
  * quote
+ * quote_t
  * stream_format
  */
 #include "stock_bot.h"
 
 #include "compute_trailing_stop.cpp" // compute_trailing_stop
-#include "etrade/deps.cpp"           // json
 #include "lib/formatted.cpp"         // Formatted
 #include <algorithm>                 // std::max, std::min
 #include <iostream>                  // std::cout, std::endl
@@ -25,9 +25,9 @@ void ETrade::StockBot::set_trailing_stop_price(order_t *close_order,
     return;
   }
 
-  json current_quote = quotes.back();
+  quote_t current_quote = quotes.back();
 
-  const double current_price = current_quote["currentPrice"];
+  const double current_price = current_quote.current_price;
   const double sma_price = simple_moving_average;
   const double tick_velocity = speedometer.average_velocity(10).second;
 

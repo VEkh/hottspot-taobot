@@ -10,6 +10,7 @@
  * order_status_t
  * order_t
  * position_t
+ * quote_t
  * sell_short_close_order
  * sell_short_open_order
  * simple_moving_average
@@ -43,11 +44,10 @@ bool should_close(const order_t *close_order, const order_t *open_order,
 
 void ETrade::StockBot::watch_side(const order_action_t &order_action_type) {
   Formatted::fmt_stream_t fmt = stream_format;
-  json reference_quote = quotes.front();
+  quote_t reference_quote = quotes.front();
   const char *order_action = ETrade::Client::ORDER_ACTIONS[order_action_type];
-  const double current_price = quotes.back()["currentPrice"];
-  const double day_range = (double)reference_quote["highPrice"] -
-                           (double)reference_quote["lowPrice"];
+  const double current_price = quotes.back().current_price;
+  const double day_range = reference_quote.high - reference_quote.low;
 
   simple_moving_average =
       speedometer.simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD).second;

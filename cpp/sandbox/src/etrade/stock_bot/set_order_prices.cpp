@@ -6,24 +6,23 @@
  * buy_open_order
  * buy_close_order
  * init_order_action
+ * quote_t
  * quotes
  * sell_short_open_order
  * sell_short_close_order
  */
 #include "stock_bot.h"
 
-#include "etrade/deps.cpp"     // json
 #include "lib/utils/float.cpp" // utils::float_
 #include <algorithm>           // std::max, std::min
 #include <math.h>              // INFINITY
 #include <string>              // string
 
 void ETrade::StockBot::set_order_prices() {
-  const json first_quote = quotes.front();
-  const double reference_price = first_quote["currentPrice"];
+  const quote_t first_quote = quotes.front();
+  const double reference_price = first_quote.current_price;
 
-  day_range =
-      (double)first_quote["highPrice"] - (double)first_quote["lowPrice"];
+  day_range = first_quote.high - first_quote.low;
 
   const double entry_delta = compute_door_delta();
   const double entry_limit_delta = entry_delta;

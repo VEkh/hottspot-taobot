@@ -1,12 +1,12 @@
 #if !defined ETRADE__STOCK_BOT_compute_door_delta
 #define ETRADE__STOCK_BOT_compute_door_delta
 
-#include "stock_bot.h" // ETrade::StockBot,  day_range, quotes
+#include "stock_bot.h" // ETrade::StockBot,  day_range, quote_t , quotes
 
 double ETrade::StockBot::compute_door_delta() {
-  json reference_quote = quotes.front();
+  quote_t reference_quote = quotes.front();
 
-  const double reference_price = reference_quote["currentPrice"];
+  const double reference_price = reference_quote.current_price;
   const double x = day_range / reference_price;
   const double x_scale = 100.0;
   const double y_scale = 200.0;

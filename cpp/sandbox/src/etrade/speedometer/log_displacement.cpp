@@ -2,20 +2,20 @@
 #define ETRADE__SPEEDOMETER_log_displacement
 
 #include "average_displacement.cpp" // average_displacement
-#include "etrade/deps.cpp"          // json
-#include "speedometer.h"            // ETrade::Speedometer
+#include "speedometer.h"            // ETrade::Speedometer, quote_t
 #include <iostream>                 // std::cout, std::endl
 #include <utility>                  // std::pair
+#include <vector>                   // std::vector
 
 void ETrade::Speedometer::log_displacement() {
   std::cout << fmt.underline;
   std::cout << "📏 Displacement" << std::endl;
   std::cout << fmt.reset << fmt.bold << fmt.magenta;
 
-  const json quotes = *quotes_ptr;
+  const std::vector<quote_t> quotes = *quotes_ptr;
 
-  const double current_price = quotes.back()["currentPrice"];
-  const double first_price = quotes.front()["currentPrice"];
+  const double current_price = quotes.back().current_price;
+  const double first_price = quotes.front().current_price;
 
   const double current_displacement = current_price - first_price;
   const double current_displacement_percent =

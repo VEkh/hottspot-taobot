@@ -1,14 +1,17 @@
 #if !defined ETRADE__SPEEDOMETER_H
 #define ETRADE__SPEEDOMETER_H
 
-#include "etrade/deps.cpp"   // json
+#include "etrade/types.cpp"  // ETrade::t
 #include "lib/formatted.cpp" // Formatted
 #include <utility>           // std::pair
+#include <vector>            // std::vector
+
+using quote_t = ETrade::t::quote_t;
 
 namespace ETrade {
 class Speedometer {
 public:
-  Speedometer(json *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
+  Speedometer(std::vector<quote_t> *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
 
   std::pair<int, double> average_displacement(const int);
   std::pair<int, double> average_velocity(const int);
@@ -18,7 +21,7 @@ public:
 
 private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  json *quotes_ptr;
+  std::vector<quote_t> *quotes_ptr;
 
   void log_average_velocity(const int);
   void log_displacement();

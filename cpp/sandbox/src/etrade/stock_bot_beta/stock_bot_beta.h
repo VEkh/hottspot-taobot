@@ -1,9 +1,12 @@
 #if !defined ETRADE__STOCK_BOT_BETA_H
 #define ETRADE__STOCK_BOT_BETA_H
 
-#include "etrade/deps.cpp"   // json, _json
-#include "lib/formatted.cpp" // Formatted
-#include <vector>            // std::vector
+#include "etrade/speedometer/speedometer.cpp" // ETrade::Speedometer
+#include "etrade/types.cpp"                   // ETrade::t
+#include "lib/formatted.cpp"                  // Formatted
+#include <vector>                             // std::vector
+
+using quote_t = ETrade::t::quote_t;
 
 namespace ETrade {
 class StockBotBeta {
@@ -15,19 +18,11 @@ public:
 private:
   const double POLLING_INTERVAL_SECONDS = 0.5;
 
-  struct quote_t {
-    double current_price;
-    double high;
-    double low;
-    double simple_moving_average;
-    char *symbol;
-    long int timestamp;
-  };
-
   char *symbol;
   int quantity;
 
   ETrade::Client etrade_client;
+  ETrade::Speedometer speedometer = ETrade::Speedometer(&quotes);
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::vector<quote_t> quotes;
 

@@ -4,12 +4,15 @@
 #include "etrade/client/client.h"             // ETrade::Client
 #include "etrade/deps.cpp"                    // json, _json
 #include "etrade/speedometer/speedometer.cpp" // ETrade::Speedometer
+#include "etrade/types.cpp"                   // ETrade::t
 #include "lib/formatted.cpp"                  // Formatted
+#include <vector>                             // std::vector
 
 using order_action_t = ETrade::Client::order_action_t;
 using order_status_t = ETrade::Client::order_status_t;
 using order_t = ETrade::Client::order_t;
 using order_type_t = ETrade::Client::order_type_t;
+using quote_t = ETrade::t::quote_t;
 
 namespace ETrade {
 class StockBot {
@@ -44,7 +47,7 @@ private:
   Formatted::fmt_stream_t stream_format = Formatted::stream();
 
   json placed_orders;
-  json quotes = R"([])"_json;
+  std::vector<quote_t> quotes;
 
   order_t buy_open_order;
   order_t buy_close_order;
@@ -52,12 +55,13 @@ private:
   order_t sell_short_close_order;
 
   json get_order_json(const order_t &);
-
+  quote_t parse_quote(const std::string &);
   status_t status();
 
   double compute_door_delta();
   double compute_trailing_stop(const double, const double);
 
+  void log_quote();
   void fetch_and_set_orders();
   void fetch_and_set_quote();
   void initialize(char *, int);

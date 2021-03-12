@@ -1,25 +1,25 @@
 #if !defined ETRADE__SPEEDOMETER_average_velocity
 #define ETRADE__SPEEDOMETER_average_velocity
 
-#include "etrade/deps.cpp" // json
-#include "speedometer.h"   // ETrade::Speedometer, quotes_ptr
-#include <utility>         // std::pair
+#include "speedometer.h" // ETrade::Speedometer, quote_t, quotes_ptr
+#include <utility>       // std::pair
+#include <vector>        // std::vector
 
 std::pair<int, double> ETrade::Speedometer::average_velocity(const int ticks) {
-  const json quotes = *quotes_ptr;
+  std::vector<quote_t> quotes = *quotes_ptr;
 
   if (quotes.size() < ticks) {
     return std::pair<int, double>(0, 0);
   }
 
-  const json current_quote = quotes.back();
-  const json past_quote = quotes.at(quotes.size() - ticks);
+  const quote_t current_quote = quotes.back();
+  const quote_t past_quote = quotes.at(quotes.size() - ticks);
 
-  const double current_price = current_quote["currentPrice"];
-  const double current_timestamp = current_quote["timestamp"];
-  const double first_price = quotes.front()["currentPrice"];
-  const double past_price = past_quote["currentPrice"];
-  const double past_timestamp = past_quote["timestamp"];
+  const double current_price = current_quote.current_price;
+  const double current_timestamp = current_quote.timestamp;
+  const double first_price = quotes.front().current_price;
+  const double past_price = past_quote.current_price;
+  const double past_timestamp = past_quote.timestamp;
 
   const int time_delta = current_timestamp - past_timestamp;
   const double velocity =

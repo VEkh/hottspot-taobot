@@ -4,7 +4,7 @@
 #include "stock_bot.h" // ETrade::StockBot, order_t, quotes
 
 void ETrade::StockBot::set_profit(order_t *order) {
-  const double current_price = quotes.back()["currentPrice"];
+  const double current_price = quotes.back().current_price;
   double profit;
   double sma_profit;
 
