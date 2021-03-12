@@ -19,7 +19,7 @@ ETrade::StockBot::parse_quote(const std::string &response_body) {
       .current_price = full_quote["All"]["lastTrade"],
       .high = full_quote["All"]["high"],
       .low = full_quote["All"]["low"],
-      .simple_moving_average = 0.00,
+      .simple_moving_average = speedometer.simple_moving_average(45),
       .symbol = symbol,
       .timestamp = now,
   };

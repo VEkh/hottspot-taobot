@@ -3,6 +3,7 @@
 
 #include "etrade/types.cpp"  // ETrade::t
 #include "lib/formatted.cpp" // Formatted
+#include <string>            // std::string
 #include <utility>           // std::pair
 #include <vector>            // std::vector
 
@@ -16,6 +17,8 @@ public:
   std::pair<int, double> average_displacement(const int);
   std::pair<int, double> average_velocity(const int);
   std::pair<int, double> simple_moving_average(const int);
+
+  std::string seconds_to_time(const int);
 
   void log();
 

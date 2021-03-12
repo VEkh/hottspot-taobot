@@ -17,6 +17,7 @@ public:
 
 private:
   const double POLLING_INTERVAL_SECONDS = 0.5;
+  const double SIMPLE_MOVING_AVERAGE_PERIOD_TICKS = 350;
 
   char *symbol;
   int quantity;

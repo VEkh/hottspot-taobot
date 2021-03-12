@@ -17,6 +17,7 @@
 #include <iomanip>             // std::setprecision
 #include <iostream>            // std::cout, std::endl, std::fixed
 #include <string>              // std::string
+#include <utility>             // std::pair
 
 void ETrade::StockBotBeta::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
@@ -26,8 +27,10 @@ void ETrade::StockBotBeta::log_quote() {
     return;
   }
 
-  quote_t *previous_quote = ticks > 1 ? &(quotes.at(ticks - 2)) : nullptr;
-  quote_t current_quote = quotes.back();
+  const quote_t *previous_quote = ticks > 1 ? &(quotes.at(ticks - 2)) : nullptr;
+  const quote_t current_quote = quotes.back();
+  const std::pair<int, double> simple_moving_average =
+      current_quote.simple_moving_average;
 
   if (previous_quote) {
     if (current_quote.current_price > previous_quote->current_price) {
@@ -49,8 +52,9 @@ void ETrade::StockBotBeta::log_quote() {
             << std::endl;
   std::cout << "Low: " << utils::float_::to_currency(current_quote.low)
             << std::endl;
-  std::cout << "Simple Moving Average: "
-            << utils::float_::to_currency(current_quote.simple_moving_average)
+  std::cout << "Simple Moving Average ("
+            << speedometer.seconds_to_time(simple_moving_average.first)
+            << "): " << utils::float_::to_currency(simple_moving_average.second)
             << std::endl;
   std::cout << fmt.reset << std::endl;
 }

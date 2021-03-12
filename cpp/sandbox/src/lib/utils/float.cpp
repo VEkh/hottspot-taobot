@@ -1,7 +1,7 @@
 #if !defined UTILS__FLOAT
 #define UTILS__FLOAT
 
-#include <iomanip>  // std::setprecision
+#include <iomanip>  // std::setw
 #include <iostream> // std::fixed
 #include <math.h>   // pow, round
 #include <sstream>  // std::stringstream

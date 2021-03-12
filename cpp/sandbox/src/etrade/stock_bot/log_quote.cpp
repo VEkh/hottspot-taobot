@@ -52,7 +52,8 @@ void ETrade::StockBot::log_quote() {
   std::cout << "Low: " << utils::float_::to_currency(current_quote.low)
             << std::endl;
   std::cout << "Simple Moving Average: "
-            << utils::float_::to_currency(current_quote.simple_moving_average)
+            << utils::float_::to_currency(
+                   current_quote.simple_moving_average.second)
             << std::endl;
   std::cout << fmt.reset << std::endl;
 }
