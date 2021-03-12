@@ -2,7 +2,6 @@
 #include "lib/curl_client/curl_client.cpp"   // CurlClient
 #include "lib/formatted.cpp"                 // Formatted
 #include "lib/utils/debug.cpp"               // utils::debug
-#include "stock_bot/stock_bot.cpp"           // ETrade::StockBot
 #include "stock_bot_beta/stock_bot_beta.cpp" // ETrade::StockBotBeta
 #include <iostream>                          // std::cout, std::endl
 #include <map>                               // std::map
@@ -18,8 +17,6 @@ void print_usage() {
       {"fetch_access_token          ", "Get authorization token"},
       {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
       {"refresh_token               ", "Refresh authorization tokens"},
-      {"stock_bot <SYMBOL> <QUANTITY>",
-       "Launch trading bot for the given symbol"},
       {"stock_bot_beta <SYMBOL> <QUANTITY>",
        "Launch (beta) trading bot for the given symbol"},
   };
@@ -97,28 +94,6 @@ int main(int argc, char *argv[]) {
   if (command == "refresh_token") {
     ETrade::Client etrade_client;
     etrade_client.refresh_token();
-
-    exit(0);
-  }
-
-  if (command == "stock_bot") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
-    char *action = argc < 5 ? nullptr : argv[4];
-
-    while (true) {
-      ETrade::StockBot stock_bot(symbol, quantity, action);
-      stock_bot.run();
-
-      action = stock_bot.next_order_action;
-      const char *action_text = action ? action : "NEUTRAL";
-
-      std::cout << fmt.bold << fmt.blue;
-      std::cout << "\n🔃 Finished stradding. Re-running with " << action_text
-                << "\n"
-                << std::endl;
-      std::cout << fmt.reset << fmt.blue;
-    }
 
     exit(0);
   }
