@@ -1,14 +1,12 @@
-#if !defined ETRADE__SPEEDOMETER_simple_moving_average
-#define ETRADE__SPEEDOMETER_simple_moving_average
+#if !defined ETRADE__STOCK_BOT_BETA_simple_moving_average
+#define ETRADE__STOCK_BOT_BETA_simple_moving_average
 
-#include "speedometer.h" // ETrade::Speedometer, quote_t, quotes_ptr
-#include <utility>       // std::pair
-#include <vector>        // std::vector
+#include "stock_bot_beta.h" // ETrade::StockBotBeta, quote_t, quotes
+#include <utility>          // std::pair
+#include <vector>           // std::vector
 
 std::pair<int, double>
-ETrade::Speedometer::simple_moving_average(const int ticks) {
-  std::vector<quote_t> quotes = *quotes_ptr;
-
+ETrade::StockBotBeta::simple_moving_average(const int ticks) {
   if (quotes.size() < ticks) {
     return std::pair<int, double>(0, 0);
   }

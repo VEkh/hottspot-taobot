@@ -14,8 +14,6 @@ class Speedometer {
 public:
   Speedometer(std::vector<quote_t> *quotes_ptr_) : quotes_ptr(quotes_ptr_){};
 
-  std::pair<int, double> simple_moving_average(const int);
-
   void log();
 
 private:

@@ -29,6 +29,8 @@ private:
 
   quote_t parse_quote(const std::string &);
 
+  std::pair<int, double> simple_moving_average(const int);
+
   void fetch_quote();
   void initialize(char *, int);
   void log_quote();

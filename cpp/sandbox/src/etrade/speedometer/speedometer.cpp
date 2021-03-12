@@ -3,6 +3,5 @@
 
 #include "speedometer.h"
 #include "log.cpp"
-#include "simple_moving_average.cpp"
 
 #endif
