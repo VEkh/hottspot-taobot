@@ -5,11 +5,18 @@
 
 namespace ETrade {
 namespace t {
+struct sma_t {
+  double buy_delta = 0.00;
+  double price;
+  int seconds = 0;
+  double sell_delta = 0.00;
+};
+
 struct quote_t {
   double current_price;
   double high;
   double low;
-  std::pair<int, double> simple_moving_average;
+  sma_t simple_moving_average;
   char *symbol;
   long int timestamp;
 };

@@ -1,10 +1,16 @@
 #if !defined CURL_CLIENT_H
 #define CURL_CLIENT_H
 
+/*
+ * CURL
+ * curl_easy_init (package: libcurl4-openssl-dev)
+ */
+#include <curl/curl.h>
+
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include <curl/curl.h> // CURL, curl_easy_init (package: libcurl4-openssl-dev)
-#include <map>         // std::map
-#include <string>      // std::string
+#include <map>               // std::map
+#include <math.h>            // INFINITY
+#include <string>            // std::string
 
 class CurlClient {
 public:

@@ -7,6 +7,7 @@
 #include <vector>                             // std::vector
 
 using quote_t = ETrade::t::quote_t;
+using sma_t = ETrade::t::sma_t;
 
 namespace ETrade {
 class StockBot {
@@ -29,7 +30,7 @@ private:
 
   quote_t parse_quote(const std::string &);
 
-  std::pair<int, double> simple_moving_average(const int);
+  sma_t simple_moving_average(const int);
 
   void fetch_quote();
   void initialize(char *, int);

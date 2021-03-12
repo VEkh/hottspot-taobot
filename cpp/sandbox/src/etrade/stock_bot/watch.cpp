@@ -4,7 +4,6 @@
 /*
  * ETrade::StockBot
  * POLLING_INTERVAL_SECONDS
- * speedometer
  */
 #include "stock_bot.h"
 
@@ -17,7 +16,6 @@ void ETrade::StockBot::watch() {
   while (true) {
     fetch_quote();
     log_quote();
-    speedometer.log();
 
     std::this_thread::sleep_for(
         std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));

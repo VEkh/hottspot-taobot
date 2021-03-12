@@ -5,9 +5,8 @@
 #include <utility>     // std::pair
 #include <vector>      // std::vector
 
-std::pair<int, double>
-ETrade::StockBot::simple_moving_average(const int seconds) {
-  std::pair<int, double> emtpy_average = {0, 0};
+sma_t ETrade::StockBot::simple_moving_average(const int seconds) {
+  sma_t emtpy_average;
 
   if (quotes.empty()) {
     return emtpy_average;
@@ -21,12 +20,24 @@ ETrade::StockBot::simple_moving_average(const int seconds) {
   }
 
   const int quotes_length = quotes.size();
-  double sum = 0;
+  double buy_delta = 0.00;
+  double sell_delta = 0.00;
+  double total_price = 0;
   int ticks;
   std::vector<quote_t>::reverse_iterator it = quotes.rbegin();
 
   for (ticks = 0; ticks < quotes_length; ticks++) {
-    sum += it->current_price;
+    total_price += it->current_price;
+
+    if (it != quotes.rend()) {
+      const double price_delta = it->current_price - (it + 1)->current_price;
+
+      if (price_delta > 0) {
+        buy_delta += price_delta;
+      } else if (price_delta < 0) {
+        sell_delta += price_delta;
+      }
+    }
 
     if (current_quote.timestamp - it->timestamp >= seconds) {
       past_quote = *it;
@@ -37,10 +48,15 @@ ETrade::StockBot::simple_moving_average(const int seconds) {
     it++;
   }
 
-  const double average = sum / ticks;
+  const double average = total_price / ticks;
   const int time_delta = current_quote.timestamp - past_quote.timestamp;
 
-  return std::pair<int, double>(time_delta, average);
+  return {
+      .buy_delta = buy_delta,
+      .price = average,
+      .seconds = time_delta,
+      .sell_delta = sell_delta,
+  };
 }
 
 #endif

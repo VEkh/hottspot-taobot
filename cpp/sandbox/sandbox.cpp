@@ -1,13 +1,13 @@
-#include <chrono> // std::chrono
 #include <iostream>
-#include <thread> // std::this_thread
-#include <time.h> // time, time_t
+#include <vector>
 
 int main() {
-  int i;
+  std::vector<int> n = {1, 4, 9, 16, 25};
+  std::vector<int>::iterator it;
 
-  for (i = 0; i < 10; i++) {
+  for (it = n.begin(); it != n.end(); it++) {
+    it + 1;
+    std::cout << "i + 1: " << *(it + 1) << std::endl;
+    std::cout << "i: " << *it << std::endl;
   }
-
-  std::cout << "i: " << i << std::endl;
 }
