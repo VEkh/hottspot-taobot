@@ -27,7 +27,7 @@ ETrade::StockBot::parse_quote(const std::string &response_body) {
       .high = full_quote["All"]["high"],
       .low = full_quote["All"]["low"],
       .simple_moving_average =
-          simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD_TICKS),
+          simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS),
       .symbol = symbol,
       .timestamp = now,
   };
