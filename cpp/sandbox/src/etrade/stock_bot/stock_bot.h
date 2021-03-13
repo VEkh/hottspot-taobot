@@ -35,6 +35,7 @@ private:
   void fetch_quote();
   void initialize(char *, int);
   void log_quote();
+  void log_simple_moving_average();
   void log_start_message();
   void watch();
 };

@@ -26,7 +26,7 @@ sma_t ETrade::StockBot::simple_moving_average(const int seconds) {
   int ticks;
   std::vector<quote_t>::reverse_iterator it = quotes.rbegin();
 
-  for (ticks = 0; ticks < quotes_length; ticks++) {
+  for (ticks = 1; ticks < quotes_length; ticks++) {
     total_price += it->current_price;
 
     if (it != quotes.rend()) {
@@ -41,7 +41,6 @@ sma_t ETrade::StockBot::simple_moving_average(const int seconds) {
 
     if (current_quote.timestamp - it->timestamp >= seconds) {
       past_quote = *it;
-      ticks++;
       break;
     }
 
@@ -49,12 +48,12 @@ sma_t ETrade::StockBot::simple_moving_average(const int seconds) {
   }
 
   const double average = total_price / ticks;
-  const int time_delta = current_quote.timestamp - past_quote.timestamp;
+  const int seconds_delta = current_quote.timestamp - past_quote.timestamp;
 
   return {
       .buy_delta = buy_delta,
       .price = average,
-      .seconds = time_delta,
+      .seconds = seconds_delta,
       .sell_delta = sell_delta,
   };
 }
