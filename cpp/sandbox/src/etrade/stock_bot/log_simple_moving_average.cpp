@@ -61,6 +61,7 @@ void ETrade::StockBot::log_simple_moving_average() {
             << utils::float_::to_currency(simple_moving_average.sell_delta)
             << std::endl;
   std::cout << "Buy Δ / Sell Δ: " << buy_to_sell_delta_ratio << std::endl;
+  std::cout << "Sell Δ / Buy Δ: " << (1 / buy_to_sell_delta_ratio) << std::endl;
   std::cout << fmt.reset << std::endl;
 }
 
