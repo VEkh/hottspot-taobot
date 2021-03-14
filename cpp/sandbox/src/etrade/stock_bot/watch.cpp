@@ -13,6 +13,7 @@
 #include "log_quote.cpp"                 // log_quote
 #include "log_simple_moving_average.cpp" // log_simple_moving_average
 #include "open_position.cpp"             // open_position
+#include "set_open_position_prices.cpp"  // set_open_position_prices
 #include "set_position_status.cpp"       // set_order_statuses
 #include <chrono>                        // std::chrono
 #include <thread>                        // std::this_thread
@@ -28,6 +29,7 @@ void ETrade::StockBot::watch() {
     fetch_orders();
     set_position_status();
     open_position();
+    set_open_position_prices();
 
     std::this_thread::sleep_for(
         std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));

@@ -17,6 +17,7 @@ public:
 
 private:
   using order_action_t = ETrade::t::order_action_t;
+  using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
   using quote_t = ETrade::t::quote_t;
@@ -54,7 +55,11 @@ private:
   void log_simple_moving_average();
   void log_start_message();
   void open_position();
+  void set_execution_price(order_t *);
+  void set_open_position_prices();
   void set_position_status();
+  void set_profit(order_t *);
+  void set_profit(order_t *, const order_t *);
   void set_status(order_t *);
   void watch();
 };
