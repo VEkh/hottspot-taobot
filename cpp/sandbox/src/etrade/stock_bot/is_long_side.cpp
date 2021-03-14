@@ -7,9 +7,9 @@
  */
 #include "stock_bot.h"
 
-bool ETrade::StockBot::is_long_side(const order_t &order) {
-  return order.action == order_action_t::BUY ||
-         order.action == order_action_t::SELL;
+bool ETrade::StockBot::is_long_side(const order_t *order) {
+  return order->action == order_action_t::BUY ||
+         order->action == order_action_t::SELL;
 }
 
 #endif

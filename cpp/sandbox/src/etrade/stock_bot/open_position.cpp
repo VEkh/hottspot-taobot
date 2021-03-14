@@ -47,10 +47,10 @@ void ETrade::StockBot::open_position() {
 
   etrade_client.place_order(this->open_order_ptr);
 
-  std::cout << fmt.bold << fmt.cyan << std::endl;
+  std::cout << fmt.bold << fmt.cyan;
   std::cout << log_icon << " " << order_action << ": Placed open order."
             << std::endl;
-  std::cout << fmt.reset;
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

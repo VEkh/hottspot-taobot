@@ -23,7 +23,7 @@ void ETrade::StockBot::log_open_position() {
     return;
   }
 
-  const bool is_long_side_ = is_long_side(this->open_order);
+  const bool is_long_side_ = is_long_side(this->open_order_ptr);
   const char *side = is_long_side_ ? "BUY" : "SELL_SHORT";
   Formatted::Stream log_color = is_long_side_ ? fmt.green : fmt.red;
 
