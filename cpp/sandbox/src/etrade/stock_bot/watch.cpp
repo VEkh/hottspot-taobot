@@ -8,8 +8,10 @@
 #include "stock_bot.h"
 
 #include "fetch_quote.cpp"               // fetch_quote
+#include "log_open_position.cpp"         // log_open_position
 #include "log_quote.cpp"                 // log_quote
 #include "log_simple_moving_average.cpp" // log_simple_moving_average
+#include "open_position.cpp"             // open_position
 #include <chrono>                        // std::chrono
 #include <thread>                        // std::this_thread
 
@@ -18,6 +20,8 @@ void ETrade::StockBot::watch() {
     fetch_quote();
     log_quote();
     log_simple_moving_average();
+    log_open_position();
+    open_position();
 
     std::this_thread::sleep_for(
         std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));

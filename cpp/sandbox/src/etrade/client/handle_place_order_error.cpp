@@ -1,8 +1,9 @@
 #if !defined ETRADE__CLIENT_handle_place_order_error
 #define ETRADE__CLIENT_handle_place_order_error
 
-#include "client.h"        // ETrade::Client, ORDER_ACTIONS, stream_format
-#include "etrade/deps.cpp" // json
+#include "client.h"                      // ETrade::Client, stream_format
+#include "etrade/constants.cpp"          // ETrade::constants
+#include "etrade/deps.cpp"               // json
 #include "lib/curl_client/curl_client.h" // CurlClient
 #include "lib/formatted.cpp"             // Formatted
 #include "lib/utils/string.cpp"          // utils::string
@@ -23,7 +24,8 @@ ETrade::Client::handle_place_order_error(const CurlClient &curl_client,
   std::cout << fmt.bold << fmt.red;
   std::cout << "❌ Something went wrong while trying to "
             << utils::string::downcase(action) << " the "
-            << ORDER_ACTIONS[order_action] << " order: " << std::endl;
+            << ETrade::constants::ORDER_ACTIONS[order_action]
+            << " order: " << std::endl;
   std::cout << response_body.dump(2) << std::endl;
   std::cout << fmt.reset;
 

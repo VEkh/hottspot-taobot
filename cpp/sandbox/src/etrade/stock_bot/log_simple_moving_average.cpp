@@ -55,15 +55,12 @@ void ETrade::StockBot::log_simple_moving_average() {
   std::cout << fmt.bold << log_color;
   std::cout << "Price: "
             << utils::float_::to_currency(simple_moving_average.price)
-            << std::endl;
-  std::cout << "Buy Delta: "
+            << " • Buy Δ: "
             << utils::float_::to_currency(simple_moving_average.buy_delta)
-            << std::endl;
-  std::cout << "Sell Delta: "
+            << " • Sell Δ: "
             << utils::float_::to_currency(simple_moving_average.sell_delta)
             << std::endl;
-  std::cout << "Buy to Sell Delta Ratio: " << buy_to_sell_delta_ratio
-            << std::endl;
+  std::cout << "Buy Δ / Sell Δ: " << buy_to_sell_delta_ratio << std::endl;
   std::cout << fmt.reset << std::endl;
 }
 

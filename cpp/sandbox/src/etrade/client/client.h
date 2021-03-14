@@ -3,6 +3,7 @@
 
 #include "etrade/deps.cpp"                    // json
 #include "etrade/oauth_header/oauth_header.h" // ETrade::OAuthHeader
+#include "etrade/types.cpp"                   // ETrade::t
 #include "lib/curl_client/curl_client.h"      // CurlClient
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
 #include <map>               // std::map
@@ -11,29 +12,12 @@
 namespace ETrade {
 class Client {
 public:
+  using order_action_t = ETrade::t::order_action_t;
+  using order_status_t = ETrade::t::order_status_t;
+  using order_t = ETrade::t::order_t;
+  using order_type_t = ETrade::t::order_type_t;
+
   enum debug_t { OFF, ON };
-
-  enum order_action_t {
-    BUY,
-    BUY_TO_COVER,
-    SELL,
-    SELL_SHORT,
-  };
-
-  enum order_status_t {
-    ORDER_CANCELLED,
-    ORDER_CANCEL_REQUESTED,
-    ORDER_EXECUTED,
-    ORDER_OPEN,
-    ORDER_PARTIAL,
-    ORDER_PENDING,
-  };
-
-  enum order_type_t {
-    LIMIT,
-    MARKET,
-    STOP_LIMIT,
-  };
 
   struct client_config_t {
     std::string account_id;
@@ -41,22 +25,6 @@ public:
     std::string base_url;
     std::map<const char *, std::string> paths;
   } client_config;
-
-  struct order_t {
-    order_action_t action;
-    double execution_price = 0.00;
-    int id = 0;
-    double limit_price = 0.00;
-    double profit = 0.00;
-    int quantity;
-    double sma_execution_price = 0.00;
-    double sma_profit = 0.00;
-    double sma_stop_price = 0.00;
-    order_status_t status = order_status_t::ORDER_PENDING;
-    double stop_price = 0.00;
-    const char *symbol;
-    order_type_t type;
-  };
 
   struct post_params_t {
     std::string body;
@@ -67,19 +35,6 @@ public:
   struct props_t {
     debug_t debug_flag;
   };
-
-  static constexpr const char *ORDER_STATUSES[6] = {
-      "CANCELLED", "CANCEL_REQUESTED", "EXECUTED", "OPEN", "PARTIAL", "PENDING",
-  };
-
-  static constexpr const char *ORDER_ACTIONS[4] = {
-      "BUY",
-      "BUY_TO_COVER",
-      "SELL",
-      "SELL_SHORT",
-  };
-
-  static order_action_t to_order_action_t(const char *);
 
   CurlClient cancel_order(int);
   CurlClient cancel_order(order_t *);
@@ -107,12 +62,6 @@ private:
   } oauth;
 
   Formatted::fmt_stream_t stream_format = Formatted::stream();
-
-  const char *ORDER_TYPES[3] = {
-      "LIMIT",
-      "MARKET",
-      "STOP_LIMIT",
-  };
 
   props_t props = {
       .debug_flag = debug_t::OFF,

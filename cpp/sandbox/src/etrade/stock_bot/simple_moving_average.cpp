@@ -5,7 +5,8 @@
 #include <utility>     // std::pair
 #include <vector>      // std::vector
 
-sma_t ETrade::StockBot::simple_moving_average(const int seconds) {
+ETrade::StockBot::sma_t
+ETrade::StockBot::simple_moving_average(const int seconds) {
   sma_t emtpy_average;
 
   if (quotes.empty()) {

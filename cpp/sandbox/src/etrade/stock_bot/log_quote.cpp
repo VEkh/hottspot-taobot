@@ -39,12 +39,10 @@ void ETrade::StockBot::log_quote() {
   std::cout << symbol << " Quote" << std::endl;
   std::cout << fmt.reset;
   std::cout << fmt.bold << log_color;
-  std::cout << "Current Price: "
+  std::cout << "Current: "
             << utils::float_::to_currency(current_quote.current_price)
-            << std::endl;
-  std::cout << "High: " << utils::float_::to_currency(current_quote.high)
-            << std::endl;
-  std::cout << "Low: " << utils::float_::to_currency(current_quote.low)
+            << " • High: " << utils::float_::to_currency(current_quote.high)
+            << " • Low: " << utils::float_::to_currency(current_quote.low)
             << std::endl;
   std::cout << fmt.reset << std::endl;
 }

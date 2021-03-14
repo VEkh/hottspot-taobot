@@ -2,6 +2,7 @@
 #define ETRADE__CLIENT_build_preview_order_payload
 
 #include "compute_client_order_id.cpp" // compute_client_order_id
+#include "etrade/constants.cpp"        // ETrade::constants
 #include "etrade/deps.cpp"             // json, _json
 #include "lib/utils/float.cpp"         // utils::float_
 #include <algorithm>                   // std::max, std::min
@@ -9,8 +10,6 @@
 
 /*
  * ETrade::Client
- * ORDER_ACTIONS
- * ORDER_TYPES
  * order_t
  * quantity
  * quote
@@ -51,10 +50,11 @@ std::string ETrade::Client::build_preview_order_payload(const order_t &order) {
   )"_json;
 
   order_json["Instrument"][0]["Product"]["symbol"] = order.symbol;
-  order_json["Instrument"][0]["orderAction"] = ORDER_ACTIONS[order.action];
+  order_json["Instrument"][0]["orderAction"] =
+      ETrade::constants::ORDER_ACTIONS[order.action];
   order_json["Instrument"][0]["quantity"] = order.quantity;
   order_json["limitPrice"] = utils::float_::to_currency(order.limit_price);
-  order_json["priceType"] = ORDER_TYPES[order.type];
+  order_json["priceType"] = ETrade::constants::ORDER_TYPES[order.type];
 
   payload["PreviewOrderRequest"]["Order"].push_back(order_json);
 

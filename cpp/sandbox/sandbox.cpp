@@ -1,13 +1,14 @@
 #include <iostream>
-#include <vector>
+
+struct t {
+  int id = 0;
+};
 
 int main() {
-  std::vector<int> n = {1, 4, 9, 16, 25};
-  std::vector<int>::iterator it;
+  t type = {.id = 4};
+  t *type_p = nullptr;
 
-  for (it = n.begin(); it != n.end(); it++) {
-    it + 1;
-    std::cout << "i + 1: " << *(it + 1) << std::endl;
-    std::cout << "i: " << *it << std::endl;
-  }
+  *type_p = type;
+
+  std::cout << type_p->id << std::endl;
 }
