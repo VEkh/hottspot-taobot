@@ -4,6 +4,7 @@
 #include "etrade/client/client.h" // ETrade::Client
 #include "etrade/types.cpp"       // ETrade::t
 #include "lib/formatted.cpp"      // Formatted
+#include <map>                    // std::map
 #include <vector>                 // std::vector
 
 namespace ETrade {
@@ -23,6 +24,11 @@ private:
   const double POLLING_INTERVAL_SECONDS = 0.5;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 5 * 60;
 
+  std::map<const char *, const char *> ICONS = {
+      {"BUY", "📈"},
+      {"SELL_SHORT", "📉"},
+  };
+
   char *symbol;
   int quantity;
 
@@ -35,6 +41,7 @@ private:
   std::vector<quote_t> quotes;
 
   bool is_long_side(const order_t &);
+  bool should_open_position();
   quote_t parse_quote(const std::string &);
   sma_t simple_moving_average(const int);
   void fetch_quote();
