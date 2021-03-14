@@ -30,6 +30,7 @@ void ETrade::StockBot::watch() {
     set_position_status();
     open_position();
     set_open_position_prices();
+    close_position();
 
     std::this_thread::sleep_for(
         std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));
