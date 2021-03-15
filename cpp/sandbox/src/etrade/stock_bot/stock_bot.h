@@ -54,7 +54,7 @@ private:
   void fetch_orders();
   void fetch_quote();
   void initialize(char *, int);
-  void log_open_position();
+  void log_position();
   void log_position_results();
   void log_quote();
   void log_simple_moving_average();

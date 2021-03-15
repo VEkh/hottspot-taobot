@@ -1,5 +1,5 @@
-#if !defined ETRADE__STOCK_BOT_log_open_position
-#define ETRADE__STOCK_BOT_log_open_position
+#if !defined ETRADE__STOCK_BOT_log_position
+#define ETRADE__STOCK_BOT_log_position
 
 /*
  * ETrade::StockBot
@@ -13,7 +13,7 @@
 #include <iomanip>              // std::setprecision
 #include <iostream>             // std::cout, std::endl, std::fixed
 
-void ETrade::StockBot::log_open_position() {
+void ETrade::StockBot::log_position() {
   if (!this->open_order_ptr && !this->close_order_ptr) {
     std::cout << fmt.bold << fmt.cyan;
     std::cout << "💀 No Open Positions." << std::endl << std::endl;

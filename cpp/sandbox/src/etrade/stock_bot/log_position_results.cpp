@@ -9,6 +9,7 @@
 #include "stock_bot.h"
 
 #include "etrade/constants.cpp"    // ETrade::constants
+#include "log_position.cpp"        // log_position
 #include "set_execution_price.cpp" // set_execution_price
 #include "set_profit.cpp"          // set_profit
 #include <iostream>                // std::cout, std::endl
@@ -43,7 +44,9 @@ void ETrade::StockBot::log_position_results() {
               << std::endl;
   }
 
-  std::cout << fmt.reset;
+  std::cout << fmt.reset << std::endl;
+
+  log_position();
 }
 
 #endif

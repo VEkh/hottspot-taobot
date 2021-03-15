@@ -10,7 +10,7 @@
 #include "close_position.cpp"            // close_position
 #include "fetch_orders.cpp"              // fetch_orders
 #include "fetch_quote.cpp"               // fetch_quote
-#include "log_open_position.cpp"         // log_open_position
+#include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
 #include "log_quote.cpp"                 // log_quote
 #include "log_simple_moving_average.cpp" // log_simple_moving_average
@@ -27,7 +27,7 @@ void ETrade::StockBot::watch() {
 
     log_quote();
     log_simple_moving_average();
-    log_open_position();
+    log_position();
 
     fetch_orders();
     set_position_status();
