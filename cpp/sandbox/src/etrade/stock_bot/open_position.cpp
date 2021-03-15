@@ -6,12 +6,14 @@
  * etrade_client
  * fmt
  * order_action_t
- * order_status_t
  * order_type_t
+ * order_t
  */
 #include "stock_bot.h"
 
+#include "etrade/constants.cpp"     // ETrade::constants
 #include "should_open_position.cpp" // should_open_position
+#include <iostream>                 // std::cout, std::endl
 
 void ETrade::StockBot::open_position() {
   if (!should_open_position()) {

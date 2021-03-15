@@ -10,6 +10,7 @@
 
 #include "set_profit.cpp"            // set_profit
 #include "should_close_position.cpp" // should_close_position
+#include <iostream>                  // std::cout, std::endl
 
 void ETrade::StockBot::close_position() {
   if (!should_close_position()) {

@@ -53,10 +53,12 @@ private:
   void fetch_quote();
   void initialize(char *, int);
   void log_open_position();
+  void log_position_results();
   void log_quote();
   void log_simple_moving_average();
   void log_start_message();
   void open_position();
+  void reset_position();
   void set_execution_price(order_t *);
   void set_open_position_prices();
   void set_position_status();
