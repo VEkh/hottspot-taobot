@@ -51,7 +51,7 @@ private:
   double compute_sell_buy_ratio(const sma_t &);
   json get_order_json(const order_t *);
   quote_t parse_quote(const std::string &);
-  sma_t simple_moving_average(const int);
+  sma_t build_simple_moving_average(const int);
   void close_position();
   void fetch_orders();
   void fetch_quote();

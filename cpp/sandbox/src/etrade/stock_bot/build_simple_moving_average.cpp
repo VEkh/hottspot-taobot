@@ -1,5 +1,5 @@
-#if !defined ETRADE__STOCK_BOT_simple_moving_average
-#define ETRADE__STOCK_BOT_simple_moving_average
+#if !defined ETRADE__STOCK_BOT_build_simple_moving_average
+#define ETRADE__STOCK_BOT_build_simple_moving_average
 
 #include "compute_buy_sell_ratio.cpp" // compute_buy_sell_ratio
 #include "compute_sell_buy_ratio.cpp" // compute_sell_buy_ratio
@@ -8,7 +8,7 @@
 #include <vector>                     // std::vector
 
 ETrade::StockBot::sma_t
-ETrade::StockBot::simple_moving_average(const int seconds) {
+ETrade::StockBot::build_simple_moving_average(const int seconds) {
   sma_t emtpy_average;
 
   if (quotes.empty()) {

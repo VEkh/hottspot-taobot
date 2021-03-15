@@ -8,11 +8,11 @@
  */
 #include "stock_bot.h"
 
-#include "etrade/deps.cpp"           // json
-#include "etrade/types.cpp"          // ETrade::t
-#include "simple_moving_average.cpp" // simple_moving_average
-#include <string>                    // std::string
-#include <time.h>                    // time, time_t
+#include "build_simple_moving_average.cpp" // build_simple_moving_average
+#include "etrade/deps.cpp"                 // json
+#include "etrade/types.cpp"                // ETrade::t
+#include <string>                          // std::string
+#include <time.h>                          // time, time_t
 
 ETrade::t::quote_t
 ETrade::StockBot::parse_quote(const std::string &response_body) {
@@ -27,7 +27,7 @@ ETrade::StockBot::parse_quote(const std::string &response_body) {
       .high = full_quote["All"]["high"],
       .low = full_quote["All"]["low"],
       .simple_moving_average =
-          simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS),
+          build_simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS),
       .symbol = symbol,
       .timestamp = now,
   };
