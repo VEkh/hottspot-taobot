@@ -33,6 +33,7 @@ private:
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  bool is_long_position;
   char *symbol;
   int quantity;
   json placed_orders;
@@ -42,9 +43,10 @@ private:
   order_t open_order;
   std::vector<quote_t> quotes;
 
-  bool is_long_side(const order_t *);
   bool should_close_position();
   bool should_open_position();
+  double compute_buy_to_sell_ratio(const sma_t &);
+  double compute_sell_to_buy_ratio(const sma_t &);
   json get_order_json(const order_t *);
   quote_t parse_quote(const std::string &);
   sma_t simple_moving_average(const int);

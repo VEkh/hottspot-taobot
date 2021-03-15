@@ -8,7 +8,6 @@
 #include "stock_bot.h"
 
 #include "etrade/constants.cpp" // ETrade::constants
-#include "is_long_side.cpp"     // is_long_side
 #include "lib/formatted.cpp"    // Formatted
 #include "lib/utils/float.cpp"  // utils::float
 #include <iomanip>              // std::setprecision
@@ -23,9 +22,8 @@ void ETrade::StockBot::log_open_position() {
     return;
   }
 
-  const bool is_long_side_ = is_long_side(this->open_order_ptr);
-  const char *side = is_long_side_ ? "BUY" : "SELL_SHORT";
-  Formatted::Stream log_color = is_long_side_ ? fmt.green : fmt.red;
+  const char *side = this->is_long_position ? "BUY" : "SELL_SHORT";
+  Formatted::Stream log_color = this->is_long_position ? fmt.green : fmt.red;
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << fmt.bold << fmt.underline << log_color;

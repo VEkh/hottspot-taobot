@@ -21,13 +21,16 @@ void ETrade::StockBot::open_position() {
   }
 
   order_t new_open_order;
-  new_open_order.action = order_action_t::BUY;
+  new_open_order.action =
+      this->is_long_position ? order_action_t::BUY : order_action_t::SELL_SHORT;
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;
-  new_close_order.action = order_action_t::SELL;
+  new_close_order.action = this->is_long_position
+                               ? order_action_t::SELL
+                               : order_action_t::BUY_TO_COVER;
   new_close_order.quantity = this->quantity;
   new_close_order.symbol = this->symbol;
   new_close_order.type = order_type_t::MARKET;

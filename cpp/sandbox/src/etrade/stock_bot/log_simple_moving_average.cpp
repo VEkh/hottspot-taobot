@@ -10,12 +10,13 @@
  */
 #include "stock_bot.h"
 
-#include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/float.cpp"   // utils::float
-#include "lib/utils/integer.cpp" // utils::integer
-#include <iomanip>               // std::setprecision
-#include <iostream>              // std::cout, std::endl, std::fixed
-#include <math.h>                // INFINITY, abs
+#include "compute_buy_to_sell_ratio.cpp" // compute_buy_to_sell_ratio
+#include "compute_sell_to_buy_ratio.cpp" // compute_sell_to_buy_ratio
+#include "lib/formatted.cpp"             // Formatted
+#include "lib/utils/float.cpp"           // utils::float
+#include "lib/utils/integer.cpp"         // utils::integer
+#include <iomanip>                       // std::setprecision
+#include <iostream>                      // std::cout, std::endl, std::fixed
 
 void ETrade::StockBot::log_simple_moving_average() {
   Formatted::Stream log_color = fmt.yellow;
@@ -29,11 +30,11 @@ void ETrade::StockBot::log_simple_moving_average() {
   const quote_t current_quote = quotes.back();
   const sma_t simple_moving_average = current_quote.simple_moving_average;
 
-  const double buy_to_sell_delta_ratio =
-      !simple_moving_average.buy_delta && !simple_moving_average.sell_delta
-          ? INFINITY
-          : abs(simple_moving_average.buy_delta /
-                simple_moving_average.sell_delta);
+  const double buy_to_sell_ratio =
+      compute_buy_to_sell_ratio(simple_moving_average);
+
+  const double sell_to_buy_ratio =
+      compute_sell_to_buy_ratio(simple_moving_average);
 
   if (previous_quote) {
     if (current_quote.simple_moving_average.price >
@@ -53,6 +54,7 @@ void ETrade::StockBot::log_simple_moving_average() {
 
   std::cout << fmt.reset;
   std::cout << fmt.bold << log_color;
+
   std::cout << "Price: "
             << utils::float_::to_currency(simple_moving_average.price)
             << " • Buy Δ: "
@@ -60,8 +62,9 @@ void ETrade::StockBot::log_simple_moving_average() {
             << " • Sell Δ: "
             << utils::float_::to_currency(simple_moving_average.sell_delta)
             << std::endl;
-  std::cout << "Buy Δ / Sell Δ: " << buy_to_sell_delta_ratio << std::endl;
-  std::cout << "Sell Δ / Buy Δ: " << (1 / buy_to_sell_delta_ratio) << std::endl;
+
+  std::cout << "Buy Δ / Sell Δ: " << buy_to_sell_ratio << std::endl;
+  std::cout << "Sell Δ / Buy Δ: " << sell_to_buy_ratio << std::endl;
   std::cout << fmt.reset << std::endl;
 }
 

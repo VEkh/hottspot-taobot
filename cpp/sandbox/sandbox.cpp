@@ -7,4 +7,13 @@ std::map<const char *, const char *> ICONS = {
     {"SELL_SHORT", "📉"},
 };
 
-int main() { std::cout << ICONS["BUY"] << std::endl; }
+int main() {
+  bool *status = nullptr;
+  bool s = true;
+  status = &s;
+  *status = false;
+
+  if (status) {
+    std::cout << *status << std::endl;
+  }
+}
