@@ -1,11 +1,12 @@
 #if !defined ETRADE__STOCK_BOT_set_open_position_prices
 #define ETRADE__STOCK_BOT_set_open_position_prices
 
-#include "etrade/utils.cpp"        // ETrade::constants
-#include "set_execution_price.cpp" // set_execution_price
-#include "set_profit.cpp"          // set_profit
-#include "stock_bot.h"             // ETrade::StockBot, fmt, order_status_t
-#include <iostream>                // std::cout, std::endl
+#include "etrade/utils.cpp"           // ETrade::constants
+#include "set_execution_price.cpp"    // set_execution_price
+#include "set_max_buy_sell_ratio.cpp" // set_max_buy_sell_ratio
+#include "set_profit.cpp"             // set_profit
+#include "stock_bot.h"                // ETrade::StockBot, fmt, order_status_t
+#include <iostream>                   // std::cout, std::endl
 
 void ETrade::StockBot::set_open_position_prices() {
   if (!this->open_order_ptr ||
@@ -27,9 +28,8 @@ void ETrade::StockBot::set_open_position_prices() {
     set_execution_price(this->open_order_ptr);
   }
 
-  if (this->close_order.status == order_status_t::ORDER_PENDING) {
-    set_profit(this->open_order_ptr);
-  }
+  set_profit(this->open_order_ptr);
+  set_max_buy_sell_ratio();
 }
 
 #endif

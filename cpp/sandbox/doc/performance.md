@@ -589,3 +589,45 @@ Conclusions:
 
 * I'm going to embark on a new algorithm to ride the 10-minute SMA. As I build
   its beta, I'll continue to trade by eyeballing it.
+
+### 2021-03-15:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.6.0:
+  * Enter: SMA buy-sell ratio exceeds a threshold
+
+* T-Stop Algorithm v0.13.0
+  * Loss: SMA buy-sell ratio falls past a threshold
+  * Profit: SMA buy-sell ratio reduces past a threshold
+
+#### Changelog
+* Entry Algorithm v0.5.0 -> v0.6.0
+* Trailing Stop Algorithm v0.12.1 -> v0.13.2
+
+#### Performance
+* TSLA (-$13.67):
+  * Win Rate: 37/61 => 0.606557
+
+#### Remarks
+* This is the first time I've run the re-factored Stock Bot.
+* This version of Stock Bot never restarts. Instead it continuously monitors
+  the stock price and makes entry-exit decisions based on price changes in the
+  buy-sell ratio of the Simple Moving Average (SMA).
+* It had mixed success. Early in the day, it experience big gains and big losses.
+* The perfect scenarios were those in which:
+  1. A position opened at the near beginning of a trend.
+  2. The price change continued in the trend direction.
+  3. The price change slowed until the buy-sell ratio reduced to the loss
+     threshold.
+* It repeatedly lost when:
+  1. A position entered when the buy-sell ratio far exceeded the minimum
+     threshold (e.g 1.35).
+  2. The buy-sell ratio reduced to the loss level (e.g. 1.15 in the _opposite_
+     direction)
+
+  At this point the position had sustained heavy loss.
+* I tried to account for this by securing profits with an exit threshold that
+  was a trailing distance behind the position's mas buy-sell ratio. However,
+  this resulted in precarious (re-)entry when the buy-sell ratio fell beneath a
+  threshold, but re-entered profit territory.
+* I will now try base entry/exit on the velocity of the buy-sell ratio.

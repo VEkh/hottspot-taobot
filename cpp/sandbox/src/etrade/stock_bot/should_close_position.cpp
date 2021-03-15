@@ -28,8 +28,8 @@ bool ETrade::StockBot::should_close_position() {
   const double sell_to_buy_ratio =
       compute_sell_to_buy_ratio(current_quote.simple_moving_average);
 
-  const double loss_exit_ratio = 1.5;
-  const double profit_exit_ratio = 0.5;
+  const double loss_exit_ratio = 1.0;
+  const double profit_exit_ratio = this->max_buy_sell_ratio - 0.1;
 
   if (this->is_long_position) {
     if (this->open_order.profit > 0) {

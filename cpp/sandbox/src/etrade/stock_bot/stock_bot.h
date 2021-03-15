@@ -35,6 +35,8 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   bool is_long_position;
   char *symbol;
+  double *max_buy_sell_ratio_ptr = nullptr;
+  double max_buy_sell_ratio;
   int quantity;
   json placed_orders;
   order_t *close_order_ptr = nullptr;
@@ -62,6 +64,7 @@ private:
   void open_position();
   void reset_position();
   void set_execution_price(order_t *);
+  void set_max_buy_sell_ratio();
   void set_open_position_prices();
   void set_position_status();
   void set_profit(order_t *);

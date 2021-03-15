@@ -3,6 +3,7 @@
 
 #include "compute_buy_to_sell_ratio.cpp" // compute_buy_to_sell_ratio
 #include "compute_sell_to_buy_ratio.cpp" // compute_sell_to_buy_ratio
+#include "set_max_buy_sell_ratio.cpp"    // set_max_buy_sell_ratio
 #include "stock_bot.h"                   // ETrade::StockBot, quote_t
 
 bool ETrade::StockBot::should_open_position() {
@@ -18,13 +19,13 @@ bool ETrade::StockBot::should_open_position() {
   const double sell_to_buy_ratio =
       compute_sell_to_buy_ratio(current_quote.simple_moving_average);
 
-  const double entry_threshold = 1.5;
+  const double entry_threshold = 1.15;
 
-  if (buy_to_sell_ratio >= entry_threshold) {
-    this->is_long_position = true;
-    return true;
-  } else if (sell_to_buy_ratio >= entry_threshold) {
-    this->is_long_position = false;
+  if (buy_to_sell_ratio >= entry_threshold ||
+      sell_to_buy_ratio >= entry_threshold) {
+    this->is_long_position = buy_to_sell_ratio >= entry_threshold;
+    set_max_buy_sell_ratio();
+
     return true;
   }
 
