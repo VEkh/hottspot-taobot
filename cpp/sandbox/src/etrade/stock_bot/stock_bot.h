@@ -43,10 +43,12 @@ private:
   std::vector<quote_t> quotes;
 
   bool is_long_side(const order_t *);
+  bool should_close_position();
   bool should_open_position();
   json get_order_json(const order_t *);
   quote_t parse_quote(const std::string &);
   sma_t simple_moving_average(const int);
+  void close_position();
   void fetch_orders();
   void fetch_quote();
   void initialize(char *, int);

@@ -8,6 +8,7 @@ bool ETrade::StockBot::should_open_position() {
     return false;
   }
 
+  // Entry algorithm
   return true;
 }
 

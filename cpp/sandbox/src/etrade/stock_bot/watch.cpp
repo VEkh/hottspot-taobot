@@ -7,6 +7,7 @@
  */
 #include "stock_bot.h"
 
+#include "close_position.cpp"            // close_position
 #include "fetch_orders.cpp"              // fetch_orders
 #include "fetch_quote.cpp"               // fetch_quote
 #include "log_open_position.cpp"         // log_open_position
