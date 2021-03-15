@@ -18,8 +18,6 @@ void ETrade::StockBot::reset_position() {
   }
 
   this->close_order_ptr = nullptr;
-  this->max_buy_sell_ratio = 0;
-  this->max_buy_sell_ratio_ptr = nullptr;
   this->open_order_ptr = nullptr;
 }
 

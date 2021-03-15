@@ -26,7 +26,7 @@ bool ETrade::StockBot::should_close_position() {
       current_quote.simple_moving_average.sell_buy_ratio;
 
   const double loss_exit_ratio = 1.0;
-  const double profit_exit_ratio = this->max_buy_sell_ratio - 0.1;
+  const double profit_exit_ratio = 1.0;
 
   if (this->is_long_position) {
     if (this->open_order.profit > 0) {

@@ -61,7 +61,6 @@ void ETrade::StockBot::log_simple_moving_average() {
             << std::endl;
   std::cout << "Sell Δ / Buy Δ: " << simple_moving_average.sell_buy_ratio
             << std::endl;
-  std::cout << "Max Buy Δ / Sell Δ: " << this->max_buy_sell_ratio << std::endl;
   std::cout << fmt.reset << std::endl;
 }
 

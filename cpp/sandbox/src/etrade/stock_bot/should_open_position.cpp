@@ -1,8 +1,7 @@
 #if !defined ETRADE__STOCK_BOT_should_open_position
 #define ETRADE__STOCK_BOT_should_open_position
 
-#include "set_max_buy_sell_ratio.cpp" // set_max_buy_sell_ratio
-#include "stock_bot.h"                // ETrade::StockBot, quote_t
+#include "stock_bot.h" // ETrade::StockBot, quote_t
 
 bool ETrade::StockBot::should_open_position() {
   if (this->open_order_ptr) {
@@ -21,7 +20,6 @@ bool ETrade::StockBot::should_open_position() {
 
   if (buy_sell_ratio >= entry_threshold || sell_buy_ratio >= entry_threshold) {
     this->is_long_position = buy_sell_ratio >= entry_threshold;
-    set_max_buy_sell_ratio();
 
     return true;
   }
