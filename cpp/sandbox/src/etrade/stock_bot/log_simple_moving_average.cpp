@@ -10,13 +10,11 @@
  */
 #include "stock_bot.h"
 
-#include "compute_buy_to_sell_ratio.cpp" // compute_buy_to_sell_ratio
-#include "compute_sell_to_buy_ratio.cpp" // compute_sell_to_buy_ratio
-#include "lib/formatted.cpp"             // Formatted
-#include "lib/utils/float.cpp"           // utils::float
-#include "lib/utils/integer.cpp"         // utils::integer
-#include <iomanip>                       // std::setprecision
-#include <iostream>                      // std::cout, std::endl, std::fixed
+#include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/float.cpp"   // utils::float
+#include "lib/utils/integer.cpp" // utils::integer
+#include <iomanip>               // std::setprecision
+#include <iostream>              // std::cout, std::endl, std::fixed
 
 void ETrade::StockBot::log_simple_moving_average() {
   Formatted::Stream log_color = fmt.yellow;
@@ -29,12 +27,6 @@ void ETrade::StockBot::log_simple_moving_average() {
   const quote_t *previous_quote = ticks > 1 ? &(quotes.at(ticks - 2)) : nullptr;
   const quote_t current_quote = quotes.back();
   const sma_t simple_moving_average = current_quote.simple_moving_average;
-
-  const double buy_to_sell_ratio =
-      compute_buy_to_sell_ratio(simple_moving_average);
-
-  const double sell_to_buy_ratio =
-      compute_sell_to_buy_ratio(simple_moving_average);
 
   if (previous_quote) {
     if (current_quote.simple_moving_average.price >
@@ -63,8 +55,12 @@ void ETrade::StockBot::log_simple_moving_average() {
             << utils::float_::to_currency(simple_moving_average.sell_delta)
             << std::endl;
 
-  std::cout << "Buy Δ / Sell Δ: " << buy_to_sell_ratio << std::endl;
-  std::cout << "Sell Δ / Buy Δ: " << sell_to_buy_ratio << std::endl;
+  std::cout << "Average Buy-Sell Velocity: "
+            << simple_moving_average.average_buy_sell_velocity << std::endl;
+  std::cout << "Buy Δ / Sell Δ: " << simple_moving_average.buy_sell_ratio
+            << std::endl;
+  std::cout << "Sell Δ / Buy Δ: " << simple_moving_average.sell_buy_ratio
+            << std::endl;
   std::cout << "Max Buy Δ / Sell Δ: " << this->max_buy_sell_ratio << std::endl;
   std::cout << fmt.reset << std::endl;
 }

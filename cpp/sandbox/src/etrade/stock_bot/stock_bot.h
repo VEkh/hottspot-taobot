@@ -47,8 +47,8 @@ private:
 
   bool should_close_position();
   bool should_open_position();
-  double compute_buy_to_sell_ratio(const sma_t &);
-  double compute_sell_to_buy_ratio(const sma_t &);
+  double compute_buy_sell_ratio(const sma_t &);
+  double compute_sell_buy_ratio(const sma_t &);
   json get_order_json(const order_t *);
   quote_t parse_quote(const std::string &);
   sma_t simple_moving_average(const int);

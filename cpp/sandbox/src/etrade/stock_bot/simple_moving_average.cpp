@@ -1,9 +1,11 @@
 #if !defined ETRADE__STOCK_BOT_simple_moving_average
 #define ETRADE__STOCK_BOT_simple_moving_average
 
-#include "stock_bot.h" // ETrade::StockBot, quote_t, quotes
-#include <utility>     // std::pair
-#include <vector>      // std::vector
+#include "compute_buy_sell_ratio.cpp" // compute_buy_sell_ratio
+#include "compute_sell_buy_ratio.cpp" // compute_sell_buy_ratio
+#include "stock_bot.h"                // ETrade::StockBot, quote_t, quotes
+#include <utility>                    // std::pair
+#include <vector>                     // std::vector
 
 ETrade::StockBot::sma_t
 ETrade::StockBot::simple_moving_average(const int seconds) {
@@ -48,15 +50,27 @@ ETrade::StockBot::simple_moving_average(const int seconds) {
     it++;
   }
 
-  const double average = total_price / ticks;
+  const double moving_average = total_price / ticks;
   const int seconds_delta = current_quote.timestamp - past_quote.timestamp;
+  const double average_velocity =
+      (moving_average - past_quote.simple_moving_average.price) / seconds_delta;
 
-  return {
-      .buy_delta = buy_delta,
-      .price = average,
-      .seconds = seconds_delta,
-      .sell_delta = sell_delta,
-  };
+  sma_t simple_moving_average;
+  simple_moving_average.buy_delta = buy_delta;
+  simple_moving_average.price = moving_average;
+  simple_moving_average.seconds = seconds_delta;
+  simple_moving_average.sell_delta = sell_delta;
+  simple_moving_average.buy_sell_ratio =
+      compute_buy_sell_ratio(simple_moving_average);
+  simple_moving_average.sell_buy_ratio =
+      compute_sell_buy_ratio(simple_moving_average);
+
+  simple_moving_average.average_buy_sell_velocity =
+      (simple_moving_average.buy_sell_ratio -
+       past_quote.simple_moving_average.buy_sell_ratio) /
+      seconds_delta;
+
+  return simple_moving_average;
 }
 
 #endif

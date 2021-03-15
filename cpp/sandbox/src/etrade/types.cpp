@@ -41,10 +41,13 @@ struct order_t {
 };
 
 struct sma_t {
-  double buy_delta = 0.00;
-  double price;
+  double average_buy_sell_velocity = 0;
+  double buy_delta = 0;
+  double buy_sell_ratio = 0;
+  double price = 0;
   int seconds = 0;
-  double sell_delta = 0.00;
+  double sell_buy_ratio = 0;
+  double sell_delta = 0;
 };
 
 struct quote_t {
