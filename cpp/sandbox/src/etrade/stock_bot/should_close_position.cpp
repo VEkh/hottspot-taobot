@@ -19,13 +19,28 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  const quote_t current_quote = this->quotes.back();
+  const int consecutive_ticks = 5;
+  int i = 0;
+  int negative_count = 0;
+  int positive_count = 0;
 
-  const double exit_velocity = 0.02;
-  const double buy_sell_velocity =
-      current_quote.simple_moving_average.average_buy_sell_velocity;
+  std::vector<quote_t>::reverse_iterator it;
 
-  if (abs(buy_sell_velocity) <= exit_velocity) {
+  for (it = this->quotes.rbegin(); i < consecutive_ticks; it++) {
+    const double acceleration = it->simple_moving_average.acceleration;
+
+    if (acceleration > 0) {
+      positive_count++;
+    } else if (acceleration < 0) {
+      negative_count++;
+    }
+
+    i++;
+  }
+
+  if (this->is_long_position && negative_count >= consecutive_ticks) {
+    return true;
+  } else if (!this->is_long_position && positive_count >= consecutive_ticks) {
     return true;
   }
 

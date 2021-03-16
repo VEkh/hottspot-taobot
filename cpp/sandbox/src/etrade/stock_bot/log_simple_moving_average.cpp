@@ -55,12 +55,14 @@ void ETrade::StockBot::log_simple_moving_average() {
             << utils::float_::to_currency(simple_moving_average.sell_delta)
             << std::endl;
 
-  std::cout << "Average Buy-Sell Velocity: "
-            << simple_moving_average.average_buy_sell_velocity << std::endl;
   std::cout << "Buy Δ / Sell Δ: " << simple_moving_average.buy_sell_ratio
             << std::endl;
   std::cout << "Sell Δ / Buy Δ: " << simple_moving_average.sell_buy_ratio
             << std::endl;
+  std::cout << std::setprecision(6) << std::fixed;
+  std::cout << "Acceleration: " << simple_moving_average.acceleration
+            << std::endl;
+  std::cout << "Velocity: " << simple_moving_average.velocity << std::endl;
   std::cout << fmt.reset << std::endl;
 }
 

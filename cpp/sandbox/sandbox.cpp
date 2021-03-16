@@ -2,4 +2,4 @@
 
 #include <map>
 
-int main() { std::cout << (37.0 / 61) << std::endl; }
+int main() { std::cout << (36.0 / 88) << std::endl; }

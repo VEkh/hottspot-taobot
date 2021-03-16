@@ -602,7 +602,7 @@ Conclusions:
 
 #### Changelog
 * Entry Algorithm v0.5.0 -> v0.6.0
-* Trailing Stop Algorithm v0.12.1 -> v0.13.2
+* Trailing Stop Algorithm v0.12.1 -> v0.12.2
 
 #### Performance
 * TSLA (-$13.67):
@@ -631,3 +631,42 @@ Conclusions:
   this resulted in precarious (re-)entry when the buy-sell ratio fell beneath a
   threshold, but re-entered profit territory.
 * I will now try base entry/exit on the velocity of the buy-sell ratio.
+
+### 2021-03-16:
+* Polling Interval: 500ms
+
+* Entry Algorithm v0.7.0:
+  * Enter: SMA buy-sell ratio exceeds a threshold
+
+* Entry Algorithm v0.8.0:
+  * Enter: SMA velocity moves consecutively in one direction
+
+* T-Stop Algorithm v0.13.0
+  * SMA buy-sell ratio velocity past a threshold
+
+* T-Stop Algorithm v0.14.0
+  * SMA accelerates in the opposite direction of the order
+
+#### Changelog
+* Entry Algorithm v0.6.0 -> v0.7.0 -> v0.8.0
+* Trailing Stop Algorithm v0.12.2 -> v0.13.0 -> v0.14.0
+
+#### Performance
+* TSLA (-$8.51):
+  * Win Rate: 36/88 => 0.409091
+
+#### Remarks
+* At first the math for the buy-sell velocity was wrong.
+* This resulted in a couple of early losses and led me to use the SMA price
+  velocity instead.
+* The entry algorithm signaled entry when the SMA velocity moved consecutively
+  in one direction.
+* It exited when the SMA velocity moved consecutively in the opposite direction
+* This worked pretty well but seemed to miss out on maximal profits.
+* It was also susceptible to strong trend reversals.
+* To adjust for this, I changed the entry algorithm to await more consecutive
+  movement and adjusted the exit algorithm to exit when the price accelerated
+  consecutively in the opposite direction.
+* This performed decently but seems to be exiting prematurely.
+* Perhaps the next thing to try is to exit when the price decelerates on
+  average, not consecutively.
