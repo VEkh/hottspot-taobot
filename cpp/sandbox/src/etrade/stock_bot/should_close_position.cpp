@@ -8,6 +8,8 @@
  */
 #include "stock_bot.h"
 
+#include <math.h> // abs
+
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
     return false;
@@ -19,27 +21,12 @@ bool ETrade::StockBot::should_close_position() {
 
   const quote_t current_quote = this->quotes.back();
 
-  const double buy_sell_ratio =
-      current_quote.simple_moving_average.buy_sell_ratio;
+  const double exit_velocity = 0.02;
+  const double buy_sell_velocity =
+      current_quote.simple_moving_average.average_buy_sell_velocity;
 
-  const double sell_buy_ratio =
-      current_quote.simple_moving_average.sell_buy_ratio;
-
-  const double loss_exit_ratio = 1.0;
-  const double profit_exit_ratio = 1.0;
-
-  if (this->is_long_position) {
-    if (this->open_order.profit > 0) {
-      return buy_sell_ratio < profit_exit_ratio;
-    } else {
-      return sell_buy_ratio >= loss_exit_ratio;
-    }
-  } else {
-    if (this->open_order.profit > 0) {
-      return sell_buy_ratio < profit_exit_ratio;
-    } else {
-      return buy_sell_ratio >= loss_exit_ratio;
-    }
+  if (abs(buy_sell_velocity) <= exit_velocity) {
+    return true;
   }
 
   return false;
