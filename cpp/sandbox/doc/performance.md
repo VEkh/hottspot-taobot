@@ -670,3 +670,30 @@ Conclusions:
 * This performed decently but seems to be exiting prematurely.
 * Perhaps the next thing to try is to exit when the price decelerates on
   average, not consecutively.
+
+### 2021-03-17:
+* Polling Interval: 500ms
+
+#### Performance
+* TSLA (-$-5.32):
+  * Win Rate: 23/60 => 0.383333
+
+### Remarks
+* I adjusted three things:
+  1. The SMA's velocity and acceleration
+    * Acceleration: Velocity change in one tick
+    * Velocity: Average buy-sell ratio displacement across the average period
+  2. Entry algorithm
+    * Buy-Sell ratio and average velocity exceed respective thresholds.
+  3. Exit algorithm
+    * Average velocity exceeds a thresholds in the opposite direction
+
+* This worked decently well. It reduced premature entries, and decently time exits.
+
+* The downside is that exits felt a bit late, since the indicator was a delayed average velocity.
+
+* This actually helped avoid premature exits in some cases, but seemed to overall miss them.
+
+* I'll try these same exit and entry indicators but with an average instantaneous velocity.
+
+* I ended up on

@@ -50,7 +50,7 @@ ETrade::StockBot::build_simple_moving_average(const int seconds) {
     it++;
   }
 
-  const quote_t previous_quote = quotes.at(quotes_length - 2);
+  const quote_t previous_quote = this->quotes.at(quotes_length - 2);
   const double moving_average = total_price / ticks;
   const int seconds_delta = current_quote.timestamp - past_quote.timestamp;
   const double average_velocity =
@@ -66,20 +66,18 @@ ETrade::StockBot::build_simple_moving_average(const int seconds) {
   simple_moving_average.sell_buy_ratio =
       compute_sell_buy_ratio(simple_moving_average);
 
-  if (previous_quote.simple_moving_average.price) {
+  if (past_quote.simple_moving_average.buy_sell_ratio) {
     simple_moving_average.velocity =
         100 *
-        (simple_moving_average.price -
-         previous_quote.simple_moving_average.price) /
+        (simple_moving_average.buy_sell_ratio -
+         past_quote.simple_moving_average.buy_sell_ratio) /
         seconds_delta;
   }
 
   if (previous_quote.simple_moving_average.velocity) {
     simple_moving_average.acceleration =
-        100 *
         (simple_moving_average.velocity -
-         previous_quote.simple_moving_average.velocity) /
-        seconds_delta;
+         previous_quote.simple_moving_average.velocity);
   }
 
   return simple_moving_average;
