@@ -1,7 +1,18 @@
 #if !defined ETRADE__STOCK_BOT_should_close_position
 #define ETRADE__STOCK_BOT_should_close_position
 
-#include "stock_bot.h" // ETrade::StockBot, order_status_t, quote_t
+/*
+ * ETrade::StockBot
+ * fmt
+ * order_status_t
+ * quote_t
+ * sma_t
+ */
+#include "stock_bot.h"
+
+#include "compute_moving_buy_sell_ratio_average.cpp" // compute_moving_buy_sell_ratio_average
+#include "lib/utils/integer.cpp"                     // utils::integer_
+#include <iostream>                                  // std::cout, std::endl
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -12,24 +23,33 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  const int ticks = 10;
-  int i = 0;
-  double total_velocity;
+  const double profit_percentage =
+      100 * (this->open_order.profit / this->open_order.execution_price);
 
-  std::vector<quote_t>::reverse_iterator it;
-
-  for (it = this->quotes.rbegin(); i < ticks; it++) {
-    total_velocity += it->simple_moving_average.velocity;
-    i++;
+  if (profit_percentage >= 0.25) {
+    return true;
   }
 
-  const double average_velocity = total_velocity / ticks;
-  const double exit_threshold = 0.2;
+  const int average_period_seconds = 60;
+  const double average_buy_sell_ratio =
+      compute_moving_buy_sell_ratio_average(average_period_seconds);
+  const double average_sell_buy_ratio =
+      average_buy_sell_ratio ? 1.0 / average_buy_sell_ratio : 0;
+  const double exit_threshold = 1.0;
 
-  if (this->is_long_position && average_velocity <= -exit_threshold) {
-    return true;
-  } else if (!this->is_long_position && average_velocity >= exit_threshold) {
-    return true;
+  std::cout << fmt.cyan;
+  std::cout << "Average Buy-Sell ("
+            << utils::integer_::seconds_to_clock(average_period_seconds)
+            << ") Δ: " << average_buy_sell_ratio << std::endl;
+  std::cout << "Average Sell-Buy ("
+            << utils::integer_::seconds_to_clock(average_period_seconds)
+            << ") Δ: " << average_buy_sell_ratio << std::endl;
+  std::cout << fmt.reset << std::endl;
+
+  if (this->is_long_position) {
+    return average_buy_sell_ratio <= exit_threshold;
+  } else if (!this->is_long_position) {
+    return average_buy_sell_ratio >= exit_threshold;
   }
 
   return false;

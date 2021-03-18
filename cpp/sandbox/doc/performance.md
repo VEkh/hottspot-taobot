@@ -675,7 +675,7 @@ Conclusions:
 * Polling Interval: 500ms
 
 #### Performance
-* TSLA (-$-5.32):
+* TSLA (-$5.32):
   * Win Rate: 23/60 => 0.383333
 
 ### Remarks
@@ -697,3 +697,34 @@ Conclusions:
 * I'll try these same exit and entry indicators but with an average instantaneous velocity.
 
 * I ended up on
+
+### 2021-03-18:
+* Polling Interval: 500ms
+
+#### Performance
+* TSLA (-$14.65):
+  * Win Rate: 32/83 => 0.385542
+
+### Remarks
+* The first half of the day, I used the average buy-sell ratio and velocity as
+  dual entry and exit indicators.
+
+* This performed poorly. Most positions lost as velocity simply fluctuates too much.
+
+* In the second half of the day, I used the average buy-sell ratio as the
+  primary entry and exit indicators.
+
+* This performed better, but only when I spanned the close-indicator's average
+  across a sufficient amount of time. Otherise positions closed prematurely.
+
+* In the next iteration, the entry indicator's buy-sell average will span 30
+  seconds while the exit indicator's will span 60 seconds. These are 25% and
+  50% of the SMA's period respectively.
+
+* I also added a secure profit threshold as a closing signal. That is, when a
+  certain minimal profit is reached, the position should close. This is
+  EXCELLENT and I'm definitely keeping this.
+
+  * The entry indicator can and will re-enter if it needs to and this will help
+    secure solid profits that are often lost when the position is held to its
+    natural exit signal.

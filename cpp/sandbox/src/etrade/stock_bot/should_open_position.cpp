@@ -1,46 +1,41 @@
 #if !defined ETRADE__STOCK_BOT_should_open_position
 #define ETRADE__STOCK_BOT_should_open_position
 
-#include "stock_bot.h" // ETrade::StockBot, quote_t
-#include <math.h>      // abs
+/*
+ * ETrade::StockBot
+ * quote_t
+ */
+#include "stock_bot.h"
+
+#include "compute_moving_buy_sell_ratio_average.cpp" // compute_moving_buy_sell_ratio_average
+#include "lib/utils/integer.cpp"                     // utils::integer_
+#include <iostream>                                  // std::cout, std::endl
+#include <math.h>                                    // abs
 
 bool ETrade::StockBot::should_open_position() {
   if (this->open_order_ptr) {
     return false;
   }
 
-  const int ticks = 6;
+  const int average_period_seconds = 30;
+  const double average_buy_sell_ratio =
+      compute_moving_buy_sell_ratio_average(average_period_seconds);
+  const double average_sell_buy_ratio =
+      average_buy_sell_ratio ? 1.0 / average_buy_sell_ratio : 0;
+  const double entry_threshold = 1.0;
 
-  if (this->quotes.size() < ticks) {
-    return false;
-  }
+  std::cout << fmt.cyan;
+  std::cout << "Average Buy-Sell ("
+            << utils::integer_::seconds_to_clock(average_period_seconds)
+            << ") Δ: " << average_buy_sell_ratio << std::endl;
+  std::cout << "Average Sell-Buy ("
+            << utils::integer_::seconds_to_clock(average_period_seconds)
+            << ") Δ: " << average_buy_sell_ratio << std::endl;
+  std::cout << fmt.reset << std::endl;
 
-  int i = 0;
-  const quote_t current_quote = this->quotes.back();
-  const double buy_sell_ratio =
-      current_quote.simple_moving_average.buy_sell_ratio;
-  const double sell_buy_ratio =
-      current_quote.simple_moving_average.sell_buy_ratio;
-  double total_velocity;
-
-  std::vector<quote_t>::reverse_iterator it;
-
-  for (it = this->quotes.rbegin(); i < ticks; it++) {
-    total_velocity += it->simple_moving_average.velocity;
-    i++;
-  }
-
-  const double average_velocity = total_velocity / ticks;
-  const double buy_sell_threshold = 1.2;
-  const double velocity_threshold = 0.2;
-
-  if (buy_sell_ratio >= buy_sell_threshold &&
-      average_velocity >= velocity_threshold) {
-    this->is_long_position = true;
-    return true;
-  } else if (sell_buy_ratio >= buy_sell_threshold &&
-             average_velocity <= -velocity_threshold) {
-    this->is_long_position = false;
+  if (average_buy_sell_ratio >= entry_threshold ||
+      average_sell_buy_ratio >= entry_threshold) {
+    this->is_long_position = average_buy_sell_ratio >= entry_threshold;
     return true;
   }
 

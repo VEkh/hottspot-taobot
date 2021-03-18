@@ -1,5 +1,3 @@
 #include <iostream>
 
-#include <map>
-
-int main() { std::cout << (23.0 / 60) << std::endl; }
+int main() { std::cout << (32.0 / 83) << std::endl; }
