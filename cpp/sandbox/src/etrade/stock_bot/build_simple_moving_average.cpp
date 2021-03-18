@@ -64,18 +64,6 @@ ETrade::StockBot::build_simple_moving_average(const int seconds) {
   simple_moving_average.sell_buy_ratio =
       compute_sell_buy_ratio(simple_moving_average);
 
-  if (past_quote.simple_moving_average.buy_sell_ratio) {
-    simple_moving_average.velocity =
-        simple_moving_average.buy_sell_ratio -
-        previous_quote.simple_moving_average.buy_sell_ratio;
-  }
-
-  if (previous_quote.simple_moving_average.velocity) {
-    simple_moving_average.acceleration =
-        (simple_moving_average.velocity -
-         previous_quote.simple_moving_average.velocity);
-  }
-
   return simple_moving_average;
 }
 
