@@ -728,3 +728,33 @@ Conclusions:
   * The entry indicator can and will re-enter if it needs to and this will help
     secure solid profits that are often lost when the position is held to its
     natural exit signal.
+
+### 2021-03-21:
+* Polling Interval: 500ms
+
+#### Performance
+* TSLA ($0.51):
+  * Win Rate: 25/89 => 0.280899
+
+### Remarks
+* Stock Bot performed decently by mid-day. It reached a height of ~$9.00
+
+* It seemed to perform better when the price moved strongly in one dirction and
+  performed more poorly when the direction wasn't as strong.
+
+* I extended the periods for computing both the open and close moving buy-sell
+  ratio averages. This seemed to help it be less jumpy.
+
+* Today's volume, however, was relatively light. If there were more volatility,
+  there may have been more swings that resulted in poorer performance.
+
+* To address fluctuating intraday volatility, I'm introducting an algorithm to
+  compute the moving buy-sell ratio average.
+
+* It's sigmoidal function s(x), where x is the percent price range of the last
+  minute of quotes.
+
+* We'll see if this helps calibrate Stock Bot's entry and exit jumpiness.
+
+* I also introduced a stop loss that mirrors the stop-profit signal at a loss
+  of -0.25%. I'm still undecided as to whether this is helpful.

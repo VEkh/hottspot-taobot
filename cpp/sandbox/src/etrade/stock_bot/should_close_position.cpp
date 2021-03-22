@@ -10,9 +10,11 @@
  */
 #include "stock_bot.h"
 
+#include "compute_door_moving_average_period.cpp" // compute_door_moving_average_period
 #include "compute_moving_buy_sell_ratio_average.cpp" // compute_moving_buy_sell_ratio_average
 #include "lib/utils/integer.cpp"                     // utils::integer_
 #include <iostream>                                  // std::cout, std::endl
+#include <math.h>                                    // abs
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -26,11 +28,11 @@ bool ETrade::StockBot::should_close_position() {
   const double profit_percentage =
       100 * (this->open_order.profit / this->open_order.execution_price);
 
-  if (profit_percentage >= 0.25) {
+  if (abs(profit_percentage) >= 0.25) {
     return true;
   }
 
-  const int average_period_seconds = 60;
+  const int average_period_seconds = compute_door_moving_average_period();
   const double average_buy_sell_ratio =
       compute_moving_buy_sell_ratio_average(average_period_seconds);
   const double average_sell_buy_ratio =
@@ -43,8 +45,12 @@ bool ETrade::StockBot::should_close_position() {
             << ") Δ: " << average_buy_sell_ratio << std::endl;
   std::cout << "Average Sell-Buy ("
             << utils::integer_::seconds_to_clock(average_period_seconds)
-            << ") Δ: " << average_buy_sell_ratio << std::endl;
+            << ") Δ: " << average_sell_buy_ratio << std::endl;
   std::cout << fmt.reset << std::endl;
+
+  if (!average_buy_sell_ratio || !average_sell_buy_ratio) {
+    return false;
+  }
 
   if (this->is_long_position) {
     return average_buy_sell_ratio <= exit_threshold;

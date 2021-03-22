@@ -46,6 +46,7 @@ private:
   bool should_close_position();
   bool should_open_position();
   double compute_buy_sell_ratio(const sma_t &);
+  double compute_door_moving_average_period();
   double compute_moving_buy_sell_ratio_average(const int);
   double compute_sell_buy_ratio(const sma_t &);
   json get_order_json(const order_t *);
