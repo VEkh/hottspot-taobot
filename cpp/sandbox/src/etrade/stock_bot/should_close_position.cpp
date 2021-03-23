@@ -14,7 +14,6 @@
 #include "compute_moving_buy_sell_ratio_average.cpp" // compute_moving_buy_sell_ratio_average
 #include "lib/utils/integer.cpp"                     // utils::integer_
 #include <iostream>                                  // std::cout, std::endl
-#include <math.h>                                    // abs
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -28,7 +27,7 @@ bool ETrade::StockBot::should_close_position() {
   const double profit_percentage =
       100 * (this->open_order.profit / this->open_order.execution_price);
 
-  if (abs(profit_percentage) >= 0.25) {
+  if (profit_percentage >= 0.25) {
     return true;
   }
 
