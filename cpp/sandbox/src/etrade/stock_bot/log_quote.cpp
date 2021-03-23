@@ -10,10 +10,11 @@
  */
 #include "stock_bot.h"
 
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/float.cpp" // utils::float
-#include <iomanip>             // std::setprecision
-#include <iostream>            // std::cout, std::endl, std::fixed
+#include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/float.cpp"   // utils::float_
+#include "lib/utils/integer.cpp" // utils::integer_
+#include <iomanip>               // std::setprecision
+#include <iostream>              // std::cout, std::endl, std::fixed
 
 void ETrade::StockBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
@@ -25,6 +26,8 @@ void ETrade::StockBot::log_quote() {
 
   const quote_t *previous_quote = ticks > 1 ? &(quotes.at(ticks - 2)) : nullptr;
   const quote_t current_quote = quotes.back();
+  const quote_t first_quote = quotes.front();
+  const int runtime = current_quote.timestamp - first_quote.timestamp;
 
   if (previous_quote) {
     if (current_quote.current_price > previous_quote->current_price) {
@@ -36,7 +39,8 @@ void ETrade::StockBot::log_quote() {
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << fmt.bold << fmt.underline << log_color;
-  std::cout << symbol << " Quote" << std::endl;
+  std::cout << symbol << " Quote (@ "
+            << utils::integer_::seconds_to_clock(runtime) << ")" << std::endl;
   std::cout << fmt.reset;
   std::cout << fmt.bold << log_color;
   std::cout << "Current: "
