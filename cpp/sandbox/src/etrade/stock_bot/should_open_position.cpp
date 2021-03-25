@@ -18,25 +18,45 @@ bool ETrade::StockBot::should_open_position() {
     return false;
   }
 
-  const int average_period_seconds = compute_door_moving_average_period();
-  const double average_buy_sell_ratio =
-      compute_moving_buy_sell_ratio_average(average_period_seconds);
-  const double average_sell_buy_ratio =
-      average_buy_sell_ratio ? 1.0 / average_buy_sell_ratio : 0;
-  const double entry_threshold = 1.2;
+  const int average_period_seconds_1 = 1 * 60;
+  const double average_buy_sell_ratio_1 =
+      compute_moving_buy_sell_ratio_average(average_period_seconds_1);
+  const double average_sell_buy_ratio_1 =
+      average_buy_sell_ratio_1 ? 1.0 / average_buy_sell_ratio_1 : 0;
+
+  const int average_period_seconds_5 = 5 * 60;
+  const double average_buy_sell_ratio_5 =
+      compute_moving_buy_sell_ratio_average(average_period_seconds_5);
+  const double average_sell_buy_ratio_5 =
+      average_buy_sell_ratio_5 ? 1.0 / average_buy_sell_ratio_5 : 0;
+
+  const double entry_threshold_1 = 1.2;
+  const double entry_threshold_5 = 1.0;
 
   std::cout << fmt.cyan;
   std::cout << "Average Buy-Sell ("
-            << utils::integer_::seconds_to_clock(average_period_seconds)
-            << ") Δ: " << average_buy_sell_ratio << std::endl;
+            << utils::integer_::seconds_to_clock(average_period_seconds_1)
+            << ") Δ: " << average_buy_sell_ratio_1 << std::endl;
   std::cout << "Average Sell-Buy ("
-            << utils::integer_::seconds_to_clock(average_period_seconds)
-            << ") Δ: " << average_sell_buy_ratio << std::endl;
+            << utils::integer_::seconds_to_clock(average_period_seconds_1)
+            << ") Δ: " << average_sell_buy_ratio_1 << std::endl;
+  std::cout << "Average Buy-Sell ("
+            << utils::integer_::seconds_to_clock(average_period_seconds_5)
+            << ") Δ: " << average_buy_sell_ratio_5 << std::endl;
+  std::cout << "Average Sell-Buy ("
+            << utils::integer_::seconds_to_clock(average_period_seconds_5)
+            << ") Δ: " << average_sell_buy_ratio_5 << std::endl;
   std::cout << fmt.reset << std::endl;
 
-  if (average_buy_sell_ratio >= entry_threshold ||
-      average_sell_buy_ratio >= entry_threshold) {
-    this->is_long_position = average_buy_sell_ratio >= entry_threshold;
+  if (average_buy_sell_ratio_1 >= entry_threshold_1 &&
+      average_buy_sell_ratio_5 >= entry_threshold_5) {
+    this->is_long_position = true;
+    return true;
+  }
+
+  if (average_sell_buy_ratio_1 >= entry_threshold_1 &&
+      average_sell_buy_ratio_5 >= entry_threshold_5) {
+    this->is_long_position = false;
     return true;
   }
 

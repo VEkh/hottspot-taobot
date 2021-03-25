@@ -33,7 +33,7 @@ ETrade::StockBot::build_simple_moving_average(const int seconds) {
     total_price += it->current_price;
 
     if (it != quotes.rend()) {
-      const double price_delta = it->current_price - (it + 1)->current_price;
+      const double price_delta = it->current_price - ((it + 1)->current_price);
 
       if (price_delta > 0) {
         buy_delta += price_delta;
@@ -42,7 +42,7 @@ ETrade::StockBot::build_simple_moving_average(const int seconds) {
       }
     }
 
-    if (current_quote.timestamp - it->timestamp >= seconds) {
+    if ((current_quote.timestamp - it->timestamp) >= seconds) {
       past_quote = *it;
       break;
     }

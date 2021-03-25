@@ -8,13 +8,13 @@ double
 ETrade::StockBot::compute_moving_buy_sell_ratio_average(const int seconds) {
   const quote_t current_quote = this->quotes.back();
 
-  double total;
+  double total = 0;
   int count = 0;
 
   std::vector<quote_t>::reverse_iterator it = this->quotes.rbegin();
 
   while (it != this->quotes.rend() &&
-         current_quote.timestamp - it->timestamp <= seconds) {
+         (current_quote.timestamp - it->timestamp) <= seconds) {
     if (!it->simple_moving_average.buy_sell_ratio) {
       return 0;
     }

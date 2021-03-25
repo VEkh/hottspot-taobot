@@ -678,7 +678,7 @@ Conclusions:
 * TSLA (-$5.32):
   * Win Rate: 23/60 => 0.383333
 
-### Remarks
+#### Remarks
 * I adjusted three things:
   1. The SMA's velocity and acceleration
     * Acceleration: Velocity change in one tick
@@ -705,7 +705,7 @@ Conclusions:
 * TSLA (-$14.65):
   * Win Rate: 32/83 => 0.385542
 
-### Remarks
+#### Remarks
 * The first half of the day, I used the average buy-sell ratio and velocity as
   dual entry and exit indicators.
 
@@ -729,14 +729,14 @@ Conclusions:
     secure solid profits that are often lost when the position is held to its
     natural exit signal.
 
-### 2021-03-21:
+### 2021-03-22:
 * Polling Interval: 500ms
 
 #### Performance
 * TSLA ($0.51):
   * Win Rate: 25/89 => 0.280899
 
-### Remarks
+#### Remarks
 * Stock Bot performed decently by mid-day. It reached a height of ~$9.00
 
 * It seemed to perform better when the price moved strongly in one dirction and
@@ -758,3 +758,29 @@ Conclusions:
 
 * I also introduced a stop loss that mirrors the stop-profit signal at a loss
   of -0.25%. I'm still undecided as to whether this is helpful.
+
+### 2021-03-23:
+* Polling Interval: 500ms
+
+#### Performance
+* TSLA (-$22.36):
+  * Win Rate: 24/59 => 0.40678
+
+#### Remarks
+* Again, StockBot performed decently by mid-day. It reached a height of ~$9.00
+
+* It seemed to perform better when the price moved strongly in one dirction and
+  performed more poorly when the direction wasn't as strong.
+
+* The dynamically adjusting buy-sell ratio moving average period seemed to work
+  initially, but started to fail when the price didn't move strongly in one
+  direction.
+
+* I continued to adjust the ratio moving average periods all day until I
+  abandoned it in favor of reverting to static (not-average) buy-sell ratio
+  entry and exit thresholds.
+
+* I'll start tomorrow with this as I determine a way to handle frequent reversals.
+
+#### Next Thing(s) to Try
+* Log displacement of Buy-Sell ratio and entertain its use as an entry indicator.

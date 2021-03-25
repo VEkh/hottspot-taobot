@@ -1,4 +1,3 @@
-#include "lib/utils/integer.cpp"
 #include <iostream>
 
-int main() { std::cout << utils::integer_::seconds_to_clock(500) << std::endl; }
+int main() { std::cout << (24.0 / 59) << std::endl; }

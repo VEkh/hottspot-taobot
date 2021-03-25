@@ -7,6 +7,8 @@
 #include <vector>      // std::vector
 
 double ETrade::StockBot::compute_door_moving_average_period() {
+  return 2 * 60;
+
   const double max_period = 5 * 60;
   const double min_period = 1 * 60;
   const int range_period = 2 * 60;
