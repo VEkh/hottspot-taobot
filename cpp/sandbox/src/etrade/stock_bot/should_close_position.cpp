@@ -31,55 +31,43 @@ bool ETrade::StockBot::should_close_position() {
     return true;
   }
 
-  const int average_period_seconds_1 = 1 * 60;
-  const double average_buy_sell_ratio_1 =
-      compute_moving_buy_sell_ratio_average(average_period_seconds_1);
-  const double average_sell_buy_ratio_1 =
-      average_buy_sell_ratio_1 ? 1.0 / average_buy_sell_ratio_1 : 0;
+  int period_seconds_1 = 1 * 60;
+  int period_seconds_2 = 2 * 60;
+  int period_seconds_5 = 5 * 60;
 
-  const int average_period_seconds_5 = 5 * 60;
-  const double average_buy_sell_ratio_5 =
-      compute_moving_buy_sell_ratio_average(average_period_seconds_5);
-  const double average_sell_buy_ratio_5 =
-      average_buy_sell_ratio_5 ? 1.0 / average_buy_sell_ratio_5 : 0;
+  std::vector<int> periods = {
+      period_seconds_1,
+      period_seconds_2,
+      period_seconds_5,
+  };
 
-  const double exit_threshold_1 = 1.2;
-  const double profit_exit_threshold_1 = 1.1;
-  const double exit_threshold_5 = 1.0;
+  std::map<int, std::map<const char *, double>> average_buy_sell_ratios =
+      compute_moving_buy_sell_ratio_average(periods);
+
+  const sma_t simple_moving_average = this->quotes.back().simple_moving_average;
+  const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
+  const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
+
+  const double exit_threshold = 1.0;
 
   std::cout << fmt.cyan;
-  std::cout << "Average Buy-Sell ("
-            << utils::integer_::seconds_to_clock(average_period_seconds_1)
-            << ") Δ: " << average_buy_sell_ratio_1 << std::endl;
-  std::cout << "Average Sell-Buy ("
-            << utils::integer_::seconds_to_clock(average_period_seconds_1)
-            << ") Δ: " << average_sell_buy_ratio_1 << std::endl;
-  std::cout << "Average Buy-Sell ("
-            << utils::integer_::seconds_to_clock(average_period_seconds_5)
-            << ") Δ: " << average_buy_sell_ratio_5 << std::endl;
-  std::cout << "Average Sell-Buy ("
-            << utils::integer_::seconds_to_clock(average_period_seconds_5)
-            << ") Δ: " << average_sell_buy_ratio_5 << std::endl;
+
+  for (int period : periods) {
+    std::cout << "Average Buy-Sell ("
+              << utils::integer_::seconds_to_clock(period)
+              << ") Δ: " << average_buy_sell_ratios[period]["buy"] << std::endl;
+    std::cout << "Average Sell-Buy ("
+              << utils::integer_::seconds_to_clock(period)
+              << ") Δ: " << average_buy_sell_ratios[period]["sell"]
+              << std::endl;
+  }
+
   std::cout << fmt.reset << std::endl;
 
   if (this->is_long_position) {
-    if (average_buy_sell_ratio_5 <= exit_threshold_5) {
-      return true;
-    }
-
-    if (this->open_order.profit > 0 &&
-        average_buy_sell_ratio_1 <= profit_exit_threshold_1) {
-      return true;
-    }
+    return buy_sell_ratio <= exit_threshold;
   } else if (!this->is_long_position) {
-    if (average_sell_buy_ratio_5 <= exit_threshold_5) {
-      return true;
-    }
-
-    if (this->open_order.profit > 0 &&
-        average_sell_buy_ratio_1 <= profit_exit_threshold_1) {
-      return true;
-    }
+    return sell_buy_ratio <= exit_threshold;
   }
 
   return false;

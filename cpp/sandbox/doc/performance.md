@@ -784,3 +784,25 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Log displacement of Buy-Sell ratio and entertain its use as an entry indicator.
+
+### 2021-03-24:
+#### Performance
+* TSLA (-$26.97)
+
+#### Remarks
+* By requiring that the 5-minute moving buy-sell ratio average is trending in
+  the same direction as the 1-minute monving average, I reduced some of the
+  entry jumpiness.
+
+* The problem still remains that I'm not properly timing inevitable reversals.
+
+* For much of the day I used the 5-minute moving average reversal as the exit
+  point. This resulted in tardy exits.
+
+* The price movement chart does seem to suggest that the two minute buy-sell
+  ratio reversal seems to signal a reversal. I'll use that as the next
+  indicator.
+
+#### Next Thing(s) to Try
+* Exit with the 2-minute buy-sell ratio.
+* Place the opposite trade of what the entry signal suggests.

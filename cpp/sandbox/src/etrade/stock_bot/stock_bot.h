@@ -47,11 +47,14 @@ private:
   bool should_open_position();
   double compute_buy_sell_ratio(const sma_t &);
   double compute_door_moving_average_period();
-  double compute_moving_buy_sell_ratio_average(const int);
   double compute_sell_buy_ratio(const sma_t &);
   json get_order_json(const order_t *);
   quote_t parse_quote(const std::string &);
   sma_t build_simple_moving_average(const int);
+
+  std::map<int, std::map<const char *, double>>
+  compute_moving_buy_sell_ratio_average(std::vector<int> &);
+
   void close_position();
   void fetch_orders();
   void fetch_quote();
