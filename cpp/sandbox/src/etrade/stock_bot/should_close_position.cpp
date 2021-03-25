@@ -23,31 +23,25 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  const double profit_percentage =
-      100 * (this->open_order.profit / this->open_order.execution_price);
-
-  if (profit_percentage >= 0.2) {
-    return true;
-  }
-
-  int period_seconds_1 = 1 * 60;
-  int period_seconds_2 = 2 * 60;
-  int period_seconds_5 = 5 * 60;
-
-  std::vector<int> periods = {
-      period_seconds_1,
-      period_seconds_2,
-      period_seconds_5,
-  };
+  int long_period_seconds = 5 * 60;
+  std::vector<int> periods = {long_period_seconds};
 
   std::map<int, std::map<const char *, double>> average_buy_sell_ratios =
       compute_moving_buy_sell_ratio_average(periods);
+
+  const double long_average_buy_sell_ratio =
+      average_buy_sell_ratios[long_period_seconds]["buy"];
+  const double long_average_sell_buy_ratio =
+      average_buy_sell_ratios[long_period_seconds]["sell"];
 
   const sma_t simple_moving_average = this->quotes.back().simple_moving_average;
   const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
   const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
   const double exit_threshold = 1.0;
+  const double profit_percentage =
+      100 * (this->open_order.profit / this->open_order.execution_price);
+  const double secure_profit_percentage = 0.1;
 
   std::cout << fmt.cyan;
 
@@ -64,9 +58,13 @@ bool ETrade::StockBot::should_close_position() {
   std::cout << fmt.reset << std::endl;
 
   if (this->is_long_position) {
-    return buy_sell_ratio <= exit_threshold;
+    return profit_percentage >= secure_profit_percentage
+               ? buy_sell_ratio <= exit_threshold
+               : long_average_buy_sell_ratio <= exit_threshold;
   } else if (!this->is_long_position) {
-    return sell_buy_ratio <= exit_threshold;
+    return profit_percentage >= secure_profit_percentage
+               ? sell_buy_ratio <= exit_threshold
+               : long_average_sell_buy_ratio <= exit_threshold;
   }
 
   return false;

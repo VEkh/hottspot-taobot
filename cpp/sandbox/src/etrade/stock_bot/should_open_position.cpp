@@ -18,31 +18,23 @@ bool ETrade::StockBot::should_open_position() {
     return false;
   }
 
-  int period_seconds_1 = 1 * 60;
-  int period_seconds_2 = 2 * 60;
-  int period_seconds_5 = 5 * 60;
-
-  std::vector<int> periods = {
-      period_seconds_1,
-      period_seconds_2,
-      period_seconds_5,
-  };
+  int long_period_seconds = 5 * 60;
+  std::vector<int> periods = {long_period_seconds};
 
   std::map<int, std::map<const char *, double>> average_buy_sell_ratios =
       compute_moving_buy_sell_ratio_average(periods);
 
-  const double average_buy_sell_ratio_1 =
-      average_buy_sell_ratios[period_seconds_1]["buy"];
-  const double average_sell_buy_ratio_1 =
-      average_buy_sell_ratios[period_seconds_1]["sell"];
+  const double long_average_buy_sell_ratio =
+      average_buy_sell_ratios[long_period_seconds]["buy"];
+  const double long_average_sell_buy_ratio =
+      average_buy_sell_ratios[long_period_seconds]["sell"];
 
-  const double average_buy_sell_ratio_5 =
-      average_buy_sell_ratios[period_seconds_5]["buy"];
-  const double average_sell_buy_ratio_5 =
-      average_buy_sell_ratios[period_seconds_5]["sell"];
+  const sma_t simple_moving_average = this->quotes.back().simple_moving_average;
+  const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
+  const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
-  const double entry_threshold_1 = 1.2;
-  const double entry_threshold_5 = 1.0;
+  const double short_entry_threshold = 1.4;
+  const double long_entry_threshold = 1.0;
 
   std::cout << fmt.cyan;
 
@@ -58,14 +50,14 @@ bool ETrade::StockBot::should_open_position() {
 
   std::cout << fmt.reset << std::endl;
 
-  if (average_buy_sell_ratio_1 >= entry_threshold_1 &&
-      average_buy_sell_ratio_5 >= entry_threshold_5) {
+  if (buy_sell_ratio >= short_entry_threshold &&
+      long_average_buy_sell_ratio >= long_entry_threshold) {
     this->is_long_position = true;
     return true;
   }
 
-  if (average_sell_buy_ratio_1 >= entry_threshold_1 &&
-      average_sell_buy_ratio_5 >= entry_threshold_5) {
+  if (sell_buy_ratio >= short_entry_threshold &&
+      long_average_sell_buy_ratio >= long_entry_threshold) {
     this->is_long_position = false;
     return true;
   }

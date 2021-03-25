@@ -806,3 +806,19 @@ Conclusions:
 #### Next Thing(s) to Try
 * Exit with the 2-minute buy-sell ratio.
 * Place the opposite trade of what the entry signal suggests.
+
+### 2021-03-25:
+#### Performance
+* TSLA: $6.40
+
+#### Remarks
+* Today closed at a profit thanks to sustained strong directional movement.
+* The latest close indicator did however also act as a greater defense against
+  tepid directional movement.
+* There were a couple times where _sharp_ reversals triggerd a premature close.
+
+#### Next Thing(s) to Try
+* Exit:
+  * Loss - when the postion-side buy-sell 7 (not 5)-minute ratio average
+    drops below 1.0
+  * (Secure) Profit - when the postion-side buy-sell ratio drops below 1.0
