@@ -7,7 +7,6 @@
  */
 #include "stock_bot.h"
 
-#include "compute_door_moving_average_period.cpp" // compute_door_moving_average_period
 #include "compute_moving_buy_sell_ratio_average.cpp" // compute_moving_buy_sell_ratio_average
 #include "lib/utils/integer.cpp"                     // utils::integer_
 #include <iostream>                                  // std::cout, std::endl
