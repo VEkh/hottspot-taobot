@@ -18,10 +18,6 @@ void ETrade::StockBot::fetch_orders() {
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return this->etrade_client.fetch(url); },
       [](const std::string &response) -> bool {
-        if (utils::string::trim(response).empty()) {
-          return true;
-        }
-
         if (std::regex_search(response,
                               std::regex("oauth_problem=nonce_used"))) {
           return true;
@@ -30,6 +26,10 @@ void ETrade::StockBot::fetch_orders() {
         return std::regex_search(
             response, std::regex("oauth_parameters_absent=oauth_nonce"));
       });
+
+  if (curl_client.response.body.empty()) {
+    return;
+  }
 
   this->placed_orders =
       json::parse(curl_client.response.body)["OrdersResponse"]["Order"];
