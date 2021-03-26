@@ -3,6 +3,7 @@
 
 /*
  * ETrade::StockBot
+ * SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS
  * quote_t
  * symbol
  */

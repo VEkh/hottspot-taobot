@@ -1,4 +1,8 @@
+#include "etrade/deps.cpp" // json
 #include <iostream>
 #include <math.h>
 
-int main() { std::cout << !!(0) << std::endl; }
+int main() {
+  json j = R"()"_json;
+  std::cout << j << std::endl;
+}

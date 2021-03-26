@@ -822,3 +822,22 @@ Conclusions:
   * Loss - when the postion-side buy-sell 7 (not 5)-minute ratio average
     drops below 1.0
   * (Secure) Profit - when the postion-side buy-sell ratio drops below 1.0
+
+### 2021-03-26:
+#### Performance
+* AAPL: -$0.01
+* TSLA: -$1.06
+
+#### Remarks
+* Second day in a row where the algorithm largely peformed as expected, taking
+  advantage of strong trends and confidently riding tepid ones.
+* It still gets hammered by sharp trend reversals.
+* I'm tweaking the SMA period to perhaps reduce large losses related to sharp
+  reversals.
+* A shorter period may exit sooner during sharp reversals, but it may make
+  entries and exits too jumpy.
+* I first tried an SMA period of 2.5 minutes with AAPL.
+  * This seemed to make StockBot too sluggish in his entry and exit.
+* 1.5 minutes seemed better. We'll try again on Monday.
+
+#### Next Thing(s) to Try
