@@ -33,8 +33,8 @@ bool ETrade::StockBot::should_open_position() {
   const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
   const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
-  const double short_entry_threshold = 1.4;
   const double long_entry_threshold = 1.0;
+  const double short_entry_threshold = 1.5;
 
   std::cout << fmt.cyan;
 

@@ -43,6 +43,10 @@ bool ETrade::StockBot::should_close_position() {
       100 * (this->open_order.profit / this->open_order.execution_price);
   const double secure_profit_percentage = 0.1;
 
+  if (profit_percentage <= -0.5) {
+    return true;
+  }
+
   std::cout << fmt.cyan;
 
   for (int period : periods) {

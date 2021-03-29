@@ -841,3 +841,24 @@ Conclusions:
 * 1.5 minutes seemed better. We'll try again on Monday.
 
 #### Next Thing(s) to Try
+
+### 2021-03-29:
+#### Performance
+* AAPL: -$0.92
+* TSLA: -$12.74
+
+#### Remarks
+* The 1.5-minute buy-sell ratio led to jumpy entry and exits.
+* I readjusted back to a 2 minute ratio and this performed better.
+* I also adjusted the entry short period average from instantaneous to a
+  30-second average. This was to avoid premature entry in trends that were
+  quickly followed by a reversal.
+* This did help avoid some reversals, but it also cause late entry into
+  would-be highly profitable positions.
+* There needs to be a balance of being able to quickly entry trends and not be
+  too susceptible to sharp reversals.
+
+#### Next Thing(s) to Try
+* Increase the instantaneous buy-sell ratio entry threshold from 1.4 - 1.5.
+* Introduce a max loss of 0.5%. This will help bail out of sharp reversals of
+  high-momentum trends.

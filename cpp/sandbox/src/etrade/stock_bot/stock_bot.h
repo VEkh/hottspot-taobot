@@ -24,7 +24,7 @@ private:
   using sma_t = ETrade::t::sma_t;
 
   const double POLLING_INTERVAL_SECONDS = 0.5;
-  const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 1.5 * 60;
+  const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
