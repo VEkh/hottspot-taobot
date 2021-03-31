@@ -862,3 +862,46 @@ Conclusions:
 * Increase the instantaneous buy-sell ratio entry threshold from 1.4 - 1.5.
 * Introduce a max loss of 0.5%. This will help bail out of sharp reversals of
   high-momentum trends.
+
+### 2021-03-30:
+#### Performance
+* AAPL: -$0.33
+* TSLA: $24.16
+
+#### Remarks
+* StockBot performed exceedingly well for TSLA whose day was characterized by
+  regular strong trends.
+* It performed moderately poorly for AAPL, whose day was characterized by several reversals.
+* Volume was below average for both TSLA and AAPL. I wonder how it will perform
+  during higher volume days.
+
+#### Next Thing(s) to Try
+* See if it continues to perform well for TSLA, performs better for AAPL, and
+  how it performs on AMZN.
+
+### 2021-03-31:
+#### Performance
+* AAPL: -$0.46
+* MSFT: $1.58
+* SNAP: $0.79
+* TSLA: $8.60
+
+#### Remarks
+* StockBot performed moderately well for TSLA whose day was characterized by a
+  mix of strong trends and sharp reversals.
+* It performed uncharacterstically high for MSFT because of the massive mid
+  afternoon spike following the company's government contract.
+* MSFT's volume increased significantly at that time and then started to
+  experience frequent reversals. Much of its large gain was lost.
+* This makes me wonder whether higher volatility works against StockBot. I'll
+  continue monitoriing.
+* AAPL performed well at first then began to experience frequent sharp
+  reversals and lost all its gains.
+* SNAP benefitted from various strong trends.
+* AMZN performed poorly. At this point, StockBot isn't suited to trade
+  securites who trade with volumes as low as AMZN and GOOG.
+* For now, I'll focus on high-volume securities.
+
+#### Next Thing(s) to Try
+* Look into Alpaca Trading
+* Maybe reduce secure profit percentage from 0.1 to 0.05%

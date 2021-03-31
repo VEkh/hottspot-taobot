@@ -41,7 +41,7 @@ bool ETrade::StockBot::should_close_position() {
   const double exit_threshold = 1.0;
   const double profit_percentage =
       100 * (this->open_order.profit / this->open_order.execution_price);
-  const double secure_profit_percentage = 0.1;
+  const double secure_profit_percentage = 0.05;
 
   if (profit_percentage <= -0.5) {
     return true;
