@@ -16,6 +16,7 @@ public:
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
+  using quote_t = ETrade::t::quote_t;
 
   enum debug_t { OFF, ON };
 
@@ -44,6 +45,7 @@ public:
   CurlClient place_order(order_t *);
   CurlClient preview_order(const order_t &);
 
+  quote_t parse_quote(const std::string &);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   void fetch_access_token();

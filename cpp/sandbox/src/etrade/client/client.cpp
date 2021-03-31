@@ -7,6 +7,7 @@
 #include "fetch_access_token.cpp"
 #include "fetch_quote.cpp"
 #include "load_client_config.cpp" // load_client_config
+#include "parse_quote.cpp"
 #include "place_order.cpp"
 #include "post.cpp"
 #include "refresh_token.cpp"

@@ -3,6 +3,7 @@
 
 /*
  * ETrade::StockBot
+ * SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS
  * etrade_client
  * quote_t
  * quotes
@@ -10,12 +11,15 @@
  */
 #include "stock_bot.h"
 
-#include "parse_quote.cpp" // parse_quote
-#include <string>          // std::string
+#include "build_simple_moving_average.cpp" // build_simple_moving_average
+#include <string>                          // std::string
 
 void ETrade::StockBot::fetch_quote() {
   std::string quote_string = etrade_client.fetch_quote(symbol);
-  quote_t current_quote = parse_quote(quote_string);
+  quote_t current_quote = etrade_client.parse_quote(quote_string);
+  current_quote.simple_moving_average =
+      build_simple_moving_average(SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS);
+
   quotes.push_back(current_quote);
 }
 
