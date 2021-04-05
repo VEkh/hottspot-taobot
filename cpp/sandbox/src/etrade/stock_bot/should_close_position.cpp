@@ -13,6 +13,7 @@
 #include "compute_moving_buy_sell_ratio_average.cpp" // compute_moving_buy_sell_ratio_average
 #include "lib/utils/integer.cpp"                     // utils::integer_
 #include <iostream>                                  // std::cout, std::endl
+#include <math.h>                                    // abs
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -43,7 +44,7 @@ bool ETrade::StockBot::should_close_position() {
       100 * (this->open_order.profit / this->open_order.execution_price);
   const double secure_profit_percentage = 0.05;
 
-  if (profit_percentage <= -0.5) {
+  if (abs(profit_percentage) >= 0.15) {
     return true;
   }
 
@@ -60,16 +61,6 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   std::cout << fmt.reset << std::endl;
-
-  if (this->is_long_position) {
-    return profit_percentage >= secure_profit_percentage
-               ? buy_sell_ratio <= exit_threshold
-               : long_average_buy_sell_ratio <= exit_threshold;
-  } else if (!this->is_long_position) {
-    return profit_percentage >= secure_profit_percentage
-               ? sell_buy_ratio <= exit_threshold
-               : long_average_sell_buy_ratio <= exit_threshold;
-  }
 
   return false;
 }

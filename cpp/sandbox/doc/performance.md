@@ -905,3 +905,57 @@ Conclusions:
 #### Next Thing(s) to Try
 * Look into Alpaca Trading
 * Maybe reduce secure profit percentage from 0.1 to 0.05%
+
+### 2021-04-01:
+#### Performance
+* AAPL: -$2.20
+* AMZN: -$5.97
+* MSFT: $0.94
+* SNAP: -$2.69
+* TSLA: -$4.74
+
+#### Remarks
+* AMZN performed poorly again, even at the day's onset where volume was higher.
+  I think it's safe to say that this strategy doesn't work for AMZN at the
+  moment.
+* TSLA performed moderately poorly, however, this is including the changes I
+  made to accommodate the low price action securities.
+* It's the second day in a row where AAPL and SNAP performed definitely poorly.
+  I'm starting to suspect that this strategy works best on securities whose day
+  range is at least several, if not dozens of dollars.
+* Day Ranges:
+  AAPL: 1.69
+  MSFT: 4.33
+  SNAP: 1.37
+  TSLA: 33
+
+  ===
+
+  AAPL %: 1.36898
+  MSFT %: 1.81194
+  SNAP %: 2.56075
+  TSLA %: 4.86009
+
+#### Next Thing(s) to Try
+* Tomorrow, to test the day range efficacy theory, I'll try trading:
+  * SPOT
+  * SQ
+
+### 2021-04-05:
+#### Performance
+* AAPL: 2 / 5 => 0.4
+* MSFT: 18 / 31 => 0.580645
+* SNAP: 5 / 11 => 0.454545 **Switched to swing algo**
+* SPOT: 0 / 3 => 0
+* SQ: 26 / 50 => 0.52 **Switched to swing algo**
+* TSLA: => 32 / 56 => 0.571429
+* UBER: => 11 / 16 => 0.6875
+
+#### Remarks
+* It's unclear whether the entry signal is right > 50%.
+* I'm setting an equal stop profit and stop loss. Then I'll see if the win
+  percentage is > 50%. If it is, then theoretically this should make money each
+  time.
+
+#### Next Thing(s) to Try
+* If it is conistently wrong >50% consider predicting a reversal upon entering.
