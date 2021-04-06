@@ -959,3 +959,26 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * If it is conistently wrong >50% consider predicting a reversal upon entering.
+
+### 2021-04-06:
+#### Performance
+* @ 12:45pm
+  * MSFT: 13 / 22 => 0.590909
+  * SNAP: 29 / 73 => 0.39726
+  * SQ: 36 / 66 => 0.545455
+  * TSLA: => 14 / 29 => 0.482759
+
+* @ Close
+  * MSFT: 15 / 27 => 0.555556
+  * SNAP: 43 / 108 => 0.398148
+  * SQ: 52 / 97 => 0.536082
+  * TSLA: => 24 / 59 => 0.40678
+
+
+#### Remarks
+* Didn't lose abysmally, but there isn't a consistent > 50% win rate.
+
+#### Next Thing(s) to Try
+* Extend the max win and loss from 0.15% to 0.4%
+* This may help address SNAP's volatility and will execute fewer trades
+* I'm still just looking for a >50% win rate.

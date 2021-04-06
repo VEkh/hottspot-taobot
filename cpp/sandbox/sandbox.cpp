@@ -1,4 +1,4 @@
 #include <iostream>
 #include <math.h>
 
-int main() { std::cout << (11.0 / 16) << std::endl; }
+int main() { std::cout << (24.0 / 59) << std::endl; }

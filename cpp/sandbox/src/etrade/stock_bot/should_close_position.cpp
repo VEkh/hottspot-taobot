@@ -39,12 +39,11 @@ bool ETrade::StockBot::should_close_position() {
   const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
   const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
-  const double exit_threshold = 1.0;
   const double profit_percentage =
       100 * (this->open_order.profit / this->open_order.execution_price);
   const double secure_profit_percentage = 0.05;
 
-  if (abs(profit_percentage) >= 0.15) {
+  if (abs(profit_percentage) >= 0.4) {
     return true;
   }
 
