@@ -39,13 +39,9 @@ bool ETrade::StockBot::should_close_position() {
   const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
   const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
+  const double long_exit_threshold = 1.15;
   const double profit_percentage =
       100 * (this->open_order.profit / this->open_order.execution_price);
-  const double secure_profit_percentage = 0.05;
-
-  if (abs(profit_percentage) >= 0.4) {
-    return true;
-  }
 
   std::cout << fmt.cyan;
 
@@ -60,6 +56,12 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   std::cout << fmt.reset << std::endl;
+
+  if (this->is_long_position) {
+    return long_average_sell_buy_ratio >= long_exit_threshold;
+  } else {
+    return long_average_buy_sell_ratio >= long_exit_threshold;
+  }
 
   return false;
 }

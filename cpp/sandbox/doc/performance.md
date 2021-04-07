@@ -982,3 +982,19 @@ Conclusions:
 * Extend the max win and loss from 0.15% to 0.4%
 * This may help address SNAP's volatility and will execute fewer trades
 * I'm still just looking for a >50% win rate.
+
+### 2021-04-07:
+#### Performance
+* As of 11:35am, it was down  $-7.95
+
+
+#### Remarks
+* Again, didn't lose abysmally, but still struggling to get consistent wins
+* Setting the target win to 0.2% is flawed because not all securities regularly
+  move by this amount.
+  * Setting thresholds related to buy-sell ratio addresses this.
+
+#### Next Thing(s) to Try
+* I'm going to try to ride the long-average buy sell ratios by entering after
+  it surpasses a threshold and exiting when it surpasses that same threshold in
+  the opposite direction.
