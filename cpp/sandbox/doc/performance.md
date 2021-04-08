@@ -998,3 +998,20 @@ Conclusions:
 * I'm going to try to ride the long-average buy sell ratios by entering after
   it surpasses a threshold and exiting when it surpasses that same threshold in
   the opposite direction.
+
+### 2021-04-07:
+#### Performance
+* AAPL (-$0.09): 5 / 14
+* MSFT (-$5.08): 5 / 35
+* SQ (-$10.27): 8 / 32
+* TSLA ($0.30): 9 / 28
+
+
+#### Remarks
+* It seems safe to say that the price moves in the opposite direction of the
+  perceived trend the majority of the time.
+* This suggests that it may actually be a good swing / reversal indicator
+
+#### Next Thing(s) to Try
+* Predict that the price direction will reverse and place a bet in the opposite
+  direction of the entry indicator.

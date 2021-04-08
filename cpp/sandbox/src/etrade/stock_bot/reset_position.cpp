@@ -18,6 +18,7 @@ void ETrade::StockBot::reset_position() {
   }
 
   this->close_order_ptr = nullptr;
+  this->has_position_reversed = false;
   this->open_order_ptr = nullptr;
 }
 

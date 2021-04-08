@@ -33,6 +33,7 @@ private:
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  bool has_position_reversed;
   bool is_long_position;
   char *symbol;
   int quantity;

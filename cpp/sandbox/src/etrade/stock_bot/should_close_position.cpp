@@ -39,7 +39,7 @@ bool ETrade::StockBot::should_close_position() {
   const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
   const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
-  const double long_exit_threshold = 1.15;
+  const double long_exit_threshold = 1.0;
   const double profit_percentage =
       100 * (this->open_order.profit / this->open_order.execution_price);
 
@@ -56,6 +56,24 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   std::cout << fmt.reset << std::endl;
+
+  if (!this->has_position_reversed) {
+    const double reverse_threshold = 1.1;
+
+    this->has_position_reversed =
+        (this->is_long_position &&
+         long_average_sell_buy_ratio >= reverse_threshold) ||
+        (!this->is_long_position &&
+         long_average_buy_sell_ratio >= reverse_threshold);
+  }
+
+  if (!this->has_position_reversed) {
+    return false;
+  } else {
+    std::cout << fmt.bold << fmt.yellow;
+    std::cout << "👈🏾The position has reversed.";
+    std::cout << fmt.reset << std::endl;
+  }
 
   if (this->is_long_position) {
     return long_average_sell_buy_ratio >= long_exit_threshold;

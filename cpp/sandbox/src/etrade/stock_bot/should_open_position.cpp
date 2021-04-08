@@ -33,7 +33,7 @@ bool ETrade::StockBot::should_open_position() {
   const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
   const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
 
-  const double long_entry_threshold = 1.15;
+  const double long_entry_threshold = 1.1;
   const double short_entry_threshold = 1.5;
 
   std::cout << fmt.cyan;
@@ -53,7 +53,7 @@ bool ETrade::StockBot::should_open_position() {
   if (long_average_buy_sell_ratio >= long_entry_threshold ||
       long_average_sell_buy_ratio >= long_entry_threshold) {
     this->is_long_position =
-        long_average_buy_sell_ratio >= long_entry_threshold;
+        long_average_sell_buy_ratio >= long_entry_threshold;
     return true;
   }
 
