@@ -33,9 +33,12 @@ private:
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  bool has_position_reversed;
+  bool has_direction_returned;
+  bool has_direction_reversed;
   bool is_long_position;
   char *symbol;
+  double long_average_buy_sell_ratio;
+  double long_average_sell_buy_ratio;
   int quantity;
   json placed_orders;
   order_t *close_order_ptr = nullptr;
@@ -65,7 +68,9 @@ private:
   void log_start_message();
   void open_position();
   void reset_position();
+  void set_direction_changes();
   void set_execution_price(order_t *);
+  void set_movement_moving_averages();
   void set_open_position_prices();
   void set_position_status();
   void set_profit(order_t *);

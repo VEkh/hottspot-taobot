@@ -999,7 +999,7 @@ Conclusions:
   it surpasses a threshold and exiting when it surpasses that same threshold in
   the opposite direction.
 
-### 2021-04-07:
+### 2021-04-08:
 #### Performance
 * AAPL (-$0.09): 5 / 14
 * MSFT (-$5.08): 5 / 35
@@ -1015,3 +1015,31 @@ Conclusions:
 #### Next Thing(s) to Try
 * Predict that the price direction will reverse and place a bet in the opposite
   direction of the entry indicator.
+
+### 2021-04-09:
+#### Performance
+* Total: -$11.46
+  * AAPL ($0.21): 6 / 12
+  * AMZN (-$23.29): 5 / 12
+  * MSFT (-$2.66): 2 / 16
+  * SNAP (-$0.40): 3 / 4
+  * SQ (-$0.76): 7 / 16
+  * TSLA ($13.12): 9 / 16
+
+
+#### Remarks
+* Today I tried using the entry signal as a reversal signal.
+* It actually worked fairly well. Though most of the win rates were still <
+  50%, the algorithm allows for large gains before closing.
+* Where it failed, however, were in securities like AMZN and MSFT who both had
+  strong movement in the direction of the entry signal.
+
+#### Next Thing(s) to Try
+* I'll revert StockBot to place an order in the direction of the entry signal.
+* However, this time I will account for more prevalent reversals by:
+  1. Waiting to see if it reverses
+  2. Marking the reversal
+  3. Waiting for the price to reverse _again_ back in the direction of the
+     original order.
+  4. Then I'll apply the close indicator if the movement neutralizes,
+     threatening to reverse again.
