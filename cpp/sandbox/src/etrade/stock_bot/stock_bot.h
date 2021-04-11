@@ -1,21 +1,23 @@
 #if !defined ETRADE__STOCK_BOT_H
 #define ETRADE__STOCK_BOT_H
 
-#include "etrade/client/client.h" // ETrade::Client
-#include "etrade/deps.cpp"        // json
-#include "etrade/types.cpp"       // ETrade::t
-#include "lib/formatted.cpp"      // Formatted
-#include <map>                    // std::map
-#include <vector>                 // std::vector
+#include "etrade/client/client.h"            // ETrade::Client
+#include "etrade/deps.cpp"                   // json
+#include "etrade/types.cpp"                  // ETrade::t
+#include "lib/formatted.cpp"                 // Formatted
+#include "lib/transmission/transmission.cpp" // Transmission
+#include <map>                               // std::map
+#include <vector>                            // std::vector
 
 namespace ETrade {
 class StockBot {
 public:
-  void run();
-
   StockBot(char *, int);
 
+  void run();
+
 private:
+  using gear_t = Transmission::gear_t;
   using order_action_t = ETrade::t::order_action_t;
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
@@ -23,6 +25,7 @@ private:
   using quote_t = ETrade::t::quote_t;
   using sma_t = ETrade::t::sma_t;
 
+  const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.1;
   const double POLLING_INTERVAL_SECONDS = 0.5;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
@@ -33,6 +36,7 @@ private:
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  Transmission transmission;
   bool has_direction_returned;
   bool has_direction_reversed;
   bool is_long_position;
@@ -68,7 +72,6 @@ private:
   void log_start_message();
   void open_position();
   void reset_position();
-  void set_direction_changes();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
   void set_open_position_prices();
@@ -76,6 +79,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *);
+  void shift_transmission_gear();
   void watch();
 };
 } // namespace ETrade

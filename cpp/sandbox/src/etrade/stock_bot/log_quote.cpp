@@ -39,8 +39,8 @@ void ETrade::StockBot::log_quote() {
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << fmt.bold << fmt.underline << log_color;
-  std::cout << symbol << " Quote (@ "
-            << utils::integer_::seconds_to_clock(runtime) << ")" << std::endl;
+  std::cout << symbol << " Quote @ "
+            << utils::integer_::seconds_to_clock(runtime) << std::endl;
   std::cout << fmt.reset;
   std::cout << fmt.bold << log_color;
   std::cout << "Current: "

@@ -3,10 +3,8 @@
 
 /*
  * ETrade::StockBot
- * fmt
+ * gear_t
  * order_status_t
- * quote_t
- * sma_t
  */
 #include "stock_bot.h"
 
@@ -19,24 +17,22 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  const double long_exit_threshold = 1.0;
+  gear_t *current_gear_ptr = this->transmission.current_gear();
 
-  if (!this->has_direction_reversed && this->open_order.profit > 0) {
-    if (this->is_long_position) {
-      return long_average_buy_sell_ratio <= long_exit_threshold;
-    } else {
-      return long_average_sell_buy_ratio <= long_exit_threshold;
-    }
-  }
-
-  if (this->has_direction_reversed && !this->has_direction_returned) {
+  if (!current_gear_ptr) {
     return false;
   }
 
-  if (this->is_long_position) {
-    return long_average_buy_sell_ratio <= long_exit_threshold;
-  } else {
-    return long_average_sell_buy_ratio <= long_exit_threshold;
+  gear_t current_gear = *current_gear_ptr;
+
+  if (current_gear == gear_t::N && this->open_order.profit > 0) {
+    return true;
+  }
+
+  if (current_gear == gear_t::N &&
+      this->transmission.shift_count(gear_t::R) > 0 &&
+      this->transmission.shift_count(gear_t::D) > 1) {
+    return true;
   }
 
   return false;

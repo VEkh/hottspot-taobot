@@ -7,6 +7,8 @@
  */
 #include "stock_bot.h"
 
+#include "lib/transmission/transmission.cpp" // Transmission
+
 void ETrade::StockBot::reset_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
     return;
@@ -18,9 +20,8 @@ void ETrade::StockBot::reset_position() {
   }
 
   this->close_order_ptr = nullptr;
-  this->has_direction_returned = false;
-  this->has_direction_reversed = false;
   this->open_order_ptr = nullptr;
+  this->transmission = Transmission();
 }
 
 #endif

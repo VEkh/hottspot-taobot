@@ -16,10 +16,10 @@
 #include "log_simple_moving_average.cpp"    // log_simple_moving_average
 #include "open_position.cpp"                // open_position
 #include "reset_position.cpp"               // reset_position
-#include "set_direction_changes.cpp"        // set_direction_changes
 #include "set_movement_moving_averages.cpp" // set_movement_moving_averages
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
+#include "shift_transmission_gear.cpp"      // shift_transmission_gear
 #include <chrono>                           // std::chrono
 #include <thread>                           // std::this_thread
 
@@ -37,7 +37,8 @@ void ETrade::StockBot::watch() {
     open_position();
     set_open_position_prices();
 
-    set_direction_changes();
+    shift_transmission_gear();
+    this->transmission.log();
 
     close_position();
     log_position_results();
