@@ -18,7 +18,6 @@ public:
 
   Transmission(){};
 
-  bool has_reversed() { return shift_count(gear_t::R) > 0; }
   gear_t *current_gear();
   gear_t *previous_gear();
   int shift_count(const gear_t);

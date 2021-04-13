@@ -25,7 +25,7 @@ private:
   using quote_t = ETrade::t::quote_t;
   using sma_t = ETrade::t::sma_t;
 
-  const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.1;
+  const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.2;
   const double POLLING_INTERVAL_SECONDS = 0.5;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
@@ -37,8 +37,6 @@ private:
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Transmission transmission;
-  bool has_direction_returned;
-  bool has_direction_reversed;
   bool is_long_position;
   char *symbol;
   double long_average_buy_sell_ratio;
@@ -55,6 +53,7 @@ private:
   bool should_open_position();
   double compute_buy_sell_ratio(const sma_t &);
   double compute_sell_buy_ratio(const sma_t &);
+  double profit_percentage(const order_t *);
   json get_order_json(const order_t *);
   sma_t build_simple_moving_average(const int);
 

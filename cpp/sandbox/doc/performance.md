@@ -1043,3 +1043,70 @@ Conclusions:
      original order.
   4. Then I'll apply the close indicator if the movement neutralizes,
      threatening to reverse again.
+
+### 2021-04-12:
+#### Performance
+* Total: -$12.42
+  * MSFT ($0.43): 6 / 16
+  * SNAP (-$1.71): 5 / 19
+  * SQ (-$2.81): 5 / 16
+  * TSLA (-$8.33): 8 / 18
+
+
+#### Remarks
+* Again, didn't lose drastic sums of money.
+* This was the first day testing the transmission gear shift exit strategy
+* It actually did a very good job neutralizing double-reversals
+* I did still, however, incur heavy losses when the algorithm was waiting for a
+  return to the Drive gear.
+
+
+#### Next Thing(s) to Try
+* Implement a max loss to cut losses if it's clearly trending in the losing
+  direction.
+
+### 2021-04-13:
+#### Performance
+* Total: $22.23
+  * MSFT (-$1.96): 4 / 18
+  * SNAP (-$1.60): 5 / 27
+  * SQ ($0.10): 10 / 22
+  * TSLA ($25.68): 14 / 26
+
+
+#### Remarks
+* Very good performance but don't celebrate too much. It was largely
+  characterized by TSLA strong monodirectional movement.
+* I re-introduced a stop loss threshold of 0.4% to avoid catastrophic losses
+* This proved to work pretty well for TSLA (on whom the threshold was based)
+  and SQ, okay for SNAP, and very poorly for MSFT.
+* The problem with a price-based stop-loss is that it represents moderate price
+  movement for some and significant price movement for others.
+* I should still implement a stop-loss, but it should be price displacement-agnostic.
+* At this point, StockBot makes money in the following ways, in descending order of profitability:
+  1. Strong cis trend, followed by gradual level off
+  2. Strong cis trend, followed by gradual reversal
+  3. Strong cis trend, followed by sharp reversal
+  4. Strong trans trend, followed by a reversal, followed by a level off
+    * This used to incur heavy losses. The Transmission, gear shift exit
+      strategy has helped address this.
+
+* At this point, StockBot loses money in following ways, in descending order of loss:
+  1. Strong trans trend, followed by reversal that levels off or reverses
+     before reaching the entry point
+  2. Strong trans trend, followed by a reversal, followed by a sharp reversal
+
+* Hopefully by refining the stop loss, loss pattern #1, will lose less money
+  and allow entry in the trans direction.
+
+* I briefly introduced a stop loss by exiting when the trans direction's
+  buy-sell ratio's moving average exceeded 1.5. However, this was excessive and
+  didn't trigger a close at the appropriate point.
+
+* I also increased the buy-sell ratio moving average entry threshold from 1.1
+  to 1.2. This seem to be a better signal and helped reduce SNAP's jumpiness.
+
+
+#### Next Thing(s) to Try
+* I'll introduce a stop loss buy-sell ratio moving average of 1.3 in the
+  reversal direction and see if that provides a more appropriate exit.
