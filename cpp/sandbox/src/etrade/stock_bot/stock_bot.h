@@ -41,6 +41,8 @@ private:
   char *symbol;
   double long_average_buy_sell_ratio;
   double long_average_sell_buy_ratio;
+  double short_average_buy_sell_ratio;
+  double short_average_sell_buy_ratio;
   int quantity;
   json placed_orders;
   order_t *close_order_ptr = nullptr;

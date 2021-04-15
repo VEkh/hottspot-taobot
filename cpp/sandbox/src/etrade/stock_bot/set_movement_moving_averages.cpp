@@ -9,7 +9,8 @@
 
 void ETrade::StockBot::set_movement_moving_averages() {
   int long_period_seconds = 5 * 60;
-  std::vector<int> periods = {long_period_seconds};
+  int short_period_seconds = 15;
+  std::vector<int> periods = {short_period_seconds, long_period_seconds};
 
   std::map<int, std::map<const char *, double>> average_buy_sell_ratios =
       compute_moving_buy_sell_ratio_average(periods);
@@ -18,6 +19,11 @@ void ETrade::StockBot::set_movement_moving_averages() {
       average_buy_sell_ratios[long_period_seconds]["buy"];
   this->long_average_sell_buy_ratio =
       average_buy_sell_ratios[long_period_seconds]["sell"];
+
+  this->short_average_buy_sell_ratio =
+      average_buy_sell_ratios[short_period_seconds]["buy"];
+  this->short_average_sell_buy_ratio =
+      average_buy_sell_ratios[short_period_seconds]["sell"];
 
   std::cout << fmt.cyan;
 

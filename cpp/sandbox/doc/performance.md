@@ -1111,7 +1111,7 @@ Conclusions:
 * I'll introduce a stop loss buy-sell ratio moving average of 1.3 in the
   reversal direction and see if that provides a more appropriate exit.
 
-### 2021-04-13:
+### 2021-04-14:
 #### Performance
 * Total: -$6.97
   * AAPL (-$2.59): 4 / 25
@@ -1146,3 +1146,29 @@ Conclusions:
   threshold.
   * If, however, the 2-min buy-sell ratio, surpasses a threshold (1.75, 1.8,
     2???), close the reversal position in favor of a cis-trend position.
+
+### 2021-04-15:
+#### Performance
+* Total: -$3.30
+  * AAPL ($0.24): 3 / 11
+  * MSFT ($0.44): 11 / 33
+  * SNAP (-$1.08): 9 / 31
+  * SQ (-$1.36): 11 / 27
+  * TSLA (-$1.53): 9 / 14
+
+#### Remarks
+* Much improved performance.
+* At first I would leave a profitable position if its 2-min buy-sell ratio
+  exceeded a threshold in the opposite direction of the trend.
+  * This proved to be too jumpy.
+* I changed to exiting when 15-sec average of the ratio exceeded the threshold.
+  This seemed to avoid premature closure without incurring too much loss.
+* After TSLA suffered a major loss because the 1.3 5-min buy-sell ratio average
+  in the opposite direction was too high a threshold, I added another exit
+  criterion: if there are >= 2 reversals.
+  * This will help exit scenarios that reverse, mildly return, but continue to
+    reverse.
+
+#### Next Thing(s) to Try
+* I'll decrease the exit threshold for the 5-min trans-buy-sell ratio from 1.3
+  to 1.25

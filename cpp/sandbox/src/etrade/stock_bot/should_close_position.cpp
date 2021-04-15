@@ -19,16 +19,12 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  const sma_t simple_moving_average = this->quotes.back().simple_moving_average;
-
-  const double buy_sell_ratio = simple_moving_average.buy_sell_ratio;
-  const double sell_buy_ratio = simple_moving_average.sell_buy_ratio;
-
-  const double short_door_threshold = 1.2;
-  const double stop_loss_threshold = 1.3;
+  const double short_door_threshold = 1.0;
+  const double stop_loss_threshold = 1.25;
 
   if (this->is_long_position) {
-    if (this->open_order.profit > 0 && sell_buy_ratio >= short_door_threshold) {
+    if (this->open_order.profit > 0 &&
+        this->short_average_sell_buy_ratio >= short_door_threshold) {
       return true;
     }
 
@@ -38,7 +34,8 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   if (!this->is_long_position) {
-    if (this->open_order.profit > 0 && buy_sell_ratio >= short_door_threshold) {
+    if (this->open_order.profit > 0 &&
+        this->short_average_buy_sell_ratio >= short_door_threshold) {
       return true;
     }
 
@@ -56,6 +53,10 @@ bool ETrade::StockBot::should_close_position() {
   gear_t current_gear = *current_gear_ptr;
 
   if (current_gear == gear_t::N && this->open_order.profit > 0) {
+    return true;
+  }
+
+  if (this->transmission.shift_count(gear_t::R) > 1) {
     return true;
   }
 
