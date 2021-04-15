@@ -1110,3 +1110,39 @@ Conclusions:
 #### Next Thing(s) to Try
 * I'll introduce a stop loss buy-sell ratio moving average of 1.3 in the
   reversal direction and see if that provides a more appropriate exit.
+
+### 2021-04-13:
+#### Performance
+* Total: -$6.97
+  * AAPL (-$2.59): 4 / 25
+  * MSFT (-$2.78): 9 / 28
+  * SNAP (-$0.99): 10 / 29
+  * SQ ($6.18): 9 / 23
+  * TSLA ($25.68): 15 / 25
+
+#### Remarks
+* Overall not terrible, however I'm stil having issues with quick reversals.
+* I'll either have to always assume reversals and incur an early loss before
+  converting to a cis-trend position.
+* Before doing that, I want to attempt to avoid situations where gains are lost
+  at early indicators of sharp reversal.
+* There are some cases in which a position is profiting, however its buy-sell
+  ratio flips in the opposite direction.
+* This could just be a correction as the trend continues in the same origninal
+  direction.
+* However, in many cases it represents a reversal that then requires a return
+  to the original direction or an outright loss.
+* Another thing I noticed is that cis-trend positions that seem to profit
+  considerably have an instantaneous buy-sell ratio that exceeds 2 (or at least
+  1.75, 1.8, etc.)
+* The ones that often result in reversals are the ones that barely pass 1.3,
+  1.5 etc.
+* Maybe this could be used to predict reversals.
+
+#### Next Thing(s) to Try
+* Exit profitable position if the instantaneous 2-min buy-sell ratio surpasses
+  a threshold in the opposite direction.
+* Predict a reversal when the 2-min buy sell ratio 5-min average exceeds the
+  threshold.
+  * If, however, the 2-min buy-sell ratio, surpasses a threshold (1.75, 1.8,
+    2???), close the reversal position in favor of a cis-trend position.
