@@ -1172,3 +1172,35 @@ Conclusions:
 #### Next Thing(s) to Try
 * I'll decrease the exit threshold for the 5-min trans-buy-sell ratio from 1.3
   to 1.25
+
+### 2021-04-16:
+#### Performance
+* Total: $3.10
+  * AAPL (-$0.35): 2 / 11
+  * MSFT ($0.61): 6 / 22
+  * SNAP (-$0.10): 2 / 18
+  * SQ ($1.35): 12 / 27
+  * TSLA ($1.59): 7 / 18
+
+#### Remarks
+* Very good performance today.
+* Many of the stocks that have performed poorly in the past, performed better
+  under this system.
+* Exiting when a profitable position shows early signs of reversal seems to
+  have made the difference.
+* There are more points for improvement:
+  * Positions break even when they Drive, Reverse, then Drive again to the
+    entry price.
+    * The close algorithm was closing because they breached profitability
+      whilst in N.
+    * Maybe I should stay in instead and wait for the reverse while profiting
+      scenario.
+  * Positions still lose big when they move gradually but steadly in the
+    opposite direction. I need a new indicator that essentially measures
+    buy-sell ratio displacement.
+    * I'll close when the ratio exceeds a threshold in the reverse direction,
+      irrespective of how long it took to get there.
+
+#### Next Thing(s) to Try
+* I'll decrease the exit threshold for the 5-min trans-buy-sell ratio from 1.3
+  to 1.25

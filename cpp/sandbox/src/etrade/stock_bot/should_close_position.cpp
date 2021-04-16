@@ -52,10 +52,6 @@ bool ETrade::StockBot::should_close_position() {
 
   gear_t current_gear = *current_gear_ptr;
 
-  if (current_gear == gear_t::N && this->open_order.profit > 0) {
-    return true;
-  }
-
   if (this->transmission.shift_count(gear_t::R) > 1) {
     return true;
   }

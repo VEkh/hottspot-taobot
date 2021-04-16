@@ -12,6 +12,9 @@
 namespace ETrade {
 namespace preview_order {
 bool is_retriable_response(const std::string &response_body) {
+  Formatted::fmt_stream_t fmt = Formatted::stream();
+  std::cout << fmt.yellow << response_body << fmt.reset << std::endl;
+
   json repsonse = json::parse(response_body);
 
   if (repsonse.contains("Error") && repsonse["Error"]["code"] == 1037) {
