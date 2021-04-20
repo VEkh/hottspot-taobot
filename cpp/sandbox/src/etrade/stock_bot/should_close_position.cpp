@@ -19,11 +19,12 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
+  const double min_normalized_profit = 0.1;
   const double short_door_threshold = 1.0;
   const double stop_loss_threshold = 1.25;
 
   if (this->is_long_position) {
-    if (this->open_order.profit > 0 &&
+    if (this->open_order.normalized_profit >= min_normalized_profit &&
         this->short_average_sell_buy_ratio >= short_door_threshold) {
       return true;
     }
@@ -34,7 +35,7 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   if (!this->is_long_position) {
-    if (this->open_order.profit > 0 &&
+    if (this->open_order.normalized_profit >= min_normalized_profit &&
         this->short_average_buy_sell_ratio >= short_door_threshold) {
       return true;
     }

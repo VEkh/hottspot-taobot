@@ -35,11 +35,15 @@ void ETrade::StockBot::log_position() {
   std::cout << fmt.bold << log_color;
   std::cout << "Open   => Execution: " << this->open_order.execution_price;
   std::cout << " • Profit: " << this->open_order.profit << " ("
-            << profit_percentage(this->open_order_ptr) << "%)" << std::endl;
+            << profit_percentage(this->open_order_ptr) << "%)";
+  std::cout << " • Normalized Profit: " << this->open_order.normalized_profit
+            << std::endl;
 
   std::cout << "Close  => Execution: " << this->close_order.execution_price;
   std::cout << " • Profit: " << this->close_order.profit << " ("
-            << profit_percentage(this->close_order_ptr) << "%)" << std::endl;
+            << profit_percentage(this->close_order_ptr) << "%)";
+  std::cout << " • Normalized Profit: " << this->close_order.normalized_profit
+            << std::endl;
 
   std::cout << "Status => Open: "
             << ETrade::constants::ORDER_STATUSES[this->open_order.status];

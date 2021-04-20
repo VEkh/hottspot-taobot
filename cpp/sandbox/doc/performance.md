@@ -1204,3 +1204,24 @@ Conclusions:
 #### Next Thing(s) to Try
 * I'll decrease the exit threshold for the 5-min trans-buy-sell ratio from 1.3
   to 1.25
+
+### 2021-04-20:
+#### Performance
+* Total: -$6.63
+  * AAPL (-$2.31): 3 / 17
+  * COIN (-$0.01): 8 / 12
+  * MSFT (-$0.92): 5 / 22
+  * SNAP (-$0.70): 6 / 27
+  * SQ ($0.59): 9 / 23
+  * TSLA (-$2.10): 4 / 8
+
+#### Remarks
+* Moderately bad performance today
+* My exit thresholds still seem to be doing okay. However, I still need a more
+  reliable escape hatch.
+* I also need to stop bailing out if an early reversal returns to profitability.
+* I need a normalized metric for price displacement.
+
+#### Next Thing(s) to Try
+* Normalize profits to a basis of $100.00. Set exit thresholds using this
+  normalized profit.
