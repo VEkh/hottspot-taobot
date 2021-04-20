@@ -11,12 +11,17 @@
  */
 #include "stock_bot.h"
 
-#include "etrade/constants.cpp"     // ETrade::constants
-#include "should_open_position.cpp" // should_open_position
-#include <iostream>                 // std::cout, std::endl
+#include "etrade/constants.cpp"          // ETrade::constants
+#include "lib/curl_client/curl_client.h" // CurlClient
+#include "should_open_position.cpp"      // should_open_position
+#include <iostream>                      // std::cout, std::endl
 
 void ETrade::StockBot::open_position() {
   if (!should_open_position()) {
+    return;
+  }
+
+  if (!this->is_long_position && !this->is_shortable) {
     return;
   }
 
@@ -50,7 +55,18 @@ void ETrade::StockBot::open_position() {
             << std::endl;
   std::cout << fmt.reset;
 
-  etrade_client.place_order(this->open_order_ptr);
+  CurlClient curl_client = etrade_client.place_order(this->open_order_ptr);
+
+  if (etrade_client.is_not_shortable_response(curl_client)) {
+    this->is_shortable = false;
+
+    std::cout << fmt.bold << fmt.yellow;
+    std::cout << log_icon << " " << order_action
+              << ": This securiity is not shortable at this time." << std::endl;
+    std::cout << fmt.reset << std::endl;
+
+    return;
+  }
 
   std::cout << fmt.bold << fmt.cyan;
   std::cout << log_icon << " " << order_action << ": Placed open order."

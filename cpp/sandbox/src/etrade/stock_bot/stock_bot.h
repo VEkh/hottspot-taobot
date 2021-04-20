@@ -38,6 +38,7 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Transmission transmission;
   bool is_long_position;
+  bool is_shortable = true;
   char *symbol;
   double long_average_buy_sell_ratio;
   double long_average_sell_buy_ratio;

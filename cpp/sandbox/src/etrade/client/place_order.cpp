@@ -5,6 +5,7 @@
 #include "client.h"        // ETrade::Client, client_config, order_t
 #include "etrade/deps.cpp" // json
 #include "handle_place_order_error.cpp"           // handle_place_order_error
+#include "is_not_shortable_response.cpp"          // is_not_shortable_response
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "preview_order.cpp"                      // preview_order
@@ -37,6 +38,10 @@ CurlClient ETrade::Client::place_order(order_t *order) {
                             client_config.account_id_key + "/orders/place.json";
 
   CurlClient preview_curl_client = preview_order(*order);
+
+  if (is_not_shortable_response(preview_curl_client)) {
+    return preview_curl_client;
+  }
 
   std::string payload =
       build_place_order_payload(preview_curl_client.response.body);

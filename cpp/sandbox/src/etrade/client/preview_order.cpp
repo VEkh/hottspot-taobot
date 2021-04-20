@@ -15,13 +15,13 @@ bool is_retriable_response(const std::string &response_body) {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::cout << fmt.yellow << response_body << fmt.reset << std::endl;
 
-  json repsonse = json::parse(response_body);
+  json response = json::parse(response_body);
 
-  if (repsonse.contains("Error") && repsonse["Error"]["code"] == 1037) {
+  if (response.contains("Error") && response["Error"]["code"] == 1037) {
     return true;
   }
 
-  if (repsonse.contains("Error") && repsonse["Error"]["code"] == 100) {
+  if (response.contains("Error") && response["Error"]["code"] == 100) {
     return true;
   }
 
