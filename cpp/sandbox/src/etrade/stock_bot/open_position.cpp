@@ -21,10 +21,6 @@ void ETrade::StockBot::open_position() {
     return;
   }
 
-  if (!this->is_long_position && !this->is_shortable) {
-    return;
-  }
-
   order_t new_open_order;
   new_open_order.action =
       this->is_long_position ? order_action_t::BUY : order_action_t::SELL_SHORT;
@@ -58,8 +54,6 @@ void ETrade::StockBot::open_position() {
   CurlClient curl_client = etrade_client.place_order(this->open_order_ptr);
 
   if (etrade_client.is_not_shortable_response(curl_client)) {
-    this->is_shortable = false;
-
     std::cout << fmt.bold << fmt.yellow;
     std::cout << log_icon << " " << order_action
               << ": This securiity is not shortable at this time." << std::endl;
