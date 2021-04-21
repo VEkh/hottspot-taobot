@@ -22,9 +22,6 @@ void ETrade::StockBot::reset_position() {
   this->close_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
   this->transmission = Transmission();
-
-  this->long_average_buy_sell_ratio_sum = 0;
-  this->long_average_sell_buy_ratio_sum = 0;
 }
 
 #endif

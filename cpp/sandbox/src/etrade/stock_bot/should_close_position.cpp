@@ -32,11 +32,6 @@ bool ETrade::StockBot::should_close_position() {
     if (this->long_average_sell_buy_ratio >= stop_loss_threshold) {
       return true;
     }
-
-    if (this->long_average_sell_buy_ratio_sum >
-        this->long_average_buy_sell_ratio_sum) {
-      return true;
-    }
   }
 
   if (!this->is_long_position) {
@@ -46,11 +41,6 @@ bool ETrade::StockBot::should_close_position() {
     }
 
     if (this->long_average_buy_sell_ratio >= stop_loss_threshold) {
-      return true;
-    }
-
-    if (this->long_average_buy_sell_ratio_sum >
-        this->long_average_sell_buy_ratio_sum) {
       return true;
     }
   }

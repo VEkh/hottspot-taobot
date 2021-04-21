@@ -34,9 +34,6 @@ private:
       {"SELL_SHORT", "📉"},
   };
 
-  double long_average_buy_sell_ratio_sum = 0;
-  double long_average_sell_buy_ratio_sum = 0;
-
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Transmission transmission;
