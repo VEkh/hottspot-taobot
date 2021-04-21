@@ -20,6 +20,11 @@ void ETrade::StockBot::set_movement_moving_averages() {
   this->long_average_sell_buy_ratio =
       average_buy_sell_ratios[long_period_seconds]["sell"];
 
+  if (this->open_order_ptr) {
+    this->long_average_buy_sell_ratio_sum += this->long_average_buy_sell_ratio;
+    this->long_average_sell_buy_ratio_sum += this->long_average_sell_buy_ratio;
+  }
+
   this->short_average_buy_sell_ratio =
       average_buy_sell_ratios[short_period_seconds]["buy"];
   this->short_average_sell_buy_ratio =
@@ -36,6 +41,14 @@ void ETrade::StockBot::set_movement_moving_averages() {
               << ") Δ: " << average_buy_sell_ratios[period]["sell"]
               << std::endl;
   }
+
+  std::cout << fmt.yellow << std::endl;
+  std::cout << "Average Buy-Sell Sum ("
+            << utils::integer_::seconds_to_clock(long_period_seconds)
+            << ") Δ: " << this->long_average_buy_sell_ratio_sum << std::endl;
+  std::cout << "Average Sell-Buy Sum ("
+            << utils::integer_::seconds_to_clock(long_period_seconds)
+            << ") Δ: " << this->long_average_sell_buy_ratio_sum << std::endl;
 
   std::cout << fmt.reset << std::endl;
 }

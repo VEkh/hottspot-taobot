@@ -34,6 +34,9 @@ private:
       {"SELL_SHORT", "📉"},
   };
 
+  double long_average_buy_sell_ratio_sum = 0;
+  double long_average_sell_buy_ratio_sum = 0;
+
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Transmission transmission;
@@ -50,6 +53,7 @@ private:
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
+
   std::vector<quote_t> quotes;
 
   bool should_close_position();
