@@ -60,6 +60,7 @@ void ETrade::StockBot::open_position() {
               << ": This securiity is not shortable at this time." << std::endl;
     std::cout << fmt.reset << std::endl;
 
+    this->close_order_ptr = nullptr;
     this->open_order_ptr = nullptr;
 
     return;
