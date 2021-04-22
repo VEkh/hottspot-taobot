@@ -25,7 +25,15 @@ private:
   using quote_t = ETrade::t::quote_t;
   using sma_t = ETrade::t::sma_t;
 
+  struct price_range_t {
+    double high = -INFINITY;
+    double low = INFINITY;
+    int period = 0;
+  };
+
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.2;
+  const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.32;
+  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.08;
   const double POLLING_INTERVAL_SECONDS = 0.5;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
@@ -49,13 +57,13 @@ private:
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
+  price_range_t moving_price_range;
 
   std::vector<quote_t> quotes;
 
   bool should_close_position();
   bool should_open_position();
   double compute_buy_sell_ratio(const sma_t &);
-  double compute_normalizing_ratio(const double);
   double compute_sell_buy_ratio(const sma_t &);
   double profit_percentage(const order_t *);
   json get_order_json(const order_t *);
@@ -68,6 +76,7 @@ private:
   void fetch_orders();
   void fetch_quote();
   void initialize(char *, int);
+  void log_moving_price_range();
   void log_position();
   void log_position_results();
   void log_quote();
@@ -78,13 +87,14 @@ private:
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
   void set_open_position_prices();
+  void set_moving_price_range(const int);
   void set_position_status();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *);
   void shift_transmission_gear();
   void watch();
-};
+}; // namespace ETrade
 } // namespace ETrade
 
 #endif

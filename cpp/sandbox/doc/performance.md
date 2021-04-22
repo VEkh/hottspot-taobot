@@ -1226,7 +1226,7 @@ Conclusions:
 * Normalize profits to a basis of $100.00. Set exit thresholds using this
   normalized profit.
 
-### 2021-04-20:
+### 2021-04-21:
 #### Performance
 * Total: $5.22
   * AAPL ($0.05)
@@ -1241,3 +1241,54 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Require the movement to be in drive in addition to having a minimum profit
+
+### 2021-04-22:
+#### Performance
+* Total: -$8.09
+  * AAPL ($0.85)
+  * COIN (-$4.71)
+  * MSFT (-$1.26)
+  * SNAP (-$0.24)
+  * SQ ($3.69)
+  * TSLA (-$6.43)
+
+#### Remarks
+* Moderatly bad performance.
+* I think requiring movement to be in Drive is excessive.
+  * The Drive gear's definition is a good entry indicator, but the threshold
+    that must be crossed to re-enter it and capture profit may end up missing
+    profits.
+* A few securities that typically perform poorly, were actually profitable
+  today, or only modestly negative.
+* I still credit the minimum profit with this. Let's continue to refine the
+  minimum profit.
+
+#### Next Thing(s) to Try
+* Compute a moving day range and use that to compute minimum profit and maximum
+  loss thresholds. This way it responds to how the security is moving more
+  recently.
+
+### 2021-04-23:
+#### Performance
+* Total: $3.25
+  * AAPL ($0.50)
+  * AMD (-$0.22)
+  * COIN (-$5.10)
+  * MSFT ($2.50)
+  * SNAP ($1.22)
+  * SQ ($4.58)
+  * TSLA ($5.28)
+
+#### Remarks
+* One of the best performances I've had, not necessarily in magnitude, but in
+  number of securities that won.
+* This first pass a dynamically adjusting minimum profit was successful. It set
+  the minimum profit to a percentage of a moving price range of the last 2
+  hours.
+* I also set the max loss to be a percentage of the moving price range. This
+  was hit a few times, but usually not before another exit indicator fired.
+* I'll discontinue trading COIN, until I can short it. Since I could only buy,
+  I could win as frequently as a security wins. I'll need to be able to short
+  for those instances when it is decreasing rapidly in price.
+
+#### Next Thing(s) to Try
