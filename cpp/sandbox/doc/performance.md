@@ -1225,3 +1225,19 @@ Conclusions:
 #### Next Thing(s) to Try
 * Normalize profits to a basis of $100.00. Set exit thresholds using this
   normalized profit.
+
+### 2021-04-20:
+#### Performance
+* Total: $5.22
+  * AAPL ($0.05)
+  * COIN (-$9.20)
+  * MSFT ($0.56)
+  * SNAP (-$2.34)
+  * SQ (-$0.73)
+  * TSLA ($16.89)
+
+#### Remarks
+* Securing a minimum profit was big difference maker
+
+#### Next Thing(s) to Try
+* Require the movement to be in drive in addition to having a minimum profit

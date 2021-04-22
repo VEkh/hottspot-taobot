@@ -4,7 +4,6 @@
 /*
  * BUY_SELL_RATIO_DOOR_THRESHOLD
  * ETrade::StockBot
- * gear_t
  */
 #include "stock_bot.h"
 
@@ -21,8 +20,6 @@ bool ETrade::StockBot::should_open_position() {
        this->short_average_sell_buy_ratio >= short_door_threshold)) {
     this->is_long_position =
         this->long_average_buy_sell_ratio >= BUY_SELL_RATIO_DOOR_THRESHOLD;
-
-    this->transmission.shift_gear(gear_t::D);
 
     return true;
   }

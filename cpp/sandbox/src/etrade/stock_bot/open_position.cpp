@@ -5,6 +5,7 @@
  * ETrade::StockBot
  * etrade_client
  * fmt
+ * gear_t
  * order_action_t
  * order_type_t
  * order_t
@@ -59,8 +60,12 @@ void ETrade::StockBot::open_position() {
               << ": This securiity is not shortable at this time." << std::endl;
     std::cout << fmt.reset << std::endl;
 
+    this->open_order_ptr = nullptr;
+
     return;
   }
+
+  this->transmission.shift_gear(gear_t::D);
 
   std::cout << fmt.bold << fmt.cyan;
   std::cout << log_icon << " " << order_action << ": Placed open order."
