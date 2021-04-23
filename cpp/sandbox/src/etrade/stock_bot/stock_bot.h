@@ -80,14 +80,14 @@ private:
   void log_position();
   void log_position_results();
   void log_quote();
-  void log_simple_moving_average();
   void log_start_message();
   void open_position();
   void reset_position();
+  void set_and_log_simple_moving_average();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
-  void set_open_position_prices();
   void set_moving_price_range(const int);
+  void set_open_position_prices();
   void set_position_status();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);

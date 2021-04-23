@@ -20,7 +20,6 @@ void ETrade::StockBot::log_moving_price_range() {
                    this->moving_price_range.period)
             << ")";
 
-
   std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.cyan;
