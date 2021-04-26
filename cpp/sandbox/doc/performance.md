@@ -1291,4 +1291,21 @@ Conclusions:
   I could win as frequently as a security wins. I'll need to be able to short
   for those instances when it is decreasing rapidly in price.
 
-#### Next Thing(s) to Try
+### 2021-04-23:
+#### Performance
+* Total: -$2.23
+  * AAPL (-$0.17)
+  * AMD ($0.59)
+  * FB (-$0.03)
+  * MSFT ($0.69)
+  * SNAP (-$0.57)
+  * SQ ($0.72)
+  * TSLA (-$3.46)
+
+#### Remarks
+* Moderately poor performance, but still very encouraging.
+* Today's performance is in spite of oscillating prices with little strong
+  movement beyond the beginning of the day.
+* It seems like the entry and exit signals are working.
+* I may need to reduce the minimum profit, but otherwise, I'll keep watching
+  this same strategy.
