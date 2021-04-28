@@ -1,8 +1,10 @@
 #include <iostream>
+#include <regex> // std::regex, std::regex_search
 
 int main() {
-  std::cout << (0.10 / 1.83) << std::endl;
-  std::cout << (0.05 / 0.40) << std::endl;
-  std::cout << (0.25 / 2.20) << std::endl;
-  std::cout << (0.70 / 10.0) << std::endl;
+  const char *symbol = "AMZN";
+
+  bool should_stop_profit = std::regex_search(
+      symbol, std::regex("sq|spot|amzn", std::regex_constants::icase));
+  std::cout << should_stop_profit << std::endl;
 }
