@@ -9,7 +9,6 @@
 #include "stock_bot.h"
 
 #include "profit_percentage.cpp" // profit_percentage
-#include <regex>                 // std::regex, std::regex_search
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -26,9 +25,6 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  bool should_stop_profit = std::regex_search(
-      this->symbol, std::regex("sq", std::regex_constants::icase));
-
   const double moving_price_range =
       this->moving_price_range.high - this->moving_price_range.low;
   const double max_loss =
@@ -37,16 +33,13 @@ bool ETrade::StockBot::should_close_position() {
       this->MOVING_DAY_RANGE_MIN_PROFIT_RATIO * moving_price_range;
 
   const double short_door_threshold = 1.0;
-  const double stop_loss_threshold = 1.25;
+  const double stop_loss_threshold = 1.3;
   const gear_t current_gear = *current_gear_ptr;
 
   if (this->is_long_position) {
-    if (this->open_order.profit >= min_profit) {
-      if (should_stop_profit) {
-        return true;
-      } else if (this->short_average_sell_buy_ratio >= short_door_threshold) {
-        return true;
-      }
+    if (this->open_order.profit >= min_profit &&
+        this->short_average_sell_buy_ratio >= short_door_threshold) {
+      return true;
     }
 
     if (this->long_average_sell_buy_ratio >= stop_loss_threshold) {
@@ -55,12 +48,9 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   if (!this->is_long_position) {
-    if (this->open_order.profit >= min_profit) {
-      if (should_stop_profit) {
-        return true;
-      } else if (this->short_average_buy_sell_ratio >= short_door_threshold) {
-        return true;
-      }
+    if (this->open_order.profit >= min_profit &&
+        this->short_average_buy_sell_ratio >= short_door_threshold) {
+      return true;
     }
 
     if (this->long_average_buy_sell_ratio >= stop_loss_threshold) {

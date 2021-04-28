@@ -33,7 +33,7 @@ private:
 
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.2;
   const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.32;
-  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.06;
+  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.05;
   const double POLLING_INTERVAL_SECONDS = 0.5;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
