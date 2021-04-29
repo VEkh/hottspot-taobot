@@ -62,16 +62,6 @@ bool ETrade::StockBot::should_close_position() {
     return true;
   }
 
-  if (this->transmission.shift_count(gear_t::R) > 1) {
-    return true;
-  }
-
-  if (current_gear == gear_t::N &&
-      this->transmission.shift_count(gear_t::R) > 0 &&
-      this->transmission.shift_count(gear_t::D) > 1) {
-    return true;
-  }
-
   return false;
 }
 

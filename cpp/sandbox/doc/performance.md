@@ -1291,7 +1291,7 @@ Conclusions:
   I could win as frequently as a security wins. I'll need to be able to short
   for those instances when it is decreasing rapidly in price.
 
-### 2021-04-23:
+### 2021-04-26:
 #### Performance
 * Total: -$2.23
   * AAPL (-$0.17)
@@ -1309,3 +1309,63 @@ Conclusions:
 * It seems like the entry and exit signals are working.
 * I may need to reduce the minimum profit, but otherwise, I'll keep watching
   this same strategy.
+
+### 2021-04-28:
+#### Performance
+* Total: -$19.25
+  * AMD ($0.76)
+  * AMZN (-$20.16): 10/19 => 0.5263157894736842
+  * FB ($1.71)
+  * MSFT ($0.78)
+  * SNAP ($1.40)
+  * SQ (-$3.17): 15/26 => 0.5769230769230769
+  * TSLA (-$0.53)
+
+#### Remarks
+* I experimented with stopping profit for low-volume stocks like SQ and AMZN to
+  see if it would counteract their excessive swings.
+* What happened instead was that it would re-enter shortly after capturing
+  profits, only to sharply reverse soon after that.
+* Maybe there's a world in which I halt the re-entry if a profit was just
+  recently captured, or even predict a reversal.
+* It is worth noting, however, that the stop-profit strategy was mostly right.
+  Is there way to avoid eventual sharp reversals?
+
+### 2021-04-29:
+#### Performance
+* Total: $5.83
+  * AAPL (-$1.85)
+  * AMD (-$0.09)
+  * FB (-$0.42)
+  * MSFT ($1.11)
+  * SNAP ($0.83)
+  * TSLA ($6.25)
+
+#### Remarks
+* Moderately good performance.
+* I removed the transmission based exit indicators and instead am only using
+  the period price range thresholds as stop-loss and minimum profit thresholds.
+  I'm also using a buy-sell ratio moving average threshold as an exit indicator
+  in the case of a reversal.
+* Reversals are inevitable if I'm reacting to price movement. By having a max
+  loss and max reverse momentum threshold, I'm protecting against this.
+* I excluded SQ because its volume is too low and this algorithm performs very
+  poorly with securities that trade in low volume.
+* We'll see how this performs tomorrow.
+
+### 2021-04-30:
+#### Performance
+* Total: -$0.02
+  * AAPL (-$0.40)
+  * AMD (-$0.34)
+  * FB (-$0.36)
+  * MSFT ($0.17)
+  * SNAP ($1.39)
+  * TSLA ($1.85)
+
+#### Remarks
+* Essentially break even
+* 2nd day in a row of moderate gain / negligible loss.
+* This is after eliminating SQ, who's recent daily volume has been less than
+  10M shares
+* Continue this and maybe add NIO next week.
