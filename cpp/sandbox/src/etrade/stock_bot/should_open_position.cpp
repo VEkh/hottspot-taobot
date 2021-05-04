@@ -12,7 +12,7 @@ bool ETrade::StockBot::should_open_position() {
     return false;
   }
 
-  const double short_door_threshold = 1.5;
+  const double short_door_threshold = 1.35;
 
   if ((this->long_average_buy_sell_ratio >= BUY_SELL_RATIO_DOOR_THRESHOLD &&
        this->short_average_buy_sell_ratio >= short_door_threshold) ||
