@@ -21,7 +21,29 @@ void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
     it++;
   }
 
-  this->moving_price_range = {.high = high, .low = low, .period = period};
+  const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.3;
+  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.05;
+  const double max_loss_percentage = 0.005 * this->open_order.execution_price;
+  const double min_profit_percentage = 0.001 * this->open_order.execution_price;
+  const double price_range = high - low;
+
+  const double min_profit_price_range =
+      MOVING_DAY_RANGE_MIN_PROFIT_RATIO * price_range;
+
+  const double max_loss_price_range =
+      MOVING_DAY_RANGE_MAX_LOSS_RATIO * price_range;
+
+  const double max_loss = std::min(max_loss_percentage, max_loss_price_range);
+  const double min_profit =
+      std::min(min_profit_percentage, min_profit_price_range);
+
+  this->moving_price_range = {
+      .high = high,
+      .low = low,
+      .max_loss = max_loss,
+      .min_profit = min_profit,
+      .period = period,
+  };
 }
 
 #endif

@@ -2,6 +2,7 @@
 #define ETRADE__STOCK_BOT_set_profit
 
 #include "stock_bot.h" // ETrade::StockBot, order_t
+#include <algorithm>   // std::max
 
 void ETrade::StockBot::set_profit(order_t *order) {
   const double current_price = this->quotes.back().current_price;
@@ -14,6 +15,7 @@ void ETrade::StockBot::set_profit(order_t *order) {
     profit = order->execution_price - current_price;
   }
 
+  order->max_profit = std::max(profit, order->max_profit);
   order->profit = profit;
 }
 

@@ -8,8 +8,6 @@
  */
 #include "stock_bot.h"
 
-#include "profit_percentage.cpp" // profit_percentage
-
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
     return false;
@@ -25,37 +23,30 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  const double max_loss_percentage = 0.5;
-  const double min_profit_percentage = 0.05;
-  const double profit_percent = profit_percentage(this->open_order_ptr);
+  const double max_loss = this->moving_price_range.max_loss;
+  const double min_profit = this->moving_price_range.min_profit;
+
   const double short_door_threshold = 1.0;
   const double stop_loss_threshold = 1.2;
 
   const gear_t current_gear = *current_gear_ptr;
 
-  if (this->is_long_position) {
-    if (profit_percent >= min_profit_percentage &&
-        this->short_average_sell_buy_ratio >= short_door_threshold) {
-      return true;
-    }
-
-    if (this->long_average_sell_buy_ratio >= stop_loss_threshold) {
-      return true;
-    }
+  if (this->open_order.max_profit >= (min_profit / 0.8) &&
+      this->open_order.profit <= this->open_order.max_profit * 0.8) {
+    return true;
   }
 
-  if (!this->is_long_position) {
-    if (profit_percent >= min_profit_percentage &&
-        this->short_average_buy_sell_ratio >= short_door_threshold) {
-      return true;
-    }
-
-    if (this->long_average_buy_sell_ratio >= stop_loss_threshold) {
-      return true;
-    }
+  if (this->is_long_position &&
+      this->long_average_sell_buy_ratio >= stop_loss_threshold) {
+    return true;
   }
 
-  if (profit_percent < -max_loss_percentage) {
+  if (!this->is_long_position &&
+      this->long_average_buy_sell_ratio >= stop_loss_threshold) {
+    return true;
+  }
+
+  if (this->open_order.profit <= -max_loss) {
     return true;
   }
 

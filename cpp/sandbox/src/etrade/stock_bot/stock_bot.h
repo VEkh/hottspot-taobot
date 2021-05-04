@@ -28,12 +28,12 @@ private:
   struct price_range_t {
     double high = -INFINITY;
     double low = INFINITY;
+    double max_loss = 0.00;
+    double min_profit = 0.00;
     int period = 0;
   };
 
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.2;
-  const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.32;
-  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.05;
   const double POLLING_INTERVAL_SECONDS = 0.5;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 

@@ -1369,3 +1369,19 @@ Conclusions:
 * This is after eliminating SQ, who's recent daily volume has been less than
   10M shares
 * Continue this and maybe add NIO next week.
+
+### 2021-05-04:
+#### Performance
+* Total: -$11.63
+  * AAPL (-$1.74)
+  * AMD (-$1.04)
+  * FB ($3.87)
+  * MSFT (-$2.77)
+  * NIO (-$0.99)
+  * SNAP (-$1.35)
+  * TSLA (-$7.60)
+
+#### Remarks
+* Poor performance
+* Changing the exit strategy to leave when the profit dips below 80% of the max
+  profit, so long as the max profit exceeds the min profit.
