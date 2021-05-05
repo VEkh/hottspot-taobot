@@ -26,13 +26,13 @@ bool ETrade::StockBot::should_close_position() {
   const double max_loss = this->moving_price_range.max_loss;
   const double min_profit = this->moving_price_range.min_profit;
 
-  const double short_door_threshold = 1.0;
   const double stop_loss_threshold = 1.2;
 
   const gear_t current_gear = *current_gear_ptr;
 
   if (this->open_order.max_profit >= (min_profit / 0.8) &&
-      this->open_order.profit <= this->open_order.max_profit * 0.8) {
+      this->open_order.profit < this->open_order.max_profit * 0.8 &&
+      this->open_order.profit >= min_profit) {
     return true;
   }
 

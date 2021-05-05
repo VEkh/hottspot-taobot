@@ -28,8 +28,8 @@ private:
   struct price_range_t {
     double high = -INFINITY;
     double low = INFINITY;
-    double max_loss = 0.00;
-    double min_profit = 0.00;
+    double max_loss = INFINITY;
+    double min_profit = INFINITY;
     int period = 0;
   };
 

@@ -1385,3 +1385,24 @@ Conclusions:
 * Poor performance
 * Changing the exit strategy to leave when the profit dips below 80% of the max
   profit, so long as the max profit exceeds the min profit.
+
+### 2021-05-05:
+#### Performance
+* Total: -$8.88
+  * AAPL (-$0.43)
+  * AMD ($0.40)
+  * FB (-$1.55)
+  * MSFT (-$2.84)
+  * NIO (-$0.84)
+  * SNAP (-$0.95)
+  * TSLA (-$2.66)
+
+#### Remarks
+* Moderately poor performance
+* The exit strategy shows potential. Its problem, however, is that it waits for
+  the short term moving buy-sell ratio to decrease beneath the entry threshold.
+  By this point the profit opportunity may be lost.
+
+#### Next Thing(s) to Try
+* Remove the short term moving buy-sell ratio indicator and instead prevent
+  entry if the current price is on the loss side of the last closing price.

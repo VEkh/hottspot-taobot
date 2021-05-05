@@ -8,6 +8,8 @@
 void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
   double high = -INFINITY;
   double low = INFINITY;
+  double max_loss = INFINITY;
+  double min_profit = INFINITY;
   int period;
 
   std::vector<quote_t>::reverse_iterator it = this->quotes.rbegin();
@@ -22,7 +24,7 @@ void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
   }
 
   const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.3;
-  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.05;
+  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.1;
   const double max_loss_percentage = 0.005 * this->open_order.execution_price;
   const double min_profit_percentage = 0.001 * this->open_order.execution_price;
   const double price_range = high - low;
@@ -33,9 +35,10 @@ void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
   const double max_loss_price_range =
       MOVING_DAY_RANGE_MAX_LOSS_RATIO * price_range;
 
-  const double max_loss = std::min(max_loss_percentage, max_loss_price_range);
-  const double min_profit =
-      std::min(min_profit_percentage, min_profit_price_range);
+  if (this->open_order.execution_price) {
+    max_loss = std::min(max_loss_percentage, max_loss_price_range);
+    min_profit = std::min(min_profit_percentage, min_profit_price_range);
+  }
 
   this->moving_price_range = {
       .high = high,
