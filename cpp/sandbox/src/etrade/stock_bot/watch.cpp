@@ -30,7 +30,7 @@ void ETrade::StockBot::watch() {
 
     log_quote();
     set_and_log_simple_moving_average();
-    set_moving_price_range(2 * 60 * 60);
+    set_moving_price_range(1 * 60 * 60);
     log_moving_price_range();
     log_position();
 

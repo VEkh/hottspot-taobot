@@ -1406,3 +1406,31 @@ Conclusions:
 #### Next Thing(s) to Try
 * Remove the short term moving buy-sell ratio indicator and instead prevent
   entry if the current price is on the loss side of the last closing price.
+
+### 2021-05-06:
+#### Performance
+* Total: $5.01
+  * AAPL (-$0.74)
+  * AMD (-$0.90)
+  * FB (-$3.13)
+  * MSFT ($1.34)
+  * NIO (-$0.23)
+  * SNAP (-$0.95)
+  * TSLA ($9.62)
+
+#### Remarks
+* Moderately good performance
+* I adjusted the entry algorithm to require that a new positin only be entered
+  if the current price exceeds the previous open executing price by the
+  `max_profit` amount.
+* This somewhat prevents excessive re-entry after profitable positions.
+  Excessive re-entry leads to running straight into a reversal.
+* Securities whose prices fluctuate are still getting killed.
+* I think it's because I'm exiting at the first sign of reversal.
+* This is often correct, but also often premature.
+
+
+#### Next Thing(s) to Try
+* Remove exit on reversal. Instead wait for the max loss to incur.
+* This may result in larger losses, but it may also give more time for initial
+  reversals to eventually win.
