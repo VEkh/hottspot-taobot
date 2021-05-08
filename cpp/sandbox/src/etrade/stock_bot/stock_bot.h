@@ -34,7 +34,8 @@ private:
   };
 
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.2;
-  const double POLLING_INTERVAL_SECONDS = 0.5;
+  const double MOVING_PRICE_RANGE_PERIOD_SECONDS = 1.5 * 60 * 60;
+  const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
   std::map<const char *, const char *> ICONS = {

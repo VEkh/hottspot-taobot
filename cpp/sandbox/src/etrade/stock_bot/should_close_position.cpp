@@ -24,28 +24,21 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   const double max_loss = this->moving_price_range.max_loss;
-  const double min_profit = this->moving_price_range.min_profit;
-  const double max_profit_exit_ratio = 0.75;
-  // const double stop_loss_threshold = 1.2;
+  const double stop_loss_threshold = 1.1;
 
   const gear_t current_gear = *current_gear_ptr;
 
-  if (this->open_order.max_profit >= (min_profit / max_profit_exit_ratio) &&
-      this->open_order.profit <
-          this->open_order.max_profit * max_profit_exit_ratio &&
-      this->open_order.profit >= min_profit) {
-    return true;
+  if (current_gear == gear_t::D && this->open_order.profit > 0) {
+    if (this->is_long_position &&
+        this->long_average_buy_sell_ratio < stop_loss_threshold) {
+      return true;
+    }
+
+    if (!this->is_long_position &&
+        this->long_average_sell_buy_ratio < stop_loss_threshold) {
+      return true;
+    }
   }
-
-  // if (this->is_long_position &&
-  //     this->long_average_sell_buy_ratio >= stop_loss_threshold) {
-  //   return true;
-  // }
-
-  // if (!this->is_long_position &&
-  //     this->long_average_buy_sell_ratio >= stop_loss_threshold) {
-  //   return true;
-  // }
 
   if (this->open_order.profit <= -max_loss) {
     return true;

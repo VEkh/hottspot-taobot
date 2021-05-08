@@ -22,7 +22,7 @@ void ETrade::StockBot::shift_transmission_gear() {
       current_gear = gear_t::D;
     }
 
-    if (this->long_average_buy_sell_ratio <= neutral_shift_threshold &&
+    if (this->long_average_buy_sell_ratio < neutral_shift_threshold &&
         this->long_average_sell_buy_ratio < BUY_SELL_RATIO_DOOR_THRESHOLD) {
       current_gear = gear_t::N;
     }
@@ -35,7 +35,7 @@ void ETrade::StockBot::shift_transmission_gear() {
       current_gear = gear_t::D;
     }
 
-    if (this->long_average_sell_buy_ratio <= neutral_shift_threshold &&
+    if (this->long_average_sell_buy_ratio < neutral_shift_threshold &&
         this->long_average_buy_sell_ratio < BUY_SELL_RATIO_DOOR_THRESHOLD) {
       current_gear = gear_t::N;
     }

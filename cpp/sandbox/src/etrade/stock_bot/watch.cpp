@@ -3,6 +3,7 @@
 
 /*
  * ETrade::StockBot
+ * MOVING_PRICE_RANGE_PERIOD_SECONDS
  * POLLING_INTERVAL_SECONDS
  */
 #include "stock_bot.h"
@@ -30,7 +31,7 @@ void ETrade::StockBot::watch() {
 
     log_quote();
     set_and_log_simple_moving_average();
-    set_moving_price_range(1 * 60 * 60);
+    set_moving_price_range(MOVING_PRICE_RANGE_PERIOD_SECONDS);
     log_moving_price_range();
     log_position();
 

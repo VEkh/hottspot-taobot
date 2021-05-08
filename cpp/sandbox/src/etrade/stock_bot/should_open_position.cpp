@@ -24,21 +24,7 @@ bool ETrade::StockBot::should_open_position() {
     this->is_long_position =
         this->long_average_buy_sell_ratio >= BUY_SELL_RATIO_DOOR_THRESHOLD;
 
-    if (!this->open_order.execution_price) {
-      return true;
-    }
-
-    if (this->is_long_position &&
-        current_price >=
-            this->open_order.execution_price + this->open_order.max_profit) {
-      return true;
-    }
-
-    if (!this->is_long_position &&
-        current_price <=
-            this->open_order.execution_price - this->open_order.max_profit) {
-      return true;
-    }
+    return true;
   }
 
   return false;

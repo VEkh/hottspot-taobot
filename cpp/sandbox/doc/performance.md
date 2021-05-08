@@ -1434,3 +1434,36 @@ Conclusions:
 * Remove exit on reversal. Instead wait for the max loss to incur.
 * This may result in larger losses, but it may also give more time for initial
   reversals to eventually win.
+
+### 2021-05-07:
+#### Performance
+* Total: -$11.18
+  * AAPL (-$1.37)
+    * Immediate Reversals @ Open: 6/19
+    * Losses: 11/19
+  * AMD (-$1.31)
+    * Losses: 10/20
+  * FB (-$0.14)
+    * Immediate Reversals @ Open: 9/14
+    * Losses: 4/14
+  * MSFT (-$2.28)
+    * Losses: 12/21
+  * NIO (-$0.04)
+    * Losses: 4/18
+  * SNAP ($0.42)
+    * Losses: 6/23
+  * TSLA (-$6.47)
+    * Immediate Reversals @ Open: 13/20
+    * Losses: 8/21
+
+#### Remarks
+* Moderately bad performance
+* Still running into too many immediate reversal scenarios
+
+
+#### Next Thing(s) to Try
+* Keep buy-sell entry indicator
+* Exit in only two scenarios:
+  1. Max loss exceeded
+  2. Transmission is in drive, the position is profiting, the long-term
+     buy-sell ratio dips below a threshold
