@@ -84,7 +84,7 @@ private:
   void log_start_message();
   void open_position();
   void reset_position();
-  void set_and_log_simple_moving_average();
+  void set_and_log_buy_sell_ratios();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
   void set_moving_price_range(const int);
