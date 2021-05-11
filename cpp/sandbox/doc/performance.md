@@ -1467,3 +1467,18 @@ Conclusions:
   1. Max loss exceeded
   2. Transmission is in drive, the position is profiting, the long-term
      buy-sell ratio dips below a threshold
+
+### 2021-05-10:
+#### Performance
+* Total: ~-$11.00
+
+#### Remarks
+* Bad performance on TSLA, only moderately poor performance for everything else.
+* I'm noticing that if I bail on TSLA when the short-term buy-sell ratio
+  crosses 1.0, I would retain profit, or minimize loss. I'm going to try that.
+* Also, modified buy-sell ratio, which isn't based on the 2-minute simple
+  moving average,s seems much more tightly bound the price movement. Does this
+  mean that it's a better metric? This remains to be seen.
+
+#### Next Thing(s) to Try
+* Exit when short-term buy-sell ratio crosses 1.0 into the opposite direction

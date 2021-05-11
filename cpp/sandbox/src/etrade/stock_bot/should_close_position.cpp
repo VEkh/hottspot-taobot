@@ -24,9 +24,20 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   const double max_loss = this->moving_price_range.max_loss;
+  const double short_term_loss_threshold = 1.0;
   const double stop_loss_threshold = 1.1;
 
   const gear_t current_gear = *current_gear_ptr;
+
+  if (this->is_long_position &&
+      this->short_average_buy_sell_ratio < short_term_loss_threshold) {
+    return true;
+  }
+
+  if (!this->is_long_position &&
+      this->short_average_sell_buy_ratio < short_term_loss_threshold) {
+    return true;
+  }
 
   if (current_gear == gear_t::D && this->open_order.profit > 0) {
     if (this->is_long_position &&
