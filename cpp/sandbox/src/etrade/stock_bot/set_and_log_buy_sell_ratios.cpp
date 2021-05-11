@@ -24,7 +24,7 @@ void ETrade::StockBot::set_and_log_buy_sell_ratios() {
   }
 
   int long_period_seconds = 5 * 60;
-  int short_period_seconds = 1 * 60;
+  int short_period_seconds = 3 * 60;
   std::vector<int> moving_average_periods = {
       short_period_seconds,
       long_period_seconds,

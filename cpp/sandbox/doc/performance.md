@@ -1482,3 +1482,27 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Exit when short-term buy-sell ratio crosses 1.0 into the opposite direction
+
+### 2021-05-11:
+#### Performance
+* Total: $14.29
+  * AAPL ($0.49)
+  * AMD (-$0.19)
+  * FB (-$1.24)
+  * MSFT ($0.53)
+  * NIO (-$0.60)
+  * SNAP (-$0.22) (+ unkown amount from overnight holding)
+  * TSLA ($15.52) (+ unkown amount from overnight holding)
+
+#### Remarks
+* Very good performance on TSLA
+* Surprisingly moderately good / neutral performance on the other securities.
+* We'll see how they perform tomorrow.
+* It seemed to perform a bit better after making the short buy-sell ratio
+  period 3 minutes, and the long-term buy-sell ratio entry threshoid increases
+  to 1.3.
+* This exit strategy, essentially made losses more frequent, but less costly.
+  Conversely it made wins larger.
+
+#### Next Thing(s) to Try
+* Just watch performance with the same entry and exits.
