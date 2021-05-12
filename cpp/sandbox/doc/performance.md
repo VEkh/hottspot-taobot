@@ -1506,3 +1506,46 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Just watch performance with the same entry and exits.
+
+### 2021-05-12:
+#### Performance
+* Total: $5.14
+  * AAPL (-$0.43): 5/22
+  * AMD (-$0.10): 7/20
+  * FB ($0.61): 10/29
+  * MSFT ($1.46): 10/27
+  * NIO (-$0.99): 3/22
+  * SNAP (-$0.65): 6/30
+  * TSLA ($5.23): 9/16
+
+#### Remarks
+* Moderately good performance for winners, moderately bad performance for losers.
+* 3/7 securities won
+* All but TSLA had losing records.
+* This is the second profitable day in a row. It seems this strategy depends on
+  large, but infrequent wins.
+* Maybe this is okay, maybe I should still consider predicting a reversal?
+
+#### Next Thing(s) to Try
+* Shorten the short-term buy-sell ratio period from 3 min to 2.5 min, which is
+  half the long-term period.
+
+### 2021-05-13:
+#### Performance
+
+* Total: $19.91
+  * AAPL ($0.33): 6/26 => 0.230769
+  * AMD ($0.42): 12/37 => 0.324324
+  * BA ($5.28): 14/27 => 0.518519
+  * FB ($0.75): 12/38 => 0.315789
+  * MSFT ($1.00): 14/35 => 0.4
+  * SNAP ($0.66): 14/42 => 0.333333
+  * TSLA ($11.47): 15/27 => 0.555556
+
+* Profitable Days in a Row: 3
+
+#### Remarks
+* BA and TSLA performed very well, all others performed moderately well.
+* This is the first time that all stocks profited.
+* If tomorrow is also profitable, we can start bumping up the quantity to each
+  security to normalize them to TSLA's price.
