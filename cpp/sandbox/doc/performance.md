@@ -1549,3 +1549,31 @@ Conclusions:
 * This is the first time that all stocks profited.
 * If tomorrow is also profitable, we can start bumping up the quantity to each
   security to normalize them to TSLA's price.
+
+### 2021-05-14:
+#### Performance
+
+* Total: -$14.73
+  * AAPL (-$0.65): 3/26
+  * AMD (-$0.55): 5/29
+  * BA (-$2.68): 10/34
+  * FB (-$5.64): 10/43
+  * MSFT (-$1.19): 5/38
+  * SNAP (-$0.89): 8/49
+  * SQ (-$1.56): 11/44
+  * TSLA (-$1.58): 11/39
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* Even though it was a loss day, all stocks except for FB only performed
+  moderately poorly.
+* There were a few too many API faults that resulted in losses. This is
+  stronger pressure to switch to another API.
+* The day was characterized by sharp reversals.
+
+#### Next Thing(s) to Try
+* I'm going to revert the short-term buy-sell ratio to 3 minutes. I may keep it
+  at 2.5 minutes since that was profitable yesterday.
+  * It may be inconsequential because if the prices oscillate too much, there
+    may be nothing I can do. We'll see.
