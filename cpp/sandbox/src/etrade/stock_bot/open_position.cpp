@@ -22,12 +22,15 @@ void ETrade::StockBot::open_position() {
     return;
   }
 
+  const double current_price = this->quotes.back().current_price;
+
   order_t new_open_order;
   new_open_order.action =
       this->is_long_position ? order_action_t::BUY : order_action_t::SELL_SHORT;
+  new_open_order.limit_price = current_price;
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
-  new_open_order.type = order_type_t::MARKET;
+  new_open_order.type = order_type_t::LIMIT;
 
   order_t new_close_order;
   new_close_order.action = this->is_long_position

@@ -38,6 +38,7 @@ struct order_t {
   order_status_t status = order_status_t::ORDER_PENDING;
   double stop_price = 0.00;
   const char *symbol;
+  double timestamp;
   order_type_t type;
 };
 

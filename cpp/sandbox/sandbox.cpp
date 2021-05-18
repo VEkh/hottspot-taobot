@@ -1,7 +1,16 @@
-#include "lib/websockets_client/websockets_client.cpp" // LibWebSocketsClient
+#include <chrono>
 #include <iostream>
+#include <thread>
+#include <time.h>
 
 int main() {
-  WebSocketsClient client("wss://stream.data.alpaca.markets/v2/iex");
-  client.connect();
+  time_t now;
+  time(&now);
+
+  std::this_thread::sleep_for(std::chrono::seconds(3));
+
+  time_t later;
+  time(&later);
+
+  std::cout << (later - now) << std::endl;
 }

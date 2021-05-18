@@ -9,7 +9,8 @@
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "preview_order.cpp"                      // preview_order
-#include <regex> // std::regex, std::regex_search
+#include <regex>  // std::regex, std::regex_search
+#include <time.h> // time, time_t
 
 namespace ETrade {
 namespace place_order {
@@ -57,11 +58,14 @@ CurlClient ETrade::Client::place_order(order_t *order) {
       ETrade::place_order::is_retriable_response);
 
   curl_client = handle_place_order_error(curl_client, order->action, "Place");
+  time_t now;
+  time(&now);
 
   json response = json::parse(curl_client.response.body);
 
   order->id = response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
   order->status = order_status_t::ORDER_OPEN;
+  order->timestamp = now;
 
   return curl_client;
 }

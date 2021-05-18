@@ -8,6 +8,7 @@
  */
 #include "stock_bot.h"
 
+#include "cancel_stale_open_order.cpp"     // cancel_stale_open_order
 #include "close_position.cpp"              // close_position
 #include "fetch_orders.cpp"                // fetch_orders
 #include "fetch_quote.cpp"                 // fetch_quote
@@ -35,6 +36,7 @@ void ETrade::StockBot::watch() {
     log_moving_price_range();
     log_position();
 
+    cancel_stale_open_order();
     fetch_orders();
     set_position_status();
     open_position();
