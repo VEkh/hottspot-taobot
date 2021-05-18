@@ -33,12 +33,13 @@ struct order_t {
   int id = 0;
   double limit_price = 0.00;
   double max_profit = 0.00;
+  int max_profit_timestamp = 0;
   double profit = 0.00;
   int quantity;
   order_status_t status = order_status_t::ORDER_PENDING;
   double stop_price = 0.00;
   const char *symbol;
-  double timestamp;
+  int timestamp = 0;
   order_type_t type;
 };
 

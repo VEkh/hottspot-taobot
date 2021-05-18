@@ -1577,3 +1577,49 @@ Conclusions:
   at 2.5 minutes since that was profitable yesterday.
   * It may be inconsequential because if the prices oscillate too much, there
     may be nothing I can do. We'll see.
+
+### 2021-05-18:
+#### Performance
+
+* Total: $13.88
+  * AAPL (-$0.11): 3/20
+  * AMD (-$0.07): 6/31
+  * BA ($1.15): 9/34
+  * FB (-$1.59): 5/28
+  * MSFT (-$0.50): 7/28
+  * NIO (-$0.46): 4/23
+  * SNAP (-$0.99): 7/39
+  * SQ (-$1.67): 1/4
+  * TSLA ($18.12): 14/28
+
+* Profitable Days in a Row: 1
+
+#### Remarks
+* The last two days had large losses (both ~ > $10)
+* Today, most securities lost, but the overall win was secured by TSLA's big
+  win.
+* Most other securities, except for SQ and FB, only suffered modest losses
+* I observed a few things about the frequent losses:
+  1. Using the short-term buy-sell ratio as an indicator seemed to result in
+    premature losses.
+  2. Often, the max profit had long since been attained with no sign of being
+    exceeded.
+  3. Loser positions were at one point profitable.
+  4. Positions often open in loss territory as the price blow past the price
+     when the order was opened before quickly reversing.
+* To address 1, I reverted to exiting when the long-term buy-sell ratio fell
+  beneath a given threshold.
+* To address 2 & 3, I am marking a `max_profit_timestamp` on the order to be
+  set at the time the max profit is attained. When the time elapsed since that
+  timestamp is set exceeds a threshold, I will close the order.
+* I also changed the open order to be a limit, instead of market, order.
+* To address 4, I converted open orders to be limit orders whose price is the
+  `current_price` when the order was opened.
+  * The danger with this is that the order never executes since the price blows
+    past the `limit_price`.
+  * To address this I cancel the order if it has been 30 seconds since its
+    opening, as measured by a new `timestamp` attribute that I introduced to
+    order.
+
+#### Next Thing(s) to Try
+* Close when time since `max_profit_timestamp` exceeds 30 seconds.
