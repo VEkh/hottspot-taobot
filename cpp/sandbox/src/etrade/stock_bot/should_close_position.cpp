@@ -7,7 +7,9 @@
  * order_status_t
  */
 #include "stock_bot.h"
-#include <time.h> // time, time_t
+
+#include "profit_percentage.cpp" // profit_percentage
+#include <time.h>                // time, time_t
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -18,35 +20,11 @@ bool ETrade::StockBot::should_close_position() {
     return false;
   }
 
-  gear_t *current_gear_ptr = this->transmission.current_gear();
-
-  if (!current_gear_ptr) {
-    return false;
-  }
-
   const double max_loss = this->moving_price_range.max_loss;
-  const double short_term_loss_threshold = 1.0;
+  const double min_profit = this->moving_price_range.min_profit;
   const double stop_loss_threshold = 1.1;
 
-  const gear_t current_gear = *current_gear_ptr;
-  time_t now;
-  time(&now);
-
-  if (now - this->open_order.max_profit_timestamp >= 30) {
-    return true;
-  }
-
-  if (this->is_long_position &&
-      this->long_average_buy_sell_ratio < stop_loss_threshold) {
-    return true;
-  }
-
-  if (!this->is_long_position &&
-      this->long_average_sell_buy_ratio < stop_loss_threshold) {
-    return true;
-  }
-
-  if (current_gear == gear_t::D && this->open_order.profit > 0) {
+  if (this->open_order.profit >= min_profit) {
     if (this->is_long_position &&
         this->long_average_buy_sell_ratio < stop_loss_threshold) {
       return true;

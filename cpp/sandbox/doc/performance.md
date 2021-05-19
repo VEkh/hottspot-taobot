@@ -1623,3 +1623,32 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Close when time since `max_profit_timestamp` exceeds 30 seconds.
+
+### 2021-05-19:
+#### Performance
+
+* Total: -$19.25
+  * AAPL ($0.59): 7/16
+  * AMD ($1.06): 9/23
+  * BA (-$3.48): 6/20
+  * FB (-$1.49): 8/21
+  * MSFT (-$3.44): 6/17
+  * SNAP (-$0.05): 10/28
+  * SQ ($2.61): 7/13
+  * TSLA (-$15.05): 3/17
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* I started with using time since max profit as an exit indicator. This proved
+  to be a poor and jumpy indicator.
+* I switched to a strategy that allowed more time for a position to be
+  profitable by setting equivalent max stop loss and min profit.
+* The min profit had to be exceeded with a buy-sell ratio that decreased
+  beneath a threshold before exiiting.
+* The downside to this is that I picked a static percentage for max loss. This
+  was either too much or too little.
+
+#### Next Thing(s) to Try
+* I'll stick with giving positions more time to be correct.
+* I'll base max loss on a percentage of the periodic price range
