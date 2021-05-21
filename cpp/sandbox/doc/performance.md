@@ -1668,3 +1668,44 @@ Conclusions:
 * Early monitoring of this adjustment still presents extensive losses. It may be necessary to reduce the min profit so I cash out sooner.
 
 #### Next Thing(s) to Try
+
+### 2021-05-21:
+#### Performance
+
+* Total: -$11.61
+  * AAPL ($0.09): 8/13
+  * AMD (-$0.10): 6/12
+  * BA ($1.89): 9/13
+  * COIN (-$1.42): 9/15
+  * FB ($2.49): 12/17
+  * MSFT (-$2.43): 8/18
+  * SNAP (-$2.17): 7/16
+  * SQ ($2.36): 9/14
+  * TSLA (-$12.18): 7/13
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* The first half of the day peformed poorly. This was due to a few things:
+  * The max loss and min profit were equal. While the position would close at
+    max loss, it wouldn't necessarily close at the equivalent min profit.
+    * This occurred particularly when the price movement extended the moving
+      range.
+    * Even with the 80% `max_profit` bail out, it wasn't succeeding.
+
+  * I also found that the price rarely moved an additional 50% of the day range
+    in the profit direction.
+    * I'm just realizing that this makes sense. Often strong movement will lead
+      to a reversal, at bare minimum a correction. It seems more likely that
+      the price will move 50% in the loss direction than an additional 50%
+      price range in the profit direction.
+
+  * To account for this, I changed the `min_profit` to be 25% of the moving
+    price range.
+
+  * After making this change, the day ended up +$9.
+
+  * We'll try this again on Monday.
+
+
+#### Next Thing(s) to Try
