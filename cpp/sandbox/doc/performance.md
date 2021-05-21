@@ -1652,3 +1652,19 @@ Conclusions:
 #### Next Thing(s) to Try
 * I'll stick with giving positions more time to be correct.
 * I'll base max loss on a percentage of the periodic price range
+
+### 2021-05-20:
+#### Performance
+
+* Total: ~-$5.15
+  * Didn't note performance
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* Position patience is good, but I missed a couple of opportunities to exit at
+  big wins.
+* To account for this, I am exiting if the max profit surpassed min profit, but the current proft has fallen between 70-80% of the max profit.
+* Early monitoring of this adjustment still presents extensive losses. It may be necessary to reduce the min profit so I cash out sooner.
+
+#### Next Thing(s) to Try
