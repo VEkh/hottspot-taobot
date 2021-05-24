@@ -6,6 +6,11 @@
 #include <vector>      // std::vector
 
 void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
+  if (this->open_order.execution_price &&
+      this->moving_price_range.min_profit != INFINITY) {
+    return;
+  }
+
   double high = -INFINITY;
   double low = INFINITY;
   double max_loss = INFINITY;

@@ -1709,3 +1709,31 @@ Conclusions:
 
 
 #### Next Thing(s) to Try
+
+### 2021-05-24:
+#### Performance
+
+* Total: -$2.63
+  * AAPL ($1.31): 11/14
+  * AMD (-$0.05): 8/12
+  * BA ($3.21): 12/18
+  * COIN (-$8.36): 3/10
+  * FB ($2.49): 8/14
+  * MSFT ($2.45): 10/13
+  * SNAP ($3.87): 11/16
+  * SQ (-$4.21): 8/15
+  * TSLA (-$5.51): 6/13
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* The morning performed extremely well; up ~$11. Then big stocks like COIN and
+  TSLA incurred too many losses.
+* The good news is 5/8 securites won and the total loss was only moderate.
+* There are a couple instances where the price moves to expand the moving range
+  and the `min_profit` beyond a point where the `max_profit` would have
+  exceeded the `min_profit` at the time the position is opened.
+
+
+#### Next Thing(s) to Try
+* Keep the `min_profit` and `max_loss` static while the position is open
