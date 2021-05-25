@@ -1737,3 +1737,28 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Keep the `min_profit` and `max_loss` static while the position is open
+
+### 2021-05-25:
+#### Performance
+
+* Total: -$14.54
+  * AAPL (-$0.50): 9/15 • Avg `max_profit` as moving price range %: 0.218578
+  * AMD (-$0.05): 5/8
+  * BA (-$0.89): 8/12
+  * COIN (-$0.07): 9/12
+  * FB (-$4.09): 3/9
+  * MSFT (-$1.58): 6/15
+  * SNAP (-$0.44): 6/9
+  * SQ (-$3.25): 4/7
+  * TSLA (-$3.69): 11/15
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* None won, but they all performed only moderately poorly.
+* All, with a couple exceptions had winning ratios.
+
+
+#### Next Thing(s) to Try
+* I'm going to set a 0.5 moving price range minimum profit and calculate the
+  average `max_profit` as moving price range %

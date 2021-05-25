@@ -29,7 +29,7 @@ void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
   }
 
   const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.5;
-  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.25;
+  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.5;
   const double max_loss_percentage = 0.005 * this->open_order.execution_price;
   const double min_profit_percentage = 0.001 * this->open_order.execution_price;
   const double price_range = high - low;
