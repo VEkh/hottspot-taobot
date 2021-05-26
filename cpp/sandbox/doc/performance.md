@@ -1762,3 +1762,49 @@ Conclusions:
 #### Next Thing(s) to Try
 * I'm going to set a 0.5 moving price range minimum profit and calculate the
   average `max_profit` as moving price range %
+
+### 2021-05-26:
+#### Performance
+
+* Total: $0.25
+  * AAPL (-$0.50): 1/6
+  * AMD (-$0.43): 1/2
+  * BA (-$4.19): 0/5
+  * COIN (-$6.73): 1/4
+  * FB (-$2.06): 3/6
+  * MSFT ($0.03): 6/15
+  * SNAP (-$1.49): 1/5
+  * SQ ($0.77): 1/2
+  * TSLA ($15.39): 3/3
+
+* Average `max_profit` as percentage of moving price range
+  * AAPL: 0.252188
+  * AMD: 0.283274
+  * BA: 0.217125
+  * COIN: 0.234126
+  * FB: 0.320768
+  * MSFT: 0.35443
+  * SNAP: 0.392255
+  * SQ: 0.318664
+  * TSLA: 0.525417
+  * Overall Average: 0.322028
+
+* Profitable Days in a Row: 1
+
+#### Remarks
+* Today was characterized by very strong performance by TSLA.
+* COIN still has yet to win, even once. I think I'll exclude it until I more
+  consistently win
+* The overall average "`max_profit` as a percentage of moving price range" is a
+  very interesting datum. It suggests that a more appropriate `min_profit` is
+  33% of the moving range. I need more data to confirm this.
+* Another realization I had is that it might be impracticle to predict
+  continued movement in the momentum direction.
+  * It's already moved some amount in that direction and high short-term
+    momentum is a required entry indicator. If anything, reversal is probably
+    more likely. We'll see.
+
+
+#### Next Thing(s) to Try
+* Move `min_profit` to 1/3 of the moving range and continue to gather data on
+  what the optimal ratio should be.
