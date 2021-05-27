@@ -1370,6 +1370,28 @@ Conclusions:
   10M shares
 * Continue this and maybe add NIO next week.
 
+### 2021-05-03:
+#### Performance
+* Total: -$12.28
+  * AAPL (-$0.38)
+  * AMD (-$0.26)
+  * FB (-$0.59)
+  * MSFT ($0.54)
+  * NIO ($0.50)
+  * SNAP ($0.27)
+  * TSLA (-$12.35)
+
+#### Remarks
+* Moderately poor performance, but mostly because TSLA kept getting caught in
+  reversals.
+* TSLA's 2-hour price range was quite large at times so the losses it sustained
+  were heavier than desired.
+* Is this inevitable?
+
+#### Next Thing(s) to Try
+* Cap the max loss at 0.4-0.5% and make the min profit 25% of that
+* Max loss should be the result of a sigmoidal
+
 ### 2021-05-04:
 #### Performance
 * Total: -$11.63
@@ -1808,3 +1830,113 @@ Conclusions:
 #### Next Thing(s) to Try
 * Move `min_profit` to 1/3 of the moving range and continue to gather data on
   what the optimal ratio should be.
+
+### 2021-05-27:
+#### Performance
+
+* Total: -$1.92
+  * AAPL (-$0.98): 5/10
+  * AMD (-$0.43): 8/11
+  * BA ($1.38): 1/2
+  * FB (-$0.09): 3/6
+  * MSFT ($0.25): 5/13
+  * SNAP (-$0.84): 5/12
+  * SQ (-$4.21): 1/5
+  * TSLA ($1.96): 7/12
+
+* Average `max_profit` as percentage of moving price range
+  * AAPL: 0.34092
+  * AMD: 0.342133
+  * BA: 0.217098
+  * FB: 0.359992
+  * MSFT: 0.331276
+  * SNAP: 0.288651
+  * SQ: 0.232202
+  * TSLA: 0.495607
+  * Overall Average: 0.325985
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* Even though the day ended at a slight loss, 4/8 stocks won! 🥳
+* FB would have won if the last position's min-profit had shrunk to fit the
+  moving price range. I think I'll re-adjust the min profit and max loss to be
+  the min of the previously set value and the current value.
+* The day opened profitably, but then reduced as it progressed.
+* The overall Max Profit as % of Moving Price range was eerily similar to
+  yesterday's despite having reduced the min profit from 50% to 33.3%.
+* It was still at around 33.3%, so I'll keep it here for now.
+
+
+#### Next Thing(s) to Try
+* Adjust the `min_profit` and `max_loss` to allow them to shrink, not expand,
+  as the moving price range adjusts.
+
+### 2021-05-28:
+#### Performance
+
+* Total: $18.43
+  * AAPL (-$0.98): 4/13
+  * AMD (-$0.43): 9/12
+  * BA ($1.38): 4/9
+  * FB (-$0.09): 6/12
+  * MSFT ($0.35): 7/12
+  * SNAP (-$1.00): 5/11
+  * TSLA ($22.14): 12/15
+
+* Average `max_profit` as percentage of moving price range
+  AAPL: 0.28418
+  AMD: 0.33725
+  BA: 0.180381
+  FB: 0.272374
+  MSFT: 0.228896
+  SNAP: 0.27691
+  TSLA: 0.363624
+  Overall Average: 0.277659
+
+* Profitable Days in a Row: 1
+
+#### Remarks
+* Great job today! 3/7 stocks won 🎉
+* The overall average `max_profit` as moving price range % was not too
+  different from the prior days average. I'll keep it at 33.33% and continue to
+  monitor.
+* Note that today was heavily influenced by strong performance from TSLA. We'll
+  see if that maintains.
+
+
+#### Next Thing(s) to Try
+
+### 2021-06-01:
+#### Performance
+
+* Total: $5.40
+  * AAPL (-$0.36): 8/14
+  * AMD (-$0.49): 9/14
+  * BA ($1.82): 7/10
+  * FB (-$3.65): 7/13
+  * MSFT (-$0.13): 7/13
+  * SNAP ($0.75): 8/13
+  * TSLA ($7.46): 9/13
+
+* Average `max_profit` as percentage of moving price range
+  AAPL: 0.2445
+  AMD: 0.258183
+  BA: 0.285189
+  FB: 0.240684
+  MSFT: 0.223737
+  SNAP: 0.286133
+  TSLA: 0.319679
+  Overall Average: 0.265444
+
+* Profitable Days in a Row: 2
+
+#### Remarks
+* Great job today! 3/7 stocks won 🎉
+* Every stock had a > 50% win ratio.
+* The overall average `max_profit` as moving price range % was ~27% again.
+  It's posible that this is or isn't the optimal percentage. Any threshold
+  you set will have and average lower than it. I'll remain at 33.3%. I may
+  reduce to 30%.
+
+#### Next Thing(s) to Try
