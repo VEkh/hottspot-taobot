@@ -1940,3 +1940,25 @@ Conclusions:
   reduce to 30%.
 
 #### Next Thing(s) to Try
+
+### 2021-06-02:
+#### Performance
+
+* Total: $12.02
+  * AAPL ($0.72): 7/12
+  * AMD (-$0.70): 4/10
+  * BA ($2.19): 10/15
+  * FB ($0.96): 8/12
+  * MSFT ($0.59): 6/9
+  * SNAP ($0.15): 7/13
+  * TSLA ($8.12): 5/7
+
+* Profitable Days in a Row: 3
+
+#### Remarks
+* Great job today! 6/7 stocks won 🎉
+* Every stock, except one, had a > 50% win ratio.
+* Things went really well today, and even the loser only moderately lost.
+
+#### Next Thing(s) to Try
+* Reduce the moving price range period from 1.5 to 1 hour.
