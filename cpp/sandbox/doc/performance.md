@@ -1962,3 +1962,38 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Reduce the moving price range period from 1.5 to 1 hour.
+
+### 2021-06-03:
+#### Performance
+
+* Total: $7.14
+  * AAPL ($0.27): 10/16
+  * AMD ($0.03): 9/16
+  * BA (-$3.19): 10/22
+  * FB (-$4.53): 9/16
+  * MSFT ($5.90): 17/21
+  * SNAP (-$0.54): 7/16
+  * TSLA ($9.21): 14/20
+
+* Average `max_profit` as % of moving price range
+  AAPL: 0.308103
+  AMD: 0.298809
+  BA: 0.259412
+  FB: 0.285905
+  MSFT: 0.356125
+  SNAP: 0.286512
+  TSLA: 0.354132
+  Overall Average: 0.307
+
+* Profitable Days in a Row: 4
+
+#### Remarks
+* Great job today! 4/7 stocks won 🎉
+* Most stocks had winning ratios.
+* The reduction of the moving price range period from 1.5 to 1 hour seemed good
+  but it could be too early to tell.
+* It did help bail out of large losses.
+
+#### Next Thing(s) to Try
+* Reduce `max_profit` as % of moving price range fro 33.3% to 30%. The average
+  seems to be coalescing around this.
