@@ -1995,5 +1995,45 @@ Conclusions:
 * It did help bail out of large losses.
 
 #### Next Thing(s) to Try
-* Reduce `max_profit` as % of moving price range fro 33.3% to 30%. The average
+* Reduce `max_profit` as % of moving price range from 33.3% to 30%. The average
   seems to be coalescing around this.
+
+### 2021-06-04:
+#### Performance
+
+* Total: -$5.72
+  * AAPL (-$0.44): 9 / 19
+  * AMD (-$0.11): 7 / 12
+  * BA (-$1.62): 15 / 27
+  * FB ($2.44): 11 / 20
+  * MSFT ($0.42): 9 / 14
+  * SNAP ($0.40): 13 / 21
+  * TSLA (-$6.80): 5 / 14
+
+* Average `max_profit` as % of moving price range
+  AAPL: 0.26734
+  AMD: 0.274601
+  BA: 0.295297
+  FB: 0.287155
+  MSFT: 0.24113
+  SNAP: 0.29328
+  TSLA: 0.254562
+  Overall Average: 0.273338
+
+* Profitable Days in a Row: 0
+
+#### Remarks
+* Good job today! 3/7 stocks won 🎉
+* Reducing the `max_profit` as % of moving price range to 30% didn't increase
+  the win % or change the overall average.
+* It also reduced the min profit of each position, theoretically reducing the
+  potential profit.
+* I'll increase it up to 35% then back to 33% if that decreases the win % too
+  drastically.
+* Four of the last five days were profitable. It will soon be time to normalize
+  the quantities of each security to a basis (TSLA).
+
+#### Next Thing(s) to Try
+* Increase `max_profit` as % of moving price range from 30% to 35%. The average
+  seems to be coalescing around this.
+* Normalize the quantities of each security to a basis (TSLA).
