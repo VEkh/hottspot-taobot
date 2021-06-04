@@ -8,6 +8,7 @@
  */
 #include "stock_bot.h"
 
+#include "etrade/constants.cpp"      // ETrade::constants
 #include "set_profit.cpp"            // set_profit
 #include "should_close_position.cpp" // should_close_position
 #include <iostream>                  // std::cout, std::endl

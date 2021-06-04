@@ -2,16 +2,16 @@
 #define ETRADE__STOCK_BOT_initialize
 
 #include "lib/formatted.cpp" // Formatted::error_message
-#include "stock_bot.h"  // ETrade::StockBot, quantity, symbol
+#include "stock_bot.h"       // ETrade::StockBot, quantity, symbol
 #include <stdexcept>         // std::invalid_argument
 
-void ETrade::StockBot::initialize(char *symbol_, int quantity_) {
+void ETrade::StockBot::initialize(char *symbol_, int quantity_mulitiplier_) {
   if (symbol_ == nullptr) {
     std::string message = Formatted::error_message("Must provide a symbol");
     throw std::invalid_argument(message);
   }
 
-  if (!quantity_) {
+  if (!quantity_mulitiplier_) {
     std::string message =
         Formatted::error_message("Quantity must be at least 1");
 
@@ -19,7 +19,8 @@ void ETrade::StockBot::initialize(char *symbol_, int quantity_) {
   }
 
   symbol = symbol_;
-  quantity = quantity_;
+  quantity_mulitiplier = quantity_mulitiplier_;
+  quantity = quantity_mulitiplier_;
 }
 
 #endif

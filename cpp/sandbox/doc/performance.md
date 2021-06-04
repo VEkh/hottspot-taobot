@@ -2037,3 +2037,29 @@ Conclusions:
 * Increase `max_profit` as % of moving price range from 30% to 35%. The average
   seems to be coalescing around this.
 * Normalize the quantities of each security to a basis (TSLA).
+
+### 2021-06-07:
+#### Performance
+
+* Total: $12.99
+  * AAPL ($5.52): 9 / 10
+  * AMC ($3.47): 2 / 4
+  * AMD (-$6.64): 7 / 15
+  * BA (-$2.06): 9 / 18
+  * FB (-$1.65): 11 / 22
+  * MSFT (-$0.17): 8 / 16
+  * SNAP ($1.44): 9 / 18
+  * TSLA ($13.08): 9 / 13
+
+* Profitable Days in a Row: 1
+* Win Record (as stable profitable algo [5/28]): 5/6
+
+#### Remarks
+* Good job today! 4/8 stocks won 🎉
+* Today was the first day with normalized quantities and it was still
+  profitable.
+* TSLA still carried, but AMC (late joiner) also did well.
+* AMD performed poorly
+* Continue with this strategy and automate quantity normalization.
+
+#### Next Thing(s) to Try

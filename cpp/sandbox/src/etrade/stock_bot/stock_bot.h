@@ -1,7 +1,7 @@
 #if !defined ETRADE__STOCK_BOT_H
 #define ETRADE__STOCK_BOT_H
 
-#include "etrade/client/client.h"            // ETrade::Client
+#include "etrade/client/client.cpp"          // ETrade::Client
 #include "etrade/deps.cpp"                   // json
 #include "etrade/types.cpp"                  // ETrade::t
 #include "lib/formatted.cpp"                 // Formatted
@@ -33,6 +33,7 @@ private:
     int period = 0;
   };
 
+  const char *NORMALIZE_QUANTITY_BASIS_SYMBOL = "TSLA";
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.3;
   const double MOVING_PRICE_RANGE_PERIOD_SECONDS = 1.0 * 60 * 60;
   const double POLLING_INTERVAL_SECONDS = 1.0;
@@ -52,6 +53,7 @@ private:
   double long_average_sell_buy_ratio;
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
+  int quantity_mulitiplier;
   int quantity;
   json placed_orders;
   order_t *close_order_ptr = nullptr;
@@ -64,9 +66,13 @@ private:
 
   bool should_close_position();
   bool should_open_position();
+
   double compute_buy_sell_ratio(const sma_t &);
   double compute_sell_buy_ratio(const sma_t &);
   double profit_percentage(const order_t *);
+
+  int compute_normalized_quantity();
+
   json get_order_json(const order_t *);
   sma_t build_simple_moving_average(const int);
 

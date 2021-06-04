@@ -2,5 +2,12 @@
 
 args="${@:-./sandbox.cpp}"
 
-g++ -iquote. -iquote./src -std=c++17 -o ./.output $args && ./.output;
+g++ \
+  -iquote. \
+  -iquote./src \
+  -std=c++17 \
+  -o ./.output \
+  $args \
+  -lcrypto \
+  -lcurl && ./.output;
 \rm -f ./.output
