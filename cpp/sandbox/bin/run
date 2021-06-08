@@ -1,13 +1,13 @@
 #!/bin/bash
 
-args="${@:-./sandbox.cpp}"
+srcs="${@:-./sandbox.cpp}"
 
 g++ \
   -iquote. \
   -iquote./src \
   -std=c++17 \
   -o ./.output \
-  $args \
+  $srcs \
   -lcrypto \
   -lcurl && ./.output;
 \rm -f ./.output

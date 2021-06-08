@@ -2,6 +2,7 @@
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "lib/utils/debug.cpp"             // utils::debug
+#include "lib/utils/io.cpp"                // utils::io
 #include "stock_bot/stock_bot.cpp"         // ETrade::StockBot
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
@@ -101,8 +102,10 @@ int main(int argc, char *argv[]) {
   if (command == "stock_bot") {
     char *symbol = argc < 3 ? nullptr : argv[2];
     int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
+    std::map<std::string, std::string> flags =
+        utils::io::extract_flags(argc, argv);
 
-    ETrade::StockBot stock_bot(symbol, quantity);
+    ETrade::StockBot stock_bot(symbol, quantity, flags);
     stock_bot.run();
 
     exit(0);

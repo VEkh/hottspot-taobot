@@ -12,10 +12,11 @@
  */
 #include "stock_bot.h"
 
-#include "etrade/constants.cpp"          // ETrade::constants
-#include "lib/curl_client/curl_client.h" // CurlClient
-#include "should_open_position.cpp"      // should_open_position
-#include <iostream>                      // std::cout, std::endl
+#include "compute_normalized_quantity.cpp" // compute_normalized_quantity
+#include "etrade/constants.cpp"            // ETrade::constants
+#include "lib/curl_client/curl_client.h"   // CurlClient
+#include "should_open_position.cpp"        // should_open_position
+#include <iostream>                        // std::cout, std::endl
 
 void ETrade::StockBot::open_position() {
   if (!should_open_position()) {
@@ -23,6 +24,7 @@ void ETrade::StockBot::open_position() {
   }
 
   const double current_price = this->quotes.back().current_price;
+  this->quantity = compute_normalized_quantity();
 
   order_t new_open_order;
   new_open_order.action =

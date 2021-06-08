@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_H
+#ifndef ETRADE__STOCK_BOT_H
 #define ETRADE__STOCK_BOT_H
 
 #include "etrade/client/client.cpp"          // ETrade::Client
@@ -7,12 +7,13 @@
 #include "lib/formatted.cpp"                 // Formatted
 #include "lib/transmission/transmission.cpp" // Transmission
 #include <map>                               // std::map
+#include <string>                            // std::string
 #include <vector>                            // std::vector
 
 namespace ETrade {
 class StockBot {
 public:
-  StockBot(char *, int);
+  StockBot(char *, int, std::map<std::string, std::string> &);
 
   void run();
 
@@ -38,6 +39,8 @@ private:
   const double MOVING_PRICE_RANGE_PERIOD_SECONDS = 1.0 * 60 * 60;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
+
+  bool FLAG_NORMALIZE_QUANTITY = false;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -83,7 +86,7 @@ private:
   void close_position();
   void fetch_orders();
   void fetch_quote();
-  void initialize(char *, int);
+  void initialize(char *, int, std::map<std::string, std::string> &flags);
   void log_moving_price_range();
   void log_position();
   void log_position_results();

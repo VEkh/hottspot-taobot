@@ -53,6 +53,8 @@ void ETrade::StockBot::log_position() {
             << ETrade::constants::ORDER_STATUSES[this->close_order.status];
   std::cout << std::endl;
 
+  std::cout << "Quantity: " << this->quantity << std::endl;
+
   if (this->open_order.max_profit_timestamp) {
     std::cout << "Max Profit ⌚ Δ: "
               << utils::integer_::seconds_to_clock(

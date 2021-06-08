@@ -1,8 +1,9 @@
-#include "etrade/stock_bot/stock_bot.cpp"
+#include "lib/utils/io.cpp" // utils::io
 #include <iostream>
 
-int main() {
-  ETrade::StockBot stock_bot((char *)"AMC", 1);
-  stock_bot.fetch_quote();
-  std::cout << stock_bot.compute_normalized_quantity() << std::endl;
+int main(int argc, char *argv[]) {
+  std::map<std::string, std::string> flags =
+      utils::io::extract_flags(argc, argv);
+
+  std::cout << flags["normalize-quantity"] << std::endl;
 }

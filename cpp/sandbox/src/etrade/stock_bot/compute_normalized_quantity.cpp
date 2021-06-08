@@ -5,6 +5,10 @@
 #include <math.h>
 
 int ETrade::StockBot::compute_normalized_quantity() {
+  if (!this->FLAG_NORMALIZE_QUANTITY) {
+    return this->quantity_mulitiplier;
+  }
+
   const double current_price = this->quotes.back().current_price;
 
   const std::string basis_quote_string =

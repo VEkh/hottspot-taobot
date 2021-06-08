@@ -5,8 +5,9 @@
 #include "initialize.cpp" // initialize
 #include "run.cpp"        // run
 
-ETrade::StockBot::StockBot(char *symbol_, int quantity_) {
-  initialize(symbol_, quantity_);
+ETrade::StockBot::StockBot(char *symbol_, int quantity_,
+                           std::map<std::string, std::string> &flags) {
+  initialize(symbol_, quantity_, flags);
 }
 
 #endif

@@ -2063,3 +2063,28 @@ Conclusions:
 * Continue with this strategy and automate quantity normalization.
 
 #### Next Thing(s) to Try
+
+### 2021-06-08:
+#### Performance
+
+* Total: $13.93
+  * AAPL ($5.07): 8 / 14
+  * AMC (-$12.20): 3 / 5
+  * AMD (-$1.93): 7 / 13
+  * BA ($7.61): 7 / 12
+  * FB (-$8.10): 8 / 22
+  * MSFT (-$1.20): 7 / 15
+  * SNAP ($7.38): 9 / 17
+  * TSLA ($17.30): 11 / 15
+
+* Profitable Days in a Row: 2
+* Win Record (as stable profitable algo [5/28]): 6/7
+
+#### Remarks
+* Good job today! 4/8 stocks won 🎉
+* The manually normalized quantities still seem to be profitable.
+* Tomorrow will be the first day where it's automated.
+* I can't trade AMC, because I can only play one side
+
+#### Next Thing(s) to Try
+* Close positions in the last minute of the day.
