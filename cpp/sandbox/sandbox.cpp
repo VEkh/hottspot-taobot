@@ -1,9 +1,6 @@
-#include "lib/utils/io.cpp" // utils::io
+#include "lib/utils/time.cpp" // utils::time_
 #include <iostream>
 
 int main(int argc, char *argv[]) {
-  std::map<std::string, std::string> flags =
-      utils::io::extract_flags(argc, argv);
-
-  std::cout << flags["normalize-quantity"] << std::endl;
+  std::cout << "Is EOD? " << utils::time_::is_end_of_day() << std::endl;
 }

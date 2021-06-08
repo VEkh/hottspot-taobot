@@ -5,6 +5,10 @@
 #include <math.h>
 
 int ETrade::StockBot::compute_normalized_quantity() {
+  if (this->symbol == this->NORMALIZE_QUANTITY_BASIS_SYMBOL) {
+    return this->quantity_mulitiplier;
+  }
+
   if (!this->FLAG_NORMALIZE_QUANTITY) {
     return this->quantity_mulitiplier;
   }

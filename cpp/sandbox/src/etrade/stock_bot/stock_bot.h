@@ -69,6 +69,7 @@ private:
 
   bool should_close_position();
   bool should_open_position();
+  bool should_terminate();
 
   double compute_buy_sell_ratio(const sma_t &);
   double compute_sell_buy_ratio(const sma_t &);
@@ -87,6 +88,7 @@ private:
   void fetch_orders();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
+  void log_end_of_day();
   void log_moving_price_range();
   void log_position();
   void log_position_results();
@@ -105,7 +107,7 @@ private:
   void set_status(order_t *);
   void shift_transmission_gear();
   void watch();
-}; // namespace ETrade
+};
 } // namespace ETrade
 
 #endif

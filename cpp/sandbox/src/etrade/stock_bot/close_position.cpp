@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_close_position
+#ifndef ETRADE__STOCK_BOT_close_position
 #define ETRADE__STOCK_BOT_close_position
 
 /*

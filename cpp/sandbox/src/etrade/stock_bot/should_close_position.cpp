@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_should_close_position
+#ifndef ETRADE__STOCK_BOT_should_close_position
 #define ETRADE__STOCK_BOT_should_close_position
 
 /*
@@ -8,6 +8,7 @@
  */
 #include "stock_bot.h"
 
+#include "lib/utils/time.cpp"    // utils::time_
 #include "profit_percentage.cpp" // profit_percentage
 #include <time.h>                // time, time_t
 
@@ -18,6 +19,10 @@ bool ETrade::StockBot::should_close_position() {
 
   if (this->close_order.status != order_status_t::ORDER_PENDING) {
     return false;
+  }
+
+  if (utils::time_::is_end_of_day()) {
+    return true;
   }
 
   const double max_loss = this->moving_price_range.max_loss;

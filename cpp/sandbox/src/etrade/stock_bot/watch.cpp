@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_watch
+#ifndef ETRADE__STOCK_BOT_watch
 #define ETRADE__STOCK_BOT_watch
 
 /*
@@ -12,6 +12,8 @@
 #include "close_position.cpp"              // close_position
 #include "fetch_orders.cpp"                // fetch_orders
 #include "fetch_quote.cpp"                 // fetch_quote
+#include "lib/utils/time.cpp"              // utils::time_
+#include "log_end_of_day.cpp"              // log_end_of_day
 #include "log_moving_price_range.cpp"      // log_moving_price_range
 #include "log_position.cpp"                // log_position
 #include "log_position_results.cpp"        // log_position_results
@@ -23,11 +25,12 @@
 #include "set_open_position_prices.cpp"    // set_open_position_prices
 #include "set_position_status.cpp"         // set_order_statuses
 #include "shift_transmission_gear.cpp"     // shift_transmission_gear
+#include "should_terminate.cpp"            // should_terminate
 #include <chrono>                          // std::chrono
 #include <thread>                          // std::this_thread
 
 void ETrade::StockBot::watch() {
-  while (true) {
+  while (!should_terminate()) {
     fetch_quote();
 
     log_quote();
@@ -52,6 +55,8 @@ void ETrade::StockBot::watch() {
     std::this_thread::sleep_for(
         std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));
   }
+
+  log_end_of_day();
 }
 
 #endif

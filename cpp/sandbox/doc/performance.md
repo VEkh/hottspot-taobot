@@ -2088,3 +2088,89 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Close positions in the last minute of the day.
+
+### 2021-06-09:
+#### Performance
+
+* Total: -$4.55
+  * AAPL (-$5.27): 8 / 17
+  * AMD (-$0.51): 9 / 16
+  * BA ($8.88): 7 / 12
+  * FB (-$14.88): 7 / 18
+  * MSFT ($0.67): 10 / 15
+  * SNAP ($14.46): 11 / 18
+  * TSLA (-$3.83): 8 / 18
+  * VIAC (-$4.08): 6 / 13
+
+* Profitable Days in a Row: 0
+* Win Record (as stable profitable algo [5/28]): 6/8
+
+#### Remarks
+* Okay job today! 4/8 stocks won 🎉
+* Was down ~$25 by mid-day but rallied to only a -$4.55 loss.
+
+#### Next Thing(s) to Try
+* Close positions in the last minute of the day.
+
+### 2021-06-10:
+#### Performance
+
+* Total: $35.91
+  * AAPL (-$1.15): 8 / 18
+  * AMD ($6.26): 12 / 21
+  * BA ($3.12): 9 / 12
+  * FB ($6.11): 9 / 16
+  * MSFT ($10.08): 13 / 15
+  * SNAP (-$7.37): 8 / 13
+  * TSLA ($12.80): 13 / 15
+  * VIAC ($6.06): 9 / 15
+
+* Profitable Days in a Row: 1
+* Win Record (as stable profitable algo [5/28]): 7/9
+
+#### Remarks
+* Okay job today! 6/8 stocks won 🎉
+* Really good performance
+* Keep quantity the same this week then scale up next week.
+
+#### Next Thing(s) to Try
+* Maybe shorten moving price range time period.
+
+### 2021-06-09:
+#### Performance
+
+* Total: -$4.55
+  * AAPL (-$5.27): 8 / 17
+  * AMD (-$0.51): 9 / 16
+  * BA ($8.88): 7 / 12
+  * FB (-$14.88): 7 / 18
+  * MSFT ($0.67): 10 / 15
+  * SNAP ($14.46): 11 / 18
+  * TSLA (-$3.83): 8 / 18
+  * VIAC (-$4.08): 6 / 13
+
+* Profitable Days in a Row: 0
+* Win Record (as stable profitable algo [5/28]): 6/8
+
+#### Remarks
+* Okay job today! 4/8 stocks won 🎉
+* Was down ~$25 by mid-day but rallied to only a -$4.55 loss.
+
+#### Next Thing(s) to Try
+* Close positions in the last minute of the day.
+
+### 2021-06-11:
+#### Performance
+
+* Total: -$1-2.00
+
+* Profitable Days in a Row: 0
+* Win Record (as stable profitable algo [5/28]): 7/10
+
+#### Remarks
+> * I was away from StockBot for the whole day and Replacement Shares are obscuring performance. I do suspect, however, that I only lost $1-2
+> * The automatic close didn't work, but I know why and fixed it.
+> * The error code 100 workaround didn't work, but I think I know why and perhaps fixed it.
+
+#### Next Thing(s) to Try
+* Maybe shorten moving price range time period.

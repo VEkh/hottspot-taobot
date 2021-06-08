@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_run
+#ifndef ETRADE__STOCK_BOT_run
 #define ETRADE__STOCK_BOT_run
 
 #include "log_start_message.cpp" // log_start_message
