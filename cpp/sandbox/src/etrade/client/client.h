@@ -44,10 +44,15 @@ public:
   CurlClient fetch(std::string, std::map<std::string, std::string>);
   CurlClient place_order(order_t *);
   CurlClient preview_order(const order_t &);
+
+  bool is_account_key_error_response(const CurlClient &);
   bool is_not_shortable_response(const CurlClient &);
+
   quote_t parse_quote(const std::string &);
+
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
+
   void fetch_access_token();
   void refresh_token();
 

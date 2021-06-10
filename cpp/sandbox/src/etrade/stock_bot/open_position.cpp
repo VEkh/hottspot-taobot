@@ -59,10 +59,23 @@ void ETrade::StockBot::open_position() {
 
   CurlClient curl_client = etrade_client.place_order(this->open_order_ptr);
 
+  if (etrade_client.is_account_key_error_response(curl_client)) {
+    std::cout << fmt.bold << fmt.yellow;
+    std::cout << log_icon << " " << order_action
+              << ": Account Key Error 🐞 (100). Retrying." << std::endl;
+    std::cout << fmt.reset << std::endl;
+
+    this->close_order_ptr = nullptr;
+    this->open_order_ptr = nullptr;
+
+    return;
+  }
+
   if (etrade_client.is_not_shortable_response(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
     std::cout << log_icon << " " << order_action
-              << ": This securiity is not shortable at this time." << std::endl;
+              << ": This securiity is not shortable at this time (1037)."
+              << std::endl;
     std::cout << fmt.reset << std::endl;
 
     this->close_order_ptr = nullptr;

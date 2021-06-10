@@ -21,10 +21,6 @@ bool is_retriable_response(const std::string &response_body) {
     return true;
   }
 
-  if (response.contains("Error") && response["Error"]["code"] == 100) {
-    return true;
-  }
-
   return std::regex_search(response_body,
                            std::regex("oauth_parameters_absent=oauth_nonce"));
 }
