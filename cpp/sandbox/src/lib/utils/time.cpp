@@ -36,7 +36,7 @@ bool is_end_of_day() {
   time(&local_now);
   std::tm local_time = *std::localtime(&local_now);
 
-  const bool is_eod = local_time.tm_hour == 15 && local_time.tm_min == 57;
+  const bool is_eod = local_time.tm_hour == 15 && local_time.tm_min == 59;
 
   if (original_tz) {
     setenv("TZ", original_tz, 1);

@@ -2136,29 +2136,6 @@ Conclusions:
 #### Next Thing(s) to Try
 * Maybe shorten moving price range time period.
 
-### 2021-06-09:
-#### Performance
-
-* Total: -$4.55
-  * AAPL (-$5.27): 8 / 17
-  * AMD (-$0.51): 9 / 16
-  * BA ($8.88): 7 / 12
-  * FB (-$14.88): 7 / 18
-  * MSFT ($0.67): 10 / 15
-  * SNAP ($14.46): 11 / 18
-  * TSLA (-$3.83): 8 / 18
-  * VIAC (-$4.08): 6 / 13
-
-* Profitable Days in a Row: 0
-* Win Record (as stable profitable algo [5/28]): 6/8
-
-#### Remarks
-* Okay job today! 4/8 stocks won 🎉
-* Was down ~$25 by mid-day but rallied to only a -$4.55 loss.
-
-#### Next Thing(s) to Try
-* Close positions in the last minute of the day.
-
 ### 2021-06-11:
 #### Performance
 
@@ -2168,9 +2145,41 @@ Conclusions:
 * Win Record (as stable profitable algo [5/28]): 7/10
 
 #### Remarks
-> * I was away from StockBot for the whole day and Replacement Shares are obscuring performance. I do suspect, however, that I only lost $1-2
-> * The automatic close didn't work, but I know why and fixed it.
-> * The error code 100 workaround didn't work, but I think I know why and perhaps fixed it.
+  * I was away from StockBot for the whole day and Replacement Shares are obscuring performance. I do suspect, however, that I only lost $1-2
+  * The automatic close didn't work, but I know why and fixed it.
+  * The error code 100 workaround didn't work, but I think I know why and perhaps fixed it.
 
 #### Next Thing(s) to Try
 * Maybe shorten moving price range time period.
+
+### 2021-06-14:
+#### Performance
+
+* Total: -$7.11
+  * AAPL ($6.02)
+  * AMD (-$1.54)
+  * BA ($3.00)
+  * FB ($4.30)
+  * MSFT ($1.40)
+  * SNAP (-$24.86)
+  * TSLA (-$5.15)
+  * VIAC ($9.71)
+
+* Profitable Days in a Row: 0
+* Win Record (as stable profitable algo [5/28]): 7/11
+
+#### Remarks
+  * 5/8 stocks won, but SNAP got DESTROYED
+  * I reverted opening orders to MARKET orders.
+    * I was missing too many entry possibilities.
+    * Also, it seems that the limit would help ensure a favorable entry price,
+      but the cost is missing entry into the most aggressive movement.
+  * The automatic close worked at 15:57 ET. I'll move it back to 15:59 ET.
+  * The error code 100 workaround worked!! 🎈. This may be the last of ETrade
+    fault tolerances that I need to implement.
+  * I shortened the moving price range period to 30 min.
+    * This felt a little short as TSLA could barely get beyond a $1.50 max loss.
+    * I'll increase it to 45 min.
+
+#### Next Thing(s) to Try
+* Increase the moving price range period to 45 min.

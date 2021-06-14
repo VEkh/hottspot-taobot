@@ -32,7 +32,7 @@ void ETrade::StockBot::open_position() {
   new_open_order.limit_price = current_price;
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
-  new_open_order.type = order_type_t::LIMIT;
+  new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;
   new_close_order.action = this->is_long_position
