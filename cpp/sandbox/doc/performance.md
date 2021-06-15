@@ -2183,3 +2183,34 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Increase the moving price range period to 45 min.
+
+### 2021-06-14:
+#### Performance
+
+* Total: -$11.66
+  * AAPL (-$1.99)
+  * AMD ($0.75)
+  * BA ($4.91)
+  * FB (-$7.86)
+  * MSFT (-$0.79)
+  * SNAP (-$15.09)
+  * TSLA ($0.66)
+  * VIAC ($7.75)
+
+* Profitable Days in a Row: 0
+* Win Record (as stable profitable algo [5/28]): 7/12
+
+#### Remarks
+  * 4/8 stocks won, but SNAP lost big again
+  * Reverting to market orders seems to have been fine. It's early to whether
+    it was a positive or negative change. If nothing else, it has increased the
+    number of trades for a given security.
+  * StockBot prematurely enters for SNAP.
+  * FB mostly loses and SNAP loses a lot. Maybe don't normalize their
+    quantities until you figure out what's going on with them?
+
+#### Next Thing(s) to Try
+* Increase the long-term buy-sell ratio entry threshold. It still seems a bit
+  jumpy for SNAP, and perhaps FB.
+* Don't normalize FB and SNAP's quantities until you figure out how to make
+  them consistently win. Maybe you need to omit them?
