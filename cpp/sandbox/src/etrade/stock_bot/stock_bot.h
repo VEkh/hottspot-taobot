@@ -72,6 +72,7 @@ private:
   bool should_terminate();
 
   double compute_buy_sell_ratio(const sma_t &);
+  double compute_min_profit_price_range_ratio(const double);
   double compute_sell_buy_ratio(const sma_t &);
   double profit_percentage(const order_t *);
 

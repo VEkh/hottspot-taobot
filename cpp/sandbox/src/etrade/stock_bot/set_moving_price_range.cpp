@@ -1,9 +1,10 @@
-#if !defined ETRADE__STOCK_BOT_set_moving_price_range
+#ifndef ETRADE__STOCK_BOT_set_moving_price_range
 #define ETRADE__STOCK_BOT_set_moving_price_range
 
-#include "stock_bot.h" // ETrade::StockBot, quote_t
-#include <algorithm>   // std::max, std::min
-#include <vector>      // std::vector
+#include "compute_min_profit_price_range_ratio.cpp" // compute_min_profit_price_range_ratio
+#include "stock_bot.h"                              // ETrade::StockBot, quote_t
+#include <algorithm>                                // std::max, std::min
+#include <vector>                                   // std::vector
 
 void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
   double high = -INFINITY;
@@ -24,13 +25,16 @@ void ETrade::StockBot::set_moving_price_range(const int period_seconds) {
   }
 
   const double MOVING_DAY_RANGE_MAX_LOSS_RATIO = 0.5;
-  const double MOVING_DAY_RANGE_MIN_PROFIT_RATIO = 0.35;
   const double max_loss_percentage = 0.005 * this->open_order.execution_price;
   const double min_profit_percentage = 0.001 * this->open_order.execution_price;
   const double price_range = high - low;
 
+  const double buy_sell_ratio = this->is_long_position
+                                    ? this->long_average_buy_sell_ratio
+                                    : this->long_average_sell_buy_ratio;
+
   const double min_profit_price_range =
-      MOVING_DAY_RANGE_MIN_PROFIT_RATIO * price_range;
+      compute_min_profit_price_range_ratio(buy_sell_ratio) * price_range;
 
   const double max_loss_price_range =
       MOVING_DAY_RANGE_MAX_LOSS_RATIO * price_range;
