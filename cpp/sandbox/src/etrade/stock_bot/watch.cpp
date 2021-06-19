@@ -5,6 +5,7 @@
  * ETrade::StockBot
  * MOVING_PRICE_RANGE_PERIOD_SECONDS
  * POLLING_INTERVAL_SECONDS
+ * fmt
  */
 #include "stock_bot.h"
 
@@ -27,9 +28,19 @@
 #include "shift_transmission_gear.cpp"     // shift_transmission_gear
 #include "should_terminate.cpp"            // should_terminate
 #include <chrono>                          // std::chrono
+#include <iostream>                        // std::cout, std::endl
 #include <thread>                          // std::this_thread
 
 void ETrade::StockBot::watch() {
+  while (!::utils::time_::is_market_open()) {
+    std::cout << fmt.yellow << fmt.bold;
+    std::cout << "Waiting for the market to open 😴" << std::endl;
+    std::cout << fmt.reset;
+
+    std::this_thread::sleep_for(
+        std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));
+  }
+
   while (!should_terminate()) {
     fetch_quote();
 

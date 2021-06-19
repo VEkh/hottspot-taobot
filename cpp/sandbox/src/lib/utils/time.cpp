@@ -36,7 +36,7 @@ bool is_end_of_day() {
   time(&local_now);
   std::tm local_time = *std::localtime(&local_now);
 
-  const bool is_eod = local_time.tm_hour == 15 && local_time.tm_min == 59;
+  const bool out = local_time.tm_hour == 15 && local_time.tm_min == 59;
 
   if (original_tz) {
     setenv("TZ", original_tz, 1);
@@ -44,7 +44,29 @@ bool is_end_of_day() {
     unsetenv("TZ");
   }
 
-  return is_eod;
+  return out;
+}
+
+bool is_market_open() {
+  const char *original_tz = getenv("TZ");
+  time_t local_now;
+
+  setenv("TZ", "America/New_York", 1);
+  time(&local_now);
+  std::tm local_time = *std::localtime(&local_now);
+
+  bool valid_hour = local_time.tm_hour >= 9 && local_time.tm_hour < 16;
+  bool valid_min = local_time.tm_hour == 9 ? local_time.tm_min >= 30 : true;
+
+  const bool out = valid_hour && valid_min;
+
+  if (original_tz) {
+    setenv("TZ", original_tz, 1);
+  } else {
+    unsetenv("TZ");
+  }
+
+  return out;
 }
 } // namespace time_
 } // namespace utils
