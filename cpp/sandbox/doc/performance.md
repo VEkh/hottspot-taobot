@@ -2184,7 +2184,7 @@ Conclusions:
 #### Next Thing(s) to Try
 * Increase the moving price range period to 45 min.
 
-### 2021-06-14:
+### 2021-06-15:
 #### Performance
 
 * Total: -$11.66
@@ -2214,3 +2214,84 @@ Conclusions:
   jumpy for SNAP, and perhaps FB.
 * Don't normalize FB and SNAP's quantities until you figure out how to make
   them consistently win. Maybe you need to omit them?
+
+### 2021-06-16:
+#### Performance
+
+* Total: $16.23
+  * AAPL (-$2.81)
+  * AMD ($8.07)
+  * BA ($5.95)
+  * FB ($5.77)
+  * MSFT ($14.74)
+  * SNAP ($0.77)
+  * TSLA (-$7.18)
+  * VIAC (-$7.53)
+
+* Profitable Days in a Row: 1
+* Win Record (as stable profitable algo [5/28]): 8/13
+
+#### Remarks
+  * 4/8 stocks won, but SNAP lost again
+  * This was the first day of a higher long-term buy-sell ratio entry
+    threshold. It's not clera that it improved or hurt performance.
+  * I'll keep it as is.
+  * What's becoming apparent is that profitability depends on many, if not,
+    most securities winning.
+  * It's almost impossible for all securities to win.
+  * Perhaps sufficient diversification will result in general profit.
+  * The next question is whether each individual security outperforms a long
+    position over time.
+  * This still remains to be seen.
+
+#### Next Thing(s) to Try
+
+### 2021-06-17:
+#### Performance
+
+* Total: $38.13
+  * AAPL ($1.98)
+  * AMD ($25.68)
+  * BA ($0.63)
+  * FB (-$0.04)
+  * MSFT (-$0.70)
+  * SNAP (-$0.43)
+  * TSLA ($0.43)
+  * VIAC ($10.59)
+
+* Profitable Days in a Row: 2
+* Win Record (as stable profitable algo [5/28]): 9/14
+
+#### Remarks
+  * 5/8 stocks won. SNAP and FB lost again but not majorly
+  * Most profitable day so far.
+  * With the higher long-term buy-sell ratio threshold, TSLA is trading much less frequently.
+  * Monitor this and maybe reduce to increase TSLA frequency.
+  * Maybe the threshold should be price-dependent?
+
+#### Next Thing(s) to Try
+  * I may increase the quantity multiplier. Understand that I still don't feel
+    good about SNAP and FB
+
+### 2021-06-18:
+#### Performance
+
+* Total: -$142.60
+  * AAPL (-$31.45)
+  * AMD (-$22.56)
+  * BA (-$34.44)
+  * F ($0.03)
+  * FB ($1.77)
+  * MSFT (-$28.89)
+  * SNAP (-$37.08)
+  * TSLA ($30.97)
+  * VIAC (-$20.95)
+
+* Profitable Days in a Row: 0
+* Win Record (as stable profitable algo [5/28]): 9/15
+
+#### Remarks
+  * 3/9 stocks won. SNAP lost again but FB won
+  * Biggest loss so far, but this is because I scaled up
+
+#### Next Thing(s) to Try
