@@ -30,12 +30,12 @@ bool ETrade::StockBot::should_close_position() {
   const double stop_loss_threshold = 1.1;
 
   if (this->open_order.max_profit >= min_profit) {
-    if (this->is_long_position &&
+    if (this->is_long_position && this->open_order.profit >= min_profit &&
         this->long_average_buy_sell_ratio < stop_loss_threshold) {
       return true;
     }
 
-    if (!this->is_long_position &&
+    if (!this->is_long_position && this->open_order.profit >= min_profit &&
         this->long_average_sell_buy_ratio < stop_loss_threshold) {
       return true;
     }

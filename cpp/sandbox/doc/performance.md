@@ -2295,3 +2295,31 @@ Conclusions:
   * Biggest loss so far, but this is because I scaled up
 
 #### Next Thing(s) to Try
+
+### 2021-06-21:
+#### Performance
+
+* Total: $5.20
+  * AAPL (-$0.64)
+  * AMD ($0.05)
+  * BA (-$1.23)
+  * FB ($2.04)
+  * MSFT ($2.88)
+  * SNAP (-$1.54)
+  * TSLA ($7.68)
+  * VIAC ($0.03)
+
+* Profitable Days in a Row: 1
+* Win Record (as stable profitable algo [5/28]): 10/16
+
+#### Remarks
+  * 4/8 stocks won, two barely did. TSLA carried
+  * Nice to make money but overall not satisfactory.
+  * 2nd half of day seemed to perform better where I:
+    * Lowered minimum min-profit to 10% of the moving price range
+    * Reduced the long term buy sell ratio entry threshold to 1.4
+    * Required profit to exceed min profit before closing in the large win
+      scenarios.
+
+#### Next Thing(s) to Try
+  * Try the full day with these changes tomorrow.
