@@ -2313,13 +2313,43 @@ Conclusions:
 * Win Record (as stable profitable algo [5/28]): 10/16
 
 #### Remarks
-  * 4/8 stocks won, two barely did. TSLA carried
-  * Nice to make money but overall not satisfactory.
-  * 2nd half of day seemed to perform better where I:
-    * Lowered minimum min-profit to 10% of the moving price range
-    * Reduced the long term buy sell ratio entry threshold to 1.4
-    * Required profit to exceed min profit before closing in the large win
-      scenarios.
+* 4/8 stocks won, two barely did. TSLA carried
+* Nice to make money but overall not satisfactory.
+* 2nd half of day seemed to perform better where I:
+  * Lowered minimum min-profit to 10% of the moving price range
+  * Reduced the long term buy sell ratio entry threshold to 1.4
+  * Required profit to exceed min profit before closing in the large win
+    scenarios.
+
+#### Next Thing(s) to Try
+  * Try the full day with these changes tomorrow.
+
+### 2021-06-21:
+#### Performance
+
+* Total: -$2.22
+  * AAPL ($0.66)
+  * AMD (-$0.45)
+  * BA (-$1.97)
+  * FB ($2.53)
+  * MSFT (-$1.01)
+  * SNAP (-$1.21)
+  * TSLA (-$0.74)
+  * VIAC (-$0.03)
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 10W 7L
+* Total Return: -$10.48
+
+#### Remarks
+* 2/8 stocks won. No losses were abysmal
+* 2nd half of the day used the average tick price delta (x10 || x15) to
+  calculate the min profit.
+* This is engineered to capture small profits before considerable loss by
+  setting a min profit that reflects how much the price changes, tick-to-tick.
+* It worked pretty well. I'm curious to see how it works tomorrow.
+* Maybe the max loss should also be a multiple of the inter-tick price delta
 
 #### Next Thing(s) to Try
   * Try the full day with these changes tomorrow.

@@ -1,17 +1,19 @@
 #include <cmath> // exp
 #include <iostream>
 
-double fn(const double buy_sell_ratio) {
-  const double x = buy_sell_ratio;
-  const double x_multiplier = 10;
-  const double x_shift = -1.25;
-  const double y_multiplier = 0.25;
-  const double y_shift = 0.10;
+double running_total() {
+  double profits[] = {
+      18.43, 5.40,  12.02,  7.14,  -5.72, 12.99,   13.93, -4.55, 35.91,
+      -2.00, -7.11, -11.66, 16.23, 38.13, -142.60, 5.20,  -2.22,
+  };
 
-  const double y =
-      (y_multiplier / (1 + exp(-(x_multiplier * (x + x_shift))))) + y_shift;
+  double sum = 0;
 
-  return y;
+  for (double n : profits) {
+    sum += n;
+  }
+
+  return sum;
 }
 
-int main() { std::cout << fn(1.0) << std::endl; }
+int main() { std::cout << running_total() << std::endl; }

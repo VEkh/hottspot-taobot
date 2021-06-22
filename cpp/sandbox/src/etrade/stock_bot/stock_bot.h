@@ -35,6 +35,7 @@ private:
   };
 
   const char *NORMALIZE_QUANTITY_BASIS_SYMBOL = "TSLA";
+  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 5.0 * 60.0;
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.4;
   const double MOVING_PRICE_RANGE_PERIOD_SECONDS = 1.0 * 60 * 60;
   const double POLLING_INTERVAL_SECONDS = 1.0;
@@ -52,6 +53,7 @@ private:
   Transmission transmission;
   bool is_long_position;
   char *symbol;
+  double average_tick_price_delta = 0.00;
   double long_average_buy_sell_ratio;
   double long_average_sell_buy_ratio;
   double short_average_buy_sell_ratio;
@@ -89,6 +91,7 @@ private:
   void fetch_orders();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
+  void log_average_tick_price_delta();
   void log_end_of_day();
   void log_moving_price_range();
   void log_position();
@@ -98,6 +101,7 @@ private:
   void open_position();
   void reset_position();
   void set_and_log_buy_sell_ratios();
+  void set_average_tick_price_delta();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
   void set_moving_price_range(const int);

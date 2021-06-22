@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_compute_moving_buy_sell_ratio_average
+#ifndef ETRADE__STOCK_BOT_compute_moving_buy_sell_ratio_average
 #define ETRADE__STOCK_BOT_compute_moving_buy_sell_ratio_average
 
 #include "stock_bot.h" // ETrade::StockBot, quote_t

@@ -1,10 +1,9 @@
-#if !defined ETRADE__STOCK_BOT_log_moving_price_range
+#ifndef ETRADE__STOCK_BOT_log_moving_price_range
 #define ETRADE__STOCK_BOT_log_moving_price_range
 
 #include "lib/utils/integer.cpp" // utils::integer
 #include "stock_bot.h"           // ETrade::StockBot, fmt
 #include <iostream>              // std::cout, std::endl
-#include <math.h>                // INFINITY
 
 void ETrade::StockBot::log_moving_price_range() {
   const double price_range =

@@ -26,7 +26,7 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   const double max_loss = this->moving_price_range.max_loss;
-  const double min_profit = this->moving_price_range.min_profit;
+  const double min_profit = this->average_tick_price_delta * 10.0;
   const double stop_loss_threshold = 1.1;
 
   if (this->open_order.max_profit >= min_profit) {
