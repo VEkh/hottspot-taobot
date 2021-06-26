@@ -2324,7 +2324,7 @@ Conclusions:
 #### Next Thing(s) to Try
   * Try the full day with these changes tomorrow.
 
-### 2021-06-21:
+### 2021-06-22:
 #### Performance
 
 * Total: -$2.22
@@ -2353,3 +2353,85 @@ Conclusions:
 
 #### Next Thing(s) to Try
   * Try the full day with these changes tomorrow.
+
+### 2021-06-23:
+#### Performance
+
+* Total: -$13.92
+  * AAPL (-$0.52)
+  * AMD ($0.44)
+  * BA (-$4.99)
+  * FB ($0.71)
+  * MSFT (-$1.70)
+  * SNAP (-$3.39)
+  * TSLA (-$4.50)
+  * VIAC ($0.03)
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 10W 8L
+* Total Return: -$24.40
+
+#### Remarks
+* 3/8 stocks won. No losses were abysmal
+* I changed the max loss to be 40 inter-tick price deltas midway through the
+  day. This puts the loss-win magnitude at 4:1, which requires a 80% win rate
+  for break even. This is unreasonable.
+* I'm changing the max loss to 15 ticks and keeping the min-profit at 10. This
+  creates a 60% win rate for break-even, which is more reasonable.
+
+#### Next Thing(s) to Try
+* Set min-profit and max loss to 10 and 15 tick deltas respectively.
+
+### 2021-06-24:
+#### Performance
+
+* Total: -$16.29
+  * AAPL (-$0.09)
+  * AMD ($1.06)
+  * BA (-$0.62)
+  * FB ($1.60)
+  * MSFT (-$0.32)
+  * SNAP (-$1.05)
+  * TSLA (-$14.01)
+  * VIAC ($0.33)
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 10W 9L
+* Total Return: -$-40.69
+
+#### Remarks
+* 2/8 stocks won.
+* TSLA lost big because the max loss wasn't large enough for normal temporary
+  corrections.
+
+#### Next Thing(s) to Try
+* Increase the max loss to 33.33x the inter-tick price delta
+* Match the min profit to the max loss so the win ratio just has to be > 50%
+
+### 2021-06-25:
+#### Performance
+
+* Total: -$2.10
+  * AAPL (-$0.42)
+  * AMD ($0.05)
+  * BA (-$3.77)
+  * FB (-$2.29)
+  * MSFT (-$1.51)
+  * SNAP (-$1.13)
+  * TSLA ($1.51)
+  * VIAC ($8.26)
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 10W 10L
+* Total Return: -$-42.79
+
+#### Remarks
+* 3/8 stocks won.
+* Got lucky by accidentally normalizing VIAC's quantity and it performed well
+
+#### Next Thing(s) to Try
+* Change min profit to 5x average tick price delta and loss to 25x
+* Think about programming for swing moments

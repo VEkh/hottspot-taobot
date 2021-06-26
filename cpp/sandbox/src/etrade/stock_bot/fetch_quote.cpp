@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_fetch_quote
+#ifndef ETRADE__STOCK_BOT_fetch_quote
 #define ETRADE__STOCK_BOT_fetch_quote
 
 /*

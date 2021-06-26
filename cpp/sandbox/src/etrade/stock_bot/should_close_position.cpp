@@ -25,25 +25,18 @@ bool ETrade::StockBot::should_close_position() {
     return true;
   }
 
-  const double max_loss = this->moving_price_range.max_loss;
-  const double min_profit = this->average_tick_price_delta * 10.0;
-  const double stop_loss_threshold = 1.1;
+  const double trailing_stop = 0.2;
+  const double max_loss_multiplier = 25.0;
+  const double min_profit_multiplier = 5.0 / (1 - trailing_stop);
+  const double max_loss = max_loss_multiplier * this->average_tick_price_delta;
+  const double min_profit =
+      min_profit_multiplier * this->average_tick_price_delta;
 
-  if (this->open_order.max_profit >= min_profit) {
-    if (this->is_long_position && this->open_order.profit >= min_profit &&
-        this->long_average_buy_sell_ratio < stop_loss_threshold) {
-      return true;
-    }
-
-    if (!this->is_long_position && this->open_order.profit >= min_profit &&
-        this->long_average_sell_buy_ratio < stop_loss_threshold) {
-      return true;
-    }
-
-    if (this->open_order.profit >= 0.7 * this->open_order.max_profit &&
-        this->open_order.profit < 0.8 * this->open_order.max_profit) {
-      return true;
-    }
+  if (this->open_order.max_profit >= min_profit &&
+      this->open_order.profit >= 0.5 * this->open_order.max_profit &&
+      this->open_order.profit <=
+          (1 - trailing_stop) * this->open_order.max_profit) {
+    return true;
   }
 
   if (this->open_order.profit <= -max_loss) {

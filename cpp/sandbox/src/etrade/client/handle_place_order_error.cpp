@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_handle_place_order_error
+#ifndef ETRADE__CLIENT_handle_place_order_error
 #define ETRADE__CLIENT_handle_place_order_error
 
 #include "client.h"                          // ETrade::Client, stream_format

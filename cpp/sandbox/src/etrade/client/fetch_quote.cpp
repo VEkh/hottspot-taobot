@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_fetch_quote
+#ifndef ETRADE__CLIENT_fetch_quote
 #define ETRADE__CLIENT_fetch_quote
 
 #include "client.h"                        // ETrade::Client, client_config
