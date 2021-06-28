@@ -1,4 +1,4 @@
-#if !defined UTILS__INTEGER
+#ifndef UTILS__INTEGER
 #define UTILS__INTEGER
 
 #include <iomanip>  // std::setw

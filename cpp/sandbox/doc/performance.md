@@ -2426,7 +2426,7 @@ Conclusions:
 * Profitable Days in a Row: 0
 #### Stats (as stable profitable algo [5/28])
 * Win / Loss: 10W 10L
-* Total Return: -$-42.79
+* Total Return: -$42.79
 
 #### Remarks
 * 3/8 stocks won.
@@ -2435,3 +2435,33 @@ Conclusions:
 #### Next Thing(s) to Try
 * Change min profit to 5x average tick price delta and loss to 25x
 * Think about programming for swing moments
+
+### 2021-06-28:
+#### Performance
+
+* Total: $1.92
+  * AAPL ($0.03)
+  * AMD (-$0.-98)
+  * BA ($0.27)
+  * FB ($5.54)
+  * MSFT (-$0.19)
+  * SNAP (-$1.54)
+  * TSLA (-$0.66)
+  * VIAC (-$0.53)
+
+* Profitable Days in a Row: 1
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 11W 10L
+* Total Return: -$40.87
+
+#### Remarks
+* 3/8 stocks won.
+* I'm seeing that often losses come from immediate reversals and often these
+  immediate reversals come after StockBot re-enters quickly after a close. This
+  quick re-entry follows both losses and wins.
+* I think a many such losses could be avoided by simply waiting 30-60 seconds
+  after a close before re-entering.
+* This will give the price enough time to correct, or re-assert its direction.
+
+#### Next Thing(s) to Try
+* Implement a holding period before successive re-opening of a position.

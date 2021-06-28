@@ -4,12 +4,34 @@
 /*
  * BUY_SELL_RATIO_DOOR_THRESHOLD
  * ETrade::StockBot
+ * fmt
+ * position_t
  */
 #include "stock_bot.h"
+
+#include "lib/utils/integer.cpp" // utils::integer_
+#include <time.h>                // time, time_t
 
 bool ETrade::StockBot::should_open_position() {
   if (this->open_order_ptr) {
     return false;
+  }
+
+  if (!this->positions.empty()) {
+    time_t now;
+    time(&now);
+
+    const position_t last_position = this->positions.back();
+
+    const int seconds_since_close = now - last_position.close_timestamp;
+
+    if (seconds_since_close < 45) {
+      std::cout << fmt.bold << fmt.yellow << std::endl;
+      std::cout << "Time since last position close: "
+                << utils::integer_::seconds_to_clock(seconds_since_close)
+                << fmt.reset << std::endl;
+      return false;
+    }
   }
 
   const double short_door_threshold = 1.5;

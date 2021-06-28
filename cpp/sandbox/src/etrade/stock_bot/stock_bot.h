@@ -23,6 +23,8 @@ private:
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
+  using position_result_t = ETrade::t::position_result_t;
+  using position_t = ETrade::t::position_t;
   using quote_t = ETrade::t::quote_t;
   using sma_t = ETrade::t::sma_t;
 
@@ -67,6 +69,7 @@ private:
   order_t open_order;
   price_range_t moving_price_range;
 
+  std::vector<position_t> positions;
   std::vector<quote_t> quotes;
 
   bool should_close_position();

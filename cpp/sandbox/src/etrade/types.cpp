@@ -27,6 +27,13 @@ enum order_type_t {
   STOP_LIMIT,
 };
 
+enum position_result_t {
+  LOSS,
+  POSITION_RESULT_PENDING,
+  TIE,
+  WIN,
+};
+
 struct order_t {
   order_action_t action;
   double execution_price = 0.00;
@@ -41,6 +48,13 @@ struct order_t {
   const char *symbol;
   int timestamp = 0;
   order_type_t type;
+};
+
+struct position_t {
+  order_t *close_order;
+  int close_timestamp = 0;
+  order_t *open_order;
+  position_result_t result = position_result_t::POSITION_RESULT_PENDING;
 };
 
 struct sma_t {

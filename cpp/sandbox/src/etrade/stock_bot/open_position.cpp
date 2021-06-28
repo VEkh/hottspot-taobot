@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_open_position
+#ifndef ETRADE__STOCK_BOT_open_position
 #define ETRADE__STOCK_BOT_open_position
 
 /*
@@ -9,6 +9,7 @@
  * order_action_t
  * order_type_t
  * order_t
+ * position_t
  */
 #include "stock_bot.h"
 
@@ -42,9 +43,14 @@ void ETrade::StockBot::open_position() {
   new_close_order.symbol = this->symbol;
   new_close_order.type = order_type_t::MARKET;
 
+  position_t new_position;
+  new_position.close_order = &new_close_order;
+  new_position.open_order = &new_open_order;
+
   this->close_order = new_close_order;
   this->close_order_ptr = &(this->close_order);
   this->open_order = new_open_order;
+  this->positions.push_back(new_position);
   this->open_order_ptr = &(this->open_order);
 
   const char *order_action =
