@@ -1,4 +1,4 @@
-#if !defined ETRADE__types
+#ifndef ETRADE__types
 #define ETRADE__types
 
 #include <utility> // std::pair
@@ -51,10 +51,9 @@ struct order_t {
 };
 
 struct position_t {
-  order_t *close_order;
+  order_t close_order;
   int close_timestamp = 0;
-  order_t *open_order;
-  position_result_t result = position_result_t::POSITION_RESULT_PENDING;
+  order_t open_order;
 };
 
 struct sma_t {

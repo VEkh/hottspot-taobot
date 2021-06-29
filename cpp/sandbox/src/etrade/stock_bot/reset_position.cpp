@@ -23,9 +23,16 @@ void ETrade::StockBot::reset_position() {
   time_t now;
   time(&now);
 
+  position_t new_position = {
+      .close_order = this->close_order,
+      .close_timestamp = (int)now,
+      .open_order = this->open_order,
+  };
+
+  this->closed_positions.push_back(new_position);
+
   this->close_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
-  this->positions.back().close_timestamp = now;
   this->transmission = Transmission();
 }
 

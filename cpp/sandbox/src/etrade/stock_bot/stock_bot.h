@@ -69,7 +69,7 @@ private:
   order_t open_order;
   price_range_t moving_price_range;
 
-  std::vector<position_t> positions;
+  std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
   bool should_close_position();
@@ -86,6 +86,7 @@ private:
   json get_order_json(const order_t *);
   sma_t build_simple_moving_average(const int);
 
+  std::map<position_result_t, int> build_closed_positions_results();
   std::map<int, std::map<const char *, double>>
   compute_moving_buy_sell_ratio_average(std::vector<int> &);
 
@@ -95,6 +96,7 @@ private:
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
   void log_average_tick_price_delta();
+  void log_closed_positions();
   void log_end_of_day();
   void log_moving_price_range();
   void log_position();

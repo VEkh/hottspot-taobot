@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_build_simple_moving_average
+#ifndef ETRADE__STOCK_BOT_build_simple_moving_average
 #define ETRADE__STOCK_BOT_build_simple_moving_average
 
 #include "compute_buy_sell_ratio.cpp" // compute_buy_sell_ratio

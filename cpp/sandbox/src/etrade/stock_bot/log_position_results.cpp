@@ -28,25 +28,18 @@ void ETrade::StockBot::log_position_results() {
   const char *order_action =
       ETrade::constants::ORDER_ACTIONS[this->open_order.action];
 
-  position_t current_position = this->positions.back();
   set_execution_price(this->close_order_ptr);
   set_profit(this->close_order_ptr, this->open_order_ptr);
 
   if (this->close_order.profit > 0) {
-    current_position.result = position_result_t::WIN;
-
     std::cout << fmt.bold << fmt.green << std::endl;
     std::cout << "🎉 " << order_action << ": Closed order at a gain."
               << std::endl;
   } else if (this->close_order.profit == 0) {
-    current_position.result = position_result_t::TIE;
-
     std::cout << fmt.bold << fmt.yellow << std::endl;
     std::cout << "😅 " << order_action << ": Closed order at no loss, no gain."
               << std::endl;
   } else {
-    current_position.result = position_result_t::LOSS;
-
     std::cout << fmt.bold << fmt.red << std::endl;
     std::cout << "😭 " << order_action
               << ": Closed order at a loss. Better luck next time!"

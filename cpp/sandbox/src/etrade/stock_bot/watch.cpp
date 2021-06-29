@@ -15,6 +15,7 @@
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "lib/utils/time.cpp"               // utils::time_
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
+#include "log_closed_positions.cpp"         // log_closed_positions
 #include "log_end_of_day.cpp"               // log_end_of_day
 #include "log_moving_price_range.cpp"       // log_moving_price_range
 #include "log_position.cpp"                 // log_position
@@ -62,6 +63,7 @@ void ETrade::StockBot::watch() {
 
     shift_transmission_gear();
     this->transmission.log();
+    log_closed_positions();
 
     close_position();
     log_position_results();

@@ -17,18 +17,18 @@ bool ETrade::StockBot::should_open_position() {
     return false;
   }
 
-  if (!this->positions.empty()) {
+  if (!this->closed_positions.empty()) {
     time_t now;
     time(&now);
 
-    const position_t last_position = this->positions.back();
+    const position_t last_position = this->closed_positions.back();
 
     const int seconds_since_close = now - last_position.close_timestamp;
 
     if (seconds_since_close < 45) {
       std::cout << fmt.bold << fmt.yellow << std::endl;
-      std::cout << "Time since last position close: "
-                << utils::integer_::seconds_to_clock(seconds_since_close)
+      std::cout << "🤚🏾 Throttle engaged. Time remaining: "
+                << utils::integer_::seconds_to_clock(45 - seconds_since_close)
                 << fmt.reset << std::endl;
       return false;
     }

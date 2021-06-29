@@ -2441,7 +2441,7 @@ Conclusions:
 
 * Total: $1.92
   * AAPL ($0.03)
-  * AMD (-$0.-98)
+  * AMD (-$0.98)
   * BA ($0.27)
   * FB ($5.54)
   * MSFT (-$0.19)
@@ -2465,3 +2465,31 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Implement a holding period before successive re-opening of a position.
+
+### 2021-06-29:
+#### Performance
+
+* Total: -$9.61
+  * AAPL ($0.53)
+  * AMD ($1.55)
+  * BA ($4.65)
+  * FB (-$1.84)
+  * MSFT ($0.94)
+  * SNAP (-$1.58)
+  * TSLA (-$12.48)
+  * VIAC (-$1.39)
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 11W 11L
+* Total Return: -$50.48
+
+#### Remarks
+* 4/8 stocks decisively won.
+* Better win percentage than the last several days. Maybe it was luck, maybe
+  the throttling helped.
+* TSLA performed poorly.
+* There was also an unfortunate hiccup at the beginning of the day that exposed
+  several positions to heavy losses.
+
+#### Next Thing(s) to Try
