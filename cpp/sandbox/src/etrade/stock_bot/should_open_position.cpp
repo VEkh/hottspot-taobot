@@ -24,12 +24,14 @@ bool ETrade::StockBot::should_open_position() {
     const position_t last_position = this->closed_positions.back();
 
     const int seconds_since_close = now - last_position.close_timestamp;
+    const int throttle_time_limit = 30;
 
-    if (seconds_since_close < 45) {
-      std::cout << fmt.bold << fmt.yellow << std::endl;
+    if (seconds_since_close < throttle_time_limit) {
+      std::cout << fmt.bold << fmt.yellow;
       std::cout << "🤚🏾 Throttle engaged. Time remaining: "
-                << utils::integer_::seconds_to_clock(45 - seconds_since_close)
-                << fmt.reset << std::endl;
+                << utils::integer_::seconds_to_clock(throttle_time_limit -
+                                                     seconds_since_close);
+      std::cout << fmt.reset << std::endl << std::endl;
       return false;
     }
   }
