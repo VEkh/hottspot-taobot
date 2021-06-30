@@ -28,15 +28,14 @@ enum order_type_t {
   STOP_LIMIT,
 };
 
-enum position_result_t {
+enum order_win_result_t {
   LOSS,
-  POSITION_RESULT_PENDING,
   TIE,
   WIN,
 };
 
 struct closed_positions_stats_t {
-  std::map<position_result_t, int> results;
+  std::map<order_win_result_t, int> results;
   double total_profit;
 };
 

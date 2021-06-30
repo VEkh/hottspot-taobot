@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_initialize
+#ifndef ETRADE__STOCK_BOT_initialize
 #define ETRADE__STOCK_BOT_initialize
 
 #include "lib/formatted.cpp" // Formatted::error_message
@@ -19,6 +19,7 @@ void ETrade::StockBot::initialize(char *symbol_, int quantity_mulitiplier_,
     throw std::invalid_argument(message);
   }
 
+  this->FLAG_MARTINGALE = flags["martingale"] == "1";
   this->FLAG_NORMALIZE_QUANTITY = flags["normalize-quantity"] == "1";
   this->symbol = symbol_;
   this->quantity_mulitiplier = quantity_mulitiplier_;

@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_set_execution_price
+#ifndef ETRADE__STOCK_BOT_set_execution_price
 #define ETRADE__STOCK_BOT_set_execution_price
 
 /*

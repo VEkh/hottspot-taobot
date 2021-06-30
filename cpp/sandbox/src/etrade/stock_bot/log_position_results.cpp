@@ -1,17 +1,18 @@
-#ifndef ETRADE__STOCK_BOT_log_position_results
-#define ETRADE__STOCK_BOT_log_position_results
+#ifndef ETRADE__STOCK_BOT_log_order_win_results
+#define ETRADE__STOCK_BOT_log_order_win_results
 
 /*
  * ETrade::StockBot
  * fmt
  * order_status_t
- * position_result_t
+ * order_win_result_t
  * position_t
  */
 #include "stock_bot.h"
 
 #include "etrade/constants.cpp"    // ETrade::constants
 #include "log_position.cpp"        // log_position
+#include "order_win_result.cpp"    // order_win_result
 #include "set_execution_price.cpp" // set_execution_price
 #include "set_profit.cpp"          // set_profit
 #include <iostream>                // std::cout, std::endl
@@ -31,19 +32,31 @@ void ETrade::StockBot::log_position_results() {
   set_execution_price(this->close_order_ptr);
   set_profit(this->close_order_ptr, this->open_order_ptr);
 
-  if (this->close_order.profit > 0) {
-    std::cout << fmt.bold << fmt.green << std::endl;
-    std::cout << "🎉 " << order_action << ": Closed order at a gain."
-              << std::endl;
-  } else if (this->close_order.profit == 0) {
-    std::cout << fmt.bold << fmt.yellow << std::endl;
-    std::cout << "😅 " << order_action << ": Closed order at no loss, no gain."
-              << std::endl;
-  } else {
+  order_win_result_t win_result = order_win_result(this->close_order_ptr);
+
+  switch (win_result) {
+  case order_win_result_t::LOSS: {
     std::cout << fmt.bold << fmt.red << std::endl;
     std::cout << "😭 " << order_action
               << ": Closed order at a loss. Better luck next time!"
               << std::endl;
+
+    break;
+  }
+  case order_win_result_t::TIE: {
+    std::cout << fmt.bold << fmt.yellow << std::endl;
+    std::cout << "😅 " << order_action << ": Closed order at no loss, no gain."
+              << std::endl;
+
+    break;
+  }
+  case order_win_result_t::WIN: {
+    std::cout << fmt.bold << fmt.green << std::endl;
+    std::cout << "🎉 " << order_action << ": Closed order at a gain."
+              << std::endl;
+
+    break;
+  }
   }
 
   std::cout << fmt.reset << std::endl;

@@ -4,34 +4,27 @@
 /*
  * ETrade::StockBot
  * order_t
- * position_result_t
+ * order_win_result_t
  * position_t
  */
 #include "stock_bot.h"
 
-#include <map> // std::map
+#include "order_win_result.cpp" // order_win_result
+#include <map>                  // std::map
 
 ETrade::StockBot::closed_positions_stats_t
 ETrade::StockBot::build_closed_positions_stats() {
-  std::map<position_result_t, int> results = {
-      {position_result_t::LOSS, 0},
-      {position_result_t::TIE, 0},
-      {position_result_t::WIN, 0},
+  std::map<order_win_result_t, int> results = {
+      {order_win_result_t::LOSS, 0},
+      {order_win_result_t::TIE, 0},
+      {order_win_result_t::WIN, 0},
   };
 
   double total_profit = 0.00;
 
   for (position_t position : this->closed_positions) {
-    order_t close_order = position.close_order;
-
-    if (close_order.profit > 0) {
-      results[position_result_t::WIN]++;
-    } else if (close_order.profit == 0) {
-      results[position_result_t::TIE]++;
-    } else {
-      results[position_result_t::LOSS]++;
-    }
-
+    order_win_result_t result = order_win_result(&(position.close_order));
+    results[result]++;
     total_profit += close_order.profit * close_order.quantity;
   }
 

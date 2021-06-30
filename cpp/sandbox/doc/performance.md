@@ -2493,3 +2493,41 @@ Conclusions:
   several positions to heavy losses.
 
 #### Next Thing(s) to Try
+
+### 2021-06-30:
+#### Performance
+
+* Total: -$10.25
+  * AAPL (-$0.18)
+  * AMD (-$1.26)
+  * BA (-$0.83)
+  * FB ($2.54)
+  * MSFT (-$2.92)
+  * SNAP (-$0.47)
+  * TSLA (-$4.75)
+  * VIAC (-$2.39)
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 11W 12L
+* Total Return: -$60.73
+
+#### Remarks
+* 1/8 stocks won.
+* I started the day with a min profit of 5x average tick price delta (ATPD)
+  with a max loss of 25x ATPD.
+* Halfway through the day 3 or 4 / 8 of the securities were profiting with win
+  percentages > 60 - 66%.
+* What was apparent, however, was that only stocks with win percentages > 75%
+  were likely to be profiting. Even at that high of a win rate, they weren't
+  guaranteed to be winning.
+* Halfway through I converted to a 30x:30x min profit to max loss ratio.
+* The win rates were significantly lower, averaging something close to 20-35%.
+* This is a decisive reduction in win rate.
+* I'll need to adjust the ratio to increase the win rate close to or above 50%.
+* I'm experimenting with introducing a martingale betting system so I want the
+  win and loss magnitudes to be roughly equivalent.
+
+#### Next Thing(s) to Try
+* Reduce min profit:max loss ratio to 15x:15x ATPD
+* Introduce Martingale betting system when the flag is turned on

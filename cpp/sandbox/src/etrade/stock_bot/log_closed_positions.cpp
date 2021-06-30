@@ -5,7 +5,7 @@
  * ETrade::StockBot
  * closed_positions_stats_t
  * fmt
- * position_result_t
+ * order_win_result_t
  */
 #include "stock_bot.h"
 
@@ -20,20 +20,19 @@ void ETrade::StockBot::log_closed_positions() {
   std::cout << fmt.bold << fmt.magenta;
 
   closed_positions_stats_t stats = build_closed_positions_stats();
-  std::map<position_result_t, int> closed_positions_results = stats.results;
+  std::map<order_win_result_t, int> closed_positions_results = stats.results;
 
-  int win_count = closed_positions_results[position_result_t::WIN];
+  int win_count = closed_positions_results[order_win_result_t::WIN];
   int total_count = this->closed_positions.size();
   double win_percentage =
       !win_count ? 0 : (win_count / (double)total_count) * 100;
 
   std::cout << "Wins: " << win_count;
   std::cout << " • Losses: "
-            << closed_positions_results[position_result_t::LOSS];
-  std::cout << " • Ties: " << closed_positions_results[position_result_t::TIE];
+            << closed_positions_results[order_win_result_t::LOSS];
+  std::cout << " • Ties: " << closed_positions_results[order_win_result_t::TIE];
   std::cout << " • Total: " << total_count;
   std::cout << std::endl;
-  std::cout << " • Total: " << total_count;
 
   std::cout << "Win %: " << win_percentage << std::endl;
 

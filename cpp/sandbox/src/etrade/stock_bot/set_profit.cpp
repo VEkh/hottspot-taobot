@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_set_profit
+#ifndef ETRADE__STOCK_BOT_set_profit
 #define ETRADE__STOCK_BOT_set_profit
 
 #include "stock_bot.h" // ETrade::StockBot, order_t

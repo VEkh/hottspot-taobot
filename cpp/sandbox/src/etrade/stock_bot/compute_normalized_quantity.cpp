@@ -5,12 +5,18 @@
 #include <math.h>
 
 int ETrade::StockBot::compute_normalized_quantity() {
+  int final_multiplier = this->quantity_mulitiplier;
+
+  if (this->FLAG_MARTINGALE) {
+    final_multiplier *= this->martingale_quantity_multiplier;
+  }
+
   if (this->symbol == this->NORMALIZE_QUANTITY_BASIS_SYMBOL) {
-    return this->quantity_mulitiplier;
+    return final_multiplier;
   }
 
   if (!this->FLAG_NORMALIZE_QUANTITY) {
-    return this->quantity_mulitiplier;
+    return final_multiplier;
   }
 
   const double current_price = this->quotes.back().current_price;
@@ -23,7 +29,7 @@ int ETrade::StockBot::compute_normalized_quantity() {
 
   const double basis_price = basis_quote.current_price;
 
-  return this->quantity_mulitiplier * ceil(basis_price / current_price);
+  return final_multiplier * ceil(basis_price / current_price);
 }
 
 #endif

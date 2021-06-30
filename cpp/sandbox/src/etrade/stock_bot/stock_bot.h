@@ -24,7 +24,7 @@ private:
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
-  using position_result_t = ETrade::t::position_result_t;
+  using order_win_result_t = ETrade::t::order_win_result_t;
   using position_t = ETrade::t::position_t;
   using quote_t = ETrade::t::quote_t;
   using sma_t = ETrade::t::sma_t;
@@ -44,6 +44,7 @@ private:
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
+  bool FLAG_MARTINGALE = false;
   bool FLAG_NORMALIZE_QUANTITY = false;
 
   std::map<const char *, const char *> ICONS = {
@@ -61,6 +62,7 @@ private:
   double long_average_sell_buy_ratio;
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
+  int martingale_quantity_multiplier = 1;
   int quantity_mulitiplier;
   int quantity;
   json placed_orders;
@@ -87,6 +89,8 @@ private:
   closed_positions_stats_t build_closed_positions_stats();
 
   json get_order_json(const order_t *);
+
+  order_win_result_t order_win_result(const order_t *);
 
   sma_t build_simple_moving_average(const int);
 
