@@ -26,8 +26,8 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   const double trailing_stop = 0.2;
-  const double max_loss_multiplier = 30.0;
-  const double min_profit_multiplier = 30.0 / (1 - trailing_stop);
+  const double max_loss_multiplier = 15.0;
+  const double min_profit_multiplier = 15.0 / (1 - trailing_stop);
   const double max_loss = max_loss_multiplier * this->average_tick_price_delta;
   const double min_profit =
       min_profit_multiplier * this->average_tick_price_delta;
