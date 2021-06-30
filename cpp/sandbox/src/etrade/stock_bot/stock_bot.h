@@ -18,6 +18,7 @@ public:
   void run();
 
 private:
+  using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
   using gear_t = Transmission::gear_t;
   using order_action_t = ETrade::t::order_action_t;
   using order_status_t = ETrade::t::order_status_t;
@@ -83,10 +84,12 @@ private:
 
   int compute_normalized_quantity();
 
+  closed_positions_stats_t build_closed_positions_stats();
+
   json get_order_json(const order_t *);
+
   sma_t build_simple_moving_average(const int);
 
-  std::map<position_result_t, int> build_closed_positions_results();
   std::map<int, std::map<const char *, double>>
   compute_moving_buy_sell_ratio_average(std::vector<int> &);
 

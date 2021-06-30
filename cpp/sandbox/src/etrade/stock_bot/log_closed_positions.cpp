@@ -3,13 +3,14 @@
 
 /*
  * ETrade::StockBot
+ * closed_positions_stats_t
  * fmt
  * position_result_t
  */
 #include "stock_bot.h"
 
-#include "build_closed_positions_results.cpp" // build_closed_positions_results
-#include <map>                                // std::map
+#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
+#include <map>                              // std::map
 
 void ETrade::StockBot::log_closed_positions() {
   std::cout << fmt.bold << fmt.magenta << fmt.underline;
@@ -18,8 +19,8 @@ void ETrade::StockBot::log_closed_positions() {
 
   std::cout << fmt.bold << fmt.magenta;
 
-  std::map<position_result_t, int> closed_positions_results =
-      build_closed_positions_results();
+  closed_positions_stats_t stats = build_closed_positions_stats();
+  std::map<position_result_t, int> closed_positions_results = stats.results;
 
   int win_count = closed_positions_results[position_result_t::WIN];
   int total_count = this->closed_positions.size();
@@ -32,8 +33,11 @@ void ETrade::StockBot::log_closed_positions() {
   std::cout << " • Ties: " << closed_positions_results[position_result_t::TIE];
   std::cout << " • Total: " << total_count;
   std::cout << std::endl;
+  std::cout << " • Total: " << total_count;
 
   std::cout << "Win %: " << win_percentage << std::endl;
+
+  std::cout << "Total Profit: " << stats.total_profit << std::endl;
 
   std::cout << fmt.reset << std::endl;
 }

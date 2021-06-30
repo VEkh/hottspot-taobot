@@ -1,6 +1,7 @@
 #ifndef ETRADE__types
 #define ETRADE__types
 
+#include <map>     // std::map
 #include <utility> // std::pair
 
 namespace ETrade {
@@ -32,6 +33,11 @@ enum position_result_t {
   POSITION_RESULT_PENDING,
   TIE,
   WIN,
+};
+
+struct closed_positions_stats_t {
+  std::map<position_result_t, int> results;
+  double total_profit;
 };
 
 struct order_t {
