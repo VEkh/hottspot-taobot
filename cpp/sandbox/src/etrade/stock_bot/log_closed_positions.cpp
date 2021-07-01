@@ -6,6 +6,7 @@
  * closed_positions_stats_t
  * fmt
  * order_win_result_t
+ * position_t
  */
 #include "stock_bot.h"
 
@@ -36,7 +37,27 @@ void ETrade::StockBot::log_closed_positions() {
 
   std::cout << "Win %: " << win_percentage << std::endl;
 
+  double recalculated_total_profit = 0.00;
+
+  std::cout << "Profits: [";
+  for (int i = 0, l = this->closed_positions.size(); i < l; i++) {
+    position_t position = this->closed_positions[i];
+
+    if (i != 0) {
+      std::cout << ", ";
+    }
+
+    recalculated_total_profit +=
+        position.close_order.profit * position.close_order.quantity;
+
+    std::cout << position.close_order.profit << ":"
+              << position.close_order.quantity;
+  }
+  std::cout << "]" << std::endl;
+
   std::cout << "Total Profit: " << stats.total_profit << std::endl;
+  std::cout << "Recalculated Total Profit: " << recalculated_total_profit
+            << std::endl;
 
   std::cout << fmt.reset << std::endl;
 }

@@ -2531,3 +2531,38 @@ Conclusions:
 #### Next Thing(s) to Try
 * Reduce min profit:max loss ratio to 15x:15x ATPD
 * Introduce Martingale betting system when the flag is turned on
+
+### 2021-07-01:
+#### Performance
+
+* Total: -$2.62
+  * AAPL ($0.84): 9 / 27 => .333333
+  * AMD ($0.61): 14 / 28 => 0.5
+  * BA (-$1.09): 13 / 33 => 0.3939393939393939
+  * FB (-$0.12): 16 / 29 => 0.5517241379310345
+  * MSFT ($0.31): 21 / 27 => 0.7777777777777778
+  * SNAP ($0.12): 16 / 31 => 0.5161290322580645
+  * TSLA (-$2.97): 11 / 21 => 0.5238095238095238
+  * VIAC (-$0.34): 25 / 49 => 0.510204
+
+* Profitable Days in a Row: 0
+#### Stats (as stable profitable algo [5/28])
+* Win / Loss: 11W 13L
+* Total Return: -$63.35
+
+#### Remarks
+* 4/8 stocks won.
+* Much better overall win rate with a 15x:15x ATPD min profit to max loss
+  ratio.
+* The general win rate was closer to 50%
+* I tested martingale on AAPL and VIAC. Surprisingly, AAPL despite having a
+  lower win rate, while VIAC lost.
+* I think martingale has potential. I'll try it tomorrow on AAPL, SNAP, VIAC
+  and maybe AMD
+* StockBot has a slight edge in martingale because the profits are minimum
+  profits. This means, a big win chasing a heavy loss could place the stock
+  deep into profit territory.
+* It's weakness is that an end-of-day losing streak can wipe out gains.
+
+#### Next Thing(s) to Try
+* Expand martingale to a couple other stocks
