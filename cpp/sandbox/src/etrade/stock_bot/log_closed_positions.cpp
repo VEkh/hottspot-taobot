@@ -18,8 +18,6 @@ void ETrade::StockBot::log_closed_positions() {
   std::cout << "📕 Closed Positions" << std::endl;
   std::cout << fmt.reset;
 
-  std::cout << fmt.bold << fmt.magenta;
-
   closed_positions_stats_t stats = build_closed_positions_stats();
   std::map<order_win_result_t, int> closed_positions_results = stats.results;
 
@@ -28,6 +26,7 @@ void ETrade::StockBot::log_closed_positions() {
   double win_percentage =
       !win_count ? 0 : (win_count / (double)total_count) * 100;
 
+  std::cout << fmt.bold << fmt.magenta;
   std::cout << "Wins: " << win_count;
   std::cout << " • Losses: "
             << closed_positions_results[order_win_result_t::LOSS];
@@ -36,28 +35,7 @@ void ETrade::StockBot::log_closed_positions() {
   std::cout << std::endl;
 
   std::cout << "Win %: " << win_percentage << std::endl;
-
-  double recalculated_total_profit = 0.00;
-
-  std::cout << "Profits: [";
-  for (int i = 0, l = this->closed_positions.size(); i < l; i++) {
-    position_t position = this->closed_positions[i];
-
-    if (i != 0) {
-      std::cout << ", ";
-    }
-
-    recalculated_total_profit +=
-        position.close_order.profit * position.close_order.quantity;
-
-    std::cout << position.close_order.profit << ":"
-              << position.close_order.quantity;
-  }
-  std::cout << "]" << std::endl;
-
   std::cout << "Total Profit: " << stats.total_profit << std::endl;
-  std::cout << "Recalculated Total Profit: " << recalculated_total_profit
-            << std::endl;
 
   std::cout << fmt.reset << std::endl;
 }

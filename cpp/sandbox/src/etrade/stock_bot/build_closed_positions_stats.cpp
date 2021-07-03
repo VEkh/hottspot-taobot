@@ -22,11 +22,25 @@ ETrade::StockBot::build_closed_positions_stats() {
 
   double total_profit = 0.00;
 
-  for (position_t position : this->closed_positions) {
+  std::cout << fmt.yellow << fmt.bold;
+  std::cout << "Profits: [";
+
+  for (int i = 0, l = this->closed_positions.size(); i < l; i++) {
+    position_t position = this->closed_positions[i];
     order_win_result_t result = order_win_result(&(position.close_order));
     results[result]++;
-    total_profit += close_order.profit * close_order.quantity;
+    total_profit += position.close_order.profit * position.close_order.quantity;
+
+    if (i != 0) {
+      std::cout << ", ";
+    }
+
+    std::cout << position.close_order.profit << ":"
+              << position.close_order.quantity;
   }
+
+  std::cout << "]" << std::endl;
+  std::cout << fmt.reset;
 
   return {
       .results = results,
