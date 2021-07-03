@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_log_position
+#ifndef ETRADE__STOCK_BOT_log_position
 #define ETRADE__STOCK_BOT_log_position
 
 /*
@@ -11,6 +11,7 @@
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/float.cpp"   // utils::float
 #include "profit_percentage.cpp" // profit_percentage
+#include <cstdio>                // printf
 #include <iomanip>               // std::setprecision
 #include <iostream>              // std::cout, std::endl, std::fixed
 #include <time.h>                // time, time_t
@@ -52,6 +53,12 @@ void ETrade::StockBot::log_position() {
   std::cout << " • Close: "
             << ETrade::constants::ORDER_STATUSES[this->close_order.status];
   std::cout << std::endl;
+
+  printf("Min Profit: %.2f • Max Loss: %.2f • Secure Profit (Lower): %.2f • "
+         "Secure Profit (Upper): %.2f\n",
+         this->exit_prices.min_profit, this->exit_prices.max_loss,
+         this->exit_prices.secure_profit_lower,
+         this->exit_prices.secure_profit_upper);
 
   if (this->open_order.max_profit_timestamp) {
     std::cout << "Max Profit ⌚ Δ: "

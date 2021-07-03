@@ -2052,7 +2052,7 @@ Conclusions:
   * TSLA ($13.08): 9 / 13
 
 * Profitable Days in a Row: 1
-* Win Record (as stable profitable algo [5/28]): 5/6
+* Win Record (as of stable profitable algo [5/28]): 5/6
 
 #### Remarks
 * Good job today! 4/8 stocks won 🎉
@@ -2078,7 +2078,7 @@ Conclusions:
   * TSLA ($17.30): 11 / 15
 
 * Profitable Days in a Row: 2
-* Win Record (as stable profitable algo [5/28]): 6/7
+* Win Record (as of stable profitable algo [5/28]): 6/7
 
 #### Remarks
 * Good job today! 4/8 stocks won 🎉
@@ -2103,7 +2103,7 @@ Conclusions:
   * VIAC (-$4.08): 6 / 13
 
 * Profitable Days in a Row: 0
-* Win Record (as stable profitable algo [5/28]): 6/8
+* Win Record (as of stable profitable algo [5/28]): 6/8
 
 #### Remarks
 * Okay job today! 4/8 stocks won 🎉
@@ -2126,7 +2126,7 @@ Conclusions:
   * VIAC ($6.06): 9 / 15
 
 * Profitable Days in a Row: 1
-* Win Record (as stable profitable algo [5/28]): 7/9
+* Win Record (as of stable profitable algo [5/28]): 7/9
 
 #### Remarks
 * Okay job today! 6/8 stocks won 🎉
@@ -2142,7 +2142,7 @@ Conclusions:
 * Total: -$1-2.00
 
 * Profitable Days in a Row: 0
-* Win Record (as stable profitable algo [5/28]): 7/10
+* Win Record (as of stable profitable algo [5/28]): 7/10
 
 #### Remarks
   * I was away from StockBot for the whole day and Replacement Shares are obscuring performance. I do suspect, however, that I only lost $1-2
@@ -2166,7 +2166,7 @@ Conclusions:
   * VIAC ($9.71)
 
 * Profitable Days in a Row: 0
-* Win Record (as stable profitable algo [5/28]): 7/11
+* Win Record (as of stable profitable algo [5/28]): 7/11
 
 #### Remarks
   * 5/8 stocks won, but SNAP got DESTROYED
@@ -2198,7 +2198,7 @@ Conclusions:
   * VIAC ($7.75)
 
 * Profitable Days in a Row: 0
-* Win Record (as stable profitable algo [5/28]): 7/12
+* Win Record (as of stable profitable algo [5/28]): 7/12
 
 #### Remarks
   * 4/8 stocks won, but SNAP lost big again
@@ -2229,7 +2229,7 @@ Conclusions:
   * VIAC (-$7.53)
 
 * Profitable Days in a Row: 1
-* Win Record (as stable profitable algo [5/28]): 8/13
+* Win Record (as of stable profitable algo [5/28]): 8/13
 
 #### Remarks
   * 4/8 stocks won, but SNAP lost again
@@ -2260,7 +2260,7 @@ Conclusions:
   * VIAC ($10.59)
 
 * Profitable Days in a Row: 2
-* Win Record (as stable profitable algo [5/28]): 9/14
+* Win Record (as of stable profitable algo [5/28]): 9/14
 
 #### Remarks
   * 5/8 stocks won. SNAP and FB lost again but not majorly
@@ -2288,7 +2288,7 @@ Conclusions:
   * VIAC (-$20.95)
 
 * Profitable Days in a Row: 0
-* Win Record (as stable profitable algo [5/28]): 9/15
+* Win Record (as of stable profitable algo [5/28]): 9/15
 
 #### Remarks
   * 3/9 stocks won. SNAP lost again but FB won
@@ -2310,7 +2310,7 @@ Conclusions:
   * VIAC ($0.03)
 
 * Profitable Days in a Row: 1
-* Win Record (as stable profitable algo [5/28]): 10/16
+* Win Record (as of stable profitable algo [5/28]): 10/16
 
 #### Remarks
 * 4/8 stocks won, two barely did. TSLA carried
@@ -2338,7 +2338,7 @@ Conclusions:
   * VIAC (-$0.03)
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 10W 7L
 * Total Return: -$10.48
 
@@ -2368,7 +2368,7 @@ Conclusions:
   * VIAC ($0.03)
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 10W 8L
 * Total Return: -$24.40
 
@@ -2397,7 +2397,7 @@ Conclusions:
   * VIAC ($0.33)
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 10W 9L
 * Total Return: -$-40.69
 
@@ -2424,7 +2424,7 @@ Conclusions:
   * VIAC ($8.26)
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 10W 10L
 * Total Return: -$42.79
 
@@ -2450,7 +2450,7 @@ Conclusions:
   * VIAC (-$0.53)
 
 * Profitable Days in a Row: 1
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 11W 10L
 * Total Return: -$40.87
 
@@ -2480,7 +2480,7 @@ Conclusions:
   * VIAC (-$1.39)
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 11W 11L
 * Total Return: -$50.48
 
@@ -2508,7 +2508,7 @@ Conclusions:
   * VIAC (-$2.39)
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 11W 12L
 * Total Return: -$60.73
 
@@ -2546,7 +2546,7 @@ Conclusions:
   * VIAC (-$0.34): 25 / 49 => 0.510204
 
 * Profitable Days in a Row: 0
-#### Stats (as stable profitable algo [5/28])
+#### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 11W 13L
 * Total Return: -$63.35
 
@@ -2566,3 +2566,79 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Expand martingale to a couple other stocks
+
+### 2021-07-02:
+#### Performance
+
+* Total: $5.27 (vs $8.41 market performance)
+  * AAPL (-$1.46): 11 / 24 => 44.0%
+  * AMD (-$1.13): 13 / 29 => 44.83%
+  * BA ($1.19): 13 / 26 => 50.0%
+  * FB (-$0.35): 16 / 32 => 50.0%
+  * MSFT ($3.52): 14 / 26 => 53.85%
+  * SNAP ($1.43): 19 / 39 => 48.72%
+  * TSLA ($1.43): 12 / 22 => 54.55%
+  * VIAC ($1.32): 19 / 38 => 50.0%
+
+* Profitable Days in a Row: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 12W 13L
+* Total Return: -$58.08
+
+#### Remarks
+* 5/8 stocks won.
+* Still strong performance
+* Looks like generally, as long as the win rate was at or near 50%, StockBot
+  won.
+* AAPL, AMD, SNAP, and VIAC were all trading with martingale. 2 /4 of them won.
+  The two winners had near 50% win rates. Maybe this suggests that a high win %
+  (with equal win and loss magnitudes) is still more important.
+* For martingale to work properly, the losses need to properly be chased. This
+  means that successive trades need to set the min profit to the greatest loss
+  in the losing streak.
+
+#### Next Thing(s) to Try
+* Maybe expand martingale to a couple other stocks
+* Maybe reduce min profit max loss ratio to 10x:10x or 12.5x:12.5x ATPD
+* For martingale stocks, set min profit to greatest loss in the losing streak
+  if last position was a loss.
+
+### 2021-07-06:
+#### Performance
+
+* Total: $32.46 (vs -$16.82 market performance)
+  * AAPL ($5.09 vs. $2.06): 19 / 41 => 46.34%
+  * AMD ($2.06 vs. -$0.23): 13 / 21 => 61.9%
+  * BA ($2.28 vs. -$0.54): 13 / 26 => 50.0%
+  * FB ($0.50 vs. -$1.92): 19 / 40 => 47.5%
+  * MSFT ($4.09 vs. $0.01): 10 / 23 => 43.48%
+  * SNAP ($5.60 vs $0.57): 16 / 40 => 40.0%
+  * TSLA ($11.18 vs. -$19.32): 10 / 19 => 52.63%
+  * VIAC ($1.66 vs. -$1.29): 24 / 48 => 50.0%
+
+* Profitable Days in a Row: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 13W 13L
+* Total Return: -$25.62
+
+#### Remarks
+* 8/8 stocks won! 🥳
+* REALLY amazing performance. This is the first time this has happened.
+* All stocks except BA, FB, and TSLA started the day using Martingale.
+* By mid-day, all stocks were up except BA and FB.
+* I changed them to both use Martingale, and they both ended up.
+* I'll continue monitoring, but I think Martingale may be a key component to
+  the success of the strategy.
+* Very rarely will a losing streak exceed 4-5 losses.
+* Because of how everything is configured, the win folloing heavy losing
+  streaks, will more than compensate for the losses.
+* I have to see if this holds true and what kind of pressure it puts on my
+  buying power, before scaling up the quantities. That is, I've once had a
+  position of 256 shares of AAPL because of Martingale. If I were also
+  multiplying this a normalizing factor, I'm not sure I have enough buying
+  power for that.
+
+#### Next Thing(s) to Try
+* Trade all stocks, including TSLA, with martingale

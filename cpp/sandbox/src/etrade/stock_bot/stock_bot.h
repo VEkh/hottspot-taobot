@@ -19,6 +19,7 @@ public:
 
 private:
   using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
+  using exit_prices_t = ETrade::t::exit_prices_t;
   using gear_t = Transmission::gear_t;
   using order_action_t = ETrade::t::order_action_t;
   using order_status_t = ETrade::t::order_status_t;
@@ -62,6 +63,7 @@ private:
   double long_average_sell_buy_ratio;
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
+  exit_prices_t exit_prices;
   int martingale_quantity_multiplier = 1;
   int quantity_mulitiplier;
   int quantity;
@@ -82,11 +84,14 @@ private:
   double compute_buy_sell_ratio(const sma_t &);
   double compute_min_profit_price_range_ratio(const double);
   double compute_sell_buy_ratio(const sma_t &);
+  double max_losing_streak_loss();
   double profit_percentage(const order_t *);
 
   int compute_normalized_quantity();
 
   closed_positions_stats_t build_closed_positions_stats();
+
+  exit_prices_t build_exit_prices();
 
   json get_order_json(const order_t *);
 

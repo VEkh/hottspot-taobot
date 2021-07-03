@@ -3,11 +3,12 @@
 
 /*
  * ETrade::StockBot
- * gear_t
+ * exit_prices_t
  * order_status_t
  */
 #include "stock_bot.h"
 
+#include "build_exit_prices.cpp" // build_exit_prices
 #include "lib/utils/time.cpp"    // utils::time_
 #include "profit_percentage.cpp" // profit_percentage
 #include <time.h>                // time, time_t
@@ -25,21 +26,15 @@ bool ETrade::StockBot::should_close_position() {
     return true;
   }
 
-  const double trailing_stop = 0.2;
-  const double max_loss_multiplier = 15.0;
-  const double min_profit_multiplier = 15.0 / (1 - trailing_stop);
-  const double max_loss = max_loss_multiplier * this->average_tick_price_delta;
-  const double min_profit =
-      min_profit_multiplier * this->average_tick_price_delta;
+  this->exit_prices = build_exit_prices();
 
-  if (this->open_order.max_profit >= min_profit &&
-      this->open_order.profit >= 0.5 * this->open_order.max_profit &&
-      this->open_order.profit <=
-          (1 - trailing_stop) * this->open_order.max_profit) {
+  if (this->open_order.max_profit >= this->exit_prices.min_profit &&
+      this->open_order.profit >= this->exit_prices.secure_profit_lower &&
+      this->open_order.profit <= this->exit_prices.secure_profit_upper) {
     return true;
   }
 
-  if (this->open_order.profit <= -max_loss) {
+  if (this->open_order.profit <= exit_prices.max_loss) {
     return true;
   }
 

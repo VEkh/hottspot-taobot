@@ -39,6 +39,13 @@ struct closed_positions_stats_t {
   double total_profit;
 };
 
+struct exit_prices_t {
+  double max_loss = 0.00;
+  double min_profit = 0.00;
+  double secure_profit_lower = 0.00;
+  double secure_profit_upper = 0.00;
+};
+
 struct order_t {
   order_action_t action;
   double execution_price = 0.00;

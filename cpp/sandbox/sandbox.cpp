@@ -1,36 +1,10 @@
 #include <iostream>
 
-struct order_t {
-  double profit;
-  int quantity;
-};
-
-double total_profit() {
-  const order_t orders[] = {
-      {
-          .profit = -0.92,
-          .quantity = 1,
-      },
-      {
-          .profit = 1.66,
-          .quantity = 1,
-      },
-  };
-
-  double sum = 0.00;
-
-  for (order_t order : orders) {
-    sum += order.profit * order.quantity;
-  }
-
-  return sum;
-}
-
 double running_total() {
   double profits[] = {
-      18.43, 5.40,   12.02,  7.14,   -5.72, 12.99, 13.93,   -4.55,
-      35.91, -2.00,  -7.11,  -11.66, 16.23, 38.13, -142.60, 5.20,
-      -2.22, -13.92, -16.29, -2.10,  1.92,  -9.61, -10.25,  -2.62,
+      18.43,  5.40,  12.02,  7.14,  -5.72,  12.99,   13.93, -4.55, 35.91,
+      -2.00,  -7.11, -11.66, 16.23, 38.13,  -142.60, 5.20,  -2.22, -13.92,
+      -16.29, -2.10, 1.92,   -9.61, -10.25, -2.62,   5.27,  32.46,
   };
 
   double sum = 0;
