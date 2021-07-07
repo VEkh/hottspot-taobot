@@ -2642,3 +2642,42 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Trade all stocks, including TSLA, with martingale
+
+### 2021-07-07:
+#### Performance
+
+* Total: $59.86 (vs -$16.82 market performance)
+  * AAPL ($0.48): 13 / 28 => 46.43%
+  * AMD ($0.33): 11 / 25 => 44.0%
+  * BA ($10.62): 13 / 28 => 46.43%
+  * FB ($10.86): 15 / 32 => 46.88%
+  * MSFT ($3.36): 11 / 26 => 42.31%
+  * SNAP ($5.38): 17 / 36 => 47.22%
+  * SQ ($3.62): 8 / 21 => 38.1%
+  * TSLA ($18.65): 12 / 20 => 60.0%
+  * TWTR ($2.80): 9 / 32 => 28.13%
+  * VIAC ($3.77): 19 / 44 => 43.18%
+
+* Profitable Days in a Row: 3
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 14W 13L
+* Total Return: $34.24
+
+#### Remarks
+* 10/10 stocks won! 🥳
+* REALLY amazing performance again. Most profitable day so far.
+* Even SQ and TWTR won and they tended to have a losing record when I last
+  traded them.
+* I'm increasing confidence in Martingale. It helps make up for a losing
+  record.
+* AAPL and AMD ended the day with an unlucky 5 and 3-loss losing streak. AAPL
+  recovered some of it, but this does expose Martingale's weakness: end-of-day
+  losing streaks.
+* Martingale is also limited by my maximum buying power. This may be exposed as
+  I multiply quantities with normalization and base multipliers.
+
+
+#### Next Thing(s) to Try
+* Normalize the quantities of the standard 8 stocks and see if I encounter
+  spending limits.
