@@ -84,8 +84,6 @@ void ETrade::StockBot::open_position() {
     return;
   }
 
-  this->transmission.shift_gear(gear_t::D);
-
   std::cout << fmt.bold << fmt.cyan;
   std::cout << log_icon << " " << order_action << ": Placed open order."
             << std::endl;

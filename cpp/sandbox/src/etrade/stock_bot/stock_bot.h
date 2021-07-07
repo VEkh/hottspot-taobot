@@ -1,14 +1,13 @@
 #ifndef ETRADE__STOCK_BOT_H
 #define ETRADE__STOCK_BOT_H
 
-#include "etrade/client/client.cpp"          // ETrade::Client
-#include "etrade/deps.cpp"                   // json
-#include "etrade/types.cpp"                  // ETrade::t
-#include "lib/formatted.cpp"                 // Formatted
-#include "lib/transmission/transmission.cpp" // Transmission
-#include <map>                               // std::map
-#include <string>                            // std::string
-#include <vector>                            // std::vector
+#include "etrade/client/client.cpp" // ETrade::Client
+#include "etrade/deps.cpp"          // json
+#include "etrade/types.cpp"         // ETrade::t
+#include "lib/formatted.cpp"        // Formatted
+#include <map>                      // std::map
+#include <string>                   // std::string
+#include <vector>                   // std::vector
 
 namespace ETrade {
 class StockBot {
@@ -20,7 +19,6 @@ public:
 private:
   using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
   using exit_prices_t = ETrade::t::exit_prices_t;
-  using gear_t = Transmission::gear_t;
   using order_action_t = ETrade::t::order_action_t;
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
@@ -55,7 +53,6 @@ private:
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  Transmission transmission;
   bool is_long_position;
   char *symbol;
   double average_tick_price_delta = 0.00;
@@ -127,7 +124,6 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *);
-  void shift_transmission_gear();
   void watch();
 };
 } // namespace ETrade

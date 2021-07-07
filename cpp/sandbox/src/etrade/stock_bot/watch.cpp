@@ -28,7 +28,6 @@
 #include "set_moving_price_range.cpp"       // set_moving_price_range
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
-#include "shift_transmission_gear.cpp"      // shift_transmission_gear
 #include "should_terminate.cpp"             // should_terminate
 #include <chrono>                           // std::chrono
 #include <iostream>                         // std::cout, std::endl
@@ -61,8 +60,6 @@ void ETrade::StockBot::watch() {
     open_position();
     set_open_position_prices();
 
-    shift_transmission_gear();
-    this->transmission.log();
     log_closed_positions();
 
     close_position();

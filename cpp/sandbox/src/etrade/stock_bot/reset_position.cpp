@@ -8,9 +8,8 @@
  */
 #include "stock_bot.h"
 
-#include "lib/transmission/transmission.cpp" // Transmission
-#include "order_win_result.cpp"              // order_win_result
-#include <time.h>                            // time, time_t
+#include "order_win_result.cpp" // order_win_result
+#include <time.h>               // time, time_t
 
 void ETrade::StockBot::reset_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
@@ -44,7 +43,6 @@ void ETrade::StockBot::reset_position() {
   this->closed_positions.push_back(position);
   this->close_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
-  this->transmission = Transmission();
 }
 
 #endif
