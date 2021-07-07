@@ -68,20 +68,10 @@ struct position_t {
   order_t open_order;
 };
 
-struct sma_t {
-  double buy_delta = 0;
-  double buy_sell_ratio = 0;
-  double price = 0;
-  int seconds = 0;
-  double sell_buy_ratio = 0;
-  double sell_delta = 0;
-};
-
 struct quote_t {
   double current_price;
   double high;
   double low;
-  sma_t simple_moving_average;
   char *symbol;
   long int timestamp;
 };

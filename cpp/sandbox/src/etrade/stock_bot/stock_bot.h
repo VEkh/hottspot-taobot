@@ -26,7 +26,6 @@ private:
   using order_win_result_t = ETrade::t::order_win_result_t;
   using position_t = ETrade::t::position_t;
   using quote_t = ETrade::t::quote_t;
-  using sma_t = ETrade::t::sma_t;
 
   struct price_range_t {
     double high = -INFINITY;
@@ -78,9 +77,7 @@ private:
   bool should_open_position();
   bool should_terminate();
 
-  double compute_buy_sell_ratio(const sma_t &);
   double compute_min_profit_price_range_ratio(const double);
-  double compute_sell_buy_ratio(const sma_t &);
   double max_losing_streak_loss();
   double profit_percentage(const order_t *);
 
@@ -93,8 +90,6 @@ private:
   json get_order_json(const order_t *);
 
   order_win_result_t order_win_result(const order_t *);
-
-  sma_t build_simple_moving_average(const int);
 
   std::map<int, std::map<const char *, double>>
   compute_moving_buy_sell_ratio_average(std::vector<int> &);
