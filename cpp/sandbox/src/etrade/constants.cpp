@@ -1,4 +1,4 @@
-#if !defined ETRADE__constants
+#ifndef ETRADE__constants
 #define ETRADE__constants
 
 namespace ETrade {

@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_set_open_position_prices
+#ifndef ETRADE__STOCK_BOT_set_open_position_prices
 #define ETRADE__STOCK_BOT_set_open_position_prices
 
 #include "etrade/utils.cpp"        // ETrade::constants

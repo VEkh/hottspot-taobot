@@ -11,9 +11,6 @@ void ETrade::StockBot::log_average_tick_price_delta() {
     return;
   }
 
-  const double price_range =
-      this->moving_price_range.high - this->moving_price_range.low;
-
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
   std::cout << "💲 Avg Tick Price Δ: ("

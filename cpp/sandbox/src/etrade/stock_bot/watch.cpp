@@ -3,7 +3,6 @@
 
 /*
  * ETrade::StockBot
- * MOVING_PRICE_RANGE_PERIOD_SECONDS
  * POLLING_INTERVAL_SECONDS
  * fmt
  */
@@ -17,7 +16,6 @@
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_closed_positions.cpp"         // log_closed_positions
 #include "log_end_of_day.cpp"               // log_end_of_day
-#include "log_moving_price_range.cpp"       // log_moving_price_range
 #include "log_position.cpp"                 // log_position
 #include "log_position_results.cpp"         // log_position_results
 #include "log_quote.cpp"                    // log_quote
@@ -25,7 +23,6 @@
 #include "reset_position.cpp"               // reset_position
 #include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
-#include "set_moving_price_range.cpp"       // set_moving_price_range
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
@@ -48,8 +45,6 @@ void ETrade::StockBot::watch() {
 
     log_quote();
     set_and_log_buy_sell_ratios();
-    set_moving_price_range(MOVING_PRICE_RANGE_PERIOD_SECONDS);
-    log_moving_price_range();
     set_average_tick_price_delta();
     log_average_tick_price_delta();
     log_position();

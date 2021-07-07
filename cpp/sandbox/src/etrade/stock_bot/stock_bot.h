@@ -27,18 +27,9 @@ private:
   using position_t = ETrade::t::position_t;
   using quote_t = ETrade::t::quote_t;
 
-  struct price_range_t {
-    double high = -INFINITY;
-    double low = INFINITY;
-    double max_loss = INFINITY;
-    double min_profit = INFINITY;
-    int period = 0;
-  };
-
   const char *NORMALIZE_QUANTITY_BASIS_SYMBOL = "TSLA";
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 5.0 * 60.0;
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.35;
-  const double MOVING_PRICE_RANGE_PERIOD_SECONDS = 1.0 * 60 * 60;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
@@ -68,7 +59,6 @@ private:
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
-  price_range_t moving_price_range;
 
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -102,7 +92,6 @@ private:
   void log_average_tick_price_delta();
   void log_closed_positions();
   void log_end_of_day();
-  void log_moving_price_range();
   void log_position();
   void log_position_results();
   void log_quote();
@@ -113,7 +102,6 @@ private:
   void set_average_tick_price_delta();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
-  void set_moving_price_range(const int);
   void set_open_position_prices();
   void set_position_status();
   void set_profit(order_t *);
