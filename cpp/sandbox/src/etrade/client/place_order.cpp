@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_place_order
+#ifndef ETRADE__CLIENT_place_order
 #define ETRADE__CLIENT_place_order
 
 #include "build_place_order_payload.cpp" // build_place_order_payload

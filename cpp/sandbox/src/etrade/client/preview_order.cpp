@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_preview_order
+#ifndef ETRADE__CLIENT_preview_order
 #define ETRADE__CLIENT_preview_order
 
 #include "build_preview_order_payload.cpp" // build_preview_order_payload
@@ -18,6 +18,12 @@ bool is_retriable_response(const std::string &response_body) {
   json response = json::parse(response_body);
 
   if (response.contains("Error") && response["Error"]["code"] == 1037) {
+    return true;
+  }
+
+  if (response.contains("Error") &&
+      response["Error"]["message"] ==
+          "Number of requests exceeded the rate limit set") {
     return true;
   }
 
