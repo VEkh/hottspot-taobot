@@ -2646,7 +2646,7 @@ Conclusions:
 ### 2021-07-07:
 #### Performance
 
-* Total: $59.86 (vs -$16.82 market performance)
+* Total: $59.86
   * AAPL ($0.48): 13 / 28 => 46.43%
   * AMD ($0.33): 11 / 25 => 44.0%
   * BA ($10.62): 13 / 28 => 46.43%
@@ -2681,3 +2681,47 @@ Conclusions:
 #### Next Thing(s) to Try
 * Normalize the quantities of the standard 8 stocks and see if I encounter
   spending limits.
+
+### 2021-07-08:
+#### Performance
+
+* Total: $167.31
+  * AAPL ($34.53): 16 / 29 => 55.17%
+  * AMD ($33.82): 6 / 20 => 30.0%
+  * BA ($32.80): 16 / 30 => 53.33%
+  * FB (-$3.60): 8 / 25 => 32.0%
+  * MSFT (-$36.93): 15 / 28 => 53.57%
+  * SNAP ($35.95): 3 / 9 => 33.33%
+  * TSLA ($33.79): 10 / 24 => 41.67%
+  * VIAC ($36.95): 19 / 35 => 54.29%
+
+* Profitable Days in a Row: 4
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 15W 13L
+* Total Return: $201.55
+
+#### Remarks
+* 8/10 stocks won!
+* Amazing performance again. Most profitable day so far.
+* MSFT had a winning record but a 6-loss losing streak to close the day so it
+  ended up losing. It also experienced really weird spikes at the end of the
+  day. There wasn't much I could do.
+* AMD may have ended up higher, but it faulted out during lunch because of the
+  Quote unavailable error. I captured the error message so I should be able to
+  prevent this in the future.
+* FB had many reversals
+* Martingale is still working really well. I was concerned that normalizing the
+  quantities would lead to buying power excesses. This didn't seem to occur
+  because simultaneous out of control losing streaks seem unlikely. Continue to
+  monitor as we continue quantity normalization.
+* At the beginning of the day, I accounted for a 8-loss losing streak for all
+  the normalized quantities. Their cost amounted to ~$160,499.20 which accounts
+  for ~2/3 of my 4x margin buying power.
+* This seems like a good constraint for now. As funds increase, I can increase
+  the number of securities traded or base quantity multipliers.
+* You can trade more securities, but this comes at the risk of multiple stocks
+  having long losing streaks.
+
+#### Next Thing(s) to Try
+* Continue trading these stocks with Martingale and normalized quantities
