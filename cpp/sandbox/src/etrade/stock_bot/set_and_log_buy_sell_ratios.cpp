@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_set_and_log_buy_sell_ratios
+#ifndef ETRADE__STOCK_BOT_set_and_log_buy_sell_ratios
 #define ETRADE__STOCK_BOT_set_and_log_buy_sell_ratios
 
 /*
@@ -45,20 +45,38 @@ void ETrade::StockBot::set_and_log_buy_sell_ratios() {
 
   std::cout << std::setprecision(2) << std::fixed;
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
-  std::cout << "Buy-Sell Ratios" << std::endl;
+  std::cout << "Average Buy-Sell Ratios" << std::endl;
   std::cout << fmt.reset;
-  std::cout << fmt.bold << fmt.cyan;
 
-  for (int period : moving_average_periods) {
-    std::cout << "Avg. Buy Δ / Sell Δ ("
-              << utils::integer_::seconds_to_clock(period)
-              << "): " << average_buy_sell_ratios[period]["buy"] << std::endl;
-    std::cout << "Avg. Sell Δ / Buy Δ ("
-              << utils::integer_::seconds_to_clock(period)
-              << "): " << average_buy_sell_ratios[period]["sell"] << std::endl;
+  std::cout << fmt.bold << fmt.cyan;
+  std::cout << "Buy Δ / Sell Δ => ";
+
+  for (int i = 0, l = moving_average_periods.size(); i < l; i++) {
+    int period = moving_average_periods[i];
+
+    if (i > 0) {
+      std::cout << " • ";
+    }
+
+    std::cout << utils::integer_::seconds_to_clock(period) << ": "
+              << average_buy_sell_ratios[period]["buy"];
   }
 
-  std::cout << fmt.reset << std::endl;
+  std::cout << std::endl;
+  std::cout << "Sell Δ / Buy Δ => ";
+
+  for (int i = 0, l = moving_average_periods.size(); i < l; i++) {
+    int period = moving_average_periods[i];
+
+    if (i > 0) {
+      std::cout << " • ";
+    }
+
+    std::cout << utils::integer_::seconds_to_clock(period) << ": "
+              << average_buy_sell_ratios[period]["sell"];
+  }
+
+  std::cout << fmt.reset << std::endl << std::endl;
 }
 
 #endif
