@@ -1,4 +1,4 @@
-#include <iostream>
+#include <cstdio> // printf
 
 double running_total() {
   double profits[] = {
@@ -17,4 +17,4 @@ double running_total() {
   return sum;
 }
 
-int main() { std::cout << running_total() << std::endl; }
+int main() { printf("Running Total: %.2f\n", running_total()); }

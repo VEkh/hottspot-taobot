@@ -36,7 +36,9 @@ enum order_win_result_t {
 
 struct closed_positions_stats_t {
   std::map<order_win_result_t, int> results;
+  int loss_streak = 0;
   double total_profit;
+  int win_streak = 0;
 };
 
 struct exit_prices_t {

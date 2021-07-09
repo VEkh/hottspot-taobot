@@ -1,4 +1,4 @@
-#if !defined UTILS__DEBUG
+#ifndef UTILS__DEBUG
 #define UTILS__DEBUG
 
 #include <cxxabi.h> // abi::__cxa_demangle
