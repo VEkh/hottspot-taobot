@@ -20,7 +20,7 @@ void ETrade::StockBot::set_open_position_prices() {
 
   if (!this->open_order.execution_price) {
     std::cout << fmt.bold << fmt.green << std::endl;
-    std::cout << log_icon << " " << order_action << ": Executed open order."
+    std::cout << log_icon << " " << order_action << ": Executed open order.\n"
               << std::endl;
     std::cout << fmt.reset;
 

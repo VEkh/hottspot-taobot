@@ -5,11 +5,12 @@
 #include "etrade/constants.cpp"              // ETrade::constants
 #include "etrade/deps.cpp"                   // json
 #include "is_account_key_error_response.cpp" // is_account_key_error_response
-#include "is_not_shortable_response.cpp"     // is_not_shortable_response
-#include "lib/curl_client/curl_client.h"     // CurlClient
-#include "lib/formatted.cpp"                 // Formatted
-#include "lib/utils/string.cpp"              // utils::string
-#include <iostream>                          // std::cout, std::endl
+#include "is_insufficient_funds_error_response.cpp" // is_insufficient_funds_error_response
+#include "is_not_shortable_response.cpp"            // is_not_shortable_response
+#include "lib/curl_client/curl_client.h"            // CurlClient
+#include "lib/formatted.cpp"                        // Formatted
+#include "lib/utils/string.cpp"                     // utils::string
+#include <iostream>                                 // std::cout, std::endl
 
 CurlClient
 ETrade::Client::handle_place_order_error(const CurlClient &curl_client,
@@ -21,11 +22,9 @@ ETrade::Client::handle_place_order_error(const CurlClient &curl_client,
     return curl_client;
   }
 
-  if (is_account_key_error_response(curl_client)) {
-    return curl_client;
-  }
-
-  if (is_not_shortable_response(curl_client)) {
+  if (is_account_key_error_response(curl_client) ||
+      is_insufficient_funds_error_response(curl_client) ||
+      is_not_shortable_response(curl_client)) {
     return curl_client;
   }
 

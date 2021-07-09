@@ -2725,3 +2725,39 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Continue trading these stocks with Martingale and normalized quantities
+
+### 2021-07-09:
+#### Performance
+
+* Total: -$50.05
+  * AAPL ($14.33): 8 / 24 => 33.33%
+  * AMD (-$32.49): 6 / 25 => 24.0%
+  * BA (-$70.09): 8 / 28 => 28.57%
+  * FB (-$38.01): 3 / 16 => 18.75%
+  * MSFT ($10.25): 15 / 28 => 48.28%
+  * SNAP ($34.35): 16 / 32 => 50.0%
+  * TSLA (-$6.74): 5 / 16 => 31.25%
+  * VIAC ($38.35): 28 / 51 => 54.9%
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 15W 14L
+* Total Return: $151.50
+
+#### Remarks
+* 4/8 stocks won
+* The losing stocks had unusually low win percentages.
+* Also, BA faulted prior to a subsequent win. That could have been the difference.
+* I also handled a couple more errors:
+  1. Quote unavailable
+  2. Insufficient funds
+* The biggest observation was that my funds can be exhausted by out-of-control
+  losing streaks. I introduced silent handling of this. Hopefully this allows
+  StockBot to keep running until funds free up.
+* Don't be discouraged. Even though some stocks had low win percentages, 4/8
+  still won. Plus, BA could have easily ended up.
+
+
+#### Next Thing(s) to Try
+* Continue trading these stocks with Martingale and normalized quantities

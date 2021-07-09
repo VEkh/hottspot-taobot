@@ -71,6 +71,18 @@ void ETrade::StockBot::open_position() {
     return;
   }
 
+  if (etrade_client.is_insufficient_funds_error_response(curl_client)) {
+    std::cout << fmt.bold << fmt.yellow;
+    std::cout << log_icon << " " << order_action
+              << ": Insufficient Funds Error 🥺 (30130.." << std::endl;
+    std::cout << fmt.reset << std::endl;
+
+    this->close_order_ptr = nullptr;
+    this->open_order_ptr = nullptr;
+
+    return;
+  }
+
   if (etrade_client.is_not_shortable_response(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
     std::cout << log_icon << " " << order_action

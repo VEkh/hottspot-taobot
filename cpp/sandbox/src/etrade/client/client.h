@@ -46,6 +46,7 @@ public:
   CurlClient preview_order(const order_t &);
 
   bool is_account_key_error_response(const CurlClient &);
+  bool is_insufficient_funds_error_response(const CurlClient &);
   bool is_not_shortable_response(const CurlClient &);
 
   quote_t parse_quote(const std::string &);
