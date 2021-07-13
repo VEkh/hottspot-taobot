@@ -1442,7 +1442,7 @@ Conclusions:
 
 #### Remarks
 * Moderately good performance
-* I adjusted the entry algorithm to require that a new positin only be entered
+* I adjusted the entry algorithm to require that a new position only be entered
   if the current price exceeds the previous open executing price by the
   `max_profit` amount.
 * This somewhat prevents excessive re-entry after profitable positions.
@@ -2761,3 +2761,91 @@ Conclusions:
 
 #### Next Thing(s) to Try
 * Continue trading these stocks with Martingale and normalized quantities
+
+### 2021-07-12:
+#### Performance
+
+* Opening Account Value: $60,410.30
+
+* Total: -$202.92 (-0.336%)
+  * AAPL (-$13.19): 3 / 7 => 42.86%
+  * AMD ($7.12): 2 / 9 => 22.22%
+  * BA ($21.95): 16 / 34 => 47.06%
+  * FB ($13.63): 15 / 35 => 42.86%
+  * MSFT ($13.36): 13 / 25 => 52.00%
+  * SNAP (-$303.61): 0 / 7 => 0.0%
+  * TSLA ($15.22): 8 / 15 => 53.33%
+  * VIAC ($45.62): 16 / 35 => 45.71%
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 15W 15L
+* Total Return: -$51.42
+
+#### Remarks
+* 6 / 8 stocks won, so that was good.
+* The dreaded happened...SNAP didn't win a SINGLE trade. Early day large losses
+  proved too high a threshold for more anemic movement later in the day.
+* AAPL ran into a similar problem. SNAP who normally trades 30-50 times, traded
+  only 7 times today.
+* AMD, BA, and SNAP saw >= 5-loss losing streaks.
+* This suggests that Martingale can't be expected to match a sufficiently large
+  loss.
+* A few alternatives are possible Martingale loss chasing:
+  1. Don't match the larges loss in the losing streak. Instead always use 15x
+     the 1-sec price variance.
+  2. Match an average between 15x ATPD and the largest loss.
+  2. Match an average of the losses in the losing streak.
+* I'll try #1 for now and see its effect. It'll be a bummer that loss-ending
+  wins won't guarantee a profit, but I think it'll protect me against
+  catastrophic losses and probably also against absurdly long losing streaks.
+
+#### Next Thing(s) to Try
+
+### 2021-07-13:
+#### Performance
+
+* Opening Account Value: $60,197.40
+
+* Total: $155.66 (+0.26%)
+  * AAPL ($38.80): 11 / 35 => 31.43%
+  * AMD ($4.95): 14 / 29 => 48.28%
+  * BA ($16.62): 12 / 24 => 50.0%
+  * FB ($39.64): 24 / 45 => 53.33%
+  * MSFT ($0.43): 14 / 32 => 43.75%
+  * SNAP ($6.97): 25 / 50 => 50.0%
+  * TSLA ($7.35): 8 / 19 => 42.11%
+  * VIAC ($40.90): 22 / 54 => 40.74%
+
+* Profitable Days in a Row: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 16W 15L
+* Total Return: $104.24
+
+#### Remarks
+* 8 / 8 stocks won 🎊
+* AAPL had a 9-loss losing streak that triggered the Insufficient Funds Error (IFE)
+* This was even after removing Martingale's largest-loss match.
+* MSFT also encountered the IFE, and I think it was due to AAPL
+* I got lucky though. I opened the would-be trade on AAPL at the previous
+  Martingale-multiplied quantity for AAPL. The position did really well and
+  covered the previous losses.
+* I ate the MSFT losses that may have been re-couped from its losing streak,
+  and restarted it.
+* All other stocks traded without encountering the IFE.
+* This demonstrates something important: an out of control loss streak (NINE
+  😱) IS, in fact, possible.
+* As such I need a contingency plan.
+* For now, it will be to half the martingale multiplier and keep trying until
+  the first win.
+* This will lead to a few outcomes:
+  1. It wins moderately on the next trade and covers only about half the loss
+  2. It wins big on the next trade and covers the whole loss
+  3. It continues losing until the next win which covers some undefined
+     percentage of the loss.
+* Scenario #3 is a very bad scenario, but I'm counting on it being highly
+  unlikely. This doesn't seem smart but I'll see how it practically plays out.
+
+#### Next Thing(s) to Try

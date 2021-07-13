@@ -37,6 +37,7 @@ CurlClient ETrade::Client::place_order(order_t *order) {
   CurlClient preview_curl_client = preview_order(*order);
 
   if (is_account_key_error_response(preview_curl_client) ||
+      is_insufficient_funds_error_response(preview_curl_client) ||
       is_not_shortable_response(preview_curl_client)) {
     return preview_curl_client;
   }

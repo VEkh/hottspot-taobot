@@ -16,6 +16,7 @@
 #include "etrade/constants.cpp"            // ETrade::constants
 #include "lib/curl_client/curl_client.h"   // CurlClient
 #include "should_open_position.cpp"        // should_open_position
+#include <cstdio>                          // printf
 #include <iostream>                        // std::cout, std::endl
 
 void ETrade::StockBot::open_position() {
@@ -74,8 +75,15 @@ void ETrade::StockBot::open_position() {
   if (etrade_client.is_insufficient_funds_error_response(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
     std::cout << log_icon << " " << order_action
-              << ": Insufficient Funds Error 🥺 (30130.." << std::endl;
-    std::cout << fmt.reset << std::endl;
+              << ": Insufficient Funds Error 🥺 (3010.).";
+
+    if (this->FLAG_MARTINGALE) {
+      printf(" Halving quantity.");
+
+      this->martingale_quantity_multiplier *= 0.5;
+    }
+
+    std::cout << fmt.reset << std::endl << std::endl;
 
     this->close_order_ptr = nullptr;
     this->open_order_ptr = nullptr;
