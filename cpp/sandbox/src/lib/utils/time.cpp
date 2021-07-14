@@ -28,6 +28,25 @@ unsigned long epoch(const char *duration = "seconds") {
   }
 }
 
+bool is_early_day() {
+  const char *original_tz = getenv("TZ");
+  time_t local_now;
+
+  setenv("TZ", "America/New_York", 1);
+  time(&local_now);
+  std::tm local_time = *std::localtime(&local_now);
+
+  const bool out = local_time.tm_hour < 11;
+
+  if (original_tz) {
+    setenv("TZ", original_tz, 1);
+  } else {
+    unsetenv("TZ");
+  }
+
+  return out;
+}
+
 bool is_end_of_day() {
   const char *original_tz = getenv("TZ");
   time_t local_now;

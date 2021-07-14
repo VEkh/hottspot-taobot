@@ -2849,3 +2849,74 @@ Conclusions:
   unlikely. This doesn't seem smart but I'll see how it practically plays out.
 
 #### Next Thing(s) to Try
+
+### 2021-07-14:
+#### Performance
+
+* Opening Account Value: $60,373.18
+
+* Total: $173.43 (🔥 PR 🔥) (+0.29%)
+  * AAPL ($8.36): 13 / 34 => 38.24%
+  * AMD ($8.11): 9 / 23 => 39.13%
+  * BA ($14.42): 18 / 36 => 50.0%
+  * FB ($18.85): 23 / 44 => 52.27%
+  * MSFT ($3.42): 13 / 34 => 38.24%
+  * SNAP ($95.96): 23 / 63 => 36.51%
+  * TSLA ($12.67): 12 / 20 => 60.0%
+  * VIAC ($11.94): 20 / 48 => 41.67%
+
+* Profitable Days in a Row: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 17W 15L
+* Total Return: $277.67
+
+#### Remarks
+* 8 / 8 stocks won 🎊
+* VIAC had an 8-loss losing streak that triggered the Insufficient Funds Error
+  (IFE)
+* My IFE capture didn't seem to work. I'll have to debug.
+* I quickly re-opened the position at the last affordable quantity and
+  reclaimed the losses.
+* I goofed and re-started VIAC with a quantity of 2048 and that position lost,
+  clearing out almost all the gains from the losing-streak-breaking win.
+* It's okay, because the lucky VIAC reclaim made the victory feel unearned.
+* I removed the Time-Throttler for Martingale trades.
+  * Losses generate multipliers for big wins.
+  * The time throttle was designed to avoid inevitable losses from rapid
+    re-entry.
+  * Since those losses could be an asset with Martingale, it makes sense to
+    remove them.
+  * Only VIAC and MSFT experienced this. Tomorrow all stocks will.
+* I restored Martingale's max-loss matching, but only after the 11am ET.
+  * By this time, the stocks have calmed down from their higher early morning
+    volatility and I don't have to worry as much about them being trapped
+    trying to recover early morning losses.
+  * Only VIAC and MSFT experienced this. Tomorrow all stocks will.
+
+#### Next Thing(s) to Try
+
+### 2021-07-15:
+#### Performance
+
+* Opening Account Value: $60,536.92
+
+* Total: $ (%)
+  * AAPL ($):
+  * AMD ($):
+  * BA ($):
+  * FB ($):
+  * MSFT ($):
+  * SNAP ($):
+  * TSLA ($):
+  * VIAC ($):
+
+* Profitable Days in a Row: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 17W 15L
+* Total Return: $277.67
+
+#### Remarks
+
+#### Next Thing(s) to Try

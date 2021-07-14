@@ -9,6 +9,7 @@
  */
 #include "stock_bot.h"
 
+#include "lib/utils/time.cpp"         // utils::time_
 #include "max_losing_streak_loss.cpp" // max_losing_streak_loss
 #include "order_win_result.cpp"       // order_win_result
 
@@ -22,7 +23,8 @@ ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
   double max_loss = -1 * max_loss_multiplier * this->average_tick_price_delta;
   double min_profit = min_profit_multiplier * this->average_tick_price_delta;
 
-  if (this->FLAG_MARTINGALE && !this->closed_positions.empty()) {
+  if (this->FLAG_MARTINGALE && !utils::time_::is_early_day() &&
+      !this->closed_positions.empty()) {
     const position_t last_position = this->closed_positions.back();
 
     if (order_win_result(&last_position.close_order) ==
