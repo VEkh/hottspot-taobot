@@ -17,7 +17,7 @@ bool ETrade::StockBot::should_open_position() {
     return false;
   }
 
-  if (!this->closed_positions.empty()) {
+  if (!this->FLAG_MARTINGALE && !this->closed_positions.empty()) {
     time_t now;
     time(&now);
 
