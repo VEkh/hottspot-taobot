@@ -2,7 +2,7 @@
 #define ETRADE__STOCK_BOT_compute_normalized_quantity
 
 #include "stock_bot.h" // ETrade::StockBot, quote_t
-#include <math.h>
+#include <math.h>      // ceil, pow
 
 int ETrade::StockBot::compute_normalized_quantity() {
   int final_multiplier = this->quantity_mulitiplier;
@@ -11,25 +11,21 @@ int ETrade::StockBot::compute_normalized_quantity() {
     final_multiplier *= this->martingale_quantity_multiplier;
   }
 
-  if (this->symbol == this->NORMALIZE_QUANTITY_BASIS_SYMBOL) {
-    return final_multiplier;
-  }
-
   if (!this->FLAG_NORMALIZE_QUANTITY) {
     return final_multiplier;
   }
 
+  const double account_balance = 60784.68;
   const double current_price = this->quotes.back().current_price;
+  const int margin_multiplier = 4;
+  const int max_allowed_losses = 8;
 
-  const std::string basis_quote_string =
-      this->etrade_client.fetch_quote(this->NORMALIZE_QUANTITY_BASIS_SYMBOL);
+  const double max_order_price = (0.8 * account_balance * margin_multiplier);
 
-  const quote_t basis_quote =
-      this->etrade_client.parse_quote(basis_quote_string);
+  const double basis_price = max_order_price / pow(2, max_allowed_losses);
+  const double normalized_quantity = ceil(basis_price / current_price);
 
-  const double basis_price = basis_quote.current_price;
-
-  return final_multiplier * ceil(basis_price / current_price);
+  return final_multiplier * normalized_quantity;
 }
 
 #endif

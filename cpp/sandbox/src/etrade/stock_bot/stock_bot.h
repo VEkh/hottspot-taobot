@@ -27,7 +27,6 @@ private:
   using position_t = ETrade::t::position_t;
   using quote_t = ETrade::t::quote_t;
 
-  const char *NORMALIZE_QUANTITY_BASIS_SYMBOL = "TSLA";
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 5.0 * 60.0;
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.35;
   const double POLLING_INTERVAL_SECONDS = 1.0;

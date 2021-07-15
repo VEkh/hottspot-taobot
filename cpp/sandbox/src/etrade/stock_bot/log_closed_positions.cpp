@@ -11,7 +11,7 @@
 #include "stock_bot.h"
 
 #include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include <cstdio>                           // printf
+#include <stdio.h>                           // printf
 #include <iostream>                         // std::cout, std::endl
 #include <map>                              // std::map
 

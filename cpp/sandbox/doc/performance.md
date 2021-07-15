@@ -2855,7 +2855,7 @@ Conclusions:
 
 * Opening Account Value: $60,373.18
 
-* Total: $173.43 (🔥 PR 🔥) (+0.29%)
+* Total: $173.43 (+0.29%) (🔥 PR 🔥)
   * AAPL ($8.36): 13 / 34 => 38.24%
   * AMD ($8.11): 9 / 23 => 39.13%
   * BA ($14.42): 18 / 36 => 50.0%
@@ -2901,6 +2901,40 @@ Conclusions:
 
 * Opening Account Value: $60,536.92
 
+* Total: $247.97 (0.41%) (🔥 PR 🔥)
+  * AAPL ($29.23): 9 / 27 => 33.33%
+  * AMD ($37.95): 12 / 23 => 52.17%
+  * BA ($18.98): 12 / 28 => 42.86%
+  * FB ($11.65): 18 / 35 => 51.43%
+  * MSFT ($17.31): 18 / 30 => 60.0%
+  * SNAP ($47.81): 16 / 36 => 50.0%
+  * TSLA ($14.66): 9 / 18 => 50.0%
+  * VIAC ($70.37): 14 / 35 => 40.0%
+
+* Profitable Days in a Row: 3
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 18W 15L
+* Total Return: $525.64
+
+#### Remarks
+* 8 / 8 stocks won 🎊, hitting another PR
+* I didn't have to intervene in any trades.
+* I think two things made a difference:
+  1. Restoring Martingale's largest loss match after early day trading.
+  2. Removing the throttle.
+    * Now positions can re-enter. They will either capture more profit or run
+      into a loss which will build loss multipliers.
+
+#### Next Thing(s) to Try
+* Normalize quantity with the current account marginable equity instead of a
+  reference stock price.
+
+### 2021-07-16:
+#### Performance
+
+* Opening Account Value: $60,784.68
+
 * Total: $ (%)
   * AAPL ($):
   * AMD ($):
@@ -2911,11 +2945,11 @@ Conclusions:
   * TSLA ($):
   * VIAC ($):
 
-* Profitable Days in a Row: 2
+* Profitable Days in a Row:
 
 #### Stats (as of stable profitable algo [5/28])
-* Win / Loss: 17W 15L
-* Total Return: $277.67
+* Win / Loss:
+* Total Return:
 
 #### Remarks
 

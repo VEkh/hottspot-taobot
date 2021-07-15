@@ -11,9 +11,9 @@
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/float.cpp"   // utils::float
 #include "profit_percentage.cpp" // profit_percentage
-#include <cstdio>                // printf
 #include <iomanip>               // std::setprecision
 #include <iostream>              // std::cout, std::endl, std::fixed
+#include <stdio.h>               // printf
 #include <time.h>                // time, time_t
 
 void ETrade::StockBot::log_position() {
