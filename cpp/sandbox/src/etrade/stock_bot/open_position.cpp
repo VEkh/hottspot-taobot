@@ -16,8 +16,9 @@
 #include "etrade/constants.cpp"            // ETrade::constants
 #include "lib/curl_client/curl_client.h"   // CurlClient
 #include "should_open_position.cpp"        // should_open_position
-#include <cstdio>                          // printf
 #include <iostream>                        // std::cout, std::endl
+#include <stdio.h>                         // printf
+#include <string>                          // std::string
 
 void ETrade::StockBot::open_position() {
   if (!should_open_position()) {
@@ -60,42 +61,39 @@ void ETrade::StockBot::open_position() {
 
   CurlClient curl_client = etrade_client.place_order(this->open_order_ptr);
 
-  if (etrade_client.is_account_key_error_response(curl_client)) {
+  if (etrade_client.is_next_cycle_retry_error(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
-    std::cout << log_icon << " " << order_action
-              << ": Account Key Error 🐞 (100). Retrying." << std::endl;
-    std::cout << fmt.reset << std::endl;
 
-    this->close_order_ptr = nullptr;
-    this->open_order_ptr = nullptr;
+    printf("%s %s: ", log_icon, order_action);
 
-    return;
-  }
+    switch (curl_client.response.error_code) {
+    case 100: {
+      printf("Account Key Error 🐞 (100). Retrying.\n");
 
-  if (etrade_client.is_insufficient_funds_error_response(curl_client)) {
-    std::cout << fmt.bold << fmt.yellow;
-    std::cout << log_icon << " " << order_action
-              << ": Insufficient Funds Error 🥺 (3010.).";
-
-    if (this->FLAG_MARTINGALE) {
-      printf(" Halving quantity.");
-
-      this->martingale_quantity_multiplier *= 0.5;
+      break;
     }
 
-    std::cout << fmt.reset << std::endl << std::endl;
+    case 3010: {
+      std::string message = "Insufficient Funds Error 😓 (3010).";
 
-    this->close_order_ptr = nullptr;
-    this->open_order_ptr = nullptr;
+      if (this->FLAG_MARTINGALE) {
+        this->martingale_quantity_multiplier *= 0.5;
 
-    return;
-  }
+        message += " Halving quantity.";
+      }
 
-  if (etrade_client.is_not_shortable_response(curl_client)) {
-    std::cout << fmt.bold << fmt.yellow;
-    std::cout << log_icon << " " << order_action
-              << ": This securiity is not shortable at this time (1037)."
-              << std::endl;
+      printf("%s\n", message.c_str());
+
+      break;
+    }
+
+    case 33: {
+      printf("This securiity is not shortable at this time (33).\n");
+
+      break;
+    }
+    }
+
     std::cout << fmt.reset << std::endl;
 
     this->close_order_ptr = nullptr;

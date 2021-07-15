@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_H
+#ifndef ETRADE__CLIENT_H
 #define ETRADE__CLIENT_H
 
 #include "etrade/deps.cpp"                    // json
@@ -45,9 +45,7 @@ public:
   CurlClient place_order(order_t *);
   CurlClient preview_order(const order_t &);
 
-  bool is_account_key_error_response(const CurlClient &);
-  bool is_insufficient_funds_error_response(const CurlClient &);
-  bool is_not_shortable_response(const CurlClient &);
+  bool is_next_cycle_retry_error(CurlClient &);
 
   quote_t parse_quote(const std::string &);
 
@@ -75,16 +73,17 @@ private:
       .debug_flag = debug_t::OFF,
   };
 
-  CurlClient handle_place_order_error(const CurlClient &,
-                                      const order_action_t &,
+  CurlClient handle_place_order_error(CurlClient &, const order_action_t &,
                                       const std::string &);
   CurlClient post(post_params_t);
+
   std::string build_place_order_payload(std::string &);
   std::string build_preview_order_payload(const order_t &);
   std::string build_request_header(OAuthHeader::props_t);
   std::string compute_client_order_id(const std::string);
   std::string fetch_token(std::string);
   std::string get_config_filepath(const char *);
+
   void fetch_request_token();
   void load_client_config();
   void load_token();

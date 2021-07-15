@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_fetch_token
+#ifndef ETRADE__CLIENT_fetch_token
 #define ETRADE__CLIENT_fetch_token
 
 #include "client.h"  // ETrade::Client, oauth, props, stream_format
@@ -31,7 +31,9 @@ std::string ETrade::Client::fetch_token(std::string request_url) {
                      });
         ;
       },
-      [](const std::string &response_body) -> bool {
+      [](const CurlClient &curl_client) -> bool {
+        const std::string response_body = curl_client.response.body;
+
         return std::regex_search(
             response_body, std::regex("oauth_parameters_absent=oauth_nonce"));
       });

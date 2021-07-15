@@ -15,7 +15,9 @@
 
 namespace ETrade {
 namespace fetch_quote {
-bool is_retriable_response(const std::string &response_body) {
+bool is_retriable_response(const CurlClient &curl_client) {
+  const std::string response_body = curl_client.response.body;
+
   if (response_body.empty()) {
     return true;
   }

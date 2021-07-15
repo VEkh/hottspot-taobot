@@ -11,7 +11,9 @@
 
 namespace ETrade {
 namespace preview_order {
-bool is_retriable_response(const std::string &response_body) {
+bool is_immediate_retry_error(const CurlClient &curl_client) {
+  const std::string response_body = curl_client.response.body;
+
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::cout << fmt.yellow << response_body << fmt.reset << std::endl;
 
@@ -48,7 +50,7 @@ CurlClient ETrade::Client::preview_order(const order_t &order) {
             .url = request_url,
         });
       },
-      ETrade::preview_order::is_retriable_response);
+      ETrade::preview_order::is_immediate_retry_error);
 
   return handle_place_order_error(curl_client, order.action, "Preview");
 }

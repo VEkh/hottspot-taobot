@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_fetch_orders
+#ifndef ETRADE__STOCK_BOT_fetch_orders
 #define ETRADE__STOCK_BOT_fetch_orders
 
 #include "etrade/deps.cpp"                        // json
@@ -17,7 +17,9 @@ void ETrade::StockBot::fetch_orders() {
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return this->etrade_client.fetch(url); },
-      [](const std::string &response) -> bool {
+      [](const CurlClient &curl_client) -> bool {
+        const std::string response = curl_client.response.body;
+
         if (std::regex_search(response,
                               std::regex("oauth_problem=nonce_used"))) {
           return true;

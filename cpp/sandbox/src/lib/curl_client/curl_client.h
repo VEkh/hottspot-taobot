@@ -1,4 +1,4 @@
-#if !defined CURL_CLIENT_H
+#ifndef CURL_CLIENT_H
 #define CURL_CLIENT_H
 
 /*
@@ -33,6 +33,7 @@ public:
 
   struct response_t {
     std::string body;
+    int error_code = 0;
     std::map<std::string, std::string> headers;
     size_t size;
   } response;

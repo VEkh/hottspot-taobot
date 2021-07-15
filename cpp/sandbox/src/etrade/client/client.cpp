@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT
+#ifndef ETRADE__CLIENT
 #define ETRADE__CLIENT
 
 #include "client.h" // ETrade::Client
