@@ -1,8 +1,9 @@
 #ifndef ETRADE__STOCK_BOT_compute_normalized_quantity
 #define ETRADE__STOCK_BOT_compute_normalized_quantity
 
-#include "stock_bot.h" // ETrade::StockBot, quote_t
-#include <math.h>      // ceil, pow
+#include "etrade/deps.cpp" // json
+#include "stock_bot.h"     // ETrade::StockBot, quote_t
+#include <math.h>          // ceil, pow
 
 int ETrade::StockBot::compute_normalized_quantity() {
   int final_multiplier = this->quantity_mulitiplier;
@@ -15,7 +16,12 @@ int ETrade::StockBot::compute_normalized_quantity() {
     return final_multiplier;
   }
 
-  const double account_balance = 60784.68;
+  const json account_balance_json = this->etrade_client.fetch_account_balance();
+
+  const double account_balance =
+      account_balance_json["BalanceResponse"]["RealTimeValues"]
+                          ["totalAccountValue"];
+
   const double current_price = this->quotes.back().current_price;
   const int margin_multiplier = 4;
   const int max_allowed_losses = 8;

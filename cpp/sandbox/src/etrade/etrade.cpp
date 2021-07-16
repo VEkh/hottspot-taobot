@@ -13,13 +13,14 @@
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"cancel_orders <ORDER_IDS>   ", "Cancel outsanding orders"},
-      {"fetch <URL>                 ", "Generic authorized request"},
-      {"fetch_access_token          ", "Get authorization token"},
-      {"fetch_quote <SYMBOL>        ", "Get quote for the given symbol"},
-      {"refresh_token               ", "Refresh authorization tokens"},
+      {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
+      {"fetch <URL>                  ", "Generic authorized request"},
+      {"fetch_access_token           ", "Get authorization token"},
+      {"fetch_account_balance        ", "Get current account balance"},
+      {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
+      {"refresh_token                ", "Refresh authorization tokens"},
       {"stock_bot <SYMBOL> <QUANTITY>",
-       "Launch (beta) trading bot for the given symbol"},
+       "Launch trading bot for the given symbol"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -78,6 +79,13 @@ int main(int argc, char *argv[]) {
   if (command == "fetch_access_token") {
     ETrade::Client etrade_client;
     etrade_client.fetch_access_token();
+
+    exit(0);
+  }
+
+  if (command == "fetch_account_balance") {
+    ETrade::Client etrade_client;
+    std::cout << etrade_client.fetch_account_balance() << std::endl;
 
     exit(0);
   }

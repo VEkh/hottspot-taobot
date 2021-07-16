@@ -8,7 +8,6 @@
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "lib/formatted.cpp"                      // Formatted
 #include <iostream>                               // std::cout, std::endl
-#include <map>                                    // std::map
 #include <regex>     // std::regex, std::regex_search
 #include <stdexcept> // std::invalid_argument
 #include <string>    // std::string

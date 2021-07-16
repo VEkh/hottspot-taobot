@@ -49,6 +49,7 @@ public:
 
   quote_t parse_quote(const std::string &);
 
+  std::string fetch_account_balance();
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
 

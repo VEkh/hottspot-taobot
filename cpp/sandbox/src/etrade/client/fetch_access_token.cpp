@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_fetch_access_token
+#ifndef ETRADE__CLIENT_fetch_access_token
 #define ETRADE__CLIENT_fetch_access_token
 
 #include "client.h" // ETrade::Client, client_config, stream_format

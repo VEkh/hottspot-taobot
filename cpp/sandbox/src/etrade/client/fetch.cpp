@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_fetch
+#ifndef ETRADE__CLIENT_fetch
 #define ETRADE__CLIENT_fetch
 
 #include "build_request_header.cpp"        // build_request_header

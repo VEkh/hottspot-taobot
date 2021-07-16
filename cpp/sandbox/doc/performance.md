@@ -2935,6 +2935,44 @@ Conclusions:
 
 * Opening Account Value: $60,784.68
 
+* Total: +$264.09 (+0.43%) (🔥 PR 🔥)
+  * AAPL ($39.73): 10 / 30 => 33.33%
+  * AMD ($29.88): 13 / 27 => 48.15%
+  * BA ($16.81): 14 / 29 => 48.28%
+  * FB ($21.78): 14 / 35 => 40.0%
+  * MSFT ($86.16): 18 / 38 => 47.37%
+  * SNAP ($108.03): 15 / 39 => 38.46%
+  * TSLA (-$81.61): 10 / 21 => 47.62%
+  * VIAC ($43.31): 23 / 49 => 46.94%
+
+* Profitable Days in a Row: 4
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 19W 15L
+* Total Return: +$789.73
+
+#### Remarks
+* 7/8 won 🎈
+* Great performance (PR) that was somewhat muffled by an end of day TSLA losing
+  streak.
+* The losing streak triggerd the IFE which was gracefully handled by StockBot,
+  so it's good to see both the refactored error handling and specificlly IFE
+  were handled.
+* Today was also the first day of normalizing the trading quantities with the
+  current account balance instead of TSLA's price.
+* The next step will be to fetch the balance from the API instead of using a
+  manual entry.
+
+#### Next Thing(s) to Try
+* Fetch net account value via the API client
+* Sign up to Binance and looking into trading cryto with StockBot
+
+### 2021-07-19:
+#### Performance
+
+* Opening Account Value: $61,046.62
+* Transfer +$1883.04
+
 * Total: $ (%)
   * AAPL ($):
   * AMD ($):

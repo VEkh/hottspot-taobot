@@ -5,6 +5,7 @@
 #include "cancel_order.cpp"
 #include "fetch.cpp"
 #include "fetch_access_token.cpp"
+#include "fetch_account_balance.cpp"
 #include "fetch_quote.cpp"
 #include "load_client_config.cpp" // load_client_config
 #include "parse_quote.cpp"
