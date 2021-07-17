@@ -6,7 +6,7 @@
 #include <map>                           // std::map
 
 bool ETrade::Client::is_next_cycle_retry_error(CurlClient &curl_client) {
-  const json response_body = json::parse(curl_client.response.body);
+  json response_body = json::parse(curl_client.response.body);
 
   if (!response_body.contains("Error")) {
     return false;

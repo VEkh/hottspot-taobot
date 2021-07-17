@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT
+#ifndef ETRADE__STOCK_BOT
 #define ETRADE__STOCK_BOT
 
 #include "stock_bot.h"    // ETrade::StockBot, init_order_action

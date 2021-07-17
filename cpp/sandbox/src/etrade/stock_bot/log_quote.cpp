@@ -1,4 +1,4 @@
-#if !defined ETRADE__STOCK_BOT_log_quote
+#ifndef ETRADE__STOCK_BOT_log_quote
 #define ETRADE__STOCK_BOT_log_quote
 
 /*
@@ -15,6 +15,7 @@
 #include "lib/utils/integer.cpp" // utils::integer_
 #include <iomanip>               // std::setprecision
 #include <iostream>              // std::cout, std::endl, std::fixed
+#include <stdio.h>               // printf
 
 void ETrade::StockBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
@@ -37,17 +38,16 @@ void ETrade::StockBot::log_quote() {
     }
   }
 
-  std::cout << std::setprecision(2) << std::fixed;
   std::cout << fmt.bold << fmt.underline << log_color;
-  std::cout << symbol << " Quote @ "
-            << utils::integer_::seconds_to_clock(runtime) << std::endl;
-  std::cout << fmt.reset;
-  std::cout << fmt.bold << log_color;
-  std::cout << "Current: "
-            << utils::float_::to_currency(current_quote.current_price)
-            << " • High: " << utils::float_::to_currency(current_quote.high)
-            << " • Low: " << utils::float_::to_currency(current_quote.low)
-            << std::endl;
+  printf("%s Quote @ %s\n", symbol,
+         utils::integer_::seconds_to_clock(runtime).c_str());
+
+  std::cout << fmt.reset << fmt.bold << log_color;
+  printf("Current: %'.2f • High: %'.2f • Low: %'.2f\n",
+         utils::float_::to_currency(current_quote.current_price),
+         utils::float_::to_currency(current_quote.high),
+         utils::float_::to_currency(current_quote.low));
+
   std::cout << fmt.reset << std::endl;
 }
 

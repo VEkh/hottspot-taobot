@@ -11,9 +11,10 @@
 #include "stock_bot.h"
 
 #include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include <stdio.h>                           // printf
 #include <iostream>                         // std::cout, std::endl
 #include <map>                              // std::map
+#include <stdio.h>                          // printf
+#include <stdio.h>                          // printf
 
 void ETrade::StockBot::log_closed_positions() {
   std::cout << fmt.bold << fmt.magenta << fmt.underline;
@@ -37,7 +38,7 @@ void ETrade::StockBot::log_closed_positions() {
   printf("Win Streak: %d • Loss Streak: %d\n", stats.win_streak,
          stats.loss_streak);
 
-  printf("Win %%: %.2f • Total Profit: $%.2f\n", win_percentage,
+  printf("Win %%: %.2f • Total Profit: $%+'.2f\n", win_percentage,
          stats.total_profit);
 
   std::cout << fmt.reset << std::endl;

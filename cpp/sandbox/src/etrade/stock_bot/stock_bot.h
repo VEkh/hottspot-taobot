@@ -17,6 +17,7 @@ public:
   void run();
 
 private:
+  using account_balance_t = ETrade::t::account_balance_t;
   using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
   using exit_prices_t = ETrade::t::exit_prices_t;
   using order_action_t = ETrade::t::order_action_t;
@@ -42,6 +43,8 @@ private:
 
   ETrade::Client etrade_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  account_balance_t account_balance;
+  account_balance_t original_account_balance;
   bool is_long_position;
   char *symbol;
   double average_tick_price_delta = 0.00;
@@ -61,6 +64,8 @@ private:
 
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
+
+  account_balance_t fetch_account_balance();
 
   bool should_close_position();
   bool should_open_position();
@@ -88,6 +93,7 @@ private:
   void fetch_orders();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
+  void log_account_balance();
   void log_average_tick_price_delta();
   void log_closed_positions();
   void log_end_of_day();

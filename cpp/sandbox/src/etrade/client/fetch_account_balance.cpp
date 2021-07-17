@@ -18,7 +18,7 @@ bool is_retriable_response(const CurlClient &curl_client) {
     return true;
   }
 
-  const json response = json::parse(response_body);
+  json response = json::parse(response_body);
 
   if (!response.contains("BalanceResponse")) {
     return true;

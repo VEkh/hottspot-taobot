@@ -1,8 +1,8 @@
-#if !defined ETRADE__STOCK_BOT_log_start_message
+#ifndef ETRADE__STOCK_BOT_log_start_message
 #define ETRADE__STOCK_BOT_log_start_message
 
 #include "stock_bot.h" // ETrade::StockBot, fmt, quantity, symbol
-#include <iostream>         // std::cout, std::endl
+#include <iostream>    // std::cout, std::endl
 
 void ETrade::StockBot::log_start_message() {
   std::cout << fmt.bold << fmt.cyan;

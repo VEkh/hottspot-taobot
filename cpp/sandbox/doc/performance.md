@@ -2970,8 +2970,7 @@ Conclusions:
 ### 2021-07-19:
 #### Performance
 
-* Opening Account Value: $61,046.62
-* Transfer +$1883.04
+* Opening Account Value: $62,929.66 (Transfer: +$1,883.04)
 
 * Total: $ (%)
   * AAPL ($):

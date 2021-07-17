@@ -34,6 +34,11 @@ enum order_win_result_t {
   WIN,
 };
 
+struct account_balance_t {
+  double balance;
+  double day_trading_margin_buying_power;
+};
+
 struct closed_positions_stats_t {
   std::map<order_win_result_t, int> results;
   int loss_streak = 0;

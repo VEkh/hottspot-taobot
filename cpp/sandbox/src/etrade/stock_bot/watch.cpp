@@ -13,6 +13,7 @@
 #include "fetch_orders.cpp"                 // fetch_orders
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "lib/utils/time.cpp"               // utils::time_
+#include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_closed_positions.cpp"         // log_closed_positions
 #include "log_end_of_day.cpp"               // log_end_of_day
@@ -41,6 +42,8 @@ void ETrade::StockBot::watch() {
   }
 
   while (!should_terminate()) {
+    log_account_balance();
+
     fetch_quote();
 
     log_quote();
