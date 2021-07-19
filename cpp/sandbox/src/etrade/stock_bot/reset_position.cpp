@@ -34,10 +34,20 @@ void ETrade::StockBot::reset_position() {
     const order_win_result_t win_result =
         order_win_result(&(this->close_order));
 
-    this->martingale_quantity_multiplier =
-        win_result == order_win_result_t::LOSS
-            ? this->martingale_quantity_multiplier *= 2
-            : 1;
+    switch (win_result) {
+    case order_win_result_t::LOSS: {
+      this->martingale_quantity_multiplier *= 2;
+
+      break;
+    }
+
+    case order_win_result_t::WIN: {
+      this->martingale_profit_multiplier = 1;
+      this->martingale_quantity_multiplier = 1;
+
+      break;
+    }
+    }
   }
 
   this->closed_positions.push_back(position);

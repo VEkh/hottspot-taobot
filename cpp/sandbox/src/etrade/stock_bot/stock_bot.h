@@ -53,6 +53,7 @@ private:
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
   exit_prices_t exit_prices;
+  int martingale_profit_multiplier = 1;
   int martingale_quantity_multiplier = 1;
   int quantity_mulitiplier;
   int quantity;

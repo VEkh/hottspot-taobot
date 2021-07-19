@@ -77,6 +77,7 @@ void ETrade::StockBot::open_position() {
       std::string message = "Insufficient Funds Error 😓 (3010).";
 
       if (this->FLAG_MARTINGALE) {
+        this->martingale_profit_multiplier *= 2;
         this->martingale_quantity_multiplier *= 0.5;
 
         message += " Halving quantity.";

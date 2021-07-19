@@ -2970,7 +2970,42 @@ Conclusions:
 ### 2021-07-19:
 #### Performance
 
-* Opening Account Value: $62,929.66 (Transfer: +$1,883.04)
+* Opening Account Value: $67,309.51 (Transfer: +$1,883.04, +4,379.60)
+
+* Total: -$1,505.21 (-2.24%)
+  * AAPL ($2.47): 7 / 15 => 46.67%
+  * AMD ($3.44): 8 / 20 => 40%
+  * BA (-$26.27): 7 / 19 => 36.84%
+  * FB ($14.85): 8 / 17 => 47.06%
+  * MSFT (-$129.27): 3 / 17 => 17.65%
+  * SNAP (-$33.02): 19 / 42 => 45.24%
+  * TSLA ($27.80): 5 / 10 => 50%
+  * VIAC (-$1,365.22): 5 / 18 => 27.78%
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 19W / 16L
+* Total Return: -$715.48
+
+#### Remarks
+* 4/8 won, MSFT lost big, VIAC lost catastrophically
+* The losses were onset by VIAC hitting a 9-loss losing streak.
+* I stopped its StockBot while it opened a new position waited for a profit to
+  cover the losses. It never came.
+* Meanwhile, MSFT and a couple others hit 4/5-loss losing streaks and
+  consequently IFEs since so much money was tied up in VIAC.
+* Things very quickly unraveled.
+* If, however, I had doubled / adjusted VIAC's expected profit, it would have
+  eventually broken out and covered the loss.
+
+#### Next Thing(s) to Try
+* Adjust the min profit if the losing streak exceeds four losses.
+
+### 2021-07-20:
+#### Performance
+
+* Opening Account Value: $67,309.51
 
 * Total: $ (%)
   * AAPL ($):

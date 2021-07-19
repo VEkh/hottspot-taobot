@@ -3,15 +3,16 @@
 
 /*
  * ETrade::StockBot
+ * closed_positions_stats_t
  * exit_prices_t
  * order_win_result_t
  * position_t
  */
 #include "stock_bot.h"
 
-#include "lib/utils/time.cpp"         // utils::time_
-#include "max_losing_streak_loss.cpp" // max_losing_streak_loss
-#include "order_win_result.cpp"       // order_win_result
+#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
+#include "lib/utils/time.cpp"               // utils::time_
+#include "max_losing_streak_loss.cpp"       // max_losing_streak_loss
 
 ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
   const double trailing_stop = 0.2;
@@ -26,10 +27,20 @@ ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
   if (this->FLAG_MARTINGALE && !utils::time_::is_early_day() &&
       !this->closed_positions.empty()) {
     const position_t last_position = this->closed_positions.back();
+    const closed_positions_stats_t closed_position_stats =
+        build_closed_positions_stats();
 
-    if (order_win_result(&last_position.close_order) ==
-        order_win_result_t::LOSS) {
+    const int loss_streak = closed_position_stats.loss_streak;
+
+    if (loss_streak > 0) {
       max_loss = max_losing_streak_loss();
+
+      if (this->martingale_profit_multiplier > 1) {
+        max_loss *= this->martingale_profit_multiplier;
+      } else if (loss_streak >= 4) {
+        max_loss *= 1.2;
+      }
+
       min_profit = abs(max_loss) / secured_profit_ratio;
     }
   }
