@@ -3005,7 +3005,42 @@ Conclusions:
 ### 2021-07-20:
 #### Performance
 
-* Opening Account Value: $67,309.51
+* Opening Account Value: $65,798.72
+
+* Total: -$598.76 (-0.91%)
+  * AAPL ($17.09): 12 / 19 => 63.16%
+  * AMD ($19.75): 5 / 17 => 29.41%
+  * BA ($23.30): 15 / 25 => 60.0%
+  * FB ($15.29): 15 / 29 => 51.72%
+  * MSFT ($15.46): 14 / 31 => 51.61%
+  * SNAP (-$858.57): 13 / 37 => 35.14%
+  * TSLA ($19.25): 9 / 18 => 50.0%
+  * VIAC ($149.67): 7 / 25 => 28.0%
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 19W 17L
+* Total Return: -$1,314.24
+
+#### Remarks
+* 7/8 won 🎉
+* The adjustment I made to min profit during a long losing streak was helpful
+  in some cases (VIAC) but put what would have been an attainable profit out of
+  reach for SNAP, which made it lose spectacularly.
+* Remember, large profit expectations lead to low win rates
+* On the bight side, StockBot didn't encounter andy IFEs.
+* This could have been because of the increased min profit, or just
+  coincidence. Keep watching.
+
+#### Next Thing(s) to Try
+* Only increase the min profit once, after the fourth loss, not for each
+  successive loss
+
+### 2021-07-21:
+#### Performance
+
+* Opening Account Value: $65,205.74
 
 * Total: $ (%)
   * AAPL ($):

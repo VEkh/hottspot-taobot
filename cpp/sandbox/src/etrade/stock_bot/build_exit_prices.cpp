@@ -37,7 +37,7 @@ ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
 
       if (this->martingale_profit_multiplier > 1) {
         max_loss *= this->martingale_profit_multiplier;
-      } else if (loss_streak >= 4) {
+      } else if (loss_streak == 4) {
         max_loss *= 1.2;
       }
 

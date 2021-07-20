@@ -80,7 +80,7 @@ void ETrade::StockBot::open_position() {
         this->martingale_profit_multiplier *= 2;
         this->martingale_quantity_multiplier *= 0.5;
 
-        message += " Halving quantity.";
+        message += " Halving quantity, doubling the min profit.";
       }
 
       printf("%s\n", message.c_str());
