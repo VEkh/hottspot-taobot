@@ -6,6 +6,7 @@
 #include <map>      // std::map
 #include <ratio>    // std::nano
 #include <stdlib.h> // setnev, unsetenv
+#include <vector>   // std::vector
 
 namespace utils {
 namespace time_ {
@@ -28,15 +29,17 @@ unsigned long epoch(const char *duration = "seconds") {
   }
 }
 
-bool is_early_day() {
+template <typename Predicate>
+bool in_time_zone(const char *time_zone, Predicate fn) {
+  return in_time_zone(time_zone, &fn);
+}
+
+template <typename Predicate>
+bool in_time_zone(const char *time_zone, Predicate *fn) {
   const char *original_tz = getenv("TZ");
-  time_t local_now;
+  setenv("TZ", time_zone, 1);
 
-  setenv("TZ", "America/New_York", 1);
-  time(&local_now);
-  std::tm local_time = *std::localtime(&local_now);
-
-  const bool out = local_time.tm_hour < 11;
+  const bool out = (*fn)();
 
   if (original_tz) {
     setenv("TZ", original_tz, 1);
@@ -47,46 +50,57 @@ bool is_early_day() {
   return out;
 }
 
-bool is_end_of_day() {
-  const char *original_tz = getenv("TZ");
-  time_t local_now;
+bool is_at_least(const std::vector<int> time_parts) {
+  return in_time_zone("America/New_York", [&]() -> bool {
+    time_t local_now;
+    time(&local_now);
+    std::tm local_time = *std::localtime(&local_now);
 
-  setenv("TZ", "America/New_York", 1);
-  time(&local_now);
-  std::tm local_time = *std::localtime(&local_now);
+    if (time_parts.empty()) {
+      return false;
+    }
 
-  const bool out = local_time.tm_hour == 15 && local_time.tm_min == 59;
+    const int hours = time_parts[0];
+    const int minutes = time_parts.size() > 1 ? time_parts[1] : 0;
 
-  if (original_tz) {
-    setenv("TZ", original_tz, 1);
-  } else {
-    unsetenv("TZ");
-  }
+    bool out = local_time.tm_hour >= hours;
 
-  return out;
+    if (out && local_time.tm_hour == hours && minutes) {
+      out = local_time.tm_min >= minutes;
+    }
+
+    return out;
+  });
 }
 
-bool is_market_open() {
-  const char *original_tz = getenv("TZ");
-  time_t local_now;
+bool is_before(const std::vector<int> time_parts) {
+  return in_time_zone("America/New_York", [&]() -> bool {
+    if (time_parts.empty()) {
+      return false;
+    }
 
-  setenv("TZ", "America/New_York", 1);
-  time(&local_now);
-  std::tm local_time = *std::localtime(&local_now);
+    time_t local_now;
 
-  bool valid_hour = local_time.tm_hour >= 9 && local_time.tm_hour < 16;
-  bool valid_min = local_time.tm_hour == 9 ? local_time.tm_min >= 30 : true;
+    time(&local_now);
+    std::tm local_time = *std::localtime(&local_now);
 
-  const bool out = valid_hour && valid_min;
+    const int hours = time_parts[0];
+    const int minutes = time_parts.size() > 1 ? time_parts[1] : 0;
 
-  if (original_tz) {
-    setenv("TZ", original_tz, 1);
-  } else {
-    unsetenv("TZ");
-  }
+    bool out = local_time.tm_hour < hours;
 
-  return out;
+    if (!out && local_time.tm_hour == hours && minutes) {
+      out = local_time.tm_min < minutes;
+    }
+
+    return out;
+  });
 }
+
+bool is_early_day() { return is_before({11, 0}); }
+bool is_end_of_day() { return is_at_least({15, 59}) && is_before({16, 0}); }
+bool is_market_open() { return is_at_least({9, 30}) && is_before({16, 0}); }
+
 } // namespace time_
 } // namespace utils
 
