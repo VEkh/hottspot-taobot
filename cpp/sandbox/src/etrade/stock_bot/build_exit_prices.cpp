@@ -13,6 +13,7 @@
 #include "build_closed_positions_stats.cpp" // build_closed_positions_stats
 #include "lib/utils/time.cpp"               // utils::time_
 #include "max_losing_streak_loss.cpp"       // max_losing_streak_loss
+#include <math.h>                           // pow
 
 ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
   const double trailing_stop = 0.2;
@@ -35,9 +36,7 @@ ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
     if (loss_streak > 0) {
       max_loss = max_losing_streak_loss();
 
-      if (this->martingale_profit_multiplier > 1) {
-        max_loss *= this->martingale_profit_multiplier;
-      } else if (loss_streak == 4) {
+      if (loss_streak == 4) {
         max_loss *= 1.2;
       }
 

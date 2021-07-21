@@ -45,23 +45,6 @@ ETrade::StockBot::build_closed_positions_stats() {
     }
   }
 
-  std::cout << fmt.yellow << fmt.bold;
-  std::cout << "Profits: [";
-
-  for (int i = 0; i < l; i++) {
-    const position_t position = this->closed_positions[i];
-
-    if (i != 0) {
-      std::cout << ", ";
-    }
-
-    std::cout << position.close_order.profit << ":"
-              << position.close_order.quantity;
-  }
-
-  std::cout << "]" << std::endl;
-  std::cout << fmt.reset;
-
   return {
       .results = results,
       .loss_streak = loss_streak,

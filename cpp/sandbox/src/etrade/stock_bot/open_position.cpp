@@ -12,13 +12,14 @@
  */
 #include "stock_bot.h"
 
-#include "compute_normalized_quantity.cpp" // compute_normalized_quantity
-#include "etrade/constants.cpp"            // ETrade::constants
-#include "lib/curl_client/curl_client.h"   // CurlClient
-#include "should_open_position.cpp"        // should_open_position
-#include <iostream>                        // std::cout, std::endl
-#include <stdio.h>                         // printf
-#include <string>                          // std::string
+#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
+#include "compute_normalized_quantity.cpp"  // compute_normalized_quantity
+#include "etrade/constants.cpp"             // ETrade::constants
+#include "lib/curl_client/curl_client.h"    // CurlClient
+#include "should_open_position.cpp"         // should_open_position
+#include <iostream>                         // std::cout, std::endl
+#include <stdio.h>                          // printf
+#include <string>                           // std::string
 
 void ETrade::StockBot::open_position() {
   if (!should_open_position()) {
@@ -77,8 +78,9 @@ void ETrade::StockBot::open_position() {
       std::string message = "Insufficient Funds Error 😓 (3010).";
 
       if (this->FLAG_MARTINGALE) {
-        this->martingale_profit_multiplier *= 2;
-        this->martingale_quantity_multiplier *= 0.5;
+        closed_positions_stats_t stats = build_closed_positions_stats();
+
+        this->insufficient_funds_at_loss = stats.loss_streak;
 
         message += " Halving quantity, doubling the min profit.";
       }

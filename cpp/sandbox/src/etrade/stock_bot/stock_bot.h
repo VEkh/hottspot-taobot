@@ -53,8 +53,7 @@ private:
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
   exit_prices_t exit_prices;
-  int martingale_profit_multiplier = 1;
-  int martingale_quantity_multiplier = 1;
+  int insufficient_funds_at_loss = 0;
   int quantity_mulitiplier;
   int quantity;
   json placed_orders;
@@ -77,6 +76,7 @@ private:
   double profit_percentage(const order_t *);
 
   int compute_normalized_quantity();
+  int martingale_quantity_multiplier();
 
   closed_positions_stats_t build_closed_positions_stats();
 

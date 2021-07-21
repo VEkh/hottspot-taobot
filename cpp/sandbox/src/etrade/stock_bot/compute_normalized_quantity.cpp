@@ -1,17 +1,14 @@
 #ifndef ETRADE__STOCK_BOT_compute_normalized_quantity
 #define ETRADE__STOCK_BOT_compute_normalized_quantity
 
-#include "etrade/deps.cpp"           // json
-#include "fetch_account_balance.cpp" // fetch_account_balance
-#include "stock_bot.h"               // ETrade::StockBot
-#include <math.h>                    // ceil, pow
+#include "fetch_account_balance.cpp"          // fetch_account_balance
+#include "martingale_quantity_multiplier.cpp" // martingale_quantity_multiplier
+#include "stock_bot.h"                        // ETrade::StockBot
+#include <math.h>                             // ceil, pow
 
 int ETrade::StockBot::compute_normalized_quantity() {
-  int final_multiplier = this->quantity_mulitiplier;
-
-  if (this->FLAG_MARTINGALE) {
-    final_multiplier *= this->martingale_quantity_multiplier;
-  }
+  int final_multiplier =
+      this->quantity_mulitiplier * martingale_quantity_multiplier();
 
   if (!this->FLAG_NORMALIZE_QUANTITY) {
     return final_multiplier;
