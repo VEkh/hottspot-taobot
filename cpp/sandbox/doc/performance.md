@@ -3042,6 +3042,49 @@ Conclusions:
 
 * Opening Account Value: $65,205.74
 
+* Total: -$157.98 (-0.24%)
+  * AAPL (-$5.41):
+  * AMD ($31.67):
+  * BA ($0.40):
+  * FB (-$28.30):
+  * MSFT ($23.96):
+  * SNAP ($72.20):
+  * TSLA (-$284.51):
+  * VIAC ($32.01):
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 19W 18L
+* Total Return: -$1,472.22
+
+#### Remarks
+* 5/8 stocks won
+* Both FB and TSLA experienced 7+ loss losing streaks
+* FB got luck and recovered the loss. TSLA didn't and ended up majorly down.
+* A couple things are becoming apparent:
+  * As losses stack up, the max loss naturally increases.
+    * This makes future wins harder and harder.
+    * As rewarding as it is to see losses recovered, I don't think StockBot
+      should max losses.
+    * Instead it can chase the average of all losses in the losing streak so
+      that it's not chasing ever-increasing losses
+  * At some point you may want to entirely disallow quantity multipliers that
+    exceed 4 or 5.
+    * If you cut your losses by refusing to double down past that threshold,
+      you'll still end up down in some cases, but you eliminate catastrophic
+      losses
+
+#### Next Thing(s) to Try
+* First start by chasing the average losing streak loss instead of the max loss.
+* Then if we still end up with catastrophic losses, we'll limit the exponential
+  quantity increase to a finite number of losses.
+
+### 2021-07-22:
+#### Performance
+
+* Opening Account Value: $65,048.03
+
 * Total: $ (%)
   * AAPL ($):
   * AMD ($):

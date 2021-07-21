@@ -1,5 +1,5 @@
-#ifndef ETRADE__STOCK_BOT_max_losing_streak_loss
-#define ETRADE__STOCK_BOT_max_losing_streak_loss
+#ifndef ETRADE__STOCK_BOT_average_losing_streak_loss
+#define ETRADE__STOCK_BOT_average_losing_streak_loss
 
 /*
  * ETrade::StockBot
@@ -9,23 +9,22 @@
 #include "stock_bot.h"
 
 #include "order_win_result.cpp" // order_win_result
-#include <algorithm>            // std::min
-#include <math.h>               // INFINITY
 #include <vector>               // std::vector
 
-double ETrade::StockBot::max_losing_streak_loss() {
-  double max_loss = INFINITY;
-
+double ETrade::StockBot::average_losing_streak_loss() {
   std::vector<position_t>::reverse_iterator it;
+  double sum = 0;
+  int count = 0;
 
   for (it = this->closed_positions.rbegin();
        it != this->closed_positions.rend() &&
        order_win_result(&(it->close_order)) == order_win_result_t::LOSS;
        it++) {
-    max_loss = std::min(max_loss, it->close_order.profit);
+    sum += it->close_order.profit;
+    count++;
   }
 
-  return max_loss;
+  return count ? sum / count : 0;
 }
 
 #endif
