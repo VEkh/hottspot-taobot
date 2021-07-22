@@ -3085,6 +3085,45 @@ Conclusions:
 
 * Opening Account Value: $65,048.03
 
+* Total: +$10.51 (+0.02%)
+  * AAPL ($16.18) => Max Loss Streak: 4
+  * AMD ($37.08) => Max Loss Streak: 6
+  * BA ($2.51) => Max Loss Streak: 6
+  * FB ($20.71) => Max Loss Streak: 6
+  * MSFT (-$8.30) => Max Loss Streak: 5
+  * SNAP ($77.56) => Max Loss Streak: 5
+  * TSLA ($23.69) => Max Loss Streak: 5
+  * VIAC (-$158.93) => Max Loss Streak: 11
+
+* Profitable Days in a Row: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 20W 18L
+* Week's Return: -$2,251.44
+* Total Return: -$1,461.71
+
+#### Remarks
+* 6/8 stocks won 🎉
+* VIAC got caught in an ELEVEN loss losing streak.
+* I think it's time to restrict the Martingale multiplier to 4 or 5 losses
+  * Anything over this places the stock at an insurmountable loss, especially
+    if its win doesn't make back the loss.
+  * I'm not sure how much this will eat into each stock's profits, but we'll
+    see.
+  * I do suspect, however, that it will avoid catastrophic losses.
+* Most securites won sizeably. This increases my faith in the idea that
+  Martingale doesn't need to chase the largest losses.
+  * There were instances where the redemptive win far exceeded prior losses.
+
+#### Next Thing(s) to Try
+* Restrict the Martingale multiplier to 4 or 5 losses
+* Finalize not chasing largest loss
+
+### 2021-07-23:
+#### Performance
+
+* Opening Account Value: $65,059.65
+
 * Total: $ (%)
   * AAPL ($):
   * AMD ($):

@@ -1,21 +1,34 @@
-#include <stdio.h> // printf
+#include <locale.h> // setlocale
+#include <stdio.h>  // printf
+#include <vector>   // std::vector
 
-double running_total() {
-  double profits[] = {
-      18.43,  5.40,   12.02,    7.14,    -5.72,   12.99,   13.93,   -4.55,
-      35.91,  -2.00,  -7.11,    -11.66,  16.23,   38.13,   -142.60, 5.20,
-      -2.22,  -13.92, -16.29,   -2.10,   1.92,    -9.61,   -10.25,  -2.62,
-      5.27,   32.46,  59.86,    167.31,  -50.05,  -202.92, 155.66,  173.43,
-      247.97, 264.09, -1505.21, -598.76, -157.98,
-  };
-
+double running_total(const std::vector<double> &returns) {
   double sum = 0;
 
-  for (double n : profits) {
+  for (double n : returns) {
     sum += n;
   }
 
   return sum;
 }
 
-int main() { printf("Running Total: %.2f\n", running_total()); }
+int main() {
+  std::vector<double> all_returns = {
+      18.43,  5.40,   12.02,    7.14,    -5.72,   12.99,   13.93,   -4.55,
+      35.91,  -2.00,  -7.11,    -11.66,  16.23,   38.13,   -142.60, 5.20,
+      -2.22,  -13.92, -16.29,   -2.10,   1.92,    -9.61,   -10.25,  -2.62,
+      5.27,   32.46,  59.86,    167.31,  -50.05,  -202.92, 155.66,  173.43,
+      247.97, 264.09, -1505.21, -598.76, -157.98, 10.51,
+  };
+
+  std::vector<double> weeks_returns = {
+      -1505.21,
+      -598.76,
+      -157.98,
+      10.51,
+  };
+
+  setlocale(LC_NUMERIC, "");
+  printf("Week's Return: %+'.2f\n", running_total(weeks_returns));
+  printf("Total Return: %+'.2f\n", running_total(all_returns));
+}
