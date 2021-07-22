@@ -71,7 +71,6 @@ private:
   bool should_open_position();
   bool should_terminate();
 
-  double average_losing_streak_loss();
   double compute_min_profit_price_range_ratio(const double);
   double profit_percentage(const order_t *);
 
