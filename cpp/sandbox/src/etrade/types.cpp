@@ -40,8 +40,10 @@ struct account_balance_t {
 };
 
 struct closed_positions_stats_t {
-  std::map<order_win_result_t, int> results;
+  int longest_loss_streak = 0;
+  int longest_win_streak = 0;
   int loss_streak = 0;
+  std::map<order_win_result_t, int> results;
   double total_profit;
   int win_streak = 0;
 };

@@ -51,8 +51,11 @@ void ETrade::StockBot::log_closed_positions() {
          closed_positions_results[order_win_result_t::LOSS],
          closed_positions_results[order_win_result_t::TIE], total_count);
 
-  printf("Win Streak: %d • Loss Streak: %d\n", stats.win_streak,
-         stats.loss_streak);
+  printf("Loss Streak => Current: %d • Longest: %d\n", stats.loss_streak,
+         stats.longest_loss_streak);
+
+  printf("Win Streak  => Current: %d • Longest: %d\n", stats.win_streak,
+         stats.longest_win_streak);
 
   printf("Win %%: %.2f • Total Profit: $%+'.2f\n", win_percentage,
          stats.total_profit);

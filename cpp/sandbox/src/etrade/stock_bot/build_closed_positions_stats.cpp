@@ -10,6 +10,7 @@
 #include "stock_bot.h"
 
 #include "order_win_result.cpp" // order_win_result
+#include <algorithm>            // std::max
 #include <map>                  // std::map
 
 ETrade::StockBot::closed_positions_stats_t
@@ -27,6 +28,15 @@ ETrade::StockBot::build_closed_positions_stats() {
   int loss_streak = 0;
   int win_streak = 0;
 
+  order_win_result_t current_streak_type = order_win_result_t::WIN;
+
+  int current_streak_count = 0;
+
+  std::map<order_win_result_t, int> max_streaks = {
+      {order_win_result_t::LOSS, 0},
+      {order_win_result_t::WIN, 0},
+  };
+
   for (int i = l - 1; i > -1; i--) {
     const position_t position = this->closed_positions[i];
     const order_win_result_t result = order_win_result(&(position.close_order));
@@ -43,11 +53,26 @@ ETrade::StockBot::build_closed_positions_stats() {
     } else if (result == order_win_result_t::LOSS && !loss_streak_broken) {
       loss_streak++;
     }
+
+    if (result == current_streak_type) {
+      current_streak_count++;
+
+      max_streaks[current_streak_type] =
+          std::max(max_streaks[current_streak_type], current_streak_count);
+    } else {
+      max_streaks[current_streak_type] =
+          std::max(max_streaks[current_streak_type], current_streak_count);
+
+      current_streak_type = result;
+      current_streak_count = 1;
+    }
   }
 
   return {
-      .results = results,
+      .longest_loss_streak = max_streaks[order_win_result_t::LOSS],
+      .longest_win_streak = max_streaks[order_win_result_t::WIN],
       .loss_streak = loss_streak,
+      .results = results,
       .total_profit = total_profit,
       .win_streak = win_streak,
   };
