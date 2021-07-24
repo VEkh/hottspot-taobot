@@ -47,9 +47,9 @@ void ETrade::StockBot::log_closed_positions() {
 
   std::cout << fmt.bold << fmt.magenta;
 
-  printf("Wins: %d • Losses: %d • Ties: %d • Total: %d\n", win_count,
-         closed_positions_results[order_win_result_t::LOSS],
-         closed_positions_results[order_win_result_t::TIE], total_count);
+  printf("Wins: %d (%.2f%%) • Losses: %d • Total: %d\n", win_count,
+         win_percentage, closed_positions_results[order_win_result_t::LOSS],
+         total_count);
 
   printf("Loss Streak => Current: %d • Longest: %d\n", stats.loss_streak,
          stats.longest_loss_streak);
@@ -57,8 +57,7 @@ void ETrade::StockBot::log_closed_positions() {
   printf("Win Streak  => Current: %d • Longest: %d\n", stats.win_streak,
          stats.longest_win_streak);
 
-  printf("Win %%: %.2f • Total Profit: $%+'.2f\n", win_percentage,
-         stats.total_profit);
+  printf("Total Profit: %+'.2f\n", stats.total_profit);
 
   std::cout << fmt.reset << std::endl;
 }
