@@ -25,6 +25,7 @@ private:
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
   using order_win_result_t = ETrade::t::order_win_result_t;
+  using order_win_result_streak_t = ETrade::t::order_win_result_streak_t;
   using position_t = ETrade::t::position_t;
   using quote_t = ETrade::t::quote_t;
 

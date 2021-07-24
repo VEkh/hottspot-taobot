@@ -39,13 +39,17 @@ struct account_balance_t {
   double day_trading_margin_buying_power;
 };
 
+struct order_win_result_streak_t {
+  std::map<int, int> counts;
+  int current;
+  int longest;
+};
+
 struct closed_positions_stats_t {
-  int longest_loss_streak = 0;
-  int longest_win_streak = 0;
-  int loss_streak = 0;
+  order_win_result_streak_t loss_streaks;
   std::map<order_win_result_t, int> results;
   double total_profit;
-  int win_streak = 0;
+  order_win_result_streak_t win_streaks;
 };
 
 struct exit_prices_t {

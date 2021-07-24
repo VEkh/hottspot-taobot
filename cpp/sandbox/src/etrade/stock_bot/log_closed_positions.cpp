@@ -13,7 +13,7 @@
 #include "build_closed_positions_stats.cpp" // build_closed_positions_stats
 #include <iostream>                         // std::cout, std::endl
 #include <map>                              // std::map
-#include <stdio.h>                          // printf
+#include <stdio.h>                          // printf, puts
 
 void ETrade::StockBot::log_closed_positions() {
   closed_positions_stats_t stats = build_closed_positions_stats();
@@ -24,12 +24,42 @@ void ETrade::StockBot::log_closed_positions() {
   double win_percentage =
       !win_count ? 0 : (win_count / (double)total_count) * 100;
 
+  void (*print_counts)(std::map<int, int> &
+                       counts) = [](std::map<int, int> &counts) -> void {
+    std::map<int, int>::iterator it;
+
+    printf("Counts: {");
+
+    for (it = counts.begin(); it != counts.end(); it++) {
+      if (it != counts.begin()) {
+        printf(", ");
+      }
+
+      printf("%d: %d", it->first, it->second);
+    }
+
+    printf("}");
+  };
+
   std::cout << fmt.bold << fmt.magenta << fmt.underline;
   std::cout << "📕 Closed Positions" << std::endl;
-  std::cout << fmt.reset;
+  std::cout << fmt.reset << fmt.bold << fmt.magenta;
 
-  std::cout << fmt.yellow << fmt.bold;
-  std::cout << "Profits: [";
+  printf("Wins: %d (%.2f%%) • Losses: %d • Total: %d\n", win_count,
+         win_percentage, closed_positions_results[order_win_result_t::LOSS],
+         total_count);
+
+  printf("Loss Streak => Current: %d • Longest: %d • ",
+         stats.loss_streaks.current, stats.loss_streaks.longest);
+  print_counts(stats.loss_streaks.counts);
+  puts("");
+
+  printf("Win  Streak => Current: %d • Longest: %d • ",
+         stats.win_streaks.current, stats.win_streaks.longest);
+  print_counts(stats.win_streaks.counts);
+  puts("\n");
+
+  printf("Profits: [");
 
   for (int i = 0, l = this->closed_positions.size(); i < l; i++) {
     const position_t position = this->closed_positions[i];
@@ -42,24 +72,11 @@ void ETrade::StockBot::log_closed_positions() {
            position.close_order.quantity);
   }
 
-  std::cout << "]" << std::endl;
-  std::cout << fmt.reset;
-
-  std::cout << fmt.bold << fmt.magenta;
-
-  printf("Wins: %d (%.2f%%) • Losses: %d • Total: %d\n", win_count,
-         win_percentage, closed_positions_results[order_win_result_t::LOSS],
-         total_count);
-
-  printf("Loss Streak => Current: %d • Longest: %d\n", stats.loss_streak,
-         stats.longest_loss_streak);
-
-  printf("Win Streak  => Current: %d • Longest: %d\n", stats.win_streak,
-         stats.longest_win_streak);
+  puts("]");
 
   printf("Total Profit: %+'.2f\n", stats.total_profit);
 
-  std::cout << fmt.reset << std::endl;
+  std::cout << fmt.reset;
 }
 
 #endif

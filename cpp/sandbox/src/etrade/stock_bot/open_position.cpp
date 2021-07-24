@@ -80,7 +80,7 @@ void ETrade::StockBot::open_position() {
       if (this->FLAG_MARTINGALE) {
         closed_positions_stats_t stats = build_closed_positions_stats();
 
-        this->insufficient_funds_at_loss = stats.loss_streak;
+        this->insufficient_funds_at_loss = stats.loss_streaks.current;
 
         message += " Halving quantity, doubling the min profit.";
       }

@@ -42,23 +42,21 @@ void ETrade::StockBot::watch() {
   }
 
   while (!should_terminate()) {
-    log_account_balance();
-
     fetch_quote();
 
     log_quote();
+    log_account_balance();
     set_and_log_buy_sell_ratios();
     set_average_tick_price_delta();
     log_average_tick_price_delta();
     log_position();
+    log_closed_positions();
 
     cancel_stale_open_order();
     fetch_orders();
     set_position_status();
     open_position();
     set_open_position_prices();
-
-    log_closed_positions();
 
     close_position();
     log_position_results();
