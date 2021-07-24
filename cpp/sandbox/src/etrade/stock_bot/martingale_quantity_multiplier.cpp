@@ -17,12 +17,11 @@ int ETrade::StockBot::martingale_quantity_multiplier() {
   }
 
   const closed_positions_stats_t stats = build_closed_positions_stats();
-  const int max_allowed_losses = 5;
   const int adjusted_loss_streak = this->insufficient_funds_at_loss
                                        ? this->insufficient_funds_at_loss - 1
                                        : stats.loss_streak;
 
-  return pow(2, adjusted_loss_streak % max_allowed_losses);
+  return pow(2, adjusted_loss_streak % this->MAX_ALLOWABLE_LOSS_STREAK);
 }
 
 #endif

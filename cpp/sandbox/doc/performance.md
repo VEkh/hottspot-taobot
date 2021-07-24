@@ -3124,6 +3124,52 @@ Conclusions:
 
 * Opening Account Value: $65,059.65
 
+* Total: -$39.94 (-0.06%)
+  * AAPL (-$9.66) => Max Loss Streak: 7
+  * AMD (-$9.16) => Max Loss Streak: 5
+  * BA ($-35.51) => Max Loss Streak: 14
+  * FB (-$1.52) => Max Loss Streak: 5
+  * MSFT ($9.66) => Max Loss Streak: 4
+  * SNAP ($18.28) => Max Loss Streak: 1
+  * SQ (-$32.86) => Max Loss Streak: 5
+  * TSLA ($18.66) => Max Loss Streak: 2
+  * TWTR ($21.23) => Max Loss Streak: 4
+  * VIAC (-$19.07) => Max Loss Streak: 8
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 20W 19L
+* Week's Return: -$2,291.38
+* Total Return: -$1,501.65
+
+#### Remarks
+* 4/10 stocks won
+* Though StockBot ended the day down, there were no abysmal losses
+* Also, earnings were as high as $60+.
+* Capping the max allowable losses helped avoid these losses, but it exposes some trade-offs.
+* If the max allowable loss streak is too small, losses will be cut _and_ the
+  loss streak will occur more often.
+* Having a larger allowable loss streak, means they will occur less frequently,
+  but the sustained losses will be larger.
+* I'll bump up the max allowable loss from 5 to 6.
+* What is apparent is that every one stock whose max loss streak was equal to
+  the max allowable loss streak, lost.
+* I'll also add that I encountered a few rate limit errors. Each one of these
+  lasted upwards of one to two minutes and in some cases forced a much delayed
+  entry which contributed to losses as well.
+  * It's possible that taking out the extra stocks will help avoid some
+    avoidable losses.
+
+#### Next Thing(s) to Try
+* Remove one or both extra stocks. 10 is definitely too many. 9...unsure.
+* Increase the max allowable loss streak from 5 to 6.
+
+### 2021-07-26:
+#### Performance
+
+* Opening Account Value: $65,019.71
+
 * Total: $ (%)
   * AAPL ($):
   * AMD ($):

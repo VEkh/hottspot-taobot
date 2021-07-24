@@ -17,13 +17,15 @@ int ETrade::StockBot::compute_normalized_quantity() {
   this->account_balance = fetch_account_balance();
 
   const double current_price = this->quotes.back().current_price;
+  const double max_allowable_margin_ratio = 2.0 / 3.0;
   const int margin_multiplier = 4;
-  const int max_allowed_losses = 8;
 
   const double max_order_price =
-      (0.8 * this->account_balance.balance * margin_multiplier);
+      (max_allowable_margin_ratio * this->account_balance.balance *
+       margin_multiplier);
 
-  const double basis_price = max_order_price / pow(2, max_allowed_losses);
+  const double basis_price =
+      max_order_price / pow(2, this->MAX_ALLOWABLE_LOSS_STREAK);
   const double normalized_quantity = ceil(basis_price / current_price);
 
   return final_multiplier * normalized_quantity;
