@@ -2838,7 +2838,7 @@ Conclusions:
 * This demonstrates something important: an out of control loss streak (NINE
   😱) IS, in fact, possible.
 * As such I need a contingency plan.
-* For now, it will be to half the martingale multiplier and keep trying until
+* For now, it will be to halve the martingale multiplier and keep trying until
   the first win.
 * This will lead to a few outcomes:
   1. It wins moderately on the next trade and covers only about half the loss
@@ -3029,7 +3029,7 @@ Conclusions:
   in some cases (VIAC) but put what would have been an attainable profit out of
   reach for SNAP, which made it lose spectacularly.
 * Remember, large profit expectations lead to low win rates
-* On the bight side, StockBot didn't encounter andy IFEs.
+* On the bright side, StockBot didn't encounter andy IFEs.
 * This could have been because of the increased min profit, or just
   coincidence. Keep watching.
 
@@ -3061,12 +3061,12 @@ Conclusions:
 #### Remarks
 * 5/8 stocks won
 * Both FB and TSLA experienced 7+ loss losing streaks
-* FB got luck and recovered the loss. TSLA didn't and ended up majorly down.
+* FB got lucky and recovered the loss. TSLA didn't and ended up majorly down.
 * A couple things are becoming apparent:
   * As losses stack up, the max loss naturally increases.
     * This makes future wins harder and harder.
     * As rewarding as it is to see losses recovered, I don't think StockBot
-      should max losses.
+      should chase max losses.
     * Instead it can chase the average of all losses in the losing streak so
       that it's not chasing ever-increasing losses
   * At some point you may want to entirely disallow quantity multipliers that
@@ -3153,7 +3153,7 @@ Conclusions:
 * Having a larger allowable loss streak, means they will occur less frequently,
   but the sustained losses will be larger.
 * I'll bump up the max allowable loss from 5 to 6.
-* What is apparent is that every one stock whose max loss streak was equal to
+* What is apparent is that every stock whose max loss streak was equal to
   the max allowable loss streak, lost.
 * I'll also add that I encountered a few rate limit errors. Each one of these
   lasted upwards of one to two minutes and in some cases forced a much delayed
@@ -3169,6 +3169,74 @@ Conclusions:
 #### Performance
 
 * Opening Account Value: $65,019.71
+
+* Total: -$166.16 (-0.03%)
+  * AAPL ($17.04)
+    Wins: 7 (43.75%) • Losses: 9 • Total: 16
+    Loss Streak => Current: 0 • Longest: 3
+    Win  Streak => Current: 1 • Longest: 3
+
+  * AMD ($10.52):
+    Wins: 13 (52.00%) • Losses: 12 • Total: 25
+    Loss Streak => Current: 0 • Longest: 6
+    Win  Streak => Current: 1 • Longest: 4
+
+  * BA ($7.91):
+    Wins: 23 (51.11%) • Losses: 22 • Total: 45
+    Loss Streak => Current: 1 • Longest: 5
+    Win  Streak => Current: 0 • Longest: 4
+
+  * FB ($54.25):
+    Wins: 18 (56.25%) • Losses: 14 • Total: 32
+    Loss Streak => Current: 0 • Longest: 5
+    Win  Streak => Current: 1 • Longest: 8
+
+  * MSFT ($11.35):
+    Wins: 22 (61.11%) • Losses: 14 • Total: 36
+    Loss Streak => Current: 1 • Longest: 2
+    Win  Streak => Current: 0 • Longest: 4
+
+  * SNAP ($40.58):
+    Wins: 13 (48.15%) • Losses: 14 • Total: 27
+    Loss Streak => Current: 0 • Longest: 3
+    Win  Streak => Current: 2 • Longest: 2
+
+  * TSLA ($27.50):
+    Wins: 11 (60.00%) • Losses: 7 • Total: 18
+    Loss Streak => Current: 1 • Longest: 2
+    Win  Streak => Current: 0 • Longest: 4
+
+  * VIAC (-$335.41):
+    Wins: 17 (30.91%) • Losses: 38 • Total: 55
+    Loss Streak => Current: 3 • Longest: 8
+    Win  Streak => Current: 0 • Longest: 3
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 20W 20L
+* Week's Return: -$166.16
+* Total Return: -$1,667.81
+
+#### Remarks
+* VIAC suffered two 8-loss losing streaks
+* It got stuck in wave patterns that didn't allow it enough time to win.
+  * Maybe increasing its min profit and max loss thresholds will decrease this
+    tendency.
+* 8-losses is too high a max allowable loss. It incurs too much loss.
+  * For now, I'll remove the max allowable loss streak, until I determine that
+    no max is best, or I get a better sense of what a typical longest loss
+    streak is.
+
+
+#### Next Thing(s) to Try
+* Increase max loss to 20x one second variance
+* Remove max loss streak cap
+
+### 2021-07-26:
+#### Performance
+
+* Opening Account Value: $64,854.01
 
 * Total: $ (%)
   * AAPL ($):

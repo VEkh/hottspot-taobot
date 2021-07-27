@@ -33,7 +33,6 @@ private:
   const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.35;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
-  const int MAX_ALLOWABLE_LOSS_STREAK = 8;
 
   bool FLAG_MARTINGALE = false;
   bool FLAG_NORMALIZE_QUANTITY = false;
