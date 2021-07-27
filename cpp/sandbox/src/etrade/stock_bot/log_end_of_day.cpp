@@ -8,13 +8,16 @@
  */
 #include "stock_bot.h"
 
-#include "lib/utils/time.cpp" // utils::time_
-#include <iostream>           // std::cout, std::endl
+#include "lib/utils/time.cpp"       // utils::time_
+#include "log_closed_positions.cpp" // log_closed_positions
+#include <iostream>                 // std::cout, std::endl
 
 void ETrade::StockBot::log_end_of_day() {
   std::cout << fmt.bold << fmt.green << std::endl;
   std::cout << "🎊 The day's over! Hope you made some guap 🤑" << std::endl;
   std::cout << fmt.reset;
+
+  log_position_results();
 }
 
 #endif
