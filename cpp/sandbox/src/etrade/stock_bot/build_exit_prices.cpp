@@ -13,9 +13,8 @@
 #include "lib/utils/time.cpp" // utils::time_
 
 ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
-  const double max_loss_multiplier = 15.0;
-  const double trailing_stop = 0.2;
-  const double secured_profit_ratio = 1 - trailing_stop;
+  const double max_loss_multiplier = 20.0;
+  const double secured_profit_ratio = 0.8;
 
   const double max_loss =
       -1 * max_loss_multiplier * this->average_tick_price_delta;
