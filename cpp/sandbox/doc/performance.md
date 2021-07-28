@@ -3233,20 +3233,51 @@ Conclusions:
 * Increase max loss to 20x one second variance
 * Remove max loss streak cap
 
-### 2021-07-26:
+### 2021-07-27:
 #### Performance
 
 * Opening Account Value: $64,854.01
 
+* Total: +$101.66 (+0.16%)
+  * AAPL (+$11.15)
+  * AMD  (+$26.58)
+  * BA   (-$8.54)
+  * FB   (+$6.68)
+  * MSFT (+$7.60)
+  * SNAP (+$61.15)
+  * TSLA (+$60.00)
+  * VIAC (-$62.97)
+
+* Profitable Days in a Row: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 21W 20L
+* Week's Return: -64.50
+* Total Return: -1,566.15
+
+#### Remarks
+* 6/8 won 🎈
+* Halfway through the day I messed up the streak algorithm and it messed up
+  some loss multipliers.
+* I think I finally have it right so today I can actually start fully correctly
+  counting win/loss streaks
+
+#### Next Thing(s) to Try
+
+### 2021-07-28:
+#### Performance
+
+* Opening Account Value: $64,956.39
+
 * Total: $ (%)
-  * AAPL ($):
-  * AMD ($):
-  * BA ($):
-  * FB ($):
-  * MSFT ($):
-  * SNAP ($):
-  * TSLA ($):
-  * VIAC ($):
+  * AAPL ($)
+  * AMD  ($)
+  * BA   ($)
+  * FB   ($)
+  * MSFT ($)
+  * SNAP ($)
+  * TSLA ($)
+  * VIAC ($)
 
 * Profitable Days in a Row:
 

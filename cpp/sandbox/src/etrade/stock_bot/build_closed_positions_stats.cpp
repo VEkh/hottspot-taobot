@@ -25,9 +25,11 @@ ETrade::StockBot::build_closed_positions_stats() {
   bool loss_streak_broken = false;
   bool win_streak_broken = false;
   double total_profit = 0.00;
+
   int l = this->closed_positions.size();
 
-  order_win_result_t current_streak_type;
+  int loss_streak_count = 0;
+  int win_streak_count = 0;
 
   int current_streak_count = 0;
 
@@ -44,43 +46,55 @@ ETrade::StockBot::build_closed_positions_stats() {
 
   for (int i = l - 1; i > -1; i--) {
     const position_t position = this->closed_positions[i];
+    const position_t *next_position_ptr =
+        i == 0 ? nullptr : &(this->closed_positions[i - 1]);
     const order_win_result_t result = order_win_result(&(position.close_order));
+
     results[result]++;
     total_profit += position.close_order.profit * position.close_order.quantity;
 
-    loss_streak_broken =
-        loss_streak_broken || result == order_win_result_t::WIN;
+    if (result == order_win_result_t::WIN) {
+      loss_streak_broken = true;
+      loss_streak_count = 0;
+      win_streak_count++;
 
-    win_streak_broken = win_streak_broken || result == order_win_result_t::LOSS;
+      if (!win_streak_broken) {
+        streaks[order_win_result_t::WIN].current++;
+      }
+    } else {
+      loss_streak_count++;
+      win_streak_broken = true;
+      win_streak_count = 0;
 
-    if (result == order_win_result_t::WIN && !win_streak_broken) {
-      streaks[order_win_result_t::WIN].current++;
-    } else if (result == order_win_result_t::LOSS && !loss_streak_broken) {
-      streaks[order_win_result_t::LOSS].current++;
+      if (!loss_streak_broken) {
+        streaks[order_win_result_t::LOSS].current++;
+      }
     }
 
-    if (i == l - 1) {
-      current_streak_type = result;
-    }
-
-    if (result == current_streak_type) {
-      current_streak_count++;
-    }
-
-    streaks[current_streak_type].longest =
-        std::max(streaks[current_streak_type].longest, current_streak_count);
-
-    if (result != current_streak_type || i == 0) {
+    if (loss_streak_count &&
+        (!next_position_ptr ||
+         order_win_result(&(next_position_ptr->close_order)) ==
+             order_win_result_t::WIN)) {
       int streak_count =
-          streaks[current_streak_type].counts[current_streak_count];
+          streaks[order_win_result_t::LOSS].counts[loss_streak_count];
 
-      streaks[current_streak_type].counts[current_streak_count] =
+      streaks[order_win_result_t::LOSS].counts[loss_streak_count] =
           streak_count ? streak_count + 1 : 1;
-    }
 
-    if (result != current_streak_type) {
-      current_streak_type = result;
-      current_streak_count = 1;
+      streaks[order_win_result_t::LOSS].longest = std::max(
+          streaks[order_win_result_t::LOSS].longest, loss_streak_count);
+    } else if (win_streak_count &&
+               (!next_position_ptr ||
+                order_win_result(&(next_position_ptr->close_order)) ==
+                    order_win_result_t::LOSS)) {
+      int streak_count =
+          streaks[order_win_result_t::WIN].counts[win_streak_count];
+
+      streaks[order_win_result_t::WIN].counts[win_streak_count] =
+          streak_count ? streak_count + 1 : 1;
+
+      streaks[order_win_result_t::WIN].longest =
+          std::max(streaks[order_win_result_t::WIN].longest, win_streak_count);
     }
   }
 
