@@ -3269,6 +3269,71 @@ Conclusions:
 
 * Opening Account Value: $64,956.39
 
+* Total: +$160.27 (+0.25%)
+  * AAPL (+$3.52)
+    Wins: 12 (41.38%) • Losses: 17 • Total: 29
+    Loss Streak => Current: 3 • Longest: 4 • Counts: {1: 1, 2: 4, 3: 2, 4: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 2: 2, 4: 1}
+
+  * AMD  (+$38.63)
+    Wins: 12 (60.00%) • Losses: 8 • Total: 20
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 4: 1}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 2, 2: 2, 3: 2}
+
+  * BA   (+$5.29)
+    Wins: 13 (50.00%) • Losses: 13 • Total: 26
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 5, 4: 2}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 4, 3: 3}
+
+  * FB   (+$9.14)
+    Wins: 6 (31.58%) • Losses: 13 • Total: 19
+    Loss Streak => Current: 2 • Longest: 3 • Counts: {1: 1, 2: 3, 3: 2}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 4, 2: 1}
+
+  * MSFT (+$1.66)
+    Wins: 11 (47.83%) • Losses: 12 • Total: 23
+    Loss Streak => Current: 2 • Longest: 4 • Counts: {1: 2, 2: 3, 4: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 3, 2: 1, 3: 2}
+
+  * SNAP (-$57.09)
+    Wins: 11 (39.29%) • Losses: 17 • Total: 28
+    Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 4, 2: 1, 3: 1, 8: 1}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 4, 2: 2, 3: 1}
+
+  * TSLA (+$92.50)
+    Wins: 6 (35.29%) • Losses: 11 • Total: 17
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 1, 4: 1, 6: 1}
+    Win  Streak => Current: 2 • Longest: 2 • Counts: {1: 3, 2: 2}
+
+  * VIAC (+$66.63)
+    Wins: 16 (43.24%) • Losses: 21 • Total: 37
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 4, 2: 1, 4: 1, 5: 1, 6: 1}
+    Win  Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 2: 3, 5: 1}
+
+* Profitable Days in a Row: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 22W 20L
+* Week's Return: +$95.77
+* Total Return: -$1,405.88
+
+#### Remarks
+* 7/8 stocks won 🎊
+* Almost got unlucky with both SNAP and TSLA, but TSLA came out big from a long
+  losing streak
+* It seems like the 20x the one-sec variance is holding well and perhaps
+  preventing obscene losing streaks. Maybe its just a string of good luck.
+* There were no IFEs
+
+#### Next Thing(s) to Try
+* Trade TWTR. It's the perfect candidate. This may cause rate limit errors so
+  wait until you can supervise to actually trade it.
+
+### 2021-07-29:
+#### Performance
+
+* Opening Account Value: $65,117.12
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

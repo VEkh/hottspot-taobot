@@ -8,6 +8,7 @@
  */
 #include "stock_bot.h"
 
+#include "await_market_open.cpp"            // await_market_open
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "close_position.cpp"               // close_position
 #include "fetch_orders.cpp"                 // fetch_orders
@@ -28,17 +29,11 @@
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
 #include <chrono>                           // std::chrono
-#include <iostream>                         // std::cout, std::endl
 #include <thread>                           // std::this_thread
 
 void ETrade::StockBot::watch() {
   while (!::utils::time_::is_market_open()) {
-    std::cout << fmt.yellow << fmt.bold;
-    std::cout << "Waiting for the market to open 😴" << std::endl;
-    std::cout << fmt.reset;
-
-    std::this_thread::sleep_for(
-        std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));
+    await_market_open();
   }
 
   while (!should_terminate()) {

@@ -89,6 +89,7 @@ private:
   std::map<int, std::map<const char *, double>>
   compute_moving_buy_sell_ratio_average(std::vector<int> &);
 
+  void await_market_open();
   void cancel_stale_open_order();
   void close_position();
   void fetch_orders();
