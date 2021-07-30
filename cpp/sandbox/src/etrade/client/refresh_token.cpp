@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_refresh_token
+#ifndef ETRADE__CLIENT_refresh_token
 #define ETRADE__CLIENT_refresh_token
 
 #include "client.h"        // ETrade::Client, client_config

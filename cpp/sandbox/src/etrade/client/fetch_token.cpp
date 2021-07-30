@@ -34,8 +34,14 @@ std::string ETrade::Client::fetch_token(std::string request_url) {
       [](const CurlClient &curl_client) -> bool {
         const std::string response_body = curl_client.response.body;
 
-        return std::regex_search(
-            response_body, std::regex("oauth_parameters_absent=oauth_nonce"));
+        if (std::regex_search(
+                response_body,
+                std::regex("oauth_parameters_absent=oauth_nonce"))) {
+          return true;
+        };
+
+        return std::regex_search(response_body,
+                                 std::regex("HTTP Status 401 – Unauthorized"));
       });
 
   const char *action = request_action(request_url);

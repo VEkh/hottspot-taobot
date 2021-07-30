@@ -3334,6 +3334,57 @@ Conclusions:
 
 * Opening Account Value: $65,117.12
 
+* Total: +$130.38 (+0.20%)
+  * AMD  (+$24.75)
+    Wins: 12 (54.55%) • Losses: 10 • Total: 22
+    Loss Streak => Current: 3 • Longest: 3 • Counts: {1: 3, 2: 2, 3: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 1, 3: 1, 4: 1}
+
+  * BA   (+$18.76)
+    Wins: 13 (40.63%) • Losses: 19 • Total: 32
+    Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 5, 2: 1, 3: 4}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 7, 3: 2}
+
+  * MSFT (-$ 6.53)
+    Wins: 5 (27.78%) • Losses: 13 • Total: 18
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 1, 3: 1, 4: 1, 5: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 3, 2: 1}
+
+  * SNAP (+$50.20)
+    Wins: 23 (60.53%) • Losses: 15 • Total: 38
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 2, 2: 4, 5: 1}
+    Win  Streak => Current: 5 • Longest: 6 • Counts: {1: 1, 2: 2, 3: 1, 4: 1, 5:1, 6: 1}
+
+  * TSLA (+$43.21)
+    Wins: 7 (43.75%) • Losses: 9 • Total: 16
+    Loss Streak => Current: 3 • Longest: 3 • Counts: {1: 1, 2: 1, 3: 2}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 4: 1}
+
+* Profitable Days in a Row: 3
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 23W 20L
+* Week's Return: +226.15
+* Total  Return: -1,275.50
+
+#### Remarks
+* 4/5 won 🎊
+* Only five of the typical eight stocks traded. I started StockBot before
+  leaving for Buffalo to handle my passport crisis 😅.
+* Some of stocks never ran because the pre-market refresh token request
+  faulted.
+* I need to increase its fault tolerance.
+  request. It's this request that keeps the token valid while we await the
+  market open.
+* Other than that very solid performance today.
+
+#### Next Thing(s) to Try
+
+### 2021-07-30:
+#### Performance
+
+* Opening Account Value: $65,247.71
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
@@ -3348,6 +3399,7 @@ Conclusions:
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss:
+* Week's Return:
 * Total Return:
 
 #### Remarks
