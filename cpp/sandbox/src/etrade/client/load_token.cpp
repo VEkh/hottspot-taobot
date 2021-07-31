@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_load_token
+#ifndef ETRADE__CLIENT_load_token
 #define ETRADE__CLIENT_load_token
 
 #include "client.h"                // ETrade::Client, tokens

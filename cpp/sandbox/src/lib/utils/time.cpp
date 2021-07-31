@@ -5,7 +5,7 @@
 #include <ctime>    // time, time_t, tm
 #include <map>      // std::map
 #include <ratio>    // std::nano
-#include <stdlib.h> // setnev, unsetenv
+#include <stdlib.h> // getenv, setenv, unsetenv
 #include <vector>   // std::vector
 
 namespace utils {

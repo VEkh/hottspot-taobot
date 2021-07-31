@@ -2,11 +2,13 @@
 
 mkdir -p ./build/
 
+app_path=$(realpath "$(dirname $0)/../../")
 sources=("etrade")
 
 for src in "${sources[@]}"
 do
   g++ \
+    -D"APP_PATH=\"$app_path\"" \
     -iquote. \
     -iquote./src \
     -std=c++17 \
