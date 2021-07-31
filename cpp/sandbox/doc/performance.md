@@ -3385,6 +3385,83 @@ Conclusions:
 
 * Opening Account Value: $65,247.71
 
+* Total: +$340.12 (+0.52%) (🔥 PR 🔥)
+  * AAPL (-$17.33)
+    Wins: 3 (50.00%) • Losses: 3 • Total: 6
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 1, 2: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 1, 2: 1}
+
+  * AMD  (+$130.99)
+    Wins: 2 (33.33%) • Losses: 4 • Total: 6
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 2, 2: 1}
+    Win  Streak => Current: 0 • Longest: 1 • Counts: {1: 2}
+
+  * BA   (-$3.32)
+    Wins: 9 (60.00%) • Losses: 6 • Total: 15
+    Loss Streak => Current: 0 • Longest: 2 • Counts: {1: 4, 2: 1}
+    Win  Streak => Current: 2 • Longest: 3 • Counts: {1: 2, 2: 2, 3: 1}
+
+  * FB   (+$5.72)
+    Wins: 6 (46.15%) • Losses: 7 • Total: 13
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 4: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 2, 2: 2}
+
+  * MSFT (-$3.20)
+    Wins: 4 (44.44%) • Losses: 5 • Total: 9
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 1, 2: 2}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 2, 2: 1}
+
+  * SNAP (+$33.17)
+    Wins: 2 (33.33%) • Losses: 4 • Total: 6
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 2, 2: 1}
+    Win  Streak => Current: 0 • Longest: 1 • Counts: {1: 2}
+
+  * TSLA (+$125.38)
+    Wins: 2 (33.33%) • Losses: 4 • Total: 6
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {4: 1}
+    Win  Streak => Current: 1 • Longest: 1 • Counts: {1: 2}
+
+  * TWTR (+$37.77)
+    Wins: 10 (50.00%) • Losses: 10 • Total: 20
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 5, 2: 1, 3: 1}
+    Win  Streak => Current: 2 • Longest: 2 • Counts: {1: 6, 2: 2}
+
+  * VIAC (+$30.94)
+    Wins: 9 (45.00%) • Losses: 11 • Total: 20
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 3: 1, 4: 1}
+    Win  Streak => Current: 2 • Longest: 2 • Counts: {1: 5, 2: 2}
+
+
+* Profitable Days in a Row: 4
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 23W 20L
+* Week's Return: +$566.27
+* Total Return: -$935.38
+
+#### Remarks
+* The day started with ETrade's /orders endpoint not returning orders executed
+  today. As a result StockBot registered all opening orders as OPEN despite
+  them being executed.
+* Some positions were open much longer than they would have been.
+* However, I got luck and ended up more than +$200.00.
+* I finally introduced a workaround to the API change and resumed StockBot
+  which earned about +$100.00.
+* Looks like the most recent algo changes are still performing well. Can't be
+  too certain though because it only ran for half the day.
+* Also, the await market open fault tolerance change was successful. I should
+  be able to safely initiate StockBot and leave, though this is still risky.
+* Trading TWTR didn't introduce any timeouts. We'll continue trading it and
+  monitor the results.
+* Introduce a longer term adjustment to the API change.
+
+#### Next Thing(s) to Try
+
+### 2021-08-02:
+#### Performance
+
+* Opening Account Value: $65,587.97
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
@@ -3393,6 +3470,7 @@ Conclusions:
   * MSFT ($)
   * SNAP ($)
   * TSLA ($)
+  * TWTR ($)
   * VIAC ($)
 
 * Profitable Days in a Row:
