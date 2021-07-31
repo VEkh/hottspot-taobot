@@ -8,12 +8,12 @@
  */
 #include "stock_bot.h"
 
-#include "etrade/deps.cpp"    // json
-#include "get_order_json.cpp" // get_order_json
-#include <iostream>           // std::cout, std::endl
+#include "etrade/deps.cpp" // json
+#include "fetch_order.cpp" // fetch_order
+#include <iostream>        // std::cout, std::endl
 
 void ETrade::StockBot::set_execution_price(order_t *order) {
-  json order_json = get_order_json(order);
+  json order_json = fetch_order(order);
 
   if (order_json.empty() ||
       !order_json["OrderDetail"][0]["Instrument"][0].contains(

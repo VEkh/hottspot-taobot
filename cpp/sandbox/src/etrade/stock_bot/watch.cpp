@@ -11,7 +11,6 @@
 #include "await_market_open.cpp"            // await_market_open
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "close_position.cpp"               // close_position
-#include "fetch_orders.cpp"                 // fetch_orders
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "lib/utils/time.cpp"               // utils::time_
 #include "log_account_balance.cpp"          // log_account_balance
@@ -48,7 +47,6 @@ void ETrade::StockBot::watch() {
     log_closed_positions();
 
     cancel_stale_open_order();
-    fetch_orders();
     set_position_status();
     open_position();
     set_open_position_prices();

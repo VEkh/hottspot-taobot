@@ -76,7 +76,7 @@ void ETrade::StockBot::log_closed_positions() {
 
   printf("Total Profit: %+'.2f\n", stats.total_profit);
 
-  std::cout << fmt.reset << std::endl;
+  std::cout << fmt.reset;
 }
 
 #endif

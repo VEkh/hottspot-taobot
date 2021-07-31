@@ -79,11 +79,8 @@ private:
   int martingale_quantity_multiplier();
 
   closed_positions_stats_t build_closed_positions_stats();
-
   exit_prices_t build_exit_prices();
-
-  json get_order_json(const order_t *);
-
+  json fetch_order(const order_t *);
   order_win_result_t order_win_result(const order_t *);
 
   std::map<int, std::map<const char *, double>>
@@ -92,7 +89,6 @@ private:
   void await_market_open();
   void cancel_stale_open_order();
   void close_position();
-  void fetch_orders();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
   void log_account_balance();

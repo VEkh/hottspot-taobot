@@ -14,9 +14,6 @@ namespace preview_order {
 bool is_immediate_retry_error(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
-  Formatted::fmt_stream_t fmt = Formatted::stream();
-  std::cout << fmt.yellow << response_body << fmt.reset << std::endl;
-
   json response = json::parse(response_body);
 
   if (response.contains("Error") && response["Error"]["code"] == 1037) {

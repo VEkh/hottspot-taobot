@@ -17,9 +17,6 @@ namespace place_order {
 bool is_immediate_retry_error(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
-  Formatted::fmt_stream_t fmt = Formatted::stream();
-  std::cout << fmt.yellow << response_body << fmt.reset << std::endl;
-
   if (std::regex_search(response_body,
                         std::regex("oauth_parameters_absent=oauth_nonce"))) {
     return true;
