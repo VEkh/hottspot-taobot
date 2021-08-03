@@ -3462,6 +3462,73 @@ Conclusions:
 
 * Opening Account Value: $65,587.97
 
+* Total: +$243.36 (+0.37%)
+  * AAPL (+$6.86)
+    Wins: 3 (33.33%) • Losses: 6 • Total: 9
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 2, 2: 2}
+    Win  Streak => Current: 0 • Longest: 1 • Counts: {1: 3}
+
+  * AMD  (+$30.73)
+    Wins: 19 (46.34%) • Losses: 22 • Total: 41
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 3: 4, 5: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 2: 4, 3: 1, 4: 1}
+
+  * BA   (-$5.78)
+    Wins: 15 (44.12%) • Losses: 19 • Total: 34
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 5, 2: 4, 6: 1}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 7, 2: 1, 3: 2}
+
+  * FB   (-$9.57)
+    Wins: 5 (62.50%) • Losses: 3 • Total: 8
+    Loss Streak => Current: 1 • Longest: 2 • Counts: {1: 1, 2: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 1, 4: 1}
+
+  * MSFT (+$50.16)
+    Wins: 3 (23.08%) • Losses: 10 • Total: 13
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 1, 2: 1, 7: 1}
+    Win  Streak => Current: 1 • Longest: 1 • Counts: {1: 3}
+
+  * SNAP (+$9.66)
+    Wins: 19 (46.34%) • Losses: 22 • Total: 41
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 3: 4, 5: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 2: 4, 3: 1, 4: 1}
+
+  * TSLA (+$6.14)
+    Wins: 4 (66.67%) • Losses: 2 • Total: 6
+    Loss Streak => Current: 0 • Longest: 2 • Counts: {2: 1}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 1, 3: 1}
+
+  * TWTR (+$28.37)
+    Wins: 20 (37.74%) • Losses: 33 • Total: 53
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 4, 2: 3, 3: 1, 4: 1, 5: 2, 6: 1}
+    Win  Streak => Current: 2 • Longest: 4 • Counts: {1: 8, 2: 4, 4: 1}
+
+  * VIAC (+$126.80)
+    Wins: 17 (27.87%) • Losses: 44 • Total: 61
+    Loss Streak => Current: 1 • Longest: 8 • Counts: {1: 1, 2: 4, 4: 2, 5: 1, 7: 2, 8: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 7, 3: 2, 4: 1}
+
+* Profitable Days in a Row: 5
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 24W 20L
+* Week's Return: +243.36
+* Total Return: -692.02
+
+#### Remarks
+* 7 / 9 stocks won 🎈
+* Day was interrupted early only a Service Unavailable Order for certain
+  orders, so performance results are incomplete.
+* I quickly added tolerance for it.
+
+#### Next Thing(s) to Try
+* Things are looking good. Keep it up!
+
+### 2021-08-03:
+#### Performance
+
+* Opening Account Value: $65,831.93
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

@@ -16,6 +16,10 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 
   json response = json::parse(response_body);
 
+  if (response.contains("Error") && response["Error"]["code"] == 163) {
+    return true;
+  }
+
   if (response.contains("Error") && response["Error"]["code"] == 1037) {
     return true;
   }
