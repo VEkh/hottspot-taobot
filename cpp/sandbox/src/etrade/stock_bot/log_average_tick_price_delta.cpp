@@ -3,8 +3,8 @@
 
 #include "lib/utils/integer.cpp" // utils::integer
 #include "stock_bot.h"           // ETrade::StockBot, fmt
-#include <iomanip>               // std::setprecision
-#include <iostream>              // std::cout, std::endl, std::fixed
+#include <iostream>              // std::cout, std::endl
+#include <stdio.h>               // printf
 
 void ETrade::StockBot::log_average_tick_price_delta() {
   if (!this->average_tick_price_delta) {
@@ -19,15 +19,15 @@ void ETrade::StockBot::log_average_tick_price_delta() {
             << ")";
 
   std::cout << fmt.reset << std::endl;
+  std::cout << fmt.bold << fmt.cyan;
 
-  std::cout << fmt.bold << fmt.cyan << std::setprecision(4) << std::fixed;
-  std::cout << "x1: " << this->average_tick_price_delta;
-  std::cout << " • 5: " << (this->average_tick_price_delta * 5.0);
-  std::cout << " • x10: " << (this->average_tick_price_delta * 10.0);
-  std::cout << " • x15: " << (this->average_tick_price_delta * 15.0);
-  std::cout << " • x20: " << (this->average_tick_price_delta * 20.0);
+  printf("x1: %.4f • x5: %.4f • x10: %.4f • x20: %.4f • x30: %.4f\n",
+         this->average_tick_price_delta, this->average_tick_price_delta * 5.0,
+         this->average_tick_price_delta * 10.0,
+         this->average_tick_price_delta * 20.0,
+         this->average_tick_price_delta * 30.0);
 
-  std::cout << fmt.reset << std::endl << std::endl;
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

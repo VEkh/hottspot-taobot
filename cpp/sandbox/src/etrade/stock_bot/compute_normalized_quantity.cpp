@@ -24,7 +24,8 @@ int ETrade::StockBot::compute_normalized_quantity() {
       (max_allowable_margin_ratio * this->account_balance.balance *
        margin_multiplier);
 
-  const double basis_price = max_order_price / pow(2, 8);
+  const double basis_price =
+      max_order_price / pow(2, this->MAX_EXPECTED_LOSS_STREAK);
   const double normalized_quantity = ceil(basis_price / current_price);
 
   return final_multiplier * normalized_quantity;

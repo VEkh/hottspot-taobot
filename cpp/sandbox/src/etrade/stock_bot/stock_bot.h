@@ -34,6 +34,8 @@ private:
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
+  const int MAX_EXPECTED_LOSS_STREAK = 10;
+
   bool FLAG_MARTINGALE = false;
   bool FLAG_NORMALIZE_QUANTITY = false;
 

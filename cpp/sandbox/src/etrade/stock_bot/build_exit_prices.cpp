@@ -10,10 +10,15 @@
  */
 #include "stock_bot.h"
 
-#include "lib/utils/time.cpp" // utils::time_
+#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
+#include "lib/utils/time.cpp"               // utils::time_
 
 ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
-  const double max_loss_multiplier = 20.0;
+  const closed_positions_stats_t stats = build_closed_positions_stats();
+
+  const double max_loss_multiplier =
+      stats.loss_streaks.current >= (this->MAX_EXPECTED_LOSS_STREAK / 2) ? 30.0
+                                                                         : 20.0;
   const double secured_profit_ratio = 0.8;
 
   const double max_loss =

@@ -3662,7 +3662,7 @@ Conclusions:
 * Profitable Days in a Row: 0
 
 #### Stats (as of stable profitable algo [5/28])
-* Win / Loss: 26W 20L
+* Win / Loss: 26W 21L
 * Week's Return: -469.07
 * Total Return: -853.09
 
@@ -3679,6 +3679,75 @@ Conclusions:
 #### Performance
 
 * Opening Account Value: $65,627.06
+
+* Total: -$419.72 (-0.64%)
+  * AAPL (+$9.72)
+    Wins: 7 (38.89%) • Losses: 11 • Total: 18
+    Loss Streak => Current: 3 • Longest: 3 • Counts: {1: 1, 2: 2, 3: 2}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 3, 2: 2}
+
+  * AMD  (+$20.27)
+    Wins: 8 (36.36%) • Losses: 14 • Total: 22
+    Loss Streak => Current: 2 • Longest: 3 • Counts: {1: 2, 2: 3, 3: 2}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 5, 3: 1}
+
+  * BA   (-$49.97)
+    Wins: 17 (43.59%) • Losses: 22 • Total: 39
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 2, 2: 3, 3: 1, 4: 1, 7: 1}
+    Win  Streak => Current: 2 • Longest: 3 • Counts: {1: 1, 2: 5, 3: 2}
+
+  * FB   (-$214.12)
+    Wins: 8 (25.81%) • Losses: 23 • Total: 31
+    Loss Streak => Current: 0 • Longest: 10 • Counts: {1: 1, 2: 1, 3: 2, 4: 1, 10: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 3, 2: 3}
+
+  * MSFT (-$11.00)
+    Wins: 8 (32.00%) • Losses: 17 • Total: 25
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 1, 3: 2, 4: 1, 6: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 1, 2: 2, 3: 1}
+
+  * SNAP (+$59.29)
+    Wins: 15 (40.54%) • Losses: 22 • Total: 37
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 3, 2: 2, 3: 2, 4: 1, 5: 1}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 7, 2: 1, 3: 2}
+
+  * TSLA (-$74.58)
+    Wins: 6 (25.00%) • Losses: 18 • Total: 24
+    Loss Streak => Current: 1 • Longest: 9 • Counts: {1: 3, 6: 1, 9: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 2, 2: 2}
+
+  * TWTR (-$5.96)
+    Wins: 22 (42.31%) • Losses: 30 • Total: 52
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 7, 2: 4, 3: 3, 6: 1}
+    Win  Streak => Current: 1 • Longest: 4 • Counts: {1: 13, 2: 1, 3: 1, 4: 1}
+
+  * VIAC (-$153.37)
+    Wins: 29 (50.88%) • Losses: 28 • Total: 57
+    Loss Streak => Current: 0 • Longest: 10 • Counts: {1: 8, 2: 3, 4: 1, 10: 1}
+    Win  Streak => Current: 1 • Longest: 6 • Counts: {1: 5, 2: 6, 3: 2, 6: 1}
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 26W 22L
+* Week's Return: -$888.79
+* Total Return: -$1,272.81
+
+#### Remarks
+* 3/9 stocks won 😢
+* VIAC and FB both had 10-loss losing streaks. FB ran into an issue where it
+  couldn't enter a position even after halving. I'll have to fix the quantity
+  halving algorithm.
+* 10-15-loss losing streak can occur. I think I'll need to use this expectation
+  to adjust the order quantities.
+
+#### Next Thing(s) to Try
+* Fix the quantity halving algorithm
+
+### 2021-08-11:
+#### Performance
+
+* Opening Account Value: $65,207.61
 
 * Total: $ (%)
   * AAPL ($)
