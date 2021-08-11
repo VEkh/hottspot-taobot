@@ -3749,6 +3749,75 @@ Conclusions:
 
 * Opening Account Value: $65,207.61
 
+* Total: +$37.63 (+0.06%)
+  * AAPL (+$1.25)
+    Wins: 5 (41.67%) • Losses: 7 • Total: 12
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 1, 2: 1, 4: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 3, 2: 1}
+
+  * AMD  (+$4.82)
+    Wins: 10 (55.56%) • Losses: 8 • Total: 18
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 6, 2: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 5, 2: 1, 3: 1}
+
+  * BA   (+$2.75)
+    Wins: 20 (48.78%) • Losses: 21 • Total: 41
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 8, 2: 3, 3: 1, 4: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 10, 2: 2, 3: 2}
+
+  * FB   (+$0.72)
+    Wins: 18 (40.91%) • Losses: 26 • Total: 44
+    Loss Streak => Current: 3 • Longest: 4 • Counts: {1: 3, 2: 3, 3: 3, 4: 2}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 7, 2: 1, 3: 3}
+
+  * MSFT (+$0.60)
+    Wins: 10 (50.00%) • Losses: 10 • Total: 20
+    Loss Streak => Current: 0 • Longest: 2 • Counts: {1: 6, 2: 2}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 6, 2: 2}
+
+  * SNAP (+$20.68)
+    Wins: 15 (40.54%) • Losses: 22 • Total: 37
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 2: 1, 3: 2, 4: 1, 5: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 7, 2: 2, 4: 1}
+
+  * TSLA (+$1.52)
+    Wins: 9 (45.00%) • Losses: 11 • Total: 20
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 3, 2: 2, 4: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 3, 3: 2}
+
+  * TWTR (-$4.11)
+    Wins: 14 (36.84%) • Losses: 24 • Total: 38
+    Loss Streak => Current: 4 • Longest: 6 • Counts: {1: 3, 2: 1, 4: 2, 5: 1, 6: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 5, 2: 1, 3: 1, 4: 1}
+
+  * VIAC (+$9.41)
+    Wins: 31 (46.97%) • Losses: 35 • Total: 66
+    Loss Streak => Current: 3 • Longest: 5 • Counts: {1: 7, 2: 2, 3: 5, 4: 1, 5: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 6, 2: 3, 3: 5, 4: 1}
+
+* Profitable Days in a Row:
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 27W 22L
+* Week's Return: -$851.16
+* Total Return: -$1,235.18
+
+#### Remarks
+* 8/9 stocks won 🎊
+* Setting the `MAX_EXPECTED_LOSS_STREAK` to 10 reduced the quantities of each
+  security and thereby the stakes of each trade.
+* The longest loss streak was 6 losses. It's possible that today was just a day
+  with favorable movement. However, it's also possible that increasing the max
+  loss after half of max lossess were reached helped. Time will tell.
+* For tomorrow, I'll reduce max expected losses to 9 and see what happens.
+
+#### Next Thing(s) to Try
+
+### 2021-08-12:
+#### Performance
+
+* Opening Account Value: $65,245.64
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
