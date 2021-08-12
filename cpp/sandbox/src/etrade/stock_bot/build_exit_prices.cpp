@@ -17,7 +17,7 @@ ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
   const closed_positions_stats_t stats = build_closed_positions_stats();
 
   const double max_loss_multiplier =
-      stats.loss_streaks.current >= (this->MAX_EXPECTED_LOSS_STREAK / 2) ? 30.0
+      stats.loss_streaks.current >= (this->MAX_EXPECTED_LOSS_STREAK / 2) ? 40.0
                                                                          : 20.0;
   const double secured_profit_ratio = 0.8;
 

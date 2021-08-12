@@ -21,11 +21,11 @@ void ETrade::StockBot::log_average_tick_price_delta() {
   std::cout << fmt.reset << std::endl;
   std::cout << fmt.bold << fmt.cyan;
 
-  printf("x1: %.4f • x5: %.4f • x10: %.4f • x20: %.4f • x30: %.4f\n",
-         this->average_tick_price_delta, this->average_tick_price_delta * 5.0,
+  printf("x10: %.4f • x20: %.4f • x30: %.4f • x40: %.4f\n",
          this->average_tick_price_delta * 10.0,
          this->average_tick_price_delta * 20.0,
-         this->average_tick_price_delta * 30.0);
+         this->average_tick_price_delta * 30.0,
+         this->average_tick_price_delta * 40.0);
 
   std::cout << fmt.reset << std::endl;
 }

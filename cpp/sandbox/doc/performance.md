@@ -3795,7 +3795,7 @@ Conclusions:
     Loss Streak => Current: 3 • Longest: 5 • Counts: {1: 7, 2: 2, 3: 5, 4: 1, 5: 1}
     Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 6, 2: 3, 3: 5, 4: 1}
 
-* Profitable Days in a Row:
+* Profitable Days in a Row: 1
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 27W 22L
@@ -3817,6 +3817,77 @@ Conclusions:
 #### Performance
 
 * Opening Account Value: $65,245.64
+
+* Total: +$44.74 (+0.07%)
+  * AAPL (+$11.38)
+    Wins: 9 (50.00%) • Losses: 9 • Total: 18
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 1, 4: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 3, 2: 3}
+
+  * AMD  (+$8.52)
+    Wins: 10 (66.67%) • Losses: 5 • Total: 15
+    Loss Streak => Current: 1 • Longest: 1 • Counts: {1: 5}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 1, 2: 1, 3: 1, 4: 1}
+
+  * BA   (+$6.15)
+    Wins: 20 (41.67%) • Losses: 28 • Total: 48
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 4, 2: 5, 3: 3, 5: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 8, 2: 3, 3: 2}
+
+  * FB   (-$7.63)
+    Wins: 18 (47.37%) • Losses: 20 • Total: 38
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 7, 2: 2, 3: 1, 6: 1}
+    Win  Streak => Current: 2 • Longest: 3 • Counts: {1: 5, 2: 5, 3: 1}
+
+  * MSFT (+$2.19)
+    Loss Streak => Current: 4 • Longest: 4 • Counts: {1: 5, 2: 5, 4: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 10, 2: 1}
+
+  * SNAP (+$12.77)
+    Wins: 20 (48.78%) • Losses: 21 • Total: 41
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 5, 2: 4, 4: 2}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 6, 2: 1, 3: 4}
+
+  * TSLA (+$34.37)
+    Wins: 9 (39.13%) • Losses: 14 • Total: 23
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 3, 2: 1, 3: 1, 6: 1}
+    Win  Streak => Current: 2 • Longest: 2 • Counts: {1: 3, 2: 3}
+
+  * TWTR (-$26.96)
+    Wins: 19 (38.78%) • Losses: 30 • Total: 49
+    Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 5, 2: 1, 3: 2, 4: 1, 5: 1, 8: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 7, 2: 3, 3: 2}
+
+  * VIAC (+$3.95)
+    Wins: 21 (42.00%) • Losses: 29 • Total: 50
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 4, 2: 5, 3: 2, 4: 1, 5: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 9, 2: 3, 3: 2}
+
+* Profitable Days in a Row: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 28W 22L
+* Week's Return: -$806.42
+* Total Return: -$1,190.44
+
+#### Remarks
+* 7/9 stocks won 🎈
+* Two consecutive days, the max loss streak didn't exceed 8. Although, today's
+  was 8, while yesterday's was 6.
+* This may be due to the heightened max loss after half the expected losses, or
+  it may be coincidence.
+* I had my first two profitable FOREX trades, one sell short, one buy.
+
+#### Next Thing(s) to Try
+* Decrease max expected loss streak to 8 and increase max loss multiplier from
+  30 to 40 for losing streaks that are at least half of the max expected losing
+  streak.
+* Get access to the FOREX API and start playing with it.
+
+### 2021-08-13:
+#### Performance
+
+* Opening Account Value: $65,290.33
 
 * Total: $ (%)
   * AAPL ($)
