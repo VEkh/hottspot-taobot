@@ -12,17 +12,19 @@
 
 #include "build_closed_positions_stats.cpp" // build_closed_positions_stats
 #include "lib/utils/time.cpp"               // utils::time_
+#include "redemptive_max_loss.cpp"          // redemptive_max_loss
 
 ETrade::StockBot::exit_prices_t ETrade::StockBot::build_exit_prices() {
   const closed_positions_stats_t stats = build_closed_positions_stats();
 
-  const double max_loss_multiplier =
-      stats.loss_streaks.current >= (this->MAX_EXPECTED_LOSS_STREAK / 2) ? 40.0
-                                                                         : 20.0;
+  const double max_loss_multiplier = 20.0;
   const double secured_profit_ratio = 0.8;
 
-  const double max_loss =
-      -1 * max_loss_multiplier * this->average_tick_price_delta;
+  double max_loss = -1 * max_loss_multiplier * this->average_tick_price_delta;
+
+  if (stats.loss_streaks.current >= (this->MAX_EXPECTED_LOSS_STREAK / 2)) {
+    max_loss = redemptive_max_loss();
+  }
 
   const double min_profit = abs(max_loss) / secured_profit_ratio;
 

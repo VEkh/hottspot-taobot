@@ -76,6 +76,7 @@ private:
 
   double compute_min_profit_price_range_ratio(const double);
   double profit_percentage(const order_t *);
+  double redemptive_max_loss();
 
   int compute_normalized_quantity();
   int martingale_quantity_multiplier();

@@ -4174,6 +4174,73 @@ Conclusions:
 
 * Opening Account Value: $66,381.68
 
+* Total: -$622.55 (-0.94%)
+  * AAPL (+$17.10)
+    Wins: 8 (42.11%) • Losses: 11 • Total: 19
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 2, 2: 3, 3: 1}
+    Win  Streak => Current: 2 • Longest: 2 • Counts: {1: 4, 2: 2}
+
+  * AMD  (-$64.41)
+    Wins: 6 (35.29%) • Losses: 11 • Total: 17
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {1: 4, 2: 1, 5: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 4, 2: 1}
+
+  * BA   (+$53.52)
+    Wins: 7 (35.00%) • Losses: 13 • Total: 20
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 4, 2: 2, 5: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 5, 2: 1}
+
+  * FB   (+$17.90)
+    Wins: 13 (44.83%) • Losses: 16 • Total: 29
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 3, 3: 1, 4: 1}
+    Win  Streak => Current: 2 • Longest: 2 • Counts: {1: 5, 2: 4}
+
+  * MSFT (+$19.22)
+    Wins: 13 (48.15%) • Losses: 14 • Total: 27
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 3, 2: 1, 3: 3}
+    Win  Streak => Current: 1 • Longest: 5 • Counts: {1: 4, 2: 2, 5: 1}
+
+  * SNAP (+$68.48)
+    Wins: 14 (41.18%) • Losses: 20 • Total: 34
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 3, 3: 1, 4: 2}
+    Win  Streak => Current: 2 • Longest: 3 • Counts: {1: 5, 2: 3, 3: 1}
+
+  * TSLA (-$82.13)
+    Wins: 4 (40.00%) • Losses: 6 • Total: 10
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 1, 5: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 1, 3: 1}
+
+  * TWTR (-$697.72)
+    Wins: 18 (36.73%) • Losses: 31 • Total: 49
+    Loss Streak => Current: 1 • Longest: 9 • Counts: {1: 6, 2: 3, 3: 2, 4: 1, 9: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 10, 2: 3, 3: 1}
+
+  * VIAC (+$45.49)
+    Wins: 19 (46.34%) • Losses: 22 • Total: 41
+    Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 5, 2: 7, 3: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 7, 2: 6}
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 32W 23L
+* Week's Return: +$226.25
+* Total Return: -$722.46
+
+#### Remarks
+* 6/9 stocks won
+* TWTR got in a 9-loss losing streak and hit IFEs.
+
+#### Next Thing(s) to Try
+* Only exit if the previous quote's profit was above the upper bound
+* If more than halfway to `MAX_EXPECTED_LOSS_STREAK`, require that
+  redemptive win will result in a profit of at least half of what was lost.
+
+### 2021-08-20:
+#### Performance
+
+* Opening Account Value: $65,759.37
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
