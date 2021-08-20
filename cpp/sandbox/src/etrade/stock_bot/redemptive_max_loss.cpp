@@ -22,8 +22,7 @@ double ETrade::StockBot::redemptive_max_loss() {
     total_loss += position.close_order.quantity * position.close_order.profit;
   }
 
-  const double amount_to_profit = total_loss * 0.5;
-  return (total_loss + amount_to_profit) / this->open_order.quantity;
+  return (1.05 * total_loss) / this->open_order.quantity;
 }
 
 #endif
