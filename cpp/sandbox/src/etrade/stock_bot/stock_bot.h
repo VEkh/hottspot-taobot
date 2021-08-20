@@ -75,6 +75,8 @@ private:
   bool should_terminate();
 
   double compute_min_profit_price_range_ratio(const double);
+  double compute_profit(const order_t *, const order_t *);
+  double compute_profit(const order_t *, const quote_t *);
   double profit_percentage(const order_t *);
   double redemptive_max_loss();
 

@@ -4241,6 +4241,75 @@ Conclusions:
 
 * Opening Account Value: $65,759.37
 
+* Total: -$473.15 (-0.72%)
+  * AAPL (+$2.16)
+    Wins: 6 (46.15%) • Losses: 7 • Total: 13
+    Loss Streak => Current: 3 • Longest: 3 • Counts: {1: 1, 3: 2}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 2, 4: 1}
+
+  * AMD  (+$20.75)
+    Wins: 2 (18.18%) • Losses: 9 • Total: 11
+    Loss Streak => Current: 8 • Longest: 8 • Counts: {1: 1, 8: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {2: 1}
+
+  * BA   (+$9.41)
+    Wins: 13 (46.43%) • Losses: 15 • Total: 28
+    Loss Streak => Current: 4 • Longest: 4 • Counts: {1: 4, 2: 2, 3: 1, 4: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 4, 2: 3, 3: 1}
+
+  * FB   (+$10.96)
+    Wins: 12 (38.71%) • Losses: 19 • Total: 31
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 5, 3: 2, 4: 2}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 7, 2: 1, 3: 1}
+
+  * MSFT (-$174.20)
+    Wins: 4 (25.00%) • Losses: 12 • Total: 16
+    Loss Streak => Current: 7 • Longest: 7 • Counts: {1: 1, 4: 1, 7: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 2, 2: 1}
+
+  * SNAP (-$576.56)
+    Wins: 2 (18.18%) • Losses: 9 • Total: 11
+    Loss Streak => Current: 8 • Longest: 8 • Counts: {1: 1, 8: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {2: 1}
+
+  * TSLA (+$9.40)
+    Wins: 6 (54.55%) • Losses: 5 • Total: 11
+    Loss Streak => Current: 0 • Longest: 2 • Counts: {1: 1, 2: 2}
+    Win  Streak => Current: 3 • Longest: 3 • Counts: {1: 3, 3: 1}
+
+  * TWTR (+$157.03)
+    Wins: 21 (41.18%) • Losses: 30 • Total: 51
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 8, 2: 3, 3: 2, 4: 1, 6: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 12, 2: 3, 3: 1}
+
+  * VIAC (+$67.89)
+    Wins: 16 (38.10%) • Losses: 26 • Total: 42
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 7, 2: 1, 4: 3, 5: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 8, 2: 2, 4: 1}
+
+* Profitable Days in a Row: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 32W 24L
+* Week's Return: -246.90
+* Total Return: -1,195.61
+
+#### Remarks
+* 7/9 stocks won. This is still good. The strategy wins more often than it
+  loses, but loses bigger than it wins.
+* SNAP and MSFT got stuck in the ever increasing max losses. TWTR escaped it.
+* I'll change the redemptive max loss to only seek to match the loss streak's
+  loss (maybe 1.1x). 1.5 balloons too large.
+* I still need to only escape if the price is decreasing past the secure profit
+  threshold.
+
+#### Next Thing(s) to Try
+
+### 2021-08-23:
+#### Performance
+
+* Opening Account Value: $65,286.57
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
