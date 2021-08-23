@@ -4220,7 +4220,8 @@ Conclusions:
     Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 5, 2: 7, 3: 1}
     Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 7, 2: 6}
 
-* Profitable Days in a Row: 0
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 32W 23L
@@ -4287,12 +4288,13 @@ Conclusions:
     Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 7, 2: 1, 4: 3, 5: 1}
     Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 8, 2: 2, 4: 1}
 
-* Profitable Days in a Row: 0
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 32W 24L
-* Week's Return: -246.90
-* Total Return: -1,195.61
+* Week's Return: -$246.90
+* Total Return: -$1,195.61
 
 #### Remarks
 * 7/9 stocks won. This is still good. The strategy wins more often than it
@@ -4309,6 +4311,84 @@ Conclusions:
 #### Performance
 
 * Opening Account Value: $65,286.57
+
+* Total: +$140.64 (+0.22%)
+  * AAPL (+$5.18)
+    Wins: 7 (41.18%) • Losses: 10 • Total: 17
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 4, 2: 1, 4: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 5, 2: 1}
+
+  * AMD  (+$18.95)
+    Wins: 6 (60.00%) • Losses: 4 • Total: 10
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 1, 3: 1}
+    Win  Streak => Current: 2 • Longest: 3 • Counts: {1: 1, 2: 1, 3: 1}
+
+  * BA   (+$14.52)
+    Wins: 16 (66.67%) • Losses: 8 • Total: 24
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 1, 2: 2, 3: 1}
+    Win  Streak => Current: 2 • Longest: 10 • Counts: {2: 3, 10: 1}
+
+  * FB   (+$6.13)
+    Wins: 13 (48.15%) • Losses: 14 • Total: 27
+    Loss Streak => Current: 1 • Longest: 2 • Counts: {1: 4, 2: 5}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 7, 2: 1, 4: 1}
+
+  * MSFT (+$11.09)
+    Wins: 17 (56.67%) • Losses: 13 • Total: 30
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 7, 3: 2}
+    Win  Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 2: 2, 3: 1, 5: 1}
+
+  * SNAP (+$42.05)
+    Wins: 6 (26.09%) • Losses: 17 • Total: 23
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 2, 4: 1, 5: 1, 6: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 4, 2: 1}
+
+  * TSLA (+$14.12)
+    Wins: 9 (56.25%) • Losses: 7 • Total: 16
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 2, 5: 1}
+    Win  Streak => Current: 1 • Longest: 5 • Counts: {1: 2, 2: 1, 5: 1}
+
+  * TWTR (+$17.20)
+    Wins: 18 (33.33%) • Losses: 36 • Total: 54
+    Loss Streak => Current: 1 • Longest: 8 • Counts: {1: 3, 2: 4, 3: 3, 4: 2, 8: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 9, 2: 3, 3: 1}
+
+  * VIAC (+$11.40)
+    Wins: 11 (36.67%) • Losses: 19 • Total: 30
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 1, 2: 1, 3: 1, 4: 2, 5: 1}
+    Win  Streak => Current: 1 • Longest: 4 • Counts: {1: 3, 2: 2, 4: 1}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 33W 24L
+* Week's Return: +$140.64
+* Total Return: -$1,054.97
+
+#### Remarks
+* 9/9 stocks won 🎉
+* This is even with TWTR's 8-loss losing streak, which forced it into an IFE.
+* The new redemptive win algorithm proved essential. Lowering it from 1.5 total
+  lost to 1.05 was perfect.
+  * I may even do this for all loss streaks, not just after four.
+* I also saw the exit adjustment pay off -- there were a couple positions that
+  would have closed at the lower secure profit as its minimum profit reduced.
+  Instead they waited to exceed the secure profit's upper bound before exitin.
+* It _may_ be worth reinstating the lower bound.
+  * I saw a position prepare to close at the upper bound. In the next tick the
+    price jumped heavily beneath the expected profit.a Just something to
+    consider.
+* When TWTR was in danger, other stocks ran into IFEs and had to attend large
+  profits to make up for losses. This worked out for most of them, but they
+  didn't runaway because of the `max loss` being set to a prohibitive level.
+
+#### Next Thing(s) to Try
+
+### 2021-08-24:
+#### Performance
+
+* Opening Account Value: $65,417.44
 
 * Total: $ (%)
   * AAPL ($)
