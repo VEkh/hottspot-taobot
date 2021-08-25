@@ -30,7 +30,6 @@ private:
   using quote_t = ETrade::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 5.0 * 60.0;
-  const double BUY_SELL_RATIO_DOOR_THRESHOLD = 1.35;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 

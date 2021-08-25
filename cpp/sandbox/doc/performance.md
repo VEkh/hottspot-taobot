@@ -4390,6 +4390,113 @@ Conclusions:
 
 * Opening Account Value: $65,417.44
 
+* Total: -$261.35 (-0.4%)
+  * AAPL (+$0.95)
+    Wins: 9 (37.50%) • Losses: 15 • Total: 24
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 2: 2, 3: 1, 4: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 7, 2: 1}
+
+  * AMD  (-$96.88)
+    Wins: 5 (31.25%) • Losses: 11 • Total: 16
+    Loss Streak => Current: 7 • Longest: 7 • Counts: {1: 2, 2: 1, 7: 1}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 2, 3: 1}
+
+  * BA   (+$15.23)
+    Wins: 25 (52.08%) • Losses: 23 • Total: 48
+    Loss Streak => Current: 2 • Longest: 4 • Counts: {1: 7, 2: 6, 4: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 8, 2: 3, 3: 1, 4: 2}
+
+  * FB   (+$13.29)
+    Wins: 19 (27.54%) • Losses: 50 • Total: 69
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 2, 2: 3, 3: 5, 4: 4, 5: 1, 6: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 13, 2: 1, 4: 1}
+
+  * MSFT (+$8.64)
+    Wins: 9 (37.50%) • Losses: 15 • Total: 24
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 2: 2, 3: 1, 4: 1}
+    Win  Streak => Current: 1 • Longest: 2 • Counts: {1: 7, 2: 1}
+
+  * SNAP (+$78.44)
+    Wins: 21 (43.75%) • Losses: 27 • Total: 48
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 7, 2: 2, 3: 1, 4: 2, 5: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 6, 2: 6, 3: 1}
+
+  * TSLA (-$291.68)
+    Wins: 8 (34.78%) • Losses: 15 • Total: 23
+    Loss Streak => Current: 0 • Longest: 9 • Counts: {2: 1, 4: 1, 9: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 1, 2: 2, 3: 1}
+
+  * TWTR (-$26.96)
+    Wins: 19 (27.54%) • Losses: 50 • Total: 69
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 2, 2: 3, 3: 5, 4: 4, 5: 1, 6: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 13, 2: 1, 4: 1}
+
+  * VIAC (+$37.60)
+    Wins: 19 (37.25%) • Losses: 32 • Total: 51
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 4, 2: 2, 3: 3, 4: 1, 5: 1, 6: 1}
+    Win  Streak => Current: 1 • Longest: 6 • Counts: {1: 10, 3: 1, 6: 1}
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 33W 25L
+* Week's Return: -$120.71
+* Total Return: -$1,316.32
+
+#### Remarks
+* 6/9 stocks won
+* The restorative win levels were too small during large loss streaks and this
+  led to premature exits.
+
+
+#### Next Thing(s) to Try
+* Set the 20 and 40x 1-second variance levels as exit minima.
+* Apply the restorative win to any losing streak.
+
+### 2021-08-25:
+#### Performance
+
+* Opening Account Value: $65,166.54
+
+* Total: +$123.96 (+0.19%)
+  * AAPL (+$6.11)
+  * AMD  (-$116.63)
+  * BA   (+$42.74)
+  * FB   (-$59.85)
+  * MSFT (+$40.42)
+  * SNAP (+$11.19)
+  * TSLA (+$15.17)
+  * TWTR (+$19.05)
+  * VIAC (+$165.76)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 34W 25L
+* Week's Return: +$3.25
+* Total Return: -$1,192.36
+
+#### Remarks
+* 7/9 stocks won 🎈. Even though there was a big loss, it's important to
+  recognize that this strategy has a winning record. Don't forget that.
+
+* I made a mistake in the max loss calculation that was looking for a max
+  between two negatives instead of their absolute value. This led to
+  insufficient max losses for AMD who lost big as a result.
+  * I made the adjustment for all other stocks and it seemed to work well.
+
+* I also added an increased entry threshold for stocks in dangerous territory
+  (1.5 long-term buy sell ratio) as an extra guard agains sharp oscillations.
+
+#### Next Thing(s) to Try
+
+### 2021-08-26:
+#### Performance
+
+* Opening Account Value: $
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
@@ -4401,7 +4508,8 @@ Conclusions:
   * TWTR ($)
   * VIAC ($)
 
-* Profitable Days in a Row:
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 0
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss:

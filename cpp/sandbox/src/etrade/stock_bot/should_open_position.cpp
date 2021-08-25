@@ -2,15 +2,15 @@
 #define ETRADE__STOCK_BOT_should_open_position
 
 /*
- * BUY_SELL_RATIO_DOOR_THRESHOLD
  * ETrade::StockBot
  * fmt
  * position_t
  */
 #include "stock_bot.h"
 
-#include "lib/utils/integer.cpp" // utils::integer_
-#include <time.h>                // time, time_t
+#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
+#include "lib/utils/integer.cpp"            // utils::integer_
+#include <time.h>                           // time, time_t
 
 bool ETrade::StockBot::should_open_position() {
   if (this->open_order_ptr) {
@@ -36,14 +36,19 @@ bool ETrade::StockBot::should_open_position() {
     }
   }
 
+  const closed_positions_stats_t stats = build_closed_positions_stats();
+
+  const double long_door_threshold =
+      (stats.loss_streaks.current < this->MAX_EXPECTED_LOSS_STREAK / 2) ? 1.3
+                                                                        : 1.5;
   const double short_door_threshold = 1.5;
 
-  if ((this->long_average_buy_sell_ratio >= BUY_SELL_RATIO_DOOR_THRESHOLD &&
+  if ((this->long_average_buy_sell_ratio >= long_door_threshold &&
        this->short_average_buy_sell_ratio >= short_door_threshold) ||
-      (this->long_average_sell_buy_ratio >= BUY_SELL_RATIO_DOOR_THRESHOLD &&
+      (this->long_average_sell_buy_ratio >= long_door_threshold &&
        this->short_average_sell_buy_ratio >= short_door_threshold)) {
     this->is_long_position =
-        this->long_average_buy_sell_ratio >= BUY_SELL_RATIO_DOOR_THRESHOLD;
+        this->long_average_buy_sell_ratio >= long_door_threshold;
 
     return true;
   }
