@@ -40,7 +40,7 @@ bool ETrade::StockBot::should_open_position() {
 
   const double long_door_threshold =
       (stats.loss_streaks.current < this->MAX_EXPECTED_LOSS_STREAK / 2) ? 1.3
-                                                                        : 1.5;
+                                                                        : 1.4;
   const double short_door_threshold = 1.5;
 
   if ((this->long_average_buy_sell_ratio >= long_door_threshold &&
