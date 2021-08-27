@@ -27,6 +27,7 @@
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
+#include "trim_old_quotes.cpp"              // trim_old_quotes
 #include <chrono>                           // std::chrono
 #include <thread>                           // std::this_thread
 
@@ -54,6 +55,7 @@ void ETrade::StockBot::watch() {
     close_position();
     log_position_results();
     reset_position();
+    trim_old_quotes();
 
     std::this_thread::sleep_for(
         std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));

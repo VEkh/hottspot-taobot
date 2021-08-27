@@ -4567,6 +4567,76 @@ Conclusions:
 
 * Opening Account Value: $65,413.52
 
+* Total: -$432.66 (-0.66%)
+  * AAPL (+$5.98)
+    Wins: 10 (52.63%) • Losses: 9 • Total: 19
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 6, 3: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 5, 2: 1, 3: 1}
+
+  * AMD  (-$178.37)
+    Wins: 27 (45.76%) • Losses: 32 • Total: 59
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 10, 2: 4, 3: 2, 4: 2}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 10, 2: 4, 3: 3}
+
+  * BA   (+$2.81)
+    Wins: 17 (51.52%) • Losses: 16 • Total: 33
+    Loss Streak => Current: 4 • Longest: 4 • Counts: {1: 4, 2: 4, 4: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 5, 2: 2, 4: 2}
+
+  * FB   (+$15.26)
+    Wins: 9 (34.62%) • Losses: 17 • Total: 26
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 3, 2: 1, 3: 1, 4: 1, 5: 1}
+    Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 6, 3: 1}
+
+  * MSFT (+$17.35)
+    Wins: 19 (55.88%) • Losses: 15 • Total: 34
+    Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 4, 2: 4, 3: 1}
+    Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 3, 3: 2, 4: 1}
+
+  * SNAP (+$82.94)
+    Wins: 27 (45.76%) • Losses: 32 • Total: 59
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 10, 2: 4, 3: 2, 4: 2}
+    Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 10, 2: 4, 3: 3}
+
+  * TSLA (+$24.62)
+    Wins: 6 (33.33%) • Losses: 12 • Total: 18
+    Loss Streak => Current: 3 • Longest: 4 • Counts: {1: 1, 2: 2, 3: 1, 4: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 4, 2: 1}
+
+  * TWTR (-$95.07)
+    Wins: 14 (31.82%) • Losses: 30 • Total: 44
+    Loss Streak => Current: 8 • Longest: 8 • Counts: {1: 6, 2: 1, 3: 3, 5: 1, 8: 1}
+    Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 8, 2: 3}
+
+  * VIAC (-$308.17)
+    Wins: 15 (41.67%) • Losses: 21 • Total: 36
+    Loss Streak => Current: 0 • Longest: 9 • Counts: {1: 8, 4: 1, 9: 1}
+    Win  Streak => Current: 1 • Longest: 5 • Counts: {1: 10, 5: 1}
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 35W 26L
+* Week's Return: -$306.65
+* Total Return: -$1,502.26
+
+#### Remarks
+* 6/9 stocks won
+* The longest loss-streaks were much higher today than yesterday. This is
+  because I lowered the entry threshold for long loss streaks.
+  * This opened trades at nearly the same frequency as low loss streaks.
+  * If a stock wasn't out of its cyclical wave by then, it would just rack up
+    losses.
+  * Increase the threshold again for long loss streaks.
+
+#### Next Thing(s) to Try
+
+### 2021-08-30:
+#### Performance
+
+* Opening Account Value: $64,981.81
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

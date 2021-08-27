@@ -115,6 +115,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *);
+  void trim_old_quotes();
   void watch();
 };
 } // namespace ETrade
