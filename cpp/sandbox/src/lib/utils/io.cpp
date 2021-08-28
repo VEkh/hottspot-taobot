@@ -1,11 +1,14 @@
 #ifndef UTILS__IO
 #define UTILS__IO
 
-#include <fstream> // std::ios, std::ofstream
-#include <map>     // std::map
-#include <regex>   // std::regex, std::regex_search, std::regex_token_iterator
-#include <string>  // std::string
-#include <utility> // std::pair
+#include "lib/formatted.cpp" // Formatted
+#include <fstream>           // std::ios, std::ofstream
+#include <map>               // std::map
+#include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
+#include <stdexcept> // std::runtime_error
+#include <stdio.h>   // fgets, popen
+#include <string>    // std::string
+#include <utility>   // std::pair
 
 namespace utils {
 namespace io {
@@ -46,6 +49,38 @@ std::map<std::string, std::string> extract_flags(int argc, char **argv) {
   }
 
   return flags;
+}
+
+std::string system_exec(const char *cmd) {
+  char buffer[128];
+  std::string result;
+  FILE *pipe = popen(cmd, "r");
+
+  if (pipe == nullptr) {
+    std::string error;
+    error = Formatted::error_message(
+        error + "popen() failed while executing '" + cmd + "'");
+
+    throw std::runtime_error(error);
+  }
+
+  try {
+    while (fgets(buffer, sizeof(buffer), pipe) != nullptr) {
+      result += buffer;
+    }
+  } catch (...) {
+    pclose(pipe);
+
+    std::string error;
+    error = Formatted::error_message(
+        error + "Something went wrong while reading the response from '" + cmd +
+        "'");
+
+    throw std::runtime_error(error);
+  }
+
+  pclose(pipe);
+  return result;
 }
 
 void write_to_file(std::string body, const char *file_path) {

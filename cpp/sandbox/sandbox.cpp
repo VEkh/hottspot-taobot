@@ -2,6 +2,9 @@
 #include <stdio.h>  // printf
 #include <vector>   // std::vector
 
+#include "lib/utils/io.cpp"
+#include <iostream>
+
 double running_total(const std::vector<double> &returns) {
   double sum = 0;
 
