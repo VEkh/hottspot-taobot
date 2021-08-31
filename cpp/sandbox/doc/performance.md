@@ -4637,6 +4637,85 @@ Conclusions:
 
 * Opening Account Value: $64,981.81
 
+* Total: -$1,109.78 (-1.71%)
+  * AAPL (+$5.11)
+  * AMD  (-$193.61)
+  * BA   (+$11.76)
+  * FB   (+$4.95)
+  * MSFT (+$15.08)
+  * SNAP (+$29.15)
+  * TSLA (-$21.56)
+  * TWTR (+$44.82)
+  * VIAC (-$1,005.47)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 35W 27L
+* Week's Return: -$1,109.78
+* Total Return: -$2,612.04
+
+#### Remarks
+* 6/9 stocks won
+* Rough day. VIAC hit 9-loss losing streak.
+* Requiring a high entry threshold during long losing streaks then requring
+  large movement in the same direction is a self-defeating strategy.
+* The spirit of wanting to wait for long losing streaks to leave their wave
+  patterns is good, but requiring large movement in the same direction is
+  asking too much.
+* I should instead wait for the price to leave the waves price range, then
+  enter at the normal entry indicator.
+
+#### Next Thing(s) to Try
+
+### 2021-08-31:
+#### Performance
+
+* Opening Account Value: $63,872.36
+
+* Total: +$97.03 (+0.15%)
+  * AAPL (+$40.71)
+  * AMD  (+$5.43)
+  * BA   (+$13.02)
+  * FB   (+$11.31)
+  * MSFT (+$11.05)
+  * SNAP (+$32.99)
+  * TSLA (-$25.42)
+  * TWTR (+$50.44)
+  * VIAC (-$42.50)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 36W 27L
+* Week's Return: -$1,012.75
+* Total Return: -$2,515.01
+
+#### Remarks
+* 7/9 stocks won, no abysmal losses 🎈
+* I goofed on the wedge algorithm at the beginning of the day. I think it
+  contributed to out of control losses. Bare minimum I didn't get an accurate
+  idea of how effective it is for the whole day.
+* When I got it right, it _did_ help avoid catastrophic losses by preventing
+  frivolous re-entry during a wedge.
+* I got very lucky with some block orders to break long losing streaks. I did
+  also get unlucky the similar movement so maybe it balanced out.
+* I also intervened in SNAP to ensure that I recovered at least most of the
+  running loss. The intervention turned out to not be necessary.
+* One potential issue with the wedge algorithm is that it may require the price
+  to move too far beyond the wedge before re-entry. This may lead to missed
+  opportunities to clear the losses.
+* I think I'll slightly contract the wedge upper and lower bounds.
+
+#### Next Thing(s) to Try
+
+### 2021-09-01:
+#### Performance
+
+* Opening Account Value: $63,969.70
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

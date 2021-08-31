@@ -1,11 +1,18 @@
 #ifndef ETRADE__STOCK_BOT_trim_old_quotes
 #define ETRADE__STOCK_BOT_trim_old_quotes
 
-#include "stock_bot.h" // ETrade::StockBot, quote_t
-#include <time.h>      // time_t, time
-#include <vector>      // vector
+#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
+#include "stock_bot.h"                      // ETrade::StockBot, quote_t
+#include <time.h>                           // time_t, time
+#include <vector>                           // vector
 
 void ETrade::StockBot::trim_old_quotes() {
+  const closed_positions_stats_t stats = build_closed_positions_stats();
+
+  if (stats.loss_streaks.current) {
+    return;
+  }
+
   const int max_time_limit = 5 * 60;
   int i = 0;
   std::vector<quote_t>::iterator it = this->quotes.begin();

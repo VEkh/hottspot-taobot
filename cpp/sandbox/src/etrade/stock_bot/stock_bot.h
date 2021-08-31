@@ -70,6 +70,7 @@ private:
 
   account_balance_t fetch_account_balance();
 
+  bool is_outside_wedge();
   bool should_close_position();
   bool should_open_position();
   bool should_terminate();
