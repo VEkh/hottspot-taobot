@@ -55,6 +55,7 @@ public:
   std::string fetch_quote(std::string);
 
   void fetch_access_token();
+  void manual_fetch_access_token();
   void refresh_token();
 
   Client();

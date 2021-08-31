@@ -9,6 +9,7 @@
 #include "fetch_order.cpp"
 #include "fetch_quote.cpp"
 #include "load_client_config.cpp" // load_client_config
+#include "manual_fetch_access_token.cpp"
 #include "parse_quote.cpp"
 #include "place_order.cpp"
 #include "post.cpp"

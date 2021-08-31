@@ -18,6 +18,7 @@ void print_usage() {
       {"fetch_access_token           ", "Get authorization token"},
       {"fetch_account_balance        ", "Get current account balance"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
+      {"manual_fetch_access_token    ", "Manually get authorization token"},
       {"refresh_token                ", "Refresh authorization tokens"},
       {"stock_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given symbol"},
@@ -96,6 +97,13 @@ int main(int argc, char *argv[]) {
 
     std::string quote = etrade_client.fetch_quote(symbol);
     std::cout << quote;
+
+    exit(0);
+  }
+
+  if (command == "manual_fetch_access_token") {
+    ETrade::Client etrade_client;
+    etrade_client.manual_fetch_access_token();
 
     exit(0);
   }

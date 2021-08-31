@@ -83,6 +83,10 @@ std::string system_exec(const char *cmd) {
   return result;
 }
 
+std::string system_exec(const std::string &cmd) {
+  return system_exec(cmd.c_str());
+}
+
 void write_to_file(std::string body, const char *file_path) {
   std::ofstream output_file(file_path, std::ios::out | std::ios::trunc);
   output_file << body;
