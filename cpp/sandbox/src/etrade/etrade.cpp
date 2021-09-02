@@ -9,16 +9,17 @@
 #include <sstream>                         // std::ostringstream
 #include <stdexcept>                       // std::invalid_argument
 #include <stdlib.h>                        // strtol
+#include <string.h>                        // strcmp
 #include <string>                          // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch <URL>                  ", "Generic authorized request"},
-      {"fetch_access_token           ", "Get authorization token"},
+      {"fetch_access_token           ",
+       "Get authorization token (modes: --auto | --manual)"},
       {"fetch_account_balance        ", "Get current account balance"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
-      {"manual_fetch_access_token    ", "Manually get authorization token"},
       {"refresh_token                ", "Refresh authorization tokens"},
       {"stock_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given symbol"},
@@ -78,8 +79,19 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "fetch_access_token") {
+    const char *mode = argc < 3 ? "--auto" : argv[2];
     ETrade::Client etrade_client;
-    etrade_client.fetch_access_token();
+
+    if (!strcmp(mode, "--auto")) {
+      etrade_client.fetch_access_token();
+    } else if (!strcmp(mode, "--manual")) {
+      etrade_client.manual_fetch_access_token();
+    } else {
+      std::string message = Formatted::error_message(
+          "Please provide a valid option: --auto | --manual");
+
+      throw std::invalid_argument(message);
+    }
 
     exit(0);
   }
@@ -97,13 +109,6 @@ int main(int argc, char *argv[]) {
 
     std::string quote = etrade_client.fetch_quote(symbol);
     std::cout << quote;
-
-    exit(0);
-  }
-
-  if (command == "manual_fetch_access_token") {
-    ETrade::Client etrade_client;
-    etrade_client.manual_fetch_access_token();
 
     exit(0);
   }
