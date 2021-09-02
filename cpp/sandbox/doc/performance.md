@@ -4711,10 +4711,38 @@ Conclusions:
 
 #### Next Thing(s) to Try
 
-### 2021-09-01:
+### 2021-09-02:
 #### Performance
 
 * Opening Account Value: $63,969.70
+
+* Total: -$70.38 (-0.11%)
+  * AAPL (+$7.00)
+  * AMD  (+$10.35)
+  * BA   (+$4.18)
+  * FB   (-$32.90)
+  * MSFT (+$28.83)
+  * SNAP (+$37.04)
+  * TSLA (-$4.13)
+  * TWTR (+$21.59)
+  * VIAC (-$142.35)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 36W 28L
+* Week's Return: -$1,012.75
+* Total Return: -$2,515.01
+
+#### Remarks
+
+#### Next Thing(s) to Try
+
+### 2021-09-01:
+#### Performance
+
+* Opening Account Value: $63,899.55
 
 * Total: $ (%)
   * AAPL ($)

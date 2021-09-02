@@ -11,7 +11,7 @@
 bool ETrade::StockBot::is_outside_wedge() {
   const closed_positions_stats_t stats = build_closed_positions_stats();
   const double current_price = this->quotes.back().current_price;
-  const double excess_ratio = 0.25;
+  const double excess_ratio = 0.15;
   const int loss_streak = stats.loss_streaks.current;
 
   const int closed_positions_l = this->closed_positions.size();

@@ -40,11 +40,11 @@ bool ETrade::StockBot::should_open_position() {
   const closed_positions_stats_t stats = build_closed_positions_stats();
 
   if (stats.loss_streaks.current >= this->LONG_LOSS_STREAK &&
-      stats.loss_streaks.current % 2 == 0 && !is_outside_wedge()) {
+      !is_outside_wedge()) {
     return false;
   }
 
-  const double long_door_threshold = 1.3;
+  const double long_door_threshold = 1.35;
   const double short_door_threshold = 1.5;
 
   if ((this->long_average_buy_sell_ratio >= long_door_threshold &&
