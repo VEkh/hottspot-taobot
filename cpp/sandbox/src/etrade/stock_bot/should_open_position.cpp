@@ -9,7 +9,6 @@
 #include "stock_bot.h"
 
 #include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include "is_outside_wedge.cpp"             // is_outside_wedge
 #include "lib/utils/integer.cpp"            // utils::integer_
 #include <time.h>                           // time, time_t
 
@@ -38,11 +37,6 @@ bool ETrade::StockBot::should_open_position() {
   }
 
   const closed_positions_stats_t stats = build_closed_positions_stats();
-
-  if (stats.loss_streaks.current >= this->LONG_LOSS_STREAK &&
-      !is_outside_wedge()) {
-    return false;
-  }
 
   const double long_door_threshold = 1.35;
   const double short_door_threshold = 1.5;

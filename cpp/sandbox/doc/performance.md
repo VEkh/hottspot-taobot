@@ -4807,6 +4807,71 @@ Conclusions:
 
 * Opening Account Value: $63,950.57
 
+* Total: -$603.19 (-0.94%)
+  * AAPL (-$11.68)
+    Wins: 1 (20.00%) • Losses: 4 • Total: 5
+    Loss Streak => Current: 4 • Longest: 4 • Counts: {4: 1}
+
+  * AMD  (+$7.46)
+    Wins: 2 (20.00%) • Losses: 8 • Total: 10
+    Loss Streak => Current: 7 • Longest: 7 • Counts: {1: 1, 7: 1}
+
+  * BA   (+$9.10)
+    Wins: 16 (51.61%) • Losses: 15 • Total: 31
+    Loss Streak => Current: 0 • Longest: 2 • Counts: {1: 9, 2: 3}
+
+  * FB   (+$13.76)
+    Wins: 14 (35.90%) • Losses: 25 • Total: 39
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 4, 2: 4, 3: 3, 4: 1}
+
+  * MSFT (+$6.54)
+    Wins: 14 (53.85%) • Losses: 12 • Total: 26
+    Loss Streak => Current: 2 • Longest: 3 • Counts: {1: 3, 2: 3, 3: 1}
+
+  * SNAP (-$640.68)
+    Wins: 2 (20.00%) • Losses: 8 • Total: 10
+    Loss Streak => Current: 7 • Longest: 7 • Counts: {1: 1, 7: 1}
+
+  * TSLA (+$9.18)
+    Wins: 8 (57.14%) • Losses: 6 • Total: 14
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 1, 2: 1, 3: 1}
+
+  * TWTR (+$13.78)
+    Wins: 23 (39.66%) • Losses: 35 • Total: 58
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 9, 2: 2, 3: 3, 4: 2, 5: 1}
+
+  * VIAC (-$10.67)
+    Wins: 1 (8.33%) • Losses: 11 • Total: 12 (after segfault)
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {5: 1, 6: 1}
+
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 37W 29L
+* Week's Return: -$427.37
+* Total Return: -$3,136.01
+
+#### Remarks
+  * 6/9 stocks won
+  * I'm going to scrap the await wedge strategy. It's great when a wedge is
+    initially broken, but when successive losses are incurred, it creates a
+    nearly insurmountable wedge and misses too many opportunities to enter
+    legitimate trades.
+  * I'm going to revert to allowing successive losses and awaiting a redemptive
+    win. I'm just going to increase `MAX_EXPECTED_LOSS_STREAK` to a level that
+    keeps the wagers small enough to not threaten massive losses.
+  * I'll start at 12 and gradually make my way to 10 (minimum) if it's evident
+    that > 12 losses rarely if ever happen.
+
+#### Next Thing(s) to Try:
+
+### 2021-09-07:
+#### Performance
+
+* Opening Account Value: $63,349.14
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

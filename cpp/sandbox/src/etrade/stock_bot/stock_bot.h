@@ -33,8 +33,7 @@ private:
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
 
-  const int LONG_LOSS_STREAK = 4;
-  const int MAX_EXPECTED_LOSS_STREAK = 8;
+  const int MAX_EXPECTED_LOSS_STREAK = 12;
 
   bool FLAG_MARTINGALE = false;
   bool FLAG_NORMALIZE_QUANTITY = false;
@@ -70,7 +69,6 @@ private:
 
   account_balance_t fetch_account_balance();
 
-  bool is_outside_wedge();
   bool should_close_position();
   bool should_open_position();
   bool should_terminate();
