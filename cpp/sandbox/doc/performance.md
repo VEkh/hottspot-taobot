@@ -4711,7 +4711,7 @@ Conclusions:
 
 #### Next Thing(s) to Try
 
-### 2021-09-02:
+### 2021-09-01:
 #### Performance
 
 * Opening Account Value: $63,969.70
@@ -4739,10 +4739,73 @@ Conclusions:
 
 #### Next Thing(s) to Try
 
-### 2021-09-01:
+### 2021-09-02:
 #### Performance
 
 * Opening Account Value: $63,899.55
+
+* Total: +$52.57 (+0.08%)
+  * AAPL (+$1.02)
+    Wins: 9 (60.00%) • Losses: 6 • Total: 15
+    Loss Streak => Current: 3 • Longest: 3 • Counts: {1: 3, 3: 1}
+
+  * AMD  (+$7.22)
+    Wins: 7 (41.18%) • Losses: 10 • Total: 17
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 4, 2: 3}
+
+  * BA   (-$5.99)
+    Wins: 10 (43.48%) • Losses: 13 • Total: 23
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {1: 4, 4: 1, 5: 1}
+
+  * FB   (+$7.17)
+    Wins: 13 (50.00%) • Losses: 13 • Total: 26
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 5, 2: 4}
+
+  * MSFT (-$12.92)
+    Wins: 4 (21.05%) • Losses: 15 • Total: 19
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {2: 1, 4: 2, 5: 1}
+
+  * SNAP (+$24.10)
+    Wins: 21 (45.65%) • Losses: 25 • Total: 46
+    Loss Streak => Current: 2 • Longest: 5 • Counts: {1: 6, 2: 3, 4: 2, 5: 1}
+
+  * TSLA (+$6.89)
+    Wins: 4 (66.67%) • Losses: 2 • Total: 6
+    Loss Streak => Current: 1 • Longest: 1 • Counts: {1: 2}
+
+  * TWTR (+$10.19)
+    Wins: 4 (33.33%) • Losses: 8 • Total: 12
+    Loss Streak => Current: 3 • Longest: 4 • Counts: {1: 1, 3: 1, 4: 1}
+
+  * VIAC (+$14.90)
+    Wins: 23 (46.00%) • Losses: 27 • Total: 50
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {1: 8, 3: 3, 5: 2}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 37W 28L
+* Week's Return: -$1,030.56
+* Total Return: -$2,532.82
+
+#### Remarks
+* 7/9 stocks won 🎈
+* Good thing is that there were no catastrophic losses.
+* Awaiting wedge breakthroughs is preventing excessive losses
+* The wedge algorithm needs to be enhanced, however, because its creating very
+  tall wedges from breakthroughs that still result in losses.
+* I need to use local min and maxes to better group / identify wedges.
+* Occasionally, StockBot segfaults after a win to break a long loss streak.
+  Investigate this.
+* The 10x 1-sec variance often spikes to bizzare levels. Investigate why this happens.
+
+#### Next Thing(s) to Try
+
+### 2021-09-03:
+#### Performance
+
+* Opening Account Value: $63,950.57
 
 * Total: $ (%)
   * AAPL ($)
