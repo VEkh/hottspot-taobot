@@ -4844,7 +4844,6 @@ Conclusions:
     Wins: 1 (8.33%) • Losses: 11 • Total: 12 (after segfault)
     Loss Streak => Current: 6 • Longest: 6 • Counts: {5: 1, 6: 1}
 
-
 * Consecutive Win  Days: 0
 * Consecutive Loss Days: 1
 
@@ -4871,6 +4870,72 @@ Conclusions:
 #### Performance
 
 * Opening Account Value: $63,349.14
+
+* Total: -$499.38 (-0.79%)
+  * AAPL (+$1.36)
+    Wins: 9 (60.00%) • Losses: 6 • Total: 15
+    Loss Streak => Current: 0 • Longest: 2 • Counts: {1: 4, 2: 1}
+
+  * AMD  (+$1.67)
+    Wins: 8 (50.00%) • Losses: 8 • Total: 16
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 1, 2: 1, 5: 1}
+
+  * BA   (+$0.64)
+    Wins: 7 (50.00%) • Losses: 7 • Total: 14
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 2, 2: 1, 3: 1}
+
+  * FB   (+$4.86)
+    Wins: 14 (45.16%) • Losses: 17 • Total: 31
+    Loss Streak => Current: 1 • Longest: 2 • Counts: {1: 5, 2: 6}
+
+  * MSFT (-$17.73)
+    Wins: 10 (31.25%) • Losses: 22 • Total: 32
+    Loss Streak => Current: 7 • Longest: 7 • Counts: {1: 2, 2: 2, 3: 3, 7: 1}
+
+  * SNAP (+$24.05)
+    Wins: 17 (38.64%) • Losses: 27 • Total: 44
+    Loss Streak => Current: 5 • Longest: 9 • Counts: {1: 5, 2: 4, 5: 1, 9: 1}
+
+  * TSLA (-$520.15)
+    Wins: 2 (16.67%) • Losses: 10 • Total: 12
+    Loss Streak => Current: 9 • Longest: 9 • Counts: {1: 1, 9: 1}
+
+  * TWTR (+$5.17)
+    Wins: 19 (35.19%) • Losses: 35 • Total: 54
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 3, 2: 5, 3: 2, 4: 1, 5: 1, 7: 1}
+
+  * VIAC (+$1.75)
+    Wins: 24 (44.44%) • Losses: 30 • Total: 54
+    Loss Streak => Current: 2 • Longest: 5 • Counts: {1: 7, 2: 4, 3: 2, 4: 1, 5: 1}
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 37W 30L
+* Week's Return: -$499.38
+* Total Return: -$3,635.39
+
+#### Remarks
+  * 7/9 stocks won 🎈
+  * Though I reduced the stakes for all stocks, nothing changed from TSLA
+    because of its price.
+  * TSLA wasn't quite in a wedge, but nonetheless couldn't break an 8-loss
+    losing streak.
+  * What may be happening is that positions are holding even when the price is
+    moving in the loss direction.
+  * A while ago, I used to exit when the entry signals would have opened a
+    position in the opposite direction. I'm going to try that again.
+    * It should rack up losses, but also perhaps reduce the overall losses
+      since it will be exiting sooner than some positions would have closed.
+    * It may also help catch the redemptive win opportunity before it passes by.
+
+#### Next Thing(s) to Try
+
+### 2021-09-08:
+#### Performance
+
+* Opening Account Value: $62,849.97
 
 * Total: $ (%)
   * AAPL ($)

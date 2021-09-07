@@ -3,16 +3,18 @@
 
 /*
  * ETrade::StockBot
+ * order_action_t
  * order_status_t
  * quote_t
  */
 #include "stock_bot.h"
 
-#include "build_exit_prices.cpp" // build_exit_prices
-#include "compute_profit.cpp"    // compute_profit
-#include "lib/utils/time.cpp"    // utils::time_
-#include "profit_percentage.cpp" // profit_percentage
-#include <time.h>                // time, time_t
+#include "build_exit_prices.cpp"    // build_exit_prices
+#include "compute_profit.cpp"       // compute_profit
+#include "lib/utils/time.cpp"       // utils::time_
+#include "profit_percentage.cpp"    // profit_percentage
+#include "should_open_position.cpp" // should_open_position
+#include <time.h>                   // time, time_t
 
 bool ETrade::StockBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -40,6 +42,15 @@ bool ETrade::StockBot::should_close_position() {
   }
 
   if (this->open_order.profit <= exit_prices.max_loss) {
+    return true;
+  }
+
+  if (this->is_long_position &&
+      should_open_position(order_action_t::SELL_SHORT)) {
+    return true;
+  }
+
+  if (!this->is_long_position && should_open_position(order_action_t::BUY)) {
     return true;
   }
 

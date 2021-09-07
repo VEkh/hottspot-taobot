@@ -71,6 +71,7 @@ private:
 
   bool should_close_position();
   bool should_open_position();
+  bool should_open_position(order_action_t);
   bool should_terminate();
 
   double compute_min_profit_price_range_ratio(const double);
