@@ -24,7 +24,7 @@ void ETrade::Client::fetch_access_token() {
       << "key=" << this->oauth.consumer_key << "&token=" << this->oauth.token;
 
   std::stringstream cmd;
-  cmd << "ruby " << APP_PATH << "/bin/etrade/fetch_access_token.rb \""
+  cmd << RUBY_PATH << " " << APP_PATH << "/bin/etrade/fetch_access_token.rb \""
       << url.str() << "\"";
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
