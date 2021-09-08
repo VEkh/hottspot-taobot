@@ -4937,6 +4937,73 @@ Conclusions:
 
 * Opening Account Value: $62,849.97
 
+* Total: +$40.46 (+0.06%)
+  * AAPL (+$0.99)
+    Wins: 7 (43.75%) • Losses: 9 • Total: 16
+    Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 4, 2: 1, 3: 1}
+
+  * AMD  (-$12.48)
+    Wins: 5 (41.67%) • Losses: 7 • Total: 12
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 1, 6: 1}
+
+  * BA   (+$56.77)
+    Wins: 11 (44.00%) • Losses: 14 • Total: 25
+    Loss Streak => Current: 0 • Longest: 9 • Counts: {1: 3, 2: 1, 9: 1}
+
+  * FB   (+$9.61)
+    Wins: 12 (38.71%) • Losses: 19 • Total: 31
+    Loss Streak => Current: 3 • Longest: 4 • Counts: {1: 2, 2: 2, 3: 3, 4: 1}
+
+  * MSFT (-$2.50)
+    Wins: 10 (43.48%) • Losses: 13 • Total: 23
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 3, 4: 1}
+
+  * SNAP (+$3.52)
+    Wins: 16 (34.78%) • Losses: 30 • Total: 46
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {2: 6, 3: 1, 4: 2, 7: 1}
+
+  * TSLA (+$7.23)
+    Wins: 9 (47.37%) • Losses: 10 • Total: 19
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 3, 2: 1, 5: 1}
+
+  * TWTR (+$2.42)
+    Wins: 13 (33.33%) • Losses: 26 • Total: 39
+    Loss Streak => Current: 1 • Longest: 8 • Counts: {1: 5, 3: 2, 7: 1, 8: 1}
+
+  * VIAC (-$25.10)
+    Wins: 14 (28.57%) • Losses: 35 • Total: 49
+    Loss Streak => Current: 0 • Longest: 10 • Counts: {1: 5, 2: 2, 3: 1, 4: 1, 9: 1, 10: 1}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 38W 30L
+* Week's Return: -$458.92
+* Total Return: -$3,594.93
+
+#### Remarks
+* 6/9 stocks won
+* As expected, periods of price consolidation resulted in long loss streaks.
+  This is okay, becuase I've allowed a `MAX_EXPECTED_LOSS_STREAK` of 12. It
+  also increases the redemptive win multiplier which is good.
+* If this strategy relies on a large `MAX_EXPECTED_LOSS_STREAK` it will only
+  stake so much, but it's better than losing lots of money because the loss
+  streaks rack up.
+* There were a couple of botched redemptive wins because the opposite open
+  signal triggered while in profit territory. As a result a couple long loss
+  streaks were redeemed by small wins.
+  * I added a loss requirement to this type of close to prevent this.
+* Otherwise, decent performance. Most things went as I expected. It's good to
+  see an overall win come from it.
+
+#### Next Thing(s) to Try
+
+### 2021-09-09:
+#### Performance
+
+* Opening Account Value: $62,890.48
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

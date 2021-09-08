@@ -45,6 +45,10 @@ bool ETrade::StockBot::should_close_position() {
     return true;
   }
 
+  if (this->open_order.profit > -5.0 * this->average_tick_price_delta) {
+    return false;
+  }
+
   if (this->is_long_position &&
       should_open_position(order_action_t::SELL_SHORT)) {
     return true;
