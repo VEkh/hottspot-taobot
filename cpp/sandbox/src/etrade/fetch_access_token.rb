@@ -23,8 +23,8 @@ driver
   .find_element(:xpath, "//button[contains(text(), 'Log on')]")
   .click
 
-accept_terms = lambda do |driver|
-  driver
+accept_terms = lambda do |d|
+  d
     .find_elements(:css, "input[type='submit'][value='Accept']")
     .first
     &.click

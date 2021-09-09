@@ -25,7 +25,7 @@ void ETrade::Client::fetch_access_token() {
 
   std::stringstream cmd;
   cmd << "GEM_HOME=" << RUBYGEMS_DIRECTORY << " " << RUBY_PATH << " "
-      << APP_PATH << "/bin/etrade/fetch_access_token.rb \"" << url.str()
+      << APP_PATH << "/src/etrade/fetch_access_token.rb \"" << url.str()
       << "\"";
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
