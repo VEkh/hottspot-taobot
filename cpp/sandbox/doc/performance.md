@@ -5004,6 +5004,65 @@ Conclusions:
 
 * Opening Account Value: $62,890.48
 
+* Total: -$772.35 (-1.23%)
+  * AAPL (+$14.30)
+  * AMD  (+$13.56)
+  * BA   (+$4.68)
+  * FB   (+$6.89)
+  * MSFT (+$9.27)
+  * SNAP (+$29.05)
+  * TSLA (-$44.43)
+  * TWTR (-$471.01)
+  * VIAC (-$334.65)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 38W 31L
+* Week's Return: -$1,231.27
+* Total Return: -$4,367.28
+
+#### Remarks
+* 6/9 stocks won
+* I accidentally interrupted the stock bots when experimenting with the
+  scheduled fetch access token. Instead of closing all positions and rebooting
+  each bot, I tried to manually trade the stocks that were down. I placed bad
+  trades with TWTR at high volume and this affected VIAC by limiting its funds.
+* The good news is that later restarted TWTR at a quantity of 1024 and it made
+  back $300+ of the $900+ that it lost.
+* This helped me realize that when StockBot unexpectedly exits in the future,
+  just close any open positions and restart it at the last traded quantity
+  until the losses are recovered.
+  * You should also do this is the `min_profit` / `max_profit` has expanded
+    well beyond their normal expected values. This typically occurs during long
+    loss streaks that trigger IFEs.
+  * NOTE: This is risky. I started to do this at the end of the day with VIAC
+    and ended up losing more money because its price was consolidating. Maybe
+    if I had started earlier things would have been fine.
+* The new "exit upon open signal in the loss direction" worked well. It has the
+  unintended effect of exiting at smaller losses. This keeps the loss streak
+  going while reducing how much needs to be recovered for the redemptive win. I
+  think it's a really good thing to keep.
+
+* I'm seeing the pattern here:
+  * StockBot makes money during periods of strong movement in one direction.
+  * It loses money during price consolidation.
+  * Almost all stock prices consolidate at some point during the day.
+  * It makes the most money when the price finally breaks through the
+    consolidation period.
+  * The only way for it to end at a loss should be if it ends the day in a
+    very extended consolidation period.
+  * However, as long as the price breaks through consolidation periods, it
+    should always make money.
+
+#### Next Thing(s) to Try
+
+### 2021-09-10:
+#### Performance
+
+* Opening Account Value: $62,118.02
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

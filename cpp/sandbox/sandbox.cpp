@@ -2,14 +2,14 @@
 #include <stdio.h>  // printf
 #include <vector>   // std::vector
 
-double running_total(const std::vector<double> &returns) {
-  double sum = 0;
+double sum(const std::vector<double> &returns) {
+  double total = 0;
 
   for (double n : returns) {
-    sum += n;
+    total += n;
   }
 
-  return sum;
+  return total;
 }
 
 int main() {
@@ -22,15 +22,16 @@ int main() {
       101.66,  160.27, 130.38,   340.12,  243.36,  240.00,  68.00,    -469.07,
       -419.72, 37.63,  44.74,    241.73,  338.38,  311.50,  198.92,   -622.55,
       -473.15, 140.64, -261.35,  123.96,  122.76,  -432.66, -1109.78, 97.03,
-      -70.38,  52.57,  -603.19,  -499.38, 40.46,
+      -70.38,  52.57,  -603.19,  -499.38, 40.46,   -772.35,
   };
 
   std::vector<double> weeks_returns = {
       -499.38,
       40.46,
+      -772.35,
   };
 
   setlocale(LC_NUMERIC, "");
-  printf("* Week's Return: %+'.2f\n", running_total(weeks_returns));
-  printf("* Total Return: %+'.2f\n", running_total(all_returns));
+  printf("* Week's Return: %+'.2f\n", sum(weeks_returns));
+  printf("* Total Return: %+'.2f\n", sum(all_returns));
 }
