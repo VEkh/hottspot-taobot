@@ -4,13 +4,15 @@ mkdir -p ./build/
 
 app_path=$(realpath "$(dirname $0)/../../")
 ruby_path=`which ruby`
+rubygems_directory=`gem environment gemdir`
 sources=("etrade")
 
 for src in "${sources[@]}"
 do
   g++ \
     -D"APP_PATH=\"$app_path\"" \
-    -D"RUBY_PATH=\"$app_path\"" \
+    -D"RUBY_PATH=\"$ruby_path\"" \
+    -D"RUBYGEMS_DIRECTORY=\"$rubygems_directory\"" \
     -iquote. \
     -iquote./src \
     -std=c++17 \

@@ -24,8 +24,9 @@ void ETrade::Client::fetch_access_token() {
       << "key=" << this->oauth.consumer_key << "&token=" << this->oauth.token;
 
   std::stringstream cmd;
-  cmd << RUBY_PATH << " " << APP_PATH << "/bin/etrade/fetch_access_token.rb \""
-      << url.str() << "\"";
+  cmd << "GEM_HOME=" << RUBYGEMS_DIRECTORY << " " << RUBY_PATH << " "
+      << APP_PATH << "/bin/etrade/fetch_access_token.rb \"" << url.str()
+      << "\"";
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
   puts("Fetching verifier with Selenium.\n");
