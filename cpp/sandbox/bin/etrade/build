@@ -2,22 +2,22 @@
 
 mkdir -p ./build/
 
-app_path=$(realpath "$(dirname $0)/../../")
-ruby_path=`which ruby`
-rubygems_directory=`gem environment gemdir`
+app_dir="$(realpath "$(dirname "$0")/../../")"
+ruby_path=$(which ruby)
+rubygems_dir=$(gem environment gemdir)
 sources=("etrade")
 
 for src in "${sources[@]}"
 do
   g++ \
-    -D"APP_PATH=\"$app_path\"" \
+    -D"APP_DIR=\"$app_dir\"" \
     -D"RUBY_PATH=\"$ruby_path\"" \
-    -D"RUBYGEMS_DIRECTORY=\"$rubygems_directory\"" \
+    -D"RUBYGEMS_DIR=\"$rubygems_dir\"" \
     -iquote. \
     -iquote./src \
     -std=c++17 \
-    -o ./build/$src \
-    ./src/$src/$src.cpp \
+    -o "./build/$src" \
+    "./src/$src/$src.cpp" \
     -lcrypto \
     -lcurl
-  done
+done

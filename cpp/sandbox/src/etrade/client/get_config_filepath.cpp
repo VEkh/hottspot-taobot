@@ -14,7 +14,7 @@ std::string ETrade::Client::get_config_filepath(const char *key) {
       {"tokens", "/config/etrade/tokens.json"},
   };
 
-  std::string filepath = std::string(APP_PATH) + paths[key];
+  std::string filepath = std::string(APP_DIR) + paths[key];
 
   client_config.paths[key] = filepath;
 
