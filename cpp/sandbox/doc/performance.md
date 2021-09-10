@@ -5063,6 +5063,65 @@ Conclusions:
 
 * Opening Account Value: $62,118.02
 
+* Total: +$79.04 (+0.13%)
+  * AAPL (+$3.57)
+    Wins: 10 (58.82%) • Losses: 7 • Total: 17
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {2: 2, 3: 1}
+
+  * AMD  (+$1.47)
+    Wins: 6 (42.86%) • Losses: 8 • Total: 14
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 1, 2: 2, 3: 1}
+
+  * BA   (+$13.17)
+    Wins: 12 (30.77%) • Losses: 27 • Total: 39
+    Loss Streak => Current: 0 • Longest: 10 • Counts: {1: 2, 2: 2, 3: 1, 8: 1, 10: 1}
+
+  * FB   (+$5.49)
+    Wins: 14 (41.18%) • Losses: 20 • Total: 34
+    Loss Streak => Current: 2 • Longest: 5 • Counts: {1: 4, 2: 4, 3: 1, 5: 1}
+
+  * MSFT (+$10.25)
+    Wins: 14 (53.85%) • Losses: 12 • Total: 26
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 2, 2: 1, 4: 2}
+
+  * SNAP (+$9.04)
+    Wins: 16 (35.56%) • Losses: 29 • Total: 45
+    Loss Streak => Current: 2 • Longest: 6 • Counts: {1: 2, 2: 2, 3: 3, 4: 2, 6: 1}
+
+  * TSLA (+$30.77)
+    Wins: 4 (30.77%) • Losses: 9 • Total: 13
+    Loss Streak => Current: 1 • Longest: 6 • Counts: {1: 1, 2: 1, 6: 1}
+
+  * TWTR (+$2.81)
+    Wins: 21 (41.18%) • Losses: 30 • Total: 51
+    Loss Streak => Current: 2 • Longest: 6 • Counts: {1: 4, 2: 2, 3: 2, 4: 1, 6: 2}
+
+  * VIAC (+$2.51)
+    Wins: 30 (48.39%) • Losses: 32 • Total: 62
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 8, 2: 7, 5: 2}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 39W 31L
+* Week's Return: -$1,152.23
+* Total Return: -$4,288.24
+
+#### Remarks
+* 9/9 stocks won 🥳,
+* Longest loss streak(s): 10 (BA)
+* There was strong movement in most stocks, but the refined algorithm performed
+  very well.
+* Keep an eye on it before increasing the stake of each trade.
+
+#### Next Thing(s) to Try
+
+### 2021-09-13:
+#### Performance
+
+* Opening Account Value: $62,197.13
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
