@@ -1,0 +1,23 @@
+#!/bin/bash
+
+case $1 in
+  "generate")
+    app_dir=$(realpath "$(dirname "$0")/../../")
+    cmd="10 8 * * 1-5 $app_dir/bin/etrade/start >> $app_dir/log/development.log 2>&1"
+
+    fmt_bold="\033[1m"
+    fmt_cyan="\033[36m"
+    fmt_reset="\033[0m"
+    fmt_yellow="\033[33m"
+
+    echo -e "${fmt_bold}${fmt_cyan}Cron command for StockBot start:\n"
+    echo -e "${fmt_yellow}$cmd"
+  ;;
+
+  "restart")
+    sudo service rsyslog restart
+    sudo service cron restart
+  ;;
+esac
+
+printf "%b" "$fmt_reset"

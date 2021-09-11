@@ -1,0 +1,18 @@
+#!/bin/bash
+
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_reset="\033[0m"
+
+echo -e "${fmt_bold}${fmt_cyan}"
+echo "Running StockBot instances$([[ -n $1 ]] && echo " for $1"):"
+echo -e "$fmt_reset"
+
+if [[ -n $1 ]]
+then
+  ps aux | rg [s]tock_bot | rg "$1"
+else
+  ps aux | rg [s]tock_bot
+fi
+
+echo

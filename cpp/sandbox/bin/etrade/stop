@@ -1,0 +1,42 @@
+#!/bin/bash
+
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_reset="\033[0m"
+
+shopt -s extglob
+
+echo -e "${fmt_bold}"
+
+case $1 in
+  +([[:alpha:]]))
+    state=$(ps aux | rg [s]tock_bot | rg "$1")
+
+    if [[ -z $state ]]
+    then
+      echo -e "${fmt_green}✅ StockBot is not running for $1"
+    else
+      echo -e "${fmt_cyan}🛑 Stopping StockBot for $1${fmt_reset}"
+
+      ps aux | rg [s]tock_bot | rg "$1" | awk '{print $2}' | xargs kill
+    fi
+
+    ;;
+
+  *)
+    state=$(ps aux | rg [s]tock_bot)
+
+    if [[ -z $state ]]
+    then
+      echo -e "${fmt_green}✅ No StockBot instances are running${fmt_reset}"
+    else
+      echo -e "${fmt_cyan}🛑 Stopping all StockBot instances${fmt_reset}"
+
+      ps aux | rg [s]tock_bot | awk '{print $2}' | xargs kill
+    fi
+    ;;
+esac
+echo
+
+printf "%b" "$fmt_reset"

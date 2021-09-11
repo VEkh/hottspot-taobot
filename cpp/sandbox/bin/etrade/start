@@ -1,31 +1,59 @@
 #!/bin/bash
-echo
-date
 
 app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_normal="\033[10m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
 
-"$app_dir/build/etrade" fetch_access_token
+shopt -s extglob
+echo -e "${fmt_bold}${fmt_cyan}"
+date
 
-symbols=(
-  "AAPL"
-  "AMD"
-  "BA"
-  "FB"
-  "MSFT"
-  "SNAP"
-  "TSLA"
-  "TWTR"
-  "VIAC"
-)
-
-for symbol in "${symbols[@]}"
-do
-  echo -e "Starting stock bot for $symbol\n"
-
+function symbol_start() {
+  symbol=$1
   log_file="$app_dir/log/$symbol.log"
+
+  echo -e "${fmt_bold}${fmt_yellow}"
+  echo -e "Starting StockBot for ${fmt_normal}${fmt_cyan}$symbol"
 
   touch "$log_file"
   echo "" > "$log_file"
 
-  "$app_dir/build/etrade" stock_bot "$symbol" 1 --martingale --normalize-quantity >> "$log_file" 2>&1 &
-done
+  "$app_dir/build/etrade" stock_bot \
+    "$symbol" \
+    1 \
+    --martingale \
+    --normalize-quantity >> "$log_file" 2>&1 &
+}
+
+
+case $1 in
+  +([[:alpha:]]))
+    symbol_start "$1"
+    ;;
+
+  *)
+    "$app_dir/build/etrade" fetch_access_token
+
+    symbols=(
+      "AAPL"
+      "AMD"
+      "BA"
+      "FB"
+      "MSFT"
+      "SNAP"
+      "TSLA"
+      "TWTR"
+      "VIAC"
+    )
+
+    for symbol in "${symbols[@]}"
+    do
+      symbol_start "$symbol"
+    done
+    ;;
+esac
+
+printf "%b" "$fmt_reset"
