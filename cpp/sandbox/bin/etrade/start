@@ -16,12 +16,12 @@ function symbol_start() {
   log_file="$app_dir/log/$symbol.log"
 
   echo -e "${fmt_bold}${fmt_yellow}"
-  echo -e "Starting StockBot for ${fmt_normal}${fmt_cyan}$symbol"
+  echo -e "Starting TaoBot for ${fmt_normal}${fmt_cyan}$symbol"
 
   touch "$log_file"
   echo "" > "$log_file"
 
-  "$app_dir/build/etrade" stock_bot \
+  "$app_dir/build/etrade" tao_bot \
     "$symbol" \
     1 \
     --martingale \

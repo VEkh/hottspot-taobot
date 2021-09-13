@@ -10,7 +10,7 @@ case $1 in
     fmt_reset="\033[0m"
     fmt_yellow="\033[33m"
 
-    echo -e "${fmt_bold}${fmt_cyan}Cron command for StockBot start:\n"
+    echo -e "${fmt_bold}${fmt_cyan}Cron command for TaoBot start:\n"
     echo -e "${fmt_yellow}$cmd"
   ;;
 

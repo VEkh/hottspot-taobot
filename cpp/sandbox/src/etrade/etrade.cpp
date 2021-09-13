@@ -3,7 +3,7 @@
 #include "lib/formatted.cpp"               // Formatted
 #include "lib/utils/debug.cpp"             // utils::debug
 #include "lib/utils/io.cpp"                // utils::io
-#include "stock_bot/stock_bot.cpp"         // ETrade::StockBot
+#include "tao_bot/tao_bot.cpp"         // ETrade::TaoBot
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <sstream>                         // std::ostringstream
@@ -21,7 +21,7 @@ void print_usage() {
       {"fetch_account_balance        ", "Get current account balance"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"refresh_token                ", "Refresh authorization tokens"},
-      {"stock_bot <SYMBOL> <QUANTITY>",
+      {"tao_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given symbol"},
   };
 
@@ -120,14 +120,14 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "stock_bot") {
+  if (command == "tao_bot") {
     char *symbol = argc < 3 ? nullptr : argv[2];
     int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
     std::map<std::string, std::string> flags =
         utils::io::extract_flags(argc, argv);
 
-    ETrade::StockBot stock_bot(symbol, quantity, flags);
-    stock_bot.run();
+    ETrade::TaoBot tao_bot(symbol, quantity, flags);
+    tao_bot.run();
 
     exit(0);
   }

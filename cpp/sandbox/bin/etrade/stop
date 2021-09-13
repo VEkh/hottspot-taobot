@@ -11,29 +11,29 @@ echo -e "${fmt_bold}"
 
 case $1 in
   +([[:alpha:]]))
-    state=$(ps aux | rg [s]tock_bot | rg "$1")
+    state=$(ps aux | rg [t]ao_bot | rg "$1")
 
     if [[ -z $state ]]
     then
-      echo -e "${fmt_green}✅ StockBot is not running for $1"
+      echo -e "${fmt_green}✅ TaoBot is not running for $1"
     else
-      echo -e "${fmt_cyan}🛑 Stopping StockBot for $1${fmt_reset}"
+      echo -e "${fmt_cyan}🛑 Stopping TaoBot for $1${fmt_reset}"
 
-      ps aux | rg [s]tock_bot | rg "$1" | awk '{print $2}' | xargs kill
+      ps aux | rg [t]ao_bot | rg "$1" | awk '{print $2}' | xargs kill
     fi
 
     ;;
 
   *)
-    state=$(ps aux | rg [s]tock_bot)
+    state=$(ps aux | rg [t]ao_bot)
 
     if [[ -z $state ]]
     then
-      echo -e "${fmt_green}✅ No StockBot instances are running${fmt_reset}"
+      echo -e "${fmt_green}✅ No TaoBot instances are running${fmt_reset}"
     else
-      echo -e "${fmt_cyan}🛑 Stopping all StockBot instances${fmt_reset}"
+      echo -e "${fmt_cyan}🛑 Stopping all TaoBot instances${fmt_reset}"
 
-      ps aux | rg [s]tock_bot | awk '{print $2}' | xargs kill
+      ps aux | rg [t]ao_bot | awk '{print $2}' | xargs kill
     fi
     ;;
 esac
