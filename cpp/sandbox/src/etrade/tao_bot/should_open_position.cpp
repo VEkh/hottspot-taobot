@@ -52,7 +52,7 @@ bool ETrade::TaoBot::should_open_position() {
 }
 
 bool ETrade::TaoBot::should_open_position(order_action_t order_action) {
-  const double long_door_threshold = 1.35;
+  const double long_door_threshold = 1.3;
   const double short_door_threshold = 1.5;
 
   switch (order_action) {

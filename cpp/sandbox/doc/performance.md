@@ -5182,6 +5182,65 @@ Conclusions:
 
 * Opening Account Value: $62,110.71
 
+* Total: $110.18 (+0.18%)
+  * AAPL (+$2.95)
+    Wins: 9 (37.50%) • Losses: 15 • Total: 24
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 2, 2: 2, 4: 1, 5: 1}
+
+  * AMD  (-$1.24)
+    Wins: 8 (33.33%) • Losses: 16 • Total: 24
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {1: 1, 2: 1, 3: 1, 5: 2}
+
+  * BA   (+$10.85)
+    Wins: 17 (40.48%) • Losses: 25 • Total: 42
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 6, 2: 3, 3: 2, 7: 1}
+
+  * FB   (+$15.79)
+    Wins: 16 (42.11%) • Losses: 22 • Total: 38
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 4, 2: 5, 3: 1, 5: 1}
+
+  * MSFT (+$5.13)
+    Wins: 12 (40.00%) • Losses: 18 • Total: 30
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 4, 2: 5, 4: 1}
+
+  * SNAP (+$60.72)
+    Wins: 24 (41.38%) • Losses: 34 • Total: 58
+    Loss Streak => Current: 0 • Longest: 9 • Counts: {1: 6, 2: 4, 3: 2, 5: 1, 9: 1}
+
+  * TSLA (+$22.05)
+    Wins: 11 (39.29%) • Losses: 17 • Total: 28
+    Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 2, 2: 1, 3: 3, 4: 1}
+
+  * TWTR (-$2.14)
+    Wins: 24 (40.68%) • Losses: 35 • Total: 59
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 6, 2: 4, 3: 2, 4: 1, 5: 1, 6: 1}
+
+  * VIAC (-$3.93)
+    Wins: 15 (37.50%) • Losses: 25 • Total: 40
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 4, 2: 6, 3: 1, 6: 1}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 40W 32L
+* Week's Return: +$23.94
+* Total Return: -$4,264.30
+
+#### Remarks
+* 6/9 stocks won
+* I reduced the long-term buy-sell threshold from 1.35 to 1.3
+* There was strong movement in most stocks. Stay vigilant for how it perfoms
+  during longer consolidation periods.
+
+#### Next Thing(s) to Try
+* Compute candle sticks from the last three minutes and use those determine entry
+
+### 2021-09-15:
+#### Performance
+
+* Opening Account Value: $62,220.72
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
