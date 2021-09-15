@@ -5241,6 +5241,66 @@ Conclusions:
 
 * Opening Account Value: $62,220.72
 
+* Total: +$80.88 (+0.13%)
+  * AAPL (+$2.09)
+    Wins: 8 (42.11%) • Losses: 11 • Total: 19
+    Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 1, 2: 2, 3: 2}
+
+  * AMD  (+$2.07)
+    Wins: 13 (40.62%) • Losses: 19 • Total: 32
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 2: 1, 3: 1, 4: 1, 5: 1}
+
+  * BA   (+$6.77)
+    Wins: 19 (51.35%) • Losses: 18 • Total: 37
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 4, 2: 3, 4: 2}
+
+  * FB   (+$7.02)
+    Wins: 14 (48.28%) • Losses: 15 • Total: 29
+    Loss Streak => Current: 1 • Longest: 6 • Counts: {1: 4, 2: 1, 3: 1, 6: 1}
+
+  * MSFT (+$5.78)
+    Wins: 11 (40.74%) • Losses: 16 • Total: 27
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 1, 2: 3, 4: 1, 5: 1}
+
+  * SNAP (+$6.56)
+    Wins: 22 (41.51%) • Losses: 31 • Total: 53
+    Loss Streak => Current: 3 • Longest: 6 • Counts: {1: 1, 2: 7, 3: 2, 4: 1, 6: 1}
+
+  * TSLA (+$21.85)
+    Wins: 11 (50.00%) • Losses: 11 • Total: 22
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 4, 2: 1, 5: 1}
+
+  * TWTR (+$5.40)
+    Wins: 28 (50.91%) • Losses: 27 • Total: 55
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 10, 2: 2, 3: 3, 4: 1}
+
+  * VIAC (+$23.34)
+    Wins: 16 (32.00%) • Losses: 34 • Total: 50
+    Loss Streak => Current: 2 • Longest: 8 • Counts: {1: 4, 2: 2, 3: 2, 4: 1, 8: 2}
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 41W 32L
+* Week's Return: +$104.82
+* Total Return: -$4,183.42
+
+#### Remarks
+* 9/9 stocks won 🥳
+* The day was characterized by mostly strong movement, hence the strong
+  performance
+* I did, however, see several instances where the three-candle entry indicator
+  would have served better than the buy-sell ratio.
+
+#### Next Thing(s) to Try
+* Three-candle entry indicator
+
+### 2021-09-16:
+#### Performance
+
+* Opening Account Value: $62,301.64
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
