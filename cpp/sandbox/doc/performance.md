@@ -5360,6 +5360,66 @@ Conclusions:
 
 * Opening Account Value: $62,419.84
 
+* Total: -$231.45 (-0.37%)
+  * AAPL (-$0.20)
+    Wins: 11 (35.48%) • Losses: 20 • Total: 31
+    Loss Streak => Current: 4 • Longest: 4 • Counts: {2: 2, 3: 4, 4: 1}
+
+  * AMD  (+$8.29)
+    Wins: 10 (32.26%) • Losses: 21 • Total: 31
+    Loss Streak => Current: 1 • Longest: 5 • Counts: {1: 5, 2: 2, 3: 1, 4: 1, 5: 1}
+
+  * BA   (+$5.04)
+    Wins: 14 (31.82%) • Losses: 30 • Total: 44
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 4, 2: 3, 3: 1, 4: 3, 5: 1}
+
+  * FB   (+$32.00)
+    Wins: 20 (45.45%) • Losses: 24 • Total: 44
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 3, 2: 2, 3: 1, 4: 2, 6: 1}
+
+  * MSFT (+$114.86)
+    Wins: 14 (31.82%) • Losses: 30 • Total: 44
+    Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 4, 2: 2, 4: 2, 6: 1, 8: 1}
+
+  * SNAP (+$12.81)
+    Wins: 12 (33.33%) • Losses: 24 • Total: 36
+    Loss Streak => Current: 2 • Longest: 7 • Counts: {1: 3, 2: 3, 3: 1, 5: 1, 7: 1}
+
+  * TSLA (+$44.54)
+    Wins: 14 (36.84%) • Losses: 24 • Total: 38
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 3, 2: 1, 3: 1, 4: 4}
+
+  * TWTR (+$11.54)
+    Wins: 24 (42.86%) • Losses: 32 • Total: 56
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 5, 2: 4, 3: 5, 4: 1}
+
+  * VIAC (-$460.34)
+    Wins: 18 (31.03%) • Losses: 40 • Total: 58
+    Loss Streak => Current: 15 • Longest: 15 • Counts: {1: 3, 2: 4, 3: 2, 4: 2, 15: 1}
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 42W 33L
+* Week's Return: -$8.37
+* Total Return: -$4,296.61
+
+#### Remarks
+* 7/9 stocks won 🎈
+* VIAC got crushed by end-of-day price consolidation. The buy-sell ratio kept
+  triggering position entries.
+* This may expose the buy-sell ratio's vulnerability to periods high, shallow
+  volatility
+
+#### Next Thing(s) to Try
+* Use the 3-candlestick trend as the primary entry indicator
+
+### 2021-09-20:
+#### Performance
+
+* Opening Account Value: $62,188.36
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
