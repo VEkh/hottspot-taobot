@@ -5301,6 +5301,65 @@ Conclusions:
 
 * Opening Account Value: $62,301.64
 
+* Total: +$118.26 (+0.19%)
+  * AAPL (+$48.19)
+    Wins: 4 (21.05%) • Losses: 15 • Total: 19
+    Loss Streak => Current: 1 • Longest: 11 • Counts: {1: 1, 3: 1, 11: 1}
+
+  * AMD  (+$1.63)
+    Wins: 10 (41.67%) • Losses: 14 • Total: 24
+    Loss Streak => Current: 2 • Longest: 3 • Counts: {1: 2, 2: 3, 3: 2}
+
+  * BA   (+$5.72)
+    Wins: 14 (31.11%) • Losses: 31 • Total: 45
+    Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 3, 2: 2, 3: 4, 4: 1, 8: 1}
+
+  * FB   (+$15.63)
+    Wins: 9 (31.03%) • Losses: 20 • Total: 29
+    Loss Streak => Current: 5 • Longest: 9 • Counts: {1: 2, 2: 2, 5: 1, 9: 1}
+
+  * MSFT (+$8.68)
+    Wins: 13 (44.83%) • Losses: 16 • Total: 29
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 3, 2: 2, 3: 1, 6: 1}
+
+  * SNAP (+$2.95)
+    Wins: 14 (29.17%) • Losses: 34 • Total: 48
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 1, 2: 2, 3: 1, 4: 1, 5: 3, 7: 1}
+
+  * TSLA (-$10.59)
+    Wins: 4 (26.67%) • Losses: 11 • Total: 15
+    Loss Streak => Current: 2 • Longest: 4 • Counts: {2: 2, 3: 1, 4: 1}
+
+  * TWTR (+$16.67)
+    Wins: 25 (37.88%) • Losses: 41 • Total: 66
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 5, 2: 2, 3: 1, 4: 4, 6: 1, 7: 1}
+
+  * VIAC (+$29.39)
+    Wins: 20 (29.85%) • Losses: 47 • Total: 67
+    Loss Streak => Current: 3 • Longest: 11 • Counts: {1: 3, 2: 3, 3: 2, 4: 1, 5: 1, 6: 2, 11: 1}
+
+* Consecutive Win  Days: 3
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 42W 32L
+* Week's Return: +$223.08
+* Total Return: -$4,065.16
+
+#### Remarks
+* 8/9 stocks won 🎉
+* Two stocks had 11-loss losing streaks and another, a 9-loss streak. 12 is
+  still probably a good `MAX_EXPECTED_LOSS_STREAK`
+* I messed up with the candlestick algorithm in the morning, but it didn't cost
+  too much.
+
+#### Next Thing(s) to Try
+
+### 2021-09-17:
+#### Performance
+
+* Opening Account Value: $62,419.84
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

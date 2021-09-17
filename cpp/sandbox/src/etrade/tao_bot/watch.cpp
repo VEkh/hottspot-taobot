@@ -9,12 +9,14 @@
 #include "tao_bot.h"
 
 #include "await_market_open.cpp"            // await_market_open
+#include "build_candlesticks.cpp"           // build_candlesticks
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "close_position.cpp"               // close_position
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "lib/utils/time.cpp"               // utils::time_
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
+#include "log_candlesticks.cpp"             // log_candlesticks
 #include "log_closed_positions.cpp"         // log_closed_positions
 #include "log_end_of_day.cpp"               // log_end_of_day
 #include "log_position.cpp"                 // log_position
@@ -37,9 +39,11 @@ void ETrade::TaoBot::watch() {
 
   while (!should_terminate()) {
     fetch_quote();
+    build_candlesticks();
 
-    log_quote();
     log_account_balance();
+    log_quote();
+    log_candlesticks();
     set_and_log_buy_sell_ratios();
     set_average_tick_price_delta();
     log_average_tick_price_delta();

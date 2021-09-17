@@ -1,4 +1,4 @@
-#if !defined ETRADE__utils
+#ifndef ETRADE__utils
 #define ETRADE__utils
 
 #include "constants.cpp"     // ETrade::constants

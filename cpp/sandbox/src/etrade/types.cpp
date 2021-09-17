@@ -39,6 +39,14 @@ struct account_balance_t {
   double day_trading_margin_buying_power;
 };
 
+struct candlestick_t {
+  std::string clock_time;
+  double close;
+  double high;
+  double low;
+  double open;
+};
+
 struct order_win_result_streak_t {
   std::map<int, int> counts;
   int current;

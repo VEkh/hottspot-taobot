@@ -5,6 +5,7 @@
 #include "etrade/deps.cpp"          // json
 #include "etrade/types.cpp"         // ETrade::t
 #include "lib/formatted.cpp"        // Formatted
+#include <list>                     // std::list
 #include <map>                      // std::map
 #include <string>                   // std::string
 #include <vector>                   // std::vector
@@ -18,6 +19,7 @@ public:
 
 private:
   using account_balance_t = ETrade::t::account_balance_t;
+  using candlestick_t = ETrade::t::candlestick_t;
   using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
   using exit_prices_t = ETrade::t::exit_prices_t;
   using order_action_t = ETrade::t::order_action_t;
@@ -63,12 +65,13 @@ private:
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
-
+  std::list<candlestick_t> candlesticks;
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance();
 
+  bool candlesticks_in_direction(order_action_t);
   bool should_close_position();
   bool should_open_position();
   bool should_open_position(order_action_t);
@@ -92,12 +95,14 @@ private:
   compute_moving_buy_sell_ratio_average(std::vector<int> &);
 
   void await_market_open();
+  void build_candlesticks();
   void cancel_stale_open_order();
   void close_position();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
   void log_account_balance();
   void log_average_tick_price_delta();
+  void log_candlesticks();
   void log_closed_positions();
   void log_end_of_day();
   void log_position();
