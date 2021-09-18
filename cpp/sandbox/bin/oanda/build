@@ -1,16 +1,12 @@
 #! /bin/bash
 
 app_dir="$(realpath "$(dirname "$0")/../../")"
-ruby_path=$(which ruby)
-rubygems_dir=$(gem environment gemdir)
-src="etrade"
+src="oanda"
 
 mkdir -p "$app_dir/build/"
 
 g++ \
   -D"APP_DIR=\"$app_dir\"" \
-  -D"RUBY_PATH=\"$ruby_path\"" \
-  -D"RUBYGEMS_DIR=\"$rubygems_dir\"" \
   -iquote"$app_dir" \
   -iquote"$app_dir/src" \
   -std=c++17 \

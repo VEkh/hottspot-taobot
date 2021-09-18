@@ -1,4 +1,4 @@
-#if !defined CURL_CLIENT_request
+#ifndef CURL_CLIENT_request
 #define CURL_CLIENT_request
 
 /*

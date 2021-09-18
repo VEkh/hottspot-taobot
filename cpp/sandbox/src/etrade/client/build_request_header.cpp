@@ -1,7 +1,7 @@
 #if !defined ETRADE__CLIENT_build_request_header
 #define ETRADE__CLIENT_build_request_header
 
-#include "client.h"                             // ETrade::Client, client_config
+#include "client.h"                             // ETrade::Client, config
 #include "etrade/oauth_header/oauth_header.cpp" // ETrade::OAuthHeader
 #include "lib/utils/map.cpp"                    // utils::map
 #include <map>                                  // std::map

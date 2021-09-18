@@ -1,7 +1,7 @@
-#if !defined ETRADE__CLIENT_cancel_order
+#ifndef ETRADE__CLIENT_cancel_order
 #define ETRADE__CLIENT_cancel_order
 
-#include "client.h"        // ETrade::Client, client_config, order_t
+#include "client.h"        // ETrade::Client, config, order_t
 #include "etrade/deps.cpp" // json, _json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
@@ -29,8 +29,8 @@ CurlClient ETrade::Client::cancel_order(int order_id) {
     throw std::invalid_argument(message);
   }
 
-  std::string url = client_config.base_url + "/v1/accounts/" +
-                    client_config.account_id_key + "/orders/cancel.json";
+  std::string url = config.base_url + "/v1/accounts/" +
+                    config.account_id_key + "/orders/cancel.json";
 
   json body = R"(
     {

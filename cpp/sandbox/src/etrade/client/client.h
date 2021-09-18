@@ -20,13 +20,6 @@ public:
 
   enum debug_t { OFF, ON };
 
-  struct client_config_t {
-    std::string account_id;
-    std::string account_id_key;
-    std::string base_url;
-    std::map<const char *, std::string> paths;
-  } client_config;
-
   struct post_params_t {
     std::string body;
     CurlClient::http_method_t method = CurlClient::http_method_t::POST;
@@ -62,6 +55,13 @@ public:
   Client(props_t);
 
 private:
+  struct config_t {
+    std::string account_id;
+    std::string account_id_key;
+    std::string base_url;
+    std::map<const char *, std::string> paths;
+  } config;
+
   struct oauth_params_t {
     std::string consumer_key;
     std::string consumer_secret;
@@ -88,7 +88,7 @@ private:
   std::string get_config_filepath(const char *);
 
   void fetch_request_token();
-  void load_client_config();
+  void load_config();
   void load_token();
   void write_token(std::string);
 };

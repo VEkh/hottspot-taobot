@@ -2,7 +2,7 @@
 #define ETRADE__CLIENT_preview_order
 
 #include "build_preview_order_payload.cpp" // build_preview_order_payload
-#include "client.h"        // ETrade::Client, client_config, order_t
+#include "client.h"        // ETrade::Client, config, order_t
 #include "etrade/deps.cpp" // json
 #include "handle_place_order_error.cpp"           // handle_place_order_error
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
@@ -37,8 +37,8 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 } // namespace ETrade
 
 CurlClient ETrade::Client::preview_order(const order_t &order) {
-  std::string request_url = client_config.base_url + "/v1/accounts/" +
-                            client_config.account_id_key +
+  std::string request_url = config.base_url + "/v1/accounts/" +
+                            config.account_id_key +
                             "/orders/preview.json";
 
   std::string payload = build_preview_order_payload(order);

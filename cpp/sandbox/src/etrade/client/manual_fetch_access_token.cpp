@@ -1,7 +1,7 @@
 #ifndef ETRADE__CLIENT_manual_fetch_access_token
 #define ETRADE__CLIENT_manual_fetch_access_token
 
-#include "client.h" // ETrade::Client, client_config, stream_format
+#include "client.h" // ETrade::Client, config, stream_format
 #include "fetch_request_token.cpp" // fetch_request_token
 #include "fetch_token.cpp"         // fetch_token
 #include "lib/formatted.cpp"       // Formatted
@@ -32,7 +32,7 @@ void ETrade::Client::manual_fetch_access_token() {
   std::cout << std::endl;
 
   std::string token_response =
-      fetch_token(client_config.base_url + "/oauth/access_token");
+      fetch_token(config.base_url + "/oauth/access_token");
 
   write_token(token_response);
 }

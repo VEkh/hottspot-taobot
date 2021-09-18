@@ -1,7 +1,7 @@
 #ifndef ETRADE__CLIENT_fetch_quote
 #define ETRADE__CLIENT_fetch_quote
 
-#include "client.h"                        // ETrade::Client, client_config
+#include "client.h"                        // ETrade::Client, config
 #include "etrade/deps.cpp"                 // json
 #include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
@@ -48,8 +48,6 @@ bool is_retriable_response(const CurlClient &curl_client) {
 
   return false;
 }
-} // namespace fetch_quote
-} // namespace ETrade
 
 bool is_valid_response(const std::string &response_body) {
   json response = json::parse(response_body);
@@ -68,6 +66,8 @@ void terminate(const std::string &response_body, const std::string &symbol) {
 
   exit(1);
 }
+} // namespace fetch_quote
+} // namespace ETrade
 
 std::string ETrade::Client::fetch_quote(char *symbol) {
   if (symbol == nullptr) {
@@ -82,7 +82,7 @@ std::string ETrade::Client::fetch_quote(char *symbol) {
 
 std::string ETrade::Client::fetch_quote(std::string symbol) {
   std::string request_url =
-      client_config.base_url + "/v1/market/quote/" + symbol + ".json";
+      config.base_url + "/v1/market/quote/" + symbol + ".json";
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return fetch(request_url); },
@@ -90,8 +90,8 @@ std::string ETrade::Client::fetch_quote(std::string symbol) {
 
   std::string response_body = curl_client.response.body;
 
-  if (!is_valid_response(response_body)) {
-    terminate(response_body, symbol);
+  if (!ETrade::fetch_quote::is_valid_response(response_body)) {
+    ETrade::fetch_quote::terminate(response_body, symbol);
   }
 
   return response_body;

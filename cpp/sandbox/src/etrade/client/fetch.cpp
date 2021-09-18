@@ -6,7 +6,6 @@
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted::error_message
 #include "load_token.cpp"                  // load_token
-#include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string

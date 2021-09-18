@@ -1,7 +1,6 @@
 #include "client/client.cpp"               // ETrade::Client
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
-#include "lib/utils/debug.cpp"             // utils::debug
 #include "lib/utils/io.cpp"                // utils::io
 #include "returns.cpp"                     // ETrade::Returns
 #include "tao_bot/tao_bot.cpp"             // ETrade::TaoBot

@@ -1,7 +1,7 @@
 #ifndef ETRADE__CLIENT_fetch_order
 #define ETRADE__CLIENT_fetch_order
 
-#include "client.h"                        // ETrade::Client, client_config
+#include "client.h"                        // ETrade::Client, config
 #include "etrade/deps.cpp"                 // json
 #include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
@@ -40,8 +40,8 @@ bool is_retriable_response(const CurlClient &curl_client) {
 } // namespace ETrade
 
 std::string ETrade::Client::fetch_order(const int order_id) {
-  std::string request_url = client_config.base_url + "/v1/accounts/" +
-                            client_config.account_id_key + "/orders/" +
+  std::string request_url = config.base_url + "/v1/accounts/" +
+                            config.account_id_key + "/orders/" +
                             std::to_string(order_id) + ".json";
 
   CurlClient curl_client = CurlClient::request_with_retry(

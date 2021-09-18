@@ -8,18 +8,18 @@
 #include "fetch_account_balance.cpp"
 #include "fetch_order.cpp"
 #include "fetch_quote.cpp"
-#include "load_client_config.cpp" // load_client_config
+#include "load_config.cpp" // load_config
 #include "manual_fetch_access_token.cpp"
 #include "parse_quote.cpp"
 #include "place_order.cpp"
 #include "post.cpp"
 #include "refresh_token.cpp"
 
-ETrade::Client::Client() { load_client_config(); }
+ETrade::Client::Client() { load_config(); }
 
 ETrade::Client::Client(props_t props_) {
   props = props_;
-  load_client_config();
+  load_config();
 }
 
 #endif
