@@ -1,0 +1,9 @@
+#!/bin/bash
+
+app_dir="$(realpath "$(dirname "$0")/../")"
+projects=("etrade" "oanda")
+
+for project in "${projects[@]}"
+do
+  "$app_dir/bin/$project/build"
+done

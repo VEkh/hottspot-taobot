@@ -1,7 +1,13 @@
 #! /bin/bash
 
 app_dir="$(realpath "$(dirname "$0")/../../")"
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
 src="oanda"
+
+echo -e "${fmt_bold}${fmt_cyan}Building: ${fmt_yellow}Oanda${fmt_reset}"
 
 mkdir -p "$app_dir/build/"
 
