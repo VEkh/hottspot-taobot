@@ -6,6 +6,7 @@
 #include "get_config_filepath.cpp" // get_config_filepath
 #include "lib/formatted.cpp"       // Formatted::error_message
 #include <fstream>                 // std::ifstream, std::ios
+#include <stdexcept>               // std::invalid_argument
 #include <string>                  // std::string
 
 void ETrade::Client::load_token() {

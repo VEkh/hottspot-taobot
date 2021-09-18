@@ -3,7 +3,8 @@
 #include "lib/formatted.cpp"               // Formatted
 #include "lib/utils/debug.cpp"             // utils::debug
 #include "lib/utils/io.cpp"                // utils::io
-#include "tao_bot/tao_bot.cpp"         // ETrade::TaoBot
+#include "returns.cpp"                     // ETrade::Returns
+#include "tao_bot/tao_bot.cpp"             // ETrade::TaoBot
 #include <iostream>                        // std::cout, std::endl
 #include <map>                             // std::map
 #include <sstream>                         // std::ostringstream
@@ -20,6 +21,7 @@ void print_usage() {
        "Get authorization token (modes: --auto | --manual)"},
       {"fetch_account_balance        ", "Get current account balance"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
+      {"log_returns                  ", "Print cumulative return"},
       {"refresh_token                ", "Refresh authorization tokens"},
       {"tao_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given symbol"},
@@ -109,6 +111,12 @@ int main(int argc, char *argv[]) {
 
     std::string quote = etrade_client.fetch_quote(symbol);
     std::cout << quote;
+
+    exit(0);
+  }
+
+  if (command == "log_returns") {
+    ETrade::Returns::log();
 
     exit(0);
   }
