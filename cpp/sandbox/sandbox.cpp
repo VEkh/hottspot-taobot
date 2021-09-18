@@ -1,7 +1,9 @@
-#include <math.h>
 #include <stdio.h> // printf
 
-int main() {
-  double a = -100;
-  printf("%c$%'.2f\n", a > 0 ? '+' : '-', abs(a));
+template <typename T> bool is_even(T n) {
+  T addend = 1;
+
+  return (n + addend) % 2 == 0;
 }
+
+int main() { printf("%i\n", is_even(1)); }

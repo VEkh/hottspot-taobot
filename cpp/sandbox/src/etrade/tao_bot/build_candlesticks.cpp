@@ -7,10 +7,6 @@
 #include <time.h>    // localtime, time_t, tm
 #include <vector>    // std::vector
 
-#include <stdlib.h> // getenv, setenv, unsetenv
-#include <string>   // std::string
-#include <time.h>   // localtime time_t
-
 void ETrade::TaoBot::build_candlesticks() {
   const int period = 60;
   const int max_candles = 4;
@@ -28,34 +24,15 @@ void ETrade::TaoBot::build_candlesticks() {
 
   std::vector<quote_t>::reverse_iterator it = this->quotes.rbegin();
 
-  std::string (*timestamp_to_clock)(time_t) =
-      [](time_t timestamp) -> std::string {
-    const char *original_tz = getenv("TZ");
-    setenv("TZ", "America/New_York", 1);
-
-    tm quote_time = *localtime(&timestamp);
-
-    const std::string out = std::to_string(quote_time.tm_hour) + ":" +
-                            std::to_string(quote_time.tm_min);
-
-    if (original_tz) {
-      setenv("TZ", original_tz, 1);
-    } else {
-      unsetenv("TZ");
-    }
-
-    return out;
-  };
-
   candlestick_t candlestick = {
-      .clock_time = timestamp_to_clock(it->timestamp),
+      .clock_time = utils::time_::timestamp_to_clock(it->timestamp),
       .close = it->current_price,
       .high = it->current_price,
       .low = it->current_price,
   };
 
   while (this->candlesticks.size() < max_candles) {
-    std::string clock_time = timestamp_to_clock(it->timestamp);
+    std::string clock_time = utils::time_::timestamp_to_clock(it->timestamp);
 
     if (candlestick.clock_time == clock_time) {
       candlestick.high = std::max(candlestick.high, it->current_price);
@@ -71,7 +48,7 @@ void ETrade::TaoBot::build_candlesticks() {
     this->candlesticks.push_front(candlestick);
 
     candlestick = {
-        .clock_time = timestamp_to_clock(it->timestamp),
+        .clock_time = utils::time_::timestamp_to_clock(it->timestamp),
         .close = it->current_price,
         .high = it->current_price,
         .low = it->current_price,

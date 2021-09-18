@@ -29,17 +29,17 @@ unsigned long epoch(const char *duration = "seconds") {
   }
 }
 
-template <typename Predicate>
-bool in_time_zone(const char *time_zone, Predicate fn) {
-  return in_time_zone(time_zone, &fn);
+template <typename ReturnType, typename Predicate>
+ReturnType in_time_zone(const char *time_zone, Predicate fn) {
+  return in_time_zone<ReturnType>(time_zone, &fn);
 }
 
-template <typename Predicate>
-bool in_time_zone(const char *time_zone, Predicate *fn) {
+template <typename ReturnType, typename Predicate>
+ReturnType in_time_zone(const char *time_zone, Predicate *fn) {
   const char *original_tz = getenv("TZ");
   setenv("TZ", time_zone, 1);
 
-  const bool out = (*fn)();
+  const ReturnType out = (*fn)();
 
   if (original_tz) {
     setenv("TZ", original_tz, 1);
@@ -51,7 +51,7 @@ bool in_time_zone(const char *time_zone, Predicate *fn) {
 }
 
 bool is_at_least(const std::vector<int> time_parts) {
-  return in_time_zone("America/New_York", [&]() -> bool {
+  return in_time_zone<bool>("America/New_York", [&]() -> bool {
     time_t local_now;
     time(&local_now);
     std::tm local_time = *std::localtime(&local_now);
@@ -74,7 +74,7 @@ bool is_at_least(const std::vector<int> time_parts) {
 }
 
 bool is_before(const std::vector<int> time_parts) {
-  return in_time_zone("America/New_York", [&]() -> bool {
+  return in_time_zone<bool>("America/New_York", [&]() -> bool {
     if (time_parts.empty()) {
       return false;
     }
@@ -100,6 +100,16 @@ bool is_before(const std::vector<int> time_parts) {
 bool is_early_day() { return is_before({11, 0}); }
 bool is_end_of_day() { return is_at_least({15, 59}) && is_before({16, 0}); }
 bool is_market_open() { return is_at_least({9, 30}) && is_before({16, 0}); }
+
+std::string timestamp_to_clock(time_t timestamp,
+                               const char *time_zone = "America/New_York") {
+  return in_time_zone<std::string>(time_zone, [&]() -> std::string {
+    tm quote_time = *localtime(&timestamp);
+
+    return std::to_string(quote_time.tm_hour) + ":" +
+           std::to_string(quote_time.tm_min);
+  });
+};
 
 } // namespace time_
 } // namespace utils
