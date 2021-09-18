@@ -29,26 +29,17 @@ void ETrade::TaoBot::log_candlesticks() {
 
   std::cout << fmt.reset << fmt.bold << fmt.cyan;
 
-  puts("[\n");
-
   while (candlestick != this->candlesticks.end()) {
     const double profit = candlestick->close - candlestick->open;
     Formatted::Stream log_color = profit >= 0 ? fmt.green : fmt.red;
 
     std::cout << log_color;
 
-    printf(" ⌚ %s: +/- %+'.2f • O: %'.2f • C: %'.2f • H: %'.2f • L: %'.2f\n",
-           candlestick->clock_time.c_str(), utils::float_::to_currency(profit),
-           utils::float_::to_currency(candlestick->open),
-           utils::float_::to_currency(candlestick->close),
-           utils::float_::to_currency(candlestick->high),
-           utils::float_::to_currency(candlestick->low));
+    printf("⌚ %s: %+'.2f\n", candlestick->clock_time.c_str(),
+           utils::float_::to_currency(profit));
 
     candlestick++;
   }
-
-  std::cout << fmt.cyan;
-  puts("]\n");
 
   std::cout << fmt.reset;
 }
