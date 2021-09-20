@@ -5420,6 +5420,75 @@ Conclusions:
 
 * Opening Account Value: $62,188.36
 
+* Total: +$325.16 (+0.52%)
+  * AAPL (+$19.67)
+    Wins: 16 (38.10%) • Losses: 26 • Total: 42
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 6, 3: 1, 5: 1, 6: 2}
+
+  * AMD  (+$11.72)
+    Wins: 22 (51.16%) • Losses: 21 • Total: 43
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 4, 2: 1, 3: 2, 4: 1, 5: 1}
+
+  * BA   (+$18.69)
+    Wins: 23 (50.00%) • Losses: 23 • Total: 46
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 5, 2: 4, 3: 2, 4: 1}
+
+  * FB   (+$120.02)
+    Wins: 14 (31.82%) • Losses: 30 • Total: 44
+    Loss Streak => Current: 1 • Longest: 9 • Counts: {1: 4, 2: 1, 4: 1, 5: 1, 6: 1, 9: 1}
+
+  * MSFT (+$10.39)
+    Wins: 16 (50.00%) • Losses: 16 • Total: 32
+    Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 5, 2: 2, 3: 1, 4: 1}
+
+  * SNAP (+$5.61)
+    Wins: 22 (51.16%) • Losses: 21 • Total: 43
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 4, 2: 1, 3: 2, 4: 1, 5: 1}
+
+  * TSLA (+$127.47)
+    Wins: 10 (25.00%) • Losses: 30 • Total: 40
+    Loss Streak => Current: 0 • Longest: 11 • Counts: {1: 3, 3: 1, 4: 2, 5: 1, 11: 1}
+
+  * TWTR (+$4.25)
+    Wins: 23 (41.82%) • Losses: 32 • Total: 55
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 6, 2: 3, 3: 1, 4: 1, 6: 1, 7: 1}
+
+  * VIAC (+$7.34)
+    Wins: 18 (36.00%) • Losses: 32 • Total: 50
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 3, 2: 2, 3: 3, 4: 1, 6: 2}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 43W 33L
+* Week's Return: +$325.16
+* Total Return: -$3,971.45
+
+#### Remarks
+* 9/9 stocks won 🥳
+* This was the first day where I used the three-candlestick trend as the sole
+  entry indicator.
+* It seems there were a comparable number of trades per stock.
+* TSLA hit an 11-loss losing streak which may confirm something:
+  * I've implemented several variants of a momentum algorthim and they all have
+    the same issue: they get wrecked during periods of price consolidation.
+  * It almost doesn't matter how the algorthim is implemented.
+* Any stock is capable of ending the day in a loss streak.
+* What seems to happen however, is that almost without fail, 2/3 of them will
+  profit.
+* The thing to determine whether it profits over time, assuming some days lose
+  and others win.
+
+#### Next Thing(s) to Try
+* Extract greater profit during times of extreme profit by exiting at 90% of
+  the profit instead of 80%.
+
+### 2021-09-21:
+#### Performance
+
+* Opening Account Value: $62,188.36
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

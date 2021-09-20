@@ -82,6 +82,7 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double profit_percentage(const order_t *);
   double redemptive_max_loss();
+  double secured_profit_ratio();
 
   int compute_normalized_quantity();
   int martingale_quantity_multiplier();
