@@ -1,7 +1,7 @@
 #ifndef ETRADE__TAO_BOT
 #define ETRADE__TAO_BOT
 
-#include "tao_bot.h"    // ETrade::TaoBot, init_order_action
+#include "tao_bot.h"      // ETrade::TaoBot, init_order_action
 #include "initialize.cpp" // initialize
 #include "run.cpp"        // run
 

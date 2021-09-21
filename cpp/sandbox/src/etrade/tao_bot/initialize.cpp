@@ -3,7 +3,7 @@
 
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "lib/formatted.cpp"         // Formatted::error_message
-#include "tao_bot.h"               // ETrade::TaoBot, quantity, symbol
+#include "tao_bot.h"                 // ETrade::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
 #include <stdexcept>                 // std::invalid_argument
 

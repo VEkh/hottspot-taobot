@@ -1,13 +1,17 @@
-#include "client/client.cpp" // Oanda::Client
-#include "lib/formatted.cpp" // Formatted
-#include <iostream>          // std::cout, std::endl
-#include <map>               // std::map
-#include <sstream>           // std::ostringstream
-#include <string>            // std::string
+#include "client/client.cpp"   // Oanda::Client
+#include "lib/formatted.cpp"   // Formatted
+#include "lib/utils/io.cpp"    // utils::io
+#include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
+#include <iostream>            // std::cout, std::endl
+#include <map>                 // std::map
+#include <sstream>             // std::ostringstream
+#include <string>              // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
+      {"tao_bot <SYMBOL> <QUANTITY>",
+       "Launch trading bot for the given currency pair"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -39,6 +43,18 @@ int main(int argc, char *argv[]) {
 
     std::string quote = oanda_client.fetch_quote(symbol);
     puts(quote.c_str());
+
+    exit(0);
+  }
+
+  if (command == "tao_bot") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
+    std::map<std::string, std::string> flags =
+        utils::io::extract_flags(argc, argv);
+
+    Oanda::TaoBot tao_bot(symbol, quantity, flags);
+    tao_bot.run();
 
     exit(0);
   }
