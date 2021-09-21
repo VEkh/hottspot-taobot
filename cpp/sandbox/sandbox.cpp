@@ -1,9 +1,7 @@
 #include <stdio.h> // printf
 
-template <typename T> bool is_even(T n) {
-  T addend = 1;
+int main() {
+  const int q = ((61720.32 * 4) * (2.0 / 3)) / 736.63;
 
-  return (n + addend) % 2 == 0;
+  printf("%i\n", q);
 }
-
-int main() { printf("%i\n", is_even(1)); }

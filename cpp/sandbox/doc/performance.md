@@ -5487,6 +5487,72 @@ Conclusions:
 ### 2021-09-21:
 #### Performance
 
+* Opening Account Value: $62,516.23
+
+* Total: -$819.10 (-1.31%)
+  * AAPL (+$172.80)
+    Wins: 11 (25.58%) • Losses: 32 • Total: 43
+    Loss Streak => Current: 3 • Longest: 10 • Counts: {1: 2, 2: 1, 3: 2, 5: 1, 7: 1, 10: 1}
+
+  * AMD  (+$7.84)
+    Wins: 14 (31.11%) • Losses: 31 • Total: 45
+    Loss Streak => Current: 3 • Longest: 6 • Counts: {1: 2, 2: 3, 3: 4, 5: 1, 6: 1}
+
+  * BA   (+$78.71)
+    Wins: 10 (24.39%) • Losses: 31 • Total: 41
+    Loss Streak => Current: 1 • Longest: 9 • Counts: {1: 4, 2: 1, 5: 2, 6: 1, 9: 1}
+
+  * FB   (+$39.52)
+    Wins: 21 (43.75%) • Losses: 27 • Total: 48
+    Loss Streak => Current: 0 • Longest: 6 • Counts: {1: 5, 2: 3, 3: 2, 4: 1, 6: 1}
+
+  * MSFT (+$75.75)
+    Wins: 13 (30.23%) • Losses: 30 • Total: 43
+    Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 2, 2: 3, 3: 2, 8: 2}
+
+  * SNAP (+$2.76)
+    Wins: 16 (45.71%) • Losses: 19 • Total: 35
+    Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 4, 2: 3, 3: 3}
+
+  * TSLA (-$1200.01)
+    Wins: 7 (18.92%) • Losses: 30 • Total: 37
+    Loss Streak => Current: 16 • Longest: 16 • Counts: {1: 2, 2: 2, 4: 2, 16: 1}
+
+  * TWTR (-$7.19)
+    Wins: 8 (19.51%) • Losses: 33 • Total: 41
+    Loss Streak => Current: 7 • Longest: 10 • Counts: {1: 1, 2: 1, 3: 3, 4: 1, 7: 1, 10: 1}
+
+  * VIAC (+$10.73)
+    Wins: 15 (36.59%) • Losses: 26 • Total: 41
+    Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 10, 2: 1, 6: 1, 8: 1}
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 43W 34L
+* Week's Return: -$493.94
+* Total Return: -$4,790.55
+
+#### Remarks
+* 7/9 stocks won 🎈
+* TSLA got wrecked, proving that the 3-min candlestick entry signal isn't
+  enough to stop excessive loss streaks.
+  * As such, I re-introduced a buy-sell ratio entry signal that triggers only
+    upon extreme movement.
+
+* This gave me the idea -- What if you picked up attempting to redeem the loss
+  streak the following morning, when movement is much greater.
+  * Presumably, the stock would move enough to recover the losses from the
+    prior day's loss streak.
+* The first step in this will be to persist the closed positions and read from
+  them instead of from the instance variable.
+
+#### Next Thing(s) to Try
+
+### 2021-09-22:
+#### Performance
+
 * Opening Account Value: $62,188.36
 
 * Total: $ (%)

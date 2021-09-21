@@ -12,22 +12,24 @@
  */
 #include "tao_bot.h"
 
-#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include "compute_normalized_quantity.cpp"  // compute_normalized_quantity
-#include "etrade/constants.cpp"             // ETrade::constants
-#include "lib/curl_client/curl_client.h"    // CurlClient
-#include "should_open_position.cpp"         // should_open_position
-#include <iostream>                         // std::cout, std::endl
-#include <stdio.h>                          // printf
-#include <string>                           // std::string
+#include "etrade/constants.cpp"          // ETrade::constants
+#include "fetch_account_balance.cpp"     // fetch_account_balance
+#include "lib/curl_client/curl_client.h" // CurlClient
+#include "normalized_quantity.cpp"       // normalized_quantity
+#include "should_open_position.cpp"      // should_open_position
+#include <iostream>                      // std::cout, std::endl
+#include <stdio.h>                       // printf
+#include <string>                        // std::string
 
 void ETrade::TaoBot::open_position() {
   if (!should_open_position()) {
     return;
   }
 
+  this->account_balance = fetch_account_balance();
+
   const double current_price = this->quotes.back().current_price;
-  this->quantity = compute_normalized_quantity();
+  this->quantity = normalized_quantity();
 
   order_t new_open_order;
   new_open_order.action =
@@ -69,29 +71,19 @@ void ETrade::TaoBot::open_position() {
 
     switch (curl_client.response.error_code) {
     case 100: {
-      printf("Account Key Error 🐞 (100). Retrying.\n");
+      puts("Account Key Error 🐞 (100). Retrying.");
 
       break;
     }
 
     case 3010: {
-      std::string message = "Insufficient Funds Error 😓 (3010).";
-
-      if (this->FLAG_MARTINGALE) {
-        closed_positions_stats_t stats = build_closed_positions_stats();
-
-        this->insufficient_funds_at_loss = stats.loss_streaks.current;
-
-        message += " Halving quantity, doubling the min profit.";
-      }
-
-      printf("%s\n", message.c_str());
+      puts("Insufficient Funds Error 😓 (3010).");
 
       break;
     }
 
     case 33: {
-      printf("This securiity is not shortable at this time (33).\n");
+      puts("This securiity is not shortable at this time (33).");
 
       break;
     }

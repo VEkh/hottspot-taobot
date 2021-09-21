@@ -30,15 +30,6 @@ void ETrade::TaoBot::reset_position() {
       .open_order = this->open_order,
   };
 
-  if (this->FLAG_MARTINGALE) {
-    const order_win_result_t win_result =
-        order_win_result(&(this->close_order));
-
-    if (win_result == order_win_result_t::WIN) {
-      this->insufficient_funds_at_loss = 0;
-    }
-  }
-
   this->closed_positions.push_back(position);
   this->close_order_ptr = nullptr;
   this->open_order_ptr = nullptr;

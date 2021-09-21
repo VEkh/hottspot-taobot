@@ -57,7 +57,6 @@ private:
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
   exit_prices_t exit_prices;
-  int insufficient_funds_at_loss = 0;
   int quantity_mulitiplier;
   int quantity;
   json placed_orders;
@@ -84,8 +83,8 @@ private:
   double redemptive_max_loss();
   double secured_profit_ratio();
 
-  int compute_normalized_quantity();
   int martingale_quantity_multiplier();
+  int normalized_quantity();
 
   closed_positions_stats_t build_closed_positions_stats();
   exit_prices_t build_exit_prices();
