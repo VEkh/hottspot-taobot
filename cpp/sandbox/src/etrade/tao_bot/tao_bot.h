@@ -80,11 +80,11 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double profit_percentage(const order_t *);
-  double redemptive_max_loss();
+  double loss_to_recover();
   double secured_profit_ratio();
 
+  int compute_quantity();
   int martingale_quantity_multiplier();
-  int normalized_quantity();
 
   closed_positions_stats_t build_closed_positions_stats();
   exit_prices_t build_exit_prices();

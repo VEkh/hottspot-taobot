@@ -10,22 +10,23 @@
  */
 #include "tao_bot.h"
 
-#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include "redemptive_max_loss.cpp"          // redemptive_max_loss
-#include "secured_profit_ratio.cpp"         // secured_profit_ratio
-#include <algorithm>                        // std::max
-#include <math.h>                           // abs
+#include "loss_to_recover.cpp"      // loss_to_recover
+#include "secured_profit_ratio.cpp" // secured_profit_ratio
+#include <algorithm>                // std::max
+#include <math.h>                   // abs
 
 ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
-  const closed_positions_stats_t stats = build_closed_positions_stats();
-
   const double max_loss_multiplier = 20.0;
   const double secured_profit_ratio_ = secured_profit_ratio();
+  const double loss_to_recover_ = loss_to_recover();
 
   double max_loss = -1 * max_loss_multiplier * this->average_tick_price_delta;
 
-  if (stats.loss_streaks.current) {
-    max_loss = -1 * std::max(abs(redemptive_max_loss()), abs(max_loss));
+  if (loss_to_recover_ < 0) {
+    const double redemptive_max_loss =
+        (1.05 * abs(loss_to_recover_)) / this->open_order.quantity;
+
+    max_loss = -1 * std::max(redemptive_max_loss, abs(max_loss));
   }
 
   const double min_profit = abs(max_loss) / secured_profit_ratio_;

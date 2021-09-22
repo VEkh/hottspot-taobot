@@ -5553,7 +5553,85 @@ Conclusions:
 ### 2021-09-22:
 #### Performance
 
-* Opening Account Value: $62,188.36
+* Opening Account Value: $61,697.04
+
+* Total: +$204.48 (+0.33%)
+  * AAPL (+$29.63)
+    Wins: 12 (32.43%) • Losses: 25 • Total: 37
+    Loss Streak => Current: 0 • Longest: 9 • Counts: {1: 1, 2: 1, 3: 1, 4: 1, 6: 1, 9: 1}
+
+  * AMD  (+$4.70)
+    Wins: 17 (50.00%) • Losses: 17 • Total: 34
+    Loss Streak => Current: 3 • Longest: 4 • Counts: {1: 6, 2: 2, 3: 1, 4: 1}
+
+  * BA   (+$25.70)
+    Wins: 12 (35.29%) • Losses: 22 • Total: 34
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {1: 2, 2: 1, 4: 2, 5: 2}
+
+  * FB   (+$111.32)
+    Wins: 13 (35.14%) • Losses: 24 • Total: 37
+    Loss Streak => Current: 1 • Longest: 6 • Counts: {1: 3, 2: 1, 3: 1, 4: 1, 6: 2}
+
+  * MSFT (+$19.01)
+    Wins: 18 (43.90%) • Losses: 23 • Total: 41
+    Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 3, 2: 3, 3: 1, 4: 1, 7: 1}
+
+  * SNAP (-$14.67)
+    Wins: 17 (40.48%) • Losses: 25 • Total: 42
+    Loss Streak => Current: 2 • Longest: 9 • Counts: {1: 3, 2: 3, 3: 1, 4: 1, 9: 1}
+
+  * TSLA (+$18.32)
+    Wins: 13 (56.52%) • Losses: 10 • Total: 23
+    Loss Streak => Current: 2 • Longest: 2 • Counts: {1: 2, 2: 4}
+
+  * TWTR (-$0.57)
+    Wins: 13 (35.14%) • Losses: 24 • Total: 37
+    Loss Streak => Current: 6 • Longest: 6 • Counts: {1: 1, 2: 4, 3: 1, 6: 2}
+
+  * VIAC (+$11.05)
+    Wins: 17 (36.96%) • Losses: 29 • Total: 46
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 4, 2: 2, 3: 4, 4: 1, 5: 1}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 44W 34L
+* Week's Return: -$289.46
+* Total Return: -$4,586.07
+
+#### Remarks
+* 7/9 stocks won 🎈
+* I fixed a couple minor hiccups with the persisted closed positions opening a
+  trade without the 1-sec variance.
+* The day was characterized by pretty large movement so not too much concern
+  about price consolidation.
+* Tomorrow will be first day where I both:
+  1. Continue trading based on the prior day's loss streak
+  2. Use a loss-based quantity algorthim
+
+* The quantity algorthim I introduced will determine which quantity will most
+  efficiently recover losses by preferring a quantity that requires less price
+  movement.
+  * It overrides the martingale doubling algorthim.
+  * It limits the quantity to the max afforable quantity so IFEs should be all
+    but impossible;
+
+* I'm not sure how the quantity algorthim will go. Theoretically it should work
+  similarly to doubling, but will prefer a quantity that requires less
+  movement. This could have a couple effects:
+  1. Accelerate losses
+  2. Recover losses more quickly and magnify redemptive wins
+
+* We'll see how it performs
+
+
+#### Next Thing(s) to Try
+
+### 2021-09-23:
+#### Performance
+
+* Opening Account Value: $61,901.52
 
 * Total: $ (%)
   * AAPL ($)

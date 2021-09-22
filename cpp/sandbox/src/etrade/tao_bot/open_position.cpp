@@ -12,10 +12,10 @@
  */
 #include "tao_bot.h"
 
+#include "compute_quantity.cpp"          // compute_quantity
 #include "etrade/constants.cpp"          // ETrade::constants
 #include "fetch_account_balance.cpp"     // fetch_account_balance
 #include "lib/curl_client/curl_client.h" // CurlClient
-#include "normalized_quantity.cpp"       // normalized_quantity
 #include "should_open_position.cpp"      // should_open_position
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
@@ -29,7 +29,7 @@ void ETrade::TaoBot::open_position() {
   this->account_balance = fetch_account_balance();
 
   const double current_price = this->quotes.back().current_price;
-  this->quantity = normalized_quantity();
+  this->quantity = compute_quantity();
 
   order_t new_open_order;
   new_open_order.action =
