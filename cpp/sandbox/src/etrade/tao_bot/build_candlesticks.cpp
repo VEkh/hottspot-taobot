@@ -25,14 +25,14 @@ void ETrade::TaoBot::build_candlesticks() {
   std::vector<quote_t>::reverse_iterator it = this->quotes.rbegin();
 
   candlestick_t candlestick = {
-      .clock_time = utils::time_::timestamp_to_clock(it->timestamp),
+      .clock_time = ::utils::time_::timestamp_to_clock(it->timestamp),
       .close = it->current_price,
       .high = it->current_price,
       .low = it->current_price,
   };
 
   while (this->candlesticks.size() < max_candles) {
-    std::string clock_time = utils::time_::timestamp_to_clock(it->timestamp);
+    std::string clock_time = ::utils::time_::timestamp_to_clock(it->timestamp);
 
     if (candlestick.clock_time == clock_time) {
       candlestick.high = std::max(candlestick.high, it->current_price);
@@ -48,7 +48,7 @@ void ETrade::TaoBot::build_candlesticks() {
     this->candlesticks.push_front(candlestick);
 
     candlestick = {
-        .clock_time = utils::time_::timestamp_to_clock(it->timestamp),
+        .clock_time = ::utils::time_::timestamp_to_clock(it->timestamp),
         .close = it->current_price,
         .high = it->current_price,
         .low = it->current_price,

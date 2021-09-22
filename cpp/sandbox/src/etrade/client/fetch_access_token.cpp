@@ -31,7 +31,7 @@ void ETrade::Client::fetch_access_token() {
   puts("Fetching verifier with Selenium.\n");
   std::cout << fmt.reset;
 
-  const std::string verifier = utils::io::system_exec(cmd.str());
+  const std::string verifier = ::utils::io::system_exec(cmd.str());
 
   if (verifier.size() != 5) {
     std::string error_message =

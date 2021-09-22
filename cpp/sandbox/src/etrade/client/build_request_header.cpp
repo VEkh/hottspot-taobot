@@ -10,7 +10,7 @@
 std::string
 ETrade::Client::build_request_header(OAuthHeader::props_t oauth_header_props) {
   oauth_header_props.params =
-      utils::map::merge(oauth_header_props.params,
+      ::utils::map::merge(oauth_header_props.params,
                         {
                             {"oauth_consumer_key", oauth.consumer_key},
                             {"oauth_consumer_secret", oauth.consumer_secret},

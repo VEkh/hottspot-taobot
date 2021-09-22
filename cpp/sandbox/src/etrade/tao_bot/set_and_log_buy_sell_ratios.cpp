@@ -58,7 +58,7 @@ void ETrade::TaoBot::set_and_log_buy_sell_ratios() {
       std::cout << " • ";
     }
 
-    std::cout << utils::integer_::seconds_to_clock(period) << ": "
+    std::cout << ::utils::integer_::seconds_to_clock(period) << ": "
               << average_buy_sell_ratios[period]["buy"];
   }
 
@@ -72,7 +72,7 @@ void ETrade::TaoBot::set_and_log_buy_sell_ratios() {
       std::cout << " • ";
     }
 
-    std::cout << utils::integer_::seconds_to_clock(period) << ": "
+    std::cout << ::utils::integer_::seconds_to_clock(period) << ": "
               << average_buy_sell_ratios[period]["sell"];
   }
 

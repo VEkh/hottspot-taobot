@@ -62,7 +62,7 @@ void ETrade::TaoBot::log_position() {
 
   if (this->open_order.max_profit_timestamp) {
     std::cout << "Max Profit ⌚ Δ: "
-              << utils::integer_::seconds_to_clock(
+              << ::utils::integer_::seconds_to_clock(
                      now - this->open_order.max_profit_timestamp);
     std::cout << std::endl;
   }

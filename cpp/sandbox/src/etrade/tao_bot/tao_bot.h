@@ -94,6 +94,8 @@ private:
   std::map<int, std::map<const char *, double>>
   compute_moving_buy_sell_ratio_average(std::vector<int> &);
 
+  std::vector<position_t> read_closed_positions();
+
   void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
@@ -122,6 +124,7 @@ private:
   void set_status(order_t *);
   void trim_old_quotes();
   void watch();
+  void write_closed_positions();
 };
 } // namespace ETrade
 

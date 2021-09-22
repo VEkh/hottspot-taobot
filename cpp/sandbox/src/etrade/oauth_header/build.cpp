@@ -22,7 +22,7 @@ std::string ETrade::OAuthHeader::build() {
   };
 
   std::string signature = build_signature();
-  params["oauth_signature"] = utils::uri::percent_encode(signature);
+  params["oauth_signature"] = ::utils::uri::percent_encode(signature);
 
   std::stringstream header;
   std::map<std::string, std::string>::iterator it;

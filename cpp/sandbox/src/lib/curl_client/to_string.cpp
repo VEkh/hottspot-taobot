@@ -19,10 +19,10 @@ std::string CurlClient::to_string() {
 
   request_parts.push_back("\"" + transformed_props.url + "\"");
 
-  std::vector<std::string> filtered_request_parts = utils::vector::filter(
+  std::vector<std::string> filtered_request_parts = ::utils::vector::filter(
       request_parts, [](std::string part) -> bool { return !part.empty(); });
 
-  return utils::vector::join(filtered_request_parts, " ");
+  return ::utils::vector::join(filtered_request_parts, " ");
 }
 
 #endif

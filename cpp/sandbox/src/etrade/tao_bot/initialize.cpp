@@ -3,6 +3,7 @@
 
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "lib/formatted.cpp"         // Formatted::error_message
+#include "read_closed_positions.cpp" // read_closed_positions
 #include "tao_bot.h"                 // ETrade::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
 #include <stdexcept>                 // std::invalid_argument
@@ -31,6 +32,8 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
   this->symbol = symbol_;
   this->quantity_mulitiplier = quantity_mulitiplier_;
   this->quantity = quantity_mulitiplier_;
+
+  this->closed_positions = read_closed_positions();
 }
 
 #endif

@@ -40,13 +40,13 @@ void ETrade::TaoBot::log_quote() {
 
   std::cout << fmt.bold << fmt.underline << log_color;
   printf("%s Quote @ %s\n", symbol,
-         utils::integer_::seconds_to_clock(runtime).c_str());
+         ::utils::integer_::seconds_to_clock(runtime).c_str());
 
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Current: %'.2f • High: %'.2f • Low: %'.2f\n",
-         utils::float_::to_currency(current_quote.current_price),
-         utils::float_::to_currency(current_quote.high),
-         utils::float_::to_currency(current_quote.low));
+         ::utils::float_::to_currency(current_quote.current_price),
+         ::utils::float_::to_currency(current_quote.high),
+         ::utils::float_::to_currency(current_quote.low));
 
   std::cout << fmt.reset << std::endl;
 }

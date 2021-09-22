@@ -18,11 +18,11 @@ std::string CurlClient::build_query_params() {
   std::map<std::string, std::string>::iterator it;
 
   for (it = params.begin(); it != params.end(); it++) {
-    param_pairs.push_back(utils::uri::percent_encode(it->first) + "=" +
-                          utils::uri::percent_encode(it->second));
+    param_pairs.push_back(::utils::uri::percent_encode(it->first) + "=" +
+                          ::utils::uri::percent_encode(it->second));
   }
 
-  std::string query_params = utils::vector::join(param_pairs, "&");
+  std::string query_params = ::utils::vector::join(param_pairs, "&");
 
   transformed_props.query_params = query_params;
   return "?" + query_params;

@@ -51,7 +51,7 @@ int main(int argc, char *argv[]) {
     char *symbol = argc < 3 ? nullptr : argv[2];
     int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
     std::map<std::string, std::string> flags =
-        utils::io::extract_flags(argc, argv);
+        ::utils::io::extract_flags(argc, argv);
 
     Oanda::TaoBot tao_bot(symbol, quantity, flags);
     tao_bot.run();

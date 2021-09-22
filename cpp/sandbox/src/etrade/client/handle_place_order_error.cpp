@@ -28,7 +28,7 @@ ETrade::Client::handle_place_order_error(CurlClient &curl_client,
 
   std::cout << fmt.bold << fmt.red;
   std::cout << "❌ Something went wrong while trying to "
-            << utils::string::downcase(action) << " the "
+            << ::utils::string::downcase(action) << " the "
             << ETrade::constants::ORDER_ACTIONS[order_action]
             << " order: " << std::endl;
   std::cout << response_body.dump(2) << std::endl;

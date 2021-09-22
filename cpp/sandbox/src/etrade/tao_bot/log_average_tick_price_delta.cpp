@@ -14,7 +14,7 @@ void ETrade::TaoBot::log_average_tick_price_delta() {
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
   std::cout << "💲 Avg Tick Price Δ: ("
-            << utils::integer_::seconds_to_clock(
+            << ::utils::integer_::seconds_to_clock(
                    this->AVERAGE_TICK_PRICE_DELTA_PERIOD)
             << ")";
 

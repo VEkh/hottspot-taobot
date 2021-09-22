@@ -26,11 +26,11 @@ void CurlClient::set_request_body() {
     std::for_each(body_params.begin(), body_params.end(),
                   [&](std::pair<std::string, std::string> param) -> void {
                     param_pairs.push_back(
-                        utils::uri::percent_encode(param.first) + "=" +
-                        utils::uri::percent_encode(param.second));
+                        ::utils::uri::percent_encode(param.first) + "=" +
+                        ::utils::uri::percent_encode(param.second));
                   });
 
-    body = utils::vector::join(param_pairs, "&");
+    body = ::utils::vector::join(param_pairs, "&");
   }
 
   transformed_props.body = body;

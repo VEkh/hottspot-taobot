@@ -16,12 +16,12 @@ std::map<const char *, std::any> parse_request_url(std::string request_url) {
       {"query_params", (std::map<std::string, std::string>){}},
   };
 
-  std::vector<std::string> url_parts = utils::string::split(request_url, "?");
+  std::vector<std::string> url_parts = ::utils::string::split(request_url, "?");
 
   result["base_url"] = url_parts[0];
 
   if (url_parts.size() > 1) {
-    result["query_params"] = utils::uri::parse_query_params(url_parts[1]);
+    result["query_params"] = ::utils::uri::parse_query_params(url_parts[1]);
   }
 
   return result;
@@ -38,7 +38,7 @@ std::string ETrade::OAuthHeader::build_params_string() {
           parsed_request_url["query_params"]);
 
   std::map<std::string, std::string> signature_params =
-      utils::map::merge(params, query_params);
+      ::utils::map::merge(params, query_params);
 
   std::map<std::string, std::string>::iterator it;
   for (it = signature_params.begin(); it != signature_params.end(); it++) {

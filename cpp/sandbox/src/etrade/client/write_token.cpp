@@ -1,4 +1,4 @@
-#if !defined ETRADE__CLIENT_write_token
+#ifndef ETRADE__CLIENT_write_token
 #define ETRADE__CLIENT_write_token
 
 #include "client.h"                // ETrade::Client, props, stream_format
@@ -26,15 +26,15 @@ void ETrade::Client::write_token(std::string response_body) {
   }
 
   std::map<std::string, std::string> parsed_tokens =
-      utils::uri::parse_query_params(response_body);
+      ::utils::uri::parse_query_params(response_body);
 
   json tokens_json;
   tokens_json["oauth_token"] =
-      utils::string::trim(parsed_tokens["oauth_token"]);
+      ::utils::string::trim(parsed_tokens["oauth_token"]);
   tokens_json["oauth_token_secret"] =
-      utils::string::trim(parsed_tokens["oauth_token_secret"]);
+      ::utils::string::trim(parsed_tokens["oauth_token_secret"]);
 
-  utils::io::write_to_file(tokens_json.dump(2), tokens_path);
+  ::utils::io::write_to_file(tokens_json.dump(2), tokens_path);
 }
 
 #endif

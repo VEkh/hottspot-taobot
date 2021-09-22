@@ -28,7 +28,7 @@ void CurlClient::set_headers() {
     request_headers = curl_slist_append(request_headers, header.c_str());
   }
 
-  transformed_props.headers = utils::vector::join(header_pairs, " ");
+  transformed_props.headers = ::utils::vector::join(header_pairs, " ");
   curl_easy_setopt(curl, CURLOPT_HTTPHEADER, request_headers);
 }
 

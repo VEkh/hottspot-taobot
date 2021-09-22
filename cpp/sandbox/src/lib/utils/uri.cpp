@@ -21,11 +21,11 @@ parse_query_params(std::string query_string) {
   std::map<std::string, std::string> query_params = {};
 
   std::vector<std::string> query_params_array =
-      utils::string::split(query_string, "&");
+      ::utils::string::split(query_string, "&");
 
   std::vector<std::string>::iterator it;
   for (it = query_params_array.begin(); it != query_params_array.end(); it++) {
-    std::vector<std::string> param_parts = utils::string::split(*it, "=");
+    std::vector<std::string> param_parts = ::utils::string::split(*it, "=");
 
     if (param_parts.size() > 1) {
       query_params[param_parts[0]] = param_parts[1];

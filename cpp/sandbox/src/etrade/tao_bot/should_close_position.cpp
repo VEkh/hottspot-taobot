@@ -25,7 +25,7 @@ bool ETrade::TaoBot::should_close_position() {
     return false;
   }
 
-  if (utils::time_::is_end_of_day()) {
+  if (::utils::time_::is_end_of_day()) {
     return true;
   }
 

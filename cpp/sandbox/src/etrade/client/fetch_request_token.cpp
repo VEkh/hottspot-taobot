@@ -37,7 +37,7 @@ void ETrade::Client::fetch_request_token() {
   }
 
   std::map<std::string, std::string> parsed_tokens =
-      utils::uri::parse_query_params(response_body);
+      ::utils::uri::parse_query_params(response_body);
 
   oauth.token = parsed_tokens["oauth_token"];
   oauth.token_secret = parsed_tokens["oauth_token_secret"];

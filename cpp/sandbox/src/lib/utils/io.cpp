@@ -2,10 +2,10 @@
 #define UTILS__IO
 
 #include "lib/formatted.cpp" // Formatted
-#include <fstream>           // std::ios, std::ofstream
+#include <fstream>           // std::ifstream, std::ios, std::ofstream
 #include <map>               // std::map
 #include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
-#include <stdexcept> // std::runtime_error
+#include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <stdio.h>   // fgets, popen
 #include <string>    // std::string
 #include <utility>   // std::pair
@@ -49,6 +49,18 @@ std::map<std::string, std::string> extract_flags(int argc, char **argv) {
   }
 
   return flags;
+}
+
+std::ifstream read_file(const char *filepath) {
+  std::ifstream file(filepath, std::ios::in);
+
+  if (!file.good()) {
+    std::string error_message = Formatted::error_message(
+        std::string("Config file missing at ") + filepath);
+    throw std::invalid_argument(error_message);
+  }
+
+  return file;
 }
 
 std::string system_exec(const char *cmd) {

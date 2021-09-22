@@ -25,7 +25,7 @@ ETrade::OAuthHeader::OAuthHeader(props_t props_) {
   }
 
   props_.params =
-      utils::map::merge(props_.params, {{"oauth_callback", "oob"},
+      ::utils::map::merge(props_.params, {{"oauth_callback", "oob"},
                                         {"oauth_signature_method", "HMAC-SHA1"},
                                         {"oauth_version", "1.0"}});
 

@@ -36,7 +36,7 @@ void ETrade::TaoBot::log_candlesticks() {
     std::cout << log_color;
 
     printf("⌚ %s: %+'.2f\n", candlestick->clock_time.c_str(),
-           utils::float_::to_currency(profit));
+           ::utils::float_::to_currency(profit));
 
     candlestick++;
   }
