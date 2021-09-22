@@ -1,0 +1,6 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+
+"$app_dir/bin/etrade/stop" "$*"
+"$app_dir/bin/etrade/start" "$*"
