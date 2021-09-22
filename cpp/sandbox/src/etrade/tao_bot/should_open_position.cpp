@@ -18,6 +18,10 @@ bool ETrade::TaoBot::should_open_position() {
     return false;
   }
 
+  if (!this->average_tick_price_delta) {
+    return false;
+  }
+
   if (!this->FLAG_MARTINGALE && !this->closed_positions.empty()) {
     time_t now;
     time(&now);
