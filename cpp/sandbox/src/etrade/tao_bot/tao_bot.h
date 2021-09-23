@@ -83,6 +83,7 @@ private:
   double loss_to_recover();
   double secured_profit_ratio();
 
+  int base_quantity();
   int compute_quantity();
   int martingale_quantity_multiplier();
 
