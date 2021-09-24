@@ -2,21 +2,14 @@
 #define ETRADE__TAO_BOT_base_quantity
 
 #include "tao_bot.h" // ETrade::TaoBot
-#include <math.h>    // ceil, pow
+#include <math.h>    // ceil
 
 int ETrade::TaoBot::base_quantity() {
-  const double current_price = this->quotes.back().current_price;
-  const double max_allowable_margin_ratio = 2.0 / 3.0;
-  const int margin_multiplier = 4;
+  const double target_profit = 0.5;
+  const double variance_multiplier = 20;
 
-  const double max_order_price =
-      (max_allowable_margin_ratio * this->account_balance.balance *
-       margin_multiplier);
-
-  const double basis_price =
-      max_order_price / pow(2, this->MAX_EXPECTED_LOSS_STREAK);
-
-  const int base_quantity_ = ceil(basis_price / current_price);
+  const int base_quantity_ = ceil(
+      target_profit / (variance_multiplier * this->average_tick_price_delta));
 
   return this->quantity_mulitiplier * base_quantity_;
 }

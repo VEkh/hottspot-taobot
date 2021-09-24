@@ -5633,6 +5633,74 @@ Conclusions:
 
 * Opening Account Value: $61,901.52
 
+* Total: -$195.79 (-0.32%)
+  * AAPL (+$2.80)
+    Wins: 4 (16.67%) • Losses: 20 • Total: 24
+    Loss Streak => Current: 5 • Longest: 5 • Counts: {5: 4}
+
+  * AMD  (+$3.30)
+    Wins: 17 (38.64%) • Losses: 27 • Total: 44
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 5, 2: 4, 3: 3, 5: 1}
+
+  * BA   (+$9.06)
+    Wins: 14 (42.42%) • Losses: 19 • Total: 33
+    Loss Streak => Current: 2 • Longest: 4 • Counts: {1: 2, 2: 2, 3: 3, 4: 1}
+
+  * FB   (+$9.97)
+    Wins: 11 (25.58%) • Losses: 32 • Total: 43
+    Loss Streak => Current: 1 • Longest: 8 • Counts: {1: 2, 2: 1, 3: 3, 4: 1, 7: 1, 8: 1}
+
+  * MSFT (+$8.75)
+    Wins: 17 (36.96%) • Losses: 29 • Total: 46
+    Loss Streak => Current: 3 • Longest: 5 • Counts: {1: 4, 2: 2, 3: 4, 4: 1, 5: 1}
+
+  * SNAP (+$20.09)
+    Wins: 20 (41.67%) • Losses: 28 • Total: 48
+    Loss Streak => Current: 1 • Longest: 3 • Counts: {1: 7, 2: 6, 3: 3}
+
+  * TSLA (-$276.16)
+    Wins: 9 (26.47%) • Losses: 25 • Total: 34
+    Loss Streak => Current: 11 • Longest: 11 • Counts: {1: 1, 2: 3, 7: 1, 11: 1}
+
+  * TWTR (+$24.32)
+    Wins: 17 (35.42%) • Losses: 31 • Total: 48
+    Loss Streak => Current: 1 • Longest: 6 • Counts: {1: 4, 2: 4, 3: 3, 4: 1, 6: 1}
+
+  * VIAC (+$2.10)
+    Wins: 24 (43.64%) • Losses: 31 • Total: 55
+    Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 12, 2: 2, 3: 2, 4: 1, 5: 1}
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 44W 35L
+* Week's Return: -$485.25
+* Total Return: -$4,781.86
+
+#### Remarks
+* 8/9 stocks won 🎉
+* The new quantity algorthim actually worked very well.
+  * By picking quantities that required less movement, the trades were less
+    risky.
+  * Also, it more precisely set the quantity to only recuperate what was lost.
+    * The only downside to this is that the relative gains were small.
+    * This is however addressed by the new base quantity algorthim.
+* The new algorthim to compute the base quantity is now based on the target
+  profit after 20x the 1-sec variance of movement.
+* This will increase the order size and therefore the quantities of
+  loss-recuping orders.
+* It will also increase the riskiness of trades and will quickly magnify the
+  quantities of long-loss-streak orders.
+* I'm setting the target profit at $0.50 for now. We'll see how that goes.
+
+#### Next Thing(s) to Try
+
+### 2021-09-24:
+#### Performance
+
+* Opening Account Value: $61,705.49
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
