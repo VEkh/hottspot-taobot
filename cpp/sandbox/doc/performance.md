@@ -5701,6 +5701,44 @@ Conclusions:
 
 * Opening Account Value: $61,705.49
 
+* Total: +$594.45 (+0.96%) (🔥PR🔥)
+  * AAPL (+$130.35)
+  * AMD  (+$2.18)
+  * BA   (+$17.61)
+  * FB   (+$16.52)
+  * MSFT (+$38.31)
+  * SNAP (+$198.91)
+  * TSLA (+$482.57)
+  * TWTR (+$16.14)
+  * VIAC (-$308.15)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 45W 35L
+* Week's Return: +$109.20
+* Total Return: -$4,187.41
+
+#### Remarks
+* 8/9 stocks won 🎉
+* We got something.
+* This is the second day that resumed trading from the previous day.
+* Not only did the prior day's deficits clear, but other stocks incurred heavy
+  losses and redeemed them.
+* The target profit of $0.50 worked very well and provided a reasonable basis
+  order size.
+* We'll watch this over several days and see how it performs
+
+#### Next Thing(s) to Try
+* Slightly modify the basis quantity to be 10e-6x the account balance. This way
+  it will increase as the portfolio increases.
+
+### 2021-09-27:
+#### Performance
+
+* Opening Account Value: $62,299.81
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
