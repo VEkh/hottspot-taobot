@@ -37,6 +37,7 @@ enum order_win_result_t {
 struct account_balance_t {
   double balance;
   double day_trading_margin_buying_power;
+  double margin_buying_power;
 };
 
 struct candlestick_t {

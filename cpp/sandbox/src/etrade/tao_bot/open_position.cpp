@@ -78,6 +78,7 @@ void ETrade::TaoBot::open_position() {
 
     case 3010: {
       puts("Insufficient Funds Error 😓 (3010).");
+      printf("Attempted quantity: %i\n", this->quantity);
 
       break;
     }

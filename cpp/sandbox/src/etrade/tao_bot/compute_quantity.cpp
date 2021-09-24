@@ -5,7 +5,7 @@
 #include "loss_to_recover.cpp" // loss_to_recover
 #include "tao_bot.h"           // ETrade::TaoBot
 #include <algorithm>           // std::min
-#include <math.h>              // abs, ceil
+#include <math.h>              // abs, ceil, floor
 
 int ETrade::TaoBot::compute_quantity() {
   const double current_price = this->quotes.back().current_price;
@@ -17,8 +17,8 @@ int ETrade::TaoBot::compute_quantity() {
 
   loss_to_recover_ = abs(loss_to_recover_);
   int max_affordable_quantity =
-      (0.95 * this->account_balance.day_trading_margin_buying_power /
-       current_price);
+      floor(0.6 * this->account_balance.day_trading_margin_buying_power /
+            current_price);
 
   int variance_multiplier = 20;
   int quantity_ = 1;
