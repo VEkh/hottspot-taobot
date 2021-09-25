@@ -75,6 +75,12 @@ void ETrade::TaoBot::open_position() {
       break;
     }
 
+    case 101: {
+      puts("Number of Shares Error 🧐 (101). Retrying.");
+
+      break;
+    }
+
     case 3010: {
       puts("Insufficient Funds Error 😓 (3010).");
       printf("Attempted quantity: %i\n", this->quantity);

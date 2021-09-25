@@ -14,6 +14,7 @@ bool ETrade::Client::is_next_cycle_retry_error(CurlClient &curl_client) {
 
   const std::map<int, const char *> error_codes = {
       {100, "ACCOUNT_KEY_MISSING"},
+      {101, "NUMBER_OF_SHARES"},
       {3010, "INSUFFICIENT_FUNDS"},
       {33, "NOT_SHORTABLE"},
   };
