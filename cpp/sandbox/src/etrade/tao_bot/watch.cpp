@@ -35,12 +35,12 @@ void ETrade::TaoBot::watch() {
   while (!should_terminate()) {
     fetch_quote();
     build_candlesticks();
+    set_average_tick_price_delta();
 
     log_account_balance();
     log_quote();
     log_candlesticks();
     set_and_log_buy_sell_ratios();
-    set_average_tick_price_delta();
     log_average_tick_price_delta();
     log_position();
     log_closed_positions();

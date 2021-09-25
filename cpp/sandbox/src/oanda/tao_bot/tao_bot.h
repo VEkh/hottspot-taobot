@@ -23,6 +23,7 @@ private:
   using order_t = Oanda::t::order_t;
   using quote_t = Global::t::quote_t;
 
+  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -30,6 +31,7 @@ private:
   account_balance_t account_balance;
   account_balance_t original_account_balance;
   char *symbol;
+  double average_tick_price_delta = 0.00;
   int quantity;
   order_t *close_order_ptr = nullptr;
   order_t close_order;
@@ -47,9 +49,11 @@ private:
   void initialize(char *, std::map<std::string, std::string> &);
   void fetch_quote();
   void log_account_balance();
+  void log_average_tick_price_delta();
   void log_candlesticks();
   void log_quote();
   void log_start_message();
+  void set_average_tick_price_delta();
   void watch();
 };
 } // namespace Oanda

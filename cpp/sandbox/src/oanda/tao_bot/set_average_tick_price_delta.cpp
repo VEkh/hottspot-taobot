@@ -1,11 +1,11 @@
-#ifndef ETRADE__TAO_BOT_set_average_tick_price_delta
-#define ETRADE__TAO_BOT_set_average_tick_price_delta
+#ifndef OANDA__TAO_BOT_set_average_tick_price_delta
+#define OANDA__TAO_BOT_set_average_tick_price_delta
 
-#include "tao_bot.h" // ETrade::TaoBot, quote_t
+#include "tao_bot.h" // Oanda::TaoBot, quote_t
 #include <math.h>    // abs
 #include <vector>    // std::vector
 
-void ETrade::TaoBot::set_average_tick_price_delta() {
+void Oanda::TaoBot::set_average_tick_price_delta() {
   const quote_t current_quote = this->quotes.back();
 
   if (current_quote.timestamp - this->quotes.front().timestamp <

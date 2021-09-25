@@ -1,12 +1,12 @@
-#ifndef ETRADE__TAO_BOT_log_average_tick_price_delta
-#define ETRADE__TAO_BOT_log_average_tick_price_delta
+#ifndef OANDA__TAO_BOT_log_average_tick_price_delta
+#define OANDA__TAO_BOT_log_average_tick_price_delta
 
 #include "lib/utils/integer.cpp" // ::utils::integer_
-#include "tao_bot.h"             // ETrade::TaoBot, fmt
+#include "tao_bot.h"             // Oanda::TaoBot, fmt
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
-void ETrade::TaoBot::log_average_tick_price_delta() {
+void Oanda::TaoBot::log_average_tick_price_delta() {
   if (!this->average_tick_price_delta) {
     return;
   }
@@ -21,7 +21,7 @@ void ETrade::TaoBot::log_average_tick_price_delta() {
   std::cout << fmt.reset << std::endl;
   std::cout << fmt.bold << fmt.cyan;
 
-  printf("x10: %.4f • x20: %.4f • x30: %.4f • x40: %.4f\n",
+  printf("x10: %.6f • x20: %.6f • x30: %.6f • x40: %.6f\n",
          this->average_tick_price_delta * 10.0,
          this->average_tick_price_delta * 20.0,
          this->average_tick_price_delta * 30.0,
