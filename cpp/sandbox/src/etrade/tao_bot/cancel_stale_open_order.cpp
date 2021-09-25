@@ -20,7 +20,7 @@ void ETrade::TaoBot::cancel_stale_open_order() {
     std::cout << std::endl;
     std::cout << fmt.reset;
 
-    this->etrade_client.cancel_order(this->open_order_ptr);
+    this->api_client.cancel_order(this->open_order_ptr);
     this->open_order_ptr = nullptr;
   }
 }

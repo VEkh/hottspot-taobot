@@ -10,13 +10,13 @@
 
 double ETrade::TaoBot::compute_profit(const order_t *order,
                                       const quote_t *quote) {
-  const double current_price = quote->current_price;
+  const double price = quote->price;
 
   if (this->is_long_position) {
-    return current_price - order->execution_price;
+    return price - order->execution_price;
   }
 
-  return order->execution_price - current_price;
+  return order->execution_price - price;
 }
 
 double ETrade::TaoBot::compute_profit(const order_t *close_order,

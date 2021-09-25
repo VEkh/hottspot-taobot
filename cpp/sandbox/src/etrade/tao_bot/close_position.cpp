@@ -3,7 +3,7 @@
 
 /*
  * ETrade::TaoBot
- * etrade_client
+ * api_client
  * fmt
  */
 #include "tao_bot.h"
@@ -23,7 +23,7 @@ void ETrade::TaoBot::close_position() {
 
   const char *log_icon = this->ICONS[order_action];
 
-  etrade_client.place_order(this->close_order_ptr);
+  api_client.place_order(this->close_order_ptr);
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
   std::cout << log_icon << " " << order_action << ": Placed closing order."

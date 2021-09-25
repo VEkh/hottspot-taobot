@@ -6,7 +6,7 @@
 
 ETrade::TaoBot::account_balance_t ETrade::TaoBot::fetch_account_balance() {
   json account_balance_json =
-      json::parse(this->etrade_client.fetch_account_balance());
+      json::parse(this->api_client.fetch_account_balance());
 
   json computed_values = account_balance_json["BalanceResponse"]["Computed"];
 

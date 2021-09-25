@@ -6,6 +6,7 @@
 #include "etrade/types.cpp"                   // ETrade::t
 #include "lib/curl_client/curl_client.h"      // CurlClient
 #include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
+#include "types.cpp"         // Global::t
 #include <map>               // std::map
 #include <string>            // std::string
 
@@ -16,7 +17,7 @@ public:
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
-  using quote_t = ETrade::t::quote_t;
+  using quote_t = Global::t::quote_t;
 
   enum debug_t { OFF, ON };
 

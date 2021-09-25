@@ -27,7 +27,7 @@ void ETrade::TaoBot::set_average_tick_price_delta() {
                                    it != this->quotes.rend();
        it++) {
 
-    double delta = abs(it->current_price - (it + 1)->current_price);
+    double delta = abs(it->price - (it + 1)->price);
     total += delta;
     ticks++;
   }

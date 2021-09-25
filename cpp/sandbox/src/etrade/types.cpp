@@ -83,14 +83,6 @@ struct position_t {
   int close_timestamp = 0;
   order_t open_order;
 };
-
-struct quote_t {
-  double current_price;
-  double high;
-  double low;
-  char *symbol;
-  long int timestamp;
-};
 } // namespace t
 } // namespace ETrade
 #endif

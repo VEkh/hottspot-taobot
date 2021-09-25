@@ -1,4 +1,10 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf
 
-int main() { printf("%.5f\n", 112728312 * 1e-5); }
+#include <string>
+
+int main() {
+  std::string num = "1.17206";
+
+  printf("%.5f\n", atof(num.c_str()));
+}

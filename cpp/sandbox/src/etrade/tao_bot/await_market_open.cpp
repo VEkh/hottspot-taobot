@@ -12,7 +12,7 @@ void ETrade::TaoBot::await_market_open() {
   puts("Waiting for the market to open 😴");
   std::cout << fmt.reset;
 
-  this->etrade_client.refresh_token();
+  this->api_client.refresh_token();
 
   std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 }

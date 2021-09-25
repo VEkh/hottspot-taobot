@@ -50,7 +50,7 @@ int main(int argc, char *argv[]) {
   std::string command = argv[1];
 
   if (command == "cancel_orders") {
-    ETrade::Client etrade_client;
+    ETrade::Client api_client;
 
     if (argc < 3) {
       std::string message =
@@ -62,7 +62,7 @@ int main(int argc, char *argv[]) {
     for (int i = 2; i < argc; i++) {
       int order_id = strtol(argv[i], nullptr, 10);
 
-      CurlClient curl_client = etrade_client.cancel_order(order_id);
+      CurlClient curl_client = api_client.cancel_order(order_id);
       std::cout << curl_client.response.body << std::endl;
     }
 
@@ -70,10 +70,10 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "fetch") {
-    ETrade::Client etrade_client;
+    ETrade::Client api_client;
     char *url = argc < 3 ? nullptr : argv[2];
 
-    CurlClient curl_client = etrade_client.fetch(url);
+    CurlClient curl_client = api_client.fetch(url);
     std::cout << curl_client.response.body << std::endl;
 
     exit(0);
@@ -81,12 +81,12 @@ int main(int argc, char *argv[]) {
 
   if (command == "fetch_access_token") {
     const char *mode = argc < 3 ? "--auto" : argv[2];
-    ETrade::Client etrade_client;
+    ETrade::Client api_client;
 
     if (!strcmp(mode, "--auto")) {
-      etrade_client.fetch_access_token();
+      api_client.fetch_access_token();
     } else if (!strcmp(mode, "--manual")) {
-      etrade_client.manual_fetch_access_token();
+      api_client.manual_fetch_access_token();
     } else {
       std::string message = Formatted::error_message(
           "Please provide a valid option: --auto | --manual");
@@ -98,17 +98,17 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "fetch_account_balance") {
-    ETrade::Client etrade_client;
-    std::cout << etrade_client.fetch_account_balance() << std::endl;
+    ETrade::Client api_client;
+    std::cout << api_client.fetch_account_balance() << std::endl;
 
     exit(0);
   }
 
   if (command == "fetch_quote") {
-    ETrade::Client etrade_client;
+    ETrade::Client api_client;
     char *symbol = argc < 3 ? nullptr : argv[2];
 
-    std::string quote = etrade_client.fetch_quote(symbol);
+    std::string quote = api_client.fetch_quote(symbol);
     std::cout << quote;
 
     exit(0);
@@ -121,8 +121,8 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "refresh_token") {
-    ETrade::Client etrade_client;
-    etrade_client.refresh_token();
+    ETrade::Client api_client;
+    api_client.refresh_token();
 
     exit(0);
   }

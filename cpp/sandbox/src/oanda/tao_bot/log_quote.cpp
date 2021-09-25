@@ -1,21 +1,20 @@
-#ifndef ETRADE__TAO_BOT_log_quote
-#define ETRADE__TAO_BOT_log_quote
+#ifndef OANDA__TAO_BOT_log_quote
+#define OANDA__TAO_BOT_log_quote
 
 /*
- * ETrade::TaoBot
+ * Oanda::TaoBot
  * fmt
  * quote_t
  */
 #include "tao_bot.h"
 
 #include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/float.cpp"   // utils::float_
 #include "lib/utils/integer.cpp" // utils::integer_
 #include <iomanip>               // std::setprecision
 #include <iostream>              // std::cout, std::endl, std::fixed
 #include <stdio.h>               // printf
 
-void ETrade::TaoBot::log_quote() {
+void Oanda::TaoBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
   const int ticks = this->quotes.size();
 
@@ -41,7 +40,7 @@ void ETrade::TaoBot::log_quote() {
          ::utils::integer_::seconds_to_clock(runtime).c_str());
 
   std::cout << fmt.reset << fmt.bold << log_color;
-  printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
+  printf("Current: %'.5f\n", current_quote.price);
 
   std::cout << fmt.reset << std::endl;
 }

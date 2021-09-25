@@ -21,7 +21,7 @@ json ETrade::TaoBot::fetch_order(const order_t *order) {
     return empty_order;
   }
 
-  std::string order_response = this->etrade_client.fetch_order(order->id);
+  std::string order_response = this->api_client.fetch_order(order->id);
 
   if (order_response.empty()) {
     std::cout << fmt.bold << fmt.red;

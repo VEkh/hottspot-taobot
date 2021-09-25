@@ -3,7 +3,7 @@
 
 /*
  * ETrade::TaoBot
- * etrade_client
+ * api_client
  * fmt
  * gear_t
  * order_action_t
@@ -28,7 +28,7 @@ void ETrade::TaoBot::open_position() {
 
   this->account_balance = fetch_account_balance();
 
-  const double current_price = this->quotes.back().current_price;
+  const double current_price = this->quotes.back().price;
   this->quantity = compute_quantity();
 
   order_t new_open_order;
@@ -61,9 +61,9 @@ void ETrade::TaoBot::open_position() {
             << std::endl;
   std::cout << fmt.reset;
 
-  CurlClient curl_client = etrade_client.place_order(this->open_order_ptr);
+  CurlClient curl_client = api_client.place_order(this->open_order_ptr);
 
-  if (etrade_client.is_next_cycle_retry_error(curl_client)) {
+  if (api_client.is_next_cycle_retry_error(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
 
     printf("%s %s: ", log_icon, order_action);

@@ -8,7 +8,7 @@
 #include <math.h>              // abs, ceil, floor
 
 int ETrade::TaoBot::compute_quantity() {
-  const double current_price = this->quotes.back().current_price;
+  const double price = this->quotes.back().price;
   double loss_to_recover_ = loss_to_recover();
 
   if (!loss_to_recover_) {
@@ -18,7 +18,7 @@ int ETrade::TaoBot::compute_quantity() {
   loss_to_recover_ = abs(loss_to_recover_);
   int max_affordable_quantity =
       floor(0.6 * this->account_balance.day_trading_margin_buying_power /
-            current_price);
+            price);
 
   int variance_multiplier = 20;
   int quantity_ = 1;

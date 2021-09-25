@@ -34,7 +34,7 @@ ETrade::TaoBot::compute_moving_buy_sell_ratio_average(
   while (it != this->quotes.rend() &&
          (current_quote.timestamp - it->timestamp) <= max_period) {
 
-    const double price_delta = it->current_price - ((it + 1)->current_price);
+    const double price_delta = it->price - ((it + 1)->price);
 
     for (int period : periods) {
       if ((current_quote.timestamp - it->timestamp) > period) {

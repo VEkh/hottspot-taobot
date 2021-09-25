@@ -5,6 +5,7 @@
 #include "etrade/deps.cpp"          // json
 #include "etrade/types.cpp"         // ETrade::t
 #include "lib/formatted.cpp"        // Formatted
+#include "types.cpp"                // Global::t
 #include <list>                     // std::list
 #include <map>                      // std::map
 #include <string>                   // std::string
@@ -29,7 +30,7 @@ private:
   using order_win_result_t = ETrade::t::order_win_result_t;
   using order_win_result_streak_t = ETrade::t::order_win_result_streak_t;
   using position_t = ETrade::t::position_t;
-  using quote_t = ETrade::t::quote_t;
+  using quote_t = Global::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
@@ -45,7 +46,7 @@ private:
       {"SELL_SHORT", "📉"},
   };
 
-  ETrade::Client etrade_client;
+  ETrade::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
   account_balance_t original_account_balance;
