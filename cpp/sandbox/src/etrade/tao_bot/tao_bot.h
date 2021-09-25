@@ -34,12 +34,6 @@ private:
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const double SIMPLE_MOVING_AVERAGE_PERIOD_SECONDS = 2 * 60;
-
-  const int MAX_EXPECTED_LOSS_STREAK = 12;
-
-  bool FLAG_MARTINGALE = false;
-  bool FLAG_NORMALIZE_QUANTITY = false;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -88,7 +82,6 @@ private:
 
   int base_quantity();
   int compute_quantity();
-  int martingale_quantity_multiplier();
 
   closed_positions_stats_t build_closed_positions_stats();
   exit_prices_t build_exit_prices();

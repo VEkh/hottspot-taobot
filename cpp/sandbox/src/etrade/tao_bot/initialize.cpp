@@ -25,8 +25,6 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
-  this->FLAG_MARTINGALE = flags["martingale"] == "1";
-  this->FLAG_NORMALIZE_QUANTITY = flags["normalize-quantity"] == "1";
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
   this->symbol = symbol_;

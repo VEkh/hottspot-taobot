@@ -5,7 +5,6 @@
  * ETrade::TaoBot
  * fmt
  * order_action_t
- * position_t
  */
 #include "tao_bot.h"
 
@@ -20,25 +19,6 @@ bool ETrade::TaoBot::should_open_position() {
 
   if (!this->average_tick_price_delta) {
     return false;
-  }
-
-  if (!this->FLAG_MARTINGALE && !this->closed_positions.empty()) {
-    time_t now;
-    time(&now);
-
-    const position_t last_position = this->closed_positions.back();
-
-    const int seconds_since_close = now - last_position.close_timestamp;
-    const int throttle_time_limit = 30;
-
-    if (seconds_since_close < throttle_time_limit) {
-      std::cout << fmt.bold << fmt.yellow;
-      std::cout << "🛑 Throttle engaged. Time remaining: "
-                << ::utils::integer_::seconds_to_clock(throttle_time_limit -
-                                                       seconds_since_close);
-      std::cout << fmt.reset << std::endl << std::endl;
-      return false;
-    }
   }
 
   if (should_open_position(order_action_t::BUY)) {
