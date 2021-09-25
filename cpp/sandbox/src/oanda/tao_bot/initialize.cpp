@@ -6,7 +6,7 @@
 #include <locale.h>          // setlocale
 #include <stdexcept>         // std::invalid_argument
 
-void Oanda::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
+void Oanda::TaoBot::initialize(char *symbol_,
                                std::map<std::string, std::string> &flags) {
   if (symbol_ == nullptr) {
     std::string message =
@@ -14,21 +14,10 @@ void Oanda::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
     throw std::invalid_argument(message);
   }
 
-  if (!quantity_mulitiplier_) {
-    std::string message =
-        Formatted::error_message("Quantity must be at least 1");
-
-    throw std::invalid_argument(message);
-  }
-
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
-  this->FLAG_MARTINGALE = flags["martingale"] == "1";
-  this->FLAG_NORMALIZE_QUANTITY = flags["normalize-quantity"] == "1";
   this->symbol = symbol_;
-  this->quantity_mulitiplier = quantity_mulitiplier_;
-  this->quantity = quantity_mulitiplier_;
 }
 
 #endif

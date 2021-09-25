@@ -50,6 +50,16 @@ ReturnType in_time_zone(const char *time_zone, Predicate *fn) {
   return out;
 }
 
+int day_of_week() {
+  return in_time_zone<int>("America/New_York", []() -> int {
+    time_t local_now;
+    time(&local_now);
+    std::tm local_time = *std::localtime(&local_now);
+
+    return local_time.tm_wday;
+  });
+}
+
 bool is_at_least(const std::vector<int> time_parts) {
   return in_time_zone<bool>("America/New_York", [&]() -> bool {
     time_t local_now;
@@ -98,8 +108,6 @@ bool is_before(const std::vector<int> time_parts) {
 }
 
 bool is_early_day() { return is_before({11, 0}); }
-bool is_end_of_day() { return is_at_least({15, 59}) && is_before({16, 0}); }
-bool is_market_open() { return is_at_least({9, 30}) && is_before({16, 0}); }
 
 std::string timestamp_to_clock(time_t timestamp,
                                const char *time_zone = "America/New_York") {

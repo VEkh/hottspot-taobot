@@ -1,10 +1,13 @@
 #ifndef OANDA__TAO_BOT_run
 #define OANDA__TAO_BOT_run
 
-#include "tao_bot.h" // Oanda::TaoBot
+#include "log_start_message.cpp" // log_start_message
+#include "tao_bot.h"             // Oanda::TaoBot
+#include "watch.cpp"             // watch
 
 void Oanda::TaoBot::run() {
-  printf("Launching TaoBot for the <%s> currency pair\n", this->symbol);
+  log_start_message();
+  watch();
 }
 
 #endif

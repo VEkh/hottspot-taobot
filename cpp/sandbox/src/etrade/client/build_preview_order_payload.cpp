@@ -45,7 +45,7 @@ std::string ETrade::Client::build_preview_order_payload(const order_t &order) {
       "limitPrice":444.44,
       "marketSession":"REGULAR",
       "orderTerm":"GOOD_FOR_DAY",
-      "priceType":"STOP_LIMIT"
+      "priceType":"MARKET"
     }
   )"_json;
 
@@ -53,7 +53,6 @@ std::string ETrade::Client::build_preview_order_payload(const order_t &order) {
   order_json["Instrument"][0]["orderAction"] =
       ETrade::constants::ORDER_ACTIONS[order.action];
   order_json["Instrument"][0]["quantity"] = order.quantity;
-  order_json["limitPrice"] = ::utils::float_::to_currency(order.limit_price);
   order_json["priceType"] = ETrade::constants::ORDER_TYPES[order.type];
 
   payload["PreviewOrderRequest"]["Order"].push_back(order_json);

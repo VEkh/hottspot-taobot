@@ -34,7 +34,6 @@ void ETrade::TaoBot::open_position() {
   order_t new_open_order;
   new_open_order.action =
       this->is_long_position ? order_action_t::BUY : order_action_t::SELL_SHORT;
-  new_open_order.limit_price = current_price;
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;

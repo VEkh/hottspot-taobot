@@ -9,12 +9,13 @@
  */
 #include "tao_bot.h"
 
-#include "build_exit_prices.cpp"    // build_exit_prices
-#include "compute_profit.cpp"       // compute_profit
-#include "lib/utils/time.cpp"       // utils::time_
-#include "profit_percentage.cpp"    // profit_percentage
-#include "should_open_position.cpp" // should_open_position
-#include <time.h>                   // time, time_t
+#include "build_exit_prices.cpp"        // build_exit_prices
+#include "compute_profit.cpp"           // compute_profit
+#include "is_end_of_trading_period.cpp" // is_end_of_trading_period
+#include "lib/utils/time.cpp"           // utils::time_
+#include "profit_percentage.cpp"        // profit_percentage
+#include "should_open_position.cpp"     // should_open_position
+#include <time.h>                       // time, time_t
 
 bool ETrade::TaoBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
@@ -25,7 +26,7 @@ bool ETrade::TaoBot::should_close_position() {
     return false;
   }
 
-  if (::utils::time_::is_end_of_day()) {
+  if (is_end_of_trading_period()) {
     return true;
   }
 

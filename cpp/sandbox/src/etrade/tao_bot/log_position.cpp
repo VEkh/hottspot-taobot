@@ -60,13 +60,6 @@ void ETrade::TaoBot::log_position() {
          this->exit_prices.secure_profit_lower,
          this->exit_prices.secure_profit_upper);
 
-  if (this->open_order.max_profit_timestamp) {
-    std::cout << "Max Profit ⌚ Δ: "
-              << ::utils::integer_::seconds_to_clock(
-                     now - this->open_order.max_profit_timestamp);
-    std::cout << std::endl;
-  }
-
   std::cout << "Quantity: " << this->quantity << std::endl;
 
   std::cout << fmt.reset << std::endl;

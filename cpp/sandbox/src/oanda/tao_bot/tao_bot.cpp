@@ -5,9 +5,9 @@
 #include "initialize.cpp" // initialize
 #include "run.cpp"
 
-Oanda::TaoBot::TaoBot(char *symbol_, int quantity_,
+Oanda::TaoBot::TaoBot(char *symbol_,
                       std::map<std::string, std::string> &flags) {
-  initialize(symbol_, quantity_, flags);
+  initialize(symbol_, flags);
 }
 
 #endif

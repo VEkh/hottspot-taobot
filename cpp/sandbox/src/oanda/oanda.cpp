@@ -49,11 +49,10 @@ int main(int argc, char *argv[]) {
 
   if (command == "tao_bot") {
     char *symbol = argc < 3 ? nullptr : argv[2];
-    int quantity = argc < 4 ? 0 : strtol(argv[3], nullptr, 10);
     std::map<std::string, std::string> flags =
         ::utils::io::extract_flags(argc, argv);
 
-    Oanda::TaoBot tao_bot(symbol, quantity, flags);
+    Oanda::TaoBot tao_bot(symbol, flags);
     tao_bot.run();
 
     exit(0);

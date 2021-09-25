@@ -1,8 +1,7 @@
 #ifndef ETRADE__types
 #define ETRADE__types
 
-#include <map>     // std::map
-#include <utility> // std::pair
+#include <map> // std::map
 
 namespace ETrade {
 namespace t {
@@ -23,9 +22,7 @@ enum order_status_t {
 };
 
 enum order_type_t {
-  LIMIT,
   MARKET,
-  STOP_LIMIT,
 };
 
 enum order_win_result_t {
@@ -72,13 +69,10 @@ struct order_t {
   order_action_t action;
   double execution_price = 0.00;
   int id = 0;
-  double limit_price = 0.00;
   double max_profit = 0.00;
-  int max_profit_timestamp = 0;
   double profit = 0.00;
   int quantity;
   order_status_t status = order_status_t::ORDER_PENDING;
-  double stop_price = 0.00;
   const char *symbol;
   int timestamp = 0;
   order_type_t type;

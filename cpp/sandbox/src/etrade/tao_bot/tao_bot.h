@@ -70,6 +70,8 @@ private:
 
   account_balance_t fetch_account_balance();
 
+  bool is_end_of_trading_period();
+  bool is_market_open();
   bool candlesticks_in_direction(order_action_t);
   bool should_close_position();
   bool should_open_position();

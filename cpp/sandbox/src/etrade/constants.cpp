@@ -14,10 +14,8 @@ const char *ORDER_STATUSES[6] = {
     "CANCELLED", "CANCEL_REQUESTED", "EXECUTED", "OPEN", "PARTIAL", "PENDING",
 };
 
-const char *ORDER_TYPES[3] = {
-    "LIMIT",
+const char *ORDER_TYPES[1] = {
     "MARKET",
-    "STOP_LIMIT",
 };
 
 } // namespace constants

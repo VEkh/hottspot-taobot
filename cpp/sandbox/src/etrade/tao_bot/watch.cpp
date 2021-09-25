@@ -1,18 +1,12 @@
 #ifndef ETRADE__TAO_BOT_watch
 #define ETRADE__TAO_BOT_watch
 
-/*
- * ETrade::TaoBot
- * POLLING_INTERVAL_SECONDS
- * fmt
- */
-#include "tao_bot.h"
-
 #include "await_market_open.cpp"            // await_market_open
 #include "build_candlesticks.cpp"           // build_candlesticks
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "close_position.cpp"               // close_position
 #include "fetch_quote.cpp"                  // fetch_quote
+#include "is_market_open.cpp"               // is_market_open
 #include "lib/utils/time.cpp"               // utils::time_
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
@@ -29,11 +23,12 @@
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
+#include "tao_bot.h"                        // ETrade::TaoBot, fmt
 #include <chrono>                           // std::chrono
 #include <thread>                           // std::this_thread
 
 void ETrade::TaoBot::watch() {
-  while (!::utils::time_::is_market_open()) {
+  while (!is_market_open()) {
     await_market_open();
   }
 
@@ -59,8 +54,8 @@ void ETrade::TaoBot::watch() {
     log_position_results();
     reset_position();
 
-    std::this_thread::sleep_for(
-        std::chrono::milliseconds((int)(POLLING_INTERVAL_SECONDS * 1000)));
+    std::this_thread::sleep_for(std::chrono::milliseconds(
+        (int)(this->POLLING_INTERVAL_SECONDS * 1000)));
   }
 
   log_end_of_day();
