@@ -1,15 +1,14 @@
-#ifndef ETRADE__TAO_BOT_compute_moving_buy_sell_ratio_average
-#define ETRADE__TAO_BOT_compute_moving_buy_sell_ratio_average
+#ifndef OANDA__TAO_BOT_build_moving_buy_sell_ratio_average
+#define OANDA__TAO_BOT_build_moving_buy_sell_ratio_average
 
-#include "tao_bot.h" // ETrade::TaoBot, quote_t
-#include <algorithm>   // std::max
-#include <map>         // std::map
-#include <math.h>      // abs
-#include <vector>      // std::vector
+#include "tao_bot.h" // Oanda::TaoBot, quote_t
+#include <algorithm> // std::max
+#include <map>       // std::map
+#include <math.h>    // abs
+#include <vector>    // std::vector
 
 std::map<int, std::map<const char *, double>>
-ETrade::TaoBot::compute_moving_buy_sell_ratio_average(
-    std::vector<int> &periods) {
+Oanda::TaoBot::build_moving_buy_sell_ratio_average(std::vector<int> &periods) {
   const quote_t current_quote = this->quotes.back();
   const quote_t first_quote = this->quotes.front();
 

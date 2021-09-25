@@ -32,6 +32,10 @@ private:
   account_balance_t original_account_balance;
   char *symbol;
   double average_tick_price_delta = 0.00;
+  double long_average_buy_sell_ratio;
+  double long_average_sell_buy_ratio;
+  double short_average_buy_sell_ratio;
+  double short_average_sell_buy_ratio;
   int quantity;
   order_t *close_order_ptr = nullptr;
   order_t close_order;
@@ -44,6 +48,9 @@ private:
   bool is_market_open();
   bool should_terminate();
 
+  std::map<int, std::map<const char *, double>>
+  build_moving_buy_sell_ratio_average(std::vector<int> &);
+
   void await_market_open();
   void build_candlesticks();
   void initialize(char *, std::map<std::string, std::string> &);
@@ -53,6 +60,7 @@ private:
   void log_candlesticks();
   void log_quote();
   void log_start_message();
+  void set_and_log_buy_sell_ratios();
   void set_average_tick_price_delta();
   void watch();
 };

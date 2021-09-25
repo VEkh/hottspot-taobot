@@ -73,7 +73,6 @@ private:
   bool should_open_position(order_action_t);
   bool should_terminate();
 
-  double compute_min_profit_price_range_ratio(const double);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double profit_percentage(const order_t *);
@@ -89,7 +88,7 @@ private:
   order_win_result_t order_win_result(const order_t *);
 
   std::map<int, std::map<const char *, double>>
-  compute_moving_buy_sell_ratio_average(std::vector<int> &);
+  build_moving_buy_sell_ratio_average(std::vector<int> &);
 
   std::vector<position_t> read_closed_positions();
 

@@ -1,5 +1,5 @@
-#ifndef ETRADE__TAO_BOT_set_and_log_buy_sell_ratios
-#define ETRADE__TAO_BOT_set_and_log_buy_sell_ratios
+#ifndef OANDA__TAO_BOT_set_and_log_buy_sell_ratios
+#define OANDA__TAO_BOT_set_and_log_buy_sell_ratios
 
 #include "build_moving_buy_sell_ratio_average.cpp" // build_moving_buy_sell_ratio_average
 #include "lib/formatted.cpp"                       // Formatted
@@ -9,7 +9,7 @@
 #include <stdio.h>                                 // printf, puts
 #include <vector>                                  // std::vector
 
-void ETrade::TaoBot::set_and_log_buy_sell_ratios() {
+void Oanda::TaoBot::set_and_log_buy_sell_ratios() {
   Formatted::Stream log_color = fmt.yellow;
   const int ticks = this->quotes.size();
 
