@@ -2,6 +2,7 @@
 #define OANDA__CLIENT
 
 #include "client.h" // Oanda::Client
+#include "fetch_account.cpp"
 #include "fetch_quote.cpp"
 #include "load_config.cpp" // load_config
 #include "parse_quote.cpp"

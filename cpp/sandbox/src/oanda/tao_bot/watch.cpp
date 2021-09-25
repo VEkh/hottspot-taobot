@@ -1,14 +1,15 @@
 #ifndef OANDA__TAO_BOT_watch
 #define OANDA__TAO_BOT_watch
 
-#include "await_market_open.cpp"  // await_market_open
-#include "build_candlesticks.cpp" // build_candlesticks
-#include "fetch_quote.cpp"        // fetch_quote
-#include "is_market_open.cpp"     // is_market_open
-#include "log_candlesticks.cpp"   // log_candlesticks
-#include "log_quote.cpp"          // log_quote
-#include "should_terminate.cpp"   // should_terminate
-#include "tao_bot.h"              // Oanda::TaoBot
+#include "await_market_open.cpp"   // await_market_open
+#include "build_candlesticks.cpp"  // build_candlesticks
+#include "fetch_quote.cpp"         // fetch_quote
+#include "is_market_open.cpp"      // is_market_open
+#include "log_account_balance.cpp" // log_account_balance
+#include "log_candlesticks.cpp"    // log_candlesticks
+#include "log_quote.cpp"           // log_quote
+#include "should_terminate.cpp"    // should_terminate
+#include "tao_bot.h"               // Oanda::TaoBot
 
 void Oanda::TaoBot::watch() {
   while (!is_market_open()) {
@@ -19,6 +20,7 @@ void Oanda::TaoBot::watch() {
     fetch_quote();
     build_candlesticks();
 
+    log_account_balance();
     log_quote();
     log_candlesticks();
 

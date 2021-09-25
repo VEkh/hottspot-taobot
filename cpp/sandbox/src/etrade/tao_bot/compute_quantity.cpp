@@ -17,8 +17,7 @@ int ETrade::TaoBot::compute_quantity() {
 
   loss_to_recover_ = abs(loss_to_recover_);
   int max_affordable_quantity =
-      floor(0.6 * this->account_balance.day_trading_margin_buying_power /
-            price);
+      floor(0.6 * this->account_balance.margin_buying_power / price);
 
   int variance_multiplier = 20;
   int quantity_ = 1;

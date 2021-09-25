@@ -31,12 +31,6 @@ enum order_win_result_t {
   WIN,
 };
 
-struct account_balance_t {
-  double balance;
-  double day_trading_margin_buying_power;
-  double margin_buying_power;
-};
-
 struct order_win_result_streak_t {
   std::map<int, int> counts;
   int current;

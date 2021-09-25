@@ -1,4 +1,4 @@
-#if !defined UTILS__STRING
+#ifndef UTILS__STRING
 #define UTILS__STRING
 
 #include <algorithm> // std::max, std::replace

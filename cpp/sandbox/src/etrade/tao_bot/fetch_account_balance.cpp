@@ -13,12 +13,10 @@ ETrade::TaoBot::account_balance_t ETrade::TaoBot::fetch_account_balance() {
   const double balance = computed_values["RealTimeValues"]["totalAccountValue"];
   const double day_trading_margin_buying_power =
       computed_values["dtMarginBuyingPower"];
-  const double margin_buying_power = computed_values["dtMarginBuyingPower"];
 
   return {
       .balance = balance,
-      .day_trading_margin_buying_power = day_trading_margin_buying_power,
-      .margin_buying_power = margin_buying_power,
+      .margin_buying_power = day_trading_margin_buying_power,
   };
 }
 

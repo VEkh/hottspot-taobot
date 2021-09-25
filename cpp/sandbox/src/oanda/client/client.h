@@ -12,6 +12,7 @@ public:
 
   Client();
 
+  std::string fetch_account();
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
 

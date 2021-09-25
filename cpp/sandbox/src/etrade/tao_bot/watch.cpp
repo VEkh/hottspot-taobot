@@ -23,7 +23,7 @@
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
-#include "tao_bot.h"                        // ETrade::TaoBot, fmt
+#include "tao_bot.h"                        // ETrade::TaoBot
 #include <chrono>                           // std::chrono
 #include <thread>                           // std::this_thread
 

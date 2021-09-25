@@ -19,7 +19,7 @@ public:
   void run();
 
 private:
-  using account_balance_t = ETrade::t::account_balance_t;
+  using account_balance_t = Global::t::account_balance_t;
   using candlestick_t = Global::t::candlestick_t;
   using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
   using exit_prices_t = ETrade::t::exit_prices_t;

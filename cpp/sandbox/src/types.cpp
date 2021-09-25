@@ -3,6 +3,11 @@
 
 namespace Global {
 namespace t {
+struct account_balance_t {
+  double balance;
+  double margin_buying_power;
+};
+
 struct candlestick_t {
   std::string clock_time;
   double close;
