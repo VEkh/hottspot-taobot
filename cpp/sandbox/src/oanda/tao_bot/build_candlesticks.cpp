@@ -1,14 +1,14 @@
-#ifndef ETRADE__TAO_BOT_build_candlesticks
-#define ETRADE__TAO_BOT_build_candlesticks
+#ifndef OANDA__TAO_BOT_build_candlesticks
+#define OANDA__TAO_BOT_build_candlesticks
 
 #include "lib/utils/time.cpp" // ::utils::time_
-#include "tao_bot.h"          // ETrade::TaoBot, candlestick_t, quote_t
+#include "tao_bot.h"          // Oanda::TaoBot, candlestick_t, quote_t
 #include <algorithm>          // std::max, std:min
 #include <list>               // std::list
 #include <time.h>             // localtime, time_t, tm
 #include <vector>             // std::vector
 
-void ETrade::TaoBot::build_candlesticks() {
+void Oanda::TaoBot::build_candlesticks() {
   const int period = 60;
   const int max_candles = 4;
 

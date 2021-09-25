@@ -1,13 +1,12 @@
-#ifndef ETRADE__TAO_BOT_log_candlesticks
-#define ETRADE__TAO_BOT_log_candlesticks
+#ifndef OANDA__TAO_BOT_log_candlesticks
+#define OANDA__TAO_BOT_log_candlesticks
 
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/float.cpp" // utils::float_
-#include "tao_bot.h"           // ETrade::TaoBot, fmt
-#include <iostream>            // std::cout
-#include <stdio.h>             // printf
+#include "lib/formatted.cpp" // Formatted
+#include "tao_bot.h"         // Oanda::TaoBot, fmt
+#include <iostream>          // std::cout
+#include <stdio.h>           // printf
 
-void ETrade::TaoBot::log_candlesticks() {
+void Oanda::TaoBot::log_candlesticks() {
   if (!this->candlesticks.size()) {
     return;
   }
@@ -25,8 +24,7 @@ void ETrade::TaoBot::log_candlesticks() {
 
     std::cout << log_color;
 
-    printf("⌚ %s: %+'.2f\n", candlestick->clock_time.c_str(),
-           ::utils::float_::to_currency(profit));
+    printf("⌚ %s: %+'.2f\n", candlestick->clock_time.c_str(), profit);
 
     candlestick++;
   }
