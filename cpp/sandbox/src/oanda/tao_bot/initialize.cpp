@@ -3,6 +3,7 @@
 
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "lib/formatted.cpp"         // Formatted::error_message
+#include "read_closed_positions.cpp" // read_closed_positions
 #include "tao_bot.h"                 // Oanda::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
 #include <stdexcept>                 // std::invalid_argument
@@ -21,6 +22,8 @@ void Oanda::TaoBot::initialize(char *symbol_,
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
   this->symbol = symbol_;
+
+  this->closed_positions = read_closed_positions();
 }
 
 #endif

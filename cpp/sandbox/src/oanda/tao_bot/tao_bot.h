@@ -67,6 +67,8 @@ private:
   std::map<int, std::map<const char *, double>>
   build_moving_buy_sell_ratio_average(std::vector<int> &);
 
+  std::vector<position_t> read_closed_positions();
+
   void await_market_open();
   void build_candlesticks();
   void initialize(char *, std::map<std::string, std::string> &);
