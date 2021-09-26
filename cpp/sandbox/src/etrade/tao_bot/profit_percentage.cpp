@@ -1,4 +1,4 @@
-#if !defined ETRADE__TAO_BOT_profit_percentage
+#ifndef ETRADE__TAO_BOT_profit_percentage
 #define ETRADE__TAO_BOT_profit_percentage
 
 #include "tao_bot.h" // ETrade::TaoBot, order_t

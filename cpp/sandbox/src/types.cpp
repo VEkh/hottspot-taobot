@@ -16,6 +16,13 @@ struct candlestick_t {
   double open;
 };
 
+struct exit_prices_t {
+  double max_loss = 0.00;
+  double min_profit = 0.00;
+  double secure_profit_lower = 0.00;
+  double secure_profit_upper = 0.00;
+};
+
 struct quote_t {
   double price;
   long int timestamp;

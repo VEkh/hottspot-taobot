@@ -1,14 +1,14 @@
-#ifndef ETRADE__TAO_BOT_log_position
-#define ETRADE__TAO_BOT_log_position
+#ifndef OANDA__TAO_BOT_log_position
+#define OANDA__TAO_BOT_log_position
 
-#include "etrade/constants.cpp"  // ETrade::constants
 #include "lib/formatted.cpp"     // Formatted
+#include "oanda/constants.cpp"   // Oanda::constants
 #include "profit_percentage.cpp" // profit_percentage
-#include "tao_bot.h"             // ETrade::TaoBot, fmt
+#include "tao_bot.h"             // Oanda::TaoBot, fmt
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
-void ETrade::TaoBot::log_position() {
+void Oanda::TaoBot::log_position() {
   if (!this->open_order_ptr && !this->close_order_ptr) {
     std::cout << fmt.bold << fmt.cyan;
     puts("💀 No Open Positions.\n");
@@ -20,7 +20,7 @@ void ETrade::TaoBot::log_position() {
   Formatted::Stream log_color = this->is_long_position ? fmt.green : fmt.red;
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s\n", ETrade::constants::ORDER_ACTIONS[this->open_order.action]);
+  printf("%s\n", Oanda::constants::ORDER_ACTIONS[this->open_order.action]);
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
@@ -35,8 +35,8 @@ void ETrade::TaoBot::log_position() {
       profit_percentage(this->close_order_ptr), this->close_order.max_profit);
 
   printf("Status => Open: %s • Close: %s\n",
-         ETrade::constants::ORDER_STATUSES[this->open_order.status],
-         ETrade::constants::ORDER_STATUSES[this->close_order.status]);
+         Oanda::constants::ORDER_STATUSES[this->open_order.status],
+         Oanda::constants::ORDER_STATUSES[this->close_order.status]);
 
   printf("Min Profit: %.2f • Max Loss: %.2f • Secure Profit (Lower): %.2f • "
          "Secure Profit (Upper): %.2f\n",

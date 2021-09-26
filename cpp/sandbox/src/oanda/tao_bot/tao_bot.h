@@ -19,6 +19,7 @@ public:
 private:
   using account_balance_t = Global::t::account_balance_t;
   using candlestick_t = Global::t::candlestick_t;
+  using exit_prices_t = Global::t::exit_prices_t;
   using order_status_t = Oanda::t::order_status_t;
   using order_t = Oanda::t::order_t;
   using quote_t = Global::t::quote_t;
@@ -30,15 +31,19 @@ private:
   Oanda::Client api_client;
   account_balance_t account_balance;
   account_balance_t original_account_balance;
+  bool is_long_position;
   char *symbol;
   double average_tick_price_delta = 0.00;
   double long_average_buy_sell_ratio;
   double long_average_sell_buy_ratio;
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
+  exit_prices_t exit_prices;
   int quantity;
   order_t *close_order_ptr = nullptr;
+  order_t *open_order_ptr = nullptr;
   order_t close_order;
+  order_t open_order;
   std::list<candlestick_t> candlesticks;
   std::vector<quote_t> quotes;
 
@@ -47,6 +52,8 @@ private:
   bool is_end_of_trading_period();
   bool is_market_open();
   bool should_terminate();
+
+  double profit_percentage(const order_t *);
 
   std::map<int, std::map<const char *, double>>
   build_moving_buy_sell_ratio_average(std::vector<int> &);
@@ -58,6 +65,7 @@ private:
   void log_account_balance();
   void log_average_tick_price_delta();
   void log_candlesticks();
+  void log_position();
   void log_quote();
   void log_start_message();
   void set_and_log_buy_sell_ratios();
