@@ -21,14 +21,14 @@ public:
 private:
   using account_balance_t = Global::t::account_balance_t;
   using candlestick_t = Global::t::candlestick_t;
-  using closed_positions_stats_t = ETrade::t::closed_positions_stats_t;
+  using closed_positions_stats_t = Global::t::closed_positions_stats_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = ETrade::t::order_action_t;
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
-  using order_win_result_t = ETrade::t::order_win_result_t;
-  using order_win_result_streak_t = ETrade::t::order_win_result_streak_t;
+  using order_win_result_t = Global::t::order_win_result_t;
+  using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using position_t = ETrade::t::position_t;
   using quote_t = Global::t::quote_t;
 

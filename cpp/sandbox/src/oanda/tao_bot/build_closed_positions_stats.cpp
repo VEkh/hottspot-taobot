@@ -1,8 +1,8 @@
-#ifndef ETRADE__TAO_BOT_build_closed_positions_stats
-#define ETRADE__TAO_BOT_build_closed_positions_stats
+#ifndef OANDA__TAO_BOT_build_closed_positions_stats
+#define OANDA__TAO_BOT_build_closed_positions_stats
 
 /*
- * ETrade::TaoBot
+ * Oanda::TaoBot
  * order_win_result_t
  * order_win_result_streak_t
  * position_t
@@ -13,8 +13,8 @@
 #include <algorithm>            // std::max
 #include <map>                  // std::map
 
-ETrade::TaoBot::closed_positions_stats_t
-ETrade::TaoBot::build_closed_positions_stats() {
+Oanda::TaoBot::closed_positions_stats_t
+Oanda::TaoBot::build_closed_positions_stats() {
   std::map<order_win_result_t, int> results = {
       {order_win_result_t::LOSS, 0},
       {order_win_result_t::TIE, 0},

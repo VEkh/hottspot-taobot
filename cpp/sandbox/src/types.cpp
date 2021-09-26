@@ -1,6 +1,8 @@
 #ifndef GLOBAL__types
 #define GLOBAL__types
 
+#include <map> // std::map
+
 namespace Global {
 namespace t {
 struct account_balance_t {
@@ -14,6 +16,25 @@ struct candlestick_t {
   double high;
   double low;
   double open;
+};
+
+enum order_win_result_t {
+  LOSS,
+  TIE,
+  WIN,
+};
+
+struct order_win_result_streak_t {
+  std::map<int, int> counts;
+  int current;
+  int longest;
+};
+
+struct closed_positions_stats_t {
+  order_win_result_streak_t loss_streaks;
+  std::map<order_win_result_t, int> results;
+  double total_profit;
+  order_win_result_streak_t win_streaks;
 };
 
 struct exit_prices_t {

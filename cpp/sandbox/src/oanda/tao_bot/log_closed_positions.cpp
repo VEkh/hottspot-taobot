@@ -1,8 +1,8 @@
-#ifndef ETRADE__TAO_BOT_log_closed_positions
-#define ETRADE__TAO_BOT_log_closed_positions
+#ifndef OANDA__TAO_BOT_log_closed_positions
+#define OANDA__TAO_BOT_log_closed_positions
 
 /*
- * ETrade::TaoBot
+ * Oanda::TaoBot
  * closed_positions_stats_t
  * fmt
  * order_win_result_t
@@ -15,7 +15,7 @@
 #include <map>                              // std::map
 #include <stdio.h>                          // printf, puts
 
-void ETrade::TaoBot::log_closed_positions() {
+void Oanda::TaoBot::log_closed_positions() {
   closed_positions_stats_t stats = build_closed_positions_stats();
   std::map<order_win_result_t, int> closed_positions_results = stats.results;
 
