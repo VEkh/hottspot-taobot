@@ -25,12 +25,12 @@ void ETrade::TaoBot::log_position() {
 
   std::cout << fmt.bold << log_color;
   printf(
-      "Open   => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %2.f\n",
+      "Open   => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f\n",
       this->open_order.execution_price, this->open_order.profit,
       profit_percentage(this->open_order_ptr), this->open_order.max_profit);
 
   printf(
-      "Close  => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %2.f\n",
+      "Close  => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f\n",
       this->close_order.execution_price, this->close_order.profit,
       profit_percentage(this->close_order_ptr), this->close_order.max_profit);
 
