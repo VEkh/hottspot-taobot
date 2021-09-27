@@ -1,10 +1,16 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf
 
+#include <iomanip>  // std::setw
+#include <iostream> // std::fixed
+#include <sstream>  // std::ostringstream
 #include <string>
 
 int main() {
-  std::string num = "1.17206";
+  std::ostringstream out;
 
-  printf("%.5f\n", atof(num.c_str()));
+  out << std::setfill('0') << std::setw(2) << 1 << ":" << std::setfill('0')
+      << std::setw(2) << 1;
+
+  printf("%s\n", out.str().c_str());
 }

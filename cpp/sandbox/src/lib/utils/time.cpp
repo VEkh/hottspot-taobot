@@ -3,8 +3,11 @@
 
 #include <chrono>   // std::chrono, std::duration
 #include <ctime>    // localtime, time, time_t, tm
+#include <iomanip>  // std::setw
+#include <iostream> // std::fixed
 #include <map>      // std::map
 #include <ratio>    // std::nano
+#include <sstream>  // std::ostringstream
 #include <stdlib.h> // getenv, setenv, unsetenv
 #include <vector>   // std::vector
 
@@ -113,9 +116,12 @@ std::string timestamp_to_clock(time_t timestamp,
                                const char *time_zone = "America/New_York") {
   return in_time_zone<std::string>(time_zone, [&]() -> std::string {
     tm quote_time = *localtime(&timestamp);
+    std::ostringstream out;
 
-    return std::to_string(quote_time.tm_hour) + ":" +
-           std::to_string(quote_time.tm_min);
+    out << std::setfill('0') << std::setw(2) << quote_time.tm_hour << ":"
+        << std::setfill('0') << std::setw(2) << quote_time.tm_min;
+
+    return out.str();
   });
 };
 

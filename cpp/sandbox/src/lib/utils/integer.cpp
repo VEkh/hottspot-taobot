@@ -4,7 +4,7 @@
 #include <iomanip>  // std::setw
 #include <iostream> // std::fixed
 #include <math.h>   // pow, round
-#include <sstream>  // std::stringstream
+#include <sstream>  // std::ostringstream
 #include <string>   // std::string
 
 namespace utils {

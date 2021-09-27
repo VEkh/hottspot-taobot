@@ -24,7 +24,7 @@ void Oanda::TaoBot::log_candlesticks() {
 
     std::cout << log_color;
 
-    printf("⌚ %s: %+'.2f\n", candlestick->clock_time.c_str(), profit);
+    printf("⌚ %s: %+'.5f\n", candlestick->clock_time.c_str(), profit);
 
     candlestick++;
   }
