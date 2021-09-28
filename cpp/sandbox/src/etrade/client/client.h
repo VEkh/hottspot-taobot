@@ -17,21 +17,16 @@ public:
   using order_status_t = ETrade::t::order_status_t;
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
+  using post_params_t = CurlClient::post_params_t;
   using quote_t = Global::t::quote_t;
 
   enum debug_t { OFF, ON };
-
-  struct post_params_t {
-    std::string body;
-    CurlClient::http_method_t method = CurlClient::http_method_t::POST;
-    std::string url;
-  };
 
   struct props_t {
     debug_t debug_flag;
   };
 
-  CurlClient cancel_order(int);
+  CurlClient cancel_order(const int);
   CurlClient cancel_order(order_t *);
   CurlClient fetch(char *);
   CurlClient fetch(std::string);
@@ -79,7 +74,7 @@ private:
 
   CurlClient handle_place_order_error(CurlClient &, const order_action_t &,
                                       const std::string &);
-  CurlClient post(post_params_t);
+  CurlClient post(const post_params_t);
 
   std::string build_place_order_payload(std::string &);
   std::string build_preview_order_payload(const order_t &);

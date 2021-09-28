@@ -3,6 +3,7 @@
 
 #include "await_market_open.cpp"            // await_market_open
 #include "build_candlesticks.cpp"           // build_candlesticks
+#include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "is_market_open.cpp"               // is_market_open
 #include "log_account_balance.cpp"          // log_account_balance
@@ -33,6 +34,8 @@ void Oanda::TaoBot::watch() {
     log_average_tick_price_delta();
     log_position();
     log_performance();
+
+    cancel_stale_open_order();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));

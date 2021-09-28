@@ -1,13 +1,19 @@
-#if !defined ETRADE__CLIENT_post
+#ifndef ETRADE__CLIENT_post
 #define ETRADE__CLIENT_post
 
-#include "build_request_header.cpp" // build_request_header
-#include "client.h"                 // ETrade::Client, oauth, post_params_t
+/*
+ * ETrade::Client
+ * oauth
+ * post_params_t
+ */
+#include "client.h"
+
+#include "build_request_header.cpp"        // build_request_header
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "load_token.cpp"                  // load_token
-#include <string>                          //  std::string
+#include <string>                          // std::string
 
-CurlClient ETrade::Client::post(post_params_t params) {
+CurlClient ETrade::Client::post(const post_params_t params) {
   std::string url = params.url;
   load_token();
 

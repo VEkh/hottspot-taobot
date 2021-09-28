@@ -17,6 +17,12 @@ public:
   enum debug_t { OFF, ON };
   enum http_method_t { GET, POST, PUT };
 
+  struct post_params_t {
+    std::string body;
+    http_method_t method = http_method_t::POST;
+    std::string url;
+  };
+
   struct props_t {
     std::string body;
     std::map<std::string, std::string> body_params;

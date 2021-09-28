@@ -70,6 +70,7 @@ private:
 
   void await_market_open();
   void build_candlesticks();
+  void cancel_stale_open_order();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();

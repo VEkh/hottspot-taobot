@@ -19,8 +19,11 @@ CurlClient Oanda::Client::fetch(std::string url) {
       .body = "",
       .body_params = {},
       .debug_flag = CurlClient::debug_t::OFF,
-      .headers = {{"Authorization",
-                   std::string("Bearer ") + this->config.authentication_token}},
+      .headers =
+          {
+              {"Authorization",
+               std::string("Bearer ") + this->config.authentication_token},
+          },
       .method = CurlClient::http_method_t::GET,
       .query_params = {},
       .url = url,
