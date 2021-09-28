@@ -8,7 +8,7 @@
  */
 #include "client.h"
 
-#include "deps.cpp"                        // json, _json
+#include "deps.cpp"                        // json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "post.cpp"                        // post

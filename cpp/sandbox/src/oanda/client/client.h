@@ -9,6 +9,7 @@
 namespace Oanda {
 class Client {
 public:
+  using order_action_t = Oanda::t::order_action_t;
   using order_t = Oanda::t::order_t;
   using order_status_t = Oanda::t::order_status_t;
   using post_params_t = CurlClient::post_params_t;
@@ -18,6 +19,7 @@ public:
 
   CurlClient cancel_order(const int);
   CurlClient cancel_order(order_t *order);
+  CurlClient place_order(order_t *order);
   std::string fetch_account();
   std::string fetch_order(const int);
   std::string fetch_quote(char *);

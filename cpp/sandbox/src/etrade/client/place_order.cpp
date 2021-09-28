@@ -1,12 +1,19 @@
 #ifndef ETRADE__CLIENT_place_order
 #define ETRADE__CLIENT_place_order
 
-#include "build_place_order_payload.cpp"   // build_place_order_payload
-#include "client.h"                        // ETrade::Client, config, order_t
-#include "etrade/deps.cpp"                 // json
-#include "handle_place_order_error.cpp"    // handle_place_order_error
-#include "is_next_cycle_retry_error.cpp"   // is_next_cycle_retry_error
-#include "lib/curl_client/curl_client.cpp" // CurlClient
+/*
+ * ETrade::Client
+ * config
+ * order_status_t
+ * order_t
+ */
+#include "client.h"
+
+#include "build_place_order_payload.cpp"          // build_place_order_payload
+#include "etrade/deps.cpp"                        // json
+#include "handle_place_order_error.cpp"           // handle_place_order_error
+#include "is_next_cycle_retry_error.cpp"          // is_next_cycle_retry_error
+#include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "preview_order.cpp"                      // preview_order
 #include <regex>  // std::regex, std::regex_search

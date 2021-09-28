@@ -8,6 +8,7 @@
 #include "fetch_quote.cpp"
 #include "load_config.cpp" // load_config
 #include "parse_quote.cpp"
+#include "place_order.cpp"
 
 Oanda::Client::Client() { load_config(); }
 

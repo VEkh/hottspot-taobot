@@ -49,7 +49,6 @@ void ETrade::TaoBot::watch() {
     set_position_status();
     open_position();
     set_open_position_prices();
-
     close_position();
     log_position_results();
     reset_position();

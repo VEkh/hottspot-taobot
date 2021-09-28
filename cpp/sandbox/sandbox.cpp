@@ -2,11 +2,10 @@
 #include <stdio.h>  // printf
 
 #include "deps.cpp"
+#include <string>
 
 int main() {
-  json j;
+  std::string i = "12484";
 
-  if (!j.contains("foo")) {
-    printf("yerrr\n");
-  }
+  printf("%i\n", (int)std::stod(i));
 }

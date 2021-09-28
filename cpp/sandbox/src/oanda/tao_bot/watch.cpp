@@ -12,6 +12,7 @@
 #include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
 #include "log_quote.cpp"                    // log_quote
+#include "open_position.cpp"                // open_position
 #include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
 #include "set_position_status.cpp"          // set_order_statuses
@@ -38,6 +39,7 @@ void Oanda::TaoBot::watch() {
 
     cancel_stale_open_order();
     set_position_status();
+    open_position();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));

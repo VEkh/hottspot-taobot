@@ -22,8 +22,10 @@ private:
   using candlestick_t = Global::t::candlestick_t;
   using closed_positions_stats_t = Global::t::closed_positions_stats_t;
   using exit_prices_t = Global::t::exit_prices_t;
+  using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
   using order_t = Oanda::t::order_t;
+  using order_type_t = Oanda::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using position_t = Oanda::t::position_t;
@@ -31,6 +33,11 @@ private:
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
+
+  std::map<const char *, const char *> ICONS = {
+      {"BUY", "📈"},
+      {"SELL", "📉"},
+  };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
@@ -56,13 +63,20 @@ private:
 
   account_balance_t fetch_account_balance();
 
+  bool candlesticks_in_direction(const order_action_t);
   bool is_end_of_trading_period();
   bool is_market_open();
+  bool should_open_position();
+  bool should_open_position(const order_action_t);
   bool should_terminate();
 
+  double loss_to_recover();
   double profit_percentage(const order_t *);
 
   closed_positions_stats_t build_closed_positions_stats();
+
+  int base_quantity();
+  int compute_quantity();
 
   json fetch_order(const order_t *);
 
@@ -84,6 +98,7 @@ private:
   void log_position();
   void log_quote();
   void log_start_message();
+  void open_position();
   void set_and_log_buy_sell_ratios();
   void set_average_tick_price_delta();
   void set_position_status();

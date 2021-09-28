@@ -66,12 +66,12 @@ private:
 
   account_balance_t fetch_account_balance();
 
+  bool candlesticks_in_direction(const order_action_t);
   bool is_end_of_trading_period();
   bool is_market_open();
-  bool candlesticks_in_direction(order_action_t);
   bool should_close_position();
   bool should_open_position();
-  bool should_open_position(order_action_t);
+  bool should_open_position(const order_action_t);
   bool should_terminate();
 
   double compute_profit(const order_t *, const order_t *);

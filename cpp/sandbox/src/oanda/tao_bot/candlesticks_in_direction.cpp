@@ -1,10 +1,10 @@
-#ifndef ETRADE__TAO_BOT_candlesticks_in_direction
-#define ETRADE__TAO_BOT_candlesticks_in_direction
+#ifndef OANDA__TAO_BOT_candlesticks_in_direction
+#define OANDA__TAO_BOT_candlesticks_in_direction
 
-#include "tao_bot.h" // ETrade::TaoBot, candlestick_t, order_action_t
+#include "tao_bot.h" // Oanda::TaoBot, candlestick_t, order_action_t
 #include <list>      // std::list
 
-bool ETrade::TaoBot::candlesticks_in_direction(
+bool Oanda::TaoBot::candlesticks_in_direction(
     const order_action_t order_action) {
   if (!this->candlesticks.size()) {
     return false;
@@ -25,7 +25,7 @@ bool ETrade::TaoBot::candlesticks_in_direction(
 
       break;
     }
-    case order_action_t::SELL_SHORT: {
+    case order_action_t::SELL: {
       out = price_delta < 0;
 
       break;
