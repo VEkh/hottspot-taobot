@@ -58,11 +58,10 @@ void Oanda::TaoBot::log_performance() {
   printf("Win  Streak => Current: %d • Longest: %d • ",
          stats.win_streaks.current, stats.win_streaks.longest);
   print_counts(stats.win_streaks.counts);
+  puts("");
 
   printf("Current Balance: %+'.5f\n", stats.current_balance);
   printf("Max Balance: %+'.5f\n", stats.max_balance);
-
-  puts("\n");
 
   printf("Profits: [");
 
