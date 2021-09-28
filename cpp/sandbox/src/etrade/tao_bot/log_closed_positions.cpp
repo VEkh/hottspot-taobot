@@ -75,7 +75,8 @@ void ETrade::TaoBot::log_closed_positions() {
 
   puts("]");
 
-  printf("Total Profit: %+'.2f\n", stats.total_profit);
+  printf("Current Balance: %+'.2f\n", stats.current_balance);
+  printf("Max Balance: %+'.2f\n", stats.max_balance);
 
   std::cout << fmt.reset << std::endl;
 }

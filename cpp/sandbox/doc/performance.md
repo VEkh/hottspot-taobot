@@ -5739,6 +5739,53 @@ Conclusions:
 
 * Opening Account Value: $62,299.81
 
+* Total: +$1,106.84 (+1.78%) (🔥PR🔥)
+  * AAPL (+$12.96)
+  * AMD  (+$16.72)
+  * BA   (+$19.66)
+  * FB   (+$24.32)
+  * MSFT (+$17.94)
+  * SNAP (+$40.65)
+  * TSLA (+$26.96)
+  * TWTR (+$26.96)
+  * VIAC (+$916.63) 😳
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 46W 35L
+* Week's Return: +$1,106.84
+* Total Return: -$3,080.57
+
+#### Remarks
+* 9/9 stocks won! 🥳
+* VIAC had a HUGE redemptive win from last week's long loss streak.
+* This fortifies my confidence in the recent strategy to persist closed
+  positions and resume trading at the start of the following trading period.
+  * This allows you to use the heavy movement at market open to heavy recover
+    loss
+* Consider the following scenario:
+  * Security has made +$10
+  * It goes on a loss streak to lose $8
+  * It ends the day with a win to recover $5
+
+  * In this case the net balance is +$7, but it's -$3 from the peak balance.
+* TaoBot should instead keep track of the current and peak balance and
+  recuperate losses if the current balance is at any point less than the peak
+  balance.
+* I updated the `max_affordable_quantity` algorthm to use ETrade's actual
+  margin buy power, instead of a fraction of the full Day Trading Margin Buy
+  Power. I kept running into IFEs.
+
+
+#### Next Thing(s) to Try
+
+### 2021-09-28:
+#### Performance
+
+* Opening Account Value: $63,407.00
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

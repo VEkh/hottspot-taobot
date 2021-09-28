@@ -23,7 +23,7 @@ Oanda::TaoBot::build_closed_positions_stats() {
 
   bool loss_streak_broken = false;
   bool win_streak_broken = false;
-  double total_profit = 0.00;
+  double current_balance_ = 0.00;
 
   int l = this->closed_positions.size();
 
@@ -50,7 +50,8 @@ Oanda::TaoBot::build_closed_positions_stats() {
     const order_win_result_t result = order_win_result(&(position.close_order));
 
     results[result]++;
-    total_profit += position.close_order.profit * position.close_order.quantity;
+    current_balance_ +=
+        position.close_order.profit * position.close_order.quantity;
 
     if (result == order_win_result_t::WIN) {
       loss_streak_broken = true;
@@ -98,9 +99,10 @@ Oanda::TaoBot::build_closed_positions_stats() {
   }
 
   return {
+      .current_balance = current_balance_,
       .loss_streaks = streaks[order_win_result_t::LOSS],
+      .max_balance = std::max(current_balance_, this->max_balance),
       .results = results,
-      .total_profit = total_profit,
       .win_streaks = streaks[order_win_result_t::WIN],
   };
 }

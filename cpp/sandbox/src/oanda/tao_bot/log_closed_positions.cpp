@@ -69,13 +69,14 @@ void Oanda::TaoBot::log_closed_positions() {
       printf(", ");
     }
 
-    printf("%+.2f:%d", position.close_order.profit,
+    printf("%+.5f:%d", position.close_order.profit,
            position.close_order.quantity);
   }
 
   puts("]");
 
-  printf("Total Profit: %+'.2f\n", stats.total_profit);
+  printf("Current Balance: %+'.5f\n", stats.current_balance);
+  printf("Max Balance: %+'.5f\n", stats.max_balance);
 
   std::cout << fmt.reset << std::endl;
 }

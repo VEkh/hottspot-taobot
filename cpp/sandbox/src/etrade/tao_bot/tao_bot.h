@@ -49,6 +49,7 @@ private:
   double average_tick_price_delta = 0.00;
   double long_average_buy_sell_ratio;
   double long_average_sell_buy_ratio;
+  double max_balance = 0.00;
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
   exit_prices_t exit_prices;
@@ -90,14 +91,13 @@ private:
   std::map<int, std::map<const char *, double>>
   build_moving_buy_sell_ratio_average(std::vector<int> &);
 
-  std::vector<position_t> load_closed_positions();
-
   void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
   void close_position();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
+  void load_performance();
   void log_account_balance();
   void log_average_tick_price_delta();
   void log_candlesticks();
@@ -120,7 +120,7 @@ private:
   void set_status(order_t *);
   void trim_old_quotes();
   void watch();
-  void write_closed_positions();
+  void write_performance();
 };
 } // namespace ETrade
 

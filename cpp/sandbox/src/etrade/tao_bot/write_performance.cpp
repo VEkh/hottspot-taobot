@@ -1,5 +1,5 @@
-#ifndef ETRADE__TAO_BOT_write_closed_positions
-#define ETRADE__TAO_BOT_write_closed_positions
+#ifndef ETRADE__TAO_BOT_write_performance
+#define ETRADE__TAO_BOT_write_performance
 
 /*
  * ETrade::TaoBot
@@ -14,7 +14,7 @@
 #include "lib/utils/io.cpp"     // utils::io
 #include <list>                 // std::list
 
-void ETrade::TaoBot::write_closed_positions() {
+void ETrade::TaoBot::write_performance() {
   json (*order_to_json)(order_t &) = [](order_t &order) -> json {
     return {
         {"action", ETrade::constants::ORDER_ACTIONS[order.action]},
@@ -25,11 +25,10 @@ void ETrade::TaoBot::write_closed_positions() {
     };
   };
 
-  std::string filepath = std::string(APP_DIR) +
-                         "/data/etrade/closed_positions/" +
+  std::string filepath = std::string(APP_DIR) + "/data/etrade/performance/" +
                          std::string(symbol) + ".json";
 
-  json closed_positions_json;
+  json performance_json;
 
   std::list<json> positions;
 
@@ -43,9 +42,10 @@ void ETrade::TaoBot::write_closed_positions() {
     positions.push_back(position_json);
   }
 
-  closed_positions_json = positions;
+  performance_json["max_balance"] = this->max_balance;
+  performance_json["positions"] = positions;
 
-  ::utils::io::write_to_file(closed_positions_json.dump(2), filepath.c_str());
+  ::utils::io::write_to_file(performance_json.dump(2), filepath.c_str());
 }
 
 #endif

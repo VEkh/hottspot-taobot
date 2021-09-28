@@ -31,9 +31,10 @@ struct order_win_result_streak_t {
 };
 
 struct closed_positions_stats_t {
+  double current_balance;
   order_win_result_streak_t loss_streaks;
+  double max_balance;
   std::map<order_win_result_t, int> results;
-  double total_profit;
   order_win_result_streak_t win_streaks;
 };
 
