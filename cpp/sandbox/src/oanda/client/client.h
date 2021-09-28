@@ -19,6 +19,7 @@ public:
   CurlClient cancel_order(const int);
   CurlClient cancel_order(order_t *order);
   std::string fetch_account();
+  std::string fetch_order(const int);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
 

@@ -63,6 +63,9 @@ private:
   double profit_percentage(const order_t *);
 
   closed_positions_stats_t build_closed_positions_stats();
+
+  json fetch_order(const order_t *);
+
   order_win_result_t order_win_result(const order_t *);
 
   std::map<int, std::map<const char *, double>>
@@ -83,6 +86,8 @@ private:
   void log_start_message();
   void set_and_log_buy_sell_ratios();
   void set_average_tick_price_delta();
+  void set_position_status();
+  void set_status(order_t *order);
   void watch();
 };
 } // namespace Oanda

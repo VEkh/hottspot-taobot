@@ -84,8 +84,11 @@ private:
   int compute_quantity();
 
   closed_positions_stats_t build_closed_positions_stats();
+
   exit_prices_t build_exit_prices();
+
   json fetch_order(const order_t *);
+
   order_win_result_t order_win_result(const order_t *);
 
   std::map<int, std::map<const char *, double>>

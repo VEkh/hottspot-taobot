@@ -4,7 +4,7 @@
 #include "etrade/deps.cpp"  // json
 #include "etrade/utils.cpp" // ETrade::utils
 #include "fetch_order.cpp"  // fetch_order
-#include "tao_bot.h"      // ETrade::TaoBot, order_status_t, order_t
+#include "tao_bot.h"        // ETrade::TaoBot, order_status_t, order_t
 #include <string>           // std::string
 
 void ETrade::TaoBot::set_status(order_t *order) {

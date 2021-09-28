@@ -1,10 +1,10 @@
-#ifndef ETRADE__TAO_BOT_set_position_status
-#define ETRADE__TAO_BOT_set_position_status
+#ifndef OANDA__TAO_BOT_set_position_status
+#define OANDA__TAO_BOT_set_position_status
 
 #include "set_status.cpp" // set_status
-#include "tao_bot.h"      // ETrade::TaoBot
+#include "tao_bot.h"      // Oanda::TaoBot
 
-void ETrade::TaoBot::set_position_status() {
+void Oanda::TaoBot::set_position_status() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
     return;
   }

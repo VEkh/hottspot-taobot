@@ -5,7 +5,6 @@
  * ETrade::TaoBot
  * fmt
  * order_t
- * placed_orders
  */
 #include "tao_bot.h"
 
