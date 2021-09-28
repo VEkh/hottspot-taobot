@@ -11,8 +11,8 @@
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_candlesticks.cpp"             // log_candlesticks
-#include "log_closed_positions.cpp"         // log_closed_positions
 #include "log_end_of_day.cpp"               // log_end_of_day
+#include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
 #include "log_position_results.cpp"         // log_position_results
 #include "log_quote.cpp"                    // log_quote
@@ -43,7 +43,7 @@ void ETrade::TaoBot::watch() {
     set_and_log_buy_sell_ratios();
     log_average_tick_price_delta();
     log_position();
-    log_closed_positions();
+    log_performance();
 
     cancel_stale_open_order();
     set_position_status();

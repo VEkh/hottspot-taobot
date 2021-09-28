@@ -1,5 +1,5 @@
-#ifndef ETRADE__TAO_BOT_log_closed_positions
-#define ETRADE__TAO_BOT_log_closed_positions
+#ifndef ETRADE__TAO_BOT_log_performance
+#define ETRADE__TAO_BOT_log_performance
 
 /*
  * ETrade::TaoBot
@@ -15,7 +15,7 @@
 #include <map>                              // std::map
 #include <stdio.h>                          // printf, puts
 
-void ETrade::TaoBot::log_closed_positions() {
+void ETrade::TaoBot::log_performance() {
   closed_positions_stats_t stats = build_closed_positions_stats();
   std::map<order_win_result_t, int> closed_positions_results = stats.results;
 
@@ -58,6 +58,10 @@ void ETrade::TaoBot::log_closed_positions() {
   printf("Win  Streak => Current: %d • Longest: %d • ",
          stats.win_streaks.current, stats.win_streaks.longest);
   print_counts(stats.win_streaks.counts);
+
+  printf("Current Balance: %+'.2f\n", stats.current_balance);
+  printf("Max Balance: %+'.2f\n", stats.max_balance);
+
   puts("\n");
 
   printf("Profits: [");
@@ -74,9 +78,6 @@ void ETrade::TaoBot::log_closed_positions() {
   }
 
   puts("]");
-
-  printf("Current Balance: %+'.2f\n", stats.current_balance);
-  printf("Max Balance: %+'.2f\n", stats.max_balance);
 
   std::cout << fmt.reset << std::endl;
 }

@@ -8,7 +8,7 @@
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_candlesticks.cpp"             // log_candlesticks
-#include "log_closed_positions.cpp"         // log_closed_positions
+#include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
 #include "log_quote.cpp"                    // log_quote
 #include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
@@ -32,7 +32,7 @@ void Oanda::TaoBot::watch() {
     set_and_log_buy_sell_ratios();
     log_average_tick_price_delta();
     log_position();
-    log_closed_positions();
+    log_performance();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));
