@@ -15,6 +15,7 @@
 #include "open_position.cpp"                // open_position
 #include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
+#include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
 #include "tao_bot.h"                        // Oanda::TaoBot
@@ -40,6 +41,7 @@ void Oanda::TaoBot::watch() {
     cancel_stale_open_order();
     set_position_status();
     open_position();
+    set_open_position_prices();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));

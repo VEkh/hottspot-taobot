@@ -70,6 +70,8 @@ private:
   bool should_open_position(const order_action_t);
   bool should_terminate();
 
+  double compute_profit(const order_t *, const quote_t *);
+  double compute_profit(const order_t *, const order_t *);
   double loss_to_recover();
   double profit_percentage(const order_t *);
 
@@ -101,7 +103,11 @@ private:
   void open_position();
   void set_and_log_buy_sell_ratios();
   void set_average_tick_price_delta();
+  void set_execution_price(order_t *order);
+  void set_open_position_prices();
   void set_position_status();
+  void set_profit(order_t *, const order_t *);
+  void set_profit(order_t *order);
   void set_status(order_t *order);
   void watch();
 };

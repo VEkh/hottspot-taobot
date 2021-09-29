@@ -24,6 +24,7 @@ public:
   std::string fetch_order(const int);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
+  std::string fetch_trade(const int);
 
   quote_t parse_quote(const std::string &);
 

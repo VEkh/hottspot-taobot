@@ -29,6 +29,7 @@ struct order_t {
   order_status_t status = order_status_t::ORDER_PENDING;
   const char *symbol;
   int timestamp = 0;
+  int trade_id = 0;
   order_type_t type;
 };
 
