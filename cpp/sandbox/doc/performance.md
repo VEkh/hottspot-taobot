@@ -5822,6 +5822,42 @@ Conclusions:
 
 * Opening Account Value: $62,438.57
 
+* Total: +$1,694.37 (+2.71%) (🔥PR🔥)
+  * AAPL (+$31.74)
+  * AMD  (+$21.22)
+  * BA   (+$16.51)
+  * FB   (+$25.58)
+  * MSFT (+$45.78)
+  * SNAP (+$140.90)
+  * TSLA (+$32.11)
+  * TWTR (+$67.83)
+  * VIAC (+$1,312.71)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 47W 36L
+* Week's Return: +$1,832.05
+* Total Return: -$2,355.36
+
+#### Remarks
+* 9/9 stocks won! 🥳
+* VIAC recovered its yesterday losses. They recovered specifically because I
+extended the max `min_profit` to be 100x the 1-sec variance, not the full
+amount necessary for recovery.
+  * It seems this is a feasible amount to cover when the price trends heavily
+    in one direction.
+* I also increased the target profit from ~$0.90 to ~$1.20. I may increase it
+  as I gain more confidence.
+
+#### Next Thing(s) to Try
+
+### 2021-09-30:
+#### Performance
+
+* Opening Account Value: $64,133.07
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

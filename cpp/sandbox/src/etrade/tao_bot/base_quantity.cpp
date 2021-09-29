@@ -5,7 +5,7 @@
 #include <math.h>    // ceil
 
 int ETrade::TaoBot::base_quantity() {
-  const double target_profit = this->account_balance.balance * 1.5e-5;
+  const double target_profit = this->account_balance.balance * 2e-5;
   const double variance_multiplier = 20;
 
   const int base_quantity_ = ceil(

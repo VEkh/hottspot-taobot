@@ -3,7 +3,7 @@
 
 #include "lib/formatted.cpp" // Formatted
 #include "tao_bot.h"         // Oanda::TaoBot, fmt
-#include <iostream>          // std::cout
+#include <iostream>          // std::cout, std::endl
 #include <stdio.h>           // printf
 
 void Oanda::TaoBot::log_candlesticks() {
@@ -29,7 +29,7 @@ void Oanda::TaoBot::log_candlesticks() {
     candlestick++;
   }
 
-  std::cout << fmt.reset;
+  std::cout << std::endl << fmt.reset;
 }
 
 #endif

@@ -4,7 +4,7 @@
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/float.cpp" // utils::float_
 #include "tao_bot.h"           // ETrade::TaoBot, fmt
-#include <iostream>            // std::cout
+#include <iostream>            // std::cout, std::endl
 #include <stdio.h>             // printf
 
 void ETrade::TaoBot::log_candlesticks() {
@@ -31,7 +31,7 @@ void ETrade::TaoBot::log_candlesticks() {
     candlestick++;
   }
 
-  std::cout << fmt.reset;
+  std::cout << std::endl << fmt.reset;
 }
 
 #endif
