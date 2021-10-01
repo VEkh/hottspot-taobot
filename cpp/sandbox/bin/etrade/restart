@@ -5,7 +5,7 @@ fmt_bold="\033[1m"
 fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 
-symbol="$1"
+symbol="${1^^}"
 
 
 if [[ "$*" =~ .*--clear-performance.* ]]
