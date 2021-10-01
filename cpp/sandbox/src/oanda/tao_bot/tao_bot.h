@@ -66,6 +66,7 @@ private:
   bool candlesticks_in_direction(const order_action_t);
   bool is_end_of_trading_period();
   bool is_market_open();
+  bool should_close_position();
   bool should_open_position();
   bool should_open_position(const order_action_t);
   bool should_terminate();
@@ -74,8 +75,11 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double loss_to_recover();
   double profit_percentage(const order_t *);
+  double secured_profit_ratio();
 
   closed_positions_stats_t build_closed_positions_stats();
+
+  exit_prices_t build_exit_prices();
 
   int base_quantity();
   int compute_quantity();
@@ -90,6 +94,7 @@ private:
   void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
+  void close_position();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();

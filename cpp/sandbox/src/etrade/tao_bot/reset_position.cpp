@@ -41,6 +41,7 @@ void ETrade::TaoBot::reset_position() {
   write_performance();
 
   this->close_order_ptr = nullptr;
+  this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
 }
 

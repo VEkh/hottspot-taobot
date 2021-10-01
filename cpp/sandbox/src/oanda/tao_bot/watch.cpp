@@ -4,6 +4,7 @@
 #include "await_market_open.cpp"            // await_market_open
 #include "build_candlesticks.cpp"           // build_candlesticks
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
+#include "close_position.cpp"               // close_position
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "is_market_open.cpp"               // is_market_open
 #include "log_account_balance.cpp"          // log_account_balance
@@ -42,6 +43,7 @@ void Oanda::TaoBot::watch() {
     set_position_status();
     open_position();
     set_open_position_prices();
+    close_position();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));

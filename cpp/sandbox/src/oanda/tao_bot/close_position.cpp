@@ -1,19 +1,19 @@
-#ifndef ETRADE__TAO_BOT_close_position
-#define ETRADE__TAO_BOT_close_position
+#ifndef OANDA__TAO_BOT_close_position
+#define OANDA__TAO_BOT_close_position
 
-#include "etrade/constants.cpp"      // ETrade::constants
+#include "oanda/constants.cpp"       // Oanda::constants
 #include "should_close_position.cpp" // should_close_position
-#include "tao_bot.h"                 // ETrade::TaoBot, fmt
+#include "tao_bot.h"                 // Oanda::TaoBot, fmt
 #include <iostream>                  // std::cout, std::endl
 #include <stdio.h>                   // printf
 
-void ETrade::TaoBot::close_position() {
+void Oanda::TaoBot::close_position() {
   if (!should_close_position()) {
     return;
   }
 
   const char *order_action =
-      ETrade::constants::ORDER_ACTIONS[this->open_order.action];
+      Oanda::constants::ORDER_ACTIONS[this->open_order.action];
 
   const char *log_icon = this->ICONS[order_action];
 

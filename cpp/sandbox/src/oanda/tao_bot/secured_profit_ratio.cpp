@@ -1,10 +1,10 @@
-#ifndef ETRADE__TAO_BOT_secured_profit_ratio
-#define ETRADE__TAO_BOT_secured_profit_ratio
+#ifndef OANDA__TAO_BOT_secured_profit_ratio
+#define OANDA__TAO_BOT_secured_profit_ratio
 
 #include "tao_bot.h" // ETrade::TaoBot
 #include <math.h>    // exp
 
-double ETrade::TaoBot::secured_profit_ratio() {
+double Oanda::TaoBot::secured_profit_ratio() {
   const double min = 0.8;
   const double max = 0.9;
 

@@ -1,8 +1,8 @@
-#ifndef ETRADE__TAO_BOT_should_close_position
-#define ETRADE__TAO_BOT_should_close_position
+#ifndef OANDA__TAO_BOT_should_close_position
+#define OANDA__TAO_BOT_should_close_position
 
 /*
- * ETrade::TaoBot
+ * Oanda::TaoBot
  * order_action_t
  * order_status_t
  * quote_t
@@ -14,8 +14,8 @@
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "should_open_position.cpp"     // should_open_position
 
-bool ETrade::TaoBot::should_close_position() {
-  if (this->open_order.status != order_status_t::ORDER_EXECUTED) {
+bool Oanda::TaoBot::should_close_position() {
+  if (this->open_order.status != order_status_t::ORDER_FILLED) {
     return false;
   }
 
@@ -47,8 +47,7 @@ bool ETrade::TaoBot::should_close_position() {
     return false;
   }
 
-  if (this->is_long_position &&
-      should_open_position(order_action_t::SELL_SHORT)) {
+  if (this->is_long_position && should_open_position(order_action_t::SELL)) {
     return true;
   }
 
