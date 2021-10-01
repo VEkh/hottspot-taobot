@@ -5858,6 +5858,39 @@ amount necessary for recovery.
 
 * Opening Account Value: $64,133.07
 
+* Total: -$280.41 (-0.44%)
+  * AAPL (+$18.20)
+  * AMD  (+$36.29)
+  * BA   (+$48.10)
+  * FB   (+$64.87)
+  * MSFT (+$774.47)
+  * SNAP (+$67.38)
+  * TSLA (+$26.48)
+  * TWTR (-$1,343.15)
+  * VIAC (+$26.94)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 47W 37L
+* Week's Return: +$1,551.64
+* Total Return: -$2,635.77
+
+#### Remarks
+* 8/9 stocks won 🎉
+* TWTR lost big, but recovered much of its loss at the end of the day
+* MSFT had a big win, even after starting from scratch.
+* Increasing the target profit increased the returns of most stocks, I may
+  still increase it.
+
+#### Next Thing(s) to Try
+
+### 2021-10-01:
+#### Performance
+
+* Opening Account Value: $63,852.77
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

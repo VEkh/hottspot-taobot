@@ -1,24 +1,16 @@
 #ifndef ETRADE__TAO_BOT_build_exit_prices
 #define ETRADE__TAO_BOT_build_exit_prices
 
-/*
- * ETrade::TaoBot
- * closed_positions_stats_t
- * exit_prices_t
- * order_win_result_t
- * position_t
- */
-#include "tao_bot.h"
-
 #include "loss_to_recover.cpp"      // loss_to_recover
 #include "secured_profit_ratio.cpp" // secured_profit_ratio
-#include <algorithm>                // std::min
+#include "tao_bot.h"                // ETrade::TaoBot
+#include <algorithm>                // std::max std::min
 #include <math.h>                   // abs
 
 ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
+  const double loss_to_recover_ = loss_to_recover();
   const double max_loss_multiplier = 20.0;
   const double secured_profit_ratio_ = secured_profit_ratio();
-  const double loss_to_recover_ = loss_to_recover();
 
   double max_loss = -1 * max_loss_multiplier * this->average_tick_price_delta;
 
@@ -36,7 +28,8 @@ ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
       (secured_profit_ratio_ - 0.2) * this->open_order.max_profit;
 
   const double secure_profit_upper =
-      secured_profit_ratio_ * this->open_order.max_profit;
+      std::max(this->exit_prices.secure_profit_upper,
+               secured_profit_ratio_ * this->open_order.max_profit);
 
   return {
       .max_loss = max_loss,

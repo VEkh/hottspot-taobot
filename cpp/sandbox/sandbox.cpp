@@ -4,8 +4,18 @@
 #include "deps.cpp"
 #include <string>
 
-int main() {
-  std::string i = "12484";
+struct fu {
+  int foo = 1;
+};
 
-  printf("%i\n", (int)std::stod(i));
+int main() {
+  fu f;
+
+  f.foo = 2;
+
+  printf("%i\n", f.foo);
+
+  f = fu();
+
+  printf("%i\n", f.foo);
 }
