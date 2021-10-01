@@ -2,10 +2,10 @@
 #define ETRADE__CLIENT_preview_order
 
 #include "build_preview_order_payload.cpp" // build_preview_order_payload
-#include "client.h"        // ETrade::Client, config, order_t
-#include "etrade/deps.cpp" // json
-#include "handle_place_order_error.cpp"           // handle_place_order_error
-#include "lib/curl_client/curl_client.cpp"        // CurlClient
+#include "client.h"                        // ETrade::Client, config, order_t
+#include "etrade/deps.cpp"                 // json
+#include "handle_place_order_error.cpp"    // handle_place_order_error
+#include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include <regex> // std::regex, std::regex_search
 
@@ -14,20 +14,26 @@ namespace preview_order {
 bool is_immediate_retry_error(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
+  if (response_body.empty()) {
+    return true;
+  }
+
   json response = json::parse(response_body);
 
-  if (response.contains("Error") && response["Error"]["code"] == 163) {
-    return true;
-  }
+  if (response.contains("Error")) {
+    int code = response["Error"]["code"];
 
-  if (response.contains("Error") && response["Error"]["code"] == 1037) {
-    return true;
-  }
+    switch (code) {
+    case 163:
+    case 1037: {
+      return true;
+    }
+    }
 
-  if (response.contains("Error") &&
-      response["Error"]["message"] ==
-          "Number of requests exceeded the rate limit set") {
-    return true;
+    if (response["Error"]["message"] ==
+        "Number of requests exceeded the rate limit set") {
+      return true;
+    }
   }
 
   return std::regex_search(response_body,
@@ -38,8 +44,7 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 
 CurlClient ETrade::Client::preview_order(const order_t &order) {
   std::string request_url = config.base_url + "/v1/accounts/" +
-                            config.account_id_key +
-                            "/orders/preview.json";
+                            config.account_id_key + "/orders/preview.json";
 
   std::string payload = build_preview_order_payload(order);
 

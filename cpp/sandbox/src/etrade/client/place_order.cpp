@@ -24,6 +24,10 @@ namespace place_order {
 bool is_immediate_retry_error(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
+  if (response_body.empty()) {
+    return true;
+  }
+
   json response = json::parse(response_body);
 
   if (response.contains("Error") && response["Error"]["code"] == 163) {

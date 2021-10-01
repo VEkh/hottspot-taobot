@@ -21,6 +21,10 @@ bool ETrade::Client::is_next_cycle_retry_error(CurlClient &curl_client) {
 
   const int code = response_body["Error"]["code"];
 
+  if (code == 101) {
+    printf("101 Error: %s\n", response_body.dump().c_str());
+  }
+
   if (error_codes.find(code) != error_codes.end()) {
     curl_client.response.error_code = code;
     return true;
