@@ -1,19 +1,13 @@
 #!/bin/bash
 
 app_dir=$(realpath "$(dirname "$0")/../../")
-fmt_bold="\033[1m"
-fmt_reset="\033[0m"
-fmt_yellow="\033[33m"
 
 symbol="${1^^}"
 
-
 if [[ "$*" =~ .*--clear-performance.* ]]
 then
-  echo -e "${fmt_bold}${fmt_yellow}Clearing $symbol's performance${fmt_reset}"
-  echo "{}" > "$app_dir/data/etrade/performance/$symbol.json"
+  "$app_dir/bin/etrade/clear_performance" "$symbol"
 fi
-
 
 "$app_dir/bin/etrade/stop" "$@"
 "$app_dir/bin/etrade/start" "$@"

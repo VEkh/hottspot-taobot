@@ -1,0 +1,11 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+
+symbol="${1^^}"
+
+echo "{}" > "$app_dir/data/etrade/performance/$symbol.json"
+echo -e "\n${fmt_bold}${fmt_yellow}Cleared $symbol's performance${fmt_reset}\n"
