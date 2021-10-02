@@ -34,8 +34,8 @@ bool ETrade::TaoBot::should_close_position() {
       compute_profit(this->open_order_ptr, &previous_quote);
 
   if (this->open_order.max_profit >= this->exit_prices.min_profit &&
-      previous_profit >= this->exit_prices.secure_profit_upper &&
-      this->open_order.profit <= this->exit_prices.secure_profit_upper) {
+      previous_profit >= this->exit_prices.secure_profit &&
+      this->open_order.profit <= this->exit_prices.secure_profit) {
     return true;
   }
 

@@ -38,11 +38,9 @@ void Oanda::TaoBot::log_position() {
          Oanda::constants::ORDER_STATUSES[this->open_order.status],
          Oanda::constants::ORDER_STATUSES[this->close_order.status]);
 
-  printf("Min Profit: %.5f • Max Loss: %.5f • Secure Profit (Lower): %.5f • "
-         "Secure Profit (Upper): %.5f\n",
+  printf("Min Profit: %.5f • Max Loss: %.5f • Secure Profit: %.5f\n",
          this->exit_prices.min_profit, this->exit_prices.max_loss,
-         this->exit_prices.secure_profit_lower,
-         this->exit_prices.secure_profit_upper);
+         this->exit_prices.secure_profit);
 
   printf("Quantity: %i\n", this->quantity);
 

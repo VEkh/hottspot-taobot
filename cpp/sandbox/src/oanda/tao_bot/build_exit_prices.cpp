@@ -24,18 +24,14 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
 
   const double min_profit = abs(max_loss) / secured_profit_ratio_;
 
-  const double secure_profit_lower =
-      (secured_profit_ratio_ - 0.2) * this->open_order.max_profit;
-
-  const double secure_profit_upper =
-      std::max(this->exit_prices.secure_profit_upper,
+  const double secure_profit =
+      std::max(this->exit_prices.secure_profit,
                secured_profit_ratio_ * this->open_order.max_profit);
 
   return {
       .max_loss = max_loss,
       .min_profit = min_profit,
-      .secure_profit_lower = secure_profit_lower,
-      .secure_profit_upper = secure_profit_upper,
+      .secure_profit = secure_profit,
   };
 }
 

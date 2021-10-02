@@ -39,6 +39,8 @@ private:
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
+      {"BUY_TO_COVER", "📈"},
+      {"SELL", "📉"},
       {"SELL_SHORT", "📉"},
   };
 

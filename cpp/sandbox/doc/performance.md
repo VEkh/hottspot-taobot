@@ -5891,6 +5891,41 @@ amount necessary for recovery.
 
 * Opening Account Value: $63,852.77
 
+* Total: -$2,714.61 (-4.25%)
+  * AAPL (+$9.19)
+  * AMD  (+$7.38)
+  * BA   (+$16.94)
+  * FB   (-$46.02)
+  * MSFT (+$2.99)
+  * SNAP (+$6.94)
+  * TSLA (+$6.30)
+  * TWTR (-$2,732.01)
+  * VIAC (+$13.69)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 47W 38L
+* Week's Return: -$1,162.97
+* Total Return: -$5,350.38
+
+#### Remarks
+* 7/9 stocks won 🎈
+* TWTR lost big, largely due to being unable to enter at the beginning of a
+  long trend because of a bug I introduced, so don't freak out at the big loss.
+* I modified the open position algorithm to account for computed quantities of
+  0.
+* I tightened the target movement to a range of 20-50x the 1-sec variance to
+  more gradually chip away at deficits.
+
+#### Next Thing(s) to Try
+
+### 2021-10-04:
+#### Performance
+
+* Opening Account Value: $63,852.77
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
