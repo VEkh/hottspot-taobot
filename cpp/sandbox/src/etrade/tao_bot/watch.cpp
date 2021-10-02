@@ -11,7 +11,7 @@
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_candlesticks.cpp"             // log_candlesticks
-#include "log_end_of_day.cpp"               // log_end_of_day
+#include "log_end_of_trading_period.cpp"    // log_end_of_trading_period
 #include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
 #include "log_position_results.cpp"         // log_position_results
@@ -57,7 +57,7 @@ void ETrade::TaoBot::watch() {
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));
   }
 
-  log_end_of_day();
+  log_end_of_trading_period();
 }
 
 #endif

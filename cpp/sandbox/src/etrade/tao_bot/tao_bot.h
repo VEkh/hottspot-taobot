@@ -109,7 +109,7 @@ private:
   void log_average_tick_price_delta();
   void log_candlesticks();
   void log_performance();
-  void log_end_of_day();
+  void log_end_of_trading_period();
   void log_position();
   void log_position_results();
   void log_quote();

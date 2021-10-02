@@ -10,6 +10,7 @@
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_candlesticks.cpp"             // log_candlesticks
+#include "log_end_of_trading_period.cpp"    // log_end_of_trading_period
 #include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
 #include "log_position_results.cpp"         // log_position_results
@@ -52,6 +53,8 @@ void Oanda::TaoBot::watch() {
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));
   }
+
+  log_end_of_trading_period();
 }
 
 #endif
