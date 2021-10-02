@@ -8,6 +8,7 @@
 #include <map>                             // std::map
 #include <sstream>                         // std::ostringstream
 #include <stdexcept>                       // std::invalid_argument
+#include <stdio.h>                         // printf
 #include <stdlib.h>                        // strtol
 #include <string.h>                        // strcmp
 #include <string>                          // std::string
@@ -139,9 +140,10 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  std::cout << fmt.bold << fmt.red << "Unknown command <" << command
-            << ">. Please refer to usage👇🏾\n"
-            << fmt.reset << std::endl;
+  std::cout << fmt.bold << fmt.red;
+  printf("Unknown command <%s>. Please refer to usage👇🏾\n\n",
+         command.c_str());
+  std::cout << fmt.reset;
 
   print_usage();
   exit(127);

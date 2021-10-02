@@ -23,6 +23,7 @@
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
 #include "tao_bot.h"                        // Oanda::TaoBot
+#include <unistd.h>                         // usleep
 
 void Oanda::TaoBot::watch() {
   while (!is_market_open()) {
@@ -50,8 +51,7 @@ void Oanda::TaoBot::watch() {
     log_position_results();
     reset_position();
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(
-        (int)(this->POLLING_INTERVAL_SECONDS * 1000)));
+    usleep(this->POLLING_INTERVAL_SECONDS * 1e6);
   }
 
   log_end_of_trading_period();

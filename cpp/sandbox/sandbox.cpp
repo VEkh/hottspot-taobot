@@ -1,13 +1,10 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf
+#include <unistd.h> // usleep
 
-#include "deps.cpp"
-#include <map>
+#include <chrono> // std::chrono
 
 int main() {
-  json j;
-
-  if (j["code"] == 1) {
-    printf("Yerrr\n");
-  }
+  usleep(3 * 1000 * 1000);
+  printf("I slept for 3 seconds\n");
 }
