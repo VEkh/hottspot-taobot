@@ -1,33 +1,33 @@
-#ifndef ETRADE__TAO_BOT_log_order_win_results
-#define ETRADE__TAO_BOT_log_order_win_results
+#ifndef OANDA__TAO_BOT_log_order_win_results
+#define OANDA__TAO_BOT_log_order_win_results
 
 /*
- * ETrade::TaoBot
+ * Oanda::TaoBot
  * fmt
  * order_status_t
  * order_win_result_t
  */
 #include "tao_bot.h"
 
-#include "etrade/constants.cpp"    // ETrade::constants
 #include "log_position.cpp"        // log_position
+#include "oanda/constants.cpp"     // Oanda::constants
 #include "order_win_result.cpp"    // order_win_result
 #include "set_execution_price.cpp" // set_execution_price
 #include "set_profit.cpp"          // set_profit
 #include <iostream>                // std::cout, std::endl
 #include <stdio.h>                 // printf
 
-void ETrade::TaoBot::log_position_results() {
+void Oanda::TaoBot::log_position_results() {
   if (!this->close_order_ptr || !this->open_order_ptr) {
     return;
   }
 
-  if (this->close_order.status != order_status_t::ORDER_EXECUTED) {
+  if (this->close_order.status != order_status_t::ORDER_FILLED) {
     return;
   }
 
   const char *order_action =
-      ETrade::constants::ORDER_ACTIONS[this->open_order.action];
+      Oanda::constants::ORDER_ACTIONS[this->open_order.action];
 
   set_execution_price(this->close_order_ptr);
   set_profit(this->close_order_ptr, this->open_order_ptr);

@@ -12,6 +12,7 @@
 #include "log_candlesticks.cpp"             // log_candlesticks
 #include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
+#include "log_position_results.cpp"         // log_position_results
 #include "log_quote.cpp"                    // log_quote
 #include "open_position.cpp"                // open_position
 #include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
@@ -44,6 +45,7 @@ void Oanda::TaoBot::watch() {
     open_position();
     set_open_position_prices();
     close_position();
+    log_position_results();
 
     std::this_thread::sleep_for(std::chrono::milliseconds(
         (int)(this->POLLING_INTERVAL_SECONDS * 1000)));
