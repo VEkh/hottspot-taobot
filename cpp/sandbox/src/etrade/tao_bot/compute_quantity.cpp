@@ -23,10 +23,10 @@ int ETrade::TaoBot::compute_quantity() {
     return std::min(base_quantity(), max_affordable_quantity);
   }
 
-  int variance_multiplier = (int)this->MIN_TARGET_TICK_MOVEMENT;
+  int variance_multiplier = this->MIN_TARGET_TICK_MOVEMENT;
   int quantity_ = 1;
 
-  while (variance_multiplier <= (int)this->MAX_TARGET_TICK_MOVEMENT &&
+  while (variance_multiplier <= this->MAX_TARGET_TICK_MOVEMENT &&
          quantity_ < max_affordable_quantity) {
     quantity_ = ceil(loss_to_recover_ /
                      (variance_multiplier * this->average_tick_price_delta));

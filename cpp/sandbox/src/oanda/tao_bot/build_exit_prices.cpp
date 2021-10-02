@@ -9,7 +9,7 @@
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double loss_to_recover_ = loss_to_recover();
-  const double max_loss_multiplier = 20.0;
+  const double max_loss_multiplier = this->MIN_TARGET_TICK_MOVEMENT;
   const double secured_profit_ratio_ = secured_profit_ratio();
 
   double max_loss = -1 * max_loss_multiplier * this->average_tick_price_delta;
@@ -18,8 +18,9 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
     const double redemptive_max_loss =
         (1.05 * abs(loss_to_recover_)) / this->open_order.quantity;
 
-    max_loss = -1 * std::min(redemptive_max_loss,
-                             100.0 * this->average_tick_price_delta);
+    max_loss =
+        -1 * std::min(redemptive_max_loss, this->MAX_TARGET_TICK_MOVEMENT *
+                                               this->average_tick_price_delta);
   }
 
   const double min_profit = abs(max_loss) / secured_profit_ratio_;

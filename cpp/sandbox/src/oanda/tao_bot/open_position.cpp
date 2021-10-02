@@ -3,7 +3,6 @@
 
 /*
  * Oanda::TaoBot
- * api_client
  * fmt
  * order_action_t
  * order_type_t
@@ -18,7 +17,6 @@
 #include "should_open_position.cpp"      // should_open_position
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
-#include <string>                        // std::string
 
 void Oanda::TaoBot::open_position() {
   if (!should_open_position()) {
@@ -26,7 +24,18 @@ void Oanda::TaoBot::open_position() {
   }
 
   this->account_balance = fetch_account_balance();
-  this->quantity = compute_quantity();
+  const int quantity_ = compute_quantity();
+
+  if (!quantity_) {
+    std::cout << fmt.bold << fmt.yellow;
+    puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
+         "have insufficient margin buying power.");
+    std::cout << fmt.reset;
+
+    return;
+  }
+
+  this->quantity = quantity_;
 
   order_t new_open_order;
   new_open_order.action =
@@ -56,7 +65,7 @@ void Oanda::TaoBot::open_position() {
   printf("%s %s: Placing open order.\n", log_icon, order_action);
   std::cout << fmt.reset;
 
-  api_client.place_order(this->open_order_ptr);
+  this->api_client.place_order(this->open_order_ptr);
 
   std::cout << fmt.bold << fmt.cyan;
   printf("%s %s: Placed open order.\n", log_icon, order_action);

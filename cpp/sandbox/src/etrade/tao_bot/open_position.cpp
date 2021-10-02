@@ -3,7 +3,6 @@
 
 /*
  * ETrade::TaoBot
- * api_client
  * fmt
  * order_action_t
  * order_type_t
@@ -18,7 +17,6 @@
 #include "should_open_position.cpp"      // should_open_position
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
-#include <string>                        // std::string
 
 void ETrade::TaoBot::open_position() {
   if (!should_open_position()) {
@@ -70,7 +68,7 @@ void ETrade::TaoBot::open_position() {
 
   CurlClient curl_client = this->api_client.place_order(this->open_order_ptr);
 
-  if (api_client.is_next_cycle_retry_error(curl_client)) {
+  if (this->api_client.is_next_cycle_retry_error(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
 
     printf("%s %s: ", log_icon, order_action);
