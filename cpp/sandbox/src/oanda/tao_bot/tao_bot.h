@@ -109,6 +109,7 @@ private:
   void log_quote();
   void log_start_message();
   void open_position();
+  void reset_position();
   void set_and_log_buy_sell_ratios();
   void set_average_tick_price_delta();
   void set_execution_price(order_t *order);
@@ -118,6 +119,7 @@ private:
   void set_profit(order_t *order);
   void set_status(order_t *order);
   void watch();
+  void write_performance();
 };
 } // namespace Oanda
 

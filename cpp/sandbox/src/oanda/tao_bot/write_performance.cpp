@@ -1,22 +1,22 @@
-#ifndef ETRADE__TAO_BOT_write_performance
-#define ETRADE__TAO_BOT_write_performance
+#ifndef OANDA__TAO_BOT_write_performance
+#define OANDA__TAO_BOT_write_performance
 
 /*
- * ETrade::TaoBot
+ * Oanda::TaoBot
  * order_t
  * position_t
  */
 #include "tao_bot.h"
 
-#include "etrade/constants.cpp" // ETrade::constants
-#include "etrade/deps.cpp"      // json
-#include "lib/utils/io.cpp"     // utils::io
-#include <list>                 // std::list
+#include "deps.cpp"            // json
+#include "lib/utils/io.cpp"    // utils::io
+#include "oanda/constants.cpp" // Oanda::constants
+#include <list>                // std::list
 
-void ETrade::TaoBot::write_performance() {
+void Oanda::TaoBot::write_performance() {
   json (*order_to_json)(order_t &) = [](order_t &order) -> json {
     return {
-        {"action", ETrade::constants::ORDER_ACTIONS[order.action]},
+        {"action", Oanda::constants::ORDER_ACTIONS[order.action]},
         {"id", order.id},
         {"profit", order.profit},
         {"quantity", order.quantity},
@@ -24,7 +24,7 @@ void ETrade::TaoBot::write_performance() {
     };
   };
 
-  std::string filepath = std::string(APP_DIR) + "/data/etrade/performance/" +
+  std::string filepath = std::string(APP_DIR) + "/data/oanda/performance/" +
                          std::string(symbol) + ".json";
 
   json performance_json;
