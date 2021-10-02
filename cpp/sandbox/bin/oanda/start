@@ -24,32 +24,18 @@ function symbol_start() {
   echo -e "Starting TaoBot for ${fmt_normal}${fmt_cyan}$symbol"
   echo "" > "$log_file"
 
-  "$app_dir/build/$project_name" tao_bot \
-    "$symbol" \
-    1 \
-    --martingale \
-    --normalize-quantity >> "$log_file" 2>&1 &
+  "$app_dir/build/$project_name" tao_bot "$symbol" >> "$log_file" 2>&1 &
 }
 
 
 case $1 in
-  +([[:alpha:]]))
+  +([[:alpha:]_[:alpha:]]))
     symbol_start "$1"
     ;;
 
   *)
-    "$app_dir/build/$project_name" fetch_access_token
-
     symbols=(
-      "AAPL"
-      "BA"
-      "FB"
-      "GM"
-      "MSFT"
-      "SNAP"
-      "TSLA"
-      "TWTR"
-      "VIAC"
+      "EUR_USD"
     )
 
     for symbol in "${symbols[@]}"

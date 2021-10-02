@@ -11,7 +11,7 @@ shopt -s extglob
 echo -e "${fmt_bold}"
 
 case $1 in
-  +([[:alpha:]]))
+  +([[:alpha:]_[:alpha:]]))
     symbol="${1^^}"
     state=$(ps aux | rg [t]ao_bot | rg "$project_name" | rg "${symbol,,}")
 
@@ -21,13 +21,13 @@ case $1 in
     else
       echo -e "${fmt_cyan}🛑 Stopping TaoBot for $symbol${fmt_reset}"
 
-      ps aux | rg [t]ao_bot | rg "$project_name" | rg "${symbol,,}" | awk '{print $2}' | xargs kill
+      ps aux | rg [t]ao_bot | rg "$project_name"  | rg "${symbol,,}" | awk '{print $2}' | xargs kill
     fi
 
     ;;
 
   *)
-    state=$(ps aux | rg [t]ao_bot | rg "$project_name" )
+    state=$(ps aux | rg [t]ao_bot | rg "$project_name"  )
 
     if [[ -z $state ]]
     then
