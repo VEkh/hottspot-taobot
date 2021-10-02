@@ -9,20 +9,25 @@
 
 int ETrade::TaoBot::compute_quantity() {
   const double price = this->quotes.back().price;
-  double loss_to_recover_ = loss_to_recover();
 
-  if (!loss_to_recover_) {
-    return base_quantity();
-  }
-
-  loss_to_recover_ = abs(loss_to_recover_);
-  int max_affordable_quantity =
+  const int max_affordable_quantity =
       floor(this->account_balance.margin_buying_power / price);
 
-  int variance_multiplier = 20;
+  if (!max_affordable_quantity) {
+    return 0;
+  }
+
+  const double loss_to_recover_ = abs(loss_to_recover());
+
+  if (!loss_to_recover_) {
+    return std::min(base_quantity(), max_affordable_quantity);
+  }
+
+  int variance_multiplier = (int)this->MIN_TARGET_TICK_MOVEMENT;
   int quantity_ = 1;
 
-  while (variance_multiplier <= 40 && quantity_ < max_affordable_quantity) {
+  while (variance_multiplier <= (int)this->MAX_TARGET_TICK_MOVEMENT &&
+         quantity_ < max_affordable_quantity) {
     quantity_ = ceil(loss_to_recover_ /
                      (variance_multiplier * this->average_tick_price_delta));
 

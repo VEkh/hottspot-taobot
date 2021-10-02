@@ -26,7 +26,18 @@ void ETrade::TaoBot::open_position() {
   }
 
   this->account_balance = fetch_account_balance();
-  this->quantity = compute_quantity();
+  const int quantity_ = compute_quantity();
+
+  if (!quantity_) {
+    std::cout << fmt.bold << fmt.yellow;
+    puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
+         "have insufficient margin buying power.");
+    std::cout << fmt.reset;
+
+    return;
+  }
+
+  this->quantity = quantity_;
 
   order_t new_open_order;
   new_open_order.action =
@@ -57,7 +68,7 @@ void ETrade::TaoBot::open_position() {
   printf("%s %s: Placing open order.\n", log_icon, order_action);
   std::cout << fmt.reset;
 
-  CurlClient curl_client = api_client.place_order(this->open_order_ptr);
+  CurlClient curl_client = this->api_client.place_order(this->open_order_ptr);
 
   if (api_client.is_next_cycle_retry_error(curl_client)) {
     std::cout << fmt.bold << fmt.yellow;
@@ -72,7 +83,7 @@ void ETrade::TaoBot::open_position() {
     }
 
     case 101: {
-      puts("Number of Shares Error 🧐 (101). Retrying.");
+      puts("Number of Shares Missing Error 😫 (101). Retrying.");
 
       break;
     }
