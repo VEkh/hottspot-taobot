@@ -12,18 +12,18 @@ bool ETrade::Client::is_next_cycle_retry_error(CurlClient &curl_client) {
     return false;
   }
 
+  if (!response_body["Error"].contains("code")) {
+    return false;
+  }
+
   const std::map<int, const char *> error_codes = {
       {100, "ACCOUNT_KEY_MISSING"},
-      {101, "NUMBER_OF_SHARES"},
+      {101, "NUMBER_OF_SHARES_MISSING"},
       {3010, "INSUFFICIENT_FUNDS"},
       {33, "NOT_SHORTABLE"},
   };
 
   const int code = response_body["Error"]["code"];
-
-  if (code == 101) {
-    printf("101 Error: %s\n", response_body.dump().c_str());
-  }
 
   if (error_codes.find(code) != error_codes.end()) {
     curl_client.response.error_code = code;

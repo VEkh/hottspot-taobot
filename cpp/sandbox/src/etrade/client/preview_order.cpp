@@ -7,6 +7,7 @@
 #include "handle_place_order_error.cpp"    // handle_place_order_error
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include <map>                                    // std::map
 #include <regex> // std::regex, std::regex_search
 
 namespace ETrade {
@@ -20,24 +21,28 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 
   json response = json::parse(response_body);
 
-  if (response.contains("Error")) {
-    int code = response["Error"]["code"];
-
-    switch (code) {
-    case 163:
-    case 1037: {
-      return true;
-    }
-    }
-
-    if (response["Error"]["message"] ==
-        "Number of requests exceeded the rate limit set") {
-      return true;
-    }
+  if (!response.contains("Error")) {
+    return std::regex_search(response_body,
+                             std::regex("oauth_parameters_absent=oauth_nonce"));
   }
 
-  return std::regex_search(response_body,
-                           std::regex("oauth_parameters_absent=oauth_nonce"));
+  if (response["Error"]["message"] ==
+      "Number of requests exceeded the rate limit set") {
+    return true;
+  }
+
+  if (!response["Error"].contains("code")) {
+    return false;
+  }
+
+  int code = response["Error"]["code"];
+
+  const std::map<int, const char *> error_codes = {
+      {163, "UNPROCESSABLE_REQUEST"},
+      {1037, "INSUFFICIENT_SHARES"},
+  };
+
+  return error_codes.find(code) != error_codes.end();
 }
 } // namespace preview_order
 } // namespace ETrade

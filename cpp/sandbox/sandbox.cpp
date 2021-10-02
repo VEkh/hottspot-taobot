@@ -2,20 +2,12 @@
 #include <stdio.h>  // printf
 
 #include "deps.cpp"
-#include <string>
-
-struct fu {
-  int foo = 1;
-};
+#include <map>
 
 int main() {
-  fu f;
+  json j;
 
-  f.foo = 2;
-
-  printf("%i\n", f.foo);
-
-  f = fu();
-
-  printf("%i\n", f.foo);
+  if (j["code"] == 1) {
+    printf("Yerrr\n");
+  }
 }
