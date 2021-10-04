@@ -20,8 +20,16 @@ void ETrade::TaoBot::set_execution_price(order_t *order) {
 
   json order_json = fetch_order(order);
 
-  if (order_json.empty() ||
-      !order_json["OrderDetail"][0]["Instrument"][0].contains(
+  if (order_json.empty()) {
+    std::cout << fmt.bold << fmt.red;
+    printf("❌ Order %i was empty. Trying again\n", order->id);
+    std::cout << fmt.reset;
+
+    usleep(0.5 * 1e6);
+    set_execution_price(order);
+  }
+
+  if (!order_json["OrderDetail"][0]["Instrument"][0].contains(
           "averageExecutionPrice")) {
     std::cout << fmt.bold << fmt.red;
 

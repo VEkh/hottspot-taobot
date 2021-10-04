@@ -21,28 +21,25 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 
   json response = json::parse(response_body);
 
-  if (!response.contains("Error")) {
-    return std::regex_search(response_body,
-                             std::regex("oauth_parameters_absent=oauth_nonce"));
-  }
-
-  if (response["Error"]["message"] ==
-      "Number of requests exceeded the rate limit set") {
+  if (response.contains("Error") &&
+      response["Error"]["message"] ==
+          "Number of requests exceeded the rate limit set") {
     return true;
   }
 
-  if (!response["Error"].contains("code")) {
-    return false;
+  if (response.contains("Error") && response["Error"].contains("code")) {
+    int code = response["Error"]["code"];
+
+    const std::map<int, const char *> error_codes = {
+        {163, "UNPROCESSABLE_REQUEST"},
+        {1037, "INSUFFICIENT_SHARES"},
+    };
+
+    return error_codes.find(code) != error_codes.end();
   }
 
-  int code = response["Error"]["code"];
-
-  const std::map<int, const char *> error_codes = {
-      {163, "UNPROCESSABLE_REQUEST"},
-      {1037, "INSUFFICIENT_SHARES"},
-  };
-
-  return error_codes.find(code) != error_codes.end();
+  return std::regex_search(response_body,
+                           std::regex("oauth_parameters_absent=oauth_nonce"));
 }
 } // namespace preview_order
 } // namespace ETrade

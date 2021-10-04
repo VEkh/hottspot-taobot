@@ -5,10 +5,10 @@
 #include "etrade/oauth_header/oauth_header.h" // ETrade::OAuthHeader
 #include "etrade/types.cpp"                   // ETrade::t
 #include "lib/curl_client/curl_client.h"      // CurlClient
-#include "lib/formatted.cpp" // Formatted::stream, Formatted::fmt_stream_t
-#include "types.cpp"         // Global::t
-#include <map>               // std::map
-#include <string>            // std::string
+#include "lib/formatted.cpp"                  // Formatted
+#include "types.cpp"                          // Global::t
+#include <map>                                // std::map
+#include <string>                             // std::string
 
 namespace ETrade {
 class Client {

@@ -1,10 +1,10 @@
 #ifndef ETRADE__CLIENT_fetch_order
 #define ETRADE__CLIENT_fetch_order
 
-#include "client.h"                        // ETrade::Client, config
-#include "etrade/deps.cpp"                 // json
-#include "fetch.cpp"                       // fetch
-#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "client.h"                               // ETrade::Client, config
+#include "etrade/deps.cpp"                        // json
+#include "fetch.cpp"                              // fetch
+#include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include <regex>  // std::regex, std::regex_search
 #include <string> // std::string, std::to_string
