@@ -5902,8 +5902,8 @@ amount necessary for recovery.
   * TWTR (-$2,732.01)
   * VIAC (+$13.69)
 
-* Consecutive Win  Days: 1
-* Consecutive Loss Days: 0
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss: 47W 38L
@@ -5924,7 +5924,39 @@ amount necessary for recovery.
 ### 2021-10-04:
 #### Performance
 
-* Opening Account Value: $63,852.77
+* Opening Account Value: $61,139.08
+
+* Total: +$87.78 (+0.14%)
+  * AAPL (-$54.06)
+  * BA  (+$1.94)
+  * FB   (+$7.71)
+  * GM   (+$107.95)
+  * MSFT (-$55.15)
+  * SNAP (+$5.14)
+  * TSLA (+$23.48)
+  * TWTR (+$34.26)
+  * VIAC (+$16.50)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 48W 38L
+* Week's Return: +$87.78
+* Total Return: -$5,262.60
+
+#### Remarks
+* 7/9 stocks won 🎈
+* I ironed out a couple more ETrade API fault handling 🙄
+* Oanda will have to set limit orders because market orders almost always start
+  down.
+
+#### Next Thing(s) to Try
+
+### 2021-10-05:
+#### Performance
+
+* Opening Account Value: $61,226.82
 
 * Total: $ (%)
   * AAPL ($)
