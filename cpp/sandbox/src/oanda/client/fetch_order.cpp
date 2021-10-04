@@ -14,6 +14,7 @@ std::string Oanda::Client::fetch_order(const int order_id) {
   CurlClient curl_client = fetch(request_url);
 
   std::string response_body = curl_client.response.body;
+
   json response = json::parse(response_body);
 
   return response["order"].dump();

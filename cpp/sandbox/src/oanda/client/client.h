@@ -2,6 +2,7 @@
 #define OANDA__CLIENT_H
 
 #include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/formatted.cpp"               // Formatted
 #include "oanda/types.cpp"                 // Oanda::t
 #include "types.cpp"                       // Global::t
 #include <string>                          // std::string
@@ -17,9 +18,10 @@ public:
 
   Client();
 
-  CurlClient cancel_order(const int);
-  CurlClient cancel_order(order_t *order);
   CurlClient place_order(order_t *order);
+
+  std::string cancel_order(const int);
+  std::string cancel_order(order_t *order);
   std::string fetch_account();
   std::string fetch_order(const int);
   std::string fetch_quote(char *);
@@ -34,6 +36,8 @@ private:
     std::string authentication_token;
     std::string base_url;
   } config;
+
+  Formatted::fmt_stream_t fmt = Formatted::stream();
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);

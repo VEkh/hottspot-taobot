@@ -1,10 +1,12 @@
 #include <iostream> // std::cout, std::endl
-#include <stdio.h>  // printf
-#include <unistd.h> // usleep
-
-#include <chrono> // std::chrono
+#include <stdexcept>
+#include <stdio.h> // printf
+#include <string>
 
 int main() {
-  usleep(3 * 1000 * 1000);
-  printf("I slept for 3 seconds\n");
+  std::string msg = std::string("I like to say ") + std::string(__FILE__) +
+                    std::to_string(__LINE__);
+
+  throw std::runtime_error(msg);
+  printf("%s\n", msg.c_str());
 }

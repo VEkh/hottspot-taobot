@@ -19,6 +19,7 @@ void Oanda::TaoBot::set_execution_price(order_t *order) {
   }
 
   std::string trade_response = this->api_client.fetch_trade(order->trade_id);
+
   json trade_json = json::parse(trade_response);
 
   if (trade_json.empty() || !trade_json.contains("price")) {

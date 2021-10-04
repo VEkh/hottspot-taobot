@@ -25,9 +25,7 @@ std::string Oanda::Client::fetch_quote(std::string symbol) {
 
   CurlClient curl_client = fetch(request_url);
 
-  std::string response_body = curl_client.response.body;
-
-  return response_body;
+  return curl_client.response.body;
 }
 
 #endif

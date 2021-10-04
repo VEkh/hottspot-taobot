@@ -15,19 +15,19 @@
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string, std::to_string
 
-CurlClient Oanda::Client::cancel_order(order_t *order) {
-  CurlClient curl_client = cancel_order(order->id);
+std::string Oanda::Client::cancel_order(order_t *order) {
+  std::string response_body = cancel_order(order->id);
 
-  json response = json::parse(curl_client.response.body);
+  json response = json::parse(response_body);
 
   if (response.contains("orderCancelTransaction")) {
     order->status = order_status_t::ORDER_CANCELLED;
   }
 
-  return curl_client;
+  return response_body;
 }
 
-CurlClient Oanda::Client::cancel_order(const int order_id) {
+std::string Oanda::Client::cancel_order(const int order_id) {
   if (!order_id) {
     std::string message =
         Formatted::error_message("Please provide an order id");
@@ -39,11 +39,13 @@ CurlClient Oanda::Client::cancel_order(const int order_id) {
                     this->config.account_id + "/orders/" +
                     std::to_string(order_id) + "/cancel";
 
-  return post({
+  CurlClient curl_client = post({
       .body = "",
       .method = CurlClient::http_method_t::PUT,
       .url = url,
   });
+
+  return curl_client.response.body;
 }
 
 #endif

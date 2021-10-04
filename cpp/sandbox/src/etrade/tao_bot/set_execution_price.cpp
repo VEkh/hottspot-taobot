@@ -12,6 +12,7 @@
 #include "fetch_order.cpp" // fetch_order
 #include <iostream>        // std::cout, std::endl
 #include <stdio.h>         // printf
+#include <unistd.h>        // usleep
 
 void ETrade::TaoBot::set_execution_price(order_t *order) {
   if (order->execution_price) {
