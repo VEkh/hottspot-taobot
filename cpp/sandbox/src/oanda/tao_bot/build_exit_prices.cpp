@@ -18,9 +18,7 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
     const double redemptive_max_loss =
         (1.05 * abs(loss_to_recover_)) / this->open_order.quantity;
 
-    max_loss =
-        -1 * std::min(redemptive_max_loss, this->MAX_TARGET_TICK_MOVEMENT *
-                                               this->average_tick_price_delta);
+    max_loss = -1 * redemptive_max_loss;
   }
 
   const double min_profit = abs(max_loss) / secured_profit_ratio_;

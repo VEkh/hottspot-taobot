@@ -5958,6 +5958,44 @@ amount necessary for recovery.
 
 * Opening Account Value: $61,226.82
 
+* Total: -$671.13 (-1.1%)
+  * AAPL (+$82.51)
+  * BA  (-$135.17)
+  * FB   (+$11.59)
+  * GM   (+$12.48)
+  * MSFT (+$95.48)
+  * SNAP (+$43.22)
+  * TSLA (+$27.08)
+  * TWTR (-$838.08)
+  * VIAC (+$29.77)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 48W 39L
+* Week's Return: -$583.35
+* Total Return: -$5,933.73
+
+#### Remarks
+* 7/9 stocks won 🎈
+* TWTR had a very rough start but reclaimed much of what it lost.
+* What may be apparent is that some stocks can enter black holes that are too
+deep that they must be handled specially.
+  * This may mean you turn on TaoBot in the morning during heavy movement, then
+    turn it off during price consolidation.
+  * It may also mean that you have to just cut losses.
+* Trying to chip away at the deficit incurs more losses. Let's go back to
+  awaiting the entire loss to be recovered.
+
+#### Next Thing(s) to Try
+* Rever to awaiting the entire redemptive win instead of trying to chip away at it.
+
+### 2021-10-06:
+#### Performance
+
+* Opening Account Value: $60,555.96
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
