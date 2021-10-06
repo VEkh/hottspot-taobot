@@ -3,19 +3,17 @@
 
 namespace Oanda {
 namespace constants {
-const char *ORDER_ACTIONS[4] = {
+const char *ORDER_ACTIONS[] = {
     "BUY",
     "SELL",
 };
 
-const char *ORDER_STATUSES[6] = {
-    "CANCELLED",
-    "FILLED",
-    "PENDING",
-    "TRIGGERED",
+const char *ORDER_STATUSES[] = {
+    "CANCELLED", "FILLED", "INIT", "PENDING", "TRIGGERED",
 };
 
-const char *ORDER_TYPES[1] = {
+const char *ORDER_TYPES[] = {
+    "LIMIT",
     "MARKET",
 };
 

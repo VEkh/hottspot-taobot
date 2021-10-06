@@ -19,7 +19,7 @@ bool Oanda::TaoBot::should_close_position() {
     return false;
   }
 
-  if (this->close_order.status != order_status_t::ORDER_PENDING) {
+  if (this->close_order.status != order_status_t::ORDER_INIT) {
     return false;
   }
 

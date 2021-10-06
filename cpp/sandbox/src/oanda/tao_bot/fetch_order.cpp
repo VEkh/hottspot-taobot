@@ -17,9 +17,9 @@ json Oanda::TaoBot::fetch_order(const order_t *order) {
     return empty_order;
   }
 
-  std::string order_response = this->api_client.fetch_order(order->id);
+  std::string response = this->api_client.fetch_order(order->id);
 
-  return json::parse(order_response);
+  return json::parse(response);
 }
 
 #endif

@@ -37,12 +37,15 @@ void Oanda::TaoBot::open_position() {
 
   this->quantity = quantity_;
 
+  const double current_price = this->quotes.back().price;
+
   order_t new_open_order;
   new_open_order.action =
       this->is_long_position ? order_action_t::BUY : order_action_t::SELL;
+  new_open_order.limit_price = current_price;
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
-  new_open_order.type = order_type_t::MARKET;
+  new_open_order.type = order_type_t::LIMIT;
 
   order_t new_close_order;
   new_close_order.action =

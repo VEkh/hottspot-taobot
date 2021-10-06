@@ -8,19 +8,18 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp" // json
-#include <iostream> // std::cout, std::endl
-#include <stdio.h>  // printf
-#include <string>   // std::stod, std::string
+#include "deps.cpp"        // json
+#include "fetch_trade.cpp" // fetch_trade
+#include <iostream>        // std::cout, std::endl
+#include <stdio.h>         // printf
+#include <string>          // std::stod, std::string
 
 void Oanda::TaoBot::set_execution_price(order_t *order) {
   if (order->execution_price) {
     return;
   }
 
-  std::string trade_response = this->api_client.fetch_trade(order->trade_id);
-
-  json trade_json = json::parse(trade_response);
+  json trade_json = fetch_trade(order->trade_id);
 
   if (trade_json.empty() || !trade_json.contains("price")) {
     std::cout << fmt.bold << fmt.red;

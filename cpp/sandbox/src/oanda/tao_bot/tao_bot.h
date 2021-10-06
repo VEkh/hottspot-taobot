@@ -1,6 +1,7 @@
 #ifndef OANDA__TAO_BOT_H
 #define OANDA__TAO_BOT_H
 
+#include "deps.cpp"                // json
 #include "lib/formatted.cpp"       // Formatted
 #include "oanda/client/client.cpp" // Oanda::Client
 #include "oanda/types.cpp"         // Oanda::t
@@ -87,6 +88,7 @@ private:
   int compute_quantity();
 
   json fetch_order(const order_t *);
+  json fetch_trade(const int);
 
   order_win_result_t order_win_result(const order_t *);
 
@@ -96,6 +98,7 @@ private:
   void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
+  void complete_filled_order(order_t *);
   void close_position();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
@@ -112,8 +115,9 @@ private:
   void open_position();
   void reset_position();
   void set_and_log_buy_sell_ratios();
+  void set_close_position_prices();
   void set_average_tick_price_delta();
-  void set_execution_price(order_t *order);
+  void set_execution_price(order_t *);
   void set_open_position_prices();
   void set_position_status();
   void set_profit(order_t *, const order_t *);

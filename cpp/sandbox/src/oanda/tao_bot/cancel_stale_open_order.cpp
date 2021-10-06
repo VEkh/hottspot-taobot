@@ -14,7 +14,7 @@ void Oanda::TaoBot::cancel_stale_open_order() {
   time_t now;
   time(&now);
 
-  if (this->open_order.status == order_status_t::ORDER_TRIGGERED &&
+  if (this->open_order.status == order_status_t::ORDER_PENDING &&
       now - this->open_order.timestamp >= 30) {
     std::cout << fmt.yellow << fmt.bold;
     printf("😴 Cancelling stale open order %i.\n", this->open_order.id);

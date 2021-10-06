@@ -19,6 +19,7 @@
 #include "reset_position.cpp"               // reset_position
 #include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
+#include "set_close_position_prices.cpp"    // set_open_position_prices
 #include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
@@ -44,11 +45,15 @@ void Oanda::TaoBot::watch() {
     log_position();
     log_performance();
 
-    cancel_stale_open_order();
     set_position_status();
+
+    cancel_stale_open_order();
     open_position();
     set_open_position_prices();
+
     close_position();
+    set_close_position_prices();
+
     log_position_results();
     reset_position();
 

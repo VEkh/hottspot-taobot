@@ -29,9 +29,6 @@ void Oanda::TaoBot::log_position_results() {
   const char *order_action =
       Oanda::constants::ORDER_ACTIONS[this->open_order.action];
 
-  set_execution_price(this->close_order_ptr);
-  set_profit(this->close_order_ptr, this->open_order_ptr);
-
   order_win_result_t win_result = order_win_result(this->close_order_ptr);
 
   switch (win_result) {
