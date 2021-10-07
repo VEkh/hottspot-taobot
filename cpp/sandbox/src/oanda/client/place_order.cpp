@@ -11,8 +11,10 @@
 
 #include "deps.cpp"                        // json, _json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/utils/float.cpp"             // ::utils::float_
 #include "oanda/constants.cpp"             // Oanda::constants
 #include "post.cpp"                        // post
+#include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::stod
 #include <time.h>                          // time, time_t
 
@@ -26,7 +28,7 @@ CurlClient Oanda::Client::place_order(order_t *order) {
     {
       "order": {
         "instrument": "",
-        "price": "0",
+        "price": "1.00000",
         "timeInForce": "FOK",
         "type": "MARKET",
         "units": 1
@@ -35,7 +37,9 @@ CurlClient Oanda::Client::place_order(order_t *order) {
   )"_json;
 
   body["order"]["instrument"] = order->symbol;
-  body["order"]["price"] = order->limit_price;
+  body["order"]["price"] = ::utils::float_::round_to_s(order->limit_price, 5);
+  body["order"]["timeInForce"] =
+      Oanda::constants::ORDER_TIMES_IN_FORCE[order->time_in_force];
   body["order"]["type"] = Oanda::constants::ORDER_TYPES[order->type];
   body["order"]["units"] = quantity_sign * order->quantity;
 
@@ -49,6 +53,14 @@ CurlClient Oanda::Client::place_order(order_t *order) {
   time(&now);
 
   json response = json::parse(curl_client.response.body);
+
+  if (!response.contains("orderCreateTransaction")) {
+    std::string message = Formatted::error_message(
+        std::string("❌ Something went wrong while placing the order: ") +
+        response.dump(2));
+
+    throw std::runtime_error(message);
+  }
 
   std::string order_id_string = response["orderCreateTransaction"]["id"];
 

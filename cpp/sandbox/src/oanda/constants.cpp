@@ -12,6 +12,11 @@ const char *ORDER_STATUSES[] = {
     "CANCELLED", "FILLED", "INIT", "PENDING", "TRIGGERED",
 };
 
+const char *ORDER_TIMES_IN_FORCE[] = {
+    "FOK",
+    "GTC",
+};
+
 const char *ORDER_TYPES[] = {
     "LIMIT",
     "MARKET",

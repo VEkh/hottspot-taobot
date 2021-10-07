@@ -5,13 +5,20 @@
 #include <iostream> // std::fixed
 #include <math.h>   // pow, round
 #include <sstream>  // std::stringstream
-#include <string>   // std::string
+#include <string>   // std::stod, std::string
 
 namespace utils {
 namespace float_ {
+std::string round_to_s(double input, int precision) {
+  std::stringstream out;
+
+  out << std::setprecision(precision) << std::fixed << input;
+
+  return out.str();
+}
+
 double round_to(double input, int precision) {
-  int normalizer = pow(10, precision);
-  return round(input * normalizer) / normalizer;
+  return std::stod(round_to_s(input, precision));
 }
 
 double to_currency(float val) { return round_to(val, 2); }

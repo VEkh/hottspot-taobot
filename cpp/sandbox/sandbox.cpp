@@ -1,12 +1,10 @@
 #include <iostream> // std::cout, std::endl
-#include <stdexcept>
-#include <stdio.h> // printf
-#include <string>
+#include <stdio.h>  // printf
+
+#include "lib/utils/float.cpp"
 
 int main() {
-  std::string msg = std::string("I like to say ") + std::string(__FILE__) +
-                    std::to_string(__LINE__);
+  const double d = 1.238919273973;
 
-  throw std::runtime_error(msg);
-  printf("%s\n", msg.c_str());
+  std::cout << ::utils::float_::round_to(d, 5) << std::endl;
 }

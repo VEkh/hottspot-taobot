@@ -26,6 +26,7 @@ private:
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
   using order_t = Oanda::t::order_t;
+  using order_time_in_force_t = Oanda::t::order_time_in_force_t;
   using order_type_t = Oanda::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;

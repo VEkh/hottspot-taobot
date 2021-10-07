@@ -16,6 +16,11 @@ enum order_status_t {
   ORDER_TRIGGERED,
 };
 
+enum order_time_in_force_t {
+  FOK,
+  GTC,
+};
+
 enum order_type_t {
   LIMIT,
   MARKET,
@@ -31,6 +36,7 @@ struct order_t {
   int quantity;
   order_status_t status = order_status_t::ORDER_INIT;
   const char *symbol;
+  order_time_in_force_t time_in_force = order_time_in_force_t::FOK;
   int timestamp = 0;
   int trade_id = 0;
   order_type_t type;

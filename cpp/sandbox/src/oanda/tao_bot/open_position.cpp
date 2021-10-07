@@ -5,6 +5,7 @@
  * Oanda::TaoBot
  * fmt
  * order_action_t
+ * order_time_in_force_t
  * order_type_t
  * order_t
  */
@@ -44,13 +45,15 @@ void Oanda::TaoBot::open_position() {
   new_open_order.limit_price = current_price();
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
-  new_open_order.type = order_type_t::LIMIT;
+  new_open_order.time_in_force = order_time_in_force_t::FOK;
+  new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;
   new_close_order.action =
       this->is_long_position ? order_action_t::SELL : order_action_t::BUY;
   new_close_order.quantity = this->quantity;
   new_close_order.symbol = this->symbol;
+  new_close_order.time_in_force = order_time_in_force_t::FOK;
   new_close_order.type = order_type_t::MARKET;
 
   this->close_order = new_close_order;
