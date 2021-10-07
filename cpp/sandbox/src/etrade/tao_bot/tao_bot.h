@@ -80,6 +80,7 @@ private:
 
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
+  double current_price();
   double profit_percentage(const order_t *);
   double loss_to_recover();
   double secured_profit_ratio();
@@ -118,6 +119,7 @@ private:
   void reset_position();
   void set_and_log_buy_sell_ratios();
   void set_average_tick_price_delta();
+  void set_close_position_prices();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
   void set_open_position_prices();

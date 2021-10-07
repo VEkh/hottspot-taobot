@@ -5996,6 +5996,42 @@ deep that they must be handled specially.
 
 * Opening Account Value: $60,555.96
 
+* Total: $4,533.67 (+7.49%) (🔥PR🔥)
+  * TWTR (+$4,533.67)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 49W 39L
+* Week's Return: +$3,950.32
+* Total Return: -$1,400.06
+
+#### Remarks
+* 1/1 stocks won 🥳
+* I reverted to requiring the redemptive win to await the entire loss if the
+  max afforable quantity is at stake.
+* TWTR won BIG as a result since it was down so much.
+* It makes more sense to do this rather than chipping away at it gradually:
+  * This increaes trade frequency which can also increase losses.
+  * Almost all stocks eventually have one or a couple days a week where the
+    price trends strogly in one direction. That trend is often established at
+    the beginning of the day. This was the case for TWTR today. TaoBot placed
+    only one trade, and it was at the very beginning of the day.
+* TWTR's loss wasn't entirely recovered, which is perfectly acceptable. It
+  almost entirely covered it by simply waiting for the day's trend to reveal
+  itself.
+* I only traded TWTR today to avoid a situation where other stocks would
+  consume margin buying power away from TWTR.
+
+#### Next Thing(s) to Try
+* Resume trading all stocks
+
+### 2021-10-07:
+#### Performance
+
+* Opening Account Value: $65,090.20
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

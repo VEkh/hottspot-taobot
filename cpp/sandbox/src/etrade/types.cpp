@@ -29,6 +29,7 @@ struct order_t {
   order_action_t action;
   double execution_price = 0.00;
   int id = 0;
+  double limit_price = 0.00;
   double max_profit = 0.00;
   double profit = 0.00;
   int quantity;

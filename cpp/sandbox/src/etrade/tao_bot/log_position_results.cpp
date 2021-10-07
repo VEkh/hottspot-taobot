@@ -9,13 +9,11 @@
  */
 #include "tao_bot.h"
 
-#include "etrade/constants.cpp"    // ETrade::constants
-#include "log_position.cpp"        // log_position
-#include "order_win_result.cpp"    // order_win_result
-#include "set_execution_price.cpp" // set_execution_price
-#include "set_profit.cpp"          // set_profit
-#include <iostream>                // std::cout, std::endl
-#include <stdio.h>                 // printf
+#include "etrade/constants.cpp" // ETrade::constants
+#include "log_position.cpp"     // log_position
+#include "order_win_result.cpp" // order_win_result
+#include <iostream>             // std::cout, std::endl
+#include <stdio.h>              // printf
 
 void ETrade::TaoBot::log_position_results() {
   if (!this->close_order_ptr || !this->open_order_ptr) {
@@ -28,9 +26,6 @@ void ETrade::TaoBot::log_position_results() {
 
   const char *order_action =
       ETrade::constants::ORDER_ACTIONS[this->open_order.action];
-
-  set_execution_price(this->close_order_ptr);
-  set_profit(this->close_order_ptr, this->open_order_ptr);
 
   order_win_result_t win_result = order_win_result(this->close_order_ptr);
 
@@ -50,7 +45,7 @@ void ETrade::TaoBot::log_position_results() {
   }
   case order_win_result_t::WIN: {
     std::cout << fmt.bold << fmt.green << std::endl;
-    printf("🎉 %s: : Closed order at a gain.\n", order_action);
+    printf("🎉 %s: Closed order at a gain.\n", order_action);
 
     break;
   }

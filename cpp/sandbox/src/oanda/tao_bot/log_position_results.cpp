@@ -9,13 +9,11 @@
  */
 #include "tao_bot.h"
 
-#include "log_position.cpp"        // log_position
-#include "oanda/constants.cpp"     // Oanda::constants
-#include "order_win_result.cpp"    // order_win_result
-#include "set_execution_price.cpp" // set_execution_price
-#include "set_profit.cpp"          // set_profit
-#include <iostream>                // std::cout, std::endl
-#include <stdio.h>                 // printf
+#include "log_position.cpp"     // log_position
+#include "oanda/constants.cpp"  // Oanda::constants
+#include "order_win_result.cpp" // order_win_result
+#include <iostream>             // std::cout, std::endl
+#include <stdio.h>              // printf
 
 void Oanda::TaoBot::log_position_results() {
   if (!this->close_order_ptr || !this->open_order_ptr) {

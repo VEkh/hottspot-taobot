@@ -3,18 +3,18 @@
 
 namespace ETrade {
 namespace constants {
-const char *ORDER_ACTIONS[4] = {
+const char *ORDER_ACTIONS[] = {
     "BUY",
     "BUY_TO_COVER",
     "SELL",
     "SELL_SHORT",
 };
 
-const char *ORDER_STATUSES[6] = {
+const char *ORDER_STATUSES[] = {
     "CANCELLED", "CANCEL_REQUESTED", "EXECUTED", "OPEN", "PARTIAL", "PENDING",
 };
 
-const char *ORDER_TYPES[1] = {
+const char *ORDER_TYPES[] = {
     "MARKET",
 };
 
