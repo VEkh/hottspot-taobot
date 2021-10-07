@@ -47,7 +47,7 @@ void Oanda::TaoBot::log_position_results() {
   }
   case order_win_result_t::WIN: {
     std::cout << fmt.bold << fmt.green << std::endl;
-    printf("🎉 %s: : Closed order at a gain.\n", order_action);
+    printf("🎉 %s: Closed order at a gain.\n", order_action);
 
     break;
   }
