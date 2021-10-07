@@ -33,6 +33,11 @@ void Oanda::TaoBot::set_execution_price(order_t *order) {
   }
 
   std::string price_string = trade_json["price"];
+
+  if (trade_json.contains("averageClosePrice")) {
+    price_string = trade_json["averageClosePrice"];
+  }
+
   order->execution_price = (double)std::stod(price_string);
 }
 
