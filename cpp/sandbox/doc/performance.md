@@ -6074,11 +6074,47 @@ deep that they must be handled specially.
 
 * Opening Account Value: $65,224.43
 
+* Total: -$1,277.00 (-1.96%)
+  * AAPL (-$17.57)
+  * AMD  (+$1.47)
+  * BA   (-$1,162.65)
+  * FB   (-$51.65)
+  * MSFT (+$4.10)
+  * SNAP (-$31.39)
+  * TSLA (-$160.04)
+  * TWTR (+$131.67)
+  * VIAC (+$9.07)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 50W 40L
+* Week's Return: +$2,807.55
+* Total Return: -$2,542.83
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 4/9 stocks won
+* BA extended its deficit. This is partially because BA couldn't commit the
+  full quantity to a redemptive win.
+* This may call for an automated pausing of instruments with a smaller deficits:
+  * If any instrument's deficit exceeds 0.5% (or maybe 1%) of the account's
+    balance, suspend trading activity.
+  * Once the deficit has recovered, resume trading.
+
+#### Next Thing(s) to Try
+
+### 2021-10-11:
+#### Performance
+
+* Opening Account Value: $63,947.44
+
 * Total: $ (%)
   * AAPL ($)
+  * AMD  ($)
   * BA   ($)
   * FB   ($)
-  * GM   ($)
   * MSFT ($)
   * SNAP ($)
   * TSLA ($)
@@ -6092,6 +6128,7 @@ deep that they must be handled specially.
 * Win / Loss:
 * Week's Return:
 * Total Return:
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
 
 #### Remarks
 

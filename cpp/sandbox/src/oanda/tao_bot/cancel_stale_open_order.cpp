@@ -4,6 +4,7 @@
 #include "current_price.cpp" // current_price
 #include "tao_bot.h"         // Oanda::TaoBot, order_status_t
 #include <iostream>          // std::cout, std::endl
+#include <math.h>            // abs
 #include <stdio.h>           // printf
 
 void Oanda::TaoBot::cancel_stale_open_order() {
@@ -16,7 +17,7 @@ void Oanda::TaoBot::cancel_stale_open_order() {
   }
 
   const bool is_order_stale =
-      (current_price() - this->open_order.limit_price) >=
+      abs(current_price() - this->open_order.limit_price) >=
       this->average_tick_price_delta * 25.0;
 
   if (!is_order_stale) {
