@@ -32,6 +32,8 @@ void Oanda::TaoBot::complete_filled_order(order_t *order) {
     trade_id_string = order_json["tradeOpenedID"];
   } else if (order_json.contains("tradeClosedIDs")) {
     trade_id_string = order_json["tradeClosedIDs"][0];
+  } else if (order_json.contains("tradeReducedID")) {
+    trade_id_string = order_json["tradeReducedID"];
   }
 
   order->trade_id = std::stod(trade_id_string);
