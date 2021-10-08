@@ -6032,11 +6032,53 @@ deep that they must be handled specially.
 
 * Opening Account Value: $65,090.20
 
+* Total: +$134.23 (+0.21%)
+  * AAPL (-$1.26)
+  * BA   (-$78.98)
+  * FB   (+$28.07)
+  * GM   (+$33.50)
+  * MSFT (-$4.00)
+  * SNAP (-$4.79)
+  * TSLA (+$24.63)
+  * TWTR (+$133.94)
+  * VIAC (+$3.13)
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 50W 39L
+* Week's Return: +$4,084.55
+* Total Return: -$1,265.83
+
+#### Remarks
+##### Stocks
+* 5/9 stocks won
+* TWTR almost completely recovered its outstanding deficit, BA lost a little
+  ground with its deficit.
+* It may be a good idea to run the one or two stocks with large deficits then
+  open up TaoBot to the other stocks afterwards.
+
+##### Forex
+* Oanda has very poor price execution for market trades. It opens positions at
+  the edge of the spread.
+* As such the positions open at, or near the loss threshold.
+* It seems like limit orders with wide target movement may be our only option.
+* This will yield very infrequent wins and many missed entry opportunities.
+* I'll have to figure out how this can be managed.
+
+#### Next Thing(s) to Try
+
+### 2021-10-08:
+#### Performance
+
+* Opening Account Value: $65,224.43
+
 * Total: $ (%)
   * AAPL ($)
-  * AMD  ($)
   * BA   ($)
   * FB   ($)
+  * GM   ($)
   * MSFT ($)
   * SNAP ($)
   * TSLA ($)
