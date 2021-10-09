@@ -1,4 +1,4 @@
-#if !defined CURL_CLIENT_write_response_headers
+#ifndef CURL_CLIENT_write_response_headers
 #define CURL_CLIENT_write_response_headers
 
 #include "curl_client.h" // CurlClient, response_t

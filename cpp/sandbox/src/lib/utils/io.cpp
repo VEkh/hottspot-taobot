@@ -55,8 +55,9 @@ std::ifstream read_file(const char *filepath) {
   std::ifstream file(filepath, std::ios::in);
 
   if (!file.good()) {
-    std::string error_message = Formatted::error_message(
-        std::string("Config file missing at ") + filepath);
+    std::string error_message =
+        Formatted::error_message(std::string("File missing at ") + filepath);
+
     throw std::invalid_argument(error_message);
   }
 

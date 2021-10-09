@@ -71,6 +71,7 @@ private:
 
   account_balance_t fetch_account_balance();
 
+  bool awaited_loss_leader();
   bool candlesticks_in_direction(const order_action_t);
   bool is_end_of_trading_period();
   bool is_market_open();
@@ -99,6 +100,8 @@ private:
 
   std::map<int, std::map<const char *, double>>
   build_moving_buy_sell_ratio_average(std::vector<int> &);
+
+  std::string get_loss_leader();
 
   void await_market_open();
   void build_candlesticks();

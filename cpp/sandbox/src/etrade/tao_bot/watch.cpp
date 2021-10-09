@@ -2,6 +2,7 @@
 #define ETRADE__TAO_BOT_watch
 
 #include "await_market_open.cpp"            // await_market_open
+#include "awaited_loss_leader.cpp"          // awaited_loss_leader
 #include "build_candlesticks.cpp"           // build_candlesticks
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "close_position.cpp"               // close_position
@@ -33,6 +34,10 @@ void ETrade::TaoBot::watch() {
   }
 
   while (!should_terminate()) {
+    if (awaited_loss_leader()) {
+      continue;
+    }
+
     fetch_quote();
     build_candlesticks();
     set_average_tick_price_delta();

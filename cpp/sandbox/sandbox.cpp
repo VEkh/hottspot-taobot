@@ -1,10 +1,18 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf
 
-#include "lib/utils/float.cpp"
+#include <regex>  // std::regex, std::regex_search
+#include <string> // std::string
 
 int main() {
-  const double d = 1.238919273973;
+  const char *symbol = "aapl";
+  const char *test = "AAPL.json";
+  std::cmatch match;
 
-  std::cout << ::utils::float_::round_to(d, 5) << std::endl;
+  if (std::regex_search(
+          test, match,
+          std::regex("(\\w+)\\.json", std::regex_constants::icase))) {
+    printf("match size: %i\n", (int)match.size());
+    printf("match 0: %s\n", std::string(match[1]).c_str());
+  }
 }
