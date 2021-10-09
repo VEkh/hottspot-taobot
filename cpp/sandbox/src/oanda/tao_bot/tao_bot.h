@@ -21,7 +21,6 @@ public:
 private:
   using account_balance_t = Global::t::account_balance_t;
   using candlestick_t = Global::t::candlestick_t;
-  using closed_positions_stats_t = Global::t::closed_positions_stats_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
@@ -30,6 +29,7 @@ private:
   using order_type_t = Oanda::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
+  using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
   using quote_t = Global::t::quote_t;
 
@@ -61,6 +61,7 @@ private:
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
+  performance_t performance;
   std::list<candlestick_t> candlesticks;
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -82,9 +83,9 @@ private:
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
 
-  closed_positions_stats_t build_closed_positions_stats();
-
   exit_prices_t build_exit_prices();
+
+  performance_t build_performance();
 
   int base_quantity();
   int compute_quantity();

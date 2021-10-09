@@ -24,24 +24,24 @@ enum order_win_result_t {
   WIN,
 };
 
+struct exit_prices_t {
+  double max_loss = 0.00;
+  double min_profit = 0.00;
+  double secure_profit = 0.00;
+};
+
 struct order_win_result_streak_t {
   std::map<int, int> counts;
   int current;
   int longest;
 };
 
-struct closed_positions_stats_t {
+struct performance_t {
   double current_balance;
   order_win_result_streak_t loss_streaks;
   double max_balance;
   std::map<order_win_result_t, int> results;
   order_win_result_streak_t win_streaks;
-};
-
-struct exit_prices_t {
-  double max_loss = 0.00;
-  double min_profit = 0.00;
-  double secure_profit = 0.00;
 };
 
 struct quote_t {

@@ -65,7 +65,7 @@ void Oanda::TaoBot::load_performance() {
     this->closed_positions.push_back(position);
   }
 
-  this->max_balance = max_balance_;
+  this->performance.max_balance = max_balance_;
 }
 
 #endif

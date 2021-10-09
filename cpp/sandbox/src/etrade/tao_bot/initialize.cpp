@@ -1,6 +1,7 @@
 #ifndef ETRADE__TAO_BOT_initialize
 #define ETRADE__TAO_BOT_initialize
 
+#include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "load_performance.cpp"      // load_performance
@@ -32,6 +33,8 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
   this->quantity = quantity_mulitiplier_;
 
   load_performance();
+
+  this->performance = build_performance();
 }
 
 #endif

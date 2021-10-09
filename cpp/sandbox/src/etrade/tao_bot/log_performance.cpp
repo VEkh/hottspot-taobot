@@ -3,20 +3,19 @@
 
 /*
  * ETrade::TaoBot
- * closed_positions_stats_t
  * fmt
  * order_win_result_t
+ * performance_t
  * position_t
  */
 #include "tao_bot.h"
 
-#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include <iostream>                         // std::cout, std::endl
-#include <map>                              // std::map
-#include <stdio.h>                          // printf, puts
+#include <iostream> // std::cout, std::endl
+#include <map>      // std::map
+#include <stdio.h>  // printf, puts
 
 void ETrade::TaoBot::log_performance() {
-  closed_positions_stats_t stats = build_closed_positions_stats();
+  performance_t stats = this->performance;
   std::map<order_win_result_t, int> closed_positions_results = stats.results;
 
   int win_count = closed_positions_results[order_win_result_t::WIN];

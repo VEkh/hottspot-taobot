@@ -1,13 +1,13 @@
 #ifndef ETRADE__TAO_BOT_trim_old_quotes
 #define ETRADE__TAO_BOT_trim_old_quotes
 
-#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include "tao_bot.h"                      // ETrade::TaoBot, quote_t
-#include <time.h>                           // time_t, time
-#include <vector>                           // vector
+#include "build_performance.cpp" // build_performance
+#include "tao_bot.h"             // ETrade::TaoBot, quote_t
+#include <time.h>                // time_t, time
+#include <vector>                // vector
 
 void ETrade::TaoBot::trim_old_quotes() {
-  const closed_positions_stats_t stats = build_closed_positions_stats();
+  const performance_t stats = this->performance;
 
   if (stats.loss_streaks.current) {
     return;

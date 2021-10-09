@@ -8,9 +8,9 @@
  */
 #include "tao_bot.h"
 
-#include "build_closed_positions_stats.cpp" // build_closed_positions_stats
-#include "write_performance.cpp"            // write_performance
-#include <time.h>                           // time, time_t
+#include "build_performance.cpp" // build_performance
+#include "write_performance.cpp" // write_performance
+#include <time.h>                // time, time_t
 
 void ETrade::TaoBot::reset_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
@@ -32,10 +32,7 @@ void ETrade::TaoBot::reset_position() {
   };
 
   this->closed_positions.push_back(position);
-
-  closed_positions_stats_t stats = build_closed_positions_stats();
-
-  this->max_balance = stats.max_balance;
+  this->performance = build_performance();
 
   write_performance();
 

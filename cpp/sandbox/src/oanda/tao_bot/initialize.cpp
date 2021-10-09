@@ -1,6 +1,7 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
+#include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "load_performance.cpp"      // load_performance
@@ -24,6 +25,8 @@ void Oanda::TaoBot::initialize(char *symbol_,
   this->symbol = symbol_;
 
   load_performance();
+
+  this->performance = build_performance();
 }
 
 #endif

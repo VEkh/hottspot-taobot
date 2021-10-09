@@ -1,8 +1,8 @@
-#ifndef OANDA__TAO_BOT_build_closed_positions_stats
-#define OANDA__TAO_BOT_build_closed_positions_stats
+#ifndef ETRADE__TAO_BOT_build_performance
+#define ETRADE__TAO_BOT_build_performance
 
 /*
- * Oanda::TaoBot
+ * ETrade::TaoBot
  * order_win_result_t
  * order_win_result_streak_t
  * position_t
@@ -13,8 +13,7 @@
 #include <algorithm>            // std::max
 #include <map>                  // std::map
 
-Oanda::TaoBot::closed_positions_stats_t
-Oanda::TaoBot::build_closed_positions_stats() {
+ETrade::TaoBot::performance_t ETrade::TaoBot::build_performance() {
   std::map<order_win_result_t, int> results = {
       {order_win_result_t::LOSS, 0},
       {order_win_result_t::TIE, 0},
@@ -101,7 +100,7 @@ Oanda::TaoBot::build_closed_positions_stats() {
   return {
       .current_balance = current_balance_,
       .loss_streaks = streaks[order_win_result_t::LOSS],
-      .max_balance = std::max(current_balance_, this->max_balance),
+      .max_balance = std::max(current_balance_, this->performance.max_balance),
       .results = results,
       .win_streaks = streaks[order_win_result_t::WIN],
   };

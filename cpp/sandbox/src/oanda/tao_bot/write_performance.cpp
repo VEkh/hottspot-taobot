@@ -41,7 +41,8 @@ void Oanda::TaoBot::write_performance() {
     positions.push_back(position_json);
   }
 
-  performance_json["max_balance"] = this->max_balance;
+  performance_json["current_balance"] = this->performance.current_balance;
+  performance_json["max_balance"] = this->performance.max_balance;
   performance_json["positions"] = positions;
 
   ::utils::io::write_to_file(performance_json.dump(2), filepath.c_str());
