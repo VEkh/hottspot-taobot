@@ -23,6 +23,7 @@ json load() {
 
   json returns_json;
   file >> returns_json;
+  file.close();
 
   return returns_json;
 }

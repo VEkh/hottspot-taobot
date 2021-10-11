@@ -6110,6 +6110,50 @@ deep that they must be handled specially.
 
 * Opening Account Value: $63,947.44
 
+* Total: +$2,363.07 (+3.7%)
+  * BA   (+$2,363.07)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 51W 40L
+* Week's Return: +$2,363.07
+* Total Return: -$179.76
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 1/1 stocks won 🥳
+* BA was the loss leader so it was the only one traded all day.
+* My new process to check for the current loss leader caused some early day
+  hang ups. Every TaoBot instance that executed it would eventually hang and
+  stop responding.
+* I think it's related to reading the files in the performance directory. It
+  seems like the same issue that led Oanda's tail logging process to keep
+  hanging. It's very cryptic.
+* Actually, it may be because I didn't run `close_directory` after traversing
+  the directory. Maybe some buffer limit was reached.
+
+##### Onada
+* TaoBot won a couple of times 🎉
+* I reverted to market orders and discoverd that Oanda opens orders at the ask
+  / bid price for SELL and BUY orders respectively.
+
+* Most of the time, the market orders open just fine on the edges of the
+  spread. However, the spread is so large that positions open to heavy losses.
+
+* For Oanda to ultimately work, I'll need to figure out how to execute market
+  orders at my desired price.
+
+#### Next Thing(s) to Try
+* Get Oanda to always execute orders an optimal price.
+
+### 2021-10-12:
+#### Performance
+
+* Opening Account Value: $66,310.48
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

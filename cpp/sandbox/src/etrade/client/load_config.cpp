@@ -21,6 +21,7 @@ void ETrade::Client::load_config() {
 
   json config_json;
   config_file >> config_json;
+  config_file.close();
 
   const char *required_keys[] = {
       "account_id",         "account_id_key",        "base_url",

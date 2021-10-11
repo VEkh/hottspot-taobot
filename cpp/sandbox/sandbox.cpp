@@ -1,18 +1,13 @@
 #include <iostream> // std::cout, std::endl
-#include <stdio.h>  // printf
+#include <stdio.h>  // printf, puts
 
-#include <regex>  // std::regex, std::regex_search
-#include <string> // std::string
+#include <fstream>
+#include <string>
 
 int main() {
-  const char *symbol = "aapl";
-  const char *test = "AAPL.json";
-  std::cmatch match;
+  std::ifstream file;
 
-  if (std::regex_search(
-          test, match,
-          std::regex("(\\w+)\\.json", std::regex_constants::icase))) {
-    printf("match size: %i\n", (int)match.size());
-    printf("match 0: %s\n", std::string(match[1]).c_str());
-  }
+  file.close();
+
+  puts("Huzzah!");
 }

@@ -6,6 +6,7 @@
 #include "tao_bot.h"        // ETrade::TaoBot, fmt
 #include <algorithm>        // std::min
 #include <dirent.h>         // DIR, closedir, dirent, opendir, readdir
+#include <fstream>          // std::ifstream
 #include <iostream>         // std::cout
 #include <string>           // std::string
 
@@ -55,8 +56,17 @@ std::string ETrade::TaoBot::get_loss_leader() {
     const std::string performance_filepath =
         performance_directory + entity->d_name;
 
+    std::ifstream file;
+
+    try {
+      file = ::utils::io::read_file(performance_filepath.c_str());
+    } catch (std::invalid_argument &) {
+      return get_loss_leader();
+    }
+
     json performance_json;
-    ::utils::io::read_file(performance_filepath.c_str()) >> performance_json;
+    file >> performance_json;
+    file.close();
 
     if (!performance_json.contains("current_balance")) {
       continue;
@@ -76,6 +86,8 @@ std::string ETrade::TaoBot::get_loss_leader() {
       loss_leader = file_symbol;
     }
   }
+
+  closedir(dir);
 
   return loss_leader;
 }

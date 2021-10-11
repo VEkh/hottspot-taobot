@@ -43,6 +43,7 @@ void ETrade::TaoBot::load_performance() {
 
   json persisted_data;
   file >> persisted_data;
+  file.close();
 
   double max_balance_ = 0.00;
   json positions_json = json::array();

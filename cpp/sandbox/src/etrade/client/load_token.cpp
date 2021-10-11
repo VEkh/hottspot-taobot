@@ -29,6 +29,7 @@ void ETrade::Client::load_token() {
 
   json tokens_json;
   tokens_file >> tokens_json;
+  tokens_file.close();
 
   oauth.token = std::string(tokens_json["oauth_token"]);
   oauth.token_secret = std::string(tokens_json["oauth_token_secret"]);

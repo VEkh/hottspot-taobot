@@ -11,6 +11,7 @@
 #include "deps.cpp"         // json
 #include "lib/utils/io.cpp" // ::utils::io
 #include "oanda/utils.cpp"  // Oanda::utils
+#include <fstream>          // std::ifstream
 #include <stdexcept>        // std::invalid_argument
 #include <vector>           // std::vector
 
@@ -43,6 +44,7 @@ void Oanda::TaoBot::load_performance() {
 
   json persisted_data;
   file >> persisted_data;
+  file.close();
 
   double max_balance_ = 0.00;
   json positions_json = json::array();
