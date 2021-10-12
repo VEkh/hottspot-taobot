@@ -6154,6 +6154,58 @@ deep that they must be handled specially.
 
 * Opening Account Value: $66,310.48
 
+* Total: +$1,027.91 (+1.55%)
+  * AAPL (+$111.69)
+  * AMD  (+$60.38)
+  * BA   (+$3.91)
+  * FB   (+$82.51)
+  * MSFT (-$383.27)
+  * SNAP (+$134.89)
+  * TSLA (+$295.54)
+  * TWTR (+$680.52)
+  * VIAC (+$41.73)
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 52W 40L
+* Week's Return: +$3,390.98
+* Total Return: +$848.15
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 8/9 stocks won 🎉
+* TWTR had a big redemptive win early in the day.
+* The rest of the stocks had great showings, overcoming loss streaks.
+* The loss leader check kicked in the day as MSFT closed on a loss streak.
+* The profit was as high as $1,500, but it's okay we can recover the $500+
+  tomorrow.
+* I also increased the target profit for the base quantity. This will push
+  TaoBot's aggression.
+
+* Things are looking good 😊
+
+* I _did_, however, have to intervene a few times to close out profits in
+  insurmountable redemption positions:
+  * A loss leader is eating up all the margin
+  * Another stock opens a position to recover a large deficit at a small
+    quantity.
+  * The position is profiting, but it won't realistically reach the target
+    because the quantity is too small.
+  * The loss leader redeems its loss.
+  * The other position is still in limbo.
+  * I have to close it out, update the performance, and restart TaoBot.
+* It might be worth looking into how to have TaoBot automatically detect if a
+  position has been manually closed.
+
+#### Next Thing(s) to Try
+
+### 2021-10-13:
+#### Performance
+
+* Opening Account Value: $67,338.39
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
