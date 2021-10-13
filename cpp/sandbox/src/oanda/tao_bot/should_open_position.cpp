@@ -2,7 +2,10 @@
 #define OANDA__TAO_BOT_should_open_position
 
 #include "candlesticks_in_direction.cpp" // candlesticks_in_direction
-#include "tao_bot.h"                     // Oanda::TaoBot, order_action_t
+#include "current_spread.cpp"            // current_spread
+#include "tao_bot.h"                     // Oanda::TaoBot, fmt, order_action_t
+#include <iostream>                      // std::cout, std::flush
+#include <stdio.h>                       // puts
 
 bool Oanda::TaoBot::should_open_position() {
   if (this->open_order_ptr) {
@@ -10,6 +13,10 @@ bool Oanda::TaoBot::should_open_position() {
   }
 
   if (!this->average_tick_price_delta) {
+    return false;
+  }
+
+  if (current_spread() > 1.6e-4) {
     return false;
   }
 
