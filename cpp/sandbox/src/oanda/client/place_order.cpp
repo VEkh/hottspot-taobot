@@ -54,6 +54,14 @@ CurlClient Oanda::Client::place_order(order_t *order) {
 
   json response = json::parse(curl_client.response.body);
 
+  std::cout << fmt.yellow << fmt.bold;
+  printf("Order payload: %s\n", body.dump(2).c_str());
+  std::cout << fmt.reset;
+
+  std::cout << fmt.yellow << fmt.bold;
+  printf("Order response: %s\n", response.dump(2).c_str());
+  std::cout << fmt.reset;
+
   if (!response.contains("orderCreateTransaction")) {
     std::string message = Formatted::error_message(
         std::string("❌ Something went wrong while placing the order: ") +
