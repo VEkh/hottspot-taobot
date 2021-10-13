@@ -20,8 +20,8 @@ std::string Oanda::Client::fetch_quote(char *symbol) {
 }
 
 std::string Oanda::Client::fetch_quote(std::string symbol) {
-  std::string request_url =
-      config.base_url + "/v3/instruments/" + symbol + "/candles?count=1";
+  std::string request_url = config.base_url + "/v3/instruments/" + symbol +
+                            "/candles?count=1&price=BAM";
 
   CurlClient curl_client = fetch(request_url);
 

@@ -43,11 +43,6 @@ struct performance_t {
   std::map<order_win_result_t, int> results;
   order_win_result_streak_t win_streaks;
 };
-
-struct quote_t {
-  double price;
-  long int timestamp;
-};
 } // namespace t
 } // namespace Global
 #endif

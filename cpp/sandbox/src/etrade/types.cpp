@@ -44,6 +44,11 @@ struct position_t {
   int close_timestamp = 0;
   order_t open_order;
 };
+
+struct quote_t {
+  double price;
+  long int timestamp;
+};
 } // namespace t
 } // namespace ETrade
 #endif

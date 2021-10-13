@@ -47,6 +47,13 @@ struct position_t {
   int close_timestamp = 0;
   order_t open_order;
 };
+
+struct quote_t {
+  double ask;
+  double bid;
+  double price;
+  long int timestamp;
+};
 } // namespace t
 } // namespace Oanda
 #endif

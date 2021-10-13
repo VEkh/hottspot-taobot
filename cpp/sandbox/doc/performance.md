@@ -6206,6 +6206,41 @@ deep that they must be handled specially.
 
 * Opening Account Value: $67,338.39
 
+* Total: -$107.96 (-0.16%)
+  * AAPL (+$19.62)
+  * AMD  (+$4.67)
+  * BA   (+$106.43)
+  * FB   (+$20.44)
+  * MSFT (+$539.55)
+  * SNAP (-$1,334.27)
+  * TSLA (+$24.78)
+  * TWTR (+$492.74)
+  * VIAC (+$18.09)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 52W 41L
+* Week's Return: +$3,283.02
+* Total Return: +$740.19
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 8/9 stocks won 🎉
+* SNAP had a big loss day, but it still didn't almost supercede the big days by
+  several other stocks.
+* Once SNAP recovers, we'll be in even better shape.
+* I didn't have to manually intervene in any positions today. They all closed
+  organically and started awaiting SNAP, the loss leader.
+
+#### Next Thing(s) to Try
+
+### 2021-10-14:
+#### Performance
+
+* Opening Account Value: $67,223.32
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

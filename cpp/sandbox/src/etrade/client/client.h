@@ -18,7 +18,7 @@ public:
   using order_t = ETrade::t::order_t;
   using order_type_t = ETrade::t::order_type_t;
   using post_params_t = CurlClient::post_params_t;
-  using quote_t = Global::t::quote_t;
+  using quote_t = ETrade::t::quote_t;
 
   enum debug_t { OFF, ON };
 

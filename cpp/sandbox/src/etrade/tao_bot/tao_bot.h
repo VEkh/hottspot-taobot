@@ -30,7 +30,7 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using position_t = ETrade::t::position_t;
-  using quote_t = Global::t::quote_t;
+  using quote_t = ETrade::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double MAX_TARGET_TICK_MOVEMENT = 50.0;

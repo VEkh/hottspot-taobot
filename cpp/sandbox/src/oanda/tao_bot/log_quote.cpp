@@ -40,7 +40,9 @@ void Oanda::TaoBot::log_quote() {
          ::utils::integer_::seconds_to_clock(runtime).c_str());
 
   std::cout << fmt.reset << fmt.bold << log_color;
-  printf("Current: %'.5f\n", current_quote.price);
+  printf("Bid: %'.5f • Mid: %'.5f • Ask: %'.5f • Spread: %'.5f\n",
+         current_quote.bid, current_quote.price, current_quote.ask,
+         current_quote.ask - current_quote.bid);
 
   std::cout << fmt.reset << std::endl;
 }

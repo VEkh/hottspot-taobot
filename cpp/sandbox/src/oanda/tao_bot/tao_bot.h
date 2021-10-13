@@ -31,7 +31,7 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
-  using quote_t = Global::t::quote_t;
+  using quote_t = Oanda::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double MAX_TARGET_TICK_MOVEMENT = 60.0;
@@ -79,6 +79,7 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double compute_profit(const order_t *, const order_t *);
   double current_price();
+  double current_spread();
   double loss_to_recover();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();

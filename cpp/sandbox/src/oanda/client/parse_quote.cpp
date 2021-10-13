@@ -12,10 +12,14 @@ Oanda::Client::parse_quote(const std::string &response_body) {
   time(&now);
 
   json quote_json = json::parse(response_body);
-  std::string price_string = quote_json["candles"][0]["mid"]["c"];
+  std::string ask_string = quote_json["candles"][0]["ask"]["c"];
+  std::string bid_string = quote_json["candles"][0]["bid"]["c"];
+  std::string mid_string = quote_json["candles"][0]["mid"]["c"];
 
   quote_t quote;
-  quote.price = std::stod(price_string);
+  quote.ask = std::stod(ask_string);
+  quote.bid = std::stod(bid_string);
+  quote.price = std::stod(mid_string);
   quote.timestamp = now;
 
   return quote;

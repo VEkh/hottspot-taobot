@@ -10,13 +10,11 @@
 
 double Oanda::TaoBot::compute_profit(const order_t *order,
                                      const quote_t *quote) {
-  const double price = quote->price;
-
   if (this->is_long_position) {
-    return price - order->execution_price;
+    return quote->bid - order->execution_price;
   }
 
-  return order->execution_price - price;
+  return order->execution_price - quote->ask;
 }
 
 double Oanda::TaoBot::compute_profit(const order_t *close_order,
