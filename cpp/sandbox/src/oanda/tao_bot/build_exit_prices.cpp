@@ -1,7 +1,6 @@
 #ifndef OANDA__TAO_BOT_build_exit_prices
 #define OANDA__TAO_BOT_build_exit_prices
 
-#include "current_spread.cpp"       // current_spread
 #include "loss_to_recover.cpp"      // loss_to_recover
 #include "secured_profit_ratio.cpp" // secured_profit_ratio
 #include "tao_bot.h"                // Oanda::TaoBot
@@ -23,8 +22,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   }
 
   const double min_profit = abs(max_loss) / secured_profit_ratio_;
-
-  max_loss -= current_spread();
 
   const double secure_profit =
       std::max(this->exit_prices.secure_profit,

@@ -39,10 +39,6 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order.profit <= exit_prices.max_loss) {
-    return true;
-  }
-
   if (this->open_order.profit > -5.0 * this->average_tick_price_delta) {
     return false;
   }

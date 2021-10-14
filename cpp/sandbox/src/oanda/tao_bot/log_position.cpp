@@ -25,10 +25,9 @@ void Oanda::TaoBot::log_position() {
 
   std::cout << fmt.bold << log_color;
   printf("Open   => Execution: %.5f • Profit: %.5f (%.2f%%) • "
-         "Max Profit: %.5f • Limit: %.5f\n",
+         "Max Profit: %.5f\n",
          this->open_order.execution_price, this->open_order.profit,
-         profit_percentage(this->open_order_ptr), this->open_order.max_profit,
-         this->open_order.limit_price);
+         profit_percentage(this->open_order_ptr), this->open_order.max_profit);
 
   printf(
       "Close  => Execution: %.5f • Profit: %.5f (%.2f%%) • Max Profit: %.5f\n",

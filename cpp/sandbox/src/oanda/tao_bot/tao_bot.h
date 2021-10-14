@@ -34,7 +34,7 @@ private:
   using quote_t = Oanda::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MAX_TARGET_TICK_MOVEMENT = 60.0;
+  const double MAX_TARGET_TICK_MOVEMENT = 50.0;
   const double MIN_TARGET_TICK_MOVEMENT = 25.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
 
