@@ -39,7 +39,7 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order.profit > -5.0 * this->average_tick_price_delta) {
+  if (this->open_order.profit > -10.0 * this->average_tick_price_delta) {
     return false;
   }
 

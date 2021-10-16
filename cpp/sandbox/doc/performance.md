@@ -6241,6 +6241,69 @@ deep that they must be handled specially.
 
 * Opening Account Value: $67,223.32
 
+* Total: -$5,203.96 (-7.74%)
+  * SNAP (-$5,114.78)
+  * TWTR (-$89.18)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 52W 42L
+* Week's Return: -$1,920.94
+* Total Return: -$4,463.77
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/2 stocks won 😭
+* TWTR's loss was the result of a leftover position.
+* Today was the largest single day loss on record.
+* It was the first time that a heavy loss day was followed by another day of
+  repeatd price consolidation, instead of a day of strong movement in one
+  direction.
+* This is an undoubted reality and I'm addressing it by re-introducing an "exit
+  based on the entry signal in the opposite direction".
+* I tried this a while ago, but abandoned it because it would end loss streaks
+  with a win that wasn't fully redemptive.
+* However, now that I'm tracking the long running deficit, it should be a good
+  tool on days like today where some profit can be extracted as price jumps
+  around to different consolidation levels.
+* I'm still optimistic that things will work out!
+
+#### Next Thing(s) to Try
+
+### 2021-10-15:
+#### Performance
+
+* Opening Account Value: $62,046.26
+
+* Total: -$2,879.06 (-4.64%)
+  * SNAP (-$2,879.06)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 3
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 52W 43L
+* Week's Return: -$4,800.00
+* Total Return: -$7,342.83
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* If I hadn't changed the exit algorithm last night, there's a very good change
+  I would have made money.
+* As a consequence, give TaoBot at least one more day unchanged.
+* If time expires, implement a cut-loss strategy that clears the performance of
+  a stock when its losses pass a certain threshold.
+
+#### Next Thing(s) to Try
+
+### 2021-10-18:
+#### Performance
+
+* Opening Account Value: $62,046.26
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
