@@ -82,7 +82,6 @@ private:
   double current_spread();
   double loss_to_recover();
   double profit_percentage(const order_t *);
-  double secured_profit_ratio();
 
   exit_prices_t build_exit_prices();
 

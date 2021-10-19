@@ -6302,7 +6302,34 @@ deep that they must be handled specially.
 ### 2021-10-18:
 #### Performance
 
-* Opening Account Value: $62,046.26
+* Opening Account Value: $59,167.27
+
+* Total: +$3,505.33 (+5.92%)
+  * SNAP (+$3,505.33)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 52W 43L
+* Week's Return: +$3,505.33
+* Total Return: -$3,837.50
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 1/1 stock won 🥳
+* A good-case scenario occurred: SNAP trended in the same direction as the
+  first position and ended in that direction, albeit not at its peak profit.
+* This occurs, but its likelihood is uncertain.
+* I'll keep the same recovery strategy understanding that tomorrow may
+  primarily be a day of price consolidation.
+
+#### Next Thing(s) to Try
+
+### 2021-10-19:
+#### Performance
+
+* Opening Account Value: $62,672.60
 
 * Total: $ (%)
   * AAPL ($)
