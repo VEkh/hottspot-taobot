@@ -11,7 +11,9 @@
 
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "compute_profit.cpp"           // compute_profit
+#include "current_spread.cpp"           // current_spread
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
+#include "opposite_direction.cpp"       // opposite_direction
 #include "should_open_position.cpp"     // should_open_position
 
 bool Oanda::TaoBot::should_close_position() {
@@ -39,15 +41,17 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order.profit > -10.0 * this->average_tick_price_delta) {
-    return false;
-  }
-
-  if (this->is_long_position && should_open_position(order_action_t::SELL)) {
+  if (this->open_order.profit >= 0.6 * exit_prices.min_profit &&
+      should_open_position(opposite_direction())) {
     return true;
   }
 
-  if (!this->is_long_position && should_open_position(order_action_t::BUY)) {
+  if (this->open_order.profit >
+      (-10.0 * this->average_tick_price_delta - current_spread())) {
+    return false;
+  }
+
+  if (should_open_position(opposite_direction())) {
     return true;
   }
 
