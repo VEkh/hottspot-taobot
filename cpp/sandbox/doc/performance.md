@@ -6311,7 +6311,7 @@ deep that they must be handled specially.
 * Consecutive Loss Days: 0
 
 #### Stats (as of stable profitable algo [5/28])
-* Win / Loss: 52W 43L
+* Win / Loss: 53W 43L
 * Week's Return: +$3,505.33
 * Total Return: -$3,837.50
 * 9-5 Salary: $506.71 / day • $2,533.56 / week
@@ -6330,6 +6330,96 @@ deep that they must be handled specially.
 #### Performance
 
 * Opening Account Value: $62,672.60
+
+* Total: +$1,410.34 (+2.25%)
+  * SNAP (+$1,410.34)
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 54W 43L
+* Week's Return: +$4,915.67
+* Total Return: -$2,427.16
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 1/1 stocks won 🥳
+* SNAP is still recovering its losses
+* It established its trend on the second trade, which was nice
+* I've had two consecutive wins, but there's no reason why tomorrow couldn't be
+  a loss day. Stay level-headed ✊🏾
+
+##### Oanda
+* I received word from customer service that they'll never execute trades at
+  the mid price.
+* I'll have to figure out how to get this to work while executing at the bid
+  and ask prices.
+
+#### Next Thing(s) to Try
+
+### 2021-10-20:
+#### Performance
+
+* Opening Account Value: $64,082.95
+
+* Total: -$9,606.64 (%)
+  * SNAP (-$9,606.64)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 54W 44L
+* Week's Return: -$4,690.97
+* Total Return: -$12,033.80
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 0/1 stocks won 😭
+* SNAP's price was consolidating just about ALL day.
+* I predicted this happening, so I'm not devasated by the loss.
+* It exposes the vulnerability of waiting for a trend to establish and holding
+  on to that trend:
+  * A trend may never establish and or may largely reverse by day's end.
+  * Along the way, you'll lose most if not all trades.
+* There's no way of predicting when / how often this will happen.
+* As such, I'm taking measures to make TaoBot less immune, by re-establishing a
+  min profit of just 20x 1-sec variance.
+* I know I've tried this many times, but I'm coupling it with something new:
+  * TaoBot can only close a profit position if there isn't an entry indicator
+    in the same direction.
+* Previously, positions with secured small profits may re-enter in the same
+  direction.
+* Sometimes this results in a consecutive win, many times it would result in a
+  loss as the trend reached its end. This would undo the original win.
+* Theoretically, requiring no or a reverse entry signal upon profit will
+  mitigate this.
+* Now, this will NOT completely protect against sustained periods of
+  consolidation, but it will hopefully help them be less devastating, meanwhile
+  taking adavantage of long profit trends.
+
+##### Oanda
+* In some positive news, EUR_USD closed in the black for the first time after a
+  full day of trading 🥳
+* This is after:
+  * Reducing the base quantity
+  * Adjusting the loss exit threshold to account for the spread.
+  * Using the full margin purchasing power.
+  * Removing the buy-sell ratio entry indicators
+    * These number fly all over the place for currencies
+
+* We'll see if this continues.
+
+
+#### Next Thing(s) to Try
+
+### 2021-10-20:
+#### Performance
+
+* Opening Account Value: $54,476.31
 
 * Total: $ (%)
   * AAPL ($)
