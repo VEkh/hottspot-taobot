@@ -3,12 +3,16 @@
 
 #include "tao_bot.h" // Oanda::TaoBot
 
-Oanda::TaoBot::order_action_t Oanda::TaoBot::opposite_direction() {
-  if (this->is_long_position) {
+Oanda::TaoBot::order_action_t
+Oanda::TaoBot::opposite_direction(const order_t *order) {
+  switch (order->action) {
+  case order_action_t::BUY: {
     return order_action_t::SELL;
   }
-
-  return order_action_t::BUY;
+  case order_action_t::SELL: {
+    return order_action_t::BUY;
+  }
+  }
 }
 
 #endif

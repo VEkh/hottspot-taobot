@@ -92,6 +92,8 @@ private:
 
   json fetch_order(const order_t *);
 
+  order_action_t opposite_direction(const order_t *);
+
   order_win_result_t order_win_result(const order_t *);
 
   performance_t build_performance();

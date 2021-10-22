@@ -12,6 +12,7 @@
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "compute_profit.cpp"           // compute_profit
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
+#include "opposite_direction.cpp"       // opposite_direction
 #include "should_open_position.cpp"     // should_open_position
 
 bool ETrade::TaoBot::should_close_position() {
@@ -33,6 +34,10 @@ bool ETrade::TaoBot::should_close_position() {
   const double previous_profit =
       compute_profit(this->open_order_ptr, &previous_quote);
 
+  if (should_open_position(this->open_order.action)) {
+    return false;
+  }
+
   if (this->open_order.max_profit >= this->exit_prices.min_profit &&
       previous_profit >= this->exit_prices.secure_profit &&
       this->open_order.profit <= this->exit_prices.secure_profit) {
@@ -43,16 +48,11 @@ bool ETrade::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order.profit > -10.0 * this->average_tick_price_delta) {
+  if (this->open_order.profit > (-10.0 * this->average_tick_price_delta)) {
     return false;
   }
 
-  if (this->is_long_position &&
-      should_open_position(order_action_t::SELL_SHORT)) {
-    return true;
-  }
-
-  if (!this->is_long_position && should_open_position(order_action_t::BUY)) {
+  if (should_open_position(opposite_direction(this->open_order_ptr))) {
     return true;
   }
 

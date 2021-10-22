@@ -84,7 +84,7 @@ private:
 
   exit_prices_t build_exit_prices();
 
-  order_action_t opposite_direction();
+  order_action_t opposite_direction(const order_t *);
 
   performance_t build_performance();
 

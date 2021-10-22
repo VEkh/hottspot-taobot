@@ -6451,10 +6451,50 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-10-21:
+### 2021-10-22:
 #### Performance
 
 * Opening Account Value: $53,716.48
+
+* Total: +$1,025.67 (+1.91%)
+  * SNAP (+$1,025.67)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 55W 45L
+* Week's Return: -$4,425.10
+* Total Return: -$11,767.93
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 1/1 stocks won 🥳
+* SNAP's win was bittersweet. When it was largely trending it was up as high as
+  $3,200. It lost most of that during price consolidation.
+* The adjusted profit securing seemed to work well to avoid premature exits and
+  in accurate re-entries.
+
+##### Oanda
+* EUR_USD finished in the black again too!
+* I'm still skeptical of its success. Maybe it's time to get it on the
+  Raspberry Pi though.
+
+#### Next Thing(s) to Try
+* Fix this scenario:
+  * Position is profiting
+  * Max profit exceeds min profit
+  * Profit falls below secure profit
+  * Entry signal is still present so it doesn't close
+  * Entry signal is no longer present
+  * Min profit has reduced, but profit is nowhere near max profit
+  * Should the position exit?
+
+### 2021-10-25:
+#### Performance
+
+* Opening Account Value: $54,742.33
 
 * Total: $ (%)
   * AAPL ($)

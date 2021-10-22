@@ -35,14 +35,13 @@ bool Oanda::TaoBot::should_close_position() {
   const double previous_profit =
       compute_profit(this->open_order_ptr, &previous_quote);
 
+  if (should_open_position(this->open_order.action)) {
+    return false;
+  }
+
   if (this->open_order.max_profit >= this->exit_prices.min_profit &&
       previous_profit >= this->exit_prices.secure_profit &&
       this->open_order.profit <= this->exit_prices.secure_profit) {
-    return true;
-  }
-
-  if (this->open_order.profit >= 0.6 * exit_prices.min_profit &&
-      should_open_position(opposite_direction())) {
     return true;
   }
 
@@ -51,7 +50,7 @@ bool Oanda::TaoBot::should_close_position() {
     return false;
   }
 
-  if (should_open_position(opposite_direction())) {
+  if (should_open_position(opposite_direction(this->open_order_ptr))) {
     return true;
   }
 

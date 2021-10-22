@@ -7,27 +7,13 @@
 #include <math.h>              // abs
 
 ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
-  const double loss_to_recover_ = loss_to_recover();
-  const double max_loss_multiplier = this->MIN_TARGET_TICK_MOVEMENT;
+  const double max_loss =
+      -this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta;
 
-  double max_loss = -1 * max_loss_multiplier * this->average_tick_price_delta;
+  const double min_profit = 1.25 * abs(max_loss);
 
-  if (loss_to_recover_ < 0) {
-    const double redemptive_max_loss =
-        (1.05 * abs(loss_to_recover_)) / this->open_order.quantity;
-
-    max_loss = -1 * redemptive_max_loss;
-  }
-
-  const double trailing_stop =
-      std::min(abs(max_loss * 0.25),
-               this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta);
-
-  const double min_profit = abs(max_loss) + trailing_stop;
-
-  const double secure_profit =
-      std::max(this->exit_prices.secure_profit,
-               this->open_order.max_profit - trailing_stop);
+  const double secure_profit = std::max(this->exit_prices.secure_profit,
+                                        this->open_order.max_profit * 0.8);
 
   return {
       .max_loss = max_loss,
