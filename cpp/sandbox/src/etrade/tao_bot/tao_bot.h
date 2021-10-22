@@ -53,7 +53,6 @@ private:
   double average_tick_price_delta = 0.00;
   double long_average_buy_sell_ratio;
   double long_average_sell_buy_ratio;
-  double max_balance = 0.00;
   double short_average_buy_sell_ratio;
   double short_average_sell_buy_ratio;
   exit_prices_t exit_prices;

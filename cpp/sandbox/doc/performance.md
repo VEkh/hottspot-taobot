@@ -6421,6 +6421,41 @@ deep that they must be handled specially.
 
 * Opening Account Value: $54,476.31
 
+* Total: -$759.80 (-1.39%)
+  * SNAP (-$759.80)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 54W 45L
+* Week's Return: -$5,450.77
+* Total Return: -$12,793.60
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 0/1 stocks won 😭
+* Though SNAP lost again, it lost MUCH less and actually won some trades.
+* I had a couple snafus with properly implementing the "end of trend" guard
+  clause for the close signal.
+* Once I did, this helped avoid unproductive position re-entries.
+* I reduced the max loss to 20x 1-sec variance, and this helped avoid large
+  losses.
+* We'll see if this gradually makes or loses money over time.
+
+##### Oanda
+* It ended in the black again!
+* Part of it is because the current balance has been miscalculating for the
+  past couple of days. I just fixed it and we'll see how it goes.
+
+#### Next Thing(s) to Try
+
+### 2021-10-21:
+#### Performance
+
+* Opening Account Value: $53,716.48
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
