@@ -8,10 +8,11 @@
  */
 #include "tao_bot.h"
 
-#include "etrade/deps.cpp" // json
-#include <iostream>        // std::cout, std::endl
-#include <stdio.h>         // printf
-#include <string>          // std::string
+#include "etrade/deps.cpp"    // json
+#include "lib/utils/json.cpp" // ::utils::json
+#include <iostream>           // std::cout, std::endl
+#include <stdio.h>            // printf
+#include <string>             // std::string
 
 json ETrade::TaoBot::fetch_order(const order_t *order) {
   json empty_order;
@@ -30,7 +31,8 @@ json ETrade::TaoBot::fetch_order(const order_t *order) {
     return empty_order;
   }
 
-  return json::parse(order_response);
+  return ::utils::json::parse_with_catch(order_response,
+                                         "ETRADE__TAO_BOT_fetch_order");
 }
 
 #endif

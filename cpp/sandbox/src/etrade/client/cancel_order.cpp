@@ -5,6 +5,7 @@
 #include "etrade/deps.cpp"                 // json, _json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
+#include "lib/utils/json.cpp"              // ::utils::json
 #include "post.cpp"                        // post
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string
@@ -12,7 +13,8 @@
 CurlClient ETrade::Client::cancel_order(order_t *order) {
   CurlClient curl_client = cancel_order(order->id);
 
-  json response = json::parse(curl_client.response.body);
+  json response = ::utils::json::parse_with_catch(
+      curl_client.response.body, "ETRADE__CLIENT_cancel_order");
 
   if (response.contains("CancelOrderResponse")) {
     order->status = order_status_t::ORDER_CANCELLED;

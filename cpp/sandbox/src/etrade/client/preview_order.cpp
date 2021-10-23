@@ -7,6 +7,7 @@
 #include "handle_place_order_error.cpp"    // handle_place_order_error
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/utils/json.cpp"                     // ::utils::json
 #include <map>                                    // std::map
 #include <regex> // std::regex, std::regex_search
 
@@ -19,7 +20,8 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
     return true;
   }
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__PREVIEW_ORDER_is_immediate_retry_error");
 
   if (response.contains("Error") &&
       response["Error"]["message"] ==

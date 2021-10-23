@@ -11,6 +11,7 @@
 #include "deps.cpp"                        // json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
+#include "lib/utils/json.cpp"              // ::utils::json
 #include "post.cpp"                        // post
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string, std::to_string
@@ -18,7 +19,8 @@
 std::string Oanda::Client::cancel_order(order_t *order) {
   std::string response_body = cancel_order(order->id);
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(response_body,
+                                                  "OANDA__CLIENT_cancel_order");
 
   if (response.contains("orderCancelTransaction")) {
     order->status = order_status_t::ORDER_CANCELLED;

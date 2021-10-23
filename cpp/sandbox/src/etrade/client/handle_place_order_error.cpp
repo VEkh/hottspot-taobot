@@ -7,14 +7,16 @@
 #include "is_next_cycle_retry_error.cpp" // is_next_cycle_retry_error
 #include "lib/curl_client/curl_client.h" // CurlClient
 #include "lib/formatted.cpp"             // Formatted
-#include "lib/utils/string.cpp"          // utils::string
+#include "lib/utils/json.cpp"            // ::utils::json
+#include "lib/utils/string.cpp"          // ::utils::string
 #include <iostream>                      // std::cout, std::endl
 
 CurlClient
 ETrade::Client::handle_place_order_error(CurlClient &curl_client,
                                          const order_action_t &order_action,
                                          const std::string &action) {
-  json response_body = json::parse(curl_client.response.body);
+  json response_body = ::utils::json::parse_with_catch(
+      curl_client.response.body, "ETRADE__CLIENT_handle_place_order_error");
 
   if (response_body.contains(action + "OrderResponse")) {
     return curl_client;

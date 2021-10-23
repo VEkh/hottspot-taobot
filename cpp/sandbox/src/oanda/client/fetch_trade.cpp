@@ -4,6 +4,7 @@
 #include "client.h"                        // Oanda::Client
 #include "fetch.cpp"                       // fetch
 #include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/utils/json.cpp"              // ::utils::json
 #include <string>                          // std::string
 
 std::string Oanda::Client::fetch_trade(const int trade_id) {
@@ -14,7 +15,8 @@ std::string Oanda::Client::fetch_trade(const int trade_id) {
   CurlClient curl_client = fetch(request_url);
 
   std::string response_body = curl_client.response.body;
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(response_body,
+                                                  "OANDA__CLIENT_fetch_trade");
 
   return response["trade"].dump();
 }

@@ -6,6 +6,7 @@
 #include "fetch.cpp"                              // fetch
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/utils/json.cpp"                     // ::utils::json
 #include <regex>  // std::regex, std::regex_search
 #include <string> // std::string, std::to_string
 
@@ -18,7 +19,8 @@ bool is_retriable_response(const CurlClient &curl_client) {
     return false;
   }
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__FETCH_ORDER_is_retriable_response");
 
   if (!response.contains("OrdersResponse")) {
     return true;
@@ -54,7 +56,8 @@ std::string ETrade::Client::fetch_order(const int order_id) {
     return response_body;
   }
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(response_body,
+                                                  "ETRADE__CLIENT_fetch_order");
 
   return response["OrdersResponse"]["Order"][0].dump();
 }

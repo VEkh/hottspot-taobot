@@ -3,10 +3,12 @@
 
 #include "client.h"                      // ETrade::Client, stream_format
 #include "lib/curl_client/curl_client.h" // CurlClient
+#include "lib/utils/json.cpp"            // ::utils::json
 #include <map>                           // std::map
 
 bool ETrade::Client::is_next_cycle_retry_error(CurlClient &curl_client) {
-  json response_body = json::parse(curl_client.response.body);
+  json response_body = ::utils::json::parse_with_catch(
+      curl_client.response.body, "ETRADE__CLIENT_is_next_cycle_retry_error");
 
   if (!response_body.contains("Error")) {
     return false;

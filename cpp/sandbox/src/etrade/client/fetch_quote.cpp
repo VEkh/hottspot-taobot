@@ -1,12 +1,13 @@
 #ifndef ETRADE__CLIENT_fetch_quote
 #define ETRADE__CLIENT_fetch_quote
 
-#include "client.h"                        // ETrade::Client, config
-#include "etrade/deps.cpp"                 // json
-#include "fetch.cpp"                       // fetch
-#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "client.h"                               // ETrade::Client, config
+#include "etrade/deps.cpp"                        // json
+#include "fetch.cpp"                              // fetch
+#include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "lib/formatted.cpp"                      // Formatted
+#include "lib/utils/json.cpp"                     // ::utils::json
 #include <iostream>                               // std::cout, std::endl
 #include <regex>     // std::regex, std::regex_search
 #include <stdexcept> // std::invalid_argument
@@ -21,7 +22,8 @@ bool is_retriable_response(const CurlClient &curl_client) {
     return true;
   }
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__FETCH_QUOTE_is_retriable_response");
 
   if (response["QuoteResponse"].contains("Messages") &&
       response["QuoteResponse"]["Messages"]["Message"][0]["code"] == 1002) {
@@ -50,7 +52,8 @@ bool is_retriable_response(const CurlClient &curl_client) {
 }
 
 bool is_valid_response(const std::string &response_body) {
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__FETCH_QUOTE_is_valid_response");
 
   return response["QuoteResponse"].contains("QuoteData");
 }

@@ -1,11 +1,12 @@
 #ifndef ETRADE__CLIENT_fetch_account_balance
 #define ETRADE__CLIENT_fetch_account_balance
 
-#include "client.h"                        // ETrade::Client, config
-#include "etrade/deps.cpp"                 // json
-#include "fetch.cpp"                       // fetch
-#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "client.h"                               // ETrade::Client, config
+#include "etrade/deps.cpp"                        // json
+#include "fetch.cpp"                              // fetch
+#include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/utils/json.cpp"                     // ::utils::json
 #include <regex>  // std::regex, std::regex_search
 #include <string> // std::string
 
@@ -18,7 +19,8 @@ bool is_retriable_response(const CurlClient &curl_client) {
     return true;
   }
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__FETCH_ACCOUNT_BALANCE_is_retriable_response");
 
   if (!response.contains("BalanceResponse")) {
     return true;

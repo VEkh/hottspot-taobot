@@ -12,6 +12,7 @@
 #include "deps.cpp"                        // json, _json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/utils/float.cpp"             // ::utils::float_
+#include "lib/utils/json.cpp"              // ::utils::json
 #include "oanda/constants.cpp"             // Oanda::constants
 #include "post.cpp"                        // post
 #include <stdexcept>                       // std::invalid_argument
@@ -52,7 +53,8 @@ CurlClient Oanda::Client::place_order(order_t *order) {
   time_t now;
   time(&now);
 
-  json response = json::parse(curl_client.response.body);
+  json response = ::utils::json::parse_with_catch(curl_client.response.body,
+                                                  "OANDA__CLIENT_place_order");
 
   std::cout << fmt.yellow << fmt.bold;
   printf("Order payload: %s\n", body.dump(2).c_str());

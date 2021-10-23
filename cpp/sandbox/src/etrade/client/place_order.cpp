@@ -15,6 +15,7 @@
 #include "is_next_cycle_retry_error.cpp"          // is_next_cycle_retry_error
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/utils/json.cpp"                     // ::utils::json
 #include "preview_order.cpp"                      // preview_order
 #include <regex>  // std::regex, std::regex_search
 #include <time.h> // time, time_t
@@ -28,7 +29,8 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
     return true;
   }
 
-  json response = json::parse(response_body);
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__PLACE_ORDER_is_immediate_retry_error");
 
   if (response.contains("Error") && response["Error"]["code"] == 163) {
     return true;
@@ -76,7 +78,8 @@ CurlClient ETrade::Client::place_order(order_t *order) {
   time_t now;
   time(&now);
 
-  json response = json::parse(curl_client.response.body);
+  json response = ::utils::json::parse_with_catch(curl_client.response.body,
+                                                  "ETRADE__CLIENT_place_order");
 
   order->id = response["PlaceOrderResponse"]["OrderIds"][0]["orderId"];
   order->status = order_status_t::ORDER_OPEN;
