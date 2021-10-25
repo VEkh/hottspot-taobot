@@ -3,9 +3,7 @@
 
 /*
  * Oanda::TaoBot
- * order_action_t
  * order_status_t
- * quote_t
  */
 #include "tao_bot.h"
 
@@ -31,17 +29,13 @@ bool Oanda::TaoBot::should_close_position() {
 
   this->exit_prices = build_exit_prices();
 
-  const quote_t previous_quote = this->quotes.at(this->quotes.size() - 2);
-  const double previous_profit =
-      compute_profit(this->open_order_ptr, &previous_quote);
-
   if (should_open_position(this->open_order.action)) {
     return false;
   }
 
   if (this->open_order.max_profit >= this->exit_prices.min_profit &&
-      previous_profit >= this->exit_prices.secure_profit &&
-      this->open_order.profit <= this->exit_prices.secure_profit) {
+      this->open_order.profit >= this->exit_prices.lower_secure_profit &&
+      this->open_order.profit <= this->exit_prices.upper_secure_profit) {
     return true;
   }
 

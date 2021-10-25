@@ -25,9 +25,10 @@ enum order_win_result_t {
 };
 
 struct exit_prices_t {
+  double lower_secure_profit = 0.00;
   double max_loss = 0.00;
   double min_profit = 0.00;
-  double secure_profit = 0.00;
+  double upper_secure_profit = 0.00;
 };
 
 struct order_win_result_streak_t {

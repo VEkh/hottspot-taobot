@@ -11,14 +11,16 @@ ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
       -this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta;
 
   const double min_profit = 1.25 * abs(max_loss);
+  const double lower_secure_profit = min_profit * 0.8;
 
-  const double secure_profit = std::max(this->exit_prices.secure_profit,
-                                        this->open_order.max_profit * 0.8);
+  const double upper_secure_profit = std::max(
+      this->exit_prices.upper_secure_profit, this->open_order.max_profit * 0.8);
 
   return {
+      .lower_secure_profit = lower_secure_profit,
       .max_loss = max_loss,
       .min_profit = min_profit,
-      .secure_profit = secure_profit,
+      .upper_secure_profit = upper_secure_profit,
   };
 }
 

@@ -6496,6 +6496,37 @@ deep that they must be handled specially.
 
 * Opening Account Value: $54,742.33
 
+* Total: +$2,608.33 (+4.76%)
+  * SNAP (+$2,608.33)
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 56W 45L
+* Week's Return: +$2,608.33
+* Total Return: -$9,159.60
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 1/1 stocks won 🥳
+* SNAP peaked $5K+ before losing much of the earnings to price consolidation.
+* I re-adjusted profit securement to exit even if the prior quote didn't exceed
+  the expanded min profit.
+* It now exits a profitable position as long as the profit is between the
+  expanded and moving min profit's secure profit thresholds.
+* This worked well.
+
+#### Remarks
+
+#### Next Thing(s) to Try
+
+### 2021-10-26:
+#### Performance
+
+* Opening Account Value: $57,350.97
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

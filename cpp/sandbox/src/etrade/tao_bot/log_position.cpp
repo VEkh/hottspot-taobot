@@ -38,9 +38,11 @@ void ETrade::TaoBot::log_position() {
          ETrade::constants::ORDER_STATUSES[this->open_order.status],
          ETrade::constants::ORDER_STATUSES[this->close_order.status]);
 
-  printf("Min Profit: %.2f • Max Loss: %.2f • Secure Profit: %.2f\n",
+  printf("Min Profit: %.2f • Max Loss: %.2f • Secure Profit (Lower): %.2f • "
+         "Secure Profit (Upper): %.2f\n",
          this->exit_prices.min_profit, this->exit_prices.max_loss,
-         this->exit_prices.secure_profit);
+         this->exit_prices.lower_secure_profit,
+         this->exit_prices.upper_secure_profit);
 
   printf("Quantity: %i\n", this->quantity);
 
