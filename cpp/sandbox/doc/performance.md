@@ -6527,6 +6527,40 @@ deep that they must be handled specially.
 
 * Opening Account Value: $57,350.97
 
+* Total: -$606.03 (%)
+  * SNAP (-$606.03)
+    * 1/2 have been mostly consolidation days
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 56W 46L
+* Week's Return: +$2,002.30
+* Total Return: -$9,765.63
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+##### ETrade
+* 0/1 stocks won 😭
+* The silver lining is that SNAP was only down $600 after a day of mostly price
+  consolidation.
+* SNAP got lucky with being on the right side of a couple big price jumps.
+* If TaoBot can get by with being down a few hundred dollars after a day of
+  consolidation, that's a win.
+* I'm re-introducing the secured profit ratio algorithm.
+
+##### Oanda
+* Finished ✌🏾up✌🏾. It seemed a little down by the official account balance,
+  but the local deficit tracker reported a $0 deficit.
+
+#### Next Thing(s) to Try
+
+### 2021-10-27:
+#### Performance
+
+* Opening Account Value: $56,745.15
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
