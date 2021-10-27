@@ -34,8 +34,8 @@ private:
   using quote_t = Oanda::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MAX_TARGET_TICK_MOVEMENT = 50.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 20.0;
+  const double MAX_TARGET_TICK_MOVEMENT = 40.0;
+  const double MIN_TARGET_TICK_MOVEMENT = 10.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
 
   std::map<const char *, const char *> ICONS = {
