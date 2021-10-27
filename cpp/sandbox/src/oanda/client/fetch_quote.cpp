@@ -10,13 +10,13 @@
 #include <string>                                 // std::string
 
 namespace Oanda {
-namespace fetch_order {
+namespace fetch_quote {
 bool is_retriable_response(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
   return response_body.empty();
 }
-} // namespace fetch_order
+} // namespace fetch_quote
 } // namespace Oanda
 
 std::string Oanda::Client::fetch_quote(char *symbol) {
@@ -36,7 +36,7 @@ std::string Oanda::Client::fetch_quote(std::string symbol) {
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return fetch(request_url); },
-      Oanda::fetch_order::is_retriable_response);
+      Oanda::fetch_quote::is_retriable_response);
 
   return curl_client.response.body;
 }
