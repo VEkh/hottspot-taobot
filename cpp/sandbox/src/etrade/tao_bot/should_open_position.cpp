@@ -14,13 +14,13 @@ bool ETrade::TaoBot::should_open_position() {
   }
 
   if (should_open_position(order_action_t::BUY)) {
-    this->is_long_position = true;
+    this->is_long_position = false;
 
     return true;
   }
 
   if (should_open_position(order_action_t::SELL_SHORT)) {
-    this->is_long_position = false;
+    this->is_long_position = true;
 
     return true;
   }

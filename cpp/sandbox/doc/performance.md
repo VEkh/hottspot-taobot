@@ -6561,6 +6561,42 @@ deep that they must be handled specially.
 
 * Opening Account Value: $56,745.15
 
+* Total: -$3,711.58 (%)
+  * SNAP (-$3,711.58)
+    * 2/3 have been mostly consolidation days
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 56W 47L
+* Week's Return: -$1,709.28
+* Total Return: -$13,477.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* SNAP spent another day mostly consolidating
+* I'm coming to the conclusion that prices spend most of their time
+  consolidating
+* SNAP has be recorded the last 253 trades. Of those, just 81 (32.02%) of them
+  have won. This is a large sample size of data.
+* This is a strong indicator that a momentum strategy is wrong most of time _if_,
+  it's predicting movement in the same direction.
+* I think its time to finally implement a reversal prediction strategy.
+* Keep in mind that predicting a reversal can actually predict the start of a
+  trend in the _reverse_ direction.
+* We'll see how it goes.
+
+
+#### Next Thing(s) to Try
+* Entry indicators predict reversal
+
+### 2021-10-28:
+#### Performance
+
+* Opening Account Value: $53,034.08
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

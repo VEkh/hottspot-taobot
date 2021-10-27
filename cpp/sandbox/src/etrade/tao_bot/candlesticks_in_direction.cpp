@@ -10,13 +10,14 @@ bool ETrade::TaoBot::candlesticks_in_direction(
     return false;
   }
 
-  std::list<candlestick_t>::iterator it = this->candlesticks.begin();
+  std::list<candlestick_t>::reverse_iterator it = this->candlesticks.rbegin();
 
-  int i = 0;
   const int sample_size = 3;
+  int i = sample_size;
   bool out = true;
 
-  while (it != this->candlesticks.end() && i < sample_size) {
+  it++;
+  while (it != this->candlesticks.rend() && i > 0) {
     const double price_delta = it->close - it->open;
 
     switch (order_action) {
@@ -36,7 +37,7 @@ bool ETrade::TaoBot::candlesticks_in_direction(
       break;
     }
 
-    i++;
+    i--;
     it++;
   }
 
