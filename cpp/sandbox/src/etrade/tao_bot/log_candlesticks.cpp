@@ -5,6 +5,7 @@
 #include "lib/utils/float.cpp" // utils::float_
 #include "tao_bot.h"           // ETrade::TaoBot, fmt
 #include <iostream>            // std::cout, std::endl
+#include <list>                // std::list
 #include <stdio.h>             // printf
 
 void ETrade::TaoBot::log_candlesticks() {

@@ -2,21 +2,24 @@
 #define ETRADE__TAO_BOT_candlesticks_in_direction
 
 #include "tao_bot.h" // ETrade::TaoBot, candlestick_t, order_action_t
+#include <iterator>  // Iter
 #include <list>      // std::list
 
 bool ETrade::TaoBot::candlesticks_in_direction(
-    const order_action_t order_action) {
+    const order_action_t order_action, const int sample_size = 3) {
   if (!this->candlesticks.size()) {
     return false;
   }
 
   std::list<candlestick_t>::reverse_iterator it = this->candlesticks.rbegin();
 
-  const int sample_size = 3;
   int i = sample_size;
   bool out = true;
 
-  it++;
+  if (sample_size == 3) {
+    it++;
+  }
+
   while (it != this->candlesticks.rend() && i > 0) {
     const double price_delta = it->close - it->open;
 

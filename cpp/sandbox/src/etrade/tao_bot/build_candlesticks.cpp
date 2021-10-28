@@ -4,7 +4,6 @@
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "tao_bot.h"          // ETrade::TaoBot, candlestick_t, quote_t
 #include <algorithm>          // std::max, std:min
-#include <list>               // std::list
 #include <time.h>             // localtime, time_t, tm
 #include <vector>             // std::vector
 

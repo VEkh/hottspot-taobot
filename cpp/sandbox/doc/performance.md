@@ -6597,6 +6597,33 @@ deep that they must be handled specially.
 
 * Opening Account Value: $53,034.08
 
+* Total: -$6.99 (%)
+  * SNAP (-$6.99)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 3
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 56W 48L
+* Week's Return: -$1,716.27
+* Total Return: -$13,484.20
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* I scaled down the stakes to see if the new reversal prediction would work.
+* Of course today would be a trend heavy day for SNAP 🙄
+* I still have to fix the strategy.
+
+#### Next Thing(s) to Try
+* Alternate trading strategy between predict continued trend and reverse trend
+  upon each loss. Will it work? Idk!
+
+### 2021-10-29:
+#### Performance
+
+* Opening Account Value: $53,027.21
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

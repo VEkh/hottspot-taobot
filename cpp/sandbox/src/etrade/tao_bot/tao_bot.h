@@ -49,6 +49,7 @@ private:
   account_balance_t account_balance;
   account_balance_t original_account_balance;
   bool is_long_position;
+  bool is_trending = true;
   char *symbol;
   double average_tick_price_delta = 0.00;
   double long_average_buy_sell_ratio;
@@ -71,7 +72,7 @@ private:
   account_balance_t fetch_account_balance();
 
   bool awaited_loss_leader();
-  bool candlesticks_in_direction(const order_action_t);
+  bool candlesticks_in_direction(const order_action_t, const int);
   bool is_end_of_trading_period();
   bool is_market_open();
   bool should_close_position();

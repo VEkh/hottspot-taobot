@@ -14,13 +14,13 @@ bool ETrade::TaoBot::should_open_position() {
   }
 
   if (should_open_position(order_action_t::BUY)) {
-    this->is_long_position = false;
+    this->is_long_position = this->is_trending;
 
     return true;
   }
 
   if (should_open_position(order_action_t::SELL_SHORT)) {
-    this->is_long_position = true;
+    this->is_long_position = !this->is_trending;
 
     return true;
   }
@@ -32,7 +32,7 @@ bool ETrade::TaoBot::should_open_position(const order_action_t order_action) {
   const double long_door_threshold = 1.5;
   const double short_door_threshold = 1.75;
 
-  if (candlesticks_in_direction(order_action)) {
+  if (candlesticks_in_direction(order_action, 3)) {
     return true;
   }
 
