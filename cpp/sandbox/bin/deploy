@@ -1,0 +1,68 @@
+#!/bin/bash
+
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+
+build_app_dir="$(realpath "$(dirname "$0")/../")"
+remote_user="vekh"
+
+remote_app_dir="/home/$remote_user/apps/hottspot_capital"
+remote_host="192.168.1.8"
+
+remote_address="${remote_user}@${remote_host}"
+
+"$build_app_dir/bin/build"
+echo
+
+echo -e "${fmt_bold}${fmt_cyan}📂 Creating app directory${fmt_reset}"
+ssh "$remote_address" "mkdir -p $remote_app_dir && mkdir -p $remote_app_dir/log "
+echo
+
+deploy_entities=(
+  ".tool-versions"
+  "Gemfile"
+  "Gemfile.lock"
+  "bin/"
+  "build/"
+  "config/"
+  "data/"
+  "src/"
+)
+
+replace_entities=(
+  ".tool-versions"
+  "Gemfile"
+  "Gemfile.lock"
+  "bin/"
+  "build/"
+  "config/"
+  "src/"
+)
+
+for entity in "${deploy_entities[@]}"; do
+  if [[ "${replace_entities[*]}" =~ $entity ]]; then
+    echo -e "${fmt_bold}${fmt_cyan}⛔ Deleting ${fmt_yellow}$entity${fmt_reset}"
+    ssh "$remote_address" "rm -rf $remote_app_dir/$entity"
+  fi
+
+  [[ $entity =~ "/" ]] && test_flag="-d" || test_flag="-f"
+
+  if [[ -n $(ssh "$remote_address" "test $test_flag $remote_app_dir/$entity && echo 'exists'") ]]
+  then
+    echo -e "${fmt_bold}${fmt_cyan}😴 Skip sending ${fmt_yellow}$entity${fmt_reset}"
+  else
+    echo -e "${fmt_bold}${fmt_cyan}🚀 Copying  ${fmt_yellow}$entity${fmt_reset}"
+    scp -qr "$build_app_dir/$entity" "$remote_address:$remote_app_dir/"
+  fi
+
+  echo
+done
+
+# TODO:
+# * Bundle install
+# * Generate and update crontab
+
+echo -e "${fmt_bold}${fmt_green}🎉 Successfully deployed Hottpsot Capital!${fmt_reset}"
