@@ -6701,6 +6701,57 @@ deep that they must be handled specially.
 
 * Opening Account Value: $53,017.80
 
+* Total: +$3.35 (+0.0063%)
+  * SNAP (+$3.35)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 50L
+* Week's Return: -$6.75
+* Total Return: -$13,490.20
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 1/1 stocks won 🥳
+* Made some progress and discoveries today.
+  1. It seems like the strategy switching strategy avoids excessively long loss
+     streaks, _only_ if it's using three candlesticks as an entry indicator.
+     Using two candlesticks leads to long loss streaks.
+
+     * If true, this discovery would refute the suspicion that excessive,
+       catastrophic loss streaks are inevitable.
+
+  2. If this is the case we should be able make money by increasing the
+     quantity to chase losses.
+
+  3. It doesn't seem like the win percentage, even for this strategy will be
+     high enough to make money over an extended period of time.
+     * It only profits if the quantity placed can redeem losses through small
+       price movement.
+
+     * Therefore, you must never place a bet that requires too much movement.
+
+     * Instead place bets that can recover losses within finite price movement
+       and a finite loss streak.
+
+  4. Trying to recover from a $13K deficit while allowing the `loss_to_recover`
+     to reset to 0 after every win will take too long.
+
+     * I think we'll have to instead borrow a redeemable amount from the
+       deficit.
+
+     * This will raise the stakes, but assuming the losses are recoverd it will
+       accelerate recovery.
+
+#### Next Thing(s) to Try
+
+### 2021-11-04:
+#### Performance
+
+* Opening Account Value: $53,021.06
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

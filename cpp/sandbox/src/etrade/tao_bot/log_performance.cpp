@@ -59,8 +59,11 @@ void ETrade::TaoBot::log_performance() {
   print_counts(stats.win_streaks.counts);
   puts("\n");
 
-  printf("Current Balance: %+'.2f • Max Balance: %+'.2f • Deficit: %+'.2f\n\n",
-         stats.current_balance, stats.max_balance,
+  printf("Current Balance: %+'.2f • Max Balance: %+'.2f\n",
+         stats.current_balance, stats.max_balance);
+
+  printf("Current Loss Streak Deficit: %+'.2f • Total Deficit: %+'.2f\n\n",
+         stats.current_loss_streak_balance,
          stats.current_balance - stats.max_balance);
 
   printf("Profits: [");

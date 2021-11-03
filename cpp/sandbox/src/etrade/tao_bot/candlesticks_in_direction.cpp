@@ -6,7 +6,7 @@
 #include <list>      // std::list
 
 bool ETrade::TaoBot::candlesticks_in_direction(
-    const order_action_t order_action, const int sample_size = 2) {
+    const order_action_t order_action, const int sample_size = 3) {
   if (!this->candlesticks.size()) {
     return false;
   }
