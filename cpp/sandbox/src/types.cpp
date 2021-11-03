@@ -38,9 +38,10 @@ struct order_win_result_streak_t {
 };
 
 struct performance_t {
-  double current_balance;
+  double current_balance = 0.00;
+  double current_loss_streak_balance = 0.00;
   order_win_result_streak_t loss_streaks;
-  double max_balance;
+  double max_balance = 0.00;
   std::map<order_win_result_t, int> results;
   order_win_result_streak_t win_streaks;
 };

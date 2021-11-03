@@ -99,6 +99,7 @@ Oanda::TaoBot::performance_t Oanda::TaoBot::build_performance() {
 
   return {
       .current_balance = current_balance_,
+      .current_loss_streak_balance = 0.00,
       .loss_streaks = streaks[order_win_result_t::LOSS],
       .max_balance = std::max(current_balance_, this->performance.max_balance),
       .results = results,

@@ -6624,6 +6624,83 @@ deep that they must be handled specially.
 
 * Opening Account Value: $53,027.21
 
+* Total: +$0.75 (+0.0014%)
+  * SNAP (+$0.75)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 57W 48L
+* Week's Return: -$1,715.52
+* Total Return: -$13,483.45
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 1/1 stocks won 🥳
+* The alternating strategy seemed to actually work pretty decently.
+  * Win rate: 16/38 (42.11%)
+  * This is significantly higher than the usual 30-35% win rate.
+* I'll keep the stakes low until I confirm or refute its efficacy.
+
+#### Next Thing(s) to Try
+
+### 2021-11-01:
+#### Performance
+
+* Opening Account Value: $53,027.92
+
+* Total: -$1.50 (-0.0028%)
+  * SNAP (-$1.50)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 57W 49L
+* Week's Return: -$1.50
+* Total Return: -$13,484.95
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* SNAP spent most of the day consolidating, but the loss wasn't abysmal. This
+  is good.
+* Also, the win percentage increased slightly to 43.82%.
+* We'll continue to monitor the trend vs reversal switch strategy. It actually
+  works very well during consolidation periods.
+
+### 2021-11-02:
+#### Performance
+
+* Opening Account Value: $53,026.42
+
+* Total: -$8.60 (-0.0162%)
+  * SNAP (-$8.60)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 57W 50L
+* Week's Return: -$10.10
+* Total Return: -$13,493.55
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* SNAP spent much of the day trending which is unfortunate that it didn't
+  perform better.
+* At the end of the day, I changed to use two candlesticks an an entry
+  indicator. I'll continue this tomorrow and see how it goes.
+
+#### Next Thing(s) to Try
+
+### 2021-11-03:
+#### Performance
+
+* Opening Account Value: $53,017.80
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)

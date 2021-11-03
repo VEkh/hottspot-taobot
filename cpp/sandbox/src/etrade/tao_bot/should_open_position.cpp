@@ -32,7 +32,7 @@ bool ETrade::TaoBot::should_open_position(const order_action_t order_action) {
   const double long_door_threshold = 1.5;
   const double short_door_threshold = 1.75;
 
-  if (candlesticks_in_direction(order_action, 3)) {
+  if (candlesticks_in_direction(order_action)) {
     return true;
   }
 

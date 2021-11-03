@@ -6,7 +6,7 @@
 #include <list>      // std::list
 
 bool ETrade::TaoBot::candlesticks_in_direction(
-    const order_action_t order_action, const int sample_size = 3) {
+    const order_action_t order_action, const int sample_size = 2) {
   if (!this->candlesticks.size()) {
     return false;
   }
@@ -16,7 +16,7 @@ bool ETrade::TaoBot::candlesticks_in_direction(
   int i = sample_size;
   bool out = true;
 
-  if (sample_size == 3) {
+  if (sample_size < this->candlesticks.size()) {
     it++;
   }
 

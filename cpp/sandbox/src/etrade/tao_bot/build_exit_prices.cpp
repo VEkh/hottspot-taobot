@@ -1,7 +1,6 @@
 #ifndef ETRADE__TAO_BOT_build_exit_prices
 #define ETRADE__TAO_BOT_build_exit_prices
 
-#include "loss_to_recover.cpp"      // loss_to_recover
 #include "secured_profit_ratio.cpp" // secured_profit_ratio
 #include "tao_bot.h"                // ETrade::TaoBot
 #include <algorithm>                // std::max std::min
