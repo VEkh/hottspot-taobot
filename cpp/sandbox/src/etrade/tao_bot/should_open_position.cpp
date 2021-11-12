@@ -2,7 +2,9 @@
 #define ETRADE__TAO_BOT_should_open_position
 
 #include "candlesticks_in_direction.cpp" // candlesticks_in_direction
+#include "lib/utils/time.cpp"            // ::utils::time_
 #include "tao_bot.h"                     // ETrade::TaoBot, order_action_t
+#include <stdlib.h>                      // rand, srand
 
 bool ETrade::TaoBot::should_open_position() {
   if (this->open_order_ptr) {
@@ -13,19 +15,13 @@ bool ETrade::TaoBot::should_open_position() {
     return false;
   }
 
-  if (should_open_position(order_action_t::BUY)) {
-    this->is_long_position = this->is_trending;
+  srand(::utils::time_::epoch("nanoseconds"));
+  const bool coin[] = {false, true};
+  const int side_index = rand() % 2;
 
-    return true;
-  }
+  this->is_long_position = coin[side_index];
 
-  if (should_open_position(order_action_t::SELL_SHORT)) {
-    this->is_long_position = !this->is_trending;
-
-    return true;
-  }
-
-  return false;
+  return true;
 }
 
 bool ETrade::TaoBot::should_open_position(const order_action_t order_action) {

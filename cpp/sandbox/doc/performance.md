@@ -6752,6 +6752,245 @@ deep that they must be handled specially.
 
 * Opening Account Value: $53,021.06
 
+* Total: -$689.53 (-1.31%)
+  * SNAP (-$689.53)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 51L
+* Week's Return: -$696.28
+* Total Return: -$14,179.73
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* Things were going great (peak of ~$500), but then an extended loss streak
+  kicked in.
+* The borrowed deficit was too high. It essentially starts SNAP at a 4-loss
+  losing streak.
+* Let's go back to no borrowed deficit, just strictly the loss streak deficit
+  and assess the real profitability of this strategy.
+* Keep your head up. You got this!
+
+#### Next Thing(s) to Try
+
+### 2021-11-05:
+#### Performance
+
+* Opening Account Value: $52,331.57
+
+* Total: -$955.42 (-1.83%)
+  * SNAP (-$955.42)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 2
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 52L
+* Week's Return: -$1,651.70
+* Total Return: -$15,135.15
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* Today was an interesting day.
+* I started the day clearing the loss streak deficit and continuing the
+  momentum-swing-switch strategy.
+  * It started with a 5-loss losing streak which it eventually recovered.
+  * It ended up +$26.17 with a win rate of 46.15% after 13 rounds
+* Then I experimented with using a coin flip as the entry indicator for the
+  first time.
+  * It ran at a whopping 50% win rate after 28 plays!
+  * This is very fascinating. Maybe it was coincidence, but maybe it actually
+    works better than a momentum indicator.
+* _Theeeen_ I started borrowing from the outstanding deficit. It was performing
+  fine by the time I took my lunch nap. By the time I woke up, it was down $800
+  😨
+* There's something there with the coin flip.
+* I'm going to take the stakes down low and just watch the raw performance, no
+  loss chasing.
+* I'll collect 50-100 samples before increasing the stakes.
+
+* All in all, I feel encouraged even though the day ended up down.
+
+* I'm also taking out the exit indicator that leaves if there is an entry
+  indicator in the opposite direction.
+
+* I'm coming to the slow realization that momentum is not be a good entry
+  indicator, but may be a good `stay-in` indicator.
+
+* We're gonna get this!
+
+#### Next Thing(s) to Try
+
+### 2021-11-08:
+#### Performance
+
+* Opening Account Value: $51,376.40
+
+* Total: -$2.24 (%)
+  * SNAP (-$2.24)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 3
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 52L
+* Week's Return: -$2.24
+* Total Return: -$15,137.39
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* SNAP was up at the beginning of the day but spent much of the rest of the day
+  consolidating.
+* I'm temporarily taking out the momentum stay-in algorithm. TaoBot missed a
+  few too many profitable exit opportunities because it was waiting for the
+  momentum to subide. Now that momentum doesn't dictate entry, it's no longer
+  necessary.
+* Otherwise, the win percentage was 43.94% after 66 plays. The longest loss
+  streak was 7. This isn't too bad. The longest win streak was 3.
+* Keep watching.
+
+#### Next Thing(s) to Try
+
+### 2021-11-09:
+#### Performance
+
+* Opening Account Value: $51,374.25
+
+* Total: $ (%)
+  * SNAP ($)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 4
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 53L
+* Week's Return: -$9.49
+* Total Return: -$15,144.64
+* 9-5 Salary: $506.71 / day • $2,533.56 / week
+
+#### Remarks
+* 0/1 stocks won 😭
+* Longest loss streak was 6. This isn't too different from 7 or 8 so it
+  shouldn't be a major victory.
+* Win percentage (N=76) was 39.47%. That's not terrible.
+* By around 10am CT, the profit was ~+$2.00 and the win rate was ~50%
+* The 10x the 1-sec variance was at least $0.10. I may set an open position
+  threshold for $0.08 as the 10x 1-sec variance. I'm not sure how to compute
+  this across stocks.
+
+#### Next Thing(s) to Try
+* Keep watching to see if TabBot is green by the time early day movement
+  subsides. If this leads to a consistent profit, maybe determine an algorithm
+  that only trades during high movement.
+
+### 2021-11-10:
+#### Performance
+
+* Opening Account Value: $51,374.25
+
+* Total: -$21.28 (-0.04%)
+  * SNAP (-$21.28)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 5
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 54L
+* Week's Return: -$30.77
+* Total Return: -$15,165.92
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* By 9:30am CT, SNAP's 10x 1-sec variance had fallen below $0.10 and the day's
+  earnings were -$1.55, and 2 / 5 won. I'm predicting that losses will continue
+  through the rest of the day with occasional wins.
+* At a sample size of 100, the win rate of Random Entry, Wait 20x 1-sec
+  Variance was 38.00%; Max Loss streak 8
+* After 140 rounds -- Wins: 53 (37.86%) • Losses: 87 • Total: 140
+* It's fair to say that no entry signal results in a winning record over time.
+* Therefore, profit will only be attainable, by chasing losses.
+* I'll have to carefully tune the base quantity to allow for long loss streaks,
+  but it's the only way for this to make money.
+* The advantage to trading frequently with the coin flip is that you're less
+  likely to have untenable loss streaks. Eventually one will win. So long as
+  you ONLY extract profit from 20x the 1-sec variance.
+
+#### Next Thing(s) to Try
+
+### 2021-11-11:
+#### Performance
+
+* Opening Account Value: $51,352.97
+
+* Total: -$167.60 (-0.33%)
+  * SNAP (-$167.60)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 6
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 58W 55L
+* Week's Return: -$198.37
+* Total Return: -$15,333.52
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 0/1 stocks won 😭
+* I started by using candlesticks as an entry indicator. These increased the
+  losses so I reverted to just a coin flip entry indicator.
+* There was also a period during which the max loss / min profit could fall
+  below the inital 20x 1-sec variance. This would result in a situation where
+  losses couldn't fully recuperate.
+  * I adjusted the exit algorithm such that it the max loss / min profit is at
+    least as much as the initial value.
+* There were some stretches where SNAP was making money, but long then a long
+  loss streak hit without full recovery.
+* Try again tomorrow. We'll get this.
+
+#### Next Thing(s) to Try
+
+### 2021-11-12:
+#### Performance
+
+* Opening Account Value: $51,374.25
+
+* Total: +$52.72 (+0.1026%)
+  * SNAP ($52.72)
+    * Wins: 24 (41.38%) • Losses: 34 • Total: 58
+    * Loss Streak => Current: 2 • Longest: 4 • Counts: {1: 5, 2: 3, 3: 1, 4: 5}
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 59W 55L
+* Week's Return: -$145.65
+* Total Return: -$15,280.80
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* Finally...1/1 STOCKS WONNNN! 🥳 😭
+* Requiring that max loss stays at last as large as what it was at time of open
+  seemed to make a large difference. This ensured that every win recovered
+  losses.
+* The coin flip entry indicator seems to continue to have success. It keeps
+  TaoBot continuously trading and decreases the chance of cripplingly long loss
+  streaks.
+* We'll keep the borrowed deficit small ($1) until we get more confidence then
+  we'll gradually increase it to accelerate the deficit recovery.
+
+#### Next Thing(s) to Try
+
+### 2021-11-15:
+#### Performance
+
+* Opening Account Value: $51,374.25
+
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
@@ -6770,7 +7009,7 @@ deep that they must be handled specially.
 * Win / Loss:
 * Week's Return:
 * Total Return:
-* 9-5 Salary: $506.71 / day • $2,533.56 / week
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
 
