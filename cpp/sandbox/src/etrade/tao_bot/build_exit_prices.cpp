@@ -13,10 +13,13 @@ ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
   double max_loss =
       -this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta;
 
-  if (loss_to_recover_) {
-    max_loss = -1 * std::max(abs(loss_to_recover_) / this->open_order.quantity,
-                             abs(max_loss));
+  if (abs(loss_to_recover_)) {
+    max_loss = std::min(this->exit_prices.init_max_loss, max_loss);
   }
+
+  const double init_max_loss = this->exit_prices.init_max_loss
+                                   ? this->exit_prices.init_max_loss
+                                   : max_loss;
 
   const double secured_profit_ratio_ = secured_profit_ratio();
   const double min_profit = (1 / secured_profit_ratio_) * abs(max_loss);
@@ -27,6 +30,7 @@ ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
                this->open_order.max_profit * secured_profit_ratio_);
 
   return {
+      .init_max_loss = init_max_loss,
       .lower_secure_profit = lower_secure_profit,
       .max_loss = max_loss,
       .min_profit = min_profit,

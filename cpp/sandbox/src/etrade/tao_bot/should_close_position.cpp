@@ -28,10 +28,6 @@ bool ETrade::TaoBot::should_close_position() {
 
   this->exit_prices = build_exit_prices();
 
-  if (should_open_position(this->open_order.action)) {
-    return false;
-  }
-
   if (this->open_order.max_profit >= this->exit_prices.min_profit &&
       this->open_order.profit >= this->exit_prices.lower_secure_profit &&
       this->open_order.profit <= this->exit_prices.upper_secure_profit) {
@@ -39,14 +35,6 @@ bool ETrade::TaoBot::should_close_position() {
   }
 
   if (this->open_order.profit <= exit_prices.max_loss) {
-    return true;
-  }
-
-  if (this->open_order.profit > (-10.0 * this->average_tick_price_delta)) {
-    return false;
-  }
-
-  if (should_open_position(opposite_direction(this->open_order_ptr))) {
     return true;
   }
 

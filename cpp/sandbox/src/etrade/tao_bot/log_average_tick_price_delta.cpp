@@ -21,10 +21,12 @@ void ETrade::TaoBot::log_average_tick_price_delta() {
   std::cout << fmt.reset << std::endl;
   std::cout << fmt.bold << fmt.cyan;
 
-  printf("x10: %.4f • x20: %.4f • x50: %.4f\n",
+  printf("x10: %.5f • x%i: %.5f • x%i: %.5f\n",
          this->average_tick_price_delta * 10.0,
-         this->average_tick_price_delta * 20.0,
-         this->average_tick_price_delta * 50.0);
+         (int)this->MIN_TARGET_TICK_MOVEMENT,
+         this->average_tick_price_delta * this->MIN_TARGET_TICK_MOVEMENT,
+         (int)this->MAX_TARGET_TICK_MOVEMENT,
+         this->average_tick_price_delta * this->MAX_TARGET_TICK_MOVEMENT);
 
   std::cout << fmt.reset << std::endl;
 }
