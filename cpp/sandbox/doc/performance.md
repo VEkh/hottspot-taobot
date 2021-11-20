@@ -6989,7 +6989,152 @@ deep that they must be handled specially.
 ### 2021-11-15:
 #### Performance
 
-* Opening Account Value: $51,374.25
+* Opening Account Value: $51,238.30
+
+* Total: +$144.91 (+0.28%)
+  * SNAP (+$144.91)
+
+* Consecutive Win  Days: 2
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 60W 55L
+* Week's Return: +$144.91
+* Total Return: -$15,135.89
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 1/1 stocks won 🥳
+* I elevated the borrowed deficit from 1 to 1.5, then to 2
+  * I'll keep an eye on it and see if it doesn't lead to an obscenely large
+    loss
+* I still need to figure out why the first trade of the day sometimes starts at
+  the the base quantity, even if there's a borrowed deficit.
+
+#### Next Thing(s) to Try
+
+### 2021-11-16:
+#### Performance
+
+* Opening Account Value: $51,383.21
+
+* Total: +$64.16 (%)
+  * SNAP (+$64.16)
+
+* Consecutive Win  Days: 3
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 61W 55L
+* Week's Return: +$209.07
+* Total Return: -$15,071.73
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 1/1 stocks won 🥳
+* I'll increase the borrowed deficit to $5 and observe the results.
+
+#### Next Thing(s) to Try
+
+### 2021-11-17:
+#### Performance
+
+* Opening Account Value: $51,447.38
+
+* Total: +$134.58 (+0.26%)
+  * SNAP (+$134.58)
+
+* Consecutive Win  Days: 4
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 62W 55L
+* Week's Return: +$343.65
+* Total Return: -$14,937.15
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 1/1 stocks won 🥳
+* SNAP ran into a 6-loss losing streak which made place two all in bets. The
+  first lost, the second reclaimed much, but not all of the loss.
+* This may suggest that a using $5 to compute the base quantity is the most
+  SNAP can handle.
+
+#### Next Thing(s) to Try
+
+### 2021-11-18:
+#### Performance
+
+* Opening Account Value: $51,581.98
+
+* Total: -$646.96 (%)
+  * SNAP (-$646.96)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 62W 56L
+* Week's Return: -$303.31
+* Total Return: -$15,584.11
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 0/1 stocks won 😭
+* A $5 base target profit / borrowed deficit is too large. It only allowed for
+  ~5 consecutive lossess
+* We'll take it down to 3 and see if that allows for more losses.
+* I briefly tried alternating between long and short instead of flipping the
+  coin on each round. This led almost immediately to a ~5 loss losing streak so
+  I quickly reverted to the coin flip.
+* After ~220 plays, the coin flip had a 40-45% win rate. That's the highest
+  I've had so I'll stick with that for now.
+
+#### Next Thing(s) to Try
+
+### 2021-11-19:
+#### Performance
+
+* Opening Account Value: $51,581.98
+
+* Total: +$79.51 (+0.15%)
+  * AAPL (+$4.00)
+  * AMD  (+$4.52)
+  * BA   (-$3.61)
+  * FB   (-$5.27)
+  * MSFT (+$12.35)
+  * SNAP (+$56.82)
+  * TSLA (+$48.78)
+  * TWTR (-$14.43)
+  * VIAC (-$23.66)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 63W 56L
+* Week's Return: -$223.80
+* Total Return: -$15,504.60
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 5/9 stocks won
+* SNAP did well after reducing the target profit to $3.
+* I cleared (but made a note of) its deficit and re-started trading the other
+  stocks
+* The margin buying power was very quickly maxed out. A target profit of $3 is
+  too much.
+* The problem is that a quantity that can't overcome a loss deficit in the
+  target movement is used to open a position. I'll have to figure out how to
+  block opening a position if the quantity can't overcome the deficit. However,
+  you should only do this if there are other stocks actively trading(?).
+
+#### Next Thing(s) to Try
+
+### 2021-11-22:
+#### Performance
+
+* Opening Account Value: $51,581.98
 
 * Total: $ (%)
   * AAPL ($)

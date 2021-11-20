@@ -7,7 +7,7 @@
 #include <time.h>
 
 int main() {
-  std::map<const char *, int> results = {
+  std::map<const char *, long int> results = {
       {"H", 0},
       {"T", 0},
   };
@@ -25,6 +25,6 @@ int main() {
 
   const double sum = results["H"] + results["T"];
 
-  printf("H: %i (%.5f%%) • T: %i (%.f%%) \n", results["H"],
+  printf("H: %li (%.5f%%) • T: %li (%.5f%%) \n", results["H"],
          100 * results["H"] / sum, results["T"], 100 * results["T"] / sum);
 }

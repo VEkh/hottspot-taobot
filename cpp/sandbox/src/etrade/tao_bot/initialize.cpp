@@ -3,6 +3,7 @@
 
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
+#include "flip_coin.cpp"             // flip_coin
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "load_performance.cpp"      // load_performance
 #include "tao_bot.h"                 // ETrade::TaoBot, quantity, symbol

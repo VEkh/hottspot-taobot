@@ -73,6 +73,7 @@ private:
 
   bool awaited_loss_leader();
   bool candlesticks_in_direction(const order_action_t, const int);
+  bool flip_coin();
   bool is_end_of_trading_period();
   bool is_market_open();
   bool should_close_position();
