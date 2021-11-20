@@ -36,6 +36,7 @@ private:
   const double MAX_TARGET_TICK_MOVEMENT = 50.0;
   const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
+  const double POSITION_TARGET_PROFIT = 2.0;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
