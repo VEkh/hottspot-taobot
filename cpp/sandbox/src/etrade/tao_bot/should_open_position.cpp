@@ -3,6 +3,7 @@
 
 #include "candlesticks_in_direction.cpp" // candlesticks_in_direction
 #include "flip_coin.cpp"                 // flip_coin
+#include "runtime.cpp"                   // runtime
 #include "tao_bot.h"                     // ETrade::TaoBot, order_action_t
 
 bool ETrade::TaoBot::should_open_position() {
@@ -10,7 +11,7 @@ bool ETrade::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->average_tick_price_delta) {
+  if (!this->candlesticks.size()) {
     return false;
   }
 

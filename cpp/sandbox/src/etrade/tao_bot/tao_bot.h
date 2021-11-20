@@ -90,6 +90,7 @@ private:
 
   int base_quantity();
   int compute_quantity();
+  int runtime();
 
   exit_prices_t build_exit_prices();
 
