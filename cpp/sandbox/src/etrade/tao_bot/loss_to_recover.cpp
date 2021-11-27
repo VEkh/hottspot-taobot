@@ -6,11 +6,7 @@
 #include <math.h>    // abs
 
 double ETrade::TaoBot::loss_to_recover() {
-  const double current_loss_streak_balance =
-      this->performance.current_loss_streak_balance;
-
-  return current_loss_streak_balance;
-}
+  return this->performance.current_loss_streak_balance;
 }
 
 #endif

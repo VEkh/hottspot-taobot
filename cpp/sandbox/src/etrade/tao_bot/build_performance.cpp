@@ -9,9 +9,11 @@
  */
 #include "tao_bot.h"
 
-#include "order_win_result.cpp" // order_win_result
-#include <algorithm>            // std::max
-#include <map>                  // std::map
+#include "compute_quantity.cpp"        // compute_quantity
+#include "max_affordable_quantity.cpp" // max_affordable_quantity
+#include "order_win_result.cpp"        // order_win_result
+#include <algorithm>                   // std::max
+#include <map>                         // std::map
 
 ETrade::TaoBot::performance_t ETrade::TaoBot::build_performance() {
   std::map<order_win_result_t, int> results = {
@@ -102,11 +104,14 @@ ETrade::TaoBot::performance_t ETrade::TaoBot::build_performance() {
   }
 
   return {
+      .are_funds_sufficient = compute_quantity() < max_affordable_quantity(),
       .current_balance = current_balance,
       .current_loss_streak_balance = current_loss_streak_balance,
+      .is_position_open = !!this->open_order_ptr,
       .loss_streaks = streaks[order_win_result_t::LOSS],
       .max_balance = std::max(current_balance, this->performance.max_balance),
       .results = results,
+      .symbol = this->symbol,
       .win_streaks = streaks[order_win_result_t::WIN],
   };
 }

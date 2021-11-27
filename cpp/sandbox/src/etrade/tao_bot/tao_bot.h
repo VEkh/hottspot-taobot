@@ -91,6 +91,7 @@ private:
 
   int base_quantity();
   int compute_quantity();
+  int max_affordable_quantity();
   int runtime();
 
   exit_prices_t build_exit_prices();
@@ -102,11 +103,12 @@ private:
   order_win_result_t order_win_result(const order_t *);
 
   performance_t build_performance();
+  performance_t get_loss_leader(std::list<performance_t> &);
+
+  std::list<performance_t> read_sibling_performances();
 
   std::map<int, std::map<const char *, double>>
   build_moving_buy_sell_ratio_average(std::vector<int> &);
-
-  std::string get_loss_leader();
 
   void await_market_open();
   void build_candlesticks();

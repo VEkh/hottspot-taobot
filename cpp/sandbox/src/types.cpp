@@ -39,11 +39,14 @@ struct order_win_result_streak_t {
 };
 
 struct performance_t {
+  bool are_funds_sufficient = true;
   double current_balance = 0.00;
   double current_loss_streak_balance = 0.00;
+  bool is_position_open = false;
   order_win_result_streak_t loss_streaks;
   double max_balance = 0.00;
   std::map<order_win_result_t, int> results;
+  std::string symbol;
   order_win_result_streak_t win_streaks;
 };
 } // namespace t

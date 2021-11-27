@@ -7095,9 +7095,9 @@ deep that they must be handled specially.
 ### 2021-11-19:
 #### Performance
 
-* Opening Account Value: $51,581.98
+* Opening Account Value: $50,935.02
 
-* Total: +$79.51 (+0.15%)
+* Total: +$79.51 (+0.16%)
   * AAPL (+$4.00)
   * AMD  (+$4.52)
   * BA   (-$3.61)
@@ -7134,18 +7134,136 @@ deep that they must be handled specially.
 ### 2021-11-22:
 #### Performance
 
-* Opening Account Value: $51,581.98
+* Opening Account Value: $50,969.29
+
+* Total: -$64.86 (-0.13%)
+  * SNAP (+$174.67)
+  * VIAC (-$239.53)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 63W 57L
+* Week's Return: -$64.86
+* Total Return: -$15,569.46
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 1/2 stocks won
+* Today started rough as I introduced sibling awareness.
+* It seemed to work later in the day.
+* I lowered the base target profit from $2 to $1. $2 was too much for VIAC. It
+  could only tolerate 5-6 losses.
+* Continue monitoring sibling awareness.
+
+#### Next Thing(s) to Try
+
+### 2021-11-23:
+#### Performance
+
+* Opening Account Value: $50,969.29
+
+* Total: +$106.73 (+0.21%)
+  * MSFT (+$23.66)
+  * SNAP (+$38.14)
+  * VIAC (+$44.92)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 64W 57L
+* Week's Return: -$64.86
+* Total Return: -$15,569.46
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 3/3 stocks won! 🥳
+* VIAC got to a couple 5-loss losing streaks, but was able to afford them.
+
+#### Next Thing(s) to Try
+* Simultaneously trade 4 stocks and see if the system holds.
+
+### 2021-11-24:
+#### Performance
+
+* Opening Account Value: $51,056.63
+
+* Total: -$914.95 (-1.79%)
+  * AAPL ($)
+  * AMD  ($)
+  * FB   ($)
+  * MSFT ($)
+  * NVDA ($)
+  * TSLA ($)
+  * TWTR ($)
+  * VIAC (~-$1,100)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 64W 58L
+* Week's Return: -$979.81
+* Total Return: -$16,484.41
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 won 🎉
+* Take out BA, TWTR and VIAC. Their prices don't consistently move. It stagnates and gaps too
+  often.
+
+#### Next Thing(s) to Try
+
+### 2021-11-26:
+#### Performance
+
+* Opening Account Value: $50,141.68
+
+* Total: +$107.48 (+0.21%)
+  * AAPL (+$7.53)
+  * AMD  (+$3.57)
+  * FB   (+$19.55)
+  * MSFT (+$29.08)
+  * NVDA (-$2.12)
+  * QQQ  (+$27.74)
+  * SNAP (+$8.68)
+  * SPY  (+$13.44)
+
+* Consecutive Win  Days: 1
+* Consecutive Loss Days: 0
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 65W 58L
+* Week's Return: -$872.33
+* Total Return: -$16,376.93
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* Each security moved pretty well. I mistook the early close time zone to be CT
+  instead of ET so most positions will be open over the weekend.
+* We'll keep the list of securities the same and watch its perforrmance over
+  the next few days.
+
+#### Next Thing(s) to Try
+* The TQQQ ETF is another viable candidate
+
+### 2021-11-29:
+#### Performance
+
+* Opening Account Value: $50,238.05
 
 * Total: $ (%)
   * AAPL ($)
   * AMD  ($)
-  * BA   ($)
   * FB   ($)
   * MSFT ($)
+  * NVDA ($)
+  * QQQ  ($)
   * SNAP ($)
-  * TSLA ($)
-  * TWTR ($)
-  * VIAC ($)
+  * SPY  ($)
 
 * Consecutive Win  Days: 0
 * Consecutive Loss Days: 0

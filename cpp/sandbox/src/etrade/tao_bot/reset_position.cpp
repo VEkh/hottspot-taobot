@@ -31,14 +31,13 @@ void ETrade::TaoBot::reset_position() {
       .open_order = this->open_order,
   };
 
-  this->closed_positions.push_back(position);
-  this->performance = build_performance();
-
-  write_performance();
-
   this->close_order_ptr = nullptr;
+  this->closed_positions.push_back(position);
   this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
+
+  this->performance = build_performance();
+  write_performance();
 }
 
 #endif

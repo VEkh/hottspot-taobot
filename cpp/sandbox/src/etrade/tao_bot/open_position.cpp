@@ -10,12 +10,14 @@
  */
 #include "tao_bot.h"
 
+#include "build_performance.cpp"         // build_performance
 #include "compute_quantity.cpp"          // compute_quantity
 #include "current_price.cpp"             // current_price
 #include "etrade/constants.cpp"          // ETrade::constants
 #include "fetch_account_balance.cpp"     // fetch_account_balance
 #include "lib/curl_client/curl_client.h" // CurlClient
 #include "should_open_position.cpp"      // should_open_position
+#include "write_performance.cpp"         // write_performance
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
 
@@ -107,12 +109,18 @@ void ETrade::TaoBot::open_position() {
     this->close_order_ptr = nullptr;
     this->open_order_ptr = nullptr;
 
+    this->performance = build_performance();
+    write_performance();
+
     return;
   }
 
   std::cout << fmt.bold << fmt.cyan;
   printf("%s %s: Placed open order.\n", log_icon, order_action);
   std::cout << fmt.reset << std::endl;
+
+  this->performance = build_performance();
+  write_performance();
 }
 
 #endif
