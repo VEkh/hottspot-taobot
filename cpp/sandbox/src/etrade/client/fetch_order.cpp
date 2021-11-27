@@ -19,10 +19,7 @@ bool is_retriable_response(const CurlClient &curl_client) {
     return false;
   }
 
-  json response = ::utils::json::parse_with_catch(
-      response_body, "ETRADE__FETCH_ORDER_is_retriable_response");
-
-  if (!response.contains("OrdersResponse")) {
+  if (std::regex_search(response_body, std::regex("<html>"))) {
     return true;
   }
 
@@ -33,6 +30,13 @@ bool is_retriable_response(const CurlClient &curl_client) {
 
   if (std::regex_search(response_body,
                         std::regex("oauth_problem=nonce_used"))) {
+    return true;
+  }
+
+  json response = ::utils::json::parse_with_catch(
+      response_body, "ETRADE__FETCH_ORDER_is_retriable_response");
+
+  if (!response.contains("OrdersResponse")) {
     return true;
   }
 
