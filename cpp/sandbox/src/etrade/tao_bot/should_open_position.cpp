@@ -15,8 +15,6 @@ bool ETrade::TaoBot::should_open_position() {
     return false;
   }
 
-  this->is_long_position = flip_coin();
-
   return true;
 }
 

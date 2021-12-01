@@ -30,6 +30,7 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
+  this->is_long_position = flip_coin();
   this->symbol = symbol_;
   this->quantity_mulitiplier = quantity_mulitiplier_;
   this->quantity = quantity_mulitiplier_;

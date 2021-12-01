@@ -44,11 +44,12 @@ case $1 in
       "AAPL"
       "AMD"
       "FB"
+      "IWM"
       "MSFT"
       "NVDA"
       "QQQ"
-      "SNAP"
       "SPY"
+      "TQQQ"
     )
 
     for symbol in "${symbols[@]}"

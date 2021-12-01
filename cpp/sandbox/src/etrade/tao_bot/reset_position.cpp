@@ -34,6 +34,7 @@ void ETrade::TaoBot::reset_position() {
   this->close_order_ptr = nullptr;
   this->closed_positions.push_back(position);
   this->exit_prices = exit_prices_t();
+  this->is_long_position = !this->is_long_position;
   this->open_order_ptr = nullptr;
 
   this->performance = build_performance();

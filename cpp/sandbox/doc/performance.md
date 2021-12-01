@@ -4985,7 +4985,7 @@ Conclusions:
 #### Remarks
 * 6/9 stocks won
 * As expected, periods of price consolidation resulted in long loss streaks.
-  This is okay, becuase I've allowed a `MAX_EXPECTED_LOSS_STREAK` of 12. It
+  This is okay, because I've allowed a `MAX_EXPECTED_LOSS_STREAK` of 12. It
   also increases the redemptive win multiplier which is good.
 * If this strategy relies on a large `MAX_EXPECTED_LOSS_STREAK` it will only
   stake so much, but it's better than losing lots of money because the loss
@@ -7255,18 +7255,117 @@ deep that they must be handled specially.
 
 * Opening Account Value: $50,238.05
 
-* Total: $ (%)
+* Total: -$319.95 (-0.64%)
+  * AAPL (+$21.85)
+  * AMD  (+$38.13)
+  * FB   (+$41.74)
+  * MSFT (+$42.53)
+  * NVDA (+$87.62)
+  * QQQ  (+$24.31)
+  * SNAP (-$611.41)
+  * SPY  (+$35.28)
+
+* Consecutive Win  Days: 0
+* Consecutive Loss Days: 1
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 65W 59L
+* Week's Return: -$319.95
+* Total Return: -$16,590.15
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* Get rid of SNAP. It's too low priced and quickly racks up losses when its
+  1-sec variance is only a few cents.
+* Any security like it (TWTR, SQ, VIAC, etc.) is also disqualified from
+  trading.
+* New viable securities are IWM and TQQQ
+
+#### Next Thing(s) to Try
+
+### 2021-11-30:
+#### Performance
+
+* Opening Account Value: $49,963.95
+
+* Total: +$219.01 (+0.44%)
+  * AAPL (+$92.92)
+  * AMD  (+$32.73)
+  * FB   (+$4.68)
+  * IWM  (+$36.51)
+  * MSFT (+$27.62)
+  * NVDA (+$65.26)
+  * QQQ  (-$72.74)
+  * SPY  (+$32.02)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 65W (Consecutive: 1) 59L (Consecutive: 0)
+* Week's Return: -$100.94
+* Total Return: -$16,371.14
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* This was hard won. QQQ got into an 8-loss losing streak and a few others hit
+  5-6 loss losing streaks at the same time.
+* The self-awareness seemed busted, but it was because SNAP was still being
+  considered.
+* I removed the coin flip per round bc there have been too many times where
+  long consecutive position directions have needlessly resulted in losses.
+* I'll instead revert to alternating the long position on each trade and use a
+  coin flip to determine the first direction.
+
+#### Next Thing(s) to Try
+
+### 2021-12-01:
+#### Performance
+
+* Opening Account Value: $50,182.96
+
+* Total: +$384.17 (+.77% Account) (75.82% Daily Salary)
+  * AAPL (+$34.90)
+  * AMD  (+$57.22)
+  * FB   (+$25.68)
+  * IWM  (+$33.50)
+  * MSFT (+$61.76)
+  * NVDA (+$15.20)
+  * QQQ  (+$55.55)
+  * SPY  (+$94.88)
+  * TQQQ (+$5.47)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 2) 59L (Consecutive: 0)
+* Week's Return: +$283.23
+* Total Return: -$15,986.97
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 9/9 securities won 🥳
+* This is one of the best days I've ever had! Most securities had a 40-50% win
+  rate and trading never halted because of a loss leader.
+* Reverting to the alternating position strategy seems to have really worked well.
+* Only picking securities with steady contiguous price movement seems to also
+  be key.
+* I'll keep watching, but this is a good feeling 🧡
+
+#### Next Thing(s) to Try
+
+### 2021-12-02:
+#### Performance
+
+* Opening Account Value: $50,567.12
+
+* Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)
   * FB   ($)
+  * IWM  ($)
   * MSFT ($)
   * NVDA ($)
   * QQQ  ($)
-  * SNAP ($)
   * SPY  ($)
-
-* Consecutive Win  Days: 0
-* Consecutive Loss Days: 0
+  * TQQQ ($)
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss:
