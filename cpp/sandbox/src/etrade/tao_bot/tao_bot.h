@@ -133,6 +133,7 @@ private:
   void set_close_position_prices();
   void set_execution_price(order_t *);
   void set_movement_moving_averages();
+  void set_next_trade_direction();
   void set_open_position_prices();
   void set_position_status();
   void set_profit(order_t *);

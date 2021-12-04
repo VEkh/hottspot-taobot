@@ -7356,13 +7356,90 @@ deep that they must be handled specially.
 
 * Opening Account Value: $50,567.12
 
+* Total: -$304.26 (-0.6% Account) (-60.05% Daily Salary)
+  * AAPL (+$29.99)
+  * AMD  (+$31.27)
+  * FB   (+$169.21)
+  * IWM  (+$35.25)
+  * MSFT (-$759.52)
+  * NVDA (+$13.78)
+  * QQQ  (+$85.20)
+  * SPY  (-$29.18)
+  * TQQQ (+$119.73)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 0) 60L (Consecutive: 1)
+* Week's Return: -$21.03
+* Total Return: -$16,291.23
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/9 stocks won 🎈
+* MSFT got into a 9-loss losing streak
+* I'm going to risk it and hope that MSFT redeems itself during larger movement
+  tomorrow morning.
+* I need to be able to tolerate more losses. I'll cut the base quantity target
+  profit by half.
+
+#### Next Thing(s) to Try
+
+### 2021-12-03:
+#### Performance
+
+* Opening Account Value: $50,262.73
+
+* Total: -$512.76 (-1.02% Account) (-101.19% Daily Salary)
+  * AAPL (+$35.19)
+  * AMD  (+$10.68)
+  * FB   (+$21.21)
+  * IWM  (+$22.37)
+  * MSFT (+$25.56)
+  * QQQ  (-$768.04)
+  * SPY  (+$77.32)
+  * TQQQ (+$62.95)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 0) 61L (Consecutive: 2)
+* Week's Return: -$533.79
+* Total Return: -$16,803.99
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 stocks won 🎉
+* SPY recovered its long losing streak from the prior day during the early
+  morning.
+* Even with the lowest possible base quantity target profit, TaoBot couldn't
+  afford the losses that QQQ eventually incurred.
+* I've resolved a few more things:
+  * This _only_ makes money if wins recuperate losses
+  * You _must_ figure out a way to avoid excessively long loss streaks -- 6
+    consecutive losses should be the maximum. There's nothing you can do if you
+    can't avoid long loss streaks and EVERY security is susceptible to them. It
+    does NOT matter its price, or how fluidly it moves.
+    * If you figure out how to definitely avoid excessively long loss streaks,
+      you've won the game. At that point you could even increase the base
+      quantity target profit or restart TSLA trading.
+  * No predictive algorithm seems to guarantee a winning record. The
+    alternating position algorithm is the simplest way to continue trading
+    which increases the number of opportunities to redeem losses.
+
+#### Next Thing(s) to Try
+* Now that I've settled on the alternating position algorithm, I need to use it
+  to avoid excessive loss streaks. The first thing I'll try is periodically
+  trading twice in the same direction after losses exceed a certain amount.
+  This should help avoid being destructively trapped in a consolidation period.
+
+### 2021-12-06:
+#### Performance
+
+* Opening Account Value: $49,749.96
+
 * Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)
   * FB   ($)
   * IWM  ($)
   * MSFT ($)
-  * NVDA ($)
   * QQQ  ($)
   * SPY  ($)
   * TQQQ ($)
