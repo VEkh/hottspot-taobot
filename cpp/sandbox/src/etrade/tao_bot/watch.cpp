@@ -34,13 +34,13 @@ void ETrade::TaoBot::watch() {
   }
 
   while (!should_terminate()) {
-    if (awaited_loss_leader()) {
-      continue;
-    }
-
     fetch_quote();
     build_candlesticks();
     set_average_tick_price_delta();
+
+    if (awaited_loss_leader()) {
+      continue;
+    }
 
     log_account_balance();
     log_quote();

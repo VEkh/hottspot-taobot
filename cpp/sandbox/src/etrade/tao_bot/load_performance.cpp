@@ -48,8 +48,8 @@ void ETrade::TaoBot::load_performance() {
   json positions_json = json::array();
 
   if (persisted_data.contains("are_funds_sufficient")) {
-    this->performance.are_funds_sufficientax_balance =
-        persisted_data["are_funds_sufficientax_balance"];
+    this->performance.are_funds_sufficient =
+        persisted_data["are_funds_sufficient"];
   }
 
   if (persisted_data.contains("current_balance")) {
@@ -57,7 +57,8 @@ void ETrade::TaoBot::load_performance() {
   }
 
   if (persisted_data.contains("current_loss_streak_balance")) {
-    this->performance.current_loss_streak_balanceurrent_balance = persisted_data["current_loss_streak_balanceurrent_balance"];
+    this->performance.current_loss_streak_balance =
+        persisted_data["current_loss_streak_balance"];
   }
 
   if (persisted_data.contains("is_position_open")) {

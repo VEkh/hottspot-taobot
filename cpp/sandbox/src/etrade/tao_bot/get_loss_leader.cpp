@@ -12,7 +12,7 @@ ETrade::TaoBot::get_loss_leader(std::list<performance_t> &performances) {
   std::list<performance_t>::iterator it;
 
   for (it = performances.begin(); it != performances.end(); it++) {
-    const double deficit = it->current_balance - it->max_balance;
+    const double deficit = it->current_loss_streak_balance;
 
     if (deficit < min_deficit) {
       min_deficit = deficit;

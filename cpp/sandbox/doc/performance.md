@@ -7422,6 +7422,7 @@ deep that they must be handled specially.
   * No predictive algorithm seems to guarantee a winning record. The
     alternating position algorithm is the simplest way to continue trading
     which increases the number of opportunities to redeem losses.
+* In other news, it looks like `awaited_loss_leader` is properly working now.
 
 #### Next Thing(s) to Try
 * Now that I've settled on the alternating position algorithm, I need to use it
