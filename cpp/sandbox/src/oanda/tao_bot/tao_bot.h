@@ -34,8 +34,8 @@ private:
   using quote_t = Oanda::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MAX_TARGET_TICK_MOVEMENT = 40.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 10.0;
+  const double MAX_TARGET_TICK_MOVEMENT = 60.0;
+  const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
 
   std::map<const char *, const char *> ICONS = {
@@ -47,7 +47,7 @@ private:
   Oanda::Client api_client;
   account_balance_t account_balance;
   account_balance_t original_account_balance;
-  bool is_long_position;
+  bool is_long_position = true;
   char *symbol;
   double average_tick_price_delta = 0.00;
   double long_average_buy_sell_ratio;
@@ -91,6 +91,7 @@ private:
 
   int base_quantity();
   int compute_quantity();
+  int max_affordable_quantity();
 
   json fetch_order(const order_t *);
   json fetch_trade(const int);

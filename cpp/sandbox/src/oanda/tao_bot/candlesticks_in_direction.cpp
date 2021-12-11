@@ -10,9 +10,8 @@ bool Oanda::TaoBot::candlesticks_in_direction(
     return false;
   }
 
+  const int sample_size = 3;
   std::list<candlestick_t>::reverse_iterator it = this->candlesticks.rbegin();
-
-  const int sample_size = 2;
   int i = sample_size;
   bool out = true;
 

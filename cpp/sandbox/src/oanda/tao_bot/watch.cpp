@@ -59,7 +59,7 @@ void Oanda::TaoBot::watch() {
 
     std::cout << std::flush;
 
-    usleep(this->POLLING_INTERVAL_SECONDS * 1e6);
+    usleep(1e6);
   }
 
   log_end_of_trading_period();

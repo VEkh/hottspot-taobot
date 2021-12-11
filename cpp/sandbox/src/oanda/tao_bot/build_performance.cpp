@@ -9,9 +9,10 @@
  */
 #include "tao_bot.h"
 
-#include "order_win_result.cpp" // order_win_result
-#include <algorithm>            // std::max
-#include <map>                  // std::map
+#include "max_affordable_quantity.cpp" // max_affordable_quantity
+#include "order_win_result.cpp"        // order_win_result
+#include <algorithm>                   // std::max
+#include <map>                         // std::map
 
 Oanda::TaoBot::performance_t Oanda::TaoBot::build_performance() {
   std::map<order_win_result_t, int> results = {
@@ -22,14 +23,12 @@ Oanda::TaoBot::performance_t Oanda::TaoBot::build_performance() {
 
   bool loss_streak_broken = false;
   bool win_streak_broken = false;
-  double current_balance_ = 0.00;
-
+  double current_balance = 0.00;
+  double current_loss_streak_balance = 0.00;
+  int current_streak_count = 0;
   int l = this->closed_positions.size();
-
   int loss_streak_count = 0;
   int win_streak_count = 0;
-
-  int current_streak_count = 0;
 
   std::map<order_win_result_t, order_win_result_streak_t> streaks = {
       {
@@ -48,9 +47,11 @@ Oanda::TaoBot::performance_t Oanda::TaoBot::build_performance() {
         i == 0 ? nullptr : &(this->closed_positions[i - 1]);
     const order_win_result_t result = order_win_result(&(position.close_order));
 
-    results[result]++;
-    current_balance_ +=
+    const double position_profit =
         position.close_order.profit * position.close_order.quantity;
+
+    results[result]++;
+    current_balance += position_profit;
 
     if (result == order_win_result_t::WIN) {
       loss_streak_broken = true;
@@ -66,6 +67,7 @@ Oanda::TaoBot::performance_t Oanda::TaoBot::build_performance() {
       win_streak_count = 0;
 
       if (!loss_streak_broken) {
+        current_loss_streak_balance += position_profit;
         streaks[order_win_result_t::LOSS].current++;
       }
     }
@@ -98,11 +100,14 @@ Oanda::TaoBot::performance_t Oanda::TaoBot::build_performance() {
   }
 
   return {
-      .current_balance = current_balance_,
-      .current_loss_streak_balance = 0.00,
+      .are_funds_sufficient = compute_quantity() < max_affordable_quantity(),
+      .current_balance = current_balance,
+      .current_loss_streak_balance = current_loss_streak_balance,
+      .is_position_open = !!this->open_order_ptr,
       .loss_streaks = streaks[order_win_result_t::LOSS],
-      .max_balance = std::max(current_balance_, this->performance.max_balance),
+      .max_balance = std::max(current_balance, this->performance.max_balance),
       .results = results,
+      .symbol = this->symbol,
       .win_streaks = streaks[order_win_result_t::WIN],
   };
 }

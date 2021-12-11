@@ -8,11 +8,8 @@
 #include "tao_bot.h"
 
 #include "build_exit_prices.cpp"        // build_exit_prices
-#include "compute_profit.cpp"           // compute_profit
 #include "current_spread.cpp"           // current_spread
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
-#include "opposite_direction.cpp"       // opposite_direction
-#include "should_open_position.cpp"     // should_open_position
 
 bool Oanda::TaoBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_FILLED) {
@@ -27,11 +24,11 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  this->exit_prices = build_exit_prices();
-
-  if (should_open_position(this->open_order.action)) {
+  if (current_spread() > 1.6e-4) {
     return false;
   }
+
+  this->exit_prices = build_exit_prices();
 
   if (this->open_order.max_profit >= this->exit_prices.min_profit &&
       this->open_order.profit >= this->exit_prices.lower_secure_profit &&
@@ -39,12 +36,7 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order.profit >
-      (-10.0 * this->average_tick_price_delta - current_spread())) {
-    return false;
-  }
-
-  if (should_open_position(opposite_direction(this->open_order_ptr))) {
+  if (this->open_order.profit <= exit_prices.max_loss) {
     return true;
   }
 

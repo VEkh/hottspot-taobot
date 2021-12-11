@@ -25,13 +25,10 @@ ETrade::TaoBot::performance_t ETrade::TaoBot::build_performance() {
   bool loss_streak_broken = false;
   bool win_streak_broken = false;
   double current_balance = 0.00;
-
-  int l = this->closed_positions.size();
-
   double current_loss_streak_balance = 0.00;
+  int l = this->closed_positions.size();
   int loss_streak_count = 0;
   int win_streak_count = 0;
-
   int current_streak_count = 0;
 
   std::map<order_win_result_t, order_win_result_streak_t> streaks = {

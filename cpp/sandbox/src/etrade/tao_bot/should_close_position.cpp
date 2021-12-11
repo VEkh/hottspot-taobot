@@ -8,10 +8,7 @@
 #include "tao_bot.h"
 
 #include "build_exit_prices.cpp"        // build_exit_prices
-#include "compute_profit.cpp"           // compute_profit
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
-#include "opposite_direction.cpp"       // opposite_direction
-#include "should_open_position.cpp"     // should_open_position
 
 bool ETrade::TaoBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_EXECUTED) {

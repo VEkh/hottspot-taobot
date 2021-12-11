@@ -9,7 +9,7 @@ ruby_path=$(which ruby)
 rubygems_dir=$(gem environment gemdir)
 src="etrade"
 
-echo -e "${fmt_bold}${fmt_cyan}Building: ${fmt_yellow}ETrade${fmt_reset}"
+echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}ETrade${fmt_reset}"
 
 mkdir -p "$app_dir/build/"
 

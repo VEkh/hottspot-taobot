@@ -3,6 +3,7 @@
 
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
+#include "fetch_quote.cpp"           // fetch_quote
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "load_performance.cpp"      // load_performance
 #include "tao_bot.h"                 // Oanda::TaoBot, quantity, symbol
@@ -24,6 +25,7 @@ void Oanda::TaoBot::initialize(char *symbol_,
       fetch_account_balance();
   this->symbol = symbol_;
 
+  fetch_quote();
   load_performance();
 
   this->performance = build_performance();

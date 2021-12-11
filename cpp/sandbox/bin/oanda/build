@@ -7,7 +7,7 @@ fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 src="oanda"
 
-echo -e "${fmt_bold}${fmt_cyan}Building: ${fmt_yellow}Oanda${fmt_reset}"
+echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}Oanda${fmt_reset}"
 
 mkdir -p "$app_dir/build/"
 

@@ -35,8 +35,6 @@ void ETrade::TaoBot::log_position_results() {
     printf("😭 %s: Closed order at a loss. Better luck next time!\n",
            order_action);
 
-    this->is_trending = !this->is_trending;
-
     break;
   }
   case order_win_result_t::TIE: {
