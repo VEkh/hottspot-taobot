@@ -15,8 +15,10 @@
 #include "is_next_cycle_retry_error.cpp"          // is_next_cycle_retry_error
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/formatted.cpp"                      // Formatted
 #include "lib/utils/json.cpp"                     // ::utils::json
 #include "preview_order.cpp"                      // preview_order
+#include <iostream>                               // std::cout, std::endl
 #include <regex>  // std::regex, std::regex_search
 #include <time.h> // time, time_t
 
@@ -33,6 +35,22 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
       response_body, "ETRADE__PLACE_ORDER_is_immediate_retry_error");
 
   if (response.contains("Error") && response["Error"]["code"] == 163) {
+    return true;
+  }
+
+  if (response.contains("Error") && response["Error"]["code"] == 1028) {
+    std::string error_message =
+        Formatted::error_message(response["Error"]["message"]);
+
+    puts(error_message.c_str());
+    std::cout << std::endl;
+
+    return true;
+  }
+
+  if (response.contains("Error") &&
+      response["Error"]["message"] ==
+          "Number of requests exceeded the rate limit set") {
     return true;
   }
 
