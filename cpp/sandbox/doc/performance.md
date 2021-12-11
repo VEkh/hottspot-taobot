@@ -7435,6 +7435,181 @@ deep that they must be handled specially.
 
 * Opening Account Value: $49,749.96
 
+* Total: -$555.96 (-1.12% Account) (-109.72% Daily Salary)
+  * AAPL (+$18.52)
+  * AMD  (+$26.89)
+  * FB   (+$73.41)
+  * IWM  (+$13.18)
+  * MSFT (+$5.81)
+  * QQQ  (-$746.73)
+  * SPY  (+$22.36)
+  * TQQQ (+$30.61)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 0) 62L (Consecutive: 3)
+* Week's Return: -$555.96
+* Total Return: -$17,359.95
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 stocks won 🎉
+* Trying to play twice in the same direction didn't resolve the consolidation
+  issue. The exact scenario that could thart it, did occur.
+
+#### Next Thing(s) to Try
+* I'll try skipping only once every four losses instead of every other loss
+  after four losses.
+
+### 2021-12-07:
+#### Performance
+
+* Opening Account Value: $49,193.95
+
+* Total: -$337.19 (-0.69% Account) (-66.54% Daily Salary)
+  * AAPL (+$18.59)
+  * AMD  (+$19.00)
+  * FB   (+$13.53)
+  * IWM  (+$10.35)
+  * MSFT (-$433.47)
+  * QQQ  (+$10.29)
+  * SPY  (+$9.87)
+  * TQQQ (+$14.65)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 0) 63L (Consecutive: 4)
+* Week's Return: -$893.15
+* Total Return: -$17,697.14
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 stocks won 🎉
+* Playing twice in the same direction every four rounds didn't work either.
+  It's actually because consolidation isn't always as cleanly sinusoidal as
+  this strategy assumed.
+* I reverted to simply alternating direction after each round. This too
+  encountered a long loss streak.
+* Then I reduced the target movement from 20 to 15x the 1-second variance.
+* This quickly racked up losses which helped remind me that the smaller the
+  target movement, the faster losses rack up.
+* I increased the target movement to 25 and the losses slowed, and the stake
+  per play didn't change significantly.
+* I'll keep it at 25 and maybe increase to 30 and continue to alternate
+  direction after each round.
+
+#### Next Thing(s) to Try
+
+### 2021-12-08:
+#### Performance
+
+* Opening Account Value: $48,856.75
+
+* Total: -$406.61 (-0.83% Account) (% Daily Salary)
+  * AAPL (+$27.36)
+  * AMD  (+$10.34)
+  * FB   (+$39.92)
+  * IWM  (-$35.82)
+  * MSFT (+$3.26)
+  * QQQ  (-$38.00)
+  * SPY  (+$5.96)
+  * TQQQ (-$419.63)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 0) 64L (Consecutive: 5)
+* Week's Return: -$1,299.76
+* Total Return: -$18,103.75
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 5/8 stocks won
+* Using 25x 1-sec variance as the target movement didn't work either. TQQQ
+  encountered a 9-loss losing streak. It also decreased the the amount of
+  rounds played.
+* I'm now going to try placing three trades three times in the same consecutive
+  direction after the first two losses.
+* The idea is that the least likely event is movement in one direction
+  indefinitely, or at least for six to eight rounds.
+* By placing trades in the same direction three times, most if not all
+  consolidation periods should be
+  handled.
+* If, however, the price moves indefinitely in one direction, changing
+  direction after three trades should account for that.
+* I changed to this strategy mid-day and it seemed to work for a couple
+  securities.
+
+#### Next Thing(s) to Try
+
+### 2021-12-09:
+#### Performance
+
+* Opening Account Value: $48,450.11
+
+* Total: -$269.66 (-0.56% Account) (-53.22% Daily Salary)
+  * AAPL (-$518.71)
+  * AMD  (+$43.03)
+  * FB   (+$21.82)
+  * IWM  (+$121.51)
+  * MSFT (+$35.97)
+  * QQQ  (+$10.03)
+  * SPY  (+$3.21)
+  * TQQQ (+$13.48)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 66W (Consecutive: 0) 65L (Consecutive: 6)
+* Week's Return: -$1,569.42
+* Total Return: -$18,373.41
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 stocks won 🎉
+* Of course, trading in the same direction three times racked up a 10-loss
+  losing streak for AAPL 😂.
+* I'm now going to only place buy trades with the same redemptive win strategy.
+* The thinking is that the least likely event is that a price will decrease
+  uninterrupted for more than 8 consecutive rounds. Of course this can and will
+  happen, but we'll see how often.
+* In forex, it happened but recovered on the tenth round.
+
+#### Next Thing(s) to Try
+
+### 2021-12-10:
+#### Performance
+
+* Opening Account Value: $48,180.43
+
+* Total: +$225.66 (+0.47% Account) (+44.53% Daily Salary)
+  * AAPL (+$8.21)
+  * AMD  (+$21.96)
+  * FB   (+$28.59)
+  * IWM  (+$21.43)
+  * MSFT (+$39.59)
+  * QQQ  (+$46.31)
+  * SPY  (+$36.94)
+  * TQQQ (+$22.63)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 67W (Consecutive: 1) 65L (Consecutive: 0)
+* Week's Return: -$1,343.76
+* Total Return: -$18,147.75
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 8/8 securities won! 🥳
+* IWM had a close call with a long bear run, but eventually recovered. I think
+  it also started two losses in.
+* The buy-only strategy shows real promise. It's profitable in bull and
+  consolidation periods.
+* We still have to see how vulnerable it is to log bear runs.
+* Oanda is even showing promise with this strategy. I had to set the max-loss /
+  target profit to 3x the spread. This gives a healthy amount of time for the
+  price to increase.
+
+#### Next Thing(s) to Try
+
+### 2021-12-13:
+#### Performance
+
+* Opening Account Value: $48,406.01
+
 * Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)
