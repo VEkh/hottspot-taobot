@@ -78,10 +78,9 @@ bool ETrade::TaoBot::awaited_loss_leader() {
   printf("<%s>\n", sibling_loss_leader.symbol.c_str());
 
   std::cout << fmt.reset << fmt.bold << fmt.yellow;
-  printf("Deficit: %+'.2f • Funds Sufficient: %s\n",
+  printf("Deficit: %+'.2f • Funds Sufficient: %s\n\n",
          sibling_loss_leader.current_loss_streak_balance,
          bool_to_string[sibling_loss_leader.are_funds_sufficient]);
-  std::cout << fmt.reset << std::endl;
 
   printf("Is sibling open? %s\n", bool_to_string[is_sibling_open_]);
   std::cout << fmt.reset << std::endl;
@@ -100,7 +99,8 @@ bool ETrade::TaoBot::awaited_loss_leader() {
     return false;
   }
 
-  if (are_funds_sufficient && sibling_loss_leader.are_funds_sufficient) {
+  if (are_funds_sufficient && sibling_loss_leader.are_funds_sufficient &&
+      sibling_loss_leader.is_position_open) {
     return false;
   }
 
