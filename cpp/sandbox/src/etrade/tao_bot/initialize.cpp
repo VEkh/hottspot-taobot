@@ -4,9 +4,9 @@
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "fetch_quote.cpp"           // fetch_quote
-#include "flip_coin.cpp"             // flip_coin
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "load_performance.cpp"      // load_performance
+#include "set_trade_direction.cpp"   // set_trade_direction
 #include "tao_bot.h"                 // ETrade::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
 #include <stdexcept>                 // std::invalid_argument
@@ -30,7 +30,6 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
-  this->is_long_position = flip_coin();
   this->symbol = symbol_;
   this->quantity_mulitiplier = quantity_mulitiplier_;
   this->quantity = quantity_mulitiplier_;
@@ -39,6 +38,7 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
   load_performance();
 
   this->performance = build_performance();
+  set_trade_direction();
 }
 
 #endif

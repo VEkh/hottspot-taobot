@@ -2,8 +2,6 @@
 #define ETRADE__TAO_BOT_should_open_position
 
 #include "candlesticks_in_direction.cpp" // candlesticks_in_direction
-#include "flip_coin.cpp"                 // flip_coin
-#include "runtime.cpp"                   // runtime
 #include "tao_bot.h"                     // ETrade::TaoBot, order_action_t
 
 bool ETrade::TaoBot::should_open_position() {
