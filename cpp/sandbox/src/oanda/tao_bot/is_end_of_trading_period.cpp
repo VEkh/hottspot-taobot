@@ -6,8 +6,8 @@
 
 bool Oanda::TaoBot::is_end_of_trading_period() {
   return ::utils::time_::day_of_week() == 5 &&
-         ::utils::time_::is_at_least({15, 59}) &&
-         ::utils::time_::is_before({16, 0});
+         ::utils::time_::is_at_least({16, 57}) &&
+         ::utils::time_::is_before({17, 0});
 }
 
 #endif

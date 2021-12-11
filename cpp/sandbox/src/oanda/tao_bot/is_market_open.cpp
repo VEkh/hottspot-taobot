@@ -12,7 +12,7 @@ bool Oanda::TaoBot::is_market_open() {
   }
 
   if (day_of_week_ == 5) {
-    return ::utils::time_::is_before({16, 0});
+    return ::utils::time_::is_before({17, 0});
   }
 
   return day_of_week_ != 6;
