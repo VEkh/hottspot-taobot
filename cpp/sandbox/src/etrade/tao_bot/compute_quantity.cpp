@@ -2,6 +2,7 @@
 #define ETRADE__TAO_BOT_compute_quantity
 
 #include "base_quantity.cpp"           // base_quantity
+#include "build_exit_prices.cpp"       // build_exit_prices
 #include "loss_to_recover.cpp"         // loss_to_recover
 #include "max_affordable_quantity.cpp" // max_affordable_quantity
 #include "tao_bot.h"                   // ETrade::TaoBot
@@ -21,9 +22,8 @@ int ETrade::TaoBot::compute_quantity() {
     return std::min(base_quantity(), max_affordable_quantity_);
   }
 
-  int quantity_ =
-      ceil(1.05 * loss_to_recover_ /
-           (this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta));
+  exit_prices_t exit_prices_ = build_exit_prices();
+  int quantity_ = ceil(1.05 * loss_to_recover_ / abs(exit_prices_.max_loss));
 
   return std::min(quantity_, max_affordable_quantity_);
 }
