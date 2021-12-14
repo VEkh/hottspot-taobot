@@ -7610,15 +7610,71 @@ deep that they must be handled specially.
 
 * Opening Account Value: $48,406.01
 
+* Total: +$222.51 (+0.46% Account) (+43.91% Daily Salary)
+  * AAPL (+$27.15)
+  * AMD  (+$30.41)
+  * FB   (+$51.31)
+  * IWM  (+$60.63)
+  * MSFT (-$2.36)
+  * NVDA (+$44.46)
+  * QQQ  (+$9.01)
+  * SPY  (+$1.91)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 68W (Consecutive: 2) 65L (Consecutive: 0)
+* Week's Return: +$222.51
+* Total Return: -$17,925.24
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* Longest loss streak was IWM with 8
+
+#### Next Thing(s) to Try
+
+### 2021-12-14:
+#### Performance
+
+* Opening Account Value: $48,628.52
+
+* Total: -$499.57 (-1.03% Account) (-98.59% Daily Salary)
+  * AAPL (-$776.52)
+  * AMD  (+$15.15)
+  * FB   (+$8.91)
+  * IWM  (+$23.72)
+  * MSFT (+$132.84)
+  * NVDA (+$30.32)
+  * QQQ  (+$46.39)
+  * SPY  (+$19.62)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 68W (Consecutive: 0) 66L (Consecutive: 1)
+* Week's Return: -$277.06
+* Total Return: -$18,424.81
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* AAPL started with 5 losses and proceeded to lose six more times.
+* TaoBot shouldn't start trying to recover more than a few losses. We'll start
+  with 3 start and adjust if it works.
+
+#### Next Thing(s) to Try
+
+### 2021-12-15:
+#### Performance
+
+* Opening Account Value: $48,128.95
+
 * Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)
   * FB   ($)
   * IWM  ($)
   * MSFT ($)
+  * NVDA ($)
   * QQQ  ($)
   * SPY  ($)
-  * TQQQ ($)
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss:
