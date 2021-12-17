@@ -7666,6 +7666,83 @@ deep that they must be handled specially.
 
 * Opening Account Value: $48,128.95
 
+* Total: +$1,633.08 (+3.39% Account) (+322.29% Daily Salary)
+  * AAPL (+$37.13)
+  * AMD  (+$112.64)
+  * FB   (+$95.38)
+  * IWM  (+$57.28)
+  * MSFT (-$535.69)
+  * NVDA (+$1,790.61)
+  * QQQ  (+$35.79)
+  * SPY  (+$39.94)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 69W (Consecutive: 1) 66L (Consecutive: 0)
+* Week's Return: +$1,356.02
+* Total Return: -$16,791.73
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* Today's win was largely a fluke. Both MSFT and NVDA hit > 8-loss losing
+  streaks. NVDA just happened to win excessively after the Fed's announcment of
+  2022 interest rate hikes.
+* The fact remains: even > 10-loss losing streaks are possible:
+  * When only placing buy orders
+  * When switching to four sell shorts after four losses
+
+#### Next Thing(s) to Try
+* I'm going to try increasing the target movement to 35x 1-sec variance.
+* If 35x 1-sec variance still incurs > 8-loss losing streaks, cut losses after
+  8 losses. No arguments.
+
+### 2021-12-16:
+#### Performance
+
+* Opening Account Value: $49,779.69
+
+* Total: -$551.07 (-1.11% Account) (-108.75% Daily Salary)
+  * AAPL (-$8.58)
+  * AMD  (+$28.07)
+  * FB   (+$35.24)
+  * IWM  (-$137.94)
+  * MSFT (+$129.71)
+  * NVDA (+$8.16)
+  * QQQ  (-$542.10)
+  * SPY  (-$63.63)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 69W (Consecutive: 0) 67L (Consecutive: 1)
+* Week's Return: +$804.95
+* Total Return: -$17,342.80
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 4/8 stocks won
+* Okay! Stocks can go down ALL day 😂
+* Placing only buys won't work.
+* I think this is where I am:
+  * Go back to alternating direction on every trade
+    * This works in bull trends, bear trends, and in phase consolidation. It
+      only doesn't work in out-of-phase consolidation, which IS possible.
+  * Simply cut losses after a single security loses 0.5% of the account value.
+    * Some securities WILL hit this. Usually at least one security does per day.
+    * However, instead of losing several hundreds of dollars and tying up
+      trading for the other stocks, it will immediately start recovering its
+      losses.
+  * I'll continue to target ~$0.50 of base profit, but if I see a couple days
+    of steady return or minimal loss, then I'll increase it to $1.00, $1.50
+    etc.
+  * Maybe having a high base target profit and loss cutting will actually
+    increase the overall return.
+
+#### Next Thing(s) to Try
+
+### 2021-12-17:
+#### Performance
+
+* Opening Account Value: $49,228.58
+
 * Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)

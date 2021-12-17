@@ -8,10 +8,11 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp"        // build_performance
+#include "build_performance.cpp"   // build_performance
+#include "cut_losses.cpp"          // cut_losses
 #include "set_trade_direction.cpp" // set_trade_direction
-#include "write_performance.cpp"        // write_performance
-#include <time.h>                       // time, time_t
+#include "write_performance.cpp"   // write_performance
+#include <time.h>                  // time, time_t
 
 void ETrade::TaoBot::reset_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
@@ -38,6 +39,7 @@ void ETrade::TaoBot::reset_position() {
   this->open_order_ptr = nullptr;
 
   this->performance = build_performance();
+  cut_losses();
   write_performance();
   set_trade_direction();
 }

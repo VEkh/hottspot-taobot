@@ -36,7 +36,7 @@ struct order_t {
   order_status_t status = order_status_t::ORDER_PENDING;
   const char *symbol;
   int timestamp = 0;
-  order_type_t type;
+  order_type_t type = order_type_t::MARKET;
 };
 
 struct position_t {

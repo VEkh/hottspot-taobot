@@ -113,6 +113,7 @@ private:
   void build_candlesticks();
   void cancel_stale_open_order();
   void close_position();
+  void cut_losses();
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &flags);
   void load_performance();
