@@ -7743,6 +7743,151 @@ deep that they must be handled specially.
 
 * Opening Account Value: $49,228.58
 
+* Total: +$619.36 (+1.26% Account) (+122.23% Daily Salary)
+  * AAPL (+$148.83)
+  * AMD  (+$20.81)
+  * FB   (+$161.87)
+  * IWM  (+$52.46)
+  * MSFT (+$51.33)
+  * NVDA (+$33.78)
+  * QQQ  (+$99.86)
+  * SPY  (+$50.41)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 70W (Consecutive: 1) 67L (Consecutive: 0)
+* Week's Return: +$1,424.31
+* Total Return: -$16,723.44
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+
+#### Next Thing(s) to Try
+
+### 2021-12-20:
+#### Performance
+
+* Opening Account Value: $49,847.94
+
+* Total: -$567.18 (% Account) (% Daily Salary)
+  * AAPL (+$16.46)
+  * AMD  (+$19.99)
+  * FB   (-$732.84)
+  * IWM  (+$16.11)
+  * MSFT (+$58.24)
+  * NVDA (+$18.46)
+  * QQQ  (+$26.23)
+  * SPY  (+$10.17)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 70W (Consecutive: 0) 68L (Consecutive: 1)
+* Week's Return: -$567.18
+* Total Return: -$17,290.62
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 securities won 🎉
+* FB was set to algorithmically cut losses but the code segfaulted. I was then
+  too undisciplined to manually cut losses and instead chased the losses.
+* This should be the last time that happens. I've already seen far too many
+  times what happens when major losses are chased.
+* If you cut losses and immediately start recovering them, you'll find that
+  each day will have one of three outcomes:
+  1. Big win
+  2. Small win
+  3. Small loss
+* Let's confirm this and see what this things actual returns are 💪🏾
+
+#### Next Thing(s) to Try
+
+### 2021-12-21:
+#### Performance
+
+* Opening Account Value: $49,280.60
+
+* Total: +$320.54 (+0.65% Account) (+63.15% Daily Salary)
+  * AAPL (+$55.18)
+  * AMD  (+$77.21)
+  * FB   (+$65.85)
+  * IWM  (+$11.25)
+  * MSFT (+$22.09)
+  * NVDA (+$22.99)
+  * QQQ  (+$19.33)
+  * SPY  (+$46.63)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 71W (Consecutive: 1) 68L (Consecutive: 0)
+* Week's Return: -$246.64
+* Total Return: -$16,970.08
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 8/8 won 🥳
+* No one had to cut losses, so we still have to see how that works out.
+
+#### Next Thing(s) to Try
+
+### 2021-12-22:
+#### Performance
+
+* Opening Account Value: $49,601.03
+
+* Total: +$283.82 (+0.57% Account) (+55.91% Daily Salary)
+  * AAPL (+$20.60)
+  * AMD  (+$13.11)
+  * FB   (+$39.91)
+  * IWM  (+$22.45)
+  * MSFT (+$32.16)
+  * NVDA (+$57.66)
+  * QQQ  (+$86.88)
+  * SPY  (+$11.07)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 72W (Consecutive: 2) 68L (Consecutive: 0)
+* Week's Return: +$37.18
+* Total Return: -$16,686.26
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 8/8 won 🥳
+* No one had to cut losses, so we still have to see how that works out.
+* Had a rocky start when I botched the max_loss algorithm. Will try again
+  tomorrow.
+
+#### Next Thing(s) to Try
+
+### 2021-12-23:
+#### Performance
+
+* Opening Account Value: $49,884.76
+
+* Total: +$318.44 (+0.64% Account) (+62.84% Daily Salary)
+  * AAPL (+$16.79)
+  * AMD  (+$14.88)
+  * FB   (+$167.16)
+  * IWM  (+$9.69)
+  * MSFT (+$38.53)
+  * NVDA (+$17.74)
+  * QQQ  (+$37.68)
+  * SPY  (+$15.95)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 73W (Consecutive: 3) 68L (Consecutive: 0)
+* Week's Return: +$355.62
+* Total Return: -$16,367.82
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 8/8 won 🥳
+* No one had to cut losses, so we still have to see how that works out.
+* Not expanding `max_loss` seemed to work well
+
+#### Next Thing(s) to Try
+
+### 2021-12-27:
+#### Performance
+
+* Opening Account Value: $50,203.06
+
 * Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)

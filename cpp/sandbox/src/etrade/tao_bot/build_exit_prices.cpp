@@ -11,8 +11,8 @@ ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
   double max_loss =
       -this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta;
 
-  if (abs(loss_to_recover())) {
-    max_loss = std::min(this->exit_prices.init_max_loss, max_loss);
+  if (abs(loss_to_recover()) > 0 && abs(this->exit_prices.init_max_loss) > 0) {
+    max_loss = this->exit_prices.init_max_loss;
   }
 
   const double init_max_loss = this->exit_prices.init_max_loss
