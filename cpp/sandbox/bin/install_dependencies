@@ -1,0 +1,153 @@
+#!/bin/bash
+# shellcheck disable=2016
+
+# From the app's root directory run:
+# scp ./bin/install_dependencies <user>@<host>:/tmp/ && \
+# ssh -t <user>@<host> "/tmp/install_dependencies" && \
+# ssh <user>@<host> "rm /tmp/install_dependencies"
+
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+
+function install_apt_packages() {
+  to_install=()
+
+  for arg in "$@"; do
+    if ! (dpkg -l | grep "$arg" | awk '{print $2}' | grep -q "^$arg$"); then
+      to_install+=($arg)
+    fi
+  done
+
+  [[ "${#to_install[*]}" = "0" ]] && return 0
+
+  log_install_start "${to_install[*]}" && \
+  sudo apt-get install -y "${to_install[@]}"
+
+}
+
+function install_asdf() {
+  asdf_completion_cmd='. $HOME/.asdf/completions/asdf.bash'
+  asdf_source_cmd='. $HOME/.asdf/asdf.sh'
+
+  [ ! -d "$HOME/.asdf" ] && \
+    log_install_start "💻 asdf" && \
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+
+  touch ~/.bashrc
+
+  bashrc_contents=$(cat ~/.bashrc)
+
+  if ! (echo "$bashrc_contents" | grep -q "$asdf_source_cmd"); then
+    echo -e "\n$asdf_source_cmd" >> ~/.bashrc
+  fi
+
+  if ! (echo "$bashrc_contents" | grep -q "$asdf_completion_cmd"); then
+    echo -e "\n$asdf_completion_cmd" >> ~/.bashrc
+  fi
+}
+
+function install_geckodriver() {
+  version="v0.30.0"
+  zip_filename="geckodriver-$version-linux64.tar.gz"
+  download_url="https://github.com/mozilla/geckodriver/releases/download/$version/$zip_filename"
+
+  [[ -f /usr/bin/geckodriver ]] && return 0
+
+  log_install_start "🦎 Gecokdriver"
+
+  cd /tmp || return
+  wget $download_url
+  tar -xzvf "$zip_filename"
+  sudo mv geckodriver /usr/bin/
+  rm "$zip_filename"
+}
+
+function install_ruby_from_asdf() {
+  asdf_bin="$HOME/.asdf/bin/asdf"
+  ruby_version="3.0.3"
+
+  install_asdf
+
+  [ ! -d "$HOME/.asdf" ] && \
+    echo -e "${fmt_bold}${fmt_red}❌ Install asdf before ruby${fmt_reset}" &&
+    return 1
+
+  [ ! -d "$HOME/.asdf/plugins/ruby" ] && \
+    log_install_start "ruby plugin" && \
+    "$asdf_bin" plugin add ruby
+
+  [ ! -d "$HOME/.asdf/installs/ruby/$ruby_version" ] && \
+    log_install_start "💎 Ruby $ruby_version" && \
+    "$asdf_bin" install ruby "$ruby_version" &&
+    "$asdf_bin" reshim ruby
+
+  if [[ -f "$HOME/.tool-versions" ]]; then
+    if ! (grep -q "\bruby\b" "$HOME/.tool-versions"); then
+      echo -e "ruby $ruby_version" >> "$HOME/.tool-versions"
+    fi
+  else
+    echo -e "ruby $ruby_version" > "$HOME/.tool-versions"
+  fi
+}
+
+function install_ruby_from_source() {
+  [[ "$(which ruby)" != "" ]] && return 0
+
+  ruby_version="ruby-3.0.3"
+  zip_filename="$ruby_version.tar.gz"
+
+  install_apt_packages build-essential libssl-dev zlib1g-dev
+  sudo wget "https://cache.ruby-lang.org/pub/ruby/3.0/$zip_filename" -P /opt/
+
+  cd /opt/ || return 0
+  sudo tar -xzvf "$zip_filename"
+  cd "$ruby_version/" || return 0
+  sudo ./configure
+  sudo make
+  sudo make install
+  sudo rm "/opt/$zip_filename"
+
+  sudo chown -R "$(whoami):$(whoami)" /usr/local/lib/ruby/
+  sudo chown -R "$(whoami):$(whoami)" /usr/local/bin/
+
+  echo -e "---\ngem: --no-document" > ~/.gemrc
+}
+
+function install_ruby_gems() {
+  to_install=()
+
+  [[ "$(which gem)" = "" ]] && return 0
+
+  for arg in "$@"; do
+    if ! (gem list | grep "$arg" | awk '{print $1}' | grep -q "^$arg$"); then
+      to_install+=($arg)
+    fi
+  done
+
+  [[ "${#to_install[*]}" = "0" ]] && return 0
+
+  gem install "${to_install[*]}"
+}
+
+function log_install_start() {
+  echo -e "${fmt_bold}${fmt_yellow}📦 Installing ${fmt_reset}${fmt_cyan}$1${fmt_reset}"
+}
+
+sudo apt-get update
+install_apt_packages firefox gcc
+install_geckodriver
+
+if [[ "$*" =~ .*--server.* ]]
+then
+  install_ruby_from_source
+else
+  install_ruby_from_asdf
+fi
+
+install_ruby_gems bundler
+
+echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"
