@@ -48,9 +48,20 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
     return true;
   }
 
-  if (response.contains("Error") &&
-      response["Error"]["message"] ==
-          "Number of requests exceeded the rate limit set") {
+  if (std::regex_search(
+          response_body,
+          std::regex("Number of requests exceeded the rate limit set"))) {
+    return true;
+  }
+
+  if (std::regex_search(
+          response_body,
+          std::regex("We are currently processing your previous request"))) {
+    return true;
+  }
+
+  if (std::regex_search(response_body,
+                        std::regex("oauth_problem=nonce_used"))) {
     return true;
   }
 
