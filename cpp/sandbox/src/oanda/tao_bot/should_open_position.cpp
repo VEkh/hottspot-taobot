@@ -10,10 +10,6 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->candlesticks.size()) {
-    return false;
-  }
-
   if (current_spread() > 1.6e-4) {
     return false;
   }
