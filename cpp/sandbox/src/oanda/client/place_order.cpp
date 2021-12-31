@@ -15,9 +15,9 @@
 #include "lib/utils/json.cpp"              // ::utils::json
 #include "oanda/constants.cpp"             // Oanda::constants
 #include "post.cpp"                        // post
+#include <ctime>                           // std::time, std::time_t
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::stod
-#include <time.h>                          // time, time_t
 
 CurlClient Oanda::Client::place_order(order_t *order) {
   std::string url = this->config.base_url + "/v3/accounts/" +
@@ -50,8 +50,7 @@ CurlClient Oanda::Client::place_order(order_t *order) {
       .url = url,
   });
 
-  time_t now;
-  time(&now);
+  std::time_t now = std::time(nullptr);
 
   json response = ::utils::json::parse_with_catch(curl_client.response.body,
                                                   "OANDA__CLIENT_place_order");

@@ -23,8 +23,7 @@ void Oanda::TaoBot::reset_position() {
     return;
   }
 
-  time_t now;
-  time(&now);
+  std::time_t now = std::time(nullptr);
 
   position_t position = {
       .close_order = this->close_order,

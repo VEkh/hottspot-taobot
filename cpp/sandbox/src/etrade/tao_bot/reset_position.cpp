@@ -12,7 +12,7 @@
 #include "cut_losses.cpp"          // cut_losses
 #include "set_trade_direction.cpp" // set_trade_direction
 #include "write_performance.cpp"   // write_performance
-#include <time.h>                  // time, time_t
+#include <ctime>                   // std::time, std::time_t
 
 void ETrade::TaoBot::reset_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
@@ -24,8 +24,7 @@ void ETrade::TaoBot::reset_position() {
     return;
   }
 
-  time_t now;
-  time(&now);
+  std::time_t now = std::time(nullptr);
 
   position_t position = {
       .close_order = this->close_order,
