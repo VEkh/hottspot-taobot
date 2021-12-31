@@ -4,8 +4,8 @@
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "fetch_quote.cpp"           // fetch_quote
-#include "flip_coin.cpp"             // flip_coin
 #include "lib/formatted.cpp"         // Formatted::error_message
+#include "lib/utils/boolean.cpp"     // ::utils::boolean
 #include "load_performance.cpp"      // load_performance
 #include "tao_bot.h"                 // ETrade::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
@@ -38,7 +38,7 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
   load_performance();
 
   this->performance = build_performance();
-  this->is_long_position = flip_coin();
+  this->is_long_position = ::utils::boolean::flip_coin();
 }
 
 #endif

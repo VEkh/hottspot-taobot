@@ -5,6 +5,7 @@
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "fetch_quote.cpp"           // fetch_quote
 #include "lib/formatted.cpp"         // Formatted::error_message
+#include "lib/utils/boolean.cpp"     // ::utils::boolean
 #include "load_performance.cpp"      // load_performance
 #include "tao_bot.h"                 // Oanda::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
@@ -29,6 +30,7 @@ void Oanda::TaoBot::initialize(char *symbol_,
   load_performance();
 
   this->performance = build_performance();
+  this->is_long_position = ::utils::boolean::flip_coin();
 }
 
 #endif
