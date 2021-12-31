@@ -8,9 +8,10 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp" // build_performance
-#include "write_performance.cpp" // write_performance
-#include <time.h>                // time, time_t
+#include "build_performance.cpp"   // build_performance
+#include "set_trade_direction.cpp" // set_trade_direction
+#include "write_performance.cpp"   // write_performance
+#include <ctime>                   // std::time, std::time_t
 
 void Oanda::TaoBot::reset_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
@@ -31,14 +32,14 @@ void Oanda::TaoBot::reset_position() {
       .open_order = this->open_order,
   };
 
-  this->closed_positions.push_back(position);
-  this->performance = build_performance();
-
-  write_performance();
-
   this->close_order_ptr = nullptr;
+  this->closed_positions.push_back(position);
   this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
+
+  this->performance = build_performance();
+  write_performance();
+  set_trade_direction();
 }
 
 #endif
