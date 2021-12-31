@@ -85,6 +85,7 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double current_price();
   double loss_to_recover();
+  double position_target_movement();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
 

@@ -8,8 +8,7 @@
 #include <math.h>                   // abs
 
 ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
-  double max_loss =
-      -this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta;
+  double max_loss = -position_target_movement();
 
   if (abs(loss_to_recover()) > 0 && abs(this->exit_prices.init_max_loss) > 0) {
     max_loss = this->exit_prices.init_max_loss;

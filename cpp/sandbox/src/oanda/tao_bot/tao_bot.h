@@ -74,11 +74,12 @@ private:
   bool should_open_position(const order_action_t);
   bool should_terminate();
 
-  double compute_profit(const order_t *, const quote_t *);
   double compute_profit(const order_t *, const order_t *);
+  double compute_profit(const order_t *, const quote_t *);
   double current_price();
   double current_spread();
   double loss_to_recover();
+  double position_target_movement();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
 

@@ -1,19 +1,20 @@
 #ifndef OANDA__TAO_BOT_build_exit_prices
 #define OANDA__TAO_BOT_build_exit_prices
 
-#include "current_spread.cpp"       // current_spread
-#include "loss_to_recover.cpp"      // loss_to_recover
-#include "secured_profit_ratio.cpp" // secured_profit_ratio
-#include "tao_bot.h"                // Oanda::TaoBot
-#include <algorithm>                // std::max std::min
-#include <math.h>                   // abs
+#include "current_spread.cpp"           // current_spread
+#include "loss_to_recover.cpp"          // loss_to_recover
+#include "position_target_movement.cpp" // position_target_movement
+#include "secured_profit_ratio.cpp"     // secured_profit_ratio
+#include "tao_bot.h"                    // Oanda::TaoBot
+#include <algorithm>                    // std::max std::min
+#include <math.h>                       // abs
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double current_spread_ = current_spread();
-  double max_loss = -3 * current_spread_;
+  double max_loss = -position_target_movement();
 
-  if (abs(loss_to_recover())) {
-    max_loss = std::min(this->exit_prices.init_max_loss, max_loss);
+  if (abs(loss_to_recover()) > 0 && abs(this->exit_prices.init_max_loss) > 0) {
+    max_loss = this->exit_prices.init_max_loss;
   }
 
   const double init_max_loss = this->exit_prices.init_max_loss
