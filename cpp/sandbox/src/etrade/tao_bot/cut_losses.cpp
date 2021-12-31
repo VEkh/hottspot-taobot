@@ -11,16 +11,15 @@
 
 #include "build_performance.cpp" // build_performance
 #include "math.h"                // abs
+#include <ctime>                 // std::time, std::time_t
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
-#include <time.h>                // time, time_t
 
 void ETrade::TaoBot::cut_losses() {
-  const double threshold = 5e-3;
   const double percent_loss = this->performance.current_loss_streak_balance /
                               this->account_balance.balance;
 
-  if (abs(percent_loss) < threshold) {
+  if (abs(percent_loss) < this->CUT_LOSS_RATIO) {
     return;
   }
 
@@ -29,8 +28,7 @@ void ETrade::TaoBot::cut_losses() {
          this->performance.current_loss_streak_balance);
   std::cout << fmt.reset << std::endl;
 
-  time_t now;
-  time(&now);
+  std::time_t now = std::time(nullptr);
 
   order_t loss_cut_order;
   loss_cut_order.profit = 1e-6;

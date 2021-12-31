@@ -7888,6 +7888,115 @@ deep that they must be handled specially.
 
 * Opening Account Value: $50,203.06
 
+* Total: +$54.42 (+0.11% Account) (+10.74% Daily Salary)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 4) 68L (Consecutive: 0)
+* Week's Return: +$54.42
+* Total Return: -$16,313.40
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 6/8 won 🎈
+* The two losses were small
+
+#### Next Thing(s) to Try
+
+### 2021-12-28:
+#### Performance
+
+* Opening Account Value: $50,257.48
+
+* Total: -$98.81 (-0.2% Account) (-19.5% Daily Salary)
+  * AAPL (+$18.22)
+  * AMD  (+$20.40)
+  * FB   (-$259.79)
+  * IWM  (+$29.62)
+  * MSFT (+$23.88)
+  * NVDA (+$23.83)
+  * QQQ  (+$24.22)
+  * SPY  (+$20.82)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 69L (Consecutive: 1)
+* Week's Return: -$44.39
+* Total Return: -$16,412.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 7/8 won 🎉
+* FB successfully cut losses
+
+#### Next Thing(s) to Try
+* Increase base target profit. I'm pretty certain that this will lead to more
+  frequent loss cuts. The question is whether the higher gains will compensate
+  for it.
+
+### 2021-12-29:
+#### Performance
+
+* Opening Account Value: $50,158.67
+
+* Total: -$196.90 (-0.39% Account) (-38.86% Daily Salary)
+  * AAPL (-$78.03)
+  * AMD  (-$389.41)
+  * FB   (+$42.61)
+  * IWM  (+$29.23)
+  * MSFT (+$86.26)
+  * NVDA (+$49.27)
+  * QQQ  (+$23.98)
+  * SPY  (+39.18)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 70L (Consecutive: 2)
+* Week's Return: -$241.29
+* Total Return: -$16,609.11
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 6/8 won 🎈
+* Base quantity needs to be larger, but I also need to cut losses sooner. AMD's
+  loss was too big to recover with a small base quantity.
+* If we assume that most of the time securities aren't on long loss streaks,
+  then a larger initial stake will more quickly recover cut losses.
+
+#### Next Thing(s) to Try
+
+### 2021-12-30:
+#### Performance
+
+* Opening Account Value: $49,961.79
+
+* Total: -$315.31 (-0.63% Account) (-62.23% Daily Salary)
+  * AAPL (+$51.77)
+  * AMD  (-$140.63)
+  * FB   (-$150.79)
+  * IWM  (-$37.11)
+  * MSFT (-$75.24)
+  * NVDA (-$29.56)
+  * QQQ  (+$57.28)
+  * SPY  (+$8.96)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 71L (Consecutive: 3)
+* Week's Return: -$556.60
+* Total Return: -$16,924.42
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 3/8 won 😢
+* 5/8 cut losses (AMD: 2, FB: 3, IWM: 1, MSFT: 2, NVDA: 1)
+* The base target profit was too aggressive and didn't leave enough room for
+  long loss streaks. Take it down to the maximal tolerable amount. 2.5e-5 was
+  still too agressive.
+
+#### Next Thing(s) to Try
+
+### 2021-12-31:
+#### Performance
+
+* Opening Account Value: $49,646.45
+
 * Total: $ (% Account) (% Daily Salary)
   * AAPL ($)
   * AMD  ($)

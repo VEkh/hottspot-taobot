@@ -33,7 +33,7 @@ private:
   using quote_t = ETrade::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MAX_TARGET_TICK_MOVEMENT = 50.0;
+  const double CUT_LOSS_RATIO = 2.0e-3;
   const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-5;
