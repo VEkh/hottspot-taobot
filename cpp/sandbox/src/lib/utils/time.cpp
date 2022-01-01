@@ -30,6 +30,8 @@ unsigned long epoch(const char *duration = "seconds") {
   if (duration == "nanoseconds") {
     return now_in_nano.count();
   }
+
+  return 0;
 }
 
 template <typename ReturnType, typename Predicate>

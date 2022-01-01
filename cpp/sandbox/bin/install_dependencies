@@ -17,7 +17,7 @@ function install_apt_packages() {
   to_install=()
 
   for arg in "$@"; do
-    if ! (dpkg -l | grep "$arg" | awk '{print $2}' | grep -q "^$arg$"); then
+    if ! (dpkg -l | grep "$arg" | awk '{print $2}' | grep -q "^$arg\(:\w\+\)\?$"); then
       to_install+=($arg)
     fi
   done
@@ -48,22 +48,6 @@ function install_asdf() {
   if ! (echo "$bashrc_contents" | grep -q "$asdf_completion_cmd"); then
     echo -e "\n$asdf_completion_cmd" >> ~/.bashrc
   fi
-}
-
-function install_geckodriver() {
-  version="v0.30.0"
-  zip_filename="geckodriver-$version-linux64.tar.gz"
-  download_url="https://github.com/mozilla/geckodriver/releases/download/$version/$zip_filename"
-
-  [[ -f /usr/bin/geckodriver ]] && return 0
-
-  log_install_start "🦎 Gecokdriver"
-
-  cd /tmp || return
-  wget $download_url
-  tar -xzvf "$zip_filename"
-  sudo mv geckodriver /usr/bin/
-  rm "$zip_filename"
 }
 
 function install_ruby_from_asdf() {
@@ -138,8 +122,7 @@ function log_install_start() {
 }
 
 sudo apt-get update
-install_apt_packages firefox gcc
-install_geckodriver
+install_apt_packages firefox firefox-geckodriver gcc libcurl4-openssl-dev openssl
 
 if [[ "$*" =~ .*--server.* ]]
 then

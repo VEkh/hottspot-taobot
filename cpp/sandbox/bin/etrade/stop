@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=2009
 
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
@@ -13,7 +14,7 @@ echo -e "${fmt_bold}"
 case $1 in
   +([[:alpha:]]))
     symbol="${1^^}"
-    state=$(ps aux | rg [t]ao_bot | rg "$project_name" | rg "${symbol,,}")
+    state=$(ps aux | grep "[t]ao_bot" | grep "$project_name" | grep "${symbol,,}")
 
     if [[ -z $state ]]
     then
@@ -21,13 +22,13 @@ case $1 in
     else
       echo -e "${fmt_cyan}🛑 Stopping TaoBot for $symbol${fmt_reset}"
 
-      ps aux | rg [t]ao_bot | rg "$project_name" | rg "${symbol,,}" | awk '{print $2}' | xargs kill
+      ps aux | grep "[t]ao_bot" | grep "$project_name" | grep "${symbol,,}" | awk '{print $2}' | xargs kill
     fi
 
     ;;
 
   *)
-    state=$(ps aux | rg [t]ao_bot | rg "$project_name" )
+    state=$(ps aux | grep "[t]ao_bot" | grep "$project_name" )
 
     if [[ -z $state ]]
     then
@@ -35,7 +36,7 @@ case $1 in
     else
       echo -e "${fmt_cyan}🛑 Stopping all TaoBot instances${fmt_reset}"
 
-      ps aux | rg [t]ao_bot | rg "$project_name"  | awk '{print $2}' | xargs kill
+      ps aux | grep "[t]ao_bot" | grep "$project_name"  | awk '{print $2}' | xargs kill
     fi
     ;;
 esac

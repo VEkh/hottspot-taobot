@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=2009
 
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
@@ -11,9 +12,9 @@ echo -e "$fmt_reset"
 
 if [[ -n $1 ]]
 then
-  ps aux | rg [t]ao_bot | rg "$project_name" | rg "$1"
+  ps aux | grep "[t]ao_bot" | grep "$project_name" | grep "$1"
 else
-  ps aux | rg [t]ao_bot | rg "$project_name"
+  ps aux | grep "[t]ao_bot" | grep "$project_name"
 fi
 
 echo
