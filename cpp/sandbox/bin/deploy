@@ -21,13 +21,6 @@ echo -e "${fmt_reset}"
 remote_address="${remote_user}@${remote_host}"
 remote_app_dir="/home/$remote_user/apps/hottspot_capital"
 
-function create_directory() {
-  echo -e "${fmt_bold}${fmt_cyan}📂 Creating app directory${fmt_reset}"
-  ssh "$remote_address" \
-    "mkdir -p $remote_app_dir && mkdir -p $remote_app_dir/log"
-  echo
-}
-
 function copy_files() {
   deploy_entities=(
     ".tool-versions"
@@ -35,41 +28,24 @@ function copy_files() {
     "Gemfile.lock"
     "bin/"
     "config/"
-    "data/"
     "deps/"
     "src/"
   )
 
-  replace_entities=(
-    ".tool-versions"
-    "Gemfile"
-    "Gemfile.lock"
-    "bin/"
-    "config/"
-    "deps/"
-    "src/"
-  )
+  echo -e "${fmt_bold}${fmt_cyan}📋 Copying files ${fmt_reset}"
 
-  for entity in "${deploy_entities[@]}"; do
-    if [[ "${replace_entities[*]}" =~ $entity ]]; then
-      echo -e "${fmt_bold}${fmt_cyan}⛔ Deleting ${fmt_yellow}$entity${fmt_reset}"
-      ssh "$remote_address" "rm -rf $remote_app_dir/$entity"
-    fi
+  rsync -arv --delete -e ssh --exclude='*.sw[nop]' \
+    --files-from=<( printf "%s\n" "${deploy_entities[@]}" ) \
+    "$build_app_dir/" \
+    "$remote_address:$remote_app_dir/"
+}
 
-    [[ $entity =~ "/" ]] && test_flag="-d" || test_flag="-f"
+function create_directory() {
+  echo -e "${fmt_bold}${fmt_cyan}📂 Creating app directory${fmt_reset}"
 
-    if [[ -n $(ssh "$remote_address" "test $test_flag $remote_app_dir/$entity && echo 'exists'") ]]
-    then
-      echo -e "${fmt_bold}${fmt_cyan}😴 Skip sending ${fmt_yellow}$entity${fmt_reset}"
-    else
-      echo -e "${fmt_bold}${fmt_cyan}📋 Copying  ${fmt_yellow}$entity${fmt_reset}"
-
-      rsync -av --delete -e ssh --exclude="*.sw[nop]" \
-        "$build_app_dir/$entity" "$remote_address:$remote_app_dir/$entity"
-    fi
-
-    echo
-  done
+  ssh "$remote_address" \
+    "mkdir -p $remote_app_dir && mkdir -p $remote_app_dir/log"
+  echo
 }
 
 function install_dependencies() {
