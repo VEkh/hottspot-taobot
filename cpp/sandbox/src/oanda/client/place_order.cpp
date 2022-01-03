@@ -74,6 +74,7 @@ CurlClient Oanda::Client::place_order(order_t *order) {
   std::string order_id_string = response["orderCreateTransaction"]["id"];
 
   order->id = (int)std::stod(order_id_string);
+  order->status = order_status_t::ORDER_PENDING;
   order->timestamp = now;
 
   return curl_client;
