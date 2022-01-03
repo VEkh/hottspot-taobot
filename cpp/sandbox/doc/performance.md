@@ -7997,7 +7997,73 @@ deep that they must be handled specially.
 
 * Opening Account Value: $49,646.45
 
-* Total: $ (% Account) (% Daily Salary)
+* Total: -$95.40 (-0.19% Account) (-18.83% Daily Salary) (vs. QQQ: -0.62%)
+  * AAPL (+$11.76)
+  * AMD  (+$10.76)
+  * FB   (+$39.83)
+  * IWM  (+$22.23)
+  * MSFT (+$25.52)
+  * NVDA (-$70.50)
+  * QQQ  (-$25.05)
+  * SPY  (-$109.95)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 72L (Consecutive: 4)
+* Week's Return: -$652.00
+* Total Return: -$17,019.82
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 5/8 won
+* Even with a base profit of 1.0e-5 the account a balance, cutting losses at
+  0.001x the account balance led to too many loss cuts.
+* I increased it to 0.002 the account balance and this worked a little better.
+* I think I'll keep it here.
+* The only way to gurantee gains is by being able to up to 12-14 losses. The
+  only way to do this is by trading fractional shares of each security. ETrade
+  doesn't allow this, but Alpaca does.
+* First, test this assumption with Forex and then get to work on an Alpaca
+  implementation of TaoBot.
+
+#### Next Thing(s) to Try
+
+### 2021-01-03:
+#### Performance
+
+* Opening Account Value: $49,551.15
+
+* Total: -$687.39 (-1.39% Account) (-135.66% Daily Salary) (vs. QQQ: +0.96)
+  * AAPL (+$12.23)
+  * AMD  (+$12.68)
+  * FB   (-$274.50)
+  * IWM  (-$197.27)
+  * MSFT (+$19.70)
+  * NVDA (+$7.37)
+  * QQQ  (-$85.18)
+  * SPY  (-$182.41)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: -$687.39
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* 4/8 won
+* 4/8 of them had 8-loss losing streaks that would have extended to 10 losses.
+* This can and will happen. It seems the only way to avoid is by being able to
+  tolerate 10-15 losses.
+* The only way to do this is to trade fractions of shares. This will reduce the
+  daily earnings, but should mostly ensure that you don't lose money.
+
+#### Next Thing(s) to Try
+
+### 2021-01-04:
+#### Performance
+
+* Opening Account Value: $48,863.71
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ)
   * AAPL ($)
   * AMD  ($)
   * FB   ($)
