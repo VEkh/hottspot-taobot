@@ -103,7 +103,7 @@ private:
 
   void await_market_open();
   void build_candlesticks();
-  void cancel_stale_open_order();
+  void clear_stale_open_order();
   void complete_filled_order(order_t *);
   void close_position();
   void fetch_quote();

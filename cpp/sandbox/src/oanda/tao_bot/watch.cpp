@@ -3,7 +3,7 @@
 
 #include "await_market_open.cpp"            // await_market_open
 #include "build_candlesticks.cpp"           // build_candlesticks
-#include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
+#include "clear_stale_open_order.cpp"       // clear_stale_open_order
 #include "close_position.cpp"               // close_position
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "is_market_open.cpp"               // is_market_open
@@ -47,7 +47,7 @@ void Oanda::TaoBot::watch() {
 
     set_position_status();
 
-    cancel_stale_open_order();
+    clear_stale_open_order();
     open_position();
     set_open_position_prices();
 
@@ -56,8 +56,6 @@ void Oanda::TaoBot::watch() {
 
     log_position_results();
     reset_position();
-
-    std::cout << std::flush;
 
     usleep(1e6);
   }
