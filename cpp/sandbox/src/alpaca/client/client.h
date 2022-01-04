@@ -16,7 +16,7 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Alpaca::t::quote_t;
 
-  Client();
+  Client(const bool);
 
   CurlClient place_order(order_t *order);
 
@@ -38,6 +38,7 @@ private:
   } config;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  bool is_live = true;
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);

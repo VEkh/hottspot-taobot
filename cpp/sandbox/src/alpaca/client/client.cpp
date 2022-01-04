@@ -10,6 +10,9 @@
 #include "parse_quote.cpp"
 #include "place_order.cpp"
 
-Alpaca::Client::Client() { load_config(); }
+Alpaca::Client::Client(const bool is_live_ = true) {
+  this->is_live = is_live_;
+  load_config();
+}
 
 #endif

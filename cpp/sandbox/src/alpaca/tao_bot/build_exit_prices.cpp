@@ -1,14 +1,14 @@
-#ifndef ETRADE__TAO_BOT_build_exit_prices
-#define ETRADE__TAO_BOT_build_exit_prices
+#ifndef ALPACA__TAO_BOT_build_exit_prices
+#define ALPACA__TAO_BOT_build_exit_prices
 
 #include "loss_to_recover.cpp"          // loss_to_recover
 #include "position_target_movement.cpp" // position_target_movement
 #include "secured_profit_ratio.cpp"     // secured_profit_ratio
-#include "tao_bot.h"                    // ETrade::TaoBot
+#include "tao_bot.h"                    // Alpaca::TaoBot
 #include <algorithm>                    // std::max std::min
 #include <math.h>                       // abs
 
-ETrade::TaoBot::exit_prices_t ETrade::TaoBot::build_exit_prices() {
+Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   double max_loss = -position_target_movement();
 
   if (abs(loss_to_recover()) > 0 && abs(this->exit_prices.init_max_loss) > 0) {

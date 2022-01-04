@@ -25,10 +25,9 @@ void Alpaca::Client::load_config() {
   config_file.close();
 
   const char *required_keys[] = {
-      "api_key_id",
-      "api_secret_key",
-      "base_url",
       "data_base_url",
+      "live",
+      "paper",
   };
 
   for (const char *key : required_keys) {
@@ -44,10 +43,39 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  const char *nested_required_keys[] = {
+      "api_key_id",
+      "api_secret_key",
+      "base_url",
+  };
+
+  const char *session_keys[] = {
+      "live",
+      "paper",
+  };
+
+  for (const char *session_key : session_keys) {
+    for (const char *key : nested_required_keys) {
+      if (config_json[session_key].contains(key)) {
+        continue;
+      }
+
+      std::string error_message = Formatted::error_message(
+          "Config file is missing the `" + std::string(session_key) +
+          std::string(".") + std::string(key) +
+          "` key. Please ensure it is in the config file at " +
+          std::string(config_path));
+
+      throw std::invalid_argument(error_message);
+    }
+  }
+
+  const char *session_key = this->is_live ? "live" : "paper";
+
   this->config = {
-      .api_key_id = config_json["api_key_id"],
-      .api_secret_key = config_json["api_secret_key"],
-      .base_url = config_json["base_url"],
+      .api_key_id = config_json[session_key]["api_key_id"],
+      .api_secret_key = config_json[session_key]["api_secret_key"],
+      .base_url = config_json[session_key]["base_url"],
       .data_base_url = config_json["data_base_url"],
   };
 }

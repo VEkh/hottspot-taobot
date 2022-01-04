@@ -24,7 +24,7 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
 
   json body = R"(
     {
-      "qty": 1,
+      "qty": 1.0000,
       "side": "BUY|SELL",
       "symbol": "XXXX",
       "time_in_force": "day",

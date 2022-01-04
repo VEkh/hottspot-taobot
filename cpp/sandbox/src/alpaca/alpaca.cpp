@@ -1,10 +1,12 @@
-#include "client/client.cpp" // Alpaca::Client
-#include "lib/formatted.cpp" // Formatted
-#include <iostream>          // std::cout, std::endl
-#include <map>               // std::map
-#include <sstream>           // std::ostringstream
-#include <stdio.h>           // printf
-#include <string>            // std::string
+#include "client/client.cpp"   // Alpaca::Client
+#include "lib/formatted.cpp"   // Formatted
+#include "lib/utils/io.cpp"    // utils::io
+#include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
+#include <iostream>            // std::cout, std::endl
+#include <map>                 // std::map
+#include <sstream>             // std::ostringstream
+#include <stdio.h>             // printf
+#include <string>              // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -42,6 +44,17 @@ int main(int argc, char *argv[]) {
 
     std::string quote = alpaca_client.fetch_quote(symbol);
     puts(quote.c_str());
+
+    exit(0);
+  }
+
+  if (command == "tao_bot") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Alpaca::TaoBot tao_bot(symbol, flags);
+    tao_bot.run();
 
     exit(0);
   }

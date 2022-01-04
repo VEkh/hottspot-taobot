@@ -1,15 +1,10 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include "lib/utils/time.cpp"
-#include <ctime>
-#include <exception>
-#include <map>
-#include <signal.h>
-#include <stdlib.h>
+#include <string> // std::stoi
 
 int main() {
-  std::time_t now = std::time(nullptr);
+  const std::string str = "";
 
-  printf("Current Unix Timestamp: %li\n", now);
+  printf("Num: %i\n", std::stoi(str));
 }

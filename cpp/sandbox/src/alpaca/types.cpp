@@ -19,12 +19,10 @@ enum order_status_t {
 };
 
 enum order_time_in_force_t {
-  FOK,
-  GTC,
+  DAY,
 };
 
 enum order_type_t {
-  LIMIT,
   MARKET,
 };
 
@@ -32,16 +30,14 @@ struct order_t {
   order_action_t action;
   double execution_price = 0.00;
   std::string id = "";
-  double limit_price = 0.00;
   double max_profit = 0.00;
   double profit = 0.00;
   int quantity;
   order_status_t status = order_status_t::ORDER_INIT;
   const char *symbol;
-  order_time_in_force_t time_in_force = order_time_in_force_t::FOK;
+  order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   int timestamp = 0;
-  int trade_id = 0;
-  order_type_t type;
+  order_type_t type = order_type_t::MARKET;
 };
 
 struct position_t {

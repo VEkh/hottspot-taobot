@@ -115,7 +115,7 @@ private:
   void close_position();
   void cut_losses();
   void fetch_quote();
-  void initialize(char *, int, std::map<std::string, std::string> &flags);
+  void initialize(char *, int, std::map<std::string, std::string> &);
   void load_performance();
   void log_account_balance();
   void log_average_tick_price_delta();

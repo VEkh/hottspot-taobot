@@ -2,8 +2,6 @@
 #define ETRADE__TAO_BOT_loss_to_recover
 
 #include "tao_bot.h" // ETrade::TaoBot
-#include <algorithm> // std::min
-#include <math.h>    // abs
 
 double ETrade::TaoBot::loss_to_recover() {
   return this->performance.current_loss_streak_balance;
