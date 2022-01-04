@@ -9,7 +9,8 @@ const char *ORDER_ACTIONS[] = {
 };
 
 const char *ORDER_STATUSES[] = {
-    "CANCELLED", "FILLED", "INIT", "PENDING", "TRIGGERED",
+    "canceled",         "done_for_day",   "expired",         "filled",   "new",
+    "partially_filled", "pending_cancel", "pending_replace", "replaced",
 };
 
 const char *ORDER_TIMES_IN_FORCE[] = {

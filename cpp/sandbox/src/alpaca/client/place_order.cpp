@@ -59,7 +59,7 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
   std::cout << fmt.reset;
 
   order->id = response["id"];
-  order->status = order_status_t::ORDER_PENDING;
+  order->status = order_status_t::ORDER_NEW;
   order->timestamp = now;
 
   return curl_client;

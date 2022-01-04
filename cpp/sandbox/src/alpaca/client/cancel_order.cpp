@@ -22,7 +22,7 @@ std::string Alpaca::Client::cancel_order(order_t *order) {
   json response = ::utils::json::parse_with_catch(
       response_body, "ALPACA__CLIENT_cancel_order");
 
-  order->status = order_status_t::ORDER_CANCELLED;
+  order->status = order_status_t::ORDER_CANCELED;
 
   return response_body;
 }

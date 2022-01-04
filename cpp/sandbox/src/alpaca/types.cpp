@@ -11,11 +11,15 @@ enum order_action_t {
 };
 
 enum order_status_t {
-  ORDER_CANCELLED,
+  ORDER_CANCELED,
+  ORDER_DONE_FOR_DAY,
+  ORDER_EXPIRED,
   ORDER_FILLED,
-  ORDER_INIT,
-  ORDER_PENDING,
-  ORDER_TRIGGERED,
+  ORDER_NEW,
+  ORDER_PARTIALLY_FILLED,
+  ORDER_PENDING_CANCEL,
+  ORDER_PENDING_REPLACE,
+  ORDER_REPLACED,
 };
 
 enum order_time_in_force_t {
@@ -33,7 +37,7 @@ struct order_t {
   double max_profit = 0.00;
   double profit = 0.00;
   int quantity;
-  order_status_t status = order_status_t::ORDER_INIT;
+  order_status_t status = order_status_t::ORDER_NEW;
   const char *symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   int timestamp = 0;
