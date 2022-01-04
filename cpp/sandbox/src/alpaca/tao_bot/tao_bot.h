@@ -17,6 +17,7 @@ public:
 
 private:
   using account_balance_t = Global::t::account_balance_t;
+  using candlestick_t = Global::t::candlestick_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -26,6 +27,7 @@ private:
   using position_t = Alpaca::t::position_t;
   using quote_t = Alpaca::t::quote_t;
 
+  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
 
@@ -36,12 +38,14 @@ private:
   bool is_long_position;
   char *symbol;
   double average_tick_price_delta = 0.00;
+  double quantity;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  std::list<candlestick_t> candlesticks;
   std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -55,17 +59,24 @@ private:
   double loss_to_recover();
   double max_affordable_quantity();
   double position_target_movement();
+  double profit_percentage(const order_t *);
   double secured_profit_ratio();
   exit_prices_t build_exit_prices();
   int runtime();
   order_win_result_t order_win_result(const order_t *);
   performance_t build_performance();
+  void build_candlesticks();
   void fetch_quote();
+  void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void log_account_balance();
+  void log_average_tick_price_delta();
+  void log_candlesticks();
+  void log_performance();
+  void log_position();
   void log_quote();
   void log_start_message();
-  void initialize(char *, std::map<std::string, std::string> &);
+  void set_average_tick_price_delta();
   void watch();
 };
 } // namespace Alpaca
