@@ -15,7 +15,7 @@
 class CurlClient {
 public:
   enum debug_t { OFF, ON };
-  enum http_method_t { GET, POST, PUT };
+  enum http_method_t { DELETE, GET, POST, PUT };
 
   struct post_params_t {
     std::string body;
@@ -35,6 +35,8 @@ public:
       .body = "",
       .body_params = {},
       .debug_flag = debug_t::OFF,
+      .headers = {},
+      .method = http_method_t::GET,
   };
 
   struct response_t {
@@ -79,7 +81,8 @@ private:
   std::string build_query_params();
   std::string to_string();
 
-  static constexpr const char *HTTP_METHODS[3] = {"GET", "POST", "PUT"};
+  static constexpr const char *HTTP_METHODS[4] = {"DELETE", "GET", "POST",
+                                                  "PUT"};
   static size_t write_response_body(char *, size_t, size_t, void *);
   static size_t write_response_headers(char *, size_t, size_t, void *);
 

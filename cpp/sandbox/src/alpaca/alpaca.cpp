@@ -1,12 +1,10 @@
-#include "client/client.cpp"   // Oanda::Client
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/io.cpp"    // ::utils::io
-#include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
-#include <iostream>            // std::cout, std::endl
-#include <map>                 // std::map
-#include <sstream>             // std::ostringstream
-#include <stdio.h>             // printf
-#include <string>              // std::string
+#include "client/client.cpp" // Alpaca::Client
+#include "lib/formatted.cpp" // Formatted
+#include <iostream>          // std::cout, std::endl
+#include <map>               // std::map
+#include <sstream>           // std::ostringstream
+#include <stdio.h>           // printf
+#include <string>            // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -18,7 +16,7 @@ void print_usage() {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::ostringstream message;
 
-  message << fmt.bold << fmt.cyan << "Oanda Client Usage:" << std::endl;
+  message << fmt.bold << fmt.cyan << "Alpaca Client Usage:" << std::endl;
 
   std::map<std::string, const char *>::iterator it;
   for (it = commands.begin(); it != commands.end(); ++it) {
@@ -39,22 +37,11 @@ int main(int argc, char *argv[]) {
   std::string command = argv[1];
 
   if (command == "fetch_quote") {
-    Oanda::Client oanda_client;
+    Alpaca::Client alpaca_client;
     char *symbol = argc < 3 ? nullptr : argv[2];
 
-    std::string quote = oanda_client.fetch_quote(symbol);
+    std::string quote = alpaca_client.fetch_quote(symbol);
     puts(quote.c_str());
-
-    exit(0);
-  }
-
-  if (command == "tao_bot") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
-    Oanda::TaoBot tao_bot(symbol, flags);
-    tao_bot.run();
 
     exit(0);
   }

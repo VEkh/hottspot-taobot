@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app_dir="$(realpath "$(dirname "$0")/../")"
-projects=("etrade" "oanda")
+projects=("alpaca" "etrade" "oanda")
 
 for project in "${projects[@]}"
 do

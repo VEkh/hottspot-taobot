@@ -1,11 +1,12 @@
 #ifndef OANDA__CLIENT_fetch_order
 #define OANDA__CLIENT_fetch_order
 
-#include "client.h"                        // Oanda::Client
-#include "fetch.cpp"                       // fetch
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/utils/json.cpp"              // ::utils::json
-#include <string>                          // std::string
+#include "client.h"                               // Oanda::Client
+#include "fetch.cpp"                              // fetch
+#include "lib/curl_client/curl_client.cpp"        // CurlClient
+#include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/utils/json.cpp"                     // ::utils::json
+#include <string>                                 // std::string
 
 namespace Oanda {
 namespace fetch_order {
