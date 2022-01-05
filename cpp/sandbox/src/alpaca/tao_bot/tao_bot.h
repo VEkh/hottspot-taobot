@@ -72,6 +72,7 @@ private:
   order_win_result_t order_win_result(const order_t *);
   performance_t build_performance();
   void build_candlesticks();
+  void cancel_stale_open_order();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();

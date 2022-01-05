@@ -12,6 +12,12 @@ void ETrade::TaoBot::cancel_stale_open_order() {
     return;
   }
 
+  if (this->open_order.status == order_status_t::ORDER_CANCELLED) {
+    this->open_order_ptr = nullptr;
+
+    return;
+  }
+
   if (this->open_order.status != order_status_t::ORDER_OPEN) {
     return;
   }
@@ -29,7 +35,6 @@ void ETrade::TaoBot::cancel_stale_open_order() {
   std::cout << fmt.reset;
 
   this->api_client.cancel_order(this->open_order_ptr);
-  this->open_order_ptr = nullptr;
 }
 
 #endif

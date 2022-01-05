@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "build_candlesticks.cpp"           // build_candlesticks
+#include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
@@ -29,6 +30,8 @@ void Alpaca::TaoBot::watch() {
     log_performance();
 
     set_position_status();
+
+    cancel_stale_open_order();
 
     usleep(1e6);
   }
