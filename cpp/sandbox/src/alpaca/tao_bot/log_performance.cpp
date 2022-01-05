@@ -75,7 +75,7 @@ void Alpaca::TaoBot::log_performance() {
       printf(", ");
     }
 
-    printf("%+.2f:%d", position.close_order.profit,
+    printf("%+.2f:%.5f", position.close_order.profit,
            position.close_order.quantity);
   }
 

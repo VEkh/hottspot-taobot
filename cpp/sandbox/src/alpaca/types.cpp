@@ -38,7 +38,7 @@ struct order_t {
   std::string id = "";
   double max_profit = 0.00;
   double profit = 0.00;
-  int quantity;
+  double quantity;
   order_status_t status = order_status_t::ORDER_INIT;
   const char *symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;

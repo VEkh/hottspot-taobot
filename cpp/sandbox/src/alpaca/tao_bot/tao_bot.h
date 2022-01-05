@@ -61,6 +61,7 @@ private:
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
   bool is_market_open();
+  bool should_close_position();
   bool should_open_position();
   bool should_terminate();
   double base_quantity();
@@ -83,6 +84,7 @@ private:
   void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
+  void close_position();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
@@ -98,6 +100,7 @@ private:
   void open_position();
   void reset_position();
   void set_average_tick_price_delta();
+  void set_close_position_prices();
   void set_execution_price(order_t *);
   void set_open_position_prices();
   void set_position_status();
