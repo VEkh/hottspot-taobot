@@ -3,6 +3,7 @@
 
 #include "client.h"          // Alpaca::Client, config
 #include "deps.cpp"          // json
+#include "is_live.cpp"       // is_live
 #include "lib/formatted.cpp" // Formatted::error_message
 #include <fstream>           // std::ifstream, std::ios
 #include <stdexcept>         // std::invalid_argument
@@ -70,7 +71,7 @@ void Alpaca::Client::load_config() {
     }
   }
 
-  const char *session_key = this->is_live ? "live" : "paper";
+  const char *session_key = is_live() ? "live" : "paper";
 
   this->config = {
       .api_key_id = config_json[session_key]["api_key_id"],

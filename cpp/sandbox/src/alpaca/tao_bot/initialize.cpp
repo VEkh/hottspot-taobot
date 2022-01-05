@@ -24,9 +24,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
-  const bool is_paper = flags["paper"].empty() ? 0 : std::stoi(flags["paper"]);
-
-  this->api_client = Alpaca::Client(!is_paper);
+  this->api_client = Alpaca::Client(flags);
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();

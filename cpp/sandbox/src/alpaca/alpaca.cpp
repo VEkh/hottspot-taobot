@@ -4,12 +4,14 @@
 #include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
 #include <iostream>            // std::cout, std::endl
 #include <map>                 // std::map
+#include <regex>               // std::regex
 #include <sstream>             // std::ostringstream
 #include <stdio.h>             // printf
 #include <string>              // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
+      {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"tao_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given currency pair"},
@@ -37,6 +39,42 @@ int main(int argc, char *argv[]) {
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::string command = argv[1];
+
+  if (command == "cancel_orders") {
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Alpaca::Client api_client(flags);
+
+    if (argc < 3) {
+      std::string message =
+          Formatted::error_message("Please provide at least one order id.");
+
+      throw std::invalid_argument(message);
+    }
+
+    for (int i = 2; i < argc; i++) {
+      std::string arg = argv[i];
+
+      if (std::regex_search(arg, std::regex("^--.*"))) {
+        continue;
+      }
+
+      const std::string response = api_client.cancel_order(arg);
+
+      std::cout << fmt.bold << fmt.yellow;
+      printf("Cancel Response: %s\n", response.c_str());
+      std::cout << fmt.reset << std::endl;
+
+      if (response.empty()) {
+        std::cout << fmt.bold << fmt.green;
+        printf("👍🏾Successfully cancelled order: %s\n", arg.c_str());
+        std::cout << fmt.reset << std::endl;
+      }
+    }
+
+    exit(0);
+  }
 
   if (command == "fetch_quote") {
     Alpaca::Client alpaca_client;

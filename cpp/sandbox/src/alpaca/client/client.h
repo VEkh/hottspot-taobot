@@ -5,6 +5,7 @@
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "types.cpp"                       // Global::t
+#include <map>                             // std::map
 #include <string>                          // std::string
 
 namespace Alpaca {
@@ -16,7 +17,7 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Alpaca::t::quote_t;
 
-  Client(const bool);
+  Client(std::map<std::string, std::string>);
 
   CurlClient place_order(order_t *order);
 
@@ -38,11 +39,11 @@ private:
   } config;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  bool is_live = true;
+  std::map<std::string, std::string> flags = {{"paper", "0"}};
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
-
+  bool is_live();
   void load_config();
 };
 } // namespace Alpaca

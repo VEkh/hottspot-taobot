@@ -10,8 +10,8 @@
 #include "parse_quote.cpp"
 #include "place_order.cpp"
 
-Alpaca::Client::Client(const bool is_live_ = true) {
-  this->is_live = is_live_;
+Alpaca::Client::Client(std::map<std::string, std::string> flags_ = {}) {
+  this->flags = flags_;
   load_config();
 }
 

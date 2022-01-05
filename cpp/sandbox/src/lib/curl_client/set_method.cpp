@@ -1,4 +1,4 @@
-#if !defined CURL_CLIENT_set_method
+#ifndef CURL_CLIENT_set_method
 #define CURL_CLIENT_set_method
 
 #include "lib/utils/vector.cpp" // utils::vector::join
@@ -24,6 +24,10 @@
 
 void CurlClient::set_method() {
   switch (props.method) {
+  case http_method_t::DELETE: {
+    curl_easy_setopt(curl, CURLOPT_CUSTOMREQUEST, "DELETE");
+    break;
+  }
   case http_method_t::GET: {
     curl_easy_setopt(curl, CURLOPT_HTTPGET, 1L);
     break;
