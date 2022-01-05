@@ -3,6 +3,7 @@
 
 /*
  * Alpaca::Client
+ * fmt
  * order_action_t
  * order_status_t
  * order_t
@@ -16,8 +17,10 @@
 #include "lib/utils/json.cpp"              // ::utils::json
 #include "post.cpp"                        // post
 #include <ctime>                           // std::time, std::time_t
+#include <iostream>                        // std::cout, std::endl
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::stod
+#include <unistd.h>                        // usleep
 
 CurlClient Alpaca::Client::place_order(order_t *order) {
   std::string url = this->config.base_url + "/v2/orders";
@@ -57,6 +60,19 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
   std::cout << fmt.yellow << fmt.bold;
   printf("Order response: %s\n", response.dump(2).c_str());
   std::cout << fmt.reset;
+  std::cout << std::flush;
+
+  if (std::regex_search(curl_client.response.body,
+                        std::regex("rate limit exceeded"))) {
+    std::cout << fmt.bold << fmt.yellow;
+    puts("[ALPACA__CLIENT_place_order] Rate limit exceeded. Trying again in "
+         "500ms");
+    std::cout << fmt.reset << std::endl;
+
+    usleep(0.5e6);
+
+    return place_order(order);
+  }
 
   order->id = response["id"];
   order->status = order_status_t::ORDER_NEW;

@@ -26,6 +26,7 @@
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
 #include "tao_bot.h"                        // ETrade::TaoBot
+#include <iostream>                         // std::cout, std::flush
 #include <unistd.h>                         // usleep
 
 void ETrade::TaoBot::watch() {
@@ -61,6 +62,8 @@ void ETrade::TaoBot::watch() {
 
     log_position_results();
     reset_position();
+
+    std::cout << std::flush;
 
     usleep(1e6);
   }

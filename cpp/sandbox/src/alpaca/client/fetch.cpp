@@ -1,11 +1,14 @@
 #ifndef ALPACA__CLIENT_fetch
 #define ALPACA__CLIENT_fetch
 
-#include "client.h"                        // Alpaca::Client
+#include "client.h"                        // Alpaca::Client, fmt
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
+#include <iostream>                        // std::cout, std::endl
+#include <regex>                           // std::regex, std::regex_search
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string
+#include <unistd.h>                        // usleep
 
 CurlClient Alpaca::Client::fetch(std::string url) {
   if (url.empty()) {
@@ -30,6 +33,17 @@ CurlClient Alpaca::Client::fetch(std::string url) {
   });
 
   curl_client.request();
+
+  if (std::regex_search(curl_client.response.body,
+                        std::regex("rate limit exceeded"))) {
+    std::cout << fmt.bold << fmt.yellow;
+    puts("[ALPACA__CLIENT_fetch] Rate limit exceeded. Trying again in 500ms");
+    std::cout << fmt.reset << std::endl;
+
+    usleep(0.5e6);
+
+    return fetch(url);
+  }
 
   return curl_client;
 }
