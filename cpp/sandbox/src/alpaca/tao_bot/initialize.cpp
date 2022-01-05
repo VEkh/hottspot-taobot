@@ -10,8 +10,9 @@
 #include "load_performance.cpp"      // load_performance
 #include "tao_bot.h"                 // Alpaca::TaoBot
 #include <locale.h>                  // setlocale
+#include <map>                       // std::map
 #include <stdexcept>                 // std::invalid_argument
-#include <string>                    // std::stoi
+#include <string>                    // std::string
 
 void Alpaca::TaoBot::initialize(char *symbol_,
                                 std::map<std::string, std::string> &flags) {

@@ -4,13 +4,14 @@
 namespace Alpaca {
 namespace constants {
 const char *ORDER_ACTIONS[] = {
-    "BUY",
-    "SELL",
+    "buy",
+    "sell",
 };
 
 const char *ORDER_STATUSES[] = {
-    "canceled",         "done_for_day",   "expired",         "filled",   "new",
-    "partially_filled", "pending_cancel", "pending_replace", "replaced",
+    "accepted",        "canceled", "done_for_day",     "expired",
+    "filled",          "new",      "partially_filled", "pending_cancel",
+    "pending_replace", "replaced",
 };
 
 const char *ORDER_TIMES_IN_FORCE[] = {
@@ -18,7 +19,7 @@ const char *ORDER_TIMES_IN_FORCE[] = {
 };
 
 const char *ORDER_TYPES[] = {
-    "MARKET",
+    "market",
 };
 
 } // namespace constants

@@ -19,8 +19,10 @@ private:
   using account_balance_t = Global::t::account_balance_t;
   using candlestick_t = Global::t::candlestick_t;
   using exit_prices_t = Global::t::exit_prices_t;
+  using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
+  using order_type_t = Alpaca::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
@@ -32,8 +34,8 @@ private:
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
 
   std::map<const char *, const char *> ICONS = {
-      {"BUY", "📈"},
-      {"SELL", "📉"},
+      {"buy", "📈"},
+      {"sell", "📉"},
   };
 
   Alpaca::Client api_client;
@@ -57,6 +59,7 @@ private:
 
   account_balance_t fetch_account_balance();
   bool is_end_of_trading_period();
+  bool should_open_position();
   bool should_terminate();
   double base_quantity();
   double compute_quantity();
@@ -83,10 +86,12 @@ private:
   void log_position();
   void log_quote();
   void log_start_message();
+  void open_position();
   void set_average_tick_price_delta();
   void set_position_status();
   void set_status(order_t *order);
   void watch();
+  void write_performance();
 };
 } // namespace Alpaca
 

@@ -104,7 +104,9 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
       .are_funds_sufficient = compute_quantity() < max_affordable_quantity(),
       .current_balance = current_balance,
       .current_loss_streak_balance = current_loss_streak_balance,
-      .is_position_open = !!this->open_order_ptr,
+      .is_position_open =
+          !!this->open_order_ptr &&
+          this->open_order.status == order_status_t::ORDER_FILLED,
       .loss_streaks = streaks[order_win_result_t::LOSS],
       .max_balance = std::max(current_balance, this->performance.max_balance),
       .results = results,

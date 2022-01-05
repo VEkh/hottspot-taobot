@@ -9,13 +9,15 @@
  */
 #include "tao_bot.h"
 
-#include "etrade/constants.cpp" // ETrade::constants
-#include "etrade/deps.cpp"      // json
-#include "etrade/utils.cpp"     // ETrade::utils
-#include "fetch_order.cpp"      // fetch_order
-#include <iostream>             // std::cout, std::endl
-#include <stdio.h>              // printf
-#include <string>               // std::string
+#include "build_performance.cpp" // build_performance
+#include "etrade/constants.cpp"  // ETrade::constants
+#include "etrade/deps.cpp"       // json
+#include "etrade/utils.cpp"      // ETrade::utils
+#include "fetch_order.cpp"       // fetch_order
+#include "write_performance.cpp" // write_performance
+#include <iostream>              // std::cout, std::endl
+#include <stdio.h>               // printf
+#include <string>                // std::string
 
 void ETrade::TaoBot::set_status(order_t *order) {
   json order_json = fetch_order(order);
@@ -37,6 +39,9 @@ void ETrade::TaoBot::set_status(order_t *order) {
     std::cout << fmt.bold << fmt.green << std::endl;
     printf("%s Executed %s order.\n", log_icon, order_action);
     std::cout << fmt.reset;
+
+    this->performance = build_performance();
+    write_performance();
   }
 }
 

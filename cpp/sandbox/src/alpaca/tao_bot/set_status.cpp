@@ -9,13 +9,15 @@
  */
 #include "tao_bot.h"
 
-#include "alpaca/constants.cpp" // Alpaca::constants
-#include "alpaca/utils.cpp"     // Alpaca::utils
-#include "deps.cpp"             // json
-#include "fetch_order.cpp"      // fetch_order
-#include <iostream>             // std::cout, std::endl
-#include <stdio.h>              // printf
-#include <string>               // std::string
+#include "alpaca/constants.cpp"  // Alpaca::constants
+#include "alpaca/utils.cpp"      // Alpaca::utils
+#include "build_performance.cpp" // build_performance
+#include "deps.cpp"              // json
+#include "fetch_order.cpp"       // fetch_order
+#include "write_performance.cpp" // write_performance
+#include <iostream>              // std::cout, std::endl
+#include <stdio.h>               // printf
+#include <string>                // std::string
 
 void Alpaca::TaoBot::set_status(order_t *order) {
   json order_json = fetch_order(order);
@@ -37,6 +39,9 @@ void Alpaca::TaoBot::set_status(order_t *order) {
     std::cout << fmt.bold << fmt.green << std::endl;
     printf("%s Executed %s order.\n", log_icon, order_action);
     std::cout << fmt.reset;
+
+    this->performance = build_performance();
+    write_performance();
   }
 }
 

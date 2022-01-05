@@ -32,12 +32,12 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
     }
   )"_json;
 
-  body["order"]["qty"] = order->quantity;
-  body["order"]["side"] = Alpaca::constants::ORDER_ACTIONS[order->action];
-  body["order"]["symbol"] = order->symbol;
-  body["order"]["time_in_force"] =
+  body["qty"] = order->quantity;
+  body["side"] = Alpaca::constants::ORDER_ACTIONS[order->action];
+  body["symbol"] = order->symbol;
+  body["time_in_force"] =
       Alpaca::constants::ORDER_TIMES_IN_FORCE[order->time_in_force];
-  body["order"]["type"] = Alpaca::constants::ORDER_TYPES[order->type];
+  body["type"] = Alpaca::constants::ORDER_TYPES[order->type];
 
   CurlClient curl_client = post({
       .body = body.dump(),
