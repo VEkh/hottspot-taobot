@@ -1,13 +1,16 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
+#include "await_market_open.cpp"            // await_market_open
 #include "awaited_loss_leader.cpp"          // awaited_loss_leader
 #include "build_candlesticks.cpp"           // build_candlesticks
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "fetch_quote.cpp"                  // fetch_quote
+#include "is_market_open.cpp"               // is_market_open
 #include "log_account_balance.cpp"          // log_account_balance
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_candlesticks.cpp"             // log_candlesticks
+#include "log_end_of_trading_period.cpp"    // log_end_of_trading_period
 #include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
 #include "log_position_results.cpp"         // log_position_results
@@ -22,6 +25,10 @@
 #include <unistd.h>                         // usleep
 
 void Alpaca::TaoBot::watch() {
+  while (!is_market_open()) {
+    await_market_open();
+  }
+
   while (!should_terminate()) {
     fetch_quote();
     build_candlesticks();
@@ -49,6 +56,8 @@ void Alpaca::TaoBot::watch() {
 
     usleep(1e6);
   }
+
+  log_end_of_trading_period();
 }
 
 #endif

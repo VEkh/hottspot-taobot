@@ -60,6 +60,7 @@ private:
   account_balance_t fetch_account_balance();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
+  bool is_market_open();
   bool should_open_position();
   bool should_terminate();
   double base_quantity();
@@ -79,6 +80,7 @@ private:
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
   std::list<performance_t> read_sibling_performances();
+  void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
   void fetch_quote();
@@ -86,6 +88,7 @@ private:
   void load_performance();
   void log_account_balance();
   void log_average_tick_price_delta();
+  void log_end_of_trading_period();
   void log_candlesticks();
   void log_performance();
   void log_position();
