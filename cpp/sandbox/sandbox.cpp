@@ -1,10 +1,17 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include <string> // std::stoi
+#include "deps.cpp" // json
+#include <string>   // std::stoi
 
 int main() {
-  const std::string str = "";
+  json j = R"(
+    {
+      "foo": null
+    }
+  )"_json;
 
-  printf("Num: %i\n", std::stoi(str));
+  if (j["foo"] == nullptr) {
+    printf("yeet\n");
+  }
 }

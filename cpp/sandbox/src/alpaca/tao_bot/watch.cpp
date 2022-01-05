@@ -12,6 +12,7 @@
 #include "log_quote.cpp"                    // log_quote
 #include "open_position.cpp"                // open_position
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
+#include "set_open_position_prices.cpp"     // set_open_position_prices
 #include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
 #include "tao_bot.h"                        // Alpaca::TaoBot
@@ -34,6 +35,7 @@ void Alpaca::TaoBot::watch() {
 
     cancel_stale_open_order();
     open_position();
+    set_open_position_prices();
 
     usleep(1e6);
   }
