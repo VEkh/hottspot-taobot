@@ -90,6 +90,7 @@ private:
   void log_quote();
   void log_start_message();
   void open_position();
+  void reset_position();
   void set_average_tick_price_delta();
   void set_execution_price(order_t *);
   void set_open_position_prices();
@@ -97,6 +98,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
+  void set_trade_direction();
   void watch();
   void write_performance();
 };
