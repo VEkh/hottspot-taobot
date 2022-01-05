@@ -1,0 +1,20 @@
+#!/bin/bash
+# shellcheck disable=2009
+
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_reset="\033[0m"
+project=$(dirname "$0" | xargs basename)
+
+echo -e "${fmt_bold}${fmt_cyan}"
+echo "Running TaoBot instances$([[ -n $1 ]] && echo " for $1"):"
+echo -e "$fmt_reset"
+
+if [[ -n $1 ]]
+then
+  ps aux | grep "[t]ao_bot" | grep "$project" | grep "$1"
+else
+  ps aux | grep "[t]ao_bot" | grep "$project"
+fi
+
+echo

@@ -5,9 +5,9 @@ fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
-src="alpaca"
+project=$(dirname "$0" | xargs basename)
 
-echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}${src^}${fmt_reset}"
+echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}${project^}${fmt_reset}"
 
 mkdir -p "$app_dir/build/"
 
@@ -16,6 +16,6 @@ g++ \
   -iquote"$app_dir" \
   -iquote"$app_dir/src" \
   -std=c++17 \
-  -o "$app_dir/build/$src" \
-  "$app_dir/src/$src/$src.cpp" \
+  -o "$app_dir/build/$project" \
+  "$app_dir/src/$project/$project.cpp" \
   -lcurl
