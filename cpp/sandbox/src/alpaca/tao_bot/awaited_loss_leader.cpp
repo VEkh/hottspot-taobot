@@ -5,6 +5,7 @@
 #include "get_loss_leader.cpp"           // get_loss_leader
 #include "max_affordable_quantity.cpp"   // max_affordable_quantity
 #include "read_sibling_performances.cpp" // read_sibling_performances
+#include "should_open_position.cpp"      // should_open_position
 #include "tao_bot.h"                     // Alpaca::TaoBot, performance_t
 #include <iostream>                      // std::cout, std::endl
 #include <list>                          // std::list
@@ -14,7 +15,7 @@
 #include <unistd.h>                      // usleep
 
 bool Alpaca::TaoBot::awaited_loss_leader() {
-  if (this->open_order_ptr) {
+  if (!should_open_position()) {
     return false;
   }
 
