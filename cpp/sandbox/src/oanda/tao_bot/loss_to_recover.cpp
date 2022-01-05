@@ -10,7 +10,7 @@
 #include "build_performance.cpp" // build_performance
 
 double Oanda::TaoBot::loss_to_recover() {
-  return this->performance.current_balance - this->performance.max_balance;
+  return this->performance.current_loss_streak_balance;
 }
 
 #endif

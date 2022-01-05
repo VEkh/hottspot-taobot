@@ -3,9 +3,9 @@
 
 /*
  * Oanda::TaoBot
- * performance_t
  * fmt
  * order_win_result_t
+ * performance_t
  * position_t
  */
 #include "tao_bot.h"
@@ -59,8 +59,11 @@ void Oanda::TaoBot::log_performance() {
   print_counts(stats.win_streaks.counts);
   puts("\n");
 
-  printf("Current Balance: %+'.5f • Max Balance: %+'.5f • Deficit: %+'.5f\n\n",
-         stats.current_balance, stats.max_balance,
+  printf("Current Balance: %+'.5f • Max Balance: %+'.5f\n",
+         stats.current_balance, stats.max_balance);
+
+  printf("Current Loss Streak Deficit: %+'.5f • Total Deficit: %+'.5f\n\n",
+         stats.current_loss_streak_balance,
          stats.current_balance - stats.max_balance);
 
   printf("Profits: [");
@@ -72,7 +75,7 @@ void Oanda::TaoBot::log_performance() {
       printf(", ");
     }
 
-    printf("%+.5f:%d", position.close_order.profit,
+    printf("%+.5f:%i", position.close_order.profit,
            position.close_order.quantity);
   }
 
