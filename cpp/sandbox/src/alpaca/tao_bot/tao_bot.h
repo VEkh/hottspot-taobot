@@ -31,6 +31,11 @@ private:
   const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
 
+  std::map<const char *, const char *> ICONS = {
+      {"BUY", "📈"},
+      {"SELL", "📉"},
+  };
+
   Alpaca::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
@@ -63,6 +68,7 @@ private:
   double secured_profit_ratio();
   exit_prices_t build_exit_prices();
   int runtime();
+  json fetch_order(const order_t *);
   order_win_result_t order_win_result(const order_t *);
   performance_t build_performance();
   void build_candlesticks();
@@ -77,6 +83,8 @@ private:
   void log_quote();
   void log_start_message();
   void set_average_tick_price_delta();
+  void set_position_status();
+  void set_status(order_t *order);
   void watch();
 };
 } // namespace Alpaca

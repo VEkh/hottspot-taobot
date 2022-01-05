@@ -10,6 +10,7 @@
 #include "log_position.cpp"                 // log_position
 #include "log_quote.cpp"                    // log_quote
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
+#include "set_position_status.cpp"          // set_order_statuses
 #include "should_terminate.cpp"             // should_terminate
 #include "tao_bot.h"                        // Alpaca::TaoBot
 #include <unistd.h>                         // usleep
@@ -26,6 +27,8 @@ void Alpaca::TaoBot::watch() {
     log_average_tick_price_delta();
     log_position();
     log_performance();
+
+    set_position_status();
 
     usleep(1e6);
   }
