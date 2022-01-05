@@ -70,7 +70,6 @@ function update_crontab() {
 
   cmd="(crontab -l 2>/dev/null; "
   cmd+="$remote_app_dir/bin/alpaca/cron generate 2>/dev/null; "
-  cmd+="$remote_app_dir/bin/etrade/cron generate 2>/dev/null; "
   cmd+="$remote_app_dir/bin/oanda/cron generate 2>/dev/null) "
   cmd+="| grep -v '^#' | grep -v 'no crontab' | sort -u | crontab -"
 
