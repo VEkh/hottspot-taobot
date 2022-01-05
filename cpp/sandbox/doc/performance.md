@@ -8049,12 +8049,21 @@ deep that they must be handled specially.
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
+##### ETrade
 * 4/8 won
 * 4/8 of them had 8-loss losing streaks that would have extended to 10 losses.
 * This can and will happen. It seems the only way to avoid is by being able to
   tolerate 10-15 losses.
 * The only way to do this is to trade fractions of shares. This will reduce the
   daily earnings, but should mostly ensure that you don't lose money.
+
+##### Oanda
+* On 2022-01-03 After 24 hours when the target movement was 2x the spread, the
+  max loss streak was 23, and the margin limit was breached.
+
+* On 2022-01-04 After 24 hours when the target movement was 3x the spread, the
+  max loss streak was 8, and the margin limit was _not_ breached.
+
 
 #### Next Thing(s) to Try
 
@@ -8063,7 +8072,55 @@ deep that they must be handled specially.
 
 * Opening Account Value: $48,863.71
 
-* Total: $ (% Account) (% Daily Salary) (vs. QQQ)
+* Total: +$0.00 (+0.00% Account) (+0.00% Daily Salary) (vs. QQQ: -1.3)
+  * Didn't trade
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: -$687.39
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+
+##### Oanda
+* On 2022-01-05 After 24 hours when the target movement was 2.5x the spread, the
+  max loss streak was 15, and the margin limit was breached.
+* Loss to recover was based on the total deficit. I changed it to be the
+  current loss streak deficit.
+
+#### Next Thing(s) to Try
+
+### 2021-01-05:
+#### Performance
+
+* Opening Account Value: $48,863.71
+
+* Total: +$0.00 (+0.00% Account) (+0.00% Daily Salary) (vs. QQQ: -3.07%)
+  Didn't trade
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: -$687.39
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* I stabilized Alpaca
+* Look into pruning excessive API requests
+* Monitor to see how many consecutive losses occur during a full day with only
+  long positions.
+* Increase the base target profit back to 1.0e-5x the balance to see how it
+  performs now that we have fractional shares.
+
+#### Next Thing(s) to Try
+
+### 2021-01-06:
+#### Performance
+
+* Opening Account Value: $48,863.71
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
   * AAPL ($)
   * AMD  ($)
   * FB   ($)
