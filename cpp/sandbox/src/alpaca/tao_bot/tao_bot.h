@@ -86,6 +86,7 @@ private:
   void log_candlesticks();
   void log_performance();
   void log_position();
+  void log_position_results();
   void log_quote();
   void log_start_message();
   void open_position();

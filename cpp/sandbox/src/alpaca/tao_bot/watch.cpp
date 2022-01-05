@@ -9,6 +9,7 @@
 #include "log_candlesticks.cpp"             // log_candlesticks
 #include "log_performance.cpp"              // log_performance
 #include "log_position.cpp"                 // log_position
+#include "log_position_results.cpp"         // log_position_results
 #include "log_quote.cpp"                    // log_quote
 #include "open_position.cpp"                // open_position
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
@@ -36,6 +37,8 @@ void Alpaca::TaoBot::watch() {
     cancel_stale_open_order();
     open_position();
     set_open_position_prices();
+
+    log_position_results();
 
     usleep(1e6);
   }
