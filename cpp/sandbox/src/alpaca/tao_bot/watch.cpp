@@ -1,6 +1,7 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
+#include "awaited_loss_leader.cpp"          // awaited_loss_leader
 #include "build_candlesticks.cpp"           // build_candlesticks
 #include "cancel_stale_open_order.cpp"      // cancel_stale_open_order
 #include "fetch_quote.cpp"                  // fetch_quote
@@ -25,6 +26,10 @@ void Alpaca::TaoBot::watch() {
     fetch_quote();
     build_candlesticks();
     set_average_tick_price_delta();
+
+    if (awaited_loss_leader()) {
+      continue;
+    }
 
     log_account_balance();
     log_quote();
