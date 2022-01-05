@@ -36,7 +36,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   load_performance();
 
   this->performance = build_performance();
-  this->is_long_position = ::utils::boolean::flip_coin();
+  this->is_long_position = true;
 }
 
 #endif

@@ -3,7 +3,6 @@
 
 #include "position_target_movement.cpp" // position_target_movement
 #include "tao_bot.h"                    // Alpaca::TaoBot
-#include <math.h>                       // ceil
 
 double Alpaca::TaoBot::base_quantity() {
   const double target_profit =
