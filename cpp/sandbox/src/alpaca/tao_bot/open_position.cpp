@@ -11,10 +11,12 @@
 #include "tao_bot.h"
 
 #include "alpaca/constants.cpp"      // Alpaca::constants
+#include "build_performance.cpp"     // build_performance
 #include "compute_quantity.cpp"      // compute_quantity
 #include "current_price.cpp"         // current_price
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "should_open_position.cpp"  // should_open_position
+#include "write_performance.cpp"     // write_performance
 #include <iostream>                  // std::cout, std::endl
 #include <stdio.h>                   // printf
 
@@ -66,6 +68,20 @@ void Alpaca::TaoBot::open_position() {
   std::cout << fmt.reset;
 
   this->api_client.place_order(this->open_order_ptr);
+
+  if (this->open_order.status != order_status_t::ORDER_NEW) {
+    std::cout << fmt.bold << fmt.red;
+    puts("❗ Failed to open order. Retrying.\n");
+    std::cout << fmt.reset << std::endl;
+
+    this->close_order_ptr = nullptr;
+    this->open_order_ptr = nullptr;
+
+    this->performance = build_performance();
+    write_performance();
+
+    return;
+  }
 
   std::cout << fmt.bold << fmt.cyan;
   printf("%s %s: Placed open order.\n", log_icon, order_action);
