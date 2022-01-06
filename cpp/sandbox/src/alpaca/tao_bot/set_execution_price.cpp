@@ -20,16 +20,11 @@ void Alpaca::TaoBot::set_execution_price(order_t *order) {
     return;
   }
 
-  json order_json = fetch_order(order);
-
-  if (order_json.empty()) {
-    std::cout << fmt.bold << fmt.red;
-    printf("❌ Order %s was empty. Trying again\n", order->id.c_str());
-    std::cout << fmt.reset;
-
-    usleep(0.5 * 1e6);
-    set_execution_price(order);
+  if (order->id.empty()) {
+    return;
   }
+
+  json order_json = fetch_order(order);
 
   const std::string execution_price_string = order_json["filled_avg_price"];
 
