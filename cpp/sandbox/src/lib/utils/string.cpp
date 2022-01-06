@@ -1,8 +1,8 @@
 #ifndef UTILS__STRING
 #define UTILS__STRING
 
-#include <algorithm> // std::max, std::replace
-#include <cctype>    // std::isspace, tolower
+#include <algorithm> // std::max, std::replace, std::transform
+#include <cctype>    // std::isspace, tolower, toupper
 #include <cstring>   // strlen
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -100,6 +100,16 @@ std::vector<std::string> split(std::string input, const char *delimiter) {
 std::string trim(std::string in) {
   std::string out = ltrim(in);
   return rtrim(out);
+}
+
+std::string upcase(std::string in) {
+  std::string out;
+
+  for (char c : in) {
+    out += toupper(c);
+  }
+
+  return out;
 }
 } // namespace string
 } // namespace utils

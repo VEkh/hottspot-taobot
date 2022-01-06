@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_close_position
 
 #include "alpaca/constants.cpp"      // Alpaca::constants
+#include "lib/utils/string.cpp"      // ::utils::string
 #include "should_close_position.cpp" // should_close_position
 #include "tao_bot.h"                 // Alpaca::TaoBot, fmt
 #include <iostream>                  // std::cout, std::endl
@@ -13,7 +14,9 @@ void Alpaca::TaoBot::close_position() {
   }
 
   const char *order_action =
-      Alpaca::constants::ORDER_ACTIONS[this->open_order.action];
+      ::utils::string::upcase(
+          Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
+          .c_str();
 
   const char *log_icon = this->ICONS[order_action];
 

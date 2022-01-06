@@ -3,6 +3,7 @@
 
 #include "alpaca/constants.cpp"  // Alpaca::constants
 #include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/string.cpp"  // ::utils::string
 #include "profit_percentage.cpp" // profit_percentage
 #include "tao_bot.h"             // Alpaca::TaoBot, fmt
 #include <iostream>              // std::cout, std::endl
@@ -20,7 +21,9 @@ void Alpaca::TaoBot::log_position() {
   Formatted::Stream log_color = this->is_long_position ? fmt.green : fmt.red;
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s\n", Alpaca::constants::ORDER_ACTIONS[this->open_order.action]);
+  printf("%s\n", ::utils::string::upcase(
+                     Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
+                     .c_str());
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
@@ -35,8 +38,12 @@ void Alpaca::TaoBot::log_position() {
       profit_percentage(this->close_order_ptr), this->close_order.max_profit);
 
   printf("Status => Open: %s • Close: %s\n",
-         Alpaca::constants::ORDER_STATUSES[this->open_order.status],
-         Alpaca::constants::ORDER_STATUSES[this->close_order.status]);
+         ::utils::string::upcase(
+             Alpaca::constants::ORDER_STATUSES[this->open_order.status])
+             .c_str(),
+         ::utils::string::upcase(
+             Alpaca::constants::ORDER_STATUSES[this->close_order.status])
+             .c_str());
 
   printf("Min Profit: %.2f • Max Loss: %.2f • Secure Profit (Lower): %.2f • "
          "Secure Profit (Upper): %.2f\n",

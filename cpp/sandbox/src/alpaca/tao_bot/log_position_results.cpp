@@ -10,6 +10,7 @@
 #include "tao_bot.h"
 
 #include "alpaca/constants.cpp" // Alpaca::constants
+#include "lib/utils/string.cpp" // ::utils::string
 #include "log_position.cpp"     // log_position
 #include "order_win_result.cpp" // order_win_result
 #include <iostream>             // std::cout, std::endl
@@ -25,7 +26,9 @@ void Alpaca::TaoBot::log_position_results() {
   }
 
   const char *order_action =
-      Alpaca::constants::ORDER_ACTIONS[this->open_order.action];
+      ::utils::string::upcase(
+          Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
+          .c_str();
 
   order_win_result_t win_result = order_win_result(this->close_order_ptr);
 

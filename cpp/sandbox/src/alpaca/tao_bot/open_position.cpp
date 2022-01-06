@@ -15,6 +15,7 @@
 #include "compute_quantity.cpp"      // compute_quantity
 #include "current_price.cpp"         // current_price
 #include "fetch_account_balance.cpp" // fetch_account_balance
+#include "lib/utils/string.cpp"      // ::utils::string
 #include "should_open_position.cpp"  // should_open_position
 #include "write_performance.cpp"     // write_performance
 #include <iostream>                  // std::cout, std::endl
@@ -59,7 +60,9 @@ void Alpaca::TaoBot::open_position() {
   this->open_order_ptr = &(this->open_order);
 
   const char *order_action =
-      Alpaca::constants::ORDER_ACTIONS[this->open_order.action];
+      ::utils::string::upcase(
+          Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
+          .c_str();
 
   const char *log_icon = this->ICONS[order_action];
 
