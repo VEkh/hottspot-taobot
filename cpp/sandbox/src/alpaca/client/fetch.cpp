@@ -1,14 +1,43 @@
 #ifndef ALPACA__CLIENT_fetch
 #define ALPACA__CLIENT_fetch
 
-#include "client.h"                        // Alpaca::Client, fmt
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include <iostream>                        // std::cout, std::endl
-#include <regex>                           // std::regex, std::regex_search
-#include <stdexcept>                       // std::invalid_argument
-#include <string>                          // std::string
-#include <unistd.h>                        // usleep
+#include "client.h"                               // Alpaca::Client, fmt
+#include "lib/curl_client/curl_client.cpp"        // CurlClient
+#include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
+#include "lib/formatted.cpp"                      // Formatted
+#include <iostream>                               // std::cout, std::endl
+#include <regex>     // std::regex, std::regex_search
+#include <stdexcept> // std::invalid_argument
+#include <string>    // std::string
+#include <unistd.h>  // usleep
+
+namespace Alpaca {
+namespace fetch {
+bool is_immediate_retry_error(const CurlClient &curl_client) {
+  const Formatted::fmt_stream_t fmt = Formatted::stream();
+  const std::string response_body = curl_client.response.body;
+
+  if (response_body.empty()) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("[ALPACA__CLIENT_fetch] %s response empty.\n",
+           curl_client.props.url.c_str());
+    std::cout << fmt.reset << std::endl;
+
+    return true;
+  }
+
+  if (std::regex_search(response_body, std::regex("rate limit exceeded"))) {
+    std::cout << fmt.bold << fmt.yellow;
+    puts("[ALPACA__CLIENT_fetch] Rate limit exceeded.");
+    std::cout << fmt.reset << std::endl;
+
+    return true;
+  };
+
+  return false;
+}
+} // namespace fetch
+} // namespace Alpaca
 
 CurlClient Alpaca::Client::fetch(std::string url) {
   if (url.empty()) {
@@ -18,32 +47,27 @@ CurlClient Alpaca::Client::fetch(std::string url) {
     throw std::invalid_argument(error_message);
   }
 
-  CurlClient curl_client = CurlClient({
-      .body = "",
-      .body_params = {},
-      .debug_flag = CurlClient::debug_t::OFF,
-      .headers =
-          {
-              {"APCA-API-KEY-ID", this->config.api_key_id},
-              {"APCA-API-SECRET-KEY", this->config.api_secret_key},
-          },
-      .method = CurlClient::http_method_t::GET,
-      .query_params = {},
-      .url = url,
-  });
+  CurlClient curl_client = CurlClient::request_with_retry(
+      [&]() -> CurlClient {
+        CurlClient client = CurlClient({
+            .body = "",
+            .body_params = {},
+            .debug_flag = CurlClient::debug_t::OFF,
+            .headers =
+                {
+                    {"APCA-API-KEY-ID", this->config.api_key_id},
+                    {"APCA-API-SECRET-KEY", this->config.api_secret_key},
+                },
+            .method = CurlClient::http_method_t::GET,
+            .query_params = {},
+            .url = url,
+        });
 
-  curl_client.request();
+        client.request();
 
-  if (std::regex_search(curl_client.response.body,
-                        std::regex("rate limit exceeded"))) {
-    std::cout << fmt.bold << fmt.yellow;
-    puts("[ALPACA__CLIENT_fetch] Rate limit exceeded. Trying again in 500ms");
-    std::cout << fmt.reset << std::endl;
-
-    usleep(0.5e6);
-
-    return fetch(url);
-  }
+        return client;
+      },
+      Alpaca::fetch::is_immediate_retry_error);
 
   return curl_client;
 }

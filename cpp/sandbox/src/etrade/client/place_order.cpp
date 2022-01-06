@@ -18,9 +18,9 @@
 #include "lib/formatted.cpp"                      // Formatted
 #include "lib/utils/json.cpp"                     // ::utils::json
 #include "preview_order.cpp"                      // preview_order
+#include <ctime>                                  // std::time, std::time_t
 #include <iostream>                               // std::cout, std::endl
-#include <regex>  // std::regex, std::regex_search
-#include <time.h> // time, time_t
+#include <regex> // std::regex, std::regex_search
 
 namespace ETrade {
 namespace place_order {
@@ -104,8 +104,7 @@ CurlClient ETrade::Client::place_order(order_t *order) {
     return curl_client;
   }
 
-  time_t now;
-  time(&now);
+  std::time_t now = std::time(nullptr);
 
   json response = ::utils::json::parse_with_catch(curl_client.response.body,
                                                   "ETRADE__CLIENT_place_order");
