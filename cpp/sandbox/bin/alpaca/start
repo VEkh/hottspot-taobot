@@ -26,7 +26,10 @@ function symbol_start() {
   echo "" > "$log_file"
 
   tao_bot_args=($symbol)
-  tao_bot_args+=(${args[@]:1})
+
+  for arg in "${args[@]}"; do
+    [[ ! ${arg,,} =~ ^(${symbol,,})$ ]] && tao_bot_args+=($arg)
+  done
 
   "$app_dir/build/$project" tao_bot "${tao_bot_args[@]}" >> "$log_file" 2>&1 &
 }
