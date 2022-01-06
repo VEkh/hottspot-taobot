@@ -5,7 +5,7 @@ fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_green="\033[32m"
 fmt_reset="\033[0m"
-project_name=$(dirname "$0" | xargs basename)
+project=$(dirname "$0" | xargs basename)
 
 shopt -s extglob
 
@@ -14,7 +14,7 @@ echo -e "${fmt_bold}"
 case $1 in
   +([[:alpha:]]))
     symbol="${1^^}"
-    state=$(ps aux | grep "[t]ao_bot" | grep "$project_name" | grep "${symbol,,}")
+    state=$(ps aux | grep "[t]ao_bot" | grep "$project" | grep -i "${symbol,,}")
 
     if [[ -z $state ]]
     then
@@ -22,13 +22,13 @@ case $1 in
     else
       echo -e "${fmt_cyan}🛑 Stopping TaoBot for $symbol${fmt_reset}"
 
-      ps aux | grep "[t]ao_bot" | grep "$project_name" | grep "${symbol,,}" | awk '{print $2}' | xargs kill
+      ps aux | grep "[t]ao_bot" | grep "$project" | grep -i "${symbol,,}" | awk '{print $2}' | xargs kill
     fi
 
     ;;
 
   *)
-    state=$(ps aux | grep "[t]ao_bot" | grep "$project_name" )
+    state=$(ps aux | grep "[t]ao_bot" | grep "$project" )
 
     if [[ -z $state ]]
     then
@@ -36,7 +36,7 @@ case $1 in
     else
       echo -e "${fmt_cyan}🛑 Stopping all TaoBot instances${fmt_reset}"
 
-      ps aux | grep "[t]ao_bot" | grep "$project_name"  | awk '{print $2}' | xargs kill
+      ps aux | grep "[t]ao_bot" | grep "$project"  | awk '{print $2}' | xargs kill
     fi
     ;;
 esac
