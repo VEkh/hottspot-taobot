@@ -11,7 +11,7 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::fetch_account_balance() {
       ::utils::json::parse_with_catch(this->api_client.fetch_account(),
                                       "ALPACA__TAO_BOT_fetch_account_balance");
 
-  const std::string balance = account_json["cash"];
+  const std::string balance = account_json["equity"];
   const std::string margin_buying_power = account_json["buying_power"];
 
   return {
