@@ -26,7 +26,7 @@ void Alpaca::TaoBot::open_position() {
   this->account_balance = fetch_account_balance();
   const double quantity_ = compute_quantity();
 
-  if (!quantity_) {
+  if (quantity_ <= 0) {
     std::cout << fmt.bold << fmt.yellow;
     puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
          "have insufficient margin buying power.");
