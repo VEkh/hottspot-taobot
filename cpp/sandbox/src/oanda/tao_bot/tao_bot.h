@@ -58,15 +58,11 @@ private:
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance();
-
-  bool candlesticks_in_direction(const order_action_t);
   bool is_end_of_trading_period();
   bool is_market_open();
   bool should_close_position();
   bool should_open_position();
-  bool should_open_position(const order_action_t);
   bool should_terminate();
-
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double current_price();
@@ -75,22 +71,14 @@ private:
   double position_target_movement();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
-
   exit_prices_t build_exit_prices();
-
-  order_action_t opposite_direction(const order_t *);
-
   performance_t build_performance();
-
   int base_quantity();
   int compute_quantity();
   int max_affordable_quantity();
-
   json fetch_order(const order_t *);
   json fetch_trade(const int);
-
   order_win_result_t order_win_result(const order_t *);
-
   void await_market_open();
   void build_candlesticks();
   void clear_stale_open_order();
