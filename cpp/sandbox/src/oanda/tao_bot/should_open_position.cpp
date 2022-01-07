@@ -9,7 +9,7 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
-  if (current_spread() > 1.6e-4) {
+  if (current_spread() > this->SPREAD_LIMITS[std::string(this->symbol)]) {
     return false;
   }
 

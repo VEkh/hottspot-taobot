@@ -21,6 +21,12 @@ void Oanda::TaoBot::initialize(char *symbol_,
     throw std::invalid_argument(message);
   }
 
+  if (this->SPREAD_LIMITS[std::string(symbol_)] <= 0) {
+    std::string message = Formatted::error_message(
+        "Must specify a spread limit for <" + std::string(symbol_) + ">");
+    throw std::invalid_argument(message);
+  }
+
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 

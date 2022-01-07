@@ -40,6 +40,12 @@ private:
       {"SELL", "📉"},
   };
 
+  std::map<std::string, double> SPREAD_LIMITS = {
+      {"EUR_JPY", 2.0e-2},
+      {"EUR_USD", 1.6e-4},
+      {"GBP_USD", 2.0e-4},
+  };
+
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   account_balance_t account_balance;
