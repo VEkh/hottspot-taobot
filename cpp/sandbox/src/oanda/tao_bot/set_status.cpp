@@ -18,13 +18,17 @@
 #include <string>              // std::string
 
 void Oanda::TaoBot::set_status(order_t *order) {
+  const order_status_t original_status = order->status;
+
+  if (original_status == order_status_t::ORDER_FILLED) {
+    return;
+  }
+
   json order_json = fetch_order(order);
 
   if (order_json.empty()) {
     return;
   }
-
-  order_status_t original_status = order->status;
 
   std::string status = order_json["state"];
   order->status = Oanda::utils::to_order_status_t(status);
