@@ -49,10 +49,6 @@ private:
   bool is_long_position = true;
   char *symbol;
   double average_tick_price_delta = 0.00;
-  double long_average_buy_sell_ratio;
-  double long_average_sell_buy_ratio;
-  double short_average_buy_sell_ratio;
-  double short_average_sell_buy_ratio;
   exit_prices_t exit_prices;
   int quantity;
   order_t *close_order_ptr = nullptr;
@@ -98,9 +94,6 @@ private:
 
   order_win_result_t order_win_result(const order_t *);
 
-  std::map<int, std::map<const char *, double>>
-  build_moving_buy_sell_ratio_average(std::vector<int> &);
-
   void await_market_open();
   void build_candlesticks();
   void clear_stale_open_order();
@@ -120,7 +113,6 @@ private:
   void log_start_message();
   void open_position();
   void reset_position();
-  void set_and_log_buy_sell_ratios();
   void set_close_position_prices();
   void set_average_tick_price_delta();
   void set_execution_price(order_t *);

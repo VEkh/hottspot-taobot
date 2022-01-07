@@ -17,7 +17,6 @@
 #include "log_quote.cpp"                    // log_quote
 #include "open_position.cpp"                // open_position
 #include "reset_position.cpp"               // reset_position
-#include "set_and_log_buy_sell_ratios.cpp"  // set_and_log_buy_sell_ratios
 #include "set_average_tick_price_delta.cpp" // set_average_tick_price_delta
 #include "set_close_position_prices.cpp"    // set_open_position_prices
 #include "set_open_position_prices.cpp"     // set_open_position_prices
@@ -40,7 +39,6 @@ void Oanda::TaoBot::watch() {
     log_account_balance();
     log_quote();
     log_candlesticks();
-    set_and_log_buy_sell_ratios();
     log_average_tick_price_delta();
     log_position();
     log_performance();
