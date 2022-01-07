@@ -38,13 +38,12 @@ void Alpaca::TaoBot::set_status(order_t *order) {
 
   if (original_status != order_status_t::ORDER_FILLED &&
       order->status == order_status_t::ORDER_FILLED) {
-    const char *order_action =
-        ::utils::string::upcase(Alpaca::constants::ORDER_ACTIONS[order->action])
-            .c_str();
+    const char *order_action = Alpaca::constants::ORDER_ACTIONS[order->action];
     const char *log_icon = this->ICONS[order_action];
 
     std::cout << fmt.bold << fmt.green << std::endl;
-    printf("%s Executed %s order.\n", log_icon, order_action);
+    printf("%s Executed %s order.\n", log_icon,
+           ::utils::string::upcase(order_action).c_str());
     std::cout << fmt.reset;
 
     this->performance = build_performance();

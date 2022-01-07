@@ -14,16 +14,15 @@ void Alpaca::TaoBot::close_position() {
   }
 
   const char *order_action =
-      ::utils::string::upcase(
-          Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
-          .c_str();
+      Alpaca::constants::ORDER_ACTIONS[this->open_order.action];
 
   const char *log_icon = this->ICONS[order_action];
 
   this->api_client.place_order(this->close_order_ptr);
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
-  printf("%s %s: Placed closing order.\n", log_icon, order_action);
+  printf("%s %s: Placed closing order.\n", log_icon,
+         ::utils::string::upcase(order_action).c_str());
   std::cout << fmt.reset;
 }
 

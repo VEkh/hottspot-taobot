@@ -60,14 +60,14 @@ void Alpaca::TaoBot::open_position() {
   this->open_order_ptr = &(this->open_order);
 
   const char *order_action =
-      ::utils::string::upcase(
-          Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
-          .c_str();
+      Alpaca::constants::ORDER_ACTIONS[this->open_order.action];
+
+  std::string order_action_label = ::utils::string::upcase(order_action);
 
   const char *log_icon = this->ICONS[order_action];
 
   std::cout << fmt.bold << fmt.green << std::endl;
-  printf("%s %s: Placing open order.\n", log_icon, order_action);
+  printf("%s %s: Placing open order.\n", log_icon, order_action_label.c_str());
   std::cout << fmt.reset;
 
   this->api_client.place_order(this->open_order_ptr);
@@ -87,7 +87,7 @@ void Alpaca::TaoBot::open_position() {
   }
 
   std::cout << fmt.bold << fmt.cyan;
-  printf("%s %s: Placed open order.\n", log_icon, order_action);
+  printf("%s %s: Placed open order.\n", log_icon, order_action_label.c_str());
   std::cout << fmt.reset << std::endl;
 }
 
