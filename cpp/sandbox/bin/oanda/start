@@ -35,7 +35,14 @@ case $1 in
 
   *)
     symbols=(
+      "AUD_USD"
+      "EUR_CHF"
+      "EUR_GBP"
+      "EUR_JPY"
       "EUR_USD"
+      "GBP_USD"
+      "USD_CAD"
+      "USD_JPY"
     )
 
     for symbol in "${symbols[@]}"

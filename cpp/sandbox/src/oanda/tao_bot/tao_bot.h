@@ -41,15 +41,16 @@ private:
   };
 
   std::map<std::string, double> SPREAD_LIMITS = {
-      {"EUR_JPY", 2.0e-2},
-      {"EUR_USD", 1.6e-4},
-      {"GBP_USD", 2.0e-4},
+      {"AUD_USD", 1.8e-4}, {"EUR_CHF", 1.8e-4}, {"EUR_GBP", 2.0e-4},
+      {"EUR_JPY", 2.0e-2}, {"EUR_USD", 1.6e-4}, {"GBP_USD", 2.0e-4},
+      {"USD_CAD", 2.2e-4}, {"USD_JPY", 1.8e-2},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   account_balance_t account_balance;
   account_balance_t original_account_balance;
+  ;
   bool is_long_position = true;
   char *symbol;
   exit_prices_t exit_prices;

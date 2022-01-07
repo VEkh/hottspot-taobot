@@ -43,6 +43,7 @@ case $1 in
     symbols=(
       "AAPL"
       "AMD"
+      "AMZN"
       "FB"
       "IWM"
       "MSFT"
@@ -51,6 +52,7 @@ case $1 in
       "SNAP"
       "SPY"
       "TSLA"
+      "VIAC"
     )
 
     for symbol in "${symbols[@]}"

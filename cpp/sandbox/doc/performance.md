@@ -8118,9 +8118,53 @@ deep that they must be handled specially.
 ### 2021-01-06:
 #### Performance
 
-* Opening Account Value: $48,863.71
+* Opening Account Value: $48,864.00 (PAPER)
 
-* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+* Total: -$828.07 (-1.69% Account) (% Daily Salary) (vs. QQQ:)
+  * AAPL (-$2.17)
+  * AMD  (+$7.10)
+  * FB   (-$825.44)
+  * IWM  (-$13.52)
+  * MSFT (-$2.32)
+  * NVDA (+$4.20)
+  * QQQ  (+$4.60)
+  * SNAP (+$0.02)
+  * SPY  (+$0.18)
+  * TSLA (-$4.44)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: -$687.39
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Stocks/ETFs
+* 5/10 won
+* After pruning the excessive API requests, Alpaca was able to support 10
+  concurrently traded securities
+* FB is on an 11-loss losing streak and down -$825.44. I still only have access
+  to 2x margin buying power, so there's a chance that the current base profit
+  ratio would be ok under normal 4x margin buying power.
+* What's discouraging is how little it stands to gain, and how much it stands
+  to lose.
+* I'll wait to see what happens when I have 4x margin buying power.
+
+
+##### Forex
+* After 27:48:42 hours of running with target movement of 2.5x the spread, the
+  max loss streak was 10. Profit was +$0.57210
+* I want to see what happens when I shrink the target movement down to 2.25x
+  spread and do only buy positions.
+
+#### Next Thing(s) to Try
+
+### 2021-01-07:
+#### Performance
+
+* Opening Account Value: $48,023.23 (PAPER)
+
+* Total: +$1,780.60 (3.71% Account) (% Daily Salary) (vs. QQQ:)
   * AAPL ($)
   * AMD  ($)
   * FB   ($)
@@ -8129,6 +8173,57 @@ deep that they must be handled specially.
   * NVDA ($)
   * QQQ  ($)
   * SPY  ($)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: -$687.39
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Stocks/ETFs
+* 11/11 won 🎉
+* FB recovered its 11-loss streak resoundingly and more than made up for
+  yesterday's loss.
+* I kept SNAP and TSLA in and added VIAC. VIAC racked up a 9-loss streak, but
+  recovered it and had the second biggest gain of the day after FB.
+* Pruning the excessive API requests has really helped avoid rate limit errors
+  and allowed 11 concurrent TaoBots.
+* I may add a twelveth (AMZN) and see how it runs.
+* Jury is still out on whether 1e-5x account balance is the right base target
+  profit, but it supported 11 FB losses. The goal is still to tolerate 10 - 15
+  losses. We'll see.
+
+##### Forex
+* After 22:20:22 hours of running with target movement of 2.25x the spread, and
+  only placing buy orders, the max loss streak was 11. Profit was +$0.60942
+* I want to see what happens when I shrink the target movement back down to 2.0x.
+* I'll also start trading multiple currencies
+
+
+* It looks like the key to profitability will be concurrent trading of many
+  instruments since most instruments don't have excessively long loss streaks
+  for most of the time.
+
+#### Next Thing(s) to Try
+
+### 2021-01-10:
+#### Performance
+
+* Opening Account Value: $49,803.83
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+  * AAPL ($) ( - 26.60)
+  * AMD  ($) ( - 26.89)
+  * FB   ($) ( - 232.21)
+  * IWM  ($) ( - 85.26)
+  * MSFT ($) ( - 24.39)
+  * NVDA ($) ( - 80.27)
+  * QQQ  ($) ( - 32.39)
+  * SNAP ($) ( - 125.99)
+  * SPY  ($) ( - 31.87)
+  * TSLA ($) ( - 15.64)
+  * VIAC ($) ( - 267.31)
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss:
