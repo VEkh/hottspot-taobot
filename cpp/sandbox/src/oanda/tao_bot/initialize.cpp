@@ -26,6 +26,7 @@ void Oanda::TaoBot::initialize(char *symbol_,
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
+
   this->symbol = symbol_;
 
   fetch_quote();

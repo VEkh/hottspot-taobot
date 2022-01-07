@@ -2,6 +2,7 @@
 #define OANDA__TAO_BOT_watch
 
 #include "await_market_open.cpp"         // await_market_open
+#include "awaited_loss_leader.cpp"       // awaited_loss_leader
 #include "build_candlesticks.cpp"        // build_candlesticks
 #include "clear_stale_open_order.cpp"    // clear_stale_open_order
 #include "close_position.cpp"            // close_position
@@ -32,6 +33,10 @@ void Oanda::TaoBot::watch() {
   while (!should_terminate()) {
     fetch_quote();
     build_candlesticks();
+
+    if (awaited_loss_leader()) {
+      continue;
+    }
 
     log_account_balance();
     log_quote();

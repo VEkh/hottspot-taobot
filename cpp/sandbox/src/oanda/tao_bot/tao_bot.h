@@ -58,6 +58,7 @@ private:
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance();
+  bool awaited_loss_leader();
   bool is_end_of_trading_period();
   bool is_market_open();
   bool should_close_position();
@@ -73,12 +74,14 @@ private:
   double secured_profit_ratio();
   exit_prices_t build_exit_prices();
   performance_t build_performance();
+  performance_t get_loss_leader(std::list<performance_t> &);
   int base_quantity();
   int compute_quantity();
   int max_affordable_quantity();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   order_win_result_t order_win_result(const order_t *);
+  std::list<performance_t> read_sibling_performances();
   void await_market_open();
   void build_candlesticks();
   void clear_stale_open_order();
