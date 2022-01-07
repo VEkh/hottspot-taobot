@@ -33,8 +33,6 @@ private:
   using position_t = Oanda::t::position_t;
   using quote_t = Oanda::t::quote_t;
 
-  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
 
   std::map<const char *, const char *> ICONS = {
@@ -48,7 +46,6 @@ private:
   account_balance_t original_account_balance;
   bool is_long_position = true;
   char *symbol;
-  double average_tick_price_delta = 0.00;
   exit_prices_t exit_prices;
   int quantity;
   order_t *close_order_ptr = nullptr;
@@ -103,7 +100,6 @@ private:
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void log_account_balance();
-  void log_average_tick_price_delta();
   void log_candlesticks();
   void log_end_of_trading_period();
   void log_performance();
@@ -114,7 +110,6 @@ private:
   void open_position();
   void reset_position();
   void set_close_position_prices();
-  void set_average_tick_price_delta();
   void set_execution_price(order_t *);
   void set_open_position_prices();
   void set_position_status();
