@@ -1,7 +1,7 @@
 #ifndef UTILS__JSON
 #define UTILS__JSON
 
-#include "deps.cpp"          // nlohmann::json
+#include "deps.cpp"          // nlohmann
 #include "lib/formatted.cpp" // Formatted
 #include <stdexcept>         // std::invalid_argument
 #include <string>            // std::string

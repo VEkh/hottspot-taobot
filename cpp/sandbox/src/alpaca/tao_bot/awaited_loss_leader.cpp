@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_awaited_loss_leader
 
 #include "compute_quantity.cpp"          // compute_quantity
+#include "fetch_account_balance.cpp"     // fetch_account_balance
 #include "get_loss_leader.cpp"           // get_loss_leader
 #include "max_affordable_quantity.cpp"   // max_affordable_quantity
 #include "read_sibling_performances.cpp" // read_sibling_performances
