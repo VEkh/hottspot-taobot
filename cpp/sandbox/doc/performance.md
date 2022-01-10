@@ -8210,25 +8210,14 @@ deep that they must be handled specially.
 ### 2021-01-10:
 #### Performance
 
-* Opening Account Value: $49,803.83
+* Opening Account Value: $49,751.66 (PAPER)
 
-* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
-  * AAPL ($) ( - 26.60)
-  * AMD  ($) ( - 26.89)
-  * FB   ($) ( - 232.21)
-  * IWM  ($) ( - 85.26)
-  * MSFT ($) ( - 24.39)
-  * NVDA ($) ( - 80.27)
-  * QQQ  ($) ( - 32.39)
-  * SNAP ($) ( - 125.99)
-  * SPY  ($) ( - 31.87)
-  * TSLA ($) ( - 15.64)
-  * VIAC ($) ( - 267.31)
+* Total: +$129.81 (+0.26% Account) (% Daily Salary) (vs. QQQ: +0.07%)
 
 #### Stats (as of stable profitable algo [5/28])
-* Win / Loss:
-* Week's Return:
-* Total Return:
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
@@ -8255,7 +8244,7 @@ deep that they must be handled specially.
 ### 2021-01-11:
 #### Performance
 
-* Opening Account Value: $49,803.83
+* Opening Account Value: $49,881.47
 
 * Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
   * AAPL ($) ( - 26.60)
