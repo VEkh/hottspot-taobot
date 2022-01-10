@@ -8232,5 +8232,50 @@ deep that they must be handled specially.
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
+##### Forex
+* After 20:53:56 hours of running with target movement of 2.0x the spread, and
+  only placing buy orders, the max loss streak was 14. This is good!
+* Ther profit was, however, -$3.0848. I increased the account balance to $250
+  to see if this will be enough to tolerate 15 losses.
+* I messed up the trading other currencies and still need to ensure that
+  concurrent trading works for Forex.
+
+##### Stocks/ETFs
+* Facebook incurred 12 losses and maxed out funds. Luckily it regained much of
+  its deficit, but I'll have to further decrease the base target profit.
+* The cryptic json parse error continues. I'm trying another catch during
+  `read_sibling_performances` to see if this is where it's happening.
+* I also need to automatically close proftiable positions whose 1-sec variance
+  has significantly diminished, _without_ clearing their deficits. They tie up
+  available funds, but we don't want them to clear the deficits that need to be
+  recovered.
+
+#### Next Thing(s) to Try
+
+### 2021-01-11:
+#### Performance
+
+* Opening Account Value: $49,803.83
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+  * AAPL ($) ( - 26.60)
+  * AMD  ($) ( - 26.89)
+  * FB   ($) ( - 232.21)
+  * IWM  ($) ( - 85.26)
+  * MSFT ($) ( - 24.39)
+  * NVDA ($) ( - 80.27)
+  * QQQ  ($) ( - 32.39)
+  * SNAP ($) ( - 125.99)
+  * SPY  ($) ( - 31.87)
+  * TSLA ($) ( - 15.64)
+  * VIAC ($) ( - 267.31)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss:
+* Week's Return:
+* Total Return:
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
 
 #### Next Thing(s) to Try
