@@ -8,6 +8,7 @@ namespace t {
 struct account_balance_t {
   double balance;
   double margin_buying_power;
+  int margin_multiplier;
 };
 
 struct candlestick_t {

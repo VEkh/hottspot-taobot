@@ -31,7 +31,7 @@ private:
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double MIN_TARGET_TICK_MOVEMENT = 20.0;
-  const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
+  const double POSITION_TARGET_PROFIT_RATIO = 2.5e-7;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},

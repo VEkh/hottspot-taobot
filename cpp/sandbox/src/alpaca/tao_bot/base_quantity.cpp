@@ -5,8 +5,9 @@
 #include "tao_bot.h"                    // Alpaca::TaoBot
 
 double Alpaca::TaoBot::base_quantity() {
-  const double target_profit =
-      this->account_balance.balance * this->POSITION_TARGET_PROFIT_RATIO;
+  const double target_profit = this->account_balance.balance *
+                               this->account_balance.margin_multiplier *
+                               this->POSITION_TARGET_PROFIT_RATIO;
 
   return target_profit / position_target_movement();
 }
