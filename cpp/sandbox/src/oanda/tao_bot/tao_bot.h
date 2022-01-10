@@ -79,6 +79,7 @@ private:
   double position_target_movement();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
+  double spread_limit();
   exit_prices_t build_exit_prices();
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);

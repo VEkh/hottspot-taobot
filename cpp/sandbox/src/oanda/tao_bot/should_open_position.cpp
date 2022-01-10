@@ -2,6 +2,7 @@
 #define OANDA__TAO_BOT_should_open_position
 
 #include "current_spread.cpp" // current_spread
+#include "spread_limit.cpp"   // spread_limit
 #include "tao_bot.h"          // Oanda::TaoBot, fmt, order_action_t
 
 bool Oanda::TaoBot::should_open_position() {
@@ -9,7 +10,7 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
-  if (current_spread() > this->SPREAD_LIMITS[std::string(this->symbol)]) {
+  if (current_spread() > spread_limit()) {
     return false;
   }
 

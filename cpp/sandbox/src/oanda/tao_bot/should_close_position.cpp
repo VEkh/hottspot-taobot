@@ -10,6 +10,7 @@
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "current_spread.cpp"           // current_spread
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
+#include "spread_limit.cpp"             // spread_limit
 
 bool Oanda::TaoBot::should_close_position() {
   if (this->open_order.status != order_status_t::ORDER_FILLED) {
@@ -24,7 +25,7 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  if (current_spread() > 1.6e-4) {
+  if (current_spread() > spread_limit()) {
     return false;
   }
 

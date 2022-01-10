@@ -7,6 +7,7 @@
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "lib/utils/boolean.cpp"     // ::utils::boolean
 #include "load_performance.cpp"      // load_performance
+#include "spread_limit.cpp"          // spread_limit
 #include "tao_bot.h"                 // Oanda::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
 #include <map>                       // std::map
@@ -21,7 +22,9 @@ void Oanda::TaoBot::initialize(char *symbol_,
     throw std::invalid_argument(message);
   }
 
-  if (this->SPREAD_LIMITS[std::string(symbol_)] <= 0) {
+  this->symbol = symbol_;
+
+  if (spread_limit() <= 0) {
     std::string message = Formatted::error_message(
         "Must specify a spread limit for <" + std::string(symbol_) + ">");
     throw std::invalid_argument(message);
@@ -32,8 +35,6 @@ void Oanda::TaoBot::initialize(char *symbol_,
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
-
-  this->symbol = symbol_;
 
   fetch_quote();
   load_performance();
