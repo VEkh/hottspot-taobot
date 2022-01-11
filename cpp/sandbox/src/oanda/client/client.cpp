@@ -4,6 +4,7 @@
 #include "client.h" // Oanda::Client
 #include "cancel_order.cpp"
 #include "fetch_account.cpp"
+#include "fetch_instrument.cpp"
 #include "fetch_order.cpp"
 #include "fetch_quote.cpp"
 #include "fetch_trade.cpp"

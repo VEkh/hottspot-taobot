@@ -23,6 +23,7 @@ public:
   std::string cancel_order(const int);
   std::string cancel_order(order_t *order);
   std::string fetch_account();
+  std::string fetch_instrument(const std::string);
   std::string fetch_order(const int);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
