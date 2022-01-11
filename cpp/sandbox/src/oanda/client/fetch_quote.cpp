@@ -6,15 +6,20 @@
 #include "lib/curl_client/curl_client.cpp"        // CurlClient
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "lib/formatted.cpp"                      // Formatted
-#include <stdexcept>                              // std::invalid_argument
-#include <string>                                 // std::string
+#include <regex>     // std::regex, std::regex_search
+#include <stdexcept> // std::invalid_argument
+#include <string>    // std::string
 
 namespace Oanda {
 namespace fetch_quote {
 bool is_retriable_response(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
-  return response_body.empty();
+  if (response_body.empty()) {
+    return true;
+  }
+
+  return std::regex_search(response_body, std::regex("<html>"));
 }
 } // namespace fetch_quote
 } // namespace Oanda

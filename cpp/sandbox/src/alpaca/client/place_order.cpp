@@ -19,9 +19,10 @@
 #include "post.cpp"                               // post
 #include <ctime>                                  // std::time, std::time_t
 #include <iostream>                               // std::cout, std::endl
-#include <stdexcept>                              // std::invalid_argument
-#include <string>                                 // std::stod
-#include <unistd.h>                               // usleep
+#include <regex>     // std::regex, std::regex_search
+#include <stdexcept> // std::invalid_argument
+#include <string>    // std::stod
+#include <unistd.h>  // usleep
 
 namespace Alpaca {
 namespace place_order {
