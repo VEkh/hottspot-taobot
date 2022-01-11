@@ -73,6 +73,7 @@ private:
   bool should_terminate();
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
+  double convert_price(const double, const std::string, const std::string);
   double current_price();
   double current_spread();
   double loss_to_recover();
@@ -90,6 +91,7 @@ private:
   json fetch_trade(const int);
   order_win_result_t order_win_result(const order_t *);
   std::list<performance_t> read_sibling_performances();
+  std::string base_currency();
   void await_market_open();
   void build_candlesticks();
   void clear_stale_open_order();
