@@ -11,6 +11,8 @@
 namespace Alpaca {
 class TaoBot {
 public:
+  using position_t = Alpaca::t::position_t;
+
   TaoBot(char *, std::map<std::string, std::string> &);
 
   void run();
@@ -26,7 +28,6 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
-  using position_t = Alpaca::t::position_t;
   using quote_t = Alpaca::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
@@ -43,6 +44,7 @@ private:
   account_balance_t account_balance;
   account_balance_t original_account_balance;
   bool is_long_position;
+  bool is_trimming_deficit = false;
   char *symbol;
   double average_tick_price_delta = 0.00;
   double quantity;
@@ -72,6 +74,7 @@ private:
   double loss_to_recover();
   double max_affordable_quantity();
   double position_target_movement();
+  double position_profit(const position_t &);
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
   exit_prices_t build_exit_prices();
@@ -108,6 +111,7 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
   void set_trade_direction();
+  void trim_deficit(const position_t &);
   void watch();
   void write_performance();
 };

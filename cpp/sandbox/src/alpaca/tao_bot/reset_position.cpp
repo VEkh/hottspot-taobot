@@ -9,6 +9,7 @@
 #include "tao_bot.h"
 
 #include "build_performance.cpp" // build_performance
+#include "trim_deficit.cpp"      // trim_deficit
 #include "write_performance.cpp" // write_performance
 #include <ctime>                 // std::time, std::time_t
 
@@ -22,19 +23,19 @@ void Alpaca::TaoBot::reset_position() {
     return;
   }
 
-  std::time_t now = std::time(nullptr);
-
-  position_t position = {
+  const position_t position = {
       .close_order = this->close_order,
-      .close_timestamp = (int)now,
+      .close_timestamp = (int)std::time(nullptr),
       .open_order = this->open_order,
   };
 
-  this->close_order_ptr = nullptr;
   this->closed_positions.push_back(position);
+
+  trim_deficit(position);
+
+  this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
-
   this->performance = build_performance();
   write_performance();
 }

@@ -12,6 +12,7 @@
 #include "compute_quantity.cpp"        // compute_quantity
 #include "max_affordable_quantity.cpp" // max_affordable_quantity
 #include "order_win_result.cpp"        // order_win_result
+#include "position_profit.cpp"         // position_profit
 #include <algorithm>                   // std::max
 #include <map>                         // std::map
 
@@ -48,11 +49,10 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
         i == 0 ? nullptr : &(this->closed_positions[i - 1]);
     const order_win_result_t result = order_win_result(&(position.close_order));
 
-    const double position_profit =
-        position.close_order.profit * position.close_order.quantity;
+    const double position_profit_ = position_profit(position);
 
     results[result]++;
-    current_balance += position_profit;
+    current_balance += position_profit_;
 
     if (result == order_win_result_t::WIN) {
       loss_streak_broken = true;
@@ -68,7 +68,7 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
       win_streak_count = 0;
 
       if (!loss_streak_broken) {
-        current_loss_streak_balance += position_profit;
+        current_loss_streak_balance += position_profit_;
         streaks[order_win_result_t::LOSS].current++;
       }
     }
