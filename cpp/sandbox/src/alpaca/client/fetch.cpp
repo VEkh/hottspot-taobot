@@ -47,7 +47,7 @@ CurlClient Alpaca::Client::fetch(std::string url) {
     throw std::invalid_argument(error_message);
   }
 
-  CurlClient curl_client = CurlClient::request_with_retry(
+  const CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient {
         CurlClient client = CurlClient({
             .body = "",
