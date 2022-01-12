@@ -1,14 +1,15 @@
 #ifndef OANDA__TAO_BOT_read_sibling_performances
 #define OANDA__TAO_BOT_read_sibling_performances
 
-#include "deps.cpp"         // json
-#include "lib/utils/io.cpp" // ::utils::io
-#include "tao_bot.h"        // Oanda::TaoBot, fmt
-#include <dirent.h>         // DIR, closedir, dirent, opendir, readdir
-#include <fstream>          // std::ifstream
-#include <iostream>         // std::cout
-#include <list>             // std::list
-#include <string>           // std::string
+#include "deps.cpp"          // json, nlohmann
+#include "lib/formatted.cpp" // Formatted
+#include "lib/utils/io.cpp"  // ::utils::io
+#include "tao_bot.h"         // Oanda::TaoBot, fmt
+#include <dirent.h>          // DIR, closedir, dirent, opendir, readdir
+#include <fstream>           // std::ifstream
+#include <iostream>          // std::cout, std::endl
+#include <list>              // std::list
+#include <string>            // std::string
 
 /*
  * std::cmatch
@@ -57,16 +58,29 @@ Oanda::TaoBot::read_sibling_performances() {
         performance_directory + entity->d_name;
 
     std::ifstream file;
+    json performance_json;
 
     try {
       file = ::utils::io::read_file(performance_filepath.c_str());
+      file >> performance_json;
+      file.close();
+    } catch (nlohmann::detail::parse_error &) {
+      std::string error_message = Formatted::error_message(
+          std::string("OANDA__TAO_BOT_read_sibling_performances") +
+          ": JSON parse error.");
+
+      std::cout << error_message << fmt.reset << std::endl;
+
+      return read_sibling_performances();
     } catch (std::invalid_argument &) {
+      std::string error_message = Formatted::error_message(
+          std::string("OANDA__TAO_BOT_read_sibling_performances") +
+          ": Invalid argument.");
+
+      std::cout << error_message << fmt.reset << std::endl;
+
       return read_sibling_performances();
     }
-
-    json performance_json;
-    file >> performance_json;
-    file.close();
 
     performance_t sibling_performance;
 
