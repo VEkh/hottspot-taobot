@@ -9,13 +9,15 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp"            // json
-#include "fetch_order.cpp"     // fetch_order
-#include "oanda/constants.cpp" // Oanda::constants
-#include "oanda/utils.cpp"     // Oanda::utils
-#include <iostream>            // std::cout, std::endl
-#include <stdio.h>             // printf
-#include <string>              // std::string
+#include "build_performance.cpp" // build_performance
+#include "deps.cpp"              // json
+#include "fetch_order.cpp"       // fetch_order
+#include "oanda/constants.cpp"   // Oanda::constants
+#include "oanda/utils.cpp"       // Oanda::utils
+#include "write_performance.cpp" // write_performance
+#include <iostream>              // std::cout, std::endl
+#include <stdio.h>               // printf
+#include <string>                // std::string
 
 void Oanda::TaoBot::set_status(order_t *order) {
   const order_status_t original_status = order->status;
@@ -41,6 +43,9 @@ void Oanda::TaoBot::set_status(order_t *order) {
     std::cout << fmt.bold << fmt.green << std::endl;
     printf("%s Executed %s order.\n", log_icon, order_action);
     std::cout << fmt.reset;
+
+    this->performance = build_performance();
+    write_performance();
   }
 }
 
