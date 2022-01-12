@@ -26,6 +26,15 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
     return true;
   }
 
+  if (std::regex_search(response_body, std::regex("<html>"))) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("[ALPACA__CLIENT_fetch] %s returned HTML: %s\n",
+           curl_client.props.url.c_str(), response_body.c_str());
+    std::cout << fmt.reset << std::endl;
+
+    return true;
+  };
+
   if (std::regex_search(response_body, std::regex("rate limit exceeded"))) {
     std::cout << fmt.bold << fmt.yellow;
     puts("[ALPACA__CLIENT_fetch] Rate limit exceeded.");
