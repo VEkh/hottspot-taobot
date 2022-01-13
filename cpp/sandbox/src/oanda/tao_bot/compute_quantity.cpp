@@ -23,7 +23,7 @@ int Oanda::TaoBot::compute_quantity() {
   }
 
   exit_prices_t exit_prices_ = build_exit_prices();
-  int quantity_ = ceil(1.05 * loss_to_recover_ / abs(exit_prices_.max_loss));
+  int quantity_ = ceil(loss_to_recover_ / abs(exit_prices_.max_loss));
 
   return std::min(quantity_, max_affordable_quantity_);
 }

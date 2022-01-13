@@ -24,7 +24,7 @@ double Alpaca::TaoBot::compute_quantity() {
 
   const exit_prices_t exit_prices_ = build_exit_prices();
 
-  const double quantity_ = 1.05 * loss_to_recover_ / abs(exit_prices_.max_loss);
+  const double quantity_ = loss_to_recover_ / abs(exit_prices_.max_loss);
 
   return std::min(quantity_, max_affordable_quantity_);
 }
