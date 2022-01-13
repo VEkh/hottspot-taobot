@@ -9,7 +9,7 @@
 
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
-#include "loss_to_recover.cpp"          // loss_to_recover
+#include "position_target_movement.cpp" // position_target_movement
 #include <math.h>                       // abs
 
 bool Alpaca::TaoBot::should_close_position() {
@@ -33,16 +33,15 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order.profit <= exit_prices.max_loss) {
+  if (this->open_order.profit >= (abs(this->exit_prices.init_max_loss) / 3.0) &&
+      (position_target_movement() / abs(this->exit_prices.init_max_loss)) <=
+          0.5) {
+    this->is_capturing_profit = true;
+
     return true;
   }
 
-  if (loss_to_recover() &&
-      this->open_order.profit >= (abs(this->exit_prices.init_max_loss) / 3.0) &&
-      (abs(this->exit_prices.max_loss) /
-       abs(this->exit_prices.init_max_loss)) <= 0.5) {
-    this->is_trimming_deficit = true;
-
+  if (this->open_order.profit <= exit_prices.max_loss) {
     return true;
   }
 

@@ -43,8 +43,8 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
   account_balance_t original_account_balance;
+  bool is_capturing_profit = false;
   bool is_long_position;
-  bool is_trimming_deficit = false;
   char *symbol;
   double average_tick_price_delta = 0.00;
   double quantity;
@@ -87,6 +87,7 @@ private:
   void await_market_open();
   void build_candlesticks();
   void cancel_stale_open_order();
+  void capture_profit(const position_t &);
   void close_position();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
@@ -111,7 +112,6 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
   void set_trade_direction();
-  void trim_deficit(const position_t &);
   void watch();
   void write_performance();
 };
