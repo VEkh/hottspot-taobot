@@ -8244,20 +8244,144 @@ deep that they must be handled specially.
 ### 2021-01-11:
 #### Performance
 
-* Opening Account Value: $49,881.47
+* Opening Account Value: 49,853.35 (PAPER)
+
+* Total: +$72.98 (+0.15% Account) (% Daily Salary) (vs. QQQ: +1.47%)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Fixed await loss leader
+* Some currency pairs have different margin rates. Have to figure out how to
+  max out the quantity based on this varying margin.
+
+##### Stocks/ETFs
+* GOOG had a long loss streak that seemed to max out funds. Going to continue
+  to watch.
+* Handled a couple more API faults
+
+#### Next Thing(s) to Try
+
+### 2021-01-12:
+#### Performance
+
+* Opening Account Value: $49,903.84 (PAPER)
+
+* Total: -$1,603.21 (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Concurrent trading seems to be stabilizing. They're all aware of each other.
+* With an account balance of ~$250, so far the following have incurred losses
+  and been unable to recover losses:
+  * USD_JPY: 10 losses; Maxed out at 8
+
+
+##### Stocks / ETFs
+* Took out Google because its price jumps too much and it incurred heavy loss
+  streaks. I may have to do the same for AMZN. It's on a 10-loss loss streak
+  and is down $930.
+
+* Introduced deficit trimming for when a position is profitable but its 1-sec
+  variance is much smaller than when it opened.
+
+#### Next Thing(s) to Try
+
+### 2021-01-13:
+#### Performance
+
+* Opening Account Value (PAPER): $48,300.63, then later reset to $48,864.00
+
+* Total: +$172.70 (+0.35% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Either EUR_JPY or USD_JPY incurred 18 losses and maxed out well before that.
+* I've increased the account's funds as I continue to search for what base
+  target profit ratio is most appropriate.
+
+##### Stocks/ETFs
+* AMZN lost about $3,300 before recovering a modest amount of it, so I removed
+  AMZN from the trading roster. Its and GOOG's prices move too explosively.
+* I'll stick with more affordable, smoother-flowing stocks and ETSs to
+  establish profitability, then may further experiment with AMZN and GOOG in
+  paper later down the road.
+* I made a few adjustments:
+  * Stop increasing the `loss_to_recover` by 5% to determine the next
+    position's quantity -- This compounds and perhaps made loss streaks more
+    devastating. The min profit algorithm should be enough to magnify
+    redemptive wins.
+  * Stop allowing `min_profit` / `max_loss` to shrink during non-loss
+    positions -- This reduces the base profit which diminishes the profitability
+    of long win streaks.
+  * Start capturing profits if the 1-sec variance is half what it was at the
+    position's open -- This way you don't have to miss out on significant price
+    movements because of early day price action.
+
+#### Next Thing(s) to Try
+
+### 2021-01-14:
+#### Performance
+
+* Opening Account Value (PAPER): $49,022.43
+
+* Total: -$137.27 (-0.25% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+* I'll resume comparing to QQQ performance once the live account is active.
+
+##### Forex
+* EUR_JPY and USD_JPY had the longest loss streaks (15). That's not too bad,
+  though maybe I think I'll increase the target movement back to 2.5x spread
+* EUR_USD and GBP_USD had phantom units from partially closed orders. This led
+  to a 37 "loss" streak for GBP_USD. What actually happened is that the price
+  executed came from the partially closed order and recorded every closed
+  position as a loss.
+* I introduced a way to handle these partially closed positions.
+
+##### Stocks/ETFs
+* After removing the compounding loss-to-recover and increasing the base target
+  profit, things seemed to mostly work well.
+* The profit is still a little small, but we'll see if it leads to a consistent
+  profit.
+* There were several errors with capturing the profit when the price variance
+  slows down. I'm making this harder to trigger since it prematurely exits too
+  many positions. The 1-sec variance needs to slow by 80% and made at least
+  half the target profit before closing.
+* Now that `capture_profit` is fixed, we'll get a sense of how things work.
+* Once we get to $50K, we can run the algorithm on the live account.
+
+#### Next Thing(s) to Try
+
+### 2021-01-18:
+#### Performance
+
+* Opening Account Value: $48,899.43 (PAPER)
 
 * Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
-  * AAPL ($) ( - 26.60)
-  * AMD  ($) ( - 26.89)
-  * FB   ($) ( - 232.21)
-  * IWM  ($) ( - 85.26)
-  * MSFT ($) ( - 24.39)
-  * NVDA ($) ( - 80.27)
-  * QQQ  ($) ( - 32.39)
-  * SNAP ($) ( - 125.99)
-  * SPY  ($) ( - 31.87)
-  * TSLA ($) ( - 15.64)
-  * VIAC ($) ( - 267.31)
 
 #### Stats (as of stable profitable algo [5/28])
 * Win / Loss:
