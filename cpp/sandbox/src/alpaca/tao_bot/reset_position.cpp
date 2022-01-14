@@ -36,6 +36,7 @@ void Alpaca::TaoBot::reset_position() {
   this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
+
   this->performance = build_performance();
   write_performance();
 }

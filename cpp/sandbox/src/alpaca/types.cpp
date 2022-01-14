@@ -33,7 +33,7 @@ enum order_type_t {
 };
 
 struct order_t {
-  order_action_t action;
+  order_action_t action = order_action_t::BUY;
   double execution_price = 0.00;
   std::string id = "";
   double max_profit = 0.00;
