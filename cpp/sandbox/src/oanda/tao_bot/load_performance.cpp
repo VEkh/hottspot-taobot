@@ -35,16 +35,15 @@ void Oanda::TaoBot::load_performance() {
                          std::string(this->symbol) + ".json";
 
   std::ifstream file;
+  json persisted_data;
 
   try {
     file = ::utils::io::read_file(filepath.c_str());
+    file >> persisted_data;
+    file.close();
   } catch (std::invalid_argument &) {
     return;
   }
-
-  json persisted_data;
-  file >> persisted_data;
-  file.close();
 
   json positions_json = json::array();
 
