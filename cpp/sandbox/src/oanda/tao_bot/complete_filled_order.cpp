@@ -7,9 +7,10 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp"        // json
-#include "fetch_order.cpp" // fetch_order
-#include <string>          // std::stod, std::string
+#include "deps.cpp"                                // json
+#include "fetch_order.cpp"                         // fetch_order
+#include "handle_partially_filled_close_order.cpp" // handle_partially_filled_close_order
+#include <string>                                  // std::stoi, std::string
 
 void Oanda::TaoBot::complete_filled_order(order_t *order) {
   if (!order) {
@@ -30,13 +31,18 @@ void Oanda::TaoBot::complete_filled_order(order_t *order) {
 
   if (order_json.contains("tradeOpenedID")) {
     trade_id_string = order_json["tradeOpenedID"];
-  } else if (order_json.contains("tradeClosedIDs")) {
-    trade_id_string = order_json["tradeClosedIDs"][0];
   } else if (order_json.contains("tradeReducedID")) {
     trade_id_string = order_json["tradeReducedID"];
+    order->trade_id = std::stoi(trade_id_string);
+
+    handle_partially_filled_close_order(order);
+
+    return;
+  } else if (order_json.contains("tradeClosedIDs")) {
+    trade_id_string = order_json["tradeClosedIDs"][0];
   }
 
-  order->trade_id = std::stod(trade_id_string);
+  order->trade_id = std::stoi(trade_id_string);
 }
 
 #endif

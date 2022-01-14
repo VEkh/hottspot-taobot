@@ -32,6 +32,7 @@ private:
   using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
   using quote_t = Oanda::t::quote_t;
+  using trade_status_t = Oanda::t::trade_status_t;
 
   const double POLLING_INTERVAL_SECONDS = 1.0;
 
@@ -98,6 +99,7 @@ private:
   void complete_filled_order(order_t *);
   void close_position();
   void fetch_quote();
+  void handle_partially_filled_close_order(const order_t *);
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void log_account_balance();

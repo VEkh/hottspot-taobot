@@ -26,6 +26,11 @@ enum order_type_t {
   MARKET,
 };
 
+enum trade_status_t {
+  TRADE_CLOSED,
+  TRADE_OPEN,
+};
+
 struct order_t {
   order_action_t action;
   double execution_price = 0.00;

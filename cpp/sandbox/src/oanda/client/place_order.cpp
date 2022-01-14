@@ -29,7 +29,6 @@ CurlClient Oanda::Client::place_order(order_t *order) {
     {
       "order": {
         "instrument": "",
-        "price": "1.00000",
         "timeInForce": "FOK",
         "type": "MARKET",
         "units": 1
@@ -38,7 +37,6 @@ CurlClient Oanda::Client::place_order(order_t *order) {
   )"_json;
 
   body["order"]["instrument"] = order->symbol;
-  body["order"]["price"] = ::utils::float_::round_to_s(order->limit_price, 5);
   body["order"]["timeInForce"] =
       Oanda::constants::ORDER_TIMES_IN_FORCE[order->time_in_force];
   body["order"]["type"] = Oanda::constants::ORDER_TYPES[order->type];

@@ -44,6 +44,25 @@ Oanda::t::order_status_t to_order_status_t(const std::string &status) {
   exit(1);
 }
 
+Oanda::t::trade_status_t to_trade_status_t(const std::string &status) {
+  int l = sizeof(Oanda::constants::TRADE_STATUSES) /
+          sizeof(*Oanda::constants::TRADE_STATUSES);
+
+  for (int i = 0; i < l; i++) {
+    if (Oanda::constants::TRADE_STATUSES[i] == status) {
+      return (Oanda::t::trade_status_t)i;
+    }
+  }
+
+  std::string message =
+      Formatted::error_message(std::string("❌ Status <" + status) +
+                               "> was not present in TRADE_STATUSES.");
+
+  std::cout << message << std::endl;
+
+  exit(1);
+}
+
 } // namespace utils
 } // namespace Oanda
 

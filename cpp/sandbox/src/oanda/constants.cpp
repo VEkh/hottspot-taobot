@@ -22,6 +22,11 @@ const char *ORDER_TYPES[] = {
     "MARKET",
 };
 
+const char *TRADE_STATUSES[] = {
+    "CLOSED",
+    "OPEN",
+};
+
 } // namespace constants
 } // namespace Oanda
 
