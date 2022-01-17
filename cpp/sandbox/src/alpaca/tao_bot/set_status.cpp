@@ -33,6 +33,10 @@ void Alpaca::TaoBot::set_status(order_t *order) {
     return;
   }
 
+  if (!order_json.contains("status")) {
+    return set_status(order);
+  }
+
   const std::string status = order_json["status"];
   order->status = Alpaca::utils::to_order_status_t(status);
 

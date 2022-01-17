@@ -26,6 +26,10 @@ void Alpaca::TaoBot::set_execution_price(order_t *order) {
 
   json order_json = fetch_order(order);
 
+  if (!order_json.contains("filled_avg_price")) {
+    return set_execution_price(order);
+  }
+
   const std::string execution_price_string = order_json["filled_avg_price"];
 
   order->execution_price = (double)std::stod(execution_price_string);
