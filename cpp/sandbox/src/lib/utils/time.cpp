@@ -2,13 +2,14 @@
 #define UTILS__TIME
 
 #include <chrono>   // std::chrono, std::duration
-#include <ctime>    // localtime, time, time_t, tm
+#include <ctime>    // std::localtime, struct std::tm
 #include <iomanip>  // std::setw
 #include <iostream> // std::fixed
 #include <map>      // std::map
 #include <ratio>    // std::nano
 #include <sstream>  // std::ostringstream
 #include <stdlib.h> // getenv, setenv, unsetenv
+#include <time.h>   // localtime, strftime, struct tm, time, time_t
 #include <vector>   // std::vector
 
 namespace utils {
@@ -63,6 +64,20 @@ int day_of_week() {
 
     return local_time.tm_wday;
   });
+}
+
+std::string date_string(time_t *date, const char *format = "%F") {
+  struct tm *timeinfo;
+  const int buffer_size = 10 + 1;
+
+  char buffer[buffer_size];
+
+  time(date);
+  timeinfo = localtime(date);
+
+  strftime(buffer, buffer_size, format, timeinfo);
+
+  return buffer;
 }
 
 bool is_at_least(const std::vector<int> time_parts) {

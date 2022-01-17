@@ -62,6 +62,7 @@ private:
   account_balance_t fetch_account_balance();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
+  bool is_holiday();
   bool is_market_open();
   bool should_close_position();
   bool should_open_position();

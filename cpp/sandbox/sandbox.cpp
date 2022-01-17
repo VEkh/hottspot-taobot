@@ -1,11 +1,13 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include <algorithm> // std::min
+#include "lib/utils/time.cpp" // ::utils::time_
 #include <string>
 
 int main() {
-  std::string str = "1.273749";
+  std::time_t now = std::time(nullptr);
 
-  printf("%i\n", std::stoi(str));
+  std::string str = ::utils::time_::date_string(&now);
+
+  printf("Today's date %s\n", str.c_str());
 }
