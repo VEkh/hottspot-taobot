@@ -17,8 +17,9 @@ void Alpaca::TaoBot::cancel_stale_open_order() {
     return;
   }
 
-  if (!(this->open_order.status == order_status_t::ORDER_NEW ||
-        this->open_order.status == order_status_t::ORDER_CANCELED)) {
+  if (!(this->open_order.status == order_status_t::ORDER_ACCEPTED ||
+        this->open_order.status == order_status_t::ORDER_CANCELED ||
+        this->open_order.status == order_status_t::ORDER_NEW)) {
     return;
   }
 
@@ -35,7 +36,22 @@ void Alpaca::TaoBot::cancel_stale_open_order() {
   printf("😴 Clearing stale open order %s.\n", this->open_order.id.c_str());
   std::cout << fmt.reset;
 
-  this->api_client.cancel_order(this->open_order_ptr);
+  const std::string cancel_response =
+      this->api_client.cancel_order(this->open_order_ptr);
+
+  if (cancel_response.empty()) {
+    std::cout << fmt.green << fmt.bold;
+    printf("✅ Successfully cancelled order %s\n", this->open_order.id.c_str());
+  } else {
+    json response_json = ::utils::json::parse_with_catch(
+        cancel_response, "ALPACA__CLIENT_cancel_order");
+
+    std::cout << fmt.red << fmt.bold;
+    printf("❌ Failed to cancel order %s: %s\n", this->open_order.id.c_str(),
+           response_json.dump(2).c_str());
+  }
+
+  std::cout << fmt.reset;
 }
 
 #endif

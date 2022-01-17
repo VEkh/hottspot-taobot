@@ -8,32 +8,25 @@
  */
 #include "client.h"
 
-#include "deps.cpp"                        // json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
-#include "lib/utils/json.cpp"              // ::utils::json
 #include "post.cpp"                        // post
 #include <stdexcept>                       // std::invalid_argument
 #include <string>                          // std::string
 
-std::string Alpaca::Client::cancel_order(order_t *order) {
-  std::string response_body = cancel_order(order->id);
-
-  json response = ::utils::json::parse_with_catch(
-      response_body, "ALPACA__CLIENT_cancel_order");
-
-  return response_body;
+std::string Alpaca::Client::cancel_order(const order_t *order) {
+  return cancel_order(order->id);
 }
 
 std::string Alpaca::Client::cancel_order(const std::string &order_id) {
   if (order_id.empty()) {
-    std::string message =
+    const std::string message =
         Formatted::error_message("Please provide an order id");
 
     throw std::invalid_argument(message);
   }
 
-  std::string url = this->config.base_url + "/v2/orders/" + order_id;
+  const std::string url = this->config.base_url + "/v2/orders/" + order_id;
 
   CurlClient curl_client = post({
       .body = "",
