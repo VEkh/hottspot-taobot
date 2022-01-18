@@ -8376,7 +8376,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-18:
+### 2021-01-17:
 #### Performance
 
 * Opening Account Value: $48,899.43 (PAPER)
@@ -8387,6 +8387,62 @@ deep that they must be handled specially.
 * Win / Loss:
 * Week's Return:
 * Total Return:
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* After 18:54:49 GBP_USD hit a 17-loss streak and maxed out funds. The good
+  news it that it could tolerate 15.
+* I'm going to revert to alternating direction after every position before
+  increasing the target movement to reduce the max loss streak.
+
+#### Next Thing(s) to Try
+
+### 2021-01-18:
+#### Performance
+
+* Opening Account Value: $--- (PAPER)
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* 23:22:10 runtime; 2.5x spread; alternating trade positions -- AUD_USD hit a
+  21-loss streak and maxed out funds. It could tolerate 15.
+* Going to revert to only buys and increase target movement to 2.75x spread
+* USD_CAD encountered a 16-loss streak and maxed out funds almost immediately
+  after increaseing to a 2.75x spread target movement.
+* I increased the funds and the target movement to 3.0x spread to hopefully
+  avoid excessive losses while trying to find the correct target movement.
+
+##### Stocks/ETFs
+* Capture profit was still ocurring infrequently, so I loosened its strictness.
+* I introduced a bug which resulted in silly losses.
+* I then introduced price movement persitence. This solves both the capture
+  profit problem and the need to gather fresh price movement data each time
+  trading opens.
+  * It will compute the cumulative price movement data which can be used all
+    day and account for early day and random volatility spikes.
+
+#### Next Thing(s) to Try
+
+### 2021-01-19:
+#### Performance
+
+* Opening Account Value: $48,899.43 (PAPER)
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
