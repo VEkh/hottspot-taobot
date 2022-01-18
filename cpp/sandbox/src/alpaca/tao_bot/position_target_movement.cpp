@@ -4,7 +4,8 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 double Alpaca::TaoBot::position_target_movement() {
-  return this->MIN_TARGET_TICK_MOVEMENT * this->average_tick_price_delta;
+  return this->MIN_TARGET_TICK_MOVEMENT *
+         this->price_movement.three_minute_one_second_variance.average;
 }
 
 #endif

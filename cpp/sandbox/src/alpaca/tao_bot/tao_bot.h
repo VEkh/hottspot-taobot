@@ -28,6 +28,7 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
+  using price_movement_t = Alpaca::t::price_movement_t;
   using quote_t = Alpaca::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
@@ -46,7 +47,6 @@ private:
   bool is_capturing_profit = false;
   bool is_long_position;
   char *symbol;
-  double average_tick_price_delta = 0.00;
   double quantity;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
@@ -54,6 +54,7 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  price_movement_t price_movement;
   std::list<candlestick_t> candlesticks;
   std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
@@ -93,28 +94,30 @@ private:
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
+  void load_price_movement();
   void log_account_balance();
-  void log_average_tick_price_delta();
-  void log_end_of_trading_period();
   void log_candlesticks();
+  void log_end_of_trading_period();
   void log_performance();
   void log_position();
   void log_position_results();
+  void log_price_movement();
   void log_quote();
   void log_start_message();
   void open_position();
   void reset_position();
-  void set_average_tick_price_delta();
   void set_close_position_prices();
   void set_execution_price(order_t *);
   void set_open_position_prices();
   void set_position_status();
+  void set_price_movement();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
   void set_trade_direction();
   void watch();
   void write_performance();
+  void write_price_movement();
 };
 } // namespace Alpaca
 

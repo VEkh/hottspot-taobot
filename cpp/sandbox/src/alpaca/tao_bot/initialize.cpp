@@ -9,6 +9,7 @@
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "lib/utils/boolean.cpp"     // ::utils::boolean
 #include "load_performance.cpp"      // load_performance
+#include "load_price_movement.cpp"   // load_rice_movement
 #include "tao_bot.h"                 // Alpaca::TaoBot
 #include <iostream>                  // std::cout, std::endl
 #include <locale.h>                  // setlocale
@@ -47,6 +48,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
 
   fetch_quote();
   load_performance();
+  load_price_movement();
 
   this->performance = build_performance();
   this->is_long_position = true;

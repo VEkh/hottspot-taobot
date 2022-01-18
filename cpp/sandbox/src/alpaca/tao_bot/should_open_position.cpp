@@ -8,7 +8,7 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->candlesticks.size()) {
+  if (!this->price_movement.three_minute_one_second_variance.average) {
     return false;
   }
 

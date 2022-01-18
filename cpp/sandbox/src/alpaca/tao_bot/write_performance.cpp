@@ -14,6 +14,7 @@
 #include "lib/utils/io.cpp"     // utils::io
 #include <list>                 // std::list
 #include <stdexcept>            // std::invalid_argument
+#include <string>               // std::string
 
 void Alpaca::TaoBot::write_performance() {
   try {
@@ -27,8 +28,9 @@ void Alpaca::TaoBot::write_performance() {
       };
     };
 
-    std::string filepath = std::string(APP_DIR) + "/data/alpaca/performance/" +
-                           std::string(symbol) + ".json";
+    const std::string filepath = std::string(APP_DIR) +
+                                 "/data/alpaca/performance/" +
+                                 std::string(symbol) + ".json";
 
     json performance_json;
 

@@ -52,6 +52,15 @@ struct position_t {
   order_t open_order;
 };
 
+struct price_movement_average_t {
+  double average = 0.00;
+  long int count = 0;
+};
+
+struct price_movement_t {
+  price_movement_average_t three_minute_one_second_variance;
+};
+
 struct quote_t {
   double price;
   long int timestamp;

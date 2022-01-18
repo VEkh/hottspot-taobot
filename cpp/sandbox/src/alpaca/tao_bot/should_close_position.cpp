@@ -33,17 +33,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  const double one_third = 1.0 / 3;
-
-  if ((this->open_order.profit >=
-       (abs(this->exit_prices.init_max_loss) * one_third)) &&
-      ((position_target_movement() / abs(this->exit_prices.init_max_loss)) <=
-       one_third)) {
-    this->is_capturing_profit = true;
-
-    return true;
-  }
-
   if (this->open_order.profit <= exit_prices.max_loss) {
     return true;
   }
