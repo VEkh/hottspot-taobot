@@ -8446,5 +8446,26 @@ deep that they must be handled specially.
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
+##### Forex
+* 22:27:10 runtime; 3.0x spread; only buys -- EUR_JPY hit a
+  15-loss streak and was able to afford it. USD_CAD and USD_JPY both hit 12
+  losses and could also afford it.
+
+#### Next Thing(s) to Try
+
+### 2021-01-20:
+#### Performance
+
+* Opening Account Value: $48,899.43 (PAPER)
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
 
 #### Next Thing(s) to Try
