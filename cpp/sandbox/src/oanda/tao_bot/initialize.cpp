@@ -7,6 +7,7 @@
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "lib/utils/boolean.cpp"     // ::utils::boolean
 #include "load_performance.cpp"      // load_performance
+#include "set_trade_direction.cpp"   // set_trade_direction
 #include "spread_limit.cpp"          // spread_limit
 #include "tao_bot.h"                 // Oanda::TaoBot, quantity, symbol
 #include <locale.h>                  // setlocale
@@ -38,9 +39,9 @@ void Oanda::TaoBot::initialize(char *symbol_,
 
   fetch_quote();
   load_performance();
+  set_trade_direction();
 
   this->performance = build_performance();
-  this->is_long_position = true;
 }
 
 #endif

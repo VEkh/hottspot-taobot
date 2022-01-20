@@ -8456,6 +8456,31 @@ deep that they must be handled specially.
 ### 2021-01-20:
 #### Performance
 
+* Opening Account Value: $---
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* 40+ hours of runtime; 3.0x spread; only buys -- AUD_USD hit an
+  18-loss streak. It seemed still able to afford it, however I shut it down
+  because it had incurred too much loss.
+
+##### Stocks/ETFs
+* TWTR hit a 15-loss streak and could only afford 11 losses.
+
+#### Next Thing(s) to Try
+* Alternate direction every three positions. Can we avoid 15 loss streaks?
+
+### 2021-01-21:
+#### Performance
+
 * Opening Account Value: $48,899.43 (PAPER)
 
 * Total: $ (% Account) (% Daily Salary) (vs. QQQ:)

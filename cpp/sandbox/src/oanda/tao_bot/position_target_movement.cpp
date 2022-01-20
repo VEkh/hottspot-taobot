@@ -5,7 +5,7 @@
 #include "tao_bot.h"          // Oanda::TaoBot
 
 double Oanda::TaoBot::position_target_movement() {
-  return 3.0 * current_spread();
+  return 2.5 * current_spread();
 }
 
 #endif
