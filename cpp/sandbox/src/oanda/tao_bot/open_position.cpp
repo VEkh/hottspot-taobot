@@ -13,7 +13,6 @@
 
 #include "build_performance.cpp"         // build_performance
 #include "compute_quantity.cpp"          // compute_quantity
-#include "current_price.cpp"             // current_price
 #include "fetch_account_balance.cpp"     // fetch_account_balance
 #include "lib/curl_client/curl_client.h" // CurlClient
 #include "oanda/constants.cpp"           // Oanda::constants
@@ -44,7 +43,6 @@ void Oanda::TaoBot::open_position() {
   order_t new_open_order;
   new_open_order.action =
       this->is_long_position ? order_action_t::BUY : order_action_t::SELL;
-  new_open_order.limit_price = current_price();
   new_open_order.quantity = this->quantity;
   new_open_order.symbol = this->symbol;
   new_open_order.time_in_force = order_time_in_force_t::FOK;

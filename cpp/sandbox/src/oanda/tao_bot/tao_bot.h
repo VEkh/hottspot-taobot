@@ -51,7 +51,6 @@ private:
   Oanda::Client api_client;
   account_balance_t account_balance;
   account_balance_t original_account_balance;
-  ;
   bool is_long_position = true;
   char *symbol;
   exit_prices_t exit_prices;
@@ -75,7 +74,6 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double convert_price(const double, const std::string, const std::string);
-  double current_price();
   double current_spread();
   double loss_to_recover();
   double position_target_movement();
@@ -119,7 +117,6 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *order);
   void set_status(order_t *order);
-  void set_trade_direction();
   void watch();
   void write_performance();
 };
