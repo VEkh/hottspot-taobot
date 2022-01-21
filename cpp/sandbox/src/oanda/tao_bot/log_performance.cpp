@@ -66,12 +66,15 @@ void Oanda::TaoBot::log_performance() {
          stats.current_loss_streak_balance,
          stats.current_balance - stats.max_balance);
 
-  printf("Profits: [");
+  printf("Profits (Last 20): [");
 
-  for (int i = 0, l = this->closed_positions.size(); i < l; i++) {
+  const int l = this->closed_positions.size();
+  const int start_index = std::max(l - 20, 0);
+
+  for (int i = start_index; i < l; i++) {
     const position_t position = this->closed_positions[i];
 
-    if (i != 0) {
+    if (i != start_index) {
       printf(", ");
     }
 
