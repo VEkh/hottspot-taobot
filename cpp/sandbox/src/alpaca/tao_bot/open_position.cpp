@@ -19,6 +19,7 @@
 #include "should_open_position.cpp"  // should_open_position
 #include "write_performance.cpp"     // write_performance
 #include <iostream>                  // std::cout, std::endl
+#include <math.h>                    // ceil
 #include <stdio.h>                   // printf
 
 void Alpaca::TaoBot::open_position() {
@@ -38,7 +39,7 @@ void Alpaca::TaoBot::open_position() {
     return;
   }
 
-  this->quantity = quantity_;
+  this->quantity = this->is_long_position ? quantity_ : ceil(quantity_);
 
   order_t new_open_order;
   new_open_order.action =

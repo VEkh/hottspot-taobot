@@ -62,7 +62,9 @@ struct price_movement_t {
 };
 
 struct quote_t {
-  double price;
+  double ask = 0.00;
+  double bid = 0.00;
+  double price = 0.00;
   long int timestamp;
 };
 } // namespace t

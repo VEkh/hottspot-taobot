@@ -32,7 +32,7 @@ std::string Alpaca::Client::fetch_quote(char *symbol) {
 
 std::string Alpaca::Client::fetch_quote(const std::string &symbol) {
   std::string request_url =
-      config.data_base_url + "/v2/stocks/" + symbol + "/trades/latest";
+      config.data_base_url + "/v2/stocks/" + symbol + "/quotes/latest";
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return fetch(request_url); },

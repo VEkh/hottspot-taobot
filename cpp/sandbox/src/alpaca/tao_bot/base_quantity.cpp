@@ -10,9 +10,7 @@ double Alpaca::TaoBot::base_quantity() {
                                this->account_balance.margin_multiplier *
                                this->POSITION_TARGET_PROFIT_RATIO;
 
-  const double quantity_ = target_profit / position_target_movement();
-
-  return this->is_long_position ? quantity_ : ceil(quantity_);
+  return target_profit / position_target_movement();
 }
 
 #endif

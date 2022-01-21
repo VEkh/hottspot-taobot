@@ -14,9 +14,13 @@ Alpaca::Client::parse_quote(const std::string &response_body) {
   json quote_json = ::utils::json::parse_with_catch(
       response_body, "ALPACA__CLIENT_parse_quote");
 
-  const double price = quote_json["trade"]["p"];
+  const double ask = quote_json["quote"]["ap"];
+  const double bid = quote_json["quote"]["bp"];
+  const double price = (ask + bid) * 0.5;
 
   quote_t quote;
+  quote.ask = ask;
+  quote.bid = bid;
   quote.price = price;
   quote.timestamp = now;
 
