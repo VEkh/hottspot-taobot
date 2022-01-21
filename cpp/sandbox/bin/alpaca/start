@@ -40,24 +40,7 @@ case $1 in
     ;;
 
   *)
-    symbols=(
-      "AAPL"
-      "AMD"
-      "CSCO"
-      "FB"
-      "GM"
-      "INTC"
-      "IWM"
-      "LCID"
-      "MSFT"
-      "NVDA"
-      "QQQ"
-      "SNAP"
-      "SPY"
-      "TSLA"
-      "TWTR"
-      "VIAC"
-    )
+    symbols=$(cat "$app_dir/bin/alpaca/symbols")
 
     for symbol in "${symbols[@]}"
     do
