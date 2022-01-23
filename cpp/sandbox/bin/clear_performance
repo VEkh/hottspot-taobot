@@ -1,0 +1,44 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+project=$(dirname "$0" | xargs basename)
+
+performance_dir="$app_dir/data/$project/performance"
+
+if [[ $project = "bin" ]]; then
+  cmd=$(basename "$0")
+
+  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
+  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
+
+  exit 1;
+fi
+
+shopt -s extglob
+mkdir -p "$performance_dir"
+
+function clear_performance() {
+  symbol="${1^^}"
+
+  echo "{}" > "$performance_dir/$symbol.json"
+  echo -e "\n${fmt_bold}${fmt_yellow}Cleared $symbol's performance${fmt_reset}\n"
+}
+
+case $1 in
+  +([[:alpha:]]))
+    clear_performance "$1"
+    ;;
+
+  *)
+    symbols=($(cat "$app_dir/bin/$project/symbols"))
+
+    for symbol in "${symbols[@]}"
+    do
+      clear_performance "$symbol"
+    done
+    ;;
+esac

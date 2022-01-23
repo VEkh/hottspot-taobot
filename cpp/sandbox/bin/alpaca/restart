@@ -1,13 +1,1 @@
-#!/bin/bash
-
-app_dir=$(realpath "$(dirname "$0")/../../")
-project=$(dirname "$0" | xargs basename)
-
-if [[ "$*" =~ .*--clear-performance.* ]]
-then
-  symbol="${1^^}"
-  "$app_dir/bin/$project/clear_performance" "$symbol"
-fi
-
-"$app_dir/bin/$project/stop" "$@"
-"$app_dir/bin/$project/start" "$@"
+../restart

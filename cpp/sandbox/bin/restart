@@ -1,0 +1,25 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+project=$(dirname "$0" | xargs basename)
+
+if [[ $project = "bin" ]]; then
+  cmd=$(basename "$0")
+
+  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
+  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
+
+  exit 1;
+fi
+
+if [[ "$*" =~ .*--clear-performance.* ]]
+then
+  symbol="${1^^}"
+  "$app_dir/bin/$project/clear_performance" "$symbol"
+fi
+
+"$app_dir/bin/$project/stop" "$@"
+"$app_dir/bin/$project/start" "$@"
