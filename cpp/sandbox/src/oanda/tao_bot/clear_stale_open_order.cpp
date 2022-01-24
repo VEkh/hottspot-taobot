@@ -25,11 +25,26 @@ void Oanda::TaoBot::clear_stale_open_order() {
     return;
   }
 
-  std::cout << fmt.yellow << fmt.bold;
-  printf("😴 Clearing stale open order %i.\n", this->open_order.id);
-  std::cout << fmt.reset;
+  switch (this->open_order.status) {
+  case order_status_t::ORDER_CANCELLED: {
+    std::cout << fmt.yellow << fmt.bold;
+    printf("😴 Clearing stale open order %i.\n", this->open_order.id);
+    std::cout << fmt.reset;
 
-  this->open_order_ptr = nullptr;
+    this->open_order_ptr = nullptr;
+
+    break;
+  }
+  case order_status_t::ORDER_PENDING: {
+    std::cout << fmt.yellow << fmt.bold;
+    printf("⛔ Cancelling stale open order %i.\n", this->open_order.id);
+    std::cout << fmt.reset;
+
+    this->api_client.cancel_order(this->open_order_ptr);
+
+    break;
+  }
+  }
 }
 
 #endif
