@@ -4,24 +4,7 @@
 #include "tao_bot.h" // Oanda::TaoBot
 
 void Oanda::TaoBot::set_trade_direction() {
-  const int loss_streak = this->performance.loss_streaks.current;
-
-  if (!loss_streak) {
-    this->is_long_position = true;
-    return;
-  }
-
-  if (loss_streak < 4) {
-    this->is_long_position = (bool)!this->is_long_position;
-    return;
-  }
-
-  if (loss_streak < 8) {
-    this->is_long_position = true;
-    return;
-  }
-
-  this->is_long_position = (bool)!this->is_long_position;
+  this->is_long_position = ((this->closed_positions.size() / 4) % 2) == 0;
 }
 
 #endif
