@@ -61,6 +61,7 @@ private:
   order_t open_order;
   performance_t performance;
   std::list<candlestick_t> candlesticks;
+  std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 

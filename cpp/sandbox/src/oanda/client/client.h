@@ -5,6 +5,7 @@
 #include "lib/formatted.cpp"               // Formatted
 #include "oanda/types.cpp"                 // Oanda::t
 #include "types.cpp"                       // Global::t
+#include <map>                             // std::map
 #include <string>                          // std::string
 
 namespace Oanda {
@@ -16,7 +17,7 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Oanda::t::quote_t;
 
-  Client();
+  Client(std::map<std::string, std::string>);
 
   CurlClient place_order(order_t *order);
 
@@ -39,10 +40,11 @@ private:
   } config;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  std::map<std::string, std::string> flags = {{"paper", "0"}};
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
-
+  bool is_live();
   void load_config();
 };
 } // namespace Oanda

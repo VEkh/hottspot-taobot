@@ -11,7 +11,12 @@
 #include "load_config.cpp" // load_config
 #include "parse_quote.cpp"
 #include "place_order.cpp"
+#include <map>    // std::map
+#include <string> // std::string
 
-Oanda::Client::Client() { load_config(); }
+Oanda::Client::Client(std::map<std::string, std::string> flags_ = {}) {
+  this->flags = flags_;
+  load_config();
+}
 
 #endif

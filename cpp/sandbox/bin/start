@@ -49,6 +49,10 @@ case $1 in
     symbol_start "$1"
     ;;
 
+  +([[:alpha:]_[:alpha:]]))
+    symbol_start "$1"
+    ;;
+
   *)
     symbols=($(cat "$app_dir/bin/$project/symbols"))
 

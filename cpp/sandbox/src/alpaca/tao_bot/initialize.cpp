@@ -20,7 +20,7 @@
 #include <string>    // std::string
 
 void Alpaca::TaoBot::initialize(char *symbol_,
-                                std::map<std::string, std::string> &flags) {
+                                std::map<std::string, std::string> &flags_) {
   if (symbol_ == nullptr) {
     const std::string message =
         Formatted::error_message("Must provide a symbol");
@@ -39,12 +39,12 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
-  this->api_client = Alpaca::Client(flags);
+  this->api_client = Alpaca::Client(flags_);
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
 
-  this->flags = flags;
+  this->flags = flags_;
   this->symbol = symbol_;
 
   fetch_quote();

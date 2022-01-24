@@ -16,7 +16,7 @@
 #include <string>                    // std::map
 
 void Oanda::TaoBot::initialize(char *symbol_,
-                               std::map<std::string, std::string> &flags) {
+                               std::map<std::string, std::string> &flags_) {
   if (symbol_ == nullptr) {
     std::string message =
         Formatted::error_message("Must provide a currency pair");
@@ -34,8 +34,12 @@ void Oanda::TaoBot::initialize(char *symbol_,
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
+  this->api_client = Oanda::Client(flags_);
+
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
+
+  this->flags = flags_;
 
   fetch_quote();
   load_performance();

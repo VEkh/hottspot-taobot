@@ -3,6 +3,7 @@
 
 #include "client.h"          // Oanda::Client, config
 #include "deps.cpp"          // json
+#include "is_live.cpp"       // is_live
 #include "lib/formatted.cpp" // Formatted::error_message
 #include <fstream>           // std::ifstream, std::ios
 #include <stdexcept>         // std::invalid_argument
@@ -25,9 +26,8 @@ void Oanda::Client::load_config() {
   config_file.close();
 
   const char *required_keys[] = {
-      "account_id",
-      "authentication_token",
-      "base_url",
+      "live",
+      "paper",
   };
 
   for (const char *key : required_keys) {
@@ -43,10 +43,39 @@ void Oanda::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  const char *nested_required_keys[] = {
+      "account_id",
+      "authentication_token",
+      "base_url",
+  };
+
+  const char *session_keys[] = {
+      "live",
+      "paper",
+  };
+
+  for (const char *session_key : session_keys) {
+    for (const char *key : nested_required_keys) {
+      if (config_json[session_key].contains(key)) {
+        continue;
+      }
+
+      std::string error_message = Formatted::error_message(
+          "Config file is missing the `" + std::string(session_key) +
+          std::string(".") + std::string(key) +
+          "` key. Please ensure it is in the config file at " +
+          std::string(config_path));
+
+      throw std::invalid_argument(error_message);
+    }
+  }
+
+  const char *session_key = is_live() ? "live" : "paper";
+
   this->config = {
-      .account_id = config_json["account_id"],
-      .authentication_token = config_json["authentication_token"],
-      .base_url = config_json["base_url"],
+      .account_id = config_json[session_key]["account_id"],
+      .authentication_token = config_json[session_key]["authentication_token"],
+      .base_url = config_json[session_key]["base_url"],
   };
 }
 
