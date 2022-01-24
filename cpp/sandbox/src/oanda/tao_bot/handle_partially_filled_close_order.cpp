@@ -32,7 +32,7 @@ void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
 
     order_t new_close_order;
     new_close_order.action = order->action;
-    new_close_order.quantity = std::stoi(current_units);
+    new_close_order.quantity = -std::stoi(current_units);
     new_close_order.symbol = order->symbol;
     new_close_order.time_in_force = order->time_in_force;
     new_close_order.type = order->type;
