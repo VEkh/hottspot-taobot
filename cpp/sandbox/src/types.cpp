@@ -35,8 +35,8 @@ struct exit_prices_t {
 
 struct order_win_result_streak_t {
   std::map<int, int> counts;
-  int current;
-  int longest;
+  int current = 0;
+  int longest = 0;
 };
 
 struct performance_t {

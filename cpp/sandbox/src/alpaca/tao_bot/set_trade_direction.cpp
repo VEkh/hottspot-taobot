@@ -8,14 +8,17 @@ void Alpaca::TaoBot::set_trade_direction() {
 
   if (!loss_streak) {
     this->is_long_position = true;
+    return;
   }
 
   if (loss_streak < 4) {
     this->is_long_position = (bool)!this->is_long_position;
+    return;
   }
 
   if (loss_streak < 8) {
     this->is_long_position = true;
+    return;
   }
 
   this->is_long_position = (bool)!this->is_long_position;
