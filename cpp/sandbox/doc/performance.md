@@ -8492,5 +8492,93 @@ deep that they must be handled specially.
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
+##### Forex
+##### Stocks / ETFs
+
+#### Next Thing(s) to Try
+
+### 2021-01-24:
+#### Performance
+
+* Opening Account Value: $48,899.43 (PAPER)
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* AUD_USD hit a 17-loss losing streak with the alternating trade direction
+  strategy.
+* No one else had a loss streak that high.
+* I finally set Oanda up to paper trade, so now we don't have to risk actual
+  money 😓
+* The clear stale open order had a bug that resulted in a $250 loss. I believe
+  I fixed it, but we'll see.
+* Handle partially closed order also closed with the wrong quantity. I fixed
+  this.
+* I need to run for several days to ensure that the fixes work.
+
+##### Stocks/ETFs
+* This is the first day with the alternating trade direction setting strategy.
+  It worked really well.
+* The longest loss streak was XLF with 11.
+* We'll see if this was a fluke over the next couple of days.
+
+#### Next Thing(s) to Try
+
+### 2021-01-25:
+#### Performance
+##### Forex (Paper)
+* Open: $---
+* Close: $---
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Open: $48,864.00
+* Close: $48,937.76
+* Return: +$73.76 (+0.15% Account) (+14.56% Daily Salary) (vs. QQQ: -2.32%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
+* Week's Return: +$73.76
+* Total Return: +$73.76
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime: 15:52:03; 2.5x spread; 4-up, 4-down -- Longest streaks were EUR_GBP
+  (14) and USD_JPY (14). Both recovered from them. It's up +0.34%.
+* Stale pending orders were also successfully cleared 🎉
+* Still haven't seen any successfully closed partial closes
+
+##### Stocks/ETFs
+* The paper account returned +>1.0% by midday. This was the second day in a row
+  and the longest loss streaks was still 11, so I stopped its running and
+  turned on live trading.
+* By day's end it had earned +0.15%.
+* We'll continue live trading with the current iteration of TaoBot and see if
+  continues to profit.
+
+#### Next Thing(s) to Try
+
+### 2021-01-26:
+#### Performance
+
+* Opening Account Value: $48,899.43 (PAPER)
+
+* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
+
+#### Stats (as of stable profitable algo [5/28])
+* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
+* Week's Return: ---
+* Total Return: -$17,707.21
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
 
 #### Next Thing(s) to Try
