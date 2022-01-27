@@ -1,11 +1,6 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <string>
+#include <math.h> // pow
 
-int main() {
-  std::string num = "-1";
-
-  printf("Num: %i\n", -std::stoi(num));
-}
+int main() { printf("Num: %f\n", pow(2, 9 + 1)); }

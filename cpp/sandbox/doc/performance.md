@@ -8568,17 +8568,55 @@ deep that they must be handled specially.
 
 ### 2021-01-26:
 #### Performance
+##### Forex (Paper)
+* Close: $---
+* Open: $---
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
-* Opening Account Value: $48,899.43 (PAPER)
+##### Stocks/ETFs
+* Return: +$1,109.46 (2.27% Account) (218.95% Daily Salary) (vs. QQQ: -0.16%)
 
-* Total: $ (% Account) (% Daily Salary) (vs. QQQ:)
-
-#### Stats (as of stable profitable algo [5/28])
-* Win / Loss: 74W (Consecutive: 0) 73L (Consecutive: 5)
-* Week's Return: ---
-* Total Return: -$17,707.21
+#### Stats (as of 2022-01-25)
+* Win / Loss: 2W (Consecutive: 2) 0L (Consecutive: 0)
+* Week's Return: +$1,183.22
+* Total Return: +$1,183.22
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
+##### Forex
+* This performed well!
+* The longest loss streaks are AUD_USD, EUR_GBP, GBP_USD, USD_JPY, all with 14
+* It's time to compute the base target profit as a ratio of the total margin
+  and try in staging. Start by making it twice the profit that is one unit (spread?)
+
+
+##### Stocks/ETFs
+* GREAT performance again 🎉
+* The longest streak is still INTC (10)
+* I'm going to keep this in production and increase the base target profit and
+  re-introduce AMZN and GOOG in staging to see if the new trading strategy
+  works with them.
+
+#### Next Thing(s) to Try
+
+### 2021-01-27:
+#### Performance
+##### Forex (Paper)
+* Close: $---
+* Open: $---
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
+* Week's Return: +$73.76
+* Total Return: +$73.76
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+##### Stocks/ETFs
 
 #### Next Thing(s) to Try

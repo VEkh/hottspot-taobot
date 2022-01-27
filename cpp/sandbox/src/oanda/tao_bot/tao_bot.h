@@ -35,6 +35,7 @@ private:
   using trade_status_t = Oanda::t::trade_status_t;
 
   const double POLLING_INTERVAL_SECONDS = 1.0;
+  const int MAX_EXPECTED_LOSS_STREAK = 15;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},

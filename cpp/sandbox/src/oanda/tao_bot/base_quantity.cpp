@@ -1,16 +1,16 @@
 #ifndef OANDA__TAO_BOT_base_quantity
 #define OANDA__TAO_BOT_base_quantity
 
-#include "current_spread.cpp"           // current_spread
-#include "position_target_movement.cpp" // position_target_movement
-#include "tao_bot.h"                    // Oanda::TaoBot
-#include <math.h>                       // ceil
+#include "max_affordable_quantity.cpp" // max_affordable_quantity
+#include "tao_bot.h"                   // Oanda::TaoBot
+#include <algorithm>                   // std::max
+#include <math.h>                      // floor, pow
 
 int Oanda::TaoBot::base_quantity() {
-  const double target_profit = current_spread();
-  const int base_quantity_ = ceil(target_profit / position_target_movement());
+  const int base_quantity_ = floor(max_affordable_quantity() /
+                                   pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1));
 
-  return base_quantity_;
+  return std::max(base_quantity_, 1);
 }
 
 #endif
