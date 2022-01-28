@@ -27,7 +27,7 @@ void Oanda::TaoBot::open_position() {
   }
 
   this->account_balance = fetch_account_balance();
-  const int quantity_ = compute_quantity();
+  const double quantity_ = compute_quantity();
 
   if (!quantity_) {
     std::cout << fmt.bold << fmt.yellow;

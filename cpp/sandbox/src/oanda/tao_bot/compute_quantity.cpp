@@ -9,8 +9,8 @@
 #include <algorithm>                   // std::min
 #include <math.h>                      // abs, ceil
 
-int Oanda::TaoBot::compute_quantity() {
-  const int max_affordable_quantity_ = max_affordable_quantity();
+double Oanda::TaoBot::compute_quantity() {
+  const double max_affordable_quantity_ = max_affordable_quantity();
 
   if (!max_affordable_quantity_) {
     return 0;
@@ -22,8 +22,8 @@ int Oanda::TaoBot::compute_quantity() {
     return std::min(base_quantity(), max_affordable_quantity_);
   }
 
-  exit_prices_t exit_prices_ = build_exit_prices();
-  int quantity_ = ceil(loss_to_recover_ / abs(exit_prices_.max_loss));
+  const exit_prices_t exit_prices_ = build_exit_prices();
+  const double quantity_ = ceil(loss_to_recover_ / abs(exit_prices_.max_loss));
 
   return std::min(quantity_, max_affordable_quantity_);
 }

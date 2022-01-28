@@ -73,11 +73,14 @@ private:
   bool should_close_position();
   bool should_open_position();
   bool should_terminate();
+  double base_quantity();
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
+  double compute_quantity();
   double convert_price(const double, const std::string, const std::string);
   double current_spread();
   double loss_to_recover();
+  double max_affordable_quantity();
   double position_target_movement();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
@@ -85,9 +88,6 @@ private:
   exit_prices_t build_exit_prices();
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
-  int base_quantity();
-  int compute_quantity();
-  int max_affordable_quantity();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   order_win_result_t order_win_result(const order_t *);

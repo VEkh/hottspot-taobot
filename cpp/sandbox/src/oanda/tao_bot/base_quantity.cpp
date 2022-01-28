@@ -4,11 +4,11 @@
 #include "max_affordable_quantity.cpp" // max_affordable_quantity
 #include "tao_bot.h"                   // Oanda::TaoBot
 #include <algorithm>                   // std::max
-#include <math.h>                      // floor, pow
+#include <math.h>                      // pow
 
-int Oanda::TaoBot::base_quantity() {
-  const int base_quantity_ = floor(max_affordable_quantity() /
-                                   pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1));
+double Oanda::TaoBot::base_quantity() {
+  const int base_quantity_ =
+      max_affordable_quantity() / pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1);
 
   return std::max(base_quantity_, 1);
 }
