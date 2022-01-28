@@ -1,6 +1,10 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include <math.h> // pow
+#include <math.h>
+#include <string>
 
-int main() { printf("Num: %f\n", pow(2, 9 + 1)); }
+int main() {
+  std::string num = "4";
+  printf("Num: %f\n", std::stod(num));
+}

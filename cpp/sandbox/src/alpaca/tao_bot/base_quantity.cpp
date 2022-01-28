@@ -1,16 +1,18 @@
 #ifndef ALPACA__TAO_BOT_base_quantity
 #define ALPACA__TAO_BOT_base_quantity
 
-#include "position_target_movement.cpp" // position_target_movement
-#include "tao_bot.h"                    // Alpaca::TaoBot
-#include <math.h>                       // ceil
+#include "current_price.cpp" // current_price
+#include "tao_bot.h"         // Alpaca::TaoBot
+#include <math.h>            // pow
 
 double Alpaca::TaoBot::base_quantity() {
-  const double target_profit = this->account_balance.balance *
-                               this->account_balance.margin_multiplier *
-                               this->POSITION_TARGET_PROFIT_RATIO;
+  const double max_buying_potential =
+      this->account_balance.balance * this->account_balance.margin_multiplier;
 
-  return target_profit / position_target_movement();
+  const double max_affordable_quantity_ =
+      max_buying_potential / current_price();
+
+  return max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1);
 }
 
 #endif

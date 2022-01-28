@@ -31,7 +31,7 @@ CurlClient Oanda::Client::place_order(order_t *order) {
         "instrument": "",
         "timeInForce": "FOK",
         "type": "MARKET",
-        "units": 1
+        "units": 1.00000
       }
     }
   )"_json;

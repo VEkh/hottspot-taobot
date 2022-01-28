@@ -29,7 +29,7 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::fetch_account_balance() {
   return {
       .balance = std::stod(balance),
       .margin_buying_power = margin_buying_power,
-      .margin_multiplier = (int)(1 / margin_rate),
+      .margin_multiplier = 1 / margin_rate,
   };
 }
 

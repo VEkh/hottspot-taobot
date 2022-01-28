@@ -56,6 +56,8 @@ void Oanda::TaoBot::watch() {
     log_position_results();
     reset_position();
 
+    std::cout << std::flush;
+
     usleep(1e6);
   }
 
