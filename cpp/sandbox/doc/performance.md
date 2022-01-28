@@ -8602,8 +8602,59 @@ deep that they must be handled specially.
 ### 2021-01-27:
 #### Performance
 ##### Forex (Paper)
-* Close: $---
-* Open: $---
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Return: +$919.65 (+1.84% Account) (+181.49% Daily Salary) (vs. QQQ: -1.01%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 3W (Consecutive: 3) 0L (Consecutive: 0)
+* Week's Return: $2,102.87
+* Total Return: $2,102.87
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime: 59:30:05; 2.5x spread; 4-up, 4-down -- Longest losss streak was EUR_GBP (15)
+
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2021-01-28:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Return: +$267.84 (+0.53% Account) (+52.86% Daily Salary) (vs. QQQ: +3.14%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 4W (Consecutive: 4) 0L (Consecutive: 0)
+* Week's Return: +$2,370.71
+* Total Return: +$2,370.71
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime < 6 hours; 2.5x spread; 4-up, 4-down; EUR_USD had an 18 loss losing
+  streak and didn't recover.
+* It still didn't trade in fractions. Not sure why.
+
+##### Stocks/ETFs
+* After two days of paper trading, AMZN and GOOG seem to perform well.
+  Their max loss streaks were 6 (AMZN) and 5 (GOOG). I'm still apprehensive of
+  their performance since I've seen them perform horribly in the past, but I'll
+  start trading them next week.
+* After 3-4 days of trading with the latest algorithm, the max loss streak has
+  been 10 (FB, INTC, IWM). This is unprecedented. It's time to try to increase
+  the base quantity to increase the profitability of low loss streak periods.
+
+#### Next Thing(s) to Try
+
+### 2021-01-31:
+#### Performance
+##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 ##### Stocks/ETFs
@@ -8611,8 +8662,8 @@ deep that they must be handled specially.
 
 #### Stats (as of 2022-01-25)
 * Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
-* Week's Return: +$73.76
-* Total Return: +$73.76
+* Week's Return:
+* Total Return:
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
 #### Remarks
