@@ -11,9 +11,16 @@ void Alpaca::TaoBot::fetch_quote() {
     const quote_t current_quote = this->api_client.parse_quote(quote_string);
 
     this->quotes.push_back(current_quote);
-  } catch (nlohmann::detail::type_error &) {
+  } catch (nlohmann::detail::parse_error &) {
     std::string error_message = Formatted::error_message(
         std::string("ALPACA__TAO_BOT_fetch_quote error when parsing"));
+
+    std::cout << error_message << fmt.reset << std::endl;
+
+    return fetch_quote();
+  } catch (nlohmann::detail::type_error &) {
+    std::string error_message = Formatted::error_message(std::string(
+        "ALPACA__TAO_BOT_fetch_quote error when reading the quote"));
 
     std::cout << error_message << fmt.reset << std::endl;
 
