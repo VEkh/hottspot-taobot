@@ -2,6 +2,7 @@
 #define OANDA__TAO_BOT_base_quantity
 
 #include "tao_bot.h" // Oanda::TaoBot
+#include <algorithm> // std::max
 #include <math.h>    // pow
 
 double Oanda::TaoBot::base_quantity() {
@@ -13,7 +14,10 @@ double Oanda::TaoBot::base_quantity() {
   const double max_affordable_quantity_ =
       max_buying_potential / dollars_per_unit;
 
-  return max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1);
+  const double base_quantity_ =
+      max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1);
+
+  return std::max(base_quantity_, 1.0);
 }
 
 #endif

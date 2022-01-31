@@ -42,7 +42,7 @@ void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
 
     std::cout << fmt.bold << fmt.yellow;
     printf("🙄 Order %i partially filled. Placing another order to close the "
-           "remaining %.5f units.\n",
+           "remaining %i units.\n",
            order->id, new_close_order.quantity);
     std::cout << fmt.reset << std::endl;
 

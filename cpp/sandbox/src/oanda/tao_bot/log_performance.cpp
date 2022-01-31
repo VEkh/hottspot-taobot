@@ -78,7 +78,7 @@ void Oanda::TaoBot::log_performance() {
       printf(", ");
     }
 
-    printf("%+.5f:%.5f", position.close_order.profit,
+    printf("%+.5f:%i", position.close_order.profit,
            position.close_order.quantity);
   }
 

@@ -76,7 +76,6 @@ private:
   double base_quantity();
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double compute_quantity();
   double convert_price(const double, const std::string, const std::string);
   double current_spread();
   double loss_to_recover();
@@ -88,6 +87,7 @@ private:
   exit_prices_t build_exit_prices();
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
+  int compute_quantity();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   order_win_result_t order_win_result(const order_t *);
