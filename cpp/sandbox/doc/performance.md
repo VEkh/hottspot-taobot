@@ -8658,10 +8658,85 @@ deep that they must be handled specially.
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 ##### Stocks/ETFs
+* Return: +$197.16 (+0.38% Account) (+38.91% Daily Salary) (vs. QQQ: 3.14%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 5W (Consecutive: 5) 0L (Consecutive: 0)
+* Week's Return: +$197.16
+* Total Return: +$2,567.32
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime 16:21:32 hours; 2.75x spread; (T)rend-(C)onsolidate-(T)rend; EUR_USD
+  had a 13 loss losing streak, but recovered.
+* Still waiting for the partial close bug to present itself.
+
+##### Stocks/ETFs
+* This was the first day I introduced AMZN and GOOG into production trading.
+  AMZN did well. GOOG did not. Its price jumps around a TON. I'll keep watching
+  and remove if necessary.
+* AMZN had a close call early in the day, but recovered.
+* There's still the bug of 1-sec variance outliers that screw up the average. I
+  need to address that.
+
+#### Next Thing(s) to Try
+
+### 2021-02-01:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Return: -$1,675.45 (-3.26% Account) (-330.65% Daily Salary) (vs. QQQ: +0.68%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 5W (Consecutive: 0) 1L (Consecutive: 1)
+* Week's Return: -$1,478.29
+* Total Return: +1,089.03
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Every forex kept encountering a cryptic pending order bug that didn't make sense.
+
+
+##### Stocks/ETFs
+* After testing AMZN and GOOG in staging for two days and somewhat promising
+  first day's performance, they both incurred heavy losses.
+* I'll take them out for now. Maybe another circumstance will make trading them
+  a good idea.
+* In staging I experimented with adjusting the `MAX_EXPECTED_LOSS_STREAK`. I
+  first reduced it to 8 (+1). Though it was still ultimately profitable, it led
+  too quickly sibling-blocking loss leaders. I increased it back to 10 (not 10
+  +1) and will observe before introducing to production.
+* I'm also testing NFLX's viability in staging.
+* The allure of AMZN and GOOG is they seemed to offer large returns. I'm
+  looking for common attributes in the most consistently profitable securities.
+  So far, TSLA is the most consistently profitable and it seems to be because
+  it's the most expensive, but highly traded stock. Another way of looking at
+  it would be securities with the greatest 1-sec variance to price ratio:
+  * AAPL: Raw: 0.019 • Ratio: 1.11e-4
+  * AMD:  Raw: 0.026 • Ratio: 2.18e-5
+  * CSCO: Raw: 0.005 • Ratio: 8.30e-5
+  * FB:   Raw: 0.039 • Ratio: 1.23e-4
+  * AMZN: Raw: 0.271 • Ratio: 8.98e-5
+  * NVDA: Raw: 0.039 • Ratio: 1.06e-4
+  * SPY:  Raw: 0.037 • Ratio: 8.10e-5
+  * TSLA: Raw: 0.206 • Ratio: 2.21e-4
+
+#### Next Thing(s) to Try
+
+### 2021-02-02:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 #### Stats (as of 2022-01-25)
-* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 * Week's Return:
 * Total Return:
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
