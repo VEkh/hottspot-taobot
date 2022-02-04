@@ -103,6 +103,7 @@ private:
   void log_price_movement();
   void log_quote();
   void log_start_message();
+  void log_timestamps();
   void open_position();
   void reset_position();
   void set_close_position_prices();

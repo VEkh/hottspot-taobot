@@ -67,17 +67,19 @@ int day_of_week() {
 }
 
 std::string date_string(time_t *date, const char *format = "%F") {
-  struct tm *timeinfo;
-  const int buffer_size = 10 + 1;
+  return in_time_zone<std::string>("America/New_York", [&]() -> std::string {
+    struct tm *timeinfo;
+    const int buffer_size = 100;
 
-  char buffer[buffer_size];
+    char buffer[buffer_size];
 
-  time(date);
-  timeinfo = localtime(date);
+    time(date);
+    timeinfo = localtime(date);
 
-  strftime(buffer, buffer_size, format, timeinfo);
+    strftime(buffer, buffer_size, format, timeinfo);
 
-  return buffer;
+    return buffer;
+  });
 }
 
 bool is_at_least(const std::vector<int> time_parts) {

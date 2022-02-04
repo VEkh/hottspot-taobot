@@ -88,6 +88,7 @@ private:
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
   int compute_quantity();
+  int runtime();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   order_win_result_t order_win_result(const order_t *);
@@ -110,6 +111,7 @@ private:
   void log_position_results();
   void log_quote();
   void log_start_message();
+  void log_timestamps();
   void open_position();
   void reset_position();
   void set_close_position_prices();

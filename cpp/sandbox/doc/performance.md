@@ -8733,6 +8733,57 @@ deep that they must be handled specially.
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 ##### Stocks/ETFs
+* Return: +$203.64 (+0.41% Account) (+40.19% Daily Salary) (vs. QQQ: +0.81%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 6W (Consecutive: 1) 1L (Consecutive: 0)
+* Week's Return: -$1,274.65
+* Total Return: +$1,292.67
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime: 18:32:18; 2.75x spread; Dynamic direction strategy; EUR_GBP incurred
+  20-loss loss streak and never recovered.
+* Reverting to 4 up, 4 down
+
+##### Stocks/ETFs
+* Reverted to normal trading without AMZN and GOOG and all went well again.
+
+#### Next Thing(s) to Try
+
+### 2021-02-03:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Return: +$257.37 (+0.52% Account) (+50.79% Daily Salary) (vs. QQQ: -4.05%)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 7W (Consecutive: 2) 1L (Consecutive: 0)
+* Week's Return: -1,017.28
+* Total Return: +$1,550.04
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* T hit 12-loss streak and didn't recover losses. Removing it from the roster.
+  Need a better candidate to test.
+* Still monitoring 10.5 MAX_EXPECTED_LOSS_STREAK to see how it performs
+  compared to 11.
+* I've been watchign NFLX on staging for the past 2.5 days and accidentally ran
+  it in production today. It seems to be doing fine. I'll add it to the roster.
+
+#### Next Thing(s) to Try
+
+### 2021-02-04:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 #### Stats (as of 2022-01-25)

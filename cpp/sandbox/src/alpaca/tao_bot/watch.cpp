@@ -16,6 +16,7 @@
 #include "log_position_results.cpp"      // log_position_results
 #include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
+#include "log_timestamps.cpp"            // log_timestamps
 #include "open_position.cpp"             // open_position
 #include "reset_position.cpp"            // reset_position
 #include "set_close_position_prices.cpp" // set_open_position_prices
@@ -29,10 +30,12 @@
 
 void Alpaca::TaoBot::watch() {
   while (!is_market_open()) {
+    log_timestamps();
     await_market_open();
   }
 
   while (!should_terminate()) {
+    log_timestamps();
     fetch_quote();
     build_candlesticks();
     set_price_movement();

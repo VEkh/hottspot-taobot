@@ -1,10 +1,12 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
+#include "lib/utils/time.cpp"
+#include <locale.h> // setlocale
 #include <math.h>
-#include <string>
 
 int main() {
-  std::string num = "4";
-  printf("Num: %f\n", std::stod(num));
+  std::time_t now = std::time(nullptr);
+  printf("Is end of day: %s\n",
+         ::utils::time_::date_string(&now, "%c %Z").c_str());
 }

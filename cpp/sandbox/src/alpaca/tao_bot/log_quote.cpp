@@ -11,9 +11,7 @@
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/float.cpp"   // utils::float_
 #include "lib/utils/integer.cpp" // utils::integer_
-#include "runtime.cpp"           // runtime
-#include <iomanip>               // std::setprecision
-#include <iostream>              // std::cout, std::endl, std::fixed
+#include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
 void Alpaca::TaoBot::log_quote() {
@@ -27,7 +25,6 @@ void Alpaca::TaoBot::log_quote() {
   const quote_t *previous_quote =
       ticks > 1 ? &(this->quotes.at(ticks - 2)) : nullptr;
   const quote_t current_quote = this->quotes.back();
-  const int runtime_ = runtime();
 
   if (previous_quote) {
     if (current_quote.price > previous_quote->price) {
@@ -38,8 +35,7 @@ void Alpaca::TaoBot::log_quote() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote @ %s\n", this->symbol,
-         ::utils::integer_::seconds_to_clock(runtime_).c_str());
+  printf("%s Quote\n", this->symbol);
 
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));

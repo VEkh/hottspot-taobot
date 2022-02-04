@@ -25,7 +25,6 @@ void Oanda::TaoBot::log_quote() {
   const quote_t *previous_quote = ticks > 1 ? &(quotes.at(ticks - 2)) : nullptr;
   const quote_t current_quote = quotes.back();
   const quote_t first_quote = quotes.front();
-  const int runtime = current_quote.timestamp - first_quote.timestamp;
 
   if (previous_quote) {
     if (current_quote.price > previous_quote->price) {
@@ -36,8 +35,7 @@ void Oanda::TaoBot::log_quote() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote @ %s\n", this->symbol,
-         ::utils::integer_::seconds_to_clock(runtime).c_str());
+  printf("%s Quote\n", this->symbol);
 
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Bid: %'.5f • Mid: %'.5f • Ask: %'.5f • Spread: %'.5f\n",
