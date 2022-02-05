@@ -79,7 +79,6 @@ function update_crontab() {
 install_dependencies
 create_directory
 copy_files
-install_ruby_dependencies
 remote_build
 update_crontab
 
