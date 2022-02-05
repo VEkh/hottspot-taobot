@@ -1,6 +1,7 @@
 #include "client/client.cpp"   // Alpaca::Client
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/io.cpp"    // utils::io
+#include "returns.cpp"         // Alpaca::Returns
 #include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
 #include <iostream>            // std::cout, std::endl
 #include <map>                 // std::map
@@ -13,6 +14,7 @@ void print_usage() {
   std::map<std::string, const char *> commands = {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
+      {"log_returns                  ", "Print cumulative return"},
       {"tao_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given currency pair"},
   };
@@ -82,6 +84,12 @@ int main(int argc, char *argv[]) {
 
     std::string quote = alpaca_client.fetch_quote(symbol);
     puts(quote.c_str());
+
+    exit(0);
+  }
+
+  if (command == "log_returns") {
+    Alpaca::Returns::log();
 
     exit(0);
   }

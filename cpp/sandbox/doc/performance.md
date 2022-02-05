@@ -8762,7 +8762,7 @@ deep that they must be handled specially.
 
 #### Stats (as of 2022-01-25)
 * Win / Loss: 7W (Consecutive: 2) 1L (Consecutive: 0)
-* Week's Return: -1,017.28
+* Week's Return: -$1,017.28
 * Total Return: +$1,550.04
 * 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
 
@@ -8779,6 +8779,42 @@ deep that they must be handled specially.
 #### Next Thing(s) to Try
 
 ### 2021-02-04:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+#### Stats (as of 2022-01-25)
+* Wins / Losses: 7W (Consecutive: 0) 2L (Consecutive: 1)
+* Today's Return: -$4,686.02 (-9.34%) (-924.79% Daily Salary) (vs. QQQ: +1.26%)
+* Week's Return: -$5,703.30
+* Total Return: -$3,332.59
+* Average Return: -0.72% • Average QQQ Return: +0.14%
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime: 06:35:27; Dynamic trade direction; 2.5x spread; USD_CAD had
+  unrecoverd 17-loss streak
+* Runtime: 06:33:00; Dynamic trade direction; 3.0x spread; USD_CAD had
+  recoverd 10-loss streak
+
+
+##### Stocks/ETFs
+* REALLY rough day. The market turbulence cause much higher than average price
+  movement and effectively created a scenario where the target movement was 10
+  or 15x the 1-sec variance.
+* I addressed this by limiting the average sample size to 300. I still think
+  this is too big. The 1-sec variance needs to be able to quickly expand when
+  price velocity increases.
+* The downside to this is that slow times may now contract the average and
+  increase losses incurred.
+* Either way test this in staging before returning to production.
+* You'll get this. Don't give up!
+
+#### Next Thing(s) to Try
+
+### 2021-02-07:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
