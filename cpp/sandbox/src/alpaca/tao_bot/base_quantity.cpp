@@ -12,7 +12,7 @@ double Alpaca::TaoBot::base_quantity() {
   const double max_affordable_quantity_ =
       max_buying_potential / current_price();
 
-  return max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1);
+  return max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK);
 }
 
 #endif

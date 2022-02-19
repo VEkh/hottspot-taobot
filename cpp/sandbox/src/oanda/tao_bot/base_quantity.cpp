@@ -15,7 +15,7 @@ double Oanda::TaoBot::base_quantity() {
       max_buying_potential / dollars_per_unit;
 
   const double base_quantity_ =
-      max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK + 1);
+      max_affordable_quantity_ / pow(2, this->MAX_EXPECTED_LOSS_STREAK);
 
   return std::max(base_quantity_, 1.0);
 }

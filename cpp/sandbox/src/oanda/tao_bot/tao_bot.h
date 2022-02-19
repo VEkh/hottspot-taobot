@@ -36,7 +36,7 @@ private:
 
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const int MAX_EXPECTED_LOSS_STREAK = 15;
+  const int MAX_EXPECTED_LOSS_STREAK = 20;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
