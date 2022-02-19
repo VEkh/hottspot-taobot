@@ -19,6 +19,11 @@
 std::string Oanda::Client::cancel_order(order_t *order) {
   std::string response_body = cancel_order(order->id);
 
+  std::cout << fmt.bold << fmt.yellow;
+  printf("[OANDA__CLIENT_cancel_order]: CANCEL order response: %s\n",
+         response_body.c_str());
+  std::cout << fmt.reset << std::endl;
+
   json response = ::utils::json::parse_with_catch(response_body,
                                                   "OANDA__CLIENT_cancel_order");
 

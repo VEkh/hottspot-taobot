@@ -28,11 +28,18 @@ void Oanda::TaoBot::set_status(order_t *order) {
 
   json order_json = fetch_order(order);
 
+  if (original_status == order_status_t::ORDER_PENDING) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("[OANDA__TAO_BOT_set_status]: PENDING order response: %s\n",
+           order_json.dump(2).c_str());
+    std::cout << fmt.reset << std::endl;
+  }
+
   if (order_json.empty()) {
     return;
   }
 
-  std::string status = order_json["state"];
+  const std::string status = order_json["state"];
   order->status = Oanda::utils::to_order_status_t(status);
 
   if (original_status != order_status_t::ORDER_FILLED &&
