@@ -41,6 +41,8 @@ void Oanda::TaoBot::load_performance() {
     file = ::utils::io::read_file(filepath.c_str());
     file >> persisted_data;
     file.close();
+  } catch (nlohmann::detail::parse_error &) {
+    return;
   } catch (std::invalid_argument &) {
     return;
   }
