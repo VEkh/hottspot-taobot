@@ -9,6 +9,7 @@
 
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
+#include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "position_target_movement.cpp" // position_target_movement
 #include <math.h>                       // abs
 
@@ -22,6 +23,10 @@ bool Alpaca::TaoBot::should_close_position() {
   }
 
   if (is_end_of_trading_period()) {
+    return true;
+  }
+
+  if (max_account_loss_reached()) {
     return true;
   }
 

@@ -34,6 +34,7 @@ private:
   using quote_t = Oanda::t::quote_t;
   using trade_status_t = Oanda::t::trade_status_t;
 
+  const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const int MAX_EXPECTED_LOSS_STREAK = 15;
 
@@ -70,6 +71,7 @@ private:
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
   bool is_market_open();
+  bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
   bool should_terminate();

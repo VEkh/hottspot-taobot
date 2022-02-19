@@ -35,6 +35,7 @@ private:
   const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const int MAX_EXPECTED_LOSS_STREAK = 10;
+  const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -65,6 +66,7 @@ private:
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
+  bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
   bool should_terminate();
