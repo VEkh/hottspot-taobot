@@ -30,10 +30,23 @@ void Alpaca::TaoBot::set_price_movement() {
 
   const double average = total / ticks;
 
+  if (average > 1.0e6) {
+    std::cout << fmt.bold << fmt.yellow;
+    puts("🧐 STRANGE PRICE MOVEMENT");
+    const quote_t penultimate_quote = this->quotes.at(this->quotes.size() - 2);
+    printf("Last Quote: %.2f • Last Price Delta: %.2f\n", current_quote.price,
+           (current_quote.price - penultimate_quote.price));
+    std::cout << fmt.reset << std::endl;
+
+    return;
+  }
+
+  const int max_sample_size = 10;
+
   const double old_cumulative_average =
       this->price_movement.three_minute_one_second_variance.average;
 
-  const double old_cumulative_count =
+  const int old_cumulative_count =
       this->price_movement.three_minute_one_second_variance.count;
 
   const double cumulative_average =
@@ -42,7 +55,9 @@ void Alpaca::TaoBot::set_price_movement() {
 
   this->price_movement.three_minute_one_second_variance.average =
       cumulative_average;
-  this->price_movement.three_minute_one_second_variance.count++;
+
+  this->price_movement.three_minute_one_second_variance.count =
+      std::min(max_sample_size, old_cumulative_count + 1);
 
   write_price_movement();
 }
