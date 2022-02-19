@@ -46,6 +46,8 @@ void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
            order->id, new_close_order.quantity);
     std::cout << fmt.reset << std::endl;
 
+    exit(1);
+
     this->api_client.place_order(this->close_order_ptr);
     this->close_order.quantity = order->quantity;
   } catch (nlohmann::detail::type_error &) {
