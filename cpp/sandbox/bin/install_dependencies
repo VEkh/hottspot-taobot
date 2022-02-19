@@ -138,6 +138,6 @@ function log_install_start() {
 }
 
 sudo apt-get update
-install_apt_packages gcc libcurl4-openssl-dev openssl
+install_apt_packages gcc g++ libcurl4-openssl-dev openssl
 
 echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"
