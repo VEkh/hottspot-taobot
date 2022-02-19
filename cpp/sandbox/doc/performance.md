@@ -8815,6 +8815,230 @@ deep that they must be handled specially.
 #### Next Thing(s) to Try
 
 ### 2021-02-07:
+#### Remarks
+##### Forex
+* Successfully ran all day
+
+##### Stocks/ETFs
+* Ony ran in paper because of Friday's loss. It lost again today, even after
+  `set_trade_direction` reverts to alternating after the 7th, not 8th loss.
+
+#### Next Thing(s) to Try
+
+### 2021-02-08:
+#### Remarks
+##### Forex
+* I stopped Oanda when trying to deploy new Alpaca code. After restarting it,
+  it hit the stale mising open order bug. I have to figure out what the issue
+  is.
+* Before stopping, it had run for more than a full day and the longest loss
+  streak was 12 (USD_JPY). It's using the new `set_trade_direction` and a
+  target movement of 3.0x spread.
+##### Stocks/ETFs
+* Event, after increasing max expected losses to 11, TaoBot was losing by
+  midday. A couple securities even incurred more than 10 losses which is the
+  first time in a couple weeks.
+* I changed `set_trade_direction` to change strategies sooner. Will
+  test again tomorrow before going back to reverting to alternating after the
+  8th loss.
+
+#### Next Thing(s) to Try
+
+### 2021-02-09:
+#### Remarks
+##### Forex
+* Forex ran all day. USD_CAD hit 13 losses but recovered after that. I'm still watching it 👀
+  target movement of 3.0x spread.
+##### Stocks/ETFs
+* Staging won big today (+$1,084.88), but only after TSLA hit 10 losses, which
+  isn't good. It could easily have been a major loss.
+* Since increasing the target position movement has seemed to help Forex, I'll
+  increase it to 25x 1-sec variance and see if it performs with less risk.
+
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2021-02-10:
+#### Remarks
+##### Forex
+* Runtime: 40:34:42; 3.0x spread; latest `set_trade_direction`; +$19.06;
+  longest loss streak USD_JPY (15), recovered.
+
+##### Stocks/ETFs
+* VIAC hit a 12-loss losing streak. Changing up the `set_trade_direction`
+  algorithm and increasing the position target movement to 30x 1-sec variance.
+* That changed worked okay, but C quickly racked up an 8-loss losing streak.
+  Changing again.
+
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2021-02-11:
+#### Remarks
+##### Forex
+* Runtime: 08:02:11; 3.5x spread; latest `set_trade_direction`; +$1.99;
+  longest loss streak AUD_USD (14), recovered.
+* Last night, however, AUD_USD hit an 18-loss losing streak and didn't recover.
+  I increased the position target movement, but I'm not sure it will work given
+  that AUD_USD hit 14 losses in 8 hours. We'll see.
+
+##### Stocks/ETFs
+* I tried increasing the target movement to 25x 1-sec variance using the
+  3alt-2down-2up-alt `set_trade_direction` algorithm. This lost. I increased
+  the target movement to 30x 1-sec variance and it still lost.
+
+* I reverted to the 4alt-4up-alt `set_trade_direction` algorithm and reduce the
+  target movement to 20x 1-sec variance. This was the last algorithm to work
+  well. It recovered some of the losses from earlier in the day.
+
+* If / when this fails, I'll start experimenting with buying power as the main
+  variable. There's a minimum buying power that will make unrecoverable losses
+  virtually impossible if you start with a small enough base quantity. We'll
+  have to discover what that is.
+
+#### Next Thing(s) to Try
+
+### 2021-02-14:
+#### Performance
+#### Remarks
+##### Forex
+* Runtime: 25:32:29; 3.5x spread; latest `set_trade_direction`; +$19.94940;
+  longest loss streak EUR_GBP (15), recovered.
+
+##### Stocks/ETFs
+* VIAC hit a 13-loss losing streak, didn't couldn't recover by end of day.
+* It looks like my most stable `set_trade_direction` didn't work 😭
+* The next thing to try will be to set the MAX_EXPECTED_LOSS_STREAK to 15 and
+  see what is the minimum account balance to make unrecoverable losses
+  virtually impossible.
+
+#### Next Thing(s) to Try
+
+### 2021-02-15:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+* Week's Return:
+* Total Return:
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime: 42:10:01; 3.5x spread; latest `set_trade_direction`; +$14.01920;
+  longest loss streak EUR_CHF (16), unrecovered.
+* Increasing balance to $40K in search of minimum balance where excessive
+  losses are virtually impossible. I'm setting the MAX_EXPECTED_LOSS_STREAK to
+  20.
+* To trigger more trades, I'm going to decrease the target movement to 3.0x
+  spread and change to the alternate-after-loss `set_trade_direction`. I'm also
+  going to add more currency pairs to the roster.
+
+##### Stocks/ETFs
+* I set the balance to $1M with a MAX_EXPECTED_LOSS_STREAK of 15. After the
+  first loss `set_trade_direction` simply alternated direction. These were the results:
+  * Max loss streak quantities:
+    * INTC:
+      * 9 streak: 2787 * $48.15 = $134,194.05
+    * TSLA:
+      * 12 streak: 1851.96392 * 918.51 = $1,701,047.38
+    * TWTR:
+      * 10 streak: 16384 * $36.60 = $599,654.4
+    * VIAC:
+      * 14 streak: 53,246.95 * $35.84 = $,1908,370.86
+  * All recovered and resulted in a profit of $3,601.92 even after only running
+    05:24:53.
+* The downside is that you need $2M in buying power to profit with this
+  strategy.
+* If I confirm this buying power's profitability, I'll rever to the
+  buy-biased, `set_trade_direction` algorithm and see if it results in fewer
+  max losses and therefore require a smaller buying power.
+* Even still, it seems like this strategy will only comfortably work with a $1M
+  account balance.
+
+#### Next Thing(s) to Try
+
+### 2021-02-16:
+#### Performance
+#### Stats (as of 2022-01-25)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+* Week's Return:
+* Total Return:
+* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### Remarks
+##### Forex
+* Runtime: 20:45:20; 3.0x spread; only alternating `set_trade_direction`; -$776.42480;
+  longest loss streak EUR_CAD (21), unrecovered.
+* Going back to `set_trade_direction` that counters consolidation. Keeping 3.0x
+  spread. Trading 20 currencies.
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2021-02-17:
+#### Remarks
+##### Forex
+* Runtime: 36:57:14; 3.0x spread; counter-consolidation `set_trade_direction`;
+  +$755.29310; longest loss streak GBP_CHF (20), recovered.
+* I'm still a little nervous about the 20 loss loss streak, but this is a very
+  good return.
+* I'll keep watching. However, the stock TaoBot seems to require $4M in buying
+  power just to offer some semblance of assured returns. Even then, it
+  encounters near unrecoverable loss streaks since it can only tolerate 15
+  losses.
+* Forex offers greater loss tolerance with a fraction of the required balance
+  ($40K). I may have to start here and potentially move back to stocks once I
+  get to $1M.
+* It's worth nothing, also, that the apparent average daily return of the stock
+  market is 0.5%. Forex has returned +1.89% in less than 48 hours.
+
+##### Stocks/ETFs
+* Something freaky happened (in staging THANK GOD). The ENTIRE balance was
+  wiped clean 😱.
+* Overnight VIAC'S symbol changed to PARA. PARA's price and volume were the old
+  VIAC's, ~$30 and 10s of millions of shares. However, VIAC's new price was
+  $500+ and hardly had any volume.
+* While I was in the shower, VIAC lost a whopping 52 consecutive times and
+  cleaned out the ENTIRE $1M balance!!!
+* Even though this was because of happenstance, it revealed the need for an
+  emergency brake for TaoBot: If the balance has reduced by 5%, which would be
+  a pretty horrific loss on a given day, assume something has gone wrong and
+  halt all instances of the program.
+
+#### Next Thing(s) to Try
+
+### 2021-02-18:
+#### Remarks
+##### Forex
+* Runtime: ~40:00:00; 3.0x spread; counter-consolidation `set_trade_direction`;
+  -$426.77; longest loss streak USD_JPY (21), unrecovered.
+* Switching to all buys and 2.5x spread. May need to increase to 3.5x spread
+##### Stocks/ETFs
+* Paper made an easy ~$700, with no major threats. I may switch to all buys
+  since even the best trade direction pattern can't avoid 10+ losses.
+* I may ultimately need to transfer all funds to Forex. Even at $4M buying
+  power, the max allowable losses is approached and even breached at times.
+  Forex offers more buying power with much less money, so greater loss streaks
+  can be tolerated. The only way to justify stock trading would be to somehow
+  gurantee 10 losses are never breached. Then the balance could be reduced to
+  near $50K again. I can keep exploring ways to guarantee this, but it doesn't
+  seem possible...
+
+#### Next Thing(s) to Try
+
+### 2021-02-22:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

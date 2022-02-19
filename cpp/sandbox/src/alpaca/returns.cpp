@@ -143,7 +143,7 @@ void log() {
          total_wins, consecutive_wins, total_losses, consecutive_losses);
 
   std::cout << fmt.cyan;
-  printf("* Today's Return: %c$%'.2f (%+.2f%%) (%+.2f%% Daily Salary) (vs. "
+  printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% Daily Salary) (vs. "
          "QQQ: %+.2f%%)\n",
          sign(todays_profit_dollars), abs(todays_profit_dollars),
          todays_profit_ratio * 100, todays_profit_salary_ratio * 100,
