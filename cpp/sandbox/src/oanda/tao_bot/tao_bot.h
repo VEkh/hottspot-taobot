@@ -45,17 +45,17 @@ private:
   };
 
   std::map<std::string, double> SPREAD_LIMITS = {
-      {"AUD_CAD", 2.5e-4}, {"AUD_CHF", 1.5e-4}, {"AUD_JPY", 1.8e-2},
-      {"AUD_NZD", 2.7e-4}, {"AUD_USD", 1.8e-4}, {"CAD_CHF", 1.6e-4},
-      {"CAD_JPY", 2.1e-2}, {"CHF_JPY", 3.9e-2}, {"EUR_AUD", 3.0e-4},
-      {"EUR_CAD", 2.3e-4}, {"EUR_CHF", 1.8e-4}, {"EUR_GBP", 2.0e-4},
-      {"EUR_JPY", 2.0e-2}, {"EUR_NZD", 4.0e-4}, {"EUR_SEK", 1.006e-2}, // 🧐
-      {"EUR_USD", 1.6e-4}, {"GBP_AUD", 4.0e-4}, {"GBP_CAD", 3.2e-4},
-      {"GBP_CHF", 2.0e-4}, {"GBP_JPY", 3.0e-2}, {"GBP_NZD", 5.0e-4},
-      {"GBP_PLN", 5.5e-3}, {"GBP_SGD", 2.6e-4}, {"GBP_USD", 2.0e-4},
-      {"NZD_CAD", 2.4e-4}, {"NZD_JPY", 2.0e-2}, {"NZD_USD", 2.0e-4},
-      {"USD_CAD", 2.2e-4}, {"USD_CHF", 1.8e-4}, {"USD_DKK", 2.2e-3},
-      {"USD_JPY", 1.8e-2}, {"USD_SEK", 7.5e-3},
+      {"AUD_CAD", 2.0e-4}, {"AUD_CHF", 2.8e-4}, {"AUD_JPY", 2.0e-2},
+      {"AUD_NZD", 3.0e-4}, {"AUD_USD", 1.8e-4}, {"CAD_CHF", 2.6e-4},
+      {"CAD_JPY", 2.2e-2}, {"CHF_JPY", 3.9e-2}, {"EUR_AUD", 3.0e-4},
+      {"EUR_CAD", 2.4e-4}, {"EUR_CHF", 2.0e-4}, {"EUR_GBP", 2.0e-4},
+      {"EUR_JPY", 2.0e-2}, {"EUR_NZD", 7.5e-4}, {"EUR_SEK", 5.0e-3},
+      {"EUR_USD", 2.0e-4}, {"GBP_AUD", 4.2e-4}, {"GBP_CAD", 3.5e-4},
+      {"GBP_CHF", 2.0e-4}, {"GBP_JPY", 3.0e-2}, {"GBP_NZD", 8.5e-4},
+      {"GBP_PLN", 4.0e-3}, {"GBP_SGD", 6.0e-4}, {"GBP_USD", 2.4e-4},
+      {"NZD_CAD", 2.4e-4}, {"NZD_JPY", 4.2e-2}, {"NZD_USD", 2.2e-4},
+      {"USD_CAD", 2.4e-4}, {"USD_CHF", 2.0e-4}, {"USD_DKK", 1.6e-3},
+      {"USD_JPY", 1.8e-2}, {"USD_SEK", 4.2e-3},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
