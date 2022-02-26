@@ -9039,6 +9039,106 @@ deep that they must be handled specially.
 #### Next Thing(s) to Try
 
 ### 2021-02-22:
+#### Remarks
+##### Forex
+* Interesting stuff happening.
+* Runtime 30:13:03; 2.5x spread; all buys; CAD_JPY (22) unrecovered becasue of
+  too many losses;  EUR_CHF (19) -- didn't recover because of insufficient
+  initial funds. I insufficiently set the funds because I didn't know that a
+  currency's margin rate could increase in the short term.
+* The largest margin rate currencies I trade are 0.04. However a few of them
+  increased to 0.05. After this I set the starting balance to account to
+  accomodate 20 losses in a 0.05 currency (>= $47K).
+* It also seems that the larger the order size, the more closely to the mid the
+  order executes. I may be misreading this.
+* I'm fairly convinced that there IS position movement that will incur less
+  than 20 losses over several hundreds of plays. The question to answer is,
+  what is that size, and what is the average return?
+
+##### Stocks/ETFs
+* I reverted to a rolling average of the 1-sec variance instad of a dynamically
+  expanding one.
+* Especially when the target movment is 40x 1-sec variance, it led to far too
+  few trades and limbo positions.
+* Now that I'm back to all buys, there's less danger of prematurely maxing out funds.
+* Also, now smaller buying powers can execute this strategy.
+* It's now in the same place as Forex: what is the position movement that
+  reasonably caps max consecutive losses?
+
+#### Next Thing(s) to Try
+
+### 2021-02-23:
+#### Remarks
+##### Forex
+* Runtime 24:35:41; 3.0x spread; all buys; AUD_USD (16) recovered
+
+##### Stocks/ETFs
+* 20x 1-sec variance; all buys; * C (10), recovered; TSLA (10), recovered
+* Return was only 0.8%
+* I'm going to decrease max expected loss to 12 and see if return increases.
+  With alternating positions I saw 13 losses. We'll see if it's the same with
+  all buys and a non-expanding 20x.
+
+### 2021-02-24:
+#### Remarks
+##### Forex
+* Runtime 48:42:13; 3.0x spread; all buys; AUD_USD (19) recovered, +$1,080.38600 (+2.16%)
+* Really good return, and pretty smooth performance. I still don't like needing
+  to tolerate 20 losses though. If this holds, however, I may launch production
+  until I figure out a way to reliably reduce the MAX_EXPECTED_LOSS_STREAK.
+* I may experiment with using 1-sec variance as the target movement instead of
+  the spread.
+
+##### Stocks/ETFs
+* Reducing to MAX_EXPECTED_LOSS_STREAK of 12 led to an increased return of
+  0.3%. This is pretty good.
+* I think I'll try increasing the target movement to see if I can consistently
+  get a MAX_EXPECTED_LOSS_STREAK under 10. I'll also reduce the account balance
+  to ensure this scales down.
+* Since switching to all buys, staging has profited the last 6 days. This is
+  even in the midst of a sharp market correction and war breaking out in
+  Ukraine. That's really good!
+* Time to scale it down and see if it still profits.
+
+#### Next Thing(s) to Try
+
+### 2021-02-25:
+#### Remarks
+Staging had a really good week 🎉
+
+##### Forex
+* Runtime 70:42:52; 3.0x spread; all buys; AUD_USD (19) recovered,
+  +$1,212.17020 (+2.42%)
+* Forex's buying power make it offer the largest profits. If I can lower the
+  MAX_EXPECTED_LOSS_STREAK, the return would be much greater.
+* I'll increase the position target movement to 3.5x spread and observe its
+  effects.
+* Some interesting stats:
+  * The average win rate is between 20-30%. 30% seems to be the median.
+  * The most traded currency was EUR_JPY (643 times), the least traded was
+    GBP_PLN (41). This may be due to a combination of:
+    * Innaccurate Max Spread to Open thresholds
+      * Update the table with the publicly listed averages
+    * Variable price action
+    * Spread multiple being an inaccurate target price movement standard.
+
+##### Stocks/ETFs
+* Today was an up day so the return wasn't as large, but it still won after
+  taking down the account balance to $30K. The return was +$11.22 (0.04%).
+* After increasing the target position movement to 30x 1-sec variance, the max
+  loss was 6, and the average trade count was about 24 which is lower than the
+  usual ~30-35.
+* I'll continue to observe the trade count and max loss with 30x 1-sec
+  variance, especially on a bear day. If it holds, I'll decrease the
+  MAX_EXPECTED_LOSS_STREAK and see how that affects returns. The trade-off
+  between sacrificing trade volume for fewer consecutive losses will be
+  interesting.
+
+#### Next Thing(s) to Try
+* May at some point want to do a per-instrument MAX_EXPECTED_LOSS_STREAK. The
+  downside is that you'd be blind-sided by a longer-than-expected loss streak.
+
+### 2021-02-28:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

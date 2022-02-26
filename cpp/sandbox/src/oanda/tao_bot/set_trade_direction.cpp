@@ -3,8 +3,6 @@
 
 #include "tao_bot.h" // Oanda::TaoBot
 
-void Oanda::TaoBot::set_trade_direction() {
-  this->is_long_position = ((this->closed_positions.size() / 4) % 2) == 0;
-}
+void Oanda::TaoBot::set_trade_direction() { this->is_long_position = true; }
 
 #endif
