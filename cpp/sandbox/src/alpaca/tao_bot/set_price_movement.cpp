@@ -3,7 +3,7 @@
 
 #include "tao_bot.h"                // Alpaca::TaoBot, quote_t
 #include "write_price_movement.cpp" // write_price_movement
-#include <math.h>                   // abs
+#include <math.h>                   // abs, INFINITY
 #include <vector>                   // std::vector
 
 void Alpaca::TaoBot::set_price_movement() {
@@ -41,7 +41,7 @@ void Alpaca::TaoBot::set_price_movement() {
     return;
   }
 
-  const int max_sample_size = 10;
+  const double max_sample_size = INFINITY;
 
   const double old_cumulative_average =
       this->price_movement.three_minute_one_second_variance.average;
@@ -57,7 +57,7 @@ void Alpaca::TaoBot::set_price_movement() {
       cumulative_average;
 
   this->price_movement.three_minute_one_second_variance.count =
-      std::min(max_sample_size, old_cumulative_count + 1);
+      std::min(max_sample_size, (double)(old_cumulative_count + 1));
 
   write_price_movement();
 }
