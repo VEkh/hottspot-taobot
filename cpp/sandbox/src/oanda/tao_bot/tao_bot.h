@@ -35,6 +35,7 @@ private:
   using trade_status_t = Oanda::t::trade_status_t;
 
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
+  const double MAX_SPREAD_TO_OPEN_RATIO = 3.5;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const int MAX_EXPECTED_LOSS_STREAK = 20;
 

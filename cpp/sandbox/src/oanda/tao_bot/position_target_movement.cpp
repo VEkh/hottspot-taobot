@@ -5,7 +5,7 @@
 #include "tao_bot.h"          // Oanda::TaoBot
 
 double Oanda::TaoBot::position_target_movement() {
-  return 2.75 * current_spread();
+  return this->MAX_SPREAD_TO_OPEN_RATIO * current_spread();
 }
 
 #endif
