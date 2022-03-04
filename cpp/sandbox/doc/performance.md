@@ -9210,6 +9210,27 @@ Staging had a really good week 🎉
   websocket server and persist in memory.
 
 ### 2021-03-04:
+#### Remarks
+##### Forex
+* Runtime 18:27:52; 3.5x spread; all buys; GBP_AUD (19) unrecovered, -$1,635.36460 (-3.15%)
+* Restarted and after 07:48:15, 3.0x spread, all buys, short every 5 losses;
+  +$280.08 (+0.56%)
+* I need to protect myself against runaway bear markets
+
+##### Stocks/ETFs
+* After increasing MAX_EXPECTED_LOSS_STREAK back to 12, the return was only
+  +0.08%. This is too small.
+* I need to reduce MAX_EXPECTED_LOSS_STREAK to 10 (or 11) and protect againt
+  runaway bear markets. I'll do it on the eighth loss.
+* Interesting discovery: a 30x 1-sec variance is close to 3.0x spread for the
+  more often traded currencies and notably less than the 3.0x spread for more
+  sparsely traded currencies.
+* It seems reasonable to infer that making 30x spread the position target
+  movement will normalize trade frequency across currencies. I'll try that.
+
+#### Next Thing(s) to Try
+
+### 2021-03-07:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

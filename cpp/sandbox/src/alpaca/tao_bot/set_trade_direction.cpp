@@ -3,6 +3,10 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot
 
-void Alpaca::TaoBot::set_trade_direction() { this->is_long_position = true; }
+void Alpaca::TaoBot::set_trade_direction() {
+  const int current_losses = this->performance.loss_streaks.current;
+
+  this->is_long_position = current_losses != 8;
+}
 
 #endif
