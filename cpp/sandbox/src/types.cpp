@@ -50,6 +50,15 @@ struct performance_t {
   std::string symbol;
   order_win_result_streak_t win_streaks;
 };
+
+struct price_movement_average_t {
+  double average = 0.00;
+  long int count = 0;
+};
+
+struct price_movement_t {
+  price_movement_average_t three_minute_one_second_variance;
+};
 } // namespace t
 } // namespace Global
 #endif

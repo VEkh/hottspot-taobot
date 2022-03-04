@@ -7,6 +7,7 @@
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "lib/utils/boolean.cpp"     // ::utils::boolean
 #include "load_performance.cpp"      // load_performance
+#include "load_price_movement.cpp"   // load_rice_movement
 #include "set_trade_direction.cpp"   // set_trade_direction
 #include "spread_limit.cpp"          // spread_limit
 #include "tao_bot.h"                 // Oanda::TaoBot, quantity, symbol
@@ -43,6 +44,7 @@ void Oanda::TaoBot::initialize(char *symbol_,
 
   fetch_quote();
   load_performance();
+  load_price_movement();
   set_trade_direction();
 
   this->performance = build_performance();

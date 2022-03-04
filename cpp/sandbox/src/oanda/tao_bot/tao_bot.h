@@ -31,11 +31,14 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
+  using price_movement_t = Global::t::price_movement_t;
   using quote_t = Oanda::t::quote_t;
   using trade_status_t = Oanda::t::trade_status_t;
 
+  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.5;
+  const double MIN_TARGET_TICK_MOVEMENT = 30.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const int MAX_EXPECTED_LOSS_STREAK = 20;
 
@@ -71,6 +74,7 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  price_movement_t price_movement;
   std::list<candlestick_t> candlesticks;
   std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
@@ -114,12 +118,14 @@ private:
   void handle_partially_filled_close_order(const order_t *);
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
+  void load_price_movement();
   void log_account_balance();
   void log_candlesticks();
   void log_end_of_trading_period();
   void log_performance();
   void log_position();
   void log_position_results();
+  void log_price_movement();
   void log_quote();
   void log_start_message();
   void log_timestamps();
@@ -129,12 +135,14 @@ private:
   void set_execution_price(order_t *);
   void set_open_position_prices();
   void set_position_status();
+  void set_price_movement();
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *order);
   void set_status(order_t *order);
   void set_trade_direction();
   void watch();
   void write_performance();
+  void write_price_movement();
 };
 } // namespace Oanda
 

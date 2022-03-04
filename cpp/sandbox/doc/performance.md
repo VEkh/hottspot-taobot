@@ -9139,6 +9139,77 @@ Staging had a really good week 🎉
   downside is that you'd be blind-sided by a longer-than-expected loss streak.
 
 ### 2021-02-28:
+#### Remarks
+##### Forex
+* Runtime 25:57:10; 3.5x spread; all buys; EUR_JPY (13) recovered, +$12.62470 (+0.02%)
+
+##### Stocks/ETFs
+* MAX_EXPECTED_LOSS_STREAK: 12; all buys; max loss C (8)
+* May take down to 11
+* Staging returned +0.12%. Which is small but perhaps expected with fewer
+  trades and smaller buying power.
+* I still need to see how it performs on an extended down day.
+
+#### Next Thing(s) to Try
+
+### 2021-03-01:
+#### Remarks
+##### Forex
+* Runtime 49:52:11; 3.5x spread; all buys; GBP_SGD (16) recovered, +$223.68530 (+0.44%)
+* Wait til halfway through tomorrow. If 16 isn't exceeded, reduce
+  MAX_EXPECTED_LOSS_STREAK to 16 and increase target movement to 4.0x spread. This should increase return.
+
+##### Stocks/ETFs
+* MAX_EXPECTED_LOSS_STREAK: 10; all buys; 30x 1-sec variance; max loss AMD, C, & SNAP (8)
+* Staging returned +0.55%. The decrease in MAX_EXPECTED_LOSS_STREAK was
+  responsible for this. Time will tell if it will be exceeded, however AMD had
+  was down -7.71% and had a very long loss streak and still only maxed at 8
+  losses. That's a good sign.
+* Staging has won the last 8 days or so. I think we're on to something.
+
+#### Next Thing(s) to Try
+
+### 2021-03-02:
+#### Remarks
+##### Forex
+* Runtime 68:29:59; 3.5x spread; all buys; GBP_SGD (16) recovered, +$271.56380 (+0.53%)
+* Now increasing position movement to 4.0x and reducing MAX_EXPECTED_LOSS_STREAK to 16
+* It was running smoothly by the end of the work day. We'll see its max loss
+  streak over the next few days.
+
+##### Stocks/ETFs
+* MAX_EXPECTED_LOSS_STREAK: 10; all buys; 30x 1-sec variance; max loss SNAP
+  (9); +0.86%
+* I'm feeling more confident and will transfer a balance back into Alpaca next
+  week.
+
+#### Next Thing(s) to Try
+
+### 2021-03-03:
+#### Remarks
+##### Forex
+* Runtime 19:25:27; 4.0x spread; all buys; EUR_CAD (17) recovered, +$463.56860 (+0.90%)
+* Wasn't expecting so many losses at a higher position movement. The other
+  longest streak was EUR_AUD (11).
+* The longer position exposed that a spread-based position movement
+  disproportionately hurts some insturments' trade volume if their spread is a
+  greater ratio of their price.
+* Start persisting price change during the period of tradeable spreads and
+  investigate using the average price change as a position target movement
+  standard just like I do with equities.
+* In the meantime, revert to 3.5x spread, and increase loss tolerance to 18.
+
+##### Stocks/ETFs
+* SNAP and NVDA hit 12 and 11 loss losing streaks respectively. I expected this
+  to happen eventually. I increased the MAX_EXPECTED_LOSS_STREAK back to 12.
+* We'll see if that holds even though this will decrease daily gains.
+
+#### Next Thing(s) to Try
+* Stream and persist equity prices. Either persist them in a central file from
+  which all processes can read, or open simultaneous connections to the
+  websocket server and persist in memory.
+
+### 2021-03-04:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

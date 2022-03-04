@@ -28,7 +28,7 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
-  using price_movement_t = Alpaca::t::price_movement_t;
+  using price_movement_t = Global::t::price_movement_t;
   using quote_t = Alpaca::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;

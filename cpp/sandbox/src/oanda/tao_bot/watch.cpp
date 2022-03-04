@@ -14,6 +14,7 @@
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
+#include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_position.cpp"             // open_position
@@ -21,6 +22,7 @@
 #include "set_close_position_prices.cpp" // set_open_position_prices
 #include "set_open_position_prices.cpp"  // set_open_position_prices
 #include "set_position_status.cpp"       // set_order_statuses
+#include "set_price_movement.cpp"        // set_price_movement
 #include "should_terminate.cpp"          // should_terminate
 #include "tao_bot.h"                     // Oanda::TaoBot
 #include <iostream>                      // std::cout, std::flush
@@ -36,6 +38,7 @@ void Oanda::TaoBot::watch() {
     log_timestamps();
     fetch_quote();
     build_candlesticks();
+    set_price_movement();
 
     if (awaited_loss_leader()) {
       continue;
@@ -44,6 +47,7 @@ void Oanda::TaoBot::watch() {
     log_account_balance();
     log_quote();
     log_candlesticks();
+    log_price_movement();
     log_position();
     log_performance();
 
