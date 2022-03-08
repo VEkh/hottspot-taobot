@@ -32,10 +32,10 @@ private:
   using quote_t = Alpaca::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 30.0;
+  const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
-  const double MAX_EXPECTED_LOSS_STREAK = 10;
+  const double MAX_EXPECTED_LOSS_STREAK = 8;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -62,6 +62,7 @@ private:
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance();
+  bool awaited_inverse();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
   bool is_holiday();
@@ -84,6 +85,7 @@ private:
   exit_prices_t build_exit_prices();
   int runtime();
   json fetch_order(const order_t *);
+  json read_sibling_performance(std::string);
   order_win_result_t order_win_result(const order_t *);
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);

@@ -102,6 +102,7 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
 
   return {
       .are_funds_sufficient = compute_quantity() < max_affordable_quantity(),
+      .closed_positions_count = (int)this->closed_positions.size(),
       .current_balance = current_balance,
       .current_loss_streak_balance = current_loss_streak_balance,
       .is_position_open =

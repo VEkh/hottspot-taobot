@@ -9,10 +9,11 @@
 #include "tao_bot.h"
 
 #include "alpaca/utils.cpp" // Alpaca::utils
-#include "deps.cpp"         // json
+#include "deps.cpp"         // json, nlohmann
 #include "lib/utils/io.cpp" // ::utils::io
 #include <fstream>          // std::ifstream
 #include <stdexcept>        // std::invalid_argument
+#include <string>           // std::string
 #include <vector>           // std::vector
 
 void Alpaca::TaoBot::load_performance() {

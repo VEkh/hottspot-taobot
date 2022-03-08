@@ -41,6 +41,7 @@ struct order_win_result_streak_t {
 
 struct performance_t {
   bool are_funds_sufficient = true;
+  int closed_positions_count = 0;
   double current_balance = 0.00;
   double current_loss_streak_balance = 0.00;
   bool is_position_open = false;

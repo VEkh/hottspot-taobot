@@ -9231,6 +9231,26 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2021-03-07:
+#### Remarks
+##### Forex
+* Runtime 14:54:20; 40x 1-sec var; short every 5; NZD_USD (17) unrecovered, -$1,405.72550 (-2.81%)
+* Increasing to 50x 1-sec var
+
+##### Stocks/ETFs
+* MAX_EXPECTED_LOSS_STREAK 10; short every 8; BAC (12) unrecovered
+* Quickly trying hedge strategy
+
+#### Next Thing(s) to Try
+* New strategy idea:
+  * Hedge positions with trade in opposite direction: Open TQQQ and SQQQ simultaneously
+  * When one loses, the loser waits until the inverse either wins or loses
+  * ~Still use martingale, however _both_ sides with double quantity with the loser~
+  * In most cases, both sides will recover losses, however in the event that
+    the losing side meets a max loss streak, simply cut losses. Since the
+    winning side will also have been increasing quantity, its gains should at
+    least partially, if not entirely cover the losing side's losses.
+
+### 2021-03-08:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

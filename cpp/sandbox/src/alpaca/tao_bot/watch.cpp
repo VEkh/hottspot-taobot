@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "await_market_open.cpp"         // await_market_open
+#include "awaited_inverse.cpp"           // awaited_inverse
 #include "awaited_loss_leader.cpp"       // awaited_loss_leader
 #include "build_candlesticks.cpp"        // build_candlesticks
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
@@ -39,6 +40,10 @@ void Alpaca::TaoBot::watch() {
     fetch_quote();
     build_candlesticks();
     set_price_movement();
+
+    if (awaited_inverse()) {
+      continue;
+    }
 
     if (awaited_loss_leader()) {
       continue;
