@@ -38,9 +38,9 @@ private:
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 30.0;
+  const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const int MAX_EXPECTED_LOSS_STREAK = 15;
+  const int MAX_EXPECTED_LOSS_STREAK = 20;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
