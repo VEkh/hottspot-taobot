@@ -39,10 +39,14 @@ private:
   } config;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  std::map<std::string, std::string> flags = {{"paper", "0"}};
+  std::map<std::string, std::string> flags = {
+      {"hedge", "0"},
+      {"paper", "0"},
+  };
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
+  bool is_hedging();
   bool is_live();
   void load_config();
 };

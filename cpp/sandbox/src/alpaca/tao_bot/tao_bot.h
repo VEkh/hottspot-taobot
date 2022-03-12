@@ -43,6 +43,7 @@ private:
   };
 
   Alpaca::Client api_client;
+  Alpaca::Client hedge_api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
   account_balance_t original_account_balance;
@@ -65,6 +66,7 @@ private:
   bool awaited_inverse();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
+  bool is_hedging();
   bool is_holiday();
   bool is_market_open();
   bool max_account_loss_reached();

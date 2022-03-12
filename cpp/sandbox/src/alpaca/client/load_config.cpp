@@ -3,6 +3,7 @@
 
 #include "client.h"          // Alpaca::Client, config
 #include "deps.cpp"          // json
+#include "is_hedging.cpp"    // is_hedging
 #include "is_live.cpp"       // is_live
 #include "lib/formatted.cpp" // Formatted::error_message
 #include <fstream>           // std::ifstream, std::ios
@@ -79,6 +80,13 @@ void Alpaca::Client::load_config() {
       .base_url = config_json[session_key]["base_url"],
       .data_base_url = config_json["data_base_url"],
   };
+
+  if (is_hedging()) {
+    this->config.api_key_id = config_json[session_key]["hedge_api_key_id"];
+
+    this->config.api_secret_key =
+        config_json[session_key]["hedge_api_secret_key"];
+  }
 }
 
 #endif

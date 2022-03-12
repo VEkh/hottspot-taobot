@@ -5,8 +5,9 @@
 #include <string>   // std::stoi
 
 bool Alpaca::Client::is_live() {
-  return this->flags["paper"].empty() ? true
-                                      : !((bool)std::stoi(flags["paper"]));
+  return this->flags["paper"].empty()
+             ? true
+             : !((bool)std::stoi(this->flags["paper"]));
 }
 
 #endif

@@ -1,4 +1,4 @@
-#if !defined UTILS__MAP
+#ifndef UTILS__MAP
 #define UTILS__MAP
 
 #include <map>    // std::map

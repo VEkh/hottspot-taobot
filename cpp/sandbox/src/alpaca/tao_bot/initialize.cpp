@@ -5,9 +5,11 @@
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "fetch_quote.cpp"           // fetch_quote
+#include "is_hedging.cpp"            // is_hedging
 #include "is_holiday.cpp"            // is_holiday
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "lib/utils/boolean.cpp"     // ::utils::boolean
+#include "lib/utils/map.cpp"         // ::utils::map
 #include "load_performance.cpp"      // load_performance
 #include "load_price_movement.cpp"   // load_rice_movement
 #include "set_trade_direction.cpp"   // set_trade_direction
@@ -39,12 +41,18 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
-  this->api_client = Alpaca::Client(flags_);
+  this->flags = flags_;
+
+  this->api_client =
+      Alpaca::Client(::utils::map::merge(this->flags, {{"hedge", "0"}}));
+
+  if (is_hedging()) {
+    this->hedge_api_client = Alpaca::Client(this->flags);
+  }
 
   this->account_balance = this->original_account_balance =
       fetch_account_balance();
 
-  this->flags = flags_;
   this->symbol = symbol_;
 
   fetch_quote();
