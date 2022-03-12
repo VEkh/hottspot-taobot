@@ -57,7 +57,6 @@ private:
   order_t open_order;
   performance_t performance;
   price_movement_t price_movement;
-  std::list<candlestick_t> candlesticks;
   std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -93,7 +92,6 @@ private:
   performance_t get_loss_leader(std::list<performance_t> &);
   std::list<performance_t> read_sibling_performances();
   void await_market_open();
-  void build_candlesticks();
   void cancel_stale_open_order();
   void close_position();
   void fetch_quote();
@@ -101,7 +99,6 @@ private:
   void load_performance();
   void load_price_movement();
   void log_account_balance();
-  void log_candlesticks();
   void log_end_of_trading_period();
   void log_performance();
   void log_position();

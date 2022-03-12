@@ -4,13 +4,11 @@
 #include "await_market_open.cpp"         // await_market_open
 #include "awaited_inverse.cpp"           // awaited_inverse
 #include "awaited_loss_leader.cpp"       // awaited_loss_leader
-#include "build_candlesticks.cpp"        // build_candlesticks
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
 #include "fetch_quote.cpp"               // fetch_quote
 #include "is_market_open.cpp"            // is_market_open
 #include "log_account_balance.cpp"       // log_account_balance
-#include "log_candlesticks.cpp"          // log_candlesticks
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
@@ -38,7 +36,6 @@ void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
     log_timestamps();
     fetch_quote();
-    build_candlesticks();
     set_price_movement();
 
     if (awaited_inverse()) {
@@ -51,7 +48,6 @@ void Alpaca::TaoBot::watch() {
 
     log_account_balance();
     log_quote();
-    log_candlesticks();
     log_price_movement();
     log_position();
     log_performance();
