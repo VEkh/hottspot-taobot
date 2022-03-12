@@ -11,7 +11,7 @@
 
 #include "alpaca/constants.cpp" // Alpaca::constants
 #include "lib/utils/string.cpp" // ::utils::string
-#include "log_position.cpp"     // log_position
+#include "log_positions.cpp"    // log_positions
 #include "order_win_result.cpp" // order_win_result
 #include <iostream>             // std::cout, std::endl
 #include <stdio.h>              // printf
@@ -61,7 +61,7 @@ void Alpaca::TaoBot::log_position_results() {
 
   std::cout << fmt.reset << std::endl;
 
-  log_position();
+  log_positions();
 }
 
 #endif

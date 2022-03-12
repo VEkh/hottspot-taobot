@@ -74,6 +74,7 @@ private:
   bool is_hedging();
   bool is_holiday();
   bool is_market_open();
+  bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
@@ -109,7 +110,8 @@ private:
   void log_account_balances();
   void log_end_of_trading_period();
   void log_performance();
-  void log_position();
+  void log_position(const order_t *, const order_t *, const char *);
+  void log_positions();
   void log_position_results();
   void log_price_movement();
   void log_quote();

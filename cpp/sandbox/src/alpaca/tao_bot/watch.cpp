@@ -11,8 +11,8 @@
 #include "log_account_balances.cpp"      // log_account_balances
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
-#include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
+#include "log_positions.cpp"             // log_positions
 #include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
 #include "log_timestamps.cpp"            // log_timestamps
@@ -49,7 +49,7 @@ void Alpaca::TaoBot::watch() {
     log_account_balances();
     log_quote();
     log_price_movement();
-    log_position();
+    log_positions();
     log_performance();
 
     set_position_status();

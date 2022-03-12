@@ -3,46 +3,45 @@
 
 #include "alpaca/constants.cpp"  // Alpaca::constants
 #include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/integer.cpp" // utils::integer_
 #include "lib/utils/string.cpp"  // ::utils::string
 #include "profit_percentage.cpp" // profit_percentage
-#include "tao_bot.h"             // Alpaca::TaoBot, fmt
+#include "tao_bot.h"             // Alpaca::TaoBot, fmt, order_action_t
+#include <ctime>                 // std::time, std::time_t
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
-void Alpaca::TaoBot::log_position() {
-  if (!this->open_order_ptr && !this->close_order_ptr) {
-    std::cout << fmt.bold << fmt.cyan;
-    puts("💀 No Open Positions.\n");
-    std::cout << fmt.reset;
-
-    return;
-  }
-
-  Formatted::Stream log_color = this->is_long_position ? fmt.green : fmt.red;
+void Alpaca::TaoBot::log_position(const order_t *close_order_ptr_,
+                                  const order_t *open_order_ptr_,
+                                  const char *label = "") {
+  Formatted::Stream log_color =
+      open_order_ptr_->action == order_action_t::BUY ? fmt.green : fmt.red;
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s\n", ::utils::string::upcase(
-                     Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
-                     .c_str());
+  printf("%s%s\n",
+         ::utils::string::upcase(
+             Alpaca::constants::ORDER_ACTIONS[open_order_ptr_->action])
+             .c_str(),
+         label);
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
   printf(
       "Open   => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f\n",
-      this->open_order.execution_price, this->open_order.profit,
-      profit_percentage(this->open_order_ptr), this->open_order.max_profit);
+      open_order_ptr_->execution_price, open_order_ptr_->profit,
+      profit_percentage(open_order_ptr_), open_order_ptr_->max_profit);
 
   printf(
       "Close  => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f\n",
-      this->close_order.execution_price, this->close_order.profit,
-      profit_percentage(this->close_order_ptr), this->close_order.max_profit);
+      close_order_ptr_->execution_price, close_order_ptr_->profit,
+      profit_percentage(close_order_ptr_), close_order_ptr_->max_profit);
 
   printf("Status => Open: %s • Close: %s\n",
          ::utils::string::upcase(
-             Alpaca::constants::ORDER_STATUSES[this->open_order.status])
+             Alpaca::constants::ORDER_STATUSES[open_order_ptr_->status])
              .c_str(),
          ::utils::string::upcase(
-             Alpaca::constants::ORDER_STATUSES[this->close_order.status])
+             Alpaca::constants::ORDER_STATUSES[close_order_ptr_->status])
              .c_str());
 
   printf("Min Profit: %.2f • Max Loss: %.2f • Secure Profit (Lower): %.2f • "
@@ -52,6 +51,12 @@ void Alpaca::TaoBot::log_position() {
          this->exit_prices.upper_secure_profit);
 
   printf("Quantity: %.5f\n", this->quantity);
+
+  std::time_t now = std::time(nullptr);
+  const int duration = now - open_order_ptr_->timestamp;
+
+  printf("Duration: %s\n",
+         ::utils::integer_::seconds_to_clock(duration).c_str());
 
   std::cout << fmt.reset << std::endl;
 }
