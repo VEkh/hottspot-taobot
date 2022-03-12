@@ -4,6 +4,7 @@
 #include "compute_quantity.cpp"          // compute_quantity
 #include "fetch_account_balance.cpp"     // fetch_account_balance
 #include "get_loss_leader.cpp"           // get_loss_leader
+#include "is_hedging.cpp"                // is_hedging
 #include "max_affordable_quantity.cpp"   // max_affordable_quantity
 #include "read_sibling_performances.cpp" // read_sibling_performances
 #include "should_open_position.cpp"      // should_open_position
@@ -16,6 +17,10 @@
 #include <unistd.h>                      // usleep
 
 bool Alpaca::TaoBot::awaited_loss_leader() {
+  if (is_hedging()) {
+    return false;
+  }
+
   if (!should_open_position()) {
     return false;
   }
