@@ -8,7 +8,7 @@
 #include "close_position.cpp"            // close_position
 #include "fetch_quote.cpp"               // fetch_quote
 #include "is_market_open.cpp"            // is_market_open
-#include "log_account_balance.cpp"       // log_account_balance
+#include "log_account_balances.cpp"      // log_account_balances
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
@@ -46,7 +46,7 @@ void Alpaca::TaoBot::watch() {
       continue;
     }
 
-    log_account_balance();
+    log_account_balances();
     log_quote();
     log_price_movement();
     log_position();

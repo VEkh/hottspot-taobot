@@ -15,6 +15,7 @@
 #include "compute_quantity.cpp"      // compute_quantity
 #include "current_price.cpp"         // current_price
 #include "fetch_account_balance.cpp" // fetch_account_balance
+#include "is_hedging.cpp"            // is_hedging
 #include "lib/utils/string.cpp"      // ::utils::string
 #include "should_open_position.cpp"  // should_open_position
 #include "write_performance.cpp"     // write_performance
@@ -27,7 +28,13 @@ void Alpaca::TaoBot::open_position() {
     return;
   }
 
-  this->account_balance = fetch_account_balance();
+  this->account_balance = fetch_account_balance(&this->api_client);
+
+  if (is_hedging()) {
+    this->hedge_account_balance =
+        fetch_account_balance(&this->hedge_api_client);
+  }
+
   const double quantity_ = compute_quantity();
 
   if (quantity_ <= 0) {

@@ -46,7 +46,9 @@ private:
   Alpaca::Client hedge_api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
+  account_balance_t hedge_account_balance;
   account_balance_t original_account_balance;
+  account_balance_t original_hedge_account_balance;
   bool is_long_position;
   char *symbol;
   double quantity;
@@ -61,7 +63,7 @@ private:
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_balance_t fetch_account_balance();
+  account_balance_t fetch_account_balance(Alpaca::Client *);
   bool awaited_inverse();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
@@ -98,7 +100,8 @@ private:
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void load_price_movement();
-  void log_account_balance();
+  void log_account_balance(account_balance_t, account_balance_t, const char *);
+  void log_account_balances();
   void log_end_of_trading_period();
   void log_performance();
   void log_position();

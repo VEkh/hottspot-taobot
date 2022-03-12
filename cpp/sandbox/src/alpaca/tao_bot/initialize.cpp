@@ -46,12 +46,15 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   this->api_client =
       Alpaca::Client(::utils::map::merge(this->flags, {{"hedge", "0"}}));
 
+  this->account_balance = this->original_account_balance =
+      fetch_account_balance(&this->api_client);
+
   if (is_hedging()) {
     this->hedge_api_client = Alpaca::Client(this->flags);
-  }
 
-  this->account_balance = this->original_account_balance =
-      fetch_account_balance();
+    this->hedge_account_balance = this->original_hedge_account_balance =
+        fetch_account_balance(&this->hedge_api_client);
+  }
 
   this->symbol = symbol_;
 
