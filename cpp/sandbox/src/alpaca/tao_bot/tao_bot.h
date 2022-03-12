@@ -93,7 +93,7 @@ private:
   double secured_profit_ratio();
   exit_prices_t build_exit_prices();
   int runtime();
-  json fetch_order(const order_t *);
+  json fetch_order(const order_t *, Alpaca::Client *);
   json read_sibling_performance(std::string);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
@@ -122,13 +122,13 @@ private:
   void open_position();
   void reset_position();
   void set_close_position_prices();
-  void set_execution_price(order_t *);
+  void set_execution_price(order_t *, Alpaca::Client *);
   void set_open_position_prices();
   void set_position_status();
   void set_price_movement();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
-  void set_status(order_t *order);
+  void set_status(order_t *order, Alpaca::Client *);
   void set_trade_direction();
   void watch();
   void write_performance();

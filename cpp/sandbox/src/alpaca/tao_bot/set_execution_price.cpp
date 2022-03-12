@@ -8,14 +8,16 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp"        // json
-#include "fetch_order.cpp" // fetch_order
-#include <iostream>        // std::cout, std::endl
-#include <stdio.h>         // printf
-#include <string>          // std::stod
-#include <unistd.h>        // usleep
+#include "alpaca/client/client.cpp" // Alpaca::Client
+#include "deps.cpp"                 // json
+#include "fetch_order.cpp"          // fetch_order
+#include <iostream>                 // std::cout, std::endl
+#include <stdio.h>                  // printf
+#include <string>                   // std::stod
+#include <unistd.h>                 // usleep
 
-void Alpaca::TaoBot::set_execution_price(order_t *order) {
+void Alpaca::TaoBot::set_execution_price(order_t *order,
+                                         Alpaca::Client *api_client_ptr) {
   if (order->execution_price) {
     return;
   }
@@ -24,10 +26,10 @@ void Alpaca::TaoBot::set_execution_price(order_t *order) {
     return;
   }
 
-  json order_json = fetch_order(order);
+  json order_json = fetch_order(order, api_client_ptr);
 
   if (!order_json.contains("filled_avg_price")) {
-    return set_execution_price(order);
+    return set_execution_price(order, api_client_ptr);
   }
 
   const std::string execution_price_string = order_json["filled_avg_price"];
