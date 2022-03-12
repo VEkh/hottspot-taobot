@@ -40,7 +40,7 @@ private:
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
   const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const int MAX_EXPECTED_LOSS_STREAK = 20;
+  const int MAX_EXPECTED_LOSS_STREAK = 18;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -55,7 +55,7 @@ private:
       {"EUR_JPY", 2.0e-2}, {"EUR_NZD", 7.5e-4}, {"EUR_SEK", 5.0e-3},
       {"EUR_USD", 2.0e-4}, {"GBP_AUD", 4.2e-4}, {"GBP_CAD", 3.5e-4},
       {"GBP_CHF", 2.0e-4}, {"GBP_JPY", 3.0e-2}, {"GBP_NZD", 8.5e-4},
-      {"GBP_PLN", 4.0e-3}, {"GBP_SGD", 6.0e-4}, {"GBP_USD", 2.4e-4},
+      {"GBP_PLN", 6.0e-3}, {"GBP_SGD", 6.0e-4}, {"GBP_USD", 2.4e-4},
       {"NZD_CAD", 2.4e-4}, {"NZD_JPY", 4.2e-2}, {"NZD_USD", 2.2e-4},
       {"USD_CAD", 2.4e-4}, {"USD_CHF", 2.0e-4}, {"USD_DKK", 1.6e-3},
       {"USD_JPY", 1.8e-2}, {"USD_SEK", 4.2e-3},
