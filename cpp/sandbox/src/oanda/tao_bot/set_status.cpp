@@ -10,7 +10,7 @@
 #include "tao_bot.h"
 
 #include "build_performance.cpp" // build_performance
-#include "deps.cpp"              // json
+#include "deps.cpp"              // json, nlohmann
 #include "fetch_order.cpp"       // fetch_order
 #include "oanda/constants.cpp"   // Oanda::constants
 #include "oanda/utils.cpp"       // Oanda::utils
@@ -39,7 +39,14 @@ void Oanda::TaoBot::set_status(order_t *order) {
     return;
   }
 
-  const std::string status = order_json["state"];
+  std::string status;
+
+  try {
+    status = order_json["state"];
+  } catch (nlohmann::detail::type_error &) {
+    return set_status(order);
+  }
+
   order->status = Oanda::utils::to_order_status_t(status);
 
   if (original_status != order_status_t::ORDER_FILLED &&

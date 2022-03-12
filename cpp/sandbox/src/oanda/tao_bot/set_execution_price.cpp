@@ -8,7 +8,7 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp"        // json
+#include "deps.cpp"        // json, nlohmann
 #include "fetch_trade.cpp" // fetch_trade
 #include <iostream>        // std::cout, std::endl
 #include <stdio.h>         // printf
@@ -32,10 +32,16 @@ void Oanda::TaoBot::set_execution_price(order_t *order) {
     return;
   }
 
-  std::string price_string = trade_json["price"];
+  std::string price_string;
 
-  if (trade_json.contains("averageClosePrice")) {
-    price_string = trade_json["averageClosePrice"];
+  try {
+    price_string = trade_json["price"];
+
+    if (trade_json.contains("averageClosePrice")) {
+      price_string = trade_json["averageClosePrice"];
+    }
+  } catch (nlohmann::detail::type_error &) {
+    return set_execution_price(order);
   }
 
   order->execution_price = (double)std::stod(price_string);
