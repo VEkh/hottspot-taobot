@@ -29,7 +29,7 @@ function clear_performance() {
 }
 
 case $1 in
-  +([[:alpha:]]))
+  +([[:alpha:]_[:alpha:]]))
     clear_performance "$1"
     ;;
 
