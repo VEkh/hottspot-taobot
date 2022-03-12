@@ -39,7 +39,8 @@ void Alpaca::TaoBot::write_performance() {
     for (position_t position : this->closed_positions) {
       json position_json = {
           {"close_order", order_to_json(position.close_order)},
-          {"close_timestamp", position.close_timestamp},
+          {"hedge_close_order", order_to_json(position.hedge_close_order)},
+          {"hedge_open_order", order_to_json(position.hedge_open_order)},
           {"open_order", order_to_json(position.open_order)},
       };
 

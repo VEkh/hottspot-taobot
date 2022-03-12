@@ -1,5 +1,5 @@
-#ifndef ALPACA__TAO_BOT_compute_quantity
-#define ALPACA__TAO_BOT_compute_quantity
+#ifndef ALPACA__TAO_BOT_compute_martingale_quantity
+#define ALPACA__TAO_BOT_compute_martingale_quantity
 
 #include "base_quantity.cpp"           // base_quantity
 #include "build_exit_prices.cpp"       // build_exit_prices
@@ -9,7 +9,7 @@
 #include <algorithm>                   // std::min
 #include <math.h>                      // abs
 
-double Alpaca::TaoBot::compute_quantity() {
+double Alpaca::TaoBot::compute_martingale_quantity() {
   const double max_affordable_quantity_ = max_affordable_quantity();
 
   if (!max_affordable_quantity_) {

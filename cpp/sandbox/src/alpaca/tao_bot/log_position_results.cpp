@@ -30,7 +30,12 @@ void Alpaca::TaoBot::log_position_results() {
           Alpaca::constants::ORDER_ACTIONS[this->open_order.action])
           .c_str();
 
-  order_win_result_t win_result = order_win_result(this->close_order_ptr);
+  order_win_result_t win_result = order_win_result({
+      .close_order = this->close_order,
+      .hedge_close_order = this->hedge_close_order,
+      .hedge_open_order = this->hedge_open_order,
+      .open_order = this->open_order,
+  });
 
   switch (win_result) {
   case order_win_result_t::LOSS: {

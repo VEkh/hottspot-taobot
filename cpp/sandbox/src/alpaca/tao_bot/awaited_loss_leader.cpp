@@ -1,20 +1,20 @@
 #ifndef ALPACA__TAO_BOT_awaited_loss_leader
 #define ALPACA__TAO_BOT_awaited_loss_leader
 
-#include "compute_quantity.cpp"          // compute_quantity
-#include "fetch_account_balance.cpp"     // fetch_account_balance
-#include "get_loss_leader.cpp"           // get_loss_leader
-#include "is_hedging.cpp"                // is_hedging
-#include "max_affordable_quantity.cpp"   // max_affordable_quantity
-#include "read_sibling_performances.cpp" // read_sibling_performances
-#include "should_open_position.cpp"      // should_open_position
-#include "tao_bot.h"                     // Alpaca::TaoBot, performance_t
-#include <iostream>                      // std::cout, std::endl
-#include <list>                          // std::list
-#include <map>                           // std::map
-#include <stdio.h>                       // printf
-#include <string>                        // std::string
-#include <unistd.h>                      // usleep
+#include "compute_martingale_quantity.cpp" // compute_martingale_quantity
+#include "fetch_account_balance.cpp"       // fetch_account_balance
+#include "get_loss_leader.cpp"             // get_loss_leader
+#include "is_hedging.cpp"                  // is_hedging
+#include "max_affordable_quantity.cpp"     // max_affordable_quantity
+#include "read_sibling_performances.cpp"   // read_sibling_performances
+#include "should_open_position.cpp"        // should_open_position
+#include "tao_bot.h"                       // Alpaca::TaoBot, performance_t
+#include <iostream>                        // std::cout, std::endl
+#include <list>                            // std::list
+#include <map>                             // std::map
+#include <stdio.h>                         // printf
+#include <string>                          // std::string
+#include <unistd.h>                        // usleep
 
 bool Alpaca::TaoBot::awaited_loss_leader() {
   if (is_hedging()) {
@@ -67,7 +67,7 @@ bool Alpaca::TaoBot::awaited_loss_leader() {
   this->account_balance = fetch_account_balance(&this->api_client);
 
   const bool are_funds_sufficient =
-      compute_quantity() < max_affordable_quantity();
+      compute_martingale_quantity() < max_affordable_quantity();
 
   std::cout << fmt.bold << fmt.underline << fmt.yellow;
   printf("Me: ");

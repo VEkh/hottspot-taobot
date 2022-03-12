@@ -54,8 +54,12 @@ private:
   double quantity;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
+  order_t *hedge_close_order_ptr = nullptr;
+  order_t *hedge_open_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
+  order_t hedge_close_order;
+  order_t hedge_open_order;
   order_t open_order;
   performance_t performance;
   price_movement_t price_movement;
@@ -77,7 +81,8 @@ private:
   double base_quantity();
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double compute_quantity();
+  double compute_hedge_quantity();
+  double compute_martingale_quantity();
   double current_price();
   double loss_to_recover();
   double max_affordable_quantity();
@@ -89,7 +94,7 @@ private:
   int runtime();
   json fetch_order(const order_t *);
   json read_sibling_performance(std::string);
-  order_win_result_t order_win_result(const order_t *);
+  order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
   std::list<performance_t> read_sibling_performances();
@@ -110,6 +115,8 @@ private:
   void log_quote();
   void log_start_message();
   void log_timestamps();
+  void open_hedged_position();
+  void open_martingale_position();
   void open_position();
   void reset_position();
   void set_close_position_prices();

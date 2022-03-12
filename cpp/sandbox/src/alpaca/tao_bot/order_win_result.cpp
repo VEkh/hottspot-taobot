@@ -8,13 +8,17 @@
  */
 #include "tao_bot.h"
 
+#include "position_profit.cpp" // position_profit
+
 Alpaca::TaoBot::order_win_result_t
-Alpaca::TaoBot::order_win_result(const order_t *order) {
-  if (order->profit > 0) {
+Alpaca::TaoBot::order_win_result(const position_t position) {
+  const double profit = position_profit(position);
+
+  if (profit > 0) {
     return order_win_result_t::WIN;
   }
 
-  if (order->profit == 0) {
+  if (profit == 0) {
     return order_win_result_t::TIE;
   }
 

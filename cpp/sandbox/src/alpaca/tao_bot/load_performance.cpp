@@ -80,7 +80,8 @@ void Alpaca::TaoBot::load_performance() {
   for (json position_json : positions_json) {
     position_t position = {
         .close_order = json_to_order(position_json["close_order"]),
-        .close_timestamp = position_json["close_timestamp"],
+        .hedge_close_order = json_to_order(position_json["hedge_close_order"]),
+        .hedge_open_order = json_to_order(position_json["hedge_open_order"]),
         .open_order = json_to_order(position_json["open_order"]),
     };
 

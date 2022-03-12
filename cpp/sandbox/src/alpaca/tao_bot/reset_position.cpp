@@ -25,7 +25,8 @@ void Alpaca::TaoBot::reset_position() {
 
   const position_t position = {
       .close_order = this->close_order,
-      .close_timestamp = (int)std::time(nullptr),
+      .hedge_close_order = this->hedge_close_order,
+      .hedge_open_order = this->hedge_open_order,
       .open_order = this->open_order,
   };
 
