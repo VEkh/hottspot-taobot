@@ -28,8 +28,7 @@ void Alpaca::TaoBot::open_position() {
   }
 
   this->account_balance = fetch_account_balance();
-  // const double quantity_ = compute_quantity();
-  const double quantity_ = 50;
+  const double quantity_ = compute_quantity();
 
   if (quantity_ <= 0) {
     std::cout << fmt.bold << fmt.yellow;

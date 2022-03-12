@@ -9251,6 +9251,91 @@ Staging had a really good week 🎉
     least partially, if not entirely cover the losing side's losses.
 
 ### 2021-03-08:
+#### Remarks
+##### Forex
+* Runtime 14:12:26; 40x 1-sec var; short every 5; AUD_NZD (22) unrecovered, +$534.89 (+1.07%)
+* Reverting to all buys until I can implement hedging in Forex.
+
+##### Stocks/ETFs
+* Hedging with high quantities was interesting.
+* Once I ironed out some kinks, it basically broke even.
+* In order for the wins to lock in profits:
+  * The winning side would have to be aware of the losing side's exit execution
+    price and set its target profit beyond that.
+  * This would probably increase the instance of losses, but would increase the
+    profitability of wins.
+  * Yo no longer need to wait for large loss leaders
+* Scale down the quantity and observe the returns
+
+#### Next Thing(s) to Try
+
+### 2021-03-09:
+#### Remarks
+##### Forex
+* Runtime 39:41:52; 40x 1-sec var; all buys; USD_CAD (15) recovered, +$68.92250 (+0.14%)
+* Decreaing MAX_EXPECTED_LOSS_STREAK to 18
+##### Stocks/ETFs
+* Hedging started off well, but revealed something. SQQQ has a slightly larger
+  1-sec variance and this weights the short side of the hedge more heavily.
+  That is a win from the short side means more, and the buy side needs to
+  travel further to compensate for the short side's loss.
+* In order to avoid missed profits from buy-side wins the price and movement of
+  each side should be balanced.
+* The day ended up ~+$70. I'll increase each trade quantity to 100 and see how
+  that goes.
+
+#### Next Thing(s) to Try
+
+### 2021-03-10:
+#### Remarks
+##### Forex
+* Runtime 01:14:16; 40x 1-sec var; all buys; GBP_PLN (18) unrecovered, -$1,828.87390 (-3.61%)
+* I had set GBP_PLN's spread threshold to 9e-3 which was far too high. I'm
+  lowering to 6e-3 and will measure the results.
+
+##### Stocks/ETFs
+* Hedging did okay today. It lost -$50 (-0.21%).
+* This is better than catastrophic losses. I'll keep monitoring to how often it
+  loses.
+* I also need to normalize the quantities so both sides are equally staked.
+
+#### Next Thing(s) to Try
+
+### 2021-03-11:
+#### Remarks
+##### Forex
+* [STAGING] Runtime 32:15:06; 40x 1-sec var; all buys; GBP_CAD (17) recovered,
+  NZD_CAD (17) recovered; +$861.67 (+1.72%)
+* Adjusting GBP_PLN's spread limit worked and revealed something: 1-sec
+  variance:spread limit ratio is important.
+  * Execution at the spread edge means all positions open at a loss. 40x 1-sec
+    variance needs to be a minimum amount greater than 0.5 * spread so that a
+    small profit decrease doesn't trigger a loss.
+  * Discovering this ratio seems significant.
+* If next week is profitable, I'll consider deploying to production. I may wait
+  til it gets to $55K.
+* If hedging goes well with equities, I'll start to implement it in Forex.
+
+##### Stocks/ETFs
+* [STAGING] Hedging did very well today: +$875.32 (+3.11%)
+* What I've learned from the proof of concept is:
+  * Hedging works some days and loses others.
+  * When the plurality of the fund is employed in it, the return can be significant.
+  * I also suspect it will help avoid catastrophic losses.
+  * The strategy wins most of the time. Today it only lost twice. However, a
+    loss greatly eats away at profits.
+  * What remains to be seen is whether implementing the hedge strategy across a
+    few instruments will mitigate or increase this risk.
+  * My hypothesis:
+    * Most instruments will mostly win.
+    * Some will lose enough to end in a deficit.
+    * Some days all instruments will lose.
+* The next step is to formalize the approach in a separate branch and test in staging next week.
+* If it's stable and brings staging to >$30K then maybe I'll deploy to production.
+
+#### Next Thing(s) to Try
+
+### 2021-03-14:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
