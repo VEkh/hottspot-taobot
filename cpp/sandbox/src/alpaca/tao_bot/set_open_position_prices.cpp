@@ -14,7 +14,7 @@ void Alpaca::TaoBot::set_open_position_prices() {
     return;
   }
 
-  set_execution_price(this->open_order_ptr, &this->api_client);
+  set_execution_price(this->open_order_ptr, this->api_client);
   set_profit(this->open_order_ptr);
 }
 

@@ -16,14 +16,14 @@
 #include <string>                   // std::string
 
 json Alpaca::TaoBot::fetch_order(const order_t *order,
-                                 Alpaca::Client *api_client_ptr) {
+                                 Alpaca::Client &api_client_ref) {
   json empty_order;
 
   if (order->id.empty()) {
     return empty_order;
   }
 
-  std::string order_response = api_client_ptr->fetch_order(order->id);
+  std::string order_response = api_client_ref.fetch_order(order->id);
 
   return ::utils::json::parse_with_catch(order_response,
                                          "ALPACA__TAO_BOT_fetch_order");

@@ -11,13 +11,10 @@ void Alpaca::TaoBot::set_position_status() {
     return;
   }
 
-  set_status(this->open_order_ptr, &this->api_client);
-  set_status(this->close_order_ptr, &this->api_client);
-
-  if (is_hedging()) {
-    set_status(this->hedge_open_order_ptr, &this->hedge_api_client);
-    set_status(this->hedge_close_order_ptr, &this->hedge_api_client);
-  }
+  set_status(this->open_order_ptr, this->api_client);
+  set_status(this->close_order_ptr, this->api_client);
+  set_status(this->hedge_open_order_ptr, this->hedge_api_client);
+  set_status(this->hedge_close_order_ptr, this->hedge_api_client);
 }
 
 #endif

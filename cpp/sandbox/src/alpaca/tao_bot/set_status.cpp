@@ -22,21 +22,25 @@
 #include <string>                   // std::string
 
 void Alpaca::TaoBot::set_status(order_t *order,
-                                Alpaca::Client *api_client_ptr) {
+                                Alpaca::Client &api_client_ref) {
+  if (!order) {
+    return;
+  }
+
   const order_status_t original_status = order->status;
 
   if (original_status == order_status_t::ORDER_FILLED) {
     return;
   }
 
-  json order_json = fetch_order(order, api_client_ptr);
+  json order_json = fetch_order(order, api_client_ref);
 
   if (order_json.empty()) {
     return;
   }
 
   if (!order_json.contains("status")) {
-    return set_status(order, api_client_ptr);
+    return set_status(order, api_client_ref);
   }
 
   const std::string status = order_json["status"];
