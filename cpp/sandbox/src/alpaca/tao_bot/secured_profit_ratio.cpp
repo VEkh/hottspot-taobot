@@ -4,7 +4,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 #include <math.h>    // exp
 
-double Alpaca::TaoBot::secured_profit_ratio() {
+double Alpaca::TaoBot::secured_profit_ratio(const order_t *open_order_ptr_) {
   const double min = 0.8;
   const double max = 0.9;
 
@@ -12,7 +12,7 @@ double Alpaca::TaoBot::secured_profit_ratio() {
     return min;
   }
 
-  const double x = this->open_order.profit / this->exit_prices.min_profit;
+  const double x = open_order_ptr_->profit / this->exit_prices.min_profit;
   const double y_shift = min;
   const double y_coefficient = max - min;
   const double x_shift = 1.5;

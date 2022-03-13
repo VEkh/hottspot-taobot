@@ -76,7 +76,7 @@ private:
   bool is_market_open();
   bool is_position_closed();
   bool max_account_loss_reached();
-  bool should_close_position();
+  bool should_close_position(const order_t *, const order_t *);
   bool should_open_position();
   bool should_terminate();
   double base_quantity();
@@ -90,8 +90,8 @@ private:
   double position_target_movement();
   double position_profit(const position_t &);
   double profit_percentage(const order_t *);
-  double secured_profit_ratio();
-  exit_prices_t build_exit_prices();
+  double secured_profit_ratio(const order_t *);
+  exit_prices_t build_exit_prices(const order_t *);
   int runtime();
   json fetch_order(const order_t *, Alpaca::Client *);
   json read_sibling_performance(std::string);
@@ -100,8 +100,10 @@ private:
   performance_t get_loss_leader(std::list<performance_t> &);
   std::list<performance_t> read_sibling_performances();
   void await_market_open();
-  void cancel_stale_open_order();
-  void close_position();
+  void cancel_stale_open_order(Alpaca::Client &, const order_t *);
+  void cancel_stale_open_orders();
+  void close_position(Alpaca::Client &, order_t *, const order_t *, const bool);
+  void close_positions();
   void fetch_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();

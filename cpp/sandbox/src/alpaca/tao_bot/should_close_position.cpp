@@ -13,12 +13,13 @@
 #include "position_target_movement.cpp" // position_target_movement
 #include <math.h>                       // abs
 
-bool Alpaca::TaoBot::should_close_position() {
-  if (this->open_order.status != order_status_t::ORDER_FILLED) {
+bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
+                                           const order_t *open_order_ptr_) {
+  if (open_order_ptr_->status != order_status_t::ORDER_FILLED) {
     return false;
   }
 
-  if (this->close_order.status != order_status_t::ORDER_INIT) {
+  if (close_order_ptr_->status != order_status_t::ORDER_INIT) {
     return false;
   }
 
@@ -30,15 +31,15 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  this->exit_prices = build_exit_prices();
+  this->exit_prices = build_exit_prices(open_order_ptr_);
 
-  if (this->open_order.max_profit >= this->exit_prices.min_profit &&
-      this->open_order.profit >= this->exit_prices.lower_secure_profit &&
-      this->open_order.profit <= this->exit_prices.upper_secure_profit) {
+  if (open_order_ptr_->max_profit >= this->exit_prices.min_profit &&
+      open_order_ptr_->profit >= this->exit_prices.lower_secure_profit &&
+      open_order_ptr_->profit <= this->exit_prices.upper_secure_profit) {
     return true;
   }
 
-  if (this->open_order.profit <= exit_prices.max_loss) {
+  if (open_order_ptr_->profit <= exit_prices.max_loss) {
     return true;
   }
 

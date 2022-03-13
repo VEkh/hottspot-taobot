@@ -7,7 +7,8 @@
 #include <algorithm>                    // std::max std::min
 #include <math.h>                       // abs
 
-Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
+Alpaca::TaoBot::exit_prices_t
+Alpaca::TaoBot::build_exit_prices(const order_t *open_order_ptr_) {
   const double max_loss = this->exit_prices.max_loss
                               ? this->exit_prices.max_loss
                               : -position_target_movement();
@@ -16,13 +17,13 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
                                    ? this->exit_prices.init_max_loss
                                    : max_loss;
 
-  const double secured_profit_ratio_ = secured_profit_ratio();
+  const double secured_profit_ratio_ = secured_profit_ratio(open_order_ptr_);
   const double min_profit = (1 / secured_profit_ratio_) * abs(max_loss);
   const double lower_secure_profit = min_profit * secured_profit_ratio_;
 
   const double upper_secure_profit =
       std::max(this->exit_prices.upper_secure_profit,
-               this->open_order.max_profit * secured_profit_ratio_);
+               open_order_ptr_->max_profit * secured_profit_ratio_);
 
   return {
       .init_max_loss = init_max_loss,

@@ -22,7 +22,7 @@ double Alpaca::TaoBot::compute_martingale_quantity() {
     return std::min(base_quantity(), max_affordable_quantity_);
   }
 
-  const exit_prices_t exit_prices_ = build_exit_prices();
+  const exit_prices_t exit_prices_ = build_exit_prices(this->open_order_ptr);
 
   const double quantity_ = loss_to_recover_ / abs(exit_prices_.max_loss);
 

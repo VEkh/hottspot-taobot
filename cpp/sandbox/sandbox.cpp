@@ -5,13 +5,10 @@
 #include <string>
 
 int main() {
-  std::map<const char *, const char *> m = {{"jay", "z"}};
-  const char *v = m["kanye"];
+  int a = 4;
+  int d = 4;
+  int *b = nullptr;
+  int *c = nullptr;
 
-  if (v == nullptr) {
-    puts("Empty value");
-    return 0;
-  }
-
-  printf("Value: %s\n", v);
+  printf("b == c: %i\n", b == c);
 }

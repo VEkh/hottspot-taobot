@@ -4,8 +4,8 @@
 #include "await_market_open.cpp"         // await_market_open
 #include "awaited_inverse.cpp"           // awaited_inverse
 #include "awaited_loss_leader.cpp"       // awaited_loss_leader
-#include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
-#include "close_position.cpp"            // close_position
+#include "cancel_stale_open_orders.cpp"  // cancel_stale_open_orders
+#include "close_positions.cpp"           // close_positions
 #include "fetch_quote.cpp"               // fetch_quote
 #include "is_market_open.cpp"            // is_market_open
 #include "log_account_balances.cpp"      // log_account_balances
@@ -54,11 +54,11 @@ void Alpaca::TaoBot::watch() {
 
     set_position_status();
 
-    cancel_stale_open_order();
+    cancel_stale_open_orders();
     open_position();
     set_open_position_prices();
 
-    close_position();
+    close_positions();
     set_close_position_prices();
 
     log_position_results();
