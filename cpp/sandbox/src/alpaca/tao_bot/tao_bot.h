@@ -68,7 +68,6 @@ private:
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
-  bool awaited_inverse();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
   bool is_hedging();
