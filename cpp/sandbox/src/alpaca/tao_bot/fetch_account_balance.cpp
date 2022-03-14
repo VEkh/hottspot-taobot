@@ -8,10 +8,10 @@
 #include <string>                   // std::stod, std::string
 
 Alpaca::TaoBot::account_balance_t
-Alpaca::TaoBot::fetch_account_balance(Alpaca::Client *api_client_ptr) {
+Alpaca::TaoBot::fetch_account_balance(Alpaca::Client &api_client_ref) {
   try {
     json account_json = ::utils::json::parse_with_catch(
-        api_client_ptr->fetch_account(),
+        api_client_ref.fetch_account(),
         "ALPACA__TAO_BOT_fetch_account_balance");
 
     const std::string balance = account_json["equity"];
@@ -24,7 +24,7 @@ Alpaca::TaoBot::fetch_account_balance(Alpaca::Client *api_client_ptr) {
         .margin_multiplier = std::stod(margin_multiplier),
     };
   } catch (nlohmann::detail::type_error &) {
-    return fetch_account_balance(api_client_ptr);
+    return fetch_account_balance(api_client_ref);
   }
 }
 

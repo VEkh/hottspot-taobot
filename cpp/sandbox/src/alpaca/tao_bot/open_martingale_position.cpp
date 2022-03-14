@@ -26,7 +26,7 @@ void Alpaca::TaoBot::open_martingale_position() {
     return;
   }
 
-  this->account_balance = fetch_account_balance(&this->api_client);
+  this->account_balance = fetch_account_balance(this->api_client);
 
   const double quantity_ = compute_martingale_quantity();
 

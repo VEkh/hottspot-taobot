@@ -21,8 +21,8 @@
 #include <stdio.h>                  // printf
 #include <string>                   // std::string
 
-void Alpaca::TaoBot::set_status(order_t *order,
-                                Alpaca::Client &api_client_ref) {
+void Alpaca::TaoBot::set_status(Alpaca::Client &api_client_ref,
+                                order_t *order) {
   if (!order) {
     return;
   }
@@ -33,14 +33,14 @@ void Alpaca::TaoBot::set_status(order_t *order,
     return;
   }
 
-  json order_json = fetch_order(order, api_client_ref);
+  json order_json = fetch_order(api_client_ref, order);
 
   if (order_json.empty()) {
     return;
   }
 
   if (!order_json.contains("status")) {
-    return set_status(order, api_client_ref);
+    return set_status(api_client_ref, order);
   }
 
   const std::string status = order_json["status"];

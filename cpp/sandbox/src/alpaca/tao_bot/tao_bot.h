@@ -67,7 +67,7 @@ private:
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_balance_t fetch_account_balance(Alpaca::Client *);
+  account_balance_t fetch_account_balance(Alpaca::Client &);
   bool awaited_inverse();
   bool awaited_loss_leader();
   bool is_end_of_trading_period();
@@ -93,7 +93,7 @@ private:
   double secured_profit_ratio(const order_t *);
   exit_prices_t build_exit_prices(const order_t *);
   int runtime();
-  json fetch_order(const order_t *, Alpaca::Client &);
+  json fetch_order(Alpaca::Client &, const order_t *);
   json read_sibling_performance(std::string);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
@@ -131,7 +131,7 @@ private:
   void set_price_movement();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
-  void set_status(order_t *order, Alpaca::Client &);
+  void set_status(Alpaca::Client &, order_t *order);
   void set_trade_direction();
   void watch();
   void write_performance();

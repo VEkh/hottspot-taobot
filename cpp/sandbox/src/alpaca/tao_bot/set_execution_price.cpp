@@ -26,7 +26,7 @@ void Alpaca::TaoBot::set_execution_price(Alpaca::Client &api_client_ref,
     return;
   }
 
-  json order_json = fetch_order(order, api_client_ref);
+  json order_json = fetch_order(api_client_ref, order);
 
   if (!order_json.contains("filled_avg_price")) {
     return set_execution_price(api_client_ref, order);

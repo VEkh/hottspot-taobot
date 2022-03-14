@@ -28,8 +28,8 @@ void Alpaca::TaoBot::open_hedged_position() {
     return;
   }
 
-  this->account_balance = fetch_account_balance(&this->api_client);
-  this->hedge_account_balance = fetch_account_balance(&this->hedge_api_client);
+  this->account_balance = fetch_account_balance(this->api_client);
+  this->hedge_account_balance = fetch_account_balance(this->hedge_api_client);
 
   const double quantity_ = compute_hedge_quantity();
 

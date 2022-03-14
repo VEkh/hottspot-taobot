@@ -15,8 +15,8 @@
 #include <stdio.h>                  // printf
 #include <string>                   // std::string
 
-json Alpaca::TaoBot::fetch_order(const order_t *order,
-                                 Alpaca::Client &api_client_ref) {
+json Alpaca::TaoBot::fetch_order(Alpaca::Client &api_client_ref,
+                                 const order_t *order) {
   json empty_order;
 
   if (order->id.empty()) {
