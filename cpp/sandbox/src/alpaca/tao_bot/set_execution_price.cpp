@@ -16,8 +16,8 @@
 #include <string>                   // std::stod
 #include <unistd.h>                 // usleep
 
-void Alpaca::TaoBot::set_execution_price(order_t *order,
-                                         Alpaca::Client &api_client_ref) {
+void Alpaca::TaoBot::set_execution_price(Alpaca::Client &api_client_ref,
+                                         order_t *order) {
   if (order->execution_price) {
     return;
   }
@@ -29,7 +29,7 @@ void Alpaca::TaoBot::set_execution_price(order_t *order,
   json order_json = fetch_order(order, api_client_ref);
 
   if (!order_json.contains("filled_avg_price")) {
-    return set_execution_price(order, api_client_ref);
+    return set_execution_price(api_client_ref, order);
   }
 
   const std::string execution_price_string = order_json["filled_avg_price"];

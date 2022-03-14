@@ -124,7 +124,8 @@ private:
   void open_position();
   void reset_position();
   void set_close_position_prices();
-  void set_execution_price(order_t *, Alpaca::Client &);
+  void set_execution_price(Alpaca::Client &, order_t *);
+  void set_open_order_prices(Alpaca::Client &, order_t *);
   void set_open_position_prices();
   void set_position_status();
   void set_price_movement();
