@@ -8,15 +8,17 @@
 #include <iostream>                  // std::cout, std::endl
 #include <stdio.h>                   // printf
 
-void Alpaca::TaoBot::close_position(Alpaca::Client &api_client_ref,
-                                    order_t *close_order_ptr_,
-                                    const order_t *open_order_ptr_,
-                                    const bool force = false) {
+void Alpaca::TaoBot::close_position(
+    Alpaca::Client &api_client_ref, order_t *close_order_ptr_,
+    const order_t *open_order_ptr_,
+    const order_t *opposite_close_order_ptr = nullptr,
+    const bool force = false) {
   if (!open_order_ptr_ || !close_order_ptr_) {
     return;
   }
 
-  if (!force && !should_close_position(close_order_ptr_, open_order_ptr_)) {
+  if (!force && !should_close_position(close_order_ptr_, open_order_ptr_,
+                                       opposite_close_order_ptr)) {
     return;
   }
 
