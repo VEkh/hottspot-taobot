@@ -123,6 +123,7 @@ private:
   void open_martingale_position();
   void open_position();
   void reset_position();
+  void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);
   void set_close_position_prices();
   void set_execution_price(Alpaca::Client &, order_t *);
   void set_open_order_prices(Alpaca::Client &, order_t *);
