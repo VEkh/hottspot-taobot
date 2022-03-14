@@ -69,7 +69,9 @@ CurlClient Oanda::Client::place_order(order_t *order) {
     throw std::runtime_error(message);
   }
 
-  std::string order_id_string = response["orderCreateTransaction"]["id"];
+  std::string order_id_string = response.contains("orderFillTransaction")
+                                    ? response["orderFillTransaction"]["id"]
+                                    : response["orderCreateTransaction"]["id"];
 
   order->id = (int)std::stod(order_id_string);
   order->status = order_status_t::ORDER_PENDING;
