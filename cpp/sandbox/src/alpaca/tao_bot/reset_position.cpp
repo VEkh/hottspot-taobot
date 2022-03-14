@@ -9,6 +9,7 @@
 #include "tao_bot.h"
 
 #include "build_performance.cpp"   // build_performance
+#include "is_hedging.cpp"          // is_hedging
 #include "set_trade_direction.cpp" // set_trade_direction
 #include "write_performance.cpp"   // write_performance
 #include <ctime>                   // std::time, std::time_t
@@ -23,6 +24,17 @@ void Alpaca::TaoBot::reset_position() {
     return;
   }
 
+  if (is_hedging()) {
+    if (!this->hedge_open_order_ptr || !this->hedge_close_order_ptr) {
+      return;
+    }
+
+    if (this->hedge_open_order.status != order_status_t::ORDER_FILLED ||
+        this->hedge_close_order.status != order_status_t::ORDER_FILLED) {
+      return;
+    }
+  }
+
   const position_t position = {
       .close_order = this->close_order,
       .hedge_close_order = this->hedge_close_order,
@@ -34,6 +46,8 @@ void Alpaca::TaoBot::reset_position() {
 
   this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();
+  this->hedge_close_order_ptr = nullptr;
+  this->hedge_open_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
 
   this->performance = build_performance();
