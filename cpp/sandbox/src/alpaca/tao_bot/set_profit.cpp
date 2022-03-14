@@ -12,9 +12,9 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
   order->profit = profit;
 }
 
-void Alpaca::TaoBot::set_profit(order_t *close_order,
-                                const order_t *open_order) {
-  close_order->profit = compute_profit(close_order, open_order);
+void Alpaca::TaoBot::set_profit(order_t *close_order_,
+                                const order_t *open_order_) {
+  close_order_->profit = compute_profit(close_order_, open_order_);
 }
 
 #endif

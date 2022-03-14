@@ -18,7 +18,7 @@ void Alpaca::TaoBot::set_close_order_prices(Alpaca::Client &api_client_ref,
   }
 
   set_execution_price(api_client_ref, close_order_ptr_);
-  set_profit(open_order_ptr_, close_order_ptr_);
+  set_profit(close_order_ptr_, open_order_ptr_);
 }
 
 #endif

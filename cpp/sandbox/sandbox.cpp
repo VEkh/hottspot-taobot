@@ -1,14 +1,9 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include <map>
-#include <string>
+#include <fstream> // std::ifstream
+#include <string>  //std::getline, std::string
 
-int main() {
-  int a = 4;
-  int d = 4;
-  int *b = nullptr;
-  int *c = nullptr;
+enum actions { BUY, SELL };
 
-  printf("b == c: %i\n", b == c);
-}
+int main() { printf("action: %i\n", actions::SELL); }

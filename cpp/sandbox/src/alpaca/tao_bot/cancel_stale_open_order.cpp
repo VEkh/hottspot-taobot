@@ -76,9 +76,13 @@ void Alpaca::TaoBot::cancel_stale_open_order(Alpaca::Client &api_client_ref,
     inverse_open_order_ptr = this->open_order_ptr;
   }
 
+  if (!inverse_close_order_ptr || !inverse_open_order_ptr) {
+    return;
+  }
+
   if (inverse_open_order_ptr->status == order_status_t::ORDER_FILLED) {
     close_position(inverse_api_client, inverse_close_order_ptr,
-                   inverse_open_order_ptr, true);
+                   inverse_open_order_ptr, nullptr, true);
   }
 }
 
