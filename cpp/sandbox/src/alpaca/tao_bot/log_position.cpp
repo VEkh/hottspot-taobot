@@ -14,6 +14,10 @@
 void Alpaca::TaoBot::log_position(const order_t *close_order_ptr_,
                                   const order_t *open_order_ptr_,
                                   const char *label = "") {
+  if (!close_order_ptr_ || !open_order_ptr_) {
+    return;
+  }
+
   Formatted::Stream log_color =
       open_order_ptr_->action == order_action_t::BUY ? fmt.green : fmt.red;
 
