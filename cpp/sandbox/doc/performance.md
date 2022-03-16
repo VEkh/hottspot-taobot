@@ -9367,6 +9367,23 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2021-03-16:
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* Martingale with hedge sort of worked. 4/5 that ran with it were profitable.
+  However, it required >10x quantity multiplying between rounds. Maybe the
+  algorithm is busted.
+* For now, just see if the adjusted profit is enough to make most instruments
+  profitable if they run without martingale.
+* I increased the min_profit even more to 1.5x the max_loss so that wins can
+  better compensate for losses. We'll see how much it affects the win
+  percentage.
+* If it's still not profitable, then a martingale with this min_profit will
+  lead to a smaller multipler round over round.
+
+#### Next Thing(s) to Try
+
+### 2021-03-17:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

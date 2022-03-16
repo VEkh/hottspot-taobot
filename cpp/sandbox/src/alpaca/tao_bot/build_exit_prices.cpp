@@ -17,15 +17,14 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices(
 
   if (opposite_close_order_ptr &&
       opposite_close_order_ptr->status == order_status_t::ORDER_FILLED) {
-    max_loss = std::min(
-        max_loss, (opposite_close_order_ptr->profit / secured_profit_ratio_));
+    max_loss = std::min(max_loss, opposite_close_order_ptr->profit);
   }
 
   const double init_max_loss = this->exit_prices.init_max_loss
                                    ? this->exit_prices.init_max_loss
                                    : max_loss;
 
-  const double min_profit = abs(max_loss) / secured_profit_ratio_;
+  const double min_profit = abs(1.5 * max_loss) / secured_profit_ratio_;
   const double lower_secure_profit = min_profit * secured_profit_ratio_;
 
   const double upper_secure_profit =
