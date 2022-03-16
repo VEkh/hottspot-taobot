@@ -7,7 +7,7 @@
 #include "secured_profit_ratio.cpp"    // secured_profit_ratio
 #include "tao_bot.h"                   // Alpaca::TaoBot
 #include <algorithm>                   // std::min
-#include <math.h>                      // floor
+#include <math.h>                      // ceil, floor
 
 double Alpaca::TaoBot::compute_hedge_quantity() {
   const double max_affordable_quantity_ = max_affordable_quantity();
@@ -28,11 +28,12 @@ double Alpaca::TaoBot::compute_hedge_quantity() {
   const exit_prices_t exit_prices_ = build_exit_prices(this->open_order_ptr);
 
   const double recovery_profit =
-      abs(exit_prices_.max_loss / secured_profit_ratio_);
+      abs(exit_prices_.max_loss / secured_profit_ratio_) -
+      abs(exit_prices_.max_loss);
 
   const double quantity_ = loss_to_recover_ / recovery_profit;
 
-  return std::min(quantity_, max_affordable_quantity_);
+  return std::min(ceil(quantity_), floor(max_affordable_quantity_));
 }
 
 #endif
