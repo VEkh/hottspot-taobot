@@ -8,6 +8,10 @@ double Alpaca::TaoBot::secured_profit_ratio(const order_t *open_order_ptr_) {
   const double min = 0.8;
   const double max = 0.9;
 
+  if (!open_order_ptr_) {
+    return min;
+  }
+
   if (!this->exit_prices.min_profit) {
     return min;
   }

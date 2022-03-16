@@ -9336,6 +9336,37 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2021-03-14:
+#### Remarks
+##### Forex
+* The API bug prevented trading between yesterday and today. Will try again tonight.
+
+##### Stocks/ETFs
+* As was to be expected, I had to debug the hedge strategy launch.
+* After getting the main bugs out of the way, most positions lost, because the
+  winning side was unaware of the loser's losses and didn't overcome them.
+* I fixed this for the last 30 min of trading and the positions started having
+  win percentages, but not large enough for all to be profitable. Only two
+  were.
+* We'll see tomorrow whether the loser loss awareness leads to greater profitability.
+
+#### Next Thing(s) to Try
+
+### 2021-03-15:
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* Loss awareness led to a >50% win rate for most securities, but not profitability.
+* This is because although the winner is aware of the loser's losses, it was
+  only seeking to match the losses, not exceed them in gains.
+* I adjusted `build_exit_prices` to require the winner to exceed the loser's losses.
+* I'm also going to martingale the quantity. If the max loss is reduced by
+  hedging, then you should be able to recover losses quickly.
+* I decreased the min_target_tick_movement for the hedged strategy because it
+  was waiting too long to move 20x 1-sec variance + profit.
+
+#### Next Thing(s) to Try
+
+### 2021-03-16:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

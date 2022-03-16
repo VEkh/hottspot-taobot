@@ -10,18 +10,17 @@
  */
 #include "tao_bot.h"
 
-#include "alpaca/constants.cpp"            // Alpaca::constants
-#include "build_performance.cpp"           // build_performance
-#include "compute_hedge_quantity.cpp"      // compute_hedge_quantity
-#include "compute_martingale_quantity.cpp" // compute_martingale_quantity
-#include "current_price.cpp"               // current_price
-#include "fetch_account_balance.cpp"       // fetch_account_balance
-#include "lib/utils/string.cpp"            // ::utils::string
-#include "should_open_position.cpp"        // should_open_position
-#include "write_performance.cpp"           // write_performance
-#include <iostream>                        // std::cout, std::endl
-#include <math.h>                          // ceil
-#include <stdio.h>                         // printf
+#include "alpaca/constants.cpp"       // Alpaca::constants
+#include "build_performance.cpp"      // build_performance
+#include "compute_hedge_quantity.cpp" // compute_hedge_quantity
+#include "current_price.cpp"          // current_price
+#include "fetch_account_balance.cpp"  // fetch_account_balance
+#include "lib/utils/string.cpp"       // ::utils::string
+#include "should_open_position.cpp"   // should_open_position
+#include "write_performance.cpp"      // write_performance
+#include <iostream>                   // std::cout, std::endl
+#include <math.h>                     // ceil
+#include <stdio.h>                    // printf
 
 void Alpaca::TaoBot::open_hedged_position() {
   if (!should_open_position()) {
