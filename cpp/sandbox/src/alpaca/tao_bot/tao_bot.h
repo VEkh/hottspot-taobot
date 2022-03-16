@@ -32,7 +32,6 @@ private:
   using quote_t = Alpaca::t::quote_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 20.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double MAX_EXPECTED_LOSS_STREAK = 8;
@@ -84,6 +83,7 @@ private:
   double compute_hedge_quantity();
   double compute_martingale_quantity();
   double current_price();
+  double min_target_tick_movement();
   double loss_to_recover();
   double max_affordable_quantity();
   double position_target_movement();
