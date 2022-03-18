@@ -80,8 +80,10 @@ void Alpaca::TaoBot::log_performance() {
       printf(", ");
     }
 
-    printf("%+.2f:%.5f", position_profit(position),
-           position.close_order.quantity);
+    const double profit =
+        position.close_order.profit + position.hedge_close_order.profit;
+
+    printf("%+.2f:%.5f", profit, position.close_order.quantity);
   }
 
   puts("]");
