@@ -18,7 +18,11 @@
 #include <unistd.h>                        // usleep
 
 bool Alpaca::TaoBot::awaited_loss_leader() {
-  if (!should_open_position()) {
+  if (is_hedging()) {
+    return false;
+  }
+
+  if (!should_open_position(this->open_order_ptr)) {
     return false;
   }
 

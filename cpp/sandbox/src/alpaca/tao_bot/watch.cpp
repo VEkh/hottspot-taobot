@@ -15,7 +15,7 @@
 #include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
 #include "log_timestamps.cpp"            // log_timestamps
-#include "open_position.cpp"             // open_position
+#include "open_positions.cpp"            // open_positions
 #include "reset_position.cpp"            // reset_position
 #include "set_close_position_prices.cpp" // set_open_position_prices
 #include "set_open_position_prices.cpp"  // set_open_position_prices
@@ -50,7 +50,7 @@ void Alpaca::TaoBot::watch() {
     set_position_status();
 
     cancel_stale_open_orders();
-    open_position();
+    open_positions();
     set_open_position_prices();
 
     close_positions();

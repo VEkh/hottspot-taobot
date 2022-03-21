@@ -22,7 +22,7 @@
 #include <stdio.h>                         // printf
 
 void Alpaca::TaoBot::open_martingale_position() {
-  if (!should_open_position()) {
+  if (!should_open_position(this->open_order_ptr)) {
     return;
   }
 

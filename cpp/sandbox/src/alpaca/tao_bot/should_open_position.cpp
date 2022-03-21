@@ -3,8 +3,8 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot
 
-bool Alpaca::TaoBot::should_open_position() {
-  if (this->open_order_ptr) {
+bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
+  if (order_ptr) {
     return false;
   }
 

@@ -9379,11 +9379,48 @@ Staging had a really good week 🎉
   better compensate for losses. We'll see how much it affects the win
   percentage.
 * If it's still not profitable, then a martingale with this min_profit will
-  lead to a smaller multipler round over round.
+  lead to a smaller multiplier round over round.
 
 #### Next Thing(s) to Try
 
 ### 2021-03-17:
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* By 11am, with the win being 1.5x the loss a couple instruments had 60% win rates, a couple had 40%.
+* The longest loss streak was 6.
+* All instruments were running losses
+* I'm increasing wins to 2x losses and activating martingale again. This should
+  make round multipliers ~2x.
+* Increasing wins to 2x lossess and activating martingale led to profit 🎉
+* The longest loss streak was 3 and the trade frequency significantly reduced,
+  which isn't necessarily a bad thing.
+* The martingale multiplier was ~3 which is unacceptable. The target is 2. Log
+  the pre-rounding quantity and see how far off it is before truncating the
+  decimal or adjusting the expected position profit.
+
+#### Next Thing(s) to Try
+
+### 2021-03-18:
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* Martingale with hedge started off good, but ended up with heavy losses by
+  11:30am.
+* After reducing exit threshold to 5x 1-sec variance, 3/6 had > 50% win rates.
+  Only one of those was mildly profitable.
+* I'll increase to 20x 1-sec variance and keep profit at 2x loss. Trade
+  frequency will decrease, but what will be the impact on win rate and
+  profitability?
+* Is there a world where you martingale, but restrict round over round
+  multipliers to 2x and instead require greater distance be covered to make up
+  for the loss?
+
+#### Next Thing(s) to Try
+* Tweak until win rate is >=50% for most of them
+* Look into this https://www.youtube.com/watch?v=JB21-RScF0Y
+
+### 2021-03-19:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

@@ -6,6 +6,7 @@
 #include "lib/formatted.cpp"        // Formatted
 #include "types.cpp"                // Global::t
 #include <list>                     // std::list
+#include <utility>                  // std::pair
 #include <vector>                   // std::vector
 
 namespace Alpaca {
@@ -75,7 +76,7 @@ private:
   bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position(const order_t *, const order_t *, const order_t *);
-  bool should_open_position();
+  bool should_open_position(const order_t *);
   bool should_terminate();
   double base_quantity();
   double compute_profit(const order_t *, const order_t *);
@@ -99,6 +100,10 @@ private:
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
   std::list<performance_t> read_sibling_performances();
+
+  std::pair<order_t, order_t> open_position(Alpaca::Client, const char *,
+                                            const double, const order_action_t,
+                                            const order_action_t);
   void await_market_open();
   void cancel_stale_open_order(Alpaca::Client &, const order_t *);
   void cancel_stale_open_orders();
@@ -122,7 +127,7 @@ private:
   void log_timestamps();
   void open_hedged_position();
   void open_martingale_position();
-  void open_position();
+  void open_positions();
   void reset_position();
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);
   void set_close_position_prices();

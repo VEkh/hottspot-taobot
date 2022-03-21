@@ -10,20 +10,17 @@
  */
 #include "tao_bot.h"
 
-#include "alpaca/constants.cpp"       // Alpaca::constants
-#include "build_performance.cpp"      // build_performance
 #include "compute_hedge_quantity.cpp" // compute_hedge_quantity
-#include "current_price.cpp"          // current_price
 #include "fetch_account_balance.cpp"  // fetch_account_balance
-#include "lib/utils/string.cpp"       // ::utils::string
+#include "open_position.cpp"          // open_position
 #include "should_open_position.cpp"   // should_open_position
-#include "write_performance.cpp"      // write_performance
 #include <iostream>                   // std::cout, std::endl
-#include <math.h>                     // ceil
-#include <stdio.h>                    // printf
+#include <stdio.h>                    // puts
+#include <unistd.h>                   // usleep
 
 void Alpaca::TaoBot::open_hedged_position() {
-  if (!should_open_position()) {
+  if (!should_open_position(this->open_order_ptr) &&
+      !should_open_position(this->hedge_open_order_ptr)) {
     return;
   }
 
@@ -36,101 +33,61 @@ void Alpaca::TaoBot::open_hedged_position() {
     std::cout << fmt.bold << fmt.yellow;
     puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
          "have insufficient margin buying power.");
-    std::cout << fmt.reset;
+    std::cout << fmt.reset << std::endl;
 
     return;
   }
 
   this->quantity = quantity_;
 
-  order_t new_open_order;
-  new_open_order.action = order_action_t::BUY;
-  new_open_order.quantity = this->quantity;
-  new_open_order.symbol = this->symbol;
-  new_open_order.type = order_type_t::MARKET;
+  bool open_order_opened = false;
+  bool hedge_open_order_opened = false;
 
-  order_t new_close_order;
-  new_close_order.action = order_action_t::SELL;
-  new_close_order.quantity = this->quantity;
-  new_close_order.symbol = this->symbol;
-  new_close_order.type = order_type_t::MARKET;
+  while (!open_order_opened) {
+    std::pair<order_t, order_t> new_orders =
+        open_position(this->api_client, "open", quantity_, order_action_t::SELL,
+                      order_action_t::BUY);
 
-  order_t new_hedge_open_order;
-  new_hedge_open_order.action = order_action_t::SELL;
-  new_hedge_open_order.quantity = this->quantity;
-  new_hedge_open_order.symbol = this->symbol;
-  new_hedge_open_order.type = order_type_t::MARKET;
+    open_order_opened = !new_orders.second.id.empty();
 
-  order_t new_hedge_close_order;
-  new_hedge_close_order.action = order_action_t::BUY;
-  new_hedge_close_order.quantity = this->quantity;
-  new_hedge_close_order.symbol = this->symbol;
-  new_hedge_close_order.type = order_type_t::MARKET;
+    if (!open_order_opened) {
+      std::cout << fmt.bold << fmt.red;
+      puts("❗ Failed to open order. Retrying.\n");
+      std::cout << fmt.reset << std::endl;
 
-  this->close_order = new_close_order;
-  this->close_order_ptr = &this->close_order;
-  this->open_order = new_open_order;
-  this->open_order_ptr = &this->open_order;
+      usleep(0.5e6);
 
-  this->hedge_close_order = new_hedge_close_order;
-  this->hedge_close_order_ptr = &this->hedge_close_order;
-  this->hedge_open_order = new_hedge_open_order;
-  this->hedge_open_order_ptr = &this->hedge_open_order;
+      continue;
+    }
 
-  const char *hedge_order_action =
-      Alpaca::constants::ORDER_ACTIONS[this->hedge_open_order.action];
-
-  const char *hedge_order_icon = this->ICONS[hedge_order_action];
-
-  const std::string hedge_order_action_label =
-      ::utils::string::upcase(hedge_order_action);
-
-  const char *order_action =
-      Alpaca::constants::ORDER_ACTIONS[this->open_order.action];
-
-  const char *order_icon = this->ICONS[order_action];
-  const std::string order_action_label = ::utils::string::upcase(order_action);
-
-  std::cout << fmt.bold << fmt.green << std::endl;
-  printf("%s %s: Placing open order.\n", order_icon,
-         order_action_label.c_str());
-  std::cout << fmt.reset;
-
-  this->api_client.place_order(this->open_order_ptr);
-
-  std::cout << fmt.bold << fmt.green << std::endl;
-  printf("%s %s: Placing hedge open order.\n", hedge_order_icon,
-         hedge_order_action_label.c_str());
-  std::cout << fmt.reset;
-
-  this->hedge_api_client.place_order(this->hedge_open_order_ptr);
-
-  if (this->open_order.status != order_status_t::ORDER_NEW ||
-      this->hedge_open_order.status != order_status_t::ORDER_NEW) {
-    std::cout << fmt.bold << fmt.red;
-    puts("❗ Failed to open order. Retrying.\n");
-    std::cout << fmt.reset << std::endl;
-
-    this->close_order_ptr = nullptr;
-    this->open_order_ptr = nullptr;
-
-    this->hedge_close_order_ptr = nullptr;
-    this->hedge_open_order_ptr = nullptr;
-
-    this->performance = build_performance();
-    write_performance();
-
-    return;
+    this->close_order = new_orders.first;
+    this->close_order_ptr = &this->close_order;
+    this->open_order = new_orders.second;
+    this->open_order_ptr = &this->open_order;
   }
 
-  std::cout << fmt.bold << fmt.cyan;
-  printf("%s %s: Placed open order.\n", order_icon, order_action_label.c_str());
-  std::cout << fmt.reset << std::endl;
+  while (!hedge_open_order_opened) {
+    std::pair<order_t, order_t> new_hedge_orders =
+        open_position(this->hedge_api_client, "hedge open", quantity_,
+                      order_action_t::BUY, order_action_t::SELL);
 
-  std::cout << fmt.bold << fmt.cyan;
-  printf("%s %s: Placed hedge open order.\n", hedge_order_icon,
-         hedge_order_action_label.c_str());
-  std::cout << fmt.reset << std::endl;
+    hedge_open_order_opened = !new_hedge_orders.second.id.empty();
+
+    if (!hedge_open_order_opened) {
+      std::cout << fmt.bold << fmt.red;
+      puts("❗ Failed to open hedge order. Retrying.\n");
+      std::cout << fmt.reset << std::endl;
+
+      usleep(0.5e6);
+
+      continue;
+    }
+
+    this->hedge_close_order = new_hedge_orders.first;
+    this->hedge_close_order_ptr = &this->hedge_close_order;
+    this->hedge_open_order = new_hedge_orders.second;
+    this->hedge_open_order_ptr = &this->hedge_open_order;
+  }
 }
 
 #endif
