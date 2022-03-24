@@ -24,7 +24,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices(
                                    ? this->exit_prices.init_max_loss
                                    : max_loss;
 
-  const double min_profit = abs(1.5 * max_loss) / secured_profit_ratio_;
+  const double min_profit = abs(2 * max_loss) / secured_profit_ratio_;
   const double lower_secure_profit = min_profit * secured_profit_ratio_;
 
   const double upper_secure_profit =
