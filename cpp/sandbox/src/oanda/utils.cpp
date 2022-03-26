@@ -3,7 +3,7 @@
 
 #include "constants.cpp"     // Oanda::constants
 #include "lib/formatted.cpp" // Formatted::error_message
-#include "oanda/types.cpp"   // Oanda::t
+#include "oanda/types.cpp"   // Oanda::t, order_status_t
 #include <stdexcept>         // std::invalid_argument
 #include <string>            // std::string
 
@@ -61,6 +61,20 @@ Oanda::t::trade_status_t to_trade_status_t(const std::string &status) {
   std::cout << message << std::endl;
 
   exit(1);
+}
+
+Oanda::t::order_status_t
+trade_status_to_order_status_t(const std::string &status) {
+  int l = sizeof(Oanda::constants::TRADE_STATUSES) /
+          sizeof(*Oanda::constants::TRADE_STATUSES);
+
+  for (int i = 0; i < l; i++) {
+    if (Oanda::constants::TRADE_STATUSES[i] == status) {
+      return Oanda::t::order_status_t::ORDER_FILLED;
+    }
+  }
+
+  return Oanda::t::order_status_t::ORDER_PENDING;
 }
 
 } // namespace utils

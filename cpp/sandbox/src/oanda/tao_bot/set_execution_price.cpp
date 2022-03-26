@@ -21,6 +21,14 @@ void Oanda::TaoBot::set_execution_price(order_t *order) {
 
   json trade_json = fetch_trade(order->trade_id);
 
+  set_execution_price(order, trade_json);
+}
+
+void Oanda::TaoBot::set_execution_price(order_t *order, json trade_json) {
+  if (order->execution_price) {
+    return;
+  }
+
   if (trade_json.empty() || !trade_json.contains("price")) {
     std::cout << fmt.bold << fmt.red;
 

@@ -133,6 +133,7 @@ private:
   void reset_position();
   void set_close_position_prices();
   void set_execution_price(order_t *);
+  void set_execution_price(order_t *, json);
   void set_open_position_prices();
   void set_position_status();
   void set_price_movement();
