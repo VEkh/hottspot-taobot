@@ -26,7 +26,6 @@ enum order_win_result_t {
 };
 
 struct exit_prices_t {
-  double init_max_loss = 0.00;
   double lower_secure_profit = 0.00;
   double max_loss = 0.00;
   double min_profit = 0.00;

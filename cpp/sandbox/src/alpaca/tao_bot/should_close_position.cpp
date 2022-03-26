@@ -14,8 +14,9 @@
 #include <math.h>                       // abs
 
 bool Alpaca::TaoBot::should_close_position(
-    const order_t *close_order_ptr_, const order_t *open_order_ptr_,
-    const order_t *opposite_close_order_ptr = nullptr) {
+    const order_t *close_order_ptr_, order_t *open_order_ptr_,
+    const order_t *opposite_close_order_ptr = nullptr,
+    const order_t *opposite_open_order_ptr = nullptr) {
   if (open_order_ptr_->status != order_status_t::ORDER_FILLED) {
     return false;
   }
@@ -32,8 +33,8 @@ bool Alpaca::TaoBot::should_close_position(
     return true;
   }
 
-  this->exit_prices =
-      build_exit_prices(open_order_ptr_, opposite_close_order_ptr);
+  this->exit_prices = build_exit_prices(
+      open_order_ptr_, opposite_close_order_ptr, opposite_open_order_ptr);
 
   if (open_order_ptr_->max_profit >= this->exit_prices.min_profit &&
       open_order_ptr_->profit >= this->exit_prices.lower_secure_profit &&

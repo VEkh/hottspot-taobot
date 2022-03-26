@@ -12,10 +12,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
                               ? this->exit_prices.max_loss
                               : -position_target_movement();
 
-  const double init_max_loss = this->exit_prices.init_max_loss
-                                   ? this->exit_prices.init_max_loss
-                                   : max_loss;
-
   const double secured_profit_ratio_ = secured_profit_ratio();
   const double min_profit = (1 / secured_profit_ratio_) * abs(max_loss);
   const double lower_secure_profit = min_profit * secured_profit_ratio_;
@@ -25,7 +21,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
                this->open_order.max_profit * secured_profit_ratio_);
 
   return {
-      .init_max_loss = init_max_loss,
       .lower_secure_profit = lower_secure_profit,
       .max_loss = max_loss,
       .min_profit = min_profit,

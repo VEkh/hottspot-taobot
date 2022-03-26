@@ -9420,7 +9420,79 @@ Staging had a really good week 🎉
 * Tweak until win rate is >=50% for most of them
 * Look into this https://www.youtube.com/watch?v=JB21-RScF0Y
 
-### 2021-03-19:
+### 2021-03-21:
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* After increasing position target movement to 20x 1-sec variance, 5/6 had
+  winning records.
+* At 2pm I normalized all quantities and scaled to max out the account's
+  balance. The final balance was about +$100.
+* We'll see how this peforms tomorrow.
+
+#### Next Thing(s) to Try
+
+### 2021-03-22:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* With position target movement to 20x 1-sec variance, 4/6 had winning records
+  and were profitable.
+* TSLA's price was too volatile and triggered too many losses. I'll try
+  increasing only its position target movement
+* IWM also suffered heavy losses, but it wasn't because of too much volatility.
+* I think the play is to increase the number of players and spread the risk
+  across many securities, OR monitor over time which securities seem to perform
+  the best and only trade those.
+* I also need to see what happens when an account balance dips below $25K.
+
+#### Next Thing(s) to Try
+
+### 2021-03-23:
+#### Remarks
+##### Forex
+##### Stocks/ETFs
+* Hedge; target movement 20x 1-sec variance; only 1 or 2 / 12 had winning
+  averages and I think only one was profitable.
+* There were a lot of reversals today.
+* Reverted to asking for a small profit for the last 30 min and even that had a
+  few that lost one or two big plays that the other tiny profits overcome.
+* [NEW IDEA]:
+  * Winning side closes
+  * Losing side closes when it's either
+    1. Lost slightly less than the winning side won, or
+    2. Lost the same amount as the winning side won.
+* This is basically seeking profit on reversals / corrections. It may work
+  better than past strategies because the winning side essentially closes
+  during at least a modest correction from its winning direction.
+* Lossess will have to be 2x wins so you'll have to win almost all of them to
+  profit.
+
+#### Next Thing(s) to Try
+
+### 2021-03-24 & 2021-03-25:
+#### Remarks
+##### Stocks/ETFs
+* The end of this week was interesting. I couldn't the right thresholds to make
+  swing prediction mostly accurate.
+* Its main pro is that you're guranteed a win and limited loss. Its main
+  disadvantage is that you spend most of your time waiting for the swing only
+  to be wrong much of the time.
+* I realize, however, that the main reason why this strategy limited loss isn't
+  because a win is guranteed, but rather that I'm cutting losses before they
+  eat too much into the guaranteed win.
+
+#### Next Thing(s) to Try
+* Go back to guaranteeing loss and waiting for a slightly larger win.
+* The difference is that now I'll be cutting losses sooner to preserve some of
+  the win instead of waiting to double the loss.
+
+### 2021-03-28:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
