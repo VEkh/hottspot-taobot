@@ -17,6 +17,9 @@ void Alpaca::TaoBot::log_price_movement() {
 
   const double min_target_tick_movement_ = min_target_tick_movement();
 
+  const double short_term_one_second_variance =
+      this->price_movement.short_term_three_minute_one_second_variance.average;
+
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
   std::cout << "💲 Avg Tick Price Δ: ("
@@ -27,9 +30,18 @@ void Alpaca::TaoBot::log_price_movement() {
   std::cout << fmt.reset << std::endl;
   std::cout << fmt.bold << fmt.cyan;
 
-  printf("x10: %.5f • x%i: %.5f\n", one_second_variance * 10.0,
+  printf("x1: %.5f • x%i: %.5f\n", one_second_variance,
          (int)min_target_tick_movement_,
          one_second_variance * min_target_tick_movement_);
+
+  if (short_term_one_second_variance) {
+    const double short_term_long_term_variance_percentage =
+        100.0 * (short_term_one_second_variance / one_second_variance);
+
+    printf("Short-Term One Second Variance: %.5f (%.3f%% Long-Term)\n",
+           short_term_one_second_variance,
+           short_term_long_term_variance_percentage);
+  }
 
   std::cout << fmt.reset << std::endl;
 }

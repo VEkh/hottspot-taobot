@@ -41,23 +41,40 @@ void Alpaca::TaoBot::set_price_movement() {
     return;
   }
 
-  const double max_sample_size = INFINITY;
+  const double cumulative_max_sample_size = INFINITY;
+  const double short_term_max_sample_size = 30;
+
+  const double old_short_term_average =
+      this->price_movement.short_term_three_minute_one_second_variance.average;
+
+  const long int old_short_term_count =
+      this->price_movement.short_term_three_minute_one_second_variance.count;
+
+  const double short_term_average =
+      ((old_short_term_average * old_short_term_count) + average) /
+      std::min(short_term_max_sample_size, (double)(old_short_term_count + 1));
 
   const double old_cumulative_average =
       this->price_movement.three_minute_one_second_variance.average;
 
-  const int old_cumulative_count =
+  const long int old_cumulative_count =
       this->price_movement.three_minute_one_second_variance.count;
 
   const double cumulative_average =
       ((old_cumulative_average * old_cumulative_count) + average) /
-      (old_cumulative_count + 1);
+      std::min(cumulative_max_sample_size, (double)(old_cumulative_count + 1));
 
   this->price_movement.three_minute_one_second_variance.average =
       cumulative_average;
 
   this->price_movement.three_minute_one_second_variance.count =
-      std::min(max_sample_size, (double)(old_cumulative_count + 1));
+      std::min(cumulative_max_sample_size, (double)(old_cumulative_count + 1));
+
+  this->price_movement.short_term_three_minute_one_second_variance.average =
+      short_term_average;
+
+  this->price_movement.short_term_three_minute_one_second_variance.count =
+      std::min(short_term_max_sample_size, (double)(old_short_term_count + 1));
 
   write_price_movement();
 }
