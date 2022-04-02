@@ -8027,7 +8027,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-03:
+### 2022-01-03:
 #### Performance
 
 * Opening Account Value: $49,551.15
@@ -8067,7 +8067,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-04:
+### 2022-01-04:
 #### Performance
 
 * Opening Account Value: $48,863.71
@@ -8091,7 +8091,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-05:
+### 2022-01-05:
 #### Performance
 
 * Opening Account Value: $48,863.71
@@ -8115,7 +8115,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-06:
+### 2022-01-06:
 #### Performance
 
 * Opening Account Value: $48,864.00 (PAPER)
@@ -8159,7 +8159,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-07:
+### 2022-01-07:
 #### Performance
 
 * Opening Account Value: $48,023.23 (PAPER)
@@ -8207,7 +8207,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-10:
+### 2022-01-10:
 #### Performance
 
 * Opening Account Value: $49,751.66 (PAPER)
@@ -8241,7 +8241,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-11:
+### 2022-01-11:
 #### Performance
 
 * Opening Account Value: 49,853.35 (PAPER)
@@ -8267,7 +8267,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-12:
+### 2022-01-12:
 #### Performance
 
 * Opening Account Value: $49,903.84 (PAPER)
@@ -8298,7 +8298,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-13:
+### 2022-01-13:
 #### Performance
 
 * Opening Account Value (PAPER): $48,300.63, then later reset to $48,864.00
@@ -8337,7 +8337,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-14:
+### 2022-01-14:
 #### Performance
 
 * Opening Account Value (PAPER): $49,022.43
@@ -8376,7 +8376,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-17:
+### 2022-01-17:
 #### Performance
 
 * Opening Account Value: $48,899.43 (PAPER)
@@ -8398,7 +8398,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-18:
+### 2022-01-18:
 #### Performance
 
 * Opening Account Value: $--- (PAPER)
@@ -8432,7 +8432,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-19:
+### 2022-01-19:
 #### Performance
 
 * Opening Account Value: $48,899.43 (PAPER)
@@ -8453,7 +8453,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-20:
+### 2022-01-20:
 #### Performance
 
 * Opening Account Value: $---
@@ -8478,7 +8478,7 @@ deep that they must be handled specially.
 #### Next Thing(s) to Try
 * Alternate direction every three positions. Can we avoid 15 loss streaks?
 
-### 2021-01-21:
+### 2022-01-21:
 #### Performance
 
 * Opening Account Value: $48,899.43 (PAPER)
@@ -8497,7 +8497,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-24:
+### 2022-01-24:
 #### Performance
 
 * Opening Account Value: $48,899.43 (PAPER)
@@ -8531,7 +8531,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-25:
+### 2022-01-25:
 #### Performance
 ##### Forex (Paper)
 * Open: $---
@@ -8566,7 +8566,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-26:
+### 2022-01-26:
 #### Performance
 ##### Forex (Paper)
 * Close: $---
@@ -8599,7 +8599,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-27:
+### 2022-01-27:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8621,7 +8621,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-28:
+### 2022-01-28:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8652,7 +8652,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-01-31:
+### 2022-01-31:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8682,7 +8682,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-01:
+### 2022-02-01:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8727,7 +8727,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-02:
+### 2022-02-02:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8752,7 +8752,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-03:
+### 2022-02-03:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8778,7 +8778,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-04:
+### 2022-02-04:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8814,7 +8814,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-07:
+### 2022-02-07:
 #### Remarks
 ##### Forex
 * Successfully ran all day
@@ -8825,7 +8825,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-08:
+### 2022-02-08:
 #### Remarks
 ##### Forex
 * I stopped Oanda when trying to deploy new Alpaca code. After restarting it,
@@ -8844,7 +8844,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-09:
+### 2022-02-09:
 #### Remarks
 ##### Forex
 * Forex ran all day. USD_CAD hit 13 losses but recovered after that. I'm still watching it 👀
@@ -8861,7 +8861,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-10:
+### 2022-02-10:
 #### Remarks
 ##### Forex
 * Runtime: 40:34:42; 3.0x spread; latest `set_trade_direction`; +$19.06;
@@ -8879,7 +8879,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-11:
+### 2022-02-11:
 #### Remarks
 ##### Forex
 * Runtime: 08:02:11; 3.5x spread; latest `set_trade_direction`; +$1.99;
@@ -8904,7 +8904,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-14:
+### 2022-02-14:
 #### Performance
 #### Remarks
 ##### Forex
@@ -8920,7 +8920,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-15:
+### 2022-02-15:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -8969,7 +8969,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-16:
+### 2022-02-16:
 #### Performance
 #### Stats (as of 2022-01-25)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
@@ -8987,7 +8987,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-17:
+### 2022-02-17:
 #### Remarks
 ##### Forex
 * Runtime: 36:57:14; 3.0x spread; counter-consolidation `set_trade_direction`;
@@ -9019,7 +9019,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-18:
+### 2022-02-18:
 #### Remarks
 ##### Forex
 * Runtime: ~40:00:00; 3.0x spread; counter-consolidation `set_trade_direction`;
@@ -9038,7 +9038,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-22:
+### 2022-02-22:
 #### Remarks
 ##### Forex
 * Interesting stuff happening.
@@ -9067,7 +9067,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-23:
+### 2022-02-23:
 #### Remarks
 ##### Forex
 * Runtime 24:35:41; 3.0x spread; all buys; AUD_USD (16) recovered
@@ -9079,7 +9079,7 @@ deep that they must be handled specially.
   With alternating positions I saw 13 losses. We'll see if it's the same with
   all buys and a non-expanding 20x.
 
-### 2021-02-24:
+### 2022-02-24:
 #### Remarks
 ##### Forex
 * Runtime 48:42:13; 3.0x spread; all buys; AUD_USD (19) recovered, +$1,080.38600 (+2.16%)
@@ -9102,7 +9102,7 @@ deep that they must be handled specially.
 
 #### Next Thing(s) to Try
 
-### 2021-02-25:
+### 2022-02-25:
 #### Remarks
 Staging had a really good week 🎉
 
@@ -9138,7 +9138,7 @@ Staging had a really good week 🎉
 * May at some point want to do a per-instrument MAX_EXPECTED_LOSS_STREAK. The
   downside is that you'd be blind-sided by a longer-than-expected loss streak.
 
-### 2021-02-28:
+### 2022-02-28:
 #### Remarks
 ##### Forex
 * Runtime 25:57:10; 3.5x spread; all buys; EUR_JPY (13) recovered, +$12.62470 (+0.02%)
@@ -9152,7 +9152,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-01:
+### 2022-03-01:
 #### Remarks
 ##### Forex
 * Runtime 49:52:11; 3.5x spread; all buys; GBP_SGD (16) recovered, +$223.68530 (+0.44%)
@@ -9169,7 +9169,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-02:
+### 2022-03-02:
 #### Remarks
 ##### Forex
 * Runtime 68:29:59; 3.5x spread; all buys; GBP_SGD (16) recovered, +$271.56380 (+0.53%)
@@ -9185,7 +9185,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-03:
+### 2022-03-03:
 #### Remarks
 ##### Forex
 * Runtime 19:25:27; 4.0x spread; all buys; EUR_CAD (17) recovered, +$463.56860 (+0.90%)
@@ -9209,7 +9209,7 @@ Staging had a really good week 🎉
   which all processes can read, or open simultaneous connections to the
   websocket server and persist in memory.
 
-### 2021-03-04:
+### 2022-03-04:
 #### Remarks
 ##### Forex
 * Runtime 18:27:52; 3.5x spread; all buys; GBP_AUD (19) unrecovered, -$1,635.36460 (-3.15%)
@@ -9230,7 +9230,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-07:
+### 2022-03-07:
 #### Remarks
 ##### Forex
 * Runtime 14:54:20; 40x 1-sec var; short every 5; NZD_USD (17) unrecovered, -$1,405.72550 (-2.81%)
@@ -9250,7 +9250,7 @@ Staging had a really good week 🎉
     winning side will also have been increasing quantity, its gains should at
     least partially, if not entirely cover the losing side's losses.
 
-### 2021-03-08:
+### 2022-03-08:
 #### Remarks
 ##### Forex
 * Runtime 14:12:26; 40x 1-sec var; short every 5; AUD_NZD (22) unrecovered, +$534.89 (+1.07%)
@@ -9269,7 +9269,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-09:
+### 2022-03-09:
 #### Remarks
 ##### Forex
 * Runtime 39:41:52; 40x 1-sec var; all buys; USD_CAD (15) recovered, +$68.92250 (+0.14%)
@@ -9286,7 +9286,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-10:
+### 2022-03-10:
 #### Remarks
 ##### Forex
 * Runtime 01:14:16; 40x 1-sec var; all buys; GBP_PLN (18) unrecovered, -$1,828.87390 (-3.61%)
@@ -9301,7 +9301,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-11:
+### 2022-03-11:
 #### Remarks
 ##### Forex
 * [STAGING] Runtime 32:15:06; 40x 1-sec var; all buys; GBP_CAD (17) recovered,
@@ -9335,7 +9335,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-14:
+### 2022-03-14:
 #### Remarks
 ##### Forex
 * The API bug prevented trading between yesterday and today. Will try again tonight.
@@ -9351,7 +9351,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-15:
+### 2022-03-15:
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
@@ -9366,7 +9366,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-16:
+### 2022-03-16:
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
@@ -9383,7 +9383,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-17:
+### 2022-03-17:
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
@@ -9401,7 +9401,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-18:
+### 2022-03-18:
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
@@ -9420,7 +9420,7 @@ Staging had a really good week 🎉
 * Tweak until win rate is >=50% for most of them
 * Look into this https://www.youtube.com/watch?v=JB21-RScF0Y
 
-### 2021-03-21:
+### 2022-03-21:
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
@@ -9432,7 +9432,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-22:
+### 2022-03-22:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -9453,7 +9453,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-23:
+### 2022-03-23:
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
@@ -9475,7 +9475,7 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2021-03-24 & 2021-03-25:
+### 2022-03-24 & 2022-03-25:
 #### Remarks
 ##### Stocks/ETFs
 * The end of this week was interesting. I couldn't the right thresholds to make
@@ -9492,7 +9492,61 @@ Staging had a really good week 🎉
 * The difference is that now I'll be cutting losses sooner to preserve some of
   the win instead of waiting to double the loss.
 
-### 2021-03-28:
+### 2022-03-28 - 2022-03-29:
+#### Remarks
+##### Stocks/ETFs
+* Still trying to tweak the consolidation tolerance. Each day, one or two won.
+* 💡EPIPHANY💡 It does NOT matter how long you wait to enter. Distance traveled
+  is no indicator of continued distance.
+* So you may as well enter as soon as the price can't within a couple seconds
+  swing the amount that it traveled before opening.
+
+#### Next Thing(s) to Try
+* New strategy:
+  1. Close loser with LIMIT order
+    * If the loser misses its limit point, close after 10 seconds and re-open
+      at the current price.
+  2. Desired should be relatively small
+  3. Accepted loss of winning side should be at most 2x the target win.
+  4. Close winning side with market order.
+
+### 2022-03-31:
+#### Remarks
+##### Stocks/ETFs
+* Morning started off well, but consolidations hit.
+* Trying smaller target profit
+* Only 1/6 was profitable
+* Quickly saw that target profits that are too small result in fast losses
+
+#### Next Thing(s) to Try
+
+### 2022-04-01:
+#### Remarks
+##### Stocks/ETFs
+* By noon, predicting a swing of 0.75x position_target_movement had a ~40% win
+  rate for the most successful ones.
+* At 12:15pm I'm going to increase the target profit to 1.0x position_target_movement
+* I later reduced the target profit to 1x 1-sec variance and even that ended in
+  win rate of 40-60%.
+* There are a few things I want to explore:
+  * This strategy doesn't seem to work on TSLA since its spread is so wide.
+    That's fine.
+  * For the instruments with tighter spreads, are there periods during which
+    this strategy is more profitable? I've seen it start profitably for a few
+    assets then lose money as the day advances.
+* I'm going to revert to the min_profit strategy and see if any actually end
+  profitably.
+* Another observation: the last time this worked was when TQQQ and SQQQ hedged
+  each other. They inversely correlated with each other, however, they didn't
+  quite move at the same rates. I think this slight discrepancy actually
+  created profit opportunities.
+* I'll test both the TQQQ:SQQQ (A:B) and A:A hedge strategies and see if they have
+  comparable results. If the A:B hedging strategy works better, I may seek to
+  replicate that with other correlated pairs.
+
+#### Next Thing(s) to Try
+
+### 2022-04-04:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

@@ -21,6 +21,13 @@ double round_to(double input, int precision) {
   return std::stod(round_to_s(input, precision));
 }
 
+double sigmoid(const double max, const double min, const double x,
+               const double x_coefficient = 1.0, const double x_shift = 0.0) {
+  const double y_shift = min;
+  const double y_coefficient = max - min;
+  return (y_coefficient / (1 + exp(-x_coefficient * (x - x_shift)))) + y_shift;
+}
+
 double to_currency(float val) { return round_to(val, 2); }
 
 std::string to_rounded_percentage(float val) {
