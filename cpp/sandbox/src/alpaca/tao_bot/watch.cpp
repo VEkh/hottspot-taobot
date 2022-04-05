@@ -5,7 +5,7 @@
 #include "awaited_loss_leader.cpp"       // awaited_loss_leader
 #include "cancel_stale_open_orders.cpp"  // cancel_stale_open_orders
 #include "close_positions.cpp"           // close_positions
-#include "fetch_quote.cpp"               // fetch_quote
+#include "fetch_quotes.cpp"              // fetch_quotes
 #include "is_market_open.cpp"            // is_market_open
 #include "log_account_balances.cpp"      // log_account_balances
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
@@ -13,7 +13,7 @@
 #include "log_position_results.cpp"      // log_position_results
 #include "log_positions.cpp"             // log_positions
 #include "log_price_movement.cpp"        // log_price_movement
-#include "log_quote.cpp"                 // log_quote
+#include "log_quotes.cpp"                // log_quotes
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_positions.cpp"            // open_positions
 #include "reset_position.cpp"            // reset_position
@@ -34,7 +34,7 @@ void Alpaca::TaoBot::watch() {
 
   while (!should_terminate()) {
     log_timestamps();
-    fetch_quote();
+    fetch_quotes();
     set_price_movement();
 
     if (awaited_loss_leader()) {
@@ -42,7 +42,7 @@ void Alpaca::TaoBot::watch() {
     }
 
     log_account_balances();
-    log_quote();
+    log_quotes();
     log_price_movement();
     log_positions();
     log_performance();

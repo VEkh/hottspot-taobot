@@ -32,6 +32,11 @@ enum order_type_t {
   MARKET,
 };
 
+struct hedge_info_t {
+  order_action_t order_action;
+  std::string symbol;
+};
+
 struct order_t {
   order_action_t action = order_action_t::BUY;
   double execution_price = 0.00;
@@ -58,6 +63,7 @@ struct quote_t {
   double ask = 0.00;
   double bid = 0.00;
   double price = 0.00;
+  const char *symbol = "";
   long int timestamp;
 };
 } // namespace t

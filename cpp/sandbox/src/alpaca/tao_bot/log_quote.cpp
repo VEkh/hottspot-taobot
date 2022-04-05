@@ -14,17 +14,17 @@
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
-void Alpaca::TaoBot::log_quote() {
+void Alpaca::TaoBot::log_quote(const std::vector<quote_t> *quotes_ptr) {
   Formatted::Stream log_color = fmt.yellow;
-  const int ticks = this->quotes.size();
+  const int ticks = quotes_ptr->size();
 
   if (!ticks) {
     return;
   }
 
   const quote_t *previous_quote =
-      ticks > 1 ? &(this->quotes.at(ticks - 2)) : nullptr;
-  const quote_t current_quote = this->quotes.back();
+      ticks > 1 ? &(quotes_ptr->at(ticks - 2)) : nullptr;
+  const quote_t current_quote = quotes_ptr->back();
 
   if (previous_quote) {
     if (current_quote.price > previous_quote->price) {
@@ -35,7 +35,7 @@ void Alpaca::TaoBot::log_quote() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote\n", this->symbol);
+  printf("%s Quote\n", current_quote.symbol);
 
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));

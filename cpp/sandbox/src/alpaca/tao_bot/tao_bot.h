@@ -22,6 +22,7 @@ private:
   using account_balance_t = Global::t::account_balance_t;
   using candlestick_t = Global::t::candlestick_t;
   using exit_prices_t = Global::t::exit_prices_t;
+  using hedge_info_t = Alpaca::t::hedge_info_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -36,6 +37,11 @@ private:
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double MAX_EXPECTED_LOSS_STREAK = 8;
+
+  std::map<std::string, hedge_info_t> HEDGE_PAIRS = {
+      {"AAPL", {.order_action = order_action_t::SELL, .symbol = "MSFT"}},
+      {"SQQQ", {.order_action = order_action_t::BUY, .symbol = "TQQQ"}},
+  };
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -65,6 +71,7 @@ private:
   price_movement_t price_movement;
   std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
+  std::vector<quote_t> hedge_quotes;
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
@@ -97,6 +104,7 @@ private:
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);
   json read_sibling_performance(std::string);
+  quote_t fetch_quote(const std::string);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
@@ -105,13 +113,14 @@ private:
   std::pair<order_t, order_t> open_position(Alpaca::Client, const char *,
                                             const double, const order_action_t,
                                             const order_action_t);
+  std::string hedge_symbol();
   void await_market_open();
   void cancel_stale_open_order(Alpaca::Client &, const order_t *);
   void cancel_stale_open_orders();
   void close_position(Alpaca::Client &, order_t *, order_t *, const order_t *,
                       const order_t *, const bool);
   void close_positions();
-  void fetch_quote();
+  void fetch_quotes();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void load_price_movement();
@@ -123,7 +132,8 @@ private:
   void log_positions();
   void log_position_results();
   void log_price_movement();
-  void log_quote();
+  void log_quote(const std::vector<quote_t> *);
+  void log_quotes();
   void log_start_message();
   void log_timestamps();
   void open_hedged_position();

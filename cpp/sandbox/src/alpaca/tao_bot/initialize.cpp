@@ -58,7 +58,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
 
   this->symbol = symbol_;
 
-  fetch_quote();
+  fetch_quotes();
   load_performance();
   load_price_movement();
   set_trade_direction();
