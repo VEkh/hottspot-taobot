@@ -31,10 +31,8 @@ void Oanda::TaoBot::set_execution_price(order_t *order, json trade_json) {
 
   if (trade_json.empty() || !trade_json.contains("price")) {
     std::cout << fmt.bold << fmt.red;
-
     printf("❌ Execution price not present in trade: %s\n",
            trade_json.dump().c_str());
-
     std::cout << fmt.reset;
 
     return;

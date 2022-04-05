@@ -26,6 +26,9 @@ void Oanda::TaoBot::open_position() {
     return;
   }
 
+  puts("OANDA__TAO_BOT_open_position");
+  std::cout << std::flush;
+
   this->account_balance = fetch_account_balance();
   const int quantity_ = compute_quantity();
 

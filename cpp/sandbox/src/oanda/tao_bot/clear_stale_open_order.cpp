@@ -42,6 +42,12 @@ void Oanda::TaoBot::clear_stale_open_order() {
 
     this->api_client.cancel_order(this->open_order_ptr);
 
+    std::cout << fmt.yellow << fmt.bold;
+    printf("🛑 This is probably an error. Investigate it.\n");
+    std::cout << fmt.reset;
+
+    exit(1);
+
     break;
   }
   }

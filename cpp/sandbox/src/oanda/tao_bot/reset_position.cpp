@@ -23,6 +23,9 @@ void Oanda::TaoBot::reset_position() {
     return;
   }
 
+  puts("OANDA__TAO_BOT_reset_position");
+  std::cout << std::flush;
+
   std::time_t now = std::time(nullptr);
 
   position_t position = {

@@ -10,6 +10,9 @@ void Oanda::TaoBot::set_position_status() {
     return;
   }
 
+  puts("OANDA__TAO_BOT_set_position_status");
+  std::cout << std::flush;
+
   set_status(this->open_order_ptr);
   complete_filled_order(this->open_order_ptr);
 

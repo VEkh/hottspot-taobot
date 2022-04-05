@@ -6,6 +6,9 @@
 #include <string>    // std::string
 
 void Oanda::TaoBot::fetch_quote() {
+  puts("OANDA__TAO_BOT_fetch_quote");
+  std::cout << std::flush;
+
   try {
     const std::string quote_string = this->api_client.fetch_quote(this->symbol);
     const quote_t current_quote = this->api_client.parse_quote(quote_string);

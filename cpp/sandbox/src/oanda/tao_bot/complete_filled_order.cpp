@@ -29,20 +29,24 @@ void Oanda::TaoBot::complete_filled_order(order_t *order) {
 
   std::string trade_id_string = "0";
 
-  if (order_json.contains("tradeOpenedID")) {
-    trade_id_string = order_json["tradeOpenedID"];
-  } else if (order_json.contains("tradeReducedID")) {
-    trade_id_string = order_json["tradeReducedID"];
+  try {
+    if (order_json.contains("tradeOpenedID")) {
+      trade_id_string = order_json["tradeOpenedID"];
+    } else if (order_json.contains("tradeReducedID")) {
+      trade_id_string = order_json["tradeReducedID"];
+      order->trade_id = std::stoi(trade_id_string);
+
+      handle_partially_filled_close_order(order);
+
+      return;
+    } else if (order_json.contains("tradeClosedIDs")) {
+      trade_id_string = order_json["tradeClosedIDs"][0];
+    }
+
     order->trade_id = std::stoi(trade_id_string);
-
-    handle_partially_filled_close_order(order);
-
-    return;
-  } else if (order_json.contains("tradeClosedIDs")) {
-    trade_id_string = order_json["tradeClosedIDs"][0];
+  } catch (nlohmann::detail::type_error &) {
+    complete_filled_order(order);
   }
-
-  order->trade_id = std::stoi(trade_id_string);
 }
 
 #endif

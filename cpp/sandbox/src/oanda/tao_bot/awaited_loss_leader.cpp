@@ -15,6 +15,9 @@
 #include <unistd.h>                      // usleep
 
 bool Oanda::TaoBot::awaited_loss_leader() {
+  puts("OANDA__TAO_BOT_awaited_loss_leader");
+  std::cout << std::flush;
+
   if (!should_open_position()) {
     return false;
   }

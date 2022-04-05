@@ -14,6 +14,9 @@ void Oanda::TaoBot::set_open_position_prices() {
     return;
   }
 
+  puts("OANDA__TAO_BOT_set_open_position_prices");
+  std::cout << std::flush;
+
   set_execution_price(this->open_order_ptr);
   set_profit(this->open_order_ptr);
 }

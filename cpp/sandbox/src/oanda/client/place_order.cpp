@@ -69,19 +69,24 @@ CurlClient Oanda::Client::place_order(order_t *order) {
     throw std::runtime_error(message);
   }
 
-  const std::string order_id_string = response["orderCreateTransaction"]["id"];
+  try {
+    const std::string order_id_string =
+        response["orderCreateTransaction"]["id"];
 
-  order->id = (int)std::stod(order_id_string);
-  order->status = order_status_t::ORDER_PENDING;
-  order->timestamp = now;
+    order->id = (int)std::stod(order_id_string);
+    order->status = order_status_t::ORDER_PENDING;
+    order->timestamp = now;
 
-  if (response.contains("orderFillTransaction")) {
-    const std::string trade_id_string =
-        response["orderFillTransaction"]["tradeOpened"]["tradeID"];
-    order->trade_id = (int)std::stod(trade_id_string);
+    if (response.contains("orderFillTransaction")) {
+      const std::string trade_id_string =
+          response["orderFillTransaction"]["tradeOpened"]["tradeID"];
+      order->trade_id = (int)std::stod(trade_id_string);
+    }
+
+    return curl_client;
+  } catch (nlohmann::detail::type_error &) {
+    return place_order(order);
   }
-
-  return curl_client;
 }
 
 #endif

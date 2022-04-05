@@ -27,7 +27,7 @@ void Oanda::TaoBot::set_status(order_t *order) {
     return;
   }
 
-  if (!order->trade_id) {
+  if (!order->trade_id && original_status != order_status_t::ORDER_INIT) {
     std::cout << fmt.bold << fmt.yellow;
     printf("[OANDA__TAO_BOT_set_status]: Order %i has no `trade_id`\n",
            order->id);
