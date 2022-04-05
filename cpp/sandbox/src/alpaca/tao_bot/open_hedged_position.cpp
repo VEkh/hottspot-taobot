@@ -10,13 +10,14 @@
  */
 #include "tao_bot.h"
 
-#include "compute_hedge_quantity.cpp" // compute_hedge_quantity
-#include "fetch_account_balance.cpp"  // fetch_account_balance
-#include "open_position.cpp"          // open_position
-#include "should_open_position.cpp"   // should_open_position
-#include <iostream>                   // std::cout, std::endl
-#include <stdio.h>                    // puts
-#include <unistd.h>                   // usleep
+#include "compute_hedge_quantities.cpp" // compute_hedge_quantities
+#include "fetch_account_balance.cpp"    // fetch_account_balance
+#include "open_position.cpp"            // open_position
+#include "should_open_position.cpp"     // should_open_position
+#include <iostream>                     // std::cout, std::endl
+#include <stdio.h>                      // puts
+#include <unistd.h>                     // usleep
+#include <utility>                      // std::pair
 
 void Alpaca::TaoBot::open_hedged_position() {
   if (!should_open_position(this->open_order_ptr) &&
@@ -26,9 +27,9 @@ void Alpaca::TaoBot::open_hedged_position() {
 
   this->account_balance = fetch_account_balance(this->api_client);
 
-  const double quantity_ = compute_hedge_quantity();
+  const std::pair<double, double> hedge_quantities = compute_hedge_quantities();
 
-  if (quantity_ <= 0) {
+  if (hedge_quantities.first <= 0 || hedge_quantities.second <= 0) {
     std::cout << fmt.bold << fmt.yellow;
     puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
          "have insufficient margin buying power.");
@@ -37,15 +38,13 @@ void Alpaca::TaoBot::open_hedged_position() {
     return;
   }
 
-  this->quantity = quantity_;
-
   bool open_order_opened = false;
   bool hedge_open_order_opened = false;
 
   while (!open_order_opened) {
     std::pair<order_t, order_t> new_orders =
-        open_position(this->api_client, "open", quantity_, order_action_t::SELL,
-                      order_action_t::BUY);
+        open_position(this->api_client, "open", hedge_quantities.first,
+                      order_action_t::SELL, order_action_t::BUY);
 
     open_order_opened = !new_orders.second.id.empty();
 
@@ -66,9 +65,14 @@ void Alpaca::TaoBot::open_hedged_position() {
   }
 
   while (!hedge_open_order_opened) {
+    const hedge_info_t hedge_info = this->HEDGE_PAIRS[this->symbol];
+    const order_action_t closing_action =
+        hedge_info.action == order_action_t::BUY ? order_action_t::SELL
+                                                 : order_action_t::BUY;
+
     std::pair<order_t, order_t> new_hedge_orders =
-        open_position(this->hedge_api_client, "hedge open", quantity_,
-                      order_action_t::BUY, order_action_t::SELL);
+        open_position(this->api_client, "hedge open", hedge_quantities.second,
+                      closing_action, hedge_info.action);
 
     hedge_open_order_opened = !new_hedge_orders.second.id.empty();
 

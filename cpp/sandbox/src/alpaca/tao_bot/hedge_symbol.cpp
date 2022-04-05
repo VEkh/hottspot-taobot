@@ -5,7 +5,7 @@
 #include <string>    // std::string
 
 std::string Alpaca::TaoBot::hedge_symbol() {
-  return this->HEDGE_PAIRS[std::string(this->symbol)].symbol;
+  return this->HEDGE_PAIRS[this->symbol].symbol;
 }
 
 #endif

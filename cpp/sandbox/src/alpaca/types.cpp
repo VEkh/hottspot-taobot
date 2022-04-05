@@ -33,7 +33,7 @@ enum order_type_t {
 };
 
 struct hedge_info_t {
-  order_action_t order_action;
+  order_action_t action;
   std::string symbol;
 };
 

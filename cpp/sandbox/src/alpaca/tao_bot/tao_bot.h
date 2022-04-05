@@ -39,8 +39,8 @@ private:
   const double MAX_EXPECTED_LOSS_STREAK = 8;
 
   std::map<std::string, hedge_info_t> HEDGE_PAIRS = {
-      {"AAPL", {.order_action = order_action_t::SELL, .symbol = "MSFT"}},
-      {"SQQQ", {.order_action = order_action_t::BUY, .symbol = "TQQQ"}},
+      {"AAPL", {.action = order_action_t::SELL, .symbol = "MSFT"}},
+      {"SQQQ", {.action = order_action_t::BUY, .symbol = "TQQQ"}},
   };
 
   std::map<const char *, const char *> ICONS = {
@@ -89,7 +89,6 @@ private:
   double base_quantity();
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double compute_hedge_quantity();
   double compute_martingale_quantity();
   double current_price();
   double min_target_tick_movement();
@@ -110,6 +109,7 @@ private:
   performance_t get_loss_leader(std::list<performance_t> &);
   std::list<performance_t> read_sibling_performances();
 
+  std::pair<double, double> compute_hedge_quantities();
   std::pair<order_t, order_t> open_position(Alpaca::Client, const char *,
                                             const double, const order_action_t,
                                             const order_action_t);

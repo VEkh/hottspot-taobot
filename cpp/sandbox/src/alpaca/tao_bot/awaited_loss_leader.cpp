@@ -1,7 +1,6 @@
 #ifndef ALPACA__TAO_BOT_awaited_loss_leader
 #define ALPACA__TAO_BOT_awaited_loss_leader
 
-#include "compute_hedge_quantity.cpp"      // compute_hedge_quantity
 #include "compute_martingale_quantity.cpp" // compute_martingale_quantity
 #include "fetch_account_balance.cpp"       // fetch_account_balance
 #include "get_loss_leader.cpp"             // get_loss_leader
@@ -67,8 +66,7 @@ bool Alpaca::TaoBot::awaited_loss_leader() {
 
   this->account_balance = fetch_account_balance(this->api_client);
 
-  const double quantity_ =
-      is_hedging() ? compute_hedge_quantity() : compute_martingale_quantity();
+  const double quantity_ = compute_martingale_quantity();
 
   const bool are_funds_sufficient = quantity_ < max_affordable_quantity();
 
