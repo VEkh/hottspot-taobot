@@ -2,11 +2,13 @@
 #define ALPACA__TAO_BOT_set_profit
 
 #include "compute_profit.cpp" // compute_profit
-#include "tao_bot.h"          // Alpaca::TaoBot, order_t
+#include "tao_bot.h"          // Alpaca::TaoBot, order_t, quote_t
 #include <algorithm>          // std::max
+#include <vector>             // std::vector
 
-void Alpaca::TaoBot::set_profit(order_t *order) {
-  const double profit = compute_profit(order, &(this->quotes.back()));
+void Alpaca::TaoBot::set_profit(order_t *order,
+                                const std::vector<quote_t> *quotes_ptr) {
+  const double profit = compute_profit(order, &(quotes_ptr->back()));
 
   order->max_profit = std::max(profit, order->max_profit);
   order->profit = profit;

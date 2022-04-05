@@ -143,11 +143,12 @@ private:
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);
   void set_close_position_prices();
   void set_execution_price(Alpaca::Client &, order_t *);
-  void set_open_order_prices(Alpaca::Client &, order_t *);
+  void set_open_order_prices(Alpaca::Client &, order_t *,
+                             const std::vector<quote_t> *);
   void set_open_position_prices();
   void set_position_status();
   void set_price_movement();
-  void set_profit(order_t *);
+  void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit(order_t *, const order_t *);
   void set_status(Alpaca::Client &, order_t *order);
   void set_trade_direction();

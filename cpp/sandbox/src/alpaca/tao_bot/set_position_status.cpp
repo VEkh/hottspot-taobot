@@ -1,7 +1,6 @@
 #ifndef ALPACA__TAO_BOT_set_position_status
 #define ALPACA__TAO_BOT_set_position_status
 
-#include "is_hedging.cpp"         // is_hedging
 #include "is_position_closed.cpp" // is_position_closed
 #include "set_status.cpp"         // set_status
 #include "tao_bot.h"              // Alpaca::TaoBot
