@@ -7,16 +7,12 @@
  */
 #include "tao_bot.h"
 
-#include "build_exit_prices.cpp"        // build_exit_prices
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
-#include "position_target_movement.cpp" // position_target_movement
-#include <math.h>                       // abs
+#include "position_profit.cpp"          // position_profit
 
-bool Alpaca::TaoBot::should_close_position(
-    const order_t *close_order_ptr_, order_t *open_order_ptr_,
-    const order_t *opposite_close_order_ptr = nullptr,
-    const order_t *opposite_open_order_ptr = nullptr) {
+bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
+                                           const order_t *open_order_ptr_) {
   if (open_order_ptr_->status != order_status_t::ORDER_FILLED) {
     return false;
   }
@@ -33,16 +29,17 @@ bool Alpaca::TaoBot::should_close_position(
     return true;
   }
 
-  this->exit_prices = build_exit_prices(
-      open_order_ptr_, opposite_close_order_ptr, opposite_open_order_ptr);
+  const position_t current_position = {
+      .close_order = this->close_order,
+      .hedge_close_order = this->hedge_close_order,
+      .hedge_open_order = this->hedge_open_order,
+      .open_order = this->open_order,
+  };
 
-  if (open_order_ptr_->max_profit >= this->exit_prices.min_profit &&
-      open_order_ptr_->profit >= this->exit_prices.lower_secure_profit &&
-      open_order_ptr_->profit <= this->exit_prices.upper_secure_profit) {
-    return true;
-  }
+  const double target_profit =
+      5.0 * this->price_movement.three_minute_one_second_variance.average;
 
-  if (open_order_ptr_->profit <= exit_prices.max_loss) {
+  if (position_profit(current_position) >= target_profit) {
     return true;
   }
 

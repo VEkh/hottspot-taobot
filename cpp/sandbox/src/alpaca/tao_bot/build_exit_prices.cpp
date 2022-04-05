@@ -10,8 +10,8 @@
 #include <stdio.h>                      // puts
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices(
-    order_t *open_order_ptr_, const order_t *opposite_close_order_ptr = nullptr,
-    const order_t *opposite_open_order_ptr = nullptr) {
+    order_t *open_order_ptr_,
+    const order_t *opposite_close_order_ptr = nullptr) {
   double position_target_movement_ = position_target_movement();
   double max_loss = -position_target_movement_;
   double min_profit = INFINITY;

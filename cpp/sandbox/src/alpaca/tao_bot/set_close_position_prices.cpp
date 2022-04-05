@@ -7,7 +7,7 @@
 void Alpaca::TaoBot::set_close_position_prices() {
   set_close_order_prices(this->api_client, this->close_order_ptr,
                          this->open_order_ptr);
-  set_close_order_prices(this->hedge_api_client, this->hedge_close_order_ptr,
+  set_close_order_prices(this->api_client, this->hedge_close_order_ptr,
                          this->hedge_open_order_ptr);
 }
 
