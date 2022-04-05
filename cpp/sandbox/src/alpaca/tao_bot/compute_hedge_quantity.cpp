@@ -7,6 +7,8 @@
 #include <math.h>                      // floor
 
 double Alpaca::TaoBot::compute_hedge_quantity() {
+  return 1;
+
   const account_balance_t limiting_account_balance =
       this->account_balance.balance <= this->hedge_account_balance.balance
           ? this->account_balance

@@ -32,7 +32,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices(
                                     : position_target_movement();
 
     const double secured_profit_ratio_ = secured_profit_ratio(open_order_ptr_);
-    const double target_profit = 0.75 * position_target_movement_;
+    const double target_profit = position_target_movement_;
 
     const double raw_min_profit =
         target_profit - opposite_close_order_ptr->profit;

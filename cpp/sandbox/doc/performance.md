@@ -9545,8 +9545,40 @@ Staging had a really good week 🎉
   replicate that with other correlated pairs.
 
 #### Next Thing(s) to Try
+* A future strategy to try may be around correlated instruments:
+  1. Form a pair of highly correlated instruments
+  2. Normalize them to a virutal basis instrument
+    * A = $200, B = $300, C (Virtual = $100)
+    * When A moves $1, C moves $0.50. When B moves $1, C moves $0.33
+  3. Make bets against discrepancies in normalized price
+    * If A's normalized price is $0.50 greater than B's normalized price, short
+      A and buy B.
 
 ### 2022-04-04:
+#### Remarks
+#### Next Thing(s) to Try
+* It became apparent that even the TQQQ x SQQQ strategy upon which the current
+  strategy is derived may not work. As long as you ultimately need to release
+  one side to hope for the other side to move into profit, there's no
+  guaranteee of long-term success.
+* What I need to instead do is the following:
+  1. Take two highly correlated assets
+  2. Long one and short the other
+  3. Wait for profit to realize between the two positions.
+    * Since their prices are correlated but not exactly mapped, there should
+      often occur a period of time where their prices will diverge enough to
+      create a proft.
+  4. Close both sides as soon as the required profit presents itself. Do NOT
+     hold one, hoping that it will become profitable
+* This can't be done by simulatneously longing and shorting a single asset. It
+  will always start at <= $0, and once one side is released, you'll be
+  gambling.
+* Where this new strategy may lose is when the prices diverged for long enough
+  in loss directions for both sides.
+* It remains to be seen how often this occurs and whether a stop loss / reset
+  will be necessary.
+
+### 2022-04-05:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

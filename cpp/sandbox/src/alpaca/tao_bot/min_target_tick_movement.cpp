@@ -5,7 +5,7 @@
 #include "tao_bot.h"      // Alpaca::TaoBot
 
 double Alpaca::TaoBot::min_target_tick_movement() {
-  return is_hedging() ? 15 : 20;
+  return is_hedging() ? 20 : 20;
 }
 
 #endif
