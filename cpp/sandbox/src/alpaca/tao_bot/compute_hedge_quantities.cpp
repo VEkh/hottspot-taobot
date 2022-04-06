@@ -11,13 +11,19 @@ std::pair<double, double> Alpaca::TaoBot::compute_hedge_quantities() {
   const quote_t base_quote = this->quotes.back();
   const quote_t hedge_quote = this->hedge_quotes.back();
 
+  const price_movement_t base_price_movement =
+      this->price_movements[this->symbol];
+  const price_movement_t hedge_price_movement =
+      this->price_movements[hedge_symbol()];
+
   const double base_one_sec_variance =
-      this->price_movements[this->symbol]
-          .three_minute_one_second_variance.average;
+      base_price_movement.short_term_three_minute_one_second_variance.average ||
+      base_price_movement.three_minute_one_second_variance.average;
 
   const double hedge_one_sec_variance =
-      this->price_movements[hedge_symbol()]
-          .three_minute_one_second_variance.average;
+      hedge_price_movement.short_term_three_minute_one_second_variance
+          .average ||
+      hedge_price_movement.three_minute_one_second_variance.average;
 
   double base_quantity_ = 1.0;
   double hedge_quantity = base_one_sec_variance / hedge_one_sec_variance;
