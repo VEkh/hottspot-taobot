@@ -14,24 +14,25 @@
 #include "lib/utils/string.cpp" // ::utils::string
 #include <iostream>             // std::cout, std::endl
 #include <stdio.h>              // printf
+#include <string>               // std::string
 #include <utility>              // std::pair
 
 std::pair<Alpaca::TaoBot::order_t, Alpaca::TaoBot::order_t>
 Alpaca::TaoBot::open_position(Alpaca::Client api_client_,
-                              const char *order_description,
-                              const double quantity_,
                               const order_action_t close_action,
-                              const order_action_t open_action) {
+                              const order_action_t open_action,
+                              const char *order_description,
+                              const double quantity_, std::string symbol_) {
   order_t new_open_order;
   new_open_order.action = open_action;
   new_open_order.quantity = quantity_;
-  new_open_order.symbol = this->symbol;
+  new_open_order.symbol = symbol_;
   new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;
   new_close_order.action = close_action;
   new_close_order.quantity = quantity_;
-  new_close_order.symbol = this->symbol;
+  new_close_order.symbol = symbol_;
   new_close_order.type = order_type_t::MARKET;
 
   const char *order_action =

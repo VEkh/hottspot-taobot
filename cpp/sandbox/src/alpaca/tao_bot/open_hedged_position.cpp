@@ -42,9 +42,9 @@ void Alpaca::TaoBot::open_hedged_position() {
   bool hedge_open_order_opened = false;
 
   while (!open_order_opened) {
-    std::pair<order_t, order_t> new_orders =
-        open_position(this->api_client, "open", hedge_quantities.first,
-                      order_action_t::SELL, order_action_t::BUY);
+    std::pair<order_t, order_t> new_orders = open_position(
+        this->api_client, order_action_t::SELL, order_action_t::BUY, "open",
+        hedge_quantities.first, this->symbol);
 
     open_order_opened = !new_orders.second.id.empty();
 
@@ -71,8 +71,8 @@ void Alpaca::TaoBot::open_hedged_position() {
                                                  : order_action_t::BUY;
 
     std::pair<order_t, order_t> new_hedge_orders =
-        open_position(this->api_client, "hedge open", hedge_quantities.second,
-                      closing_action, hedge_info.action);
+        open_position(this->api_client, closing_action, hedge_info.action,
+                      "hedge open", hedge_quantities.second, hedge_info.symbol);
 
     hedge_open_order_opened = !new_hedge_orders.second.id.empty();
 

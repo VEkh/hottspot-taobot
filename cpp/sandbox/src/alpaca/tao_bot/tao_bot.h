@@ -110,9 +110,10 @@ private:
   std::list<performance_t> read_sibling_performances();
 
   std::pair<double, double> compute_hedge_quantities();
-  std::pair<order_t, order_t> open_position(Alpaca::Client, const char *,
-                                            const double, const order_action_t,
-                                            const order_action_t);
+  std::pair<order_t, order_t> open_position(Alpaca::Client,
+                                            const order_action_t,
+                                            const order_action_t, const char *,
+                                            const double, std::string);
   std::string hedge_symbol();
   void await_market_open();
   void cancel_stale_open_order(Alpaca::Client &, const order_t *);
