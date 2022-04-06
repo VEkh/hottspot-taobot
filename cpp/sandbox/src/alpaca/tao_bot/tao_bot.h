@@ -130,6 +130,7 @@ private:
   void log_performance();
   void log_position(const order_t *, const order_t *, const char *);
   void log_positions();
+  void log_positions_profit();
   void log_position_results();
   void log_price_movement();
   void log_quote(const std::vector<quote_t> *);
