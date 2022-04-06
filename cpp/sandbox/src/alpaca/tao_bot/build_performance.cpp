@@ -9,11 +9,11 @@
  */
 #include "tao_bot.h"
 
+#include "closed_position_profit.cpp"      // closed_position_profit
 #include "compute_martingale_quantity.cpp" // compute_martingale_quantity
 #include "is_hedging.cpp"                  // is_hedging
 #include "max_affordable_quantity.cpp"     // max_affordable_quantity
 #include "order_win_result.cpp"            // order_win_result
-#include "position_profit.cpp"             // position_profit
 #include <algorithm>                       // std::max
 #include <map>                             // std::map
 
@@ -50,7 +50,7 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
         i == 0 ? nullptr : &(this->closed_positions[i - 1]);
     const order_win_result_t result = order_win_result(position);
 
-    const double position_profit_ = position_profit(position);
+    const double position_profit_ = closed_position_profit(position);
 
     results[result]++;
     current_balance += position_profit_;

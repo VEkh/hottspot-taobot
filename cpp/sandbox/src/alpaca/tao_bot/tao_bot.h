@@ -86,6 +86,7 @@ private:
   bool should_open_position(const order_t *);
   bool should_terminate();
   double base_quantity();
+  double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double compute_martingale_quantity();
@@ -93,8 +94,8 @@ private:
   double min_target_tick_movement();
   double loss_to_recover();
   double max_affordable_quantity();
+  double open_position_profit(const order_t *, const order_t *);
   double position_target_movement();
-  double position_profit(const position_t &);
   double profit_percentage(const order_t *);
   double secured_profit_ratio(const order_t *);
   exit_prices_t build_exit_prices(order_t *, const order_t *);

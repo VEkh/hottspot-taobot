@@ -8,11 +8,11 @@
  */
 #include "tao_bot.h"
 
-#include "position_profit.cpp" // position_profit
+#include "closed_position_profit.cpp" // closed_position_profit
 
 Alpaca::TaoBot::order_win_result_t
 Alpaca::TaoBot::order_win_result(const position_t position) {
-  const double profit = position_profit(position);
+  const double profit = closed_position_profit(position);
 
   if (profit > 0) {
     return order_win_result_t::WIN;
