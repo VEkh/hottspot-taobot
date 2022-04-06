@@ -9,7 +9,7 @@ Alpaca::TaoBot::quote_t Alpaca::TaoBot::fetch_quote(const std::string symbol_) {
   try {
     const std::string quote_string = this->api_client.fetch_quote(symbol_);
     quote_t parsed_quote = this->api_client.parse_quote(quote_string);
-    parsed_quote.symbol = symbol_.c_str();
+    parsed_quote.symbol = symbol_;
 
     return parsed_quote;
   } catch (nlohmann::detail::parse_error &) {

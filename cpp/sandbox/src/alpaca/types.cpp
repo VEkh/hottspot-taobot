@@ -46,7 +46,7 @@ struct order_t {
   double profit = 0.00;
   double quantity = 0.00;
   order_status_t status = order_status_t::ORDER_INIT;
-  const char *symbol;
+  std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   int timestamp = 0;
   order_type_t type = order_type_t::MARKET;
@@ -63,7 +63,7 @@ struct quote_t {
   double ask = 0.00;
   double bid = 0.00;
   double price = 0.00;
-  const char *symbol = "";
+  std::string symbol = "";
   long int timestamp;
 };
 } // namespace t

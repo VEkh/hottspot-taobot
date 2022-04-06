@@ -10,11 +10,11 @@
  */
 #include "tao_bot.h"
 
-#include "position_profit.cpp" // position_profit
-#include <algorithm>           // std::max
-#include <iostream>            // std::cout, std::endl
-#include <map>                 // std::map
-#include <stdio.h>             // printf, puts
+#include "closed_position_profit.cpp" // closed_position_profit
+#include <algorithm>                  // std::max
+#include <iostream>                   // std::cout, std::endl
+#include <map>                        // std::map
+#include <stdio.h>                    // printf, puts
 
 void Alpaca::TaoBot::log_performance() {
   performance_t stats = this->performance;
@@ -80,10 +80,9 @@ void Alpaca::TaoBot::log_performance() {
       printf(", ");
     }
 
-    const double profit =
-        position.close_order.profit + position.hedge_close_order.profit;
+    const double profit = closed_position_profit(position);
 
-    printf("%+.2f:%.5f", profit, position.close_order.quantity);
+    printf("%+.2f", profit);
   }
 
   puts("]");

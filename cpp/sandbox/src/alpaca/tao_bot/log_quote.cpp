@@ -35,7 +35,7 @@ void Alpaca::TaoBot::log_quote(const std::vector<quote_t> *quotes_ptr) {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote\n", current_quote.symbol);
+  printf("%s Quote\n", current_quote.symbol.c_str());
 
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));

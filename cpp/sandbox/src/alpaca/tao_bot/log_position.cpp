@@ -22,11 +22,11 @@ void Alpaca::TaoBot::log_position(const order_t *close_order_ptr_,
       open_order_ptr_->action == order_action_t::BUY ? fmt.green : fmt.red;
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s%s\n",
+  printf("%s [%s]%s\n",
          ::utils::string::upcase(
              Alpaca::constants::ORDER_ACTIONS[open_order_ptr_->action])
              .c_str(),
-         label);
+         open_order_ptr_->symbol.c_str(), label);
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
@@ -54,7 +54,7 @@ void Alpaca::TaoBot::log_position(const order_t *close_order_ptr_,
          this->exit_prices.lower_secure_profit,
          this->exit_prices.upper_secure_profit);
 
-  printf("Quantity: %.5f\n", this->quantity);
+  printf("Quantity: %.5f\n", open_order_ptr_->quantity);
 
   std::time_t now = std::time(nullptr);
   const int duration = now - open_order_ptr_->timestamp;
