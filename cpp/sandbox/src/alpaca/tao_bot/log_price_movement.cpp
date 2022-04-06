@@ -6,10 +6,11 @@
 #include "tao_bot.h"                    // Alpaca::TaoBot, fmt
 #include <iostream>                     // std::cout, std::endl
 #include <stdio.h>                      // printf
+#include <string>                       // std::string
 
-void Alpaca::TaoBot::log_price_movement() {
+void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
   const double one_second_variance =
-      this->price_movement.three_minute_one_second_variance.average;
+      this->price_movements[symbol_].three_minute_one_second_variance.average;
 
   if (!one_second_variance) {
     return;
@@ -18,17 +19,17 @@ void Alpaca::TaoBot::log_price_movement() {
   const double min_target_tick_movement_ = min_target_tick_movement();
 
   const double short_term_one_second_variance =
-      this->price_movement.short_term_three_minute_one_second_variance.average;
+      this->price_movements[symbol_]
+          .short_term_three_minute_one_second_variance.average;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
-  std::cout << "💲 Avg Tick Price Δ: ("
-            << ::utils::integer_::seconds_to_clock(
-                   this->AVERAGE_TICK_PRICE_DELTA_PERIOD)
-            << ")";
+  printf(
+      "💲 %s Avg Tick Price Δ: (%s)\n", symbol_.c_str(),
+      ::utils::integer_::seconds_to_clock(this->AVERAGE_TICK_PRICE_DELTA_PERIOD)
+          .c_str());
 
-  std::cout << fmt.reset << std::endl;
-  std::cout << fmt.bold << fmt.cyan;
+  std::cout << fmt.reset << fmt.bold << fmt.cyan;
 
   printf("x1: %.5f • x%i: %.5f\n", one_second_variance,
          (int)min_target_tick_movement_,

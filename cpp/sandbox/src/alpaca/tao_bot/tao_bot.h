@@ -68,7 +68,7 @@ private:
   order_t hedge_open_order;
   order_t open_order;
   performance_t performance;
-  price_movement_t price_movement;
+  std::map<std::string, price_movement_t> price_movements;
   std::map<std::string, std::string> flags;
   std::vector<position_t> closed_positions;
   std::vector<quote_t> hedge_quotes;
@@ -123,7 +123,7 @@ private:
   void fetch_quotes();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
-  void load_price_movement();
+  void load_price_movement(const std::string &);
   void log_account_balance(account_balance_t, account_balance_t, const char *);
   void log_account_balances();
   void log_end_of_trading_period();
@@ -132,7 +132,8 @@ private:
   void log_positions();
   void log_positions_profit();
   void log_position_results();
-  void log_price_movement();
+  void log_price_movement(const std::string &);
+  void log_price_movements();
   void log_quote(const std::vector<quote_t> *);
   void log_quotes();
   void log_start_message();
@@ -148,14 +149,15 @@ private:
                              const std::vector<quote_t> *);
   void set_open_position_prices();
   void set_position_status();
-  void set_price_movement();
+  void set_price_movement(const std::string &, std::vector<quote_t> &);
+  void set_price_movements();
   void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit(order_t *, const order_t *);
   void set_status(Alpaca::Client &, order_t *order);
   void set_trade_direction();
   void watch();
   void write_performance();
-  void write_price_movement();
+  void write_price_movement(const std::string &, const price_movement_t &);
 };
 } // namespace Alpaca
 

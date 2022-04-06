@@ -40,7 +40,8 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
       open_position_profit(this->open_order_ptr, this->hedge_open_order_ptr);
 
   const double target_profit =
-      5.0 * this->price_movement.three_minute_one_second_variance.average;
+      5.0 * this->price_movements[this->symbol]
+                .three_minute_one_second_variance.average;
 
   if (open_position_profit_ >= target_profit) {
     return true;

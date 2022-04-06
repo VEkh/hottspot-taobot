@@ -5,6 +5,7 @@
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
 #include "fetch_quote.cpp"           // fetch_quote
+#include "hedge_symbol.cpp"          // hedge_symbol
 #include "is_hedging.cpp"            // is_hedging
 #include "is_holiday.cpp"            // is_holiday
 #include "lib/formatted.cpp"         // Formatted::error_message
@@ -42,6 +43,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   setlocale(LC_NUMERIC, "");
 
   this->flags = flags_;
+  this->symbol = symbol_;
 
   this->api_client =
       Alpaca::Client(::utils::map::merge(this->flags, {{"hedge", "0"}}));
@@ -56,14 +58,16 @@ void Alpaca::TaoBot::initialize(char *symbol_,
         fetch_account_balance(this->hedge_api_client);
   }
 
-  this->symbol = symbol_;
-
   fetch_quotes();
   load_performance();
-  load_price_movement();
+  load_price_movement(this->symbol);
   set_trade_direction();
 
   this->performance = build_performance();
+
+  if (is_hedging()) {
+    load_price_movement(hedge_symbol());
+  }
 }
 
 #endif

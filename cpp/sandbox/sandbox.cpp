@@ -6,8 +6,7 @@
 #include <string>              //std::getline, std::string
 
 int main() {
-  std::map<std::string, int> m = {{"how", 4}};
-  const char *key = "how";
+  int a = 1, b = 4;
 
-  printf("val: %i\n", m[key]);
+  printf("a: %i; b: %i\n", a, b);
 }

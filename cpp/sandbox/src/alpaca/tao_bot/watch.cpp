@@ -12,7 +12,7 @@
 #include "log_performance.cpp"           // log_performance
 #include "log_position_results.cpp"      // log_position_results
 #include "log_positions.cpp"             // log_positions
-#include "log_price_movement.cpp"        // log_price_movement
+#include "log_price_movements.cpp"       // log_price_movements
 #include "log_quotes.cpp"                // log_quotes
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_positions.cpp"            // open_positions
@@ -20,7 +20,7 @@
 #include "set_close_position_prices.cpp" // set_open_position_prices
 #include "set_open_position_prices.cpp"  // set_open_position_prices
 #include "set_position_status.cpp"       // set_order_statuses
-#include "set_price_movement.cpp"        // set_price_movement
+#include "set_price_movements.cpp"       // set_price_movements
 #include "should_terminate.cpp"          // should_terminate
 #include "tao_bot.h"                     // Alpaca::TaoBot
 #include <iostream>                      // std::cout, std::flush
@@ -35,7 +35,7 @@ void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
     log_timestamps();
     fetch_quotes();
-    set_price_movement();
+    set_price_movements();
 
     if (awaited_loss_leader()) {
       continue;
@@ -43,7 +43,7 @@ void Alpaca::TaoBot::watch() {
 
     log_account_balances();
     log_quotes();
-    log_price_movement();
+    log_price_movements();
     log_positions();
     log_performance();
 
