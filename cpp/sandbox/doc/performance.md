@@ -9578,7 +9578,40 @@ Staging had a really good week 🎉
 * It remains to be seen how often this occurs and whether a stop loss / reset
   will be necessary.
 
-### 2022-04-05:
+### 2022-04-05 - 2022-04-06:
+#### Remarks
+##### Stocks/ETFs
+* The correlated hedge strategy is showing promise.
+* I still have to make the sides equally weighted according to price movement
+  so that movement in either direction is profitable.
+* I tried using the long term 1-sec variance as the normalizer and that
+  somewhat worked.
+* I'll try the short-term 1-sec variance tomorrow.
+
+#### Next Thing(s) to Try
+
+### 2022-04-07 - 2022-04-08:
+#### Remarks
+##### Stocks/ETFs
+* Normalizing quantity based on the rate of price movement worked well.
+* Using 5x the slower moving asset's 1-sec variance as the target profit worked
+  well. However, the profits too often crossed into negative territory because
+  the profit wasn't enough. Now trying 10x.
+* Using 5x the faster asset's 1-sec variance as the target profit wasn't effective.
+* 10x the slower asset's 1-sec variance worked pretty well so I introduced
+  quantity scaling.
+* After a few math hiccups, it works generally well although most positions
+  ended with proit-clearing losses.
+* I'm curious to see how this performs when it runs for a full day.
+* Does this tend to profit during periods of high volatility? Does this mean
+  you should only open when the 1-sec variance exceeds the average by a certain
+  amount?
+* If can lose at any time for any reason even when the pairs are sufficiently
+  correlated, maybe you need to come up with a loss strategy.
+
+#### Next Thing(s) to Try
+
+### 2022-04-11:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

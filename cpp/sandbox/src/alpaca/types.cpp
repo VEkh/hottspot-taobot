@@ -42,6 +42,7 @@ struct order_t {
   double execution_price = 0.00;
   std::string id = "";
   double max_profit = 0.00;
+  double max_position_profit = 0.00;
   bool max_profit_reset = false;
   double profit = 0.00;
   double quantity = 0.00;

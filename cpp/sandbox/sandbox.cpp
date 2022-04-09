@@ -2,11 +2,13 @@
 #include <stdio.h>  // printf, puts
 
 #include "lib/utils/float.cpp" // ::utils::float_
-#include <map>                 //std::map
-#include <string>              //std::getline, std::string
+#include <algorithm>           // std::min
+#include <valarray>            // std::string
 
 int main() {
-  int a = 1, b = 4;
+  const double a = 0.5, b = 1.0;
+  const double avg = (a + b) / 2.0;
 
-  printf("a: %i; b: %i\n", a, b);
+  printf("a ratio: %.5f; b ratio: %.5f\n", a / avg, b / avg);
+  printf("ratio: %.5f\n", (a / avg) / (b / avg));
 }
