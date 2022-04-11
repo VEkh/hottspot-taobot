@@ -39,8 +39,11 @@ private:
   const double MAX_EXPECTED_LOSS_STREAK = 8;
 
   std::map<std::string, hedge_info_t> HEDGE_PAIRS = {
-      {"AAPL", {.action = order_action_t::SELL, .symbol = "MSFT"}},
-      {"SQQQ", {.action = order_action_t::BUY, .symbol = "TQQQ"}},
+      {"AAPL", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
+      {"C", {.action = order_action_t::SELL, .symbol = "BAC"}},
+      {"MSFT", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
+      {"SPY", {.action = order_action_t::BUY, .symbol = "SQQQ"}},
+      {"TSLA", {.action = order_action_t::SELL, .symbol = "QQQ"}},
   };
 
   std::map<const char *, const char *> ICONS = {
@@ -96,6 +99,7 @@ private:
   double max_affordable_quantity();
   double open_position_profit(const order_t *, const order_t *);
   double position_target_movement();
+  double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
   double secured_profit_ratio(const order_t *);
   exit_prices_t build_exit_prices(order_t *, const order_t *);

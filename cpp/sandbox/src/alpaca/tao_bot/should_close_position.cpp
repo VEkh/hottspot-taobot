@@ -8,9 +8,11 @@
 #include "tao_bot.h"
 
 #include "build_exit_prices.cpp"        // build_exit_prices
+#include "hedge_symbol.cpp"             // hedge_symbol
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "open_position_profit.cpp"     // open_position_profit
+#include "price_movement_ratio.cpp"     // price_movement_ratio
 #include <algorithm>                    // std::min
 
 bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
@@ -45,6 +47,12 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
       open_position_profit(this->open_order_ptr, this->hedge_open_order_ptr);
 
   if (open_position_profit_ >= this->exit_prices.min_profit) {
+    return true;
+  }
+
+  if (price_movement_ratio(this->symbol) < 1 &&
+      price_movement_ratio(hedge_symbol()) < 1 &&
+      open_position_profit_ <= -this->exit_prices.min_profit) {
     return true;
   }
 

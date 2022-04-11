@@ -9612,6 +9612,25 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-11:
+#### Remarks
+##### Stocks/ETFs
+* By 1pm BAC_C had an 86.67% win rate with 12 recorded losses. Everyone else's
+  win rates were 100%.
+* However, all's current positions were losing, desptie an overall profit.
+  BAC_C had lost its profit. The total sum was about break even.
+* These ongoing losses occurred as the price movement fell well below the
+  cumulative average.
+* The next thing to try is to introduce loss cuts when price movement slows,
+  while keeping positions open during periods of high volatility.
+* Temporarily removing BAC_C from roster. Will maybe restore to only open when
+  price movement is above cumulative average.
+* Having a close strategy during low volatility resulted in overal loss and
+  losing percentages across the board.
+* I'll now only open positions during periods of high volatility.
+
+#### Next Thing(s) to Try
+
+### 2022-04-12:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
