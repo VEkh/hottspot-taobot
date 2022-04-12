@@ -9631,6 +9631,23 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-12:
+#### Remarks
+##### Stocks/ETFs
+* Good news! The morning started with a hiccup: losses were being claimed
+  despite it being a high volatility period.
+* This was because The morning's short-term price movement hadn't yet been
+  computed. BAC_C lost >$150 in just three minutes!
+* However after the short-term price variance kicked in, the positions all
+  started winning and 60-70% of the value was reclaimed. 2/5 of them still
+  profited!
+* I added a condtion that blocks position closing before 10:30am ET, which is
+  when early morning volatility was finally cooling down.
+* This suggests that tomorrow morning should be profitable, barring any
+  mistakes.
+
+#### Next Thing(s) to Try
+
+### 2022-04-13:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

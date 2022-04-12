@@ -43,7 +43,7 @@ private:
       {"C", {.action = order_action_t::SELL, .symbol = "BAC"}},
       {"MSFT", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
       {"SPY", {.action = order_action_t::BUY, .symbol = "SQQQ"}},
-      {"TSLA", {.action = order_action_t::SELL, .symbol = "QQQ"}},
+      {"TSLA", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
   };
 
   std::map<const char *, const char *> ICONS = {
