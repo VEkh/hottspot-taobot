@@ -22,6 +22,9 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
       this->price_movements[symbol_]
           .short_term_three_minute_one_second_variance.average;
 
+  const double pair_one_second_vairance_ratio =
+      this->price_movements[symbol_].ratio_from_hedge.average;
+
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
   printf(
@@ -42,6 +45,11 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
     printf("Short-Term One Second Variance: %.5f (%.3f%% Long-Term)\n",
            short_term_one_second_variance,
            short_term_long_term_variance_percentage);
+  }
+
+  if (pair_one_second_vairance_ratio) {
+    printf("Ratio to Pair's One Second Variance: %.5f\n",
+           pair_one_second_vairance_ratio);
   }
 
   std::cout << fmt.reset << std::endl;

@@ -30,6 +30,7 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
+  using price_movement_average_t = Global::t::price_movement_average_t;
   using price_movement_t = Global::t::price_movement_t;
   using quote_t = Alpaca::t::quote_t;
 
@@ -43,7 +44,7 @@ private:
       {"C", {.action = order_action_t::SELL, .symbol = "BAC"}},
       {"MSFT", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
       {"SPY", {.action = order_action_t::BUY, .symbol = "SQQQ"}},
-      {"TSLA", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
+      {"TSLA", {.action = order_action_t::SELL, .symbol = "QQQ"}},
   };
 
   std::map<const char *, const char *> ICONS = {
@@ -111,6 +112,9 @@ private:
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
   performance_t get_loss_leader(std::list<performance_t> &);
+  price_movement_average_t price_movement_pair_ratio(std::vector<quote_t> &,
+                                                     std::vector<quote_t> &,
+                                                     const std::string);
   std::list<performance_t> read_sibling_performances();
 
   std::pair<double, double> compute_hedge_quantities();

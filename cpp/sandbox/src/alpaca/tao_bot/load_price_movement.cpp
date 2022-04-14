@@ -32,17 +32,15 @@ void Alpaca::TaoBot::load_price_movement(const std::string &symbol_) {
     return;
   }
 
-  double average, short_term_average;
-  int count, short_term_count;
+  double average, ratio_from_hedge_average, short_term_average;
+  int count, ratio_from_hedge_count, short_term_count;
 
-  if (persisted_data.contains("three_minute_one_second_variance")) {
-    average = persisted_data["three_minute_one_second_variance"]["average"];
-    count = persisted_data["three_minute_one_second_variance"]["count"];
+  if (persisted_data.contains("ratio_from_hedge")) {
+    ratio_from_hedge_average = persisted_data["ratio_from_hedge"]["average"];
+    ratio_from_hedge_count = persisted_data["ratio_from_hedge"]["count"];
 
-    this->price_movements[symbol_].three_minute_one_second_variance.average =
-        average;
-    this->price_movements[symbol_].three_minute_one_second_variance.count =
-        count;
+    this->price_movements[symbol_].ratio_from_hedge.average = ratio_from_hedge_average;
+    this->price_movements[symbol_].ratio_from_hedge.count = ratio_from_hedge_count;
   }
 
   if (persisted_data.contains("short_term_three_minute_one_second_variance")) {
@@ -57,6 +55,16 @@ void Alpaca::TaoBot::load_price_movement(const std::string &symbol_) {
         short_term_average;
     this->price_movements[symbol_]
         .short_term_three_minute_one_second_variance.count = short_term_count;
+  }
+
+  if (persisted_data.contains("three_minute_one_second_variance")) {
+    average = persisted_data["three_minute_one_second_variance"]["average"];
+    count = persisted_data["three_minute_one_second_variance"]["count"];
+
+    this->price_movements[symbol_].three_minute_one_second_variance.average =
+        average;
+    this->price_movements[symbol_].three_minute_one_second_variance.count =
+        count;
   }
 }
 

@@ -9648,6 +9648,39 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-13:
+#### Remarks
+##### Stocks/ETFs
+* Everything behaved correctly, however all positions ended at a loss by the
+  end of the high volatility period.
+* I think it's because the hedge side is too heavily favored and the market was
+  trending up this morning.
+* Perhaps I need to re-think how I normalize the hedge quantities
+
+#### Next Thing(s) to Try
+* Compute the price movement ratios by:
+  1. Go through each quote in the base and hedge quotes vectors.
+  2. Compute the price delta between each tick.
+  3. Compute the ratio between the hedge and price price deltas.
+  4. Compute the average of these individual ratios.
+* This should be the most accurate computation of the price movement ratios.
+
+### 2022-04-14:
+#### Remarks
+##### Stocks/ETFs
+* Per usual, there was a computation error to start the day that I didn't fix
+  until ~10am.
+* However, after the new price movement ratio algorithm was up an running 4/5
+  positions won.
+* Altough, TSLA_QQQ seemed to be profiting during the day's bull run, I suspect
+  the success was due to the day trending downward.
+* BAC_C still heavily favors the hedge position, which will make bull markets
+  bad for it.
+* I suspect that I'm still incorrectly computing the normalization ratio. I'll
+  monitor and make adjustments.
+
+#### Next Thing(s) to Try
+
+### 2022-04-18:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

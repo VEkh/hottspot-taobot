@@ -22,6 +22,9 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
              .three_minute_one_second_variance.average) {
       return false;
     }
+    if (!this->price_movements[this->symbol].ratio_from_hedge.average) {
+      return false;
+    }
 
     if (::utils::time_::is_at_least({9, 30}) &&
         ::utils::time_::is_before({10, 0})) {

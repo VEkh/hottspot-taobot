@@ -30,12 +30,10 @@ std::pair<double, double> Alpaca::TaoBot::compute_hedge_quantities() {
           : hedge_price_movement.three_minute_one_second_variance.average;
 
   const double normalization_factor =
-      hedge_one_sec_variance / base_one_sec_variance;
+      this->price_movements[this->symbol].ratio_from_hedge.average;
+
   const double hedge_quantity = 1;
   const double base_quantity_ = hedge_quantity * normalization_factor;
-
-  // TODO: remove when scaling is perfected
-  // return {base_quantity_, hedge_quantity};
 
   const double base_cost = base_quantity_ * base_quote.ask;
   const double hedge_cost = hedge_quantity * hedge_quote.ask;
