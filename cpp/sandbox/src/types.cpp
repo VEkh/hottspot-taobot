@@ -29,7 +29,6 @@ struct exit_prices_t {
   double lower_secure_profit = 0.00;
   double max_loss = 0.00;
   double min_profit = 0.00;
-  double position_target_movement = 0.00;
   double upper_secure_profit = 0.00;
 };
 

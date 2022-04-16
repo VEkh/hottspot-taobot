@@ -138,8 +138,8 @@ private:
   void set_position_status();
   void set_price_movement();
   void set_profit(order_t *, const order_t *);
-  void set_profit(order_t *order);
-  void set_status(order_t *order);
+  void set_profit(order_t *);
+  void set_status(order_t *, order_t *);
   void set_trade_direction();
   void watch();
   void write_performance();

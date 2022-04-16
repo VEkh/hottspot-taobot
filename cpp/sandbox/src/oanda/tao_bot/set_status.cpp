@@ -17,10 +17,12 @@
 #include "set_execution_price.cpp" // set_execution_price
 #include "write_performance.cpp"   // write_performance
 #include <iostream>                // std::cout, std::endl
+#include <math.h>                  // abs
 #include <stdio.h>                 // printf
-#include <string>                  // std::string
+#include <string>                  // std::string, std::stoi
 
-void Oanda::TaoBot::set_status(order_t *order) {
+void Oanda::TaoBot::set_status(order_t *order,
+                               order_t *linked_order = nullptr) {
   const order_status_t original_status = order->status;
 
   if (original_status == order_status_t::ORDER_FILLED) {
@@ -50,9 +52,11 @@ void Oanda::TaoBot::set_status(order_t *order) {
   }
 
   std::string status;
+  std::string trade_quantity_string;
 
   try {
     status = trade_json["state"];
+    trade_quantity_string = trade_json["initialUnits"];
   } catch (nlohmann::detail::type_error &) {
     return set_status(order);
   }
@@ -63,10 +67,26 @@ void Oanda::TaoBot::set_status(order_t *order) {
       order->status == order_status_t::ORDER_FILLED) {
     const char *order_action = Oanda::constants::ORDER_ACTIONS[order->action];
     const char *log_icon = this->ICONS[order_action];
+    const int trade_quantity = abs(std::stoi(trade_quantity_string));
 
     std::cout << fmt.bold << fmt.green << std::endl;
     printf("%s Executed %s order.\n", log_icon, order_action);
     std::cout << fmt.reset;
+
+    if (trade_quantity != order->quantity) {
+      std::cout << fmt.bold << fmt.red << std::endl;
+      printf("🚨 Executed trade quantity (%i) doesn't match desired quantity "
+             "(%i). Adjusting.\n",
+             trade_quantity, order->quantity);
+      std::cout << fmt.reset;
+
+      this->quantity = trade_quantity;
+      order->quantity = trade_quantity;
+
+      if (linked_order) {
+        linked_order->quantity = trade_quantity;
+      }
+    }
 
     set_execution_price(order, trade_json);
     this->performance = build_performance();
