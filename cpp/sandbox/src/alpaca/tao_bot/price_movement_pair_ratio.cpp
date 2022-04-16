@@ -31,7 +31,7 @@ Alpaca::TaoBot::price_movement_pair_ratio(std::vector<quote_t> &quotes_a,
 
   const double average = total_a / total_b;
 
-  if (average > 1.0e6) {
+  if (average > 1.0e6 || average < 1.0e-3) {
     return this->price_movements[symbol_].ratio_from_hedge;
   }
 

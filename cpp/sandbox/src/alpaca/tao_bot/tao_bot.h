@@ -132,6 +132,7 @@ private:
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void load_price_movement(const std::string &);
+  void load_quotes(std::vector<quote_t> &, const std::string &);
   void log_account_balance(account_balance_t, account_balance_t, const char *);
   void log_account_balances();
   void log_end_of_trading_period();
@@ -164,6 +165,7 @@ private:
   void set_status(Alpaca::Client &, order_t *order);
   void set_trade_direction();
   void watch();
+  void write_quotes(std::vector<quote_t> &, const std::string &);
   void write_performance();
   void write_price_movement(const std::string &, const price_movement_t &);
 };

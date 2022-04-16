@@ -13,6 +13,7 @@
 #include "lib/utils/map.cpp"         // ::utils::map
 #include "load_performance.cpp"      // load_performance
 #include "load_price_movement.cpp"   // load_rice_movement
+#include "load_quotes.cpp"           // load_quotes
 #include "set_trade_direction.cpp"   // set_trade_direction
 #include "tao_bot.h"                 // Alpaca::TaoBot
 #include <iostream>                  // std::cout, std::endl
@@ -51,11 +52,15 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   this->account_balance = this->original_account_balance =
       fetch_account_balance(this->api_client);
 
+  load_quotes(this->quotes, this->symbol);
+
   if (is_hedging()) {
     this->hedge_api_client = Alpaca::Client(this->flags);
 
     this->hedge_account_balance = this->original_hedge_account_balance =
         fetch_account_balance(this->hedge_api_client);
+
+    load_quotes(this->hedge_quotes, hedge_symbol());
   }
 
   fetch_quotes();
