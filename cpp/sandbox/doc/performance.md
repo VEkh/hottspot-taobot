@@ -9681,6 +9681,16 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-18:
+#### Remarks
+##### Stocks/ETFs
+* Per usual, there were a few hiccups with Friday night's code changes. Once I
+  resolved those, 2/5 won and it's become quite apparent that C and BAC aren't
+  correlated enough to reliably profit. I'm taking that pair out of the
+  rotation.
+
+#### Next Thing(s) to Try
+
+### 2022-04-19:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
