@@ -17,7 +17,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices(
           : hedge_price_movement.three_minute_one_second_variance.average;
 
   const double target_profit =
-      10.0 * hedge_one_sec_variance * this->hedge_open_order.quantity;
+      5.0 * hedge_one_sec_variance * this->hedge_open_order.quantity;
 
   exit_prices_t out;
   out.min_profit = target_profit;
