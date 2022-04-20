@@ -43,7 +43,7 @@ private:
       {"AAPL", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
       {"C", {.action = order_action_t::SELL, .symbol = "BAC"}},
       {"MSFT", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
-      {"SPY", {.action = order_action_t::BUY, .symbol = "SQQQ"}},
+      {"SPY", {.action = order_action_t::SELL, .symbol = "QQQ"}},
       {"TSLA", {.action = order_action_t::SELL, .symbol = "QQQ"}},
   };
 
