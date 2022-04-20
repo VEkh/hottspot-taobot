@@ -35,25 +35,20 @@ std::pair<double, double> Alpaca::TaoBot::compute_hedge_quantities() {
   const double hedge_quantity = 1;
   const double base_quantity_ = hedge_quantity * normalization_factor;
 
-  const double base_cost = base_quantity_ * base_quote.ask;
-  const double hedge_cost = hedge_quantity * hedge_quote.ask;
+  // TODO: Remove when scaling is perfected
+  // return {hedge_quantity, base_quantity_};
 
   const double max_buying_power = 0.95 * this->account_balance.balance *
                                   this->account_balance.margin_multiplier;
 
   const double buying_power =
-      0.5 * std::min(this->account_balance.margin_buying_power,
-                     max_buying_power / tradeable_symbols_count());
-
-  const double purchasable_base_units = buying_power / base_cost;
-  const double purchasable_hedge_units = buying_power / hedge_cost;
-  const double buying_power_multiplier = std::min(
-      (purchasable_base_units / purchasable_hedge_units) * normalization_factor,
-      1.0);
-  const double adjusted_buying_power = buying_power_multiplier * buying_power;
+      std::min(this->account_balance.margin_buying_power,
+               max_buying_power / tradeable_symbols_count());
 
   const double adjusted_hedge_quantity =
-      floor(adjusted_buying_power / hedge_quote.ask);
+      floor(buying_power /
+            ((normalization_factor * base_quote.ask) + hedge_quote.ask));
+
   const double adjusted_base_quantity =
       adjusted_hedge_quantity * normalization_factor;
 
