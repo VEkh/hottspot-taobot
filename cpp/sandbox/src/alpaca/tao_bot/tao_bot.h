@@ -104,6 +104,7 @@ private:
   double profit_percentage(const order_t *);
   double secured_profit_ratio(const order_t *);
   exit_prices_t build_exit_prices(order_t *, const order_t *);
+  int order_duration(const order_t *);
   int runtime();
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);

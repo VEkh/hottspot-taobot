@@ -31,11 +31,6 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
         ::utils::time_::is_before({10, 0})) {
       return true;
     }
-
-    if (price_movement_ratio(this->symbol) < 1 ||
-        price_movement_ratio(hedge_symbol()) < 1) {
-      return false;
-    }
   }
 
   return true;

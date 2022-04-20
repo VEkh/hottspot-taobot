@@ -9690,7 +9690,29 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2022-04-19:
+### 2022-04-19 - 2022-04-20:
+#### Remarks
+##### Stocks/ETFs
+* I traded only SPY_QQQ since it's the pair with the highest imperfect
+  correlation. It netted +$64.95.
+* SPY had larger variance than QQQ and this caused miscalculated hedge
+  quantities at the beginning of the day.
+* I fixed the math and the pair profited about $200 in the first few hours.
+* After this, however, it got into a loss position for the next couple of
+  hours.
+* After stopping and restarted, it won most of the rest of the trades and
+  netted positive.
+* This makes me think that I should just close losing positions after they've
+  been open for long enough.
+* Most profit positions seem to close within 3-20 minutes. I'll start by
+  introducing a position time limit.
+* I'll also continue only trading SPY_QQQ until I either confirm that this
+  timeout strategy works for other pairs or another pair is as correlated as
+  SPY_QQQ is.
+
+#### Next Thing(s) to Try
+
+### 2022-04-21:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

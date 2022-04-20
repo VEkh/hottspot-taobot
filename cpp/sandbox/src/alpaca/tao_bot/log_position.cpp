@@ -5,9 +5,9 @@
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/integer.cpp" // utils::integer_
 #include "lib/utils/string.cpp"  // ::utils::string
+#include "order_duration.cpp"    // order_duration
 #include "profit_percentage.cpp" // profit_percentage
 #include "tao_bot.h"             // Alpaca::TaoBot, fmt, order_action_t
-#include <ctime>                 // std::time, std::time_t
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
@@ -56,8 +56,7 @@ void Alpaca::TaoBot::log_position(const order_t *close_order_ptr_,
 
   printf("Quantity: %.5f\n", open_order_ptr_->quantity);
 
-  std::time_t now = std::time(nullptr);
-  const int duration = now - open_order_ptr_->timestamp;
+  const int duration = order_duration(open_order_ptr_);
 
   printf("Duration: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str());
