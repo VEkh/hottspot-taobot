@@ -9713,6 +9713,25 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-21:
+#### Remarks
+##### Stocks/ETFs
+* Day started with a timed out loss
+* A couple more won, but then a couple lost that had sustained profits that
+  didn't reach the target.
+* I then introduced capturing profit after a time limit and switched
+  normalization to be price based again. These led to a 16-win winning streak.
+* However this may have been because the day trended downward heavily.
+* I modified the normalization coefficient to be both price and movement
+  based.
+* I extended the loss time limit to 45 minutes. There were a couple positions
+  that seemed like they were going to eventually win.
+* We'll see what effects the profit timeout and tweaked normalization have
+  tomorrow.
+* You're going to figure this out. Keep going!
+
+#### Next Thing(s) to Try
+
+### 2022-04-22:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

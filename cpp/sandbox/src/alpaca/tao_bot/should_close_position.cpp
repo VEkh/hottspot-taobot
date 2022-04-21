@@ -14,6 +14,7 @@
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "open_position_profit.cpp"     // open_position_profit
 #include "order_duration.cpp"           // order_duration
+#include "profit_duration.cpp"          // profit_duration
 
 bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
                                            const order_t *open_order_ptr_) {
@@ -51,6 +52,9 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
   }
 
   const int max_position_duration = 30 * 60;
+  if (open_position_profit_ > 0 && profit_duration() >= 20) {
+    return true;
+  }
 
   if (is_hedging() && open_position_profit_ < 0) {
     if (order_duration(this->open_order_ptr) > max_position_duration &&

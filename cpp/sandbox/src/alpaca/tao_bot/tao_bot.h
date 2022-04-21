@@ -6,6 +6,7 @@
 #include "lib/formatted.cpp"        // Formatted
 #include "types.cpp"                // Global::t
 #include <list>                     // std::list
+#include <math.h>                   // INFINITY
 #include <utility>                  // std::pair
 #include <vector>                   // std::vector
 
@@ -102,9 +103,11 @@ private:
   double position_target_movement();
   double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
+  double profit_started_at = INFINITY;
   double secured_profit_ratio(const order_t *);
   exit_prices_t build_exit_prices(order_t *, const order_t *);
   int order_duration(const order_t *);
+  int profit_duration();
   int runtime();
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);
@@ -161,8 +164,9 @@ private:
   void set_position_status();
   void set_price_movement(const std::string &, std::vector<quote_t> &);
   void set_price_movements();
-  void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit(order_t *, const order_t *);
+  void set_profit(order_t *, const std::vector<quote_t> *);
+  void set_profit_started_at();
   void set_status(Alpaca::Client &, order_t *order);
   void set_trade_direction();
   void watch();

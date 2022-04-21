@@ -2,9 +2,10 @@
 #define ALPACA__TAO_BOT_log_positions_profit
 
 #include "lib/formatted.cpp"        // Formatted
+#include "lib/utils/integer.cpp"    // utils::integer_
 #include "open_position_profit.cpp" // open_position_profit
+#include "profit_duration.cpp"      // profit_duration
 #include "tao_bot.h"                // Alpaca::TaoBot, fmt
-#include <algorithm>                // std::max
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 
@@ -22,8 +23,9 @@ void Alpaca::TaoBot::log_positions_profit() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
-  printf("Current: %.2f • Max: %.2f • Target: %.2f\n", profit,
-         this->open_order_ptr->max_position_profit,
+  printf("Current: %.2f • Max: %.2f • Profit Duration: %s • Target: %.2f\n",
+         profit, this->open_order_ptr->max_position_profit,
+         ::utils::integer_::seconds_to_clock(profit_duration()).c_str(),
          this->exit_prices.min_profit);
   std::cout << fmt.reset << std::endl;
 }

@@ -21,6 +21,7 @@
 #include "set_open_position_prices.cpp"  // set_open_position_prices
 #include "set_position_status.cpp"       // set_order_statuses
 #include "set_price_movements.cpp"       // set_price_movements
+#include "set_profit_started_at.cpp"     // set_profit_started_at
 #include "should_terminate.cpp"          // should_terminate
 #include "tao_bot.h"                     // Alpaca::TaoBot
 #include <iostream>                      // std::cout, std::flush
@@ -52,6 +53,7 @@ void Alpaca::TaoBot::watch() {
     cancel_stale_open_orders();
     open_positions();
     set_open_position_prices();
+    set_profit_started_at();
 
     close_positions();
     set_close_position_prices();
