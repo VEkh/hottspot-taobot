@@ -51,10 +51,11 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  const int max_position_duration = 30 * 60;
   if (open_position_profit_ > 0 && profit_duration() >= 20) {
     return true;
   }
+
+  const int max_position_duration = 45 * 60;
 
   if (is_hedging() && open_position_profit_ < 0) {
     if (order_duration(this->open_order_ptr) > max_position_duration &&
