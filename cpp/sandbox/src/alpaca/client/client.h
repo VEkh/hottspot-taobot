@@ -12,8 +12,9 @@ namespace Alpaca {
 class Client {
 public:
   using order_action_t = Alpaca::t::order_action_t;
-  using order_t = Alpaca::t::order_t;
   using order_status_t = Alpaca::t::order_status_t;
+  using order_t = Alpaca::t::order_t;
+  using order_type_t = Alpaca::t::order_type_t;
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Alpaca::t::quote_t;
 

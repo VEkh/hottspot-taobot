@@ -11,6 +11,7 @@
 void Alpaca::TaoBot::close_position(Alpaca::Client &api_client_ref,
                                     order_t *close_order_ptr_,
                                     order_t *open_order_ptr_,
+                                    const double limit_price = 0.00,
                                     const bool force = false) {
   if (!open_order_ptr_ || !close_order_ptr_) {
     return;
@@ -24,6 +25,11 @@ void Alpaca::TaoBot::close_position(Alpaca::Client &api_client_ref,
       Alpaca::constants::ORDER_ACTIONS[open_order_ptr_->action];
 
   const char *log_icon = this->ICONS[order_action];
+
+  if (limit_price) {
+    close_order_ptr_->type = order_type_t::LIMIT;
+    close_order_ptr_->limit_price = limit_price;
+  }
 
   api_client_ref.place_order(close_order_ptr_);
 

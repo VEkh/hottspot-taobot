@@ -27,6 +27,7 @@ const char *ORDER_TIMES_IN_FORCE[] = {
 };
 
 const char *ORDER_TYPES[] = {
+    "limit",
     "market",
 };
 

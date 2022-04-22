@@ -67,6 +67,10 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
       Alpaca::constants::ORDER_TIMES_IN_FORCE[order->time_in_force];
   body["type"] = Alpaca::constants::ORDER_TYPES[order->type];
 
+  if (order->type == order_type_t::LIMIT && order->limit_price) {
+    body["limit_price"] = utils::float_::round_to_s(order->limit_price, 2);
+  }
+
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient {
         return post({

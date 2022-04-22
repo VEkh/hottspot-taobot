@@ -132,7 +132,8 @@ private:
   void await_market_open();
   void cancel_stale_open_order(Alpaca::Client &, const order_t *);
   void cancel_stale_open_orders();
-  void close_position(Alpaca::Client &, order_t *, order_t *, const bool);
+  void close_position(Alpaca::Client &, order_t *, order_t *, const double,
+                      const bool);
   void close_positions();
   void fetch_quotes();
   void initialize(char *, std::map<std::string, std::string> &);

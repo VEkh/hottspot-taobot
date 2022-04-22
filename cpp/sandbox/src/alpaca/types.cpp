@@ -29,6 +29,7 @@ enum order_time_in_force_t {
 };
 
 enum order_type_t {
+  LIMIT,
   MARKET,
 };
 
@@ -41,6 +42,7 @@ struct order_t {
   order_action_t action = order_action_t::BUY;
   double execution_price = 0.00;
   std::string id = "";
+  double limit_price = 0.00;
   double max_profit = 0.00;
   double max_position_profit = 0.00;
   bool max_profit_reset = false;
