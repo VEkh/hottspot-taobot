@@ -5,6 +5,7 @@
 #include "alpaca/types.cpp"         // Alpaca::t
 #include "lib/formatted.cpp"        // Formatted
 #include "types.cpp"                // Global::t
+#include <ctime>                    // std::time_t
 #include <list>                     // std::list
 #include <math.h>                   // INFINITY
 #include <utility>                  // std::pair
@@ -127,6 +128,7 @@ private:
                                             const order_action_t, const char *,
                                             const double, std::string);
   std::string hedge_symbol();
+  std::time_t started_at = std::time(nullptr);
   void await_market_open();
   void cancel_stale_open_order(Alpaca::Client &, const order_t *);
   void cancel_stale_open_orders();
