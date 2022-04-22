@@ -51,7 +51,8 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  if (open_position_profit_ > 0 && profit_duration() >= 20) {
+  if (open_position_profit_ > 0 &&
+      profit_duration(this->profit_started_at) >= 20) {
     return true;
   }
 

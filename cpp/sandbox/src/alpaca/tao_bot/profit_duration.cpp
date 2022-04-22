@@ -5,8 +5,8 @@
 #include <algorithm> // std::max
 #include <ctime>     // std::time
 
-int Alpaca::TaoBot::profit_duration() {
-  return std::max(0.0, std::time(nullptr) - this->profit_started_at);
+int Alpaca::TaoBot::profit_duration(const double timestamp) {
+  return std::max(0.0, std::time(nullptr) - timestamp);
 }
 
 #endif

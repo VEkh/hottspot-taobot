@@ -98,6 +98,7 @@ private:
   double compute_martingale_quantity();
   double current_price();
   double min_target_tick_movement();
+  double loss_started_at = INFINITY;
   double loss_to_recover();
   double max_affordable_quantity();
   double open_position_profit(const order_t *, const order_t *);
@@ -108,7 +109,7 @@ private:
   double secured_profit_ratio(const order_t *);
   exit_prices_t build_exit_prices(order_t *, const order_t *);
   int order_duration(const order_t *);
-  int profit_duration();
+  int profit_duration(const double);
   int runtime();
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);
@@ -161,6 +162,7 @@ private:
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);
   void set_close_position_prices();
   void set_execution_price(Alpaca::Client &, order_t *);
+  void set_loss_started_at();
   void set_open_order_prices(Alpaca::Client &, order_t *,
                              const std::vector<quote_t> *);
   void set_open_position_prices();
