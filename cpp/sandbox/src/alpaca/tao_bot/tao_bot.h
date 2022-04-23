@@ -31,7 +31,7 @@ private:
   using order_type_t = Alpaca::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
-  using performance_t = Global::t::performance_t;
+  using performance_t = Alpaca::t::performance_t;
   using price_movement_average_t = Global::t::price_movement_average_t;
   using price_movement_t = Global::t::price_movement_t;
   using quote_t = Alpaca::t::quote_t;
@@ -81,7 +81,6 @@ private:
   std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
-  bool awaited_loss_leader();
   bool is_end_of_trading_period();
   bool is_hedging();
   bool is_holiday();
@@ -91,16 +90,12 @@ private:
   bool should_close_position(const order_t *, const order_t *);
   bool should_open_position(const order_t *);
   bool should_terminate();
-  double base_quantity();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double compute_martingale_quantity();
   double current_price();
   double min_target_tick_movement();
   double loss_started_at = INFINITY;
-  double loss_to_recover();
-  double max_affordable_quantity();
   double open_position_profit(const order_t *, const order_t *);
   double position_target_movement();
   double price_movement_ratio(const std::string symbol_);
@@ -113,15 +108,12 @@ private:
   int runtime();
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);
-  json read_sibling_performance(std::string);
   quote_t fetch_quote(const std::string);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  performance_t get_loss_leader(std::list<performance_t> &);
   price_movement_average_t price_movement_pair_ratio(std::vector<quote_t> &,
                                                      std::vector<quote_t> &,
                                                      const std::string);
-  std::list<performance_t> read_sibling_performances();
 
   std::pair<double, double> compute_hedge_quantities();
   std::pair<order_t, order_t> open_position(Alpaca::Client,
@@ -156,7 +148,6 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_hedged_position();
-  void open_martingale_position();
   void open_positions();
   void reset_position();
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);

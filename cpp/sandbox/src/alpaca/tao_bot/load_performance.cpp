@@ -51,11 +51,6 @@ void Alpaca::TaoBot::load_performance() {
 
   json positions_json = json::array();
 
-  if (persisted_data.contains("are_funds_sufficient")) {
-    this->performance.are_funds_sufficient =
-        persisted_data["are_funds_sufficient"];
-  }
-
   if (persisted_data.contains("current_balance")) {
     this->performance.current_balance = persisted_data["current_balance"];
   }
@@ -63,10 +58,6 @@ void Alpaca::TaoBot::load_performance() {
   if (persisted_data.contains("current_loss_streak_balance")) {
     this->performance.current_loss_streak_balance =
         persisted_data["current_loss_streak_balance"];
-  }
-
-  if (persisted_data.contains("is_position_open")) {
-    this->performance.is_position_open = persisted_data["is_position_open"];
   }
 
   if (persisted_data.contains("max_balance")) {

@@ -47,12 +47,9 @@ void Alpaca::TaoBot::write_performance() {
       positions.push_back(position_json);
     }
 
-    performance_json["are_funds_sufficient"] =
-        this->performance.are_funds_sufficient;
     performance_json["current_balance"] = this->performance.current_balance;
     performance_json["current_loss_streak_balance"] =
         this->performance.current_loss_streak_balance;
-    performance_json["is_position_open"] = this->performance.is_position_open;
     performance_json["max_balance"] = this->performance.max_balance;
     performance_json["positions"] = positions;
     performance_json["symbol"] = this->performance.symbol;

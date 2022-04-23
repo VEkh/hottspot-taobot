@@ -1,10 +1,14 @@
 #ifndef ALPACA__types
 #define ALPACA__types
 
-#include <string> // std::string
+#include "src/types.cpp" // Global::t
+#include <string>        // std::string
 
 namespace Alpaca {
 namespace t {
+using order_win_result_streak_t = Global::t::order_win_result_streak_t;
+using order_win_result_t = Global::t::order_win_result_t;
+
 enum order_action_t {
   BUY,
   SELL,
@@ -53,6 +57,17 @@ struct order_t {
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   int timestamp = 0;
   order_type_t type = order_type_t::MARKET;
+};
+
+struct performance_t {
+  int closed_positions_count = 0;
+  double current_balance = 0.00;
+  double current_loss_streak_balance = 0.00;
+  order_win_result_streak_t loss_streaks;
+  double max_balance = 0.00;
+  std::map<order_win_result_t, int> results;
+  std::string symbol;
+  order_win_result_streak_t win_streaks;
 };
 
 struct position_t {

@@ -9,13 +9,11 @@
  */
 #include "tao_bot.h"
 
-#include "closed_position_profit.cpp"      // closed_position_profit
-#include "compute_martingale_quantity.cpp" // compute_martingale_quantity
-#include "is_hedging.cpp"                  // is_hedging
-#include "max_affordable_quantity.cpp"     // max_affordable_quantity
-#include "order_win_result.cpp"            // order_win_result
-#include <algorithm>                       // std::max
-#include <map>                             // std::map
+#include "closed_position_profit.cpp" // closed_position_profit
+#include "is_hedging.cpp"             // is_hedging
+#include "order_win_result.cpp"       // order_win_result
+#include <algorithm>                  // std::max
+#include <map>                        // std::map
 
 Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
   std::map<order_win_result_t, int> results = {
@@ -99,30 +97,10 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
     }
   }
 
-  bool are_funds_sufficient;
-  bool is_position_open;
-
-  if (is_hedging()) {
-    are_funds_sufficient = true;
-    is_position_open =
-        (!!this->open_order_ptr &&
-         this->open_order.status == order_status_t::ORDER_FILLED) &&
-        (!!this->hedge_open_order_ptr &&
-         this->hedge_open_order.status == order_status_t::ORDER_FILLED);
-  } else {
-    are_funds_sufficient =
-        compute_martingale_quantity() < max_affordable_quantity();
-
-    is_position_open = !!this->open_order_ptr &&
-                       this->open_order.status == order_status_t::ORDER_FILLED;
-  }
-
   return {
-      .are_funds_sufficient = are_funds_sufficient,
       .closed_positions_count = (int)this->closed_positions.size(),
       .current_balance = current_balance,
       .current_loss_streak_balance = current_loss_streak_balance,
-      .is_position_open = is_position_open,
       .loss_streaks = streaks[order_win_result_t::LOSS],
       .max_balance = std::max(current_balance, this->performance.max_balance),
       .results = results,

@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "await_market_open.cpp"         // await_market_open
-#include "awaited_loss_leader.cpp"       // awaited_loss_leader
 #include "cancel_stale_open_orders.cpp"  // cancel_stale_open_orders
 #include "close_positions.cpp"           // close_positions
 #include "fetch_quotes.cpp"              // fetch_quotes
@@ -38,10 +37,6 @@ void Alpaca::TaoBot::watch() {
     log_timestamps();
     fetch_quotes();
     set_price_movements();
-
-    if (awaited_loss_leader()) {
-      continue;
-    }
 
     log_account_balances();
     log_quotes();
