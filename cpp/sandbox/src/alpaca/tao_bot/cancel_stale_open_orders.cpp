@@ -6,7 +6,6 @@
 
 void Alpaca::TaoBot::cancel_stale_open_orders() {
   cancel_stale_open_order(this->api_client, this->open_order_ptr);
-  cancel_stale_open_order(this->api_client, this->hedge_open_order_ptr);
 }
 
 #endif

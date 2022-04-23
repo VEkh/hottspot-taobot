@@ -14,11 +14,7 @@ void Alpaca::TaoBot::cancel_stale_open_order(Alpaca::Client &api_client_ref,
   }
 
   if (order_ptr->status == order_status_t::ORDER_CANCELED) {
-    if (order_ptr == this->open_order_ptr) {
-      this->open_order_ptr = nullptr;
-    } else if (order_ptr == this->hedge_open_order_ptr) {
-      this->hedge_open_order_ptr = nullptr;
-    }
+    this->open_order_ptr = nullptr;
 
     return;
   }
