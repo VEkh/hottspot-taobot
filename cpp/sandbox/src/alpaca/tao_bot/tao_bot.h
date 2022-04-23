@@ -143,7 +143,7 @@ private:
   void log_position_results();
   void log_price_movement(const std::string &);
   void log_price_movements();
-  void log_quote(const std::vector<quote_t> *);
+  void log_quote(const std::string &);
   void log_quotes();
   void log_start_message();
   void log_timestamps();

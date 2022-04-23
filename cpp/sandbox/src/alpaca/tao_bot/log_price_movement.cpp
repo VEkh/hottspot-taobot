@@ -16,14 +16,12 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
     return;
   }
 
-  const double min_target_tick_movement_ = min_target_tick_movement();
-
   const double short_term_one_second_variance =
       this->price_movements[symbol_]
           .short_term_three_minute_one_second_variance.average;
 
   const double pair_one_second_vairance_ratio =
-      this->price_movements[symbol_].ratio_from_pair.average;
+      this->price_movements[symbol_].ratio_to_pair.average;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
@@ -34,9 +32,7 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
 
   std::cout << fmt.reset << fmt.bold << fmt.cyan;
 
-  printf("x1: %.5f • x%i: %.5f\n", one_second_variance,
-         (int)min_target_tick_movement_,
-         one_second_variance * min_target_tick_movement_);
+  printf("Long-Term One Second Variance: %.5f\n", one_second_variance);
 
   if (short_term_one_second_variance) {
     const double short_term_long_term_variance_percentage =
@@ -48,7 +44,7 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
   }
 
   if (pair_one_second_vairance_ratio) {
-    printf("Ratio to Pair's One Second Variance: %.5f\n",
+    printf("Ratio to Pair's One Second %% Variance: %.5f\n",
            pair_one_second_vairance_ratio);
   }
 

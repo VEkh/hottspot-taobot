@@ -10,8 +10,7 @@
 #include <stdio.h>                  // printf
 
 void Alpaca::TaoBot::log_positions_profit() {
-  const double profit =
-      open_position_profit(this->open_order_ptr, this->hedge_open_order_ptr);
+  const double profit = open_position_profit(this->open_order_ptr);
 
   this->open_order_ptr->max_position_profit =
       std::max(this->open_order_ptr->max_position_profit, profit);

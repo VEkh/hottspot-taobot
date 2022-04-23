@@ -6,8 +6,8 @@
 #include "tao_bot.h"        // Alpaca::TaoBot
 
 void Alpaca::TaoBot::log_quotes() {
-  log_quote(&this->quotes[this->symbol]);
-  log_quote(&this->quotes[hedge_symbol()]);
+  log_quote(this->symbol);
+  log_quote(hedge_symbol());
 }
 
 #endif

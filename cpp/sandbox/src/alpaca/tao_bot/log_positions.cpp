@@ -18,8 +18,6 @@ void Alpaca::TaoBot::log_positions() {
   }
 
   log_position(this->close_order_ptr, this->open_order_ptr);
-  log_position(this->hedge_close_order_ptr, this->hedge_open_order_ptr,
-               " (Hedge)");
   log_positions_profit();
 }
 #endif

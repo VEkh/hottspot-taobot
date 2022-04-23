@@ -14,17 +14,20 @@
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
-void Alpaca::TaoBot::log_quote(const std::vector<quote_t> *quotes_ptr) {
+void Alpaca::TaoBot::log_quote(const std::string &symbol_) {
   Formatted::Stream log_color = fmt.yellow;
-  const int ticks = quotes_ptr->size();
+
+  const std::vector<quote_t> quotes_ = this->quotes[symbol_];
+  const int ticks = quotes_.size();
 
   if (!ticks) {
     return;
   }
 
   const quote_t *previous_quote =
-      ticks > 1 ? &(quotes_ptr->at(ticks - 2)) : nullptr;
-  const quote_t current_quote = quotes_ptr->back();
+      ticks > 1 ? &(quotes_.at(ticks - 2)) : nullptr;
+
+  const quote_t current_quote = quotes_.back();
 
   if (previous_quote) {
     if (current_quote.price > previous_quote->price) {
@@ -39,6 +42,13 @@ void Alpaca::TaoBot::log_quote(const std::vector<quote_t> *quotes_ptr) {
 
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
+
+  if (this->signal.signaler == symbol_) {
+    printf("🔁 As Signaled: %'.2f\n",
+           ::utils::float_::to_currency(
+               current_quote.price *
+               this->signal.signaled_to_signaler_price_ratio));
+  }
 
   std::cout << fmt.reset << std::endl;
 }

@@ -15,10 +15,9 @@ void Alpaca::TaoBot::set_price_movements() {
 
   set_price_movement(hedge_symbol_);
 
-  this->price_movements[this->symbol].ratio_from_pair =
-      price_movement_pair_ratio(
-          this->quotes[hedge_symbol_], this->quotes[this->symbol],
-          this->price_movements[this->symbol].ratio_from_pair);
+  this->price_movements[this->symbol].ratio_to_pair = price_movement_pair_ratio(
+      this->quotes[this->symbol], this->quotes[hedge_symbol_],
+      this->price_movements[this->symbol].ratio_to_pair);
 
   write_price_movement(this->symbol, this->price_movements[this->symbol]);
   write_price_movement(hedge_symbol_, this->price_movements[hedge_symbol_]);

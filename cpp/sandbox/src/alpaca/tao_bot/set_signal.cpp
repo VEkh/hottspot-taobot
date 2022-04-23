@@ -11,15 +11,14 @@ void Alpaca::TaoBot::set_signal() {
     return;
   }
 
-  const std::string hedge_symbol_ = hedge_symbol();
-
-  const price_movement_average_t ratio_to_pair = price_movement_pair_ratio(
-      this->quotes[this->symbol], this->quotes[hedge_symbol_],
-      this->price_movements[this->symbol].ratio_to_pair);
+  const price_movement_average_t ratio_to_pair =
+      this->price_movements[this->symbol].ratio_to_pair;
 
   if (!ratio_to_pair.average) {
     return;
   }
+
+  const std::string hedge_symbol_ = hedge_symbol();
 
   if (ratio_to_pair.average >= 1) {
     const double ratio = this->quotes[hedge_symbol_].back().price /
