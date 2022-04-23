@@ -10,7 +10,6 @@
 #include "tao_bot.h"
 
 #include "alpaca/constants.cpp" // Alpaca::constants
-#include "is_hedging.cpp"       // is_hedging
 #include "lib/utils/string.cpp" // ::utils::string
 #include "log_positions.cpp"    // log_positions
 #include "order_win_result.cpp" // order_win_result
@@ -18,24 +17,14 @@
 #include <stdio.h>              // printf
 
 void Alpaca::TaoBot::log_position_results() {
-  if (is_hedging()) {
-    if (!(this->close_order_ptr && this->open_order_ptr &&
-          this->hedge_close_order_ptr && this->hedge_open_order_ptr)) {
-      return;
-    }
+  if (!(this->close_order_ptr && this->open_order_ptr &&
+        this->hedge_close_order_ptr && this->hedge_open_order_ptr)) {
+    return;
+  }
 
-    if (!(this->close_order.status == order_status_t::ORDER_FILLED &&
-          this->hedge_close_order.status == order_status_t::ORDER_FILLED)) {
-      return;
-    }
-  } else {
-    if (!(this->close_order_ptr && this->open_order_ptr)) {
-      return;
-    }
-
-    if (this->close_order.status != order_status_t::ORDER_FILLED) {
-      return;
-    }
+  if (!(this->close_order_ptr->status == order_status_t::ORDER_FILLED &&
+        this->hedge_close_order_ptr->status == order_status_t::ORDER_FILLED)) {
+    return;
   }
 
   const std::string order_action = ::utils::string::upcase(

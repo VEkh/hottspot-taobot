@@ -10,7 +10,6 @@
 #include "tao_bot.h"
 
 #include "closed_position_profit.cpp" // closed_position_profit
-#include "is_hedging.cpp"             // is_hedging
 #include "order_win_result.cpp"       // order_win_result
 #include <algorithm>                  // std::max
 #include <map>                        // std::map

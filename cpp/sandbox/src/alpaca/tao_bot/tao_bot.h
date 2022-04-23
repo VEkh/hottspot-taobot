@@ -82,7 +82,6 @@ private:
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
   bool is_end_of_trading_period();
-  bool is_hedging();
   bool is_holiday();
   bool is_market_open();
   bool is_position_closed();

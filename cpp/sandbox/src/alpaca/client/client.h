@@ -47,7 +47,6 @@ private:
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
-  bool is_hedging();
   bool is_live();
   void load_config();
 };

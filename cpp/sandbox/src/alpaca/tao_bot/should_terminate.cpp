@@ -8,16 +8,10 @@
 #include <stdio.h>                      // printf
 
 bool Alpaca::TaoBot::should_terminate() {
-  bool are_positions_closed =
-      !this->close_order_ptr ||
-      this->close_order.status == order_status_t::ORDER_FILLED;
-
-  if (is_hedging()) {
-    are_positions_closed =
-        ((!this->close_order_ptr && !this->hedge_close_order_ptr) ||
-         (this->close_order.status == order_status_t::ORDER_FILLED &&
-          this->hedge_close_order.status == order_status_t::ORDER_FILLED));
-  }
+  const bool are_positions_closed =
+      ((!this->close_order_ptr && !this->hedge_close_order_ptr) ||
+       (this->close_order.status == order_status_t::ORDER_FILLED &&
+        this->hedge_close_order.status == order_status_t::ORDER_FILLED));
 
   if (is_end_of_trading_period()) {
     return are_positions_closed;

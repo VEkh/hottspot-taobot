@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_cancel_stale_open_order
 
 #include "alpaca/client/client.cpp" // Alpaca::Client
-#include "is_hedging.cpp"           // is_hedging
 #include "tao_bot.h"                // Alpaca::TaoBot, order_t, order_status_t
 #include <ctime>                    // std::time, std::time_t
 #include <iostream>                 // std::cout, std::endl
@@ -61,29 +60,6 @@ void Alpaca::TaoBot::cancel_stale_open_order(Alpaca::Client &api_client_ref,
   std::cout << fmt.green << fmt.bold;
   printf("✅ Successfully canceled order %s\n", order_ptr->id.c_str());
   std::cout << fmt.reset << std::endl;
-
-  if (!is_hedging()) {
-    return;
-  }
-
-  Alpaca::Client inverse_api_client = this->hedge_api_client;
-  order_t *inverse_close_order_ptr = this->hedge_close_order_ptr;
-  order_t *inverse_open_order_ptr = this->hedge_open_order_ptr;
-
-  if (order_ptr == this->hedge_open_order_ptr) {
-    inverse_api_client = this->api_client;
-    inverse_close_order_ptr = this->close_order_ptr;
-    inverse_open_order_ptr = this->open_order_ptr;
-  }
-
-  if (!inverse_close_order_ptr || !inverse_open_order_ptr) {
-    return;
-  }
-
-  if (inverse_open_order_ptr->status == order_status_t::ORDER_FILLED) {
-    close_position(inverse_api_client, inverse_close_order_ptr,
-                   inverse_open_order_ptr, 0.00, true);
-  }
 }
 
 #endif

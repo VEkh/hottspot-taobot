@@ -10,7 +10,6 @@
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "hedge_symbol.cpp"             // hedge_symbol
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
-#include "is_hedging.cpp"               // is_hedging
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "open_position_profit.cpp"     // open_position_profit
 #include "order_duration.cpp"           // order_duration
@@ -58,11 +57,10 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
 
   const int max_position_duration = 45 * 60;
 
-  if (is_hedging() && open_position_profit_ < 0) {
-    if (order_duration(this->open_order_ptr) > max_position_duration &&
-        order_duration(this->hedge_open_order_ptr) > max_position_duration) {
-      return true;
-    }
+  if (open_position_profit_ < 0 &&
+      order_duration(this->open_order_ptr) > max_position_duration &&
+      order_duration(this->hedge_open_order_ptr) > max_position_duration) {
+    return true;
   }
 
   return false;
