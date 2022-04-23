@@ -16,13 +16,11 @@
 #include <ctime>                   // std::time, std::time_t
 
 void Alpaca::TaoBot::reset_position() {
-  if (!(this->close_order_ptr && this->open_order_ptr &&
-        this->hedge_close_order_ptr && this->hedge_open_order_ptr)) {
+  if (!(this->close_order_ptr && this->open_order_ptr)) {
     return;
   }
 
-  if (!(this->close_order_ptr->status == order_status_t::ORDER_FILLED &&
-        this->hedge_close_order_ptr->status == order_status_t::ORDER_FILLED)) {
+  if (this->close_order_ptr->status != order_status_t::ORDER_FILLED) {
     return;
   }
 

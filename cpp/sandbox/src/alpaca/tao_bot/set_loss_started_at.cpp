@@ -8,15 +8,12 @@
 
 void Alpaca::TaoBot::set_loss_started_at() {
   if (!(this->open_order_ptr &&
-        this->open_order_ptr->status == order_status_t::ORDER_FILLED &&
-        this->hedge_open_order_ptr &&
-        this->hedge_open_order_ptr->status == order_status_t::ORDER_FILLED)) {
+        this->open_order_ptr->status == order_status_t::ORDER_FILLED)) {
     this->loss_started_at = INFINITY;
     return;
   }
 
-  const double profit =
-      open_position_profit(this->open_order_ptr, this->hedge_open_order_ptr);
+  const double profit = open_position_profit(this->open_order_ptr);
 
   if (profit > 0) {
     this->loss_started_at = INFINITY;

@@ -27,8 +27,8 @@ void Alpaca::TaoBot::close_position(Alpaca::Client &api_client_ref,
   const char *log_icon = this->ICONS[order_action];
 
   if (limit_price) {
-    close_order_ptr_->type = order_type_t::LIMIT;
     close_order_ptr_->limit_price = limit_price;
+    close_order_ptr_->type = order_type_t::LIMIT;
   }
 
   api_client_ref.place_order(close_order_ptr_);

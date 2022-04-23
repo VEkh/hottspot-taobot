@@ -7,12 +7,9 @@
  */
 #include "tao_bot.h"
 
-#include "build_exit_prices.cpp"        // build_exit_prices
-#include "hedge_symbol.cpp"             // hedge_symbol
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "open_position_profit.cpp"     // open_position_profit
-#include "order_duration.cpp"           // order_duration
 #include "profit_duration.cpp"          // profit_duration
 
 bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
@@ -33,33 +30,24 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  this->exit_prices =
-      build_exit_prices(this->open_order_ptr, this->hedge_close_order_ptr);
-
-  const position_t current_position = {
-      .close_order = this->close_order,
-      .hedge_close_order = this->hedge_close_order,
-      .hedge_open_order = this->hedge_open_order,
-      .open_order = this->open_order,
-  };
-
   const double open_position_profit_ =
-      open_position_profit(this->open_order_ptr, this->hedge_open_order_ptr);
-
-  if (open_position_profit_ >= this->exit_prices.min_profit) {
-    return true;
-  }
+      open_position_profit(this->open_order_ptr);
 
   if (open_position_profit_ > 0 &&
       profit_duration(this->profit_started_at) >= 20) {
     return true;
   }
 
-  const int max_position_duration = 45 * 60;
+  const double converted_signaler_price_ = converted_signaler_price();
+  const double signaled_price = current_price(this->signal.signaled);
 
-  if (open_position_profit_ < 0 &&
-      order_duration(this->open_order_ptr) > max_position_duration &&
-      order_duration(this->hedge_open_order_ptr) > max_position_duration) {
+  if (open_order_ptr_->action == order_action_t::BUY &&
+      converted_signaler_price_ <= signaled_price) {
+    return true;
+  }
+
+  if (open_order_ptr_->action == order_action_t::SELL &&
+      converted_signaler_price_ >= signaled_price) {
     return true;
   }
 
