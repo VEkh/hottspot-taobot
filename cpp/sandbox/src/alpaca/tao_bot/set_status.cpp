@@ -12,11 +12,9 @@
 #include "alpaca/client/client.cpp" // Alpaca::Client
 #include "alpaca/constants.cpp"     // Alpaca::constants
 #include "alpaca/utils.cpp"         // Alpaca::utils
-#include "build_performance.cpp"    // build_performance
 #include "deps.cpp"                 // json
 #include "fetch_order.cpp"          // fetch_order
 #include "lib/utils/string.cpp"     // ::utils::string
-#include "write_performance.cpp"    // write_performance
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 #include <string>                   // std::string
@@ -55,9 +53,6 @@ void Alpaca::TaoBot::set_status(Alpaca::Client &api_client_ref,
     printf("%s Executed %s order.\n", log_icon,
            ::utils::string::upcase(order_action).c_str());
     std::cout << fmt.reset;
-
-    this->performance = build_performance();
-    write_performance();
   }
 }
 

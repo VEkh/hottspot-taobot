@@ -30,7 +30,7 @@ double sigmoid(const double max, const double min, const double x,
 
 double to_currency(float val) { return round_to(val, 2); }
 
-std::string to_rounded_percentage(float val) {
+std::string to_rounded_percentage(double val) {
   std::stringstream result;
 
   result << std::setprecision(4) << std::fixed << (val * 100.0);

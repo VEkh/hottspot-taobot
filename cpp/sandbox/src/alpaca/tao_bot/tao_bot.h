@@ -93,7 +93,8 @@ private:
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double current_price();
+  double converted_signaler_price();
+  double current_price(const std::string &);
   double min_target_tick_movement();
   double loss_started_at = INFINITY;
   double open_position_profit(const order_t *, const order_t *);
@@ -148,6 +149,7 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_hedged_position();
+  void open_pair_signaled_position();
   void open_positions();
   void reset_position();
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);

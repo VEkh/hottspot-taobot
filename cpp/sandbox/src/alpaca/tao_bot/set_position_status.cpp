@@ -12,8 +12,6 @@ void Alpaca::TaoBot::set_position_status() {
 
   set_status(this->api_client, this->open_order_ptr);
   set_status(this->api_client, this->close_order_ptr);
-  set_status(this->api_client, this->hedge_open_order_ptr);
-  set_status(this->api_client, this->hedge_close_order_ptr);
 }
 
 #endif

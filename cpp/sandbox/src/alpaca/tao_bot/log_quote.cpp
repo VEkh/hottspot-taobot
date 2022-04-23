@@ -8,11 +8,12 @@
  */
 #include "tao_bot.h"
 
-#include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/float.cpp"   // utils::float_
-#include "lib/utils/integer.cpp" // utils::integer_
-#include <iostream>              // std::cout, std::endl
-#include <stdio.h>               // printf
+#include "converted_signaler_price.cpp" // converted_signaler_price
+#include "lib/formatted.cpp"            // Formatted
+#include "lib/utils/float.cpp"          // utils::float_
+#include "lib/utils/integer.cpp"        // utils::integer_
+#include <iostream>                     // std::cout, std::endl
+#include <stdio.h>                      // printf
 
 void Alpaca::TaoBot::log_quote(const std::string &symbol_) {
   Formatted::Stream log_color = fmt.yellow;
@@ -44,10 +45,15 @@ void Alpaca::TaoBot::log_quote(const std::string &symbol_) {
   printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
 
   if (this->signal.signaler == symbol_) {
-    printf("🔁 As Signaled: %'.2f\n",
-           ::utils::float_::to_currency(
-               current_quote.price *
-               this->signal.signaled_to_signaler_price_ratio));
+    const double signaled_price = current_price(this->signal.signaled);
+    const double converted_signaler_price_ = converted_signaler_price();
+
+    const double price_delta_ratio =
+        (converted_signaler_price_ - signaled_price) / signaled_price;
+
+    printf("🔁 As Signaled: %'.2f • Δ Ratio %+.2f%%\n",
+           ::utils::float_::to_currency(converted_signaler_price_),
+           price_delta_ratio * 100.0);
   }
 
   std::cout << fmt.reset << std::endl;

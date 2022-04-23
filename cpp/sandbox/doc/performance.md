@@ -9732,6 +9732,32 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-22:
+#### Remarks
+##### Stocks/ETFs
+* Something is flawed about the current hedging strategy: It still waits and
+  hopes that a profit emerges between the two positions. This often doesn't
+  occur. I want to try something new.
+* What I've observed is that between the two hedged positions, one moves faster
+  than the other. This is the leader. This espcially occurs between SPY and QQQ.
+* SPY and QQQ almost always move in the same direction, second to second. What
+  seems to often occur is that the leader's direction and magnitude often
+  predicts the follower's.
+* This can be used to predict profit opportunities in the following way:
+  1. Identify the leader and follower
+  2. Normalize their prices to the follower
+  3. At each quote, note the difference between the current price and the
+     normalized price. Normalize tha difference.
+  4. Wait for the leader's price should diverge from the follower's by a
+     certain threshold.
+  5. Place an order for the follower in the direction of the price divergence.
+  6. Close either when either:
+    * The price divergence closes
+    * The profit has been sustained for a minimum amount of time.
+    * The price divergence has closed and is moving in the opposite direction.
+
+#### Next Thing(s) to Try
+
+### 2022-04-25:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
