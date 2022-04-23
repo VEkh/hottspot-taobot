@@ -62,7 +62,6 @@ private:
   account_balance_t hedge_account_balance;
   account_balance_t original_account_balance;
   account_balance_t original_hedge_account_balance;
-  bool is_long_position;
   char *symbol;
   double quantity;
   exit_prices_t exit_prices;
@@ -166,7 +165,6 @@ private:
   void set_profit_started_at();
   void set_signal();
   void set_status(Alpaca::Client &, order_t *order);
-  void set_trade_direction();
   void watch();
   void write_quotes(const std::string &);
   void write_performance();

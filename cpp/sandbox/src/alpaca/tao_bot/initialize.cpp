@@ -13,7 +13,6 @@
 #include "load_performance.cpp"      // load_performance
 #include "load_price_movement.cpp"   // load_rice_movement
 #include "load_quotes.cpp"           // load_quotes
-#include "set_trade_direction.cpp"   // set_trade_direction
 #include "tao_bot.h"                 // Alpaca::TaoBot
 #include <iostream>                  // std::cout, std::endl
 #include <locale.h>                  // setlocale
@@ -58,7 +57,6 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   load_performance();
   load_price_movement(this->symbol);
   load_price_movement(hedge_symbol());
-  set_trade_direction();
 
   this->performance = build_performance();
 }

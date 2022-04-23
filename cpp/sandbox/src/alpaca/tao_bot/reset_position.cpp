@@ -10,10 +10,9 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp"   // build_performance
-#include "set_trade_direction.cpp" // set_trade_direction
-#include "write_performance.cpp"   // write_performance
-#include <ctime>                   // std::time, std::time_t
+#include "build_performance.cpp" // build_performance
+#include "write_performance.cpp" // write_performance
+#include <ctime>                 // std::time, std::time_t
 
 void Alpaca::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {
@@ -41,7 +40,6 @@ void Alpaca::TaoBot::reset_position() {
   this->signal = signal_t();
 
   this->performance = build_performance();
-  set_trade_direction();
   write_performance();
 }
 
