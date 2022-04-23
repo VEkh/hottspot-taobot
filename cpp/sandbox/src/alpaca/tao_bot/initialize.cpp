@@ -51,8 +51,8 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   this->account_balance = this->original_account_balance =
       fetch_account_balance(this->api_client);
 
-  load_quotes(this->quotes, this->symbol);
-  load_quotes(this->hedge_quotes, hedge_symbol());
+  load_quotes(this->symbol);
+  load_quotes(hedge_symbol());
 
   fetch_quotes();
   load_performance();

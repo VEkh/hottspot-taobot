@@ -21,7 +21,7 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
     return false;
   }
 
-  if (!this->price_movements[this->symbol].ratio_from_hedge.average) {
+  if (!this->price_movements[this->symbol].ratio_from_pair.average) {
     return false;
   }
 

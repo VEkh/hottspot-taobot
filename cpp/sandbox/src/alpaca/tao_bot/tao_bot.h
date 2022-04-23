@@ -35,6 +35,7 @@ private:
   using price_movement_average_t = Global::t::price_movement_average_t;
   using price_movement_t = Global::t::price_movement_t;
   using quote_t = Alpaca::t::quote_t;
+  using signal_t = Alpaca::t::signal_t;
 
   const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
@@ -76,9 +77,9 @@ private:
   performance_t performance;
   std::map<std::string, price_movement_t> price_movements;
   std::map<std::string, std::string> flags;
+  std::map<std::string, std::vector<quote_t>> quotes;
+  signal_t signal;
   std::vector<position_t> closed_positions;
-  std::vector<quote_t> hedge_quotes;
-  std::vector<quote_t> quotes;
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
   bool is_end_of_trading_period();
@@ -110,9 +111,9 @@ private:
   quote_t fetch_quote(const std::string);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  price_movement_average_t price_movement_pair_ratio(std::vector<quote_t> &,
-                                                     std::vector<quote_t> &,
-                                                     const std::string);
+  price_movement_average_t
+  price_movement_pair_ratio(std::vector<quote_t> &, std::vector<quote_t> &,
+                            const price_movement_average_t);
 
   std::pair<double, double> compute_hedge_quantities();
   std::pair<order_t, order_t> open_position(Alpaca::Client,
@@ -131,7 +132,7 @@ private:
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void load_price_movement(const std::string &);
-  void load_quotes(std::vector<quote_t> &, const std::string &);
+  void load_quotes(const std::string &);
   void log_account_balance(account_balance_t, account_balance_t, const char *);
   void log_account_balances();
   void log_end_of_trading_period();
@@ -157,15 +158,16 @@ private:
                              const std::vector<quote_t> *);
   void set_open_position_prices();
   void set_position_status();
-  void set_price_movement(const std::string &, std::vector<quote_t> &);
+  void set_price_movement(const std::string &);
   void set_price_movements();
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit_started_at();
+  void set_signal();
   void set_status(Alpaca::Client &, order_t *order);
   void set_trade_direction();
   void watch();
-  void write_quotes(std::vector<quote_t> &, const std::string &);
+  void write_quotes(const std::string &);
   void write_performance();
   void write_price_movement(const std::string &, const price_movement_t &);
 };

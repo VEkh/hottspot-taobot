@@ -7,14 +7,14 @@
 #include <vector>    // std::vector
 
 Alpaca::TaoBot::price_movement_average_t
-Alpaca::TaoBot::price_movement_pair_ratio(std::vector<quote_t> &quotes_a,
-                                          std::vector<quote_t> &quotes_b,
-                                          const std::string symbol_) {
+Alpaca::TaoBot::price_movement_pair_ratio(
+    std::vector<quote_t> &quotes_a, std::vector<quote_t> &quotes_b,
+    const price_movement_average_t fallback = price_movement_average_t()) {
   const int sample_size = 150;
 
   if (quotes_a.size() < (sample_size + 1) ||
       quotes_b.size() < (sample_size + 1)) {
-    return this->price_movements[symbol_].ratio_from_hedge;
+    return fallback;
   }
 
   double total_a = 0;
@@ -25,14 +25,14 @@ Alpaca::TaoBot::price_movement_pair_ratio(std::vector<quote_t> &quotes_a,
 
   for (it_a = quotes_a.rbegin(), it_b = quotes_b.rbegin(); i >= 0;
        it_a++, it_b++, i--) {
-    total_a += abs(it_a->price - (it_a + 1)->price);
-    total_b += abs(it_b->price - (it_b + 1)->price);
+    total_a += abs(it_a->price - (it_a + 1)->price) / (it_a + 1)->price;
+    total_b += abs(it_b->price - (it_b + 1)->price) / (it_b + 1)->price;
   }
 
   const double average = total_a / total_b;
 
   if (average > 1.0e6 || average < 1.0e-3) {
-    return this->price_movements[symbol_].ratio_from_hedge;
+    return fallback;
   }
 
   return {.average = average, .count = sample_size};

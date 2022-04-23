@@ -3,8 +3,10 @@
 
 /*
  * Alpaca::TaoBot
+ * exit_prices_t
  * order_status_t
  * position_t
+ * signal_t
  */
 #include "tao_bot.h"
 
@@ -38,6 +40,7 @@ void Alpaca::TaoBot::reset_position() {
   this->hedge_close_order_ptr = nullptr;
   this->hedge_open_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
+  this->signal = signal_t();
 
   this->performance = build_performance();
   set_trade_direction();

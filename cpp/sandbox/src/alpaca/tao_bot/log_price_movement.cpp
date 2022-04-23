@@ -23,7 +23,7 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
           .short_term_three_minute_one_second_variance.average;
 
   const double pair_one_second_vairance_ratio =
-      this->price_movements[symbol_].ratio_from_hedge.average;
+      this->price_movements[symbol_].ratio_from_pair.average;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 

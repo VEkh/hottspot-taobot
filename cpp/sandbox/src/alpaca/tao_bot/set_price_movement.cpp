@@ -7,8 +7,9 @@
 #include <string>                   // std::string
 #include <vector>                   // std::vector
 
-void Alpaca::TaoBot::set_price_movement(const std::string &symbol_,
-                                        std::vector<quote_t> &quotes_) {
+void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
+  std::vector<quote_t> quotes_ = this->quotes[symbol_];
+
   if (!quotes_.size()) {
     return;
   }

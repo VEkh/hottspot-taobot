@@ -57,7 +57,8 @@ struct price_movement_average_t {
 };
 
 struct price_movement_t {
-  price_movement_average_t ratio_from_hedge;
+  price_movement_average_t ratio_from_pair;
+  price_movement_average_t ratio_to_pair;
   price_movement_average_t short_term_three_minute_one_second_variance;
   price_movement_average_t three_minute_one_second_variance;
 };

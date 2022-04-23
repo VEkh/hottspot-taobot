@@ -9,8 +9,8 @@
 #include <utility>                     // std::pair
 
 std::pair<double, double> Alpaca::TaoBot::compute_hedge_quantities() {
-  const quote_t base_quote = this->quotes.back();
-  const quote_t hedge_quote = this->hedge_quotes.back();
+  const quote_t base_quote = this->quotes[this->symbol].back();
+  const quote_t hedge_quote = this->quotes[hedge_symbol()].back();
 
   const price_movement_t base_price_movement =
       this->price_movements[this->symbol];
@@ -31,7 +31,7 @@ std::pair<double, double> Alpaca::TaoBot::compute_hedge_quantities() {
 
   const double normalization_factor =
       (hedge_quote.ask / base_quote.ask) *
-      this->price_movements[this->symbol].ratio_from_hedge.average;
+      this->price_movements[this->symbol].ratio_from_pair.average;
 
   const double hedge_quantity = 1;
   const double base_quantity_ = hedge_quantity * normalization_factor;

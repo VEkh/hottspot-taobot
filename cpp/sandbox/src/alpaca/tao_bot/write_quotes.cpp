@@ -11,8 +11,8 @@
 #include <string>            // std::string
 #include <vector>            // std::vector
 
-void Alpaca::TaoBot::write_quotes(std::vector<quote_t> &quotes_,
-                                  const std::string &symbol_) {
+void Alpaca::TaoBot::write_quotes(const std::string &symbol_) {
+  std::vector<quote_t> quotes_ = this->quotes[symbol_];
   try {
     json (*quote_to_json)(quote_t &) = [](quote_t &quote) -> json {
       return {

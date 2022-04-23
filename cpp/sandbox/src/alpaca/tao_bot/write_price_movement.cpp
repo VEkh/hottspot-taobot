@@ -18,10 +18,6 @@ void Alpaca::TaoBot::write_price_movement(
 
     json price_movement_json = R"(
       {
-        "ratio_from_hedge": {
-          "average": 0.00,
-          "count": 0
-        },
         "short_term_three_minute_one_second_variance": {
           "average": 0.00,
           "count": 0
@@ -33,10 +29,6 @@ void Alpaca::TaoBot::write_price_movement(
       }
     )"_json;
 
-    price_movement_json["ratio_from_hedge"]["average"] =
-        price_movement.ratio_from_hedge.average;
-    price_movement_json["ratio_from_hedge"]["count"] =
-        price_movement.ratio_from_hedge.count;
     price_movement_json
         ["short_term_three_minute_one_second_variance"]["average"] =
             price_movement.short_term_three_minute_one_second_variance.average;

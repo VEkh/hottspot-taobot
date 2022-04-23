@@ -9,14 +9,16 @@
 #include <string>                        // std::string
 
 void Alpaca::TaoBot::set_price_movements() {
-  set_price_movement(this->symbol, this->quotes);
+  set_price_movement(this->symbol);
 
   const std::string hedge_symbol_ = hedge_symbol();
 
-  set_price_movement(hedge_symbol_, this->hedge_quotes);
+  set_price_movement(hedge_symbol_);
 
-  this->price_movements[this->symbol].ratio_from_hedge =
-      price_movement_pair_ratio(this->hedge_quotes, this->quotes, this->symbol);
+  this->price_movements[this->symbol].ratio_from_pair =
+      price_movement_pair_ratio(
+          this->quotes[hedge_symbol_], this->quotes[this->symbol],
+          this->price_movements[this->symbol].ratio_from_pair);
 
   write_price_movement(this->symbol, this->price_movements[this->symbol]);
   write_price_movement(hedge_symbol_, this->price_movements[hedge_symbol_]);

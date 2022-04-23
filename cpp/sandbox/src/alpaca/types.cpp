@@ -84,6 +84,12 @@ struct quote_t {
   std::string symbol = "";
   int timestamp;
 };
+
+struct signal_t {
+  std::string signaled;
+  double signaled_to_signaler_price_ratio = 0.00;
+  std::string signaler;
+};
 } // namespace t
 } // namespace Alpaca
 #endif

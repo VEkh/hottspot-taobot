@@ -10,8 +10,7 @@
 #include <string>           // std::string
 #include <vector>           // std::vector
 
-void Alpaca::TaoBot::load_quotes(std::vector<quote_t> &quotes_,
-                                 const std::string &symbol_) {
+void Alpaca::TaoBot::load_quotes(const std::string &symbol_) {
   quote_t (*json_to_quote)(json &) = [](json &quote_json) -> quote_t {
     quote_t quote;
     quote.ask = quote_json["ask"];
@@ -39,7 +38,7 @@ void Alpaca::TaoBot::load_quotes(std::vector<quote_t> &quotes_,
   }
 
   for (json quote_json : quotes_json) {
-    quotes_.push_back(json_to_quote(quote_json));
+    this->quotes[symbol_].push_back(json_to_quote(quote_json));
   }
 }
 
