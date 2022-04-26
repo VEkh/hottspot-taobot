@@ -149,6 +149,8 @@ private:
   void log_price_movements();
   void log_quote(const std::string &);
   void log_quotes();
+  void log_signal(const signal_t &, const char *);
+  void log_signals();
   void log_start_message();
   void log_timestamps();
   void open_hedged_position();
