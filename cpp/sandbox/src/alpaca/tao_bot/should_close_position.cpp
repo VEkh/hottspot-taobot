@@ -10,7 +10,9 @@
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "open_position_profit.cpp"     // open_position_profit
+#include "opposite_direction.cpp"       // opposite_direction
 #include "profit_duration.cpp"          // profit_duration
+#include <ctime>                        // std::time
 
 bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
                                            const order_t *open_order_ptr_) {
@@ -30,26 +32,23 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  const double open_position_profit_ =
-      open_position_profit(this->open_order_ptr);
+  const double open_position_profit_ = open_position_profit(open_order_ptr_);
 
   if (open_position_profit_ > 0 &&
       profit_duration(this->profit_started_at) >= 20) {
     return true;
   }
 
-  const double converted_signaler_price_ =
-      converted_signaler_price(this->open_signal);
-  const double signaled_price = current_price(this->open_signal.signaled);
+  if (open_position_profit_ < 0) {
+    const int now = std::time(nullptr);
+    const int loss_time_limit = 60;
 
-  if (open_order_ptr_->action == order_action_t::BUY &&
-      converted_signaler_price_ <= signaled_price) {
-    return true;
-  }
-
-  if (open_order_ptr_->action == order_action_t::SELL &&
-      converted_signaler_price_ >= signaled_price) {
-    return true;
+    if (this->stop_loss_signal.signaler_trend_direction ==
+            opposite_direction(open_order_ptr_->action) &&
+        (now - this->stop_loss_signal.signaler_trend_started_at) >=
+            loss_time_limit) {
+      return true;
+    }
   }
 
   return false;

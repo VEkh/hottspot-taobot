@@ -89,6 +89,7 @@ private:
   bool max_account_loss_reached();
   bool should_close_position(const order_t *, const order_t *);
   bool should_open_position(const order_t *);
+  bool should_open_position(const signal_t &);
   bool should_terminate();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
@@ -167,6 +168,7 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit_started_at();
+  void set_stop_loss_signal();
   void set_status(Alpaca::Client &, order_t *order);
   void watch();
   void write_performance();
