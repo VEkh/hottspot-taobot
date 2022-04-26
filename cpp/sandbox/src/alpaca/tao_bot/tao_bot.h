@@ -74,10 +74,11 @@ private:
   order_t hedge_open_order;
   order_t open_order;
   performance_t performance;
+  signal_t open_signal;
+  signal_t stop_loss_signal;
   std::map<std::string, price_movement_t> price_movements;
   std::map<std::string, std::string> flags;
   std::map<std::string, std::vector<quote_t>> quotes;
-  signal_t signal;
   std::vector<position_t> closed_positions;
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
@@ -93,7 +94,7 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity(const std::string &);
-  double converted_signaler_price();
+  double converted_signaler_price(const signal_t &);
   double current_price(const std::string &);
   double min_target_tick_movement();
   double loss_started_at = INFINITY;
@@ -109,9 +110,10 @@ private:
   int runtime();
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);
-  quote_t fetch_quote(const std::string);
+  order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
+  quote_t fetch_quote(const std::string);
   price_movement_average_t
   price_movement_pair_ratio(std::vector<quote_t> &, std::vector<quote_t> &,
                             const price_movement_average_t);
@@ -158,18 +160,18 @@ private:
   void set_loss_started_at();
   void set_open_order_prices(Alpaca::Client &, order_t *);
   void set_open_position_prices();
+  void set_open_signal();
   void set_position_status();
   void set_price_movement(const std::string &);
   void set_price_movements();
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit_started_at();
-  void set_signal();
   void set_status(Alpaca::Client &, order_t *order);
   void watch();
-  void write_quotes(const std::string &);
   void write_performance();
   void write_price_movement(const std::string &, const price_movement_t &);
+  void write_quotes(const std::string &);
 };
 } // namespace Alpaca
 

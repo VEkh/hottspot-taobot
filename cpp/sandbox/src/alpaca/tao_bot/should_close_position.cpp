@@ -38,8 +38,9 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  const double converted_signaler_price_ = converted_signaler_price();
-  const double signaled_price = current_price(this->signal.signaled);
+  const double converted_signaler_price_ =
+      converted_signaler_price(this->open_signal);
+  const double signaled_price = current_price(this->open_signal.signaled);
 
   if (open_order_ptr_->action == order_action_t::BUY &&
       converted_signaler_price_ <= signaled_price) {

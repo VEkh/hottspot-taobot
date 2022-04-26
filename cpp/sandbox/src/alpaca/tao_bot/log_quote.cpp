@@ -44,9 +44,10 @@ void Alpaca::TaoBot::log_quote(const std::string &symbol_) {
   std::cout << fmt.reset << fmt.bold << log_color;
   printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
 
-  if (this->signal.signaler == symbol_) {
-    const double signaled_price = current_price(this->signal.signaled);
-    const double converted_signaler_price_ = converted_signaler_price();
+  if (this->open_signal.signaler == symbol_) {
+    const double signaled_price = current_price(this->open_signal.signaled);
+    const double converted_signaler_price_ =
+        converted_signaler_price(this->open_signal);
 
     const double price_delta_ratio =
         (converted_signaler_price_ - signaled_price) / signaled_price;

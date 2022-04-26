@@ -15,6 +15,7 @@
 #include "current_price.cpp"            // current_price
 #include "fetch_account_balance.cpp"    // fetch_account_balance
 #include "open_position.cpp"            // open_position
+#include "opposite_direction.cpp"       // opposite_direction
 #include "should_open_position.cpp"     // should_open_position
 #include <iostream>                     // std::cout, std::endl
 #include <stdio.h>                      // puts
@@ -28,7 +29,7 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
 
   this->account_balance = fetch_account_balance(this->api_client);
 
-  const std::string symbol_ = this->signal.signaled;
+  const std::string symbol_ = this->open_signal.signaled;
   const double quantity = compute_quantity(symbol_);
 
   if (quantity <= 0) {
@@ -43,15 +44,15 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
   bool open_order_opened = false;
 
   while (!open_order_opened) {
-    const double converted_signaler_price_ = converted_signaler_price();
+    const double converted_signaler_price_ =
+        converted_signaler_price(this->open_signal);
     const double signaled_price = current_price(symbol_);
-    const bool is_long_position = converted_signaler_price_ > signaled_price;
-
-    const order_action_t close_order_action =
-        is_long_position ? order_action_t::SELL : order_action_t::BUY;
 
     const order_action_t open_order_action =
-        is_long_position ? order_action_t::BUY : order_action_t::SELL;
+        this->open_signal.signaler_trend_direction;
+
+    const order_action_t close_order_action =
+        opposite_direction(open_order_action);
 
     std::pair<order_t, order_t> new_orders =
         open_position(this->api_client, close_order_action, open_order_action,

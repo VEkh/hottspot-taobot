@@ -9758,6 +9758,27 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-25:
+#### Remarks
+##### Stocks/ETFs
+* VERY promising sign today
+* Today's win rate was 82.61%, but it still lost. Here are few observations:
+  * The entry indicator is sound
+  * Taking 20 seconds of profit is a good profit exit strategy.
+  * The loss strategy needs work.
+* It takes too long to stop a loss. I'll focus on this and tweak it so that it
+  allows enough time to lose but doesn't close too quickly.
+* I'll introduce a new kind of signal, a stop_loss_signal, which will contrast
+  the open_signal
+* The stop_loss_signal signal will be set once a position is open. If it offers
+  a signal to open in the opposite direction and the open position is losing,
+  then we'll close open position.
+* Also, when volatility slowed, fewer positions opened. Maybe this isn't a bad
+  thing. However, I'm going to try setting a signal to open if the signlaer
+  outpaces the signaled in one direction for at least a minute.
+
+#### Next Thing(s) to Try
+
+### 2022-04-25:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
