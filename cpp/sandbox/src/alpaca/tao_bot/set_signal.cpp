@@ -5,6 +5,7 @@
 #include "hedge_symbol.cpp"              // hedge_symbol
 #include "price_movement_pair_ratio.cpp" // price_movement_pair_ratio
 #include "tao_bot.h"                     // Alpaca::TaoBot, order_status_t
+#include <ctime>                         // std::time
 
 void Alpaca::TaoBot::set_signal() {
   if (this->open_order_ptr &&
@@ -16,6 +17,14 @@ void Alpaca::TaoBot::set_signal() {
       this->price_movements[this->symbol].ratio_to_pair;
 
   if (!ratio_to_pair.average) {
+    return;
+  }
+
+  int signal_expiration = 30 * 60;
+  std::time_t now = std::time(nullptr);
+
+  if (!this->signal.signaler.empty() &&
+      (this->signal.timestamp - now) < signal_expiration) {
     return;
   }
 
@@ -38,6 +47,7 @@ void Alpaca::TaoBot::set_signal() {
         .signaled = this->symbol,
         .signaled_to_signaler_price_ratio = ratio,
         .signaler = hedge_symbol_,
+        .timestamp = (int)std::time(nullptr),
     };
   }
 }

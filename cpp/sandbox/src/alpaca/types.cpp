@@ -89,6 +89,7 @@ struct signal_t {
   std::string signaled;
   double signaled_to_signaler_price_ratio = 0.00;
   std::string signaler;
+  int timestamp;
 };
 } // namespace t
 } // namespace Alpaca

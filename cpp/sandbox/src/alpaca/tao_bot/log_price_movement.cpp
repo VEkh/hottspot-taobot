@@ -44,7 +44,7 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
   }
 
   if (pair_one_second_vairance_ratio) {
-    printf("Ratio to Pair's One Second %% Variance: %.5f\n",
+    printf("Ratio to Pair's One Second Variance: %.5f\n",
            pair_one_second_vairance_ratio);
   }
 
