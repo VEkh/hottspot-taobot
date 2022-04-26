@@ -10,6 +10,7 @@
  */
 #include "tao_bot.h"
 
+#include "compute_quantity.cpp"         // current_price
 #include "converted_signaler_price.cpp" // converted_signaler_price
 #include "current_price.cpp"            // current_price
 #include "fetch_account_balance.cpp"    // fetch_account_balance
@@ -27,7 +28,8 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
 
   this->account_balance = fetch_account_balance(this->api_client);
 
-  const double quantity = 1;
+  const std::string symbol_ = this->signal.signaled;
+  const double quantity = compute_quantity(symbol_);
 
   if (quantity <= 0) {
     std::cout << fmt.bold << fmt.yellow;
@@ -42,7 +44,7 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
 
   while (!open_order_opened) {
     const double converted_signaler_price_ = converted_signaler_price();
-    const double signaled_price = current_price(this->signal.signaled);
+    const double signaled_price = current_price(symbol_);
     const bool is_long_position = converted_signaler_price_ > signaled_price;
 
     const order_action_t close_order_action =
@@ -53,7 +55,7 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
 
     std::pair<order_t, order_t> new_orders =
         open_position(this->api_client, close_order_action, open_order_action,
-                      "open", quantity, this->signal.signaled);
+                      "open", quantity, symbol_);
 
     open_order_opened = !new_orders.second.id.empty();
 

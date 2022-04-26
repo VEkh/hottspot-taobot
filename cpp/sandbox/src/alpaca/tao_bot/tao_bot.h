@@ -92,6 +92,7 @@ private:
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
+  double compute_quantity(const std::string &);
   double converted_signaler_price();
   double current_price(const std::string &);
   double min_target_tick_movement();
