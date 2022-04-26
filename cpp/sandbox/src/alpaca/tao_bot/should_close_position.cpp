@@ -39,16 +39,9 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  if (open_position_profit_ < 0) {
-    const int now = std::time(nullptr);
-    const int loss_time_limit = 60;
-
-    if (this->stop_loss_signal.signaler_trend_direction ==
-            opposite_direction(open_order_ptr_->action) &&
-        (now - this->stop_loss_signal.signaler_trend_started_at) >=
-            loss_time_limit) {
-      return true;
-    }
+  if (open_position_profit_ < 0 &&
+      profit_duration(this->loss_started_at) >= 3 * 60) {
+    return true;
   }
 
   return false;

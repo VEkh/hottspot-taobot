@@ -41,7 +41,6 @@ void Alpaca::TaoBot::watch() {
     fetch_quotes();
     set_price_movements();
     set_open_signal();
-    set_stop_loss_signal();
 
     log_account_balances();
     log_quotes();
@@ -58,6 +57,7 @@ void Alpaca::TaoBot::watch() {
     set_loss_started_at();
     set_profit_started_at();
 
+    set_stop_loss_signal();
     close_positions();
     set_close_position_prices();
 

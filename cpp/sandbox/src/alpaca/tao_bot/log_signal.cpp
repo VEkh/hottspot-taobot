@@ -33,15 +33,20 @@ void Alpaca::TaoBot::log_signal(const signal_t &signal, const char *title) {
   const int trend_duration =
       std::time(nullptr) - signal.signaler_trend_started_at;
 
+  const double price_delta_ratio =
+      (signaler_price - signaled_price) / signaled_price;
+
   std::cout << fmt.bold << fmt.underline << log_color;
   printf("%s Signal\n", title);
 
   std::cout << fmt.reset << fmt.bold << log_color;
 
-  printf("Signaled [%s] $: %'.2f • Signaler [%s] (in Signaled) $: %'.2f • "
+  printf("Signaled [%s]: $%'.2f • Signaler [%s] (in Signaled): $%'.2f "
+         "(%+.2f%%)\n"
          "Trend Direction: %s • Trend Duration: %s\n",
          signal.signaled.c_str(), ::utils::float_::to_currency(signaled_price),
          signal.signaler.c_str(), ::utils::float_::to_currency(signaler_price),
+         price_delta_ratio * 100.0,
          ::utils::string::upcase(trend_direction).c_str(),
          ::utils::integer_::seconds_to_clock(trend_duration).c_str());
 

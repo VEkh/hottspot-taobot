@@ -31,11 +31,11 @@ bool Alpaca::TaoBot::should_open_position(const signal_t &signal) {
     return true;
   }
 
-  const int time_minimum = 60;
+  const int time_minimum = 2 * 60;
   const bool is_persistent_signal =
       (std::time(nullptr) - signal.signaler_trend_started_at) >= time_minimum;
 
-  return price_delta_ratio > 0 && is_persistent_signal;
+  return price_delta_ratio >= 0.0003 && is_persistent_signal;
 }
 
 #endif

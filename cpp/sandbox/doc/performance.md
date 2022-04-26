@@ -9778,7 +9778,29 @@ Staging had a really good week 🎉
 
 #### Next Thing(s) to Try
 
-### 2022-04-25:
+### 2022-04-26:
+#### Remarks
+##### Stocks/ETFs
+* Experimenting with a losing strategy that works. Currently trying closing
+  loss after 20 secs to match win strategy.
+* Entry signal of trending for one minute led to a 40% streak and loss.
+  Reverting to entering when signaler trend exceeds threshold.
+* I'm not convinced that closing after 20 seconds is right. A position needs
+  time to be right. But when do I cut a loss???
+* The end of the day looked more promising with this setup
+  * Entry signal:
+    * Signaler outpaces signaled by 0.1%, or
+    * Signaler outpaces signaled for two minutes and exceeds 0.03%
+  * Stop loss signal:
+    * Loss persists for three minutes
+* This had an 83.33% win rate after running for 1.5 hours and was profitable.
+* A winning position so often needs time to win. Cutting loss after 20 secs and
+  1 minute were too premature. I'll see how 3 minutes works, especially after
+  making the entry signal less jumpy.
+
+#### Next Thing(s) to Try
+
+### 2022-04-27:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
