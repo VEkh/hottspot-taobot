@@ -7,8 +7,6 @@
 #include <math.h>                      // floor
 
 double Alpaca::TaoBot::compute_quantity(const std::string &symbol_) {
-  return 1;
-
   const quote_t quote = this->quotes[symbol_].back();
 
   const double max_buying_power = 0.95 * this->account_balance.balance *

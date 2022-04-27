@@ -27,23 +27,23 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
     return;
   }
 
-  this->account_balance = fetch_account_balance(this->api_client);
-
-  const std::string symbol_ = this->open_signal.signaled;
-  const double quantity = compute_quantity(symbol_);
-
-  if (quantity <= 0) {
-    std::cout << fmt.bold << fmt.yellow;
-    puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
-         "have insufficient margin buying power.");
-    std::cout << fmt.reset << std::endl;
-
-    return;
-  }
-
   bool open_order_opened = false;
 
   while (!open_order_opened) {
+    this->account_balance = fetch_account_balance(this->api_client);
+
+    const std::string symbol_ = this->open_signal.signaled;
+    const double quantity = compute_quantity(symbol_);
+
+    if (quantity <= 0) {
+      std::cout << fmt.bold << fmt.yellow;
+      puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
+           "have insufficient margin buying power.");
+      std::cout << fmt.reset << std::endl;
+
+      return;
+    }
+
     const double converted_signaler_price_ =
         converted_signaler_price(this->open_signal);
     const double signaled_price = current_price(symbol_);
