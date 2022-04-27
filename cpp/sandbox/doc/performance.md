@@ -9801,6 +9801,24 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-27:
+#### Remarks
+##### Stocks/ETFs
+* MASSIVE success today 🎉
+* TaoBot's win rate was 78.57% and it profited +$803.66
+* It seems that a few things are coming together:
+  1. TAKE YOUR LIL PROFIT AND GO HOME - Closing after 20 seconds of sustained
+     profit is critical. Time and time again, profitable positions just barely
+     escaped reversals by closing after 20 seconds.
+  2. IT TAKES TIME TO BE RIGHT - Allowing 3 (then 5) minutes of loss before
+     closing gave many positions that at first appeared to be losses time
+     enough to win.
+  3. CUT EXTREME LOSSES - If losses are extreme enough within the loss time
+     window, cut them. Right now it's at -0.2%. It seems to work for now. I'm
+     not sure how that would apply to other pairs if I were to trade them.
+
+#### Next Thing(s) to Try
+
+### 2022-04-28:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

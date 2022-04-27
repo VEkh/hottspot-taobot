@@ -40,7 +40,14 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
   }
 
   if (open_position_profit_ < 0 &&
-      profit_duration(this->loss_started_at) >= 3 * 60) {
+      profit_duration(this->loss_started_at) >= 5 * 60) {
+    return true;
+  }
+
+  const double profit_ratio =
+      open_order_ptr_->profit / open_order_ptr_->execution_price;
+
+  if (profit_ratio <= -0.002) {
     return true;
   }
 
