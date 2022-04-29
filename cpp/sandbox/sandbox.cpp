@@ -1,14 +1,10 @@
 #include <iostream> // std::cout, std::endl
 #include <stdio.h>  // printf, puts
 
-#include <ctime>  // std::time
-#include <math.h> // INFINITY
+#include "lib/utils/float.cpp" // ::utils::float_
 
 int main() {
-  size_t size = 1;
+  const double y = ::utils::float_::sigmoid(0.002, 0.00125, 1.0, 5, 1.5);
 
-  double started_at = std::time(nullptr) - 100;
-
-  printf("Started At: %.2f • Time Elapsed: %.2f\n", started_at,
-         std::time(nullptr) - started_at);
+  printf("Value: %.5f\n", y);
 }

@@ -9819,6 +9819,50 @@ Staging had a really good week 🎉
 #### Next Thing(s) to Try
 
 ### 2022-04-28:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day today.
+* The win rate was 67.21% which is still very high. However, there were a lot
+  of reversals.
+* Some things I noticed:
+  1. The morning ended at a large deficit for the second consecutive day. This
+     is when positions are entering due to really high signaler-signaled price
+     differences. I think I'll take out the open condition that asks whether
+     that delta has exceeded a threshold.
+  2. I briefly tried incrasing the time-dependent's entry condition's price
+     delta ratio from 0.0003 to 0.0004, but that created an high threshold.
+     This caused some missed entry opportunities, but it also protected against
+     some aggressive reversals.
+  3. 2 minutes also seems like a long time to confirm direction. I'm reducing
+     it to 1.5 minutes, but I'm not sure how well that will work.
+* This approach still has promise. A few things are still working correctly:
+  * Taking a small, time-restricted profit is the way to go. (Although I wonder
+    if I should increase it to 30 seconds.)
+  * Closing at a max loss is still good. Maybe it should be -0.15%? I'll keep tweaking.
+  * Closing after a time limit is still good.
+  * I just need to continue to tweak the parameters to find a good permutation.
+
+### 2022-04-29:
+#### Remarks
+##### Stocks/ETFs
+* The day had a rough start. Positions took too long to enter since they
+  weren't entering during spikes.
+* Also, the max loss was to great for the wins.
+* I changed to use volatility to determine the take profit time limit and the
+  max loss:
+  * The higher the volatility, the less time you wait for profit
+  * The higher the volatility, the more loss you allow
+* After making these changes the day ended with a 75.0% win rate and +$175.60
+  profit.
+* It did, however, lose the last two trades to max loss at the end of the day 😭
+* I'll keep watching to see if I need to increase the min take profit time to
+  10 sec, and / or decrease the max loss to 0.1%
+* I also took off the loss time limit. Now it will either close with the take
+  profit or a max loss.
+* Keep going with this until I get something stable!
+
+
+### 2022-05-02:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)

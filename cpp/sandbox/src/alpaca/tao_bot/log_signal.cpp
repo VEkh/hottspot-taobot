@@ -42,7 +42,7 @@ void Alpaca::TaoBot::log_signal(const signal_t &signal, const char *title) {
   std::cout << fmt.reset << fmt.bold << log_color;
 
   printf("Signaled [%s]: $%'.2f • Signaler [%s] (in Signaled): $%'.2f "
-         "(%+.2f%%)\n"
+         "(%+.4f%%)\n"
          "Trend Direction: %s • Trend Duration: %s\n",
          signal.signaled.c_str(), ::utils::float_::to_currency(signaled_price),
          signal.signaler.c_str(), ::utils::float_::to_currency(signaler_price),

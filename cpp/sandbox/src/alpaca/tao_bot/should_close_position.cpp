@@ -9,9 +9,11 @@
 
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
+#include "max_loss_ratio.cpp"           // max_loss_ratio
 #include "open_position_profit.cpp"     // open_position_profit
 #include "opposite_direction.cpp"       // opposite_direction
 #include "profit_duration.cpp"          // profit_duration
+#include "take_profit_after.cpp"        // take_profit_after
 #include <ctime>                        // std::time
 
 bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
@@ -34,8 +36,8 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
 
   const double open_position_profit_ = open_position_profit(open_order_ptr_);
 
-  if (open_position_profit_ > 0 &&
-      profit_duration(this->profit_started_at) >= 20) {
+  if (open_position_profit_ > 0 && profit_duration(this->profit_started_at) >=
+                                       take_profit_after(open_order_ptr_)) {
     return true;
   }
 
@@ -47,7 +49,7 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
   const double profit_ratio =
       open_order_ptr_->profit / open_order_ptr_->execution_price;
 
-  if (profit_ratio <= -0.002) {
+  if (profit_ratio <= max_loss_ratio(open_order_ptr_)) {
     return true;
   }
 

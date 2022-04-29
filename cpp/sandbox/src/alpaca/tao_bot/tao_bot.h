@@ -97,6 +97,7 @@ private:
   double compute_quantity(const std::string &);
   double converted_signaler_price(const signal_t &);
   double current_price(const std::string &);
+  double max_loss_ratio(const order_t *);
   double min_target_tick_movement();
   double loss_started_at = INFINITY;
   double open_position_profit(const order_t *, const order_t *);
@@ -105,10 +106,12 @@ private:
   double profit_percentage(const order_t *);
   double profit_started_at = INFINITY;
   double secured_profit_ratio(const order_t *);
+  double volatility(const order_t *);
   exit_prices_t build_exit_prices(order_t *, const order_t *);
   int order_duration(const order_t *);
   int profit_duration(const double);
   int runtime();
+  int take_profit_after(const order_t *);
   int tradeable_symbols_count();
   json fetch_order(Alpaca::Client &, const order_t *);
   order_action_t opposite_direction(const order_action_t);
