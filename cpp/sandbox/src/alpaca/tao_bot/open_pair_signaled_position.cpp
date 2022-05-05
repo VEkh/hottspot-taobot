@@ -44,10 +44,6 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
       return;
     }
 
-    const double converted_signaler_price_ =
-        converted_signaler_price(this->open_signal);
-    const double signaled_price = current_price(symbol_);
-
     const order_action_t open_order_action =
         this->open_signal.signaler_trend_direction;
 

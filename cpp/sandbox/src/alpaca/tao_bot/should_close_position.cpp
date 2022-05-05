@@ -36,20 +36,17 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
 
   const double open_position_profit_ = open_position_profit(open_order_ptr_);
 
-  if (open_position_profit_ > 0 && profit_duration(this->profit_started_at) >=
-                                       take_profit_after(open_order_ptr_)) {
-    return true;
-  }
-
-  if (open_position_profit_ < 0 &&
-      profit_duration(this->loss_started_at) >= 5 * 60) {
-    return true;
-  }
-
   const double profit_ratio =
       open_order_ptr_->profit / open_order_ptr_->execution_price;
 
-  if (profit_ratio <= max_loss_ratio(open_order_ptr_)) {
+  const double max_loss_ratio_ = max_loss_ratio(open_order_ptr_);
+
+  if (profit_ratio > -max_loss_ratio_ &&
+      open_order_ptr_->profit < open_order_ptr_->max_profit) {
+    return true;
+  }
+
+  if (profit_ratio <= max_loss_ratio_) {
     return true;
   }
 

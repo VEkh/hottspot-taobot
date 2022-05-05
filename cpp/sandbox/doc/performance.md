@@ -9863,6 +9863,77 @@ Staging had a really good week 🎉
 
 
 ### 2022-05-02:
+#### Remarks
+##### Stocks/ETFs
+Wins: 101 (70.14%) • Losses: 42 • Total: 144
+Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 16, 2: 7, 3: 3, 4: 1}
+Win  Streak => Current: 1 • Longest: 15 • Counts: {1: 12, 2: 2, 3: 3, 4: 4, 5: 2, 6: 1, 7: 1, 10: 1, 12: 1, 15: 1}
+
+Current Balance: -250.19 • Max Balance: +803.16
+Current Loss Streak Deficit: +0.00 • Total Deficit: -1053.35
+
+* Day was off to a great start. It peaked at a profit of +$803.16, but thened
+  up at a deficit of -$250.19 because of too many incurred losses.
+* I ended the day be resetting the balance and reducing the max loss to -0.1%.
+* My guess is that this will decrease the win rate. The question is by how much
+  and whether that will consistently lead to loss.
+* I also need to observe whether this strategy consistently succeeds in the
+  morning, and if so how to respond to that.
+
+
+#### Next Thing(s) to Try
+
+### 2022-05-03:
+#### Remarks
+##### Stocks/ETFs
+* Started off losing $1K (gotta remember settings)
+* Reset with close at first profit beneath max profit. After: 03:17:14
+  > Wins: 48 (64.00%) • Losses: 26 • Total: 75
+  > Current Balance: +14.85 • Max Balance: +81.88
+* Reset with just random coin toss to enter, purely testing exit strategy. After
+
+#### Next Thing(s) to Try
+
+### 2022-05-04:
+#### Remarks
+##### Stocks/ETFs
+* Started day with: profit for > 5 sec; current_profit < max_profit
+  * Mildly lost
+* Next tried: current_profit >= -max_loss (-0.1%) && current_profit < max_profit
+  * Ran for ~45 min
+  * Profited +$+131.66, but positions were open too long
+* Next tried: current_profit >= -max_loss (-0.05%) && current_profit < max_profit
+  * Ran for 01:58:43
+  * Lost (-$34.75) (-0.13%)
+  * Wins: 16 (48.48%) • Losses: 17 • Total: 33
+* Next tried: current_profit >= -max_loss (-0.1%) && current_profit < max_profit
+  * Ran for 1 hour
+  * Intrest rates hike sent volatility through the roof and resulted in heavy
+    loss: (-603.78) (-2.31%)
+  * Wins: 22 (41.51%) • Losses: 31 • Total: 53
+* Next tried: current_profit >= -max_loss (-0.1 - -0.15%) && current_profit <
+  max_profit; no entry at signal spikes
+  * Ran for 1 hour
+  * -$324.05 (-1.27%)
+* Going back to extracting small profits
+
+
+#### Next Thing(s) to Try
+
+### 2022-05-05:
+#### Remarks
+##### Stocks/ETFs
+* Today won! 🎉
+  Wins: 54 (52.94%) • Losses: 48 • Total: 102
+  Current Balance: +429.21 • Max Balance: +727.83
+* It looks like two things worked:
+  1. Volatility expanding the win and loss thresholds
+  2. The win and loss thresholds being the same, with wins having the
+     possibility of being more open-ended.
+* Time to see if it works tomorrow as well!
+
+
+### 2022-05-06:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
