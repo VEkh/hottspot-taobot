@@ -16,7 +16,7 @@ double Alpaca::TaoBot::compute_quantity(const std::string &symbol_) {
       std::min(this->account_balance.margin_buying_power,
                max_buying_power / tradeable_symbols_count());
 
-  return floor(buying_power / quote.ask);
+  return floor(buying_power / (1.04 * quote.ask));
 }
 
 #endif
