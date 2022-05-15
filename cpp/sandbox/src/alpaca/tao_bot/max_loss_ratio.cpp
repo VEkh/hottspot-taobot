@@ -5,7 +5,7 @@
 #include "volatility.cpp" // volatility
 
 double Alpaca::TaoBot::max_loss_ratio(const order_t *order_ptr) {
-  return -::utils::float_::sigmoid(0.005, 0.00075, volatility(order_ptr), 1.25,
+  return -::utils::float_::sigmoid(0.005, 0.0009, volatility(order_ptr), 1.25,
                                    4.0);
 }
 
