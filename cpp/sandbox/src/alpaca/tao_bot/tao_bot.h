@@ -118,6 +118,8 @@ private:
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
   quote_t fetch_quote(const std::string);
+  quote_t get_quote(const std::string);
+  quote_t read_streamed_quote(const std::string);
   price_movement_average_t
   price_movement_pair_ratio(std::vector<quote_t> &, std::vector<quote_t> &,
                             const price_movement_average_t);

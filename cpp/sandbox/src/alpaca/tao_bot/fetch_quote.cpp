@@ -1,9 +1,11 @@
 #ifndef ALPACA__TAO_BOT_fetch_quote
 #define ALPACA__TAO_BOT_fetch_quote
 
-#include "deps.cpp"  // nlohmann
-#include "tao_bot.h" // Alpaca::TaoBot, quote_t
-#include <string>    // std::string
+#include "deps.cpp"          // json, nlohmann
+#include "lib/formatted.cpp" // Formatted
+#include "tao_bot.h"         // Alpaca::TaoBot, quote_t
+#include <fstream>           // std::ifstream
+#include <string>            // std::string
 
 Alpaca::TaoBot::quote_t Alpaca::TaoBot::fetch_quote(const std::string symbol_) {
   try {
@@ -14,14 +16,14 @@ Alpaca::TaoBot::quote_t Alpaca::TaoBot::fetch_quote(const std::string symbol_) {
     return parsed_quote;
   } catch (nlohmann::detail::parse_error &) {
     std::string error_message = Formatted::error_message(
-        std::string("ALPACA__TAO_BOT_fetch_quote error when parsing"));
+        std::string("[ALPACA__TAO_BOT_fetch_quote]: Error when parsing"));
 
     std::cout << error_message << fmt.reset << std::endl;
 
     return fetch_quote(symbol_);
   } catch (nlohmann::detail::type_error &) {
     std::string error_message = Formatted::error_message(std::string(
-        "ALPACA__TAO_BOT_fetch_quote error when reading the quote"));
+        "[ALPACA__TAO_BOT_fetch_quote]: Error when reading the quote"));
 
     std::cout << error_message << fmt.reset << std::endl;
 
