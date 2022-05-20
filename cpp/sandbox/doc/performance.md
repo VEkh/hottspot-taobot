@@ -9926,29 +9926,49 @@ Current Loss Streak Deficit: +0.00 • Total Deficit: -1053.35
 * Today won! 🎉
   Wins: 54 (52.94%) • Losses: 48 • Total: 102
   Current Balance: +429.21 • Max Balance: +727.83
-* It looks like two things worked:
+* It looks like three things worked:
   1. Volatility expanding the win and loss thresholds
   2. The win and loss thresholds being the same, with wins having the
      possibility of being more open-ended.
+  3. Waiting for the entry signal to persist, and not jumping at spikes.
 * Time to see if it works tomorrow as well!
 
 
 ### 2022-05-06:
-#### Performance
-##### Forex (Paper)
-* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
-
-##### Stocks/ETFs
-* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
-
-#### Stats (as of 2022-01-25)
-* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
-* Week's Return:
-* Total Return:
-* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
-
 #### Remarks
-##### Forex
 ##### Stocks/ETFs
+* Dude. YOU'RE DOING IT!! 🎉🥳  TaoBot was up about 1.8% by midday in staging. I
+  decided to YOLO and run it on production. Here are the results:
+
+  Wins: 26 (60.47%) • Losses: 17 • Total: 43
+  Current Balance: +872.38 • Max Balance: +872.38
 
 #### Next Thing(s) to Try
+* Stream asset prices -- Executing synchronous quote requests is a time
+  bottleneck. Some wins are missed and some losses are exacerbated by having to
+  await the quote response.
+* Streaming the prices into a JSON object and polling it will eliminate this
+  bottlneck.
+
+### 2022-05-09:
+#### Remarks
+##### Stocks/ETFs
+* Today was rough 😭, but highly informative
+* I ran staging and production simulatneously on separate machines. I didn't
+  realize until the end of the day that this was what caused the severe lags in
+  quote fetching -- the API was hitting rate limits.
+* This is because both were accessing the same data.alpaa.markets/v2
+  endpoint...I think 😬
+* I started with production on the Pi4 and staging on my desktop. Production
+  lost more money than staging.
+* Then I switched servers for the environment. This time production lost less
+  money than staging.
+* There were several instances where the lag in quote fetching led to late
+  entry or exit.
+* I 'm going to try running only one environment (production) on the desktop
+  tomorrow.
+* In either case, the moral of the story is: SPEED IS EVERYTHING.
+* Being late to enter or close can be the difference between a win and a loss
+  and .01s of percentage points.
+* It's further evidence that I need to implement WebSockets ASAP.
+* I'll probably abandon libwebsockets for boost/beast

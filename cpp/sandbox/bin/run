@@ -1,13 +1,16 @@
 #!/bin/bash
 
-srcs="${@:-./sandbox.cpp}"
+srcs="${*:-./sandbox.cpp}"
 
 g++ \
   -iquote. \
   -iquote./src \
+  -isystem./deps/build/include \
   -std=c++17 \
   -o ./.output \
-  $srcs \
+  "$srcs" \
   -lcrypto \
-  -lcurl && ./.output;
+  -lcurl \
+  -lpthread \
+  -lssl && ./.output;
 \rm -f ./.output

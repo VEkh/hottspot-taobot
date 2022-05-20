@@ -102,7 +102,7 @@ std::string trim(std::string in) {
   return rtrim(out);
 }
 
-std::string upcase(std::string in) {
+std::string upcase(const std::string &in) {
   std::string out;
 
   for (char c : in) {

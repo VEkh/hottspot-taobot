@@ -1,14 +1,25 @@
 #ifndef ALPACA__CLIENT_H
 #define ALPACA__CLIENT_H
 
-#include "alpaca/types.cpp"                // Alpaca::t
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include "types.cpp"                       // Global::t
-#include <map>                             // std::map
-#include <string>                          // std::string
+#include "alpaca/types.cpp"                 // Alpaca::t
+#include "lib/curl_client/curl_client.cpp"  // CurlClient
+#include "lib/formatted.cpp"                // Formatted
+#include "types.cpp"                        // Global::t
+#include <boost/asio/connect.hpp>           // boost::asio
+#include <boost/beast/core/flat_buffer.hpp> // boost::beast::flat_buffer
+#include <boost/beast/http.hpp>             // boost::beast, boost::beast::http
+#include <boost/beast/ssl.hpp>              // boost::asio::ssl
+#include <boost/beast/websocket.hpp>        // boost::beast::websocket
+#include <map>                              // std::map
+#include <string>                           // std::string
 
 namespace Alpaca {
+namespace beast = boost::beast;
+namespace http = beast::http;
+namespace net = boost::asio;
+namespace ssl = net::ssl;
+namespace websocket = beast::websocket;
+
 class Client {
 public:
   using order_action_t = Alpaca::t::order_action_t;
@@ -17,6 +28,7 @@ public:
   using order_type_t = Alpaca::t::order_type_t;
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Alpaca::t::quote_t;
+  using tcp = net::ip::tcp;
 
   Client(std::map<std::string, std::string>);
 
@@ -30,6 +42,8 @@ public:
   std::string fetch_quote(const std::string &);
 
   quote_t parse_quote(const std::string &);
+
+  void stream_quotes(int, char *[]);
 
 private:
   struct config_t {
@@ -49,6 +63,7 @@ private:
   CurlClient post(const post_params_t params);
   bool is_live();
   void load_config();
+  void write_streamed_quote(const beast::flat_buffer &);
 };
 } // namespace Alpaca
 

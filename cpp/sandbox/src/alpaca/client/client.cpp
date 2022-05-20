@@ -9,6 +9,7 @@
 #include "load_config.cpp" // load_config
 #include "parse_quote.cpp"
 #include "place_order.cpp"
+#include "stream_quotes.cpp"
 #include <map>    // std::map
 #include <string> // std::string
 

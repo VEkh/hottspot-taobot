@@ -15,6 +15,7 @@ void print_usage() {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"log_returns                  ", "Print cumulative return"},
+      {"stream_quotes <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
       {"tao_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given currency pair"},
   };
@@ -90,6 +91,20 @@ int main(int argc, char *argv[]) {
 
   if (command == "log_returns") {
     Alpaca::Returns::log();
+
+    exit(0);
+  }
+
+  if (command == "stream_quotes") {
+    if (argc < 3) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to stream.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Alpaca::Client alpaca_client;
+    alpaca_client.stream_quotes(argc, argv);
 
     exit(0);
   }

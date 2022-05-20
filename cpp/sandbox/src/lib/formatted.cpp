@@ -1,4 +1,4 @@
-#if !defined(FORMATTED_STREAM)
+#ifndef FORMATTED_STREAM
 #define FORMATTED_STREAM
 
 #include <ostream> // std::ostream

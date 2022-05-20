@@ -19,10 +19,14 @@ function build_project() {
     -D"APP_DIR=\"$app_dir\"" \
     -iquote"$app_dir" \
     -iquote"$app_dir/src" \
+    -isystem./deps/build/include \
     -std=c++17 \
     -o "$app_dir/build/$project" \
     "$app_dir/src/$project/$project.cpp" \
-    -lcurl
+    -lcrypto \
+    -lcurl \
+    -lpthread \
+    -lssl
 }
 
 if [[ $project = "bin" ]]
