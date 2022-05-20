@@ -132,6 +132,7 @@ private:
   std::string hedge_symbol();
   std::time_t started_at = std::time(nullptr);
   void await_market_open();
+  void await_next_poll();
   void cancel_stale_open_order(Alpaca::Client &, const order_t *);
   void cancel_stale_open_orders();
   void close_position(Alpaca::Client &, order_t *, order_t *, const double,
