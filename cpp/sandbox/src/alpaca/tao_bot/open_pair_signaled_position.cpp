@@ -44,8 +44,9 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
       return;
     }
 
-    const order_action_t open_order_action =
-        this->open_signal.signaler_trend_direction;
+    const order_action_t open_order_action = ::utils::boolean::flip_coin()
+                                                 ? order_action_t::BUY
+                                                 : order_action_t::SELL;
 
     const order_action_t close_order_action =
         opposite_direction(open_order_action);

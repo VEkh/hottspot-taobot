@@ -12,12 +12,6 @@ void Alpaca::TaoBot::fetch_quotes() {
 
   this->quotes[this->symbol].push_back(current_quote);
   write_quotes(this->symbol);
-
-  const std::string hedge_symbol_ = hedge_symbol();
-  const quote_t current_hedge_quote = get_quote(hedge_symbol_);
-
-  this->quotes[hedge_symbol_].push_back(current_hedge_quote);
-  write_quotes(hedge_symbol_);
 }
 
 #endif

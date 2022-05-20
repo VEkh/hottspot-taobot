@@ -4,8 +4,7 @@
 #include "alpaca/client/client.cpp"  // Alpaca::Client
 #include "build_performance.cpp"     // build_performance
 #include "fetch_account_balance.cpp" // fetch_account_balance
-#include "fetch_quote.cpp"           // fetch_quote
-#include "hedge_symbol.cpp"          // hedge_symbol
+#include "fetch_quotes.cpp"          // fetch_quotes
 #include "is_holiday.cpp"            // is_holiday
 #include "lib/formatted.cpp"         // Formatted::error_message
 #include "lib/utils/boolean.cpp"     // ::utils::boolean
@@ -51,12 +50,10 @@ void Alpaca::TaoBot::initialize(char *symbol_,
       fetch_account_balance(this->api_client);
 
   load_quotes(this->symbol);
-  load_quotes(hedge_symbol());
 
   fetch_quotes();
   load_performance();
   load_price_movement(this->symbol);
-  load_price_movement(hedge_symbol());
 
   this->performance = build_performance();
 }

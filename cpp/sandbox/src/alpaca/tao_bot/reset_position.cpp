@@ -37,8 +37,6 @@ void Alpaca::TaoBot::reset_position() {
   this->hedge_close_order_ptr = nullptr;
   this->hedge_open_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
-  this->open_signal = signal_t();
-  this->stop_loss_signal = signal_t();
 
   this->account_balance = fetch_account_balance(this->api_client);
   this->performance = build_performance();

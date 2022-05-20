@@ -13,11 +13,7 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
     return false;
   }
 
-  if (this->open_signal.signaler.empty()) {
-    return false;
-  }
-
-  return should_open_position(this->open_signal);
+  return true;
 }
 
 bool Alpaca::TaoBot::should_open_position(const signal_t &signal) {
