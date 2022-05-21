@@ -28,7 +28,6 @@ function copy_files() {
     "Gemfile.lock"
     "bin/"
     "config/"
-    "deps/"
     "src/"
   )
 
@@ -49,12 +48,9 @@ function create_directory() {
 }
 
 function install_dependencies() {
-  echo -e "${fmt_bold}${fmt_cyan}📦 Installing dependencies${fmt_reset}"
+  echo -e "${fmt_bold}${fmt_cyan}📦 Installing Dependencies${fmt_reset}"
 
-  scp "$build_app_dir/bin/install_dependencies" \
-    "$remote_address:/tmp/" && \
-    ssh -t "$remote_address" \
-      "/tmp/install_dependencies --server && rm /tmp/install_dependencies"
+  ssh -t "$remote_address" "$remote_app_dir/bin/install_dependencies"
 }
 
 function install_ruby_dependencies() {
@@ -76,9 +72,9 @@ function update_crontab() {
   ssh "$remote_address" "$cmd"
 }
 
-install_dependencies
 create_directory
 copy_files
+install_dependencies
 remote_build
 update_crontab
 
