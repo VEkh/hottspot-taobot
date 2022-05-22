@@ -60,7 +60,6 @@ struct order_t {
 };
 
 struct performance_t {
-  int closed_positions_count = 0;
   double current_balance = 0.00;
   double current_loss_streak_balance = 0.00;
   order_win_result_streak_t loss_streaks;
@@ -72,8 +71,6 @@ struct performance_t {
 
 struct position_t {
   order_t close_order;
-  order_t hedge_close_order;
-  order_t hedge_open_order;
   order_t open_order;
 };
 

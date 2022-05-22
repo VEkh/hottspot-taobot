@@ -66,12 +66,8 @@ private:
   double quantity;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
-  order_t *hedge_close_order_ptr = nullptr;
-  order_t *hedge_open_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
-  order_t hedge_close_order;
-  order_t hedge_open_order;
   order_t open_order;
   performance_t performance;
   signal_t open_signal;
@@ -159,7 +155,6 @@ private:
   void log_signals();
   void log_start_message();
   void log_timestamps();
-  void open_hedged_position();
   void open_pair_signaled_position();
   void open_positions();
   void reset_position();

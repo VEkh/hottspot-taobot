@@ -97,7 +97,6 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
   }
 
   return {
-      .closed_positions_count = (int)this->closed_positions.size(),
       .current_balance = current_balance,
       .current_loss_streak_balance = current_loss_streak_balance,
       .loss_streaks = streaks[order_win_result_t::LOSS],

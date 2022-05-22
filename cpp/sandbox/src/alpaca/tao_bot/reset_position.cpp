@@ -25,8 +25,6 @@ void Alpaca::TaoBot::reset_position() {
 
   const position_t position = {
       .close_order = this->close_order,
-      .hedge_close_order = this->hedge_close_order,
-      .hedge_open_order = this->hedge_open_order,
       .open_order = this->open_order,
   };
 
@@ -34,8 +32,6 @@ void Alpaca::TaoBot::reset_position() {
 
   this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();
-  this->hedge_close_order_ptr = nullptr;
-  this->hedge_open_order_ptr = nullptr;
   this->open_order_ptr = nullptr;
 
   this->account_balance = fetch_account_balance(this->api_client);

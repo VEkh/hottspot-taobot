@@ -30,8 +30,6 @@ void Alpaca::TaoBot::log_position_results() {
 
   order_win_result_t win_result = order_win_result({
       .close_order = this->close_order,
-      .hedge_close_order = this->hedge_close_order,
-      .hedge_open_order = this->hedge_open_order,
       .open_order = this->open_order,
   });
 

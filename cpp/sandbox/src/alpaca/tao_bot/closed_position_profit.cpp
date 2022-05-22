@@ -8,13 +8,7 @@
 #include "tao_bot.h"
 
 double Alpaca::TaoBot::closed_position_profit(const position_t &position) {
-  const double profit =
-      position.close_order.profit * position.close_order.quantity;
-
-  const double hedge_profit =
-      position.hedge_close_order.profit * position.hedge_close_order.quantity;
-
-  return hedge_profit + profit;
+  return position.close_order.profit * position.close_order.quantity;
 }
 
 #endif
