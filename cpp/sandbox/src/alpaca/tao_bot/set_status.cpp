@@ -15,6 +15,7 @@
 #include "deps.cpp"                 // json
 #include "fetch_order.cpp"          // fetch_order
 #include "lib/utils/string.cpp"     // ::utils::string
+#include <ctime>                    // std::time
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 #include <string>                   // std::string
@@ -46,6 +47,9 @@ void Alpaca::TaoBot::set_status(Alpaca::Client &api_client_ref,
 
   if (original_status != order_status_t::ORDER_FILLED &&
       order->status == order_status_t::ORDER_FILLED) {
+    order->runtime = (int)(std::time(nullptr) - this->started_at);
+    order->timestamp = (int)std::time(nullptr);
+
     const char *order_action = Alpaca::constants::ORDER_ACTIONS[order->action];
     const char *log_icon = this->ICONS[order_action];
 

@@ -52,6 +52,7 @@ struct order_t {
   bool max_profit_reset = false;
   double profit = 0.00;
   double quantity = 0.00;
+  int runtime = 0;
   order_status_t status = order_status_t::ORDER_INIT;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;

@@ -12,7 +12,6 @@
 
 #include "build_performance.cpp" // build_performance
 #include "write_performance.cpp" // write_performance
-#include <ctime>                 // std::time, std::time_t
 
 void Alpaca::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {

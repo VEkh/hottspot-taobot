@@ -11,6 +11,8 @@
 #include "tao_bot.h"
 
 #include "closed_position_profit.cpp" // closed_position_profit
+#include "lib/utils/integer.cpp"      // utils::integer_
+#include "order_win_result.cpp"       // order_win_result
 #include <algorithm>                  // std::max
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
@@ -83,6 +85,43 @@ void Alpaca::TaoBot::log_performance() {
     const double profit = closed_position_profit(position);
 
     printf("%+.2f", profit);
+  }
+
+  puts("]\n");
+
+  printf("Runtime:Win Rate: [");
+
+  double running_loss_count = 0;
+  double running_total_profit = 0;
+  double running_win_count = 0;
+
+  for (int i = 0; i < l; i++) {
+    const position_t position = this->closed_positions[i];
+
+    if (i != 0) {
+      printf(", ");
+    }
+
+    switch (order_win_result(position)) {
+    case order_win_result_t::LOSS: {
+      running_loss_count++;
+      break;
+    }
+    case order_win_result_t::WIN: {
+      running_win_count++;
+      break;
+    }
+    }
+
+    const double win_rate =
+        (running_win_count / (running_win_count + running_loss_count));
+
+    running_total_profit += closed_position_profit(position);
+
+    printf("{ %s • %.3f • %.2f }",
+           ::utils::integer_::seconds_to_clock(position.close_order.runtime)
+               .c_str(),
+           win_rate, running_total_profit);
   }
 
   puts("]");
