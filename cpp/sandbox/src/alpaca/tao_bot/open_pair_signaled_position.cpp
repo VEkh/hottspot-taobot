@@ -16,6 +16,7 @@
 #include "fetch_account_balance.cpp"    // fetch_account_balance
 #include "open_position.cpp"            // open_position
 #include "opposite_direction.cpp"       // opposite_direction
+#include "order_win_result.cpp"         // order_win_result
 #include "should_open_position.cpp"     // should_open_position
 #include <iostream>                     // std::cout, std::endl
 #include <stdio.h>                      // puts
@@ -28,6 +29,21 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
   }
 
   bool open_order_opened = false;
+
+  bool (*is_long_position)(Alpaca::TaoBot *) =
+      [](Alpaca::TaoBot *this_) -> bool {
+    if (!this_->closed_positions.size()) {
+      return ::utils::boolean::flip_coin();
+    }
+
+    const position_t last_position = this_->closed_positions.back();
+
+    if (this_->order_win_result(last_position) == order_win_result_t::WIN) {
+      return last_position.open_order.action == order_action_t::BUY;
+    }
+
+    return last_position.close_order.action == order_action_t::BUY;
+  };
 
   while (!open_order_opened) {
     this->account_balance = fetch_account_balance(this->api_client);
@@ -43,9 +59,8 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
       return;
     }
 
-    const order_action_t open_order_action = ::utils::boolean::flip_coin()
-                                                 ? order_action_t::BUY
-                                                 : order_action_t::SELL;
+    const order_action_t open_order_action =
+        is_long_position(this) ? order_action_t::BUY : order_action_t::SELL;
 
     const order_action_t close_order_action =
         opposite_direction(open_order_action);

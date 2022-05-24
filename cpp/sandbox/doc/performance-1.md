@@ -1,4 +1,4 @@
-### 2022-05-23:
+### 2022-05-25:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -15,6 +15,77 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-05-24:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day. I started the day with random again and it wasn't going well
+  by midday. It was down < -$1K.
+* Then I switched it to alternate on every trade after an initial coin flip.
+  This modestly lost, but could reasonbly be predicted to not perform very
+  well.
+* THEN, I tried the following algorithm:
+  * Initial coin flip; if latest position won, open in same direction,
+    otherwise switch directions.
+* Here were its results after 02:41:34 of run time:
+  ```
+  Wins: 40 (53.33%) • Losses: 35 • Total: 75
+  Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 10, 2: 3, 3: 5, 4: 1}
+  Win  Streak => Current: 1 • Longest: 5 • Counts: {1: 11, 2: 2, 3: 4, 4: 2, 5: 1}
+
+  Current Balance: +796.07 • Max Balance: +1151.45
+  ```
+* The good thing about this strategy is that it almost guranatees profit during
+  extended trend periods.
+* It will, however, lose during consolidation periods and trends with heavy
+  corrections.
+* We'll see how it generally performs over the next few days.
+* Have fun in Boston!
+
+
+#### Next Thing(s) to Try
+
+### 2022-05-23:
+#### Remarks
+##### Stocks/ETFs
+* TaoBot ran on the Pi with quote streaming deployed. Quote streaming well,
+  except I forgot to create the `streamed_quotes` directory so it wasn't
+  reading from the stream 😬
+* Day started with some bugs from weekend changes.
+* Then running four stocks exposed how coupled the stop loss and profite
+  thresholds are to SPY's volatility. I reverted to only trading SPY and will
+  resume trading others when I've ironed out a daily take profit strategy for
+  it.
+* Here are today's results:
+
+**STAGING**
+##### Record Since 2022-05-13
+```
+Win / Loss: 5W (Consecutive: 0) 1L (Consecutive: 1)
+```
+Wins: 56 (47.06%) • Losses: 63 • Total: 119
+Loss Streak => Current: 1 • Longest: 8 • Counts: {1: 17, 2: 6, 3: 4, 4: 2, 6: 1, 8: 1}
+Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 14, 2: 11, 3: 4, 4: 2}
+
+Current Balance: -180.60 • Max Balance: +306.40
+```
+Wins: 114 (48.31%) • Losses: 122 • Total: 236
+Loss Streak => Current: 1 • Longest: 7 • Counts: {1: 19, 2: 16, 3: 13, 4: 5, 5: 1, 7: 1}
+Win  Streak => Current: 0 • Longest: 7 • Counts: {1: 25, 2: 12, 3: 10, 4: 3, 5: 2, 6: 1, 7: 1}
+
+Current Balance: +676.10 (+2.48%) • Max Balance: +1,557.10
+```
+
+* Again, there exists a profit at some point. I just need to figure out how to
+  escape with it.
+* I'll observe the full day, including the first half hour which I missed today
+  because of 🐞s.
+* I did observe however that the day started with a > 50% win rate, but lost it
+  15 minutes into trading.
+* Observe all day tomorrow and see if you can come up with some sort of take
+  profit strategy that doesn't miss out too much on high gains.
 
 #### Next Thing(s) to Try
 
