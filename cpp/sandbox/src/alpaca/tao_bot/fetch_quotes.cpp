@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_fetch_quotes
 
 #include "get_quote.cpp"    // get_quote
-#include "hedge_symbol.cpp" // hedge_symbol
 #include "tao_bot.h"        // Alpaca::TaoBot, quote_t
 #include "write_quotes.cpp" // write_quotes
 #include <string>           // std::string

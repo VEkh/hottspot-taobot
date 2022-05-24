@@ -32,8 +32,7 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
   while (!open_order_opened) {
     this->account_balance = fetch_account_balance(this->api_client);
 
-    const std::string symbol_ = this->open_signal.signaled;
-    const double quantity = compute_quantity(symbol_);
+    const double quantity = compute_quantity(this->symbol);
 
     if (quantity <= 0) {
       std::cout << fmt.bold << fmt.yellow;
@@ -53,7 +52,7 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
 
     std::pair<order_t, order_t> new_orders =
         open_position(this->api_client, close_order_action, open_order_action,
-                      "open", quantity, symbol_);
+                      "open", quantity, this->symbol);
 
     open_order_opened = !new_orders.second.id.empty();
 
