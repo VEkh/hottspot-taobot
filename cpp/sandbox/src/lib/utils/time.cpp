@@ -2,7 +2,7 @@
 #define UTILS__TIME
 
 #include <chrono>   // std::chrono, std::duration
-#include <ctime>    // std::localtime, struct std::tm
+#include <ctime>    // std::localtime, std::mktime, struct std::tm
 #include <iomanip>  // std::setw
 #include <iostream> // std::fixed
 #include <map>      // std::map
@@ -130,6 +130,17 @@ bool is_before(const std::vector<int> time_parts) {
 }
 
 bool is_early_day() { return is_before({11, 0}); }
+
+std::tm parse_timestamp(std::string in, const char *format) {
+  std::tm datetime = {};
+  std::istringstream date_string(in);
+
+  date_string >> std::get_time(&datetime, format);
+
+  std::mktime(&datetime);
+
+  return datetime;
+}
 
 std::string timestamp_to_clock(time_t timestamp,
                                const char *time_zone = "America/New_York") {

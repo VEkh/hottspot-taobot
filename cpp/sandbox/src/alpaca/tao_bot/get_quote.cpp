@@ -25,6 +25,13 @@ Alpaca::TaoBot::quote_t Alpaca::TaoBot::get_quote(const std::string symbol_) {
     std::cout << error_message << fmt.reset << std::endl;
 
     return fetch_quote(symbol_);
+  } catch (std::domain_error &e) {
+    std::string error_message = Formatted::error_message(
+        std::string("[ALPACA__TAO_BOT_get_quote]: std::domain_error "
+                    "when streaming: "));
+    std::cout << error_message << e.what() << fmt.reset << std::endl;
+
+    return fetch_quote(symbol_);
   } catch (std::invalid_argument &) {
     std::string error_message = Formatted::error_message(
         std::string("[ALPACA__TAO_BOT_get_quote]: std::invalid_argument "

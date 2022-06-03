@@ -1,16 +1,17 @@
-#include "deps.cpp"          // json
-#include "lib/formatted.cpp" // Formatted
-#include <algorithm>         // std::max
-#include <ctime>             // std::mktime, std::tm
-#include <fstream>           // std::ifstream, std::ios
-#include <iomanip>           // std::get_time
-#include <iostream>          // std::cout, std::endl
-#include <locale.h>          // setlocale
-#include <math.h>            // abs
-#include <sstream>           // std::istringstream
-#include <stdexcept>         // std::invalid_argument
-#include <stdio.h>           // printf
-#include <string>            // std::string
+#include "deps.cpp"           // json
+#include "lib/formatted.cpp"  // Formatted
+#include "lib/utils/time.cpp" // ::utils::time_
+#include <algorithm>          // std::max
+#include <ctime>              // std::tm
+#include <fstream>            // std::ifstream, std::ios
+#include <iomanip>            // std::get_time
+#include <iostream>           // std::cout, std::endl
+#include <locale.h>           // setlocale
+#include <math.h>             // abs
+#include <sstream>            // std::istringstream
+#include <stdexcept>          // std::invalid_argument
+#include <stdio.h>            // printf
+#include <string>             // std::string
 
 namespace Alpaca {
 namespace Returns {
@@ -32,17 +33,6 @@ json load() {
   file.close();
 
   return returns_json;
-}
-
-std::tm parse_date(std::string in) {
-  std::tm datetime = {};
-  std::istringstream date_string(in);
-
-  date_string >> std::get_time(&datetime, "%Y-%m-%d");
-
-  std::mktime(&datetime);
-
-  return datetime;
 }
 
 void log() {
@@ -87,7 +77,8 @@ void log() {
       (todays_qqq_close - todays_qqq_open) / todays_qqq_open;
 
   for (; it != all_returns.rend(); it++) {
-    const std::tm parsed_date = parse_date(it.key());
+    const std::tm parsed_date =
+        ::utils::time_::parse_timestamp(it.key(), "%Y-%m-%d");
     json return_json = it.value();
 
     const double close = return_json["close"];

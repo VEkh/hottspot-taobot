@@ -1,10 +1,14 @@
 #ifndef ALPACA__TAO_BOT_read_streamed_quote
 #define ALPACA__TAO_BOT_read_streamed_quote
 
-#include "deps.cpp"  // json, nlohmann
-#include "tao_bot.h" // Alpaca::TaoBot, quote_t
-#include <fstream>   // std::ifstream
-#include <string>    // std::string
+#include "deps.cpp"           // json, nlohmann
+#include "lib/formatted.cpp"  // Formatted
+#include "lib/utils/time.cpp" // ::utils::time_
+#include "tao_bot.h"          // Alpaca::TaoBot, quote_t
+#include <ctime>              // std::tm, std::mktime
+#include <fstream>            // std::ifstream
+#include <stdexcept>          // std::domain_error
+#include <string>             // std::string
 
 Alpaca::TaoBot::quote_t
 Alpaca::TaoBot::read_streamed_quote(const std::string symbol_) {
@@ -27,6 +31,19 @@ Alpaca::TaoBot::read_streamed_quote(const std::string symbol_) {
   wrapper["quote"] = quote_json;
   quote_t parsed_quote = this->api_client.parse_quote(wrapper.dump());
   parsed_quote.symbol = symbol_;
+
+  std::tm parsed_time =
+      ::utils::time_::parse_timestamp(quote_json["t"], "%Y-%m-%dT%H:%M:%SZ");
+
+  const std::time_t quote_epoch = std::mktime(&parsed_time);
+  const std::time_t now = std::time(nullptr);
+
+  if ((now - quote_epoch) > 10) {
+    const std::string error_message = Formatted::error_message(
+        symbol_ + std::string(" quote stale. Falling back to fetch."));
+
+    throw std::domain_error(error_message);
+  }
 
   return parsed_quote;
 }
