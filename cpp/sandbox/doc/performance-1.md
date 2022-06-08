@@ -1,4 +1,4 @@
-### 2022-05-25:
+### 2022-06-08:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -15,6 +15,159 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-06-07:
+#### Remarks
+##### Stocks/ETFs
+* AMZN: -750.99 after 02:47:14 of run time
+* Switched to using long-term 3-minute one-sec variance. AMZN ended at -$63.36
+  with a win rate of 48.48%
+* 4/6 won today: AAPL, MSFT, QQQ, and SPY. That's very good
+* 2/6 lost, AMZN lost ~$800. I think this is because the exit threshold shrank
+  too much over time.
+* In response, I'm going to use the long-term one-second variance taken over
+  10K samples.
+* This way, a profitable mid day can compensate for a losing morning
+* I'm also increasing the target profit to 3% so the big winners can more
+  greatly compensate for the losers.
+
+#### Next Thing(s) to Try
+
+### 2022-06-06:
+#### Remarks
+##### Stocks/ETFs
+* Today was the first day I implemented a daily target profit and trailing
+  stop.
+* 3 / 5 won: MSFT, QQQ, TSLA (twice)
+* SPY almost won, AAPL's max profit was $0.62
+* The idea is to continue doing this and observe:
+  * What's the daily win rate across all assets?
+  * Are there some that seem to consistently perform well? So far, TSLA is the
+    top contender.
+
+#### Next Thing(s) to Try
+
+### 2022-06-02:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day
+* The day started off very down, but then picked up by mid morning.
+* By the near end of the day QQQ and TSLA were winning with win rates greater
+  than 50%. AAPL and SPY's deficits overshadowed their siblings profits.
+* The day started with consolidation at almost the exact height of the
+  thresholdds.
+* Since the prices movements slow throughout the day, it was hard for late day
+  gains to overcome an early deficit.
+* THEN at around 2:30pm CT, the stream just stopped receiving messages. It
+  didn't error out, it was just non-responsive.
+* This brought everyone's price movement to 0 and kicked off a flurry of
+  immediate closures which tanked the day's gains.
+* This made it apparent that I'll need to build a stream status check for
+  `get_quote` to fall back to the historical quote endpoint if the streamed
+  quote is stale.
+
+#### Next Thing(s) to Try
+
+### 2022-06-01:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day today.
+* I started by observing the short tern one second net average and determing a
+  threshold that might be a good entry indicator.
+* Meanwhile TaoBot was following trends with an exit threshold of 20x one
+  second variance. This ended at a loss after about 2 hours.
+* Also, red4 was red-lining and I think this was intermittently interrupting
+  the quote stream, so I moved everything to the desktop.
+* When I implemented the one second net average threshold, it failed miserably.
+* This led me to the following thought:
+  * If I were to set the exit threshold at a ridiculously high amount, such
+    that it would only execute one trade in the whole day, the stocks who
+    happened to guess right would be the only ones to win. However, the right
+    guessers would be guaranteed to win by the amount the price profited since
+    the day's open.
+  * If, however, I set the threshold too low, there will be many more trades,
+    but there will be many losses because of temporary or sharp corrections.
+  * The more trades there are, the more likely losses will dominate.
+  * The goal should be to find the perfect threshold that will allows you to
+    trade often enough to profit on put bear and bull trends, but not often
+    enough that you're getting destroyed by fluctuations.
+* I ended the day by trying 40x the one-second variance. This ended ~+$70 after
+  about 2 hours of play.
+* I'll observe this tomorrow on the desktop and increase the threshold if I
+  think it's still too susceptible to corrections.
+
+#### Next Thing(s) to Try
+
+### 2022-05-27:
+#### Remarks
+##### Stocks/ETFs
+* TaoBot didn't do well today:
+
+**STAGING**
+```
+SPY
+
+Wins: 25 (40.98%) • Losses: 35 • Total: 61
+Loss Streak => Current: 1 • Longest: 7 • Counts: {1: 5, 2: 7, 3: 2, 4: 1, 7: 1}
+Win  Streak => Current: 0 • Longest: 3 • Counts: {1: 7, 2: 6, 3: 2}
+
+Current Balance: -989.73 • Max Balance: +140.75
+Current Loss Streak Deficit: +0.00 • Total Deficit: -1130.48
+```
+
+* QQQ: Close: $309.10; Open: $299.33
+
+* SPY's movement was slower than normal and it spent most of its day
+  connsolidating.
+* In the last couple hours of the day, I tried changing the exit thresholds to
+  be based on a multiple of the 1-sec variance again, instead of a
+  volatility-based max loss ratio.
+* This should make it generalizable to other securities. I still need to tweak
+  the ratio to ensure it's correct.
+
+#### Next Thing(s) to Try
+
+### 2022-05-26:
+#### Remarks
+##### Stocks/ETFs
+* Anemic day, but that led to profit.
+* Observe again tomorrow
+
+**STAGING**
+```
+Wins: 30 (51.72%) • Losses: 28 • Total: 58
+Loss Streak => Current: 1 • Longest: 4 • Counts: {1: 4, 2: 3, 3: 2, 4: 3}
+Win  Streak => Current: 0 • Longest: 6 • Counts: {1: 4, 2: 4, 3: 1, 4: 1, 5: 1, 6: 1}
+
+Current Balance: +406.08 (+1.61%) • Max Balance: +877.64
+Current Loss Streak Deficit: -60.06 • Total Deficit: -471.56
+```
+
+* QQQ -- Open: 291.26, Close: 299.33
+
+#### Next Thing(s) to Try
+
+### 2022-05-25:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day:
+**STAGING**
+```
+Wins: 68 (46.90%) • Losses: 76 • Total: 145
+Loss Streak => Current: 0 • Longest: 7 • Counts: {1: 21, 2: 6, 3: 6, 4: 2, 5: 1, 6: 1, 7: 1}
+Win  Streak => Current: 1 • Longest: 7 • Counts: {1: 23, 2: 9, 3: 4, 4: 2, 7: 1}
+
+Current Balance: -309.12 • Max Balance: +1111.18
+Current Loss Streak Deficit: +0.00 • Total Deficit: -1420.30
+```
+* The peak occurred at 03:19:08 of runtime, just as we were taking off from ORD to BOS
+* Then it crashed the rest of the day.
+* I still need to observe the patterns of daily highs and lows to come up with
+  a solid take profit strategy.
+* Another possibility: start 2% trailing stop at +4.0% gain
+* QQQ Open: 287.24, Close: 291.26
 
 #### Next Thing(s) to Try
 

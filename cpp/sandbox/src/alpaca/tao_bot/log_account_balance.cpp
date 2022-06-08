@@ -1,10 +1,11 @@
 #ifndef ALPACA__TAO_BOT_log_account_balance
 #define ALPACA__TAO_BOT_log_account_balance
 
-#include "lib/formatted.cpp" // Formatted
-#include "tao_bot.h"         // Alpaca::TaoBot
-#include <iostream>          // std::cout, std::endl
-#include <stdio.h>           // printf
+#include "lib/formatted.cpp"       // Formatted
+#include "tao_bot.h"               // Alpaca::TaoBot
+#include "target_daily_profit.cpp" // target_daily_profit
+#include <iostream>                // std::cout, std::endl
+#include <stdio.h>                 // printf
 
 void Alpaca::TaoBot::log_account_balance(
     account_balance_t account_balance_,
@@ -30,6 +31,9 @@ void Alpaca::TaoBot::log_account_balance(
 
   printf("Original Balance:    $%'.2f\n", original_account_balance_.balance);
   printf("Margin Buying Power: $%'.2f\n", account_balance_.margin_buying_power);
+  printf("Target Asset Max Profit: $%'.2f\n",
+         target_daily_profit() / (1 - this->TARGET_DAILY_PROFIT_TRAILING_STOP));
+  printf("Target Asset Profit: $%'.2f\n", target_daily_profit());
 
   std::cout << fmt.reset << std::endl;
 }
