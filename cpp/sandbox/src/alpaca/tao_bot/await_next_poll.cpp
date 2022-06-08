@@ -10,12 +10,13 @@ void Alpaca::TaoBot::await_next_poll() {
   double await_time = 5e5;
 
   if (this->open_order_ptr &&
-      this->open_order_ptr->status == order_status_t::ORDER_FILLED) {
+      this->open_order_ptr->status == order_status_t::ORDER_FILLED &&
+      this->exit_prices.max_loss) {
     const double profit_ratio =
-        this->open_order_ptr->profit / this->open_order_ptr->execution_price;
+        this->open_order_ptr->profit / this->exit_prices.max_loss;
 
-    if ((abs(profit_ratio / max_loss_ratio(this->open_order_ptr))) >= 0.7) {
-      await_time = profit_ratio > 0 ? 1e6 : 5e4;
+    if (abs(profit_ratio) >= 0.7 && this->open_order_ptr->profit > 0) {
+      await_time = 1e6;
     }
   }
 
