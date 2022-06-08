@@ -95,9 +95,14 @@ void Alpaca::Client::stream_quotes(int argc, char *argv[]) {
   boost::system::error_code stream_error;
 
   while (!stream_error) {
-    ws.read(buffer, stream_error);
-    write_streamed_quote(buffer);
-    ::utils::websocket::log_and_consume_buffer(buffer);
+    try {
+      ws.read(buffer, stream_error);
+      write_streamed_quote(buffer);
+      ::utils::websocket::log_and_consume_buffer(buffer);
+    } catch (boost::wrapexcept<boost::system::system_error> &) {
+      puts("❌ Websocket Stream failed.");
+      continue;
+    }
   }
 
   ws.close(websocket::close_code::normal);
