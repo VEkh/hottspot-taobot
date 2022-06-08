@@ -27,7 +27,7 @@ void Alpaca::TaoBot::write_quotes(const std::string &symbol_) {
     const std::string filepath = std::string(APP_DIR) + "/data/alpaca/quotes/" +
                                  std::string(symbol_) + ".json";
 
-    const int sample_size = 10000;
+    const int sample_size = this->QUOTES_MAX_SIZE;
     int i = 0;
     json quotes_json;
     std::list<json> quotes_list;

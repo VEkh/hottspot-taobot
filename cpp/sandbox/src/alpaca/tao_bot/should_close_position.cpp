@@ -1,20 +1,10 @@
 #ifndef ALPACA__TAO_BOT_should_close_position
 #define ALPACA__TAO_BOT_should_close_position
 
-/*
- * Alpaca::TaoBot
- * order_status_t
- */
-#include "tao_bot.h"
-
+#include "build_exit_prices.cpp"        // build_exit_prices
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
-#include "max_loss_ratio.cpp"           // max_loss_ratio
-#include "open_position_profit.cpp"     // open_position_profit
-#include "opposite_direction.cpp"       // opposite_direction
-#include "profit_duration.cpp"          // profit_duration
-#include "take_profit_after.cpp"        // take_profit_after
-#include <ctime>                        // std::time
+#include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
 
 bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
                                            const order_t *open_order_ptr_) {
@@ -34,19 +24,14 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  const double open_position_profit_ = open_position_profit(open_order_ptr_);
+  this->exit_prices = build_exit_prices(this->open_order_ptr);
 
-  const double profit_ratio =
-      open_order_ptr_->profit / open_order_ptr_->execution_price;
-
-  const double max_loss_ratio_ = max_loss_ratio(open_order_ptr_);
-
-  if (profit_ratio > -max_loss_ratio_ &&
+  if (open_order_ptr_->profit > this->exit_prices.min_profit &&
       open_order_ptr_->profit < open_order_ptr_->max_profit) {
     return true;
   }
 
-  if (profit_ratio <= max_loss_ratio_) {
+  if (open_order_ptr_->profit <= this->exit_prices.max_loss) {
     return true;
   }
 

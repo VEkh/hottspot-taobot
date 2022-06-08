@@ -50,7 +50,7 @@ void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
     return;
   }
 
-  const double cumulative_max_sample_size = INFINITY;
+  const double cumulative_max_sample_size = this->QUOTES_MAX_SIZE;
   const double short_term_max_sample_size = 30;
 
   const double old_short_term_average =

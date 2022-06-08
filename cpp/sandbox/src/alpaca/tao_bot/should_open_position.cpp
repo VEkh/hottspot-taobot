@@ -14,7 +14,7 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
   }
 
   if (!this->price_movements[this->symbol]
-           .short_term_three_minute_one_second_variance.average) {
+           .three_minute_one_second_variance.average) {
     return false;
   }
 

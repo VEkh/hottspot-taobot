@@ -41,6 +41,7 @@ private:
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double MAX_EXPECTED_LOSS_STREAK = 8;
+  const int QUOTES_MAX_SIZE = 1e4;
 
   std::map<std::string, hedge_info_t> HEDGE_PAIRS = {
       {"AAPL", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
@@ -104,7 +105,7 @@ private:
   double profit_started_at = INFINITY;
   double secured_profit_ratio(const order_t *);
   double volatility(const order_t *);
-  exit_prices_t build_exit_prices(order_t *, const order_t *);
+  exit_prices_t build_exit_prices(const order_t *);
   int order_duration(const order_t *);
   int profit_duration(const double);
   int runtime();
