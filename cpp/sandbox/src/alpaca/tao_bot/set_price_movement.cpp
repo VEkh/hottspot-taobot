@@ -30,8 +30,10 @@ void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
                               it != quotes_.rend();
        it++) {
 
-    double delta = abs(it->price - (it + 1)->price);
-    total += delta;
+    const double time_delta = (it->timestamp - (it + 1)->timestamp) / 1000.0;
+    const double delta = (it->price - (it + 1)->price) / time_delta;
+
+    total += abs(delta);
     ticks++;
   }
 

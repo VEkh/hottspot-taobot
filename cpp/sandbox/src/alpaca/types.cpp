@@ -80,7 +80,7 @@ struct quote_t {
   double bid = 0.00;
   double price = 0.00;
   std::string symbol = "";
-  int timestamp;
+  long timestamp;
 };
 
 struct signal_t {
