@@ -1,4 +1,4 @@
-### 2022-06-08:
+### 2022-06-10:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -15,6 +15,41 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-06-09:
+#### Remarks
+##### Stocks/ETFs
+* Today was a rare day where all assets won.
+* I started by setting the exit threhsold to 30x the long-term one-second
+  variance.
+* This failed because the fast movement triggered many losses.
+* I changed exit threshold to be the greater of the two one-sec variances.
+* It was actually doing decently:
+  * TSLA had reached its 1% return within a couple of hours.
+  * The other assets, however, were mostly stuck in consolidation.
+* However, shortly after 1pm CT, all assets prices started a sharp decline that
+  lasted the rest of the day.
+* This led to long win streaks across the board:
+  * AAPL (13); AMZN (7); MSFT (5); QQQ (10); SPY (11)
+* It's important to acknowledge that this is a rare circumstance. It is good to
+  know, however, that in this scenario the algorithm makes the most money.
+* What should happen more often is that if assets win, it will be within the
+  first 1-2 hours.
+* After that, they'll mostly lose during consolidation.
+
+#### Next Thing(s) to Try
+
+### 2022-06-08:
+#### Remarks
+##### Stocks/ETFs
+* I tried going for 3% return.
+* AMZN and TSLA almost made it, but didn't quite hit the mark.
+* There were one or two that were also positive, but after the morning, most
+  prices consolidated much of the rest of the day and resulted in losses.
+* I'm going to go back to targeting 2% with an exit threshold of 30x the
+  long-term 1-sec variance.
 
 #### Next Thing(s) to Try
 
