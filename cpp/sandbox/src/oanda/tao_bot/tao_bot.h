@@ -35,7 +35,7 @@ private:
   using quote_t = Oanda::t::quote_t;
   using trade_status_t = Oanda::t::trade_status_t;
 
-  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
+  const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
   const double MIN_TARGET_TICK_MOVEMENT = 40.0;

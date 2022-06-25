@@ -17,7 +17,7 @@ void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
   const quote_t current_quote = quotes_.back();
 
   if (current_quote.timestamp - quotes_.front().timestamp <
-      this->AVERAGE_TICK_PRICE_DELTA_PERIOD) {
+      this->AVG_ONE_SEC_VARIANCE_TIMEFRAME) {
     return;
   }
 
@@ -26,7 +26,7 @@ void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
   std::vector<quote_t>::reverse_iterator it;
 
   for (it = quotes_.rbegin(); current_quote.timestamp - it->timestamp <=
-                                  this->AVERAGE_TICK_PRICE_DELTA_PERIOD &&
+                                  this->AVG_ONE_SEC_VARIANCE_TIMEFRAME &&
                               it != quotes_.rend();
        it++) {
 
@@ -50,7 +50,7 @@ void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
     return;
   }
 
-  const double cumulative_max_sample_size = this->QUOTES_MAX_SIZE;
+  const double cumulative_max_sample_size = this->PRICE_MOVEMENT_SAMPLE_SIZE;
   const double short_term_max_sample_size = 30;
 
   const double old_short_term_average =

@@ -18,7 +18,7 @@ void Oanda::TaoBot::log_price_movement() {
 
   std::cout << "💲 Avg Tick Price Δ: ("
             << ::utils::integer_::seconds_to_clock(
-                   this->AVERAGE_TICK_PRICE_DELTA_PERIOD)
+                   this->AVG_ONE_SEC_VARIANCE_TIMEFRAME)
             << ")";
 
   std::cout << fmt.reset << std::endl;

@@ -27,7 +27,7 @@ void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
 
   printf(
       "💲 %s Avg Tick Price Δ: (%s)\n", symbol_.c_str(),
-      ::utils::integer_::seconds_to_clock(this->AVERAGE_TICK_PRICE_DELTA_PERIOD)
+      ::utils::integer_::seconds_to_clock(this->AVG_ONE_SEC_VARIANCE_TIMEFRAME)
           .c_str());
 
   std::cout << fmt.reset << fmt.bold << fmt.cyan;

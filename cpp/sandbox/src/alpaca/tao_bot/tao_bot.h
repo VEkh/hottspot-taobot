@@ -37,12 +37,13 @@ private:
   using quote_t = Alpaca::t::quote_t;
   using signal_t = Alpaca::t::signal_t;
 
-  const double AVERAGE_TICK_PRICE_DELTA_PERIOD = 3.0 * 60.0;
+  const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double TARGET_DAILY_PROFIT = 0.02;
   const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.2;
-  const int QUOTES_MAX_SIZE = 1e4;
+  const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
+  const int QUOTES_MAX_SIZE = 5e2;
 
   std::map<std::string, hedge_info_t> HEDGE_PAIRS = {
       {"AAPL", {.action = order_action_t::SELL, .symbol = "TQQQ"}},

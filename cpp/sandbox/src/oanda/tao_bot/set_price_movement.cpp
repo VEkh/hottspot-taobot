@@ -19,7 +19,7 @@ void Oanda::TaoBot::set_price_movement() {
   }
 
   if (current_quote.timestamp - this->quotes.front().timestamp <
-      this->AVERAGE_TICK_PRICE_DELTA_PERIOD) {
+      this->AVG_ONE_SEC_VARIANCE_TIMEFRAME) {
     return;
   }
 
@@ -28,7 +28,7 @@ void Oanda::TaoBot::set_price_movement() {
   std::vector<quote_t>::reverse_iterator it;
 
   for (it = this->quotes.rbegin(); current_quote.timestamp - it->timestamp <=
-                                       this->AVERAGE_TICK_PRICE_DELTA_PERIOD &&
+                                       this->AVG_ONE_SEC_VARIANCE_TIMEFRAME &&
                                    it != this->quotes.rend();
        it++) {
 
