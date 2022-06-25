@@ -32,6 +32,18 @@ function print_status() {
   fi
 }
 
+function start_if_stopped() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}😴 No quotes are streaming. Starting stream.\n${fmt_reset}"
+    start_stream
+  else
+    echo -e "${fmt_cyan}💖 Quotes are streaming. Doing nothing.${fmt_reset}"
+  fi
+}
+
 function start_stream() {
   all_symbols=($(cat "$app_dir/bin/$project/symbols"))
   log_dir="$app_dir/log/$project"
@@ -61,6 +73,10 @@ function stop_stream() {
 }
 
 case $1 in
+  heartbeat)
+    start_if_stopped
+    ;;
+
   restart)
     stop_stream
     start_stream "${@:2}"
@@ -84,8 +100,9 @@ case $1 in
     echo -e "${fmt_bold}${fmt_cyan}Description: Stream the quotes for provided symbols.${fmt_reset}\n"
     echo -e "${fmt_bold}${fmt_yellow}Usage: stream [COMMAND]\n"
     echo -e "Commands:"
-    echo -e "  restart <SYMBOLS>       Stop, then start streaming. See stop and start documentation."
-    echo -e "  start   <SYMBOLS>       Start streaming one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)."
+    echo -e "  heartbeat               Check status. Restart if stopped."
+    echo -e "  restart   <SYMBOLS>     Stop, then start streaming. See stop and start documentation."
+    echo -e "  start     <SYMBOLS>     Start streaming one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)."
     echo -e "  status                  Print running stream processes, if any."
     echo -e "  stop                    Stop streawming all symbols."
 
