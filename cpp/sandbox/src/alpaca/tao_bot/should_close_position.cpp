@@ -24,7 +24,7 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
     return true;
   }
 
-  this->exit_prices = build_exit_prices(this->open_order_ptr);
+  this->exit_prices = build_exit_prices(open_order_ptr_);
 
   if (open_order_ptr_->profit > this->exit_prices.min_profit &&
       open_order_ptr_->profit < open_order_ptr_->max_profit) {

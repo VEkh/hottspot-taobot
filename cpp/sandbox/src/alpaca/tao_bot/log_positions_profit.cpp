@@ -24,18 +24,17 @@ void Alpaca::TaoBot::log_positions_profit() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
-  printf(
-      "Current: %.2f • Max: %.2f • Loss Duration: %s  • Profit Duration: %s\n"
-      "Max Loss Ratio %+.5f • Take Profit After (Sec): %i\n",
-      profit, this->open_order_ptr->max_position_profit,
-      ::utils::integer_::seconds_to_clock(
-          profit_duration(this->loss_started_at))
-          .c_str(),
-      ::utils::integer_::seconds_to_clock(
-          profit_duration(this->profit_started_at))
-          .c_str(),
-      max_loss_ratio(this->open_order_ptr),
-      take_profit_after(this->open_order_ptr));
+  printf("Current: %.2f • Max: %.2f • Loss Duration: %s • Profit Duration: %s\n"
+         "Max Loss Ratio %+.5f • Take Profit After (Sec): %i\n",
+         profit, this->open_order_ptr->max_position_profit,
+         ::utils::integer_::seconds_to_clock(
+             profit_duration(this->loss_started_at))
+             .c_str(),
+         ::utils::integer_::seconds_to_clock(
+             profit_duration(this->profit_started_at))
+             .c_str(),
+         max_loss_ratio(this->open_order_ptr),
+         take_profit_after(this->open_order_ptr));
   std::cout << fmt.reset << std::endl;
 }
 #endif

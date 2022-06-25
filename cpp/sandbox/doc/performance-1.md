@@ -1,4 +1,4 @@
-### 2022-06-10:
+### 2022-06-27:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -15,6 +15,217 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-06-24:
+#### Remarks
+##### Stocks/ETFs
+* 4/6 could have cashed out at 2% return, but they had to wait til 3pm.
+* AAPL, one of the two who couldn't, almost just reached the 2% target.
+* High volatility expansion of the exit thresholds worked well.
+* I'm now waiting for each price movement average to reach 500K samples. Each
+  symbol averages about 40-50K per day.
+* As movement slowed, the thresholds shrank. This shrinkage should diminish as
+  the average's sample size increases.
+* I'll probably need to increase the coefficient as the one-sec variance
+  averages decrease.
+
+#### Next Thing(s) to Try
+
+### 2022-06-23:
+#### Remarks
+* Started the day with non-expanding exit prices (only 40x long-term one-sec
+  variance) and got raped.
+* Resolved: You MUST always expand the exit thresholds as volatility spikes. If
+  not, you WILL lose lots of money.
+* In fact, this is probably why the interest rate announcements wipe you out,
+  and that's why stopping the algorithm when volatility exceeds an threshold
+  amount makes sense.
+* We'll see if the increased sample size of the long-term one-sec variance
+  mixed with volatility expansion works better tomorrow.
+
+#### Next Thing(s) to Try
+
+### 2022-06-22:
+#### Remarks
+##### Stocks/ETFs
+* Day started off with good trending that would have probably led to a win if I
+  was staking the full amount. However, I was instead staking just one unit per
+  trade.
+* Consolidation later in the day led to the max loss.
+* I'm going to increase the max sample size for the price movement to 100K to
+  see if I can get a more static average and use a fixed multiple of that
+  throughout the day.
+
+### 2022-06-22:
+#### Remarks
+##### Stocks/ETFs
+* Time based exits didn't work.
+* Reverted to one-sec variance. This performed okay.
+* Gonna see how this is again while preventing trade opening when volatility is
+  >= 3.0
+* How does it peform across days? Should I just do martingale across days?
+* Maybe you can demonstrate that it profits over a long time and take to Oanda?
+
+
+#### Next Thing(s) to Try
+
+### 2022-06-16:
+#### Performance (STAGING)
+##### Stocks/ETFs
+AMZN
+```
+Wins: 11 (33.33%) • Losses: 22 • Total: 33
+Loss Streak => Current: 0 • Longest: 8 • Counts: {1: 4, 2: 1, 3: 1, 5: 1, 8: 1}
+Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 6, 2: 1, 3: 1}
+
+Current Balance: -436.18 • Max Balance: +19.14
+Current Loss Streak Deficit: +0.00 • Total Deficit: -455.32
+```
+
+TSLA
+```
+Wins: 14 (51.85%) • Losses: 13 • Total: 27
+Loss Streak => Current: 0 • Longest: 4 • Counts: {1: 1, 2: 2, 4: 2}
+Win  Streak => Current: 3 • Longest: 5 • Counts: {1: 2, 2: 2, 3: 1, 5: 1}
+
+Current Balance: +71.00 • Max Balance: +71.00
+Current Loss Streak Deficit: +0.00 • Total Deficit: +0.00
+```
+
+#### Remarks
+##### Stocks/ETFs
+* Max 1-sec variances in the first five minutes of trading:
+  * AMZN: 150-175% long-term
+  * TSLA: 175-215% long-term
+* Both AMZN and TSLA hit long loss streaks at the end of the day. TSLA escaped
+  it, AMZN didn't and closed with win rate of 33%, which is the first time it's
+  been <40%.
+* I'm curious to try a time-based take profit during periods of high volatility
+  mixed with martingale. We'll see how that goes
+* Something to note is that TSLA consistently does well.
+
+
+#### Next Thing(s) to Try
+
+### 2022-06-15:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day.
+* The fed raised interest rates at 1pm which sent prices crazy.
+* One-sec variance volatility hit absurd highs:
+  * AMZN - Short-term ~1000% the long-term
+  * TSLA - Short-term ~800% the long-term
+  variance.
+* In this instance and in prior similar outlier events, TaoBot has tended to
+  perform very poorly.
+* I'll compare this to the morning's volatility fluctuations and set a maximum
+  volatility condition to opening a position.
+* I still have high confidence in this algorithm's success potential. What the
+  interest rate hike demonstrates is that it still struggles in periods of
+  immense volatility.
+* I'll either have to figure out how to handle these heightened volatility
+  periods, or just keep out during them.
+* Here were today's results:
+
+  AMZN
+  ```
+  Wins: 16 (41.03%) • Losses: 23 • Total: 39
+  Loss Streak => Current: 1 • Longest: 6 • Counts: {1: 5, 2: 3, 3: 2, 6: 1}
+  Win  Streak => Current: 0 • Longest: 4 • Counts: {1: 7, 2: 1, 3: 1, 4: 1}
+
+  Current Balance: -1,413.21 • Max Balance: +51.53
+  Current Loss Streak Deficit: -176.82 • Total Deficit: -1,464.74
+  ```
+
+  TSLA
+  ```
+  Wins: 18 (40.91%) • Losses: 26 • Total: 44
+  Loss Streak => Current: 5 • Longest: 5 • Counts: {1: 8, 2: 3, 3: 1, 4: 1, 5: 1}
+  Win  Streak => Current: 0 • Longest: 2 • Counts: {1: 8, 2: 5}
+
+  Current Balance: -1,534.61 • Max Balance: +183.03
+  Current Loss Streak Deficit: -1,549.85 • Total Deficit: -1,717.64
+  ```
+* It's good to see that the win rate is still 40-60%.
+
+#### Next Thing(s) to Try
+### 2022-06-14:
+#### Remarks
+##### Stocks/ETFs
+* Re-introduced martingale has won two days in a row now. Today was greater
+  than yesterday.
+
+* I decreased the max expected loss first to 5, then to 4 after a couple of
+  hours. Here were the results:
+
+  AMZN
+  ```
+  Wins: 18 (43.90%) • Losses: 23 • Total: 41
+  Loss Streak => Current: 0 • Longest: 5 • Counts: {1: 5, 2: 2, 3: 3, 5: 1}
+  Win  Streak => Current: 1 • Longest: 3 • Counts: {1: 6, 2: 3, 3: 2}
+
+  Current Balance: +28.55 • Max Balance: +70.87
+  Current Loss Streak Deficit: +0.00 • Total Deficit: -42.32
+  ```
+
+  TSLA
+  ```
+  Wins: 25 (56.82%) • Losses: 19 • Total: 44
+  Loss Streak => Current: 0 • Longest: 3 • Counts: {1: 7, 2: 3, 3: 2}
+  Win  Streak => Current: 1 • Longest: 4 • Counts: {1: 4, 2: 4, 3: 3, 4: 1}
+
+  Current Balance: +84.51 • Max Balance: +139.67
+  Current Loss Streak Deficit: +0.00 • Total Deficit: -55.16
+  ```
+
+* Observation: I used to think that martingale would only work if you never
+  reached the max expected loss, which you should set to an amount that could
+  never realistically be reached. I think this is incorrect.
+
+  By instead setting the max expected loss to the median loss streak (3 or 4) a
+  few things will happen:
+  * Long win streaks will be far more profitable
+  * Most losses will be redeemed by wins
+  * The loss streaks that exceed the max expected loss will just be in the same
+    scenario as if the stakes were the same and maximized for each round.
+    However, they will be less costly than equal stake rounds because you'll be
+    building up to the max loss.
+  * Since every round is seeking to reclaim the total deficit, the first
+    redemptive win after the loss that exceeded the max expected loss, can be
+    succceeded by wins to reclaim the total loss.
+
+* I think the final max expected loss will be 3 or 4 and this should bring
+  daily returns to a consistent 1-2%.
+
+#### Next Thing(s) to Try
+
+### 2022-06-13:
+#### Remarks
+##### Stocks/ETFs
+* First day re-introducing martingale to the latest tao algorithm.
+* The win rates were 43.59 (AMZN) and 41.38% (TSLA)
+* The return was small because of low stake rounds.
+* I'm going to decrease the expected loss to increase the base quantity.
+* I'm expecting a loss, but the higher base quantity may be enough to increase
+  the day's return.
+
+#### Next Thing(s) to Try
+
+### 2022-06-10:
+#### Remarks
+##### Stocks/ETFs
+* Interesting day. AMZN won after 6 rounds, MSFT after 7.
+* However as predicted, most of the other assets slowly increased their losses
+  throughout the rest of the day as the price started to consolidate.
+* Near the day's end, I decided to try re-implementing martingale. I've noticed
+  over the last couple of weeks that the average win rate has been 40 - 60%
+  with few if any loss streaks exceeding 6. Maybe I have reached a point
+  runaway martingale losses are unlikely.
+* I tried this with AMZN and TSLA toward the day's end and AMZN recovered a
+  well-sized deficit.
+* I'll try again on Monday with just those two assets.
 
 #### Next Thing(s) to Try
 
