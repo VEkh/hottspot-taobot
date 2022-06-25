@@ -107,6 +107,7 @@ private:
   double secured_profit_ratio(const order_t *);
   double target_daily_profit();
   double volatility(const order_t *);
+  double volatility(const std::string &);
   exit_prices_t build_exit_prices(const order_t *);
   int order_duration(const order_t *);
   int profit_duration(const double);

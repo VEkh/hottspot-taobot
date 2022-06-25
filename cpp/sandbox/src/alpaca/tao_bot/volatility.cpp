@@ -2,10 +2,13 @@
 #define ALPACA__TAO_BOT_volatility
 
 #include "tao_bot.h" // Alpaca::TaoBot, order_t
+#include <string>    // std::string
 
 double Alpaca::TaoBot::volatility(const order_t *order_ptr) {
-  const std::string symbol_ = order_ptr->symbol;
+  return volatility(order_ptr->symbol);
+}
 
+double Alpaca::TaoBot::volatility(const std::string &symbol_) {
   const double one_second_variance =
       this->price_movements[symbol_].three_minute_one_second_variance.average;
 

@@ -5,6 +5,7 @@
 #include "current_price.cpp"            // current_price
 #include "hedge_symbol.cpp"             // hedge_symbol
 #include "tao_bot.h"                    // Alpaca::TaoBot, quote_t
+#include "volatility.cpp"               // volatility
 #include <ctime>                        // std::time
 #include <math.h>                       // abs
 
@@ -23,6 +24,10 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
       quotes_.back().price != quotes_.at(quotes_.size() - 2).price;
 
   if (!is_price_moving) {
+    return false;
+  }
+
+  if (volatility(this->symbol) > 4.0) {
     return false;
   }
 
