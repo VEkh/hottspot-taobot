@@ -10,8 +10,9 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp" // build_performance
-#include "write_performance.cpp" // write_performance
+#include "build_performance.cpp"     // build_performance
+#include "fetch_account_balance.cpp" // fetch_account_balance
+#include "write_performance.cpp"     // write_performance
 
 void Alpaca::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {
@@ -33,7 +34,8 @@ void Alpaca::TaoBot::reset_position() {
   this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
 
-  this->account_balance = fetch_account_balance(this->api_client);
+  this->account_balance =
+      fetch_account_balance(this->api_client, this->account_balance);
   this->performance = build_performance();
   write_performance();
 }

@@ -46,7 +46,8 @@ void Alpaca::TaoBot::open_pair_signaled_position() {
   };
 
   while (!open_order_opened) {
-    this->account_balance = fetch_account_balance(this->api_client);
+    this->account_balance =
+        fetch_account_balance(this->api_client, this->account_balance);
 
     const double quantity = compute_quantity(this->symbol);
 

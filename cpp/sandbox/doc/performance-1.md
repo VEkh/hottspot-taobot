@@ -1,9 +1,11 @@
-### 2022-06-27:
+### 2022-07-05:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 ##### Stocks/ETFs
+* Today's Max Gain:  $ • +$     (+%)
+* Today's Max Loss:  $ • -$     (-%)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 #### Stats (as of 2022-01-25)
@@ -15,6 +17,129 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-07-01:
+#### Performance
+##### Stocks/ETFs
+* Today's Max Gain:  $26,456.30 • +$0.00     (+0.00%)
+* Today's Max Loss:  $25,217.51 • -$1238.79  (-4.68%)
+* 4/6 won. Here were their maxes:
+  * AAPL: +$83.07  🥉
+  * AMZN: +$0.00
+  * MSFT: +$84.41  🥈
+  * QQQ:  +$80.94
+  * SPY:  +$292.50 🥇
+  * TSLA: +$0.00
+
+#### Remarks
+* This is the first day where the max profit never practically exceeded $0.00.
+* That's not good, but good to know it's possible.
+* I was almost sure that the day would trigger the emergency brake since it
+  didn't profit in the morning.
+* It almost did, but actually ended up near the day's high at day's end.
+* This dashes some confidence, but I still think it's worth trying it for
+  several days and observing results.
+
+##### Forex
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-06-30:
+#### Performance
+##### Stocks/ETFs
+* Today's Max:  $27,653.91 • +$2,498.48 (+9.93%)
+* Today's Loss: $24,812.34 • -$343.09   (-1.36%)
+* Rare day where only 6/6 won. Here were their maxes:
+  * AAPL: +$507.07
+  * AMZN: +$597.44 🥈
+  * MSFT: +$507.50
+  * QQQ:  +$554.63 🥉
+  * SPY:  +$507.50
+  * TSLA: +$685.78 🥇
+
+#### Remarks
+##### Stocks/ETFs
+* This might have been the highest high I've ever seen.
+* There were two consecutive long trending periods for the first two hours. One
+  bearish, the next bullish.
+* I think I'm ready to implement the group target and trailing stop. Target 3%,
+  trailing stop 1%.
+
+#### Next Thing(s) to Try
+
+### 2022-06-29:
+#### Performance
+##### Stocks/ETFs
+* Today's Max: +$27,573.12 • +$339.87 (+1.25%)
+
+#### Remarks
+##### Stocks/ETFs
+* Rare day where only 1/6 won. Here were their maxes:
+  * AAPL: +$192.80 • Total Deficit: -$180.81
+  * AMZN: +$522.52 • Total Deficit: -$756.28 🥇
+  * MSFT: +$10.02  • Total Deficit: -$217.07
+  * QQQ: +$0.00    • Total Deficit: -$591.73 🥈
+  * SPY: +$73.10   • Total Deficit: -$556.58 🥉
+  * TSLA: +$0.00   • Total Deficit: -$533.38
+* Interesting results. Collectively, the trading cluster reached a 1.25% return,
+  but only 2/5 attained / exceeded their target profit.
+* Does this mean that you should close trading when the cluster's target is
+  reached, or when an individual's target is reached? Maybe both?
+
+#### Next Thing(s) to Try
+
+### 2022-06-28:
+#### Performance
+##### Stocks/ETFs
+* Today's Max: $27,616.19 • +$1,743.15 (+6.74%)
+* **🚨 NOTE: Today's Maxes Indicate Most Likely High Earners 🚨**
+  * AAPL: +$279.48
+  * AMZN: +$459.84 🥈
+  * MSFT: +$157.75
+  * QQQ: +$328.06 🥉
+  * SPY: +$217.62
+  * TSLA: +$501.38 🥇
+
+#### Remarks
+##### Stocks/ETFs
+* Today was unusually trendy day. As a result 5/6, not only won, but also far
+  exceeded the min profit target.
+* Since today was particularly trendy, each asset had atypically long win
+  streaks. As such, their maxes should be a good indicator of which assets have
+  the greatest earning (and loss) potential.
+* You shouldn't count on most days to be like this.
+* Continue observing and looking for an attainable daily profit.
+* Samples increased by ~40K+ (AAPL by 43,463. Ended at 180,979)
+
+#### Next Thing(s) to Try
+
+### 2022-06-27:
+#### Performance
+##### Stocks/ETFs
+* Today's Max: $26,915.30 • +$1,070.76 (+4.14%)
+
+#### Remarks
+##### Stocks/ETFs
+* 3/6 won. Those three had the following maxes:
+  * AAPL: +$316.10 (+7.34%)  🥉
+  * AMZN: +$724.01 (+16.81%) 🥇
+  * TSLA: +$475.94 (+11.05%) 🥈
+* SPY who lost maxed at +$112.61 (+2.61%). MSFT and QQQ maxed at $0.00
+* The average total completed positions was about 15.
+* DO THIS:
+  * All week don't stop any bots.
+  * Record the max profit.
+  * Enhance the stop slipping profit algorithm to be able to close mid-trade, OR,
+    * To stop when the cumulative target profit has been reached. Not just the
+      target for each individual asset.
+* Again, exit price expansion during high volatility worked well, so keep that.
+* 40x 1-sec variance is still working well as each sample size increases, so
+  I'll probably stay here. However, MSFT still hit a 5-loss losing streak,
+  bolstering the long loss inevitability theory.
+* The samples increases by ~30-40K (AAPL ended at 137,516 samples)
 
 #### Next Thing(s) to Try
 

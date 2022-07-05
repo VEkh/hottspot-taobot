@@ -1,14 +1,17 @@
 #ifndef GLOBAL__types
 #define GLOBAL__types
 
-#include <map> // std::map
+#include <map>    // std::map
+#include <string> // std::string
 
 namespace Global {
 namespace t {
 struct account_balance_t {
-  double balance;
+  double balance = 0.0;
   double margin_buying_power;
   double margin_multiplier;
+  double max_balance = 0.00;
+  long int timestamp = 0;
 };
 
 struct candlestick_t {

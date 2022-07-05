@@ -81,6 +81,9 @@ private:
   std::vector<position_t> closed_positions;
 
   account_balance_t fetch_account_balance(Alpaca::Client &);
+  account_balance_t fetch_account_balance(Alpaca::Client &,
+                                          const account_balance_t &);
+
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
@@ -164,6 +167,7 @@ private:
   void open_pair_signaled_position();
   void open_positions();
   void reset_position();
+  void set_cached_account_balance();
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);
   void set_close_position_prices();
   void set_execution_price(Alpaca::Client &, order_t *);
