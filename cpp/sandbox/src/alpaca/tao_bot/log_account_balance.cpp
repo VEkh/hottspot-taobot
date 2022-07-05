@@ -1,39 +1,53 @@
 #ifndef ALPACA__TAO_BOT_log_account_balance
 #define ALPACA__TAO_BOT_log_account_balance
 
-#include "lib/formatted.cpp"       // Formatted
-#include "tao_bot.h"               // Alpaca::TaoBot
-#include "target_daily_profit.cpp" // target_daily_profit
-#include <iostream>                // std::cout, std::endl
-#include <stdio.h>                 // printf
+#include "build_account_exit_prices.cpp" // build_account_exit_prices
+#include "lib/formatted.cpp"             // Formatted
+#include "tao_bot.h"                     // Alpaca::TaoBot
+#include <iostream>                      // std::cout, std::endl
+#include <stdio.h>                       // printf
 
-void Alpaca::TaoBot::log_account_balance(
-    account_balance_t account_balance_,
-    account_balance_t original_account_balance_, const char *label) {
-  const double balance_delta =
-      account_balance_.balance - original_account_balance_.balance;
+void Alpaca::TaoBot::log_account_balance() {
+  const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
   const double balance_delta_percentage =
-      (balance_delta / original_account_balance_.balance) * 100.0;
+      (exit_prices_.current_profit / this->original_account_balance.balance) *
+      100.0;
+
+  const double max_balance_delta_percentage =
+      (exit_prices_.max_profit / this->original_account_balance.balance) *
+      100.0;
 
   Formatted::Stream log_color = fmt.green;
 
-  if (account_balance_.balance < original_account_balance_.balance) {
+  if (exit_prices_.current_profit < 0) {
     log_color = fmt.red;
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("💰 %s\n", label);
+  printf("💰 Account Balance\n");
   std::cout << fmt.reset << fmt.bold << log_color;
 
-  printf("Current Balance:     $%'.2f (%+'.2f) (%+'.2f%%)\n",
-         account_balance_.balance, balance_delta, balance_delta_percentage);
+  printf("Current Balance:       $%'.2f (%+'.2f) (%+'.2f%%)\n",
+         this->account_balance.balance, exit_prices_.current_profit,
+         balance_delta_percentage);
 
-  printf("Original Balance:    $%'.2f\n", original_account_balance_.balance);
-  printf("Margin Buying Power: $%'.2f\n", account_balance_.margin_buying_power);
-  printf("Target Asset Max Profit: $%'.2f\n",
-         target_daily_profit() / (1 - this->TARGET_DAILY_PROFIT_TRAILING_STOP));
-  printf("Target Asset Profit: $%'.2f\n", target_daily_profit());
+  printf("Max Balance:           $%'.2f (%+'.2f) (%+'.2f%%)\n",
+         this->account_balance.max_balance, exit_prices_.max_profit,
+         max_balance_delta_percentage);
+
+  printf("Original Balance:      $%'.2f\n",
+         this->original_account_balance.balance);
+
+  printf("Margin Buying Power:   $%'.2f\n",
+         this->account_balance.margin_buying_power);
+
+  printf("Stop Loss Profit:      $%'.2f\n", exit_prices_.stop_loss_profit);
+
+  printf("Target Account Profit: $%'.2f\n", exit_prices_.target_account_profit);
+
+  printf("Target Max Profit:     $%'.2f%s\n", exit_prices_.target_max_profit,
+         exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "");
 
   std::cout << fmt.reset << std::endl;
 }

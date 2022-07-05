@@ -22,6 +22,7 @@ public:
 
 private:
   using account_balance_t = Global::t::account_balance_t;
+  using account_exit_prices_t = Alpaca::t::account_exit_prices_t;
   using candlestick_t = Global::t::candlestick_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using hedge_info_t = Alpaca::t::hedge_info_t;
@@ -41,7 +42,7 @@ private:
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.05;
   const double TARGET_DAILY_PROFIT = 0.02;
-  const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.2;
+  const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.01;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 5e2;
 
@@ -84,6 +85,8 @@ private:
   account_balance_t fetch_account_balance(Alpaca::Client &,
                                           const account_balance_t &);
 
+  account_exit_prices_t build_account_exit_prices();
+
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
@@ -109,7 +112,7 @@ private:
   double profit_percentage(const order_t *);
   double profit_started_at = INFINITY;
   double secured_profit_ratio(const order_t *);
-  double target_daily_profit();
+  double target_daily_profit(const double);
   double volatility(const order_t *);
   double volatility(const std::string &);
   exit_prices_t build_exit_prices(const order_t *);
@@ -148,8 +151,7 @@ private:
   void load_performance();
   void load_price_movement(const std::string &);
   void load_quotes(const std::string &);
-  void log_account_balance(account_balance_t, account_balance_t, const char *);
-  void log_account_balances();
+  void log_account_balance();
   void log_end_of_trading_period();
   void log_performance();
   void log_position(const order_t *, const order_t *, const char *);

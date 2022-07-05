@@ -38,6 +38,14 @@ enum order_type_t {
   MARKET,
 };
 
+struct account_exit_prices_t {
+  double current_profit = 0.00;
+  double max_profit = 0.00;
+  double stop_loss_profit = 0.00;
+  double target_account_profit = 0.00;
+  double target_max_profit = 0.00;
+};
+
 struct hedge_info_t {
   order_action_t action;
   std::string symbol;

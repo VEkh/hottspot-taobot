@@ -42,7 +42,7 @@ void Alpaca::TaoBot::watch() {
     set_price_movements();
     set_cached_account_balance();
 
-    log_account_balances();
+    log_account_balance();
     log_quotes();
     log_price_movements();
     log_positions();

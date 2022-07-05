@@ -4,12 +4,11 @@
 #include "tao_bot.h"                   // Alpaca::TaoBot
 #include "tradeable_symbols_count.cpp" // tradeable_symbols_count
 
-double Alpaca::TaoBot::target_daily_profit() {
+double Alpaca::TaoBot::target_daily_profit(const double return_ratio) {
   const double original_account_balance =
       this->original_account_balance.balance;
 
-  return (original_account_balance * this->TARGET_DAILY_PROFIT) *
-         (1.0 / tradeable_symbols_count());
+  return original_account_balance * return_ratio;
 }
 
 #endif

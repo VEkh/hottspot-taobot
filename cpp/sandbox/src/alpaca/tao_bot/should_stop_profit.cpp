@@ -1,23 +1,15 @@
 #ifndef ALPACA__TAO_BOT_should_stop_profit
 #define ALPACA__TAO_BOT_should_stop_profit
 
-#include "closed_position_profit.cpp"  // closed_position_profit
-#include "order_win_result.cpp"        // order_win_result
-#include "tao_bot.h"                   // Alpaca::TaoBot, order_win_result_t
-#include "target_daily_profit.cpp"     // target_daily_profit
-#include "tradeable_symbols_count.cpp" // tradeable_symbols_count
-#include <algorithm>                   // std::max
+#include "build_account_exit_prices.cpp" // build_account_exit_prices
+#include "tao_bot.h" // Alpaca::TaoBot, account_exit_prices_t
 
 bool Alpaca::TaoBot::should_stop_profit() {
-  const double current_balance = this->performance.current_balance;
-  const double max_profit = this->performance.max_balance;
-  const double max_loss =
-      max_profit * (1 - this->TARGET_DAILY_PROFIT_TRAILING_STOP);
-  const double min_profit =
-      target_daily_profit() / (1 - this->TARGET_DAILY_PROFIT_TRAILING_STOP);
+  const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
-  return max_profit >= min_profit && current_balance >= target_daily_profit() &&
-         current_balance < max_loss;
+  return exit_prices_.max_profit >= exit_prices_.target_max_profit &&
+         exit_prices_.current_profit >= exit_prices_.target_account_profit &&
+         exit_prices_.current_profit < exit_prices_.stop_loss_profit;
 }
 
 #endif
