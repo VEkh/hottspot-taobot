@@ -6,7 +6,7 @@
 #include <ctime>                     // std::time
 
 void Alpaca::TaoBot::set_cached_account_balance() {
-  const int CACHE_EXPIRATION = 1 * 60;
+  const int CACHE_EXPIRATION = 20;
 
   if ((std::time(nullptr) - this->account_balance.timestamp) <
       CACHE_EXPIRATION) {

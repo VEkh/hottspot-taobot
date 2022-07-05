@@ -1,4 +1,4 @@
-### 2022-07-05:
+### 2022-07-06:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -17,6 +17,37 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-07-05:
+#### Performance
+##### Stocks/ETFs
+* Today's Max Gain:  $27,222.73 • +$854.20     (+3.24%)
+* Today's Max Loss:  $26,105.12 • -$263.38     (-1.00%)
+* Return (STAGING):  +$547.8 (+2.08% Account)
+
+#### Remarks
+##### Stocks/ETFs
+* 4/6 won
+* Asset Maxes:
+  * AAPL: +$35.40
+  * AMZN: +$196.20 🥈
+  * MSFT: +$136.40 🥉
+  * QQQ:  +$7.41
+  * SPY:  +$118.88
+  * TSLA: +$409.60 🥇
+* The target profit was reached and the trailing stop was breached but didn't
+  exit for two reasons:
+  1. Not all instances of TaoBot recorded the attained target proft before the
+     profit had slipped.
+  2. `should_close_position` wasn't closing if the `should_stop_profit` is true
+* I've made the appropriate changes and will run on the Hedge account for the
+  rest of the day to compare results and see if I can figure out a way to
+  profit during consolidation.
+* As expected, Hedge Account lost -2.32% after picking up where the Main
+  Account exited.
+* We'll try the same again tomorrow.
 
 #### Next Thing(s) to Try
 

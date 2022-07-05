@@ -13,7 +13,7 @@ Alpaca::TaoBot::build_exit_prices(const order_t *open_order_ptr_) {
       price_movement.short_term_three_minute_one_second_variance.average,
       price_movement.three_minute_one_second_variance.average);
 
-  const double exit = 30.0 * one_sec_variance;
+  const double exit = 40.0 * one_sec_variance;
 
   exit_prices_t out;
   out.max_loss = -exit;
