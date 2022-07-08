@@ -5,7 +5,7 @@
 #include "deps.cpp"                 // json, nlohmann
 #include "lib/utils/json.cpp"       // ::utils::json
 #include "tao_bot.h"                // Alpaca::TaoBot
-#include <algorithm>                // std::max
+#include <algorithm>                // std::max, std::min
 #include <ctime>                    // std::time
 #include <string>                   // std::stod, std::string
 
@@ -15,6 +15,9 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::fetch_account_balance(
 
   account_balance_.max_balance =
       std::max(account_balance_.balance, previous_balance.max_balance);
+
+  account_balance_.min_balance =
+      std::min(account_balance_.balance, previous_balance.min_balance);
 
   return account_balance_;
 }
@@ -37,6 +40,7 @@ Alpaca::TaoBot::fetch_account_balance(Alpaca::Client &api_client_ref) {
         .margin_buying_power = std::stod(margin_buying_power),
         .margin_multiplier = std::stod(margin_multiplier),
         .max_balance = balance_d,
+        .min_balance = balance_d,
         .timestamp = std::time(nullptr),
     };
   } catch (nlohmann::detail::type_error &) {

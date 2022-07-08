@@ -18,6 +18,12 @@ void Alpaca::TaoBot::log_account_balance() {
       (exit_prices_.max_profit / this->original_account_balance.balance) *
       100.0;
 
+  const double max_loss = this->account_balance.min_balance -
+                          this->original_account_balance.balance;
+
+  const double max_loss_percentage =
+      (max_loss / this->original_account_balance.balance) * 100.0;
+
   Formatted::Stream log_color = fmt.green;
 
   if (exit_prices_.current_profit < 0) {
@@ -35,6 +41,9 @@ void Alpaca::TaoBot::log_account_balance() {
   printf("Max Balance:           $%'.2f (%+'.2f) (%+'.2f%%)\n",
          this->account_balance.max_balance, exit_prices_.max_profit,
          max_balance_delta_percentage);
+
+  printf("Min Balance:           $%'.2f (%+'.2f) (%+'.2f%%)\n",
+         this->account_balance.min_balance, max_loss, max_loss_percentage);
 
   printf("Original Balance:      $%'.2f\n",
          this->original_account_balance.balance);

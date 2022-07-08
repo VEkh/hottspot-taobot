@@ -1,4 +1,4 @@
-### 2022-07-08:
+### 2022-07-11:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -19,6 +19,45 @@
 ##### Stocks/ETFs
 
 #### Next Thing(s) to Try
+
+### 2022-07-08:
+#### Performance
+##### Stocks/ETFs
+* Today's Max Gain:  $26,875.43 (+$1,080.24) (+4.19%)
+* Today's Max Loss:  $25,470.13 (-$325.06)   (-1.26%)
+* Return (STAGING): +$816.90 (+3.17% Account)
+
+#### Remarks
+##### Stocks/ETFs
+* The main account reached its target with the noted stats.
+* 6/6 won. Today trended up heavily.
+* Cash Flows:
+  * AAPL: +$290.82
+  * AMZN: +$769.82   🥈
+  * MSFT: +$241.44
+  * QQQ:  +$398.76   🥉
+  * SPY:  +$270.83
+  * TSLA: +$1,132.91 🥇
+* I'm toying with the idea of only trading the highest cash flow assets.
+  However, if I had done that today with AMZN and TSLA on the beta account, I
+  would have been down.
+* It's probably best to continue spreading the risk across multiple assets.
+
+* After the main account closed and restarted on the beta account, here was its
+  return:
+  * Today's Max Gain:  $29,360.52 (+386.44)  (+1.33%)
+  * Today's Max Loss:  $25,470.13 (-$685.07) (-2.36%)
+  * Return (STAGING):  +$55.31 (+0.19% Account)
+
+* The assets spent much time consolidating and some time trending so this
+  tracks.
+
+#### Friday Report
+* All in all, today was a good week. 3/4 days won, two of them met / exceeded
+  the trailing stop daily threshold.
+* It still remains to be seen whether cycling through the exit thresholds helps
+  eliminate or reduce the gravity of loss days.
+* This is a good intro into the weekend and MiniConf week.
 
 ### 2022-07-07:
 #### Performance
