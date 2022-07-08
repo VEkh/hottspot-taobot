@@ -16,6 +16,7 @@
 #include <algorithm>                  // std::max
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map
+#include <math.h>                     // abs
 #include <stdio.h>                    // printf, puts
 
 void Alpaca::TaoBot::log_performance() {
@@ -87,44 +88,17 @@ void Alpaca::TaoBot::log_performance() {
     printf("%+.2f", profit);
   }
 
-  puts("]\n");
+  puts("]");
 
-  printf("Runtime:Win Rate: [");
-
-  double running_loss_count = 0;
-  double running_total_profit = 0;
-  double running_win_count = 0;
+  double total_cash_moved = 0;
 
   for (int i = 0; i < l; i++) {
     const position_t position = this->closed_positions[i];
 
-    if (i != 0) {
-      printf(", ");
-    }
-
-    switch (order_win_result(position)) {
-    case order_win_result_t::LOSS: {
-      running_loss_count++;
-      break;
-    }
-    case order_win_result_t::WIN: {
-      running_win_count++;
-      break;
-    }
-    }
-
-    const double win_rate =
-        (running_win_count / (running_win_count + running_loss_count));
-
-    running_total_profit += closed_position_profit(position);
-
-    printf("{ %s • %.3f • %.2f }",
-           ::utils::integer_::seconds_to_clock(position.close_order.runtime)
-               .c_str(),
-           win_rate, running_total_profit);
+    total_cash_moved += abs(closed_position_profit(position));
   }
 
-  puts("]");
+  printf("Total Cash Moved: %+'.2f\n", total_cash_moved);
 
   std::cout << fmt.reset << std::endl;
 }
