@@ -1,4 +1,4 @@
-### 2022-07-06:
+### 2022-07-08:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -17,6 +17,46 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-07-07:
+#### Performance
+##### Stocks/ETFs
+* Today's Max Gain:  $26,252.44 (+$633.68) (+2.47%)
+* Today's Max Loss:  $25,138.09 (-$480.67) (-1.88%)
+* Return (STAGING): +$201.74 (+0.79% Account)
+
+#### Remarks
+##### Stocks/ETFs
+* 5/6 won
+* However AMZN lost and was consolidating for much of the morning so I
+  hesistate to call it a victory.
+* I won't feel safe until I can demonstrate that a strategy profits during
+  consolidation.
+* I'll clear performance and watch again tomorrow.
+
+#### Next Thing(s) to Try
+
+### 2022-07-06:
+#### Performance
+##### Stocks/ETFs
+* Today's Max Gain:  $26,897.89 • +$0.00     (+0.00%)
+* Today's Max Loss:  $24,959.87 • -$1,938.02 (-7.21%)
+* Return (STAGING):  -$1,234.56 (-4.59% Account)
+
+
+#### Remarks
+##### Stocks/ETFs
+* The morning started with the exact movement that would lead to major loss:
+  consolidation at the exact height of the exit prices.
+* When the -5% emergency brake fired, I restarted with an adjustment:
+  * Cycle through a series of 1-sec variance multipliers: 20x, 30x, 40x.
+* After a couple of hours it was actually profitting. Then at 1pm, volatility
+  spiked and started incurring loss.
+* However, by the end of the day it was about +0.5% from the restart.
+* We'll see if this is an adequate defense against sharp fluctuations or I just
+  got lucky with trending.
 
 #### Next Thing(s) to Try
 
