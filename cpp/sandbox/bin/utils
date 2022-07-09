@@ -1,0 +1,13 @@
+#!/bin/bash
+
+function to_lower() {
+  echo -e "$1" | awk '{ print toupper($0) }'
+}
+
+function to_title() {
+  echo -e "$1" | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
+}
+
+function to_upper() {
+  echo -e "$1" | awk '{ print toupper($0) }'
+}

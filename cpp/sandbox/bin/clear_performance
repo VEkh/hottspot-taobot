@@ -7,6 +7,9 @@ fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
+# shellcheck disable=1091
+source "$app_dir/bin/utils" # to_upper
+
 performance_dir="$app_dir/data/$project/performance"
 
 if [[ $project = "bin" ]]; then
@@ -22,7 +25,7 @@ shopt -s extglob
 mkdir -p "$performance_dir"
 
 function clear_performance() {
-  symbol="${1^^}"
+  symbol="$(to_upper "$1")"
 
   echo "{}" > "$performance_dir/$symbol.json"
   echo -e "\n${fmt_bold}${fmt_yellow}Cleared $symbol's performance${fmt_reset}\n"
@@ -34,7 +37,8 @@ case $1 in
     ;;
 
   *)
-    symbols=($(cat "$app_dir/bin/$project/symbols"))
+    symbols=()
+    while IFS="" read -r line; do symbols+=("$line"); done < <(cat "$app_dir/bin/$project/symbols")
 
     for symbol in "${symbols[@]}"
     do

@@ -1,7 +1,5 @@
 #!/bin/bash
 
-
-app_dir="$(realpath "$(dirname "$0")/../")"
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_reset="\033[0m"
@@ -9,24 +7,33 @@ fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
 function build_project() {
-  project="$1"
+  # shellcheck disable=1091
+  source "$app_dir/bin/utils" # to_title
 
-  echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}${project^}${fmt_reset}"
+  project="$1"
+  project_title=$(to_title "$project")
+
+  echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}${project_title}${fmt_reset}"
 
   mkdir -p "$app_dir/build/"
 
-  g++ \
-    -D"APP_DIR=\"$app_dir\"" \
-    -iquote"$app_dir" \
-    -iquote"$app_dir/src" \
-    -isystem./deps/build/include \
-    -std=c++17 \
-    -o "$app_dir/build/$project" \
-    "$app_dir/src/$project/$project.cpp" \
-    -lcrypto \
-    -lcurl \
-    -lpthread \
-    -lssl
+  args=(
+    "-D'APP_DIR=\"$app_dir\"'"
+    "-iquote'$app_dir'"
+    "-iquote'$app_dir/src'"
+    "-isystem'$app_dir/deps/build/include'"
+    "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-isystem/opt/homebrew/opt/openssl@3/include")"
+    "-std=c++17"
+    "-o '$app_dir/build/$project'"
+    "$app_dir/src/$project/$project.cpp"
+    "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-L/opt/homebrew/opt/openssl@3/lib")"
+    "-lcrypto"
+    "-lcurl"
+    "-lpthread"
+    "-lssl"
+  )
+
+  echo -e "${args[@]}" | xargs g++
 }
 
 if [[ $project = "bin" ]]

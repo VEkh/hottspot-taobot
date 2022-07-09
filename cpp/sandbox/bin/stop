@@ -1,12 +1,16 @@
 #!/bin/bash
 # shellcheck disable=2009
 
+app_dir=$(realpath "$(dirname "$0")/../../")
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_green="\033[32m"
 fmt_red="\033[31m"
 fmt_reset="\033[0m"
 project=$(dirname "$0" | xargs basename)
+
+# shellcheck disable=1091
+source "$app_dir/bin/utils" # to_lower, to_upper
 
 if [[ $project = "bin" ]]; then
   cmd=$(basename "$0")
@@ -23,8 +27,8 @@ echo -e "${fmt_bold}"
 
 case $1 in
   +([[:alpha:]_[:alpha:]]))
-    symbol="${1^^}"
-    state=$(ps aux | grep "[t]ao_bot" | grep "$project" | grep -i "${symbol,,}")
+    symbol="$(to_upper "$1")"
+    state=$(ps aux | grep "[t]ao_bot" | grep "$project" | grep -i "$(to_lower "$symbol")")
 
     if [[ -z $state ]]
     then
@@ -32,7 +36,7 @@ case $1 in
     else
       echo -e "${fmt_cyan}🛑 Stopping TaoBot for $symbol${fmt_reset}"
 
-      ps aux | grep "[t]ao_bot" | grep "$project"  | grep -i "${symbol,,}" |
+      ps aux | grep "[t]ao_bot" | grep "$project"  | grep -i "$(to_lower "$symbol")" |
       awk '{print $2}' | xargs kill
     fi
 

@@ -9,12 +9,13 @@
 #include <ratio>    // std::nano
 #include <sstream>  // std::ostringstream
 #include <stdlib.h> // getenv, setenv, unsetenv
+#include <string>   // std::string
 #include <time.h>   // localtime, strftime, struct tm, time, time_t
 #include <vector>   // std::vector
 
 namespace utils {
 namespace time_ {
-unsigned long epoch(const char *duration = "seconds") {
+unsigned long epoch(const std::string duration = "seconds") {
   std::chrono::duration<long, std::nano> now_in_nano =
       std::chrono::system_clock::now().time_since_epoch();
 

@@ -1,7 +1,6 @@
 #!/bin/bash
 # shellcheck disable=2016
 
-app_dir="$(realpath "$(dirname "$0")/../")"
 file_args="${*}"
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
@@ -10,12 +9,16 @@ fmt_red="\033[31m"
 fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 
+function build_app_dir() {
+  echo -e "$(realpath "$(dirname "$0")/../")"
+}
+
 function install_apt_packages() {
   to_install=()
 
   for arg in "$@"; do
     if ! (dpkg -l | grep "$arg" | awk '{print $2}' | grep -q "^$arg\(:\w\+\)\?$"); then
-      to_install+=($arg)
+      to_install+=("$arg")
     fi
   done
 
@@ -48,6 +51,8 @@ function install_asdf() {
 }
 
 function install_boost() {
+  app_dir=$(build_app_dir)
+
   [ -d "$app_dir/deps/boost" ] && return 0
 
   log_install_start "⚡ Boost"
@@ -57,17 +62,40 @@ function install_boost() {
   git clone --recursive \
     "https://github.com/boostorg/boost.git" "$app_dir/deps/boost"
 
-  cd "$app_dir/deps/boost/" || return 0
+  cmd="cd $app_dir/deps/boost/"
+  cmd+=" && ./bootstrap.sh"
+  cmd+=" && ./b2 install --prefix=\"$app_dir/deps/build/\""
 
-  ./bootstrap.sh
+  sh -c "$cmd"
+}
 
-  ./b2 install --prefix="$app_dir/deps/build/"
+function install_brew_packages() {
+  if [[ $(which brew) =~ .*not\sfound.* ]]; then
+    log_install_start "🍺 Homerew Package Installer"
+    /bin/bash -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  to_install=()
+
+  for arg in "$@"; do
+    if ! (brew list | grep "$arg" | grep -q "^$arg\(:\w\+\)\?$"); then
+      to_install+=("$arg")
+    fi
+  done
+
+  [[ "${#to_install[*]}" = "0" ]] && return 0
+
+  # log_install_start "${to_install[*]}"
+
+  log_install_start "${to_install[*]}" && \
+  brew install "${to_install[@]}"
 }
 
 function install_cpp_dependencies() {
   log_install_start "C++ Dependencies"
 
-  mkdir -p "$app_dir/deps/"
+  mkdir -p "$(build_app_dir)/deps/"
 
   install_boost
   install_nlohmann_json
@@ -89,6 +117,8 @@ function install_etrade_dependencies() {
 }
 
 function install_nlohmann_json() {
+  app_dir=$(build_app_dir)
+
   [ -d "$app_dir/deps/nlohmann" ] && return 0
 
   log_install_start "{} nlohmann/json"
@@ -156,7 +186,7 @@ function install_ruby_gems() {
 
   for arg in "$@"; do
     if ! (gem list | grep "$arg" | awk '{print $1}' | grep -q "^$arg$"); then
-      to_install+=($arg)
+      to_install+=("$arg")
     fi
   done
 
@@ -169,8 +199,13 @@ function log_install_start() {
   echo -e "${fmt_bold}${fmt_yellow}📦 Installing ${fmt_reset}${fmt_cyan}$1${fmt_reset}"
 }
 
-sudo apt-get update
-install_apt_packages gcc g++ libcurl4-openssl-dev libssl-dev openssl python3
+if [[ $OSTYPE =~ ^linux.* ]]; then
+  sudo apt-get update
+  install_apt_packages gcc g++ libcurl4-openssl-dev libssl-dev openssl python3
+fi
+
+[[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils openssl "python@3.10"
+
 install_cpp_dependencies
 
 echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"

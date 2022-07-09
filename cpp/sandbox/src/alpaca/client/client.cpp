@@ -13,7 +13,7 @@
 #include <map>    // std::map
 #include <string> // std::string
 
-Alpaca::Client::Client(std::map<std::string, std::string> flags_ = {}) {
+Alpaca::Client::Client(std::map<std::string, std::string> flags_) {
   this->flags = flags_;
   load_config();
 }

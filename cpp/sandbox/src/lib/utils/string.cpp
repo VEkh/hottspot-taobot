@@ -78,8 +78,8 @@ std::vector<std::string> split(std::string input, const char *delimiter) {
   int match_position = suffix.find(delimiter);
 
   while (match_position != -1 && suffix != "") {
-    if (delimiter == "") {
-      match = suffix.substr(0, match_position || 1);
+    if (std::string(delimiter) == "") {
+      match = suffix.substr(0, match_position ? match_position : 1);
     } else {
       match = suffix.substr(0, match_position);
     }

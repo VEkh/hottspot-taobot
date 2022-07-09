@@ -6,6 +6,9 @@ fmt_red="\033[31m"
 fmt_reset="\033[0m"
 project=$(dirname "$0" | xargs basename)
 
+# shellcheck disable=1091
+source "$app_dir/bin/utils" # to_upper
+
 if [[ $project = "bin" ]]; then
   cmd=$(basename "$0")
 
@@ -17,7 +20,7 @@ fi
 
 if [[ "$*" =~ .*--clear-performance.* ]]
 then
-  symbol="${1^^}"
+  symbol="$(to_upper "$1")"
   "$app_dir/bin/$project/clear_performance" "$symbol"
 fi
 

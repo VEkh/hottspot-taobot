@@ -30,7 +30,7 @@ public:
   using quote_t = Alpaca::t::quote_t;
   using tcp = net::ip::tcp;
 
-  Client(std::map<std::string, std::string>);
+  Client(std::map<std::string, std::string> = {});
 
   CurlClient place_order(order_t *order);
 
