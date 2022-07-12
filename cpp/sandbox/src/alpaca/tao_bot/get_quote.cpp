@@ -6,6 +6,7 @@
 #include "lib/formatted.cpp"       // Formatted
 #include "read_streamed_quote.cpp" // read_streamed_quote
 #include "tao_bot.h"               // Alpaca::TaoBot, quote_t
+#include <iostream>                // std::cout, std::endl
 #include <string>                  // std::string
 
 Alpaca::TaoBot::quote_t Alpaca::TaoBot::get_quote(const std::string symbol_) {

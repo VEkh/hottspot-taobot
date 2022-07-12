@@ -15,6 +15,7 @@ void print_usage() {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"log_returns                  ", "Print cumulative return"},
+      {"stream_account               ", "Stream account info"},
       {"stream_quotes <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
       {"tao_bot <SYMBOL> <QUANTITY>",
        "Launch trading bot for the given currency pair"},
@@ -91,6 +92,16 @@ int main(int argc, char *argv[]) {
 
   if (command == "log_returns") {
     Alpaca::Returns::log();
+
+    exit(0);
+  }
+
+  if (command == "stream_account") {
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Alpaca::Client alpaca_client(flags);
+    alpaca_client.stream_account();
 
     exit(0);
   }

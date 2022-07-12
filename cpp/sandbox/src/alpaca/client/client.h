@@ -43,6 +43,7 @@ public:
 
   quote_t parse_quote(const std::string &);
 
+  void stream_account();
   void stream_quotes(int, char *[]);
 
 private:
