@@ -1,4 +1,4 @@
-### 2022-07-11:
+### 2022-07-12:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -19,6 +19,28 @@
 ##### Stocks/ETFs
 
 #### Next Thing(s) to Try
+
+### 2022-07-11:
+#### Performance
+##### Stocks/ETFs (STAGING)
+* Today's Max Gain:  $27,402.86 (+811.22) (+3.05%)
+* Today's Max Loss:  $26,265.89 (-325.75) (-1.23%)
+* Return: +$435.96   (+1.67% Account)
+
+#### Remarks
+##### Stocks/ETFs
+* 4/6 won
+* The target max profit was reached, but it didn't close the stop profit was
+  breached. This is because not all TaoBot instances recorded the exceeded max
+  profit in time.
+* I'm going to need to create a separate process that "streams" the account
+  balance by polling it over a short interval.
+* I'll presist this to a JSON file and each TaoBot instance will read from it
+  and fetch as a fallback.
+* This way, hopefully all instances exit when they should.
+
+#### Next Thing(s) to Try
+* Stream account balance in separate process.
 
 ### 2022-07-08:
 #### Performance
