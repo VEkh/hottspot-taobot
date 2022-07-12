@@ -81,9 +81,9 @@ private:
   std::map<std::string, std::vector<quote_t>> quotes;
   std::vector<position_t> closed_positions;
 
-  account_balance_t fetch_account_balance(Alpaca::Client &);
-  account_balance_t fetch_account_balance(Alpaca::Client &,
-                                          const account_balance_t &);
+  account_balance_t get_account_balance(Alpaca::Client &);
+  account_balance_t get_account_balance(Alpaca::Client &,
+                                        const account_balance_t &);
 
   account_exit_prices_t build_account_exit_prices();
 
@@ -121,7 +121,9 @@ private:
   int runtime();
   int take_profit_after(const order_t *);
   int tradeable_symbols_count();
+  json fetch_account_balance(Alpaca::Client &);
   json fetch_order(Alpaca::Client &, const order_t *);
+  json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
@@ -169,7 +171,6 @@ private:
   void open_pair_signaled_position();
   void open_positions();
   void reset_position();
-  void set_cached_account_balance();
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);
   void set_close_position_prices();
   void set_execution_price(Alpaca::Client &, order_t *);
@@ -185,6 +186,7 @@ private:
   void set_profit_started_at();
   void set_stop_loss_signal();
   void set_status(Alpaca::Client &, order_t *order);
+  void update_account_balance();
   void watch();
   void write_performance();
   void write_price_movement(const std::string &, const price_movement_t &);

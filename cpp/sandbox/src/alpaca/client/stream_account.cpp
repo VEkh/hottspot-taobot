@@ -17,11 +17,11 @@ void Alpaca::Client::stream_account() {
 
     try {
       account_json = ::utils::json::parse_with_catch(
-          fetch_account(), "ALPACA__TAO_BOT_fetch_account_balance");
+          fetch_account(), "ALPACA__CLIENT_stream_account");
 
     } catch (nlohmann::detail::type_error &) {
       std::string error_message = Formatted::error_message(std::string(
-          "[ALPACA__TAO_BOT_fetch_account_balance]: "
+          "[ALPACA__CLIENT_stream_account]: "
           "nlohmann::detail::type_error when fetching quote. Trying again."));
 
       std::cout << error_message << fmt.reset << std::endl;
