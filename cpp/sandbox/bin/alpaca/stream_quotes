@@ -1,0 +1,112 @@
+#!/bin/bash
+# shellcheck disable=2009
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_normal="\033[10m"
+fmt_reset="\033[0m"
+fmt_underline="\033[4m"
+fmt_yellow="\033[33m"
+project=$(dirname "$0" | xargs basename)
+
+shopt -s extglob
+echo -e "${fmt_bold}${fmt_cyan}"
+date
+echo
+
+function get_status() {
+  ps aux | grep --color "[s]tream_quotes" | grep -vE "heartbeat|status|stop" | grep --color "$project"
+}
+
+function print_status() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}✅ No quotes are streaming"
+  else
+    printf "%b" "$fmt_reset"
+    get_status
+  fi
+}
+
+function start_if_stopped() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}😴 No quotes are streaming. Starting stream.\n${fmt_reset}"
+    start_stream
+  else
+    echo -e "${fmt_cyan}💖 Quotes are streaming. Doing nothing.${fmt_reset}"
+  fi
+}
+
+function start_stream() {
+  all_symbols=($(cat "$app_dir/bin/$project/symbols"))
+  log_dir="$app_dir/log/$project"
+  symbols=("${@:-${all_symbols[@]}}")
+
+  mkdir -p "$log_dir"
+
+  log_file="$log_dir/quote_stream.log"
+
+  echo -e "${fmt_bold}${fmt_yellow}Starting Quote Stream"\
+    "for ${fmt_normal}${fmt_cyan}${symbols[*]}"
+
+  "$app_dir/build/$project" stream_quotes "${symbols[@]}" > "$log_file" 2>&1 &
+}
+
+function stop_stream() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}✅ No quotes are streaming"
+  else
+    echo -e "${fmt_cyan}🛑 Stopping Quote Stream${fmt_reset}"
+
+    get_status | awk '{print $2}' | xargs kill
+  fi
+}
+
+case $1 in
+  heartbeat)
+    start_if_stopped
+    ;;
+
+  restart)
+    stop_stream
+    start_stream "${@:2}"
+    ;;
+
+  start)
+    start_stream "${@:2}"
+    ;;
+
+  status)
+    print_status
+    ;;
+
+  stop)
+    stop_stream
+
+    ;;
+
+  *)
+    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}🦙 ALPACA QUOTE STREAM${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_cyan}Description: Stream the quotes for provided symbols.${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_yellow}Usage: stream_quotes [COMMAND]\n"
+    echo -e "Commands:"
+    echo -e "  heartbeat               Check status. Restart if stopped."
+    echo -e "  restart   <SYMBOLS>     Stop, then start streaming. See stop and start documentation."
+    echo -e "  start     <SYMBOLS>     Start streaming one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)."
+    echo -e "  status                  Print running stream processes, if any."
+    echo -e "  stop                    Stop streawming all symbols."
+
+    ;;
+esac
+
+printf "%b" "$fmt_reset"

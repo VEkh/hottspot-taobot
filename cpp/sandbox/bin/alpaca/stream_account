@@ -11,13 +11,16 @@ fmt_underline="\033[4m"
 fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
+# shellcheck disable=1090
+source "$app_dir/bin/utils" # to_lower, to_upper
+
 shopt -s extglob
 echo -e "${fmt_bold}${fmt_cyan}"
 date
 echo
 
 function get_status() {
-  ps aux | grep --color "[s]tream_quotes" | grep --color "$project"
+  ps aux | grep --color "[s]tream_account" | grep -vE "heartbeat|status|stop" | grep --color "$project"
 }
 
 function print_status() {
@@ -25,7 +28,7 @@ function print_status() {
 
   if [[ -z $state ]]
   then
-    echo -e "${fmt_green}✅ No quotes are streaming"
+    echo -e "${fmt_green}✅ Account is not streaming"
   else
     printf "%b" "$fmt_reset"
     get_status
@@ -37,26 +40,24 @@ function start_if_stopped() {
 
   if [[ -z $state ]]
   then
-    echo -e "${fmt_green}😴 No quotes are streaming. Starting stream.\n${fmt_reset}"
+    echo -e "${fmt_green}😴 Account is not streaming. Starting stream.\n${fmt_reset}"
     start_stream
   else
-    echo -e "${fmt_cyan}💖 Quotes are streaming. Doing nothing.${fmt_reset}"
+    echo -e "${fmt_cyan}💖 Account is streaming. Doing nothing.${fmt_reset}"
   fi
 }
 
 function start_stream() {
-  all_symbols=($(cat "$app_dir/bin/$project/symbols"))
   log_dir="$app_dir/log/$project"
-  symbols=("${@:-${all_symbols[@]}}")
+  log_file="$log_dir/account_stream.log"
 
   mkdir -p "$log_dir"
 
-  log_file="$log_dir/quote_stream.log"
+  stream_args=("$@")
 
-  echo -e "${fmt_bold}${fmt_yellow}Starting Quote Stream"\
-    "for ${fmt_normal}${fmt_cyan}${symbols[*]}"
+  echo -e "${fmt_bold}${fmt_yellow}Starting Account Stream ${fmt_normal}${fmt_cyan}"
 
-  "$app_dir/build/$project" stream_quotes "${symbols[@]}" > "$log_file" 2>&1 &
+  "$app_dir/build/$project" stream_account "${stream_args[@]}" > "$log_file" 2>&1 &
 }
 
 function stop_stream() {
@@ -64,9 +65,9 @@ function stop_stream() {
 
   if [[ -z $state ]]
   then
-    echo -e "${fmt_green}✅ No quotes are streaming"
+    echo -e "${fmt_green}✅ Account is streaming"
   else
-    echo -e "${fmt_cyan}🛑 Stopping Quote Stream${fmt_reset}"
+    echo -e "${fmt_cyan}🛑 Stopping Account Stream${fmt_reset}"
 
     get_status | awk '{print $2}' | xargs kill
   fi
@@ -96,15 +97,15 @@ case $1 in
     ;;
 
   *)
-    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}🦙 ALPACA STREAM${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_cyan}Description: Stream the quotes for provided symbols.${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_yellow}Usage: stream [COMMAND]\n"
+    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}🦙 ALPACA ACCOUNT STREAM${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_cyan}Description: Stream the brokerage account iinfo.${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_yellow}Usage: stream_account [COMMAND]\n"
     echo -e "Commands:"
     echo -e "  heartbeat               Check status. Restart if stopped."
-    echo -e "  restart   <SYMBOLS>     Stop, then start streaming. See stop and start documentation."
-    echo -e "  start     <SYMBOLS>     Start streaming one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)."
+    echo -e "  restart   <OPTIONS>     Stop, then start streaming. See stop and start documentation."
+    echo -e "  start     <OPTIONS>     Start streaming with <OPTIONS> (e.g. --paper, etc.)."
     echo -e "  status                  Print running stream processes, if any."
-    echo -e "  stop                    Stop streawming all symbols."
+    echo -e "  stop                    Stop streawming account."
 
     ;;
 esac

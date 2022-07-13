@@ -7,7 +7,7 @@ fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
 function build_project() {
-  # shellcheck disable=1091
+  # shellcheck disable=1090
   source "$app_dir/bin/utils" # to_title
 
   project="$1"
