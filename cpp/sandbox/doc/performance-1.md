@@ -1,4 +1,4 @@
-### 2022-07-12:
+### 2022-07-13:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -17,6 +17,36 @@
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-07-12:
+#### Performance
+
+##### Stocks/ETFs
+**Alpha**
+```
+Max Balance: $27,439.26 (+454.49)   (+1.68%)
+Min Balance: $25,636.17 (-1,348.60) (-5.00%)
+Return: -$1353.03 (-5.01%)
+```
+
+**Beta**
+```
+Max Balance: $29,740.87 (+898.48) (+3.12%)
+Min Balance: $28,353.81 (-488.58) (-1.69%)
+Return: +$189.54 (+0.65%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* In the alpha account on 2 or 3/6 won.
+* It did reach 1.68, but ultimately hit the emergency brake, suggesting that
+  the variable exit prices doesn't entirely avoid the loss.
+* I may have to accept that a moment-based strategy can and will lose. I just
+  need to lose a stop loss that matches the stop profit.
+* I'll need more data to determine what the appropriate thresholds are. Right
+  now I'm going to try +/-4.0%
 
 #### Next Thing(s) to Try
 
