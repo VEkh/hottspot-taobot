@@ -1,12 +1,15 @@
-### 2022-07-13:
+### 2022-07-15:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 ##### Stocks/ETFs
-* Today's Max Gain:  $ • +$     (+%)
-* Today's Max Loss:  $ • -$     (-%)
-* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+**Alpha**
+```
+Max Balance:           $ (+$) (+%)
+Min Balance:           $ (-$) (-%)
+Return: +$ (+%)
+```
 
 #### Stats (as of 2022-01-25)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
@@ -20,21 +23,100 @@
 
 #### Next Thing(s) to Try
 
+### 2022-07-14:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Max Balance:           $26158.11 (+353.33) (+1.37%)
+Min Balance:           $25477.35 (-327.43) (-1.27%)
+Return: +$317.03 (+1.23%)
+```
+
+**Beta (Round 1)**
+```
+Max Balance:           $29,514.17 (+347.01) (+1.19%)
+Min Balance:           $28,912.11 (-255.05) (-0.87%)
+Return: +$307.27 (+1.05%)
+```
+
+**Beta (Round 2)**
+```
+Max Balance:           $29,901.87 (+427.44) (+1.45%)
+Min Balance:           $29,369.03 (-105.40) (-0.36%)
+Return: +$373.06 (+1.27%)
+```
+
+**Beta (Round 3)**
+```
+Max Balance:           $29,856.11 (+8.62) (+0.03%)
+Min Balance:           $28,940.97 (-906.52) (-3.04%)
+Return: -$918.93 (-3.08%)
+```
+
+**Beta (Round 4)**
+```
+Max Balance:           $29,332.45 (+403.89) (+1.40%)
+Min Balance:           $28,890.57 (-37.99) (-0.13%)
+Return: +$361.45 (+1.25%)
+```
+
+**Beta (Round 5)**
+```
+Max Balance:           $29,318.19 (+28.18) (+0.10%)
+Min Balance:           $28,621.80 (-668.21) (-2.28%)
+Original Balance:      $29,290.01
+Return: -667.82$ (-2.28%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-07-13:
+#### Performance
+##### Stocks/ETFs
+**Alpha (Round 1)**
+```
+Max Balance:           $26,104.30 (+$504.85) (+1.97%)
+Min Balance:           $24,827.79 (-$771.66) (-3.01%)
+Return: -$788.96 (-3.08%)
+```
+
+**Alpha (Round 2) (0.5x Margin)**
+```
+Max Balance:           $26,242.52 (+$211.12) (+0.81%)
+Min Balance:           $25,766.98 (-$264.42) (-1.02%)
+Return: -$788.96 (-3.08%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* I was in FL and didn't properly record the cross-asset win rate.
+* It seems that I can almost always earn at least 1%.
+* The current plan is to target a 1.05% return with .1% trailing stop that
+  expands to a 0.5, or maybe 1% trailing stop.
+* This could perhaps help take advantage of large win days.
+* The stop loss will be 3%.
+
+#### Next Thing(s) to Try
+
 ### 2022-07-12:
 #### Performance
 
 ##### Stocks/ETFs
 **Alpha**
 ```
-Max Balance: $27,439.26 (+454.49)   (+1.68%)
-Min Balance: $25,636.17 (-1,348.60) (-5.00%)
-Return: -$1353.03 (-5.01%)
+Max Balance: $27,439.26 (+$454.49)   (+1.68%)
+Min Balance: $25,636.17 (-$1,348.60) (-5.00%)
+Return: -$1,353.03 (-5.01%)
 ```
 
 **Beta**
 ```
-Max Balance: $29,740.87 (+898.48) (+3.12%)
-Min Balance: $28,353.81 (-488.58) (-1.69%)
+Max Balance: $29,740.87 (+$898.48) (+3.12%)
+Min Balance: $28,353.81 (-$488.58) (-1.69%)
 Return: +$189.54 (+0.65%)
 ```
 
@@ -53,8 +135,8 @@ Return: +$189.54 (+0.65%)
 ### 2022-07-11:
 #### Performance
 ##### Stocks/ETFs (STAGING)
-* Today's Max Gain:  $27,402.86 (+811.22) (+3.05%)
-* Today's Max Loss:  $26,265.89 (-325.75) (-1.23%)
+* Today's Max Gain:  $27,402.86 (+$811.22) (+3.05%)
+* Today's Max Loss:  $26,265.89 (-$325.75) (-1.23%)
 * Return: +$435.96   (+1.67% Account)
 
 #### Remarks
