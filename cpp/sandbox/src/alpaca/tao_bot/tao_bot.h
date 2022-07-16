@@ -169,7 +169,7 @@ private:
   void log_signals();
   void log_start_message();
   void log_timestamps();
-  void open_pair_signaled_position();
+  void open_and_persist_position();
   void open_positions();
   void reset_position();
   void set_close_order_prices(Alpaca::Client &, order_t *, order_t *);

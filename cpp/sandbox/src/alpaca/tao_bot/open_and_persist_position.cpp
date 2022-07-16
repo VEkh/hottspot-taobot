@@ -1,5 +1,5 @@
-#ifndef ALPACA__TAO_BOT_open_pair_signaled_position
-#define ALPACA__TAO_BOT_open_pair_signaled_position
+#ifndef ALPACA__TAO_BOT_open_and_persist_position
+#define ALPACA__TAO_BOT_open_and_persist_position
 
 /*
  * Alpaca::TaoBot
@@ -23,7 +23,7 @@
 #include <unistd.h>                     // usleep
 #include <utility>                      // std::pair
 
-void Alpaca::TaoBot::open_pair_signaled_position() {
+void Alpaca::TaoBot::open_and_persist_position() {
   if (!should_open_position(this->open_order_ptr)) {
     return;
   }

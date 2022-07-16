@@ -1,4 +1,4 @@
-### 2022-07-15:
+### 2022-07-18:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -22,6 +22,25 @@ Return: +$ (+%)
 ##### Stocks/ETFs
 
 #### Next Thing(s) to Try
+
+### 2022-07-15:
+##### Stocks/ETFs
+**Alpha**
+```
+Max Balance:           $26,396.40 (+$279.70) (+1.07%) [Was really more, but I was Florida 🛥ing]
+Min Balance:           $25,869.25 (-$247.45) (-1.00%)
+Return:                           +$279.70   (+1.07%)
+```
+
+**Beta**
+```
+Max Balance:           $28,559.73 (+61.01)  (+0.21%)
+Min Balance:           $27,640.98 (-857.74) (-3.01%)
+Return:                            -$944.99 (-3.31%)
+```
+
+#### Stats (STAGING) (as of 2022-06-27)
+* Win / Loss: 10W (Consecutive: 2) 4L (Consecutive: 0)
 
 ### 2022-07-14:
 #### Performance
@@ -71,6 +90,8 @@ Return: -667.82$ (-2.28%)
 
 #### Remarks
 ##### Stocks/ETFs
+* Alpha account won
+* Beta won 3 / 5
 
 #### Next Thing(s) to Try
 
