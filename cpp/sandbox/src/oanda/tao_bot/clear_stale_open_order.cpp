@@ -50,6 +50,8 @@ void Oanda::TaoBot::clear_stale_open_order() {
 
     break;
   }
+  default: {
+  }
   }
 }
 

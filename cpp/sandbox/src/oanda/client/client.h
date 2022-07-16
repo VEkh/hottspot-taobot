@@ -17,7 +17,7 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Oanda::t::quote_t;
 
-  Client(std::map<std::string, std::string>);
+  Client(std::map<std::string, std::string> = {});
 
   CurlClient place_order(order_t *order);
 

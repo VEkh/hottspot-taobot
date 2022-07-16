@@ -14,7 +14,7 @@
 #include <map>    // std::map
 #include <string> // std::string
 
-Oanda::Client::Client(std::map<std::string, std::string> flags_ = {}) {
+Oanda::Client::Client(std::map<std::string, std::string> flags_) {
   this->flags = flags_;
   load_config();
 }
