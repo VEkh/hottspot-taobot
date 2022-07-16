@@ -86,6 +86,8 @@ void Oanda::TaoBot::set_status(order_t *order,
       if (linked_order) {
         linked_order->quantity = trade_quantity;
       }
+
+      exit(1);
     }
 
     set_execution_price(order, trade_json);
