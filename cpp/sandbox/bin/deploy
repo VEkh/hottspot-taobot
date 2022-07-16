@@ -65,8 +65,8 @@ function update_crontab() {
   echo -e "${fmt_bold}${fmt_cyan}⏰ Updating ${fmt_yellow}crontab${fmt_reset}"
 
   cmd="(crontab -l 2>/dev/null; "
-  cmd+="$remote_app_dir/bin/alpaca/cron generate 2>/dev/null; "
-  cmd+="$remote_app_dir/bin/oanda/cron generate 2>/dev/null) "
+  cmd+="$remote_app_dir/bin/alpaca/cron generate 2>/dev/null "
+  # cmd+="$remote_app_dir/bin/oanda/cron generate 2>/dev/null) "
   cmd+="| grep -v '^#' | grep -v 'no crontab' | sort -u | crontab -"
 
   ssh "$remote_address" "$cmd"
