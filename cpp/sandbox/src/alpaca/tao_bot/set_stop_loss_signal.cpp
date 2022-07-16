@@ -9,7 +9,6 @@
 #include "tao_bot.h"
 
 #include "current_price.cpp"             // current_price
-#include "hedge_symbol.cpp"              // hedge_symbol
 #include "price_movement_pair_ratio.cpp" // price_movement_pair_ratio
 #include <ctime>                         // std::time
 

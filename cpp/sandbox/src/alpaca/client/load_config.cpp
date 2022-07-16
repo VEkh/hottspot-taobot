@@ -3,6 +3,7 @@
 
 #include "client.h"          // Alpaca::Client, config
 #include "deps.cpp"          // json
+#include "is_beta.cpp"       // is_beta
 #include "is_live.cpp"       // is_live
 #include "lib/formatted.cpp" // Formatted::error_message
 #include <fstream>           // std::ifstream, std::ios
@@ -72,10 +73,13 @@ void Alpaca::Client::load_config() {
   }
 
   const char *session_key = is_live() ? "live" : "paper";
+  const std::string account_type_prefix = is_beta() ? "beta_" : "";
 
   this->config = {
-      .api_key_id = config_json[session_key]["api_key_id"],
-      .api_secret_key = config_json[session_key]["api_secret_key"],
+      .api_key_id =
+          config_json[session_key][account_type_prefix + "api_key_id"],
+      .api_secret_key =
+          config_json[session_key][account_type_prefix + "api_secret_key"],
       .base_url = config_json[session_key]["base_url"],
       .data_base_url = config_json["data_base_url"],
   };

@@ -8,7 +8,6 @@
 #include "is_holiday.cpp"           // is_holiday
 #include "lib/formatted.cpp"        // Formatted::error_message
 #include "lib/utils/boolean.cpp"    // ::utils::boolean
-#include "lib/utils/map.cpp"        // ::utils::map
 #include "load_performance.cpp"     // load_performance
 #include "load_price_movement.cpp"  // load_rice_movement
 #include "load_quotes.cpp"          // load_quotes
@@ -43,8 +42,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   this->flags = flags_;
   this->symbol = symbol_;
 
-  this->api_client =
-      Alpaca::Client(::utils::map::merge(this->flags, {{"hedge", "0"}}));
+  this->api_client = Alpaca::Client(this->flags);
 
   this->account_balance = this->original_account_balance =
       get_account_balance(this->api_client);

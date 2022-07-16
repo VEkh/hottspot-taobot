@@ -3,7 +3,6 @@
 
 #include "converted_signaler_price.cpp" // converted_signaler_price
 #include "current_price.cpp"            // current_price
-#include "hedge_symbol.cpp"             // hedge_symbol
 #include "tao_bot.h"                    // Alpaca::TaoBot, quote_t
 #include "volatility.cpp"               // volatility
 #include <ctime>                        // std::time

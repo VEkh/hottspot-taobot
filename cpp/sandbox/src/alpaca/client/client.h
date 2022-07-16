@@ -56,12 +56,13 @@ private:
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::map<std::string, std::string> flags = {
-      {"hedge", "0"},
+      {"beta", "0"},
       {"paper", "0"},
   };
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
+  bool is_beta();
   bool is_live();
   void load_config();
   void write_streamed_quote(const beast::flat_buffer &);
