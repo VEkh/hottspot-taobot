@@ -17,7 +17,7 @@ date
 echo
 
 function get_status() {
-  ps aux | grep --color "[s]tream_quotes" | grep -vE "heartbeat|status|stop" | grep --color "$project"
+  ps aux | grep --color "[s]tream_quotes" | grep -vE "heartbeat|restart|status|stop" | grep --color "$project"
 }
 
 function print_status() {
