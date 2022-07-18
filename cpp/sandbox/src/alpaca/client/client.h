@@ -43,6 +43,7 @@ public:
 
   quote_t parse_quote(const std::string &);
 
+  bool is_beta();
   void stream_account();
   void stream_quotes(int, char *[]);
 
@@ -62,7 +63,6 @@ private:
 
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
-  bool is_beta();
   bool is_live();
   void load_config();
   void write_streamed_quote(const beast::flat_buffer &);

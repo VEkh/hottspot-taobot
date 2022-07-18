@@ -1,4 +1,4 @@
-### 2022-07-18:
+### 2022-07-19:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -22,6 +22,48 @@ Return: +$ (+%)
 ##### Stocks/ETFs
 
 #### Next Thing(s) to Try
+
+### 2022-07-18:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Max Balance:           $26677.17 (+283.38) (+1.07%)
+Min Balance:           $25597.54 (-796.25) (-3.02%)
+Return:                           -$800.51 (-3.03%)
+```
+
+**Beta (Round 1)**
+```
+Max Balance:           $28,032.42 (+405.71) (+1.47%)
+Min Balance:           $27,421.51 (-205.20) (-0.74%)
+Return:                           +$275.65 (+1.00%)
+```
+
+**Beta (Round 2)**
+```
+Max Balance:           $27,921.71 (+19.35) (+0.07%)
+Min Balance:           $27,461.85 (-440.51) (-1.58%)
+Return:                           +-$377.81 (-1.35%)
+```
+
+#### Stats (as of 2022-01-25)
+* Win / Loss: 10W (Consecutive: 0) 5L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* Cash Flows (Beta):
+  * AAPL: $340.32 🥈
+  * AMZN: $304.08
+  * MSFT: $174.88
+  * QQQ:  $313.94 🥉
+  * SPY:  $163.41
+  * TSLA: $565.13 🥇
+
+#### Next Thing(s) to Try
+* Observe this week if any wins exceed a max loss of 2% before winning. If not,
+  set the max account loss to 2%.
+* Trade GOOG
 
 ### 2022-07-15:
 ##### Stocks/ETFs
