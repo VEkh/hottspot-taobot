@@ -1,4 +1,4 @@
-### 2022-07-19:
+### 2022-07-20:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -11,7 +11,7 @@ Min Balance:           $ (-$) (-%)
 Return: +$ (+%)
 ```
 
-#### Stats (as of 2022-01-25)
+#### (STAGING) Stats (as of 2022-06-27)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 * Week's Return:
 * Total Return:
@@ -22,6 +22,46 @@ Return: +$ (+%)
 ##### Stocks/ETFs
 
 #### Next Thing(s) to Try
+
+### 2022-07-19:
+#### Performance
+##### Stocks/ETFs
+**Alpha** (Won in 03:27! 😲)
+```
+Max Balance:           $25908.86 (+327.88) (+1.28%)
+Min Balance:           $25552.61 (-28.37)  (-0.11%)
+Return:                          +$276.15 (+1.08%)
+```
+
+**Beta**
+```
+Max Balance:           $29,148.97 (+1,656.59) (+6.03%)
+Min Balance:           $27,094.37 (-398.01)   (-1.45%)
+Return:                           +$1,321.47 (+1.08%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 11W (Consecutive: 1) 5L (Consecutive: 0)
+* Wins that dipped below -2%: 0
+
+#### Remarks
+##### Stocks/ETFs
+* Cash Flows (Beta):
+  * AAPL: $471.25
+  * AMZN: $829.86   🥈
+  * GOOG: $625.55
+  * MSFT: $477.43
+  * QQQ:  $652.63   🥉
+  * TSLA: $1,541.99 🥇
+
+* 4/6 won in `Beta`.
+* Alpha won in just 3.5 minutes! I've never seen that haha.
+* Today was a long trending day so `Beta` performed well by letting it run all
+  day.
+
+#### Next Thing(s) to Try
+* I'll continue running `Beta` all day to see how it tends to perform. I'll
+  probably also increase its exit threshold to 50-60x one-sec variance.
 
 ### 2022-07-18:
 #### Performance
@@ -49,6 +89,7 @@ Return:                           +-$377.81 (-1.35%)
 
 #### Stats (as of 2022-01-25)
 * Win / Loss: 10W (Consecutive: 0) 5L (Consecutive: 1)
+* Wins that dipped below -2%: 0
 
 #### Remarks
 ##### Stocks/ETFs

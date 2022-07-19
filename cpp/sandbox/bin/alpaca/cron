@@ -5,7 +5,7 @@ project=$(dirname "$0" | xargs basename)
 case $1 in
   "generate")
     app_dir=$(realpath "$(dirname "$0")/../../")
-    cmd="30 8 * * 1-5 $app_dir/bin/$project/start --paper >> $app_dir/log/development.log 2>&1"
+    cmd="30 8 * * 1-5 $app_dir/bin/$project/start --clear-performance --paper >> $app_dir/log/development.log 2>&1"
     cmd+="\n29 8 * * 1-5 $app_dir/bin/$project/stream_account start --paper >> $app_dir/log/development.log 2>&1"
     cmd+="\n0 15 * * 1-5 $app_dir/bin/$project/stream_account stop >> $app_dir/log/development.log 2>&1"
     cmd+="\n0 15 * * 1-5 $app_dir/bin/$project/stream_quotes stop >> $app_dir/log/development.log 2>&1"
