@@ -1,4 +1,4 @@
-### 2022-07-20:
+### 2022-07-25:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -23,6 +23,142 @@ Return: +$ (+%)
 
 #### Next Thing(s) to Try
 
+### 2022-07-22:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $25668.73 (-118.59) (-0.46%)
+Max Balance:           $26294.10 (+506.78) (+1.97%)
+Min Balance:           $24796.83 (-990.49) (-3.84%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 11W (Consecutive: 0) 8L (Consecutive: 3)
+
+#### Remarks
+##### Stocks/ETFs
+* Really interesting day.
+* I started the day by setting the exit threshold at 60x one-sec variance after
+  the first 20x position.
+* Most assets started the day with tall consolidation that took the loss down
+  to -3.84%
+* However, they all started trending downward and the profit increased to
+  +1.97%.
+* This confirms the suspicion that I should just leave on TaoBot and seek the
+  exit threshold that rides general trends.
+* Even the max loss wasn't as severe as I've seen.
+* Try 60x for a few days and see if >=75x is better.
+
+#### Next Thing(s) to Try
+* At some point use [Valgrind](https://valgrind.org/) to audit memory leaks.
+
+### 2022-07-21:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+**Alpha (Round 1)**
+```
+Max Balance:           $25935.99 (+110.02) (+0.43%)
+Min Balance:           $25240.78 (-585.19) (-2.27%)
+Return:                           -$609.59 (-2.36%)
+```
+
+**Alpha (Round 2)**
+```
+Current Balance:       $25,619.91 (+403.53) (+1.60%)
+Max Balance:           $25,745.32 (+528.94) (+2.10%)
+Min Balance:           $25,026.52 (-189.86) (-0.75%)
+Runtime:               34:12
+```
+
+**Alpha (Round 3)**
+```
+Current Balance:       $25,698.77 (+66.26) (+0.26%)
+Max Balance:           $25,726.97 (+94.46) (+0.37%)
+Min Balance:           $25,469.04 (-163.47) (-0.64%)
+Runtime:               48:26
+```
+
+**Alpha (Round 4)**
+```
+Current Balance:       $25,758.82 (+65.22) (+0.25%)
+Max Balance:           $25,808.04 (+114.44) (+0.45%)
+Min Balance:           $25,519.63 (-173.97) (-0.68%)
+Runtime:               06:55
+```
+
+**Alpha (Round 5)**
+```
+Current Balance:       $25,156.46 (-602.36) (-2.34%)
+Max Balance:           $25,777.78 (+18.96) (+0.07%)
+Min Balance:           $25,149.74 (-609.08) (-2.36%)
+Runtime:               01:55:09
+```
+
+**Alpha (Round 6)**
+```
+Current Balance:       $25,792.89 (-207.47) (-0.80%)
+Max Balance:           $26,024.96 (+24.60) (+0.09%)
+Min Balance:           $25,774.14 (-226.22) (-0.87%)
+Runtime:               01:51:49
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 11W (Consecutive: 0) 7L (Consecutive: 2)
+* Times loss dipped below 2% then loss: 3
+
+#### Remarks
+##### Stocks/ETFs
+* A second consecutive loss day for the first Alpha round 😭
+* This is what seems apparent:
+  * No matter how small the target profit (including 0) it's always possible to
+    not attain it if the prices are consolidating.
+  * You should leave TaoBot on all day:
+    * Large trend days will profit
+    * If you select the proper exit boundaries, consolidation days should only lose mildly.
+
+#### Next Thing(s) to Try
+
+### 2022-07-20:
+#### Performance
+##### Stocks/ETFs
+**Alpha (Round 1)**
+```
+Max Balance:           $26,092.80 (+238.97) (+0.92%)
+Min Balance:           $24,990.97 (-$862.86 (-3.34%)
+Return:                            -$862.86 (-3.34%)
+```
+
+**Alpha (Round 2)**
+```
+Max Balance:           $26,082.58 (+82.22)  (+0.32%)
+Min Balance:           $25,802.48 (-197.88) (-0.76%)
+Return:                            -$171.45 (-0.66%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 11W (Consecutive: 0) 6L (Consecutive: 1)
+* Times loss dipped below 2% then loss: 2
+
+#### Remarks
+##### Stocks/ETFs
+* Day didn't start with clear performance because of a coding bug.
+* I reset Staging's balance and restarted with 1.25 hours left.
+* 2 of the last 3 days lost 3%. That can't happen if this strategy is to make
+  money over time.
+* Maybe I need to increase the exit threshold to reduce the severity of loss
+  days.
+* Yesterday demonstrated why it could be much better to leave TaoBot on all day
+  if the day happens to be a long trend day.
+* The problem with this is how many days trend like this?
+* I've mostly seen losses after prolonged running. Is it possible that there's
+  an exit threshold that keeps losses to a minimum on consolidation days?
+
+#### Next Thing(s) to Try
+
 ### 2022-07-19:
 #### Performance
 ##### Stocks/ETFs
@@ -42,7 +178,7 @@ Return:                           +$1,321.47 (+1.08%)
 
 #### (STAGING) Stats (as of 2022-06-27)
 * Win / Loss: 11W (Consecutive: 1) 5L (Consecutive: 0)
-* Wins that dipped below -2%: 0
+* Times loss dipped below 2% then loss: 1
 
 #### Remarks
 ##### Stocks/ETFs

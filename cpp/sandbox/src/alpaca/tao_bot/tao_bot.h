@@ -40,7 +40,7 @@ private:
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
-  const double MAX_ACCOUNT_LOSS_RATIO = 0.03;
+  const double MAX_ACCOUNT_LOSS_RATIO = 0.02;
   const double TARGET_DAILY_PROFIT = 0.0105;
   const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.001;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
