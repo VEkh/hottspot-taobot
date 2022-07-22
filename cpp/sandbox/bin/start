@@ -47,6 +47,12 @@ function symbol_start() {
   "$app_dir/build/$project" tao_bot "${tao_bot_args[@]}" >> "$log_file" 2>&1 &
 }
 
+if [[ "$*" =~ .*--clear-performance.* ]]
+then
+  symbol="$(to_upper "$1")"
+  "$app_dir/bin/$project/clear_performance" "$symbol"
+fi
+
 case $1 in
   +([[:alpha:]]))
     symbol_start "$1"
