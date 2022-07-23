@@ -1,6 +1,7 @@
-#ifndef ALPACA__TAO_BOT_log_positions_profit
-#define ALPACA__TAO_BOT_log_positions_profit
+#ifndef ALPACA__TAO_BOT_log_position_profit
+#define ALPACA__TAO_BOT_log_position_profit
 
+#include "is_position_closed.cpp"   // is_position_closed
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/integer.cpp"    // utils::integer_
 #include "max_loss_ratio.cpp"       // max_loss_ratio
@@ -11,7 +12,11 @@
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 
-void Alpaca::TaoBot::log_positions_profit() {
+void Alpaca::TaoBot::log_position_profit() {
+  if (is_position_closed()) {
+    return;
+  }
+
   const double profit = open_position_profit(this->open_order_ptr);
 
   this->open_order_ptr->max_position_profit =

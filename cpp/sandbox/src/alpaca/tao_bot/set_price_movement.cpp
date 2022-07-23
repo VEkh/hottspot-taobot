@@ -7,7 +7,8 @@
 #include <string>                   // std::string
 #include <vector>                   // std::vector
 
-void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
+void Alpaca::TaoBot::set_price_movement() {
+  const std::string symbol_ = this->symbol;
   std::vector<quote_t> quotes_ = this->quotes[symbol_];
 
   if (!quotes_.size()) {
@@ -88,7 +89,7 @@ void Alpaca::TaoBot::set_price_movement(const std::string &symbol_) {
       .short_term_three_minute_one_second_variance.count =
       std::min(short_term_max_sample_size, (double)(old_short_term_count + 1));
 
-  write_price_movement(symbol_, this->price_movements[symbol_]);
+  write_price_movement();
 }
 
 #endif

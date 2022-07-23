@@ -8,30 +8,28 @@
 #include <iostream>                  // std::cout, std::endl
 #include <stdio.h>                   // printf
 
-void Alpaca::TaoBot::close_position(Alpaca::Client &api_client_ref,
-                                    order_t *close_order_ptr_,
-                                    order_t *open_order_ptr_,
-                                    const double limit_price = 0.00,
+void Alpaca::TaoBot::close_position(const double limit_price = 0.00,
                                     const bool force = false) {
-  if (!open_order_ptr_ || !close_order_ptr_) {
+  if (!this->open_order_ptr || !this->close_order_ptr) {
     return;
   }
 
-  if (!force && !should_close_position(close_order_ptr_, open_order_ptr_)) {
+  if (!force &&
+      !should_close_position(this->close_order_ptr, this->open_order_ptr)) {
     return;
   }
 
   const char *order_action =
-      Alpaca::constants::ORDER_ACTIONS[open_order_ptr_->action];
+      Alpaca::constants::ORDER_ACTIONS[this->open_order_ptr->action];
 
   const char *log_icon = this->ICONS[order_action];
 
   if (limit_price) {
-    close_order_ptr_->limit_price = limit_price;
-    close_order_ptr_->type = order_type_t::LIMIT;
+    this->close_order_ptr->limit_price = limit_price;
+    this->close_order_ptr->type = order_type_t::LIMIT;
   }
 
-  api_client_ref.place_order(close_order_ptr_);
+  this->api_client.place_order(this->close_order_ptr);
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
   printf("%s %s: Placed closing order.\n", log_icon,

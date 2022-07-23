@@ -9,12 +9,13 @@
 #include <stdio.h>           // puts
 #include <string>            // std::string
 
-void Alpaca::TaoBot::write_price_movement(
-    const std::string &symbol_, const price_movement_t &price_movement) {
+void Alpaca::TaoBot::write_price_movement() {
+  const price_movement_t price_movement = this->price_movements[this->symbol];
+
   try {
     const std::string filepath = std::string(APP_DIR) +
                                  "/data/alpaca/price_movement/" +
-                                 std::string(symbol_) + ".json";
+                                 std::string(this->symbol) + ".json";
 
     json price_movement_json = R"(
       {
@@ -49,7 +50,7 @@ void Alpaca::TaoBot::write_price_movement(
     puts(error_message.c_str());
     std::cout << fmt.reset << std::endl;
 
-    return write_price_movement(symbol_, price_movement);
+    return write_price_movement();
   }
 }
 

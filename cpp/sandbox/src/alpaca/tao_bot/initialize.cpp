@@ -3,7 +3,7 @@
 
 #include "alpaca/client/client.cpp" // Alpaca::Client
 #include "build_performance.cpp"    // build_performance
-#include "fetch_quotes.cpp"         // fetch_quotes
+#include "fetch_and_persist_quote.cpp"         // fetch_and_persist_quote
 #include "get_account_balance.cpp"  // get_account_balance
 #include "is_holiday.cpp"           // is_holiday
 #include "lib/formatted.cpp"        // Formatted::error_message
@@ -49,7 +49,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
 
   load_quotes(this->symbol);
 
-  fetch_quotes();
+  fetch_and_persist_quote();
   load_performance();
   load_price_movement(this->symbol);
 

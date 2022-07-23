@@ -7,21 +7,20 @@
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 
-void Alpaca::TaoBot::cancel_stale_open_order(Alpaca::Client &api_client_ref,
-                                             const order_t *order_ptr) {
-  if (!order_ptr) {
+void Alpaca::TaoBot::cancel_stale_open_order() {
+  if (!this->open_order_ptr) {
     return;
   }
 
-  if (order_ptr->status == order_status_t::ORDER_CANCELED) {
+  if (this->open_order_ptr->status == order_status_t::ORDER_CANCELED) {
     this->open_order_ptr = nullptr;
 
     return;
   }
 
-  if (!(order_ptr->status == order_status_t::ORDER_ACCEPTED ||
-        order_ptr->status == order_status_t::ORDER_CANCELED ||
-        order_ptr->status == order_status_t::ORDER_NEW)) {
+  if (!(this->open_order_ptr->status == order_status_t::ORDER_ACCEPTED ||
+        this->open_order_ptr->status == order_status_t::ORDER_CANCELED ||
+        this->open_order_ptr->status == order_status_t::ORDER_NEW)) {
     return;
   }
 
@@ -29,32 +28,34 @@ void Alpaca::TaoBot::cancel_stale_open_order(Alpaca::Client &api_client_ref,
   const int time_limit_seconds = 10;
 
   const bool is_order_stale =
-      (now - order_ptr->timestamp) >= time_limit_seconds;
+      (now - this->open_order_ptr->timestamp) >= time_limit_seconds;
 
   if (!is_order_stale) {
     return;
   }
 
   std::cout << fmt.yellow << fmt.bold;
-  printf("😴 Clearing stale open order %s.\n", order_ptr->id.c_str());
+  printf("😴 Clearing stale open order %s.\n", this->open_order_ptr->id.c_str());
   std::cout << fmt.reset;
 
-  const std::string cancel_response = api_client_ref.cancel_order(order_ptr);
+  const std::string cancel_response =
+      this->api_client.cancel_order(this->open_order_ptr);
 
   if (!cancel_response.empty()) {
     json response_json = ::utils::json::parse_with_catch(
         cancel_response, "ALPACA__CLIENT_cancel_order");
 
     std::cout << fmt.red << fmt.bold;
-    printf("❌ Failed to cancel order %s: %s\n", order_ptr->id.c_str(),
-           response_json.dump(2).c_str());
+    printf("❌ Failed to cancel order %s: %s\n",
+           this->open_order_ptr->id.c_str(), response_json.dump(2).c_str());
     std::cout << fmt.reset;
 
     return;
   }
 
   std::cout << fmt.green << fmt.bold;
-  printf("✅ Successfully canceled order %s\n", order_ptr->id.c_str());
+  printf("✅ Successfully canceled order %s\n",
+         this->open_order_ptr->id.c_str());
   std::cout << fmt.reset << std::endl;
 }
 

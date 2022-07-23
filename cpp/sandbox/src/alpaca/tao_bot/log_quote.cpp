@@ -13,10 +13,10 @@
 #include <iostream>            // std::cout, std::endl
 #include <stdio.h>             // printf
 
-void Alpaca::TaoBot::log_quote(const std::string &symbol_) {
+void Alpaca::TaoBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
 
-  const std::vector<quote_t> quotes_ = this->quotes[symbol_];
+  const std::vector<quote_t> quotes_ = this->quotes[this->symbol];
   const int ticks = quotes_.size();
 
   if (!ticks) {

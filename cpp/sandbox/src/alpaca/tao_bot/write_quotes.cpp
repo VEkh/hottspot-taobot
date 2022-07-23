@@ -11,8 +11,8 @@
 #include <string>            // std::string
 #include <vector>            // std::vector
 
-void Alpaca::TaoBot::write_quotes(const std::string &symbol_) {
-  std::vector<quote_t> quotes_ = this->quotes[symbol_];
+void Alpaca::TaoBot::write_quotes() {
+  std::vector<quote_t> quotes_ = this->quotes[this->symbol];
   try {
     json (*quote_to_json)(quote_t &) = [](quote_t &quote) -> json {
       return {
@@ -25,7 +25,7 @@ void Alpaca::TaoBot::write_quotes(const std::string &symbol_) {
     };
 
     const std::string filepath = std::string(APP_DIR) + "/data/alpaca/quotes/" +
-                                 std::string(symbol_) + ".json";
+                                 std::string(this->symbol) + ".json";
 
     const int sample_size = this->QUOTES_MAX_SIZE;
     int i = 0;

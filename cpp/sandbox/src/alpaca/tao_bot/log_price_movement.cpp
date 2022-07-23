@@ -8,25 +8,26 @@
 #include <stdio.h>                      // printf
 #include <string>                       // std::string
 
-void Alpaca::TaoBot::log_price_movement(const std::string &symbol_) {
+void Alpaca::TaoBot::log_price_movement() {
   const double one_second_variance =
-      this->price_movements[symbol_].three_minute_one_second_variance.average;
+      this->price_movements[this->symbol]
+          .three_minute_one_second_variance.average;
 
   if (!one_second_variance) {
     return;
   }
 
   const double short_term_one_second_variance =
-      this->price_movements[symbol_]
+      this->price_movements[this->symbol]
           .short_term_three_minute_one_second_variance.average;
 
   const double pair_one_second_vairance_ratio =
-      this->price_movements[symbol_].ratio_to_pair.average;
+      this->price_movements[this->symbol].ratio_to_pair.average;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
   printf(
-      "💲 %s Avg Tick Price Δ: (%s)\n", symbol_.c_str(),
+      "💲 %s Avg Tick Price Δ: (%s)\n", this->symbol,
       ::utils::integer_::seconds_to_clock(this->AVG_ONE_SEC_VARIANCE_TIMEFRAME)
           .c_str());
 

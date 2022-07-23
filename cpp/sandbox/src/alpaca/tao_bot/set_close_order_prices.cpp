@@ -6,19 +6,17 @@
 #include "set_profit.cpp"           // set_profit
 #include "tao_bot.h"                // Alpaca::TaoBot, order_status_t, order_t
 
-void Alpaca::TaoBot::set_close_order_prices(Alpaca::Client &api_client_ref,
-                                            order_t *close_order_ptr_,
-                                            order_t *open_order_ptr_) {
-  if (!close_order_ptr_ || !open_order_ptr_) {
+void Alpaca::TaoBot::set_close_order_prices() {
+  if (!this->close_order_ptr || !this->open_order_ptr) {
     return;
   }
 
-  if (close_order_ptr_->status != order_status_t::ORDER_FILLED) {
+  if (this->close_order_ptr->status != order_status_t::ORDER_FILLED) {
     return;
   }
 
-  set_execution_price(api_client_ref, close_order_ptr_);
-  set_profit(close_order_ptr_, open_order_ptr_);
+  set_execution_price(this->api_client, this->close_order_ptr);
+  set_profit(this->close_order_ptr, this->open_order_ptr);
 }
 
 #endif
