@@ -10,18 +10,17 @@
  */
 #include "tao_bot.h"
 
-#include "compute_quantity.cpp"         // current_price
-#include "converted_signaler_price.cpp" // converted_signaler_price
-#include "current_price.cpp"            // current_price
-#include "get_account_balance.cpp"      // get_account_balance
-#include "open_position.cpp"            // open_position
-#include "opposite_direction.cpp"       // opposite_direction
-#include "order_win_result.cpp"         // order_win_result
-#include "should_open_position.cpp"     // should_open_position
-#include <iostream>                     // std::cout, std::endl
-#include <stdio.h>                      // puts
-#include <unistd.h>                     // usleep
-#include <utility>                      // std::pair
+#include "compute_quantity.cpp"     // current_price
+#include "current_price.cpp"        // current_price
+#include "get_account_balance.cpp"  // get_account_balance
+#include "open_position.cpp"        // open_position
+#include "opposite_direction.cpp"   // opposite_direction
+#include "order_win_result.cpp"     // order_win_result
+#include "should_open_position.cpp" // should_open_position
+#include <iostream>                 // std::cout, std::endl
+#include <stdio.h>                  // puts
+#include <unistd.h>                 // usleep
+#include <utility>                  // std::pair
 
 void Alpaca::TaoBot::open_and_persist_position() {
   if (!should_open_position(this->open_order_ptr)) {

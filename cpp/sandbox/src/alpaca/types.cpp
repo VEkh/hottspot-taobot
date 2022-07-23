@@ -86,15 +86,6 @@ struct quote_t {
   std::string symbol = "";
   long timestamp;
 };
-
-struct signal_t {
-  int created_at;
-  std::string signaled;
-  double signaled_to_signaler_price_ratio = 0.00;
-  std::string signaler;
-  order_action_t signaler_trend_direction = order_action_t::BUY;
-  int signaler_trend_started_at;
-};
 } // namespace t
 } // namespace Alpaca
 #endif

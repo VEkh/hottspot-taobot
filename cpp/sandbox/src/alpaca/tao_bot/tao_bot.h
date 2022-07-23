@@ -35,7 +35,6 @@ private:
   using price_movement_average_t = Global::t::price_movement_average_t;
   using price_movement_t = Global::t::price_movement_t;
   using quote_t = Alpaca::t::quote_t;
-  using signal_t = Alpaca::t::signal_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
@@ -62,8 +61,6 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  signal_t open_signal;
-  signal_t stop_loss_signal;
   std::map<std::string, price_movement_t> price_movements;
   std::map<std::string, std::string> flags;
   std::map<std::string, std::vector<quote_t>> quotes;
@@ -82,14 +79,13 @@ private:
   bool max_account_loss_reached();
   bool should_close_position(const order_t *, const order_t *);
   bool should_open_position(const order_t *);
-  bool should_open_position(const signal_t &);
+  bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity(const std::string &);
-  double converted_signaler_price(const signal_t &);
   double current_price(const std::string &);
   double max_loss_ratio(const order_t *);
   double min_target_tick_movement();
@@ -119,9 +115,6 @@ private:
   quote_t fetch_quote(const std::string);
   quote_t get_quote(const std::string);
   quote_t read_streamed_quote(const std::string);
-  price_movement_average_t
-  price_movement_pair_ratio(std::vector<quote_t> &, std::vector<quote_t> &,
-                            const price_movement_average_t);
 
   std::pair<order_t, order_t> open_position(Alpaca::Client,
                                             const order_action_t,
@@ -146,8 +139,6 @@ private:
   void log_position_results();
   void log_price_movement();
   void log_quote();
-  void log_signal(const signal_t &, const char *);
-  void log_signals();
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
@@ -156,14 +147,12 @@ private:
   void set_execution_price(Alpaca::Client &, order_t *);
   void set_loss_started_at();
   void set_open_order_prices();
-  void set_open_signal();
   void set_position_status();
   void set_price_movement();
   void set_and_persist_price_movement();
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *, const std::vector<quote_t> *);
   void set_profit_started_at();
-  void set_stop_loss_signal();
   void set_status(Alpaca::Client &, order_t *order);
   void update_account_balance();
   void watch();

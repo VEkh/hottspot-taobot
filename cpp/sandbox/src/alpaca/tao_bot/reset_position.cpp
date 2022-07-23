@@ -6,7 +6,6 @@
  * exit_prices_t
  * order_status_t
  * position_t
- * signal_t
  */
 #include "tao_bot.h"
 

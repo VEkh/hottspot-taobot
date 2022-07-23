@@ -15,7 +15,6 @@
 #include "log_position_results.cpp"           // log_position_results
 #include "log_price_movement.cpp"             // log_price_movement
 #include "log_quote.cpp"                      // log_quote
-#include "log_signals.cpp"                    // log_signals
 #include "log_timestamps.cpp"                 // log_timestamps
 #include "open_and_persist_position.cpp"      // open_and_persist_position
 #include "reset_position.cpp"                 // reset_position
