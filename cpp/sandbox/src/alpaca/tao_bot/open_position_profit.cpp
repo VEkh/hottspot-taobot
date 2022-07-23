@@ -3,13 +3,8 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot, order_t
 
-double Alpaca::TaoBot::open_position_profit(
-    const order_t *base_open_order, const order_t *hedge_open_order = nullptr) {
-  double total = base_open_order->profit * base_open_order->quantity;
-
-  if (hedge_open_order) {
-    total += hedge_open_order->profit * hedge_open_order->quantity;
-  }
+double Alpaca::TaoBot::open_position_profit(const order_t *order_ptr) {
+  double total = order_ptr->profit * order_ptr->quantity;
 
   return total;
 }

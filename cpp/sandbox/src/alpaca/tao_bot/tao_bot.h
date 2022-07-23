@@ -25,7 +25,6 @@ private:
   using account_exit_prices_t = Alpaca::t::account_exit_prices_t;
   using candlestick_t = Global::t::candlestick_t;
   using exit_prices_t = Global::t::exit_prices_t;
-  using hedge_info_t = Alpaca::t::hedge_info_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -46,26 +45,15 @@ private:
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 4e2;
 
-  std::map<std::string, hedge_info_t> HEDGE_PAIRS = {
-      {"AAPL", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
-      {"C", {.action = order_action_t::SELL, .symbol = "BAC"}},
-      {"MSFT", {.action = order_action_t::SELL, .symbol = "TQQQ"}},
-      {"SPY", {.action = order_action_t::SELL, .symbol = "QQQ"}},
-      {"TSLA", {.action = order_action_t::SELL, .symbol = "QQQ"}},
-  };
-
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
       {"sell", "📉"},
   };
 
   Alpaca::Client api_client;
-  Alpaca::Client hedge_api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
-  account_balance_t hedge_account_balance;
   account_balance_t original_account_balance;
-  account_balance_t original_hedge_account_balance;
   char *symbol;
   double quantity;
   exit_prices_t exit_prices;
@@ -106,7 +94,7 @@ private:
   double max_loss_ratio(const order_t *);
   double min_target_tick_movement();
   double loss_started_at = INFINITY;
-  double open_position_profit(const order_t *, const order_t *);
+  double open_position_profit(const order_t *);
   double position_target_movement();
   double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
@@ -139,7 +127,6 @@ private:
                                             const order_action_t,
                                             const order_action_t, const char *,
                                             const double, std::string);
-  std::string hedge_symbol();
   std::time_t started_at = std::time(nullptr);
   void await_market_open();
   void await_next_poll();

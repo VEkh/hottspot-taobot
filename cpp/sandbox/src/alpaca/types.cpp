@@ -46,11 +46,6 @@ struct account_exit_prices_t {
   double target_max_profit = 0.00;
 };
 
-struct hedge_info_t {
-  order_action_t action;
-  std::string symbol;
-};
-
 struct order_t {
   order_action_t action = order_action_t::BUY;
   double execution_price = 0.00;
