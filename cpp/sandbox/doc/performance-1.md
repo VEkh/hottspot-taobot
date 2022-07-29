@@ -1,4 +1,4 @@
-### 2022-07-25:
+### 2022-08-01:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -20,6 +20,154 @@ Return: +$ (+%)
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-07-29:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $26236.55 (+739.53) (+2.90%)
+Max Balance:           $26599.38 (+1102.36) (+4.32%)
+Min Balance:           $24923.71 (-573.31) (-2.25%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 13W (Consecutive: 1) 11L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+* MAJOR ENHANCEMENT 🚨
+* What a day! 🚨I made the change to stop taking profits and it really seems to
+  have paid off.
+* 3/6 won with a total ~3% return
+* Each asset held the winning position for the following time after respective
+  losses:
+  * AAPL: 04:14:13 • 4 L
+  * AMZN: 06:20:34 • 2 L
+  * GOOG: 06:28:54 • 0 L
+  * MSFT: 04:15:40 • 3 L
+  * QQQ : 06:19:17 • 2 L
+  * TSLA: 06:28:54 • 0 L
+* This strategy _definitely_ saves money that was lost when following bull and
+  bear trends that would end up in reversals.
+* What remain to be seen are:
+  * How often the day will end in profit?
+  * Will this be similar to past reslts with a consistently higher max?
+  * If / when this loses, how major will the loss be?
+* It's important to note that today was an exceptionally successful day because
+  of strong trending for much of the day for most assets. We'll see how normal
+  this is.
+
+#### Next Thing(s) to Try
+
+### 2022-07-28:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $25527.83 (-634.72) (-2.43%)
+Max Balance:           $26330.45 (+167.90) (+0.64%)
+Min Balance:           $10037.50 (-16125.05) (-61.63%) [😵 Weird glitch. Real value was ~-2.87%]
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 12W (Consecutive: 0) 11L (Consecutive: 2)
+
+#### Remarks
+##### Stocks/ETFs
+* First day out of the last five where the target wasn't reached. However, loss
+  was still > -4%.
+
+#### Next Thing(s) to Try
+* I had an interesting idea: What if instead of taking profits, you left them
+  open ended?
+* When you take a profit one of a few things will happen:
+  1. The price will soon reverse and continue in the opposite direction, thus
+     nullifying the gain.
+  2. The price will keep going in the profit direction. In this case you would
+     have been better off staying in the position since closing and opening
+     necessitates a brief pause in gains.
+  3. The price reverses, triggers a loss, then reverses again to continue in
+     the original direction.
+* In cases 2 & 3, you would have been better off staying in the orignal
+  position, so maybe TaoBot only closes enough times for the day's trend to
+  establish itself.
+* If not the day's trend, then a long enough trend to reach the account's
+  target profit.
+* I'll have to leave TaoBot on all day for the next several days to record the
+  results, but it's possible that this will result in similar if not greater
+  returns.
+
+### 2022-07-27:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $26194.79 (-44.00) (-0.17%)
+Max Balance:           $26604.47 (+365.68) (+1.39%)
+Min Balance:           $25462.93 (-775.86) (-2.96%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 12W (Consecutive: 0) 10L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* Fourth consecutive day where 1.15% target was reached.
+* Also, max loss still didn't breach 4%.
+* VERY important: The profit only slipped ~-1% when the Fed announced interest
+  rate hikes at 1pm CT.
+  * Usually this kicks of heavy volatility and destroys profit.
+* This is also the fourth consecutive where the price meaningfully trended for
+  some portion of the day.
+  * This bodes well for Forex whose TaoBots will be running contiguously.
+* On three of the last four days, running all day resulted in loss.
+
+x * 1.01^y = 2x => 1.01^y = 2 => log(2) / log(1.01) = y
+
+#### Next Thing(s) to Try
+
+### 2022-07-26:
+#### Performance
+##### Stocks/ETFs
+**Alpha (2x Multiplier)**
+```
+Current Balance:       $26255.76 (+255.40) (+0.98%) (x2: +1.96%)
+Max Balance:           $26604.02 (+603.66) (+2.32%) (x2: +4.64%)
+Min Balance:           $25945.29 (-55.07)  (-0.21%) (x2: -0.42%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 12W (Consecutive: 1) 9L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+* Prolonged trending characterized this morning for most assets.
+* As price movement slowed, gains slipped
+* Last 3 days, peak was >= +1.65% and loss was > -4%. That's encouraging.
+
+#### Next Thing(s) to Try
+
+### 2022-07-25:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $24894.32 (-755.24) (-2.94%)
+Max Balance:           $26072.48 (+422.92) (+1.65%)
+Min Balance:           $24752.77 (-896.79) (-3.50%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 11W (Consecutive: 0) 9L (Consecutive: 4)
+
+#### Remarks
+##### Stocks/ETFs
+* Today and Friday performed very similarly.
+* Both lows didn't exceed -4%. Interesting.
+
 
 #### Next Thing(s) to Try
 
