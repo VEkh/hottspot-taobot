@@ -87,14 +87,11 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity(const std::string &);
   double current_price(const std::string &);
-  double max_loss_ratio(const order_t *);
   double min_target_tick_movement();
-  double loss_started_at = INFINITY;
   double open_position_profit(const order_t *);
   double position_target_movement();
   double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
-  double profit_started_at = INFINITY;
   double secured_profit_ratio(const order_t *);
   double target_daily_profit(const double);
   double target_daily_profit_trailing_stop();
@@ -104,7 +101,6 @@ private:
   int order_duration(const order_t *);
   int profit_duration(const double);
   int runtime();
-  int take_profit_after(const order_t *);
   int tradeable_symbols_count();
   json fetch_account_balance(Alpaca::Client &);
   json fetch_order(Alpaca::Client &, const order_t *);
@@ -135,7 +131,6 @@ private:
   void log_performance();
   void log_position();
   void log_positions();
-  void log_position_profit();
   void log_position_results();
   void log_price_movement();
   void log_quote();
@@ -145,14 +140,12 @@ private:
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(Alpaca::Client &, order_t *);
-  void set_loss_started_at();
   void set_open_order_prices();
   void set_position_status();
   void set_price_movement();
   void set_and_persist_price_movement();
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *, const std::vector<quote_t> *);
-  void set_profit_started_at();
   void set_status(Alpaca::Client &, order_t *order);
   void update_account_balance();
   void watch();

@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_await_next_poll
 
 #include "math.h"                   // abs
-#include "max_loss_ratio.cpp"       // max_loss_ratio
 #include "open_position_profit.cpp" // open_position_profit
 #include "tao_bot.h"                // Alpaca::TaoBot
 

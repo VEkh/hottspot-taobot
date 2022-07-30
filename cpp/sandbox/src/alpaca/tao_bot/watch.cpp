@@ -11,7 +11,6 @@
 #include "log_end_of_trading_period.cpp"      // log_end_of_trading_period
 #include "log_performance.cpp"                // log_performance
 #include "log_position.cpp"                   // log_position
-#include "log_position_profit.cpp"            // log_position_profit
 #include "log_position_results.cpp"           // log_position_results
 #include "log_price_movement.cpp"             // log_price_movement
 #include "log_quote.cpp"                      // log_quote
@@ -20,10 +19,8 @@
 #include "reset_position.cpp"                 // reset_position
 #include "set_and_persist_price_movement.cpp" // set_and_persist_price_movement
 #include "set_close_order_prices.cpp"         // set_close_order_prices
-#include "set_loss_started_at.cpp"            // set_loss_started_at
 #include "set_open_order_prices.cpp"          // set_open_order_prices
 #include "set_position_status.cpp"            // set_order_statuses
-#include "set_profit_started_at.cpp"          // set_profit_started_at
 #include "should_terminate.cpp"               // should_terminate
 #include "tao_bot.h"                          // Alpaca::TaoBot
 #include "update_account_balance.cpp"         // update_account_balance
@@ -46,7 +43,6 @@ void Alpaca::TaoBot::watch() {
     log_quote();
     log_price_movement();
     log_position();
-    log_position_profit();
     log_performance();
 
     set_position_status();
@@ -54,8 +50,6 @@ void Alpaca::TaoBot::watch() {
     cancel_stale_open_order();
     open_and_persist_position();
     set_open_order_prices();
-    set_loss_started_at();
-    set_profit_started_at();
 
     close_position();
     set_close_order_prices();
