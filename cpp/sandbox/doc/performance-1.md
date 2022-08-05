@@ -1,25 +1,183 @@
-### 2022-08-01:
+### 2022-08-08:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
 
 ##### Stocks/ETFs
-**Alpha**
+**Alpha (STAGING)**
 ```
 Max Balance:           $ (+$) (+%)
 Min Balance:           $ (-$) (-%)
 Return: +$ (+%)
 ```
 
-#### (STAGING) Stats (as of 2022-06-27)
+#### (STAGING) Close Stats (as of 2022-06-27)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
-* Week's Return:
-* Total Return:
-* 9-5 Salary: $506.71 / day • $2,533.56 / week • $132,251.74 / year
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-08-05:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $27615.76 (+1551.90) (+5.95%)
+Max Balance:           $28091.94 (+2028.08) (+7.78%)
+Min Balance:           $25947.131 (-116.73) (-0.45%)
+```
+
+#### (STAGING) Close Stats (as of 2022-06-27)
+* Win / Loss: 16W (Consecutive: 1) 13L (Consecutive: 0)
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 5W (Consecutive: 1) 1L (Consecutive: 0)
+* Would have closed by 9:17am CT
+
+#### Remarks
+##### Stocks/ETFs
+* 6/6 won today 🎉
+* Though the day was marked by strong extended trends, there was good variety
+  in movement.
+* If I had closed at 4%, I would have missed out on ~2% gain.
+  * This is interesting. It's still unclear whether I should always let TaoBot
+    run all day because of this outcome, or if I should always close at 4+%
+    since some days close below 4%.
+  * Maybe I'll run 4+% Close on production and All Day Run on staging.
+* It's good that I didn't change the algorithm after yestderday's loss.
+* Yesterday's loss supported what I already knew: since this is a
+  momentum-based algorithm, it will fail on days that spend most if not all day
+  consolidating. The prevalence of these days remains in question.
+
+#### Next Thing(s) to Try
+
+### 2022-08-04:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $26075.12 (-998.44) (-3.69%)
+Max Balance:           $27138.61 (+65.05) (+0.24%)
+Min Balance:           $25872.12 (-1201.44) (-4.44%)
+```
+
+#### (STAGING) Close Stats (as of 2022-06-27)
+* Win / Loss: 15W (Consecutive: 0) 13L (Consecutive: 1)
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 4W (Consecutive: 0) 1L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* Very interesting day. 1/6 won.
+* Every asset started the day with thrashing consolidation and didn't
+  significantly trend throughout the rest of the day.
+* This can and does happen. I'm not sure that there's anything that a
+  momentum-based approach can do against this.
+* What is encouraging, however, is that the current iteration still keeps loss
+  between -3-4%.
+* Change nothing and continue to observe. Remember, before today, the last four
+  consecutive days peaked at >4%.
+* The trend that I'm seeing since the 07/29 iteration is that gains/losses will
+  be somewhere between +/- 2-4%, and will peak slightly beyond that in most
+  cases.
+* Continue to observe if this is true, until next Wednesday. If it is, turn on
+  the take profit at the 4.25 (0.2 trailing stop level).
+* It will still be wise of you to wait for a $30K account balance before going
+  live.
+
+#### Next Thing(s) to Try
+
+### 2022-08-03:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $27083.16 (+985.61) (+3.78%)
+Max Balance:           $27351.50 (+1,253.95) (+4.80%)
+Min Balance:           $26022.03 (-75.52) (-0.29%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 15W (Consecutive: 2) 12L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+* Great day today! 5/6 assets won.
+* There was a strong bull trend for most assets, but the algorithm also rode
+  more turbulent price movements well.
+* The increased loss threshold DEFINITELY helped avoid excessively long loss
+  streaks during consolication periods. The longest loss streaks were GOOG (5) and TSLA (4)
+* The reduced take profit threshold was enough to secure profits. It couldn't
+  secure a bear trend profit, but it was still good.
+* This is the fourth consecutive day with a max greater than 4%. I still have
+  yet to see whether I should use it as a target profit, or if  I should keep
+  trying to end the day at the max profit.
+* I'll observe for a couple more days.
+* I'm getting really close to a stable version ready for production 🔥.
+
+#### Next Thing(s) to Try
+
+### 2022-08-02:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $26087.16 (+736.03) (+2.90%)
+Max Balance:           $26928.23 (+1577.10) (+6.22%)
+Min Balance:           $25182.43 (-168.70) (-0.67%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 14W (Consecutive: 1) 12L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+* 4/6 won and this is the third consecutive day with a max gain of > 4%. That's
+  really good!
+* This peak and the positive return were DEFINITELY a result of securing a
+  profit after 200x 1-sec variance.
+* This allowed almost all assets to profit on the bull and bear trends.
+* I try reducing the take profit to 150x 1-sec variance because 200x seemed
+  like a bit much.
+* MSFT never won and lost 9 times. Yesterday TSLA similarly lost 7 times. I'm
+  not sure if increasing the loss threshold will decrease the loss likelihood.
+* It's worth a shot but I'll keep it at 30x and first observe how the 150x
+  secure profit works.
+
+#### Next Thing(s) to Try
+
+### 2022-08-01:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $25361.25 (-869.16) (-3.31%)
+Max Balance:           $27378.47 (+1148.06) (+4.38%)
+Min Balance:           $25345.46 (-884.95) (-3.37%)
+```
+
+#### (STAGING) Stats (as of 2022-06-27)
+* Win / Loss: 13W (Consecutive: 0) 12L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* May want to consider a really high position take profit threshold, maybe 120x
+  1-sec variance.
+* GREAT peak again today that hit at ~10am CT.
+* However, everyone's trends started to reverse and TSLA ran into a 7-streak
+  loss at the inflection point.
+* It's still a win because the max balance was exceptional, but I'm going to
+  see if securing a very large win in hopes of following a reversal trend will
+  help lead to open-ended gains.
+* If it still doesn't by the end of the week, I may look at the average max
+  balance and re-implement a stop profit loss strategy.
 
 #### Next Thing(s) to Try
 
