@@ -9,9 +9,10 @@
 #include <ctime>                    // std::time
 #include <string>                   // std::stod, std::string
 
-json Alpaca::TaoBot::fetch_account_balance(Alpaca::Client &api_client_ref) {
+json Alpaca::TaoBot::fetch_account_balance() {
   return ::utils::json::parse_with_catch(
-      api_client_ref.fetch_account(), "ALPACA__TAO_BOT_fetch_account_balance");
+      this->api_client.fetch_account(),
+      "ALPACA__TAO_BOT_fetch_account_balance");
 }
 
 #endif

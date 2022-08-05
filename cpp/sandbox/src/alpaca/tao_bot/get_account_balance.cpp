@@ -12,9 +12,8 @@
 #include <string>                    // std::string
 
 Alpaca::TaoBot::account_balance_t
-Alpaca::TaoBot::get_account_balance(Alpaca::Client &api_client_ref,
-                                    const account_balance_t &previous_balance) {
-  account_balance_t account_balance_ = get_account_balance(api_client_ref);
+Alpaca::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
+  account_balance_t account_balance_ = get_account_balance();
 
   account_balance_.max_balance =
       std::max(account_balance_.balance, previous_balance.max_balance);
@@ -25,33 +24,32 @@ Alpaca::TaoBot::get_account_balance(Alpaca::Client &api_client_ref,
   return account_balance_;
 }
 
-Alpaca::TaoBot::account_balance_t
-Alpaca::TaoBot::get_account_balance(Alpaca::Client &api_client_ref) {
+Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
   json account_json;
 
   try {
     account_json = read_streamed_account();
   } catch (nlohmann::detail::parse_error &) {
     std::string error_message = Formatted::error_message(
-        std::string("[ALPACA__TAO_BOT_get_account_balance]: "
-                    "nlohmann::detail::parse_error when streaming"));
+        "[ALPACA__TAO_BOT_get_account_balance]: "
+        "nlohmann::detail::parse_error when streaming");
     std::cout << error_message << fmt.reset << std::endl;
 
-    account_json = fetch_account_balance(api_client_ref);
+    account_json = fetch_account_balance();
   } catch (std::domain_error &e) {
     std::string error_message = Formatted::error_message(
-        std::string("[ALPACA__TAO_BOT_get_account_balance]: std::domain_error "
-                    "when streaming: "));
+        "[ALPACA__TAO_BOT_get_account_balance]: std::domain_error "
+        "when streaming: ");
     std::cout << error_message << e.what() << fmt.reset << std::endl;
 
-    account_json = fetch_account_balance(api_client_ref);
+    account_json = fetch_account_balance();
   } catch (std::invalid_argument &) {
-    std::string error_message = Formatted::error_message(std::string(
+    std::string error_message = Formatted::error_message(
         "[ALPACA__TAO_BOT_get_account_balance]: std::invalid_argument "
-        "when streaming"));
+        "when streaming");
     std::cout << error_message << fmt.reset << std::endl;
 
-    account_json = fetch_account_balance(api_client_ref);
+    account_json = fetch_account_balance();
   }
 
   try {
@@ -70,7 +68,7 @@ Alpaca::TaoBot::get_account_balance(Alpaca::Client &api_client_ref) {
         .timestamp = std::time(nullptr),
     };
   } catch (nlohmann::detail::type_error &) {
-    return get_account_balance(api_client_ref);
+    return get_account_balance();
   }
 }
 

@@ -6,8 +6,7 @@
 #include <ctime>                   // std::time
 
 void Alpaca::TaoBot::update_account_balance() {
-  this->account_balance =
-      get_account_balance(this->api_client, this->account_balance);
+  this->account_balance = get_account_balance(this->account_balance);
 }
 
 #endif
