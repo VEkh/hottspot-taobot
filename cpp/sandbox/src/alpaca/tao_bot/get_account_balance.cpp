@@ -9,11 +9,27 @@
 #include <algorithm>                 // std::max, std::min
 #include <ctime>                     // std::time
 #include <iostream>                  // std::cout, std::endl
-#include <string>                    // std::string
+#include <math.h>                    // abs
+#include <string>                    // std::string, std::to_string
 
 Alpaca::TaoBot::account_balance_t
 Alpaca::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
   account_balance_t account_balance_ = get_account_balance();
+
+  const double balance_delta_ratio =
+      abs(account_balance_.balance - previous_balance.balance) /
+      previous_balance.balance;
+
+  if (balance_delta_ratio > 0.01) {
+    std::string error_message = Formatted::error_message(
+        "[ALPACA__TAO_BOT_get_account_balance]: Account balance "
+        "spiked by a strange amount: " +
+        std::to_string(balance_delta_ratio * 100) + "%. Retrying.");
+
+    std::cout << error_message << fmt.reset << std::endl;
+
+    return get_account_balance(previous_balance);
+  }
 
   account_balance_.max_balance =
       std::max(account_balance_.balance, previous_balance.max_balance);
