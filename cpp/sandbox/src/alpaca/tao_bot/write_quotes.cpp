@@ -12,7 +12,7 @@
 #include <vector>            // std::vector
 
 void Alpaca::TaoBot::write_quotes() {
-  std::vector<quote_t> quotes_ = this->quotes[this->symbol];
+  std::vector<quote_t> quotes_ = this->quotes;
   try {
     json (*quote_to_json)(quote_t &) = [](quote_t &quote) -> json {
       return {

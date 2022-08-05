@@ -10,11 +10,10 @@ double Alpaca::TaoBot::volatility(const order_t *order_ptr) {
 
 double Alpaca::TaoBot::volatility(const std::string &symbol_) {
   const double one_second_variance =
-      this->price_movements[symbol_].three_minute_one_second_variance.average;
+      this->price_movements.three_minute_one_second_variance.average;
 
   const double short_term_one_second_variance =
-      this->price_movements[symbol_]
-          .short_term_three_minute_one_second_variance.average;
+      this->price_movements.short_term_three_minute_one_second_variance.average;
 
   return short_term_one_second_variance / one_second_variance;
 }

@@ -42,21 +42,18 @@ void Alpaca::TaoBot::load_price_movement(const std::string &symbol_) {
     short_term_count =
         persisted_data["short_term_three_minute_one_second_variance"]["count"];
 
-    this->price_movements[symbol_]
-        .short_term_three_minute_one_second_variance.average =
+    this->price_movements.short_term_three_minute_one_second_variance.average =
         short_term_average;
-    this->price_movements[symbol_]
-        .short_term_three_minute_one_second_variance.count = short_term_count;
+    this->price_movements.short_term_three_minute_one_second_variance.count =
+        short_term_count;
   }
 
   if (persisted_data.contains("three_minute_one_second_variance")) {
     average = persisted_data["three_minute_one_second_variance"]["average"];
     count = persisted_data["three_minute_one_second_variance"]["count"];
 
-    this->price_movements[symbol_].three_minute_one_second_variance.average =
-        average;
-    this->price_movements[symbol_].three_minute_one_second_variance.count =
-        count;
+    this->price_movements.three_minute_one_second_variance.average = average;
+    this->price_movements.three_minute_one_second_variance.count = count;
   }
 }
 

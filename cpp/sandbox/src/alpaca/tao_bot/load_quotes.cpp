@@ -38,7 +38,7 @@ void Alpaca::TaoBot::load_quotes(const std::string &symbol_) {
   }
 
   for (json quote_json : quotes_json) {
-    this->quotes[symbol_].push_back(json_to_quote(quote_json));
+    this->quotes.push_back(json_to_quote(quote_json));
   }
 }
 

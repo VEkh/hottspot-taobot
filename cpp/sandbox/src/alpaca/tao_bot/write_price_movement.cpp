@@ -10,7 +10,7 @@
 #include <string>            // std::string
 
 void Alpaca::TaoBot::write_price_movement() {
-  const price_movement_t price_movement = this->price_movements[this->symbol];
+  const price_movement_t price_movement = this->price_movements;
 
   try {
     const std::string filepath = std::string(APP_DIR) +

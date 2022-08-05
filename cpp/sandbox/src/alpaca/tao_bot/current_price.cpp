@@ -4,8 +4,6 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 #include <string>    // std::string
 
-double Alpaca::TaoBot::current_price(const std::string &symbol_) {
-  return this->quotes[symbol_].back().price;
-}
+double Alpaca::TaoBot::current_price() { return this->quotes.back().price; }
 
 #endif

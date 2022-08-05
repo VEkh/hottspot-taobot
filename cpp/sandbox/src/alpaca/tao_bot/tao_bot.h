@@ -61,9 +61,9 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  std::map<std::string, price_movement_t> price_movements;
+  price_movement_t price_movements;
   std::map<std::string, std::string> flags;
-  std::map<std::string, std::vector<quote_t>> quotes;
+  std::vector<quote_t> quotes;
   std::vector<position_t> closed_positions;
 
   account_balance_t get_account_balance(Alpaca::Client &);

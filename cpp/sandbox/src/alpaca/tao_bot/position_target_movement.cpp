@@ -6,8 +6,7 @@
 
 double Alpaca::TaoBot::position_target_movement() {
   return min_target_tick_movement() *
-         this->price_movements[this->symbol]
-             .three_minute_one_second_variance.average;
+         this->price_movements.three_minute_one_second_variance.average;
 }
 
 #endif

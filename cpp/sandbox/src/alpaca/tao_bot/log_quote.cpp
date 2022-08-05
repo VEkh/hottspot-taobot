@@ -16,7 +16,7 @@
 void Alpaca::TaoBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
 
-  const std::vector<quote_t> quotes_ = this->quotes[this->symbol];
+  const std::vector<quote_t> quotes_ = this->quotes;
   const int ticks = quotes_.size();
 
   if (!ticks) {
