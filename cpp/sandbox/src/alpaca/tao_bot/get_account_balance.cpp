@@ -69,11 +69,22 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
   }
 
   try {
+    double original_margin_buying_power =
+        this->account_balance.original_margin_buying_power;
+
     const std::string balance = account_json["equity"];
     const std::string margin_buying_power = account_json["buying_power"];
     const std::string margin_multiplier = account_json["multiplier"];
 
+    if (!original_margin_buying_power) {
+      original_margin_buying_power =
+          account_json.contains("original_margin_buying_power")
+              ? (double)account_json["original_margin_buying_power"]
+              : std::stod(margin_buying_power);
+    }
+
     const double balance_d = std::stod(balance);
+    const time_t now = std::time(nullptr);
 
     return {
         .balance = balance_d,
@@ -81,7 +92,8 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
         .margin_multiplier = std::stod(margin_multiplier),
         .max_balance = balance_d,
         .min_balance = balance_d,
-        .timestamp = std::time(nullptr),
+        .original_margin_buying_power = original_margin_buying_power,
+        .timestamp = now,
     };
   } catch (nlohmann::detail::type_error &) {
     return get_account_balance();

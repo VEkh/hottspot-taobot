@@ -9,8 +9,8 @@
 double Alpaca::TaoBot::compute_quantity(const std::string &symbol_) {
   const quote_t quote = this->quotes.back();
 
-  const double max_buying_power = 0.95 * this->account_balance.balance *
-                                  this->account_balance.margin_multiplier;
+  const double max_buying_power =
+      this->account_balance.original_margin_buying_power;
 
   const double buying_power =
       std::min(this->account_balance.margin_buying_power,

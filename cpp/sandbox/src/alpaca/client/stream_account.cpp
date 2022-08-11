@@ -12,6 +12,8 @@
 #include <unistd.h>           // usleep
 
 void Alpaca::Client::stream_account() {
+  double original_margin_buying_power = 0.00;
+
   while (true) {
     json account_json;
 
@@ -31,6 +33,13 @@ void Alpaca::Client::stream_account() {
       continue;
     }
 
+    if (!original_margin_buying_power) {
+      const std::string margin_buying_power = account_json["buying_power"];
+
+      original_margin_buying_power = std::stod(margin_buying_power);
+    }
+
+    account_json["original_margin_buying_power"] = original_margin_buying_power;
     account_json["timestamp"] = (long int)std::time(nullptr);
 
     std::cout << fmt.bold << fmt.cyan << account_json.dump(2) << fmt.reset
