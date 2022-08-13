@@ -1,4 +1,4 @@
-### 2022-08-08:
+### 2022-08-15:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -6,9 +6,9 @@
 ##### Stocks/ETFs
 **Alpha (STAGING)**
 ```
-Max Balance:           $ (+$) (+%)
-Min Balance:           $ (-$) (-%)
-Return: +$ (+%)
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
 ```
 
 #### (STAGING) Close Stats (as of 2022-06-27)
@@ -20,6 +20,187 @@ Return: +$ (+%)
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-08-12:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $29787.27 (+682.74) (+2.35%)
+Max Balance:           $29796.39 (+691.86) (+2.38%)
+Min Balance:           $28429.41 (-675.12) (-2.32%)
+```
+
+#### (STAGING) Never Close Stats (as of 2022-07-29)
+* Win / Loss: 7W (Consecutive: 2) 3L (Consecutive: 0)
+* Total % Return (Never Stopping): 13.99%
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 5W (Consecutive: 0) 5L (Consecutive: 4)
+* Total % Return: 23.50%
+
+#### (STAGING) Target (+3.65%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 8W (Consecutive: 0) 2L (Consecutive: 1)
+  * I messed up the buying power split again so that QQQ was left with an
+    anemic amount of the balance. I adjusted the compute quantity algorithm to
+    resemble a prior working iteration.
+* Total % Return: 25.84%
+
+#### Remarks
+##### Stocks/ETFs
+* Buying Power Start: $116,418.12 • End: $116,418.12
+  * Confirmed. This changes overnight and appears to stay constant all day.
+* I think I'm about ready to start trading live. For extra security, I should
+  probably run for one more day to iron out the margin buy power and max
+  balance time issues.
+* After computing the total % return in each of the target profit strategies,
+  targetting 3.5% has the greatest return in 10 days 0of observation.
+* What's more reassuring is that ALL strategies had a positve return over the
+  last 10 days. I think this goes beyond fluke and is evidence that this could
+  be very profitable over the long run. 🤑
+
+#### Next Thing(s) to Try
+
+### 2022-08-11:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $29124.07 (+715.82) (+2.52%)
+Max Balance:           $29395.01 (+986.76) (+3.47%)
+Min Balance:           $28056.81 (-351.44) (-1.24%)
+```
+
+#### (STAGING) Close Stats (as of 2022-06-27)
+* Win / Loss: 18W (Consecutive: 1) 14L (Consecutive: 0)
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 5W (Consecutive: 0) 4L (Consecutive: 3)
+
+#### (STAGING) Target (+3.65%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 8W (Consecutive: 4) 1L (Consecutive: 0)
+  * ❗ Though today's max was only 3.47%, I'm counting it as a win because the
+    full margin buy power wasn't being used becuase of a change I made to the
+    quantity computation.
+
+#### Remarks
+##### Stocks/ETFs
+* Buying Power Start: $113,633.00 • End: $113,633.00
+  * Looks like this only changes overnight.
+  * That suggests that multiplying the current balance by four was never an
+    accurate indicator of the buying power.
+  * Reading directly from the current buying power will be better.
+* I'm going to observe for one more day, but it's looking like I'm going to
+  target a 3.5% take profit.
+
+#### Next Thing(s) to Try
+
+### 2022-08-10:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $28421.05 (-174.09) (-0.61%)
+Max Balance:           $29677.07 (+1081.93) (+3.78%) @ 09:20 CDT
+Min Balance:           $28366.55 (-228.59) (-0.80%)
+```
+
+#### (STAGING) Close Stats (as of 2022-06-27)
+* Win / Loss: 17W (Consecutive: 0) 14L (Consecutive: 1)
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 5W (Consecutive: 0) 3L (Consecutive: 2)
+
+#### (STAGING) Target (+3.65%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 7W (Consecutive: 3) 1L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+* Buying Power Start: $114,380.56 • End: $114,380.56
+  * Even after a slight loss. It appears this amount doesn't change throughout
+    the day. Confirm this over the next couple of days.
+* I may need to lower the target to 3.65% (stop of 3.5%). I'll decide after two
+  more days of observation.
+
+#### Next Thing(s) to Try
+
+### 2022-08-09:
+#### Performance
+##### Stocks/ETFs
+**Beta (STAGING) (🚨 DISREGARD since 1st hour was lost 🚨)**
+```
+Current Balance:       $28,246.80 (-490.69) (-1.71%)
+Max Balance:           $28,960.42 (+222.93) (+0.78%)
+Min Balance:           $28,208.24 (-529.25) (-1.84%)
+```
+
+#### (STAGING) Close Stats (as of 2022-06-27)
+* Win / Loss: 17W (Consecutive: 2) 13L (Consecutive: 0)
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 5W (Consecutive: 0) 2L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* Uhhh WEIRD day 😳
+* The day OPENED with a few things in the Alpha account:
+  1. A +6% gain 🎉
+  2. A severely slashed margin buying power 😵
+  3. A margin buying power multiplier that remained `4`.
+  4. A large AMD position that had been open all of yestderday and into today
+     because of order cancellation segfaults I was debugging on Friday.
+* This created a bizarre, but interesting scenario:
+  * Normally the buying power is the lesser of `margin buying power` and
+    `(balance * margin multiplier (4)) / number of assets traded`.
+  * At the beginning of the day, `margin buying power` and `balance * margin
+    multiplier` are roughly equivalent, so if the balance-multipler product is
+    used, there will be enough buying power for all trades. Let's call this
+    product the Presumed Buying Power.
+  * This morning, however, the divvied Presumed Buying Power (~$18K per asset)
+    was still less than the actual avaialable buying power (~$68K), but not
+    enough to open trades for each asset with the presumed amount (i.e. $18K *
+    6 >> $27K * 4)
+  * As a result, most assets opened below their anticipated quantities and TSLA
+    couldn't ever open a position.
+* I'm fairly sure that this was all because the AMD position was open overnight
+  and all will return to normal tomorrow.
+* It does make me wonder, however, if I should adjust the quantity algorithm to
+  deal with only the available margin buying power.
+* After an hour, I finally resolved to run the app on `Beta` to see if it could
+  still profit. While it didn't hit the big targets, it still kept the loss
+  small, less than the target 2-4% range.
+
+#### Next Thing(s) to Try
+
+### 2022-08-08:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $27827.57 (+225.70) (+0.82%)
+Max Balance:           $28613.34 (+1011.47) (+3.66%)
+Min Balance:           $26800.66 (-801.21) (-2.90%)
+```
+
+#### (STAGING) Close Stats (as of 2022-06-27)
+* Win / Loss: 17W (Consecutive: 2) 13L (Consecutive: 0)
+
+#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+* Win / Loss: 5W (Consecutive: 0) 2L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* Had a rough start, but had a very healthy peak. It ultimately ended in
+  shallow green.
+* I may want to think of a time-based stop profit algorithm:
+  * Target 4.25% at the start
+  * If it hasn't reached this by 11:45pm (?) target max - (n * 1)% for n hours
+    after the halfway point.
 
 #### Next Thing(s) to Try
 
@@ -54,6 +235,10 @@ Min Balance:           $25947.131 (-116.73) (-0.45%)
 * Yesterday's loss supported what I already knew: since this is a
   momentum-based algorithm, it will fail on days that spend most if not all day
   consolidating. The prevalence of these days remains in question.
+* Longest loss streaks before final position:
+  * AAPL (4)
+  * AMZN (3)
+  * MSFT (3)
 
 #### Next Thing(s) to Try
 
@@ -181,7 +366,7 @@ Min Balance:           $25345.46 (-884.95) (-3.37%)
 
 #### Next Thing(s) to Try
 
-### 2022-07-29:
+### 🌟 2022-07-29 🌟:
 #### Performance
 ##### Stocks/ETFs
 **Alpha**

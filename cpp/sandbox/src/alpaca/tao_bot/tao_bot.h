@@ -22,8 +22,7 @@ public:
 
 private:
   using account_balance_t = Global::t::account_balance_t;
-  using account_exit_prices_t = Alpaca::t::account_exit_prices_t;
-  using candlestick_t = Global::t::candlestick_t;
+  using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
@@ -39,7 +38,7 @@ private:
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.02;
-  const double TARGET_DAILY_PROFIT = 0.0105;
+  const double TARGET_DAILY_PROFIT = 0.0355;
   const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.001;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 4e2;

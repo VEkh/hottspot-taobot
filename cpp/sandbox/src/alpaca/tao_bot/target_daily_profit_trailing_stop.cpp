@@ -1,7 +1,7 @@
 #ifndef ALPACA__TAO_BOT_target_daily_profit_trailing_stop
 #define ALPACA__TAO_BOT_target_daily_profit_trailing_stop
 
-#include "tao_bot.h" // Alpaca::TaoBot, order_win_result_t
+#include "tao_bot.h" // Alpaca::TaoBot
 #include <algorithm> // std::max, std::min
 
 double Alpaca::TaoBot::target_daily_profit_trailing_stop() {
