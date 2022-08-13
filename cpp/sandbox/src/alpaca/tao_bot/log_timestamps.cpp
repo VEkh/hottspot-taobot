@@ -15,7 +15,7 @@ void Alpaca::TaoBot::log_timestamps() {
 
   std::cout << fmt.bold << fmt.cyan;
   printf("⌚ Current Time: %s • Runtime: %s\n",
-         ::utils::time_::date_string(&now, "%c %Z").c_str(),
+         ::utils::time_::date_string(now, "%c %Z").c_str(),
          ::utils::integer_::seconds_to_clock(runtime_).c_str());
   std::cout << fmt.reset << std::endl;
 }

@@ -15,7 +15,7 @@ bool Alpaca::TaoBot::is_holiday() {
   };
 
   std::time_t now = std::time(nullptr);
-  const std::string date_string = ::utils::time_::date_string(&now);
+  const std::string date_string = ::utils::time_::date_string(now);
 
   return HOLIDAYS[date_string];
 }

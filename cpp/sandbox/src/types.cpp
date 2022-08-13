@@ -11,6 +11,7 @@ struct account_balance_t {
   double margin_buying_power;
   double margin_multiplier;
   double max_balance = 0.00;
+  long int max_balance_timestamp = 0;
   double min_balance = 0.00;
   long int timestamp = 0;
 };

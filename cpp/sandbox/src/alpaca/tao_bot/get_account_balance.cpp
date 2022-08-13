@@ -11,6 +11,7 @@
 #include <iostream>                  // std::cout, std::endl
 #include <math.h>                    // abs
 #include <string>                    // std::string, std::to_string
+#include <unistd.h>                  // usleep
 
 Alpaca::TaoBot::account_balance_t
 Alpaca::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
@@ -28,11 +29,18 @@ Alpaca::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
 
     std::cout << error_message << fmt.reset << std::endl;
 
+    usleep(5e5);
+
     return get_account_balance(previous_balance);
   }
 
   account_balance_.max_balance =
       std::max(account_balance_.balance, previous_balance.max_balance);
+
+  account_balance_.max_balance_timestamp =
+      account_balance_.balance == account_balance_.max_balance
+          ? std::time(nullptr)
+          : previous_balance.max_balance_timestamp;
 
   account_balance_.min_balance =
       std::min(account_balance_.balance, previous_balance.min_balance);
@@ -91,6 +99,7 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
         .margin_buying_power = std::stod(margin_buying_power),
         .margin_multiplier = std::stod(margin_multiplier),
         .max_balance = balance_d,
+        .max_balance_timestamp = now,
         .min_balance = balance_d,
         .original_margin_buying_power = original_margin_buying_power,
         .timestamp = now,

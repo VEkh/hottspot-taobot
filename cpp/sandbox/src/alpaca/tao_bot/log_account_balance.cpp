@@ -3,6 +3,7 @@
 
 #include "build_account_exit_prices.cpp" // build_account_exit_prices
 #include "lib/formatted.cpp"             // Formatted
+#include "lib/utils/time.cpp"            // ::utils::time_
 #include "tao_bot.h"                     // Alpaca::TaoBot
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
@@ -41,9 +42,13 @@ void Alpaca::TaoBot::log_account_balance() {
              ? " 🔥"
              : "");
 
-  printf("Max Balance:           $%'.2f (%+'.2f) (%+'.2f%%)\n",
-         this->account_balance.max_balance, exit_prices_.max_profit,
-         max_balance_delta_percentage);
+  printf(
+      "Max Balance:           $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+      this->account_balance.max_balance, exit_prices_.max_profit,
+      max_balance_delta_percentage,
+      ::utils::time_::date_string(this->account_balance.max_balance_timestamp,
+                                  "%H:%M %Z", "America/Chicago")
+          .c_str());
 
   printf("Min Balance:           $%'.2f (%+'.2f) (%+'.2f%%)\n",
          this->account_balance.min_balance, max_loss, max_loss_percentage);
