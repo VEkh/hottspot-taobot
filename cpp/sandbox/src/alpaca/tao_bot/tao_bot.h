@@ -85,7 +85,7 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity(const std::string &);
-  double current_price(const std::string &);
+  double current_price();
   double min_target_tick_movement();
   double open_position_profit(const order_t *);
   double position_target_movement();
@@ -107,9 +107,9 @@ private:
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  quote_t fetch_quote(const std::string);
-  quote_t get_quote(const std::string);
-  quote_t read_streamed_quote(const std::string);
+  quote_t fetch_quote();
+  quote_t get_quote();
+  quote_t read_streamed_quote();
 
   std::pair<order_t, order_t> open_position(Alpaca::Client,
                                             const order_action_t,
@@ -122,8 +122,8 @@ private:
   void fetch_and_persist_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
-  void load_price_movement(const std::string &);
-  void load_quotes(const std::string &);
+  void load_price_movement();
+  void load_quotes();
   void log_account_balance();
   void log_end_of_trading_period();
   void log_performance();

@@ -10,8 +10,7 @@
  */
 #include "tao_bot.h"
 
-#include "compute_quantity.cpp"     // current_price
-#include "current_price.cpp"        // current_price
+#include "compute_quantity.cpp"     // compute_quantity
 #include "get_account_balance.cpp"  // get_account_balance
 #include "open_position.cpp"        // open_position
 #include "opposite_direction.cpp"   // opposite_direction

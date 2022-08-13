@@ -8,16 +8,13 @@
 #include <vector>                   // std::vector
 
 void Alpaca::TaoBot::set_price_movement() {
-  const std::string symbol_ = this->symbol;
-  std::vector<quote_t> quotes_ = this->quotes;
-
-  if (!quotes_.size()) {
+  if (!this->quotes.size()) {
     return;
   }
 
-  const quote_t current_quote = quotes_.back();
+  const quote_t current_quote = this->quotes.back();
 
-  if (current_quote.timestamp - quotes_.front().timestamp <
+  if (current_quote.timestamp - this->quotes.front().timestamp <
       this->AVG_ONE_SEC_VARIANCE_TIMEFRAME) {
     return;
   }
@@ -26,9 +23,9 @@ void Alpaca::TaoBot::set_price_movement() {
   int ticks = 0;
   std::vector<quote_t>::reverse_iterator it;
 
-  for (it = quotes_.rbegin(); current_quote.timestamp - it->timestamp <=
-                                  this->AVG_ONE_SEC_VARIANCE_TIMEFRAME &&
-                              it != quotes_.rend();
+  for (it = this->quotes.rbegin(); current_quote.timestamp - it->timestamp <=
+                                       this->AVG_ONE_SEC_VARIANCE_TIMEFRAME &&
+                                   it != this->quotes.rend();
        it++) {
 
     const double time_delta = (it->timestamp - (it + 1)->timestamp) / 1000.0;
@@ -43,7 +40,7 @@ void Alpaca::TaoBot::set_price_movement() {
   if (average > 1.0e6) {
     std::cout << fmt.bold << fmt.yellow;
     puts("🧐 STRANGE PRICE MOVEMENT");
-    const quote_t penultimate_quote = quotes_.at(quotes_.size() - 2);
+    const quote_t penultimate_quote = this->quotes.at(this->quotes.size() - 2);
     printf("Last Quote: %.2f • Last Price Delta: %.2f\n", current_quote.price,
            (current_quote.price - penultimate_quote.price));
     std::cout << fmt.reset << std::endl;

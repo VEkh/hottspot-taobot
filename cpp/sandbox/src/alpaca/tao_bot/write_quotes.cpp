@@ -12,7 +12,6 @@
 #include <vector>            // std::vector
 
 void Alpaca::TaoBot::write_quotes() {
-  std::vector<quote_t> quotes_ = this->quotes;
   try {
     json (*quote_to_json)(quote_t &) = [](quote_t &quote) -> json {
       return {
@@ -33,8 +32,8 @@ void Alpaca::TaoBot::write_quotes() {
     std::list<json> quotes_list;
     std::vector<quote_t>::reverse_iterator it;
 
-    for (it = quotes_.rbegin(); it != quotes_.rend() && i < sample_size;
-         it++, i++) {
+    for (it = this->quotes.rbegin();
+         it != this->quotes.rend() && i < sample_size; it++, i++) {
       quotes_list.push_front(quote_to_json(*it));
     }
 

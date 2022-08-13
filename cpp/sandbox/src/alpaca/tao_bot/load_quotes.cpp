@@ -10,7 +10,7 @@
 #include <string>           // std::string
 #include <vector>           // std::vector
 
-void Alpaca::TaoBot::load_quotes(const std::string &symbol_) {
+void Alpaca::TaoBot::load_quotes() {
   quote_t (*json_to_quote)(json &) = [](json &quote_json) -> quote_t {
     quote_t quote;
     quote.ask = quote_json["ask"];
@@ -22,7 +22,7 @@ void Alpaca::TaoBot::load_quotes(const std::string &symbol_) {
   };
 
   const std::string filepath = std::string(APP_DIR) + "/data/alpaca/quotes/" +
-                               std::string(symbol_) + ".json";
+                               std::string(this->symbol) + ".json";
 
   std::ifstream file;
   json quotes_json;

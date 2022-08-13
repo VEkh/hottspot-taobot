@@ -10,11 +10,10 @@
 #include <stdexcept>          // std::domain_error
 #include <string>             // std::string
 
-Alpaca::TaoBot::quote_t
-Alpaca::TaoBot::read_streamed_quote(const std::string symbol_) {
+Alpaca::TaoBot::quote_t Alpaca::TaoBot::read_streamed_quote() {
   const std::string filepath = std::string(APP_DIR) +
                                "/data/alpaca/streamed_quotes/" +
-                               std::string(symbol_) + ".json";
+                               std::string(this->symbol) + ".json";
 
   std::ifstream file;
   json quote_json;
@@ -24,13 +23,13 @@ Alpaca::TaoBot::read_streamed_quote(const std::string symbol_) {
     file >> quote_json;
     file.close();
   } catch (nlohmann::detail::parse_error &) {
-    return read_streamed_quote(symbol_);
+    return read_streamed_quote();
   }
 
   json wrapper;
   wrapper["quote"] = quote_json;
   quote_t parsed_quote = this->api_client.parse_quote(wrapper.dump());
-  parsed_quote.symbol = symbol_;
+  parsed_quote.symbol = this->symbol;
 
   std::tm parsed_time =
       ::utils::time_::parse_timestamp(quote_json["t"], "%Y-%m-%dT%H:%M:%SZ");
@@ -40,7 +39,7 @@ Alpaca::TaoBot::read_streamed_quote(const std::string symbol_) {
 
   if ((now - quote_epoch) > 10) {
     const std::string error_message = Formatted::error_message(
-        symbol_ + std::string(" quote stale. Falling back to fetch."));
+        this->symbol + std::string(" quote stale. Falling back to fetch."));
 
     throw std::domain_error(error_message);
   }

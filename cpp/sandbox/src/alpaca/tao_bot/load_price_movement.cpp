@@ -14,10 +14,10 @@
 #include <stdexcept>        // std::invalid_argument
 #include <string>           // std::string
 
-void Alpaca::TaoBot::load_price_movement(const std::string &symbol_) {
+void Alpaca::TaoBot::load_price_movement() {
   const std::string filepath = std::string(APP_DIR) +
                                "/data/alpaca/price_movement/" +
-                               std::string(symbol_) + ".json";
+                               std::string(this->symbol) + ".json";
 
   std::ifstream file;
   json persisted_data;

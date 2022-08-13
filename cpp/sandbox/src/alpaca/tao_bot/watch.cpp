@@ -46,7 +46,6 @@ void Alpaca::TaoBot::watch() {
     log_performance();
 
     set_position_status();
-
     cancel_stale_open_order();
     open_and_persist_position();
     set_open_order_prices();

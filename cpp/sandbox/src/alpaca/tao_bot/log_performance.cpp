@@ -12,7 +12,6 @@
 
 #include "closed_position_profit.cpp" // closed_position_profit
 #include "lib/utils/integer.cpp"      // utils::integer_
-#include "order_win_result.cpp"       // order_win_result
 #include <algorithm>                  // std::max
 #include <iostream>                   // std::cout, std::endl
 #include <map>                        // std::map

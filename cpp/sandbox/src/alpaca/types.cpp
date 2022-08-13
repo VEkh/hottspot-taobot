@@ -43,12 +43,10 @@ struct order_t {
   double execution_price = 0.00;
   std::string id = "";
   double limit_price = 0.00;
-  double max_profit = 0.00;
   double max_position_profit = 0.00;
-  bool max_profit_reset = false;
+  double max_profit = 0.00;
   double profit = 0.00;
   double quantity = 0.00;
-  int runtime = 0;
   order_status_t status = order_status_t::ORDER_INIT;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
@@ -76,7 +74,7 @@ struct quote_t {
   double bid = 0.00;
   double price = 0.00;
   std::string symbol = "";
-  long timestamp;
+  long int timestamp;
 };
 } // namespace t
 } // namespace Alpaca

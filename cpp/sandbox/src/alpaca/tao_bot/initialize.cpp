@@ -16,7 +16,6 @@
 #include <locale.h>                    // setlocale
 #include <map>                         // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
-#include <stdio.h>   // puts
 #include <string>    // std::string
 
 void Alpaca::TaoBot::initialize(char *symbol_,
@@ -47,11 +46,11 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   this->account_balance = this->original_account_balance =
       get_account_balance();
 
-  load_quotes(this->symbol);
+  load_quotes();
 
   fetch_and_persist_quote();
   load_performance();
-  load_price_movement(this->symbol);
+  load_price_movement();
 
   this->performance = build_performance();
 }

@@ -47,7 +47,6 @@ void Alpaca::TaoBot::set_status(Alpaca::Client &api_client_ref,
 
   if (original_status != order_status_t::ORDER_FILLED &&
       order->status == order_status_t::ORDER_FILLED) {
-    order->runtime = (int)(std::time(nullptr) - this->started_at);
     order->timestamp = (int)std::time(nullptr);
 
     const char *order_action = Alpaca::constants::ORDER_ACTIONS[order->action];

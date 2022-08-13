@@ -7,7 +7,7 @@
 #include <string>           // std::string
 
 void Alpaca::TaoBot::fetch_and_persist_quote() {
-  const quote_t current_quote = get_quote(this->symbol);
+  const quote_t current_quote = get_quote();
 
   this->quotes.push_back(current_quote);
   write_quotes();
