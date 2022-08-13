@@ -60,10 +60,11 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  price_movement_t price_movements;
+  price_movement_t price_movement;
   std::map<std::string, std::string> flags;
-  std::vector<quote_t> quotes;
+  std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
+  std::vector<quote_t> quotes;
 
   account_balance_t get_account_balance();
   account_balance_t get_account_balance(const account_balance_t &);
@@ -114,7 +115,6 @@ private:
                                             const order_action_t,
                                             const order_action_t, const char *,
                                             const double, std::string);
-  std::time_t started_at = std::time(nullptr);
   void await_market_open();
   void await_next_poll();
   void cancel_stale_open_order();

@@ -10,8 +10,6 @@
 #include <string>            // std::string
 
 void Alpaca::TaoBot::write_price_movement() {
-  const price_movement_t price_movement = this->price_movements;
-
   try {
     const std::string filepath = std::string(APP_DIR) +
                                  "/data/alpaca/price_movement/" +
@@ -30,16 +28,20 @@ void Alpaca::TaoBot::write_price_movement() {
       }
     )"_json;
 
-    price_movement_json
-        ["short_term_three_minute_one_second_variance"]["average"] =
-            price_movement.short_term_three_minute_one_second_variance.average;
-    price_movement_json
-        ["short_term_three_minute_one_second_variance"]["count"] =
-            price_movement.short_term_three_minute_one_second_variance.count;
+    price_movement_json["short_term_three_minute_one_second_variance"]
+                       ["average"] =
+                           this->price_movement
+                               .short_term_three_minute_one_second_variance
+                               .average;
+    price_movement_json["short_term_three_minute_one_second_variance"]
+                       ["count"] =
+                           this->price_movement
+                               .short_term_three_minute_one_second_variance
+                               .count;
     price_movement_json["three_minute_one_second_variance"]["average"] =
-        price_movement.three_minute_one_second_variance.average;
+        this->price_movement.three_minute_one_second_variance.average;
     price_movement_json["three_minute_one_second_variance"]["count"] =
-        price_movement.three_minute_one_second_variance.count;
+        this->price_movement.three_minute_one_second_variance.count;
 
     ::utils::io::write_to_file(price_movement_json.dump(2), filepath.c_str());
   } catch (nlohmann::detail::parse_error &) {

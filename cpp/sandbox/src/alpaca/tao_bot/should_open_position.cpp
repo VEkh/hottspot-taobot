@@ -11,7 +11,7 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
     return false;
   }
 
-  if (!this->price_movements.short_term_three_minute_one_second_variance
+  if (!this->price_movement.short_term_three_minute_one_second_variance
            .average) {
     return false;
   }

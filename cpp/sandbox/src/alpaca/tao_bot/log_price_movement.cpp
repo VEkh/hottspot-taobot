@@ -1,23 +1,21 @@
 #ifndef ALPACA__TAO_BOT_log_price_movement
 #define ALPACA__TAO_BOT_log_price_movement
 
-#include "lib/utils/integer.cpp"        // ::utils::integer_
-#include "min_target_tick_movement.cpp" // min_target_tick_movement
-#include "tao_bot.h"                    // Alpaca::TaoBot, fmt
-#include <iostream>                     // std::cout, std::endl
-#include <stdio.h>                      // printf
-#include <string>                       // std::string
+#include "lib/utils/integer.cpp" // ::utils::integer_
+#include "tao_bot.h"             // Alpaca::TaoBot, fmt
+#include <iostream>              // std::cout, std::endl
+#include <stdio.h>               // printf
 
 void Alpaca::TaoBot::log_price_movement() {
   const double one_second_variance =
-      this->price_movements.three_minute_one_second_variance.average;
+      this->price_movement.three_minute_one_second_variance.average;
 
   if (!one_second_variance) {
     return;
   }
 
   const double short_term_one_second_variance =
-      this->price_movements.short_term_three_minute_one_second_variance.average;
+      this->price_movement.short_term_three_minute_one_second_variance.average;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
