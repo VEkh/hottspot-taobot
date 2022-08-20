@@ -37,7 +37,7 @@ void Alpaca::TaoBot::open_and_persist_position() {
     const position_t last_position = this_->closed_positions.back();
 
     if (this_->order_win_result(last_position) == order_win_result_t::WIN) {
-      return last_position.open_order.action == order_action_t::BUY;
+      return last_position.open_order.action == order_action_t::SELL;
     }
 
     return last_position.close_order.action == order_action_t::BUY;

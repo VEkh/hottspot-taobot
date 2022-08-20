@@ -96,7 +96,7 @@ private:
   double target_daily_profit_trailing_stop();
   double volatility(const order_t *);
   double volatility(const std::string &);
-  exit_prices_t build_exit_prices(const order_t *);
+  exit_prices_t build_exit_prices();
   int order_duration(const order_t *);
   int profit_duration(const double);
   int runtime();

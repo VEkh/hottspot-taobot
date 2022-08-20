@@ -1,4 +1,4 @@
-### 2022-08-15:
+### 2022-08-22:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -11,15 +11,189 @@ Max Balance:           $ (+) (+%)
 Min Balance:           $ (-) (-%)
 ```
 
-#### (STAGING) Close Stats (as of 2022-06-27)
+#### Close Stats (as of 2022-08-15)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
-#### (STAGING) Target (+4.25%) Reached Stats (as of 2022-07-29)
+#### Target (+3.55%) Reached Stats (as of 2022-08-15)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-08-19:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Current Balance:       $29274.24 (-493.18) (-1.66%)
+Max Balance:           $30140.95 (+373.53) (+1.25%) @ 09:01 CDT
+Min Balance:           $29257.65 (-509.77) (-1.71%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* Today started with modest trending, hence the early peak.
+* I'm going to try some new things.
+* I think a good takeaway from the last few weeks is that you should be patient
+  in stopping wins. The ideal is that I can follow wins to their true
+  reversal points.
+* What's been hard in the past few weeks is figuring out the proper stop win
+  threshold. Is it 40x, 80x, or 150x the 1-sec variance? What about legitimate
+  smaller scale trends that occur while waiting for that target point?
+* I'm going to re-visit maximizing profits by:
+  1. Riding a trend to its true end.
+  2. Waiting for it to reverse by an amount equal to the loss amount.
+  3. Opening a position in the opposite direction.
+* This will be challenging for periods when the price is trending in one
+  direction with intermittent sharp corrections. However, the loss threshold
+  expansion during heightened volatility should help counteract this.
+* I'm not sure how successful this will be, but it will be interesting to see.
+
+#### Next Thing(s) to Try
+
+### 2022-08-18:
+#### Performance
+
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $24946.52 (-535.28) (-2.10%)
+Max Balance:           $25616.79 (+134.99) (+0.53%) @ 08:34 CDT
+Min Balance:           $24709.05 (-772.75) (-3.03%)
+```
+
+#### Close Stats (as of 2022-08-15)
+* Wins / Losses: 1W (Consecutive: 0) 3L (Consecutive: 3)
+* Latest Return: -$534.91 (-2.10%) (-92.72% Daily Salary)
+                 (vs. NASDAQ: +0.24%) (vs. S&P 500: +0.27%)
+* Week's Return: -$2,017.95 • Total Return: -$2,017.95
+* Average Return: -1.90% • Average NASDAQ Return: -0.09% • Average S&P 500 Return: +0.29%
+
+#### Target (+3.55%) Reached Stats (as of 2022-08-15)
+* Win / Loss: 0W (Consecutive: 0) 4L (Consecutive: 3)
+
+#### Remarks
+##### Stocks/ETFs
+* The job's not done. 2/6 won.
+* This was the third consecutive day of modest to no trending.
+* As a result, most of the day was operating at a loss.
+* It's time to go back to staging and focus on how to profit during
+  consolidation.
+* This time, be sure to not be seduced by days with long trends.
+
+#### Next Thing(s) to Try
+* What seems interesting to work on a large scale is a high win-to-loss exit
+  threshold ratio.
+* Perhaps we can reduce the scale from 150:50 to 80:20 or something like that.
+* Most securities have a hard time reaching 120 or 150x 1-sec variance in
+  profit.
+
+### 2022-08-17:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $25504.64 (-1082.72) (-4.07%)
+Max Balance:           $26587.38 (+0.02) (+0.00%) @ 08:30 CDT
+Min Balance:           $25063.17 (-1524.19) (-5.73%)
+```
+
+#### Close Stats (as of 2022-08-15)
+* Wins / Losses: 1W (Consecutive: 0) 2L (Consecutive: 2)
+* Latest Return: -$1,084.81 (-4.08%) (-188.03% Daily Salary)
+                 (vs. NASDAQ: -1.15%) (vs. S&P 500: -0.71%)
+* Week's Return: -$1,483.04 • Total Return: -$1,483.04
+* Average Return: -1.83% • Average NASDAQ Return: -0.20% • Average S&P 500 Return: -0.14%
+
+#### Target (+3.55%) Reached Stats (as of 2022-08-15)
+* Win / Loss: 0W (Consecutive: 0) 3L (Consecutive: 3)
+
+#### Remarks
+##### Stocks/ETFs
+* 0/6 won again today 😳.
+* Something interesting is happening.
+* This is the first time in weeks (maybe in a month) where there have been two
+  consecutive big loss days.
+* It's max loss almost reached -6% which has been unheard of for the last
+  several weeks.
+* I think what's happening is this:
+  * Right now most assets are hitting a resistance point to the bull run of the
+    last couple of weeks.
+  * This consolidation period is kryptonite to a momentum strategy.
+* This doesn't mean that this consolidation period will last indefinitely.
+  However, it does demonstrate that it can and will occur for multiple days.
+* It's scary. My knee jerk instinct is to shut everything down and observe
+  staging for more time, but I can't ignore the success of the last two weeks.
+  Remember, in all take balance profit scenarios, TaoBot made money.
+* However, I think it will be more wise to weather the storm, even if it means
+  putting more money in, once the $25K threshold is breached.
+* This may demonstrate the need for spreading the risk between equities and
+  currencies.
+* OR maybe the tough fact that this strategy will ultimately break even or lose
+  money, no matter how long of a period of profitability it demonstrates.
+
+#### Next Thing(s) to Try
+
+### 2022-08-16:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $26602.13 (-924.47) (-3.36%)
+Max Balance:           $27824.67 (+298.07) (+1.08%) @ 09:40 CDT
+Min Balance:           $26523.39 (-1003.21) (-3.64%)
+```
+
+#### Close Stats (as of 2022-08-15)
+* Wins / Losses: 1W (Consecutive: 0) 1L (Consecutive: 1)
+* Latest Return: -$924.47 (-3.36%) (-160.24% Daily Salary)
+                 (vs. NASDAQ: -0.24%) (vs. S&P 500: +0.19%)
+* Week's Return: -$398.23 • Total Return: -$398.23
+* Average Return: -0.70% • Average NASDAQ Return: +0.27% • Average S&P 500 Return: +0.30%
+
+#### Target (+3.55%) Reached Stats (as of 2022-08-15)
+* Win / Loss: 0W (Consecutive: 0) 2L (Consecutive: 2)
+
+#### Remarks
+##### Stocks/ETFs
+* 0/6 won 😭
+* The silver lining to this is that it still kept the loss to -3-4%. This is
+  still an improvement over past iterations.
+* I know that these days can happen, but they're unusual.
+* I decreased the position take profit to 120x 1-sec variance (which is a 3:1
+  take-profit:stop-loss ratio) because there were a few too many assets that
+  could have secured wins and rode the long trends.
+* I'm not changing much of anything else. I'm still confident that this works.
+
+#### Next Thing(s) to Try
+
+### 2022-08-15:
+#### Performance
+##### Stocks/ETFs
+**Alpha**
+```
+Current Balance:       $27535.48 (+535.12) (+1.98%)
+Max Balance:           $27657.40 (+657.04) (+2.43%) @ 08:35 CDT
+Min Balance:           $26777.81 (-222.55) (-0.82%)
+```
+
+#### Close Stats (as of 2022-08-15)
+* Wins / Losses: 1W (Consecutive: 1) 0L (Consecutive: 0)
+* Latest Return: +$535.12 (+1.98%) (+92.75% Daily Salary) (vs. QQQ: +0.81%)
+* Week's Return: +$535.12
+* Total Return: +$535.12
+* Average Return: +1.98% • Average QQQ Return: +0.81%
+
+#### Target (+3.55%) Reached Stats (as of 2022-08-15)
+* Win / Loss: 0W (Consecutive: 0) 1L (Consecutive: 1)
+
+#### Remarks
+##### Stocks/ETFs
+* YAY! First day on production and 3/6 assets won with a return of +~2% 🎉🥳
+* Nothing much more to say. Just keep observing 💯
 
 #### Next Thing(s) to Try
 
