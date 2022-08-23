@@ -34,6 +34,7 @@ struct account_exit_prices_t {
 struct exit_prices_t {
   double max_loss = 0.00;
   double min_profit = 0.00;
+  double trailing_stop_profit = 0.00;
 };
 
 struct order_win_result_streak_t {
@@ -43,11 +44,8 @@ struct order_win_result_streak_t {
 };
 
 struct performance_t {
-  bool are_funds_sufficient = true;
-  int closed_positions_count = 0;
   double current_balance = 0.00;
   double current_loss_streak_balance = 0.00;
-  bool is_position_open = false;
   order_win_result_streak_t loss_streaks;
   double max_balance = 0.00;
   std::map<order_win_result_t, int> results;

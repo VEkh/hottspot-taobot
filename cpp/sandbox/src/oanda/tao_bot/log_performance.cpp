@@ -10,9 +10,13 @@
  */
 #include "tao_bot.h"
 
-#include <iostream> // std::cout, std::endl
-#include <map>      // std::map
-#include <stdio.h>  // printf, puts
+#include "closed_position_profit.cpp" // closed_position_profit
+#include "lib/utils/integer.cpp"      // utils::integer_
+#include <algorithm>                  // std::max
+#include <iostream>                   // std::cout, std::endl
+#include <map>                        // std::map
+#include <math.h>                     // abs
+#include <stdio.h>                    // printf, puts
 
 void Oanda::TaoBot::log_performance() {
   performance_t stats = this->performance;
@@ -78,11 +82,22 @@ void Oanda::TaoBot::log_performance() {
       printf(", ");
     }
 
-    printf("%+.5f:%i", position.close_order.profit,
-           position.close_order.quantity);
+    const double profit = closed_position_profit(position);
+
+    printf("%+.5f", profit);
   }
 
   puts("]");
+
+  double total_cash_moved = 0;
+
+  for (int i = 0; i < l; i++) {
+    const position_t position = this->closed_positions[i];
+
+    total_cash_moved += abs(closed_position_profit(position));
+  }
+
+  printf("Total Cash Moved: %+'.5f\n", total_cash_moved);
 
   std::cout << fmt.reset << std::endl;
 }

@@ -8,12 +8,8 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp"            // json
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/io.cpp"    // utils::io
 #include "oanda/constants.cpp" // Oanda::constants
-#include <list>                // std::list
-#include <stdexcept>           // std::invalid_argument
+#include <string>              // std::string
 
 void Oanda::TaoBot::write_performance() {
   try {
@@ -27,8 +23,9 @@ void Oanda::TaoBot::write_performance() {
       };
     };
 
-    std::string filepath = std::string(APP_DIR) + "/data/oanda/performance/" +
-                           std::string(symbol) + ".json";
+    const std::string filepath = std::string(APP_DIR) +
+                                 "/data/oanda/performance/" +
+                                 std::string(symbol) + ".json";
 
     json performance_json;
 
@@ -37,19 +34,15 @@ void Oanda::TaoBot::write_performance() {
     for (position_t position : this->closed_positions) {
       json position_json = {
           {"close_order", order_to_json(position.close_order)},
-          {"close_timestamp", position.close_timestamp},
           {"open_order", order_to_json(position.open_order)},
       };
 
       positions.push_back(position_json);
     }
 
-    performance_json["are_funds_sufficient"] =
-        this->performance.are_funds_sufficient;
     performance_json["current_balance"] = this->performance.current_balance;
     performance_json["current_loss_streak_balance"] =
         this->performance.current_loss_streak_balance;
-    performance_json["is_position_open"] = this->performance.is_position_open;
     performance_json["max_balance"] = this->performance.max_balance;
     performance_json["positions"] = positions;
     performance_json["symbol"] = this->performance.symbol;

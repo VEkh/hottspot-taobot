@@ -13,7 +13,7 @@
 
 #include "build_performance.cpp"         // build_performance
 #include "compute_quantity.cpp"          // compute_quantity
-#include "fetch_account_balance.cpp"     // fetch_account_balance
+#include "get_account_balance.cpp"       // get_account_balance
 #include "lib/curl_client/curl_client.h" // CurlClient
 #include "oanda/constants.cpp"           // Oanda::constants
 #include "should_open_position.cpp"      // should_open_position
@@ -29,7 +29,7 @@ void Oanda::TaoBot::open_position() {
   puts("OANDA__TAO_BOT_open_position");
   std::cout << std::flush;
 
-  this->account_balance = fetch_account_balance();
+  this->account_balance = get_account_balance();
   const int quantity_ = compute_quantity();
 
   if (!quantity_) {

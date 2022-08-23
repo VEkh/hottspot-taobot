@@ -1,31 +1,25 @@
 #ifndef OANDA__TAO_BOT_compute_quantity
 #define OANDA__TAO_BOT_compute_quantity
 
-#include "base_quantity.cpp"           // base_quantity
-#include "build_exit_prices.cpp"       // build_exit_prices
-#include "loss_to_recover.cpp"         // loss_to_recover
-#include "max_affordable_quantity.cpp" // max_affordable_quantity
-#include "tao_bot.h"                   // Oanda::TaoBot
+#include "base_currency.cpp"           // base_currency
+#include "convert_price.cpp"           // convert_price
+#include "tao_bot.h"                   // Alpaca::TaoBot
+#include "tradeable_symbols_count.cpp" // tradeable_symbols_count
 #include <algorithm>                   // std::min
-#include <math.h>                      // abs, ceil
+#include <math.h>                      // floor
 
 int Oanda::TaoBot::compute_quantity() {
-  const double max_affordable_quantity_ = max_affordable_quantity();
+  const quote_t quote = this->quotes.back();
+  const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
 
-  if (!max_affordable_quantity_) {
-    return 0;
-  }
+  const double max_buying_power =
+      this->account_balance.balance * this->account_balance.margin_multiplier;
 
-  const double loss_to_recover_ = abs(loss_to_recover());
+  const double buying_power =
+      std::min(this->account_balance.margin_buying_power,
+               max_buying_power / tradeable_symbols_count());
 
-  if (!loss_to_recover_) {
-    return std::min(base_quantity(), max_affordable_quantity_);
-  }
-
-  exit_prices_t exit_prices_ = build_exit_prices();
-  const double quantity_ = loss_to_recover_ / abs(exit_prices_.max_loss);
-
-  return ceil(std::min(quantity_, max_affordable_quantity_));
+  return floor(buying_power / dollars_per_unit);
 }
 
 #endif

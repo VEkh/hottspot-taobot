@@ -77,12 +77,15 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
   }
 
   try {
-    double original_margin_buying_power =
-        this->account_balance.original_margin_buying_power;
-
     const std::string balance = account_json["equity"];
     const std::string margin_buying_power = account_json["buying_power"];
     const std::string margin_multiplier = account_json["multiplier"];
+
+    const double balance_d = std::stod(balance);
+    const time_t now = std::time(nullptr);
+
+    double original_margin_buying_power =
+        this->account_balance.original_margin_buying_power;
 
     if (!original_margin_buying_power) {
       original_margin_buying_power =
@@ -90,9 +93,6 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
               ? (double)account_json["original_margin_buying_power"]
               : std::stod(margin_buying_power);
     }
-
-    const double balance_d = std::stod(balance);
-    const time_t now = std::time(nullptr);
 
     return {
         .balance = balance_d,

@@ -8,11 +8,12 @@
  */
 #include "tao_bot.h"
 
-#include "deps.cpp"         // json
+#include "deps.cpp"         // json, nlohmann
 #include "lib/utils/io.cpp" // ::utils::io
 #include "oanda/utils.cpp"  // Oanda::utils
 #include <fstream>          // std::ifstream
 #include <stdexcept>        // std::invalid_argument
+#include <string>           // std::string
 #include <vector>           // std::vector
 
 void Oanda::TaoBot::load_performance() {
@@ -31,8 +32,9 @@ void Oanda::TaoBot::load_performance() {
 
   this->closed_positions = {};
 
-  std::string filepath = std::string(APP_DIR) + "/data/oanda/performance/" +
-                         std::string(this->symbol) + ".json";
+  const std::string filepath = std::string(APP_DIR) +
+                               "/data/oanda/performance/" +
+                               std::string(this->symbol) + ".json";
 
   std::ifstream file;
   json persisted_data;
@@ -49,11 +51,6 @@ void Oanda::TaoBot::load_performance() {
 
   json positions_json = json::array();
 
-  if (persisted_data.contains("are_funds_sufficient")) {
-    this->performance.are_funds_sufficient =
-        persisted_data["are_funds_sufficient"];
-  }
-
   if (persisted_data.contains("current_balance")) {
     this->performance.current_balance = persisted_data["current_balance"];
   }
@@ -61,10 +58,6 @@ void Oanda::TaoBot::load_performance() {
   if (persisted_data.contains("current_loss_streak_balance")) {
     this->performance.current_loss_streak_balance =
         persisted_data["current_loss_streak_balance"];
-  }
-
-  if (persisted_data.contains("is_position_open")) {
-    this->performance.is_position_open = persisted_data["is_position_open"];
   }
 
   if (persisted_data.contains("max_balance")) {
@@ -78,7 +71,6 @@ void Oanda::TaoBot::load_performance() {
   for (json position_json : positions_json) {
     position_t position = {
         .close_order = json_to_order(position_json["close_order"]),
-        .close_timestamp = position_json["close_timestamp"],
         .open_order = json_to_order(position_json["open_order"]),
     };
 

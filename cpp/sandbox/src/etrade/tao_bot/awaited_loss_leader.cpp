@@ -3,7 +3,6 @@
 
 #include "compute_quantity.cpp"          // compute_quantity
 #include "get_loss_leader.cpp"           // get_loss_leader
-#include "max_affordable_quantity.cpp"   // max_affordable_quantity
 #include "read_sibling_performances.cpp" // read_sibling_performances
 #include "tao_bot.h"                     // ETrade::TaoBot
 #include <iostream>                      // std::cout, std::endl

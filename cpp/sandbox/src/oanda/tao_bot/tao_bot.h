@@ -20,7 +20,7 @@ public:
 
 private:
   using account_balance_t = Global::t::account_balance_t;
-  using candlestick_t = Global::t::candlestick_t;
+  using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
@@ -40,7 +40,10 @@ private:
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
   const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
+  const double TARGET_DAILY_PROFIT = 0.0105;
+  const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.001;
   const int MAX_EXPECTED_LOSS_STREAK = 18;
+  const int QUOTES_MAX_SIZE = 4e2;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -75,52 +78,59 @@ private:
   order_t open_order;
   performance_t performance;
   price_movement_t price_movement;
-  std::list<candlestick_t> candlesticks;
   std::map<std::string, std::string> flags;
+  std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_balance_t fetch_account_balance();
-  bool awaited_loss_leader();
+  account_balance_t get_account_balance();
+  account_balance_t get_account_balance(const account_balance_t &);
+  account_exit_prices_t build_account_exit_prices();
   bool is_end_of_trading_period();
   bool is_market_open();
+  bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
   bool should_terminate();
   double base_quantity();
+  double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double convert_price(const double, const std::string, const std::string);
   double current_spread();
   double loss_to_recover();
-  double max_affordable_quantity();
+  double open_position_profit(const order_t *);
   double position_target_movement();
   double profit_percentage(const order_t *);
   double secured_profit_ratio();
   double spread_limit();
+  double target_daily_profit(const double);
+  double target_daily_profit_trailing_stop();
   exit_prices_t build_exit_prices();
-  performance_t build_performance();
-  performance_t get_loss_leader(std::list<performance_t> &);
   int compute_quantity();
+  int order_duration(const order_t *);
   int runtime();
+  int tradeable_symbols_count();
+  json fetch_account_balance();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
-  order_win_result_t order_win_result(const order_t *);
-  std::list<performance_t> read_sibling_performances();
+  json read_streamed_account();
+  order_win_result_t order_win_result(const position_t);
+  performance_t build_performance();
   std::string base_currency();
   void await_market_open();
-  void build_candlesticks();
   void clear_stale_open_order();
-  void complete_filled_order(order_t *);
   void close_position();
+  void complete_filled_order(order_t *);
+  void fetch_and_persist_quote();
   void fetch_quote();
   void handle_partially_filled_close_order(const order_t *);
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void load_price_movement();
+  void load_quotes();
   void log_account_balance();
-  void log_candlesticks();
   void log_end_of_trading_period();
   void log_performance();
   void log_position();
@@ -131,6 +141,7 @@ private:
   void log_timestamps();
   void open_position();
   void reset_position();
+  void set_and_persist_price_movement();
   void set_close_position_prices();
   void set_execution_price(order_t *);
   void set_execution_price(order_t *, json);
@@ -140,10 +151,11 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_profit(order_t *);
   void set_status(order_t *, order_t *);
-  void set_trade_direction();
+  void update_account_balance();
   void watch();
   void write_performance();
   void write_price_movement();
+  void write_quotes();
 };
 } // namespace Oanda
 

@@ -35,11 +35,12 @@ struct order_t {
   order_action_t action;
   double execution_price = 0.00;
   int id = 0;
+  double max_position_profit = 0.00;
   double max_profit = 0.00;
   double profit = 0.00;
   int quantity;
   order_status_t status = order_status_t::ORDER_INIT;
-  const char *symbol;
+  std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::FOK;
   int timestamp = 0;
   int trade_id = 0;
@@ -48,7 +49,6 @@ struct order_t {
 
 struct position_t {
   order_t close_order;
-  int close_timestamp = 0;
   order_t open_order;
 };
 
@@ -56,6 +56,7 @@ struct quote_t {
   double ask;
   double bid;
   double price;
+  std::string symbol = "";
   long int timestamp;
 };
 } // namespace t

@@ -14,19 +14,28 @@ void Oanda::TaoBot::log_price_movement() {
     return;
   }
 
+  const double short_term_one_second_variance =
+      this->price_movement.short_term_three_minute_one_second_variance.average;
+
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
-  std::cout << "💲 Avg Tick Price Δ: ("
-            << ::utils::integer_::seconds_to_clock(
-                   this->AVG_ONE_SEC_VARIANCE_TIMEFRAME)
-            << ")";
+  printf(
+      "💲 %s Avg Tick Price Δ: (%s)\n", this->symbol,
+      ::utils::integer_::seconds_to_clock(this->AVG_ONE_SEC_VARIANCE_TIMEFRAME)
+          .c_str());
 
-  std::cout << fmt.reset << std::endl;
-  std::cout << fmt.bold << fmt.cyan;
+  std::cout << fmt.reset << fmt.bold << fmt.cyan;
 
-  printf("x10: %.7f • x%i: %.7f\n", one_second_variance * 10.0,
-         (int)this->MIN_TARGET_TICK_MOVEMENT,
-         one_second_variance * this->MIN_TARGET_TICK_MOVEMENT);
+  printf("Long-Term One Second Variance: %.5f\n", one_second_variance);
+
+  if (short_term_one_second_variance) {
+    const double short_term_long_term_variance_percentage =
+        100.0 * (short_term_one_second_variance / one_second_variance);
+
+    printf("Short-Term One Second Variance: %.5f (%.3f%% Long-Term)\n",
+           short_term_one_second_variance,
+           short_term_long_term_variance_percentage);
+  }
 
   std::cout << fmt.reset << std::endl;
 }

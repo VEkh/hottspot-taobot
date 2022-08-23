@@ -9,14 +9,15 @@
 #include <vector>                   // std::vector
 
 void Oanda::TaoBot::set_price_movement() {
-  puts("OANDA__TAO_BOT_set_price_movement");
-  std::cout << std::flush;
-
-  const quote_t current_quote = this->quotes.back();
+  if (!this->quotes.size()) {
+    return;
+  }
 
   if (current_spread() > spread_limit()) {
     return;
   }
+
+  const quote_t current_quote = this->quotes.back();
 
   if (current_quote.timestamp - this->quotes.front().timestamp <
       this->AVG_ONE_SEC_VARIANCE_TIMEFRAME) {
