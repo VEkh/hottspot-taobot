@@ -11,24 +11,25 @@ void Oanda::TaoBot::clear_stale_open_order() {
     return;
   }
 
-  if (!(this->open_order.status == order_status_t::ORDER_PENDING ||
-        this->open_order.status == order_status_t::ORDER_CANCELLED)) {
+  if (!(this->open_order_ptr->status == order_status_t::ORDER_PENDING ||
+        this->open_order_ptr->status == order_status_t::ORDER_CANCELLED)) {
     return;
   }
 
   const std::time_t now = std::time(nullptr);
   const int time_limit = 10;
 
-  const bool is_order_stale = (now - this->open_order.timestamp) >= time_limit;
+  const bool is_order_stale =
+      (now - this->open_order_ptr->timestamp) >= time_limit;
 
   if (!is_order_stale) {
     return;
   }
 
-  switch (this->open_order.status) {
+  switch (this->open_order_ptr->status) {
   case order_status_t::ORDER_CANCELLED: {
     std::cout << fmt.yellow << fmt.bold;
-    printf("😴 Clearing stale open order %i.\n", this->open_order.id);
+    printf("😴 Clearing stale open order %i.\n", this->open_order_ptr->id);
     std::cout << fmt.reset;
 
     this->open_order_ptr = nullptr;
@@ -37,7 +38,7 @@ void Oanda::TaoBot::clear_stale_open_order() {
   }
   case order_status_t::ORDER_PENDING: {
     std::cout << fmt.yellow << fmt.bold;
-    printf("⛔ Cancelling stale open order %i.\n", this->open_order.id);
+    printf("⛔ Cancelling stale open order %i.\n", this->open_order_ptr->id);
     std::cout << fmt.reset;
 
     this->api_client.cancel_order(this->open_order_ptr);
@@ -50,8 +51,7 @@ void Oanda::TaoBot::clear_stale_open_order() {
 
     break;
   }
-  default: {
-  }
+  default: {}
   }
 }
 

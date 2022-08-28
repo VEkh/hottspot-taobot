@@ -41,6 +41,10 @@ void Alpaca::TaoBot::cancel_stale_open_order() {
   const std::string cancel_response =
       this->api_client.cancel_order(this->open_order_ptr);
 
+  std::cout << fmt.red << fmt.bold;
+  printf("Cancel Response: %s\n", cancel_response.c_str());
+  std::cout << fmt.reset;
+
   if (!cancel_response.empty()) {
     json response_json = ::utils::json::parse_with_catch(
         cancel_response, "ALPACA__CLIENT_cancel_order");
