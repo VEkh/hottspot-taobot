@@ -11,7 +11,8 @@
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
-      {"tao_bot <SYMBOL> <QUANTITY>",
+      {"stream_account               ", "Stream account info"},
+      {"tao_bot <SYMBOL> <QUANTITY>  ",
        "Launch trading bot for the given currency pair"},
   };
 
@@ -44,6 +45,16 @@ int main(int argc, char *argv[]) {
 
     std::string quote = oanda_client.fetch_quote(symbol);
     puts(quote.c_str());
+
+    exit(0);
+  }
+
+  if (command == "stream_account") {
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Oanda::Client oanda_client(flags);
+    oanda_client.stream_account();
 
     exit(0);
   }

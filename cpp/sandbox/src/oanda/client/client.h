@@ -32,6 +32,8 @@ public:
 
   quote_t parse_quote(const std::string &);
 
+  void stream_account();
+
 private:
   struct config_t {
     std::string account_id;

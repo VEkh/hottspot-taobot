@@ -17,7 +17,7 @@ void print_usage() {
       {"log_returns                  ", "Print cumulative return"},
       {"stream_account               ", "Stream account info"},
       {"stream_quotes <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
-      {"tao_bot <SYMBOL> <QUANTITY>",
+      {"tao_bot <SYMBOL> <QUANTITY>  ",
        "Launch trading bot for the given currency pair"},
   };
 
