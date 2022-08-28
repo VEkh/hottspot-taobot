@@ -48,7 +48,6 @@ private:
   ETrade::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
-  account_balance_t original_account_balance;
   bool is_long_position;
   char *symbol;
   double average_tick_price_delta = 0.00;

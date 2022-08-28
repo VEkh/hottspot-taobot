@@ -9,8 +9,8 @@
 Oanda::TaoBot::account_exit_prices_t
 Oanda::TaoBot::build_account_exit_prices() {
   const double current_balance = this->account_balance.balance;
-  const double max_profit = this->account_balance.max_balance -
-                            this->original_account_balance.balance;
+  const double max_profit =
+      this->account_balance.max_balance - this->account_balance.original_balance;
 
   const double target_account_profit =
       target_daily_profit(this->TARGET_DAILY_PROFIT);
@@ -19,10 +19,10 @@ Oanda::TaoBot::build_account_exit_prices() {
       this->TARGET_DAILY_PROFIT + this->TARGET_DAILY_PROFIT_TRAILING_STOP);
 
   const double current_profit =
-      current_balance - this->original_account_balance.balance;
+      current_balance - this->account_balance.original_balance;
 
   const double max_profit_ratio =
-      max_profit / this->original_account_balance.balance;
+      max_profit / this->account_balance.original_balance;
 
   const double stop_loss_profit_ratio =
       std::max(this->TARGET_DAILY_PROFIT,

@@ -9,9 +9,11 @@
 #include "lib/utils/json.cpp" // ::utils::json
 #include <ctime>              // std::time
 #include <iostream>           // std::cout, std::endl
+#include <string>             // std::stod, std::string
 #include <unistd.h>           // usleep
 
 void Alpaca::Client::stream_account() {
+  double original_balance = 0.00;
   double original_margin_buying_power = 0.00;
 
   while (true) {
@@ -33,12 +35,19 @@ void Alpaca::Client::stream_account() {
       continue;
     }
 
+    if (!original_balance) {
+      const std::string balance = account_json["equity"];
+
+      original_balance = std::stod(balance);
+    }
+
     if (!original_margin_buying_power) {
       const std::string margin_buying_power = account_json["buying_power"];
 
       original_margin_buying_power = std::stod(margin_buying_power);
     }
 
+    account_json["original_balance"] = original_balance;
     account_json["original_margin_buying_power"] = original_margin_buying_power;
     account_json["timestamp"] = (long int)std::time(nullptr);
 

@@ -67,7 +67,6 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   account_balance_t account_balance;
-  account_balance_t original_account_balance;
   bool is_long_position = true;
   char *symbol;
   exit_prices_t exit_prices;

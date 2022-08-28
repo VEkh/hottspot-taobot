@@ -8,11 +8,11 @@ double Oanda::TaoBot::target_daily_profit_trailing_stop() {
   const double base_trailing_stop = this->TARGET_DAILY_PROFIT_TRAILING_STOP;
   const double max_trailing_stop = 0.005;
 
-  const double max_profit = this->account_balance.max_balance -
-                            this->original_account_balance.balance;
+  const double max_profit =
+      this->account_balance.max_balance - this->account_balance.original_balance;
 
   const double max_profit_ratio =
-      max_profit / this->original_account_balance.balance;
+      max_profit / this->account_balance.original_balance;
 
   const double expanded_trailing_stop =
       max_profit_ratio - (1 + this->TARGET_DAILY_PROFIT);

@@ -9,7 +9,7 @@
 #include <algorithm>                 // std::max, std::min
 #include <ctime>                     // std::time
 #include <iostream>                  // std::cout, std::endl
-#include <string>                    // std::string
+#include <string>                    // std::stod, std::string, std::to_string
 
 Oanda::TaoBot::account_balance_t
 Oanda::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
@@ -69,8 +69,16 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
     const double margin_buying_power =
         floor(std::stod(margin_buying_power_string)) / margin_rate;
 
+    double original_balance = this->account_balance.original_balance;
+
     const double balance_d = std::stod(balance);
     const time_t now = std::time(nullptr);
+
+    if (!original_balance) {
+      original_balance = account_json.contains("originalBalance")
+                             ? (double)account_json["originalBalance"]
+                             : std::stod(balance);
+    }
 
     const double original_margin_buying_power =
         this->account_balance.original_margin_buying_power
@@ -84,6 +92,7 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
         .max_balance = balance_d,
         .max_balance_timestamp = now,
         .min_balance = balance_d,
+        .original_balance = original_balance,
         .original_margin_buying_power = original_margin_buying_power,
         .timestamp = now,
     };

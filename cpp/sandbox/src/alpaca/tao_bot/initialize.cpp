@@ -43,8 +43,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
 
   this->api_client = Alpaca::Client(this->flags);
 
-  this->account_balance = this->original_account_balance =
-      get_account_balance();
+  this->account_balance = get_account_balance();
 
   load_quotes();
 

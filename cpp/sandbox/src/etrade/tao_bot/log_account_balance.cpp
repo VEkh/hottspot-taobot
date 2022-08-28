@@ -8,14 +8,14 @@
 
 void ETrade::TaoBot::log_account_balance() {
   const double balance_delta =
-      this->account_balance.balance - this->original_account_balance.balance;
+      this->account_balance.balance - this->account_balance.original_balance;
 
   const double balance_delta_percentage =
-      (balance_delta / this->original_account_balance.balance) * 100.0;
+      (balance_delta / this->account_balance.original_balance) * 100.0;
 
   Formatted::Stream log_color = fmt.green;
 
-  if (this->account_balance.balance < this->original_account_balance.balance) {
+  if (this->account_balance.balance < this->account_balance.original_balance) {
     log_color = fmt.red;
   }
 
@@ -28,7 +28,7 @@ void ETrade::TaoBot::log_account_balance() {
          balance_delta_percentage);
 
   printf("Original Balance:    $%'.2f\n",
-         this->original_account_balance.balance);
+         this->account_balance.original_balance);
 
   printf("Margin Buying Power: $%'.2f\n",
          this->account_balance.margin_buying_power);

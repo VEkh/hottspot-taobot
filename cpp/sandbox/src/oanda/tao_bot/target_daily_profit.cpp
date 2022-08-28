@@ -4,10 +4,7 @@
 #include "tao_bot.h" // Oanda::TaoBot
 
 double Oanda::TaoBot::target_daily_profit(const double return_ratio) {
-  const double original_account_balance =
-      this->original_account_balance.balance;
-
-  return original_account_balance * return_ratio;
+  return this->account_balance.original_balance * return_ratio;
 }
 
 #endif

@@ -10,7 +10,7 @@
 #include <ctime>                     // std::time
 #include <iostream>                  // std::cout, std::endl
 #include <math.h>                    // abs
-#include <string>                    // std::string, std::to_string
+#include <string>                    // std::stod, std::string, std::to_string
 #include <unistd.h>                  // usleep
 
 Alpaca::TaoBot::account_balance_t
@@ -84,8 +84,16 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
     const double balance_d = std::stod(balance);
     const time_t now = std::time(nullptr);
 
+    double original_balance = this->account_balance.original_balance;
+
     double original_margin_buying_power =
         this->account_balance.original_margin_buying_power;
+
+    if (!original_balance) {
+      original_balance = account_json.contains("original_balance")
+                             ? (double)account_json["original_balance"]
+                             : std::stod(balance);
+    }
 
     if (!original_margin_buying_power) {
       original_margin_buying_power =
@@ -101,6 +109,7 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
         .max_balance = balance_d,
         .max_balance_timestamp = now,
         .min_balance = balance_d,
+        .original_balance = original_balance,
         .original_margin_buying_power = original_margin_buying_power,
         .timestamp = now,
     };
