@@ -10,10 +10,9 @@
 
 #include "build_performance.cpp" // build_performance
 #include "write_performance.cpp" // write_performance
-#include <ctime>                 // std::time, std::time_t
 
 void Oanda::TaoBot::reset_position() {
-  if (!this->open_order_ptr || !this->close_order_ptr) {
+  if (!(this->open_order_ptr && !this->close_order_ptr)) {
     return;
   }
 
@@ -25,15 +24,14 @@ void Oanda::TaoBot::reset_position() {
   puts("OANDA__TAO_BOT_reset_position");
   std::cout << std::flush;
 
-  std::time_t now = std::time(nullptr);
-
-  position_t position = {
+  const position_t position = {
       .close_order = this->close_order,
       .open_order = this->open_order,
   };
 
-  this->close_order_ptr = nullptr;
   this->closed_positions.push_back(position);
+
+  this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();
   this->open_order_ptr = nullptr;
 

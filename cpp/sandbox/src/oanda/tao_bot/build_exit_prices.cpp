@@ -1,24 +1,31 @@
 #ifndef OANDA__TAO_BOT_build_exit_prices
 #define OANDA__TAO_BOT_build_exit_prices
 
-#include "position_target_movement.cpp" // position_target_movement
-#include "secured_profit_ratio.cpp"     // secured_profit_ratio
-#include "tao_bot.h"                    // Oanda::TaoBot
-#include <algorithm>                    // std::max std::min
-#include <math.h>                       // abs
+#include "tao_bot.h" // Oanda::TaoBot
+#include <algorithm> // std::max std::min
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
-  const double max_loss = this->exit_prices.max_loss
-                              ? this->exit_prices.max_loss
-                              : -position_target_movement();
+  const price_movement_t price_movement = this->price_movement;
 
-  const double secured_profit_ratio_ = secured_profit_ratio();
-  const double min_profit = (1 / secured_profit_ratio_) * abs(max_loss);
+  const double one_sec_variance = std::max(
+      price_movement.short_term_three_minute_one_second_variance.average,
+      price_movement.three_minute_one_second_variance.average);
 
-  return {
+  const double exit_threshold = 40 * one_sec_variance;
+  const double max_loss = -exit_threshold;
+  const double min_profit = 1.05 * exit_threshold;
+  const double trailing_stop = exit_threshold;
+
+  const double trailing_stop_profit =
+      this->open_order_ptr->max_profit - trailing_stop;
+
+  exit_prices_t out = {
       .max_loss = max_loss,
       .min_profit = min_profit,
+      .trailing_stop_profit = trailing_stop_profit,
   };
+
+  return out;
 }
 
 #endif

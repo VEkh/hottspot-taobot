@@ -77,7 +77,7 @@ private:
   bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
-  bool should_close_position(const order_t *, const order_t *);
+  bool should_close_position();
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
@@ -91,7 +91,6 @@ private:
   double position_target_movement();
   double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
-  double secured_profit_ratio(const order_t *);
   double target_daily_profit(const double);
   double target_daily_profit_trailing_stop();
   double volatility(const order_t *);
@@ -115,9 +114,8 @@ private:
                                             const order_action_t, const char *,
                                             const double);
   void await_market_open();
-  void await_next_poll();
   void cancel_stale_open_order();
-  void close_position(const double, const bool);
+  void close_position();
   void fetch_and_persist_quote();
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();

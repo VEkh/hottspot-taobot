@@ -101,9 +101,7 @@ private:
   double current_spread();
   double loss_to_recover();
   double open_position_profit(const order_t *);
-  double position_target_movement();
   double profit_percentage(const order_t *);
-  double secured_profit_ratio();
   double spread_limit();
   double target_daily_profit(const double);
   double target_daily_profit_trailing_stop();
@@ -148,7 +146,7 @@ private:
   void open_and_persist_position();
   void reset_position();
   void set_and_persist_price_movement();
-  void set_close_position_prices();
+  void set_close_order_prices();
   void set_execution_price(order_t *);
   void set_execution_price(order_t *, json);
   void set_open_order_prices();

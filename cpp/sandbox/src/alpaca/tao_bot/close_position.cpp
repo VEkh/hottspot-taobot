@@ -8,14 +8,12 @@
 #include <iostream>                  // std::cout, std::endl
 #include <stdio.h>                   // printf
 
-void Alpaca::TaoBot::close_position(const double limit_price = 0.00,
-                                    const bool force = false) {
+void Alpaca::TaoBot::close_position() {
   if (!this->open_order_ptr || !this->close_order_ptr) {
     return;
   }
 
-  if (!force &&
-      !should_close_position(this->close_order_ptr, this->open_order_ptr)) {
+  if (!should_close_position()) {
     return;
   }
 
@@ -23,11 +21,6 @@ void Alpaca::TaoBot::close_position(const double limit_price = 0.00,
       Alpaca::constants::ORDER_ACTIONS[this->open_order_ptr->action];
 
   const char *log_icon = this->ICONS[order_action];
-
-  if (limit_price) {
-    this->close_order_ptr->limit_price = limit_price;
-    this->close_order_ptr->type = order_type_t::LIMIT;
-  }
 
   this->api_client.place_order(this->close_order_ptr);
 

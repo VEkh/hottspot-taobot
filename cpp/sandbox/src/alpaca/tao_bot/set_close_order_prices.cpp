@@ -1,10 +1,9 @@
 #ifndef ALPACA__TAO_BOT_set_close_order_prices
 #define ALPACA__TAO_BOT_set_close_order_prices
 
-#include "alpaca/client/client.cpp" // Alpaca::Client
-#include "set_execution_price.cpp"  // set_execution_price
-#include "set_profit.cpp"           // set_profit
-#include "tao_bot.h"                // Alpaca::TaoBot, order_status_t, order_t
+#include "set_execution_price.cpp" // set_execution_price
+#include "set_profit.cpp"          // set_profit
+#include "tao_bot.h"               // Alpaca::TaoBot, order_status_t, order_t
 
 void Alpaca::TaoBot::set_close_order_prices() {
   if (!this->close_order_ptr || !this->open_order_ptr) {

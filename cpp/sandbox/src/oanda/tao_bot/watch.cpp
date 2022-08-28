@@ -17,7 +17,7 @@
 #include "open_and_persist_position.cpp"      // open_and_persist_position
 #include "reset_position.cpp"                 // reset_position
 #include "set_and_persist_price_movement.cpp" // set_and_persist_price_movement
-#include "set_close_position_prices.cpp"      // set_close_position_prices
+#include "set_close_order_prices.cpp"         // set_close_order_prices
 #include "set_open_order_prices.cpp"          // set_open_order_prices
 #include "set_position_status.cpp"            // set_order_statuses
 #include "should_terminate.cpp"               // should_terminate
@@ -50,14 +50,14 @@ void Oanda::TaoBot::watch() {
     set_open_order_prices();
 
     close_position();
-    set_close_position_prices();
+    set_close_order_prices();
 
     log_position_results();
     reset_position();
 
     std::cout << std::flush;
 
-    usleep(1e6);
+    usleep(5e5);
   }
 
   log_end_of_trading_period();

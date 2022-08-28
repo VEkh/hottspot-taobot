@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "await_market_open.cpp"              // await_market_open
-#include "await_next_poll.cpp"                // await_next_poll
 #include "cancel_stale_open_order.cpp"        // cancel_stale_open_order
 #include "close_position.cpp"                 // close_position
 #include "fetch_and_persist_quote.cpp"        // fetch_and_persist_quote
@@ -58,7 +57,7 @@ void Alpaca::TaoBot::watch() {
 
     std::cout << std::flush;
 
-    await_next_poll();
+    usleep(5e5);
   }
 
   log_end_of_trading_period();

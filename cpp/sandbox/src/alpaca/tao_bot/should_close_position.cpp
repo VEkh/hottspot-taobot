@@ -7,13 +7,12 @@
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
 
-bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
-                                           const order_t *open_order_ptr_) {
-  if (open_order_ptr_->status != order_status_t::ORDER_FILLED) {
+bool Alpaca::TaoBot::should_close_position() {
+  if (this->open_order_ptr->status != order_status_t::ORDER_FILLED) {
     return false;
   }
 
-  if (close_order_ptr_->status != order_status_t::ORDER_INIT) {
+  if (this->close_order_ptr->status != order_status_t::ORDER_INIT) {
     return false;
   }
 
@@ -31,12 +30,12 @@ bool Alpaca::TaoBot::should_close_position(const order_t *close_order_ptr_,
 
   this->exit_prices = build_exit_prices();
 
-  if (open_order_ptr_->max_profit >= this->exit_prices.min_profit &&
-      open_order_ptr_->profit < this->exit_prices.trailing_stop_profit) {
+  if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
+      this->open_order_ptr->profit < this->exit_prices.trailing_stop_profit) {
     return true;
   }
 
-  if (open_order_ptr_->profit <= this->exit_prices.max_loss) {
+  if (this->open_order_ptr->profit <= this->exit_prices.max_loss) {
     return true;
   }
 
