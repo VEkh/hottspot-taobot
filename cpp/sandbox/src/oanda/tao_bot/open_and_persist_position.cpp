@@ -1,11 +1,10 @@
-#ifndef ALPACA__TAO_BOT_open_and_persist_position
-#define ALPACA__TAO_BOT_open_and_persist_position
+#ifndef OANDA__TAO_BOT_open_and_persist_position
+#define OANDA__TAO_BOT_open_and_persist_position
 
 /*
- * Alpaca::TaoBot
+ * Oanda::TaoBot
  * fmt
  * order_action_t
- * order_type_t
  * order_t
  */
 #include "tao_bot.h"
@@ -21,17 +20,20 @@
 #include <unistd.h>                  // usleep
 #include <utility>                   // std::pair
 
-void Alpaca::TaoBot::open_and_persist_position() {
+void Oanda::TaoBot::open_and_persist_position() {
   if (!should_open_position()) {
     return;
   }
+
+  puts("OANDA__TAO_BOT_open_position");
+  std::cout << std::flush;
 
   bool open_order_opened = false;
 
   while (!open_order_opened) {
     this->account_balance = get_account_balance(this->account_balance);
 
-    const double quantity = compute_quantity();
+    const int quantity = compute_quantity();
 
     if (quantity <= 0) {
       std::cout << fmt.bold << fmt.yellow;
@@ -51,7 +53,7 @@ void Alpaca::TaoBot::open_and_persist_position() {
     std::pair<order_t, order_t> new_orders =
         open_position(close_order_action, open_order_action, "open", quantity);
 
-    open_order_opened = !new_orders.second.id.empty();
+    open_order_opened = !new_orders.second.id;
 
     if (!open_order_opened) {
       std::cout << fmt.bold << fmt.red;

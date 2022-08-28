@@ -2,11 +2,12 @@
 #define OANDA__TAO_BOT_set_position_status
 
 #include "complete_filled_order.cpp" // complete_filled_order
+#include "is_position_closed.cpp"    // is_position_closed
 #include "set_status.cpp"            // set_status
 #include "tao_bot.h"                 // Oanda::TaoBot
 
 void Oanda::TaoBot::set_position_status() {
-  if (!this->open_order_ptr || !this->close_order_ptr) {
+  if (is_position_closed()) {
     return;
   }
 

@@ -9,13 +9,11 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp"   // build_performance
 #include "deps.cpp"                // json, nlohmann
 #include "fetch_trade.cpp"         // fetch_trade
 #include "oanda/constants.cpp"     // Oanda::constants
 #include "oanda/utils.cpp"         // Oanda::utils
 #include "set_execution_price.cpp" // set_execution_price
-#include "write_performance.cpp"   // write_performance
 #include <iostream>                // std::cout, std::endl
 #include <math.h>                  // abs
 #include <stdio.h>                 // printf
@@ -80,7 +78,6 @@ void Oanda::TaoBot::set_status(order_t *order,
              trade_quantity, order->quantity);
       std::cout << fmt.reset;
 
-      this->quantity = trade_quantity;
       order->quantity = trade_quantity;
 
       if (linked_order) {
@@ -91,8 +88,6 @@ void Oanda::TaoBot::set_status(order_t *order,
     }
 
     set_execution_price(order, trade_json);
-    this->performance = build_performance();
-    write_performance();
   }
 }
 

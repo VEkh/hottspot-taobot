@@ -14,11 +14,11 @@
 #include "log_price_movement.cpp"             // log_price_movement
 #include "log_quote.cpp"                      // log_quote
 #include "log_timestamps.cpp"                 // log_timestamps
-#include "open_position.cpp"                  // open_position
+#include "open_and_persist_position.cpp"      // open_and_persist_position
 #include "reset_position.cpp"                 // reset_position
 #include "set_and_persist_price_movement.cpp" // set_and_persist_price_movement
 #include "set_close_position_prices.cpp"      // set_close_position_prices
-#include "set_open_position_prices.cpp"       // set_open_position_prices
+#include "set_open_order_prices.cpp"          // set_open_order_prices
 #include "set_position_status.cpp"            // set_order_statuses
 #include "should_terminate.cpp"               // should_terminate
 #include "tao_bot.h"                          // Oanda::TaoBot
@@ -45,10 +45,9 @@ void Oanda::TaoBot::watch() {
     log_performance();
 
     set_position_status();
-
     clear_stale_open_order();
-    open_position();
-    set_open_position_prices();
+    open_and_persist_position();
+    set_open_order_prices();
 
     close_position();
     set_close_position_prices();

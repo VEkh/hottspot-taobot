@@ -6,7 +6,7 @@
 #include <algorithm>                   // std::min
 #include <math.h>                      // floor
 
-double Alpaca::TaoBot::compute_quantity(const std::string &symbol_) {
+double Alpaca::TaoBot::compute_quantity() {
   const quote_t quote = this->quotes.back();
 
   const double max_buying_power =

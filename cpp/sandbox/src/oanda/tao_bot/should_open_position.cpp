@@ -14,6 +14,19 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
+  if (!this->price_movement.short_term_three_minute_one_second_variance
+           .average) {
+    return false;
+  }
+
+  const std::vector<quote_t> quotes_ = this->quotes;
+  const bool is_price_moving =
+      quotes_.back().price != quotes_.at(quotes_.size() - 2).price;
+
+  if (!is_price_moving) {
+    return false;
+  }
+
   return true;
 }
 

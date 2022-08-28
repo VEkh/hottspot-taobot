@@ -74,17 +74,17 @@ private:
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
+  bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position(const order_t *, const order_t *);
-  bool should_open_position(const order_t *);
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double compute_quantity(const std::string &);
+  double compute_quantity();
   double current_price();
   double min_target_tick_movement();
   double open_position_profit(const order_t *);
@@ -102,7 +102,7 @@ private:
   int runtime();
   int tradeable_symbols_count();
   json fetch_account_balance();
-  json fetch_order(Alpaca::Client &, const order_t *);
+  json fetch_order(const order_t *);
   json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
@@ -111,10 +111,9 @@ private:
   quote_t get_quote();
   quote_t read_streamed_quote();
 
-  std::pair<order_t, order_t> open_position(Alpaca::Client,
-                                            const order_action_t,
+  std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
-                                            const double, std::string);
+                                            const double);
   void await_market_open();
   void await_next_poll();
   void cancel_stale_open_order();
@@ -137,14 +136,14 @@ private:
   void open_and_persist_position();
   void reset_position();
   void set_close_order_prices();
-  void set_execution_price(Alpaca::Client &, order_t *);
+  void set_execution_price(order_t *);
   void set_open_order_prices();
   void set_position_status();
   void set_price_movement();
   void set_and_persist_price_movement();
   void set_profit(order_t *, const order_t *);
-  void set_profit(order_t *, const std::vector<quote_t> *);
-  void set_status(Alpaca::Client &, order_t *order);
+  void set_profit(order_t *);
+  void set_status(order_t *order);
   void update_account_balance();
   void watch();
   void write_performance();

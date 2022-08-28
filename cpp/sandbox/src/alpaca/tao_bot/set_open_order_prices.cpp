@@ -23,10 +23,8 @@ void Alpaca::TaoBot::set_open_order_prices() {
     return;
   }
 
-  const std::vector<quote_t> *quotes_ptr = &this->quotes;
-
-  set_execution_price(this->api_client, this->open_order_ptr);
-  set_profit(this->open_order_ptr, quotes_ptr);
+  set_execution_price(this->open_order_ptr);
+  set_profit(this->open_order_ptr);
 }
 
 #endif

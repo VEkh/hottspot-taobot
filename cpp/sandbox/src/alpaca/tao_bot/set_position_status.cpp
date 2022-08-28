@@ -10,8 +10,8 @@ void Alpaca::TaoBot::set_position_status() {
     return;
   }
 
-  set_status(this->api_client, this->open_order_ptr);
-  set_status(this->api_client, this->close_order_ptr);
+  set_status(this->open_order_ptr);
+  set_status(this->close_order_ptr);
 }
 
 #endif

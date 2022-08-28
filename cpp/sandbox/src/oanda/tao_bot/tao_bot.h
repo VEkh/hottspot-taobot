@@ -71,7 +71,6 @@ private:
   bool is_long_position = true;
   char *symbol;
   exit_prices_t exit_prices;
-  int quantity;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
@@ -88,6 +87,7 @@ private:
   account_exit_prices_t build_account_exit_prices();
   bool is_end_of_trading_period();
   bool is_market_open();
+  bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position();
@@ -116,8 +116,14 @@ private:
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   json read_streamed_account();
+  order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
+
+  std::pair<order_t, order_t> open_position(const order_action_t,
+                                            const order_action_t, const char *,
+                                            const int);
+
   std::string base_currency();
   void await_market_open();
   void clear_stale_open_order();
@@ -139,13 +145,13 @@ private:
   void log_quote();
   void log_start_message();
   void log_timestamps();
-  void open_position();
+  void open_and_persist_position();
   void reset_position();
   void set_and_persist_price_movement();
   void set_close_position_prices();
   void set_execution_price(order_t *);
   void set_execution_price(order_t *, json);
-  void set_open_position_prices();
+  void set_open_order_prices();
   void set_position_status();
   void set_price_movement();
   void set_profit(order_t *, const order_t *);

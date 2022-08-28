@@ -5,9 +5,10 @@
 #include "volatility.cpp" // volatility
 #include <ctime>          // std::time
 #include <math.h>         // abs
+#include <vector>         // std:vector
 
-bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
-  if (order_ptr) {
+bool Alpaca::TaoBot::should_open_position() {
+  if (this->open_order_ptr) {
     return false;
   }
 
@@ -21,10 +22,6 @@ bool Alpaca::TaoBot::should_open_position(const order_t *order_ptr) {
       quotes_.back().price != quotes_.at(quotes_.size() - 2).price;
 
   if (!is_price_moving) {
-    return false;
-  }
-
-  if (volatility(this->symbol) > 4.0) {
     return false;
   }
 
