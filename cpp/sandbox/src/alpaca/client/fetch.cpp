@@ -6,7 +6,7 @@
 #include "lib/curl_client/request_with_retry.cpp" // CurlClient::request_with_retry
 #include "lib/formatted.cpp"                      // Formatted
 #include <iostream>                               // std::cout, std::endl
-#include <regex>     // std::regex, std::regex_search
+#include <regex>     // std::regex, std::regex_constants, std::regex_search
 #include <stdexcept> // std::invalid_argument
 #include <string>    // std::string
 #include <unistd.h>  // usleep
@@ -38,6 +38,16 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
   if (std::regex_search(response_body, std::regex("rate limit exceeded"))) {
     std::cout << fmt.bold << fmt.yellow;
     puts("[ALPACA__CLIENT_fetch] Rate limit exceeded.");
+    std::cout << fmt.reset << std::endl;
+
+    return true;
+  };
+
+  if (std::regex_search(response_body,
+                        std::regex("error", std::regex_constants::icase))) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("[ALPACA__CLIENT_fetch] %s returned general error: %s\n",
+           curl_client.props.url.c_str(), response_body.c_str());
     std::cout << fmt.reset << std::endl;
 
     return true;
