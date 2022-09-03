@@ -1,13 +1,13 @@
-#ifndef ALPACA__TAO_BOT_target_position_profit
-#define ALPACA__TAO_BOT_target_position_profit
+#ifndef OANDA__TAO_BOT_target_position_profit
+#define OANDA__TAO_BOT_target_position_profit
 
 #include "dynamic_one_sec_variance.cpp" // dynamic_one_sec_variance
 #include "lib/utils/float.cpp"          // ::utils::float_
-#include "tao_bot.h"                    // Alpaca::TaoBot
+#include "tao_bot.h"                    // Oanda::TaoBot
 #include <algorithm>                    // std::max
 #include <ctime>                        // std::time
 
-double Alpaca::TaoBot::target_position_profit() {
+double Oanda::TaoBot::target_position_profit() {
   const double static_one_sec_variance =
       this->price_movement.three_minute_one_second_variance.average;
 

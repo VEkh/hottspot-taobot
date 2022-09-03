@@ -5,7 +5,6 @@
 #include "tao_bot.h"                    // Alpaca::TaoBot
 #include "target_position_profit.cpp"   // target_position_profit
 #include "volatility.cpp"               // volatility
-#include <algorithm>                    // std::max
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double one_sec_variance = dynamic_one_sec_variance();

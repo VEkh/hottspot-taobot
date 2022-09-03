@@ -98,12 +98,15 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double convert_price(const double, const std::string, const std::string);
   double current_spread();
+  double dynamic_one_sec_variance();
   double loss_to_recover();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double spread_limit();
-  double target_account_profit(const double);
+  double target_account_profit();
   double target_account_profit_trailing_stop();
+  double target_position_profit();
+  double volatility();
   exit_prices_t build_exit_prices();
   int compute_quantity();
   int order_duration(const order_t *);

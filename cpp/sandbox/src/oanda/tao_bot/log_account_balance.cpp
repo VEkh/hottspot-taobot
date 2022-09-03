@@ -3,6 +3,7 @@
 
 #include "build_account_exit_prices.cpp" // build_account_exit_prices
 #include "lib/formatted.cpp"             // Formatted
+#include "lib/utils/time.cpp"            // ::utils::time_
 #include "tao_bot.h"                     // Oanda::TaoBot
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
@@ -15,10 +16,11 @@ void Oanda::TaoBot::log_account_balance() {
       100.0;
 
   const double max_balance_delta_percentage =
-      (exit_prices_.max_profit / this->account_balance.original_balance) * 100.0;
+      (exit_prices_.max_profit / this->account_balance.original_balance) *
+      100.0;
 
-  const double max_loss =
-      this->account_balance.min_balance - this->account_balance.original_balance;
+  const double max_loss = this->account_balance.min_balance -
+                          this->account_balance.original_balance;
 
   const double max_loss_percentage =
       (max_loss / this->account_balance.original_balance) * 100.0;

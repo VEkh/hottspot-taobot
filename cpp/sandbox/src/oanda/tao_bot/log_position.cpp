@@ -35,11 +35,16 @@ void Oanda::TaoBot::log_position() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
-  printf(
-      "Open   => Execution: %.5f • Profit: %.5f (%.2f%%) • Max Profit: %.5f\n",
-      this->open_order_ptr->execution_price, this->open_order_ptr->profit,
-      profit_percentage(this->open_order_ptr),
-      this->open_order_ptr->max_profit);
+  printf("Open   => Execution: %.5f • Profit: %.5f (%.2f%%) • Max Profit: %.5f "
+         "@ %s%s\n",
+         this->open_order_ptr->execution_price, this->open_order_ptr->profit,
+         profit_percentage(this->open_order_ptr),
+         this->open_order_ptr->max_profit,
+         ::utils::time_::date_string(this->open_order_ptr->max_profit_timesamp,
+                                     "%H:%M %Z", "America/Chicago")
+             .c_str(),
+         this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
+                                                                          : "");
 
   printf(
       "Close  => Execution: %.5f • Profit: %.5f (%.2f%%) • Max Profit: %.5f\n",
@@ -61,16 +66,16 @@ void Oanda::TaoBot::log_position() {
   printf("Quantity: %i\n", this->open_order_ptr->quantity);
 
   const int duration = order_duration(this->open_order_ptr);
+  const int max_profit_duration =
+      std::time(nullptr) - this->open_order_ptr->max_profit_timesamp;
 
-  printf("Duration: %s\n",
-         ::utils::integer_::seconds_to_clock(duration).c_str());
+  printf("Duration: %s • Max Profit Duration: %s\n",
+         ::utils::integer_::seconds_to_clock(duration).c_str(),
+         ::utils::integer_::seconds_to_clock(max_profit_duration).c_str());
 
   std::cout << fmt.reset << std::endl;
 
   const double position_profit = open_position_profit(this->open_order_ptr);
-
-  this->open_order_ptr->max_position_profit =
-      std::max(this->open_order_ptr->max_position_profit, position_profit);
 
   log_color = position_profit >= 0 ? fmt.green : fmt.red;
 

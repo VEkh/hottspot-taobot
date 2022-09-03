@@ -37,12 +37,13 @@ struct order_t {
   int id = 0;
   double max_position_profit = 0.00;
   double max_profit = 0.00;
+  long int max_profit_timesamp = 0;
   double profit = 0.00;
   int quantity;
   order_status_t status = order_status_t::ORDER_INIT;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::FOK;
-  int timestamp = 0;
+  long int timestamp = 0;
   int trade_id = 0;
   order_type_t type;
 };
