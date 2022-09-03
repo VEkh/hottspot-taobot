@@ -40,8 +40,8 @@ private:
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
   const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const double TARGET_DAILY_PROFIT = 0.0105;
-  const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.001;
+  const double TARGET_ACCOUNT_PROFIT = 0.0105;
+  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int MAX_EXPECTED_LOSS_STREAK = 18;
   const int QUOTES_MAX_SIZE = 4e2;
 
@@ -102,8 +102,8 @@ private:
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double spread_limit();
-  double target_daily_profit(const double);
-  double target_daily_profit_trailing_stop();
+  double target_account_profit(const double);
+  double target_account_profit_trailing_stop();
   exit_prices_t build_exit_prices();
   int compute_quantity();
   int order_duration(const order_t *);

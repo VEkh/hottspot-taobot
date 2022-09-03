@@ -45,12 +45,13 @@ struct order_t {
   double limit_price = 0.00;
   double max_position_profit = 0.00;
   double max_profit = 0.00;
+  long int max_profit_timesamp = 0;
   double profit = 0.00;
   double quantity = 0.00;
   order_status_t status = order_status_t::ORDER_INIT;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
-  int timestamp = 0;
+  long int timestamp = 0;
   order_type_t type = order_type_t::MARKET;
 };
 

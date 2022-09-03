@@ -1,11 +1,10 @@
 #ifndef ALPACA__TAO_BOT_should_open_position
 #define ALPACA__TAO_BOT_should_open_position
 
-#include "tao_bot.h"      // Alpaca::TaoBot, quote_t
-#include "volatility.cpp" // volatility
-#include <ctime>          // std::time
-#include <math.h>         // abs
-#include <vector>         // std:vector
+#include "tao_bot.h" // Alpaca::TaoBot, quote_t
+#include <ctime>     // std::time
+#include <math.h>    // abs
+#include <vector>    // std:vector
 
 bool Alpaca::TaoBot::should_open_position() {
   if (this->open_order_ptr) {

@@ -5,11 +5,9 @@
 #include <algorithm> // std::max std::min
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
-  const price_movement_t price_movement = this->price_movement;
-
   const double one_sec_variance = std::max(
-      price_movement.short_term_three_minute_one_second_variance.average,
-      price_movement.three_minute_one_second_variance.average);
+      this->price_movement.short_term_three_minute_one_second_variance.average,
+      this->price_movement.three_minute_one_second_variance.average);
 
   const double exit_threshold = 40 * one_sec_variance;
   const double max_loss = -exit_threshold;

@@ -1,4 +1,4 @@
-### 2022-08-22:
+### 2022-09-06:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -11,15 +11,394 @@ Max Balance:           $ (+) (+%)
 Min Balance:           $ (-) (-%)
 ```
 
-#### Close Stats (as of 2022-08-15)
-* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
-
-#### Target (+3.55%) Reached Stats (as of 2022-08-15)
+#### (Alpha STAGING) Close Stats (as of 2022-09-01)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-09-02:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Runtime: 03:13:03
+Current Balance:       $25561.02 (+180.28) (+0.71%)
+Max Balance:           $26160.71 (+779.97) (+3.07%) @ 09:01 CDT
+Min Balance:           $24377.22 (-1003.52) (-3.95%)
+```
+
+**Beta (STAGING)**
+```
+Runtime: 01:37:32
+Current Balance:       $27,612.44 (-886.21) (-3.11%)
+Max Balance:           $28,815.13 (+316.48) (+1.11%) @ 13:44 CDT
+Min Balance:           $27,573.73 (-924.92) (-3.25%)
+```
+
+#### (Alpha STAGING) Close Stats (as of 2022-09-01)
+* Win / Loss: 2W (Consecutive: 2) 0L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+* I started with incorrect math that prevented the account balance form closing
+  closer to the peak. Luckily the math worked out well enough that it could
+  close when the profit resurged to the minimum threshold, hence the win.
+* I corrected the math, restarted in Beta, and the target profit easing was
+  working at the account level.
+* Since I started Beta during a consolidation period that never broke, it lost
+  money, but not before peaking at a respectable profit.
+* I may adjust the target profit easing rates and further reduce the number of
+  trading assets, but I think I may be at another working iteration that I'll
+  monitor next week.
+
+#### Next Thing(s) to Try
+
+### 2022-09-01:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING) (Alpha) Round 1**
+```
+Runtime: 03:56:14
+Current Balance:       $25379.79 (+148.13) (+0.59%)
+Max Balance:           $25807.13 (+575.47) (+2.28%) @ 10:29 CDT
+Min Balance:           $24893.53 (-338.13) (-1.34%)
+```
+
+**Beta (STAGING) Round 1**
+```
+Runtime: 24:28 ❗
+Current Balance:       $29,251.43 (+1,022.39) (+3.62%)
+Max Balance:           $29,287.67 (+1,058.63) (+3.75%) @ 13:27 CDT
+Min Balance:           $28,174.31 (-54.73) (-0.19%)
+```
+
+**Beta (STAGING) Round 2**
+```
+Runtime: 01:28:40
+Current Balance:       $28,533.32 (-689.47) (-2.36%)
+Max Balance:           $29,279.65 (+56.86) (+0.19%) @ 13:35 CDT
+Min Balance:           $27,649.44 (-1,573.35) (-5.38%)
+```
+
+#### Close Stats (as of 2022-09-01)
+* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
+
+#### Remarks
+##### Stocks/ETFs
+**Price Movements: Price Ratios**
+```
+AAPL: 6.70e-05
+AMZN: 9.91e-05 🥈
+GOOG: 7.56e-05 🥉
+MSFT: 7.03e-05
+QQQ:  7.04e-05 #4
+TSLA: 1.37e-04 🥇
+```
+
+* Holding win positions for a long time is still working well.
+* I'm introducing a new concept: Sigmoid-Eased Peak Profit Expansion
+* The way it works is as follows:
+  * Set target profit
+  * When that target is reached, extend it
+  * The new target profit will sigmoidally diminish over a calibrated time to a
+    specified minimum.
+* This approach allows profits to reach their natural maxima and gives them
+  sufficient time to extend them. The diminish period is 1 hour for each asset
+  position, two hours for the account's daily profit.
+
+#### Next Thing(s) to Try
+* Only trade the four highest moving assets
+
+### 2022-08-31:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+**Alpha (STAGING) Round 1**
+```
+Runtime: 05:15:01
+Current Balance:       $25,296.77 (-787.30) (-3.02%)
+Max Balance:           $26,729.80 (+645.73) (+2.48%) @ 08:53 CDT
+Min Balance:           $25,040.63 (-1,043.44) (-4.00%)
+```
+
+**Alpha (STAGING) Round 1**
+```
+Runtime: 57:57
+Current Balance:       $25,265.64 (-818.43) (-3.14%)
+Max Balance:           $26,128.69 (+44.62) (+0.17%) @ 14:48 CDT
+Min Balance:           $25,251.88 (-832.19) (-3.19%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* I can't properly count today's results as wins because the peaks resulted
+  from luckily timed restarts.
+* What was apparent, however, were a few things:
+  * Long holding profits is a good idea that helps avoid unnecessary double
+    losses.
+  * The timed diminishing profit target was also an excellent idea. I modified
+    it to use the order's `max_profit_timestamp` instead of the order's start
+    timestamp. This way it can reset as the profit hits new peaks.
+  * I'm also reducing the target max profit hold time from two hours to one.
+  * It's still a toss up whether a win should trigger a reversal. A reversal
+    seemed more correct today. I'll try again for tomorrow.
+  * I think a 40x 1-sec loss threshold prevents jumpiness during periods of
+    lower volatility, but I think a smaller exit threshold will be better for
+    high volatility periods. The morning lost heavily because of large loss
+    thresholds that triggered.
+
+#### Next Thing(s) to Try
+* Small loss threshold during high volatility, high loss threshold during low
+  volatility.
+
+### 2022-08-30:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+**Alpha (STAGING) Round 1**
+```
+Runtime: 01:19:51
+Current Balance:       $26839.44 (-1052.04) (-3.77%)
+Max Balance:           $28143.05 (+251.57) (+0.90%) @ 08:30 CDT
+Min Balance:           $26571.77 (-1319.71) (-4.73%)
+```
+
+**Alpha (STAGING) Round 2**
+```
+Runtime: 05:07:12
+Current Balance:       $26,196.56 (-1,694.92) (-6.08%)
+Max Balance:           $27,321.86 (-569.62) (-2.04%) @ 10:07 CDT
+Min Balance:           $26,051.24 (-1,840.24) (-6.60%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+
+#### Next Thing(s) to Try
+
+### 2022-08-29:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING) Round 1**
+```
+Current Balance:       $29304.89 (-802.11) (-2.66%)
+Max Balance:           $30138.59 (+31.59) (+0.10%) @ 08:30 CDT
+Min Balance:           $28909.39 (-1197.61) (-3.98%)
+```
+
+**Alpha (STAGING) Round 2**
+```
+Runtime: 02:08:15
+Current Balance:       $28,683.37 (-1,423.63) (-4.73%)
+Max Balance:           $29,417.74 (-689.26) (-2.29%) @ 11:37 CDT
+Min Balance:           $28,671.71 (-1,435.29) (-4.77%)
+```
+
+**Alpha (STAGING) Round 3**
+```
+Runtime: 01:18:27
+Current Balance:       $27,725.95 (-2,381.05) (-7.91%)
+Max Balance:           $28,631.20 (-1,475.80) (-4.90%) @ 13:24 CDT
+Min Balance:           $27,684.15 (-2,422.85) (-8.05%)
+```
+
+**Alpha (STAGING) Round 4**
+```
+Runtime: 15:09
+Current Balance:       $27,971.47 (-2,135.53) (-7.09%)
+Max Balance:           $28,054.79 (-2,052.21) (-6.82%) @ 14:56 CDT
+Min Balance:           $27,705.15 (-2,401.85) (-7.98%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* Rough day again. No considerable profit was realized despite a day of strong
+  trending.
+* The trailing stop is still working as intended.
+* Loss positions are still being held too long and much of the max profit is
+  lost to a deep trailing stop.
+* At the end of the day I reduced the exit threshold to the smallest it's ever
+  been: 10x 1-sec variance.
+* It peaked at a profit of ~ +1.1% and seemed to be riding short-term trends as
+  intended.
+* We'll start tomorrow with this iteration and see how it goes.
+
+#### Next Thing(s) to Try
+
+### 2022-08-26:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING) Round 1**
+```
+Runtime: 04:52:17
+Current Balance:       $24641.92 (-785.51) (-3.09%)
+Max Balance:           $25523.58 (+96.15) (+0.38%) @ 09:39 CDT
+Min Balance:           $24007.67 (-1419.76) (-5.58%)
+```
+
+**Alpha (STAGING) Round 2**
+```
+Runtime: 01:33:04
+Current Balance:       $30,114.78 (+114.78) (+0.38%)
+Max Balance:           $30,192.60 (+192.60) (+0.64%) @ 14:44 CDT
+Min Balance:           $29,926.70 (-73.30) (-0.24%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* I had to break Round 1. In the morning it dropped to -5.58% loss. After the
+  bear trend broke it shot up back to +0.38% profit. This was encouraging,
+  suggesting that even if it lost heavily, it could also gain heavily. However,
+  after several more hours of running, consolidation periods had drained the
+  profit back down to -3.09% loss. This shouldn't have been the case given how
+  strongly the price was trending for all assets. It suggested that the exit
+  threshold was still too shallow.
+* Reset the account's balance to $30K and increased the exit threshold to 40x
+  1-sec variance.
+* This profited, however the prices were still trending significantly, so it's
+  hard to tell how effective it truly was. We'll see on Monday how it goes.
+* Have a good weekend! You'll figure this out!
+
+#### Next Thing(s) to Try
+
+### 2022-08-25:
+#### Performance
+
+##### Stocks/ETFs
+**Alpha (STAGING) Round 1**
+```
+Current Balance:       $26125.44 (-624.45) (-2.33%)
+Max Balance:           $27043.04 (+293.15) (+1.10%) @ 08:40 CDT
+Min Balance:           $26106.16 (-643.73) (-2.41%)
+```
+
+**Alpha (STAGING) Round 2**
+```
+Current Balance:       $25,399.35 (-678.92) (-2.60%)
+Max Balance:           $26,224.02 (+145.75) (+0.56%) @ 10:25 CDT
+Min Balance:           $25,258.49 (-819.78) (-3.14%)
+```
+
+**Alpha (STAGING) Round 3**
+```
+Current Balance:       $25,399.35 (-678.92) (-2.60%)
+Max Balance:           $26,224.02 (+145.75) (+0.56%) @ 10:25 CDT
+Min Balance:           $25,258.49 (-819.78) (-3.14%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* I broke and made two changes when round 1 was doing poorly
+  1. Increase the exit threshold from 20 to 25x 1-sec variance
+  2. Don't wait for min profit before exiting at trailing stop
+* This didn't perform well and I reverted to the opening strategy with the same
+  increased exit threshold.
+* Try not to break and hold even if the morning is off to a bad start.
+
+#### Next Thing(s) to Try
+
+### 2022-08-24:
+#### Performance
+
+##### Stocks/ETFs
+**Alpha (STAGING) Round 2**
+```
+Current Balance:       $26,844.10 (+360.07) (+1.36%)
+Max Balance:           $26,916.94 (+432.91) (+1.63%) @ 14:14 CDT
+Min Balance:           $26,235.14 (-248.89) (-0.94%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* Okay! I think I have an iteration that I'd like to test for the next one to
+  two weeks.
+* It:
+  * Rides trends as far as they can reasonably be expected to go
+  * Cuts loss soon enough to ride reversals, but not so soon that it triggers
+    frivolously.
+* There were also very good win streaks:
+  * AAPL: 1
+  * AMZN: 5
+  * GOOG: 5
+  * MSFT: 4
+  * QQQ: 4
+  * TSLA: 7
+* I was watching the exit points and I really think that a 20x 1-sec variance
+  is the Goldie Locks exit threshold. I'd _strongly_ suggest that I don't
+  change it as I'm observing over the next several days.
+* This iteration is pretty close to what I've been trying to build.
+* Starting tomorrow, I'll measure it's daily performance and see if I can set a
+  realistic daily target profit.
+
+#### Next Thing(s) to Try
+
+### 2022-08-23:
+#### Performance
+##### Forex (Paper)
+* Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
+
+##### Stocks/ETFs
+**Alpha (STAGING) Round 2**
+```
+Current Balance:       $27,351.18 (-140.81) (-0.51%)
+Max Balance:           $28,066.41 (+574.42) (+2.09%) @ 11:37 CDT
+Min Balance:           $27,298.03 (-193.96) (-0.71%)
+```
+
+**Alpha (STAGING) Round 3 (< 1 hour)**
+```
+Current Balance:       $27,243.30 (-73.36) (-0.27%)
+Max Balance:           $27,396.82 (+80.16) (+0.29%) @ 14:51 CDT
+Min Balance:           $27,031.44 (-285.22) (-1.04%)
+```
+
+#### Remarks
+##### Stocks/ETFs
+* I started the day with trying to ride short trends but the stop loss was too
+  tight and triggered too much loss.
+* I loosened them and set the target win to 35x 1-sec variance with a 15x 1-sec
+  variance trailing stop. This actually worked pretty well and got to a +2.09%
+  return.
+* This iteration ended at a slight loss after a hectic conslidation period, but
+  I still felt it left too much profit on the table.
+* I'm now solely using the trailing stop to make profit. That is, the profit
+  starts once the trailing stop is exceeded.
+* The trailing stop is 15x 1-sec variance.
+* This should still successfully ride trends to their reasonable end, but it
+  will also take smaller profits sooner.
+* It still remains to be seen whether placing an opposite trade post-win is
+  better than placing a same-direction trade.
+* I still feel confident I can figure something out that attains a >1-2% daily
+  profit, even on consolidation days.
+
+#### Next Thing(s) to Try
+
+### 2022-08-22:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Didn't run all day because of experiments
+```
+
+#### Remarks
+##### Stocks/ETFs
+* I'm experimenting with exit signals that maximize trend riding.
+* The goal is to:
+  * Cut losses sooner rather than later
+  * Ride winning trends as long as they will go
+  * Open a reversal position after the winning trend has finished and indicates
+    a correction.
+* I have an iteration that showed promise at the end of the day.
+* I'll see how it does tomorrow.
 
 #### Next Thing(s) to Try
 
@@ -472,7 +851,7 @@ Min Balance:           $26022.03 (-75.52) (-0.29%)
 * There was a strong bull trend for most assets, but the algorithm also rode
   more turbulent price movements well.
 * The increased loss threshold DEFINITELY helped avoid excessively long loss
-  streaks during consolication periods. The longest loss streaks were GOOG (5) and TSLA (4)
+  streaks during consolidation periods. The longest loss streaks were GOOG (5) and TSLA (4)
 * The reduced take profit threshold was enough to secure profits. It couldn't
   secure a bear trend profit, but it was still good.
 * This is the fourth consecutive day with a max greater than 4%. I still have

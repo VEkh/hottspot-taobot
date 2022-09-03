@@ -38,8 +38,7 @@ private:
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double MAX_ACCOUNT_LOSS_RATIO = 0.02;
-  const double TARGET_DAILY_PROFIT = 0.0355;
-  const double TARGET_DAILY_PROFIT_TRAILING_STOP = 0.001;
+  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 4e2;
 
@@ -85,15 +84,15 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity();
   double current_price();
+  double dynamic_one_sec_variance();
   double min_target_tick_movement();
   double open_position_profit(const order_t *);
-  double position_target_movement();
   double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
-  double target_daily_profit(const double);
-  double target_daily_profit_trailing_stop();
-  double volatility(const order_t *);
-  double volatility(const std::string &);
+  double target_account_profit();
+  double target_account_profit_trailing_stop();
+  double target_position_profit();
+  double volatility();
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *);
   int profit_duration(const double);
