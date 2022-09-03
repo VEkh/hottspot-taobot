@@ -11,13 +11,12 @@ json Oanda::TaoBot::fetch_account_balance() {
         this->api_client.fetch_account(),
         "OANDA__TAO_BOT_fetch_account_balance-fetch_account");
 
-    json instrument_json = ::utils::json::parse_with_catch(
-        this->api_client.fetch_instrument(this->symbol),
-        "OANDA__TAO_BOT_fetch_account_balance-fetch_instrument");
+    json instruments_json = ::utils::json::parse_with_catch(
+        this->api_client.fetch_instruments({this->symbol}),
+        "OANDA__TAO_BOT_fetch_account_balance-fetch_instruments");
 
-    account_json["marginRates"] = {
-        {this->symbol, instrument_json["marginRate"]},
-    };
+    account_json["marginRates"] =
+        this->api_client.map_margin_rates(instruments_json);
 
     return account_json;
   } catch (nlohmann::detail::type_error &) {

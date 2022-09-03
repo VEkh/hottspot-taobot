@@ -1,24 +1,13 @@
 #ifndef ALPACA__TAO_BOT_tradeable_symbols_count
 #define ALPACA__TAO_BOT_tradeable_symbols_count
 
-#include "tao_bot.h" // Alpaca::TaoBot
-#include <fstream>   // std::ifstream, std::ios
-#include <string>    //std::getline, std::string
+#include "lib/utils/io.cpp" // ::utils::io
+#include "tao_bot.h"        // Alpaca::TaoBot
 
 int Alpaca::TaoBot::tradeable_symbols_count() {
-  const std::string symbols_file_path =
-      std::string(APP_DIR) + "/bin/alpaca/symbols";
+  std::vector<std::string> symbols = ::utils::io::tradeable_symbols("alpaca");
 
-  std::ifstream file(symbols_file_path.c_str(), std::ios::in);
-
-  int count = 0;
-  std::string line;
-
-  while (std::getline(file, line)) {
-    count++;
-  }
-
-  return count;
+  return symbols.size();
 }
 
 #endif

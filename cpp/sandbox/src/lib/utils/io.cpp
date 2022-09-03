@@ -7,7 +7,7 @@
 #include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <stdio.h>   // fgets, popen
-#include <string>    // std::string
+#include <string>    // std::getline, std::string
 #include <utility>   // std::pair
 
 namespace utils {
@@ -98,6 +98,21 @@ std::string system_exec(const char *cmd) {
 
 std::string system_exec(const std::string &cmd) {
   return system_exec(cmd.c_str());
+}
+
+std::vector<std::string> tradeable_symbols(const std::string project) {
+  const std::string symbols_file_path =
+      std::string(APP_DIR) + "/bin/" + project + "/symbols";
+
+  std::ifstream file(symbols_file_path.c_str(), std::ios::in);
+  std::string line;
+  std::vector<std::string> out;
+
+  while (std::getline(file, line)) {
+    out.push_back(line);
+  }
+
+  return out;
 }
 
 void write_to_file(std::string body, const char *file_path) {

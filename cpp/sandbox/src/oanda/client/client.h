@@ -1,12 +1,14 @@
 #ifndef OANDA__CLIENT_H
 #define OANDA__CLIENT_H
 
+#include "deps.cpp"                        // json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "oanda/types.cpp"                 // Oanda::t
 #include "types.cpp"                       // Global::t
 #include <map>                             // std::map
 #include <string>                          // std::string
+#include <vector>                          // std::vector
 
 namespace Oanda {
 class Client {
@@ -21,10 +23,11 @@ public:
 
   CurlClient place_order(order_t *order);
 
+  std::map<std::string, std::string> map_margin_rates(json);
   std::string cancel_order(const int);
   std::string cancel_order(order_t *order);
   std::string fetch_account();
-  std::string fetch_instrument(const std::string);
+  std::string fetch_instruments(const std::vector<std::string>);
   std::string fetch_order(const int);
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);

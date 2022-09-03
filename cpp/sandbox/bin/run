@@ -1,8 +1,11 @@
 #!/bin/bash
 
+
+app_dir="$(realpath "$(dirname "$0")/../")"
 srcs="${*:-./sandbox.cpp}"
 
 args=(
+  "-D'APP_DIR=\"$app_dir\"'"
   "-iquote'.'"
   "-iquote'./src'"
   "-isystem'./deps/build/include'"
