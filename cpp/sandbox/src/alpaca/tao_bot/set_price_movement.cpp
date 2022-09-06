@@ -4,7 +4,6 @@
 #include "tao_bot.h"                // Alpaca::TaoBot, quote_t
 #include "write_price_movement.cpp" // write_price_movement
 #include <math.h>                   // abs, INFINITY
-#include <string>                   // std::string
 #include <vector>                   // std::vector
 
 void Alpaca::TaoBot::set_price_movement() {
@@ -82,8 +81,6 @@ void Alpaca::TaoBot::set_price_movement() {
 
   this->price_movement.short_term_three_minute_one_second_variance.count =
       std::min(short_term_max_sample_size, (double)(old_short_term_count + 1));
-
-  write_price_movement();
 }
 
 #endif

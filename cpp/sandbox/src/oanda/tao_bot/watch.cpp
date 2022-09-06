@@ -4,7 +4,7 @@
 #include "await_market_open.cpp"              // await_market_open
 #include "clear_stale_open_order.cpp"         // clear_stale_open_order
 #include "close_position.cpp"                 // close_position
-#include "fetch_quote.cpp"                    // fetch_quote
+#include "fetch_and_persist_quote.cpp"        // fetch_and_persist_quote
 #include "is_market_open.cpp"                 // is_market_open
 #include "log_account_balance.cpp"            // log_account_balance
 #include "log_end_of_trading_period.cpp"      // log_end_of_trading_period
@@ -34,7 +34,7 @@ void Oanda::TaoBot::watch() {
 
   while (!should_terminate()) {
     log_timestamps();
-    fetch_quote();
+    fetch_and_persist_quote();
     set_and_persist_price_movement();
     update_account_balance();
 

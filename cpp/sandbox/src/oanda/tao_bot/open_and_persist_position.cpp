@@ -53,7 +53,7 @@ void Oanda::TaoBot::open_and_persist_position() {
     std::pair<order_t, order_t> new_orders =
         open_position(close_order_action, open_order_action, "open", quantity);
 
-    open_order_opened = !new_orders.second.id;
+    open_order_opened = !!new_orders.second.id;
 
     if (!open_order_opened) {
       std::cout << fmt.bold << fmt.red;

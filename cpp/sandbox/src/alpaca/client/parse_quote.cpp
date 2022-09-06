@@ -4,7 +4,6 @@
 #include "client.h"           // Alpaca::Client, quote_t
 #include "deps.cpp"           // json
 #include "lib/utils/time.cpp" // ::utils::time_
-#include <ctime>              // std::time, std::time_t
 #include <string>             // std::string, std::stod
 
 Alpaca::Client::quote_t
@@ -14,7 +13,7 @@ Alpaca::Client::parse_quote(const std::string &response_body) {
   const double ask = quote_json["quote"]["ap"];
   const double bid = quote_json["quote"]["bp"];
   const double price = (ask + bid) * 0.5;
-  const long now = ::utils::time_::epoch("milliseconds");
+  const long int now = ::utils::time_::epoch("milliseconds");
 
   quote_t quote;
   quote.ask = ask;

@@ -26,13 +26,13 @@ void Oanda::TaoBot::log_price_movement() {
 
   std::cout << fmt.reset << fmt.bold << fmt.cyan;
 
-  printf("Long-Term One Second Variance: %.5f\n", one_second_variance);
+  printf("Long-Term One Second Variance: %.7f\n", one_second_variance);
 
   if (short_term_one_second_variance) {
     const double short_term_long_term_variance_percentage =
         100.0 * (short_term_one_second_variance / one_second_variance);
 
-    printf("Short-Term One Second Variance: %.5f (%.3f%% Long-Term)\n",
+    printf("Short-Term One Second Variance: %.7f (%.3f%% Long-Term)\n",
            short_term_one_second_variance,
            short_term_long_term_variance_percentage);
   }

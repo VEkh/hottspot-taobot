@@ -17,7 +17,8 @@ void Alpaca::TaoBot::reset_position() {
     return;
   }
 
-  if (this->close_order_ptr->status != order_status_t::ORDER_FILLED) {
+  if (this->close_order_ptr->status != order_status_t::ORDER_FILLED ||
+      this->open_order_ptr->status != order_status_t::ORDER_FILLED) {
     return;
   }
 

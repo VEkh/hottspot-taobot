@@ -78,9 +78,17 @@ CurlClient Oanda::Client::place_order(order_t *order) {
     order->timestamp = now;
 
     if (response.contains("orderFillTransaction")) {
-      const std::string trade_id_string =
-          response["orderFillTransaction"]["tradeOpened"]["tradeID"];
-      order->trade_id = (int)std::stod(trade_id_string);
+      if (response["orderFillTransaction"].contains("tradeOpened")) {
+        const std::string trade_id_string =
+            response["orderFillTransaction"]["tradeOpened"]["tradeID"];
+
+        order->trade_id = (int)std::stod(trade_id_string);
+      } else if (response["orderFillTransaction"].contains("tradesClosed")) {
+        const std::string trade_id_string =
+            response["orderFillTransaction"]["tradesClosed"][0]["tradeID"];
+
+        order->trade_id = (int)std::stod(trade_id_string);
+      }
     }
 
     return curl_client;

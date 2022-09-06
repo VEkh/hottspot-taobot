@@ -40,11 +40,9 @@ void Oanda::TaoBot::initialize(char *symbol_,
   this->symbol = symbol_;
 
   this->api_client = Oanda::Client(this->flags);
-
   this->account_balance = get_account_balance();
 
   load_quotes();
-
   fetch_and_persist_quote();
   load_performance();
   load_price_movement();

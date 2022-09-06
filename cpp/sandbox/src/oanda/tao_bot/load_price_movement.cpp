@@ -12,6 +12,7 @@
 #include "lib/utils/io.cpp" // ::utils::io
 #include <fstream>          // std::ifstream
 #include <stdexcept>        // std::invalid_argument
+#include <string>           // std::string
 
 void Oanda::TaoBot::load_price_movement() {
   const std::string filepath = std::string(APP_DIR) +
@@ -31,17 +32,29 @@ void Oanda::TaoBot::load_price_movement() {
     return;
   }
 
-  if (!persisted_data.contains("three_minute_one_second_variance")) {
-    return;
+  double average, short_term_average;
+  int count, short_term_count;
+
+  if (persisted_data.contains("short_term_three_minute_one_second_variance")) {
+    short_term_average =
+        persisted_data["short_term_three_minute_one_second_variance"]
+                      ["average"];
+    short_term_count =
+        persisted_data["short_term_three_minute_one_second_variance"]["count"];
+
+    this->price_movement.short_term_three_minute_one_second_variance.average =
+        short_term_average;
+    this->price_movement.short_term_three_minute_one_second_variance.count =
+        short_term_count;
   }
 
-  const double average =
-      persisted_data["three_minute_one_second_variance"]["average"];
+  if (persisted_data.contains("three_minute_one_second_variance")) {
+    average = persisted_data["three_minute_one_second_variance"]["average"];
+    count = persisted_data["three_minute_one_second_variance"]["count"];
 
-  const int count = persisted_data["three_minute_one_second_variance"]["count"];
-
-  this->price_movement.three_minute_one_second_variance.average = average;
-  this->price_movement.three_minute_one_second_variance.count = count;
+    this->price_movement.three_minute_one_second_variance.average = average;
+    this->price_movement.three_minute_one_second_variance.count = count;
+  }
 }
 
 #endif

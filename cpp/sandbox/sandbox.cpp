@@ -6,9 +6,7 @@
 #include <vector>              // std::vector
 
 int main() {
-  std::vector<std::string> symbols = ::utils::io::tradeable_symbols("alpaca");
+  bool booln = 0;
 
-  ::utils::debug::inspect(symbols);
-
-  printf("count: %i\n", (int)symbols.size());
+  printf("boolean as number: %i\n", booln);
 }

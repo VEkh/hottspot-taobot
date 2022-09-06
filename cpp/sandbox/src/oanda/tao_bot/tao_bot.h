@@ -43,6 +43,7 @@ private:
   const double TARGET_ACCOUNT_PROFIT = 0.0105;
   const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int MAX_EXPECTED_LOSS_STREAK = 18;
+  const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 4e2;
 
   std::map<const char *, const char *> ICONS = {
@@ -67,7 +68,6 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   account_balance_t account_balance;
-  bool is_long_position = true;
   char *symbol;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;

@@ -35,7 +35,7 @@ void Oanda::TaoBot::log_account_balance() {
   printf("💰 Account Balance\n");
   std::cout << fmt.reset << fmt.bold << log_color;
 
-  printf("Current Balance:       $%'.5f (%+'.5f) (%+'.5f%%)%s\n",
+  printf("Current Balance:       $%'.5f (%+'.5f) (%+'.2f%%)%s\n",
          this->account_balance.balance, exit_prices_.current_profit,
          balance_delta_percentage,
          this->account_balance.balance == this->account_balance.max_balance
@@ -50,7 +50,7 @@ void Oanda::TaoBot::log_account_balance() {
                                   "%H:%M %Z", "America/Chicago")
           .c_str());
 
-  printf("Min Balance:           $%'.5f (%+'.5f) (%+'.5f%%)\n",
+  printf("Min Balance:           $%'.5f (%+'.5f) (%+'.2f%%)\n",
          this->account_balance.min_balance, max_loss, max_loss_percentage);
 
   printf("Original Balance:      $%'.5f\n",
