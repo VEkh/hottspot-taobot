@@ -1,4 +1,147 @@
-### 2022-09-06:
+### 2022-09-12:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-09:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 02:30:28
+Current Balance:       $28664.64 (+512.18) (+1.82%)
+Max Balance:           $29406.58 (+1254.12) (+4.45%) @ 09:43 CDT
+Min Balance:           $27978.20 (-174.26) (-0.62%)
+```
+
+**Alpha (Staging)**
+```
+Runtime: 03:56:00
+Current Balance:       $26,080.64 (-25.37) (-0.10%)
+Max Balance:           $26,219.52 (+113.51) (+0.43%) @ 12:38 CDT
+Min Balance:           $25,756.62 (-349.39) (-1.34%)
+Original Balance:      $26,106.01
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 2W (Consecutive: 2) 0L (Consecutive: 0)
+
+###### Notes
+* Hooray! 🎉 That's two days of winning since being back on production.
+* Though both win days had extensive trending, they had their fair share of
+  consolidation so it seems like a decent indicator of future performance.
+* I'll feel more comfortable once I see it struggle through a few more
+  consolidation days.
+* I have noticed, however, that each win closed at or below half the peak. This
+  is because the take profit easing function is allowing too much time for the
+  peak to be exceeded.
+
+###### Next Thing(s) to Try
+* Shorten the half life of the account profit take profit time easing function.
+  * This may lead to lead to missed profit extension opportunities. If so,
+    increase it from 30 to 45 minutes.
+
+##### Forex
+**Staging**
+```
+Runtime: 04:50:04
+Current Balance:       $49,941.30230 (-1.31560) (-0.00%)
+Max Balance:           $49,942.61790 (+0.00000) (+0.00%) @ 11:11 CDT
+Min Balance:           $49,941.23860 (-1.37930) (-0.00%)
+Original Balance:      $49,942.61790
+```
+
+###### Notes
+* Forex is still consistently closing at a loss after sufficient runtime.
+* I'm going to start it on Sunday and run eight high margin currencies all week
+  non-stop.
+* I'll both observe the net return and which are the four fastest moving
+  currencies so I can focus on those.
+* Since equity assets tend to lose money over time, I'm guessing currencies
+  will be similar.
+* If this is the case, it doesn't necessarily mean that Forex can't win, I'll
+  just have to figure out another way.
+
+
+###### Next Thing(s) to Try
+
+### 2022-09-08:
+#### Performance
+##### Forex
+**Staging**
+```
+Runtime: 06:29:01
+Current Balance:       $49,942.61790 (-0.47350) (-0.00%)
+Max Balance:           $49,943.09140 (+0.00000) (+0.00%) @ 20:09 CDT
+Min Balance:           $49,941.54440 (-1.54700) (-0.00%)
+```
+
+##### Stocks/ETFs
+**Alpha**
+```
+Runtime: 03:58:21
+Current Balance:       $28184.19 (+1184.12) (+4.39%)
+Max Balance:           $29382.60 (+2382.53) (+8.82%) @ 11:22 CDT
+Min Balance:           $25952.39 (-1047.68) (-3.88%)
+```
+
+**Alpha (STAGING)**
+```
+Runtime: 02:28:09
+Current Balance:       $26,128.00 (-952.62) (-3.52%)
+Max Balance:           $27,143.12 (+62.50) (+0.23%) @ 12:33 CDT
+Min Balance:           $25,783.52 (-1,297.10) (-4.79%)
+```
+
+#### (Alpha) Close Stats (as of 2022-09-08)
+* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
+
+#### Remarks
+##### Forex
+* Running  Oanda for 6.5 hours didn't result in as much loss as I thought it
+  would!
+* `EUR_CAD` and `USD_CAD` both had 13 loss streaks but `EUR_USD` and `USD_JPY`
+  only had 4 and 3 loss streaks respectively, so I'm not sure if this warrants
+  increasing the loss thresholds.
+* I simply need to let Oanda run for a whole week and see what the results are.
+
+##### Stocks/ETFs
+* GREAT first day back in production!! 🎉
+* It's a bummer that about half the peak was lost though 😕
+* I wonder if this means I should shorten the take profit easing period for the
+  account profit.
+* I'll watch a couple more days before pulling the trigger.
+* We'll see how it goes tomorrow.
+
+#### Next Thing(s) to Try
+
+### 2022-09-07:
 #### Performance
 ##### Forex (Paper)
 * Return: $ (% Account) (% Daily Salary) (vs. QQQ: %)
@@ -6,17 +149,79 @@
 ##### Stocks/ETFs
 **Alpha (STAGING)**
 ```
-Current Balance:       $ (+) (+%)
-Max Balance:           $ (+) (+%)
-Min Balance:           $ (-) (-%)
+Runtime: 05:26:10
+Current Balance:       $27118.03 (+283.23) (+1.06%)
+Max Balance:           $27507.88 (+673.08) (+2.51%) @ 08:49 CDT
+Min Balance:           $25826.29 (-1008.51) (-3.76%)
+Original Balance:      $26834.80
+```
+
+**Beta (STAGING)**
+```
+Runtime: 51:42
+Current Balance:       $25,966.34 (-324.25) (-1.23%)
+Max Balance:           $26,516.60 (+226.01) (+0.86%) @ 14:29 CDT
+Min Balance:           $25,860.51 (-430.08) (-1.64%)
 ```
 
 #### (Alpha STAGING) Close Stats (as of 2022-09-01)
-* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+* Win / Loss: 4W (Consecutive: 4) 0L (Consecutive: 0)
 
 #### Remarks
 ##### Forex
 ##### Stocks/ETFs
+* I think I'm ready to turn on in production again.
+* I know that some days will lose, but I think this is the best iteration to
+  date. It's time to try again.
+
+#### Next Thing(s) to Try
+
+### 2022-09-06:
+#### Performance
+##### Stocks/ETFs
+**Alpha (STAGING)**
+```
+Runtime: 03:36:51
+Current Balance:       $26864.87 (+1330.04) (+5.21%)
+Max Balance:           $27538.68 (+2003.85) (+7.85%) @ 11:05 CDT
+Min Balance:           $25178.27 (-356.56) (-1.40%)
+```
+
+**Beta (STAGING)**
+```
+Runtime: 02:27:52
+Current Balance:       $26,326.34 (-1,279.79) (-4.64%)
+Max Balance:           $27,814.26 (+208.13) (+0.75%) @ 12:34 CDT
+Min Balance:           $26,296.03 (-1,310.10) (-4.75%)
+```
+
+#### (Alpha STAGING) Close Stats (as of 2022-09-01)
+* Win / Loss: 3W (Consecutive: 3) 0L (Consecutive: 0)
+
+#### Remarks
+##### Forex
+* Forex has been running well for the last couple of days.
+* I actually may have accidentally fixed that mysterious leftover shares issue
+  that plagued Oanda. It was looking for `tradesClosed` in the place order
+  response for closing trades.
+* I'll keep monitoring and increasing the quantities until each position is
+  maxxing the account's buying power.
+* The main observation to make is whether Forex profits over time.
+* I suspect that prices spend most of their time consolidating so throughout
+  the week there will probably be a net negative balance across all assets.
+* I could, however, be wrong. Even if I am, I may be able to work out a
+  time-eased account profit targeting scenario like I do for equities.
+
+##### Stocks/ETFs
+* GREAT day. The morning witnessed two _heavy_ trend periods that lead to a
+  very high peak.
+* This suggests that a two things are working well:
+  1. Time eased profit targeting, both at the asset and account balance
+     level.
+  2. Trading fewer, high price-action assets.
+* I'm almost ready to re-try this in production. I just need to see one or two
+  more days where all assets consolidate almost all day, to see what profit
+  peaks hit and what kind of loss I can expect.
 
 #### Next Thing(s) to Try
 
