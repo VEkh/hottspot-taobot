@@ -17,9 +17,6 @@ void Oanda::TaoBot::close_position() {
     return;
   }
 
-  puts("OANDA__TAO_BOT_close_position");
-  std::cout << std::flush;
-
   const char *order_action =
       Oanda::constants::ORDER_ACTIONS[this->open_order.action];
 

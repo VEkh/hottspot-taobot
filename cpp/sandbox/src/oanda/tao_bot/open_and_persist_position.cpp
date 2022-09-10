@@ -25,9 +25,6 @@ void Oanda::TaoBot::open_and_persist_position() {
     return;
   }
 
-  puts("OANDA__TAO_BOT_open_position");
-  std::cout << std::flush;
-
   bool open_order_opened = false;
 
   while (!open_order_opened) {

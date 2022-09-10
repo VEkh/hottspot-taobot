@@ -8,7 +8,7 @@
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double one_sec_variance = dynamic_one_sec_variance();
-  const int max_loss_coefficient = volatility() > 1 ? -20 : -40;
+  const int max_loss_coefficient = volatility() > 1 ? -40 : -60;
 
   const double max_loss = max_loss_coefficient * one_sec_variance;
   const double min_profit = target_position_profit();

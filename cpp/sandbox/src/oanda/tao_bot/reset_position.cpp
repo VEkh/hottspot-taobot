@@ -21,9 +21,6 @@ void Oanda::TaoBot::reset_position() {
     return;
   }
 
-  puts("OANDA__TAO_BOT_reset_position");
-  std::cout << std::flush;
-
   const position_t position = {
       .close_order = this->close_order,
       .open_order = this->open_order,

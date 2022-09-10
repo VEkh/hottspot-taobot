@@ -9,6 +9,8 @@
 #include <math.h>                      // floor
 
 int Oanda::TaoBot::compute_quantity() {
+  return 1e2;
+
   const quote_t quote = this->quotes.back();
   const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
 
