@@ -40,7 +40,7 @@ void log() {
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   json returns = load();
-  json all_returns = returns["all"];
+  json hottspot_returns = returns["hottspot"];
   json nasdaq_returns = returns["nasdaq"];
   json sp500_returns = returns["sp500"];
 
@@ -52,7 +52,7 @@ void log() {
   double avg_nasdaq_profit_ratio = 0.00;
   double avg_sp500_profit_ratio = 0.00;
   double week_total = 0.00;
-  int all_returns_length = all_returns.size();
+  int hottspot_returns_length = hottspot_returns.size();
   int consecutive_losses = 0;
   int consecutive_wins = 0;
   int nasdaq_returns_length = nasdaq_returns.size();
@@ -61,7 +61,7 @@ void log() {
   int total_losses = 0;
   int total_wins = 0;
 
-  json::reverse_iterator it = all_returns.rbegin();
+  json::reverse_iterator it = hottspot_returns.rbegin();
   json todays_return_json = it.value();
   json::reverse_iterator nasdaq_it = nasdaq_returns.rbegin();
   json::reverse_iterator sp500_it = sp500_returns.rbegin();
@@ -86,7 +86,7 @@ void log() {
   const double todays_sp500_profit_ratio =
       (todays_sp500_close - todays_sp500_open) / todays_sp500_open;
 
-  for (; it != all_returns.rend(); it++) {
+  for (; it != hottspot_returns.rend(); it++) {
     const std::tm parsed_date =
         ::utils::time_::parse_timestamp(it.key(), "%Y-%m-%d");
     json return_json = it.value();
@@ -99,10 +99,10 @@ void log() {
     start_weekday = std::max(start_weekday, parsed_date.tm_wday);
 
     is_week_total_complete = (bool)(is_week_total_complete ||
-                                    (it != all_returns.rbegin() &&
+                                    (it != hottspot_returns.rbegin() &&
                                      parsed_date.tm_wday >= start_weekday));
 
-    avg_profit_ratio += profit_ratio / all_returns_length;
+    avg_profit_ratio += profit_ratio / hottspot_returns_length;
     grand_total += profit_dollars;
 
     if (!is_week_total_complete) {
@@ -155,8 +155,8 @@ void log() {
          total_wins, consecutive_wins, total_losses, consecutive_losses);
 
   std::cout << fmt.cyan;
-  printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% Daily Salary)\n"
-         "                 (vs. NASDAQ: %+.2f%%) (vs. S&P 500: %+.2f%%)\n",
+  printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% Daily Salary)"
+         " (vs. NASDAQ: %+.2f%%) (vs. S&P 500: %+.2f%%)\n",
          sign(todays_profit_dollars), abs(todays_profit_dollars),
          todays_profit_ratio * 100, todays_profit_salary_ratio * 100,
          todays_nasdaq_profit_ratio * 100, todays_sp500_profit_ratio * 100);
