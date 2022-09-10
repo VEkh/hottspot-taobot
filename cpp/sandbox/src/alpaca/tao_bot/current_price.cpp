@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_current_price
 
 #include "tao_bot.h" // Alpaca::TaoBot
-#include <string>    // std::string
 
 double Alpaca::TaoBot::current_price() { return this->quotes.back().price; }
 
