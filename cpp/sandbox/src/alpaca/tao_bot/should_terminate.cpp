@@ -6,7 +6,7 @@
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
 #include <iostream>                     // std::cout, std::endl
-#include <stdio.h>                      // printf
+#include <stdio.h>                      // puts
 
 bool Alpaca::TaoBot::should_terminate() {
   const bool are_positions_closed =
@@ -20,9 +20,7 @@ bool Alpaca::TaoBot::should_terminate() {
   if (max_account_loss_reached()) {
     if (are_positions_closed) {
       std::cout << fmt.bold << fmt.red << std::endl;
-      printf(
-          "🛑 %.1f%% of account balance lost!! Applying emergency brake.\n",
-          this->MAX_ACCOUNT_LOSS_RATIO * 100);
+      puts("🛑 Max account balance lost!! Applying emergency brake.");
       std::cout << fmt.reset;
     }
 
