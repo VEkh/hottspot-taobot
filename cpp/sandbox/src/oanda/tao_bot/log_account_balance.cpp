@@ -50,8 +50,12 @@ void Oanda::TaoBot::log_account_balance() {
                                   "%H:%M %Z", "America/Chicago")
           .c_str());
 
-  printf("Min Balance:           $%'.5f (%+'.5f) (%+'.2f%%)\n",
-         this->account_balance.min_balance, max_loss, max_loss_percentage);
+  printf(
+      "Min Balance:           $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
+      this->account_balance.min_balance, max_loss, max_loss_percentage,
+      ::utils::time_::date_string(this->account_balance.min_balance_timestamp,
+                                  "%H:%M %Z", "America/Chicago")
+          .c_str());
 
   printf("Original Balance:      $%'.5f\n",
          this->account_balance.original_balance);

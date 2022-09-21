@@ -26,6 +26,11 @@ Oanda::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
   account_balance_.min_balance =
       std::min(account_balance_.balance, previous_balance.min_balance);
 
+  account_balance_.min_balance_timestamp =
+      account_balance_.balance == account_balance_.min_balance
+          ? std::time(nullptr)
+          : previous_balance.min_balance_timestamp;
+
   return account_balance_;
 }
 
@@ -92,6 +97,7 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
         .max_balance = balance_d,
         .max_balance_timestamp = now,
         .min_balance = balance_d,
+        .min_balance_timestamp = now,
         .original_balance = original_balance,
         .original_margin_buying_power = original_margin_buying_power,
         .timestamp = now,

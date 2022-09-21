@@ -19,7 +19,7 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
   order->profit = profit;
 
   if (profit == order->max_profit) {
-    order->max_profit_timesamp = std::time(nullptr);
+    order->max_profit_timestamp = std::time(nullptr);
   }
 }
 

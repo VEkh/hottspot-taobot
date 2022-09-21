@@ -16,10 +16,11 @@ void Alpaca::TaoBot::log_account_balance() {
       100.0;
 
   const double max_balance_delta_percentage =
-      (exit_prices_.max_profit / this->account_balance.original_balance) * 100.0;
+      (exit_prices_.max_profit / this->account_balance.original_balance) *
+      100.0;
 
-  const double max_loss =
-      this->account_balance.min_balance - this->account_balance.original_balance;
+  const double max_loss = this->account_balance.min_balance -
+                          this->account_balance.original_balance;
 
   const double max_loss_percentage =
       (max_loss / this->account_balance.original_balance) * 100.0;
@@ -49,8 +50,12 @@ void Alpaca::TaoBot::log_account_balance() {
                                   "%H:%M %Z", "America/Chicago")
           .c_str());
 
-  printf("Min Balance:           $%'.2f (%+'.2f) (%+'.2f%%)\n",
-         this->account_balance.min_balance, max_loss, max_loss_percentage);
+  printf(
+      "Min Balance:           $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+      this->account_balance.min_balance, max_loss, max_loss_percentage,
+      ::utils::time_::date_string(this->account_balance.min_balance_timestamp,
+                                  "%H:%M %Z", "America/Chicago")
+          .c_str());
 
   printf("Original Balance:      $%'.2f\n",
          this->account_balance.original_balance);
