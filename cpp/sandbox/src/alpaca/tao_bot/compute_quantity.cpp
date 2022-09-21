@@ -1,12 +1,17 @@
 #ifndef ALPACA__TAO_BOT_compute_quantity
 #define ALPACA__TAO_BOT_compute_quantity
 
-#include "tao_bot.h"                   // Alpaca::TaoBot
+#include "is_micro_position.cpp"       // is_micro_position
+#include "tao_bot.h"                   // Alpaca::TaoBot, order_win_result_t
 #include "tradeable_symbols_count.cpp" // tradeable_symbols_count
 #include <algorithm>                   // std::min
 #include <math.h>                      // floor
 
 double Alpaca::TaoBot::compute_quantity() {
+  if (is_micro_position()) {
+    return this->MICRO_QUANTITY;
+  }
+
   const quote_t quote = this->quotes.back();
 
   const double max_buying_power =

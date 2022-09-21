@@ -38,6 +38,7 @@ private:
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  const int MICRO_QUANTITY = 1;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 4e2;
 
@@ -71,6 +72,8 @@ private:
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
+  bool is_micro_position();
+  bool is_micro_position(const position_t &);
   bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();

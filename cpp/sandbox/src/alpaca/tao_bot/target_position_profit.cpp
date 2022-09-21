@@ -20,7 +20,7 @@ double Alpaca::TaoBot::target_position_profit() {
   const int duration =
       std::time(nullptr) - this->open_order_ptr->max_profit_timestamp;
 
-  return ::utils::float_::sigmoid(max, min, duration, -0.0015, 1800) *
+  return ::utils::float_::sigmoid(max, min, duration, -0.0015, 10 * 60) *
          dynamic_one_sec_variance();
 }
 

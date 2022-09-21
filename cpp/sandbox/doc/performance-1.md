@@ -1,7 +1,7 @@
-### 2022-09-12:
+### 2022-09-21:
 #### Performance
 ##### Equities
-**Alpha**
+**Alpha (STAGING)**
 ```
 Runtime: 00:00:00
 Current Balance:       $ (+) (+%)
@@ -10,7 +10,7 @@ Min Balance:           $ (-) (-%)
 Original Balance:      $ (-) (-%)
 ```
 
-###### Stats (as of 2022-09-08)
+###### Stats (STAGING) (as of 2022-09-19)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
@@ -27,6 +27,471 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-20:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 43:55
+Current Balance:       $28976.46 (-1207.73) (-4.00%)
+Max Balance:           $30442.98 (+258.79) (+0.86%) @ 08:44 CDT
+Min Balance:           $28976.46 (-1207.73) (-4.00%) @ 09:13 CDT
+Original Balance:      $30184.19
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 04:34:31
+Current Balance:       $28,468.07 (-503.28) (-1.74%)
+Max Balance:           $29,733.27 (+761.92) (+2.63%) @ 12:59 CDT
+Min Balance:           $28,378.68 (-592.67) (-2.05%) @ 14:07 CDT
+Original Balance:      $28,971.35
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 1W (Consecutive: 0) 1L (Consecutive: 1)
+
+###### Notes
+* Morning got thrashed by high amplitude consolidation.
+* I turned on beta right as the prices had finally decided their trend
+  direction. It profited.
+* This made me think: what if you kept stakes very low in the morning with
+  1-quantity orders until the price picked its direction? Then close the
+  winning the position and maximize stakes.
+* Pros and Cons to this approach:
+  * Pros
+    * Avoid crippling early morning losses
+  * Cons
+    * Miss out on big early morning gains
+* If you extended this to always slash stakes after a loss what will eventually
+  happen is a series of big loss, small win cycles where the wins could have
+  overcome losses, but couldn't because of the diluted quantity.
+* I think, however, that some attempt to reserve max proportional buying for
+  when the price is trending in the win direction will be a cool thing to
+  attempt.
+
+###### Next Thing(s) to Try
+**Turbo Wins, Deflate Losses**
+1. Start with a micro order size, one share
+2. Wait for a position that is profiting by the same amount as the stop loss
+   threshold.
+3. Close the winning position and open again with the max buying power
+   available to the asset.
+4. Ride the profit with the time-eased trend riding algorithm.
+5. When the position closes, open a new position with the micro quantity, win
+   or lose, and repeat steps 1-4.
+  * Even if the position loses, at least the previous micro order(s) prevented a
+    bigger cumulative loss.
+  * If you win, still continuing with a micro order will help avoid a
+    subsequent loss that eats into the profit you just earned. If it continues
+    in the same trend direction, you'll close and open at max size anyway.
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-19:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 06:28:58
+Current Balance:       $30203.68 (+203.68) (+0.68%)
+Max Balance:           $30746.83 (+746.83) (+2.49%) @ 08:56 CDT
+Min Balance:           $29620.38 (-379.62) (-1.27%) @ 11:58 CDT
+Original Balance:      $30000.00
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
+
+###### Notes
+* Didn't have the full 4x margin others values would have been doubled.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-16:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 03:06:46
+Current Balance:       $23743.14 (-1708.29) (-6.71%)
+Max Balance:           $25451.43 (+0.00) (+0.00%) @ 08:30 CDT
+Min Balance:           $23697.24 (-1754.19) (-6.89%) @ 11:15 CDT
+Original Balance:      $25451.43
+```
+
+**Alpha (STAGING)**
+```
+Runtime: 02:50:04
+Current Balance:       $27,010.00 (+10.00) (+0.04%)
+Max Balance:           $27,339.61 (+339.61) (+1.26%) @ 14:06 CDT
+Min Balance:           $26,858.05 (-141.95) (-0.53%) @ 14:54 CDT
+Original Balance:      $27,000.00
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 3W (Consecutive: 0) 4L (Consecutive: 3)
+
+###### Notes
+**One-Sec Variance to Price Ratios**
+```
+AMZN: 1.128e-04 🥈
+GOOG: 8.587e-05 🥉
+QQQ:  7.844e-05
+TSLA: 1.166e-04 🥇
+```
+
+* It happened again!!! 😭
+* After six straight days of success, a week of losses cleared out all the
+  profit I made.
+* This is is what's happening:
+  1. TaoBot profits heavily during an extended trend period.
+  2. I get excited and think that it will always work.
+  3. I run it in production.
+  4. Shortly after running it in production, the markets enter an extended
+     consolidation period.
+  5. TaoBot loses lots of money and I run back to the drawing board.
+* Each production run has followed almost this exact pattern.
+* What I realilze, however, is that TaoBot does in fact work, just not during
+  consolidation. This makes sense since it's a momentum algorithm.
+* I suspect that by leaving it on, it will eventually start making money again,
+  once the market starts to decisively trend.
+* What is still accurate, however, is that I think the current iteration is the
+  best intraday, long trend rider that I've built. On days when it's working
+  properly, you can earn upwards of 5-6%.
+* What I haven't done well, up until now, is lose properly.
+* If I accept that there will be down days, I must also cap their severity.
+  There were two days this week that resulted in ~7% losses. This is
+  unacceptable.
+* This is why I've introduced a hard stop at 4% loss. Looking at past
+  performance, very rarely has a profitable day experienced a 4% loss at any
+  point.
+* If return has dipped below 4%, it typically won't profit that day. It _may_
+  reduce by closing time, but I've also seen it expand unchecked.
+* If this strategy is to be profitable, I have to accept losses and cut them
+  before they become too devastating.
+
+###### Next Thing(s) to Try
+* I'm fairly confident that in a macro sense, this strategy is profitable.
+  These are the next steps I'll take to demonstrate this:
+  1. **Revert to staging** -- Even though I'm confident that this strategy will
+     work in production, it's still possible that I'm wrong. It doesn't make
+     sense to risk real money before answering this question definitively.
+  2. **Hard stop account losses** -- Introduce a hard account stop-loss with no
+     conditions around time of day, volatility, volume etc.. I recommend -4%.
+    * On most profit days, it will be very apparent early on that the day will
+      profit.
+  3. **Change nothing** -- Or at least little to nothing else about the
+     algorithm, unless it is to make it more capable at riding long intraday
+     trends. In other words, maximize the algorithm's earning potential on its
+     most opportune days.
+    * This will create plenty of padding for the extended consolidation days
+      that WILL occur.
+  4. **Reduce traded assets** -- Here's my current thinking. At first I thought
+     it made sense to trade multiple assets to hedge against the poor
+     performance of any one asset. However, by trading more assets, you're also
+     introducing liability -- a well performing asset can be offset by a poorly
+     performing one. My current thinking is that I should just trade the one or
+     two fastest moving assets since their larger absolute price movement is
+     more track for TaoBot to ride. I may be wrong about this, but we'll see.
+  5. **Loss padding** -- Set the account balance to an amount that allows for 5
+     consecutive days at the max allowed loss (-4%). This is $30K.
+  6. **Observe** -- Observe overall performance through at least a couple of
+     trend-consolidation cycles.
+     * Watch it succeed _and_ fail as maximally as possible to get a sense of
+       whether it is still profiting after a failure period.
+  7. **Launch** -- If after a couple trend-consolidation cycles I've made
+     money, launch in production after bringing its account balance to the same
+     padded level.
+
+##### Forex
+**Staging**
+```
+Runtime: 116:02:52
+Current Balance:       $49,913.74300 (-27.55930) (-0.06%)
+Max Balance:           $49,939.42740 (-1.87490) (-0.00%) @ 19:54 CDT
+Min Balance:           $49,913.30430 (-27.99800) (-0.06%)
+Original Balance:      $49,941.30230
+```
+
+###### Notes
+* Forex ran all week! 🎉 That's pretty cool.
+* The down side is that it ended pretty much near its lowest point.
+* What this suggests is that a contiguous momentum strategy is inherently
+  unprofitable.
+* What _may_ be true, however, is that it can be profitable for short amounts
+  of time. Most currency pairs, enjoyed at least a brief moment of profit.
+  * It is worth noting, however, that a major 6% inflation announcement early
+    in the week sent prices flying in a way that was profitable to some. I
+    can't imagine that this happens often.
+* Let's reduce the currency pairs. Here are their price movement to price ratios:
+
+**One-Sec Variance to Price Ratios**
+```
+AUD_CAD: 1.068e-05
+EUR_GBP: 8.072e-06
+EUR_USD: 1.118e-05 #4
+GBP_USD: 1.355e-05 🥈
+NZD_USD: 2.583e-05 🥇
+USD_CAD: 7.699e-06
+USD_CHF: 9.797e-06
+USD_JPY: 1.149e-05 🥉
+```
+
+* I was expecting `EUR_USD` to have the largest ratio.
+
+###### Next Thing(s) to Try
+
+### 2022-09-15:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 03:28:38
+Current Balance:       $25473.36 (-639.02) (-2.45%)
+Max Balance:           $26473.72 (+361.34) (+1.38%) @ 10:01 CDT
+Min Balance:           $25237.07 (-875.31) (-3.35%) @ 09:46 CDT
+Original Balance:      $26112.38
+```
+
+**Alpha (STAGING)**
+```
+Runtime: 02:57:09
+Current Balance:       $28,033.50 (+535.75) (+1.95%)
+Max Balance:           $28,399.62 (+901.87) (+3.28%) @ 14:28 CDT
+Min Balance:           $27,154.33 (-343.42) (-1.25%) @ 12:57 CDT
+Original Balance:      $27,497.75
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 3W (Consecutive: 0) 3L (Consecutive: 2)
+
+###### Notes
+* Staging _would_ go on to profit on the first day I re-introduce the account
+  emergency brake 🙄.
+* I still think the premature exit is worth avoiding Monday's -7% debacle.
+* This whole game is just a balance of trade-offs.
+* If I crap out again, I think I'm going to restore funds and see if the stop
+  loss helps avoid mega losses and makes the strategy overall profitable.
+
+###### Next Thing(s) to Try
+* Increase the max loss to -4%, to give more time for victory.
+
+##### Forex
+**Staging**
+```
+Runtime: 105:53:51
+Current Balance:       $49,915.83810 (-25.46420) (-0.05%)
+Max Balance:           $49,939.42740 (-1.87490) (-0.00%) @ 19:54 CDT
+Min Balance:           $49,915.83810 (-25.46420) (-0.05%)
+Original Balance:      $49,941.30230
+```
+
+###### Notes
+* Still running without incident, which is good.
+* I think in addition to only trading the currencies with the highest price
+  movment, I'll only trade during periods of high volatility.
+
+###### Next Thing(s) to Try
+
+### 2022-09-14:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 06:28:58
+Current Balance:       $26154.65 (-805.55) (-2.99%)
+Max Balance:           $27258.63 (+298.43) (+1.11%) @ 08:46 CDT
+Min Balance:           $25751.99 (-1208.21) (-4.48%) @ 14:49 CDT
+Original Balance:      $26960.20
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 3W (Consecutive: 0) 2L (Consecutive: 1)
+
+###### Notes
+* TSLA saved AMZN and GOOG's horrific showing, which re-emphasizes the need for
+  spreading risk across several assets.
+* It's time to re-introduce the max account loss algorithm.
+* It will exit when volatility has fallen below 0.5 and the account loss
+  exceeds -2%.
+* From what I've observed, the account will rarely win after that point.
+* This approach of the max loss has a couple advantages:
+  1. It isn't just a magic number loss percentage that can be triggered during
+     early morning volatility.
+  2. It gives ToaBot sufficient time (usually 1-3 hours) to win, which it
+     usually has by the time volatility and volume have significantly
+     diminished.
+  3. It will help cap losses to reasonable levels so that routine and mega wins
+     can lead to long-term profit.
+* After each loos, I'll still turn on staging without clearing performance. If
+  the loss threshold is correct, TaoBot should go on to lose more money on most
+  days.
+* If it seems that it is prematurely exiting, I'll increase the loss threshold.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 77:35:11
+Current Balance:       $49,922.83490 (-18.46740) (-0.04%)
+Max Balance:           $49,939.42740 (-1.87490) (-0.00%) @ 19:54 CDT
+Min Balance:           $49,922.66930 (-18.63300) (-0.04%)
+Original Balance:      $49,941.30230
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-13:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 01:13:06
+Current Balance:       $26969.60 (+290.91) (+1.09%)
+Max Balance:           $27099.73 (+421.04) (+1.58%) @ 08:32 CDT
+Min Balance:           $26242.51 (-436.18) (-1.63%)
+Original Balance:      $26678.69
+```
+
+**Alpha (Staging) (Round 1)**
+```
+Runtime: 02:50:38
+Current Balance:       $26,341.13 (+275.35) (+1.06%)
+Max Balance:           $26,666.37 (+600.59) (+2.30%) @ 10:28 CDT
+Min Balance:           $26,020.75 (-45.03) (-0.17%)
+Original Balance:      $26,065.78
+```
+
+**Alpha (Staging) (Round 1)**
+```
+Runtime: 02:22:06
+Current Balance:       $27,506.43 (+1,167.63) (+4.43%)
+Max Balance:           $27,920.37 (+1,581.57) (+6.00%) @ 14:48 CDT
+Min Balance:           $26,213.18 (-125.62) (-0.48%)
+Original Balance:      $26,338.80
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 3W (Consecutive: 1) 1L (Consecutive: 0)
+
+###### Notes
+* 6.3% inflation was announced today and stock prices plummeted
+* The good news is that I won. Bad news is I missed out on what could have been
+  my longest contiguous trend ride to date 😭.
+* Today's trend patterns were pretty ideal for the momentum algorithm, but I
+  prematurely closed twice.
+* This suggests that I excessively shortened the take profit easing function's
+  half life.
+* To compensate, I'll try to increase the easing function's upper bound each
+  time a new max is reached. This should buy the price more time to continue in
+  the trend direction.
+* This will necessarily reduce the max take profit, but will hopefully increase
+  the overall profit that it takes each day.
+* This increasing the upper bound doesn't work, I'll increase the half life to
+  45 minutes from 30 minutes.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 53:46:47
+Current Balance:       $49,929.09170 (-12.21060) (-0.02%)
+Max Balance:           $49,939.42740 (-1.87490) (-0.00%) @ 19:54 CDT
+Min Balance:           $49,925.84610 (-15.45620) (-0.03%)
+Original Balance:      $49,941.30230
+```
+
+###### Notes
+###### Next Thing(s) to Try
+* 6.3% inflation currency exchange rates went wild!
+* It shot `EUR_USD` back into profit territory! I think it did the same for a
+  couple other pairs, but I didn't take note.
+* It seems important to discount the inflation-induced spikes as anomalies, but
+  it is cool to see the prices move.
+
+### 2022-09-12:
+#### Performance
+##### Equities
+**Alpha**
+```
+Runtime: 06:28:58
+Current Balance:       $26714.95 (-1925.99) (-6.72%)
+Max Balance:           $28659.67 (+18.73) (+0.07%) @ 08:30 CDT
+Min Balance:           $26640.83 (-2000.11) (-6.98%)
+Original Balance:      $28640.94
+```
+
+###### Stats (as of 2022-09-08)
+* Win / Loss: 2W (Consecutive: 0) 1L (Consecutive: 1)
+
+###### Notes
+* Okay today was just about as bad as it will reasonably get 😭
+* There was almost never a profit and the day spent most of its time
+  consolidating.
+* I thought that even in this scenario, losses would be contained to 2-4%, but
+  I was wrong.
+* I'm not going to change anything for now.
+* One thing I'd like to monitor is whether a time-based emergency brake makes
+  sense.
+* I've observed that generally, TaoBot doesn't make money past the day's
+  halfway point. Almost all profit peaks are observed within the first half of
+  the day.
+* If that's the case, it would make sense shut it down after halfway point, if
+  the loss is beneath a certain threshold, perhaps 2%.
+* During the rest of the week, I'll confirm or refute this and implement a
+  time-based emergency brake at the end of the week.
+* I'll probably be able to tolerate one or two more down days. I guess I'll
+  just see if those happen this week.
+* Don't forget the last 6 profit days!
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 30:29:38
+Current Balance:       $49,928.87410 (-12.42820) (-0.02%)
+Max Balance:           $49,939.42740 (-1.87490) (-0.00%) @ 19:54 CDT
+Min Balance:           $49,928.87410 (-12.42820) (-0.02%)
+Original Balance:      $49,941.30230
+```
+
+###### Notes
+* Interesting observation at the end of the first day:
+  6/8 currency pairs were profitable for some duration.
+* At the end of 30 hours, however, no currencies were profitable.
+* I'm still watching to see what I can learn.
+
 ###### Next Thing(s) to Try
 
 ### 2022-09-09:
@@ -1714,7 +2179,7 @@ Return: +$189.54 (+0.65%)
   consolidation at the exact height of the exit prices.
 * When the -5% emergency brake fired, I restarted with an adjustment:
   * Cycle through a series of 1-sec variance multipliers: 20x, 30x, 40x.
-* After a couple of hours it was actually profitting. Then at 1pm, volatility
+* After a couple of hours it was actually profiting. Then at 1pm, volatility
   spiked and started incurring loss.
 * However, by the end of the day it was about +0.5% from the restart.
 * We'll see if this is an adequate defense against sharp fluctuations or I just
