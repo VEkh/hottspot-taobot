@@ -14,14 +14,14 @@ double Alpaca::TaoBot::target_account_profit() {
                                    this->account_balance.original_balance) -
                                   1;
 
-  const double max_target = std::max(max_profit_ratio, min_target) + 0.02;
+  const double max_target = std::max(max_profit_ratio, min_target) + 0.03;
 
   const double max_balance_duration =
       (std::time(nullptr) - this->account_balance.max_balance_timestamp) /
       one_hour_seconds;
 
   return ::utils::float_::sigmoid(max_target, min_target, max_balance_duration,
-                                  -6.5, 0.5);
+                                  -6.5, 0.75);
 }
 
 #endif

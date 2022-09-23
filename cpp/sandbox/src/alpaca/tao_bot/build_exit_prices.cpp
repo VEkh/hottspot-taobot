@@ -10,7 +10,7 @@
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double one_sec_variance = dynamic_one_sec_variance();
-  const int max_loss_coefficient = -25;
+  const int max_loss_coefficient = -20;
 
   const double max_loss = max_loss_coefficient * one_sec_variance;
 

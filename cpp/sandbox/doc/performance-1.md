@@ -1,4 +1,4 @@
-### 2022-09-21:
+### 2022-09-26:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -15,6 +15,173 @@ Original Balance:      $ (-) (-%)
 
 ###### Notes
 ###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-23:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 06:28:59
+Current Balance:       $25453.16 (-700.76) (-2.68%)
+Max Balance:           $27055.10 (+901.18) (+3.45%) @ 08:53 CDT
+Min Balance:           $25441.47 (-712.45) (-2.72%) @ 14:58 CDT
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 1W (Consecutive: 0) 3L (Consecutive: 3)
+
+###### Notes
+* Ok! Here's what I got. The morning exhibited ideal movement and yielded large
+  profit. That's the easy stuff. Thirty minutes into trading, however,
+  consolidation began and persisted all day. This highlights the dire need for
+  intelligent consolidation trading using resistance and support levels.
+* The first step will be to build the resistance and support levels. After that
+  I can start making decisions with them.
+* I can do this!
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-22:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 03:21:14
+Current Balance:       $26201.69 (-1095.64) (-4.01%)
+Max Balance:           $27456.37 (+159.04) (+0.58%) @ 08:31 CDT
+Min Balance:           $26201.08 (-1096.25) (-4.02%) @ 11:51 CDT
+Original Balance:      $27297.33
+```
+
+**Beta (STAGING)**
+```
+Runtime: 01:29:21
+Current Balance:       $32,043.71 (+375.88) (+1.19%)
+Max Balance:           $32,133.93 (+466.10) (+1.47%) @ 14:55 CDT
+Min Balance:           $31,374.88 (-292.95) (-0.93%) @ 13:51 CDT
+Original Balance:      $31,667.83
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 1W (Consecutive: 0) 3L (Consecutive: 3)
+
+###### Notes
+* The quest for consolidation profitability continues.
+* Most assets except TSLA spent the morning consolidating and ultimately lost
+  after 3.5 hours.
+* However, when I turned on Beta after reducing both the stop loss threshold
+  and take profit algorithm's half life, prices started trending and Beta won.
+* TaoBot succeed today and yestderday in Beta where the price started trending
+  after a long morning of consolidation. I take solace in the fact that it can
+  ride long trends.
+* I'm still struggling to figure out how to successfully ride consolidation.
+* I'm back to a very shallow loss, with long positive trend ride strategy.
+* Assuming this fails during consolidation, I think the next step will be to
+  come up with an algorithm that constructs likely resistance and support
+  levels.
+* After doing that, I'll use them to make buy and sell decisions.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-21:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 03:54:39
+Current Balance:       $27311.23 (-1141.69) (-4.01%)
+Max Balance:           $28472.73 (+19.81) (+0.07%) @ 08:31 CDT
+Min Balance:           $27311.23 (-1141.69) (-4.01%) @ 12:24 CDT
+Original Balance:      $28452.92
+```
+
+**Beta (STAGING) (Round 1)**
+```
+Runtime: 41:21
+Current Balance:       $25,218.80 (-1,054.39) (-4.01%)
+Max Balance:           $26,326.46 (+53.27) (+0.20%) @ 12:59 CDT
+Min Balance:           $25,218.80 (-1,054.39) (-4.01%) @ 13:08 CDT
+Original Balance:      $26,273.19
+
+**Note**: Fed hiked interest rates and everything crapped out 8 min later.
+```
+
+**Beta (STAGING) (Round 2)**
+```
+Runtime: 01:41:13
+Current Balance:       $31,596.43 (+1,596.43) (+5.32%)
+Max Balance:           $31,623.92 (+1,623.92) (+5.41%) @ 14:49 CDT
+Min Balance:           $29,710.54 (-289.46) (-0.96%) @ 13:31 CDT
+Original Balance:      $30,000.00
+
+**Note**: The margin buying power was only x2 since I reset
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 1W (Consecutive: 0) 2L (Consecutive: 2)
+
+###### Notes
+* What a day! 😵
+* The morning started again in crippling consolidation. This is the second or
+  third consecutive day like this.
+* The micro position approach helped delay the failure, but the day's movement
+  was still too static for profit.
+* Then the Fed incrased interest rates again and sent the markets flying. At
+  first this triggered crippling loss. Then I reverted the `micro position`
+  approach to full buying power and the resulting profit ensued.
+* I'm reintroducing GOOG and QQQ because I think their movement would have
+  saved today.
+* The position time ease function was too slow in exiting profitable positions.
+  I shortened the half life to 5 min and increased the decay rate.
+* I realized the problem with the micro-position strategy: it's essentially a
+  regression to using distance traveled as an entry indicator. As I've
+  demonstrated many times, this is not a good entry indicator. It also makes
+  you miss out on early entry in trend periods.
+
+###### Next Thing(s) to Try
+* Go back to full buying power on all positions with the four fastest moving assets.
+* Let's see if the accelerated team easing tkake profit algorithm helps
+  increase profitability during consolidation periods.
+* I also set the loss and extra take profit threhsolds to 25x 1-sec variance.
 
 ##### Forex
 **Staging**
