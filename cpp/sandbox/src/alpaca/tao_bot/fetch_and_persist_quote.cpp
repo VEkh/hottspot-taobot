@@ -15,7 +15,7 @@ void Alpaca::TaoBot::fetch_and_persist_quote() {
   const double delta_ratio =
       (new_quote.price - current_price_) / current_price_;
 
-  if (abs(delta_ratio) >= 0.1) {
+  if (abs(delta_ratio) >= 0.02) {
     std::cout << fmt.bold << fmt.yellow;
     puts("🧐 STRANGE PRICE MOVEMENT");
     printf("Last Quote: %.2f • New Quote: %.2f\n", current_price_,
