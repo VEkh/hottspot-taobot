@@ -18,6 +18,9 @@ public:
 
   TaoBot(char *, std::map<std::string, std::string> &);
 
+  void build_momentum_reversals();
+  void log_momentum_reversals();
+
   void run();
 
 private:
@@ -39,7 +42,7 @@ private:
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  const int QUOTES_MAX_SIZE = 4e2;
+  const int QUOTES_MAX_SIZE = 6e3;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -59,6 +62,10 @@ private:
   performance_t performance;
   price_movement_t price_movement;
   std::map<std::string, std::string> flags;
+  std::map<const char *, std::map<std::string, quote_t>> momentum_reversals = {
+      {"resistance", {}},
+      {"support", {}},
+  };
   std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;

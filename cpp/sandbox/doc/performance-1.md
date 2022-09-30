@@ -1,4 +1,4 @@
-### 2022-09-26:
+### 2022-09-30:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -11,9 +11,196 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 5W (Consecutive: 4) 3L (Consecutive: 0)
+
+###### Notes
+* Okay! The momentum shift collection ran pretty well. Now it's time to make
+  decisions with them.
+* I'll start by using them to make a decision after every position closes. I
+  may end up only using them after losses.
+* Here's the plan for resistance and support levels:
+  * Assign a score to each one that is a product of the current `price_delta`
+    and current `time_delta`.
+  * Since I want to reward proximity, I'll score the inverse of each delta
+  * Since there will likely be many points that match the current price, set
+    the max `price_delta` score to 100.
+  * Pick the reverals point with the highest score.
+  * If the current price is above it, buy, if below, sell.
+
+###### Next Thing(s) to Try
+
+### 2022-09-29:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 01:21:20
+Current Balance:       $27716.50 (+1125.71) (+4.23%)
+Max Balance:           $28400.69 (+1809.90) (+6.81%) @ 09:16 CDT
+Min Balance:           $26465.21 (-125.58) (-0.47%) @ 08:31 CDT
+Original Balance:      $26590.79
+```
+
+**Beta (STAGING) (Round 1)**
+```
+Runtime: 38:39
+Current Balance:       $25,597.44 (-1,067.08) (-4.00%)
+Max Balance:           $26,757.98 (+93.46) (+0.35%) @ 10:01 CDT
+Min Balance:           $25,597.44 (-1,067.08) (-4.00%) @ 10:31 CDT
+Original Balance:      $26,664.52
+```
+
+**Beta (STAGING) (Round 2)**
+```
+Runtime: 02:30:09
+Current Balance:       $25,911.34 (+333.12) (+1.30%)
+Max Balance:           $25,963.23 (+385.01) (+1.51%) @ 12:09 CDT
+Min Balance:           $25,146.21 (-432.01) (-1.69%) @ 11:13 CDT
+Original Balance:      $25,578.22
+```
+
+**Beta (STAGING) (Round 3)**
+```
+Runtime: 01:32:31
+Current Balance:       $24,851.31 (-1,057.14) (-4.08%)
+Max Balance:           $26,052.93 (+144.48) (+0.56%) @ 13:20 CDT
+Min Balance:           $24,851.31 (-1,057.14) (-4.08%) @ 14:44 CDT
+Original Balance:      $25,908.45
+```
+
+**Beta (STAGING) (Round 4)**
+```
+Runtime: 07:45
+Current Balance:       $24,617.31 (-234.00) (-0.94%)
+Max Balance:           $24,895.08 (+43.77) (+0.18%) @ 14:54 CDT
+Min Balance:           $24,608.95 (-242.36) (-0.98%) @ 14:59 CDT
+Original Balance:      $24,851.31
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-28:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 57:32
+Current Balance:       $26611.46 (+650.57) (+2.51%)
+Max Balance:           $26733.69 (+772.80) (+2.98%) @ 08:49 CDT
+Min Balance:           $25905.79 (-55.10) (-0.21%) @ 08:30 CDT
+Original Balance:      $25960.89
+```
+
+**Beta (STAGING) (Round 1)**
+```
+Runtime: 03:11:09
+Current Balance:       $26,694.47 (-1,117.97) (-4.02%)
+Max Balance:           $27,897.12 (+84.68) (+0.30%) @ 09:36 CDT
+Min Balance:           $26,694.47 (-1,117.97) (-4.02%) @ 12:40 CDT
+Original Balance:      $27,812.44
+```
+
+**Beta (STAGING) (Round 2)**
+```
+Runtime: 01:55:31
+Current Balance:       $26,758.38 (+74.50) (+0.28%)
+Max Balance:           $27,011.67 (+327.79) (+1.23%) @ 14:11 CDT
+Min Balance:           $26,350.92 (-332.96) (-1.25%) @ 13:49 CDT
+Original Balance:      $26,683.88
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 4W (Consecutive: 3) 3L (Consecutive: 0)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-09-27:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 01:58:40
+Current Balance:       $26009.83 (+303.47) (+1.18%)
+Max Balance:           $26507.54 (+801.18) (+3.12%) @ 09:09 CDT
+Min Balance:           $25362.11 (-344.25) (-1.34%) @ 10:14 CDT
+Original Balance:      $25706.36
+```
+
+**Beta (STAGING) (Round 1)**
+```
+Runtime: 02:58:17
+Current Balance:       $29,353.83 (-1,226.83) (-4.01%)
+Max Balance:           $31,756.86 (+1,176.20) (+3.85%) @ 11:19 CDT
+Min Balance:           $29,353.83 (-1,226.83) (-4.01%) @ 13:36 CDT
+Original Balance:      $30,580.66
+```
+
+**Beta (STAGING) (Round 2)**
+```
+Runtime: 43:27
+Current Balance:       $28,159.93 (-1,192.76) (-4.06%)
+Max Balance:           $29,756.21 (+403.52) (+1.37%) @ 13:41 CDT
+Min Balance:           $28,159.93 (-1,192.76) (-4.06%) @ 14:21 CDT
+Original Balance:      $29,352.69
+```
+
+**Beta (STAGING) (Round 3)**
+```
+Runtime: 29:35
+Current Balance:       $27,922.08 (-237.85) (-0.84%)
+Max Balance:           $28,283.27 (+123.34) (+0.44%) @ 14:32 CDT
+Min Balance:           $27,818.03 (-341.90) (-1.21%) @ 14:50 CDT
+Original Balance:      $28,159.93
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 3W (Consecutive: 2) 3L (Consecutive: 0)
+
+###### Notes
+* Automate consolidation trading.
+
+###### Next Thing(s) to Try
+
+### 2022-09-26:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 02:28:09
+Current Balance:       $25757.00 (+494.97) (+1.96%)
+Max Balance:           $26419.98 (+1157.95) (+4.58%) @ 09:56 CDT
+Min Balance:           $25126.94 (-135.09) (-0.53%) @ 08:32 CDT
+Original Balance:      $25262.03
+```
+
+**Beta (STAGING)**
+```
+Runtime: 03:23:34
+Current Balance:       $30,693.29 (-1,305.56) (-4.08%)
+Max Balance:           $32,842.64 (+843.79) (+2.64%) @ 11:58 CDT
+Min Balance:           $30,693.29 (-1,305.56) (-4.08%) @ 14:25 CDT
+Original Balance:      $31,998.85
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 2W (Consecutive: 1) 3L (Consecutive: 0)
+
+###### Notes
+* Business as usual:
+  * Day started with heavy up trend
+  * Then reversed trend
+  * Was interrupted by consolidation
+  * Finally made enough to close at a profit in Alphs
+* This time the prices consolidated for the rest of the day and resulted in a
+  major loss for Beta.
+* Next stop is still figure out how to use resistance and support levels to
+  trade during consolidation.
+
 ###### Next Thing(s) to Try
 
 ##### Forex
@@ -50,7 +237,7 @@ Min Balance:           $25441.47 (-712.45) (-2.72%) @ 14:58 CDT
   intelligent consolidation trading using resistance and support levels.
 * The first step will be to build the resistance and support levels. After that
   I can start making decisions with them.
-* I can do this!
+* I can do this! 👿
 
 ###### Next Thing(s) to Try
 

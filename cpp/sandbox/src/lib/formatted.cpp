@@ -25,6 +25,7 @@ public:
     FG_YELLOW = 33,
     FONT_BOLD = 1,
     FONT_UNDERLINE = 4,
+    NO_FONT_UNDERLINE = 24,
     RESET = 0,
   };
 
@@ -55,6 +56,7 @@ struct fmt_stream_t {
   Stream cyan;
   Stream green;
   Stream magenta;
+  Stream no_underline;
   Stream red;
   Stream reset;
   Stream underline;
@@ -68,6 +70,7 @@ fmt_stream_t stream() {
       .cyan = Stream({Stream::code_t::FG_CYAN}),
       .green = Stream({Stream::code_t::FG_GREEN}),
       .magenta = Stream({Stream::code_t::FG_MAGENTA}),
+      .no_underline = Stream({Stream::code_t::NO_FONT_UNDERLINE}),
       .red = Stream({Stream::code_t::FG_RED}),
       .reset = Stream({Stream::code_t::RESET}),
       .underline = Stream({Stream::code_t::FONT_UNDERLINE}),

@@ -1,12 +1,14 @@
 #include "lib/utils/debug.cpp" // ::utils::debug
 #include "lib/utils/io.cpp"    // ::utils::io
+#include "lib/utils/time.cpp"  // ::utils::time_
+#include <ctime>               // std::time
 #include <iostream>            // std::cout, std::endl
 #include <stdio.h>             // printf, puts
 #include <string>              // std::string
-#include <vector>              // std::vector
 
 int main() {
-  bool booln = 0;
+  std::time_t now = std::time(nullptr);
 
-  printf("boolean as number: %i\n", booln);
+  printf("%s\n",
+         ::utils::time_::date_string(now, "%FT%R", "America/Chicago").c_str());
 }
