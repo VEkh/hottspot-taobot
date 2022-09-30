@@ -21,7 +21,7 @@ double Alpaca::TaoBot::target_account_profit() {
       one_hour_seconds;
 
   return ::utils::float_::sigmoid(max_target, min_target, max_balance_duration,
-                                  -6.5, 0.75);
+                                  -6.5, 0.5);
 }
 
 #endif
