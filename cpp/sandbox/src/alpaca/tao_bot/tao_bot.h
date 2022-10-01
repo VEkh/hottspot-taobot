@@ -18,6 +18,7 @@ public:
 
   TaoBot(char *, std::map<std::string, std::string> &);
 
+  bool is_next_position_long();
   void build_momentum_reversals();
   void log_momentum_reversals();
 
@@ -78,7 +79,6 @@ private:
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
-  bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position();

@@ -52,6 +52,9 @@ int main(int argc, char *argv[]) {
     Alpaca::TaoBot tao_bot(symbol, flags);
     tao_bot.build_momentum_reversals();
     tao_bot.log_momentum_reversals();
+    const bool should_buy = tao_bot.is_next_position_long();
+
+    printf("Should buy next?: %i\n", should_buy);
 
     exit(0);
   }

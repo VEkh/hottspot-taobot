@@ -1,4 +1,4 @@
-### 2022-09-30:
+### 2022-10-03:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -11,21 +11,56 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Stats (STAGING) (as of 2022-09-19)
-* Win / Loss: 5W (Consecutive: 4) 3L (Consecutive: 0)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
-* Okay! The momentum shift collection ran pretty well. Now it's time to make
-  decisions with them.
-* I'll start by using them to make a decision after every position closes. I
-  may end up only using them after losses.
-* Here's the plan for resistance and support levels:
-  * Assign a score to each one that is a product of the current `price_delta`
-    and current `time_delta`.
-  * Since I want to reward proximity, I'll score the inverse of each delta
-  * Since there will likely be many points that match the current price, set
-    the max `price_delta` score to 100.
-  * Pick the reverals point with the highest score.
-  * If the current price is above it, buy, if below, sell.
+###### Next Thing(s) to Try
+
+### 2022-09-30:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 07:53
+Current Balance:       $26564.43 (-1122.46) (-4.05%)
+Max Balance:           $27863.90 (+177.01) (+0.64%) @ 08:30 CDT
+Min Balance:           $26564.43 (-1122.46) (-4.05%) @ 08:37 CDT
+Original Balance:      $27686.89
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 03:40:14
+Current Balance:       $26,844.81 (+283.12) (+1.07%)
+Max Balance:           $26,992.58 (+430.89) (+1.62%) @ 11:21 CDT
+Min Balance:           $25,859.67 (-702.02) (-2.64%) @ 09:29 CDT
+Original Balance:      $26,561.69
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 02:13:09
+Current Balance:       $27,332.43 (+488.45) (+1.82%)
+Max Balance:           $27,340.50 (+496.52) (+1.85%) @ 14:58 CDT
+Min Balance:           $26,452.35 (-391.63) (-1.46%) @ 13:44 CDT
+Original Balance:      $26,843.98
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 5W (Consecutive: 0) 4L (Consecutive: 1)
+
+###### Notes
+* The morning started in a consolidation pattern and quickly racked up a -4%
+  loss in 7 minutes!! 😭😂
+* However, when I turned it on in Beta, TaoBot did exceedingly well after
+  running for about 30 minutes. I forgot to record the performance.
+* I decided to return to alpha and it won two separate rounds! 🎈
+* There was a mix of consolidation and trending in both rounds.
+* I need more time to observe this strategy's effectiveness.
+* I'm temporarily stopping the max loss emergency brake until I can get a sense
+  of how well this works.
+* I'm still unsure as to whether I'll only use the momentum reversal points to
+  predict positions after losses. I gotta keep watching, but it's a promising start!
 
 ###### Next Thing(s) to Try
 
@@ -81,6 +116,19 @@ Original Balance:      $24,851.31
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
+* Okay! The momentum shift collection ran pretty well. Now it's time to make
+  decisions with them.
+* I'll start by using them to make a decision after every position closes. I
+  may end up only using them after losses.
+* Here's the plan for resistance and support levels:
+  * Assign a score to each one that is a product of the current `price_delta`
+    and current `time_delta`.
+  * Since I want to reward proximity, I'll score the inverse of each delta
+  * Since there will likely be many points that match the current price, set
+    the max `price_delta` score to 100.
+  * Pick the reverals point with the highest score.
+  * If the current price is above it, buy, if below, sell.
+
 ###### Next Thing(s) to Try
 
 ### 2022-09-28:

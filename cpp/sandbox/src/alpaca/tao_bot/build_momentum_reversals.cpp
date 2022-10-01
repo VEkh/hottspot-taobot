@@ -7,7 +7,7 @@
 #include <string>             // std::string
 
 void Alpaca::TaoBot::build_momentum_reversals() {
-  const int seek_time_milliseconds = 3 * 60 * 1e3;
+  const int seek_time_milliseconds = 5 * 60 * 1e3;
 
   if (this->quotes.empty()) {
     return;
