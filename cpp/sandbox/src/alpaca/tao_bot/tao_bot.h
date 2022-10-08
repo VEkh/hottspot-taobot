@@ -73,7 +73,6 @@ private:
 
   account_exit_prices_t build_account_exit_prices();
 
-  bool has_reached_profitable_momentum_reversal();
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
