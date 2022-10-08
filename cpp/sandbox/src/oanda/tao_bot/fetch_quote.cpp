@@ -13,6 +13,14 @@ void Oanda::TaoBot::fetch_quote() {
     parsed_quote.symbol = this->symbol;
 
     this->quotes.push_back(parsed_quote);
+
+    if (this->quotes.size() > this->QUOTES_MAX_SIZE) {
+      const int offset = this->quotes.size() - this->QUOTES_MAX_SIZE;
+      const std::vector<quote_t> limited_quotes(this->quotes.begin() + offset,
+                                                this->quotes.end());
+
+      this->quotes = limited_quotes;
+    }
   } catch (nlohmann::detail::parse_error &) {
     std::string error_message = Formatted::error_message(
         std::string("OANDA__TAO_BOT_fetch_quote error when parsing"));
