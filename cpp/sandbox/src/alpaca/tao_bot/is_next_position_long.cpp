@@ -1,13 +1,14 @@
 #ifndef ALPACA__TAO_BOT_is_next_position_long
 #define ALPACA__TAO_BOT_is_next_position_long
 
-#include "lib/formatted.cpp" // Formatted
-#include "tao_bot.h"         // Alpaca::TaoBot, fmt, quote_t
-#include <iostream>          // std::cout, std::endl
-#include <map>               // std::map
-#include <math.h>            // abs
-#include <stdio.h>           // printf
-#include <string>            // std::string
+#include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/boolean.cpp" // ::utils::boolean
+#include "tao_bot.h" // Alpaca::TaoBot, fmt, quote_scoreboard_t, quote_t
+#include <iostream>  // std::cout, std::endl
+#include <map>       // std::map
+#include <math.h>    // abs
+#include <stdio.h>   // printf
+#include <string>    // std::string
 
 bool Alpaca::TaoBot::is_next_position_long() {
   if (this->quotes.empty()) {
@@ -19,15 +20,12 @@ bool Alpaca::TaoBot::is_next_position_long() {
     return ::utils::boolean::flip_coin();
   }
 
-  struct decider_t {
-    quote_t quote;
-    double score = 0.0;
-    std::string type;
-  } decider;
+  quote_scoreboard_t scoreboard;
 
-  void (*traverse_momentum_reversals)(Alpaca::TaoBot *, decider_t &,
+  void (*traverse_momentum_reversals)(Alpaca::TaoBot *, quote_scoreboard_t &,
                                       const char *) =
-      [](Alpaca::TaoBot *self, decider_t &decider, const char *type) -> void {
+      [](Alpaca::TaoBot *self, quote_scoreboard_t &scoreboard,
+         const char *type) -> void {
     const quote_t current_quote = self->quotes.back();
 
     std::map<std::string, quote_t> reversals = self->momentum_reversals[type];
@@ -42,35 +40,35 @@ bool Alpaca::TaoBot::is_next_position_long() {
 
       const double score = price_score * time_score;
 
-      if (score > decider.score) {
-        decider.quote = quote;
-        decider.score = score;
-        decider.type = type;
+      if (score > scoreboard.score) {
+        scoreboard.quote = quote;
+        scoreboard.score = score;
+        scoreboard.type = type;
       }
     }
   };
 
-  traverse_momentum_reversals(this, decider, "resistance");
-  traverse_momentum_reversals(this, decider, "support");
+  traverse_momentum_reversals(this, scoreboard, "resistance");
+  traverse_momentum_reversals(this, scoreboard, "support");
 
   const Formatted::Stream type_color =
-      decider.type == "resistance" ? fmt.green : fmt.red;
+      scoreboard.type == "resistance" ? fmt.green : fmt.red;
 
   const quote_t current_quote = this->quotes.back();
 
   std::cout << fmt.bold << fmt.yellow;
   printf("Current Quote: %.2f\n\n", current_quote.price);
-  printf("With a score of %.4f, the", decider.score);
+  printf("With a score of %.4f, the", scoreboard.score);
   std::cout << type_color;
-  printf(" %s ", decider.type.c_str());
+  printf(" %s ", scoreboard.type.c_str());
   std::cout << fmt.yellow;
-  printf("price of %.2f @ %s is the deciding quote.\n", decider.quote.price,
-         ::utils::time_::date_string(decider.quote.timestamp / 1000, "%R",
+  printf("price of %.2f @ %s is the deciding quote.\n", scoreboard.quote.price,
+         ::utils::time_::date_string(scoreboard.quote.timestamp / 1000, "%R",
                                      "America/Chicago")
              .c_str());
   std::cout << fmt.reset << std::endl;
 
-  return current_quote.price >= decider.quote.price;
+  return current_quote.price >= scoreboard.quote.price;
 };
 
 #endif

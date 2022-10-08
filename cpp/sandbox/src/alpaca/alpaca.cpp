@@ -44,21 +44,6 @@ int main(int argc, char *argv[]) {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::string command = argv[1];
 
-  if (command == "analyze_momentum_reversals") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
-    Alpaca::TaoBot tao_bot(symbol, flags);
-    tao_bot.build_momentum_reversals();
-    tao_bot.log_momentum_reversals();
-    const bool should_buy = tao_bot.is_next_position_long();
-
-    printf("Should buy next?: %i\n", should_buy);
-
-    exit(0);
-  }
-
   if (command == "cancel_orders") {
     std::map<std::string, std::string> flags =
         ::utils::io::extract_flags(argc, argv);

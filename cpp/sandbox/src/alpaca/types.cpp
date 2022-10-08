@@ -77,6 +77,12 @@ struct quote_t {
   std::string symbol = "";
   long int timestamp;
 };
+
+struct quote_scoreboard_t {
+  quote_t quote;
+  double score = 0.00;
+  std::string type;
+};
 } // namespace t
 } // namespace Alpaca
 #endif

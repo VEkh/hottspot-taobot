@@ -18,10 +18,6 @@ public:
 
   TaoBot(char *, std::map<std::string, std::string> &);
 
-  bool is_next_position_long();
-  void build_momentum_reversals();
-  void log_momentum_reversals();
-
   void run();
 
 private:
@@ -37,6 +33,7 @@ private:
   using performance_t = Alpaca::t::performance_t;
   using price_movement_average_t = Global::t::price_movement_average_t;
   using price_movement_t = Global::t::price_movement_t;
+  using quote_scoreboard_t = Alpaca::t::quote_scoreboard_t;
   using quote_t = Alpaca::t::quote_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
@@ -79,6 +76,7 @@ private:
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
+  bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position();
@@ -118,6 +116,7 @@ private:
                                             const order_action_t, const char *,
                                             const double);
   void await_market_open();
+  void build_momentum_reversals();
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote();
@@ -127,24 +126,25 @@ private:
   void load_quotes();
   void log_account_balance();
   void log_end_of_trading_period();
+  void log_momentum_reversals();
   void log_performance();
   void log_position();
-  void log_positions();
   void log_position_results();
+  void log_positions();
   void log_price_movement();
   void log_quote();
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
   void reset_position();
+  void set_and_persist_price_movement();
   void set_close_order_prices();
   void set_execution_price(order_t *);
   void set_open_order_prices();
   void set_position_status();
   void set_price_movement();
-  void set_and_persist_price_movement();
-  void set_profit(order_t *, const order_t *);
   void set_profit(order_t *);
+  void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
   void update_account_balance();
   void watch();
