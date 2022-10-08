@@ -27,6 +27,15 @@ void Alpaca::TaoBot::fetch_and_persist_quote() {
   }
 
   this->quotes.push_back(new_quote);
+
+  if (this->quotes.size() > this->QUOTES_MAX_SIZE) {
+    const int offset = this->quotes.size() - this->QUOTES_MAX_SIZE;
+    std::vector<quote_t> limited_quotes(this->quotes.begin() + offset,
+                                        this->quotes.end());
+
+    this->quotes = limited_quotes;
+  }
+
   write_quotes();
 }
 

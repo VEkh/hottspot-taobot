@@ -73,11 +73,13 @@ private:
 
   account_exit_prices_t build_account_exit_prices();
 
+  bool is_breaking_out();
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
+  bool is_price_moving();
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();

@@ -1,4 +1,4 @@
-### 2022-10-03:
+### 2022-10-10:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -10,10 +10,172 @@ Min Balance:           $ (-) (-%)
 Original Balance:      $ (-) (-%)
 ```
 
-###### Stats (STAGING) (as of 2022-09-19)
+###### Stats (STAGING) (as of 2022-10-07)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2022-10-07:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 02:54:37 (Only x2 margin)
+Current Balance:       $30321.00 (+321.00) (+1.07%)
+Max Balance:           $30371.36 (+371.36) (+1.24%) @ 09:04 CDT
+Min Balance:           $29775.34 (-224.66) (-0.75%) @ 08:36 CDT
+Original Balance:      $30000.00
+```
+
+**Beta (STAGING)**
+```
+Runtime: 03:32:57
+Current Balance:       $28,827.39 (-473.62) (-1.62%)
+Max Balance:           $29,488.31 (+187.30) (+0.64%) @ 11:34 CDT
+Min Balance:           $28,677.45 (-623.56) (-2.13%) @ 14:42 CDT
+Original Balance:      $29,301.01
+```
+
+###### Stats (STAGING) (as of 2022-10-07)
+* Win / Loss: 1W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+* Today was a day of heavy trending so you can't celebrate the win too much.
+* Beta did, however, lose gracefully because of waiting for breakouts.
+* I still need to see how it works on a day of full consolidation. Stay tuned.
+
+###### Next Thing(s) to Try
+
+### 2022-10-06:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 06:29:00
+Current Balance:       $25629.65 (-2283.09) (-8.18%)
+Max Balance:           $28093.34 (+180.60) (+0.65%) @ 08:30 CDT
+Min Balance:           $25323.53 (-2589.21) (-9.28%) @ 14:56 CDT
+Original Balance:      $27912.74
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 7W (Consecutive: 0) 6L (Consecutive: 1)
+
+###### Notes
+* The day of reckonning has finally arrived!
+* Today was the mega loss that invalidated using momentum reversals as
+  direction predicters.
+* I'm going to switch up and try to only trade during breakout times. It will
+  still be wrong enough times, but should never be as catastrophic trying to
+  ride intraday trends during consolidation.
+
+###### Next Thing(s) to Try
+* Only trade during breakout moments:
+  1. Keep only the quotes from the last hour +
+  2. Only open trades when the price is lower than the lowest support level, or
+     higher than the highest resistance level.
+
+### 2022-10-05:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 02:41:49
+Current Balance:       $28,026.77 (+459.69) (+1.67%)
+Max Balance:           $28,473.33 (+906.25) (+3.29%) @ 12:22 CDT
+Min Balance:           $26,958.69 (-608.39) (-2.21%) @ 10:50 CDT
+Original Balance:      $27,567.08
+```
+
+**Beta (STAGING)**
+```
+Runtime: 01:40:53
+Current Balance:       $29,357.30 (-802.15) (-2.66%)
+Max Balance:           $30,369.05 (+209.60) (+0.69%) @ 13:27 CDT
+Min Balance:           $29,234.59 (-924.86) (-3.07%) @ 14:52 CDT
+Original Balance:      $30,159.45
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 7W (Consecutive: 2) 5L (Consecutive: 0)
+
+###### Notes
+* Don't get too hype, there was still large trending today.
+* The exit profit upon approaching momentum reversal point was nerfing big
+  gains on long trends. I'm going to suppress it for now and return to what I
+  had yesterday.
+* All in all, it's nice to more wins than losses of late, but I need to see
+  more days where mornings start with heavy consolidation with hardly any
+  movement all day to see how bad losses are.
+
+###### Next Thing(s) to Try
+
+### 2022-10-04:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 01:06:49
+Current Balance:       $27597.70 (+902.14) (+3.38%)
+Max Balance:           $27835.58 (+1140.02) (+4.27%) @ 09:02 CDT
+Min Balance:           $26575.39 (-120.17) (-0.45%) @ 08:30 CDT
+Original Balance:      $26695.56
+```
+
+**Beta (STAGING)**
+```
+Runtime: 05:18:06
+Current Balance:       $30,273.22 (+92.97) (+0.31%)
+Max Balance:           $31,243.61 (+1,063.36) (+3.52%) @ 13:58 CDT
+Min Balance:           $28,596.73 (-1,583.52) (-5.25%) @ 11:05 CDT
+Original Balance:      $30,180.25
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 6W (Consecutive: 1) 5L (Consecutive: 0)
+
+###### Notes
+* Another pretty good win! 🎉
+* Even Beta had a really high peak. It ultimately got destroyed by
+  consolidation which makes me think it can do even better during
+  consolidation.
+
+###### Next Thing(s) to Try
+* Ride shallow consolidation:
+  * If a position is profiting >= 5x 1-sec variance and its price matches a
+    momentum reversal, exit.
+
+### 2022-10-03:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 06:28:59
+Current Balance:       $26818.25 (-382.50) (-1.41%)
+Max Balance:           $27714.29 (+513.54) (+1.89%) @ 08:40 CDT
+Min Balance:           $25504.35 (-1696.40) (-6.24%) @ 09:05 CDT
+Original Balance:      $27200.75
+```
+
+###### Stats (STAGING) (as of 2022-09-19)
+* Win / Loss: 5W (Consecutive: 0) 5L (Consecutive: 2)
+
+###### Notes
+* The loss wasn't abysmal
+* It was good that I stayed in all day instead of bailing at the early mega
+  loss.
+* Looks like I'll need to refine the resistance and support alorithms to make
+  them profitable.
+* I think was saved by long trends, but who knows? Maybe I fully capitalized on
+  them because I got in right at the beginning of the breakout because of the
+  momentum reversal points.
+* I also missed some of TSLA's biggest gains in the morning because of a HUGE
+  overnight price change. I modified the price aberration algorithm and
+  restarted.
+* Noteworthy: The Quotes count got to ~40K quotes by the end of the day, and
+  await time between rounds didn't increase significantly.
+
 ###### Next Thing(s) to Try
 
 ### 2022-09-30:
