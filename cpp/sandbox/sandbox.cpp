@@ -1,14 +1,13 @@
 #include "lib/utils/debug.cpp" // ::utils::debug
 #include "lib/utils/io.cpp"    // ::utils::io
-#include "lib/utils/time.cpp"  // ::utils::time_
-#include <ctime>               // std::time
+#include <algorithm>           // std::copy
 #include <iostream>            // std::cout, std::endl
+#include <map>                 // std::vector
 #include <stdio.h>             // printf, puts
 #include <string>              // std::string
 
 int main() {
-  std::time_t now = std::time(nullptr);
+  std::map<std::string, int> m = {{"foo", 1}, {"bar", 2}};
 
-  printf("%s\n",
-         ::utils::time_::date_string(now, "%FT%R", "America/Chicago").c_str());
+  ::utils::debug::inspect(m);
 }

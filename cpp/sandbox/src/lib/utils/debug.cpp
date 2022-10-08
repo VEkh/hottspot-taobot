@@ -11,14 +11,16 @@ namespace utils {
 namespace debug {
 void inspect(std::string str) { std::cout << str << std::endl; }
 
-void inspect(std::vector<std::string> collection) {
-  for (int i = 0; i < collection.size(); i++) {
-    std::cout << collection[i] << std::endl;
+template <typename Member> void inspect(std::vector<Member> collection) {
+  for (typename std::vector<Member>::iterator it = collection.begin();
+       it != collection.end(); it++) {
+    std::cout << *it << std::endl;
   }
 }
 
-void inspect(std::map<std::string, std::string> collection) {
-  std::map<std::string, std::string>::iterator it;
+template <typename Key, typename Value>
+void inspect(std::map<Key, Value> collection) {
+  typename std::map<Key, Value>::iterator it;
 
   if (collection.begin() == collection.end()) {
     return;
