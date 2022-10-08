@@ -1,6 +1,7 @@
 #ifndef ALPACA__TAO_BOT_is_next_position_long
 #define ALPACA__TAO_BOT_is_next_position_long
 
+#include "current_price.cpp"     // current_price
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/boolean.cpp" // ::utils::boolean
 #include "tao_bot.h" // Alpaca::TaoBot, fmt, quote_scoreboard_t, quote_t
@@ -54,10 +55,10 @@ bool Alpaca::TaoBot::is_next_position_long() {
   const Formatted::Stream type_color =
       scoreboard.type == "resistance" ? fmt.green : fmt.red;
 
-  const quote_t current_quote = this->quotes.back();
+  const double current_price_ = current_price();
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Current Quote: %.2f\n\n", current_quote.price);
+  printf("Current Quote: %.2f\n\n", current_price_);
   printf("With a score of %.4f, the", scoreboard.score);
   std::cout << type_color;
   printf(" %s ", scoreboard.type.c_str());
@@ -68,7 +69,7 @@ bool Alpaca::TaoBot::is_next_position_long() {
              .c_str());
   std::cout << fmt.reset << std::endl;
 
-  return current_quote.price >= scoreboard.quote.price;
+  return current_price_ >= scoreboard.quote.price;
 };
 
 #endif
