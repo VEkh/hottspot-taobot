@@ -1,12 +1,12 @@
-#ifndef ALPACA__TAO_BOT_build_momentum_reversals
-#define ALPACA__TAO_BOT_build_momentum_reversals
+#ifndef OANDA__TAO_BOT_build_momentum_reversals
+#define OANDA__TAO_BOT_build_momentum_reversals
 
 #include "lib/utils/time.cpp" // ::utils::time_
-#include "tao_bot.h"          // Alpaca::TaoBot, quote_t
+#include "tao_bot.h"          // Oanda::TaoBot, quote_t
 #include <map>                // std::map
 #include <string>             // std::string
 
-void Alpaca::TaoBot::build_momentum_reversals() {
+void Oanda::TaoBot::build_momentum_reversals() {
   const int seek_time_milliseconds = 5 * 60 * 1e3;
 
   if (this->quotes.empty()) {

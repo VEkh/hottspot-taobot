@@ -1,12 +1,12 @@
-#ifndef ALPACA__TAO_BOT_log_momentum_reversals
-#define ALPACA__TAO_BOT_log_momentum_reversals
+#ifndef OANDA__TAO_BOT_log_momentum_reversals
+#define OANDA__TAO_BOT_log_momentum_reversals
 
 #include "lib/utils/time.cpp" // ::utils::time_
-#include "tao_bot.h"          // Alpaca::TaoBot, fmt, quote_t
+#include "tao_bot.h"          // Oanda::TaoBot, fmt, quote_t
 #include <map>                // std::map
 #include <string>             // std::map
 
-void Alpaca::TaoBot::log_momentum_reversals() {
+void Oanda::TaoBot::log_momentum_reversals() {
   void (*log_reversals)(std::map<std::string, quote_t> &, const char *) =
       [](std::map<std::string, quote_t> &reversals, const char *label) -> void {
     Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -23,7 +23,7 @@ void Alpaca::TaoBot::log_momentum_reversals() {
 
       const quote_t quote = it->second;
 
-      printf("%.2f @ %s", quote.price,
+      printf("%.5f @ %s", quote.price,
              ::utils::time_::date_string(quote.timestamp / 1000, "%R",
                                          "America/Chicago")
                  .c_str());
