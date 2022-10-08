@@ -4,6 +4,8 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::max_account_loss_reached() {
+  return false;
+
   const double loss_ratio =
       (this->account_balance.balance - this->account_balance.original_balance) /
       this->account_balance.original_balance;
