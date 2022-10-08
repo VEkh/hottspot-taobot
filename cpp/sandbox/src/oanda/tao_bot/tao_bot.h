@@ -88,10 +88,12 @@ private:
   account_balance_t get_account_balance();
   account_balance_t get_account_balance(const account_balance_t &);
   account_exit_prices_t build_account_exit_prices();
+  bool is_breaking_out();
   bool is_end_of_trading_period();
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
+  bool is_price_moving();
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
@@ -101,6 +103,7 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double convert_price(const double, const std::string, const std::string);
+  double current_price();
   double current_spread();
   double dynamic_one_sec_variance();
   double loss_to_recover();

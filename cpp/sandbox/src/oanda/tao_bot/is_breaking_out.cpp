@@ -1,14 +1,14 @@
-#ifndef ALPACA__TAO_BOT_is_breaking_out
-#define ALPACA__TAO_BOT_is_breaking_out
+#ifndef OANDA__TAO_BOT_is_breaking_out
+#define OANDA__TAO_BOT_is_breaking_out
 
 #include "current_price.cpp" // current_price
-#include "tao_bot.h"         // Alpaca::TaoBot, quote_t
+#include "tao_bot.h"         // Oanda::TaoBot, quote_t
 #include <algorithm>         // std::max, std::min
 #include <map>               // std::map
 #include <math.h>            // INFINITY
 #include <string>            // std::string
 
-bool Alpaca::TaoBot::is_breaking_out() {
+bool Oanda::TaoBot::is_breaking_out() {
   const double current_price_ = current_price();
   double max_resistance = -INFINITY;
   double min_support = INFINITY;
