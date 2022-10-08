@@ -1,7 +1,8 @@
 #ifndef ALPACA__TAO_BOT_should_close_position
 #define ALPACA__TAO_BOT_should_close_position
 
-#include "build_exit_prices.cpp"        // build_exit_prices
+#include "build_exit_prices.cpp"                        // build_exit_prices
+#include "has_reached_profitable_momentum_reversal.cpp" // has_reached_profitable_momentum_reversal
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
@@ -31,6 +32,10 @@ bool Alpaca::TaoBot::should_close_position() {
   this->exit_prices = build_exit_prices();
 
   if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit) {
+    return true;
+  }
+
+  if (has_reached_profitable_momentum_reversal()) {
     return true;
   }
 
