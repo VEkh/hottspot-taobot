@@ -3,15 +3,15 @@
 
 #include "dynamic_one_sec_variance.cpp" // dynamic_one_sec_variance
 #include "tao_bot.h"                    // Oanda::TaoBot
-#include "target_position_profit.cpp"   // target_position_profit
+#include <math.h>                       // abs
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double one_sec_variance = dynamic_one_sec_variance();
-  const int max_loss_coefficient = -60;
+  const int max_loss_coefficient = -40;
 
   const double max_loss = max_loss_coefficient * one_sec_variance;
-  const double min_profit = target_position_profit();
   const double trailing_stop = 20 * one_sec_variance;
+  const double min_profit = abs(10 * max_loss) + trailing_stop;
 
   const double trailing_stop_profit =
       this->open_order_ptr->max_profit - trailing_stop;

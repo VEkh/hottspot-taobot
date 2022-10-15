@@ -1,4 +1,4 @@
-### 2022-10-10:
+### 2022-10-17:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -10,10 +10,226 @@ Min Balance:           $ (-) (-%)
 Original Balance:      $ (-) (-%)
 ```
 
-###### Stats (STAGING) (as of 2022-10-07)
+###### Stats (STAGING) (as of 2022-10-17)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2022-10-14:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 38:17
+Current Balance:       $24660.74 (-1039.35) (-4.04%)
+Max Balance:           $25700.51 (+0.42) (+0.00%) @ 08:30 CDT
+Min Balance:           $24417.27 (-1282.82) (-4.99%) @ 09:00 CDT
+Original Balance:      $25700.09
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 02:26:22
+Current Balance:       $22,918.69 (-1,736.59) (-7.04%) 💣😭
+Max Balance:           $24,755.93 (+100.65) (+0.41%) @ 09:12 CDT
+Min Balance:           $22,900.72 (-1,754.56) (-7.12%) @ 11:35 CDT
+Original Balance:      $24,655.28
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Current Balance:       $30,195.96 (+195.96) (+0.65%)
+Max Balance:           $30,213.17 (+213.17) (+0.71%) @ 14:58 CDT
+Min Balance:           $29,835.03 (-164.97) (-0.55%) @ 14:01 CDT
+Original Balance:      $30,000.00
+```
+
+###### Stats (STAGING) (as of 2022-10-07)
+* Win / Loss: 1W (Consecutive: 0) 4L (Consecutive: 4)
+
+###### Notes
+* Okay, the high-frequency, small profit approach failed miserably, and on a
+  heavy trend day no less.
+* I'm going to revert to a long hold strategy for the advantages I cited a
+  couple months ago.
+* On most days, the price for each security _does_ pick a direction toward
+  which it trends for the day's remainder.
+* Even if this isn't the case for one, it usually is for one or more other
+  assets.
+* The difference is that I have two things now:
+  1. A time-eased account take profit that should help secure diminishing
+     profits.
+  2. I'll await 1-hour range breakouts to help avoid consolidation triggering
+     heavy losses.
+* You may think this won't work on Forex where the prices seem to fluctuate
+  less, but you can close positions at the end of each day (4pm CT).
+  * Closing positions at really high profits could also help.
+
+###### Next Thing(s) to Try
+
+### 2022-10-13:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 01:42:34
+Current Balance:       $25565.93 (-858.31) (-3.25%)
+Max Balance:           $26889.12 (+464.88) (+1.76%) @ 09:10 CDT
+Min Balance:           $25517.14 (-907.10) (-3.43%) @ 10:12 CDT
+Original Balance:      $26424.24
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 01:36:52
+Current Balance:       $26,138.30 (+431.55) (+1.68%)
+Max Balance:           $27,402.27 (+1,695.52) 😳 (+6.60%) @ 10:57 CDT
+Min Balance:           $25,677.17 (-29.58) (-0.12%) @ 10:14 CDT
+Original Balance:      $25,706.75
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 03:06:36
+Current Balance:       $26,208.02 (+55.76) (+0.21%)
+Max Balance:           $26,433.87 (+281.61) (+1.08%) @ 14:53 CDT
+Min Balance:           $25,385.24 (-767.02) (-2.93%) @ 13:25 CDT
+Original Balance:      $26,152.26
+```
+
+###### Stats (STAGING) (as of 2022-10-07)
+* Win / Loss: 1W (Consecutive: 0) 3L (Consecutive: 3)
+
+###### Notes
+###### Next Thing(s) to Try
+* Round 2 started with crazy trending, but got crushed by shallow consolidation
+* Hooray! This `Tight Stop Loss With Expanding Trailing Stop` approach is
+  showing promise. It won two consecutive times 🎉
+* It keeps the losses manageable while waiting for explosive runs. It was good
+  to see a +6.60% max even though it was during long trending, which didn't
+  start til almost 1.75 hours into trading.
+* The t-stop max of 10x 1-sec variance was too tight, so I increased it to 15x.
+  This was to loose, so I shrank it to 12.5x.
+* I also shortened the account level take profit half life to close sooner.
+* I suspect that this algorithm will work better during periods of higher
+  volatility, and I may want to consider limiting it to periods when volatility
+  is > 1.
+* It's really interesting to see assests go from being major losers to major
+  winners and vice versa.
+* For now, I'll keep watching and look out for another full consolidation day.
+* If this works, it would be the real trend riding algorithm I've been trying
+  to build 🤠
+
+### 2022-10-12:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Current Balance:       $28813.14 (-211.54) (-0.73%)
+Max Balance:           $29314.58 (+289.90) (+1.00%) @ 08:33 CDT
+Min Balance:           $28758.32 (-266.36) (-0.92%) @ 08:36 CDT
+Original Balance:      $29024.68
+```
+
+**Alpha (STAGING) (Round 2-???)**
+```
+Current Balance:       $26,577.55 (-2,447.13) (-8.43%)
+Max Balance:           $29314.58 (+289.90) (+1.00%) @ 08:33 CDT
+Min Balance:           $26,543.17 (-2,481.51) (-8.55%) @ 14:58 CDT
+Original Balance:      $29,024.68
+```
+
+###### Stats (STAGING) (as of 2022-10-07)
+* Win / Loss: 1W (Consecutive: 0) 3L (Consecutive: 3)
+
+###### Notes
+* Good news: today was another consolidation day to test things.
+* Bad news: Even waiting for breakouts failed 😢
+* At 1pm there was a crazy spike in volatility that sent profits plummeting.
+* I ended the day by experimenting with another small win capture approach with
+  an expanding traling stop. It worked modestly well, but still ultimately lost
+  money over time.
+* Looks like I'll have to go back to the drawing board.
+
+###### Next Thing(s) to Try
+
+### 2022-10-11:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 01:35:42
+Current Balance:       $29455.46 (-601.97) (-2.00%)
+Max Balance:           $30338.98 (+281.55) (+0.94%) @ 08:31 CDT
+Min Balance:           $29379.72 (-677.71) (-2.25%) @ 08:56 CDT
+Original Balance:      $30057.43
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 01:30:37
+Current Balance:       $28,860.34 (-595.12) (-2.02%)
+Max Balance:           $29,564.72 (+109.26) (+0.37%) @ 12:16 CDT
+Min Balance:           $28,573.00 (-882.46) (-3.00%) @ 12:42 CDT
+Original Balance:      $29,455.46
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 02:06:21
+Current Balance:       $29,214.54 (+372.88) (+1.29%)
+Max Balance:           $29,612.51 (+770.85) (+2.67%) @ 14:11 CDT
+Min Balance:           $28,695.25 (-146.41) (-0.51%) @ 13:39 CDT
+Original Balance:      $28,841.66
+```
+
+**Beta (STAGING) (Round 1)**
+```
+Runtime: 24:28
+Current Balance:       $28,404.69 (+178.16) (+0.63%)
+Max Balance:           $28,406.23 (+179.70) (+0.64%) @ 11:19 CDT
+Min Balance:           $27,957.88 (-268.65) (-0.95%) @ 11:10 CDT
+Original Balance:      $28,226.53
+```
+
+
+###### Stats (STAGING) (as of 2022-10-07)
+* Win / Loss: 1W (Consecutive: 0) 2L (Consecutive: 2)
+
+###### Notes
+* Consolidation lasted a long time and I lost patience and tried a
+  consolidation trend riding strategy. I lost 😭
+* I think I just gotta keep as is and be really disciplined. Most time during
+  most days will not be in trades.
+* For the love of God...HOOOOLD! Stop switching strategies mid-day.
+
+###### Next Thing(s) to Try
+
+### 2022-10-10:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 24:51 (But really 6.5 hours)
+Current Balance:       $30,109.12 (-194.93) (-0.64%)
+Max Balance:           $30,790.49 (+486.44) (+1.61%) @ 14:45 CDT
+Min Balance:           $29,611.21 (-692.84) (-2.29%) @ 14:45 CDT
+Original Balance:      $30,304.05
+```
+
+###### Stats (STAGING) (as of 2022-10-07)
+* Win / Loss: 1W (Consecutive: 0) 1L (Consecutive: 1)
+
+###### Notes
+* Good news! Today was a consolidation day and TaoBot didn't lose abysmally 🎉
+* In fact, I would have almost certainly won if I didn't erroneously enter a
+  couple positions when the price was within consolidation range.
+* I also updated the take profit algorithm to leave if the max profit hasn't
+  been exceeded in 60 seconds. The sigmoid algorithm seems to hold positions
+  far too long for some reason I have to figure out.
+* We'll see how things go tomorrow!
+
 ###### Next Thing(s) to Try
 
 ### 2022-10-07:
@@ -38,7 +254,7 @@ Original Balance:      $29,301.01
 ```
 
 ###### Stats (STAGING) (as of 2022-10-07)
-* Win / Loss: 1W (Consecutive: 0) 0L (Consecutive: 0)
+* Win / Loss: 1W (Consecutive: 1) 0L (Consecutive: 0)
 
 ###### Notes
 * Today was a day of heavy trending so you can't celebrate the win too much.

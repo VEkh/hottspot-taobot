@@ -2,74 +2,45 @@
 #define OANDA__TAO_BOT_is_next_position_long
 
 #include "current_price.cpp"     // current_price
-#include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/boolean.cpp" // ::utils::boolean
-#include "tao_bot.h" // Oanda::TaoBot, fmt, quote_scoreboard_t, quote_t
-#include <iostream>  // std::cout, std::endl
-#include <map>       // std::map
-#include <math.h>    // abs
-#include <stdio.h>   // printf
-#include <string>    // std::string
+#include "tao_bot.h"             // Oanda::TaoBot, fmt, quote_t
+#include <ctime>                 // std::time
+#include <math.h>                // INFINITY, abs
 
 bool Oanda::TaoBot::is_next_position_long() {
   if (this->quotes.empty()) {
     return ::utils::boolean::flip_coin();
   }
 
-  if (this->momentum_reversals["resistance"].empty() &&
-      this->momentum_reversals["support"].empty()) {
+  const double current_price_ = current_price();
+  const std::time_t now = std::time(nullptr);
+  double max_quote = -INFINITY;
+  double min_quote = INFINITY;
+  std::vector<quote_t>::reverse_iterator quote_it;
+
+  for (quote_it = this->quotes.rbegin(); quote_it != this->quotes.rend();
+       quote_it++) {
+    if (now - (quote_it->timestamp / 1000) > this->CONSOLIDATION_TIME_SECONDS) {
+      break;
+    }
+
+    max_quote = std::max(max_quote, quote_it->price);
+    min_quote = std::min(min_quote, quote_it->price);
+  }
+
+  if (max_quote == min_quote) {
     return ::utils::boolean::flip_coin();
   }
 
-  quote_scoreboard_t scoreboard;
+  if (max_quote != -INFINITY && current_price_ >= max_quote) {
+    return true;
+  }
 
-  void (*traverse_momentum_reversals)(Oanda::TaoBot *, quote_scoreboard_t &,
-                                      const char *) =
-      [](Oanda::TaoBot *self, quote_scoreboard_t &scoreboard,
-         const char *type) -> void {
-    const quote_t current_quote = self->quotes.back();
+  if (min_quote != INFINITY && current_price_ <= min_quote) {
+    return false;
+  }
 
-    std::map<std::string, quote_t> reversals = self->momentum_reversals[type];
-    std::map<std::string, quote_t>::iterator it;
-
-    for (it = reversals.begin(); it != reversals.end(); it++) {
-      const quote_t quote = it->second;
-      const double price_score =
-          std::min(100.0, 1 / abs(current_quote.price - quote.price));
-      const double time_score =
-          1000.0 / (current_quote.timestamp - quote.timestamp);
-
-      const double score = price_score * time_score;
-
-      if (score > scoreboard.score) {
-        scoreboard.quote = quote;
-        scoreboard.score = score;
-        scoreboard.type = type;
-      }
-    }
-  };
-
-  traverse_momentum_reversals(this, scoreboard, "resistance");
-  traverse_momentum_reversals(this, scoreboard, "support");
-
-  const Formatted::Stream type_color =
-      scoreboard.type == "resistance" ? fmt.green : fmt.red;
-
-  const double current_price_ = current_price();
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Current Quote: %.5f\n\n", current_price_);
-  printf("With a score of %.4f, the", scoreboard.score);
-  std::cout << type_color;
-  printf(" %s ", scoreboard.type.c_str());
-  std::cout << fmt.yellow;
-  printf("price of %.5f @ %s is the deciding quote.\n", scoreboard.quote.price,
-         ::utils::time_::date_string(scoreboard.quote.timestamp / 1000, "%R",
-                                     "America/Chicago")
-             .c_str());
-  std::cout << fmt.reset << std::endl;
-
-  return current_price_ >= scoreboard.quote.price;
+  return ::utils::boolean::flip_coin();
 };
 
 #endif

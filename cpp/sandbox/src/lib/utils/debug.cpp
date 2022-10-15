@@ -9,7 +9,9 @@
 
 namespace utils {
 namespace debug {
-void inspect(std::string str) { std::cout << str << std::endl; }
+template <typename BasicType> void inspect(BasicType in) {
+  std::cout << in << std::endl;
+}
 
 template <typename Member> void inspect(std::vector<Member> collection) {
   for (typename std::vector<Member>::iterator it = collection.begin();

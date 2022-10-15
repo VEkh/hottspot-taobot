@@ -4,28 +4,32 @@
 #include "current_price.cpp" // current_price
 #include "tao_bot.h"         // Alpaca::TaoBot, quote_t
 #include <algorithm>         // std::max, std::min
-#include <map>               // std::map
+#include <ctime>             // std::time
 #include <math.h>            // INFINITY
-#include <string>            // std::string
+#include <vector>            // std::vector
 
 bool Alpaca::TaoBot::is_breaking_out() {
   const double current_price_ = current_price();
-  double max_resistance = -INFINITY;
-  double min_support = INFINITY;
-  std::map<std::string, quote_t>::iterator it;
+  const std::time_t now = std::time(nullptr);
+  double max_quote = -INFINITY;
+  double min_quote = INFINITY;
+  std::vector<quote_t>::reverse_iterator quote_it;
 
-  for (it = this->momentum_reversals["resistance"].begin();
-       it != this->momentum_reversals["resistance"].end(); it++) {
-    max_resistance = std::max(max_resistance, it->second.price);
+  for (quote_it = this->quotes.rbegin(); quote_it != this->quotes.rend();
+       quote_it++) {
+    if (now - (quote_it->timestamp / 1000) > this->CONSOLIDATION_TIME_SECONDS) {
+      break;
+    }
+
+    max_quote = std::max(max_quote, quote_it->price);
+    min_quote = std::min(min_quote, quote_it->price);
   }
 
-  for (it = this->momentum_reversals["support"].begin();
-       it != this->momentum_reversals["support"].end(); it++) {
-    min_support = std::min(min_support, it->second.price);
+  if (max_quote == min_quote) {
+    return false;
   }
 
-  return (max_resistance != -INFINITY && current_price_ > max_resistance) ||
-         (min_support != INFINITY && current_price_ < min_support);
+  return current_price_ >= max_quote || current_price_ <= min_quote;
 }
 
 #endif

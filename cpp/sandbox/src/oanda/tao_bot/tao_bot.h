@@ -43,6 +43,7 @@ private:
   const double POLLING_INTERVAL_SECONDS = 1.0;
   const double TARGET_ACCOUNT_PROFIT = 0.0105;
   const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  const int CONSOLIDATION_TIME_SECONDS = 60 * 60;
   const int MAX_EXPECTED_LOSS_STREAK = 18;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 6e3;
