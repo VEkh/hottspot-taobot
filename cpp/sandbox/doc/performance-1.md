@@ -1,4 +1,4 @@
-### 2022-10-17:
+### 2022-10-24:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -15,6 +15,259 @@ Original Balance:      $ (-) (-%)
 
 ###### Notes
 ###### Next Thing(s) to Try
+
+### 2022-10-21:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 02:34:08
+Current Balance:       $29899.13 (+310.74) (+1.05%)
+Max Balance:           $30136.05 (+547.66) (+1.85%) @ 09:07 CDT
+Min Balance:           $28630.83 (-957.56) (-3.24%) @ 10:20 CDT
+Original Balance:      $29588.39
+```
+
+**Beta (STAGING)**
+```
+Runtime: 03:53:22
+Current Balance:       $28,397.14 (+561.28) (+2.02%)
+Max Balance:           $28,506.35 (+670.49) (+2.41%) @ 14:43 CDT
+Min Balance:           $27,707.72 (-128.14) (-0.46%) @ 12:44 CDT
+Original Balance:      $27,835.86
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 3W (Consecutive: 2) 2L (Consecutive: 0)
+
+###### Notes
+* Things still looking good, even after TSLA had a consolidation morning.
+
+###### Next Thing(s) to Try
+
+### 2022-10-20:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 01:16:02
+Current Balance:       $29593.50 (+768.54) (+2.67%)
+Max Balance:           $30127.29 (+1302.33) (+4.52%) @ 09:20 CDT
+Min Balance:           $28797.56 (-27.40) (-0.10%) @ 08:30 CDT
+Original Balance:      $28824.96
+```
+
+**Beta (STAGING)**
+```
+Runtime: 05:10:47
+Current Balance:       $27,846.49 (+439.21) (+1.60%)
+Max Balance:           $28,428.62 (+1,021.34) (+3.73%) @ 13:45 CDT
+Min Balance:           $27,081.91 (-325.37) (-1.19%) @ 12:04 CDT
+Original Balance:      $27,407.28
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 2W (Consecutive: 1) 2L (Consecutive: 0)
+
+###### Notes
+* Both Alpha and Beta won 🎉
+* Change nothing. Still keeping an eye on increasing rate of target profit
+  decline.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 80:21:13
+Current Balance:       $49,891.07780 (-12.64150) (-0.03%)
+Max Balance:           $49,903.71930 (+0.00000) (+0.00%) @ 08:42 CDT
+Min Balance:           $49,891.02950 (-12.68980) (-0.03%) @ 12:58 CDT
+Original Balance:      $49,903.71930
+```
+
+###### Notes
+* Time to turn it off. All pairs except one or two are essentially irredeemably
+  losing.
+* The main reason is because there's much less price action for currency pairs.
+  I'll have to think of some way to profit on this.
+
+### 2022-10-19:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 05:56:50
+Current Balance:       $28,848.31 (-1,163.26) (-3.88%)
+Max Balance:           $30,494.36 (+482.79) (+1.61%) @ 09:24 CDT
+Min Balance:           $28,825.45 (-1,186.12) (-3.95%) @ 14:29 CDT
+Original Balance:      $30,011.57
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 1W (Consecutive: 0) 2L (Consecutive: 1)
+
+###### Notes
+* Alpha's API got jacked up until 08:46:01 and I had to restart at 9am after my
+  shower. Good thing is that all assets were consolidating all morning anyway
+  so I didn't miss much and may have saved some money.
+* Today was a consolidation day through and through. There two bits of good news:
+  1. During normal running, the loss was held to -4%. It was -5% in total with
+     the morning's API mishap.
+  2. The account profit peaked at +1.61%.
+* It's hard to know whether this would have been a win under normal
+  circumstances since we lost 10-15 minutes of the pivotal time of the day. I'd
+  say change nothing and continue to observe.
+* If you do change anything, it may be to increase the consolidation time
+  frame. It seems to have slowed down the rate of loss.
+* At some point you may want to consider moving to a more rapid take profit
+  countdown.
+
+###### Next Thing(s) to Try
+
+##### Forex
+
+**Oanda (STAGING)**
+```
+Runtime: 55:59:08
+Current Balance:       $49,894.94980 (-8.76950) (-0.02%)
+Max Balance:           $49,903.71930 (+0.00000) (+0.00%) @ 08:42 CDT
+Min Balance:           $49,894.70990 (-9.00940) (-0.02%) @ 11:50 CDT
+Original Balance:      $49,903.71930
+```
+
+###### Notes
+* Most assets have been or currently are in 20-36 loss losing streaks. It seems
+  safe to say that they won't find their way out of them.
+
+### 2022-10-18:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 38:06
+Current Balance:       $30354.60 (+1648.30) (+5.74%)
+Max Balance:           $30638.05 (+1931.75) (+6.73%) @ 08:54 CDT
+Min Balance:           $28670.57 (-35.73) (-0.12%) @ 08:30 CDT
+Original Balance:      $28706.30
+```
+
+**Beta (STAGING)**
+```
+Runtime: 05:38:45
+Current Balance:       $27,441.14 (-881.58) (-3.11%)
+Max Balance:           $29,511.62 (+1,188.90) (+4.20%) @ 10:41 CDT
+Min Balance:           $27,290.03 (-1,032.69) (-3.65%) @ 14:50 CDT
+Original Balance:      $28,322.72
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 1W (Consecutive: 1) 1L (Consecutive: 0)
+
+###### Notes
+* Big win today! Everything worked as expected.
+* Between Alpha and Beta, I shortened the consolidation time frame. This led to
+  AMZN and GOOG having 16 and 18 loss losing streaks respectively. I'm going to
+  extend it to 1.5 hours. This will further help slow profit attrition during
+  consolidation.
+* I'm also going to pause the exiting on big wins. I may reverse the decision
+  again, but here's the thinking:
+  * Every time you exit a position, you're opening yourself to loss
+    consolidation at your exit point.
+  * You could, however, also be missing out on an opportunity to ride the reversal.
+  * This actually won't happen in the current iteration of TaoBot because it
+    awaits consolidation breach before opening in the reverse direction.
+  * If the range is still small and a position closes at a loss, then it can
+    open in the opposite direction when the range is breached.
+  * A premature close from a win can correct then return in the original
+    direction. In this case, you're missing out on the profit you could have
+    maintained and may even have incurred a loss in the meamtime.
+  * It therefore makes sense simply hold and let the account take profit stop
+    trading.
+* It's worth noting that Beta would have won on two separate occasions if stop
+  profit were enabled for it. I leave it on to learn how to minimize
+  consolidation attrition. Maybe one day leaving TaoBot will consistently earn
+  more than stopping profit. Until then, I'm happy closing it after the
+  morning's profits.
+
+###### Next Thing(s) to Try
+
+##### Forex
+
+**Oanda (STAGING)**
+```
+Runtime: 32:39:59
+Current Balance:       $49,898.45850 (-5.26080) (-0.01%)
+Max Balance:           $49,903.71930 (+0.00000) (+0.00%) @ 08:42 CDT
+Min Balance:           $49,898.45850 (-5.26080) (-0.01%) @ 17:21 CDT
+Original Balance:      $49,903.71930
+```
+
+###### Notes
+* Most currency pairs have been consolidating for the last 12-18 hours so
+  they're all at heavy losses.
+* Maybe I'll have to reduce their take profit, OR introduce an account stop
+  profit per day or for a given time period.
+
+### 2022-10-17:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 01:27:30
+Current Balance:       $29992.39 (-196.21) (-0.65%)
+Max Balance:           $31255.63 (+1067.03) (+3.53%) @ 08:40 CDT
+Min Balance:           $29979.12 (-209.48) (-0.69%) @ 09:57 CDT
+Original Balance:      $30188.60
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 05:00:18
+Current Balance:       $28,755.03 (-1,433.57) (-4.75%)
+Max Balance:           $30,373.45 (+184.85) (+0.61%) @ 10:53 CDT
+Min Balance:           $28,723.46 (-1,465.14) (-4.85%) @ 14:55 CDT
+Original Balance:      $30,188.60
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 0W (Consecutive: 0) 1L (Consecutive: 1)
+
+###### Notes
+* Interesting day. To start the day, I had a bug in deciding whether to enter
+  trades and their direction which made most trade direction decisions random.
+  If the bug were absent, the day would have almost certainly resulted in a win.
+* Today highlighted a few things:
+  1. A day of almost nonstop consolidation can result in a loss of 5%, even if
+    you're waiting for breakouts.
+  2. Early morning success is key.
+  3. Waiting longer to take profit is key. I'm still not sure if 100x one-sec
+     variance is right, but if TSLA had never closed, it would have profited.
+     There are scenarios, however, where not closing would be disadvantageous.
+  4. This is good reason to not run the app all day and keep the time-eased
+     take profit algorigthm: after early morning gains, price often
+     consolidates with no new trends forming. This _will_ incur heavy losses.
+  5. Consolidation is a fact of life. You'll have to re-introduce the max
+     account loss at some point. The difference is that since it takes longer
+     to realize large losses, you can perhaps feel more assured that most of
+     the day has past before it triggers.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Oanda (STAGING)**
+```
+Runtime: 19:22:21
+Current Balance:       $49,903.73070 (+0.89670) (+0.00%) 🔥
+Max Balance:           $49,903.73070 (+0.89670) (+0.00%) @ 08:21 CDT
+Min Balance:           $49,900.64650 (-2.18750) (-0.00%) @ 05:28 CDT
+Original Balance:      $49,902.83400
+```
+
+###### Notes
+* The new strategy worked well for Oanda in the first 19 hours. The win
+  thresholds are a bit out of reach, so I'm going to try 40x stop loss, 400x
+  stop profit.
 
 ### 2022-10-14:
 #### Performance
