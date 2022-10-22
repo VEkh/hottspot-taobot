@@ -115,6 +115,7 @@ private:
   quote_t get_quote();
   quote_t read_streamed_quote();
 
+  std::pair<double, double> get_quote_price_range();
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
