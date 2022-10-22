@@ -64,6 +64,7 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
 
   try {
     const std::string balance = account_json["account"]["balance"];
+    const std::string position_value = account_json["account"]["positionValue"];
     const std::string margin_rate_string =
         account_json["marginRates"][this->symbol];
     const std::string margin_buying_power_string =
@@ -76,7 +77,7 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
 
     double original_balance = this->account_balance.original_balance;
 
-    const double balance_d = std::stod(balance);
+    const double balance_d = std::stod(balance) + std::stod(position_value);
     const time_t now = std::time(nullptr);
 
     if (!original_balance) {
