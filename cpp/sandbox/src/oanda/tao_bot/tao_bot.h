@@ -99,6 +99,7 @@ private:
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
+  bool should_stop_profit();
   bool should_terminate();
   double base_quantity();
   double closed_position_profit(const position_t &);

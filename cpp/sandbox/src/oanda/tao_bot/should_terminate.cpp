@@ -3,6 +3,7 @@
 
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
+#include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Oanda::TaoBot, order_status_t
 #include <iostream>                     // std::cout, std::endl
 #include <stdio.h>                      // printf
@@ -19,11 +20,17 @@ bool Oanda::TaoBot::should_terminate() {
   if (max_account_loss_reached()) {
     if (are_positions_closed) {
       std::cout << fmt.bold << fmt.red << std::endl;
-      printf(
-          "🛑 %.1f%% of account balance lost!! Applying emergency brake.\n",
-          this->MAX_ACCOUNT_LOSS_RATIO * 100);
+      puts("🛑 Max account balance lost!! Applying emergency brake.");
       std::cout << fmt.reset;
     }
+
+    return are_positions_closed;
+  }
+
+  if (should_stop_profit()) {
+    std::cout << fmt.bold << fmt.green << std::endl;
+    puts("🎊 Your max profit is slipping. We're going to stop now.");
+    std::cout << fmt.reset;
 
     return are_positions_closed;
   }
