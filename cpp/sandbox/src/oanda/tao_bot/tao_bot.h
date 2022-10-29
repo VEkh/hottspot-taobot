@@ -79,10 +79,6 @@ private:
   performance_t performance;
   price_movement_t price_movement;
   std::map<std::string, std::string> flags;
-  std::map<const char *, std::map<std::string, quote_t>> momentum_reversals = {
-      {"resistance", {}},
-      {"support", {}},
-  };
   std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -137,7 +133,6 @@ private:
 
   std::string base_currency();
   void await_market_open();
-  void build_momentum_reversals();
   void clear_stale_open_order();
   void close_position();
   void complete_filled_order(order_t *);
@@ -150,7 +145,6 @@ private:
   void load_quotes();
   void log_account_balance();
   void log_end_of_trading_period();
-  void log_momentum_reversals();
   void log_performance();
   void log_position();
   void log_position_results();

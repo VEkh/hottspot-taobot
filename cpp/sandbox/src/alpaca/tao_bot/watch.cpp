@@ -1,13 +1,11 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
-#include "build_momentum_reversals.cpp"       // build_momentum_reversals
 #include "cancel_stale_open_order.cpp"        // cancel_stale_open_order
 #include "close_position.cpp"                 // close_position
 #include "fetch_and_persist_quote.cpp"        // fetch_and_persist_quote
 #include "log_account_balance.cpp"            // log_account_balance
 #include "log_end_of_trading_period.cpp"      // log_end_of_trading_period
-#include "log_momentum_reversals.cpp"         // log_momentum_reversals
 #include "log_performance.cpp"                // log_performance
 #include "log_position.cpp"                   // log_position
 #include "log_position_results.cpp"           // log_position_results
@@ -33,14 +31,12 @@ void Alpaca::TaoBot::watch() {
     fetch_and_persist_quote();
     set_and_persist_price_movement();
     update_account_balance();
-    build_momentum_reversals();
 
     log_account_balance();
     log_quote();
     log_price_movement();
     log_position();
     log_performance();
-    log_momentum_reversals();
 
     set_position_status();
     cancel_stale_open_order();
