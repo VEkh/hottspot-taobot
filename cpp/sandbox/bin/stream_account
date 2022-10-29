@@ -51,7 +51,7 @@ function start_if_stopped() {
   if [[ -z $state ]]
   then
     echo -e "${fmt_green}😴 Account is not streaming. Starting stream.\n${fmt_reset}"
-    start_stream
+    start_stream "${@}"
   else
     echo -e "${fmt_cyan}💖 Account is streaming. Doing nothing.${fmt_reset}"
   fi
@@ -63,11 +63,9 @@ function start_stream() {
 
   mkdir -p "$log_dir"
 
-  stream_args=("$@")
-
   echo -e "${fmt_bold}${fmt_yellow}Starting Account Stream ${fmt_normal}${fmt_cyan}"
 
-  "$app_dir/build/$project" stream_account "${stream_args[@]}" > "$log_file" 2>&1 &
+  "$app_dir/build/$project" stream_account "${@}" > "$log_file" 2>&1 &
 }
 
 function stop_stream() {
@@ -85,7 +83,7 @@ function stop_stream() {
 
 case $1 in
   heartbeat)
-    start_if_stopped
+    start_if_stopped "${@:2}"
     ;;
 
   restart)

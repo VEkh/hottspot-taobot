@@ -1,0 +1,34 @@
+#!/bin/bash
+# shellcheck disable=2009
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+project=$(dirname "$0" | xargs basename)
+
+if [[ $project = "bin" ]]; then
+  cmd=$(basename "$0")
+
+  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
+  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
+
+  exit 1;
+fi
+
+function get_status() {
+  ps aux | grep --color "[t]ao_bot" | grep --color "$project"
+}
+
+state=$(get_status)
+
+if [[ -z $state ]]; then
+  echo -e "${fmt_bold}${fmt_cyan}No running instances of TaoBot. Starting.${fmt_reset}"
+
+  "$app_dir/bin/$project/stream_account" restart "$@"
+  "$app_dir/bin/$project/restart" "$@"
+else
+  echo -e "${fmt_bold}${fmt_green}💖 TaoBot is already running. Doing nothing.${fmt_reset}"
+fi
