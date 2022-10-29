@@ -9,17 +9,13 @@
 #include <math.h>                      // floor
 
 int Oanda::TaoBot::compute_quantity() {
-  return 1e2;
-
   const quote_t quote = this->quotes.back();
   const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
 
   const double max_buying_power =
       this->account_balance.balance * this->account_balance.margin_multiplier;
 
-  const double buying_power =
-      std::min(this->account_balance.margin_buying_power,
-               max_buying_power / tradeable_symbols_count());
+  const double buying_power = max_buying_power / tradeable_symbols_count();
 
   return floor(buying_power / dollars_per_unit);
 }
