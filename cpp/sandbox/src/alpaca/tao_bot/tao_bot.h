@@ -152,6 +152,7 @@ private:
   void set_status(order_t *order);
   void update_account_balance();
   void watch();
+  void write_account_performance();
   void write_performance();
   void write_price_movement();
   void write_quotes();

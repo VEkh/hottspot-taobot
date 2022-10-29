@@ -23,6 +23,7 @@
 #include "should_terminate.cpp"               // should_terminate
 #include "tao_bot.h"                          // Alpaca::TaoBot
 #include "update_account_balance.cpp"         // update_account_balance
+#include "write_account_performance.cpp"      // write_account_performance
 #include <iostream>                           // std::cout, std::flush
 #include <unistd.h>                           // usleep
 
@@ -58,6 +59,7 @@ void Alpaca::TaoBot::watch() {
   }
 
   log_end_of_trading_period();
+  write_account_performance();
 }
 
 #endif
