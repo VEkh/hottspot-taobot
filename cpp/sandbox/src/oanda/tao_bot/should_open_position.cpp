@@ -3,11 +3,16 @@
 
 #include "current_spread.cpp"  // current_spread
 #include "is_breaking_out.cpp" // is_breaking_out
+#include "is_market_open.cpp"  // is_market_open
 #include "is_price_moving.cpp" // is_price_moving
 #include "spread_limit.cpp"    // spread_limit
 #include "tao_bot.h"           // Oanda::TaoBot, fmt, order_action_t
 
 bool Oanda::TaoBot::should_open_position() {
+  if (!is_market_open()) {
+    return false;
+  }
+
   if (this->open_order_ptr) {
     return false;
   }

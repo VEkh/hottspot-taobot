@@ -1,12 +1,10 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
-#include "await_market_open.cpp"              // await_market_open
 #include "build_momentum_reversals.cpp"       // build_momentum_reversals
 #include "cancel_stale_open_order.cpp"        // cancel_stale_open_order
 #include "close_position.cpp"                 // close_position
 #include "fetch_and_persist_quote.cpp"        // fetch_and_persist_quote
-#include "is_market_open.cpp"                 // is_market_open
 #include "log_account_balance.cpp"            // log_account_balance
 #include "log_end_of_trading_period.cpp"      // log_end_of_trading_period
 #include "log_momentum_reversals.cpp"         // log_momentum_reversals
@@ -29,11 +27,6 @@
 #include <unistd.h>                           // usleep
 
 void Alpaca::TaoBot::watch() {
-  while (!is_market_open()) {
-    log_timestamps();
-    await_market_open();
-  }
-
   while (!should_terminate()) {
     log_timestamps();
     fetch_and_persist_quote();

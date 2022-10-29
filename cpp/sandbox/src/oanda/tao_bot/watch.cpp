@@ -1,7 +1,6 @@
 #ifndef OANDA__TAO_BOT_watch
 #define OANDA__TAO_BOT_watch
 
-#include "await_market_open.cpp"              // await_market_open
 #include "build_momentum_reversals.cpp"       // build_momentum_reversals
 #include "clear_stale_open_order.cpp"         // clear_stale_open_order
 #include "close_position.cpp"                 // close_position
@@ -29,11 +28,6 @@
 #include <unistd.h>                           // usleep
 
 void Oanda::TaoBot::watch() {
-  while (!is_market_open()) {
-    log_timestamps();
-    await_market_open();
-  }
-
   while (!should_terminate()) {
     log_timestamps();
     fetch_and_persist_quote();
