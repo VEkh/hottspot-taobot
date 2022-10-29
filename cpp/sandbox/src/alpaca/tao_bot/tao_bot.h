@@ -123,7 +123,7 @@ private:
   void build_momentum_reversals();
   void cancel_stale_open_order();
   void close_position();
-  void fetch_and_persist_quote();
+  void fetch_and_persist_quote(const bool);
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
   void load_price_movement();
