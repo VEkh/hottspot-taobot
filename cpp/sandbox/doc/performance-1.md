@@ -1,4 +1,4 @@
-### 2022-10-24:
+### 2022-10-31:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -14,6 +14,306 @@ Original Balance:      $ (-) (-%)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-10-28:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 05:34:27
+Current Balance:       $28773.14 (+870.89) (+3.12%)
+Max Balance:           $29054.77 (+1152.52) (+4.13%) @ 13:51 CDT
+Min Balance:           $26784.66 (-1117.59) (-4.01%) @ 08:46 CDT
+Original Balance:      $27902.25
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 00:44
+Current Balance:       $28675.00 (+772.75) (+2.77%)
+Max Balance:           $28771.46 (+869.21) (+3.12%) @ 14:08 CDT
+Min Balance:           $28675.00 (+772.75) (+2.77%) @ 14:08 CDT
+Original Balance:      $27902.25
+```
+
+**Neglected to restart account stream before restart**
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 49:58
+Current Balance:       $28464.42 (-210.58) (-0.73%)
+Max Balance:           $28705.13 (+30.13) (+0.11%) @ 14:30 CDT
+Min Balance:           $28455.75 (-219.25) (-0.76%) @ 14:58 CDT
+Original Balance:      $28675.00
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 6W (Consecutive: 1) 4L (Consecutive: 0)
+
+###### Notes
+* It took five hourse, but Alpha finally won 😂
+* This was a fantastic day for trying out the trailing stop approach to
+  stopping the account profit. It allowed the lead to extend for several hours
+  before closing at a legitimate correction point.
+* It will help avoid missing out on highly attainable profits that rapidly
+  reverse into loss.
+* 1% is also an excellent trailing stop amount. It gave plenty of time for the
+  profit to dip and eventually extend its max. 0.5% would have been too small.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 07:26:59
+Current Balance:       $43384.34310 (-2694.16740) (-5.85%)
+Max Balance:           $46615.45190 (+536.94140) (+1.17%) @ 08:51 CDT
+Min Balance:           $43120.35900 (-2958.15150) (-6.42%) @ 15:56 CDT
+Original Balance:      $46078.51050
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+* This is a perfect case for why the trailing stop approach to securing account
+  profit is better. This would have been another win.
+
+###### Next Thing(s) to Try
+
+### 2022-10-27:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 03:58:01
+Current Balance:       $28149.74 (-1659.15) (-5.57%)
+Max Balance:           $30958.42 (+1149.53) (+3.86%) @ 08:57 CDT
+Min Balance:           $28133.77 (-1675.12) (-5.62%) @ 12:27 CDT
+Original Balance:      $29808.89
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 28:19
+Current Balance:       $28,191.11 (+39.08) (+0.14%)
+Max Balance:           $28,209.06 (+57.03) (+0.20%) @ 12:51 CDT
+Min Balance:           $28,142.06 (-9.97) (-0.04%) @ 12:55 CDT
+Original Balance:      $28,152.03
+Margin Buying Power:   $119,235.56
+Stop Loss Profit:      $28,447.63
+Target Account Profit: $28,447.63
+Target Max Profit:     $28,588.39 (Goofed on math 😵)
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 14:07
+Current Balance:       $28,541.62 (+350.51) (+1.24%)
+Max Balance:           $28,691.83 (+500.72) (+1.78%) @ 13:12 CDT
+Min Balance:           $28,094.72 (-96.39) (-0.34%) @ 13:04 CDT
+Original Balance:      $28,191.11
+```
+
+**Alpha (STAGING) (Round 4)**
+```
+Runtime: 01:45:28
+Current Balance:       $27,940.71 (-599.89) (-2.10%)
+Max Balance:           $28,644.20 (+103.60) (+0.36%) @ 13:49 CDT
+Min Balance:           $27,940.71 (-599.89) (-2.10%) @ 14:59 CDT
+Original Balance:      $28,540.60
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 5W (Consecutive: 0) 4L (Consecutive: 1)
+
+###### Notes
+* Round 1 surpassed the target, but reversed quickly then started
+  consolidating. I'm tempted to change the account take profit algorithm to a
+  simple trailing stop at 1.05% + .05%.
+* This will have a consequence of prematurely closing before higher peaks are
+  reached. It will also close an re-open into consolidation. It will, however,
+  avoid sharp reversals that are never re-claimed.
+* Whatever I decide with he take profit algorithm, I want to automate recording
+  the round's performance and restarting all instances.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 44:12
+Current Balance:       $46078.51050 (+794.70060) (+1.75%)
+Max Balance:           $46412.95350 (+1129.14360) (+2.49%) @ 08:46 CDT
+Min Balance:           $44155.24170 (-1128.56820) (-2.49%) @ 08:56 CDT
+Original Balance:      $45283.80990
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-10-26:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 02:48:53
+Current Balance:       $29831.27 (+362.38) (+1.23%)
+Max Balance:           $30195.72 (+726.83) (+2.47%) @ 10:32 CDT
+Min Balance:           $28760.57 (-708.32) (-2.40%) @ 09:04 CDT
+Original Balance:      $29468.89
+```
+
+**Beta (STAGING)**
+```
+Runtime: 03:38:34
+Current Balance:       $30,498.14 (+2,229.59) (+7.89%)
+Max Balance:           $30,571.98 (+2,303.43) (+8.15%) 🔥@  14:36 CDT
+Min Balance:           $28,245.12 (-23.43) (-0.08%) @ 11:28 CDT
+Original Balance:      $28,268.55
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 5W (Consecutive: 2) 3L (Consecutive: 0)
+
+###### Notes
+* Very interesting. It looks like most days, Beta has won after Alpha closed.
+  Tomorrow and Friday, I'll restart alpha multiple times unless the start time
+  would be after 1pm (12:30pm?).
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging (Round 1)**
+```
+Runtime: 04:35:03
+Current Balance:       $49888.45860 (+2.74250) (+0.01%)
+Max Balance:           $49889.22570 (+3.50960) (+0.01%) @ 11:32 CDT
+Min Balance:           $49885.60410 (-0.11200) (-0.00%) @ 09:36 CDT
+Original Balance:      $49885.71610
+Margin Buying Power:   $1662266.66667
+Stop Loss Profit:      $0.71755
+Target Account Profit: $0.71755
+Target Max Profit:     $1.07633 ✅
+```
+
+**Staging (Round 2)**
+```
+Runtime: 02:54:36
+Current Balance:       $44,851.91660 (-5,033.79950) (-10.09%)
+Max Balance:           $49,888.59230 (+2.87620) (+0.01%) @ 13:17 CDT
+Min Balance:           $44,076.72090 (-5,808.99520) (-11.64%) @ 16:04 CDT
+Original Balance:      $49,885.71610
+```
+
+###### Notes
+* It won! This is the second consecutive day where Forex would have won when
+  starting at 8am.
+* The account stop profit calculations are getting jacked up by the small order
+  sizes.
+* Forex's 2nd round lost badly. I'm going to see if it really depends on
+  morning movement.
+
+###### Next Thing(s) to Try
+* Maximize order sizes to get a real sense of how much percentage change you
+  can expect in a given day.
+
+### 2022-10-25:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 54:34
+Current Balance:       $29476.80 (+824.60) (+2.88%)
+Max Balance:           $29696.93 (+1044.73) (+3.65%) @ 09:02 CDT
+Min Balance:           $28577.94 (-74.26) (-0.26%) @ 08:30 CDT
+Original Balance:      $28652.20
+```
+
+**Beta (STAGING)**
+```
+Runtime: 05:33:35
+Current Balance:       $28,284.01 (-100.16) (-0.35%)
+Max Balance:           $28,827.61 (+443.44) (+1.56%) @ 11:22 CDT
+Min Balance:           $27,750.90 (-633.27) (-2.23%) @ 13:15 CDT
+Original Balance:      $28,384.17
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 4W (Consecutive: 1) 3L (Consecutive: 0)
+
+###### Notes
+* No API glitches, plus a win. I'll take that 🙂
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 11:16:01
+Current Balance:       $49886.41670 (-1.81740) (-0.00%)
+Max Balance:           $49890.24860 (+2.01450) (+0.00%) @ 09:02 CDT
+Min Balance:           $49886.34180 (-1.89230) (-0.00%) @ 19:34 CDT
+Original Balance:      $49888.23410
+```
+
+###### Notes
+* This actually won. I just goofed on the math and couldn't stop slipping
+  profit.
+* I'll try again tomorrow with the fixed math.
+
+###### Next Thing(s) to Try
+
+### 2022-10-24:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 06:26:23
+Current Balance:       $28,677.11 (-1,208.96) (-4.05%)
+Max Balance:           $29,945.27 (+59.20) (+0.20%) @ 08:33 CDT
+Min Balance:           $27,737.01 (-2,149.06) (-7.19%) @ 12:59 CDT
+Original Balance:      $29,886.07
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 3W (Consecutive: 0) 3L (Consecutive: 1)
+
+###### Notes
+* There was an API glitch that caused all instance to segfault. I suspect that
+  it was another unhandled API response. I'll have to log and quickly debug
+  next time.
+* After the first ~30 min, the account balance was down < -5%. In addition to
+  the glitch, the morning started with consolidation for all assets.
+* If you're considering re-introducing the emergency brake, just know that it
+  can hit in the first 30 min.
+* TaoBot almost crossed profit territory at ~9:30am and again made a great run
+  close to 2:30pm.
+* This demonstrates that almost all consolidation time frames can lead to large
+  max loss; -7.19% in this case.
+* As a result, I'll reduce it to 45 minutes so a redemptive position can maybe
+  open sooner.
+
 ###### Next Thing(s) to Try
 
 ### 2022-10-21:
@@ -245,7 +545,7 @@ Original Balance:      $30,188.60
      variance is right, but if TSLA had never closed, it would have profited.
      There are scenarios, however, where not closing would be disadvantageous.
   4. This is good reason to not run the app all day and keep the time-eased
-     take profit algorigthm: after early morning gains, price often
+     take profit algorithm: after early morning gains, price often
      consolidates with no new trends forming. This _will_ incur heavy losses.
   5. Consolidation is a fact of life. You'll have to re-introduce the max
      account loss at some point. The difference is that since it takes longer
