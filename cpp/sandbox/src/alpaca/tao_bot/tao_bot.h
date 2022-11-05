@@ -37,6 +37,7 @@ private:
   using quote_t = Alpaca::t::quote_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
+  const double MAX_ACCOUNT_LOSS_RATIO = -0.045;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
