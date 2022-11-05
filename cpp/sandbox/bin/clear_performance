@@ -7,7 +7,7 @@ fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
-# shellcheck disable=1091
+# shellcheck disable=1090,1091
 source "$app_dir/bin/utils" # to_upper
 
 performance_dir="$app_dir/data/$project/performance"

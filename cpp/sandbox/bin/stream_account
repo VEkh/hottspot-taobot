@@ -58,6 +58,7 @@ function start_if_stopped() {
 }
 
 function start_stream() {
+  data_dir="$app_dir/data/$project"
   log_dir="$app_dir/log/$project"
   log_file="$log_dir/account_stream.log"
 
@@ -65,6 +66,7 @@ function start_stream() {
 
   echo -e "${fmt_bold}${fmt_yellow}Starting Account Stream ${fmt_normal}${fmt_cyan}"
 
+  echo "{}" > "$data_dir/account.json"
   "$app_dir/build/$project" stream_account "${@}" > "$log_file" 2>&1 &
 }
 

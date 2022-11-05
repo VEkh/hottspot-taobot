@@ -119,6 +119,8 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
         .original_margin_buying_power = original_margin_buying_power,
         .timestamp = now,
     };
+  } catch (nlohmann::detail::parse_error &) {
+    return get_account_balance();
   } catch (nlohmann::detail::type_error &) {
     return get_account_balance();
   }
