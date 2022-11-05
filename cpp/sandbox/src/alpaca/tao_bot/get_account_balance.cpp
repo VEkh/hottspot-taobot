@@ -65,6 +65,13 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
     std::cout << error_message << fmt.reset << std::endl;
 
     account_json = fetch_account_balance();
+  } catch (nlohmann::detail::type_error &) {
+    std::string error_message =
+        Formatted::error_message("[ALPACA__TAO_BOT_get_account_balance]: "
+                                 "nlohmann::detail::type_error when streaming");
+    std::cout << error_message << fmt.reset << std::endl;
+
+    account_json = fetch_account_balance();
   } catch (std::domain_error &e) {
     std::string error_message = Formatted::error_message(
         "[ALPACA__TAO_BOT_get_account_balance]: std::domain_error "
