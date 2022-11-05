@@ -1,7 +1,6 @@
 #ifndef ALPACA__TAO_BOT_should_open_position
 #define ALPACA__TAO_BOT_should_open_position
 
-#include "is_breaking_out.cpp" // is_breaking_out
 #include "is_market_open.cpp"  // is_market_open
 #include "is_price_moving.cpp" // is_price_moving
 #include "tao_bot.h"           // Alpaca::TaoBot, quote_t
@@ -24,10 +23,6 @@ bool Alpaca::TaoBot::should_open_position() {
   }
 
   if (!is_price_moving()) {
-    return false;
-  }
-
-  if (!is_breaking_out()) {
     return false;
   }
 

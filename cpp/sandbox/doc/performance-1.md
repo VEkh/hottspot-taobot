@@ -1,4 +1,4 @@
-### 2022-10-31:
+### 2022-11-07:
 #### Performance
 ##### Equities
 **Alpha (STAGING)**
@@ -10,20 +10,362 @@ Min Balance:           $ (-) (-%)
 Original Balance:      $ (-) (-%)
 ```
 
+###### Stats (STAGING) (as of 2022-11-03)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-11-04:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 39:02
+Current Balance:       $31612.32 (+1068.71) (+3.50%)
+Max Balance:           $31953.27 (+1409.66) (+4.62%) @ 08:45 CDT
+Min Balance:           $29914.99 (-628.62) (-2.06%) @ 08:33 CDT
+Original Balance:      $30543.61
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 01:36:50
+Current Balance:       $30185.08 (-1422.67) (-4.50%)
+Max Balance:           $31793.79 (+186.04) (+0.59%) @ 09:41 CDT
+Min Balance:           $30185.08 (-1422.67) (-4.50%) @ 10:23 CDT
+Original Balance:      $31607.75
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 30:20
+Current Balance:       $32054.86 (+1874.57) (+6.21%)
+Max Balance:           $32374.95 (+2194.66) (+7.27%) @ 10:53 CDT
+Min Balance:           $30167.51 (-12.78) (-0.04%) @ 10:24 CDT
+Original Balance:      $30180.29
+```
+
+**Alpha (STAGING) (Round 4)**
+```
+Runtime: 01:16:17
+Current Balance:       $32153.74 (+98.88) (+0.31%)
+Max Balance:           $32507.50 (+452.64) (+1.41%) @ 12:09 CDT
+Min Balance:           $31667.05 (-387.81) (-1.21%) @ 11:05 CDT
+Original Balance:      $32054.86
+```
+
+**Alpha (STAGING) (Round 5)**
+```
+Runtime: 01:45:40
+Current Balance:       $32279.69 (+155.67) (+0.48%)
+Max Balance:           $32621.73 (+497.71) (+1.55%) @ 13:57 CDT
+Min Balance:           $31600.24 (-523.78) (-1.63%) @ 13:19 CDT
+Original Balance:      $32124.02
+```
+
+**Alpha (STAGING) (Round 6)**
+```
+Runtime: 21:26
+Current Balance:       $32299.06 (+20.10) (+0.06%)
+Max Balance:           $32628.07 (+349.11) (+1.08%) @ 14:13 CDT
+Min Balance:           $32179.58 (-99.38) (-0.31%) @ 14:05 CDT
+Original Balance:      $32278.96
+```
+
+**Alpha (STAGING) (Round 7)**
+```
+Runtime: 35:59
+Current Balance:       $32217.51 (-81.55) (-0.25%)
+Max Balance:           $32580.46 (+281.40) (+0.87%) @ 14:46 CDT
+Min Balance:           $31963.23 (-335.83) (-1.04%) @ 14:30 CDT
+Original Balance:      $32299.06
+```
+
+###### Stats (STAGING) (as of 2022-11-03)
+* Win / Loss: 1W (Consecutive: 1) 1L (Consecutive: 0)
+
+###### Notes
+* Two restarts failed with
+```
+terminate called after throwing an instance of 'nlohmann::detail::type_error'
+what():  [json.exception.type_error.302] type must be number, but is null
+```
+
+* I think this is because I clear out account.json and it fails has trouble
+  parsing it.
+* Today's overall return was +5.47%. This was a solid return, but it was
+  actually a day that could have been +10%. Add to that, one of the rounds
+  returned +6.21% with a +7.27% peak. If I'm betting that big wins will make up
+  for capped big losses (-4.5%), then days like these need to be as big as
+  possible.
+* The big win round happened after a -4.5% loss. I did, however, change
+  strategies between rounds. If I had stopped trading after the loss, I would
+  have missed out on BIG gains.
+* I'm wondering if that still means that I should pause trading after the loss.
+  I guess for now, I won't.
+* Since waiting for breakouts still resulted in a -7% loss at the beginning of
+  the week, I reverted to continuous trading.
+* Here's where the algorithm stands:
+  * Flip coin to start
+  * Only close on losses. Hold wins.
+  * Loss threshold is max(`25x long-term one-sec variance`, `1/4 the consolidation time's price range`)
+  * Close round when the account max profit exceeds +1.05%, then breaches a 1%
+    stop loss.
+  * Close round if account loss exceeds -4.5%.
+* The 1% account profit trailing stop is a really good amount. It's led to
+  runaway profits and secures modest profits. It feels better to secure a win
+  when the target is reached, even if it's a small win.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 26:07
+Current Balance:       $33846.24950 (-1607.23020) (-4.53%)
+Max Balance:           $35702.44470 (+248.96500) (+0.70%) @ 08:51 CDT
+Min Balance:           $33846.24950 (-1607.23020) (-4.53%) @ 08:56 CDT
+Original Balance:      $35453.47970
+```
+
+###### Stats (STAGING) (as of 2022-11-03)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+* Looks like I just got lucky a couple of days.
+
+###### Next Thing(s) to Try
+
+### 2022-11-03:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 09:00
+Current Balance:       $31033.02 (+33.01) (+0.11%)
+Max Balance:           $31364.45 (+364.44) (+1.18%) @ 08:32 CDT
+Min Balance:           $30723.07 (-276.94) (-0.89%) @ 08:31 CDT
+Original Balance:      $31000.01
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 06:23:59
+Current Balance:       $30582.82 (-449.07) (-1.45%)
+Max Balance:           $31092.61 (+60.72) (+0.20%) @ 08:35 CDT
+Min Balance:           $29675.44 (-1356.45) (-4.37%) @ 12:01 CDT
+Original Balance:      $31031.89
+```
+
+###### Stats (STAGING) (as of 2022-11-03)
+* Win / Loss: 0W (Consecutive: 0) 1L (Consecutive: 1)
+
+###### Notes
+* I'm going to try a new max loss that is based on the consolidation period's
+  time range. Specifically one-third of the range.
+* Since I'm awaiting breakouts, I won't be missing out on entering in the
+  opposite direction if I wait longer.
+* This will incur larger losses when they do happen, but it will also help
+  prevent premature closures.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 15:00
+Current Balance:       $35453.47970 (-1931.99940) (-5.17%)
+Max Balance:           $37385.47910 (+0.00000) (+0.00%) @ 08:30 CDT
+Min Balance:           $35453.47970 (-1931.99940) (-5.17%) @ 08:45 CDT
+Original Balance:      $37385.47910
+```
+
+###### Stats (STAGING) (as of 2022-11-03)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2022-11-02:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 01:18:53
+Current Balance:       $25192.90 (-1195.48) (-4.53%)
+Max Balance:           $26429.60 (+41.22) (+0.16%) @ 08:30 CDT
+Min Balance:           $25192.90 (-1195.48) (-4.53%) @ 09:37 CDT
+Original Balance:      $26388.38
+```
+
+**Reset Alpha**
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 02:59:22
+Current Balance:       $30260.52 (+260.52) (+0.87%)
+Max Balance:           $30562.34 (+562.34) (+1.87%) @ 12:13 CDT
+Min Balance:           $29958.08 (-41.92) (-0.14%) @ 09:53 CDT
+Original Balance:      $30000.00
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 01:55:33
+Current Balance:       $31,013.20 (+814.48) (+2.70%)
+Max Balance:           $31,075.41 (+876.69) (+2.90%) @ 14:52 CDT
+Min Balance:           $29,669.28 (-529.44) (-1.75%) @ 14:09 CDT
+Original Balance:      $30,198.72
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 7W (Consecutive: 0) 6L (Consecutive: 1)
+
+###### Notes
+* Today was the first day of re-introducing the max account loss. This time
+  it's -4.5%. Alpha hit it and closed.
+* I restarted Alpha and will watch.
+* The idea is this:
+  * Monday demonstrated that even by waiting for breakouts, it's still possible
+    to lose <-7% in one day.
+  * It seems safe to say that large losses are inevitable with any momentum
+    strategy.
+  * Days will therefore fall into one of four categories:
+    * Massive gains (+4-10%)
+    * Small gains (+1-2%)
+    * Small losses (-1-2%)
+    * Massive losses (-4-10%)
+  * Assuming that these days are evenly distributed, this suggests that the
+    strategy will break even in the long run.
+  * However, if you limit the max loss days, then you can possibly skew overall
+    performance in the gain direction.
+* I'll have to wait a few weeks to see this play out, but overall profitability
+  is still an open question.
+* The Fed hiked interest rates by 0.75% again at 1pm and that sent the markets
+  flying.
+* The good news is that waiting for breakouts help keep loss to a minimum until
+  the price finally broke out.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 10:00
+Current Balance:       $37385.47910 (+183.40420) (+0.49%)
+Max Balance:           $37810.28870 (+608.21380) (+1.63%) @ 08:39 CDT
+Min Balance:           $36851.80880 (-350.26610) (-0.94%) @ 08:32 CDT
+Original Balance:      $37202.07490
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+* I'm introducing a -4.5% max loss here too.
+* I'm just not restarting it after wins.
+* It is nice to see it win somewhat consistently.
+
+###### Next Thing(s) to Try
+
+### 2022-11-01:
+#### Performance
+##### Equities
+**Alpha (STAGING) (Round 1)**
+```
+Runtime: 45:11
+Current Balance:       $26182.29 (+21.27) (+0.08%)
+Max Balance:           $26468.62 (+307.60) (+1.18%) @ 08:51 CDT
+Min Balance:           $25832.28 (-328.74) (-1.26%) @ 08:31 CDT
+Original Balance:      $26161.02
+```
+
+**Alpha (STAGING) (Round 2)**
+```
+Runtime: 22:48
+Current Balance:       $26492.99 (+318.77) (+1.22%)
+Max Balance:           $26761.97 (+587.75) (+2.25%) @ 09:13 CDT
+Min Balance:           $25868.24 (-305.98) (-1.17%) @ 09:01 CDT
+Original Balance:      $26174.22
+```
+
+**Alpha (STAGING) (Round 3)**
+```
+Runtime: 45:16
+Current Balance:       $26596.49 (+110.61) (+0.42%)
+Max Balance:           $26850.54 (+364.66) (+1.38%) @ 09:58 CDT
+Min Balance:           $26284.19 (-201.69) (-0.76%) @ 09:28 CDT
+Original Balance:      $26485.88
+```
+
+**Alpha (STAGING) (Round 4)**
+```
+Runtime: 04:56:59
+Current Balance:       $26425.81 (-170.68) (-0.64%)
+Max Balance:           $26852.87 (+256.38) (+0.96%) @ 11:38 CDT
+Min Balance:           $26180.86 (-415.63) (-1.56%) @ 12:51 CDT
+Original Balance:      $26596.49
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 7W (Consecutive: 1) 5L (Consecutive: 0)
+
+###### Next Thing(s) to Try
+* 3/4 rounds won. All were moderate to little gains.
+* The last round almost won.
+* It's worth noting that a long hold for all positions would have resulted in
+  the largest gain. A time-eased take profit function would have probably also
+  done better. This is probably not worth the trade off of missing out on gains
+  because of sharp reversal.
+
+###### Notes
+
+##### Forex
+**Staging**
+```
+Runtime: 25:15
+Current Balance:       $37210.84250 (+211.06430) (+0.57%)
+Max Balance:           $37618.82150 (+619.04330) (+1.67%) @ 08:54 CDT
+Min Balance:           $36447.24160 (-552.53660) (-1.49%) @ 08:44 CDT
+Original Balance:      $36999.77820
+```
+
 ###### Stats (STAGING) (as of 2022-10-17)
 * Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
 
 ###### Notes
 ###### Next Thing(s) to Try
 
+### 2022-10-31:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Runtime: 06:48:00
+Current Balance:       $26201.73 (-2236.93) (-7.87%)
+Max Balance:           $28627.09 (+188.43) (+0.66%) @ 08:31 CDT
+Min Balance:           $26187.80 (-2250.86) (-7.91%) @ 14:56 CDT
+Original Balance:      $28438.66
+```
+
+###### Stats (STAGING) (as of 2022-10-17)
+* Win / Loss: 6W (Consecutive: 0) 5L (Consecutive: 1)
+
+###### Notes
+* Big loss day 😞. Don't forget big win days. Remember, the key is to determine
+  whether it's profitable over the long run.
+
+###### Next Thing(s) to Try
+
 ##### Forex
 **Staging**
 ```
-Runtime: 00:00:00
-Current Balance:       $ (+) (+%)
-Max Balance:           $ (+) (+%)
-Min Balance:           $ (-) (-%)
-Original Balance:      $ (-) (-%)
+Runtime: 08:04:27
+Current Balance:       $36666.66860 (-6717.67450) (-15.48%)
+Max Balance:           $43384.34310 (+0.00000) (+0.00%) @ 08:30 CDT
+Min Balance:           $35876.48660 (-7507.85650) (-17.31%) @ 16:16 CDT
+Original Balance:      $43384.34310
 ```
 
 ###### Stats (STAGING) (as of 2022-10-17)
