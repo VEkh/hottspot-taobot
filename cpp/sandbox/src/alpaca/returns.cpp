@@ -1,3 +1,6 @@
+#ifndef ALPACA_RETURNS
+#define ALPACA_RETURNS
+
 #include "deps.cpp"           // json
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/utils/time.cpp" // ::utils::time_
@@ -174,3 +177,5 @@ void log() {
 }
 } // namespace Returns
 } // namespace Alpaca
+
+#endif

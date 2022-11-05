@@ -2,6 +2,7 @@
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/io.cpp"    // utils::io
 #include "returns.cpp"         // Alpaca::Returns
+#include "sessions.cpp"        // Alpaca::Sessions
 #include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
 #include <iostream>            // std::cout, std::endl
 #include <map>                 // std::map
@@ -15,6 +16,8 @@ void print_usage() {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"log_returns                  ", "Print cumulative return"},
+      {"log_sessions                 ",
+       "Print account performance for recorded sessions"},
       {"stream_account               ", "Stream account info"},
       {"stream_quotes <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
       {"tao_bot <SYMBOL> <QUANTITY>  ",
@@ -93,6 +96,11 @@ int main(int argc, char *argv[]) {
   if (command == "log_returns") {
     Alpaca::Returns::log();
 
+    exit(0);
+  }
+
+  if (command == "log_sessions") {
+    Alpaca::Sessions::log();
     exit(0);
   }
 
