@@ -41,17 +41,24 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   this->flags = flags_;
   this->symbol = symbol_;
 
-  this->api_client = Alpaca::Client(this->flags);
+  try {
+    this->api_client = Alpaca::Client(this->flags);
 
-  this->account_balance = get_account_balance();
+    this->account_balance = get_account_balance();
 
-  load_quotes();
+    load_quotes();
 
-  fetch_and_persist_quote(true);
-  load_performance();
-  load_price_movement();
+    fetch_and_persist_quote(true);
+    load_performance();
+    load_price_movement();
 
-  this->performance = build_performance();
+    this->performance = build_performance();
+  } catch (nlohmann::detail::type_error) {
+    puts(Formatted::error_message(
+             "❌ JSON type error during initialization. Retrying.")
+             .c_str());
+    return initialize(symbol, flags_);
+  }
 }
 
 #endif
