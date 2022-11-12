@@ -20,16 +20,16 @@ void Alpaca::TaoBot::log_account_balance() {
       (exit_prices_.max_profit / this->account_balance.original_balance) *
       100.0;
 
-  const double overall_max_balance_delta_percentage =
-      (exit_prices_.overall_max_profit /
-       this->account_balance.original_balance) *
-      100.0;
-
   const double max_loss = this->account_balance.min_balance -
                           this->account_balance.original_balance;
 
   const double max_loss_percentage =
       (max_loss / this->account_balance.original_balance) * 100.0;
+
+  const double overall_max_balance_delta_percentage =
+      (exit_prices_.overall_max_profit /
+       this->account_balance.original_balance) *
+      100.0;
 
   Formatted::Stream log_color = fmt.green;
 

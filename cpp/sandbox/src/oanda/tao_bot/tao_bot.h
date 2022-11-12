@@ -41,8 +41,8 @@ private:
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
   const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const double TARGET_ACCOUNT_PROFIT = 0.0105;
-  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.0005;
+  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.01;
   const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   const int MAX_EXPECTED_LOSS_STREAK = 18;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
@@ -86,6 +86,7 @@ private:
   account_balance_t get_account_balance();
   account_balance_t get_account_balance(const account_balance_t &);
   account_exit_prices_t build_account_exit_prices();
+  bool has_super_profited();
   bool is_breaking_out();
   bool is_end_of_trading_period();
   bool is_market_open();

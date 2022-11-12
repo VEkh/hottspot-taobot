@@ -25,10 +25,48 @@ void Alpaca::Client::stream_account() {
       account_json = ::utils::json::parse_with_catch(
           fetch_account(), "ALPACA__CLIENT_stream_account");
 
+    } catch (...) {
+      usleep(1e6);
+
+      continue;
+    }
+
+    try {
+      const std::string balance_string = account_json["equity"];
+      const double balance = std::stod(balance_string);
+      max_balance = std::max(balance, max_balance);
+
+      if (!original_balance) {
+        original_balance = balance;
+      }
+
+      if (!original_margin_buying_power) {
+        const std::string margin_buying_power = account_json["buying_power"];
+
+        original_margin_buying_power = std::stod(margin_buying_power);
+      }
+
+      account_json["max_balance"] = max_balance;
+      account_json["original_balance"] = original_balance;
+      account_json["original_margin_buying_power"] =
+          original_margin_buying_power;
+      account_json["timestamp"] = (long int)std::time(nullptr);
+
+      std::cout << fmt.bold << fmt.cyan << account_json.dump(2) << fmt.reset
+                << std::endl
+                << std::endl;
+
+      const std::string filepath =
+          std::string(APP_DIR) + "/data/alpaca/account.json";
+
+      ::utils::io::write_to_file(account_json.dump(2), filepath.c_str());
+
+      usleep(1e6);
     } catch (nlohmann::detail::type_error &) {
-      std::string error_message = Formatted::error_message(std::string(
-          "[ALPACA__CLIENT_stream_account]: "
-          "nlohmann::detail::type_error when fetching quote. Trying again."));
+      std::string error_message = Formatted::error_message(
+          std::string("[ALPACA__CLIENT_stream_account]: "
+                      "nlohmann::detail::type_error when parsing account "
+                      "balance. Trying again."));
 
       std::cout << error_message << fmt.reset << std::endl;
 
@@ -36,36 +74,6 @@ void Alpaca::Client::stream_account() {
 
       continue;
     }
-
-    const std::string balance_string = account_json["equity"];
-    const double balance = std::stod(balance_string);
-    max_balance = std::max(balance, max_balance);
-
-    if (!original_balance) {
-      original_balance = balance;
-    }
-
-    if (!original_margin_buying_power) {
-      const std::string margin_buying_power = account_json["buying_power"];
-
-      original_margin_buying_power = std::stod(margin_buying_power);
-    }
-
-    account_json["max_balance"] = max_balance;
-    account_json["original_balance"] = original_balance;
-    account_json["original_margin_buying_power"] = original_margin_buying_power;
-    account_json["timestamp"] = (long int)std::time(nullptr);
-
-    std::cout << fmt.bold << fmt.cyan << account_json.dump(2) << fmt.reset
-              << std::endl
-              << std::endl;
-
-    const std::string filepath =
-        std::string(APP_DIR) + "/data/alpaca/account.json";
-
-    ::utils::io::write_to_file(account_json.dump(2), filepath.c_str());
-
-    usleep(1e6);
   }
 }
 

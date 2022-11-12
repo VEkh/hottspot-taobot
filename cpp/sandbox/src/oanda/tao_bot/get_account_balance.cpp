@@ -31,6 +31,11 @@ Oanda::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
           ? std::time(nullptr)
           : previous_balance.min_balance_timestamp;
 
+  account_balance_.overall_max_balance_timestamp =
+      account_balance_.balance == account_balance_.overall_max_balance
+          ? std::time(nullptr)
+          : previous_balance.overall_max_balance_timestamp;
+
   return account_balance_;
 }
 
@@ -85,8 +90,13 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
     if (!original_balance) {
       original_balance = account_json.contains("originalBalance")
                              ? (double)account_json["originalBalance"]
-                             : std::stod(balance);
+                             : balance_d;
     }
+
+    const double overall_max_balance =
+        account_json.contains("maxBalance")
+            ? (double)account_json["maxBalance"]
+            : std::max(this->account_balance.overall_max_balance, balance_d);
 
     const double original_margin_buying_power =
         this->account_balance.original_margin_buying_power
@@ -103,6 +113,8 @@ Oanda::TaoBot::account_balance_t Oanda::TaoBot::get_account_balance() {
         .min_balance_timestamp = now,
         .original_balance = original_balance,
         .original_margin_buying_power = original_margin_buying_power,
+        .overall_max_balance = overall_max_balance,
+        .overall_max_balance_timestamp = now,
         .timestamp = now,
     };
   } catch (nlohmann::detail::type_error &) {

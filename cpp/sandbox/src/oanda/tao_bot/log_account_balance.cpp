@@ -2,6 +2,7 @@
 #define OANDA__TAO_BOT_log_account_balance
 
 #include "build_account_exit_prices.cpp" // build_account_exit_prices
+#include "has_super_profited.cpp"        // has_super_profited
 #include "lib/formatted.cpp"             // Formatted
 #include "lib/utils/time.cpp"            // ::utils::time_
 #include "tao_bot.h"                     // Oanda::TaoBot
@@ -24,6 +25,11 @@ void Oanda::TaoBot::log_account_balance() {
 
   const double max_loss_percentage =
       (max_loss / this->account_balance.original_balance) * 100.0;
+
+  const double overall_max_balance_delta_percentage =
+      (exit_prices_.overall_max_profit /
+       this->account_balance.original_balance) *
+      100.0;
 
   Formatted::Stream log_color = fmt.green;
 
@@ -57,6 +63,14 @@ void Oanda::TaoBot::log_account_balance() {
                                   "%H:%M %Z", "America/Chicago")
           .c_str());
 
+  printf("Overall Max Balance:   $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+         this->account_balance.overall_max_balance,
+         exit_prices_.overall_max_profit, overall_max_balance_delta_percentage,
+         ::utils::time_::date_string(
+             this->account_balance.overall_max_balance_timestamp, "%H:%M %Z",
+             "America/Chicago")
+             .c_str());
+
   printf("Original Balance:      $%'.5f\n",
          this->account_balance.original_balance);
 
@@ -67,8 +81,9 @@ void Oanda::TaoBot::log_account_balance() {
 
   printf("Target Account Profit: $%'.5f\n", exit_prices_.target_account_profit);
 
-  printf("Target Max Profit:     $%'.5f%s\n", exit_prices_.target_max_profit,
-         exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "");
+  printf("Target Max Profit:     $%'.5f%s%s\n", exit_prices_.target_max_profit,
+         exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "",
+         has_super_profited() ? "🤑" : "");
 
   std::cout << fmt.reset << std::endl;
 }
