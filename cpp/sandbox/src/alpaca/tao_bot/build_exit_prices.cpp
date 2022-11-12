@@ -15,7 +15,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   const std::pair<double, double> quote_range = get_quote_price_range();
   const double price_range = quote_range.first - quote_range.second;
-  const int max_loss_coefficient = -25;
+  const int max_loss_coefficient = -40;
 
   const double max_loss = std::min(
       max_loss_coefficient * static_one_sec_variance, price_range / -4.0);
