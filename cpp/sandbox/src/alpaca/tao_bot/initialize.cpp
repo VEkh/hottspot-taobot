@@ -52,6 +52,7 @@ void Alpaca::TaoBot::initialize(char *symbol_,
     load_performance();
     load_price_movement();
 
+    this->init_closed_positions_count = this->closed_positions.size();
     this->performance = build_performance();
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(

@@ -1,16 +1,21 @@
 #ifndef ALPACA__TAO_BOT_write_account_performance
 #define ALPACA__TAO_BOT_write_account_performance
 
-#include "deps.cpp"           // json, nlohmann
-#include "lib/utils/io.cpp"   // ::utils::io
-#include "lib/utils/time.cpp" // ::utils::time_
-#include "runtime.cpp"        // runtime
-#include "tao_bot.h"          // Alpaca::TaoBot
-#include <ctime>              // std::time
-#include <stdexcept>          // std::invalid_argument
-#include <string>             // std::string
+#include "deps.cpp"                 // json, nlohmann
+#include "lib/utils/io.cpp"         // ::utils::io
+#include "lib/utils/time.cpp"       // ::utils::time_
+#include "new_positions_opened.cpp" // new_positions_opened
+#include "runtime.cpp"              // runtime
+#include "tao_bot.h"                // Alpaca::TaoBot
+#include <ctime>                    // std::time
+#include <stdexcept>                // std::invalid_argument
+#include <string>                   // std::string
 
 void Alpaca::TaoBot::write_account_performance() {
+  if (!new_positions_opened()) {
+    return;
+  }
+
   const std::string filepath =
       std::string(APP_DIR) + "/data/alpaca/performance/account.json";
 
