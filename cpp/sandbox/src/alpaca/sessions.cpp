@@ -44,8 +44,11 @@ void log() {
     const double max_balance = session["max_balance"];
     const double min_balance = session["min_balance"];
     const double original_balance = session["original_balance"];
-    const int max_balance_timestamp = session["max_balance_timestamp"];
-    const int min_balance_timestamp = session["min_balance_timestamp"];
+    const double overall_max_balance = session["overall_max_balance"];
+    const long int max_balance_timestamp = session["max_balance_timestamp"];
+    const long int min_balance_timestamp = session["min_balance_timestamp"];
+    const long int overall_max_balance_timestamp =
+        session["overall_max_balance_timestamp"];
 
     const double current_profit = current_balance - original_balance;
     const double current_profit_percent =
@@ -56,6 +59,9 @@ void log() {
     const double min_profit = min_balance - original_balance;
     const double min_profit_percent =
         100 * (min_balance - original_balance) / original_balance;
+    const double overall_max_profit = overall_max_balance - original_balance;
+    const double overall_max_profit_percent =
+        100 * (overall_max_balance - original_balance) / original_balance;
 
     Formatted::Stream profit_color = current_profit >= 0 ? fmt.green : fmt.red;
 

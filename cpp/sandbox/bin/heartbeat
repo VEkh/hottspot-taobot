@@ -27,7 +27,6 @@ state=$(get_status)
 if [[ -z $state ]]; then
   echo -e "${fmt_bold}${fmt_cyan}No running instances of TaoBot. Starting.${fmt_reset}"
 
-  "$app_dir/bin/$project/stream_account" restart "$@"
   "$app_dir/bin/$project/restart" "$@"
 else
   echo -e "${fmt_bold}${fmt_green}💖 TaoBot is already running. Doing nothing.${fmt_reset}"

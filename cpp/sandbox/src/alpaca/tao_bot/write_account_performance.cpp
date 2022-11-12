@@ -21,6 +21,9 @@ void Alpaca::TaoBot::write_account_performance() {
       {"min_balance", this->account_balance.min_balance},
       {"min_balance_timestamp", this->account_balance.min_balance_timestamp},
       {"original_balance", this->account_balance.original_balance},
+      {"overall_max_balance", this->account_balance.overall_max_balance},
+      {"overall_max_balance_timestamp",
+       this->account_balance.overall_max_balance_timestamp},
       {"runtime", runtime()},
   };
 

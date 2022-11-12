@@ -6,7 +6,7 @@
 #include <algorithm>                 // std::max, std::min
 
 double Alpaca::TaoBot::target_account_profit_trailing_stop() {
-  const double base_trailing_stop = this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP;
+  const double base_trailing_stop = 0.001;
   const double max_trailing_stop = 0.005;
 
   const double max_profit = this->account_balance.max_balance -

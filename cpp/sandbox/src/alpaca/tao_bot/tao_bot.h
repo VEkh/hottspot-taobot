@@ -39,7 +39,8 @@ private:
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   const double MAX_ACCOUNT_LOSS_RATIO = -0.045;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
-  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.0005;
+  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.01;
   const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 8e3;
@@ -71,6 +72,7 @@ private:
 
   account_exit_prices_t build_account_exit_prices();
 
+  bool has_super_profited();
   bool is_breaking_out();
   bool is_end_of_trading_period();
   bool is_holiday();

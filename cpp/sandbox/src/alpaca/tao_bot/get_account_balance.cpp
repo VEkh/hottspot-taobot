@@ -42,6 +42,11 @@ Alpaca::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
           ? std::time(nullptr)
           : previous_balance.max_balance_timestamp;
 
+  account_balance_.overall_max_balance_timestamp =
+      account_balance_.balance == account_balance_.overall_max_balance
+          ? std::time(nullptr)
+          : previous_balance.overall_max_balance_timestamp;
+
   account_balance_.min_balance =
       std::min(account_balance_.balance, previous_balance.min_balance);
 
@@ -96,6 +101,11 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
     const double balance_d = std::stod(balance);
     const time_t now = std::time(nullptr);
 
+    const double overall_max_balance =
+        account_json.contains("max_balance")
+            ? (double)account_json["max_balance"]
+            : std::max(this->account_balance.overall_max_balance, balance_d);
+
     double original_balance = this->account_balance.original_balance;
 
     double original_margin_buying_power =
@@ -124,6 +134,8 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
         .min_balance_timestamp = now,
         .original_balance = original_balance,
         .original_margin_buying_power = original_margin_buying_power,
+        .overall_max_balance = overall_max_balance,
+        .overall_max_balance_timestamp = now,
         .timestamp = now,
     };
   } catch (nlohmann::detail::parse_error &) {

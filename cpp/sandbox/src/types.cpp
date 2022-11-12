@@ -16,6 +16,8 @@ struct account_balance_t {
   long int min_balance_timestamp = 0;
   double original_balance = 0.00;
   double original_margin_buying_power = 0.00;
+  double overall_max_balance = 0.00;
+  long int overall_max_balance_timestamp = 0;
   long int timestamp = 0;
 };
 
@@ -28,6 +30,7 @@ enum order_win_result_t {
 struct account_exit_prices_t {
   double current_profit = 0.00;
   double max_profit = 0.00;
+  double overall_max_profit = 0.00;
   double stop_loss_profit = 0.00;
   double target_account_profit = 0.00;
   double target_max_profit = 0.00;
