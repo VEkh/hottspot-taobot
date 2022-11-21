@@ -7,7 +7,7 @@
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double one_sec_variance = dynamic_one_sec_variance();
-  const int max_loss_coefficient = -40;
+  const int max_loss_coefficient = -80;
 
   const double max_loss = max_loss_coefficient * one_sec_variance;
   const double trailing_stop = 20 * one_sec_variance;
