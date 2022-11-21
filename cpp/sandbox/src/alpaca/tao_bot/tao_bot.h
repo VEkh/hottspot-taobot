@@ -75,6 +75,7 @@ private:
 
   bool has_super_profited();
   bool is_breaking_out();
+  bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_holiday();
   bool is_market_open();

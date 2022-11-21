@@ -1,12 +1,18 @@
 #ifndef ALPACA__TAO_BOT_is_end_of_trading_period
 #define ALPACA__TAO_BOT_is_end_of_trading_period
 
-#include "lib/utils/time.cpp" // ::utils::time_
-#include "tao_bot.h"          // Alpaca::TaoBot
+#include "is_early_close_day.cpp" // is_early_close_day
+#include "lib/utils/time.cpp"     // ::utils::time_
+#include "tao_bot.h"              // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::is_end_of_trading_period() {
-  return ::utils::time_::is_at_least({15, 59}) &&
-         ::utils::time_::is_before({16, 0});
+  if (is_early_close_day()) {
+    return ::utils::time_::is_at_least({11, 59}, "America/Chicago") &&
+           ::utils::time_::is_before({12, 0}, "America/Chicago");
+  }
+
+  return ::utils::time_::is_at_least({14, 59}, "America/Chicago") &&
+         ::utils::time_::is_before({15, 0}, "America/Chicago");
 }
 
 #endif
