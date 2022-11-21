@@ -1,7 +1,8 @@
 #ifndef ALPACA__TAO_BOT_has_super_profited
 #define ALPACA__TAO_BOT_has_super_profited
 
-#include "tao_bot.h" // Alpaca::TaoBot
+#include "lib/utils/time.cpp" // ::utils::time_
+#include "tao_bot.h"          // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::has_super_profited() {
   const double overall_max_profit = this->account_balance.overall_max_balance -
@@ -10,10 +11,15 @@ bool Alpaca::TaoBot::has_super_profited() {
   const double overall_max_profit_ratio =
       overall_max_profit / this->account_balance.original_balance;
 
-  const double super_profit_raito =
-      2 * this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP;
+  double super_profit_ratio = 0.04;
 
-  return overall_max_profit_ratio >= super_profit_raito;
+  if (::utils::time_::is_at_least({14, 45}, "America/Chicago")) {
+    super_profit_ratio = 0.02;
+  } else if (::utils::time_::is_at_least({14, 30}, "America/Chicago")) {
+    super_profit_ratio = 0.03;
+  }
+
+  return overall_max_profit_ratio >= super_profit_ratio;
 }
 
 #endif

@@ -84,8 +84,9 @@ std::string date_string(const long int timestamp_seconds,
   });
 }
 
-bool is_at_least(const std::vector<int> time_parts) {
-  return in_time_zone<bool>("America/New_York", [&]() -> bool {
+bool is_at_least(const std::vector<int> time_parts,
+                 const char *time_zone = "America/New_York") {
+  return in_time_zone<bool>(time_zone, [&]() -> bool {
     time_t local_now;
     time(&local_now);
     std::tm local_time = *std::localtime(&local_now);
@@ -107,8 +108,9 @@ bool is_at_least(const std::vector<int> time_parts) {
   });
 }
 
-bool is_before(const std::vector<int> time_parts) {
-  return in_time_zone<bool>("America/New_York", [&]() -> bool {
+bool is_before(const std::vector<int> time_parts,
+               const char *time_zone = "America/New_York") {
+  return in_time_zone<bool>(time_zone, [&]() -> bool {
     if (time_parts.empty()) {
       return false;
     }
