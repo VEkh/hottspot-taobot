@@ -59,12 +59,14 @@ void Oanda::Client::stream_account() {
       const double unrealized_pl = std::stod(unrealized_pl_string);
       const double balance = std::stod(balance_string) + unrealized_pl;
 
+      max_balance = std::max(max_balance, balance);
+
       if (!original_balance) {
         original_balance = balance;
       }
 
       account_json["marginRates"] = map_margin_rates(instruments_json);
-      account_json["maxBalance"] = std::max(max_balance, balance);
+      account_json["maxBalance"] = max_balance;
       account_json["originalBalance"] = original_balance;
       account_json["timestamp"] = (long int)std::time(nullptr);
 
