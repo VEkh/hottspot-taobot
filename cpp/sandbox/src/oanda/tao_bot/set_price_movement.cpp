@@ -75,11 +75,13 @@ void Oanda::TaoBot::set_price_movement() {
       ((old_cumulative_average * old_cumulative_count) + average) /
       (old_cumulative_count + 1);
 
-  this->price_movement.three_minute_one_second_variance.average =
-      cumulative_average;
+  if ((average / old_cumulative_average) >= 0.75) {
+    this->price_movement.three_minute_one_second_variance.average =
+        cumulative_average;
 
-  this->price_movement.three_minute_one_second_variance.count =
-      std::min(cumulative_max_sample_size, (double)(old_cumulative_count + 1));
+    this->price_movement.three_minute_one_second_variance.count = std::min(
+        cumulative_max_sample_size, (double)(old_cumulative_count + 1));
+  }
 
   this->price_movement.short_term_three_minute_one_second_variance.average =
       short_term_average;
