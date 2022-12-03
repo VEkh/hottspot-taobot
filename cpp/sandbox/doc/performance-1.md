@@ -63,7 +63,7 @@ Original Balance:       $26,394.93
 **Alpha (PRODUCTION)**
 ```
 Thu Dec  1 14:59:00 2022 • Runtime: 06:36:57
-Current Balance:        $30,848.44 (-2,978.09) (-8.80%)
+Current Balance:        $30,848.44 (-2,978.09) (-8.80%) 😭
 Max Balance:            $34,047.98 (+221.45) (+0.65%) @ 08:31 CST
 Overall Max Balance:    $34,047.98 (+221.45) (+0.65%) @ 08:31 CST
 Min Balance:            $30,834.10 (-2,992.43) (-8.85%) @ 14:58 CST
