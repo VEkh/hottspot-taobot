@@ -1,6 +1,7 @@
 #include "client/client.cpp"   // Oanda::Client
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/io.cpp"    // ::utils::io
+#include "sessions.cpp"        // Oanda::Sessions
 #include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
 #include <iostream>            // std::cout, std::endl
 #include <map>                 // std::map
@@ -11,6 +12,8 @@
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
+      {"log_sessions                 ",
+       "Print account performance for recorded sessions"},
       {"stream_account               ", "Stream account info"},
       {"tao_bot <SYMBOL> <QUANTITY>  ",
        "Launch trading bot for the given currency pair"},
@@ -46,6 +49,11 @@ int main(int argc, char *argv[]) {
     std::string quote = oanda_client.fetch_quote(symbol);
     puts(quote.c_str());
 
+    exit(0);
+  }
+
+  if (command == "log_sessions") {
+    Oanda::Sessions::log();
     exit(0);
   }
 

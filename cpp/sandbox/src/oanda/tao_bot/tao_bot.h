@@ -72,6 +72,7 @@ private:
   account_balance_t account_balance;
   char *symbol;
   exit_prices_t exit_prices;
+  int init_closed_positions_count = 0;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
@@ -94,6 +95,7 @@ private:
   bool is_position_closed();
   bool is_price_moving();
   bool max_account_loss_reached();
+  bool new_positions_opened();
   bool should_close_position();
   bool should_open_position();
   bool should_stop_profit();
@@ -167,6 +169,7 @@ private:
   void set_status(order_t *, order_t *);
   void update_account_balance();
   void watch();
+  void write_account_performance();
   void write_performance();
   void write_price_movement();
   void write_quotes();
