@@ -13,9 +13,9 @@ bool Alpaca::TaoBot::has_super_profited() {
 
   double super_profit_ratio = 0.04;
 
-  if (::utils::time_::is_at_least({14, 45}, "America/Chicago")) {
+  if (::utils::time_::is_at_least({9, 30}, "America/Chicago")) {
     super_profit_ratio = 0.02;
-  } else if (::utils::time_::is_at_least({14, 30}, "America/Chicago")) {
+  } else if (::utils::time_::is_at_least({9, 0}, "America/Chicago")) {
     super_profit_ratio = 0.03;
   }
 
