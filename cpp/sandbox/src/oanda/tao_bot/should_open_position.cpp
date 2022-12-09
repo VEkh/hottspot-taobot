@@ -2,7 +2,6 @@
 #define OANDA__TAO_BOT_should_open_position
 
 #include "current_spread.cpp"  // current_spread
-#include "is_breaking_out.cpp" // is_breaking_out
 #include "is_market_open.cpp"  // is_market_open
 #include "is_price_moving.cpp" // is_price_moving
 #include "spread_limit.cpp"    // spread_limit
@@ -27,10 +26,6 @@ bool Oanda::TaoBot::should_open_position() {
   }
 
   if (!is_price_moving()) {
-    return false;
-  }
-
-  if (!is_breaking_out()) {
     return false;
   }
 
