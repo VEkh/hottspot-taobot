@@ -106,6 +106,11 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
             ? (double)account_json["max_balance"]
             : std::max(this->account_balance.overall_max_balance, balance_d);
 
+    const double session_original_balance =
+        this->account_balance.session_original_balance
+            ? this->account_balance.session_original_balance
+            : balance_d;
+
     double original_balance = this->account_balance.original_balance;
 
     double original_margin_buying_power =
@@ -136,6 +141,7 @@ Alpaca::TaoBot::account_balance_t Alpaca::TaoBot::get_account_balance() {
         .original_margin_buying_power = original_margin_buying_power,
         .overall_max_balance = overall_max_balance,
         .overall_max_balance_timestamp = now,
+        .session_original_balance = session_original_balance,
         .timestamp = now,
     };
   } catch (nlohmann::detail::parse_error &) {

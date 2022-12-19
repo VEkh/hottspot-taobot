@@ -37,12 +37,12 @@ private:
   using trade_status_t = Oanda::t::trade_status_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const double MAX_ACCOUNT_LOSS_RATIO = -0.045;
+  const double MAX_ACCOUNT_LOSS_RATIO = -0.03;
   const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
   const double MIN_TARGET_TICK_MOVEMENT = 40.0;
   const double POLLING_INTERVAL_SECONDS = 1.0;
-  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.0005;
-  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.01;
+  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.004;
+  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   const int MAX_EXPECTED_LOSS_STREAK = 18;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
@@ -101,6 +101,7 @@ private:
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
+  double account_profit_expanding_trailing_stop_ratio();
   double base_quantity();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
@@ -114,7 +115,6 @@ private:
   double profit_percentage(const order_t *);
   double spread_limit();
   double target_account_profit();
-  double target_account_profit_trailing_stop();
   double target_position_profit();
   double volatility();
   exit_prices_t build_exit_prices();

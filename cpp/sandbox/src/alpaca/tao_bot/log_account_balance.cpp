@@ -31,6 +31,14 @@ void Alpaca::TaoBot::log_account_balance() {
        this->account_balance.original_balance) *
       100.0;
 
+  const double session_original_profit =
+      this->account_balance.session_original_balance -
+      this->account_balance.original_balance;
+
+  const double session_original_profit_percentage =
+      (session_original_profit / this->account_balance.original_balance) *
+      100.0;
+
   Formatted::Stream log_color = fmt.green;
 
   if (exit_prices_.current_profit < 0) {
@@ -41,7 +49,7 @@ void Alpaca::TaoBot::log_account_balance() {
   printf("💰 Account Balance\n");
   std::cout << fmt.reset << fmt.bold << log_color;
 
-  printf("Current Balance:       $%'.2f (%+'.2f) (%+'.2f%%)%s\n",
+  printf("Current Balance:          $%'.2f (%+'.2f) (%+'.2f%%)%s\n",
          this->account_balance.balance, exit_prices_.current_profit,
          balance_delta_percentage,
          this->account_balance.balance == this->account_balance.max_balance
@@ -49,14 +57,14 @@ void Alpaca::TaoBot::log_account_balance() {
              : "");
 
   printf(
-      "Max Balance:           $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+      "Max Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
       this->account_balance.max_balance, exit_prices_.max_profit,
       max_balance_delta_percentage,
       ::utils::time_::date_string(this->account_balance.max_balance_timestamp,
                                   "%H:%M %Z", "America/Chicago")
           .c_str());
 
-  printf("Overall Max Balance:   $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+  printf("Overall Max Balance:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
          this->account_balance.overall_max_balance,
          exit_prices_.overall_max_profit, overall_max_balance_delta_percentage,
          ::utils::time_::date_string(
@@ -65,23 +73,30 @@ void Alpaca::TaoBot::log_account_balance() {
              .c_str());
 
   printf(
-      "Min Balance:           $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+      "Min Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
       this->account_balance.min_balance, max_loss, max_loss_percentage,
       ::utils::time_::date_string(this->account_balance.min_balance_timestamp,
                                   "%H:%M %Z", "America/Chicago")
           .c_str());
 
-  printf("Original Balance:      $%'.2f\n",
+  printf("Original Balance:         $%'.2f\n",
          this->account_balance.original_balance);
 
-  printf("Margin Buying Power:   $%'.2f\n",
+  printf("Session Original Balance: $%'.2f (%+'.2f) (%+'.2f%%)\n",
+         this->account_balance.session_original_balance,
+         session_original_profit, session_original_profit_percentage);
+
+  printf("Margin Buying Power:      $%'.2f\n",
          this->account_balance.margin_buying_power);
 
-  printf("Stop Loss Profit:      $%'.2f\n", exit_prices_.stop_loss_profit);
+  printf("Stop Loss Profit:         $%'.2f\n",
+         exit_prices_.session_stop_profit_loss);
 
-  printf("Target Account Profit: $%'.2f\n", exit_prices_.target_account_profit);
+  printf("Target Account Profit:    $%'.2f\n",
+         exit_prices_.target_account_profit);
 
-  printf("Target Max Profit:     $%'.2f%s%s\n", exit_prices_.target_max_profit,
+  printf("Target Max Profit:        $%'.2f%s%s\n",
+         exit_prices_.target_max_profit,
          exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "",
          has_super_profited() ? "🤑" : "");
 

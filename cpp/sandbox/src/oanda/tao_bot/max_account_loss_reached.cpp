@@ -1,16 +1,13 @@
 #ifndef OANDA__TAO_BOT_max_account_loss_reached
 #define OANDA__TAO_BOT_max_account_loss_reached
 
-#include "tao_bot.h" // Oanda::TaoBot
+#include "build_account_exit_prices.cpp" // build_account_exit_prices
+#include "tao_bot.h"                     // Oanda::TaoBot
 
 bool Oanda::TaoBot::max_account_loss_reached() {
-  return false;
+  const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
-  const double loss_ratio =
-      (this->account_balance.balance - this->account_balance.original_balance) /
-      this->account_balance.original_balance;
-
-  return loss_ratio <= this->MAX_ACCOUNT_LOSS_RATIO;
+  return this->account_balance.balance <= exit_prices_.session_stop_loss;
 }
 
 #endif

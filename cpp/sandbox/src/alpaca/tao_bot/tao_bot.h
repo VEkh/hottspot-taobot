@@ -37,10 +37,10 @@ private:
   using quote_t = Alpaca::t::quote_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const double MAX_ACCOUNT_LOSS_RATIO = -0.045;
+  const double MAX_ACCOUNT_LOSS_RATIO = -0.03;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
-  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.0005;
-  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.01;
+  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.004;
+  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
   const int QUOTES_MAX_SIZE = 8e3;
@@ -89,6 +89,7 @@ private:
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
+  double account_profit_expanding_trailing_stop_ratio();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -100,7 +101,6 @@ private:
   double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
   double target_account_profit();
-  double target_account_profit_trailing_stop();
   double target_position_profit();
   double volatility();
   exit_prices_t build_exit_prices();

@@ -18,6 +18,7 @@ struct account_balance_t {
   double original_margin_buying_power = 0.00;
   double overall_max_balance = 0.00;
   long int overall_max_balance_timestamp = 0;
+  double session_original_balance = 0.00;
   long int timestamp = 0;
 };
 
@@ -31,7 +32,8 @@ struct account_exit_prices_t {
   double current_profit = 0.00;
   double max_profit = 0.00;
   double overall_max_profit = 0.00;
-  double stop_loss_profit = 0.00;
+  double session_stop_loss = 0.00;
+  double session_stop_profit_loss = 0.00;
   double target_account_profit = 0.00;
   double target_max_profit = 0.00;
 };
