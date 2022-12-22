@@ -131,6 +131,9 @@ void log() {
     }
   }
 
+  const double win_percentage =
+      ((double)total_wins / (total_wins + total_losses)) * 100.0;
+
   for (; nasdaq_it != nasdaq_returns.rend(); nasdaq_it++) {
     json return_json = nasdaq_it.value();
 
@@ -154,8 +157,10 @@ void log() {
   }
 
   std::cout << fmt.bold << fmt.yellow << std::endl;
-  printf("* Wins / Losses: %iW (Consecutive: %i) %iL (Consecutive: %i)\n",
-         total_wins, consecutive_wins, total_losses, consecutive_losses);
+  printf(
+      "* Wins / Losses: %iW (%.2f%%) (Consecutive: %i) %iL (Consecutive: %i)\n",
+      total_wins, win_percentage, consecutive_wins, total_losses,
+      consecutive_losses);
 
   std::cout << fmt.cyan;
   printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% Daily Salary)"
