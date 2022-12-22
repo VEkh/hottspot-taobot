@@ -13,7 +13,8 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double max_loss = max_loss_coefficient * static_one_sec_variance;
   const double min_profit = abs(max_loss);
 
-  const double trailing_stop_profit = this->open_order_ptr->max_profit * 0.5;
+  const double trailing_stop_profit =
+      this->open_order_ptr->max_profit * (2.0 / 3);
 
   exit_prices_t out = {
       .max_loss = max_loss,

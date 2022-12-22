@@ -17,7 +17,8 @@ bool Oanda::TaoBot::should_stop_profit() {
                                       this->TARGET_ACCOUNT_PROFIT_RATIO;
 
     return exit_prices_.current_profit > target_profit_cash &&
-           exit_prices_.current_profit <= 0.5 * exit_prices_.overall_max_profit;
+           exit_prices_.current_profit <=
+               (2.0 / 3) * exit_prices_.overall_max_profit;
   }
 
   return is_session_profit_slipping;
