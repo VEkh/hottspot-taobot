@@ -1,18 +1,28 @@
 #ifndef OANDA__TAO_BOT_clear_stale_open_order
 #define OANDA__TAO_BOT_clear_stale_open_order
 
-#include "tao_bot.h" // Oanda::TaoBot, order_status_t
-#include <ctime>     // std::time, std::time_t
-#include <iostream>  // std::cout, std::endl
-#include <stdio.h>   // printf
+#include "reset_orders.cpp" // reset_orders
+#include "tao_bot.h"        // Oanda::TaoBot, order_status_t
+#include <ctime>            // std::time, std::time_t
+#include <iostream>         // std::cout, std::endl
+#include <stdio.h>          // printf
 
 void Oanda::TaoBot::clear_stale_open_order() {
   if (!this->open_order_ptr) {
     return;
   }
 
-  if (!(this->open_order_ptr->status == order_status_t::ORDER_PENDING ||
-        this->open_order_ptr->status == order_status_t::ORDER_CANCELLED)) {
+  if (this->open_order_ptr->status == order_status_t::ORDER_CANCELLED) {
+    std::cout << fmt.yellow << fmt.bold;
+    printf("🔁 Resetting cancelled order %i.\n", this->open_order_ptr->id);
+    std::cout << fmt.reset;
+
+    reset_orders();
+
+    return;
+  }
+
+  if (this->open_order_ptr->status != order_status_t::ORDER_PENDING) {
     return;
   }
 
@@ -26,33 +36,11 @@ void Oanda::TaoBot::clear_stale_open_order() {
     return;
   }
 
-  switch (this->open_order_ptr->status) {
-  case order_status_t::ORDER_CANCELLED: {
-    std::cout << fmt.yellow << fmt.bold;
-    printf("😴 Clearing stale open order %i.\n", this->open_order_ptr->id);
-    std::cout << fmt.reset;
+  std::cout << fmt.yellow << fmt.bold;
+  printf("⛔ Cancelling stale open order %i.\n", this->open_order_ptr->id);
+  std::cout << fmt.reset;
 
-    this->open_order_ptr = nullptr;
-
-    break;
-  }
-  case order_status_t::ORDER_PENDING: {
-    std::cout << fmt.yellow << fmt.bold;
-    printf("⛔ Cancelling stale open order %i.\n", this->open_order_ptr->id);
-    std::cout << fmt.reset;
-
-    this->api_client.cancel_order(this->open_order_ptr);
-
-    std::cout << fmt.yellow << fmt.bold;
-    printf("🛑 This is probably an error. Investigate it.\n");
-    std::cout << fmt.reset;
-
-    exit(1);
-
-    break;
-  }
-  default: {}
-  }
+  this->api_client.cancel_order(this->open_order_ptr);
 }
 
 #endif

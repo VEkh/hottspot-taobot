@@ -157,6 +157,7 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
+  void reset_orders();
   void reset_position();
   void set_and_persist_price_movement();
   void set_close_order_prices();

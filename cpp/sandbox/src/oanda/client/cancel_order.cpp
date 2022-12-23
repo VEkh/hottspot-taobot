@@ -29,6 +29,9 @@ std::string Oanda::Client::cancel_order(order_t *order) {
 
   if (response.contains("orderCancelTransaction")) {
     order->status = order_status_t::ORDER_CANCELLED;
+  } else if (response.contains("errorCode") &&
+             std::string(response["errorCode"]) == "ORDER_DOESNT_EXIST") {
+    order->status = order_status_t::ORDER_CANCELLED;
   }
 
   return response_body;

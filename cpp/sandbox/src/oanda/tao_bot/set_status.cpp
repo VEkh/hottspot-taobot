@@ -10,6 +10,7 @@
 #include "tao_bot.h"
 
 #include "deps.cpp"                // json, nlohmann
+#include "fetch_order.cpp"         // fetch_order
 #include "fetch_trade.cpp"         // fetch_trade
 #include "oanda/constants.cpp"     // Oanda::constants
 #include "oanda/utils.cpp"         // Oanda::utils
@@ -22,16 +23,30 @@
 void Oanda::TaoBot::set_status(order_t *order,
                                order_t *linked_order = nullptr) {
   const order_status_t original_status = order->status;
+  std::string status;
 
   if (original_status == order_status_t::ORDER_FILLED) {
     return;
   }
 
   if (!order->trade_id && original_status != order_status_t::ORDER_INIT) {
+    json order_json = fetch_order(order);
+
     std::cout << fmt.bold << fmt.yellow;
     printf("[OANDA__TAO_BOT_set_status]: Order %i has no `trade_id`\n",
            order->id);
+    printf("[OANDA__TAO_BOT_set_status]: Fetched Order: %s\n",
+           order_json.dump(2).c_str());
     std::cout << fmt.reset << std::endl;
+
+    if (!order_json.empty()) {
+      try {
+        status = order_json["state"];
+        order->status = Oanda::utils::to_order_status_t(status);
+      } catch (nlohmann::detail::type_error &) {
+        return;
+      }
+    }
 
     return;
   }
@@ -49,7 +64,6 @@ void Oanda::TaoBot::set_status(order_t *order,
     return;
   }
 
-  std::string status;
   std::string trade_quantity_string;
 
   try {

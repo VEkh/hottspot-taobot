@@ -9,6 +9,7 @@
 #include "tao_bot.h"
 
 #include "build_performance.cpp" // build_performance
+#include "reset_orders.cpp"      // reset_orders
 #include "write_performance.cpp" // write_performance
 
 void Oanda::TaoBot::reset_position() {
@@ -28,10 +29,9 @@ void Oanda::TaoBot::reset_position() {
 
   this->closed_positions.push_back(position);
 
-  this->close_order_ptr = nullptr;
-  this->exit_prices = exit_prices_t();
-  this->open_order_ptr = nullptr;
+  reset_orders();
 
+  this->exit_prices = exit_prices_t();
   this->performance = build_performance();
   write_performance();
 }
