@@ -40,15 +40,31 @@ void log() {
   for (json::iterator it = sessions.begin(); it != sessions.end(); it++) {
     json session = it.value();
 
-    const double current_balance = session["current_balance"];
-    const double max_balance = session["max_balance"];
-    const double min_balance = session["min_balance"];
-    const double original_balance = session["original_balance"];
-    const double overall_max_balance = session["overall_max_balance"];
-    const long int max_balance_timestamp = session["max_balance_timestamp"];
-    const long int min_balance_timestamp = session["min_balance_timestamp"];
-    const long int overall_max_balance_timestamp =
-        session["overall_max_balance_timestamp"];
+    double current_balance;
+    double max_balance;
+    double min_balance;
+    double original_balance;
+    double overall_max_balance;
+    long int max_balance_timestamp;
+    long int min_balance_timestamp;
+    long int overall_max_balance_timestamp;
+
+    try {
+      current_balance = session["current_balance"];
+      max_balance = session["max_balance"];
+      min_balance = session["min_balance"];
+      original_balance = session["original_balance"];
+      overall_max_balance = session["overall_max_balance"];
+      max_balance_timestamp = session["max_balance_timestamp"];
+      min_balance_timestamp = session["min_balance_timestamp"];
+      overall_max_balance_timestamp = session["overall_max_balance_timestamp"];
+    } catch (nlohmann::detail::type_error &) {
+      std::cout << fmt.bold << fmt.red << std::endl;
+      printf("😵 Corrupt value at: %s\n", it.key().c_str());
+      std::cout << fmt.reset << std::endl;
+
+      continue;
+    }
 
     const double current_profit = current_balance - original_balance;
     const double current_profit_percent =
