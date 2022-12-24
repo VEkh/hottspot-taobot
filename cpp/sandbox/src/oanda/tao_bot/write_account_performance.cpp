@@ -39,17 +39,18 @@ void Oanda::TaoBot::write_account_performance() {
     file = ::utils::io::read_file(filepath.c_str());
     file >> persisted_performances;
     file.close();
+
+    const long int now = std::time(nullptr);
+    const std::string timestamp_key =
+        ::utils::time_::date_string(now, "%FT%R", "America/Chicago");
+
+    persisted_performances[timestamp_key] = account_performance;
+
+    ::utils::io::write_to_file(persisted_performances.dump(2),
+                               filepath.c_str());
   } catch (nlohmann::detail::parse_error &) {
   } catch (std::invalid_argument &) {
   }
-
-  const long int now = std::time(nullptr);
-  const std::string timestamp_key =
-      ::utils::time_::date_string(now, "%FT%R", "America/Chicago");
-
-  persisted_performances[timestamp_key] = account_performance;
-
-  ::utils::io::write_to_file(persisted_performances.dump(2), filepath.c_str());
 }
 
 #endif
