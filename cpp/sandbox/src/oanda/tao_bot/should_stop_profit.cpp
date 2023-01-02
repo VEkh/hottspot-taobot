@@ -14,7 +14,7 @@ bool Oanda::TaoBot::should_stop_profit() {
 
   if (has_super_profited() && !is_session_profit_slipping) {
     const double target_profit_cash = this->account_balance.original_balance *
-                                      this->TARGET_ACCOUNT_PROFIT_RATIO;
+                                      this->TARGET_ACCOUNT_MIN_PROFIT_RATIO;
 
     return exit_prices_.current_profit > target_profit_cash &&
            exit_prices_.current_profit <=
