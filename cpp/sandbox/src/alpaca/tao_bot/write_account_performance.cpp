@@ -30,6 +30,8 @@ void Alpaca::TaoBot::write_account_performance() {
       {"overall_max_balance_timestamp",
        this->account_balance.overall_max_balance_timestamp},
       {"runtime", runtime()},
+      {"session_original_balance",
+       this->account_balance.session_original_balance},
   };
 
   std::ifstream file;

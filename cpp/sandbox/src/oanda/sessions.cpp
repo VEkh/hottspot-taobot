@@ -75,24 +75,39 @@ void log() {
     printf(" • Runtime: %s",
            ::utils::integer_::seconds_to_clock(runtime).c_str());
     std::cout << fmt.no_underline << profit_color << std::endl;
-    printf("Current Balance:        $%'.2f (%+'.2f) (%+'.2f%%)\n",
+    printf("Current Balance:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
            current_balance, current_profit, current_profit_percent);
-    printf("Max Balance:            $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+    printf("Max Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
            max_balance, max_profit, max_profit_percent,
            ::utils::time_::date_string(max_balance_timestamp, "%H:%M %Z",
                                        "America/Chicago")
                .c_str());
-    printf("Overall Max Balance:    $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+    printf("Overall Max Balance:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
            overall_max_balance, overall_max_profit, overall_max_profit_percent,
            ::utils::time_::date_string(overall_max_balance_timestamp,
                                        "%H:%M %Z", "America/Chicago")
                .c_str());
-    printf("Min Balance:            $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+    printf("Min Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
            min_balance, min_profit, min_profit_percent,
            ::utils::time_::date_string(min_balance_timestamp, "%H:%M %Z",
                                        "America/Chicago")
                .c_str());
-    printf("Original Balance:       $%'.2f\n", original_balance);
+    printf("Original Balance:         $%'.2f\n", original_balance);
+
+    if (session.contains("session_original_balance")) {
+      const double session_original_balance =
+          session["session_original_balance"];
+
+      const double session_original_balance_profit =
+          session_original_balance - original_balance;
+
+      const double session_original_balance_profit_percent =
+          (session_original_balance_profit / original_balance) * 100.0;
+
+      printf("Session Original Balance: $%'.2f (%+'.2f) (%+'.2f%%)\n",
+             session_original_balance, session_original_balance_profit,
+             session_original_balance_profit_percent);
+    }
   }
 
   std::cout << fmt.reset << fmt.cyan;
