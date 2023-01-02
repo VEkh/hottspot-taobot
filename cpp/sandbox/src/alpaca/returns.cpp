@@ -71,13 +71,13 @@ void log() {
   json todays_nasdaq_return_json = nasdaq_it.value();
   json todays_sp500_return_json = sp500_it.value();
 
-  const double DAILY_SALARY = 576.92;
+  const double NINE_TO_FIVE_SALARY = 576.92;
   const double todays_close = todays_return_json["close"];
   const double todays_open = todays_return_json["open"];
   const double todays_profit_dollars = todays_close - todays_open;
   const double todays_profit_ratio = todays_profit_dollars / todays_open;
   const double todays_profit_salary_ratio =
-      todays_profit_dollars / DAILY_SALARY;
+      todays_profit_dollars / NINE_TO_FIVE_SALARY;
 
   const double todays_nasdaq_close = todays_nasdaq_return_json["close"];
   const double todays_nasdaq_open = todays_nasdaq_return_json["open"];
@@ -163,7 +163,7 @@ void log() {
       consecutive_losses);
 
   std::cout << fmt.cyan;
-  printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% Daily Salary)"
+  printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% 9-5 Salary)"
          " (vs. NASDAQ: %+.2f%%) (vs. S&P 500: %+.2f%%)\n",
          sign(todays_profit_dollars), abs(todays_profit_dollars),
          todays_profit_ratio * 100, todays_profit_salary_ratio * 100,
