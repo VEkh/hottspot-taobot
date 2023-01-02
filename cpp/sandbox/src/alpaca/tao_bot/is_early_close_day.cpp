@@ -10,7 +10,7 @@
 bool Alpaca::TaoBot::is_early_close_day() {
   std::map<std::string, bool> DATES = {
       {"2022-07-03", true},
-      {"2022-11-25", true},
+      {"2022-11-24", true},
   };
 
   std::time_t now = std::time(nullptr);

@@ -9,9 +9,10 @@
 
 bool Alpaca::TaoBot::is_holiday() {
   std::map<std::string, bool> HOLIDAYS = {
-      {"2022-01-17", true}, {"2022-02-21", true}, {"2022-04-15", true},
-      {"2022-05-30", true}, {"2022-06-20", true}, {"2022-07-04", true},
-      {"2022-09-05", true}, {"2022-11-24", true}, {"2022-12-26", true},
+      {"2023-01-02", true}, {"2023-01-16", true}, {"2023-02-20", true},
+      {"2023-04-07", true}, {"2023-05-29", true}, {"2023-06-19", true},
+      {"2023-07-04", true}, {"2023-09-04", true}, {"2023-11-23", true},
+      {"2023-12-25", true},
   };
 
   std::time_t now = std::time(nullptr);
