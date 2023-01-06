@@ -70,7 +70,7 @@ void Alpaca::TaoBot::set_price_movement() {
       ((old_cumulative_average * old_cumulative_count) + average) /
       (old_cumulative_count + 1);
 
-  if ((average / old_cumulative_average) >= 0.75) {
+  if ((average / old_cumulative_average) >= 0.5) {
     this->price_movement.three_minute_one_second_variance.average =
         cumulative_average;
 
