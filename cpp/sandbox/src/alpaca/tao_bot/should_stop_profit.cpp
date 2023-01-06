@@ -1,9 +1,11 @@
 #ifndef ALPACA__TAO_BOT_should_stop_profit
 #define ALPACA__TAO_BOT_should_stop_profit
 
+#include "batch_volatility.cpp"          // batch_volatility
 #include "build_account_exit_prices.cpp" // build_account_exit_prices
 #include "has_super_profited.cpp"        // has_super_profited
-#include "tao_bot.h" // Alpaca::TaoBot, account_exit_prices_t
+#include "tao_bot.h"      // Alpaca::TaoBot, account_exit_prices_t
+#include "volatility.cpp" // volatility
 
 bool Alpaca::TaoBot::should_stop_profit() {
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
@@ -19,6 +21,10 @@ bool Alpaca::TaoBot::should_stop_profit() {
     return exit_prices_.current_profit > target_profit_cash &&
            exit_prices_.current_profit <=
                (2.0 / 3) * exit_prices_.overall_max_profit;
+  }
+
+  if (batch_volatility() < 1.0) {
+    return false;
   }
 
   return is_session_profit_slipping;

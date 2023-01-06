@@ -91,6 +91,7 @@ private:
   bool should_stop_profit();
   bool should_terminate();
   double account_profit_expanding_trailing_stop_ratio();
+  double batch_volatility();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -111,6 +112,7 @@ private:
   int tradeable_symbols_count();
   json fetch_account_balance();
   json fetch_order(const order_t *);
+  json load_price_movement(const std::string);
   json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);

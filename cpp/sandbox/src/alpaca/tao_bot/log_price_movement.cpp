@@ -1,6 +1,7 @@
 #ifndef ALPACA__TAO_BOT_log_price_movement
 #define ALPACA__TAO_BOT_log_price_movement
 
+#include "batch_volatility.cpp"  // batch_volatility
 #include "lib/utils/integer.cpp" // ::utils::integer_
 #include "tao_bot.h"             // Alpaca::TaoBot, fmt
 #include <iostream>              // std::cout, std::endl
@@ -36,6 +37,11 @@ void Alpaca::TaoBot::log_price_movement() {
            short_term_one_second_variance,
            short_term_long_term_variance_percentage);
   }
+
+  const double batch_volatility_ = batch_volatility();
+
+  printf("Batch Volatility: %.5f %s\n", batch_volatility_,
+         batch_volatility_ > 1 ? "🥵" : "🥶");
 
   std::cout << fmt.reset << std::endl;
 }
