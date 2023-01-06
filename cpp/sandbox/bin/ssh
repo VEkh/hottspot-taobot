@@ -1,0 +1,15 @@
+#!/bin/bash
+
+case $1 in
+  "restart")
+    case $OSTYPE in
+      darwin*)
+        sudo launchctl stop com.openssh.sshd
+        sudo launchctl start com.openssh.sshd
+      ;;
+
+      linux*)
+        sudo service ssh restart
+      ;;
+    esac
+esac

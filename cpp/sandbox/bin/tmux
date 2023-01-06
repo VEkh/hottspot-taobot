@@ -20,6 +20,7 @@ function tail_cmd() {
 
 tmux -2 new-session -s hottspot_capital -n "code" \; \
   send-keys "$app_dir/bin/$equity_project/cron restart" "Enter" \; \
+  send-keys "$app_dir/bin/ssh restart" "Enter" \; \
   split-window -h "vim ." \; \
   select-layout main-vertical \; \
   new-window -n "stocks-1" "$(tail_cmd "$equity_project" "${equity_symbols[0]}")" \; \
