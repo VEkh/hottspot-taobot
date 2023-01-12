@@ -1,12 +1,11 @@
 #ifndef ALPACA__TAO_BOT_should_open_position
 #define ALPACA__TAO_BOT_should_open_position
 
-#include "is_market_open.cpp"  // is_market_open
-#include "is_price_moving.cpp" // is_price_moving
-#include "tao_bot.h"           // Alpaca::TaoBot, quote_t
-#include <ctime>               // std::time
-#include <math.h>              // abs
-#include <vector>              // std:vector
+#include "is_market_open.cpp" // is_market_open
+#include "tao_bot.h"          // Alpaca::TaoBot, quote_t
+
+#include "batch_volatility.cpp" // batch_volatility
+#include "lib/utils/time.cpp"   // ::utils::time_
 
 bool Alpaca::TaoBot::should_open_position() {
   if (!is_market_open()) {
@@ -22,8 +21,8 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!is_price_moving()) {
-    return false;
+  if (batch_volatility() < 1.2) {
+    return ::utils::time_::is_before({8, 31}, "America/Chicago");
   }
 
   return true;
