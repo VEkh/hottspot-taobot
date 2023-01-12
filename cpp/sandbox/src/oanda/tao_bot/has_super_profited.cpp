@@ -11,15 +11,7 @@ bool Oanda::TaoBot::has_super_profited() {
   const double overall_max_profit_ratio =
       overall_max_profit / this->account_balance.original_balance;
 
-  double super_profit_ratio = 0.03;
-
-  if (::utils::time_::is_at_least({9, 30}, "America/Chicago")) {
-    super_profit_ratio = 0.005;
-  } else if (::utils::time_::is_at_least({9, 0}, "America/Chicago")) {
-    super_profit_ratio = 0.01;
-  } else if (::utils::time_::is_at_least({8, 30}, "America/Chicago")) {
-    super_profit_ratio = 0.02;
-  }
+  double super_profit_ratio = 0.005 / (2.0 / 3);
 
   return overall_max_profit_ratio >= super_profit_ratio;
 }
