@@ -18,7 +18,7 @@ function tail_cmd() {
   echo -e "tail -f $app_dir/log/$1/$2.log"
 }
 
-tmux -2 new-session -s hottspot_capital -n "code" \; \
+tmux -2 new-session -s hottspot_taobot -n "code" \; \
   send-keys "$app_dir/bin/$equity_project/cron restart" "Enter" \; \
   send-keys "$app_dir/bin/ssh restart" "Enter" \; \
   split-window -h "vim ." \; \

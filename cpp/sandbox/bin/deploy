@@ -13,13 +13,13 @@ echo -e "${fmt_bold}${fmt_yellow}Who is the remote server user👨🏾? (Default
 read -r remote_user
 remote_user=${remote_user:-$(whoami)}
 
-echo -e "${fmt_bold}${fmt_yellow}What is the remote server host 📬? (e.g. 192.x.x.x, example.com) (Default: '$HOTTSPOT_CAPITAL_REMOTE_HOST')"
+echo -e "${fmt_bold}${fmt_yellow}What is the remote server host 📬? (e.g. 192.x.x.x, example.com) (Default: '$HOTTSPOT_TAOBOT_REMOTE_HOST')"
 read -r remote_host
-remote_host=${remote_host:-$HOTTSPOT_CAPITAL_REMOTE_HOST}
+remote_host=${remote_host:-$HOTTSPOT_TAOBOT_REMOTE_HOST}
 echo -e "${fmt_reset}"
 
 remote_address="${remote_user}@${remote_host}"
-remote_app_dir="/home/$remote_user/apps/hottspot_capital"
+remote_app_dir="/home/$remote_user/apps/hottspot/taobot"
 
 function copy_files() {
   deploy_entities=(
