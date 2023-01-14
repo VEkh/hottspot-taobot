@@ -1,4 +1,4 @@
-### 2023-01-13:
+### 2023-01-17:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -27,6 +27,140 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2023-01-13:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Fri Jan 13 08:40:00 2023 • Runtime: 40:02
+Current Balance:          $25,718.28 (-867.51) (-3.26%)
+Max Balance:              $26,810.59 (+224.80) (+0.85%) @ 08:30 CST
+Overall Max Balance:      $26,810.59 (+224.80) (+0.85%) @ 08:30 CST
+Min Balance:              $25,718.28 (-867.51) (-3.26%) @ 08:40 CST
+Original Balance:         $26,585.79
+Session Original Balance: $26,585.79 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Fri Jan 13 08:45:00 2023 • Runtime: 03:14
+Current Balance:          $30,775.25 (+263.62) (+0.86%)
+Max Balance:              $30,854.82 (+343.19) (+1.12%) @ 08:45 CST
+Overall Max Balance:      $30,854.82 (+343.19) (+1.12%) @ 08:45 CST
+Min Balance:              $30,471.82 (-39.81) (-0.13%) @ 08:42 CST
+Original Balance:         $30,511.63
+Session Original Balance: $30,511.63 (+0.00) (+0.00%)
+
+Fri Jan 13 08:50:00 2023 • Runtime: 04:44
+Current Balance:          $31,076.42 (+564.79) (+1.85%)
+Max Balance:              $31,147.12 (+635.49) (+2.08%) @ 08:50 CST
+Overall Max Balance:      $31,147.12 (+635.49) (+2.08%) @ 08:50 CST
+Min Balance:              $30,435.19 (-76.44) (-0.25%) @ 08:48 CST
+Original Balance:         $30,511.63
+Session Original Balance: $30,775.25 (+263.62) (+0.86%)
+
+Fri Jan 13 09:03:00 2023 • Runtime: 12:07
+Current Balance:          $31,645.40 (+1,133.77) (+3.72%)
+Max Balance:              $31,952.37 (+1,440.74) (+4.72%) @ 09:00 CST
+Overall Max Balance:      $31,952.37 (+1,440.74) (+4.72%) @ 09:00 CST
+Min Balance:              $30,885.42 (+373.79) (+1.23%) @ 08:52 CST
+Original Balance:         $30,511.63
+Session Original Balance: $31,034.35 (+522.72) (+1.71%)
+
+Fri Jan 13 09:09:00 2023 • Runtime: 05:15
+Current Balance:          $31,918.48 (+1,406.85) (+4.61%)
+Max Balance:              $31,988.67 (+1,477.04) (+4.84%) @ 09:09 CST
+Overall Max Balance:      $31,988.67 (+1,477.04) (+4.84%) @ 09:09 CST
+Min Balance:              $31,574.30 (+1,062.67) (+3.48%) @ 09:07 CST
+Original Balance:         $30,511.63
+Session Original Balance: $31,635.30 (+1,123.67) (+3.68%)
+
+Fri Jan 13 09:44:00 2023 • Runtime: 34:50
+Current Balance:          $32,219.80 (+1,708.17) (+5.60%)
+Max Balance:              $32,308.18 (+1,796.55) (+5.89%) @ 09:44 CST
+Overall Max Balance:      $32,308.18 (+1,796.55) (+5.89%) @ 09:44 CST
+Min Balance:              $31,691.03 (+1,179.40) (+3.87%) @ 09:40 CST
+Original Balance:         $30,511.63
+Session Original Balance: $31,918.48 (+1,406.85) (+4.61%)
+```
+
+###### Stats (PRODUCTION) (as of 2022-11-09)
+* Win / Loss: 27W (Consecutive: 0) 17L (Consecutive: 1)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 31W (55.36%) (Consecutive: 0) 25L (Consecutive: 1)
+* Latest Return: -$867.51 (-3.26%) (-150.37% 9-5 Salary) (vs. NASDAQ: +0.61%) (vs. S&P 500: +1.43%)
+* Week's Return: -$4,045.67 • Total Return: -$7,457.02
+* Average Return: -0.45% • Average NASDAQ Return: +0.02% • Average S&P 500 Return: +0.04%
+
+###### Notes
+* Okay! Very interesting. Production lost and I stayed out. However, for the
+  third consecutive day, staging won when I kept restarting it.
+* The major reasons for this are:
+  1. I'm holding profits instead of taking them for each position. I only close
+     the session when the account balance has reached its target.
+    * This makes long trends profitable even when the counterbalancing asset
+       closes.
+  2. I'm only trading during high volatility.
+    * This week has demonstrated how consistently able the account is at
+      earning at least +1% in profit. In many cases it far exceeds +1%.
+    * Continous trading during low volatility times often leads to significant
+      loss during consolidation periods.
+    * Not only do you avoid this loss by staying out, you make big profits
+      harder to lose.
+  3. I stop the session at -3% loss.
+    * This is actually very important, as I saw on Monday. If the account is
+      down -3% and you keep trading, it would have to gain at least +4% to
+      profit again.
+    * However, if you restart it, it can incrementally climb its way back to
+      profitability one step at a time.
+    * It does admittedly expose itself to the risk of further loss, but as I've
+      seen repeatedly, the current approach's probability of profiting at least
+      +1% during high volatility periods is very high.
+
+* Also, today was the first time in 8 days where the account balance didn't reach
+  +1.5% in profit. Of course this would happen on the second day where I
+  introduce +1.5% as the highest superprofit level 😂. It doesn't reduce my
+  confidence in it as an appropriate level.
+
+* The silver lining in today's loss is that I have two options going forward
+  for production:
+  1. Change nothing and set the highest superprofit level to +1.5% and don't
+     restart wins or losses under any circumstances.
+    * This _will_ make money if the 7/8 win ratio holds.
+  2. Keep restarting after 3% losses until you the volatility gate gets you to
+     a profit or reduced loss.
+    * This _may_ make A LOT of money. The last three days have demonstrated
+      this to be a highly profitable strategy, but I still feel like it'll
+      incur a big loss one of these days.
+    * Even if it does, however, it may be justifiable loss because the
+      volatility gate will stop it from being too crippling, and it will result
+      in some major win days.
+
+* Option 1 is a lower risk, lower reward approach, but it feels good to know
+  that it will almost certainly be profitable.
+* If option 2 works, it would be a total game changer.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Fri Jan 13 08:01:00 2023 • Runtime: 01:16
+Current Balance:          $24,786.99 (-887.64) (-3.46%)
+Max Balance:              $25,674.62 (+0.00) (+0.00%) @ 08:00 CST
+Overall Max Balance:      $25,674.62 (+0.00) (+0.00%) @ 08:00 CST
+Min Balance:              $24,763.87 (-910.75) (-3.55%) @ 08:01 CST
+Original Balance:         $25,674.62
+Session Original Balance: $25,674.62 (+0.00) (+0.00%)
+```
+
+###### Notes
+* Trading just `EUR_USD` seems to be a bad idea especially when it loses
+  immediately. I'll re-add another high volume currency pair.
+
 ###### Next Thing(s) to Try
 
 ### 2023-01-12:
@@ -59,7 +193,7 @@ Original Balance:         $26,316.40
 Session Original Balance: $26,720.10 (+403.70) (+1.53%)
 ```
 
-**Alpha (PRODUCTION)**
+**Alpha (STAGING)**
 ```
 Thu Jan 12 08:44:00 2023 • Runtime: 05:08
 Current Balance:          $29,922.46 (+412.68) (+1.40%)
