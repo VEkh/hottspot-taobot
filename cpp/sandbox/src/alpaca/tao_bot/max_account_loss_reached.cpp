@@ -7,9 +7,7 @@
 bool Alpaca::TaoBot::max_account_loss_reached() {
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
-  return (exit_prices_.current_profit /
-          this->account_balance.original_balance) <=
-         this->MAX_ACCOUNT_LOSS_RATIO;
+  return this->account_balance.balance <= exit_prices_.session_stop_loss;
 }
 
 #endif
