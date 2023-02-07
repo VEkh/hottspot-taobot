@@ -8,9 +8,10 @@
 
 double Alpaca::TaoBot::compute_quantity() {
   const quote_t quote = this->quotes.back();
+  const double margin_throttle = 4.0;
 
   const double max_buying_power =
-      this->account_balance.original_margin_buying_power;
+      this->account_balance.original_margin_buying_power / margin_throttle;
 
   const double buying_power = max_buying_power / tradeable_symbols_count();
 
