@@ -16,8 +16,9 @@ void Oanda::TaoBot::log_account_balance() {
       (exit_prices_.current_profit / this->account_balance.original_balance) *
       100.0;
 
-  const double max_balance_delta_percentage =
-      (exit_prices_.max_profit / this->account_balance.original_balance) *
+  const double session_max_balance_delta_percentage =
+      (exit_prices_.session_max_profit /
+       this->account_balance.original_balance) *
       100.0;
 
   const double max_loss = this->account_balance.min_balance -
@@ -49,29 +50,23 @@ void Oanda::TaoBot::log_account_balance() {
   printf("💰 Account Balance\n");
   std::cout << fmt.reset << fmt.bold << log_color;
 
-  printf("Current Balance:       $%'.5f (%+'.5f) (%+'.2f%%)%s\n",
+  printf("Current Balance:                  $%'.5f (%+'.5f) (%+'.2f%%)%s\n",
          this->account_balance.balance, exit_prices_.current_profit,
          balance_delta_percentage,
-         this->account_balance.balance == this->account_balance.max_balance
+         this->account_balance.balance ==
+                 this->account_balance.session_max_balance
              ? " 🔥"
              : "");
 
-  printf(
-      "Max Balance:              $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
-      this->account_balance.max_balance, exit_prices_.max_profit,
-      max_balance_delta_percentage,
-      ::utils::time_::date_string(this->account_balance.max_balance_timestamp,
-                                  "%H:%M %Z", "America/Chicago")
-          .c_str());
+  printf("Max Balance:                      $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
+         this->account_balance.session_max_balance,
+         exit_prices_.session_max_profit, session_max_balance_delta_percentage,
+         ::utils::time_::date_string(
+             this->account_balance.session_max_balance_timestamp, "%H:%M %Z",
+             "America/Chicago")
+             .c_str());
 
-  printf(
-      "Min Balance:              $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
-      this->account_balance.min_balance, max_loss, max_loss_percentage,
-      ::utils::time_::date_string(this->account_balance.min_balance_timestamp,
-                                  "%H:%M %Z", "America/Chicago")
-          .c_str());
-
-  printf("Overall Max Balance:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+  printf("Overall Max Balance:              $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
          this->account_balance.overall_max_balance,
          exit_prices_.overall_max_profit, overall_max_balance_delta_percentage,
          ::utils::time_::date_string(
@@ -79,25 +74,44 @@ void Oanda::TaoBot::log_account_balance() {
              "America/Chicago")
              .c_str());
 
-  printf("Original Balance:         $%'.5f\n",
+  printf(
+      "Min Balance:                      $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
+      this->account_balance.min_balance, max_loss, max_loss_percentage,
+      ::utils::time_::date_string(this->account_balance.min_balance_timestamp,
+                                  "%H:%M %Z", "America/Chicago")
+          .c_str());
+
+  printf("Original Balance:                 $%'.5f\n",
          this->account_balance.original_balance);
 
-  printf("Session Original Balance: $%'.2f (%+'.2f) (%+'.2f%%)\n",
+  printf("Session Original Balance:         $%'.5f (%+'.5f) (%+'.2f%%)\n",
          this->account_balance.session_original_balance,
          session_original_profit, session_original_profit_percentage);
 
-  printf("Margin Buying Power:      $%'.5f\n",
+  printf("Margin Buying Power:              $%'.5f\n",
          this->account_balance.margin_buying_power);
 
-  printf("Stop Loss Profit:         $%'.5f\n",
+  printf("Stop Loss Profit:                 $%'.5f\n",
          exit_prices_.session_stop_profit_loss);
 
-  printf("Target Account Profit:    $%'.5f\n",
+  printf("Session Target Account Profit:    $%'.5f\n",
+         exit_prices_.session_target_account_profit);
+
+  printf("Session Target Max Profit:        $%'.5f%s\n",
+         exit_prices_.session_target_max_profit,
+         exit_prices_.session_max_profit >=
+                 exit_prices_.session_target_max_profit
+             ? " ✅"
+             : "");
+
+  printf("Target Account Profit:            $%'.5f\n",
          exit_prices_.target_account_profit);
 
-  printf("Target Max Profit:        $%'.5f%s%s\n",
+  printf("Target Max Profit:                $%'.5f%s%s\n",
          exit_prices_.target_max_profit,
-         exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "",
+         exit_prices_.overall_max_profit >= exit_prices_.target_max_profit
+             ? " ✅"
+             : "",
          has_super_profited() ? "🤑" : "");
 
   std::cout << fmt.reset << std::endl;

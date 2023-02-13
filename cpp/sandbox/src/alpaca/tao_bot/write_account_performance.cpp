@@ -21,8 +21,9 @@ void Alpaca::TaoBot::write_account_performance() {
 
   json account_performance = {
       {"current_balance", this->account_balance.balance},
-      {"max_balance", this->account_balance.max_balance},
-      {"max_balance_timestamp", this->account_balance.max_balance_timestamp},
+      {"max_balance", this->account_balance.session_max_balance},
+      {"max_balance_timestamp",
+       this->account_balance.session_max_balance_timestamp},
       {"min_balance", this->account_balance.min_balance},
       {"min_balance_timestamp", this->account_balance.min_balance_timestamp},
       {"original_balance", this->account_balance.original_balance},

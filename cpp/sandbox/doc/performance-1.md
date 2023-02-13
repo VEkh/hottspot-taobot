@@ -1,7 +1,7 @@
-### 2023-02-07:
+### 2023-02-14:
 #### Performance
 ##### Equities
-**Alpha (PRODUCTION)**
+**Alpha (STAGING)**
 ```
 Runtime: 00:00:00
 Current Balance:       $ (+) (+%)
@@ -24,6 +24,379 @@ Current Balance:       $ (+) (+%)
 Max Balance:           $ (+) (+%)
 Min Balance:           $ (-) (-%)
 Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-02-13:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Mon Feb 13 08:34:00 2023 • Runtime: 34:02
+Current Balance:          $31,588.04 (+1,170.00) (+3.85%)
+Max Balance:              $31,698.16 (+1,280.12) (+4.21%) @ 08:34 CST
+Overall Max Balance:      $31,698.16 (+1,280.12) (+4.21%) @ 08:34 CST
+Min Balance:              $30,189.16 (-228.88) (-0.75%) @ 08:32 CST
+Original Balance:         $30,418.04
+Session Original Balance: $30,418.04 (+0.00) (+0.00%)
+
+
+Mon, Feb 13, 2023 09:20:19 CST • Runtime: 01:18
+Current Balance:          $31686.91 (+1268.87) (+4.17%)
+Max Balance:              $31749.13 (+1331.09) (+4.38%) @ 09:19 CST
+Overall Max Balance:      $31749.13 (+1331.09) (+4.38%) @ 09:19 CST
+Min Balance:              $31621.84 (+1203.80) (+3.96%) @ 09:19 CST
+Original Balance:         $30418.04
+Session Original Balance: $31633.53 (+1215.49) (+4.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-02-03)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+* Sessions Record: 2W (%100.00) 0L (Total 2)
+* Hooray! A win! 🎉
+* I had to massage the stop profit logic to get it to act right, but it should
+  behave properly upon the next win.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-02-10:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Fri Feb 10 08:44:00 2023 • Runtime: 44:49
+Current Balance:          $30,301.71 (-1,301.88) (-4.12%)
+Max Balance:              $32,601.18 (+997.59) (+3.16%) @ 08:37 CST
+Overall Max Balance:      $32,601.18 (+997.59) (+3.16%) @ 08:37 CST
+Min Balance:              $30,296.52 (-1,307.07) (-4.14%) @ 08:44 CST
+Original Balance:         $31,603.59
+Session Original Balance: $31,603.59 (+0.00) (+0.00%)
+
+Fri Feb 10 09:37:00 2023 • Runtime: 52:54
+Current Balance:          $29,014.11 (-2,589.48) (-8.19%)
+Max Balance:              $30,459.19 (-1,144.40) (-3.62%) @ 08:45 CST
+Overall Max Balance:      $75,509.18 (+43,905.59) (+138.93%) @ 08:45 CST
+Min Balance:              $29,013.82 (-2,589.77) (-8.19%) @ 09:37 CST
+Original Balance:         $31,603.59
+Session Original Balance: $30,301.66 (-1,301.93) (-4.12%)
+
+Fri Feb 10 09:58:00 2023 • Runtime: 20:39
+Current Balance:          $30,218.51 (-1,385.08) (-4.38%)
+Max Balance:              $30,469.12 (-1,134.47) (-3.59%) @ 09:57 CST
+Overall Max Balance:      $75,509.18 (+43,905.59) (+138.93%) @ 09:38 CST
+Min Balance:              $28,630.97 (-2,972.62) (-9.41%) @ 09:40 CST
+Original Balance:         $31,603.59
+Session Original Balance: $29,014.12 (-2,589.47) (-8.19%)
+
+Fri Feb 10 10:37:00 2023 • Runtime: 38:10
+Current Balance:          $28,942.92 (-2,660.67) (-8.42%)
+Max Balance:              $30,266.64 (-1,336.95) (-4.23%) @ 10:15 CST
+Overall Max Balance:      $75,509.18 (+43,905.59) (+138.93%) @ 09:59 CST
+Min Balance:              $28,939.11 (-2,664.48) (-8.43%) @ 10:37 CST
+Original Balance:         $31,603.59
+Session Original Balance: $30,218.49 (-1,385.10) (-4.38%)
+
+Fri Feb 10 11:17:00 2023 • Runtime: 39:31
+Current Balance:          $30,186.26 (-1,417.33) (-4.48%)
+Max Balance:              $30,258.87 (-1,344.72) (-4.25%) @ 11:17 CST
+Overall Max Balance:      $75,509.18 (+43,905.59) (+138.93%) @ 10:38 CST
+Min Balance:              $28,356.89 (-3,246.70) (-10.27%) @ 10:51 CST
+Original Balance:         $31,603.59
+Session Original Balance: $28,942.92 (-2,660.67) (-8.42%)
+
+Fri Feb 10 12:20:00 2023 • Runtime: 01:02:29
+Current Balance:          $31,398.30 (-205.29) (-0.65%)
+Max Balance:              $31,605.85 (+2.26) (+0.01%) @ 12:20 CST
+Overall Max Balance:      $75,509.18 (+43,905.59) (+138.93%) @ 11:18 CST
+Min Balance:              $29,710.57 (-1,893.02) (-5.99%) @ 11:34 CST
+Original Balance:         $31,603.59
+Session Original Balance: $30,186.19 (-1,417.40) (-4.48%)
+
+Fri Feb 10 14:59:00 2023 • Runtime: 02:38:04
+Current Balance:          $30,470.06 (-1,133.53) (-3.59%)
+Max Balance:              $32,029.86 (+426.27) (+1.35%) @ 13:07 CST
+Overall Max Balance:      $75,509.18 (+43,905.59) (+138.93%) @ 12:21 CST
+Min Balance:              $30,332.82 (-1,270.77) (-4.02%) @ 14:53 CST
+Original Balance:         $31,603.59
+Session Original Balance: $31,398.30 (-205.29) (-0.65%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-02-03)
+* Win / Loss: 0W (Consecutive: 0) 0L (Consecutive: 0)
+
+###### Notes
+* Really cool! Even though it closed down, it almost hit the target in the
+  first round.
+* It also, again closed at ~-4% which would be -1% at 1x margin buying power.
+* This continues the observation that it doesn't seem to close below -2x the
+  margin buying multiplier.
+* Let's continue to watch and see if it hits +4% and how often it does.
+* It was also necessary to keep the sessions on in order to redeem the big
+  deficit and ultimately almost win again.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Runtime: 00:00:00
+Current Balance:       $ (+) (+%)
+Max Balance:           $ (+) (+%)
+Min Balance:           $ (-) (-%)
+Original Balance:      $ (-) (-%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-02-09:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thu Feb  9 08:43:00 2023 • Runtime: 43:30
+Current Balance:          $25,010.90 (-253.14) (-1.00%)
+Max Balance:              $25,326.49 (+62.45) (+0.25%) @ 08:32 CST
+Overall Max Balance:      $25,326.49 (+62.45) (+0.25%) @ 08:32 CST
+Min Balance:              $25,010.90 (-253.14) (-1.00%) @ 08:43 CST
+Original Balance:         $25,264.04
+Session Original Balance: $25,264.04 (+0.00) (+0.00%)
+
+Thu Feb  9 09:24:00 2023 • Runtime: 40:02
+Current Balance:          $25,315.27 (+51.23) (+0.20%)
+Max Balance:              $25,383.97 (+119.93) (+0.47%) @ 09:22 CST
+Overall Max Balance:      $25,383.97 (+119.93) (+0.47%) @ 09:22 CST
+Min Balance:              $24,952.89 (-311.15) (-1.23%) @ 08:54 CST
+Original Balance:         $25,264.04
+Session Original Balance: $25,013.10 (-250.94) (-0.99%)
+
+Thu Feb  9 09:44:00 2023 • Runtime: 19:57
+Current Balance:          $25,058.88 (-205.16) (-0.81%)
+Max Balance:              $25,326.85 (+62.81) (+0.25%) @ 09:27 CST
+Overall Max Balance:      $25,383.97 (+119.93) (+0.47%) @ 09:25 CST
+Min Balance:              $25,058.88 (-205.16) (-0.81%) @ 09:44 CST
+Original Balance:         $25,264.04
+Session Original Balance: $25,315.27 (+51.23) (+0.20%)
+
+Thu Feb  9 10:57:00 2023 • Runtime: 01:12:45
+Current Balance:          $24,805.83 (-458.21) (-1.81%)
+Max Balance:              $25,107.17 (-156.87) (-0.62%) @ 09:50 CST
+Overall Max Balance:      $25,383.97 (+119.93) (+0.47%) @ 09:45 CST
+Min Balance:              $24,805.83 (-458.21) (-1.81%) @ 10:57 CST
+Original Balance:         $25,264.04
+Session Original Balance: $25,058.88 (-205.16) (-0.81%)
+
+Thu Feb  9 11:55:00 2023 • Runtime: 57:40
+Current Balance:          $24,553.49 (-710.55) (-2.81%)
+Max Balance:              $24,889.24 (-374.80) (-1.48%) @ 11:26 CST
+Overall Max Balance:      $25,383.97 (+119.93) (+0.47%) @ 10:58 CST
+Min Balance:              $24,550.04 (-714.00) (-2.83%) @ 11:55 CST
+Original Balance:         $25,264.04
+Session Original Balance: $24,807.09 (-456.95) (-1.81%)
+
+Thu Feb  9 14:36:00 2023 • Runtime: 02:40:08
+Current Balance:          $24,842.59 (-421.45) (-1.67%)
+Max Balance:              $24,907.09 (-356.95) (-1.41%) @ 14:35 CST
+Overall Max Balance:      $25,383.97 (+119.93) (+0.47%) @ 11:56 CST
+Min Balance:              $24,417.79 (-846.25) (-3.35%) @ 13:49 CST
+Original Balance:         $25,264.04
+Session Original Balance: $24,552.88 (-711.16) (-2.81%)
+
+Thu Feb  9 14:59:00 2023 • Runtime: 22:00
+Current Balance:          $24,891.87 (-372.17) (-1.47%)
+Max Balance:              $25,000.27 (-263.77) (-1.04%) @ 14:54 CST
+Overall Max Balance:      $25,383.97 (+119.93) (+0.47%) @ 14:37 CST
+Min Balance:              $24,821.70 (-442.34) (-1.75%) @ 14:49 CST
+Original Balance:         $25,264.04
+Session Original Balance: $24,840.30 (-423.74) (-1.68%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-02-03)
+* Win / Loss: 0W (Consecutive: 0) 5L (Consecutive: 5)
+
+###### Notes
+* Sessions Record: 3W (%42.86) 4L (Total 7)
+* Of course the first day on which I'm ready to walk away with the +1% target
+  is the first day to not reach it.
+* The low reached -3.35%. Scaled up to 4x margin buying power, that would be
+  -13.4% 😬.
+* I got lucky with heavy end-of-day trending but a loss at -3% would have
+  cleared away the previous days that would have won.
+* SO, I think this is the final iteration:
+  * Close and do NOT re-open when max loss is reached.
+    * As you've seen many times, re-opening exposes you to bottomless losses.
+      This can and will clear out all your winnings.
+  * Close when and do NOT re-open when target has been reached.
+    * Taking down the margin buying power to 1x has revealed that +1% is a
+      reasonable target TaoBot runs all day. If there is sufficient trending
+      and the standard amount of consolidation, +1% was attained on both trend
+      and consolidation days.
+* That means that this strategy will only be profitable if most mornings trend
+  for long enough to reach the targets.
+
+###### Next Thing(s) to Try
+* Revert to only staging with new strategy and observe through next Thursday.
+  If it's profitable, turn production back on.
+
+##### Forex
+**Staging**
+```
+Thu Feb  9 08:45:00 2023 • Runtime: 44:24
+Current Balance:          $20,156.46 (+203.90) (+1.02%)
+Max Balance:              $20,269.01 (+316.46) (+1.59%) @ 08:43 CST
+Overall Max Balance:      $20,269.01 (+316.46) (+1.59%) @ 08:43 CST
+Min Balance:              $19,517.76 (-434.79) (-2.18%) @ 08:33 CST
+Original Balance:         $19,952.55
+Session Original Balance: $19,952.55 (+0.00) (+0.00%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-02-08:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wed Feb  8 10:08:00 2023 • Runtime: 02:08:02
+Current Balance:          $25,868.94 (+252.27) (+0.98%)
+Max Balance:              $25,922.27 (+305.60) (+1.19%) @ 10:04 CST
+Overall Max Balance:      $25,922.27 (+305.60) (+1.19%) @ 10:04 CST
+Min Balance:              $25,447.65 (-169.02) (-0.66%) @ 08:35 CST
+Original Balance:         $25,616.67
+Session Original Balance: $25,616.67 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-02-03)
+* Win / Loss: 0W (Consecutive: 0) 4L (Consecutive: 4)
+
+###### Notes
+* Sessions Record: 1W (%25.0) 3L (Total 4)
+* Okay! The last four days have hit >=+1% in max profit but closed at a loss
+  because of consolidation.
+* It looks like it's time to start targeting +1% and closing after it wins.
+* Even if it would have won on Friday with the return to holding profits, it
+  would have lost three consecutive days.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Wed Feb  8 08:10:00 2023 • Runtime: 09:56
+Current Balance:          $20,005.72 (+538.71) (+2.77%)
+Max Balance:              $20,210.32 (+743.30) (+3.82%) @ 08:10 CST
+Overall Max Balance:      $20,210.32 (+743.30) (+3.82%) @ 08:10 CST
+Min Balance:              $19,072.26 (-394.76) (-2.03%) @ 08:03 CST
+Original Balance:         $19,467.02
+Session Original Balance: $19,467.02 (+0.00) (+0.00%)
+
+Wed Feb  8 08:11:00 2023 • Runtime: 00:03
+Current Balance:          $19,952.55 (+485.54) (+2.49%)
+Max Balance:              $20,013.11 (+546.10) (+2.81%) @ 08:11 CST
+Overall Max Balance:      $20,210.32 (+743.30) (+3.82%) @ 08:11 CST
+Min Balance:              $19,943.24 (+476.22) (+2.45%) @ 08:11 CST
+Original Balance:         $19,467.02
+Session Original Balance: $20,013.11 (+546.10) (+2.81%)
+```
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-02-07:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tue Feb  7 08:55:00 2023 • Runtime: 55:16
+Current Balance:          $26,154.00 (+257.47) (+0.99%)
+Max Balance:              $26,219.31 (+322.78) (+1.25%) @ 08:54 CST
+Overall Max Balance:      $26,219.31 (+322.78) (+1.25%) @ 08:54 CST
+Min Balance:              $25,851.42 (-45.11) (-0.17%) @ 08:40 CST
+Original Balance:         $25,896.53
+Session Original Balance: $25,896.53 (+0.00) (+0.00%)
+
+Tue Feb  7 10:16:00 2023 • Runtime: 01:20:39
+Current Balance:          $25,888.93 (-7.60) (-0.03%)
+Max Balance:              $26,393.44 (+496.91) (+1.92%) @ 09:12 CST
+Overall Max Balance:      $26,393.44 (+496.91) (+1.92%) @ 09:12 CST
+Min Balance:              $25,888.93 (-7.60) (-0.03%) @ 10:16 CST
+Original Balance:         $25,896.53
+Session Original Balance: $26,154.00 (+257.47) (+0.99%)
+
+Tue Feb  7 12:12:00 2023 • Runtime: 01:55:11
+Current Balance:          $25,629.75 (-266.78) (-1.03%)
+Max Balance:              $25,999.71 (+103.18) (+0.40%) @ 11:57 CST
+Overall Max Balance:      $26,393.44 (+496.91) (+1.92%) @ 10:17 CST
+Min Balance:              $25,629.75 (-266.78) (-1.03%) @ 12:12 CST
+Original Balance:         $25,896.53
+Session Original Balance: $25,888.93 (-7.60) (-0.03%)
+
+Tue Feb  7 13:20:00 2023 • Runtime: 01:07:32
+Current Balance:          $25,363.60 (-532.93) (-2.06%)
+Max Balance:              $25,838.55 (-57.98) (-0.22%) @ 12:35 CST
+Overall Max Balance:      $26,393.44 (+496.91) (+1.92%) @ 12:13 CST
+Min Balance:              $25,363.60 (-532.93) (-2.06%) @ 13:20 CST
+Original Balance:         $25,896.53
+Session Original Balance: $25,622.87 (-273.66) (-1.06%)
+
+Tue Feb  7 14:31:00 2023 • Runtime: 01:10:24
+Current Balance:          $25,616.32 (-280.21) (-1.08%)
+Max Balance:              $25,656.80 (-239.73) (-0.93%) @ 14:30 CST
+Overall Max Balance:      $26,393.44 (+496.91) (+1.92%) @ 13:21 CST
+Min Balance:              $25,341.92 (-554.61) (-2.14%) @ 13:44 CST
+Original Balance:         $25,896.53
+Session Original Balance: $25,363.20 (-533.33) (-2.06%)
+
+Tue Feb  7 14:59:00 2023 • Runtime: 27:01
+Current Balance:          $25,625.27 (-271.26) (-1.05%)
+Max Balance:              $25,679.57 (-216.96) (-0.84%) @ 14:54 CST
+Overall Max Balance:      $26,393.44 (+496.91) (+1.92%) @ 14:32 CST
+Min Balance:              $25,569.57 (-326.96) (-1.26%) @ 14:46 CST
+Original Balance:         $25,896.53
+Session Original Balance: $25,614.44 (-282.09) (-1.09%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-02-03)
+* Win / Loss: 0W (Consecutive: 0) 3L (Consecutive: 3)
+
+###### Notes
+* Sessions Record: 3W (%50.0) 3L (Total 6)
+* Consolidation day with large trends that didn't quite clear as many session
+  profit targets as I would have liked.
+* The max profit was still +1.94% so that's three consecutive days that would
+  have earned >=+1%. Two of them were consolidation days.
+* The max loss is still holding at -2%. That's really great.
+
+###### Next Thing(s) to Try
+
+##### Forex
+**Staging**
+```
+Tue Feb  7 08:15:00 2023 • Runtime: 14:02
+Current Balance:          $19,467.02 (-615.48) (-3.06%)
+Max Balance:              $20,147.75 (+65.26) (+0.32%) @ 08:03 CST
+Overall Max Balance:      $20,147.75 (+65.26) (+0.32%) @ 08:03 CST
+Min Balance:              $19,461.47 (-621.03) (-3.09%) @ 08:15 CST
+Original Balance:         $20,082.49
+Session Original Balance: $20,082.49 (+0.00) (+0.00%)
 ```
 
 ###### Notes
@@ -103,7 +476,7 @@ Session Original Balance: $26,060.41 (-332.13) (-1.26%)
 * Win / Loss: 0W (Consecutive: 0) 2L (Consecutive: 2)
 
 ###### Notes
-* Sessions Record: 3W (%37.50) 5L (Total 0)
+* Sessions Record: 3W (%37.50) 5L (Total 8)
 * Very early trending followed by mostly consolidation with brief additional
   trending.
 * It's good that loss on a consolidation day is still holding at ~-2%.

@@ -4,16 +4,13 @@
 #include "tao_bot.h" // Oanda::TaoBot
 #include <algorithm> // std::max, std::min
 
-double Oanda::TaoBot::account_profit_expanding_trailing_stop_ratio() {
+double Oanda::TaoBot::account_profit_expanding_trailing_stop_ratio(
+    const double max_profit) {
   const double base_trailing_stop = this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP;
   const double max_trailing_stop = 0.01;
 
-  const double session_max_profit =
-      this->account_balance.max_balance -
-      this->account_balance.session_original_balance;
-
   const double session_max_profit_ratio =
-      session_max_profit / this->account_balance.original_balance;
+      max_profit / this->account_balance.original_balance;
 
   const double expanded_base_trailing_stop =
       std::max(base_trailing_stop,

@@ -41,23 +41,23 @@ void log() {
     json session = it.value();
 
     double current_balance;
-    double max_balance;
     double min_balance;
     double original_balance;
     double overall_max_balance;
-    long int max_balance_timestamp;
+    double session_max_balance;
     long int min_balance_timestamp;
     long int overall_max_balance_timestamp;
+    long int session_max_balance_timestamp;
 
     try {
       current_balance = session["current_balance"];
-      max_balance = session["max_balance"];
       min_balance = session["min_balance"];
+      min_balance_timestamp = session["min_balance_timestamp"];
       original_balance = session["original_balance"];
       overall_max_balance = session["overall_max_balance"];
-      max_balance_timestamp = session["max_balance_timestamp"];
-      min_balance_timestamp = session["min_balance_timestamp"];
       overall_max_balance_timestamp = session["overall_max_balance_timestamp"];
+      session_max_balance = session["max_balance"];
+      session_max_balance_timestamp = session["max_balance_timestamp"];
     } catch (nlohmann::detail::type_error &) {
       std::cout << fmt.bold << fmt.red << std::endl;
       printf("😵 Corrupt value at: %s\n", it.key().c_str());
@@ -69,9 +69,9 @@ void log() {
     const double current_profit = current_balance - original_balance;
     const double current_profit_percent =
         100 * (current_balance - original_balance) / original_balance;
-    const double max_profit = max_balance - original_balance;
-    const double max_profit_percent =
-        100 * (max_balance - original_balance) / original_balance;
+    const double session_max_profit = session_max_balance - original_balance;
+    const double session_max_profit_percent =
+        100 * (session_max_balance - original_balance) / original_balance;
     const double min_profit = min_balance - original_balance;
     const double min_profit_percent =
         100 * (min_balance - original_balance) / original_balance;
@@ -94,9 +94,9 @@ void log() {
     printf("Current Balance:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
            current_balance, current_profit, current_profit_percent);
     printf("Max Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           max_balance, max_profit, max_profit_percent,
-           ::utils::time_::date_string(max_balance_timestamp, "%H:%M %Z",
-                                       "America/Chicago")
+           session_max_balance, session_max_profit, session_max_profit_percent,
+           ::utils::time_::date_string(session_max_balance_timestamp,
+                                       "%H:%M %Z", "America/Chicago")
                .c_str());
     printf("Overall Max Balance:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
            overall_max_balance, overall_max_profit, overall_max_profit_percent,
