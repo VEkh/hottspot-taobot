@@ -10,6 +10,7 @@
 #include <algorithm>          // std::max
 #include <ctime>              // std::time
 #include <iostream>           // std::cout, std::endl
+#include <math.h>             // abs
 #include <string>             // std::stod, std::string
 #include <unistd.h>           // usleep
 
@@ -34,7 +35,11 @@ void Alpaca::Client::stream_account() {
     try {
       const std::string balance_string = account_json["equity"];
       const double balance = std::stod(balance_string);
-      max_balance = std::max(balance, max_balance);
+
+      if (!max_balance ||
+          max_balance && (abs(max_balance - balance) / max_balance) < 0.1) {
+        max_balance = std::max(balance, max_balance);
+      }
 
       if (!original_balance) {
         original_balance = balance;
