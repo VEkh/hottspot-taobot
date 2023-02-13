@@ -17,7 +17,7 @@ function install_apt_packages() {
   to_install=()
 
   for arg in "$@"; do
-    if ! (dpkg -l | grep "$arg" | awk '{print $2}' | grep -q "^$arg\(:\w\+\)\?$"); then
+    if ! (dpkg -l | grep -v "^rc" | grep "$arg" | awk '{print $2}' | grep -q "^$arg\(:\w\+\)\?$"); then
       to_install+=("$arg")
     fi
   done
