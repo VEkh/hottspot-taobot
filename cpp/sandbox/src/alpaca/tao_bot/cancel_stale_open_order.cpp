@@ -25,7 +25,7 @@ void Alpaca::TaoBot::cancel_stale_open_order() {
   }
 
   const std::time_t now = std::time(nullptr);
-  const int time_limit_seconds = 10;
+  const int time_limit_seconds = 2 * 60;
 
   const bool is_order_stale =
       (now - this->open_order_ptr->timestamp) >= time_limit_seconds;
