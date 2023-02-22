@@ -7,7 +7,7 @@
 double Alpaca::TaoBot::account_profit_expanding_trailing_stop_ratio(
     const double max_profit) {
   const double base_trailing_stop = this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP;
-  const double max_trailing_stop = 0.005;
+  const double max_trailing_stop = this->api_client.is_live() ? 0.0025 : 0.005;
 
   const double max_profit_ratio =
       max_profit / this->account_balance.original_balance;
