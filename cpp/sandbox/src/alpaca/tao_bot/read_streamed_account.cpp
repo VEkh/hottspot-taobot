@@ -11,8 +11,7 @@
 #include <string>             // std::string
 
 json Alpaca::TaoBot::read_streamed_account() {
-  const std::string filepath =
-      std::string(APP_DIR) + "/data/alpaca/account.json";
+  const std::string filepath = std::string(DATA_DIR) + "/alpaca/account.json";
 
   std::ifstream file;
   json account_json;

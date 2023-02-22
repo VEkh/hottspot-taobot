@@ -15,8 +15,8 @@
 #include <string>           // std::string
 
 void Oanda::TaoBot::load_price_movement() {
-  const std::string filepath = std::string(APP_DIR) +
-                               "/data/oanda/price_movement/" +
+  const std::string filepath = std::string(DATA_DIR) +
+                               "/oanda/price_movement/" +
                                std::string(this->symbol) + ".json";
 
   std::ifstream file;

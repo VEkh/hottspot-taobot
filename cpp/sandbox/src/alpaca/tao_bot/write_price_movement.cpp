@@ -11,8 +11,8 @@
 
 void Alpaca::TaoBot::write_price_movement() {
   try {
-    const std::string filepath = std::string(APP_DIR) +
-                                 "/data/alpaca/price_movement/" +
+    const std::string filepath = std::string(DATA_DIR) +
+                                 "/alpaca/price_movement/" +
                                  std::string(this->symbol) + ".json";
 
     json price_movement_json = R"(

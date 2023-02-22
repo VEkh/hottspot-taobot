@@ -21,7 +21,7 @@ namespace Returns {
 char sign(double n) { return n >= 0 ? '+' : '-'; };
 
 json load() {
-  std::string path = std::string(APP_DIR) + "/data/alpaca/returns.json";
+  std::string path = std::string(DATA_DIR) + "/alpaca/returns.json";
   std::ifstream file(path.c_str(), std::ios::in);
 
   if (!file.good()) {

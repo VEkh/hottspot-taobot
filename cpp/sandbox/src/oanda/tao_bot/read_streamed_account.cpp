@@ -11,8 +11,7 @@
 #include <string>             // std::string
 
 json Oanda::TaoBot::read_streamed_account() {
-  const std::string filepath =
-      std::string(APP_DIR) + "/data/oanda/account.json";
+  const std::string filepath = std::string(DATA_DIR) + "/oanda/account.json";
 
   std::ifstream file;
   json account_json;

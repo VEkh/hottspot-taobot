@@ -23,7 +23,7 @@ void Alpaca::TaoBot::write_quotes() {
       };
     };
 
-    const std::string filepath = std::string(APP_DIR) + "/data/alpaca/quotes/" +
+    const std::string filepath = std::string(DATA_DIR) + "/alpaca/quotes/" +
                                  std::string(this->symbol) + ".json";
 
     const int sample_size = this->QUOTES_MAX_SIZE;

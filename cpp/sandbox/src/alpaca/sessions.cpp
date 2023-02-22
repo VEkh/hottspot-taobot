@@ -21,7 +21,7 @@ void log() {
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   const std::string filepath =
-      std::string(APP_DIR) + "/data/alpaca/performance/account.json";
+      std::string(DATA_DIR) + "/alpaca/performance/account.json";
 
   std::ifstream file;
   json sessions;

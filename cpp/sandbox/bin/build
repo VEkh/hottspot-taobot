@@ -19,6 +19,7 @@ function build_project() {
 
   args=(
     "-D'APP_DIR=\"$app_dir\"'"
+    "-D'DATA_DIR=\"$data_dir\"'"
     "-iquote'$app_dir'"
     "-iquote'$app_dir/src'"
     "-isystem'$app_dir/deps/build/include'"
@@ -39,6 +40,7 @@ function build_project() {
 if [[ $project = "bin" ]]
 then
   app_dir="$(realpath "$(dirname "$0")/../")"
+  data_dir="$(realpath "$(dirname "$0")/../../data/")"
   projects=("alpaca" "oanda")
 
   for project in "${projects[@]}"
@@ -47,5 +49,6 @@ then
   done
 else
   app_dir="$(realpath "$(dirname "$0")/../../")"
+  data_dir="$(realpath "$(dirname "$0")/../../../data/")"
   build_project "$project"
 fi

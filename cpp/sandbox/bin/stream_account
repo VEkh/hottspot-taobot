@@ -2,6 +2,7 @@
 # shellcheck disable=2009
 
 app_dir=$(realpath "$(dirname "$0")/../../")
+data_dir=$(realpath "$(dirname "$0")/../../../data/")
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_green="\033[32m"
@@ -58,15 +59,15 @@ function start_if_stopped() {
 }
 
 function start_stream() {
-  data_dir="$app_dir/data/$project"
   log_dir="$app_dir/log/$project"
   log_file="$log_dir/account_stream.log"
+  project_data_dir="$data_dir/$project"
 
   mkdir -p "$log_dir"
 
   echo -e "${fmt_bold}${fmt_yellow}Starting Account Stream ${fmt_normal}${fmt_cyan}"
 
-  echo "{}" > "$data_dir/account.json"
+  echo "{}" > "$project_data_dir/account.json"
   "$app_dir/build/$project" stream_account "${@}" > "$log_file" 2>&1 &
 }
 

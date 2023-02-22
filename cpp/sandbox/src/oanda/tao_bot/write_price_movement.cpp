@@ -11,8 +11,8 @@
 
 void Oanda::TaoBot::write_price_movement() {
   try {
-    const std::string filepath = std::string(APP_DIR) +
-                                 "/data/oanda/price_movement/" +
+    const std::string filepath = std::string(DATA_DIR) +
+                                 "/oanda/price_movement/" +
                                  std::string(this->symbol) + ".json";
 
     json price_movement_json = R"(

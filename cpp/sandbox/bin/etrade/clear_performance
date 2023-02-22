@@ -1,13 +1,13 @@
 #!/bin/bash
 
-app_dir=$(realpath "$(dirname "$0")/../../")
+data_dir=$(realpath "$(dirname "$0")/../../../data/")
 fmt_bold="\033[1m"
 fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 project_name=$(dirname "$0" | xargs basename)
 symbol="${1^^}"
 
-performance_dir="$app_dir/data/$project_name/performance"
+performance_dir="$data_dir/$project_name/performance"
 
 mkdir -p "$performance_dir"
 

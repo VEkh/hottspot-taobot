@@ -28,9 +28,9 @@ void Alpaca::TaoBot::write_performance() {
       };
     };
 
-    const std::string filepath = std::string(APP_DIR) +
-                                 "/data/alpaca/performance/" +
-                                 std::string(symbol) + ".json";
+    const std::string filepath = std::string(DATA_DIR) +
+                                 "/alpaca/performance/" + std::string(symbol) +
+                                 ".json";
 
     json performance_json;
 

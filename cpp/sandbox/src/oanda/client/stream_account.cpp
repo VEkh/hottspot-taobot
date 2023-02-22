@@ -75,7 +75,7 @@ void Oanda::Client::stream_account() {
                 << std::endl;
 
       const std::string filepath =
-          std::string(APP_DIR) + "/data/oanda/account.json";
+          std::string(DATA_DIR) + "/oanda/account.json";
 
       ::utils::io::write_to_file(account_json.dump(2), filepath.c_str());
 

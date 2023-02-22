@@ -24,7 +24,7 @@ void ETrade::TaoBot::write_performance() {
     };
   };
 
-  std::string filepath = std::string(APP_DIR) + "/data/etrade/performance/" +
+  std::string filepath = std::string(DATA_DIR) + "/etrade/performance/" +
                          std::string(symbol) + ".json";
 
   json performance_json;

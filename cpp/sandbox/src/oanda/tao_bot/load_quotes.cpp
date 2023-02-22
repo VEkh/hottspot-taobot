@@ -21,7 +21,7 @@ void Oanda::TaoBot::load_quotes() {
     return quote;
   };
 
-  const std::string filepath = std::string(APP_DIR) + "/data/oanda/quotes/" +
+  const std::string filepath = std::string(DATA_DIR) + "/oanda/quotes/" +
                                std::string(this->symbol) + ".json";
 
   std::ifstream file;

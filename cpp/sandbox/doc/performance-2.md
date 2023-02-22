@@ -113,15 +113,74 @@ Session Original Balance: $33,794.46 (+2,563.28) (+8.21%)
   after wins is allowed.
 
 ###### Next Thing(s) to Try
+* Run two environments simultaneously
 
 ##### Forex
 **Staging**
 ```
-Runtime: 00:00:00
-Current Balance:       $ (+) (+%)
-Max Balance:           $ (+) (+%)
-Min Balance:           $ (-) (-%)
-Original Balance:      $ (-) (-%)
+Wed Feb 22 08:04:00 2023 • Runtime: 04:30
+Current Balance:          $18,062.51 (+62.32) (+0.35%)
+Max Balance:              $18,166.49 (+166.30) (+0.92%) @ 08:03 CST
+Overall Max Balance:      $18,166.49 (+166.30) (+0.92%) @ 08:03 CST
+Min Balance:              $17,838.81 (-161.38) (-0.90%) @ 08:00 CST
+Original Balance:         $18,000.19
+Session Original Balance: $18,000.19 (+0.00) (+0.00%)
+
+Wed Feb 22 09:11:00 2023 • Runtime: 04:50
+Current Balance:          $17,466.61 (-595.90) (-3.30%)
+Max Balance:              $18,062.51 (+0.00) (+0.00%) @ 09:07 CST
+Overall Max Balance:      $18,166.49 (+103.99) (+0.58%) @ 09:07 CST
+Min Balance:              $17,466.61 (-595.90) (-3.30%) @ 09:11 CST
+Original Balance:         $18,062.51
+Session Original Balance: $18,062.51 (+0.00) (+0.00%)
+
+Wed Feb 22 09:12:00 2023 • Runtime: 00:03
+Current Balance:          $17,417.37 (-582.81) (-3.24%)
+Max Balance:              $17,466.61 (-533.58) (-2.96%) @ 09:12 CST
+Overall Max Balance:      $18,166.49 (+166.30) (+0.92%) @ 09:12 CST
+Min Balance:              $17,413.27 (-586.92) (-3.26%) @ 09:12 CST
+Original Balance:         $18,000.19
+Session Original Balance: $17,466.61 (-533.58) (-2.96%)
+
+Wed Feb 22 11:10:00 2023 • Runtime: 02:16
+Current Balance:          $17,494.24 (+76.86) (+0.44%)
+Max Balance:              $17,498.33 (+80.95) (+0.46%) @ 11:10 CST
+Overall Max Balance:      $18,166.49 (+749.12) (+4.30%) @ 11:08 CST
+Min Balance:              $17,273.83 (-143.55) (-0.82%) @ 11:09 CST
+Original Balance:         $17,417.37
+Session Original Balance: $17,417.37 (+0.00) (+0.00%)
+
+Wed Feb 22 11:11:00 2023 • Runtime: 00:06
+Current Balance:          $17,388.68 (-611.51) (-3.40%)
+Max Balance:              $17,494.24 (-505.95) (-2.81%) @ 11:11 CST
+Overall Max Balance:      $18,166.49 (+166.30) (+0.92%) @ 11:11 CST
+Min Balance:              $17,388.68 (-611.51) (-3.40%) @ 11:11 CST
+Original Balance:         $18,000.19
+Session Original Balance: $17,494.24 (-505.95) (-2.81%)
+
+Wed Feb 22 13:20:00 2023 • Runtime: 01:15
+Current Balance:          $17,460.86 (+72.18) (+0.42%)
+Max Balance:              $17,460.86 (+72.18) (+0.42%) @ 13:20 CST
+Overall Max Balance:      $18,166.49 (+777.81) (+4.47%) @ 13:19 CST
+Min Balance:              $17,286.33 (-102.35) (-0.59%) @ 13:19 CST
+Original Balance:         $17,388.68
+Session Original Balance: $17,388.68 (+0.00) (+0.00%)
+
+Wed Feb 22 13:23:00 2023 • Runtime: 04:06
+Current Balance:          $17,443.36 (+54.68) (+0.31%)
+Max Balance:              $17,460.86 (+72.18) (+0.42%) @ 13:20 CST
+Overall Max Balance:      $18,166.49 (+777.81) (+4.47%) @ 13:19 CST
+Min Balance:              $17,286.33 (-102.35) (-0.59%) @ 13:20 CST
+Original Balance:         $17,388.68
+Session Original Balance: $17,388.68 (+0.00) (+0.00%)
+
+Wed Feb 22 13:55:00 2023 • Runtime: 12:03
+Current Balance:          $17,239.68 (-760.51) (-4.23%)
+Max Balance:              $17,441.95 (-558.24) (-3.10%) @ 13:44 CST
+Overall Max Balance:      $18,166.49 (+166.30) (+0.92%) @ 13:43 CST
+Min Balance:              $17,239.68 (-760.51) (-4.23%) @ 13:55 CST
+Original Balance:         $18,000.19
+Session Original Balance: $17,433.73 (-566.46) (-3.15%)
 ```
 
 ###### Notes

@@ -21,7 +21,7 @@
 std::list<ETrade::TaoBot::performance_t>
 ETrade::TaoBot::read_sibling_performances() {
   std::string performance_directory =
-      std::string(APP_DIR) + "/data/etrade/performance/";
+      std::string(DATA_DIR) + "/etrade/performance/";
 
   std::list<performance_t> out;
 
@@ -93,7 +93,8 @@ ETrade::TaoBot::read_sibling_performances() {
     sibling_performance.are_funds_sufficient =
         performance_json["are_funds_sufficient"];
     sibling_performance.current_balance = performance_json["current_balance"];
-    sibling_performance.current_loss_streak_balance = performance_json["current_loss_streak_balance"];
+    sibling_performance.current_loss_streak_balance =
+        performance_json["current_loss_streak_balance"];
     sibling_performance.is_position_open = performance_json["is_position_open"];
     sibling_performance.max_balance = performance_json["max_balance"];
     sibling_performance.symbol = file_symbol;

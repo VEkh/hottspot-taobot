@@ -23,8 +23,7 @@ void Oanda::TaoBot::write_performance() {
       };
     };
 
-    const std::string filepath = std::string(APP_DIR) +
-                                 "/data/oanda/performance/" +
+    const std::string filepath = std::string(DATA_DIR) + "/oanda/performance/" +
                                  std::string(symbol) + ".json";
 
     json performance_json;

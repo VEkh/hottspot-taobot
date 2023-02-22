@@ -11,8 +11,8 @@
 #include <string>             // std::string
 
 Alpaca::TaoBot::quote_t Alpaca::TaoBot::read_streamed_quote() {
-  const std::string filepath = std::string(APP_DIR) +
-                               "/data/alpaca/streamed_quotes/" +
+  const std::string filepath = std::string(DATA_DIR) +
+                               "/alpaca/streamed_quotes/" +
                                std::string(this->symbol) + ".json";
 
   std::ifstream file;

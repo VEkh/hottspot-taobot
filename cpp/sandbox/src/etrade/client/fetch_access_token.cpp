@@ -1,7 +1,7 @@
 #ifndef ETRADE__CLIENT_fetch_access_token
 #define ETRADE__CLIENT_fetch_access_token
 
-#include "client.h" // ETrade::Client, config, stream_format
+#include "client.h"                // ETrade::Client, config, stream_format
 #include "fetch_request_token.cpp" // fetch_request_token
 #include "fetch_token.cpp"         // fetch_token
 #include "lib/formatted.cpp"       // Formatted

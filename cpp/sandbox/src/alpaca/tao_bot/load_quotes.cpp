@@ -21,7 +21,7 @@ void Alpaca::TaoBot::load_quotes() {
     return quote;
   };
 
-  const std::string filepath = std::string(APP_DIR) + "/data/alpaca/quotes/" +
+  const std::string filepath = std::string(DATA_DIR) + "/alpaca/quotes/" +
                                std::string(this->symbol) + ".json";
 
   std::ifstream file;

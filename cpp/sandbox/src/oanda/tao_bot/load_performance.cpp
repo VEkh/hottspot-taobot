@@ -32,8 +32,7 @@ void Oanda::TaoBot::load_performance() {
 
   this->closed_positions = {};
 
-  const std::string filepath = std::string(APP_DIR) +
-                               "/data/oanda/performance/" +
+  const std::string filepath = std::string(DATA_DIR) + "/oanda/performance/" +
                                std::string(this->symbol) + ".json";
 
   std::ifstream file;

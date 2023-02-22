@@ -11,7 +11,7 @@
 namespace ETrade {
 namespace Returns {
 json load() {
-  std::string path = std::string(APP_DIR) + "/data/etrade/returns.json";
+  std::string path = std::string(DATA_DIR) + "/etrade/returns.json";
   std::ifstream file(path.c_str(), std::ios::in);
 
   if (!file.good()) {

@@ -17,7 +17,7 @@ void Oanda::TaoBot::write_account_performance() {
   }
 
   const std::string filepath =
-      std::string(APP_DIR) + "/data/oanda/performance/account.json";
+      std::string(DATA_DIR) + "/oanda/performance/account.json";
 
   json account_performance = {
       {"current_balance", this->account_balance.balance},

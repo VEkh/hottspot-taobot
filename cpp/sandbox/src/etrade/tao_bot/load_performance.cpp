@@ -30,7 +30,7 @@ void ETrade::TaoBot::load_performance() {
 
   this->closed_positions = {};
 
-  std::string filepath = std::string(APP_DIR) + "/data/etrade/performance/" +
+  std::string filepath = std::string(DATA_DIR) + "/etrade/performance/" +
                          std::string(this->symbol) + ".json";
 
   std::ifstream file;

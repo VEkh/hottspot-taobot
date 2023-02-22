@@ -17,7 +17,7 @@ void Alpaca::TaoBot::write_account_performance() {
   }
 
   const std::string filepath =
-      std::string(APP_DIR) + "/data/alpaca/performance/account.json";
+      std::string(DATA_DIR) + "/alpaca/performance/account.json";
 
   json account_performance = {
       {"current_balance", this->account_balance.balance},

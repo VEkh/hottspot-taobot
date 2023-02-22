@@ -20,8 +20,8 @@ void Alpaca::Client::write_streamed_quote(const beast::flat_buffer &buffer) {
     json item = resp_json[0];
     const std::string symbol = item["S"];
 
-    const std::string filepath = std::string(APP_DIR) +
-                                 "/data/alpaca/streamed_quotes/" +
+    const std::string filepath = std::string(DATA_DIR) +
+                                 "/alpaca/streamed_quotes/" +
                                  std::string(symbol) + ".json";
 
     ::utils::io::write_to_file(item.dump(2), filepath.c_str());

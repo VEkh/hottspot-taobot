@@ -40,8 +40,8 @@ void Alpaca::TaoBot::load_price_movement() {
 }
 
 json Alpaca::TaoBot::load_price_movement(const std::string symbol_) {
-  const std::string filepath = std::string(APP_DIR) +
-                               "/data/alpaca/price_movement/" +
+  const std::string filepath = std::string(DATA_DIR) +
+                               "/alpaca/price_movement/" +
                                std::string(symbol_) + ".json";
 
   std::ifstream file;
