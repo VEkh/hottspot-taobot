@@ -9,10 +9,10 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
       this->price_movement.three_minute_one_second_variance.average;
 
   const int max_loss_coefficient = -25;
-  const double trailing_stop_profit_ratio = 0.8;
+  const double trailing_stop_profit_ratio = 1 / 1.1;
 
   const double max_loss = max_loss_coefficient * static_one_sec_variance;
-  const double min_profit = abs(max_loss) / trailing_stop_profit_ratio;
+  const double min_profit = abs(3 * max_loss) / trailing_stop_profit_ratio;
 
   const double trailing_stop_profit =
       this->open_order_ptr->max_profit * trailing_stop_profit_ratio;
