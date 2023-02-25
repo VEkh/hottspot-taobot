@@ -11,7 +11,7 @@ bool Alpaca::TaoBot::has_super_profited() {
   const double overall_max_profit_ratio =
       overall_max_profit / this->account_balance.original_balance;
 
-  double super_profit_ratio = 0.04;
+  double super_profit_ratio = this->TARGET_ACCOUNT_PROFIT_RATIO;
 
   return overall_max_profit_ratio >= super_profit_ratio;
 }
