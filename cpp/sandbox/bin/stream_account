@@ -2,7 +2,7 @@
 # shellcheck disable=2009
 
 app_dir=$(realpath "$(dirname "$0")/../../")
-data_dir=$(realpath "$(dirname "$0")/../../../data/")
+data_dir="$app_dir/data/"
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_green="\033[32m"

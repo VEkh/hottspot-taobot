@@ -1,6 +1,6 @@
 #!/bin/bash
 
-data_dir=$(realpath "$(dirname "$0")/../../../data/")
+data_dir=$(realpath "$(dirname "$0")/../../data/")
 fmt_bold="\033[1m"
 fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
