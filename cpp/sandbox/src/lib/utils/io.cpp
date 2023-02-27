@@ -2,6 +2,7 @@
 #define UTILS__IO
 
 #include "lib/formatted.cpp" // Formatted
+#include "string.cpp"        // ::utils::string
 #include <fstream>           // std::ifstream, std::ios, std::ofstream
 #include <map>               // std::map
 #include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
@@ -9,9 +10,34 @@
 #include <stdio.h>   // fgets, popen
 #include <string>    // std::getline, std::string
 #include <utility>   // std::pair
+#include <vector>    // std::vector
 
 namespace utils {
 namespace io {
+template <typename TransformPredicate>
+std::vector<std::string> collect_args(int argc, char **argv,
+                                      TransformPredicate fn) {
+  return collect_args(argc, argv, &fn);
+}
+
+template <typename TransformPredicate>
+std::vector<std::string> collect_args(int argc, char **argv,
+                                      TransformPredicate *fn) {
+  std::vector<std::string> args;
+
+  for (int i = 2; i < argc; i++) {
+    const std::string arg = (*fn)(argv[i]);
+    args.push_back(arg);
+  }
+
+  return args;
+}
+
+std::vector<std::string> collect_args(int argc, char **argv) {
+  return collect_args(argc, argv,
+                      [](std::string in) -> std::string { return in; });
+}
+
 std::pair<std::string, std::string> flag_to_pair(std::string &flag) {
   std::regex token_regex = std::regex("--|=");
 

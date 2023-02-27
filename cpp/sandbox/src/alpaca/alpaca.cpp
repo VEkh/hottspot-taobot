@@ -1,6 +1,7 @@
 #include "client/client.cpp"   // Alpaca::Client
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/utils/io.cpp"    // utils::io
+#include "quote/quote.cpp"     // Alpaca::Quote
 #include "returns.cpp"         // Alpaca::Returns
 #include "sessions.cpp"        // Alpaca::Sessions
 #include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
@@ -22,6 +23,8 @@ void print_usage() {
       {"stream_quotes <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
       {"tao_bot <SYMBOL> <QUANTITY>  ",
        "Launch trading bot for the given currency pair"},
+      {"watch_quotes <SYMBOLS>       ",
+       "Persist and make computations for fetched/streamed quotes"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -135,6 +138,23 @@ int main(int argc, char *argv[]) {
 
     Alpaca::TaoBot tao_bot(symbol, flags);
     tao_bot.run();
+
+    exit(0);
+  }
+
+  if (command == "watch_quotes") {
+    if (argc < 3) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to stream.");
+
+      throw std::invalid_argument(message);
+    }
+
+    const std::vector<std::string> symbols =
+        ::utils::io::collect_args(argc, argv, ::utils::string::upcase);
+
+    Alpaca::Quote watcher;
+    watcher.watch(symbols);
 
     exit(0);
   }
