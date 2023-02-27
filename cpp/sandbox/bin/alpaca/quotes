@@ -1,0 +1,128 @@
+#!/bin/bash
+# shellcheck disable=2009
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_normal="\033[10m"
+fmt_reset="\033[0m"
+fmt_underline="\033[4m"
+fmt_yellow="\033[33m"
+project=$(dirname "$0" | xargs basename)
+
+# shellcheck disable=1090,1091
+source "$app_dir/bin/utils" # to_title, to_upper
+
+shopt -s extglob
+echo -e "${fmt_bold}${fmt_cyan}"
+date
+echo
+
+case $(to_lower "$1") in
+  stream|watch)
+    action=$(to_lower "$1")
+    action_gerund="${action}ing"
+    ;;
+  *)
+    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}ALPACA QUOTES${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_cyan}Provide an action (stream|watch) to proceed${fmt_reset}\n"
+    exit 1
+    ;;
+esac
+
+function get_status() {
+  ps aux | grep --color "[q]uotes_${action}" | grep -vE "heartbeat|log|restart|status|stop" | grep --color "$project"
+}
+
+function print_status() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}✅ Not ${action_gerund} any quotes"
+  else
+    printf "%b" "$fmt_reset"
+    get_status
+  fi
+}
+
+function start_if_stopped() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}😴 Not ${action_gerund} any quotes. Starting.\n${fmt_reset}"
+    start_action
+  else
+    echo -e "${fmt_cyan}💖 Already ${action_gerund} quotes. Doing nothing.${fmt_reset}"
+  fi
+}
+
+function start_action() {
+  all_symbols=($(cat "$app_dir/bin/$project/symbols"))
+  cmd="quotes_${action}"
+  log_dir="$app_dir/log/$project"
+  symbols=("${@:-${all_symbols[@]}}")
+
+  mkdir -p "$log_dir"
+
+  log_file="$log_dir/quotes_${action}.log"
+
+  echo -e "${fmt_bold}${fmt_yellow}Starting Quotes $(to_title "$action")"\
+    "for ${fmt_normal}${fmt_cyan}${symbols[*]}"
+
+  "$app_dir/build/$project" "$cmd" "${symbols[@]}" > "$log_file" 2>&1 &
+}
+
+function stop_action() {
+  state=$(get_status)
+
+  if [[ -z $state ]]
+  then
+    echo -e "${fmt_green}✅ Not ${action_gerund} any quotes"
+  else
+    echo -e "${fmt_cyan}🛑 Stopping Quotes $(to_title "$action")${fmt_reset}"
+
+    get_status | awk '{print $2}' | xargs kill
+  fi
+}
+
+case $2 in
+  heartbeat)
+    start_if_stopped
+    ;;
+
+  restart)
+    stop_action
+    start_action "${@:3}"
+    ;;
+
+  start)
+    start_action "${@:3}"
+    ;;
+
+  status)
+    print_status
+    ;;
+
+  stop)
+    stop_action
+
+    ;;
+
+  *)
+    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}ALPACA QUOTES $(to_upper "$action")${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_cyan}Description: $(to_title "$action") the quotes for provided symbols.${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_yellow}Usage: quotes $action [COMMAND] [ARGS]\n"
+    echo -e "Commands:"
+    echo -e "  heartbeat               Check status. Restart if stopped."
+    echo -e "  restart   <SYMBOLS>     Stop, then start ${action_gerund}. See stop and start documentation."
+    echo -e "  start     <SYMBOLS>     Start ${action_gerund} one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)."
+    echo -e "  status                  Print running ${action} processes, if any."
+    echo -e "  stop                    Stop ${action_gerund} all symbols."
+
+    ;;
+esac
+
+printf "%b" "$fmt_reset"

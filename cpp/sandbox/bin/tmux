@@ -26,7 +26,7 @@ tmux -2 new-session -s hottspot_taobot -n "code" \; \
   new-window -n "stocks-1" "$(tail_cmd "$equity_project" "${equity_symbols[0]}")" \; \
   split-window -h "$(tail_cmd "$equity_project" "${equity_symbols[1]}")" \; \
   new-window -n "stock-streams" "$(tail_cmd "$equity_project"  "account_stream")" \; \
-  split-window -h "$(tail_cmd "$equity_project" "quote_stream")" \; \
+  split-window -h "$(tail_cmd "$equity_project" "quotes_stream")" \; \
   new-window -n "forex-1" "$(tail_cmd "$forex_project" "${forex_symbols[0]}")" \; \
   split-window -h "$(tail_cmd "$forex_project" "${forex_symbols[1]}")" \; \
   new-window -n "forex-streams" "$(tail_cmd "$forex_project" "account_stream")" \; \

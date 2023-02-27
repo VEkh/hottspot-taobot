@@ -19,12 +19,12 @@ void print_usage() {
       {"log_returns                  ", "Print cumulative return"},
       {"log_sessions                 ",
        "Print account performance for recorded sessions"},
+      {"quotes_stream <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
+      {"quotes_watch <SYMBOLS>       ",
+       "Persist and make computations for fetched/streamed quotes"},
       {"stream_account               ", "Stream account info"},
-      {"stream_quotes <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
       {"tao_bot <SYMBOL> <QUANTITY>  ",
        "Launch trading bot for the given currency pair"},
-      {"watch_quotes <SYMBOLS>       ",
-       "Persist and make computations for fetched/streamed quotes"},
   };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -107,17 +107,7 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "stream_account") {
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
-    Alpaca::Client alpaca_client(flags);
-    alpaca_client.stream_account();
-
-    exit(0);
-  }
-
-  if (command == "stream_quotes") {
+  if (command == "quotes_stream") {
     if (argc < 3) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to stream.");
@@ -131,18 +121,7 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "tao_bot") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
-    Alpaca::TaoBot tao_bot(symbol, flags);
-    tao_bot.run();
-
-    exit(0);
-  }
-
-  if (command == "watch_quotes") {
+  if (command == "quotes_watch") {
     if (argc < 3) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to stream.");
@@ -155,6 +134,27 @@ int main(int argc, char *argv[]) {
 
     Alpaca::Quote watcher;
     watcher.watch(symbols);
+
+    exit(0);
+  }
+
+  if (command == "stream_account") {
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Alpaca::Client alpaca_client(flags);
+    alpaca_client.stream_account();
+
+    exit(0);
+  }
+
+  if (command == "tao_bot") {
+    char *symbol = argc < 3 ? nullptr : argv[2];
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Alpaca::TaoBot tao_bot(symbol, flags);
+    tao_bot.run();
 
     exit(0);
   }
