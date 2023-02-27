@@ -1,25 +1,14 @@
 #ifndef ALPACA__CLIENT_H
 #define ALPACA__CLIENT_H
 
-#include "alpaca/types.cpp"                 // Alpaca::t
-#include "lib/curl_client/curl_client.cpp"  // CurlClient
-#include "lib/formatted.cpp"                // Formatted
-#include "types.cpp"                        // Global::t
-#include <boost/asio/connect.hpp>           // boost::asio
-#include <boost/beast/core/flat_buffer.hpp> // boost::beast::flat_buffer
-#include <boost/beast/http.hpp>             // boost::beast, boost::beast::http
-#include <boost/beast/ssl.hpp>              // boost::asio::ssl
-#include <boost/beast/websocket.hpp>        // boost::beast::websocket
-#include <map>                              // std::map
-#include <string>                           // std::string
+#include "alpaca/types.cpp"                // Alpaca::t
+#include "lib/curl_client/curl_client.cpp" // CurlClient
+#include "lib/formatted.cpp"               // Formatted
+#include "types.cpp"                       // Global::t
+#include <map>                             // std::map
+#include <string>                          // std::string
 
 namespace Alpaca {
-namespace beast = boost::beast;
-namespace http = beast::http;
-namespace net = boost::asio;
-namespace ssl = net::ssl;
-namespace websocket = beast::websocket;
-
 class Client {
 public:
   using order_action_t = Alpaca::t::order_action_t;
@@ -28,7 +17,13 @@ public:
   using order_type_t = Alpaca::t::order_type_t;
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Alpaca::t::quote_t;
-  using tcp = net::ip::tcp;
+
+  struct config_t {
+    std::string api_key_id;
+    std::string api_secret_key;
+    std::string base_url;
+    std::string data_base_url;
+  } config;
 
   Client(std::map<std::string, std::string> = {});
 
@@ -46,16 +41,8 @@ public:
   bool is_beta();
   bool is_live();
   void stream_account();
-  void stream_quotes(int, char *[]);
 
 private:
-  struct config_t {
-    std::string api_key_id;
-    std::string api_secret_key;
-    std::string base_url;
-    std::string data_base_url;
-  } config;
-
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::map<std::string, std::string> flags = {
       {"beta", "0"},
@@ -65,7 +52,6 @@ private:
   CurlClient fetch(std::string);
   CurlClient post(const post_params_t params);
   void load_config();
-  void write_streamed_quote(const beast::flat_buffer &);
 };
 } // namespace Alpaca
 

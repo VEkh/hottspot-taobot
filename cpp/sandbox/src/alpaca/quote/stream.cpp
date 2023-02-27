@@ -1,20 +1,20 @@
-#ifndef ALPACA__CLIENT_stream_quotes
-#define ALPACA__CLIENT_stream_quotes
+#ifndef ALPACA__QUOTE_stream
+#define ALPACA__QUOTE_stream
 
 /*
- * Alpaca::Client
+ * Alpaca::Quote
  * beast
  * http
  * net
  * ssl
  * websocket
  */
-#include "client.h"
+#include "quote.h"
 
 #include "lib/utils/string.cpp"               // ::utils::string
 #include "lib/utils/websocket.cpp"            // ::utils::websocket
 #include "src/deps.cpp"                       // json
-#include "write_streamed_quote.cpp"           // write_streamed_quote
+#include "write_streamed.cpp"                 // write_streamed
 #include <boost/asio/connect.hpp>             // boost::asio
 #include <boost/asio/ip/tcp.hpp>              // boost::asio::ip::tcp
 #include <boost/beast/core/flat_buffer.hpp>   // boost::beast::flat_buffer
@@ -30,7 +30,7 @@
 #include <sstream>                            // std::ostringstream
 #include <string>                             // std::string, std::to_string
 
-void Alpaca::Client::stream_quotes(int argc, char *argv[]) {
+void Alpaca::Quote::stream(int argc, char *argv[]) {
   net::io_context ioc;
   ssl::context ssl_context(ssl::context::tlsv12_client);
   tcp::resolver resolver(ioc);
@@ -70,8 +70,8 @@ void Alpaca::Client::stream_quotes(int argc, char *argv[]) {
 
   json auth_message = {
       {"action", "auth"},
-      {"key", this->config.api_key_id},
-      {"secret", this->config.api_secret_key},
+      {"key", this->api_client.config.api_key_id},
+      {"secret", this->api_client.config.api_secret_key},
   };
 
   ws.write(net::buffer(auth_message.dump()));
@@ -97,7 +97,7 @@ void Alpaca::Client::stream_quotes(int argc, char *argv[]) {
   while (!stream_error) {
     try {
       ws.read(buffer, stream_error);
-      write_streamed_quote(buffer);
+      write_streamed(buffer);
       ::utils::websocket::log_and_consume_buffer(buffer);
     } catch (boost::wrapexcept<boost::system::system_error> &) {
       puts("❌ Websocket Stream failed.");
@@ -106,6 +106,6 @@ void Alpaca::Client::stream_quotes(int argc, char *argv[]) {
   }
 
   ws.close(websocket::close_code::normal);
-} // namespace WebsocketClient
+}
 
 #endif

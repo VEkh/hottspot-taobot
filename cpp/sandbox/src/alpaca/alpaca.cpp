@@ -115,8 +115,8 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    Alpaca::Client alpaca_client;
-    alpaca_client.stream_quotes(argc, argv);
+    Alpaca::Quote streamer;
+    streamer.stream(argc, argv);
 
     exit(0);
   }

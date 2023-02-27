@@ -1,19 +1,32 @@
 #ifndef ALPACA__QUOTE_H
 #define ALPACA__QUOTE_H
 
-#include "alpaca/client/client.cpp" // Alpaca::Client
-#include "alpaca/types.cpp"         // Alpaca::t
-#include "lib/formatted.cpp"        // Formatted
-#include "types.cpp"                // Global::t
-#include <map>                      // std::map
-#include <string>                   // std::string
-#include <vector>                   // std::vector
+#include "alpaca/client/client.cpp"         // Alpaca::Client
+#include "alpaca/types.cpp"                 // Alpaca::t
+#include "lib/formatted.cpp"                // Formatted
+#include "types.cpp"                        // Global::t
+#include <boost/asio/connect.hpp>           // boost::asio
+#include <boost/beast/core/flat_buffer.hpp> // boost::beast::flat_buffer
+#include <boost/beast/http.hpp>             // boost::beast, boost::beast::http
+#include <boost/beast/ssl.hpp>              // boost::asio::ssl
+#include <boost/beast/websocket.hpp>        // boost::beast::websocket
+#include <map>                              // std::map
+#include <string>                           // std::string
+#include <vector>                           // std::vector
 
 namespace Alpaca {
+namespace beast = boost::beast;
+namespace http = beast::http;
+namespace net = boost::asio;
+namespace ssl = net::ssl;
+namespace websocket = beast::websocket;
+
 class Quote {
 public:
+  using tcp = net::ip::tcp;
   Quote();
 
+  void stream(int, char *[]);
   void watch(const std::vector<std::string>);
 
 private:
@@ -39,10 +52,10 @@ private:
   void read_collection(const std::string);
   void set_and_persist_price_movement(const std::string);
   void set_price_movement(const std::string);
-  void stream();
   void write();
   void write_collection(const std::string);
   void write_price_movement(const std::string);
+  void write_streamed(const beast::flat_buffer &);
 };
 } // namespace Alpaca
 

@@ -1,16 +1,16 @@
-#ifndef ALPACA__CLIENT_write_streamed_quote
-#define ALPACA__CLIENT_write_streamed_quote
+#ifndef ALPACA__QUOTE_write_streamed
+#define ALPACA__QUOTE_write_streamed
 
-#include "client.h"                            // Alpaca::Client, beast
 #include "lib/formatted.cpp"                   // Formatted
 #include "lib/utils/io.cpp"                    // ::utils::io
+#include "quote.h"                             // Alpaca::Quote, beast
 #include "src/deps.cpp"                        // json
 #include <boost/beast/core/flat_buffer.hpp>    // boost::beast::flat_buffer
 #include <boost/beast/core/make_printable.hpp> // boost::beast::make_printable
 #include <sstream>                             // std::ostringstream
 #include <string>                              // std::string, std::to_string
 
-void Alpaca::Client::write_streamed_quote(const beast::flat_buffer &buffer) {
+void Alpaca::Quote::write_streamed(const beast::flat_buffer &buffer) {
   std::ostringstream stream;
 
   stream << beast::make_printable(buffer.data());
