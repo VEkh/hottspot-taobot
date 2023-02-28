@@ -43,6 +43,8 @@ private:
 
   double current_price(const std::string);
 
+  price_movement_t read_price_movement(const std::string);
+
   quote_t fetch_quote(const std::string);
   quote_t get_quote(const std::string);
   quote_t read_streamed_quote(const std::string);

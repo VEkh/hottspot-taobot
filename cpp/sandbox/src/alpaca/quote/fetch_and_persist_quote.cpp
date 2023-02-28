@@ -12,7 +12,9 @@
 void Alpaca::Quote::fetch_and_persist_quote(const std::string symbol) {
   const quote_t new_quote = get_quote(symbol);
 
-  const double current_price_ = current_price(symbol);
+  const double current_price_ =
+      this->quotes[symbol].size() ? current_price(symbol) : new_quote.price;
+
   const double delta_ratio =
       (new_quote.price - current_price_) / current_price_;
 
