@@ -1,12 +1,11 @@
 #ifndef ALPACA__TAO_BOT_batch_volatility
 #define ALPACA__TAO_BOT_batch_volatility
 
-#include "deps.cpp"                // json
-#include "lib/utils/io.cpp"        // ::utils::io
-#include "load_price_movement.cpp" // load_price_movement
-#include "tao_bot.h"               // Alpaca::TaoBot
-#include <string>                  // std::string
-#include <vector>                  // std::vector
+#include "deps.cpp"         // json
+#include "lib/utils/io.cpp" // ::utils::io
+#include "tao_bot.h"        // Alpaca::TaoBot, price_movement_t
+#include <string>           // std::string
+#include <vector>           // std::vector
 
 double Alpaca::TaoBot::batch_volatility() {
   const std::vector<std::string> symbols =
@@ -16,27 +15,22 @@ double Alpaca::TaoBot::batch_volatility() {
   int count = 0;
 
   for (const std::string symbol_ : symbols) {
-    json price_movement_json = load_price_movement(symbol_);
+    const price_movement_t price_movement_ =
+        this->quoter.read_price_movement(symbol_);
 
-    if (price_movement_json.empty()) {
+    if (!price_movement_.short_term_three_minute_one_second_variance.average) {
       continue;
     }
 
-    if (!price_movement_json.contains(
-            "short_term_three_minute_one_second_variance")) {
-      continue;
-    }
-
-    if (!price_movement_json.contains("three_minute_one_second_variance")) {
+    if (!price_movement_.three_minute_one_second_variance.average) {
       continue;
     }
 
     const double short_term_average_one_sec_variance =
-        price_movement_json["short_term_three_minute_one_second_variance"]
-                           ["average"];
+        price_movement_.short_term_three_minute_one_second_variance.average;
 
     const double average_one_sec_variance =
-        price_movement_json["three_minute_one_second_variance"]["average"];
+        price_movement_.three_minute_one_second_variance.average;
 
     const double volatility_ =
         short_term_average_one_sec_variance / average_one_sec_variance;

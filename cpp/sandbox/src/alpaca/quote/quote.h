@@ -23,16 +23,18 @@ namespace websocket = beast::websocket;
 
 class Quote {
 public:
+  using price_movement_t = Global::t::price_movement_t;
+  using quote_t = Alpaca::t::quote_t;
   using tcp = net::ip::tcp;
+
   Quote();
 
+  price_movement_t read_price_movement(const std::string);
+  std::vector<quote_t> read_collection(const std::string, const double);
   void stream(int, char *[]);
   void watch(const std::vector<std::string>);
 
 private:
-  using price_movement_t = Global::t::price_movement_t;
-  using quote_t = Alpaca::t::quote_t;
-
   Alpaca::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
@@ -43,15 +45,12 @@ private:
 
   double current_price(const std::string);
 
-  price_movement_t read_price_movement(const std::string);
-
   quote_t fetch_quote(const std::string);
   quote_t get_quote(const std::string);
   quote_t read_streamed_quote(const std::string);
 
-  void fetch_and_persist_quote(const std::string);
+  void fetch_and_persist_quote(const std::string, const bool);
   void read(const std::string);
-  void read_collection(const std::string);
   void set_and_persist_price_movement(const std::string);
   void set_price_movement(const std::string);
   void write();

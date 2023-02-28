@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_H
 
 #include "alpaca/client/client.cpp" // Alpaca::Client
+#include "alpaca/quote/quote.cpp"   // Alpaca::Quote
 #include "alpaca/types.cpp"         // Alpaca::t
 #include "lib/formatted.cpp"        // Formatted
 #include "types.cpp"                // Global::t
@@ -51,9 +52,9 @@ private:
   };
 
   Alpaca::Client api_client;
+  Alpaca::Quote quoter;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
-  char *symbol;
   double quantity;
   int init_closed_positions_count = 0;
   exit_prices_t exit_prices;
@@ -64,6 +65,7 @@ private:
   performance_t performance;
   price_movement_t price_movement;
   std::map<std::string, std::string> flags;
+  std::string symbol;
   std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -111,14 +113,10 @@ private:
   int tradeable_symbols_count();
   json fetch_account_balance();
   json fetch_order(const order_t *);
-  json load_price_movement(const std::string);
   json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  quote_t fetch_quote();
-  quote_t get_quote();
-  quote_t read_streamed_quote();
 
   std::pair<double, double> get_quote_price_range();
   std::pair<order_t, order_t> open_position(const order_action_t,
@@ -130,8 +128,6 @@ private:
   void fetch_and_persist_quote(const bool);
   void initialize(char *, std::map<std::string, std::string> &);
   void load_performance();
-  void load_price_movement();
-  void load_quotes();
   void log_account_balance();
   void log_end_of_trading_period();
   void log_performance();
@@ -143,13 +139,13 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
+  void read_price_movement();
+  void read_quotes();
   void reset_position();
-  void set_and_persist_price_movement();
   void set_close_order_prices();
   void set_execution_price(order_t *);
   void set_open_order_prices();
   void set_position_status();
-  void set_price_movement();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
@@ -157,8 +153,6 @@ private:
   void watch();
   void write_account_performance();
   void write_performance();
-  void write_price_movement();
-  void write_quotes();
 };
 } // namespace Alpaca
 

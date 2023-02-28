@@ -16,6 +16,7 @@ void Alpaca::Quote::watch(const std::vector<std::string> symbols) {
   for (const std::string symbol : symbols) {
     read_collection(symbol);
     read_price_movement(symbol);
+    fetch_and_persist_quote(symbol, true);
   }
 
   while (true) {
