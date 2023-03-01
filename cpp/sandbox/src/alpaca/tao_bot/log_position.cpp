@@ -62,9 +62,11 @@ void Alpaca::TaoBot::log_position() {
              Alpaca::constants::ORDER_STATUSES[this->close_order_ptr->status])
              .c_str());
 
-  printf("Min Profit: %.2f • Max Loss: %.2f • Trailing Stop Profit: %.2f\n",
-         this->exit_prices.min_profit, this->exit_prices.max_loss,
-         this->exit_prices.trailing_stop_profit);
+  printf("Min Profit: %.2f%s • Max Loss: %.2f • Trailing Stop Profit: %.2f\n",
+         this->exit_prices.min_profit,
+         this->open_order_ptr->max_profit >= this->exit_prices.min_profit ? " ✅"
+                                                                          : "",
+         this->exit_prices.max_loss, this->exit_prices.trailing_stop_profit);
 
   printf("Quantity: %.5f\n", this->open_order_ptr->quantity);
 
