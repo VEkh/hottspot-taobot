@@ -70,7 +70,7 @@ function install_boost() {
 }
 
 function install_brew_packages() {
-  if [[ $(which brew) =~ .*not\sfound.* ]]; then
+  if [[ $(which brew) =~ .*not\\sfound.* ]]; then
     log_install_start "🍺 Homerew Package Installer"
     /bin/bash -c \
       "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -114,6 +114,24 @@ function install_etrade_dependencies() {
   fi
 
   install_ruby_gems bundler
+}
+
+function install_postgresql() {
+  if [[ $OSTYPE =~ ^linux.* ]]; then
+    package="postgresql"
+
+    if (dpkg -l | grep -v "^rc" | grep "$package" | awk '{print $2}' | grep -q "^${package}\(:\w\+\)\?$"); then
+      return 0;
+    fi
+
+    log_install_start "🐘 PostgreSQL"
+
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+      sudo apt-key add -
+    sudo apt-get update
+    sudo apt-get -y install postgresql
+  fi
 }
 
 function install_nlohmann_json() {
@@ -201,11 +219,12 @@ function log_install_start() {
 
 if [[ $OSTYPE =~ ^linux.* ]]; then
   sudo apt-get update
-  install_apt_packages gcc g++ libcurl4-openssl-dev libssl-dev openssl python3
+  install_apt_packages gcc g++ libcurl4-openssl-dev libssl-dev lsb-release openssl python3
 fi
 
 [[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3" "python@3.10"
 
+install_postgresql
 install_cpp_dependencies
 
 echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"
