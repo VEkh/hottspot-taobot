@@ -37,14 +37,16 @@ Alpaca::Quote::read_collection(const std::string symbol,
     file.close();
   } catch (nlohmann::detail::parse_error &) {
     return {};
-  } catch (nlohmann::detail::type_error &) {
-    return {};
   } catch (std::invalid_argument &) {
     return {};
   }
 
-  for (json quote_json : quotes_json) {
-    this->quotes[symbol].push_back(json_to_quote(quote_json));
+  try {
+    for (json quote_json : quotes_json) {
+      this->quotes[symbol].push_back(json_to_quote(quote_json));
+    }
+  } catch (nlohmann::detail::type_error &) {
+    return read_collection(symbol, limit);
   }
 
   std::vector<quote_t>::iterator range_begin =

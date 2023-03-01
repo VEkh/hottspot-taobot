@@ -25,7 +25,7 @@ Alpaca::Quote::read_price_movement(const std::string symbol) {
   }
 
   if (persisted_data.empty()) {
-    return price_movement_t();
+    return this->price_movements[symbol];
   }
 
   if (persisted_data.contains("short_term_three_minute_one_second_variance")) {
