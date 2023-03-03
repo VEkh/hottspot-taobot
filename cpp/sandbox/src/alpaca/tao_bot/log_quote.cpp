@@ -19,7 +19,7 @@ void Alpaca::TaoBot::log_quote() {
 
   const int ticks = this->quotes.size();
 
-  if (!ticks) {
+  if (ticks < 2) {
     return;
   }
 

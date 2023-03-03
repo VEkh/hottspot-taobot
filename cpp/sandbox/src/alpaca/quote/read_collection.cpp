@@ -41,19 +41,22 @@ Alpaca::Quote::read_collection(const std::string symbol,
     return {};
   }
 
+  std::vector<quote_t> all_quotes;
+
   try {
     for (json quote_json : quotes_json) {
-      this->quotes[symbol].push_back(json_to_quote(quote_json));
+      all_quotes.push_back(json_to_quote(quote_json));
     }
   } catch (nlohmann::detail::type_error &) {
     return read_collection(symbol, limit);
   }
 
   std::vector<quote_t>::iterator range_begin =
-      limit == INFINITY ? this->quotes[symbol].begin()
-                        : this->quotes[symbol].end() - limit;
+      limit == INFINITY ? all_quotes.begin() : all_quotes.end() - limit;
 
-  return std::vector<quote_t>(range_begin, this->quotes[symbol].end());
+  this->quotes[symbol] = std::vector<quote_t>(range_begin, all_quotes.end());
+
+  return this->quotes[symbol];
 }
 
 #endif
