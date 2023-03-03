@@ -1,0 +1,48 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "$0")/../../")
+config_filepath="$app_dir/config/db/credentials.json"
+current_dir=$(realpath "$(dirname "$0")")
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+scripts_dir="$current_dir/scripts"
+
+echo -e "${fmt_bold}${fmt_cyan}\n$(date)${fmt_reset}\n"
+
+if [[ ! -f "$config_filepath" ]]; then
+  echo -e "${fmt_bold}${fmt_red}❗ Database config file does not exist.${fmt_reset}"
+  echo -e "${fmt_bold}${fmt_yellow}Create it using ${config_filepath}.example${fmt_reset}\n"
+  exit 1
+fi
+
+if [[ -z "$1" ]]; then
+  echo -e "${fmt_bold}${fmt_red}💣 Provide a command that maps to an"\
+          "executable (.sql) script (e.g. setup, etc.)${fmt_reset}"
+  exit 1
+fi
+
+if [[ ! -f "$scripts_dir/$1.sql" ]]; then
+  echo -e "${fmt_bold}${fmt_red}😵 The script for \"$1\" does"\
+          "not exist at $scripts_dir/${1}.sql${fmt_reset}"
+  exit 1
+fi
+
+echo -e "${fmt_bold}${fmt_yellow}🤖 Authorized Execution of DB Scripts${fmt_reset}\n"
+
+credentals=$(cat "$config_filepath")
+database_name="$(echo "$credentals" | jq ".name")"
+database_password="$(echo "$credentals" | jq ".password")"
+database_username="$(echo "$credentals" | jq ".username")"
+
+psql_cmd="psql"
+psql_cmd+=" -v DB_NAME=\"${database_name}\""
+psql_cmd+=" -v DB_PASSWORD=\"${database_password}\""
+psql_cmd+=" -v DB_USERNAME=\"${database_username}\""
+psql_cmd+="< ${scripts_dir}/${1}.sql"
+
+sudo -u postgres sh -c "${psql_cmd}"
+
+printf "%b" "$fmt_reset"

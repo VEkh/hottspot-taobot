@@ -219,7 +219,7 @@ function log_install_start() {
 
 if [[ $OSTYPE =~ ^linux.* ]]; then
   sudo apt-get update
-  install_apt_packages gcc g++ libcurl4-openssl-dev libssl-dev lsb-release openssl python3
+  install_apt_packages gcc g++ jq libcurl4-openssl-dev libssl-dev lsb-release openssl python3
 fi
 
 [[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3" "python@3.10"
