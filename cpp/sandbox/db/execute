@@ -1,6 +1,6 @@
 #!/bin/bash
 
-app_dir=$(realpath "$(dirname "$0")/../../")
+app_dir=$(realpath "$(dirname "$0")/../")
 config_filepath="$app_dir/config/db/credentials.json"
 current_dir=$(realpath "$(dirname "$0")")
 fmt_bold="\033[1m"
