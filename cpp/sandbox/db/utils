@@ -1,0 +1,41 @@
+#!/bin/bash
+
+set -e
+
+app_dir=$(realpath "$(dirname "$0")/../")
+config_filepath="$app_dir/config/db/credentials.json"
+fmt_bold="\033[1m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+
+function build_db_url() {
+  if [[ ! -f "$config_filepath" ]]; then
+    exit 1
+  fi
+
+  credentals=$(cat "$config_filepath")
+  database_host="$(echo "$credentals" | jq -r ".host // empty")"
+  database_name="$(echo "$credentals" | jq -r ".name")"
+  database_password="$(echo "$credentals" | jq -r ".password")"
+  database_port="$(echo "$credentals" | jq -r ".port // empty")"
+  database_username="$(echo "$credentals" | jq -r ".username")"
+
+  # Fallbacks
+  database_host="${database_host:-localhost}"
+  database_port="${database_port:-5432}"
+
+  url="postgres://"
+  url+="${database_username}"
+  url+=":${database_password}"
+  url+="@${database_host}"
+  url+=":${database_port}"
+  url+="/${database_name}"
+
+  echo -e "${url}"
+}
+
+function on_build_db_url_error() {
+  echo -e "${fmt_bold}${fmt_red}❗ Database config file does not exist.${fmt_reset}"
+  echo -e "${fmt_bold}${fmt_yellow}Create it using ${config_filepath}.example${fmt_reset}\n"
+}
