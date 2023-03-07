@@ -1,31 +1,24 @@
 #!/bin/bash
 
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_green="\033[32m"
-fmt_red="\033[31m"
-fmt_reset="\033[0m"
-fmt_yellow="\033[33m"
+app_dir=$(realpath "$(dirname "$0")/../")
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 function generate() {
   migrations_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
-  echo -e "Directory: $(dirname "$0")"
-  echo -e "${BASH_SOURCE[0]}"
-  echo -e "${migrations_dir}"
 
   if [[ -z $1 ]]; then
-    echo -e "${fmt_bold}${fmt_red}Provide a (camel,"\
-            "pascal, or snake cased) migration name.${fmt_reset}"
+    ascii_print "Provide a (camel, pascal, or snake cased) migration name." "red"
     exit
   fi
-
-  echo -e "${fmt_bold}${fmt_cyan}🔨 Generating"\
-          "${fmt_yellow}${1}${fmt_cyan} migration${fmt_reset}"
 
   formatted_name=$(
     echo -e "$1" |
     awk '{ gsub(/[[:punct:]]/, "_"); gsub(/[[:upper:]]/, "_&"); sub("^_", ""); print tolower($0); }'
   )
+
+  ascii_print "🔨 Generating ${ASCII["yellow"]}${formatted_name}${ASCII["cyan"]} migration\n" "cyan"
 
   timestamp=$(date "+%Y%m%d%I%M%S")
   filepath="${timestamp}_${formatted_name}.sql"
@@ -33,6 +26,5 @@ function generate() {
   touch "$migrations_dir/down/${filepath}"
   touch "$migrations_dir/up/${filepath}"
 
-  echo -e "${fmt_bold}${fmt_green}🎉 Migration successfully written to" \
-    "${fmt_yellow}${migrations_dir}/(down|up)/${filepath}${fmt_reset}"
+  ascii_print "🎉 Migration successfully written to ${ASCII["yellow"]}${migrations_dir}/(down|up)/${filepath}" "green"
 }

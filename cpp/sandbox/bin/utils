@@ -1,5 +1,27 @@
 #!/bin/bash
 
+declare -A ASCII=(
+  ["bold"]="\033[1m"
+  ["cyan"]="\033[36m"
+  ["green"]="\033[32m"
+  ["red"]="\033[31m"
+  ["reset"]="\033[0m"
+  ["underline"]="\033[4m"
+  ["yellow"]="\033[33m"
+)
+
+export ASCII
+
+function ascii_print() {
+  message="${ASCII["bold"]}"
+
+  for fmt in "${@:2}"; do
+    message+="${ASCII["${fmt}"]}"
+  done
+
+  echo -e "${message}${1}${ASCII["reset"]}"
+}
+
 function to_lower() {
   echo -e "$1" | awk '{ print tolower($0) }'
 }

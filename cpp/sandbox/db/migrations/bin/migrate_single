@@ -2,11 +2,10 @@
 
 set -e
 
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_green="\033[32m"
-fmt_reset="\033[0m"
-fmt_yellow="\033[33m"
+app_dir=$(realpath "$(dirname "$0")/../")
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 function migrate_single_up() {
   db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
@@ -21,8 +20,7 @@ function migrate_single_up() {
 
   version=$(migration_filename_to_version "${1}")
 
-  echo -e "${fmt_bold}${fmt_cyan}🔼 Migrating"\
-          "${fmt_yellow}${version} ${fmt_cyan}up${fmt_reset}"
+  ascii_print "🔼 Migrating ${ASCII["yellow"]}${version} ${ASCII["cyan"]}up" "cyan"
 
   up_cmd="psql ${db_url} < ${1}"
 
@@ -35,6 +33,5 @@ function migrate_single_up() {
 
   sh -c "${persist_cmd}"
 
-  echo -e "${fmt_bold}${fmt_green}🎉 Successfully migrated" \
-          "${fmt_yellow}${version} ${fmt_green}up${fmt_reset}"
+  ascii_print "🎉 Successfully migrated ${ASCII["yellow"]}${version} ${ASCII["green"]}up" "green"
 }

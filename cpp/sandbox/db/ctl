@@ -1,32 +1,27 @@
 #!/bin/bash
 
 app_dir=$(realpath "$(dirname "$0")/../")
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_reset="\033[0m"
-fmt_underline="\033[4m"
-fmt_yellow="\033[33m"
 
 # shellcheck disable=1090,1091
-source "$app_dir/bin/utils" # to_title
+source "$app_dir/bin/utils" # ASCII, ascii_print, to_title
 
-echo -e "${fmt_bold}${fmt_cyan}\n$(date)${fmt_reset}\n"
+ascii_print "\n$(date)\n" "cyan"
 
 case $1 in
   *start|stop)
     gerund=$([[ $1 = "stop" ]] && echo -e "${1}ping" || echo -e "${1}ing")
 
-    echo -e "${fmt_bold}${fmt_yellow}💿 $(to_title "$gerund") Database${fmt_reset}"
+    ascii_print "💿 $(to_title "$gerund") Database\n" "yellow"
 
     if [[ $OSTYPE =~ ^linux.* ]]; then
       sudo service postgresql "$1"
     fi
     ;;
   *)
-    echo -e "${fmt_bold}${fmt_yellow}${fmt_underline}💿 DATABASE CONTROL${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_cyan}Provide an action (restart|start|stop) to proceed${fmt_reset}"
+    ascii_print "💿 DATABASE CONTROL\n" "underline" "yellow"
+    ascii_print "Provide an action (restart|start|stop) to proceed\n" "cyan"
     exit 1;
     ;;
 esac
 
-printf "%b" "$fmt_reset"
+printf "%b" "${ASCII["reset"]}"

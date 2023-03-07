@@ -4,10 +4,9 @@ set -e
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 config_filepath="$app_dir/config/db/credentials.json"
-fmt_bold="\033[1m"
-fmt_red="\033[31m"
-fmt_reset="\033[0m"
-fmt_yellow="\033[33m"
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 function build_db_url() {
   if [[ ! -f "$config_filepath" ]]; then
@@ -41,6 +40,6 @@ function migration_filename_to_version() {
 }
 
 function on_build_db_url_error() {
-  echo -e "${fmt_bold}${fmt_red}❗ Database config file does not exist.${fmt_reset}"
-  echo -e "${fmt_bold}${fmt_yellow}Create it using ${config_filepath}.example${fmt_reset}\n"
+  ascii_print "❗ Database config file does not exist.\n" "red"
+  ascii_print "Create it using ${config_filepath}.example\n" "yellow"
 }

@@ -2,18 +2,17 @@
 
 set -e
 
+app_dir=$(realpath "$(dirname "$0")/../")
 current_dir=$(realpath "$(dirname "$0")")
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_reset="\033[0m"
-fmt_yellow="\033[33m"
 
-echo -e "${fmt_bold}${fmt_cyan}\n$(date)${fmt_reset}\n"
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 # shellcheck disable=1090
 source "${current_dir}/utils" # build_db_url, on_build_db_url_error
 
-echo -e "${fmt_bold}${fmt_yellow}🚪 Connecting to Database${fmt_reset}\n"
+ascii_print "\n$(date)\n" "cyan"
+ascii_print "🚪 Connecting to Database\n" "yellow"
 
 trap 'on_build_db_url_error' ERR
 psql_cmd="psql $(build_db_url)"
@@ -21,4 +20,4 @@ trap - ERR
 
 sh -c "${psql_cmd}"
 
-printf "%b" "$fmt_reset"
+printf "%b" "${ASCII["reset"]}"
