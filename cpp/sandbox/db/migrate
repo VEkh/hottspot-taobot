@@ -1,0 +1,38 @@
+#!/bin/bash
+
+set -e
+
+current_dir=$(realpath "$(dirname "$0")")
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_reset="\033[0m"
+fmt_underline="\033[4m"
+fmt_yellow="\033[33m"
+migrations_dir="${current_dir}/migrations"
+
+srcs=($(ls "${migrations_dir}/bin/"))
+
+for src in "${srcs[@]}"; do
+  # shellcheck disable=1090
+  source "${migrations_dir}/bin/${src}" # generate, migrate_all_up
+done
+
+echo -e "${fmt_bold}${fmt_cyan}\n$(date)${fmt_reset}\n"
+
+case $1 in
+  "")
+    migrate_all_up
+    ;;
+  generate)
+    generate "$2"
+    ;;
+  *|help)
+    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}💿 DATABASE MIGRATIONS${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_cyan}Description: Scripts to assist schema changes${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_yellow}Usage: migrate [COMMAND] [ARGS]${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_yellow}Commands:"
+    echo -e "  generate <NAME>    Generate migration with given (camel, pascal, or snake cased) name."
+    ;;
+esac
+
+printf "%b" "$fmt_reset"

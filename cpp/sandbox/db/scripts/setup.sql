@@ -21,4 +21,11 @@ where
     where
       datname = :'DB_NAME') \gexec
 
+\c :DB_NAME
+drop table if exists schema_migrations;
+
+create table schema_migrations(
+  version bigint primary key
+);
+
 \echo '🎉 Finished setting up database'

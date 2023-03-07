@@ -2,7 +2,7 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "$0")/../")
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 config_filepath="$app_dir/config/db/credentials.json"
 fmt_bold="\033[1m"
 fmt_red="\033[31m"
@@ -33,6 +33,11 @@ function build_db_url() {
   url+="/${database_name}"
 
   echo -e "${url}"
+}
+
+function migration_filename_to_version() {
+  echo -e "${1}" |
+  awk '{ match($0, /\/([[:digit:]]+).*\.sql$/, arr); print arr[1] }'
 }
 
 function on_build_db_url_error() {

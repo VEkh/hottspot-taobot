@@ -16,14 +16,14 @@ case $1 in
   *start|stop)
     gerund=$([[ $1 = "stop" ]] && echo -e "${1}ping" || echo -e "${1}ing")
 
-    echo -e "${fmt_bold}${fmt_yellow}📀 $(to_title "$gerund") Database${fmt_reset}"
+    echo -e "${fmt_bold}${fmt_yellow}💿 $(to_title "$gerund") Database${fmt_reset}"
 
     if [[ $OSTYPE =~ ^linux.* ]]; then
       sudo service postgresql "$1"
     fi
     ;;
   *)
-    echo -e "${fmt_bold}${fmt_yellow}${fmt_underline}📀 DATABASE CONTROL${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_yellow}${fmt_underline}💿 DATABASE CONTROL${fmt_reset}\n"
     echo -e "${fmt_bold}${fmt_cyan}Provide an action (restart|start|stop) to proceed${fmt_reset}"
     exit 1;
     ;;
