@@ -10,20 +10,20 @@ function migrate_all_up() {
   db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
   scripts_dir="${db_dir}/scripts"
 
-  # build_db_url, migration_filename_to_version, on_build_db_url_error
+  # build_db_uri, migration_filename_to_version, on_build_db_uri_error
   # shellcheck disable=1090
   source "${db_dir}/utils"
 
   # shellcheck disable=1090
   source "${db_dir}/migrations/bin/migrate_single" # migrate_single
 
-  trap 'on_build_db_url_error' ERR
-  db_url="$(build_db_url)"
+  trap 'on_build_db_uri_error' ERR
+  db_uri="$(build_db_uri)"
   trap - ERR
 
   ascii_print "💿 Running up migrations" "yellow"
 
-  db_cmd="psql ${db_url} -t < ${scripts_dir}/print_schema_migration_versions.sql"
+  db_cmd="psql ${db_uri} -t < ${scripts_dir}/print_schema_migration_versions.sql"
   db_versions=($(sh -c "${db_cmd}"))
 
   migration_files=($(find "${migrations_dir}/up" -name "[0-9]*.sql"))

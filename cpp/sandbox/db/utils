@@ -9,7 +9,7 @@ config_filepath="$app_dir/config/db/credentials.json"
 # shellcheck disable=1090
 source "${app_dir}/bin/utils" # ASCII, ascii_print
 
-function build_db_url() {
+function build_db_uri() {
   if [[ ! -f "$config_filepath" ]]; then
     exit 1
   fi
@@ -25,14 +25,14 @@ function build_db_url() {
   database_host="${database_host:-localhost}"
   database_port="${database_port:-5432}"
 
-  url="postgres://"
-  url+="${database_username}"
-  url+=":${database_password}"
-  url+="@${database_host}"
-  url+=":${database_port}"
-  url+="/${database_name}"
+  uri="postgres://"
+  uri+="${database_username}"
+  uri+=":${database_password}"
+  uri+="@${database_host}"
+  uri+=":${database_port}"
+  uri+="/${database_name}"
 
-  echo -e "${url}"
+  echo -e "${uri}"
 }
 
 function migration_filename_to_version() {
@@ -46,7 +46,7 @@ function migration_version_to_filename() {
   find "${db_dir}/migrations/${action}" -name "${version}_*.sql"
 }
 
-function on_build_db_url_error() {
+function on_build_db_uri_error() {
   ascii_print "❗ Database config file does not exist.\n" "red"
-  ascii_print "Create it using ${config_filepath}.example\n" "yellow"
+  ascii_print "Create it using ${config_filepath}.example" "yellow"
 }
