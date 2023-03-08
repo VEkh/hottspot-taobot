@@ -12,8 +12,9 @@ source "${app_dir}/bin/utils" # ASCII, ascii_print
 srcs=($(ls "${migrations_dir}/bin/"))
 
 for src in "${srcs[@]}"; do
+  # generate, migrate_all_up, migrate_single
   # shellcheck disable=1090
-  source "${migrations_dir}/bin/${src}" # generate, migrate_all_up, migrate_single_up
+  source "${migrations_dir}/bin/${src}"
 done
 
 ascii_print "\n$(date)\n" "cyan"
@@ -30,6 +31,7 @@ case $1 in
     ascii_print "Description: Scripts to assist schema changes\n" "cyan"
     ascii_print "Usage: migrate [COMMAND] [ARGS]\n" "yellow"
     ascii_print "Commands:\n" "yellow"
+    ascii_print "  <NO_COMMAND>       Migrate up all un-migrated migrations.\n" "yellow"
     ascii_print "  generate <NAME>    Generate migration with given (camel, pascal, or snake cased) name.\n" "yellow"
     ;;
 esac

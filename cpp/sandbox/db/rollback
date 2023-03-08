@@ -1,0 +1,59 @@
+#!/bin/bash
+
+
+app_dir=$(realpath "$(dirname "$0")/../")
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+
+db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+migrations_dir="${db_dir}/migrations"
+scripts_dir="${db_dir}/scripts"
+
+# shellcheck disable=1090
+source "${db_dir}/migrations/bin/migrate_single" # migrate_single
+
+# build_db_url, migration_filename_to_version, on_build_db_url_error
+# shellcheck disable=1090
+source "${db_dir}/utils"
+
+trap 'on_build_db_url_error' ERR
+db_url="$(build_db_url)"
+trap - ERR
+
+ascii_print "👀 Rolling Back" "yellow"
+
+db_cmd="psql ${db_url} -t -v ORDER=\"desc\" < ${scripts_dir}/print_schema_migration_versions.sql"
+db_versions=($(sh -c "${db_cmd}"))
+
+migration_files=($(find "${migrations_dir}/down" -name "[0-9]*.sql" | sort -r))
+rolled_back_version=""
+
+i=0
+while [[
+  ! ${#db_versions[@]} = 0 &&
+  -z "${rolled_back_version}" &&
+  -n "${migration_files[i]}"
+]]; do
+  filename="${migration_files[i]}"
+  version=$(migration_filename_to_version "${filename}")
+
+  # shellcheck disable=2076
+  if [[ " ${db_versions[*]} " =~ " ${version} " ]]; then
+    migrate_single "down" "${filename}"
+    rolled_back_version="${version}"
+  fi
+
+  i=$((i + 1))
+done
+
+if [[ -n "${rolled_back_version}" ]]; then
+  success_msg=$(
+    echo -e "🎉 Successfully rolled back" \
+            "${ASCII["yellow"]} ${rolled_back_version}\n"
+  )
+
+  ascii_print "${success_msg}" "green"
+else
+  ascii_print "😓 No migrations to roll back" "yellow"
+fi

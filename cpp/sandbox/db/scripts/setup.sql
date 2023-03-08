@@ -28,4 +28,6 @@ create table schema_migrations(
   version bigint primary key
 );
 
+alter table schema_migrations owner to :DB_USERNAME;
+
 \echo '🎉 Finished setting up database'

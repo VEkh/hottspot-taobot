@@ -15,7 +15,7 @@ function migrate_all_up() {
   source "${db_dir}/utils"
 
   # shellcheck disable=1090
-  source "${db_dir}/migrations/bin/migrate_single" # migrate_single_up
+  source "${db_dir}/migrations/bin/migrate_single" # migrate_single
 
   trap 'on_build_db_url_error' ERR
   db_url="$(build_db_url)"
@@ -32,7 +32,9 @@ function migrate_all_up() {
     version=$(migration_filename_to_version "${filename}")
 
     # shellcheck disable=2076
-    [[ ! " ${db_versions[*]} " =~ " ${version} " ]] && migrate_single_up "${filename}"
+    if [[ ! " ${db_versions[*]} " =~ " ${version} " ]]; then
+      migrate_single "up" "${filename}"
+    fi
   done
 
   success_msg=$(
