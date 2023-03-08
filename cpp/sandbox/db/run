@@ -3,26 +3,26 @@
 app_dir=$(realpath "$(dirname "$0")/../")
 config_filepath="$app_dir/config/db/credentials.json"
 current_dir=$(realpath "$(dirname "$0")")
-scripts_dir="$current_dir/scripts"
+scripts_dir="${current_dir}/scripts"
 
 # shellcheck disable=1090
 source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 ascii_print "\n$(date)\n" "cyan"
 
-if [[ ! -f "$config_filepath" ]]; then
+if [[ ! -f "${config_filepath}" ]]; then
   ascii_print "❗ Database config file does not exist.\n" "red"
   ascii_print "Create it using ${config_filepath}.example\n" "yellow"
   exit 1
 fi
 
-if [[ -z "$1" ]]; then
-  ascii_print "💣 Provide a command that maps to an executable (.sql) script (e.g. setup, etc.)\n" "red"
+if [[ -z "${1}" ]]; then
+  ascii_print "💣 Provide a command that maps to an executable (.sql) script (e.g. setup, etc.)" "red"
   exit 1
 fi
 
-if [[ ! -f "$scripts_dir/$1.sql" ]]; then
-  ascii_print "😵 The script for \"$1\" does not exist at $scripts_dir/${1}.sql\n" "red"
+if [[ ! -f "${scripts_dir}/${1}.sql" ]]; then
+  ascii_print "😵 The script for \"${1}\" does not exist at ${scripts_dir}/${1}.sql" "red"
   exit 1
 fi
 

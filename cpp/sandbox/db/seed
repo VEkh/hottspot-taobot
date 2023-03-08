@@ -1,0 +1,35 @@
+#!/bin/bash
+
+set -e
+
+app_dir=$(realpath "$(dirname "$0")/../")
+db_dir=$(realpath "$(dirname "$0")")
+seeds_dir="$db_dir/seeds"
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+
+# shellcheck disable=1090
+source "${db_dir}/utils" # build_db_uri, on_build_db_uri_error
+entity="${1}"
+
+if [[ -z "${entity}" ]]; then
+  ascii_print "💣 Provide an entity that maps to an executable (.sql) seed (e.g. quotes, etc.)" "red"
+  exit 1
+fi
+
+if [[ ! -f "${seeds_dir}/${entity}.sql" ]]; then
+  ascii_print "😵 The script for \"${1}\" does not exist at ${seeds_dir}/${entity}.sql" "red"
+  exit 1
+fi
+
+ascii_print "\n$(date)\n" "cyan"
+ascii_print "🌱 Seeding Database ${ASCII["cyan"]}${entity}\n" "yellow"
+
+trap 'on_build_db_uri_error' ERR
+psql_cmd="psql $(build_db_uri) < ${db_dir}/seeds/${entity}.sql"
+trap - ERR
+
+sh -c "${psql_cmd}"
+
+printf "%b" "${ASCII["reset"]}"

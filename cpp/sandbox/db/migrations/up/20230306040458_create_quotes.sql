@@ -2,10 +2,12 @@ create table quotes(
   ask double precision not null,
   bid double precision not null,
   id bigint primary key,
-  inserted_at timestamp with time zone not null,
+  inserted_at timestamp with time zone default now() not null,
   symbol text not null,
   timestamp timestamp with time zone not null
 );
+
+create unique index quotes_symbol_timestamp_idx on quotes(symbol, timestamp);
 
 create sequence quotes_id_seq
   cache 1 start with 1
