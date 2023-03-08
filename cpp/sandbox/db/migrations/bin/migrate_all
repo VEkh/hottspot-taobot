@@ -33,7 +33,7 @@ function migrate_all_up() {
 
     # shellcheck disable=2076
     if [[ ! " ${db_versions[*]} " =~ " ${version} " ]]; then
-      migrate_single "up" "${filename}"
+      migrate_single "up" "${version}"
     fi
   done
 

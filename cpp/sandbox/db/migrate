@@ -23,6 +23,9 @@ case $1 in
   "")
     migrate_all_up
     ;;
+  down|up)
+    migrate_single "$1" "$2"
+    ;;
   generate)
     generate "$2"
     ;;
@@ -31,8 +34,9 @@ case $1 in
     ascii_print "Description: Scripts to assist schema changes\n" "cyan"
     ascii_print "Usage: migrate [COMMAND] [ARGS]\n" "yellow"
     ascii_print "Commands:\n" "yellow"
-    ascii_print "  <NO_COMMAND>       Migrate up all un-migrated migrations.\n" "yellow"
-    ascii_print "  generate <NAME>    Generate migration with given (camel, pascal, or snake cased) name.\n" "yellow"
+    ascii_print "  <NO_COMMAND>         Migrate up all un-migrated migrations.\n" "yellow"
+    ascii_print "  (down|up) <VERSION>  Migrate a single migration up or down.\n" "yellow"
+    ascii_print "  generate <NAME>      Generate migration with given (camel, pascal, or snake cased) name.\n" "yellow"
     ;;
 esac
 

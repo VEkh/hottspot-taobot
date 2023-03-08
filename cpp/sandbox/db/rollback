@@ -40,7 +40,7 @@ while [[
 
   # shellcheck disable=2076
   if [[ " ${db_versions[*]} " =~ " ${version} " ]]; then
-    migrate_single "down" "${filename}"
+    migrate_single "down" "${version}"
     rolled_back_version="${version}"
   fi
 

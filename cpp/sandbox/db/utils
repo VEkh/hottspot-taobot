@@ -3,6 +3,7 @@
 set -e
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+db_dir="${app_dir}/db"
 config_filepath="$app_dir/config/db/credentials.json"
 
 # shellcheck disable=1090
@@ -37,6 +38,12 @@ function build_db_url() {
 function migration_filename_to_version() {
   echo -e "${1}" |
   awk '{ match($0, /\/([[:digit:]]+).*\.sql$/, arr); print arr[1] }'
+}
+
+function migration_version_to_filename() {
+  action="${2}"
+  version="${1}"
+  find "${db_dir}/migrations/${action}" -name "${version}_*.sql"
 }
 
 function on_build_db_url_error() {

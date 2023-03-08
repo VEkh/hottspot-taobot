@@ -10,24 +10,33 @@ source "${app_dir}/bin/utils" # ASCII, ascii_print
 function migrate_single() {
   db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 
-  # build_db_url, migration_filename_to_version, on_build_db_url_error
+  # build_db_url, migration_version_to_filename, on_build_db_url_error
   # shellcheck disable=1090
   source "${db_dir}/utils"
 
   action="${1}"
   [[ "${action}" = "up" ]] && action_emoji="🔼" || action_emoji="🔽"
-  filename="${2}"
+  version="${2}"
+  filename="$(migration_version_to_filename "${version}" "${action}")"
 
-  trap 'on_build_db_url_error' ERR
+  if [[ ! -f "${filename}" ]]; then
+    error_message=$(
+      echo -e "❗ Migration ${ASCII["yellow"]}${version}" \
+              "${ASCII["red"]}doesn't have a corresponding file"\
+              "in ${ASCII["yellow"]}${db_dir}/${action}/"
+    )
+    ascii_print "${error_message}" "red"
+    exit 1
+  fi
+
+  trap 'on_build_db_url_error' err
   db_url="$(build_db_url)"
-  trap - ERR
-
-  version=$(migration_filename_to_version "${filename}")
+  trap - err
 
   ascii_print "${action_emoji} Migrating ${ASCII["yellow"]}${version} ${ASCII["cyan"]}${action}" "cyan"
 
   cmd="psql ${db_url} < ${filename}"
-  [[ "${action}" = "up" ]] && persist_action="write" || persist_action="delete"
+  [[ "${action}" = "down" ]] && persist_action="delete" || persist_action="write"
 
   sh -c "${cmd}"
 
