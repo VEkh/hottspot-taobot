@@ -4,6 +4,7 @@
 #include "lib/formatted.cpp" // Formatted
 #include <libpq-fe.h>        // PGconn
 #include <string>            // std::string
+#include <vector>            // std::vector
 
 class Pg {
 public:
@@ -11,6 +12,7 @@ public:
 
   PGconn *connect();
   void disconnect();
+  std::vector<std::string> query(const std::string);
 
 private:
   struct config_t {
