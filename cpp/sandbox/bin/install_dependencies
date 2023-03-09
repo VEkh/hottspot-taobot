@@ -217,14 +217,27 @@ function log_install_start() {
   echo -e "${fmt_bold}${fmt_yellow}📦 Installing ${fmt_reset}${fmt_cyan}$1${fmt_reset}"
 }
 
+install_postgresql
+
 if [[ $OSTYPE =~ ^linux.* ]]; then
+  packages=(
+    "g++"
+    "gcc"
+    "jq"
+    "libcurl4-openssl-dev"
+    "libpq-dev"
+    "libssl-dev"
+    "lsb-release"
+    "openssl"
+    "python3"
+  )
+
   sudo apt-get update
-  install_apt_packages gcc g++ jq libcurl4-openssl-dev libssl-dev lsb-release openssl python3
+  install_apt_packages "${packages[@]}"
 fi
 
 [[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3" "python@3.10"
 
-install_postgresql
 install_cpp_dependencies
 
 echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"

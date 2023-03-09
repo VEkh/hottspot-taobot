@@ -11,6 +11,7 @@ args=(
   "-iquote'.'"
   "-iquote'./src'"
   "-isystem'./deps/build/include'"
+  "-isystem'/usr/include/postgresql'"
   "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-isystem/opt/homebrew/opt/openssl@3/include")"
   "-std=c++17"
   "-o './.output'"
@@ -18,6 +19,7 @@ args=(
   "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-L/opt/homebrew/opt/openssl@3/lib")"
   "-lcrypto"
   "-lcurl"
+  "-lpq"
   "-lpthread"
   "-lssl"
 )

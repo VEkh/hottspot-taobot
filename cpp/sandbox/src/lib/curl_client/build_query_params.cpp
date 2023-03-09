@@ -1,4 +1,4 @@
-#if !defined CURL_CLIENT_build_query_params
+#ifndef CURL_CLIENT_build_query_params
 #define CURL_CLIENT_build_query_params
 
 #include "curl_client.h"        // CurlClient, props, transformed_props

@@ -8,26 +8,27 @@ project=$(dirname "$0" | xargs basename)
 
 function build_project() {
   # shellcheck disable=1090,1091
-  source "$app_dir/bin/utils" # to_title
+  source "${app_dir}/bin/utils" # to_title
 
-  data_dir="$app_dir/data/"
+  data_dir="${app_dir}/data/"
   project="$1"
   project_title=$(to_title "$project")
 
   echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}${project_title}${fmt_reset}"
 
-  mkdir -p "$app_dir/build/"
+  mkdir -p "${app_dir}/build/"
 
   args=(
-    "-D'APP_DIR=\"$app_dir\"'"
+    "-D'APP_DIR=\"${app_dir}\"'"
     "-D'DATA_DIR=\"$data_dir\"'"
-    "-iquote'$app_dir'"
-    "-iquote'$app_dir/src'"
-    "-isystem'$app_dir/deps/build/include'"
+    "-iquote'${app_dir}'"
+    "-iquote'${app_dir}/src'"
+    "-isystem'${app_dir}/deps/build/include'"
+    "-isystem'/usr/include/postgresql'"
     "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-isystem/opt/homebrew/opt/openssl@3/include")"
     "-std=c++17"
-    "-o '$app_dir/build/$project'"
-    "$app_dir/src/$project/$project.cpp"
+    "-o '${app_dir}/build/$project'"
+    "${app_dir}/src/$project/$project.cpp"
     "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-L/opt/homebrew/opt/openssl@3/lib")"
     "-lcrypto"
     "-lcurl"
