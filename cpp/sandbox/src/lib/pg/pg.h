@@ -12,7 +12,7 @@ public:
 
   PGconn *connect();
   void disconnect();
-  std::vector<std::string> query(const std::string);
+  std::vector<std::string> exec(const std::string);
 
 private:
   struct config_t {
