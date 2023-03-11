@@ -86,7 +86,7 @@ std::vector<std::string> split(std::string input, const char *delimiter) {
 
     result.push_back(match);
 
-    int advance_by = std::max((int)strlen(delimiter), 1);
+    const int advance_by = std::max((int)strlen(delimiter), 1);
 
     suffix = suffix.substr(match_position + advance_by, suffix.size() - 1);
     match_position = suffix.find(delimiter);

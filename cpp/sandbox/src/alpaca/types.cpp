@@ -8,6 +8,7 @@ namespace Alpaca {
 namespace t {
 using order_win_result_streak_t = Global::t::order_win_result_streak_t;
 using order_win_result_t = Global::t::order_win_result_t;
+using quote_t = Global::t::quote_t;
 
 enum order_action_t {
   BUY,
@@ -68,14 +69,6 @@ struct performance_t {
 struct position_t {
   order_t close_order;
   order_t open_order;
-};
-
-struct quote_t {
-  double ask = 0.00;
-  double bid = 0.00;
-  double price = 0.00;
-  std::string symbol = "";
-  long int timestamp;
 };
 
 struct quote_scoreboard_t {

@@ -74,6 +74,14 @@ struct price_movement_t {
   price_movement_average_t short_term_three_minute_one_second_variance;
   price_movement_average_t three_minute_one_second_variance;
 };
+
+struct quote_t {
+  double ask = 0.00;
+  double bid = 0.00;
+  double price = 0.00;
+  std::string symbol = "";
+  long int timestamp;
+};
 } // namespace t
 } // namespace Global
 #endif

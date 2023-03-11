@@ -1,4 +1,4 @@
-#if !defined UTILS__VECTOR
+#ifndef UTILS__VECTOR
 #define UTILS__VECTOR
 
 #include <string> // std::string
@@ -19,7 +19,8 @@ std::vector<std::string> filter(std::vector<std::string> collection,
   return result;
 }
 
-std::string join(std::vector<std::string> collection, const char *delimiter) {
+std::string join(std::vector<std::string> collection,
+                 const char *delimiter = ", ") {
   std::string output;
   std::vector<std::string>::iterator it;
 

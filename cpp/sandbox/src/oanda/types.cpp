@@ -1,8 +1,12 @@
 #ifndef OANDA__types
 #define OANDA__types
 
+#include "src/types.cpp" // Global::t
+
 namespace Oanda {
 namespace t {
+using quote_t = Global::t::quote_t;
+
 enum order_action_t {
   BUY,
   SELL,
@@ -51,14 +55,6 @@ struct order_t {
 struct position_t {
   order_t close_order;
   order_t open_order;
-};
-
-struct quote_t {
-  double ask;
-  double bid;
-  double price;
-  std::string symbol = "";
-  long int timestamp;
 };
 
 struct quote_scoreboard_t {

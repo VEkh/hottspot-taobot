@@ -16,7 +16,7 @@ public:
   using order_t = Alpaca::t::order_t;
   using order_type_t = Alpaca::t::order_type_t;
   using post_params_t = CurlClient::post_params_t;
-  using quote_t = Alpaca::t::quote_t;
+  using quote_t = Global::t::quote_t;
 
   struct config_t {
     std::string api_key_id;

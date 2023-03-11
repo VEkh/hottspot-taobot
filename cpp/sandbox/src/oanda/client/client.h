@@ -17,7 +17,7 @@ public:
   using order_t = Oanda::t::order_t;
   using order_status_t = Oanda::t::order_status_t;
   using post_params_t = CurlClient::post_params_t;
-  using quote_t = Oanda::t::quote_t;
+  using quote_t = Global::t::quote_t;
 
   Client(std::map<std::string, std::string> = {});
 

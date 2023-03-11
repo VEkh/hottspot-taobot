@@ -10,9 +10,22 @@ class Pg {
 public:
   Pg();
 
+  struct query_result_t {
+    std::string error_message = "";
+    std::vector<std::string> fields = {};
+    int fields_n = 0;
+    int rows_n = 0;
+    int status = 0;
+    std::vector<std::string> tuples = {};
+  };
+
+  PGconn *conn;
+
   PGconn *connect();
+
+  query_result_t exec(const std::string);
+
   void disconnect();
-  std::vector<std::string> exec(const std::string);
 
 private:
   struct config_t {
@@ -24,7 +37,6 @@ private:
   } config;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  PGconn *conn;
   std::string db_uri;
 
   std::string build_connect_uri();

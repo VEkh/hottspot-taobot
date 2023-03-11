@@ -24,7 +24,7 @@ namespace websocket = beast::websocket;
 class Quote {
 public:
   using price_movement_t = Global::t::price_movement_t;
-  using quote_t = Alpaca::t::quote_t;
+  using quote_t = Global::t::quote_t;
   using tcp = net::ip::tcp;
 
   Quote();

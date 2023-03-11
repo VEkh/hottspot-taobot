@@ -33,7 +33,7 @@ private:
   using position_t = Oanda::t::position_t;
   using price_movement_t = Global::t::price_movement_t;
   using quote_scoreboard_t = Oanda::t::quote_scoreboard_t;
-  using quote_t = Oanda::t::quote_t;
+  using quote_t = Global::t::quote_t;
   using trade_status_t = Oanda::t::trade_status_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
