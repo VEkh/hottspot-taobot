@@ -5,10 +5,16 @@
 #include "tao_bot.h"                     // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::max_account_loss_reached() {
-  return false;
+  if (!this->api_client.is_live()) {
+    return false;
+  }
+
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
-  return this->account_balance.min_balance <= exit_prices_.session_stop_loss;
+  const double current_profit_ratio =
+      exit_prices_.current_profit / this->account_balance.original_balance;
+
+  return current_profit_ratio <= this->MAX_ACCOUNT_LOSS_RATIO;
 }
 
 #endif

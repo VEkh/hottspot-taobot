@@ -35,12 +35,12 @@ private:
   using price_movement_average_t = Global::t::price_movement_average_t;
   using price_movement_t = Global::t::price_movement_t;
   using quote_scoreboard_t = Alpaca::t::quote_scoreboard_t;
-  using quote_t = Alpaca::t::quote_t;
+  using quote_t = Global::t::quote_t;
 
   const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const double MAX_ACCOUNT_LOSS_RATIO = -0.04;
+  const double MAX_ACCOUNT_LOSS_RATIO = -0.03;
   const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
-  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.04;
+  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.03;
   const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;

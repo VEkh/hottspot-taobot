@@ -8,7 +8,7 @@
 
 double Alpaca::TaoBot::compute_quantity() {
   const quote_t quote = this->quotes.back();
-  const double margin_throttle = this->api_client.is_live() ? 4.0 : 1.0;
+  const double margin_throttle = 1.0;
 
   const double max_buying_power =
       this->account_balance.original_margin_buying_power / margin_throttle;
