@@ -40,7 +40,7 @@ DB::Quote::result_to_collection(const query_result_t &result) {
       }
     }
 
-    quote.price = (quote.ask + quote.bid) / 2;
+    quote.price = (quote.ask + quote.bid) * 0.5;
     out.push_back(quote);
   }
 

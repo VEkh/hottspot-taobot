@@ -14,16 +14,23 @@ int main() {
 
   DB::Quote db_quote(pg);
 
-  db_quote.get("AMZN", 10);
-
-  // std::vector<std::string> quotes = pg.exec(R"(
-  //   select row_to_json(quotes) from quotes
-  // )");
-
-  // pg.exec(R"(
-  //   insert into quotes(ask, bid, symbol, timestamp)
-  //     values (99.0, 101.50, 'AMZN', '2023-03-10T21:00:01.91608747Z');
-  // )");
+  db_quote.get("AMZN");
+  db_quote.upsert({
+      {
+          .ask = 99.0,
+          .bid = 101.50,
+          .price = 0.00,
+          .symbol = "AMZN",
+          .timestamp = 1678482001.916087,
+      },
+      {
+          .ask = 99.0,
+          .bid = 101.50,
+          .price = 0.00,
+          .symbol = "TSLA",
+          .timestamp = 1678482001.916087,
+      },
+  });
 
   pg.disconnect();
 }

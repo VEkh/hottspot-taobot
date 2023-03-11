@@ -12,7 +12,10 @@ public:
   using quote_t = Global::t::quote_t;
 
   Quote(Pg &c) : conn(c){};
+
   std::vector<quote_t> get(const std::string, const double);
+
+  void upsert(std::vector<quote_t>);
 
 private:
   using query_result_t = Pg::query_result_t;

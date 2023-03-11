@@ -80,7 +80,7 @@ struct quote_t {
   double bid = 0.00;
   double price = 0.00;
   std::string symbol = "";
-  long int timestamp;
+  double timestamp;
 };
 } // namespace t
 } // namespace Global

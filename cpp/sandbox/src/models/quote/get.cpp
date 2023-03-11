@@ -21,7 +21,8 @@ std::vector<DB::Quote::quote_t> DB::Quote::get(const std::string symbol,
 
   std::string query = "select ask, bid, symbol, extract(epoch from timestamp) "
                       "as timestamp from quotes where symbol=" +
-                      std::string(sanitized_symbol) + limit_clause;
+                      std::string(sanitized_symbol) +
+                      " order by timestamp asc " + limit_clause;
 
   query_result_t query_result = this->conn.exec(query);
   PQfreemem(sanitized_symbol);

@@ -3,5 +3,6 @@
 
 #include "quote.h" // DB::Quote
 #include "get.cpp"
+#include "upsert.cpp"
 
 #endif
