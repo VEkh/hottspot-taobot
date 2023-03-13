@@ -10,10 +10,11 @@
 #include <vector>                 // std::vector
 
 int main() {
-  Pg pg((std::map<std::string, std::string>){
+  std::map<std::string, std::string> flags = {
       {"env", "development"},
-  });
+  };
 
+  Pg pg(flags);
   pg.connect();
 
   DB::Quote db_quote(pg);
@@ -21,7 +22,7 @@ int main() {
   db_quote.get("AMZN");
 
   db_quote.upsert({
-      .ask = 99.0,
+      .ask = 99.33333333,
       .bid = 101.50,
       .price = 0.00,
       .symbol = "TSLA",

@@ -31,6 +31,8 @@ void Alpaca::Quote::fetch_and_persist_quote(
 
   this->quotes[symbol].push_back(new_quote);
 
+  db_quote.upsert(new_quote);
+
   if (this->quotes[symbol].size() > this->QUOTES_MAX_SIZE) {
     const int offset = this->quotes[symbol].size() - this->QUOTES_MAX_SIZE;
     const std::vector<quote_t> limited_quotes(

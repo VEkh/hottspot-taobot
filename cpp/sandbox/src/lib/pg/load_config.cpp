@@ -1,12 +1,13 @@
 #ifndef PG_load_config
 #define PG_load_config
 
-#include "deps.cpp" // json
-#include "pg.h"     // Pg, fmt
-#include <fstream>  // std::ifstream, std::ios
-#include <iostream> // std::endl
-#include <sstream>  // std::stringstream
-#include <string>   // std::string
+#include "deps.cpp"  // json
+#include "pg.h"      // Pg, fmt
+#include <fstream>   // std::ifstream, std::ios
+#include <iostream>  // std::endl
+#include <sstream>   // std::stringstream
+#include <stdexcept> // std::invalid_argument
+#include <string>    // std::string
 
 void Pg::load_config() {
   const std::string filepath =

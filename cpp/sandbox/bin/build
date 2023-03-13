@@ -32,6 +32,7 @@ function build_project() {
     "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-L/opt/homebrew/opt/openssl@3/lib")"
     "-lcrypto"
     "-lcurl"
+    "-lpq"
     "-lpthread"
     "-lssl"
   )

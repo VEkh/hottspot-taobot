@@ -21,7 +21,7 @@ public:
     std::vector<std::string> tuples = {};
   };
 
-  PGconn *conn;
+  PGconn *conn = nullptr;
 
   PGconn *connect();
 

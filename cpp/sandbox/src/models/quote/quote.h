@@ -11,6 +11,7 @@ class Quote {
 public:
   using quote_t = Global::t::quote_t;
 
+  Quote(){};
   Quote(Pg &c) : conn(c){};
 
   std::vector<quote_t> get(const std::string, const double);

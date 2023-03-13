@@ -14,7 +14,8 @@ PGconn *Pg::connect() {
   switch (conn_status) {
   case CONNECTION_OK: {
     std::cout << fmt.bold << fmt.yellow;
-    printf("🚪 Successfully connected to %s", this->config.name.c_str());
+    std::cout << "🚪 Successfully connected to ";
+    std::cout << fmt.green << this->config.name;
     std::cout << fmt.reset << std::endl;
 
     break;
