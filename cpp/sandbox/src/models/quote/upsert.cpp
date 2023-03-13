@@ -6,6 +6,10 @@
 #include <string>     // std::string
 #include <vector>     // std::vector
 
+void DB::Quote::upsert(const quote_t quote) {
+  upsert((const std::vector<quote_t>){quote});
+}
+
 void DB::Quote::upsert(const std::vector<quote_t> quotes) {
   std::string query = "insert into quotes(ask, bid, symbol, timestamp) values ";
 

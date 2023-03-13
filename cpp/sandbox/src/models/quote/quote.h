@@ -15,7 +15,8 @@ public:
 
   std::vector<quote_t> get(const std::string, const double);
 
-  void upsert(std::vector<quote_t>);
+  void upsert(const quote_t);
+  void upsert(const std::vector<quote_t>);
 
 private:
   using query_result_t = Pg::query_result_t;

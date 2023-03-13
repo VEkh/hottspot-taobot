@@ -15,6 +15,15 @@ int main() {
   DB::Quote db_quote(pg);
 
   db_quote.get("AMZN");
+
+  db_quote.upsert({
+      .ask = 99.0,
+      .bid = 101.50,
+      .price = 0.00,
+      .symbol = "TSLA",
+      .timestamp = 1678721705.176510,
+  });
+
   db_quote.upsert({
       {
           .ask = 99.0,
