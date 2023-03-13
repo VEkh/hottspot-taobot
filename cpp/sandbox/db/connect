@@ -9,15 +9,15 @@ db_dir=$(realpath "$(dirname "$0")")
 source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 # shellcheck disable=1090
-source "${db_dir}/utils" # build_db_uri, on_build_db_uri_error
+source "${db_dir}/utils" # build_db_uri
 
 ascii_print "\n$(date)\n" "cyan"
 ascii_print "🚪 Connecting to Database\n" "yellow"
 
-trap 'on_build_db_uri_error' ERR
-psql_cmd="psql $(build_db_uri)"
-trap - ERR
+uri="$(build_db_uri)"
+psql_cmd="psql ${uri}"
 
 sh -c "${psql_cmd}"
+
 
 printf "%b" "${ASCII["reset"]}"

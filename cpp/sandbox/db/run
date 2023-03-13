@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app_dir=$(realpath "$(dirname "$0")/../")
-config_filepath="$app_dir/config/db/credentials.json"
+config_filepath="${app_dir}/config/db/credentials.json"
 current_dir=$(realpath "$(dirname "$0")")
 scripts_dir="${current_dir}/scripts"
 
@@ -11,27 +11,41 @@ source "${app_dir}/bin/utils" # ASCII, ascii_print
 ascii_print "\n$(date)\n" "cyan"
 
 if [[ ! -f "${config_filepath}" ]]; then
-  ascii_print "❗ Database config file does not exist.\n" "red"
-  ascii_print "Create it using ${config_filepath}.example\n" "yellow"
+  ascii_print "❗ Database config file does not exist.\n" "red" >&2
+  ascii_print "Create it using ${config_filepath}.example\n" "yellow" >&2
   exit 1
 fi
 
 if [[ -z "${1}" ]]; then
-  ascii_print "💣 Provide a command that maps to an executable (.sql) script (e.g. setup, etc.)" "red"
+  ascii_print "💣 Provide a command that maps to an executable (.sql) script (e.g. setup, etc.)" "red" >&2
   exit 1
 fi
 
 if [[ ! -f "${scripts_dir}/${1}.sql" ]]; then
-  ascii_print "😵 The script for \"${1}\" does not exist at ${scripts_dir}/${1}.sql" "red"
+  ascii_print "😵 The script for \"${1}\" does not exist at ${scripts_dir}/${1}.sql" "red" >&2
+  exit 1
+fi
+
+env="${ENV:-development}"
+
+credentials=$(jq ".${env} // empty" "${config_filepath}" )
+
+if [[ -z "${credentials}" ]]; then
+  error_message=$(
+    echo -e "❗ Database environment ${ASCII["yellow"]}${env}"\
+            "${ASCII["red"]}is not specified in ${config_filepath}."
+  )
+
+  ascii_print "${error_message}" "red" >&2
+
   exit 1
 fi
 
 ascii_print "🤖 Authorized Execution of DB Scripts\n" "yellow"
 
-credentals=$(cat "$config_filepath")
-database_name="$(echo "$credentals" | jq ".name")"
-database_password="$(echo "$credentals" | jq ".password")"
-database_username="$(echo "$credentals" | jq ".username")"
+database_name="$(echo "${credentials}" | jq ".name")"
+database_password="$(echo "${credentials}" | jq ".password")"
+database_username="$(echo "${credentials}" | jq ".username")"
 
 psql_cmd="psql"
 psql_cmd+=" -v DB_NAME=\"${database_name}\""

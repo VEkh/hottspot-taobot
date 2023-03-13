@@ -2,13 +2,15 @@
 #define PG_H
 
 #include "lib/formatted.cpp" // Formatted
+#include "lib/utils/map.cpp" // ::utils::map
 #include <libpq-fe.h>        // PGconn
+#include <map>               // std::map
 #include <string>            // std::string
 #include <vector>            // std::vector
 
 class Pg {
 public:
-  Pg();
+  Pg(std::map<std::string, std::string> f);
 
   struct query_result_t {
     std::string error_message = "";
@@ -37,6 +39,10 @@ private:
   } config;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  std::map<std::string, std::string> default_flags = {
+      {"env", "development"},
+  };
+  std::map<std::string, std::string> flags;
   std::string db_uri;
 
   std::string build_connect_uri();

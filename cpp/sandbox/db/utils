@@ -10,16 +10,33 @@ config_filepath="$app_dir/config/db/credentials.json"
 source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 function build_db_uri() {
+  env="${ENV:-development}"
+
   if [[ ! -f "$config_filepath" ]]; then
+    ascii_print "❗ Database config file does not exist.\n" "red" >&2
+    ascii_print "Create it using ${config_filepath}.example" "yellow" >&2
+
     exit 1
   fi
 
-  credentals=$(cat "$config_filepath")
-  database_host="$(echo "$credentals" | jq -r ".host // empty")"
-  database_name="$(echo "$credentals" | jq -r ".name")"
-  database_password="$(echo "$credentals" | jq -r ".password")"
-  database_port="$(echo "$credentals" | jq -r ".port // empty")"
-  database_username="$(echo "$credentals" | jq -r ".username")"
+  credentials=$(jq ".${env} // empty" "${config_filepath}")
+
+  if [[ -z "${credentials}" ]]; then
+    error_message=$(
+      echo -e "❗ Database environment ${ASCII["yellow"]}${env}"\
+              "${ASCII["red"]}is not specified in ${config_filepath}."
+    )
+
+    ascii_print "${error_message}" "red" >&2
+
+    exit 1
+  fi
+
+  database_host="$(echo "${credentials}" | jq -r ".host // empty")"
+  database_name="$(echo "${credentials}" | jq -r ".name")"
+  database_password="$(echo "${credentials}" | jq -r ".password")"
+  database_port="$(echo "${credentials}" | jq -r ".port // empty")"
+  database_username="$(echo "${credentials}" | jq -r ".username")"
 
   # Fallbacks
   database_host="${database_host:-localhost}"
@@ -44,9 +61,4 @@ function migration_version_to_filename() {
   action="${2}"
   version="${1}"
   find "${db_dir}/migrations/${action}" -name "${version}_*.sql"
-}
-
-function on_build_db_uri_error() {
-  ascii_print "❗ Database config file does not exist.\n" "red"
-  ascii_print "Create it using ${config_filepath}.example" "yellow"
 }

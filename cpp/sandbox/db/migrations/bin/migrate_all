@@ -1,5 +1,6 @@
 #!/bin/bash
 
+set -e
 
 app_dir=$(realpath "$(dirname "$0")/../")
 
@@ -10,16 +11,14 @@ function migrate_all_up() {
   db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
   scripts_dir="${db_dir}/scripts"
 
-  # build_db_uri, migration_filename_to_version, on_build_db_uri_error
+  # build_db_uri, migration_filename_to_version
   # shellcheck disable=1090
   source "${db_dir}/utils"
 
   # shellcheck disable=1090
   source "${db_dir}/migrations/bin/migrate_single" # migrate_single
 
-  trap 'on_build_db_uri_error' ERR
   db_uri="$(build_db_uri)"
-  trap - ERR
 
   ascii_print "💿 Running up migrations" "yellow"
 

@@ -10,7 +10,7 @@ seeds_dir="$db_dir/seeds"
 source "${app_dir}/bin/utils" # ASCII, ascii_print
 
 # shellcheck disable=1090
-source "${db_dir}/utils" # build_db_uri, on_build_db_uri_error
+source "${db_dir}/utils" # build_db_uri
 entity="${1}"
 
 if [[ -z "${entity}" ]]; then
@@ -26,9 +26,7 @@ fi
 ascii_print "\n$(date)\n" "cyan"
 ascii_print "🌱 Seeding Database ${ASCII["cyan"]}${entity}\n" "yellow"
 
-trap 'on_build_db_uri_error' ERR
 psql_cmd="psql $(build_db_uri) < ${db_dir}/seeds/${entity}.sql"
-trap - ERR
 
 sh -c "${psql_cmd}"
 

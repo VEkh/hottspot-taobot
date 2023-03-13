@@ -5,11 +5,15 @@
 #include "lib/pg/pg.cpp"          // Pg
 #include "models/quote/quote.cpp" // DB::Quote
 #include <libpq-fe.h>             // PGconn, PQescapeLiteral, PQfreemem
+#include <map>                    // std::map
 #include <string>                 // std::string
 #include <vector>                 // std::vector
 
 int main() {
-  Pg pg;
+  Pg pg((std::map<std::string, std::string>){
+      {"env", "development"},
+  });
+
   pg.connect();
 
   DB::Quote db_quote(pg);

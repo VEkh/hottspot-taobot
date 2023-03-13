@@ -5,9 +5,7 @@ set -e
 db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 
 # shellcheck disable=1090
-source "${db_dir}/utils" # build_db_uri, on_build_db_uri_error
+source "${db_dir}/utils" # build_db_uri
 
-trap 'on_build_db_uri_error' ERR
 uri=$(build_db_uri)
 echo -e "${uri}"
-trap - ERR

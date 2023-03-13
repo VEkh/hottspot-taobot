@@ -10,7 +10,7 @@ source "${app_dir}/bin/utils" # ASCII, ascii_print
 function migrate_single() {
   db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 
-  # build_db_uri, migration_version_to_filename, on_build_db_uri_error
+  # build_db_uri, migration_version_to_filename
   # shellcheck disable=1090
   source "${db_dir}/utils"
 
@@ -29,9 +29,7 @@ function migrate_single() {
     exit 1
   fi
 
-  trap 'on_build_db_uri_error' ERR
   db_uri="$(build_db_uri)"
-  trap - ERR
 
   ascii_print "${action_emoji} Migrating ${ASCII["yellow"]}${version} ${ASCII["cyan"]}${action}" "cyan"
 

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 
 app_dir=$(realpath "$(dirname "$0")/../")
 
@@ -13,13 +15,11 @@ scripts_dir="${db_dir}/scripts"
 # shellcheck disable=1090
 source "${db_dir}/migrations/bin/migrate_single" # migrate_single
 
-# build_db_uri, migration_filename_to_version, on_build_db_uri_error
+# build_db_uri, migration_filename_to_version
 # shellcheck disable=1090
 source "${db_dir}/utils"
 
-trap 'on_build_db_uri_error' ERR
 db_uri="$(build_db_uri)"
-trap - ERR
 
 ascii_print "👀 Rolling Back" "yellow"
 

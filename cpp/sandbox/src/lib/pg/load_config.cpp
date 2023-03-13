@@ -20,7 +20,7 @@ void Pg::load_config() {
     stream << fmt.bold << fmt.red;
     stream << "❗ Database config file does not exist." << std::endl;
     stream << fmt.yellow;
-    stream << "Create it using " << filepath << ".example" << std::endl;
+    stream << "Create it using " << filepath << ".example";
     stream << fmt.reset;
 
     throw std::invalid_argument(stream.str());
@@ -29,6 +29,22 @@ void Pg::load_config() {
   json config_json;
   config_file >> config_json;
   config_file.close();
+
+  const std::string env = this->flags["env"];
+
+  if (!config_json.contains(env)) {
+    std::stringstream stream;
+
+    stream << fmt.bold << fmt.red;
+    stream << "❗ Database environment ";
+    stream << fmt.yellow << env << fmt.red;
+    stream << " is not specified in " << filepath << ".";
+    stream << fmt.reset;
+
+    throw std::invalid_argument(stream.str());
+  }
+
+  config_json = config_json[env];
 
   this->config.name = config_json["name"];
   this->config.password = config_json["password"];
