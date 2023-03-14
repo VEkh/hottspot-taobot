@@ -9,7 +9,16 @@
 #include <string>                 // std::string
 #include <vector>                 // std::vector
 
+#include "lib/utils/time.cpp" // ::utils::time_
+
 int main() {
+  printf("Epoch: %.10f\n", ::utils::time_::quote_timestamp_to_epoch_double(
+                               "2023-03-14T14:38:00.195355826Z"));
+
+  const double now = ::utils::time_::epoch("nanoseconds") / 1.0e9;
+
+  printf("%.9f\n", now);
+
   std::map<std::string, std::string> flags = {
       {"env", "development"},
   };
@@ -20,31 +29,6 @@ int main() {
   DB::Quote db_quote(pg);
 
   db_quote.get("AMZN");
-
-  db_quote.upsert({
-      .ask = 99.33333333,
-      .bid = 101.50,
-      .price = 0.00,
-      .symbol = "TSLA",
-      .timestamp = 1678721705.176510,
-  });
-
-  db_quote.upsert({
-      {
-          .ask = 99.0,
-          .bid = 101.50,
-          .price = 0.00,
-          .symbol = "AMZN",
-          .timestamp = 1678482001.916087,
-      },
-      {
-          .ask = 99.0,
-          .bid = 101.50,
-          .price = 0.00,
-          .symbol = "TSLA",
-          .timestamp = 1678482001.916087,
-      },
-  });
 
   pg.disconnect();
 }

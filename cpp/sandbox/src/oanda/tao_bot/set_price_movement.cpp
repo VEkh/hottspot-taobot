@@ -32,7 +32,7 @@ void Oanda::TaoBot::set_price_movement() {
                                    it != this->quotes.rend();
        it++) {
 
-    const double time_delta = (it->timestamp - (it + 1)->timestamp) / 1000.0;
+    const double time_delta = it->timestamp - (it + 1)->timestamp;
     const double delta = (it->price - (it + 1)->price) / time_delta;
 
     total += abs(delta);

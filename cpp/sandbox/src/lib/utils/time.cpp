@@ -7,6 +7,7 @@
 #include <iostream> // std::fixed
 #include <map>      // std::map
 #include <ratio>    // std::nano
+#include <regex>    // std::cmatch, std::regex, std::regex_search
 #include <sstream>  // std::ostringstream
 #include <stdlib.h> // getenv, setenv, unsetenv
 #include <string>   // std::string
@@ -144,6 +145,21 @@ std::tm parse_timestamp(std::string in, const char *format) {
   std::mktime(&datetime);
 
   return datetime;
+}
+
+double quote_timestamp_to_epoch_double(const char *timestamp) {
+  std::tm parsed = parse_timestamp(timestamp, "%Y-%m-%dT%H:%M:%SZ");
+  const int epoch = std::mktime(&parsed);
+  double seconds_decimal = 0;
+
+  std::cmatch match;
+
+  if (std::regex_search(timestamp, match, std::regex("\\d{2}(\\.\\d+)Z$")) &&
+      match.size() > 1) {
+    seconds_decimal = std::stod(match[1]);
+  }
+
+  return epoch + seconds_decimal;
 }
 
 std::string timestamp_to_clock(time_t timestamp,

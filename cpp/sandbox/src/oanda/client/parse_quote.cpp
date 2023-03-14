@@ -13,7 +13,7 @@ Oanda::Client::parse_quote(const std::string &response_body) {
   std::string ask_string = quote_json["candles"][0]["ask"]["c"];
   std::string bid_string = quote_json["candles"][0]["bid"]["c"];
   std::string mid_string = quote_json["candles"][0]["mid"]["c"];
-  const long int now = ::utils::time_::epoch("milliseconds");
+  const double now = ::utils::time_::epoch("nanoseconds") / 1.0e9;
 
   quote_t quote;
   quote.ask = std::stod(ask_string);

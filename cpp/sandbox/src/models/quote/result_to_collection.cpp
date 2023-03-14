@@ -36,7 +36,7 @@ DB::Quote::result_to_collection(const query_result_t &result) {
       }
 
       if (field == "timestamp") {
-        quote.timestamp = std::stod(value) * 1000;
+        quote.timestamp = std::stod(value);
       }
     }
 

@@ -17,7 +17,7 @@ std::pair<double, double> Alpaca::TaoBot::get_quote_price_range() {
 
   for (quote_it = this->quotes.rbegin(); quote_it != this->quotes.rend();
        quote_it++) {
-    if (now - (quote_it->timestamp / 1000) > this->CONSOLIDATION_TIME_SECONDS) {
+    if (now - quote_it->timestamp > this->CONSOLIDATION_TIME_SECONDS) {
       break;
     }
 
