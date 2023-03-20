@@ -4,6 +4,7 @@
 #include "lib/formatted.cpp" // Formatted
 #include "string.cpp"        // ::utils::string
 #include <fstream>           // std::ifstream, std::ios, std::ofstream
+#include <list>              // std::list
 #include <map>               // std::map
 #include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
 #include <stdexcept> // std::invalid_argument, std::runtime_error
@@ -15,26 +16,30 @@
 namespace utils {
 namespace io {
 template <typename TransformPredicate>
-std::vector<std::string> collect_args(int argc, char **argv,
-                                      TransformPredicate fn) {
-  return collect_args(argc, argv, &fn);
+std::list<std::string> extract_args(int argc, char **argv,
+                                    TransformPredicate fn) {
+  return extract_args(argc, argv, &fn);
 }
 
 template <typename TransformPredicate>
-std::vector<std::string> collect_args(int argc, char **argv,
-                                      TransformPredicate *fn) {
-  std::vector<std::string> args;
+std::list<std::string> extract_args(int argc, char **argv,
+                                    TransformPredicate *fn) {
+  std::regex flag_prefix("^--.*");
+  std::list<std::string> args;
 
-  for (int i = 2; i < argc; i++) {
+  for (int i = 1; i < argc; i++) {
     const std::string arg = (*fn)(argv[i]);
-    args.push_back(arg);
+
+    if (!std::regex_search(arg, flag_prefix)) {
+      args.push_back(arg);
+    }
   }
 
   return args;
 }
 
-std::vector<std::string> collect_args(int argc, char **argv) {
-  return collect_args(argc, argv,
+std::list<std::string> extract_args(int argc, char **argv) {
+  return extract_args(argc, argv,
                       [](std::string in) -> std::string { return in; });
 }
 
@@ -61,12 +66,13 @@ std::pair<std::string, std::string> flag_to_pair(std::string &flag) {
 }
 
 std::map<std::string, std::string> extract_flags(int argc, char **argv) {
+  std::regex flag_prefix("^--.*");
   std::map<std::string, std::string> flags;
 
   for (int i = 0; i < argc; i++) {
     std::string arg = argv[i];
 
-    if (!std::regex_search(arg, std::regex("^--.*"))) {
+    if (!std::regex_search(arg, flag_prefix)) {
       continue;
     }
 

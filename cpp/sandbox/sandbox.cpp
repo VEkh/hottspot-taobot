@@ -7,32 +7,28 @@
 #include <libpq-fe.h>             // PGconn, PQescapeLiteral, PQfreemem
 #include <map>                    // std::map
 #include <string>                 // std::string
-#include <vector>                 // std::vector
 
-#include "lib/utils/time.cpp" // ::utils::time_
+#include "lib/utils/debug.cpp" // ::utils::debug
+#include "lib/utils/io.cpp"    // ::utils::io
+#include <list>                // std::list
+#include <vector>              // std::vector
 
-int main() {
-  printf("Epoch: %.10f\n", ::utils::time_::quote_timestamp_to_epoch_double(
-                               "2023-03-15T14:23:42.637369248Z"));
+int main(int argc, char *argv[]) {
+  std::list<std::string> args = ::utils::io::extract_args(argc, argv);
+  std::list<std::string>::iterator start = args.begin();
+  start++;
+  std::vector<std::string> args_vec(start, args.end());
+  std::map<std::string, std::string> flags =
+      ::utils::io::extract_flags(argc, argv);
 
-  const double now = ::utils::time_::epoch("nanoseconds") / 1.0e9;
+  if (args.size()) {
+    args.pop_front();
+  }
 
-  printf("%.9f\n", now);
+  puts("Args Vector: ");
+  ::utils::debug::inspect(args_vec);
+  puts("");
 
-  std::map<std::string, std::string> flags = {
-      {"env", "development"},
-  };
-
-  Pg pg(flags);
-  pg.connect();
-
-  DB::Quote db_quote(pg);
-
-  db_quote.get_last({
-      .debug = true,
-      .limit = 10,
-      .symbol = "AMZN",
-  });
-
-  pg.disconnect();
+  puts("Flags: ");
+  ::utils::debug::inspect(flags);
 }

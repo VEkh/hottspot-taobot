@@ -2,12 +2,12 @@
 
 
 app_dir="$(realpath "$(dirname "$0")/../")"
-data_dir="$app_dir/data/"
+data_dir="${app_dir}/data/"
 srcs="${*:-./sandbox.cpp}"
 
 args=(
-  "-D'APP_DIR=\"$app_dir\"'"
-  "-D'DATA_DIR=\"$data_dir\"'"
+  "-D'APP_DIR=\"${app_dir}\"'"
+  "-D'DATA_DIR=\"${data_dir}\"'"
   "-iquote'.'"
   "-iquote'./src'"
   "-isystem'./deps/build/include'"

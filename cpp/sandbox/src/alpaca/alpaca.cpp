@@ -7,11 +7,13 @@
 #include "sessions.cpp"        // Alpaca::Sessions
 #include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
 #include <iostream>            // std::cout, std::endl
+#include <list>                // std::list
 #include <map>                 // std::map
 #include <regex>               // std::regex
 #include <sstream>             // std::ostringstream
 #include <stdio.h>             // printf
 #include <string>              // std::string
+#include <vector>              // std::vector
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -130,8 +132,12 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    const std::vector<std::string> symbols =
-        ::utils::io::collect_args(argc, argv, ::utils::string::upcase);
+    std::list<std::string> args =
+        ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
+
+    std::list<std::string>::iterator symbols_start = args.begin();
+    symbols_start++;
+    std::vector<std::string> symbols(symbols_start, args.end());
 
     Pg pg;
     pg.connect();
