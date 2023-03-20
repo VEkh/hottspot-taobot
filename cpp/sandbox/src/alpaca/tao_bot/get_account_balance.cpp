@@ -21,7 +21,7 @@ Alpaca::TaoBot::get_account_balance(const account_balance_t &previous_balance) {
       abs(account_balance_.balance - previous_balance.balance) /
       previous_balance.balance;
 
-  if (balance_delta_ratio > 0.01) {
+  if (balance_delta_ratio > 0.1) {
     std::string error_message = Formatted::error_message(
         "[ALPACA__TAO_BOT_get_account_balance]: Account balance "
         "spiked by a strange amount: " +
