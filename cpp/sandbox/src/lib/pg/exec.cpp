@@ -23,10 +23,12 @@
 #include <string>               // std::string
 #include <vector>               // std::vector
 
-Pg::query_result_t Pg::exec(const std::string q) {
-  std::cout << fmt.bold << fmt.cyan;
-  printf("%s\n", q.c_str());
-  std::cout << fmt.reset << std::flush;
+Pg::query_result_t Pg::exec(const std::string q, const bool debug = true) {
+  if (debug) {
+    std::cout << fmt.bold << fmt.cyan;
+    printf("%s\n", q.c_str());
+    std::cout << fmt.reset << std::flush;
+  }
 
   PGresult *res = PQexec(this->conn, q.c_str());
   query_result_t result;
@@ -37,23 +39,27 @@ Pg::query_result_t Pg::exec(const std::string q) {
 
   const char *result_status_string = PQresStatus((ExecStatusType)result.status);
 
-  std::cout << fmt.bold << fmt.cyan;
-  printf("%s\n", result_status_string);
-  std::cout << fmt.reset << std::flush;
+  if (debug) {
+    std::cout << fmt.bold << fmt.cyan;
+    printf("%s\n", result_status_string);
+    std::cout << fmt.reset << std::flush;
+  }
 
   switch (result.status) {
   case ExecStatusType::PGRES_COMMAND_OK:
   case ExecStatusType::PGRES_TUPLES_OK: {
     const char *cmd_status = PQcmdStatus(res);
 
-    std::cout << fmt.bold << fmt.magenta;
-    printf("%s\n", cmd_status);
+    if (debug) {
+      std::cout << fmt.bold << fmt.magenta;
+      printf("%s\n", cmd_status);
+    }
 
     for (int col = 0; col < result.fields_n; col++) {
       result.fields.push_back(PQfname(res, col));
     }
 
-    if (result.rows_n) {
+    if (debug && result.rows_n) {
       printf("%s\n", ::utils::vector::join(result.fields, ",").c_str());
     }
 
@@ -66,7 +72,9 @@ Pg::query_result_t Pg::exec(const std::string q) {
         tuple += std::string(",") + std::string(PQgetvalue(res, row, col));
       }
 
-      printf("%s\n", tuple.c_str());
+      if (debug) {
+        printf("%s\n", tuple.c_str());
+      }
 
       result.tuples.push_back(tuple);
     }
@@ -80,7 +88,7 @@ Pg::query_result_t Pg::exec(const std::string q) {
     result.error_message = error_message;
 
     std::cout << fmt.bold << fmt.red;
-    printf("Error Message: %s", error_message);
+    printf("Error Message: %s\n", error_message);
     std::cout << fmt.reset << std::flush;
   }
   }

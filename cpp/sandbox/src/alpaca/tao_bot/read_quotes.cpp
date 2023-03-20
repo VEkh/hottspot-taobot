@@ -5,8 +5,11 @@
 #include <vector>    // std::vector
 
 void Alpaca::TaoBot::read_quotes() {
-  const std::vector<quote_t> quotes_ =
-      this->quoter.read_collection(this->symbol, 2);
+  const std::vector<quote_t> quotes_ = this->quoter.db_quote.get_last({
+      .debug = false,
+      .limit = 2,
+      .symbol = this->symbol,
+  });
 
   if (quotes_.empty()) {
     return read_quotes();

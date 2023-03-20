@@ -13,7 +13,7 @@
 
 int main() {
   printf("Epoch: %.10f\n", ::utils::time_::quote_timestamp_to_epoch_double(
-                               "2023-03-14T14:38:00.195355826Z"));
+                               "2023-03-15T14:23:42.637369248Z"));
 
   const double now = ::utils::time_::epoch("nanoseconds") / 1.0e9;
 
@@ -28,7 +28,11 @@ int main() {
 
   DB::Quote db_quote(pg);
 
-  db_quote.get("AMZN");
+  db_quote.get_last({
+      .debug = true,
+      .limit = 10,
+      .symbol = "AMZN",
+  });
 
   pg.disconnect();
 }

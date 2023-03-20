@@ -1,4 +1,4 @@
-### 2023-03-13:
+### 2023-03-21:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -11,9 +11,279 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-03-08)
-* Win Record: 2W (66.67%) 1L (Total 3)
+* Win Record: 6W (66.67%) 3L (Total 9)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2023-03-20:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Mon Mar 20 08:32:00 2023 • Runtime: 28:28
+Current Balance:          $29,776.77 (+815.16) (+2.81%)
+Max Balance:              $29,864.13 (+902.52) (+3.12%) @ 08:32 CDT
+Overall Max Balance:      $29,864.13 (+902.52) (+3.12%) @ 08:32 CDT
+Min Balance:              $28,929.12 (-32.49) (-0.11%) @ 08:30 CDT
+Original Balance:         $28,961.61
+Session Original Balance: $28,961.61 (+0.00) (+0.00%)
+
+Mon Mar 20 08:33:00 2023 • Runtime: 00:38
+Current Balance:          $29,835.05 (+873.44) (+3.02%)
+Max Balance:              $29,835.05 (+873.44) (+3.02%) @ 08:33 CDT
+Overall Max Balance:      $29,864.13 (+902.52) (+3.12%) @ 08:33 CDT
+Min Balance:              $29,735.68 (+774.07) (+2.67%) @ 08:33 CDT
+Original Balance:         $28,961.61
+Session Original Balance: $29,807.59 (+845.98) (+2.92%)
+
+Mon Mar 20 08:35:00 2023 • Runtime: 01:18
+Current Balance:          $29,848.70 (+887.09) (+3.06%)
+Max Balance:              $29,858.23 (+896.62) (+3.10%) @ 08:35 CDT
+Overall Max Balance:      $29,864.13 (+902.52) (+3.12%) @ 08:34 CDT
+Min Balance:              $29,442.45 (+480.84) (+1.66%) @ 08:34 CDT
+Original Balance:         $28,961.61
+Session Original Balance: $29,815.96 (+854.35) (+2.95%)
+```
+
+**Alpha (PRODUCTION)**
+```
+Mon Mar 20 14:59:00 2023 • Runtime: 06:22:01
+Current Balance:          $26,018.66 (-111.18) (-0.43%)
+Max Balance:              $26,647.04 (+517.20) (+1.98%) @ 11:19 CDT
+Overall Max Balance:      $26,647.04 (+517.20) (+1.98%) @ 11:19 CDT
+Min Balance:              $24,913.58 (-1,216.26) (-4.65%) @ 08:50 CDT
+Original Balance:         $26,129.84
+Session Original Balance: $26,129.84 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 6W (66.67%) 3L (Total 9)
+
+###### Notes
+* I almost lost the win in the second session when TSLA took on an immediate
+  loss. It seems reasonable to expect that one day will lose while chasing a >=
+  +3% return. The risk justification will depend on how much money is saved by
+  reopening sub-three-percent first sessions.
+* 3x the stop loss threshold has been a good win target for TSLA, however, it
+  seems to be a bit much for AMZN.
+* This suggests that win targets should be determined on a per-symbol basis.
+* This will be one of the first things I finish building back testing.
+
+###### Next Thing(s) to Try
+
+### 2023-03-17:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Fri, Mar 17, 2023 08:36:12 CDT • Runtime: 00:11
+Current Balance:                  $28963.18 (-1086.74) (-3.62%)
+Max Balance:                      $28963.18 (-1086.74) (-3.62%) @ 08:36 CDT
+Overall Max Balance:              $30236.68 (+186.76) (+0.62%) @ 08:36 CDT
+Min Balance:                      $28963.18 (-1086.74) (-3.62%) @ 08:36 CDT
+Original Balance:                 $30049.92
+Session Original Balance:         $28963.18 (-1086.74) (-3.62%)
+```
+
+**Alpha (PRODUCTION)**
+```
+Fri Mar 17 14:59:00 2023 • Runtime: 06:20:59
+Current Balance:          $26,153.82 (-1,621.62) (-5.84%)
+Max Balance:              $29,108.55 (+1,333.11) (+4.80%) @ 09:39 CDT
+Overall Max Balance:      $29,108.55 (+1,333.11) (+4.80%) @ 09:39 CDT
+Min Balance:              $25,781.05 (-1,994.39) (-7.18%) @ 14:33 CDT
+Original Balance:         $27,775.44
+Session Original Balance: $27,775.44 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 5W (62.5%) 3L (Total 8)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 38W (53.52%) (Consecutive: 0) 33L (Consecutive: 2)
+* Latest Return: -$1,086.74 (-3.62%) (-188.37% 9-5 Salary) (vs. NASDAQ: -0.36%) (vs. S&P 500: +1.43%)
+* Week's Return: +$1,116.56 • Total Return: -$7,695.69
+* Average Return: -0.37% • Average NASDAQ Return: -0.02% • Average S&P 500 Return: -0.04%
+
+###### Notes
+* Okay. The win rate is regressing closer to what I'd expect
+* I had to manually close production today because the API's /account endpoint
+  was hanging and triggered the "Unusual Account Balance Delta" error.
+* I increase the threshold to 10%, so it should be much less likely to happen.
+* The week still ended profitably, but we'll see how next week goes.
+
+###### Next Thing(s) to Try
+
+### 2023-03-16:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thu Mar 16 08:35:00 2023 • Runtime: 35:00
+Current Balance:          $30,061.46 (-987.51) (-3.18%)
+Max Balance:              $31,147.12 (+98.15) (+0.32%) @ 08:30 CDT
+Overall Max Balance:      $31,147.12 (+98.15) (+0.32%) @ 08:30 CDT
+Min Balance:              $30,061.46 (-987.51) (-3.18%) @ 08:35 CDT
+Original Balance:         $31,048.97
+Session Original Balance: $31,048.97 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Thu Mar 16 14:59:00 2023 • Runtime: 06:21:00
+Current Balance:          $27,719.23 (+162.46) (+0.59%)
+Max Balance:              $29,749.35 (+2,192.58) (+7.96%) @ 10:35 CDT
+Overall Max Balance:      $29,749.35 (+2,192.58) (+7.96%) @ 10:35 CDT
+Min Balance:              $26,910.20 (-646.57) (-2.35%) @ 08:47 CDT
+Original Balance:         $27,556.77
+Session Original Balance: $27,556.77 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 5W (71.43%) 2L (Total 7)
+
+###### Notes
+* Okay. Finally another loss. Just keep watching. Maybe this is the beginning
+  of a loss streak.
+
+###### Next Thing(s) to Try
+
+### 2023-03-15:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wed Mar 15 08:33:00 2023 • Runtime: 33:47
+Current Balance:          $31,045.98 (+1,021.69) (+3.40%)
+Max Balance:              $31,235.48 (+1,211.19) (+4.03%) @ 08:33 CDT
+Overall Max Balance:      $31,235.48 (+1,211.19) (+4.03%) @ 08:33 CDT
+Min Balance:              $29,829.50 (-194.79) (-0.65%) @ 08:30 CDT
+Original Balance:         $30,024.29
+Session Original Balance: $30,024.29 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Wed Mar 15 14:59:00 2023 • Runtime: 06:24:04
+Current Balance:          $27,587.88 (-1,424.57) (-4.91%)
+Max Balance:              $29,122.80 (+110.35) (+0.38%) @ 08:35 CDT
+Overall Max Balance:      $29,122.80 (+110.35) (+0.38%) @ 08:35 CDT
+Min Balance:              $27,423.20 (-1,589.25) (-5.48%) @ 14:58 CDT
+Original Balance:         $29,012.45
+Session Original Balance: $29,012.45 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 5W (83.33%) 1L (Total 6)
+
+###### Notes
+* 11/12 days have won. I still feel like this is largely luck. AMZN and TSLA
+  both guessed correctly in the morning. and TSLA consolidated for most of the
+  day.
+* I just need to see some incorrect guess mornings to get a better sense of
+  this thing's accuracy.
+
+###### Next Thing(s) to Try
+
+### 2023-03-14:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tue Mar 14 08:32:00 2023 • Runtime: 32:53
+Current Balance:          $30,047.43 (+1,255.21) (+4.36%)
+Max Balance:              $30,231.11 (+1,438.89) (+5.00%) @ 08:32 CDT
+Overall Max Balance:      $30,231.11 (+1,438.89) (+5.00%) @ 08:32 CDT
+Min Balance:              $28,792.22 (+0.00) (+0.00%) @ 08:30 CDT
+Original Balance:         $28,792.22
+Session Original Balance: $28,792.22 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Tue, Mar 14, 2023 12:43:45 CDT • Runtime: 04:09:43
+Current Balance:                  $28811.03 (-1238.91) (-4.12%)
+Max Balance:                      $30301.85 (+251.91) (+0.84%) @ 08:37 CDT
+Overall Max Balance:              $30301.85 (+251.91) (+0.84%) @ 08:37 CDT
+Min Balance:                      $27418.05 (-2631.89) (-8.76%) @ 09:20 CDT
+Original Balance:                 $30049.94
+Session Original Balance:         $30049.94 (+0.00) (+0.00%)
+
+Tue Mar 14 14:59:00 2023 • Runtime: 19:58
+Current Balance:          $29,033.41 (-1,016.53) (-3.38%)
+Max Balance:              $29,047.81 (-1,002.13) (-3.33%) @ 14:57 CDT
+Overall Max Balance:      $30,301.85 (+251.91) (+0.84%) @ 14:39 CDT
+Min Balance:              $28,221.16 (-1,828.78) (-6.09%) @ 14:42 CDT
+Original Balance:         $30,049.94
+Session Original Balance: $28,312.60 (-1,737.34) (-5.78%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 4W (80.0%) 1L (Total 5)
+
+###### Notes
+* It's getting creepy how well this is doing. Keep watching. Don't add any more
+  money until it hits $40/50K.
+* I still feel like I'm getting lucky. We'll see on the next morning with dual
+  incorrect first guesses.
+* Weird situation in staging where the price movements got jacked up because of
+  parsed quote timestamps that seemed to be coming from far in the future that
+  Alpaca was returning.
+* I reverted to using the current epoch and everything seems to be okay now.
+
+###### Next Thing(s) to Try
+
+### 2023-03-13:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Mon Mar 13 08:37:00 2023 • Runtime: 37:39
+Current Balance:          $28,793.72 (+936.01) (+3.36%)
+Max Balance:              $28,948.23 (+1,090.52) (+3.91%) @ 08:37 CDT
+Overall Max Balance:      $28,948.23 (+1,090.52) (+3.91%) @ 08:37 CDT
+Min Balance:              $27,573.53 (-284.18) (-1.02%) @ 08:30 CDT
+Original Balance:         $27,857.71
+Session Original Balance: $27,857.71 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Mon, Mar 13, 2023 09:42:13 CDT • Runtime: 01:01:11
+Current Balance:                  $28989.22 (-1010.78) (-3.37%)
+Max Balance:                      $31041.22 (+1041.22) (+3.47%) @ 08:55 CDT
+Overall Max Balance:              $31041.22 (+1041.22) (+3.47%) @ 08:55 CDT
+Min Balance:                      $28989.22 (-1010.78) (-3.37%) @ 09:42 CDT
+Original Balance:                 $30000.00
+Session Original Balance:         $30000.00 (+0.00) (+0.00%)
+
+Mon, Mar 13, 2023 14:25:35 CDT • Runtime: 04:40:33
+Current Balance:                  $27750.34 (-2249.66) (-7.50%)
+Max Balance:                      $29019.95 (-980.05) (-3.27%) @ 12:02 CDT
+Overall Max Balance:              $31041.22 (+1041.22) (+3.47%) @ 09:45 CDT
+Min Balance:                      $27750.34 (-2249.66) (-7.50%) @ 14:25 CDT
+Original Balance:                 $30000.00
+Session Original Balance:         $28978.79 (-1021.21) (-3.40%)
+
+Mon Mar 13 14:59:00 2023 • Runtime: 20:03
+Current Balance:          $30,052.81 (+72.94) (+0.24%)
+Max Balance:              $30,126.00 (+146.13) (+0.49%) @ 14:57 CDT
+Overall Max Balance:      $30,126.00 (+146.13) (+0.49%) @ 14:57 CDT
+Min Balance:              $29,922.27 (-57.60) (-0.19%) @ 14:44 CDT
+Original Balance:         $29,979.87
+Session Original Balance: $29,979.87 (+0.00) (+0.00%)
+```
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 3W (75.0%) 1L (Total 4)
+
+###### Notes
+* Nice to be two wins ahead of 50/50. Keep watching.
+* Staging spent much of its time in consolidation after the morning win even
+  though it peaked again past the target at first.
+* This is the second consecutive day where it was the right choice to stay out
+  after production's early morning win.
+
 ###### Next Thing(s) to Try
 
 ### 2023-03-10:

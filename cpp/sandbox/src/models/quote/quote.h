@@ -11,10 +11,17 @@ class Quote {
 public:
   using quote_t = Global::t::quote_t;
 
+  struct get_last_args_t {
+    bool debug = false;
+    int limit = 1;
+    std::string symbol;
+  };
+
   Quote(){};
   Quote(Pg &c) : conn(c){};
 
   std::vector<quote_t> get(const std::string, const double);
+  std::vector<quote_t> get_last(get_last_args_t);
 
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);

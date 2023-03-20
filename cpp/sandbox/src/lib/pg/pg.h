@@ -25,7 +25,7 @@ public:
 
   PGconn *connect();
 
-  query_result_t exec(const std::string);
+  query_result_t exec(const std::string, const bool);
 
   void disconnect();
 

@@ -1,5 +1,6 @@
 #include "client/client.cpp"   // Alpaca::Client
 #include "lib/formatted.cpp"   // Formatted
+#include "lib/pg/pg.cpp"       // Pg
 #include "lib/utils/io.cpp"    // utils::io
 #include "quote/quote.cpp"     // Alpaca::Quote
 #include "returns.cpp"         // Alpaca::Returns

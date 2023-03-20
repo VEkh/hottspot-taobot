@@ -8,11 +8,10 @@
  */
 #include "tao_bot.h"
 
-#include "get_quote_price_range.cpp" // get_quote_price_range
-#include "lib/formatted.cpp"         // Formatted
-#include "lib/utils/float.cpp"       // utils::float_
-#include <iostream>                  // std::cout, std::endl
-#include <stdio.h>                   // printf
+#include "lib/formatted.cpp"   // Formatted
+#include "lib/utils/float.cpp" // utils::float_
+#include <iostream>            // std::cout, std::endl
+#include <stdio.h>             // printf
 
 void Alpaca::TaoBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
@@ -22,8 +21,6 @@ void Alpaca::TaoBot::log_quote() {
   if (ticks < 2) {
     return;
   }
-
-  const std::pair<double, double> quote_range = get_quote_price_range();
 
   const quote_t *previous_quote =
       ticks > 1 ? &(this->quotes.at(ticks - 2)) : nullptr;
@@ -39,20 +36,10 @@ void Alpaca::TaoBot::log_quote() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote (%i Min Range)\n", current_quote.symbol.c_str(),
-         this->CONSOLIDATION_TIME_SECONDS / 60);
+  printf("%s Quote\n", current_quote.symbol.c_str());
   std::cout << fmt.no_underline;
 
-  printf("Current: %'.2f", ::utils::float_::to_currency(current_quote.price));
-  std::cout << fmt.yellow << " • ";
-
-  std::cout << fmt.green;
-  printf("High: %'.2f", ::utils::float_::to_currency(quote_range.first));
-  std::cout << fmt.yellow << " • ";
-
-  std::cout << fmt.red;
-  printf("Low: %'.2f\n", ::utils::float_::to_currency(quote_range.second));
-
+  printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
   std::cout << fmt.reset << std::endl;
 }
 
