@@ -38,14 +38,14 @@ private:
   using quote_scoreboard_t = Alpaca::t::quote_scoreboard_t;
   using quote_t = Global::t::quote_t;
 
-  const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const double MAX_ACCOUNT_LOSS_RATIO = -0.03;
-  const double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
-  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.03;
-  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
-  const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
-  const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  const int QUOTES_MAX_SIZE = 8e3;
+  constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
+  constexpr static double MAX_ACCOUNT_LOSS_RATIO = -0.03;
+  constexpr static double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
+  constexpr static double TARGET_ACCOUNT_PROFIT_RATIO = 0.03;
+  constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  const static int CONSOLIDATION_TIME_SECONDS = 45 * 60;
+  const static int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
+  const static int QUOTES_MAX_SIZE = 8e3;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
