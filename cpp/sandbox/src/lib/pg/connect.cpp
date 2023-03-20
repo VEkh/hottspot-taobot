@@ -25,6 +25,7 @@ PGconn *Pg::connect() {
     printf("❌ Connection to %s failed. Status: %i", this->config.name.c_str(),
            conn_status);
     std::cout << fmt.reset << std::endl;
+    exit(1);
   }
   }
 
