@@ -2,10 +2,12 @@
 #define ALPACA__TAO_BOT_initialize
 
 #include "alpaca/client/client.cpp" // Alpaca::Client
+#include "alpaca/quote/quote.cpp"   // Alpaca::Quote
 #include "build_performance.cpp"    // build_performance
 #include "get_account_balance.cpp"  // get_account_balance
 #include "is_holiday.cpp"           // is_holiday
 #include "lib/formatted.cpp"        // Formatted::error_message
+#include "lib/pg/pg.cpp"            // Pg
 #include "lib/utils/boolean.cpp"    // ::utils::boolean
 #include "lib/utils/string.cpp"     // ::utils::string
 #include "load_performance.cpp"     // load_performance
@@ -37,6 +39,11 @@ void Alpaca::TaoBot::initialize(char *symbol_,
   setlocale(LC_NUMERIC, "");
 
   this->flags = flags_;
+
+  this->pg = Pg(this->flags);
+  this->pg.connect();
+
+  this->quoter = Alpaca::Quote(this->pg);
   this->symbol = ::utils::string::upcase(symbol_);
 
   try {

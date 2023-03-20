@@ -133,7 +133,10 @@ int main(int argc, char *argv[]) {
     const std::vector<std::string> symbols =
         ::utils::io::collect_args(argc, argv, ::utils::string::upcase);
 
-    Alpaca::Quote watcher;
+    Pg pg;
+    pg.connect();
+
+    Alpaca::Quote watcher(pg);
     watcher.watch(symbols);
 
     exit(0);

@@ -56,6 +56,7 @@ void Alpaca::TaoBot::watch() {
 
   log_end_of_trading_period();
   write_account_performance();
+  this->pg.disconnect();
 }
 
 #endif

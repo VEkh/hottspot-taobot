@@ -5,6 +5,7 @@
 #include "alpaca/quote/quote.cpp"   // Alpaca::Quote
 #include "alpaca/types.cpp"         // Alpaca::t
 #include "lib/formatted.cpp"        // Formatted
+#include "lib/pg/pg.cpp"            // Pg
 #include "types.cpp"                // Global::t
 #include <ctime>                    // std::time_t
 #include <list>                     // std::list
@@ -53,6 +54,7 @@ private:
 
   Alpaca::Client api_client;
   Alpaca::Quote quoter;
+  Pg pg;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   account_balance_t account_balance;
   double quantity;

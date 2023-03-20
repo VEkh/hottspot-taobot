@@ -29,7 +29,10 @@ public:
   using quote_t = Global::t::quote_t;
   using tcp = net::ip::tcp;
 
-  Quote(std::map<std::string, std::string>);
+  Quote(){};
+  Quote(Pg);
+
+  DB::Quote db_quote;
 
   price_movement_t read_price_movement(const std::string);
   std::vector<quote_t> read_collection(const std::string, const double);
@@ -38,12 +41,11 @@ public:
 
 private:
   Alpaca::Client api_client;
-  DB::Quote db_quote;
   Pg pg;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  const int QUOTES_MAX_SIZE = 8e3;
+  constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
+  constexpr static int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
+  constexpr static int QUOTES_MAX_SIZE = 8e3;
   std::map<std::string, std::string> flags;
   std::map<std::string, price_movement_t> price_movements;
   std::map<std::string, std::vector<quote_t>> quotes;
@@ -55,7 +57,6 @@ private:
   quote_t read_streamed_quote(const std::string);
 
   void fetch_and_persist_quote(const std::string, const bool);
-  void initialize(std::map<std::string, std::string>);
   void read(const std::string);
   void set_and_persist_price_movement(const std::string);
   void set_price_movement(const std::string);
