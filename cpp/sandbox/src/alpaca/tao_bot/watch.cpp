@@ -49,7 +49,7 @@ void Alpaca::TaoBot::watch() {
     log_position_results();
     reset_position();
 
-    std::cout << std::flush;
+    std::cout << "\n\n\n\n\n\n\n\n\n\n" << std::flush;
 
     usleep(5e5);
   }
