@@ -1,7 +1,6 @@
 #!/bin/bash
 
 app_dir=$(realpath "$(dirname "$0")/../../")
-args=("$@")
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
 fmt_normal="\033[10m"
@@ -11,7 +10,9 @@ fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
 # shellcheck disable=1090
-source "$app_dir/bin/utils" # to_lower, to_upper
+source "$app_dir/bin/utils" # extract_flags, to_lower, to_upper
+
+flags=($(extract_flags "${@}"))
 
 if [[ $project = "bin" ]]; then
   cmd=$(basename "$0")
@@ -38,13 +39,7 @@ function symbol_start() {
   echo -e "Starting TaoBot for ${fmt_normal}${fmt_cyan}$symbol"
   echo "" > "$log_file"
 
-  tao_bot_args=("$symbol")
-
-  for arg in "${args[@]}"; do
-    [[ ! "$(to_lower "$arg")" =~ ^("$(to_lower "$symbol")")$ ]] && tao_bot_args+=("$arg")
-  done
-
-  "$app_dir/build/$project" tao_bot "${tao_bot_args[@]}" >> "$log_file" 2>&1 &
+  "$app_dir/build/$project" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
 }
 
 if [[ "$*" =~ .*--clear-performance.* ]]

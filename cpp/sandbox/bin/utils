@@ -22,6 +22,26 @@ function ascii_print() {
   echo -e "${message}${1}${ASCII["reset"]}"
 }
 
+function extract_args() {
+  args=()
+
+  for arg in "${@}"; do
+    [[ ! "${arg}" =~ ^-- ]] && args+=("${arg}")
+  done
+
+  echo -e "${args[@]}"
+}
+
+function extract_flags() {
+  flags=()
+
+  for flag in "${@}"; do
+    [[ "${flag}" =~ ^-- ]] && flags+=("${flag}")
+  done
+
+  echo -e "${flags[@]}"
+}
+
 function to_lower() {
   echo -e "$1" | awk '{ print tolower($0) }'
 }

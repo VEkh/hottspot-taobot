@@ -12,7 +12,7 @@ fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
 # shellcheck disable=1090,1091
-source "$app_dir/bin/utils" # to_title, to_upper
+source "$app_dir/bin/utils" # extract_args, extract_flags, to_title, to_upper
 
 shopt -s extglob
 echo -e "${fmt_bold}${fmt_cyan}"
@@ -53,7 +53,7 @@ function start_if_stopped() {
   if [[ -z $state ]]
   then
     echo -e "${fmt_green}😴 Not ${action_gerund} any quotes. Starting.\n${fmt_reset}"
-    start_action
+    start_action "${@}"
   else
     echo -e "${fmt_cyan}💖 Already ${action_gerund} quotes. Doing nothing.${fmt_reset}"
   fi
@@ -62,8 +62,11 @@ function start_if_stopped() {
 function start_action() {
   all_symbols=($(cat "$app_dir/bin/$project/symbols"))
   cmd="quotes_${action}"
+  flags=($(extract_flags "${@}"))
   log_dir="$app_dir/log/$project"
-  symbols=("${@:-${all_symbols[@]}}")
+
+  symbols=($(extract_args "${@}"))
+  [[ ${#symbols[@]} = 0 ]] && symbols=(${all_symbols[@]})
 
   mkdir -p "$log_dir"
 
@@ -72,7 +75,7 @@ function start_action() {
   echo -e "${fmt_bold}${fmt_yellow}Starting Quotes $(to_title "$action")"\
     "for ${fmt_normal}${fmt_cyan}${symbols[*]}"
 
-  "$app_dir/build/$project" "$cmd" "${symbols[@]}" > "$log_file" 2>&1 &
+  "$app_dir/build/$project" "$cmd" "${symbols[@]}" "${flags[@]}" > "$log_file" 2>&1 &
 }
 
 function stop_action() {
@@ -90,7 +93,7 @@ function stop_action() {
 
 case $2 in
   heartbeat)
-    start_if_stopped
+    start_if_stopped "${@:3}"
     ;;
 
   restart)

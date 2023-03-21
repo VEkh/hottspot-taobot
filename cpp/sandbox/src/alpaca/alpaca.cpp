@@ -139,7 +139,10 @@ int main(int argc, char *argv[]) {
     symbols_start++;
     std::vector<std::string> symbols(symbols_start, args.end());
 
-    Pg pg;
+    std::map<std::string, std::string> flags =
+        ::utils::io::extract_flags(argc, argv);
+
+    Pg pg(flags);
     pg.connect();
 
     Alpaca::Quote watcher(pg);
