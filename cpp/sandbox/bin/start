@@ -1,5 +1,7 @@
 #!/bin/bash
 
+shopt -s extglob
+
 app_dir=$(realpath "$(dirname "$0")/../../")
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
@@ -23,7 +25,6 @@ if [[ $project = "bin" ]]; then
   exit 1;
 fi
 
-shopt -s extglob
 echo -e "${fmt_bold}${fmt_cyan}"
 date
 

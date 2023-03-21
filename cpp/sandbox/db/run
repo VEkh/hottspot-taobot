@@ -6,7 +6,7 @@ current_dir=$(realpath "$(dirname "$0")")
 scripts_dir="${current_dir}/scripts"
 
 # shellcheck disable=1090
-source "${app_dir}/bin/utils" # ASCII, ascii_print
+source "${app_dir}/bin/utils" # ASCII, ascii_print, get_env_flag
 
 ascii_print "\n$(date)\n" "cyan"
 
@@ -26,7 +26,7 @@ if [[ ! -f "${scripts_dir}/${1}.sql" ]]; then
   exit 1
 fi
 
-env="${ENV:-development}"
+env=$(get_env_flag "${@}")
 
 credentials=$(jq ".${env} // empty" "${config_filepath}" )
 

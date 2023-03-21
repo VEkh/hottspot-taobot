@@ -20,11 +20,11 @@ done
 ascii_print "\n$(date)\n" "cyan"
 
 case $1 in
-  "")
-    migrate_all_up
+  ""|--*)
+    migrate_all_up "${@}"
     ;;
   down|up)
-    migrate_single "$1" "$2"
+    migrate_single "${@}"
     ;;
   generate)
     generate "$2"

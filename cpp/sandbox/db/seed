@@ -23,10 +23,12 @@ if [[ ! -f "${seeds_dir}/${entity}.sql" ]]; then
   exit 1
 fi
 
-ascii_print "\n$(date)\n" "cyan"
-ascii_print "🌱 Seeding Database ${ASCII["cyan"]}${entity}\n" "yellow"
+env=$(to_title "$(get_env_flag "${@}")")
 
-psql_cmd="psql $(build_db_uri) < ${db_dir}/seeds/${entity}.sql"
+ascii_print "\n$(date)\n" "cyan"
+ascii_print "🌱 Seeding ${ASCII["red"]}${env}${ASCII["yellow"]} Database ${ASCII["cyan"]}${entity}\n" "yellow"
+
+psql_cmd="psql $(build_db_uri "${@}") < ${db_dir}/seeds/${entity}.sql"
 
 sh -c "${psql_cmd}"
 

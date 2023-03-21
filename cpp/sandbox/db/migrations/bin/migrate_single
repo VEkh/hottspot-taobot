@@ -29,7 +29,7 @@ function migrate_single() {
     exit 1
   fi
 
-  db_uri="$(build_db_uri)"
+  db_uri="$(build_db_uri "${@}")"
 
   ascii_print "${action_emoji} Migrating ${ASCII["yellow"]}${version} ${ASCII["cyan"]}${action}" "cyan"
 

@@ -6,15 +6,17 @@ app_dir=$(realpath "$(dirname "$0")/../")
 db_dir=$(realpath "$(dirname "$0")")
 
 # shellcheck disable=1090
-source "${app_dir}/bin/utils" # ASCII, ascii_print
+source "${app_dir}/bin/utils" # ASCII, ascii_print, get_env_flag, to_title
 
 # shellcheck disable=1090
 source "${db_dir}/utils" # build_db_uri
 
-ascii_print "\n$(date)\n" "cyan"
-ascii_print "🚪 Connecting to Database\n" "yellow"
+env=$(to_title "$(get_env_flag "${@}")")
 
-uri="$(build_db_uri)"
+ascii_print "\n$(date)\n" "cyan"
+ascii_print "🚪 Connecting to ${ASCII["red"]}${env}${ASCII["yellow"]} Database\n" "yellow"
+
+uri="$(build_db_uri "${@}")"
 psql_cmd="psql ${uri}"
 
 sh -c "${psql_cmd}"

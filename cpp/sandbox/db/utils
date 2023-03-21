@@ -7,10 +7,10 @@ db_dir="${app_dir}/db"
 config_filepath="$app_dir/config/db/credentials.json"
 
 # shellcheck disable=1090
-source "${app_dir}/bin/utils" # ASCII, ascii_print
+source "${app_dir}/bin/utils" # ASCII, ascii_print, extract_flags_to_map
 
 function build_db_uri() {
-  env="${ENV:-development}"
+  env=$(get_env_flag "${@}")
 
   if [[ ! -f "$config_filepath" ]]; then
     ascii_print "❗ Database config file does not exist.\n" "red" >&2

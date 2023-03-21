@@ -42,6 +42,40 @@ function extract_flags() {
   echo -e "${flags[@]}"
 }
 
+function extract_flags_to_map() {
+  if [[ ! "$(declare -p "${1}" 2>/dev/null)" =~ ^(declare -A) ]]; then
+    ascii_print "You must pass in a map as the first arg. You passed: \`${1}\`" "red" >&2
+    exit 1
+  fi
+
+
+  local -n map=${1} 2>/dev/null
+
+  for flag in "${@:2}"; do
+    key_value=($(
+      echo -e "${flag}" |
+      awk '{ match($0, /--([[:alpha:]]+)=?(.*)/, arr); print arr[1]; print arr[2] }'
+    ))
+
+    key="${key_value[0]}"
+
+    if [[ -n "${key}" ]]; then
+      [[ -z "${key_value[1]}" ]] && value="1" || value="${key_value[1]}"
+
+      # shellcheck disable=SC2034
+      map["${key}"]="${value}"
+    fi
+  done
+}
+
+function get_env_flag() {
+  local -A flags=(["env"]="development")
+
+  extract_flags_to_map flags "${@}"
+
+  echo -e "${flags["env"]}"
+}
+
 function to_lower() {
   echo -e "$1" | awk '{ print tolower($0) }'
 }
