@@ -74,7 +74,7 @@ void Alpaca::Quote::set_price_movement(const std::string symbol) {
       ((old_cumulative_average * old_cumulative_count) + average) /
       (old_cumulative_count + 1);
 
-  if ((average / old_cumulative_average) >= 0.33) {
+  if ((average / old_cumulative_average) >= 0.35) {
     this->price_movements[symbol].three_minute_one_second_variance.average =
         cumulative_average;
 

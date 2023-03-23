@@ -7,9 +7,11 @@ create table quotes(
   timestamp timestamp with time zone not null
 );
 
-create unique index quotes_symbol_timestamp_idx on quotes(symbol, timestamp);
+create index quotes_symbol_idx on quotes(symbol);
 
 create index quotes_timestamp_idx on quotes(timestamp);
+
+create unique index quotes_symbol_timestamp_idx on quotes(symbol, timestamp);
 
 create sequence quotes_id_seq
   cache 1 start with 1
