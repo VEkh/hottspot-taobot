@@ -11,7 +11,9 @@
 
 #include "result_to_collection.cpp" // result_to_collection
 #include <libpq-fe.h>               // PQescapeLiteral, PQfreemem
-#include <string>                   // std::string, std::stod, std::to_string
+#include <stdio.h>                  // snprintf
+#include <string.h>                 // strlen
+#include <string>                   // std::string, std::to_string
 #include <vector>                   // std::vector
 
 std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
@@ -22,17 +24,31 @@ std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
   char *sanitized_symbol =
       PQescapeLiteral(this->conn.conn, symbol.c_str(), sizeof(symbol.c_str()));
 
-  const std::string limit_clause = " limit " + std::to_string(limit);
+  const char *query = R"(
+    select
+      ask, bid, symbol, extract(epoch from timestamp) as timestamp
+    from quotes
+    where
+      symbol=%s
+      and id in (
+        select id from quotes
+        where symbol=%s
+        order by timestamp desc
+        limit %i
+      )
+    order by timestamp asc
+  )";
 
-  std::string query =
-      "select ask, bid, symbol, extract(epoch from timestamp) "
-      "as timestamp from quotes where symbol=" +
-      std::string(sanitized_symbol) +
-      " and id in (select id from quotes where symbol=" + sanitized_symbol +
-      " order by timestamp desc limit " + std::to_string(limit) +
-      ") order by timestamp asc";
+  const size_t query_l = strlen(query) + strlen(sanitized_symbol) +
+                         strlen(sanitized_symbol) +
+                         std::to_string(limit).size();
 
-  query_result_t query_result = this->conn.exec(query, debug);
+  char formatted_query[query_l];
+
+  snprintf(formatted_query, query_l, query, sanitized_symbol, sanitized_symbol,
+           limit);
+
+  query_result_t query_result = this->conn.exec(formatted_query, debug);
   PQfreemem(sanitized_symbol);
 
   std::vector<quote_t> result = result_to_collection(query_result);
