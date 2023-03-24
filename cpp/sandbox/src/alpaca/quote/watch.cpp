@@ -38,6 +38,11 @@ void Alpaca::Quote::watch(const std::vector<std::string> symbols) {
       std::cout << fmt.reset << std::endl;
     }
 
+    this->db_quote.insert_latest_avg_one_sec_variances();
+    std::cout << fmt.bold << fmt.yellow;
+    puts("Set and Persisted Price Movement (in DB)");
+    std::cout << fmt.reset << std::endl;
+
     std::cout << fmt.bold << fmt.magenta;
     puts("================================");
     std::cout << fmt.reset << std::endl;

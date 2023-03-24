@@ -1,10 +1,10 @@
 #ifndef DB__QUOTE_result_to_collection
 #define DB__QUOTE_result_to_collection
 
-#include "lib/utils/time.cpp" // ::utils::time_
-#include "quote.h"            // DB::Quote, query_result_t, quote_t
-#include <string>             // std::string
-#include <vector>             // std::vector
+#include "lib/utils/string.cpp" // ::utils::string
+#include "quote.h"              // DB::Quote, query_result_t, quote_t
+#include <string>               // std::string
+#include <vector>               // std::vector
 
 #include <ctime> // std::tm
 

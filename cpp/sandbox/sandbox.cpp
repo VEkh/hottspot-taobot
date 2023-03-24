@@ -1,6 +1,5 @@
 #include <iostream> // std::cout, std::endl
-#include <stdio.h>  // printf, snprintf
-#include <string.h> // strlen
+#include <stdio.h>  // printf
 #include <string>   // std::string
 
 #include "lib/pg/pg.cpp"          // Pg
@@ -8,17 +7,6 @@
 #include <libpq-fe.h>             // PGconn, PQescapeLiteral, PQfreemem
 
 int main(int argc, char *argv[]) {
-  const char *query = R"(
-    select * from quotes where symbol = '%s'
-  )";
-
-  char formatted_query[strlen(query) + 1];
-
-  snprintf(formatted_query, strlen(query) + 1, query, "TSLA");
-
-  printf("Size of query: %i\n", (int)(strlen(query)));
-  printf("%s\n", formatted_query);
-
   Pg pg;
   pg.connect();
 
@@ -31,6 +19,8 @@ int main(int argc, char *argv[]) {
   });
 
   db_quote.get("AMZN", 10);
+
+  db_quote.insert_latest_avg_one_sec_variances();
 
   pg.disconnect();
 }

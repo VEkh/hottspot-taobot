@@ -23,6 +23,7 @@ public:
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(get_last_args_t);
 
+  void insert_latest_avg_one_sec_variances();
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
 
