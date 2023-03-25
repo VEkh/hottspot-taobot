@@ -18,7 +18,7 @@ class TaoBot {
 public:
   using position_t = Alpaca::t::position_t;
 
-  TaoBot(char *, std::map<std::string, std::string> &);
+  TaoBot(std::string, std::map<std::string, std::string> &);
 
   void run();
 
@@ -128,7 +128,7 @@ private:
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote(const bool);
-  void initialize(char *, std::map<std::string, std::string> &);
+  void initialize(std::string, std::map<std::string, std::string> &);
   void load_performance();
   void log_account_balance();
   void log_end_of_trading_period();

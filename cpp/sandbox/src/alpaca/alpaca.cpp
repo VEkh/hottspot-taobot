@@ -11,6 +11,7 @@
 #include <map>                 // std::map
 #include <regex>               // std::regex
 #include <sstream>             // std::ostringstream
+#include <stdexcept>           // std::invalid_argument
 #include <stdio.h>             // printf
 #include <string>              // std::string
 #include <vector>              // std::vector
@@ -162,11 +163,20 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "tao_bot") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
+    std::list<std::string> args = ::utils::io::extract_args(argc, argv);
+    args.pop_front(); // Remove `tao_bot` arg
+
     std::map<std::string, std::string> flags =
         ::utils::io::extract_flags(argc, argv);
 
-    Alpaca::TaoBot tao_bot(symbol, flags);
+    if (args.empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to trade.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Alpaca::TaoBot tao_bot(args.front(), flags);
     tao_bot.run();
 
     exit(0);

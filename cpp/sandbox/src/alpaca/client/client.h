@@ -23,9 +23,11 @@ public:
     std::string api_secret_key;
     std::string base_url;
     std::string data_base_url;
+    bool is_live;
   } config;
 
-  Client(std::map<std::string, std::string> = {});
+  Client(){};
+  Client(std::map<std::string, std::string>);
 
   CurlClient place_order(order_t *order);
 
@@ -38,8 +40,6 @@ public:
 
   quote_t parse_quote(const std::string &);
 
-  bool is_beta();
-  bool is_live();
   void stream_account();
 
 private:

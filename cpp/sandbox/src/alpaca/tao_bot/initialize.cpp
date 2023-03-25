@@ -18,9 +18,9 @@
 #include <stdexcept>                // std::invalid_argument, std::runtime_error
 #include <string>                   // std::string
 
-void Alpaca::TaoBot::initialize(char *symbol_,
+void Alpaca::TaoBot::initialize(std::string symbol_,
                                 std::map<std::string, std::string> &flags_) {
-  if (symbol_ == nullptr) {
+  if (symbol_.empty()) {
     const std::string message =
         Formatted::error_message("Must provide a symbol");
 

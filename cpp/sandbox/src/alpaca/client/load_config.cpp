@@ -3,8 +3,6 @@
 
 #include "client.h"          // Alpaca::Client, config
 #include "deps.cpp"          // json
-#include "is_beta.cpp"       // is_beta
-#include "is_live.cpp"       // is_live
 #include "lib/formatted.cpp" // Formatted::error_message
 #include <fstream>           // std::ifstream, std::ios
 #include <stdexcept>         // std::invalid_argument
@@ -13,12 +11,22 @@
 void Alpaca::Client::load_config() {
   std::string config_path =
       std::string(APP_DIR) + "/config/alpaca/credentials.json";
+  std::string error_message;
 
   std::ifstream config_file(config_path.c_str(), std::ios::in);
 
   if (!config_file.good()) {
-    std::string error_message = Formatted::error_message(
-        "Config file missing at " + std::string(config_path));
+    error_message = Formatted::error_message("Config file missing at " +
+                                             std::string(config_path));
+    throw std::invalid_argument(error_message);
+  }
+
+  const std::string api_key_id = this->flags["api_key_id"];
+
+  if (api_key_id.empty()) {
+    error_message = Formatted::error_message(
+        "Please provide an --api_key_id=<API_KEY_ID> option");
+
     throw std::invalid_argument(error_message);
   }
 
@@ -26,10 +34,16 @@ void Alpaca::Client::load_config() {
   config_file >> config_json;
   config_file.close();
 
+  if (!config_json.contains(api_key_id)) {
+    error_message = Formatted::error_message(
+        "There is no entry for the `api_key_id` \"" + api_key_id + "\"");
+
+    throw std::invalid_argument(error_message);
+  }
+
   const char *required_keys[] = {
       "data_base_url",
-      "live",
-      "paper",
+      api_key_id.c_str(),
   };
 
   for (const char *key : required_keys) {
@@ -37,7 +51,7 @@ void Alpaca::Client::load_config() {
       continue;
     }
 
-    std::string error_message = Formatted::error_message(
+    error_message = Formatted::error_message(
         "Config file is missing the `" + std::string(key) +
         "` key. Please ensure it is in the config file at " +
         std::string(config_path));
@@ -46,42 +60,30 @@ void Alpaca::Client::load_config() {
   }
 
   const char *nested_required_keys[] = {
-      "api_key_id",
-      "api_secret_key",
       "base_url",
+      "is_live",
+      "secret_key",
   };
 
-  const char *session_keys[] = {
-      "live",
-      "paper",
-  };
-
-  for (const char *session_key : session_keys) {
-    for (const char *key : nested_required_keys) {
-      if (config_json[session_key].contains(key)) {
-        continue;
-      }
-
-      std::string error_message = Formatted::error_message(
-          "Config file is missing the `" + std::string(session_key) +
-          std::string(".") + std::string(key) +
-          "` key. Please ensure it is in the config file at " +
-          std::string(config_path));
-
-      throw std::invalid_argument(error_message);
+  for (const char *key : nested_required_keys) {
+    if (config_json[api_key_id].contains(key)) {
+      continue;
     }
+
+    error_message = Formatted::error_message(
+        "Config file is missing the `" + api_key_id + std::string(".") +
+        std::string(key) + "` key. Please ensure it is in the config file at " +
+        std::string(config_path));
+
+    throw std::invalid_argument(error_message);
   }
 
-  const char *session_key = is_live() ? "live" : "paper";
-  const std::string account_type_prefix = is_beta() ? "beta_" : "";
-
   this->config = {
-      .api_key_id =
-          config_json[session_key][account_type_prefix + "api_key_id"],
-      .api_secret_key =
-          config_json[session_key][account_type_prefix + "api_secret_key"],
-      .base_url = config_json[session_key]["base_url"],
+      .api_key_id = api_key_id,
+      .api_secret_key = config_json[api_key_id]["secret_key"],
+      .base_url = config_json[api_key_id]["base_url"],
       .data_base_url = config_json["data_base_url"],
+      .is_live = config_json[api_key_id]["is_live"],
   };
 }
 

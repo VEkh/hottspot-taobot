@@ -5,7 +5,7 @@
 #include "tao_bot.h"                     // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::max_account_loss_reached() {
-  if (!this->api_client.is_live()) {
+  if (!this->api_client.config.is_live) {
     return false;
   }
 

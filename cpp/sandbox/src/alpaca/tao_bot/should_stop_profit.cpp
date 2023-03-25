@@ -5,7 +5,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot, account_exit_prices_t
 
 bool Alpaca::TaoBot::should_stop_profit() {
-  if (!this->api_client.is_live()) {
+  if (!this->api_client.config.is_live) {
     return false;
   }
 
@@ -19,7 +19,7 @@ bool Alpaca::TaoBot::should_stop_profit() {
   const double current_profit_ratio =
       exit_prices_.current_profit / this->account_balance.original_balance;
 
-  if (this->api_client.is_live() &&
+  if (this->api_client.config.is_live &&
       exit_prices_.overall_max_profit >= exit_prices_.target_max_profit &&
       exit_prices_.session_max_profit <
           exit_prices_.session_target_max_profit &&
