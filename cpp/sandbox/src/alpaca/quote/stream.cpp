@@ -11,6 +11,7 @@
  */
 #include "quote.h"
 
+#include "lib/utils/io.cpp"                   // ::utils::io
 #include "lib/utils/string.cpp"               // ::utils::string
 #include "lib/utils/websocket.cpp"            // ::utils::websocket
 #include "src/deps.cpp"                       // json
@@ -25,12 +26,13 @@
 #include <boost/beast/version.hpp>            // BOOST_BEAST_VERSION_STRING
 #include <boost/beast/websocket.hpp>          // boost::beast::websocket
 #include <boost/system/error_code.hpp>        // boost::system::error_code
+#include <list>                               // std::list
 #include <openssl/err.h>                      // ERR_get_error
 #include <openssl/ssl.h>                      // SSL_set_tlsext_host_name
 #include <sstream>                            // std::ostringstream
 #include <string>                             // std::string, std::to_string
 
-void Alpaca::Quote::stream(int argc, char *argv[]) {
+void Alpaca::Quote::stream(const std::list<std::string> &symbols) {
   net::io_context ioc;
   ssl::context ssl_context(ssl::context::tlsv12_client);
   tcp::resolver resolver(ioc);
@@ -82,10 +84,7 @@ void Alpaca::Quote::stream(int argc, char *argv[]) {
     { "action": "subscribe", "quotes": [] }
   )"_json;
 
-  for (int i = 2; i < argc; i++) {
-    std::string symbol = ::utils::string::upcase(argv[i]);
-    subscribe_message["quotes"].push_back(symbol);
-  }
+  subscribe_message["quotes"] = symbols;
 
   ws.write(net::buffer(subscribe_message.dump()));
   ws.read(buffer);

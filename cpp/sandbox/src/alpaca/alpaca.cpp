@@ -54,10 +54,14 @@ int main(int argc, char *argv[]) {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::string command = argv[1];
 
-  if (command == "cancel_orders") {
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
+  std::list<std::string> args =
+      ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
+  args.pop_front(); // Remove `tao_bot` arg
 
+  std::map<std::string, std::string> flags =
+      ::utils::io::extract_flags(argc, argv);
+
+  if (command == "cancel_orders") {
     Alpaca::Client api_client(flags);
 
     if (argc < 3) {
@@ -112,50 +116,37 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "quotes_stream") {
-    if (argc < 3) {
+    if (args.empty()) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to stream.");
 
       throw std::invalid_argument(message);
     }
 
-    Alpaca::Quote streamer;
-    streamer.stream(argc, argv);
+    Alpaca::Quote streamer(flags);
+    streamer.stream(args);
 
     exit(0);
   }
 
   if (command == "quotes_watch") {
-    if (argc < 3) {
+    if (args.empty()) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to stream.");
 
       throw std::invalid_argument(message);
     }
 
-    std::list<std::string> args =
-        ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
-
-    std::list<std::string>::iterator symbols_start = args.begin();
-    symbols_start++;
-    std::vector<std::string> symbols(symbols_start, args.end());
-
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
     Pg pg(flags);
     pg.connect();
 
-    Alpaca::Quote watcher(pg);
-    watcher.watch(symbols);
+    Alpaca::Quote watcher(pg, flags);
+    watcher.watch(args);
 
     exit(0);
   }
 
   if (command == "stream_account") {
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
     Alpaca::Client alpaca_client(flags);
     alpaca_client.stream_account();
 
@@ -163,12 +154,6 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "tao_bot") {
-    std::list<std::string> args = ::utils::io::extract_args(argc, argv);
-    args.pop_front(); // Remove `tao_bot` arg
-
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
     if (args.empty()) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to trade.");

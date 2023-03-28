@@ -6,16 +6,22 @@ equity_symbols=()
 forex_project="oanda"
 forex_symbols=()
 
-while IFS="" read -r line
-  do equity_symbols+=("$line")
-done < <(cat "$app_dir/bin/$equity_project/symbols")
+while IFS="" read -r line; do
+  symbol="${line}"
+  equity_symbols+=("${symbol}")
+  touch "${app_dir}/log/${equity_project}/live-alpha/${symbol}.log"
+  touch "${app_dir}/log/${equity_project}/paper-alpha/${symbol}.log"
+done < <(cat "${app_dir}/bin/${equity_project}/symbols")
 
-while IFS="" read -r line
-  do forex_symbols+=("$line")
-done < <(cat "$app_dir/bin/$forex_project/symbols")
+while IFS="" read -r line; do
+  symbol="${line}"
+  forex_symbols+=("${symbol}")
+  touch "${app_dir}/log/${forex_project}/${symbol}.log"
+  touch "${app_dir}/log/${forex_project}/${symbol}.log"
+done < <(cat "${app_dir}/bin/${forex_project}/symbols")
 
 function tail_cmd() {
-  echo -e "tail -f $app_dir/log/$1/$2.log"
+  echo -e "tail -f ${app_dir}/log/${1}/${2}.log"
 }
 
 tmux -2 new-session -s hottspot_taobot -n "code" \; \
@@ -24,12 +30,14 @@ tmux -2 new-session -s hottspot_taobot -n "code" \; \
   send-keys "$app_dir/db/ctl restart" "Enter" \; \
   split-window -h "vim ." \; \
   select-layout main-vertical \; \
-  new-window -n "stocks-1" "$(tail_cmd "$equity_project" "${equity_symbols[0]}")" \; \
-  split-window -h "$(tail_cmd "$equity_project" "${equity_symbols[1]}")" \; \
-  new-window -n "stock-streams" "$(tail_cmd "$equity_project"  "account_stream")" \; \
-  split-window -h "$(tail_cmd "$equity_project" "quotes_stream")" \; \
-  select-pane -t 0 \; \
-  split-window "$(tail_cmd "$equity_project" "quotes_watch")" \; \
+  new-window -n "stocks-live" "$(tail_cmd "${equity_project}/live-alpha" "${equity_symbols[0]}")" \; \
+  split-window -h "$(tail_cmd "${equity_project}/live-alpha" "${equity_symbols[1]}")" \; \
+  new-window -n "stocks-paper" "$(tail_cmd "${equity_project}/paper-alpha" "${equity_symbols[0]}")" \; \
+  split-window -h "$(tail_cmd "${equity_project}/paper-alpha" "${equity_symbols[1]}")" \; \
+  new-window -n "stock-quote-streams" "$(tail_cmd "${equity_project}"  "quotes_stream")" \; \
+  split-window -h "$(tail_cmd "${equity_project}" "quotes_watch")" \; \
+  new-window -n "stock-account-streams" "$(tail_cmd "${equity_project}/live-alpha"  "account_stream")" \; \
+  split-window -h "$(tail_cmd "${equity_project}/paper-alpha" "account_stream")" \; \
   new-window -n "forex-1" "$(tail_cmd "$forex_project" "${forex_symbols[0]}")" \; \
   split-window -h "$(tail_cmd "$forex_project" "${forex_symbols[1]}")" \; \
   new-window -n "forex-streams" "$(tail_cmd "$forex_project" "account_stream")" \; \

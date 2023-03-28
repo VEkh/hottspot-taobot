@@ -1,6 +1,9 @@
 #!/bin/bash
 # shellcheck disable=2009
 
+set -e
+shopt -s extglob
+
 app_dir=$(realpath "$(dirname "$0")/../../")
 fmt_bold="\033[1m"
 fmt_cyan="\033[36m"
@@ -11,10 +14,14 @@ fmt_underline="\033[4m"
 fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
+# extract_args
+# extract_flags
+# extract_flags_to_map
+# to_title
+# to_upper
 # shellcheck disable=1090,1091
-source "$app_dir/bin/utils" # extract_args, extract_flags, to_title, to_upper
+source "${app_dir}/bin/utils"
 
-shopt -s extglob
 echo -e "${fmt_bold}${fmt_cyan}"
 date
 echo
@@ -32,14 +39,20 @@ case $(to_lower "$1") in
 esac
 
 function get_status() {
-  ps aux | grep --color "[q]uotes_${action}" | grep -vE "heartbeat|log|restart|status|stop" | grep --color "$project"
+  state=$(
+    ps aux |
+    grep "[q]uotes_${action}" |
+    grep -vE "heartbeat|log|restart|status|stop" |
+    grep --color "${project}"
+  )
+
+  echo -e "${state}"
 }
 
 function print_status() {
   state=$(get_status)
 
-  if [[ -z $state ]]
-  then
+  if [[ -z "${state}" ]]; then
     echo -e "${fmt_green}✅ Not ${action_gerund} any quotes"
   else
     printf "%b" "$fmt_reset"
@@ -50,8 +63,7 @@ function print_status() {
 function start_if_stopped() {
   state=$(get_status)
 
-  if [[ -z $state ]]
-  then
+  if [[ -z "${state}" ]]; then
     echo -e "${fmt_green}😴 Not ${action_gerund} any quotes. Starting.\n${fmt_reset}"
     start_action "${@}"
   else
@@ -64,6 +76,16 @@ function start_action() {
   cmd="quotes_${action}"
   flags=($(extract_flags "${@}"))
   log_dir="$app_dir/log/$project"
+
+  local -A flag_map
+  extract_flags_to_map flag_map "${flags[@]}"
+
+  api_key="${flag_map["api-key"]}"
+
+  if [[ -z "${api_key}" ]]; then
+    ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
+    exit 1
+  fi
 
   symbols=($(extract_args "${@}"))
   [[ ${#symbols[@]} = 0 ]] && symbols=(${all_symbols[@]})

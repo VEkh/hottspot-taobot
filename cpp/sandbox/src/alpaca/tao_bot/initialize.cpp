@@ -43,7 +43,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   this->pg = Pg(this->flags);
   this->pg.connect();
 
-  this->quoter = Alpaca::Quote(this->pg);
+  this->quoter = Alpaca::Quote(this->pg, this->flags);
   this->symbol = ::utils::string::upcase(symbol_);
 
   try {

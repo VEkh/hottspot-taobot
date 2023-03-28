@@ -21,11 +21,11 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  const std::string api_key_id = this->flags["api_key_id"];
+  const std::string api_key = this->flags["api-key"];
 
-  if (api_key_id.empty()) {
+  if (api_key.empty()) {
     error_message = Formatted::error_message(
-        "Please provide an --api_key_id=<API_KEY_ID> option");
+        "Please provide an --api-key=<API_KEY> option");
 
     throw std::invalid_argument(error_message);
   }
@@ -34,16 +34,16 @@ void Alpaca::Client::load_config() {
   config_file >> config_json;
   config_file.close();
 
-  if (!config_json.contains(api_key_id)) {
+  if (!config_json.contains(api_key)) {
     error_message = Formatted::error_message(
-        "There is no entry for the `api_key_id` \"" + api_key_id + "\"");
+        "There is no entry for the `api-key` \"" + api_key + "\"");
 
     throw std::invalid_argument(error_message);
   }
 
   const char *required_keys[] = {
       "data_base_url",
-      api_key_id.c_str(),
+      api_key.c_str(),
   };
 
   for (const char *key : required_keys) {
@@ -66,12 +66,12 @@ void Alpaca::Client::load_config() {
   };
 
   for (const char *key : nested_required_keys) {
-    if (config_json[api_key_id].contains(key)) {
+    if (config_json[api_key].contains(key)) {
       continue;
     }
 
     error_message = Formatted::error_message(
-        "Config file is missing the `" + api_key_id + std::string(".") +
+        "Config file is missing the `" + api_key + std::string(".") +
         std::string(key) + "` key. Please ensure it is in the config file at " +
         std::string(config_path));
 
@@ -79,11 +79,12 @@ void Alpaca::Client::load_config() {
   }
 
   this->config = {
-      .api_key_id = api_key_id,
-      .api_secret_key = config_json[api_key_id]["secret_key"],
-      .base_url = config_json[api_key_id]["base_url"],
+      .api_key = api_key,
+      .api_key_id = config_json[api_key]["id"],
+      .api_secret_key = config_json[api_key]["secret_key"],
+      .base_url = config_json[api_key]["base_url"],
       .data_base_url = config_json["data_base_url"],
-      .is_live = config_json[api_key_id]["is_live"],
+      .is_live = config_json[api_key]["is_live"],
   };
 }
 

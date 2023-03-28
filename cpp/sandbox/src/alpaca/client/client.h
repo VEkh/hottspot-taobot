@@ -19,6 +19,7 @@ public:
   using quote_t = Global::t::quote_t;
 
   struct config_t {
+    std::string api_key;
     std::string api_key_id;
     std::string api_secret_key;
     std::string base_url;

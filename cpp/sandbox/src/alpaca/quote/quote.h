@@ -12,6 +12,7 @@
 #include <boost/beast/http.hpp>             // boost::beast, boost::beast::http
 #include <boost/beast/ssl.hpp>              // boost::asio::ssl
 #include <boost/beast/websocket.hpp>        // boost::beast::websocket
+#include <list>                             // std::list
 #include <map>                              // std::map
 #include <string>                           // std::string
 #include <vector>                           // std::vector
@@ -30,14 +31,15 @@ public:
   using tcp = net::ip::tcp;
 
   Quote(){};
-  Quote(Pg);
+  Quote(Pg, std::map<std::string, std::string>);
+  Quote(std::map<std::string, std::string>);
 
   DB::Quote db_quote;
 
   price_movement_t read_price_movement(const std::string);
   std::vector<quote_t> read_collection(const std::string, const double);
-  void stream(int, char *[]);
-  void watch(const std::vector<std::string>);
+  void stream(const std::list<std::string> &);
+  void watch(const std::list<std::string> &);
 
 private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;

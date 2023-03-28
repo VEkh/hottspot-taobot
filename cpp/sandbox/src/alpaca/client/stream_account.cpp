@@ -61,8 +61,8 @@ void Alpaca::Client::stream_account() {
                 << std::endl
                 << std::endl;
 
-      const std::string filepath =
-          std::string(DATA_DIR) + "/alpaca/account.json";
+      const std::string filepath = std::string(DATA_DIR) + "/alpaca/" +
+                                   this->config.api_key + "/account.json";
 
       ::utils::io::write_to_file(account_json.dump(2), filepath.c_str());
 

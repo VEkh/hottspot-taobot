@@ -7,12 +7,12 @@
 #include "read_price_movement.cpp"            // read_price_movement
 #include "set_and_persist_price_movement.cpp" // set_and_persist_price_movement
 #include <iostream> // std::cout, std::endl, std::flush
+#include <list>     // std::list
 #include <stdio.h>  // printf, puts
 #include <string>   // std::string
 #include <unistd.h> // usleep
-#include <vector>   // std::vector
 
-void Alpaca::Quote::watch(const std::vector<std::string> symbols) {
+void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
   for (const std::string symbol : symbols) {
     read_collection(symbol);
     read_price_movement(symbol);

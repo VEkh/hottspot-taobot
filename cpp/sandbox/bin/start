@@ -8,15 +8,14 @@ fmt_cyan="\033[36m"
 fmt_normal="\033[10m"
 fmt_red="\033[31m"
 fmt_reset="\033[0m"
-fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
 # shellcheck disable=1090
-source "$app_dir/bin/utils" # extract_flags, to_lower, to_upper
+source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
 
 flags=($(extract_flags "${@}"))
 
-if [[ $project = "bin" ]]; then
+if [[ "${project}" = "bin" ]]; then
   cmd=$(basename "$0")
 
   echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
@@ -29,24 +28,32 @@ echo -e "${fmt_bold}${fmt_cyan}"
 date
 
 function symbol_start() {
-  log_dir="$app_dir/log/$project"
+  local -A flag_map
+  extract_flags_to_map flag_map "${flags[@]}"
+
+  api_key="${flag_map["api-key"]}"
+
+  if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
+    ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
+    exit 1
+  fi
+
+  log_dir="${app_dir}/log/${project}/${api_key}"
   symbol=$(to_upper "$1")
 
-  mkdir -p "$log_dir"
+  mkdir -p "${log_dir}"
 
-  log_file="$log_dir/$symbol.log"
+  log_file="${log_dir}/${symbol}.log"
 
-  echo -e "${fmt_bold}${fmt_yellow}"
-  echo -e "Starting TaoBot for ${fmt_normal}${fmt_cyan}$symbol"
-  echo "" > "$log_file"
+  ascii_print "Starting TaoBot for ${fmt_normal}${fmt_cyan}${symbol}" "yellow"
+  echo "" > "${log_file}"
 
-  "$app_dir/build/$project" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
+  "${app_dir}/build/${project}" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
 }
 
-if [[ "$*" =~ .*--clear-performance.* ]]
-then
+if [[ "$*" =~ .*--clear-performance.* ]]; then
   symbol="$(to_upper "$1")"
-  "$app_dir/bin/$project/clear_performance" "$symbol"
+  "${app_dir}/bin/${project}/clear_performance" "${symbol}"
 fi
 
 case $1 in
@@ -62,9 +69,8 @@ case $1 in
     symbols=()
     while IFS="" read -r line; do symbols+=("$line"); done < <(cat "$app_dir/bin/$project/symbols")
 
-    for symbol in "${symbols[@]}"
-    do
-      symbol_start "$symbol"
+    for symbol in "${symbols[@]}"; do
+      symbol_start "${symbol}"
     done
     ;;
 esac

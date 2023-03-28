@@ -4,6 +4,7 @@ declare -A ASCII=(
   ["bold"]="\033[1m"
   ["cyan"]="\033[36m"
   ["green"]="\033[32m"
+  ["normal"]="\033[10m"
   ["red"]="\033[31m"
   ["reset"]="\033[0m"
   ["underline"]="\033[4m"
@@ -54,7 +55,7 @@ function extract_flags_to_map() {
   for flag in "${@:2}"; do
     key_value=($(
       echo -e "${flag}" |
-      awk '{ match($0, /--([[:alpha:]]+)=?(.*)/, arr); print arr[1]; print arr[2] }'
+      awk '{ gsub("--", "", $0); gsub("=", " ", $0); print $0 }'
     ))
 
     key="${key_value[0]}"
