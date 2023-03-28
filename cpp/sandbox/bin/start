@@ -1,13 +1,9 @@
 #!/bin/bash
 
+set -e
 shopt -s extglob
 
 app_dir=$(realpath "$(dirname "$0")/../../")
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_normal="\033[10m"
-fmt_red="\033[31m"
-fmt_reset="\033[0m"
 project=$(dirname "$0" | xargs basename)
 
 # shellcheck disable=1090
@@ -20,14 +16,12 @@ extract_flags_to_map flag_map "${flags[@]}"
 if [[ "${project}" = "bin" ]]; then
   cmd=$(basename "$0")
 
-  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
-  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
+  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
 
   exit 1;
 fi
 
-echo -e "${fmt_bold}${fmt_cyan}"
-date
+ascii_print "$(date)\n" "cyan"
 
 function symbol_start() {
   api_key="${flag_map["api-key"]}"
@@ -44,7 +38,7 @@ function symbol_start() {
 
   log_file="${log_dir}/${symbol}.log"
 
-  ascii_print "Starting TaoBot for ${fmt_normal}${fmt_cyan}${symbol}" "yellow"
+  ascii_print "Starting TaoBot for ${ASCII["normal"]}${ASCII["cyan"]}${symbol}" "yellow"
   echo "" > "${log_file}"
 
   "${app_dir}/build/${project}" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
@@ -52,21 +46,23 @@ function symbol_start() {
 
 if [[ "${flag_map["clear-performance"]}" = "1" ]]; then
   symbol="$(to_upper "$1")"
-  "${app_dir}/bin/${project}/clear_performance" "${symbol}"
+  "${app_dir}/bin/${project}/clear_performance" "${symbol}" "${flags[@]}"
 fi
 
 case $1 in
   +([[:alpha:]]))
-    symbol_start "$1"
+    symbol_start "${1}"
     ;;
 
   +([[:alpha:]_[:alpha:]]))
-    symbol_start "$1"
+    symbol_start "${1}"
     ;;
 
   *)
     symbols=()
-    while IFS="" read -r line; do symbols+=("$line"); done < <(cat "$app_dir/bin/$project/symbols")
+    while IFS="" read -r line; do
+      symbols+=("$line")
+    done < <(cat "$app_dir/bin/$project/symbols")
 
     for symbol in "${symbols[@]}"; do
       symbol_start "${symbol}"
@@ -74,4 +70,4 @@ case $1 in
     ;;
 esac
 
-printf "%b" "$fmt_reset"
+printf "%b" "${ASCII["reset"]}"

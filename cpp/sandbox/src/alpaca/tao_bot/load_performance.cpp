@@ -33,6 +33,7 @@ void Alpaca::TaoBot::load_performance() {
   this->closed_positions = {};
 
   const std::string filepath = std::string(DATA_DIR) + "/alpaca/performance/" +
+                               this->api_client.config.api_key + "/" +
                                std::string(this->symbol) + ".json";
 
   std::ifstream file;
