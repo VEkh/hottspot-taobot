@@ -14,6 +14,8 @@ project=$(dirname "$0" | xargs basename)
 source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
 
 flags=($(extract_flags "${@}"))
+declare -A flag_map
+extract_flags_to_map flag_map "${flags[@]}"
 
 if [[ "${project}" = "bin" ]]; then
   cmd=$(basename "$0")
@@ -28,9 +30,6 @@ echo -e "${fmt_bold}${fmt_cyan}"
 date
 
 function symbol_start() {
-  local -A flag_map
-  extract_flags_to_map flag_map "${flags[@]}"
-
   api_key="${flag_map["api-key"]}"
 
   if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
@@ -51,7 +50,7 @@ function symbol_start() {
   "${app_dir}/build/${project}" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
 }
 
-if [[ "$*" =~ .*--clear-performance.* ]]; then
+if [[ "${flag_map["clear-performance"]}" = "1" ]]; then
   symbol="$(to_upper "$1")"
   "${app_dir}/bin/${project}/clear_performance" "${symbol}"
 fi
