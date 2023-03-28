@@ -11,6 +11,9 @@
 #include <stdexcept>                // std::invalid_argument
 #include <string>                   // std::string
 
+#include "lib/formatted.cpp" // Formatted
+#include <stdio.h>           // puts
+
 void Oanda::TaoBot::write_account_performance() {
   if (!new_positions_opened()) {
     return;
@@ -52,7 +55,18 @@ void Oanda::TaoBot::write_account_performance() {
     ::utils::io::write_to_file(persisted_performances.dump(2),
                                filepath.c_str());
   } catch (nlohmann::detail::parse_error &) {
+    const std::string error_message = Formatted::error_message(
+        "[OANDA__TAO_BOT_write_account_performance] Parse error when trying to "
+        "write account session.");
+
+    puts(error_message.c_str());
   } catch (std::invalid_argument &) {
+    const std::string error_message =
+        Formatted::error_message("[OANDA__TAO_BOT_write_account_performance] "
+                                 "Invalid argument error when trying to "
+                                 "write account session.");
+
+    puts(error_message.c_str());
   }
 }
 
