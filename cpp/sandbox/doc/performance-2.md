@@ -1,4 +1,4 @@
-### 2023-03-21:
+### 2023-03-28:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -11,7 +11,222 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-03-08)
-* Win Record: 6W (66.67%) 3L (Total 9)
+* Win Record: 7W (50.00%) 7L (Total 14)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-03-27:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Mon Mar 27 08:57:00 2023 • Runtime: 35:59
+Current Balance:          $27,186.07 (-856.81) (-3.06%)
+Max Balance:              $28,148.07 (+105.19) (+0.38%) @ 08:30 CDT
+Overall Max Balance:      $28,148.07 (+105.19) (+0.38%) @ 08:30 CDT
+Min Balance:              $27,186.07 (-856.81) (-3.06%) @ 08:57 CDT
+Original Balance:         $28,042.88
+Session Original Balance: $28,042.88 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Mon Mar 27 14:59:00 2023 • Runtime: 05:59:59
+Current Balance:          $33,725.16 (-723.33) (-2.10%)
+Max Balance:              $35,200.61 (+752.12) (+2.18%) @ 11:08 CDT
+Overall Max Balance:      $35,200.61 (+752.12) (+2.18%) @ 11:08 CDT
+Min Balance:              $33,467.08 (-981.41) (-2.85%) @ 13:07 CDT
+Original Balance:         $34,448.49
+Session Original Balance: $34,448.49 (+0.00) (+0.00%)
+```
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 7W (50.00%) 7L (Total 14)
+
+###### Notes
+* Okay so the luck is officially over. It's good to be break even though.
+* The problem with the current strategy is that it still depends on heavy early
+  morning trending.
+* As I've seen, this may or may not happen, and is sometimes entirely dependent
+  on a lucky first guess.
+* So? What should I do?
+* Obviously keep building backtesting so I can move forward with greater
+  confidence in a specific strategy.
+* What I need to decide now is whether I should go back to only staging until
+  staging gets to $40K or crashes out.
+
+###### Next Thing(s) to Try
+
+### 2023-03-24:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Fri Mar 24 09:17:00 2023 • Runtime: 01:17:23
+Current Balance:          $28,050.28 (-871.20) (-3.01%)
+Max Balance:              $29,747.92 (+826.44) (+2.86%) @ 08:47 CDT
+Overall Max Balance:      $29,747.92 (+826.44) (+2.86%) @ 08:47 CDT
+Min Balance:              $28,050.28 (-871.20) (-3.01%) @ 09:17 CDT
+Original Balance:         $28,921.48
+Session Original Balance: $28,921.48 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Fri Mar 24 14:59:00 2023 • Runtime: 05:40:00
+Current Balance:          $34,464.16 (+356.13) (+1.04%)
+Max Balance:              $34,665.54 (+557.51) (+1.63%) @ 14:22 CDT
+Overall Max Balance:      $34,665.54 (+557.51) (+1.63%) @ 14:22 CDT
+Min Balance:              $32,851.24 (-1,256.79) (-3.68%) @ 11:27 CDT
+Original Balance:         $34,108.03
+Session Original Balance: $34,108.03 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 7W (53.85%) 6L (Total 13)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 40W (52.63%) (Consecutive: 0) 36L (Consecutive: 1)
+* Latest Return: -$874.55 (-3.02%) (-151.59% 9-5 Salary) (vs. NASDAQ: +0.51%) (vs. S&P 500: +1.43%)
+* Week's Return: -$908.57 • Total Return: -$8,604.26
+* Average Return: -0.39% • Average NASDAQ Return: +0.01% • Average S&P 500 Return: -0.02%
+
+###### Notes
+* Look at how close production got to winning before being swallowed up by
+  consolidation.
+* Now we'll see if staging wins for the fourth consecutive day.
+* Interesting that staging has won the last 4/4 days. Keep watching and see if
+  it gets to $40K
+
+###### Next Thing(s) to Try
+
+### 2023-03-23:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thu Mar 23 10:32:00 2023 • Runtime: 02:32:23
+Current Balance:          $28,898.76 (+834.95) (+2.98%)
+Max Balance:              $28,942.53 (+878.72) (+3.13%) @ 10:32 CDT
+Overall Max Balance:      $28,942.53 (+878.72) (+3.13%) @ 10:32 CDT
+Min Balance:              $27,508.28 (-555.53) (-1.98%) @ 08:40 CDT
+Original Balance:         $28,063.81
+Session Original Balance: $28,063.81 (+0.00) (+0.00%)
+
+Thu Mar 23 10:34:00 2023 • Runtime: 01:10
+Current Balance:          $28,908.00 (+844.19) (+3.01%)
+Max Balance:              $28,908.00 (+844.19) (+3.01%) @ 10:34 CDT
+Overall Max Balance:      $28,942.53 (+878.72) (+3.13%) @ 10:33 CDT
+Min Balance:              $28,826.24 (+762.43) (+2.72%) @ 10:33 CDT
+Original Balance:         $28,063.81
+Session Original Balance: $28,898.80 (+834.99) (+2.98%)
+
+Thu Mar 23 10:35:00 2023 • Runtime: 00:42
+Current Balance:          $28,911.16 (+847.35) (+3.02%)
+Max Balance:              $28,911.16 (+847.35) (+3.02%) @ 10:35 CDT
+Overall Max Balance:      $28,942.53 (+878.72) (+3.13%) @ 10:35 CDT
+Min Balance:              $28,869.73 (+805.92) (+2.87%) @ 10:35 CDT
+Original Balance:         $28,063.81
+Session Original Balance: $28,895.17 (+831.36) (+2.96%)
+```
+
+**Alpha (STAGING)**
+```
+Thu Mar 23 14:59:00 2023 • Runtime: 04:18:00
+Current Balance:          $34,130.21 (+5,694.70) (+20.03%)
+Max Balance:              $34,774.86 (+6,339.35) (+22.29%) @ 14:47 CDT
+Overall Max Balance:      $34,774.86 (+6,339.35) (+22.29%) @ 14:47 CDT
+Min Balance:              $27,796.18 (-639.33) (-2.25%) @ 10:50 CDT
+Original Balance:         $28,435.51
+Session Original Balance: $28,435.51 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 7W (58.33%) 5L (Total 12)
+
+###### Notes
+* The change to a 2.5:1 take-profit-to-stop-loss ratio was actually the exact
+  amount needed for today.
+* If I had kept it at 3:1, I'm fairly certain today would have lost.
+* A 2.5:1 ratio would have almost certainly resulted in a win yesterday as
+  well. So I'll keep it here for now.
+* Look at staging's return 😳
+* I've never seen that before.
+* It was directly because of the 2.5:1 ratio change. Is it possible that this
+  is the true golden ratio? 🧐. We'll see.
+* If it is, is there a way to compute this ratio, in case it changes over time?
+* In the last week, staging has more often profited than lost after closing
+  production. This may suggest that I do in fact need to let the algorithm run
+  all day.
+* I'll only make this change if staging can get to a balance $40K.
+
+###### Next Thing(s) to Try
+
+### 2023-03-22:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wed Mar 22 10:39:00 2023 • Runtime: 02:39:23
+Current Balance:          $28,064.98 (-872.40) (-3.01%)
+Max Balance:              $29,485.65 (+548.27) (+1.89%) @ 08:31 CDT
+Overall Max Balance:      $29,485.65 (+548.27) (+1.89%) @ 08:31 CDT
+Min Balance:              $28,064.98 (-872.40) (-3.01%) @ 10:39 CDT
+Original Balance:         $28,937.38
+Session Original Balance: $28,937.38 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Wed Mar 22 14:59:00 2023 • Runtime: 04:18:00
+Current Balance:          $28,460.15 (+1,698.02) (+6.34%)
+Max Balance:              $29,084.48 (+2,322.35) (+8.68%) @ 14:21 CDT
+Overall Max Balance:      $29,084.48 (+2,322.35) (+8.68%) @ 14:21 CDT
+Min Balance:              $26,326.43 (-435.70) (-1.63%) @ 13:32 CDT
+Original Balance:         $26,762.13
+Session Original Balance: $26,762.13 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 6W (54.55%) 5L (Total 11)
+
+###### Notes
+* Okay, it looks like the eerie high win rate is over.
+* Now we have to see if this strategy loses more often than it wins, and if the
+  account balance can survive until the next win streak.
+* I'm strongly considering reducing the take-profit-stop-loss ratio from 3:1 to
+  2.5:1. TaoBot would have won today if that were the case and it missed
+  successive wins as a result.
+
+###### Next Thing(s) to Try
+
+### 2023-03-21:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tue Mar 21 08:35:00 2023 • Runtime: 35:36
+Current Balance:          $28,931.85 (-913.31) (-3.06%)
+Max Balance:              $29,906.14 (+60.98) (+0.20%) @ 08:30 CDT
+Overall Max Balance:      $29,906.14 (+60.98) (+0.20%) @ 08:30 CDT
+Min Balance:              $28,931.85 (-913.31) (-3.06%) @ 08:35 CDT
+Original Balance:         $29,845.16
+Session Original Balance: $29,845.16 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Tue Mar 21 14:59:00 2023 • Runtime: 06:21:02
+Current Balance:          $26,776.43 (+778.10) (+2.99%)
+Max Balance:              $27,106.61 (+1,108.28) (+4.26%) @ 14:33 CDT
+Overall Max Balance:      $27,106.61 (+1,108.28) (+4.26%) @ 14:33 CDT
+Min Balance:              $25,182.48 (-815.85) (-3.14%) @ 09:25 CDT
+Original Balance:         $25,998.33
+Session Original Balance: $25,998.33 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 6W (60.0%) 4L (Total 10)
 
 ###### Notes
 ###### Next Thing(s) to Try
@@ -46,7 +261,7 @@ Original Balance:         $28,961.61
 Session Original Balance: $29,815.96 (+854.35) (+2.95%)
 ```
 
-**Alpha (PRODUCTION)**
+**Alpha (STAGING)**
 ```
 Mon Mar 20 14:59:00 2023 • Runtime: 06:22:01
 Current Balance:          $26,018.66 (-111.18) (-0.43%)
@@ -86,7 +301,7 @@ Original Balance:                 $30049.92
 Session Original Balance:         $28963.18 (-1086.74) (-3.62%)
 ```
 
-**Alpha (PRODUCTION)**
+**Alpha (STAGING)**
 ```
 Fri Mar 17 14:59:00 2023 • Runtime: 06:20:59
 Current Balance:          $26,153.82 (-1,621.62) (-5.84%)
