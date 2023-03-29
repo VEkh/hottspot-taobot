@@ -13,8 +13,7 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->price_movement.short_term_three_minute_one_second_variance
-           .average) {
+  if (!this->one_sec_variance_avgs.latest) {
     return false;
   }
 

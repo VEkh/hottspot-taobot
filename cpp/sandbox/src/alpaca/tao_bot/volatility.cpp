@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_volatility
 #define ALPACA__TAO_BOT_volatility
 
+// NOTE: Deprecated
+
 #include "tao_bot.h" // Alpaca::TaoBot, order_t
 #include <string>    // std::string
 

@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_batch_volatility
 #define ALPACA__TAO_BOT_batch_volatility
 
+// NOTE: Deprecated
+
 #include "deps.cpp"         // json
 #include "lib/utils/io.cpp" // ::utils::io
 #include "tao_bot.h"        // Alpaca::TaoBot, price_movement_t

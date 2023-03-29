@@ -9,12 +9,12 @@
  */
 #include "quote.h"
 
-#include "result_to_collection.cpp" // result_to_collection
-#include <libpq-fe.h>               // PQescapeLiteral, PQfreemem
-#include <stdio.h>                  // snprintf
-#include <string.h>                 // strlen
-#include <string>                   // std::string, std::to_string
-#include <vector>                   // std::vector
+#include "result_to_quotes.cpp" // result_to_quotes
+#include <libpq-fe.h>           // PQescapeLiteral, PQfreemem
+#include <stdio.h>              // snprintf
+#include <string.h>             // strlen
+#include <string>               // std::string, std::to_string
+#include <vector>               // std::vector
 
 std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
   const bool debug = args.debug;
@@ -22,9 +22,9 @@ std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
   const std::string symbol = args.symbol;
 
   char *sanitized_symbol =
-      PQescapeLiteral(this->conn.conn, symbol.c_str(), sizeof(symbol.c_str()));
+      PQescapeLiteral(this->conn.conn, symbol.c_str(), symbol.size());
 
-  const char *query = R"(
+  const char *query_format = R"(
     select
       ask, bid, symbol, extract(epoch from timestamp) as timestamp
     from quotes
@@ -39,19 +39,19 @@ std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
     order by timestamp asc
   )";
 
-  const size_t query_l = strlen(query) + strlen(sanitized_symbol) +
+  const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
                          strlen(sanitized_symbol) +
                          std::to_string(limit).size();
 
-  char formatted_query[query_l];
+  char query[query_l];
 
-  snprintf(formatted_query, query_l, query, sanitized_symbol, sanitized_symbol,
+  snprintf(query, query_l, query_format, sanitized_symbol, sanitized_symbol,
            limit);
 
-  query_result_t query_result = this->conn.exec(formatted_query, debug);
+  query_result_t query_result = this->conn.exec(query, debug);
   PQfreemem(sanitized_symbol);
 
-  std::vector<quote_t> result = result_to_collection(query_result);
+  std::vector<quote_t> result = result_to_quotes(query_result);
 
   return result;
 }

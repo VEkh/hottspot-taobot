@@ -19,8 +19,8 @@ void DB::Quote::upsert(const std::vector<quote_t> quotes) {
       query += ", ";
     }
 
-    char *sanitized_symbol = PQescapeLiteral(
-        this->conn.conn, it->symbol.c_str(), sizeof(it->symbol.c_str()));
+    char *sanitized_symbol =
+        PQescapeLiteral(this->conn.conn, it->symbol.c_str(), it->symbol.size());
 
     std::vector<std::string> values = {
         std::to_string(it->ask),

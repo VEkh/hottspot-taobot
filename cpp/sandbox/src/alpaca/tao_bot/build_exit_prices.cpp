@@ -5,10 +5,9 @@
 #include <math.h>    // abs
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
-  const double static_one_sec_variance =
-      this->price_movement.three_minute_one_second_variance.average;
+  const double static_one_sec_variance = this->one_sec_variance_avgs.running;
 
-  const int max_loss_coefficient = -25;
+  const int max_loss_coefficient = -62.5;
   const double trailing_stop_profit_ratio = 1 / 1.1;
 
   const double max_loss = max_loss_coefficient * static_one_sec_variance;

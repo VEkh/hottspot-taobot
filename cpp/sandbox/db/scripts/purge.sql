@@ -1,4 +1,4 @@
-\echo '💡 Purging database'
+\echo '🧹 Purging database'
 select
   format($$drop database %s$$, :'DB_NAME')
 where

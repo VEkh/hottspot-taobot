@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_target_position_profit
 #define ALPACA__TAO_BOT_target_position_profit
 
+// NOTE: Deprecated
+
 #include "dynamic_one_sec_variance.cpp" // dynamic_one_sec_variance
 #include "lib/utils/float.cpp"          // ::utils::float_
 #include "tao_bot.h"                    // Alpaca::TaoBot

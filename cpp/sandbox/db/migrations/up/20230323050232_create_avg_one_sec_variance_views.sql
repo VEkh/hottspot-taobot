@@ -1,4 +1,4 @@
-create or replace view latest_avg_one_sec_variances as
+create or replace view computed_latest_avg_one_sec_variances as
 with last_quotes as (
   select
     symbol,
@@ -44,6 +44,24 @@ group by
   symbol,
   ref_timestamp;
 
+create or replace view limited_one_sec_variance_running_averages as
+select
+  (array_agg(limited.avg_one_sec_variance order by limited.timestamp desc))[1] as latest,
+  avg(limited.avg_one_sec_variance) as running,
+  limited.symbol
+from (
+  select
+    avg_one_sec_variance,
+    symbol,
+    timestamp
+  from
+    avg_one_sec_variances
+  order by
+    timestamp desc
+  limit 500000) as limited
+group by
+  limited.symbol;
+
 create or replace function insert_latest_avg_one_sec_variances()
   returns setof avg_one_sec_variances
   as $$
@@ -52,25 +70,19 @@ declare
 begin
   for result in insert into avg_one_sec_variances(avg_one_sec_variance, symbol, timestamp)
   select
-    latest_avg_one_sec_variances.avg_one_sec_variance,
-    latest_avg_one_sec_variances.symbol,
-    latest_avg_one_sec_variances.timestamp
+    computed_latest_avg_one_sec_variances.avg_one_sec_variance,
+    computed_latest_avg_one_sec_variances.symbol,
+    computed_latest_avg_one_sec_variances.timestamp
   from
-    latest_avg_one_sec_variances
+    computed_latest_avg_one_sec_variances
     join (
       select
-        coalesce(computed_running_avgs.running_avg, fallback.avg_one_sec_variance) as running_avg,
+        coalesce(computed_running_avgs.running, fallback.avg_one_sec_variance) as running,
         coalesce(computed_running_avgs.symbol, fallback.symbol) as symbol
-      from (
-        select
-          avg(avg_one_sec_variance) as running_avg,
-          symbol
-        from
-          avg_one_sec_variances
-        group by
-          symbol) as computed_running_avgs
-      right join latest_avg_one_sec_variances as fallback on fallback.symbol = computed_running_avgs.symbol) as running_avgs on running_avgs.symbol = latest_avg_one_sec_variances.symbol
-      and (latest_avg_one_sec_variances.avg_one_sec_variance / running_avgs.running_avg) >= 0.35
+      from
+        limited_one_sec_variance_running_averages as computed_running_avgs
+        right join computed_latest_avg_one_sec_variances as fallback on fallback.symbol = computed_running_avgs.symbol) as running_avgs on running_avgs.symbol = computed_latest_avg_one_sec_variances.symbol
+      and (computed_latest_avg_one_sec_variances.avg_one_sec_variance / running_avgs.running) >= 0.35
     on conflict
       do nothing
     returning

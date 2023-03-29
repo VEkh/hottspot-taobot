@@ -26,6 +26,7 @@ private:
   using account_balance_t = Global::t::account_balance_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
+  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -33,8 +34,9 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Alpaca::t::performance_t;
-  using price_movement_average_t = Global::t::price_movement_average_t;
-  using price_movement_t = Global::t::price_movement_t;
+  using price_movement_average_t =
+      Global::t::price_movement_average_t;              // NOTE: Deprecated
+  using price_movement_t = Global::t::price_movement_t; // NOTE: Deprecated
   using quote_scoreboard_t = Alpaca::t::quote_scoreboard_t;
   using quote_t = Global::t::quote_t;
 
@@ -60,12 +62,13 @@ private:
   double quantity;
   int init_closed_positions_count = 0;
   exit_prices_t exit_prices;
+  one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  price_movement_t price_movement;
+  price_movement_t price_movement; // NOTE: Deprecated
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::time_t started_at = std::time(nullptr);
@@ -94,7 +97,7 @@ private:
   bool should_stop_profit();
   bool should_terminate();
   double account_profit_expanding_trailing_stop_ratio(const double);
-  double batch_volatility();
+  double batch_volatility(); // NOTE: Deprecated
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -103,7 +106,6 @@ private:
   double dynamic_one_sec_variance();
   double min_target_tick_movement();
   double open_position_profit(const order_t *);
-  double price_movement_ratio(const std::string symbol_);
   double profit_percentage(const order_t *);
   double target_account_profit();
   double target_position_profit();

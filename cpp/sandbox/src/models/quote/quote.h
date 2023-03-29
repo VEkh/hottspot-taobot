@@ -9,6 +9,7 @@
 namespace DB {
 class Quote {
 public:
+  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using quote_t = Global::t::quote_t;
 
   struct get_last_args_t {
@@ -19,6 +20,9 @@ public:
 
   Quote(){};
   Quote(Pg &c) : conn(c){};
+
+  one_sec_variance_avgs_t get_one_sec_variance_avgs(const std::string,
+                                                    const bool);
 
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(get_last_args_t);
@@ -32,7 +36,10 @@ private:
 
   Pg conn;
 
-  std::vector<quote_t> result_to_collection(const query_result_t &);
+  one_sec_variance_avgs_t
+  result_to_one_sec_variance_avgs(const query_result_t &);
+
+  std::vector<quote_t> result_to_quotes(const query_result_t &);
 };
 } // namespace DB
 

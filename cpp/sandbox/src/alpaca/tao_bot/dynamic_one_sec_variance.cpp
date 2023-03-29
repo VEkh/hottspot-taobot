@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_dynamic_one_sec_variance
 #define ALPACA__TAO_BOT_dynamic_one_sec_variance
 
+// NOTE: Deprecated
+
 #include "tao_bot.h" // Alpaca::TaoBot
 #include <algorithm> // std::max
 

@@ -4,7 +4,8 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 void Alpaca::TaoBot::read_price_movement() {
-  this->price_movement = this->quoter.read_price_movement(this->symbol);
+  this->one_sec_variance_avgs =
+      this->quoter.db_quote.get_one_sec_variance_avgs(this->symbol);
 }
 
 #endif

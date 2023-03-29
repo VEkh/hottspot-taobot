@@ -5,6 +5,7 @@
 #include "lib/pg/pg.cpp"          // Pg
 #include "models/quote/quote.cpp" // DB::Quote
 #include <libpq-fe.h>             // PGconn, PQescapeLiteral, PQfreemem
+#include <string.h>               // strlen
 
 int main(int argc, char *argv[]) {
   Pg pg;
@@ -12,15 +13,10 @@ int main(int argc, char *argv[]) {
 
   DB::Quote db_quote(pg);
 
-  db_quote.get_last({
-      .debug = true,
-      .limit = 3,
-      .symbol = "AMZN",
-  });
+  DB::Quote::one_sec_variance_avgs_t averages =
+      db_quote.get_one_sec_variance_avgs("AMZN");
 
-  db_quote.get("AMZN", 10);
-
-  db_quote.insert_latest_avg_one_sec_variances();
+  printf("latest: %.5f • running: %.5f\n", averages.latest, averages.running);
 
   pg.disconnect();
 }
