@@ -2,12 +2,14 @@
 #define ALPACA__TAO_BOT_write_account_performance
 
 #include "deps.cpp"                 // json, nlohmann
+#include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/io.cpp"         // ::utils::io
 #include "lib/utils/time.cpp"       // ::utils::time_
 #include "new_positions_opened.cpp" // new_positions_opened
 #include "runtime.cpp"              // runtime
 #include "tao_bot.h"                // Alpaca::TaoBot
 #include <ctime>                    // std::time
+#include <iostream>                 // std::cout, std::endl
 #include <stdexcept>                // std::invalid_argument
 #include <string>                   // std::string
 
@@ -35,6 +37,7 @@ void Alpaca::TaoBot::write_account_performance() {
        this->account_balance.session_original_balance},
   };
 
+  ::utils::io::touch(filepath.c_str(), "{}");
   std::ifstream file;
   json persisted_performances;
 
@@ -52,7 +55,17 @@ void Alpaca::TaoBot::write_account_performance() {
     ::utils::io::write_to_file(persisted_performances.dump(2),
                                filepath.c_str());
   } catch (nlohmann::detail::parse_error &) {
+    const std::string error_message = Formatted::error_message(
+        "[ALPACA__TAO_BOT_write_account_performance] Failed to write session "
+        "because of `nlohmann::detail::parse_error`");
+
+    std::cout << error_message << std::endl;
   } catch (std::invalid_argument &) {
+    const std::string error_message = Formatted::error_message(
+        "[ALPACA__TAO_BOT_write_account_performance] Failed to write session "
+        "because of `std::invalid_argument`");
+
+    std::cout << error_message << std::endl;
   }
 }
 
