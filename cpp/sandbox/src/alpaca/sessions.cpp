@@ -2,9 +2,9 @@
 #define ALPACA_SESSIONS
 
 #include "deps.cpp"              // json
-#include "lib/formatted.cpp"     // ::utils::io
+#include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/integer.cpp" // ::utils::integer_
-#include "lib/utils/io.cpp"      // Formatted
+#include "lib/utils/io.cpp"      // ::utils::io
 #include "lib/utils/time.cpp"    // ::utils::time_
 #include <ctime>                 // std::tm
 #include <fstream>               // std::ifstream
@@ -16,12 +16,14 @@
 
 namespace Alpaca {
 namespace Sessions {
-void log() {
+void log(const std::string api_key) {
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   const std::string filepath =
-      std::string(DATA_DIR) + "/alpaca/performance/account.json";
+      std::string(DATA_DIR) + "/alpaca/sessions/" + api_key + ".json";
+
+  ::utils::io::touch(filepath.c_str(), "{}");
 
   std::ifstream file;
   json sessions;

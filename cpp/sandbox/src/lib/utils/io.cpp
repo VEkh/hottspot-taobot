@@ -3,7 +3,9 @@
 
 #include "lib/formatted.cpp" // Formatted
 #include "string.cpp"        // ::utils::string
+#include <cstring>           // strcpy,strlen
 #include <fstream>           // std::ifstream, std::ios, std::ofstream
+#include <libgen.h>          // dirname
 #include <list>              // std::list
 #include <map>               // std::map
 #include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
@@ -133,10 +135,10 @@ std::string system_exec(const std::string &cmd) {
 }
 
 std::vector<std::string> tradeable_symbols(const std::string project) {
-  const std::string symbols_file_path =
+  const std::string symbols_filepath =
       std::string(APP_DIR) + "/bin/" + project + "/symbols";
 
-  std::ifstream file(symbols_file_path.c_str(), std::ios::in);
+  std::ifstream file(symbols_filepath.c_str(), std::ios::in);
   std::string line;
   std::vector<std::string> out;
 
@@ -147,10 +149,29 @@ std::vector<std::string> tradeable_symbols(const std::string project) {
   return out;
 }
 
-void write_to_file(std::string body, const char *file_path) {
-  std::ofstream output_file(file_path, std::ios::out | std::ios::trunc);
+void write_to_file(std::string body, const char *filepath) {
+  std::ofstream output_file(filepath, std::ios::out | std::ios::trunc);
   output_file << body;
   output_file.close();
+}
+
+void touch(const char *filepath, const std::string content = "") {
+  char filepath_copy[strlen(filepath)];
+  strcpy(filepath_copy, filepath);
+
+  std::ifstream file(filepath, std::ios::in);
+
+  if (file.good()) {
+    return;
+  }
+
+  char *directory = dirname((char *)filepath_copy);
+
+  const std::string mkdir_cmd =
+      std::string("mkdir -p ") + std::string(directory);
+
+  system_exec(mkdir_cmd.c_str());
+  write_to_file(content, filepath);
 }
 } // namespace io
 } // namespace utils

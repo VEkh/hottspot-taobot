@@ -9,7 +9,6 @@
 #include <iostream>            // std::cout, std::endl
 #include <list>                // std::list
 #include <map>                 // std::map
-#include <regex>               // std::regex
 #include <sstream>             // std::ostringstream
 #include <stdexcept>           // std::invalid_argument
 #include <stdio.h>             // printf
@@ -54,39 +53,36 @@ int main(int argc, char *argv[]) {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::string command = argv[1];
 
-  std::list<std::string> args =
-      ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
+  std::list<std::string> args = ::utils::io::extract_args(argc, argv);
   args.pop_front(); // Remove `tao_bot` arg
+
+  std::list<std::string> upcased_args =
+      ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
+  upcased_args.pop_front(); // Remove `tao_bot` arg
 
   std::map<std::string, std::string> flags =
       ::utils::io::extract_flags(argc, argv);
 
   if (command == "cancel_orders") {
-    Alpaca::Client api_client(flags);
-
-    if (argc < 3) {
+    if (args.empty()) {
       std::string message =
           Formatted::error_message("Please provide at least one order id.");
 
       throw std::invalid_argument(message);
     }
 
-    for (int i = 2; i < argc; i++) {
-      std::string arg = argv[i];
+    Alpaca::Client api_client(flags);
 
-      if (std::regex_search(arg, std::regex("^--.*"))) {
-        continue;
-      }
-
+    for (const std::string arg : args) {
       const std::string response = api_client.cancel_order(arg);
 
       std::cout << fmt.bold << fmt.yellow;
-      printf("Cancel Response: %s\n", response.c_str());
+      printf("Cancel Response: %s", response.c_str());
       std::cout << fmt.reset << std::endl;
 
       if (response.empty()) {
         std::cout << fmt.bold << fmt.green;
-        printf("👍🏾Successfully cancelled order: %s\n", arg.c_str());
+        printf("👍🏾Successfully cancelled order: %s", arg.c_str());
         std::cout << fmt.reset << std::endl;
       }
     }
@@ -111,12 +107,19 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "log_sessions") {
-    Alpaca::Sessions::log();
+    if (args.empty()) {
+      std::string message =
+          Formatted::error_message("Please provide an api key.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Alpaca::Sessions::log(args.front());
     exit(0);
   }
 
   if (command == "quotes_stream") {
-    if (args.empty()) {
+    if (upcased_args.empty()) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to stream.");
 
@@ -124,13 +127,13 @@ int main(int argc, char *argv[]) {
     }
 
     Alpaca::Quote streamer(flags);
-    streamer.stream(args);
+    streamer.stream(upcased_args);
 
     exit(0);
   }
 
   if (command == "quotes_watch") {
-    if (args.empty()) {
+    if (upcased_args.empty()) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to stream.");
 
@@ -141,7 +144,7 @@ int main(int argc, char *argv[]) {
     pg.connect();
 
     Alpaca::Quote watcher(pg, flags);
-    watcher.watch(args);
+    watcher.watch(upcased_args);
 
     exit(0);
   }
@@ -154,14 +157,14 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "tao_bot") {
-    if (args.empty()) {
+    if (upcased_args.empty()) {
       std::string message = Formatted::error_message(
           "Please provide at least one symbol to trade.");
 
       throw std::invalid_argument(message);
     }
 
-    Alpaca::TaoBot tao_bot(args.front(), flags);
+    Alpaca::TaoBot tao_bot(upcased_args.front(), flags);
     tao_bot.run();
 
     exit(0);
