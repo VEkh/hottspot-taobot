@@ -43,9 +43,9 @@ void log() {
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   json returns = load();
-  json hottspot_returns = returns["hottspot"];
-  json nasdaq_returns = returns["nasdaq"];
-  json sp500_returns = returns["sp500"];
+  json hottspot_returns = returns["HOTT"];
+  json nasdaq_returns = returns["NDX"];
+  json sp500_returns = returns["SPX"];
 
   bool is_loss_streak_broken = false;
   bool is_week_total_complete = false;
