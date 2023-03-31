@@ -7,6 +7,7 @@
 #include "lib/formatted.cpp"                    // Formatted
 #include "lib/pg/pg.cpp"                        // Pg
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "models/position/position.cpp"         // DB::Position
 #include "types.cpp"                            // Global::t
 #include <list>                                 // std::list
 #include <math.h>                               // INFINITY
@@ -58,6 +59,7 @@ private:
   Alpaca::Client api_client;
   Alpaca::Quote quoter;
   DB::AccountStat db_account_stat;
+  DB::Position db_position;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   account_snapshot_t account_snapshot;
@@ -160,6 +162,7 @@ private:
   void watch();
   void write_account_performance();
   void write_performance();
+  void write_position(const position_t &, const exit_prices_t &);
 };
 } // namespace Alpaca
 

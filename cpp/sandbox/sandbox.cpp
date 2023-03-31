@@ -2,24 +2,32 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/pg/pg.cpp"                        // Pg
-#include "lib/utils/time.cpp"                   // ::utils::time_
-#include "models/account_stat/account_stat.cpp" // DB::AccountStat
-#include <libpq-fe.h> // PGconn, PQescapeLiteral, PQfreemem
-#include <string.h>   // strlen
+#include "lib/pg/pg.cpp"                // Pg
+#include "models/position/position.cpp" // DB::Position
+#include <time.h>                       // time
 
 int main(int argc, char *argv[]) {
-  const double day_start = ::utils::time_::beginning_of_day_to_epoch();
-
+  const double now = time(nullptr);
   Pg pg;
   pg.connect();
 
-  DB::AccountStat db_account_stat(pg);
+  DB::Position db_position(pg);
 
-  db_account_stat.get_snapshot({
+  db_position.insert({
       .api_key_id = "PKB5FJN28HVP0TNZV00B",
-      .session_started_at = day_start,
-      .starting_from = day_start,
+      .close_order_execution_mid = 100.00,
+      .close_order_id = "abcdef123456",
+      .close_order_quantity = -10.00,
+      .closed_at = now,
+      .max_profit = 120.00,
+      .max_profit_at = now,
+      .open_order_execution_mid = 110.00,
+      .open_order_id = "abcdef123456",
+      .open_order_quantity = 10.00,
+      .opened_at = now,
+      .stop_loss = 90.00,
+      .stop_profit = 110.00,
+      .symbol = "TSLA",
       .debug = true,
   });
 

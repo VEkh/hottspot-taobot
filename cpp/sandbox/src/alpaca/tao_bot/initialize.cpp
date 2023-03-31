@@ -11,6 +11,7 @@
 #include "lib/utils/string.cpp"                 // ::utils::string
 #include "load_performance.cpp"                 // load_performance
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "models/position/position.cpp"         // DB::Position
 #include "tao_bot.h"                            // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"          // update_account_snapshot
 #include <iostream>                             // std::cout, std::endl
@@ -44,7 +45,8 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   this->pg = Pg(this->flags);
   this->pg.connect();
 
-  this->account_stat = DB::AccountStat(this->pg);
+  this->db_account_stat = DB::AccountStat(this->pg);
+  this->db_position = DB::Position(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
   this->symbol = ::utils::string::upcase(symbol_);
 

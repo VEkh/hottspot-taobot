@@ -11,6 +11,7 @@
 
 #include "build_performance.cpp" // build_performance
 #include "write_performance.cpp" // write_performance
+#include "write_position.cpp"    // write_position
 
 void Alpaca::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {
@@ -28,6 +29,8 @@ void Alpaca::TaoBot::reset_position() {
   };
 
   this->closed_positions.push_back(position);
+
+  write_position(position, this->exit_prices);
 
   this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();
