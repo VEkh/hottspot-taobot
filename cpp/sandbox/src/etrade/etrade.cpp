@@ -19,7 +19,7 @@ void print_usage() {
       {"fetch <URL>                  ", "Generic authorized request"},
       {"fetch_access_token           ",
        "Get authorization token (modes: --auto | --manual)"},
-      {"fetch_account_balance        ", "Get current account balance"},
+      {"fetch_account_snapshot        ", "Get current account balance"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"log_returns                  ", "Print cumulative return"},
       {"refresh_token                ", "Refresh authorization tokens"},
@@ -98,9 +98,9 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "fetch_account_balance") {
+  if (command == "fetch_account_snapshot") {
     ETrade::Client api_client;
-    std::cout << api_client.fetch_account_balance() << std::endl;
+    std::cout << api_client.fetch_account_snapshot() << std::endl;
 
     exit(0);
   }

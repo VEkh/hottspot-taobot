@@ -19,7 +19,7 @@ public:
   void run();
 
 private:
-  using account_balance_t = Global::t::account_balance_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
   using candlestick_t = Global::t::candlestick_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = ETrade::t::order_action_t;
@@ -47,7 +47,7 @@ private:
 
   ETrade::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  account_balance_t account_balance;
+  account_snapshot_t account_snapshot;
   bool is_long_position;
   char *symbol;
   double average_tick_price_delta = 0.00;
@@ -68,7 +68,7 @@ private:
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_balance_t fetch_account_balance();
+  account_snapshot_t fetch_account_balance();
 
   bool awaited_loss_leader();
   bool candlesticks_in_direction(const order_action_t, const int);
@@ -116,7 +116,7 @@ private:
   void fetch_quote();
   void initialize(char *, int, std::map<std::string, std::string> &);
   void load_performance();
-  void log_account_balance();
+  void log_account_snapshot();
   void log_average_tick_price_delta();
   void log_candlesticks();
   void log_performance();

@@ -8,7 +8,7 @@
 double Oanda::TaoBot::max_affordable_quantity() {
   const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
 
-  return this->account_balance.margin_buying_power / dollars_per_unit;
+  return this->account_snapshot.margin_buying_power / dollars_per_unit;
 }
 
 #endif

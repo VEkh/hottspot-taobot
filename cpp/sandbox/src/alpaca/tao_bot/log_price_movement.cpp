@@ -14,8 +14,7 @@ void Alpaca::TaoBot::log_price_movement() {
     return;
   }
 
-  const double latest_one_sec_variance_avg =
-      this->one_sec_variance_avgs.latest;
+  const double latest_one_sec_variance_avg = this->one_sec_variance_avgs.latest;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
@@ -30,7 +29,7 @@ void Alpaca::TaoBot::log_price_movement() {
     const double latest_to_running_percentage =
         100.0 * (latest_one_sec_variance_avg / running_one_sec_variance_avg);
 
-    printf("Latest: %.5f (%.3f%% Long-Term) %s\n", latest_one_sec_variance_avg,
+    printf("Latest:  %.5f (%.3f%% Long-Term) %s\n", latest_one_sec_variance_avg,
            latest_to_running_percentage,
            latest_to_running_percentage > 100 ? "🥵" : "🥶");
   }

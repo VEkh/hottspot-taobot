@@ -7,7 +7,7 @@
 
 double Oanda::TaoBot::base_quantity() {
   const double max_buying_potential =
-      this->account_balance.balance * this->account_balance.margin_multiplier;
+      this->account_snapshot.balance * this->account_snapshot.margin_multiplier;
 
   const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
 

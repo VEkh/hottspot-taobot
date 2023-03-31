@@ -6,63 +6,63 @@
 
 Alpaca::TaoBot::account_exit_prices_t
 Alpaca::TaoBot::build_account_exit_prices() {
-  const double current_balance = this->account_balance.balance;
-  const double session_max_profit = this->account_balance.session_max_balance -
-                                    this->account_balance.original_balance;
+  const double current_equity = this->account_snapshot.equity;
+  const double session_max_profit = this->account_snapshot.session_max_equity -
+                                    this->account_snapshot.original_equity;
 
-  const double overall_max_profit = this->account_balance.overall_max_balance -
-                                    this->account_balance.original_balance;
+  const double overall_max_profit =
+      this->account_snapshot.max_equity - this->account_snapshot.original_equity;
 
   const double session_original_profit =
-      this->account_balance.session_original_balance -
-      this->account_balance.original_balance;
+      this->account_snapshot.session_original_equity -
+      this->account_snapshot.original_equity;
 
   const double session_target_profit_cash =
-      (this->account_balance.original_balance *
+      (this->account_snapshot.original_equity *
        this->TARGET_ACCOUNT_PROFIT_RATIO) +
       session_original_profit;
 
   const double session_target_max_profit =
-      (this->account_balance.original_balance *
+      (this->account_snapshot.original_equity *
        (this->TARGET_ACCOUNT_PROFIT_RATIO +
         this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP)) +
       session_original_profit;
 
-  const double target_profit_cash = (this->account_balance.original_balance *
+  const double target_profit_cash = (this->account_snapshot.original_equity *
                                      this->TARGET_ACCOUNT_PROFIT_RATIO);
 
   const double target_max_profit =
-      (this->account_balance.original_balance *
+      (this->account_snapshot.original_equity *
        (this->TARGET_ACCOUNT_PROFIT_RATIO +
         this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP));
 
   const double current_profit =
-      current_balance - this->account_balance.original_balance;
+      current_equity - this->account_snapshot.original_equity;
 
   const double max_profit_ratio =
-      session_max_profit / this->account_balance.original_balance;
+      session_max_profit / this->account_snapshot.original_equity;
 
   const double overall_max_profit_ratio =
-      overall_max_profit / this->account_balance.original_balance;
+      overall_max_profit / this->account_snapshot.original_equity;
 
   const double session_stop_loss =
-      this->account_balance.session_original_balance +
-      (this->MAX_ACCOUNT_LOSS_RATIO * this->account_balance.original_balance);
+      this->account_snapshot.session_original_equity +
+      (this->MAX_ACCOUNT_LOSS_RATIO * this->account_snapshot.original_equity);
 
   const double trailing_stop_cash =
-      this->account_balance.original_balance *
+      this->account_snapshot.original_equity *
       account_profit_expanding_trailing_stop_ratio(
-          this->account_balance.overall_max_balance -
-          this->account_balance.original_balance);
+          this->account_snapshot.max_equity -
+          this->account_snapshot.original_equity);
 
   const double overall_stop_profit_loss =
       overall_max_profit - trailing_stop_cash;
 
   const double session_trailing_stop_cash =
-      this->account_balance.original_balance *
+      this->account_snapshot.original_equity *
       account_profit_expanding_trailing_stop_ratio(
-          this->account_balance.session_max_balance -
-          this->account_balance.session_original_balance);
+          this->account_snapshot.session_max_equity -
+          this->account_snapshot.session_original_equity);
 
   const double session_stop_profit_loss =
       session_max_profit - session_trailing_stop_cash;

@@ -1,17 +1,18 @@
 #ifndef ALPACA__TAO_BOT_H
 #define ALPACA__TAO_BOT_H
 
-#include "alpaca/client/client.cpp" // Alpaca::Client
-#include "alpaca/quote/quote.cpp"   // Alpaca::Quote
-#include "alpaca/types.cpp"         // Alpaca::t
-#include "lib/formatted.cpp"        // Formatted
-#include "lib/pg/pg.cpp"            // Pg
-#include "types.cpp"                // Global::t
-#include <ctime>                    // std::time_t
-#include <list>                     // std::list
-#include <math.h>                   // INFINITY
-#include <utility>                  // std::pair
-#include <vector>                   // std::vector
+#include "alpaca/client/client.cpp"             // Alpaca::Client
+#include "alpaca/quote/quote.cpp"               // Alpaca::Quote
+#include "alpaca/types.cpp"                     // Alpaca::t
+#include "lib/formatted.cpp"                    // Formatted
+#include "lib/pg/pg.cpp"                        // Pg
+#include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "types.cpp"                            // Global::t
+#include <list>                                 // std::list
+#include <math.h>                               // INFINITY
+#include <time.h>                               // time
+#include <utility>                              // std::pair
+#include <vector>                               // std::vector
 
 namespace Alpaca {
 class TaoBot {
@@ -23,7 +24,7 @@ public:
   void run();
 
 private:
-  using account_balance_t = Global::t::account_balance_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
@@ -56,10 +57,12 @@ private:
 
   Alpaca::Client api_client;
   Alpaca::Quote quoter;
-  Pg pg;
+  DB::AccountStat db_account_stat;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  account_balance_t account_balance;
+  Pg pg;
+  account_snapshot_t account_snapshot;
   double quantity;
+  double started_at = time(nullptr);
   int init_closed_positions_count = 0;
   exit_prices_t exit_prices;
   one_sec_variance_avgs_t one_sec_variance_avgs;
@@ -71,12 +74,12 @@ private:
   price_movement_t price_movement; // NOTE: Deprecated
   std::map<std::string, std::string> flags;
   std::string symbol;
-  std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_balance_t get_account_balance();
-  account_balance_t get_account_balance(const account_balance_t &);
+  account_snapshot_t get_account_balance(); // NOTE: Deprecated
+  account_snapshot_t
+  get_account_balance(const account_snapshot_t &); // NOTE: Deprecated
 
   account_exit_prices_t build_account_exit_prices();
 
@@ -115,7 +118,7 @@ private:
   int profit_duration(const double);
   int runtime();
   int tradeable_symbols_count();
-  json fetch_account_balance();
+  json fetch_account_balance(); // NOTE: Deprecated
   json fetch_order(const order_t *);
   json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
@@ -132,7 +135,7 @@ private:
   void fetch_and_persist_quote(const bool);
   void initialize(std::string, std::map<std::string, std::string> &);
   void load_performance();
-  void log_account_balance();
+  void log_account_snapshot();
   void log_end_of_trading_period();
   void log_performance();
   void log_position();
@@ -153,7 +156,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
-  void update_account_balance();
+  void update_account_snapshot();
   void watch();
   void write_account_performance();
   void write_performance();

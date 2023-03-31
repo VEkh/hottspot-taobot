@@ -22,19 +22,19 @@ void Alpaca::TaoBot::write_account_performance() {
                                this->api_client.config.api_key + ".json";
 
   json account_performance = {
-      {"current_balance", this->account_balance.balance},
-      {"max_balance", this->account_balance.session_max_balance},
+      {"current_balance", this->account_snapshot.equity},
+      {"max_balance", this->account_snapshot.session_max_equity},
       {"max_balance_timestamp",
-       this->account_balance.session_max_balance_timestamp},
-      {"min_balance", this->account_balance.min_balance},
-      {"min_balance_timestamp", this->account_balance.min_balance_timestamp},
-      {"original_balance", this->account_balance.original_balance},
-      {"overall_max_balance", this->account_balance.overall_max_balance},
+       this->account_snapshot.session_max_equity_timestamp},
+      {"min_balance", this->account_snapshot.min_equity},
+      {"min_balance_timestamp", this->account_snapshot.min_equity_timestamp},
+      {"original_balance", this->account_snapshot.original_equity},
+      {"overall_max_balance", this->account_snapshot.max_equity},
       {"overall_max_balance_timestamp",
-       this->account_balance.overall_max_balance_timestamp},
+       this->account_snapshot.max_equity_timestamp},
       {"runtime", runtime()},
       {"session_original_balance",
-       this->account_balance.session_original_balance},
+       this->account_snapshot.session_original_equity},
   };
 
   ::utils::io::touch(filepath.c_str(), "{}");

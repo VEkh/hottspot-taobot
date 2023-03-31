@@ -11,19 +11,19 @@ double Alpaca::TaoBot::target_account_profit() {
   const double one_hour_seconds = 60 * 60;
 
   const double session_max_profit_ratio =
-      (this->account_balance.session_max_balance /
-       this->account_balance.original_balance) -
+      (this->account_snapshot.session_max_equity /
+       this->account_snapshot.original_equity) -
       1;
 
   const double max_target =
       std::max(session_max_profit_ratio, min_target) + 0.03;
 
-  const double max_balance_duration =
+  const double max_equity_duration =
       (std::time(nullptr) -
-       this->account_balance.session_max_balance_timestamp) /
+       this->account_snapshot.session_max_equity_timestamp) /
       one_hour_seconds;
 
-  return ::utils::float_::sigmoid(max_target, min_target, max_balance_duration,
+  return ::utils::float_::sigmoid(max_target, min_target, max_equity_duration,
                                   -6.5, 0.25);
 }
 

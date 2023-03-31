@@ -1,5 +1,5 @@
-#ifndef ETRADE__CLIENT_fetch_account_balance
-#define ETRADE__CLIENT_fetch_account_balance
+#ifndef ETRADE__CLIENT_fetch_account_snapshot
+#define ETRADE__CLIENT_fetch_account_snapshot
 
 #include "client.h"                               // ETrade::Client, config
 #include "etrade/deps.cpp"                        // json
@@ -11,7 +11,7 @@
 #include <string> // std::string
 
 namespace ETrade {
-namespace fetch_account_balance {
+namespace fetch_account_snapshot {
 bool is_retriable_response(const CurlClient &curl_client) {
   const std::string response_body = curl_client.response.body;
 
@@ -20,7 +20,7 @@ bool is_retriable_response(const CurlClient &curl_client) {
   }
 
   json response = ::utils::json::parse_with_catch(
-      response_body, "ETRADE__FETCH_ACCOUNT_BALANCE_is_retriable_response");
+      response_body, "ETRADE__FETCH_ACCOUNT_SNAPSHOT_is_retriable_response");
 
   if (!response.contains("BalanceResponse")) {
     return true;
@@ -38,17 +38,17 @@ bool is_retriable_response(const CurlClient &curl_client) {
 
   return false;
 }
-} // namespace fetch_account_balance
+} // namespace fetch_account_snapshot
 } // namespace ETrade
 
-std::string ETrade::Client::fetch_account_balance() {
+std::string ETrade::Client::fetch_account_snapshot() {
   std::string request_url = config.base_url + "/v1/accounts/" +
                             config.account_id_key +
                             "/balance.json?instType=BROKERAGE&realTimeNAV=true";
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient { return fetch(request_url); },
-      ETrade::fetch_account_balance::is_retriable_response);
+      ETrade::fetch_account_snapshot::is_retriable_response);
 
   std::string response_body = curl_client.response.body;
 

@@ -40,28 +40,29 @@ void log() {
   for (json::iterator it = sessions.begin(); it != sessions.end(); it++) {
     json session = it.value();
 
-    const double current_balance = session["current_balance"];
-    const double max_balance = session["max_balance"];
-    const double min_balance = session["min_balance"];
-    const double original_balance = session["original_balance"];
-    const double overall_max_balance = session["overall_max_balance"];
-    const long int max_balance_timestamp = session["max_balance_timestamp"];
-    const long int min_balance_timestamp = session["min_balance_timestamp"];
-    const long int overall_max_balance_timestamp =
+    const double current_equity = session["current_balance"];
+    const double max_equity = session["overall_max_balance"];
+    const double min_equity = session["min_balance"];
+    const double original_equity = session["original_balance"];
+    const double session_max_equity = session["max_balance"];
+    const double max_equity_timestamp =
         session["overall_max_balance_timestamp"];
+    const double min_equity_timestamp = session["min_balance_timestamp"];
+    const double session_max_equity_timestamp =
+        session["max_balance_timestamp"];
 
-    const double current_profit = current_balance - original_balance;
+    const double current_profit = current_equity - original_equity;
     const double current_profit_percent =
-        100 * (current_balance - original_balance) / original_balance;
-    const double max_profit = max_balance - original_balance;
+        100 * (current_equity - original_equity) / original_equity;
+    const double max_profit = max_equity - original_equity;
     const double max_profit_percent =
-        100 * (max_balance - original_balance) / original_balance;
-    const double min_profit = min_balance - original_balance;
+        100 * (max_equity - original_equity) / original_equity;
+    const double min_profit = min_equity - original_equity;
     const double min_profit_percent =
-        100 * (min_balance - original_balance) / original_balance;
-    const double overall_max_profit = overall_max_balance - original_balance;
+        100 * (min_equity - original_equity) / original_equity;
+    const double overall_max_profit = max_equity - original_equity;
     const double overall_max_profit_percent =
-        100 * (overall_max_balance - original_balance) / original_balance;
+        100 * (max_equity - original_equity) / original_equity;
 
     Formatted::Stream profit_color = current_profit >= 0 ? fmt.green : fmt.red;
 
@@ -75,38 +76,38 @@ void log() {
     printf(" • Runtime: %s",
            ::utils::integer_::seconds_to_clock(runtime).c_str());
     std::cout << fmt.no_underline << profit_color << std::endl;
-    printf("Current Balance:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
-           current_balance, current_profit, current_profit_percent);
-    printf("Max Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           max_balance, max_profit, max_profit_percent,
-           ::utils::time_::date_string(max_balance_timestamp, "%H:%M %Z",
+    printf("Current Equity:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
+           current_equity, current_profit, current_profit_percent);
+    printf("Max Equity:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+           max_equity, max_profit, max_profit_percent,
+           ::utils::time_::date_string(max_equity_timestamp, "%H:%M %Z",
                                        "America/Chicago")
                .c_str());
-    printf("Overall Max Balance:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           overall_max_balance, overall_max_profit, overall_max_profit_percent,
-           ::utils::time_::date_string(overall_max_balance_timestamp,
-                                       "%H:%M %Z", "America/Chicago")
-               .c_str());
-    printf("Min Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           min_balance, min_profit, min_profit_percent,
-           ::utils::time_::date_string(min_balance_timestamp, "%H:%M %Z",
+    printf("Overall Max Equity:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+           max_equity, overall_max_profit, overall_max_profit_percent,
+           ::utils::time_::date_string(max_equity_timestamp, "%H:%M %Z",
                                        "America/Chicago")
                .c_str());
-    printf("Original Balance:         $%'.2f\n", original_balance);
+    printf("Min Equity:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+           min_equity, min_profit, min_profit_percent,
+           ::utils::time_::date_string(min_equity_timestamp, "%H:%M %Z",
+                                       "America/Chicago")
+               .c_str());
+    printf("Original Equity:         $%'.2f\n", original_equity);
 
     if (session.contains("session_original_balance")) {
-      const double session_original_balance =
+      const double session_original_equity =
           session["session_original_balance"];
 
-      const double session_original_balance_profit =
-          session_original_balance - original_balance;
+      const double session_original_equity_profit =
+          session_original_equity - original_equity;
 
-      const double session_original_balance_profit_percent =
-          (session_original_balance_profit / original_balance) * 100.0;
+      const double session_original_equity_profit_percent =
+          (session_original_equity_profit / original_equity) * 100.0;
 
-      printf("Session Original Balance: $%'.2f (%+'.2f) (%+'.2f%%)\n",
-             session_original_balance, session_original_balance_profit,
-             session_original_balance_profit_percent);
+      printf("Session Original Equity: $%'.2f (%+'.2f) (%+'.2f%%)\n",
+             session_original_equity, session_original_equity_profit,
+             session_original_equity_profit_percent);
     }
   }
 

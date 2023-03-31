@@ -10,7 +10,7 @@ double Oanda::TaoBot::account_profit_expanding_trailing_stop_ratio(
   const double max_trailing_stop = 0.01;
 
   const double session_max_profit_ratio =
-      max_profit / this->account_balance.original_balance;
+      max_profit / this->account_snapshot.original_equity;
 
   const double expanded_base_trailing_stop =
       std::max(base_trailing_stop,

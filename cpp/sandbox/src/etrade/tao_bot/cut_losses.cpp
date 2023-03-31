@@ -17,7 +17,7 @@
 
 void ETrade::TaoBot::cut_losses() {
   const double percent_loss = this->performance.current_loss_streak_balance /
-                              this->account_balance.balance;
+                              this->account_snapshot.balance;
 
   if (abs(percent_loss) < this->CUT_LOSS_RATIO) {
     return;

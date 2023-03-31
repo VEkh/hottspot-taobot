@@ -55,7 +55,7 @@ bool ETrade::TaoBot::awaited_loss_leader() {
 
   const bool is_sibling_open_ = is_sibling_open(sibling_performances);
 
-  this->account_balance = fetch_account_balance();
+  this->account_snapshot = fetch_account_balance();
 
   const bool are_funds_sufficient =
       compute_quantity() < max_affordable_quantity();

@@ -9,7 +9,7 @@
 #include "fetch_quote.cpp"                  // fetch_quote
 #include "is_market_open.cpp"               // is_market_open
 #include "lib/utils/time.cpp"               // utils::time_
-#include "log_account_balance.cpp"          // log_account_balance
+#include "log_account_snapshot.cpp"          // log_account_snapshot
 #include "log_average_tick_price_delta.cpp" // log_average_tick_price_delta
 #include "log_candlesticks.cpp"             // log_candlesticks
 #include "log_end_of_trading_period.cpp"    // log_end_of_trading_period
@@ -43,7 +43,7 @@ void ETrade::TaoBot::watch() {
       continue;
     }
 
-    log_account_balance();
+    log_account_snapshot();
     log_quote();
     log_candlesticks();
     set_and_log_buy_sell_ratios();

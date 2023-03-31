@@ -42,24 +42,24 @@ void log(const std::string api_key) {
   for (json::iterator it = sessions.begin(); it != sessions.end(); it++) {
     json session = it.value();
 
-    double current_balance;
-    double min_balance;
-    double original_balance;
-    double overall_max_balance;
-    double session_max_balance;
-    long int min_balance_timestamp;
-    long int overall_max_balance_timestamp;
-    long int session_max_balance_timestamp;
+    double current_equity;
+    double min_equity;
+    double original_equity;
+    double max_equity;
+    double session_max_equity;
+    double min_equity_timestamp;
+    double max_equity_timestamp;
+    double session_max_equity_timestamp;
 
     try {
-      current_balance = session["current_balance"];
-      min_balance = session["min_balance"];
-      min_balance_timestamp = session["min_balance_timestamp"];
-      original_balance = session["original_balance"];
-      overall_max_balance = session["overall_max_balance"];
-      overall_max_balance_timestamp = session["overall_max_balance_timestamp"];
-      session_max_balance = session["max_balance"];
-      session_max_balance_timestamp = session["max_balance_timestamp"];
+      current_equity = session["current_balance"];
+      min_equity = session["min_balance"];
+      min_equity_timestamp = session["min_balance_timestamp"];
+      original_equity = session["original_balance"];
+      max_equity = session["overall_max_balance"];
+      max_equity_timestamp = session["overall_max_balance_timestamp"];
+      session_max_equity = session["max_balance"];
+      session_max_equity_timestamp = session["max_balance_timestamp"];
     } catch (nlohmann::detail::type_error &) {
       std::cout << fmt.bold << fmt.red << std::endl;
       printf("😵 Corrupt value at: %s\n", it.key().c_str());
@@ -68,18 +68,18 @@ void log(const std::string api_key) {
       continue;
     }
 
-    const double current_profit = current_balance - original_balance;
+    const double current_profit = current_equity - original_equity;
     const double current_profit_percent =
-        100 * (current_balance - original_balance) / original_balance;
-    const double session_max_profit = session_max_balance - original_balance;
+        100 * (current_equity - original_equity) / original_equity;
+    const double session_max_profit = session_max_equity - original_equity;
     const double session_max_profit_percent =
-        100 * (session_max_balance - original_balance) / original_balance;
-    const double min_profit = min_balance - original_balance;
+        100 * (session_max_equity - original_equity) / original_equity;
+    const double min_profit = min_equity - original_equity;
     const double min_profit_percent =
-        100 * (min_balance - original_balance) / original_balance;
-    const double overall_max_profit = overall_max_balance - original_balance;
+        100 * (min_equity - original_equity) / original_equity;
+    const double overall_max_profit = max_equity - original_equity;
     const double overall_max_profit_percent =
-        100 * (overall_max_balance - original_balance) / original_balance;
+        100 * (max_equity - original_equity) / original_equity;
 
     Formatted::Stream profit_color = current_profit >= 0 ? fmt.green : fmt.red;
 
@@ -93,38 +93,38 @@ void log(const std::string api_key) {
     printf(" • Runtime: %s",
            ::utils::integer_::seconds_to_clock(runtime).c_str());
     std::cout << fmt.no_underline << profit_color << std::endl;
-    printf("Current Balance:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
-           current_balance, current_profit, current_profit_percent);
-    printf("Max Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           session_max_balance, session_max_profit, session_max_profit_percent,
-           ::utils::time_::date_string(session_max_balance_timestamp,
-                                       "%H:%M %Z", "America/Chicago")
-               .c_str());
-    printf("Overall Max Balance:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           overall_max_balance, overall_max_profit, overall_max_profit_percent,
-           ::utils::time_::date_string(overall_max_balance_timestamp,
-                                       "%H:%M %Z", "America/Chicago")
-               .c_str());
-    printf("Min Balance:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-           min_balance, min_profit, min_profit_percent,
-           ::utils::time_::date_string(min_balance_timestamp, "%H:%M %Z",
+    printf("Current Equity:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
+           current_equity, current_profit, current_profit_percent);
+    printf("Max Equity:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+           session_max_equity, session_max_profit, session_max_profit_percent,
+           ::utils::time_::date_string(session_max_equity_timestamp, "%H:%M %Z",
                                        "America/Chicago")
                .c_str());
-    printf("Original Balance:         $%'.2f\n", original_balance);
+    printf("Overall Max Equity:      $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+           max_equity, overall_max_profit, overall_max_profit_percent,
+           ::utils::time_::date_string(max_equity_timestamp, "%H:%M %Z",
+                                       "America/Chicago")
+               .c_str());
+    printf("Min Equity:              $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+           min_equity, min_profit, min_profit_percent,
+           ::utils::time_::date_string(min_equity_timestamp, "%H:%M %Z",
+                                       "America/Chicago")
+               .c_str());
+    printf("Original Equity:         $%'.2f\n", original_equity);
 
     if (session.contains("session_original_balance")) {
-      const double session_original_balance =
+      const double session_original_equity =
           session["session_original_balance"];
 
-      const double session_original_balance_profit =
-          session_original_balance - original_balance;
+      const double session_original_equity_profit =
+          session_original_equity - original_equity;
 
-      const double session_original_balance_profit_percent =
-          (session_original_balance_profit / original_balance) * 100.0;
+      const double session_original_equity_profit_percent =
+          (session_original_equity_profit / original_equity) * 100.0;
 
-      printf("Session Original Balance: $%'.2f (%+'.2f) (%+'.2f%%)\n",
-             session_original_balance, session_original_balance_profit,
-             session_original_balance_profit_percent);
+      printf("Session Original Equity: $%'.2f (%+'.2f) (%+'.2f%%)\n",
+             session_original_equity, session_original_equity_profit,
+             session_original_equity_profit_percent);
     }
   }
 

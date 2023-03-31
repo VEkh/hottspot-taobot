@@ -16,8 +16,8 @@
 #include <unistd.h>              // usleep
 
 void Oanda::Client::stream_account() {
-  double max_balance = 0.00;
-  double original_balance = 0.00;
+  double max_equity = 0.00;
+  double original_equity = 0.00;
   json instruments_json;
 
   try {
@@ -52,22 +52,22 @@ void Oanda::Client::stream_account() {
     }
 
     try {
-      const std::string balance_string = account_json["account"]["balance"];
+      const std::string equity_string = account_json["account"]["balance"];
       const std::string unrealized_pl_string =
           account_json["account"]["unrealizedPL"];
 
       const double unrealized_pl = std::stod(unrealized_pl_string);
-      const double balance = std::stod(balance_string) + unrealized_pl;
+      const double equity = std::stod(equity_string) + unrealized_pl;
 
-      max_balance = std::max(max_balance, balance);
+      max_equity = std::max(max_equity, equity);
 
-      if (!original_balance) {
-        original_balance = balance;
+      if (!original_equity) {
+        original_equity = equity;
       }
 
       account_json["marginRates"] = map_margin_rates(instruments_json);
-      account_json["maxBalance"] = max_balance;
-      account_json["originalBalance"] = original_balance;
+      account_json["maxBalance"] = max_equity;
+      account_json["originalBalance"] = original_equity;
       account_json["timestamp"] = (long int)std::time(nullptr);
 
       std::cout << fmt.bold << fmt.cyan << account_json.dump(2) << fmt.reset

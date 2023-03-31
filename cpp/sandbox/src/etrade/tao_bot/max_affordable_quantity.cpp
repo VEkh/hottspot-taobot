@@ -6,7 +6,7 @@
 #include <math.h>            // floor
 
 int ETrade::TaoBot::max_affordable_quantity() {
-  return floor(this->account_balance.margin_buying_power / current_price());
+  return floor(this->account_snapshot.margin_buying_power / current_price());
 }
 
 #endif

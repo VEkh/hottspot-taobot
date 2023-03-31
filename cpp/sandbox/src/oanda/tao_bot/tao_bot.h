@@ -19,7 +19,7 @@ public:
   void run();
 
 private:
-  using account_balance_t = Global::t::account_balance_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Oanda::t::order_action_t;
@@ -70,7 +70,7 @@ private:
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
-  account_balance_t account_balance;
+  account_snapshot_t account_snapshot;
   char *symbol;
   exit_prices_t exit_prices;
   int init_closed_positions_count = 0;
@@ -85,8 +85,8 @@ private:
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_balance_t get_account_balance();
-  account_balance_t get_account_balance(const account_balance_t &);
+  account_snapshot_t get_account_snapshot();
+  account_snapshot_t get_account_snapshot(const account_snapshot_t &);
   account_exit_prices_t build_account_exit_prices();
   bool has_super_profited();
   bool is_breaking_out();
@@ -123,7 +123,7 @@ private:
   int order_duration(const order_t *);
   int runtime();
   int tradeable_symbols_count();
-  json fetch_account_balance();
+  json fetch_account_snapshot();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   json read_streamed_account();
@@ -148,7 +148,7 @@ private:
   void load_performance();
   void load_price_movement();
   void load_quotes();
-  void log_account_balance();
+  void log_account_snapshot();
   void log_end_of_trading_period();
   void log_performance();
   void log_position();
@@ -170,7 +170,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *, order_t *);
-  void update_account_balance();
+  void update_account_snapshot();
   void watch();
   void write_account_performance();
   void write_performance();

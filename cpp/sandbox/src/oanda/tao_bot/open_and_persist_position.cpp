@@ -10,7 +10,7 @@
 #include "tao_bot.h"
 
 #include "compute_quantity.cpp"      // compute_quantity
-#include "get_account_balance.cpp"   // get_account_balance
+#include "get_account_snapshot.cpp"   // get_account_snapshot
 #include "is_next_position_long.cpp" // is_next_position_long
 #include "open_position.cpp"         // open_position
 #include "opposite_direction.cpp"    // opposite_direction
@@ -28,7 +28,7 @@ void Oanda::TaoBot::open_and_persist_position() {
   bool open_order_opened = false;
 
   while (!open_order_opened) {
-    this->account_balance = get_account_balance(this->account_balance);
+    this->account_snapshot = get_account_snapshot(this->account_snapshot);
 
     const int quantity = compute_quantity();
 

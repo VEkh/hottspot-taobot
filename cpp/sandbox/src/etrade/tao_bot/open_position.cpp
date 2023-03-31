@@ -24,7 +24,7 @@ void ETrade::TaoBot::open_position() {
     return;
   }
 
-  this->account_balance = fetch_account_balance();
+  this->account_snapshot = fetch_account_balance();
   const int quantity_ = compute_quantity();
 
   if (!quantity_) {

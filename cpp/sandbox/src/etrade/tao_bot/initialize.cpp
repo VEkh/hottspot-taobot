@@ -28,7 +28,7 @@ void ETrade::TaoBot::initialize(char *symbol_, int quantity_mulitiplier_,
   // Support comma separation in print output
   setlocale(LC_NUMERIC, "");
 
-  this->account_balance = fetch_account_balance();
+  this->account_snapshot = fetch_account_balance();
   this->symbol = symbol_;
   this->quantity_mulitiplier = quantity_mulitiplier_;
   this->quantity = quantity_mulitiplier_;

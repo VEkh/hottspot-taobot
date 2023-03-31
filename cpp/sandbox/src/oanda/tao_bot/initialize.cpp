@@ -3,7 +3,7 @@
 
 #include "build_performance.cpp"       // build_performance
 #include "fetch_and_persist_quote.cpp" // fetch_and_persist_quote
-#include "get_account_balance.cpp"     // get_account_balance
+#include "get_account_snapshot.cpp"     // get_account_snapshot
 #include "lib/formatted.cpp"           // Formatted::error_message
 #include "lib/utils/boolean.cpp"       // ::utils::boolean
 #include "load_performance.cpp"        // load_performance
@@ -40,7 +40,7 @@ void Oanda::TaoBot::initialize(char *symbol_,
   this->symbol = symbol_;
 
   this->api_client = Oanda::Client(this->flags);
-  this->account_balance = get_account_balance();
+  this->account_snapshot = get_account_snapshot();
 
   load_quotes();
   fetch_and_persist_quote();

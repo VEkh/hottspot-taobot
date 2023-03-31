@@ -147,6 +147,15 @@ std::tm parse_timestamp(std::string in, const char *format) {
   return datetime;
 }
 
+double beginning_of_day_to_epoch() {
+  const int now = time(nullptr);
+  std::string now_string = date_string(now, "%F", "America/Chicago");
+  tm date_start = parse_timestamp(now_string, "%Y-%m-%d");
+  const double day_start_epoch = mktime(&date_start);
+
+  return day_start_epoch;
+}
+
 double quote_timestamp_to_epoch_double(const char *timestamp) {
   std::tm parsed = parse_timestamp(timestamp, "%Y-%m-%dT%H:%M:%SZ");
   const int epoch = std::mktime(&parsed);

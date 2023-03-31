@@ -6,20 +6,21 @@
 
 namespace Global {
 namespace t {
-struct account_balance_t {
-  double balance = 0.0;
-  double margin_buying_power;
-  double margin_multiplier;
-  double min_balance = 0.00;
-  long int min_balance_timestamp = 0;
-  double original_balance = 0.00;
+struct account_snapshot_t {
+  double equity = 0.00;
+  double margin_buying_power = 0.00;
+  double margin_multiplier = 0.00;
+  double max_equity = 0.00;
+  double max_equity_timestamp = 0;
+  double min_equity = 0.00;
+  double min_equity_timestamp = 0;
+  double original_equity = 0.00;
   double original_margin_buying_power = 0.00;
-  double overall_max_balance = 0.00;
-  long int overall_max_balance_timestamp = 0;
-  double session_max_balance = 0.00;
-  long int session_max_balance_timestamp = 0;
-  double session_original_balance = 0.00;
-  long int timestamp = 0;
+  double session_max_equity = 0.00;
+  double session_max_equity_timestamp = 0;
+  double session_original_equity = 0.00;
+  double timestamp = 0;
+  std::string api_key_id = "";
 };
 
 enum order_win_result_t {

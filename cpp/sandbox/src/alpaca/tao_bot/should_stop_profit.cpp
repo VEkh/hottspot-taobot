@@ -17,7 +17,7 @@ bool Alpaca::TaoBot::should_stop_profit() {
       exit_prices_.current_profit <= exit_prices_.session_stop_profit_loss;
 
   const double current_profit_ratio =
-      exit_prices_.current_profit / this->account_balance.original_balance;
+      exit_prices_.current_profit / this->account_snapshot.original_equity;
 
   if (this->api_client.config.is_live &&
       exit_prices_.overall_max_profit >= exit_prices_.target_max_profit &&
