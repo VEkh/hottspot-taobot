@@ -15,5 +15,5 @@ if [[ $project = "bin" ]]; then
   exit 1;
 fi
 
-"$app_dir/bin/$project/stop" "$@"
-"$app_dir/bin/$project/start" "$@"
+"$app_dir/bin/$project/stop" "${@}"
+"$app_dir/bin/$project/start" "${@}"
