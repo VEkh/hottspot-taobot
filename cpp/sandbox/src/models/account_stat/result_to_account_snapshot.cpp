@@ -3,7 +3,7 @@
 
 #include "account_stat.h" // DB::AccountStat, account_snapshot_t, query_result_t
 #include "lib/utils/string.cpp" // ::utils::string
-#include <string>               // std::string
+#include <string>               // std::stod, std::string
 #include <vector>               // std::vector
 
 DB::AccountStat::account_snapshot_t

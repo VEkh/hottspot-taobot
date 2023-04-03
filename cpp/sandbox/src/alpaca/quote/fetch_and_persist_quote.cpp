@@ -11,7 +11,7 @@ void Alpaca::Quote::fetch_and_persist_quote(
     const std::string symbol, const bool skip_anomaly_check = false) {
   const quote_t new_quote = get_quote(symbol);
 
-  const double current_price_ = this->current_quote.price;
+  const double current_price_ = this->current_quotes[symbol].price;
 
   const double delta_ratio =
       (new_quote.price - current_price_) / current_price_;
@@ -28,8 +28,9 @@ void Alpaca::Quote::fetch_and_persist_quote(
 
   db_quote.upsert(new_quote);
 
-  this->previous_quote = !current_price_ ? new_quote : this->current_quote;
-  this->current_quote = new_quote;
+  this->previous_quotes[symbol] =
+      !current_price_ ? new_quote : this->current_quotes[symbol];
+  this->current_quotes[symbol] = new_quote;
 }
 
 #endif

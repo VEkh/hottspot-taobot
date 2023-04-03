@@ -1,17 +1,17 @@
 #ifndef ALPACA__QUOTE_get_quote
 #define ALPACA__QUOTE_get_quote
 
-#include "deps.cpp"                // json, nlohmann
-#include "fetch_quote.cpp"         // fetch_quote
-#include "lib/formatted.cpp"       // Formatted
-#include "quote.h"                 // Alpaca::Quote, quote_t
-#include "read_streamed_quote.cpp" // read_streamed_quote
-#include <iostream>                // std::cout, std::endl
-#include <string>                  // std::string
+#include "deps.cpp"               // json, nlohmann
+#include "fetch_quote.cpp"        // fetch_quote
+#include "get_streamed_quote.cpp" // get_streamed_quote
+#include "lib/formatted.cpp"      // Formatted
+#include "quote.h"                // Alpaca::Quote, quote_t
+#include <iostream>               // std::cout, std::endl
+#include <string>                 // std::string
 
 Alpaca::Quote::quote_t Alpaca::Quote::get_quote(const std::string symbol) {
   try {
-    return read_streamed_quote(symbol);
+    return get_streamed_quote(symbol);
   } catch (nlohmann::detail::parse_error &) {
     std::string error_message = Formatted::error_message(
         "[ALPACA__QUOTE_get_quote]: nlohmann::detail::parse_error "

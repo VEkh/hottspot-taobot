@@ -11,12 +11,11 @@ int main(int argc, char *argv[]) {
 
   DB::StreamedQuote db_streamed_quote(pg);
 
-  db_streamed_quote.upsert({
-      .ask = 195.0,
-      .bid = 194.0,
-      .symbol = "TSLA",
-      .debug = true,
-  });
+  DB::StreamedQuote::quote_t quote =
+      db_streamed_quote.get({.symbol = "TSLA", .debug = true});
+
+  printf("ask: %f • bid: %f • symbol: %s • timestamp: %f\n", quote.ask,
+         quote.bid, quote.symbol.c_str(), quote.timestamp);
 
   pg.disconnect();
 }

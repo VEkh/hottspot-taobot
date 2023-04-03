@@ -45,13 +45,14 @@ private:
   DB::StreamedQuote db_streamed_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
-  quote_t current_quote;
-  quote_t previous_quote;
+  std::map<std::string, quote_t> current_quotes;
+  std::map<std::string, quote_t> previous_quotes;
   std::map<std::string, std::string> flags;
 
   quote_t fetch_quote(const std::string);
   quote_t get_quote(const std::string);
-  quote_t read_streamed_quote(const std::string);
+  quote_t get_streamed_quote(const std::string);
+  quote_t read_streamed_quote(const std::string); // NOTE: Deprecated
 
   void fetch_and_persist_quote(const std::string, const bool);
   void read(const std::string);

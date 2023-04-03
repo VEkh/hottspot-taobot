@@ -1,6 +1,8 @@
 #ifndef ALPACA__QUOTE_read_streamed_quote
 #define ALPACA__QUOTE_read_streamed_quote
 
+// NOTE: Deprecated
+
 #include "deps.cpp"           // json, nlohmann
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/utils/time.cpp" // ::utils::time_

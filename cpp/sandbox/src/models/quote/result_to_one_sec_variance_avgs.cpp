@@ -3,7 +3,7 @@
 
 #include "lib/utils/string.cpp" // ::utils::string
 #include "quote.h" // DB::Quote, one_sec_variance_avgs_t, query_result_t
-#include <string>  // std::string
+#include <string>  // std::stod, std::string
 #include <vector>  // std::vector
 
 DB::Quote::one_sec_variance_avgs_t
