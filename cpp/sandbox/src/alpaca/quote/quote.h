@@ -1,20 +1,21 @@
 #ifndef ALPACA__QUOTE_H
 #define ALPACA__QUOTE_H
 
-#include "alpaca/client/client.cpp"         // Alpaca::Client
-#include "alpaca/types.cpp"                 // Alpaca::t
-#include "lib/formatted.cpp"                // Formatted
-#include "lib/pg/pg.cpp"                    // Pg
-#include "models/quote/quote.cpp"           // DB::Quote
-#include "types.cpp"                        // Global::t
-#include <boost/asio/connect.hpp>           // boost::asio
-#include <boost/beast/core/flat_buffer.hpp> // boost::beast::flat_buffer
-#include <boost/beast/http.hpp>             // boost::beast, boost::beast::http
-#include <boost/beast/ssl.hpp>              // boost::asio::ssl
-#include <boost/beast/websocket.hpp>        // boost::beast::websocket
-#include <list>                             // std::list
-#include <map>                              // std::map
-#include <string>                           // std::string
+#include "alpaca/client/client.cpp"                 // Alpaca::Client
+#include "alpaca/types.cpp"                         // Alpaca::t
+#include "lib/formatted.cpp"                        // Formatted
+#include "lib/pg/pg.cpp"                            // Pg
+#include "models/quote/quote.cpp"                   // DB::Quote
+#include "models/streamed_quote/streamed_quote.cpp" // DB::StreamedQuote
+#include "types.cpp"                                // Global::t
+#include <boost/asio/connect.hpp>                   // boost::asio
+#include <boost/beast/core/flat_buffer.hpp>         // boost::beast::flat_buffer
+#include <boost/beast/http.hpp>      // boost::beast, boost::beast::http
+#include <boost/beast/ssl.hpp>       // boost::asio::ssl
+#include <boost/beast/websocket.hpp> // boost::beast::websocket
+#include <list>                      // std::list
+#include <map>                       // std::map
+#include <string>                    // std::string
 
 namespace Alpaca {
 namespace beast = boost::beast;
@@ -41,6 +42,7 @@ private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
 
   Alpaca::Client api_client;
+  DB::StreamedQuote db_streamed_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   quote_t current_quote;

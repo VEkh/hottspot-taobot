@@ -126,8 +126,13 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    Alpaca::Quote streamer(flags);
+    Pg pg(flags);
+    pg.connect();
+
+    Alpaca::Quote streamer(pg, flags);
     streamer.stream(upcased_args);
+
+    pg.disconnect();
 
     exit(0);
   }
@@ -145,6 +150,8 @@ int main(int argc, char *argv[]) {
 
     Alpaca::Quote watcher(pg, flags);
     watcher.watch(upcased_args);
+
+    pg.disconnect();
 
     exit(0);
   }
