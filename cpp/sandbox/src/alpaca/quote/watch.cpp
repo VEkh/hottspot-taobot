@@ -1,21 +1,16 @@
 #ifndef ALPACA__QUOTE_watch
 #define ALPACA__QUOTE_watch
 
-#include "fetch_and_persist_quote.cpp"        // fetch_and_persist_quote
-#include "quote.h"                            // Alpaca::Quote
-#include "read_collection.cpp"                // read_collection
-#include "read_price_movement.cpp"            // read_price_movement
-#include "set_and_persist_price_movement.cpp" // set_and_persist_price_movement
-#include <iostream> // std::cout, std::endl, std::flush
-#include <list>     // std::list
-#include <stdio.h>  // printf, puts
-#include <string>   // std::string
-#include <unistd.h> // usleep
+#include "fetch_and_persist_quote.cpp" // fetch_and_persist_quote
+#include "quote.h"                     // Alpaca::Quote
+#include <iostream>                    // std::cout, std::endl, std::flush
+#include <list>                        // std::list
+#include <stdio.h>                     // printf, puts
+#include <string>                      // std::string
+#include <unistd.h>                    // usleep
 
 void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
   for (const std::string symbol : symbols) {
-    read_collection(symbol);
-    read_price_movement(symbol);
     fetch_and_persist_quote(symbol, true);
   }
 
@@ -30,17 +25,11 @@ void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
       std::cout << fmt.bold << fmt.yellow;
       puts("Fetched and Persisted Quote");
       std::cout << fmt.reset;
-
-      set_and_persist_price_movement(symbol);
-
-      std::cout << fmt.bold << fmt.yellow;
-      puts("Set and Persisted Price Movement");
-      std::cout << fmt.reset << std::endl;
     }
 
     this->db_quote.insert_latest_avg_one_sec_variances();
     std::cout << fmt.bold << fmt.yellow;
-    puts("Set and Persisted Price Movement (in DB)");
+    puts("Set and Persisted Price Movement");
     std::cout << fmt.reset << std::endl;
 
     std::cout << fmt.bold << fmt.magenta;

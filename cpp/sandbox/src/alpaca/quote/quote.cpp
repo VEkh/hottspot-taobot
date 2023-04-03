@@ -7,8 +7,6 @@
 #include <map>                      // std::map
 #include <string>                   // std::string
 
-#include "read_collection.cpp"
-#include "read_price_movement.cpp"
 #include "stream.cpp"
 #include "watch.cpp"
 

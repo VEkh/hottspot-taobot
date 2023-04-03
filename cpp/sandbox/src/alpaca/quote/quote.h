@@ -15,7 +15,6 @@
 #include <list>                             // std::list
 #include <map>                              // std::map
 #include <string>                           // std::string
-#include <vector>                           // std::vector
 
 namespace Alpaca {
 namespace beast = boost::beast;
@@ -26,8 +25,6 @@ namespace websocket = beast::websocket;
 
 class Quote {
 public:
-  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
-  using price_movement_t = Global::t::price_movement_t;
   using quote_t = Global::t::quote_t;
   using tcp = net::ip::tcp;
 
@@ -37,24 +34,18 @@ public:
 
   DB::Quote db_quote;
 
-  price_movement_t read_price_movement(const std::string);
-  std::vector<quote_t> read_collection(const std::string, const double);
   void stream(const std::list<std::string> &);
   void watch(const std::list<std::string> &);
 
 private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const static int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  const static int QUOTES_MAX_SIZE = 8e3;
 
   Alpaca::Client api_client;
-  Pg pg;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  Pg pg;
+  quote_t current_quote;
+  quote_t previous_quote;
   std::map<std::string, std::string> flags;
-  std::map<std::string, price_movement_t> price_movements;
-  std::map<std::string, std::vector<quote_t>> quotes;
-
-  double current_price(const std::string);
 
   quote_t fetch_quote(const std::string);
   quote_t get_quote(const std::string);
@@ -62,11 +53,7 @@ private:
 
   void fetch_and_persist_quote(const std::string, const bool);
   void read(const std::string);
-  void set_and_persist_price_movement(const std::string);
-  void set_price_movement(const std::string);
   void write();
-  void write_collection(const std::string);
-  void write_price_movement(const std::string);
   void write_streamed(const beast::flat_buffer &);
 };
 } // namespace Alpaca
