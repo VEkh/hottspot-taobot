@@ -5,9 +5,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot, account_exit_prices_t
 
 bool Alpaca::TaoBot::should_stop_profit() {
-  if (!this->api_client.config.is_live) {
-    return false;
-  }
+  return false;
 
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 

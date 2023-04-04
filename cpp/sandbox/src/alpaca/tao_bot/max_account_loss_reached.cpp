@@ -5,9 +5,7 @@
 #include "tao_bot.h"                     // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::max_account_loss_reached() {
-  if (!this->api_client.config.is_live) {
-    return false;
-  }
+  return false;
 
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
