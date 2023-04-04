@@ -18,8 +18,12 @@ public:
     std::string symbol;
   };
 
+  struct get_stop_profit_args_t {};
+
   Quote(){};
   Quote(Pg &c) : conn(c){};
+
+  double get_stop_profit(const std::string symbol, const bool debug);
 
   one_sec_variance_avgs_t get_one_sec_variance_avgs(const std::string,
                                                     const bool);
@@ -35,6 +39,8 @@ private:
   using query_result_t = Pg::query_result_t;
 
   Pg conn;
+
+  double result_to_stop_profit(const query_result_t &);
 
   one_sec_variance_avgs_t
   result_to_one_sec_variance_avgs(const query_result_t &);

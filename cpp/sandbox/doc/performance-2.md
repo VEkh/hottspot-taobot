@@ -1,4 +1,4 @@
-### 2023-03-28:
+### 2023-04-05:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -11,9 +11,232 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 9W (47.37%) 10L (Total 19)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-04-04:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tue, Apr 04, 2023 12:41:17 CDT • Runtime: 04:37:14
+Current Equity:                   $26029.09 (-339.59) (-1.29%)
+Max Equity:                       $27080.25 (+711.57) (+2.70%) @ 08:59 CDT
+Overall Max Equity:               $27080.25 (+711.57) (+2.70%) @ 08:59 CDT
+Min Equity:                       $25031.58 (-1337.10) (-5.07%) @ 10:05 CDT
+Original Equity:                  $26368.68
+Session Original Equity:          $26368.68 (+0.00) (+0.00%)
+
+**Change to reading `stop_profit` from DB
+Tue Apr  4 14:59:00 2023 • Runtime: 02:17:44
+Current Equity:          $26,294.65 (-74.03) (-0.28%)
+Max Equity:              $26,505.25 (+136.57) (+0.52%) @ 13:51 CDT
+Overall Max Equity:      $27,080.25 (+711.57) (+2.70%) @ 08:59 CDT
+Min Equity:              $25,031.58 (-1,337.10) (-5.07%) @ 10:05 CDT
+Original Equity:         $26,368.68
+Session Original Equity: $26,029.09 (-339.59) (-1.29%)
+```
+
+**Alpha (STAGING)**
+```
+Tue Apr  4 14:59:00 2023 • Runtime: 06:54:59
+Current Equity:          $31,405.08 (+272.08) (+0.87%)
+Max Equity:              $32,034.66 (+901.66) (+2.90%) @ 13:32 CDT
+Overall Max Equity:      $32,034.66 (+901.66) (+2.90%) @ 13:32 CDT
+Min Equity:              $30,022.11 (-1,110.89) (-3.57%) @ 09:00 CDT
+Original Equity:         $31,133.00
+Session Original Equity: $31,133.00 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 9W (47.37%) 10L (Total 19)
+
+###### Notes
+* Morning started with bad consolidation from AMZN.
+* However it kept reaching the historical average max profit before losing.
+* I then changed the stop profit thresholds for production to use this
+  historical average and performance improved.
+* I'm using the historical average from staging and will leave its stop profit
+  as a 2.5:1 ratio to its stop loss so that it can continue producing a
+  reliable average for production.
+* Eventually I'll want to use backtesting to generate this average.
+* This is yet another day on which it would have been a bad idea to terminate a
+  the morning's -3% loss.
+
+###### Next Thing(s) to Try
+
+### 2023-04-03:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Mon Apr  3 14:59:00 2023 • Runtime: 06:59:00
+Current Equity:          $26,379.75 (-1,601.79) (-5.72%)
+Max Equity:              $28,089.55 (+108.01) (+0.39%) @ 08:30 CDT
+Overall Max Equity:      $28,089.55 (+108.01) (+0.39%) @ 08:30 CDT
+Min Equity:              $26,041.24 (-1,940.30) (-6.93%) @ 14:31 CDT
+Original Equity:         $27,981.54
+Session Original Equity: $27,981.54 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Mon Apr  3 14:59:00 2023 • Runtime: 06:59:02
+Current Equity:          $31,170.83 (-1,966.52) (-5.93%)
+Max Equity:              $33,274.20 (+136.85) (+0.41%) @ 08:34 CDT
+Overall Max Equity:      $33,274.20 (+136.85) (+0.41%) @ 08:34 CDT
+Min Equity:              $30,587.29 (-2,550.06) (-7.70%) @ 14:07 CDT
+Original Equity:         $33,137.35
+Session Original Equity: $33,137.35 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 9W (50.00%) 9L (Total 18)
+
+###### Notes
+* Production is slowly heading toward crashing out 😞
+* We'll see if it does.
+
+###### Next Thing(s) to Try
+
+### 2023-03-31:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Fri Mar 31 14:59:00 2023 • Runtime: 05:55:59
+Current Equity:          $27,989.44 (+969.08) (+3.59%)
+Max Equity:              $28,261.44 (+1,241.08) (+4.59%) @ 11:04 CDT
+Overall Max Equity:      $28,261.44 (+1,241.08) (+4.59%) @ 11:04 CDT
+Min Equity:              $26,733.47 (-286.89) (-1.06%) @ 08:32 CDT
+Original Equity:         $27,020.36
+Session Original Equity: $27,244.06 (+223.70) (+0.83%)
+```
+
+**Alpha (STAGING)**
+```
+Fri Mar 31 14:59:00 2023 • Runtime: 05:56:01
+Current Equity:          $33,154.93 (+789.16) (+2.44%)
+Max Equity:              $33,420.00 (+1,054.23) (+3.26%) @ 11:22 CDT
+Overall Max Equity:      $33,420.00 (+1,054.23) (+3.26%) @ 11:22 CDT
+Min Equity:              $32,229.28 (-136.49) (-0.42%) @ 09:27 CDT
+Original Equity:         $32,365.77
+Session Original Equity: $32,275.34 (-90.43) (-0.28%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 9W (52.94%) 8L (Total 16)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 42W (52.50%) (Consecutive: 1) 38L (Consecutive: 0)
+* Latest Return: +$961.18 (+3.56%) (+166.61% 9-5 Salary) (vs. NASDAQ: +1.67%) (vs. S&P 500: +1.44%)
+* Week's Return: -$57.11 • Total Return: -$8,661.37
+* Average Return: -0.37% • Average NASDAQ Return: +0.06% • Average S&P 500 Return: +0.05%
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-03-30:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thu Mar 30 14:59:00 2023 • Runtime: 06:58:59
+Current Equity:          $27,026.26 (-1,177.70) (-4.18%)
+Max Equity:              $28,592.09 (+388.13) (+1.38%) @ 08:31 CDT
+Overall Max Equity:      $28,592.09 (+388.13) (+1.38%) @ 08:31 CDT
+Min Equity:              $26,522.05 (-1,681.91) (-5.96%) @ 09:20 CDT
+Original Equity:         $28,203.96
+Session Original Equity: $28,203.96 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Thu Mar 30 14:59:00 2023 • Runtime: 06:59:01
+Current Equity:          $31,946.87 (-2,150.88) (-6.31%)
+Max Equity:              $34,627.93 (+530.18) (+1.55%) @ 08:31 CDT
+Overall Max Equity:      $34,627.93 (+530.18) (+1.55%) @ 08:31 CDT
+Min Equity:              $31,800.22 (-2,297.53) (-6.74%) @ 09:20 CDT
+Original Equity:         $34,097.75
+Session Original Equity: $34,097.75 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 8W (50.00%) 8L (Total 16)
+
+###### Notes
+* Bummer that it closed down, but still avoided a catastrophic loss.
+* This current 2.5:1 ratio will either be profitable or crash out.
+* If it crashes out, hold until you can finally back test.
+
+###### Next Thing(s) to Try
+
+### 2023-03-29:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wed, Mar 29, 2023 14:59:00 CDT • Runtime: 06:58:58
+Current Balance:                  $28201.42 (+1008.27) (+3.71%)
+Max Balance:                      $29474.69 (+2281.54) (+8.39%) @ 13:02 CDT
+Overall Max Balance:              $29474.69 (+2281.54) (+8.39%) @ 13:02 CDT
+Min Balance:                      $27090.31 (-102.84) (-0.38%) @ 08:30 CDT
+Original Balance:                 $27193.15
+Session Original Balance:         $27193.15 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Wed, Mar 29, 2023 14:59:01 CDT • Runtime: 06:58:59
+Current Balance:                  $34124.98 (-755.34) (-2.17%)
+Max Balance:                      $35500.51 (+620.19) (+1.78%) @ 08:39 CDT
+Overall Max Balance:              $35500.51 (+620.19) (+1.78%) @ 08:39 CDT
+Min Balance:                      $33205.91 (-1674.41) (-4.80%) @ 09:08 CDT
+Original Balance:                 $34880.32
+Session Original Balance:         $34880.32 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 8W (53.33%) 7L (Total 15)
+
+###### Notes
+* Today was the first day of successfully running staging and production
+  simultaneously.
+* Almost had a mega win in production, but closed with solid return nonethless.
+* Staging is still avoiding a catastrophic loss since this 2.5:1
+  take-profit-to-stop-loss ratio.
+
+###### Next Thing(s) to Try
+
+### 2023-03-28:
+#### Performance
+##### Equities
+**Alpha (STAGING)**
+```
+Tue Mar 28 14:59:00 2023 • Runtime: 06:59:00
+Current Balance:          $34,893.92 (+1,196.29) (+3.55%)
+Max Balance:              $35,111.34 (+1,413.71) (+4.20%) @ 14:52 CDT
+Overall Max Balance:      $35,111.34 (+1,413.71) (+4.20%) @ 14:52 CDT
+Min Balance:              $33,148.97 (-548.66) (-1.63%) @ 08:31 CDT
+Original Balance:         $33,697.63
+Session Original Balance: $33,697.63 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
 * Win Record: 7W (50.00%) 7L (Total 14)
 
 ###### Notes
+* Okay here's an important conclusion: You can't close because of morning loss.
+* Many mornings will start with consolidation, so you can't count on a lucky
+  streak of trend mornings to generate overall profit.
+* You have to compute the right take-profit-to-stop-loss ratio that will
+  consistently yield profitable returns or otherwise non-catastrophic losses.
+* The 2.5:1 ratio has done a good job of avoiding such losses and has in fact
+  led to some major returns.
+* I'll restart production tomorrow and run it side by side with staging.
+
 ###### Next Thing(s) to Try
 
 ### 2023-03-27:

@@ -2,20 +2,20 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/pg/pg.cpp"                            // Pg
-#include "models/streamed_quote/streamed_quote.cpp" // DB::StreamedQuote
+#include "lib/pg/pg.cpp"          // Pg
+#include "models/quote/quote.cpp" // DB::Quote
+#include <map>                    // std::map
+#include <string>                 // std::string
 
 int main(int argc, char *argv[]) {
-  Pg pg;
+  Pg pg((std::map<std::string, std::string>){{"env", "production"}});
   pg.connect();
 
-  DB::StreamedQuote db_streamed_quote(pg);
+  DB::Quote db_quote(pg);
 
-  DB::StreamedQuote::quote_t quote =
-      db_streamed_quote.get({.symbol = "TSLA", .debug = true});
+  const double stop_profit = db_quote.get_stop_profit("TSLA", true);
 
-  printf("ask: %f • bid: %f • symbol: %s • timestamp: %f\n", quote.ask,
-         quote.bid, quote.symbol.c_str(), quote.timestamp);
+  printf("stop_profit: %f\n", stop_profit);
 
   pg.disconnect();
 }

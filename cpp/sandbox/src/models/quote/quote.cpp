@@ -5,6 +5,7 @@
 #include "get.cpp"
 #include "get_last.cpp"
 #include "get_one_sec_variance_avgs.cpp"
+#include "get_stop_profit.cpp"
 #include "insert_latest_avg_one_sec_variances.cpp"
 #include "upsert.cpp"
 
