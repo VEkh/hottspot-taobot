@@ -10,7 +10,6 @@
 
 #include "build_performance.cpp" // build_performance
 #include "reset_orders.cpp"      // reset_orders
-#include "write_performance.cpp" // write_performance
 
 void Oanda::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {
@@ -33,7 +32,6 @@ void Oanda::TaoBot::reset_position() {
 
   this->exit_prices = exit_prices_t();
   this->performance = build_performance();
-  write_performance();
 }
 
 #endif

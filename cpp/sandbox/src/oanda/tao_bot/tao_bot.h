@@ -145,7 +145,6 @@ private:
   void fetch_quote();
   void handle_partially_filled_close_order(const order_t *);
   void initialize(char *, std::map<std::string, std::string> &);
-  void load_performance();
   void load_price_movement();
   void load_quotes();
   void log_account_snapshot();
@@ -173,7 +172,6 @@ private:
   void update_account_snapshot();
   void watch();
   void write_account_performance();
-  void write_performance();
   void write_price_movement();
   void write_quotes();
 };

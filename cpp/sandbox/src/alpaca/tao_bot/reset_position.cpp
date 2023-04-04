@@ -10,7 +10,6 @@
 #include "tao_bot.h"
 
 #include "build_performance.cpp" // build_performance
-#include "write_performance.cpp" // write_performance
 #include "write_position.cpp"    // write_position
 
 void Alpaca::TaoBot::reset_position() {
@@ -37,7 +36,6 @@ void Alpaca::TaoBot::reset_position() {
   this->open_order_ptr = nullptr;
 
   this->performance = build_performance();
-  write_performance();
 }
 
 #endif

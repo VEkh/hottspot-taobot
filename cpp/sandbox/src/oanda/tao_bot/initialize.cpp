@@ -3,10 +3,9 @@
 
 #include "build_performance.cpp"       // build_performance
 #include "fetch_and_persist_quote.cpp" // fetch_and_persist_quote
-#include "get_account_snapshot.cpp"     // get_account_snapshot
+#include "get_account_snapshot.cpp"    // get_account_snapshot
 #include "lib/formatted.cpp"           // Formatted::error_message
 #include "lib/utils/boolean.cpp"       // ::utils::boolean
-#include "load_performance.cpp"        // load_performance
 #include "load_price_movement.cpp"     // load_rice_movement
 #include "load_quotes.cpp"             // load_quotes
 #include "spread_limit.cpp"            // spread_limit
@@ -44,7 +43,6 @@ void Oanda::TaoBot::initialize(char *symbol_,
 
   load_quotes();
   fetch_and_persist_quote();
-  load_performance();
   load_price_movement();
 
   this->init_closed_positions_count = this->closed_positions.size();

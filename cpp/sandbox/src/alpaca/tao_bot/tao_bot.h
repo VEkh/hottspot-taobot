@@ -136,7 +136,6 @@ private:
   void close_position();
   void fetch_and_persist_quote(const bool);
   void initialize(std::string, std::map<std::string, std::string> &);
-  void load_performance();
   void log_account_snapshot();
   void log_end_of_trading_period();
   void log_performance();
@@ -161,7 +160,6 @@ private:
   void update_account_snapshot();
   void watch();
   void write_account_performance();
-  void write_performance();
   void write_position(const position_t &, const exit_prices_t &);
 };
 } // namespace Alpaca

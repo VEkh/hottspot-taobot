@@ -9,7 +9,6 @@
 #include "lib/pg/pg.cpp"                        // Pg
 #include "lib/utils/boolean.cpp"                // ::utils::boolean
 #include "lib/utils/string.cpp"                 // ::utils::string
-#include "load_performance.cpp"                 // load_performance
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
 #include "models/position/position.cpp"         // DB::Position
 #include "tao_bot.h"                            // Alpaca::TaoBot
@@ -54,7 +53,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->api_client = Alpaca::Client(this->flags);
 
     update_account_snapshot();
-    load_performance();
 
     this->init_closed_positions_count = this->closed_positions.size();
     this->performance = build_performance();

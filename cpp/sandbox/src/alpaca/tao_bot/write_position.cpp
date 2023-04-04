@@ -9,10 +9,6 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp" // build_performance
-#include "write_performance.cpp" // write_performance
-#include "write_position.cpp"    // write_position
-
 void Alpaca::TaoBot::write_position(const position_t &position,
                                     const exit_prices_t &exit_prices_) {
   const int close_quantity_multiplier =

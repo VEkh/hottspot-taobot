@@ -44,11 +44,6 @@ function symbol_start() {
   "${app_dir}/build/${project}" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
 }
 
-if [[ "${flag_map["clear-performance"]}" = "1" ]]; then
-  symbol="$(to_upper "$1")"
-  "${app_dir}/bin/${project}/clear_performance" "${symbol}" "${flags[@]}"
-fi
-
 case $1 in
   +([[:alpha:]]))
     symbol_start "${1}"
