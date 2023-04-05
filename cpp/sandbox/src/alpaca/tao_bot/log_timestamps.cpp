@@ -5,19 +5,16 @@
 #include "lib/utils/time.cpp"    // ::utils::time_
 #include "runtime.cpp"           // runtime
 #include "tao_bot.h"             // Alpaca::TaoBot, fmt
-#include <ctime>                 // std::time, std::time_t
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
 void Alpaca::TaoBot::log_timestamps() {
-  std::time_t now = std::time(nullptr);
-
   std::cout << fmt.bold << fmt.cyan;
-  printf(
-      "⌚ Current Time: %s • Runtime: %s\n",
-      ::utils::time_::date_string(now, "%a, %b %d, %Y %X %Z", "America/Chicago")
-          .c_str(),
-      ::utils::integer_::seconds_to_clock(runtime()).c_str());
+  printf("⌚ Current Time: %s • Runtime: %s\n",
+         ::utils::time_::date_string(this->api_client.config.current_time,
+                                     "%a, %b %d, %Y %X %Z", "America/Chicago")
+             .c_str(),
+         ::utils::integer_::seconds_to_clock(runtime()).c_str());
   std::cout << fmt.reset << std::endl;
 }
 

@@ -13,23 +13,28 @@ public:
   using quote_t = Global::t::quote_t;
 
   struct get_last_args_t {
-    bool debug = false;
     int limit = 1;
     std::string symbol;
+    double timestamp_upper_bound;
+    bool debug = false;
   };
 
-  struct get_stop_profit_args_t {};
+  struct get_one_sec_variance_avgs_args_t {
+    std::string symbol;
+    double timestamp_upper_bound;
+    bool debug = false;
+  };
 
   Quote(){};
   Quote(Pg &c) : conn(c){};
 
   double get_stop_profit(const std::string symbol, const bool debug);
 
-  one_sec_variance_avgs_t get_one_sec_variance_avgs(const std::string,
-                                                    const bool);
+  one_sec_variance_avgs_t
+  get_one_sec_variance_avgs(const get_one_sec_variance_avgs_args_t);
 
   std::vector<quote_t> get(const std::string, const double);
-  std::vector<quote_t> get_last(get_last_args_t);
+  std::vector<quote_t> get_last(const get_last_args_t);
 
   void insert_latest_avg_one_sec_variances();
   void upsert(const quote_t);

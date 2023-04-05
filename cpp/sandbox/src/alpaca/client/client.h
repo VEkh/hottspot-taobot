@@ -23,7 +23,9 @@ public:
     std::string api_key_id;
     std::string api_secret_key;
     std::string base_url;
+    double current_time;
     std::string data_base_url;
+    bool is_backtest;
     bool is_live;
   } config;
 

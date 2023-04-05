@@ -5,7 +5,10 @@
 
 void Alpaca::TaoBot::read_price_movement() {
   this->one_sec_variance_avgs =
-      this->quoter.db_quote.get_one_sec_variance_avgs(this->symbol);
+      this->quoter.db_quote.get_one_sec_variance_avgs({
+          .symbol = this->symbol,
+          .timestamp_upper_bound = this->api_client.config.current_time,
+      });
 }
 
 #endif

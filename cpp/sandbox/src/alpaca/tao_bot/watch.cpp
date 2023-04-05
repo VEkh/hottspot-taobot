@@ -1,9 +1,10 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
+#include "advance_current_time.cpp"      // advance_current_time
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
-#include "log_account_snapshot.cpp"       // log_account_snapshot
+#include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
@@ -20,10 +21,9 @@
 #include "set_position_status.cpp"       // set_order_statuses
 #include "should_terminate.cpp"          // should_terminate
 #include "tao_bot.h"                     // Alpaca::TaoBot
-#include "update_account_snapshot.cpp"    // update_account_snapshot
+#include "update_account_snapshot.cpp"   // update_account_snapshot
 #include "write_account_performance.cpp" // write_account_performance
 #include <iostream>                      // std::cout, std::flush
-#include <unistd.h>                      // usleep
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
@@ -51,7 +51,7 @@ void Alpaca::TaoBot::watch() {
 
     std::cout << "\n\n\n\n\n\n\n\n\n\n" << std::flush;
 
-    usleep(5e5);
+    advance_current_time();
   }
 
   log_end_of_trading_period();

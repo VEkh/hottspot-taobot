@@ -131,6 +131,7 @@ private:
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
+  void advance_current_time();
   void await_market_open();
   void cancel_stale_open_order();
   void close_position();

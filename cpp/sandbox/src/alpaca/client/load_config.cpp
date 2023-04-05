@@ -1,12 +1,14 @@
 #ifndef ALPACA__CLIENT_load_config
 #define ALPACA__CLIENT_load_config
 
-#include "client.h"          // Alpaca::Client, config
-#include "deps.cpp"          // json
-#include "lib/formatted.cpp" // Formatted::error_message
-#include <fstream>           // std::ifstream, std::ios
-#include <stdexcept>         // std::invalid_argument
-#include <string>            // std::string
+#include "client.h"           // Alpaca::Client, config
+#include "deps.cpp"           // json
+#include "lib/formatted.cpp"  // Formatted::error_message
+#include "lib/utils/time.cpp" // ::utils::time_
+#include <fstream>            // std::ifstream, std::ios
+#include <stdexcept>          // std::invalid_argument
+#include <string>             // std::string
+#include <time.h>             // mktime, time, tm
 
 void Alpaca::Client::load_config() {
   std::string config_path =
@@ -59,13 +61,18 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  const char *nested_required_keys[] = {
+  std::vector<std::string> nested_required_keys = {
       "base_url",
+      "is_backtest",
       "is_live",
       "secret_key",
   };
 
-  for (const char *key : nested_required_keys) {
+  if (config_json[api_key]["is_backtest"]) {
+    nested_required_keys.push_back("backtest_start_at");
+  }
+
+  for (std::string key : nested_required_keys) {
     if (config_json[api_key].contains(key)) {
       continue;
     }
@@ -78,12 +85,26 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  double current_time = time(nullptr);
+
+  if (config_json[api_key].contains("backtest_start_at")) {
+    const std::string backtest_start_at_string =
+        config_json[api_key]["backtest_start_at"];
+
+    tm backtest_start_at = ::utils::time_::parse_timestamp(
+        backtest_start_at_string, "%Y-%m-%d %H:%M:%S");
+
+    current_time = (double)mktime(&backtest_start_at);
+  }
+
   this->config = {
       .api_key = api_key,
       .api_key_id = config_json[api_key]["id"],
       .api_secret_key = config_json[api_key]["secret_key"],
       .base_url = config_json[api_key]["base_url"],
+      .current_time = current_time,
       .data_base_url = config_json["data_base_url"],
+      .is_backtest = config_json[api_key]["is_backtest"],
       .is_live = config_json[api_key]["is_live"],
   };
 }
