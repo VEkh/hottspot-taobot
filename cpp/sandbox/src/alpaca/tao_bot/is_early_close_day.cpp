@@ -3,18 +3,17 @@
 
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "tao_bot.h"          // Alpaca::TaoBot, fmt
-#include <ctime>              // std::time, std::time_t
 #include <map>                // std::map
 #include <string>             // std::string
 
 bool Alpaca::TaoBot::is_early_close_day() {
   std::map<std::string, bool> DATES = {
-      {"2022-07-03", true},
-      {"2022-11-24", true},
+      {"2023-07-03", true},
+      {"2023-11-24", true},
   };
 
-  std::time_t now = std::time(nullptr);
-  const std::string date_string = ::utils::time_::date_string(now);
+  const std::string date_string =
+      ::utils::time_::date_string(this->api_client.config.current_epoch);
 
   return DATES[date_string];
 }

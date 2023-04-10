@@ -12,6 +12,10 @@ void Alpaca::TaoBot::cancel_stale_open_order() {
     return;
   }
 
+  if (this->api_client.config.is_backtest) {
+    return;
+  }
+
   if (this->open_order_ptr->status == order_status_t::ORDER_CANCELED) {
     this->open_order_ptr = nullptr;
 

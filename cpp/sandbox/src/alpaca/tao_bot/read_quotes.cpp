@@ -10,7 +10,7 @@ void Alpaca::TaoBot::read_quotes() {
   const std::vector<quote_t> quotes_ = this->quoter.db_quote.get_last({
       .limit = 2,
       .symbol = this->symbol,
-      .timestamp_upper_bound = this->api_client.config.current_time,
+      .timestamp_upper_bound = this->api_client.config.current_epoch,
   });
 
   if (quotes_.empty()) {

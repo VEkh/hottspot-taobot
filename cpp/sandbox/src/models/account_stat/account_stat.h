@@ -17,18 +17,29 @@ public:
     bool debug = false;
   };
 
-  struct insert_args_t {
+  struct get_snapshot_with_computed_equity_args_t {
+    std::string api_key_id;
+    double starting_from;
+    bool debug = false;
+  };
+
+  struct upsert_args_t {
     std::string api_key_id;
     double equity = 0.00;
+    double inserted_at = 0.00;
     double margin_buying_power = 0.00;
     double margin_multiplier = 0.00;
+    bool debug = false;
   };
 
   AccountStat(){};
   AccountStat(Pg c) : conn(c){};
 
   account_snapshot_t get_snapshot(const get_snapshot_args_t);
-  void insert(const insert_args_t);
+  account_snapshot_t get_snapshot_with_computed_equity(
+      const get_snapshot_with_computed_equity_args_t);
+
+  void upsert(const upsert_args_t);
 
 private:
   using query_result_t = Pg::query_result_t;

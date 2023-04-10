@@ -51,6 +51,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
   try {
     this->api_client = Alpaca::Client(this->flags);
+    this->started_at = this->api_client.config.current_epoch;
 
     update_account_snapshot();
 

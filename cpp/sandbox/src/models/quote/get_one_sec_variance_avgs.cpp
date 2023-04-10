@@ -33,12 +33,10 @@ DB::Quote::one_sec_variance_avgs_t DB::Quote::get_one_sec_variance_avgs(
       limit 1) as latest_avg
       join lateral (
         select
-          limited.symbol,
           avg(limited.avg_one_sec_variance) as avg
         from (
           select
-            avg_one_sec_variance,
-            symbol
+            avg_one_sec_variance
           from
             avg_one_sec_variances
           where
@@ -46,9 +44,7 @@ DB::Quote::one_sec_variance_avgs_t DB::Quote::get_one_sec_variance_avgs(
             and timestamp <= to_timestamp(%f)
           order by
             timestamp desc
-          limit 500000) as limited
-      group by
-        limited.symbol) as limited_agg on limited_agg.symbol = latest_avg.symbol;
+          limit 500000) as limited) as limited_agg on true;
   )";
 
   char *sanitized_symbol =

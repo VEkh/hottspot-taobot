@@ -76,9 +76,10 @@ void Alpaca::Client::stream_account() {
       const std::string filepath = std::string(DATA_DIR) + "/alpaca/" +
                                    this->config.api_key + "/account.json";
 
-      db_account_stat.insert({
+      db_account_stat.upsert({
           .api_key_id = this->config.api_key_id,
           .equity = equity,
+          .inserted_at = 0.00,
           .margin_buying_power = margin_buying_power,
           .margin_multiplier = margin_multiplier,
       });

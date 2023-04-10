@@ -97,6 +97,7 @@ private:
   bool is_price_moving();
   bool max_account_loss_reached();
   bool new_positions_opened();
+  bool should_backtest_exec_slow_query();
   bool should_close_position();
   bool should_open_position();
   bool should_stop_profit();
@@ -131,7 +132,7 @@ private:
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
-  void advance_current_time();
+  void advance_current_epoch();
   void await_market_open();
   void cancel_stale_open_order();
   void close_position();
@@ -159,9 +160,11 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
   void update_account_snapshot();
+  void upsert_backtest_account_stat();
   void watch();
   void write_account_performance();
-  void write_position(const position_t &, const exit_prices_t &);
+  void write_close_position();
+  void write_open_position();
 };
 } // namespace Alpaca
 

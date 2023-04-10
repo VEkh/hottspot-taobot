@@ -11,7 +11,7 @@
 void Alpaca::TaoBot::log_timestamps() {
   std::cout << fmt.bold << fmt.cyan;
   printf("⌚ Current Time: %s • Runtime: %s\n",
-         ::utils::time_::date_string(this->api_client.config.current_time,
+         ::utils::time_::date_string(this->api_client.config.current_epoch,
                                      "%a, %b %d, %Y %X %Z", "America/Chicago")
              .c_str(),
          ::utils::integer_::seconds_to_clock(runtime()).c_str());

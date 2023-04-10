@@ -10,9 +10,13 @@
 #include "tao_bot.h"
 
 #include "build_performance.cpp" // build_performance
-#include "write_position.cpp"    // write_position
 
 void Alpaca::TaoBot::reset_position() {
+  // TODO: Delete Backtest Guard
+  if (this->api_client.config.is_backtest) {
+    return;
+  }
+
   if (!(this->close_order_ptr && this->open_order_ptr)) {
     return;
   }
@@ -28,8 +32,6 @@ void Alpaca::TaoBot::reset_position() {
   };
 
   this->closed_positions.push_back(position);
-
-  write_position(position, this->exit_prices);
 
   this->close_order_ptr = nullptr;
   this->exit_prices = exit_prices_t();

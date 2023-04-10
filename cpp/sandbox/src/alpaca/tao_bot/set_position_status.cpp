@@ -6,6 +6,11 @@
 #include "tao_bot.h"              // Alpaca::TaoBot
 
 void Alpaca::TaoBot::set_position_status() {
+  // TODO: Delete Backtest Guard
+  if (this->api_client.config.is_backtest) {
+    return;
+  }
+
   if (is_position_closed()) {
     return;
   }

@@ -58,16 +58,6 @@ ReturnType in_time_zone(const char *time_zone, Predicate *fn) {
   return out;
 }
 
-int day_of_week() {
-  return in_time_zone<int>("America/New_York", []() -> int {
-    time_t local_now;
-    time(&local_now);
-    std::tm local_time = *std::localtime(&local_now);
-
-    return local_time.tm_wday;
-  });
-}
-
 std::string date_string(const long int timestamp_seconds,
                         const char *format = "%F",
                         const char *timezone = "America/New_York") {
@@ -85,16 +75,27 @@ std::string date_string(const long int timestamp_seconds,
   });
 }
 
-bool is_at_least(const std::vector<int> time_parts,
-                 const char *time_zone = "America/New_York") {
-  return in_time_zone<bool>(time_zone, [&]() -> bool {
-    time_t local_now;
-    time(&local_now);
-    std::tm local_time = *std::localtime(&local_now);
+int day_of_week(const long int epoch) {
+  return in_time_zone<int>("America/New_York", [&]() -> int {
+    tm local_time = *localtime(&epoch);
 
-    if (time_parts.empty()) {
-      return false;
-    }
+    return local_time.tm_wday;
+  });
+}
+
+int day_of_week() {
+  const long int now = time(nullptr);
+  return day_of_week(now);
+}
+
+bool is_at_least(const long int epoch, const std::vector<int> time_parts,
+                 const char *time_zone = "America/New_York") {
+  if (time_parts.empty()) {
+    return false;
+  }
+
+  return in_time_zone<bool>(time_zone, [&]() -> bool {
+    tm local_time = *localtime(&epoch);
 
     const int hours = time_parts[0];
     const int minutes = time_parts.size() > 1 ? time_parts[1] : 0;
@@ -109,17 +110,20 @@ bool is_at_least(const std::vector<int> time_parts,
   });
 }
 
-bool is_before(const std::vector<int> time_parts,
+bool is_at_least(const std::vector<int> time_parts,
+                 const char *time_zone = "America/New_York") {
+  const long int now = time(nullptr);
+  return is_at_least(now, time_parts, time_zone);
+}
+
+bool is_before(const long int epoch, const std::vector<int> time_parts,
                const char *time_zone = "America/New_York") {
+  if (time_parts.empty()) {
+    return false;
+  }
+
   return in_time_zone<bool>(time_zone, [&]() -> bool {
-    if (time_parts.empty()) {
-      return false;
-    }
-
-    time_t local_now;
-
-    time(&local_now);
-    std::tm local_time = *std::localtime(&local_now);
+    tm local_time = *localtime(&epoch);
 
     const int hours = time_parts[0];
     const int minutes = time_parts.size() > 1 ? time_parts[1] : 0;
@@ -134,21 +138,24 @@ bool is_before(const std::vector<int> time_parts,
   });
 }
 
-bool is_early_day() { return is_before({11, 0}); }
+bool is_before(const std::vector<int> time_parts,
+               const char *time_zone = "America/New_York") {
+  const long int now = time(nullptr);
+  return is_before(now, time_parts, time_zone);
+}
 
-std::tm parse_timestamp(std::string in, const char *format) {
-  std::tm datetime = {};
-  std::istringstream date_string(in);
+tm parse_timestamp(std::string in, const char *format) {
+  tm datetime = {};
+  std::istringstream date_string_(in);
 
-  date_string >> std::get_time(&datetime, format);
+  date_string_ >> std::get_time(&datetime, format);
 
-  std::mktime(&datetime);
+  mktime(&datetime);
 
   return datetime;
 }
 
-double beginning_of_day_to_epoch() {
-  const int now = time(nullptr);
+double beginning_of_day_to_epoch(const long int now) {
   std::string now_string = date_string(now, "%F", "America/Chicago");
   tm date_start = parse_timestamp(now_string, "%Y-%m-%d");
   const double day_start_epoch = mktime(&date_start);

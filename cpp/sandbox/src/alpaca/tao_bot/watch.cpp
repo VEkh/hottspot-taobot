@@ -1,7 +1,7 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
-#include "advance_current_time.cpp"      // advance_current_time
+#include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
 #include "log_account_snapshot.cpp"      // log_account_snapshot
@@ -51,7 +51,7 @@ void Alpaca::TaoBot::watch() {
 
     std::cout << "\n\n\n\n\n\n\n\n\n\n" << std::flush;
 
-    advance_current_time();
+    advance_current_epoch();
   }
 
   log_end_of_trading_period();

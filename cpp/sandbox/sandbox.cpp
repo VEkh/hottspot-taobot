@@ -2,20 +2,13 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/pg/pg.cpp"          // Pg
-#include "models/quote/quote.cpp" // DB::Quote
-#include <map>                    // std::map
-#include <string>                 // std::string
+#include "lib/utils/time.cpp" // ::utils::time_
+#include <time.h>             // time
 
 int main(int argc, char *argv[]) {
-  Pg pg((std::map<std::string, std::string>){{"env", "production"}});
-  pg.connect();
+  const double now = time(nullptr);
 
-  DB::Quote db_quote(pg);
+  int out = ::utils::time_::day_of_week(1680615000.000000);
 
-  const double stop_profit = db_quote.get_stop_profit("TSLA", true);
-
-  printf("stop_profit: %f\n", stop_profit);
-
-  pg.disconnect();
+  printf("%i\n", (int)out);
 }
