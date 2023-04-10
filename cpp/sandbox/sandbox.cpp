@@ -2,13 +2,12 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <time.h>             // time
+#include "lib/utils/debug.cpp" // ::utils::debug
+#include "lib/utils/io.cpp"    // ::utils::io
 
 int main(int argc, char *argv[]) {
-  const double now = time(nullptr);
+  std::map<std::string, std::string> flags =
+      ::utils::io::extract_flags(argc, argv);
 
-  int out = ::utils::time_::day_of_week(1680615000.000000);
-
-  printf("%i\n", (int)out);
+  ::utils::debug::inspect(flags);
 }

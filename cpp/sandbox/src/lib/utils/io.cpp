@@ -3,12 +3,12 @@
 
 #include "lib/formatted.cpp" // Formatted
 #include "string.cpp"        // ::utils::string
-#include <cstring>           // strcpy,strlen
+#include <cstring>           // strcpy, strlen
 #include <fstream>           // std::ifstream, std::ios, std::ofstream
 #include <libgen.h>          // dirname
 #include <list>              // std::list
 #include <map>               // std::map
-#include <regex>     // std::regex, std::regex_search, std::regex_token_iterator
+#include <regex>     // std::regex, std::regex_replace, std::regex_search
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <stdio.h>   // fgets, popen
 #include <string>    // std::getline, std::string
@@ -46,25 +46,16 @@ std::list<std::string> extract_args(int argc, char **argv) {
 }
 
 std::pair<std::string, std::string> flag_to_pair(std::string &flag) {
-  std::regex token_regex = std::regex("--|=");
+  std::string no_first_dashes = std::regex_replace(flag, std::regex("^--"), "");
+  std::string no_equal =
+      std::regex_replace(no_first_dashes, std::regex("="), " ");
 
-  std::sregex_token_iterator it(flag.begin(), flag.end(), token_regex, -1);
-  std::sregex_token_iterator end;
+  std::vector<std::string> parts = ::utils::string::split(no_equal, " ");
 
-  std::string parts[2] = {"", "1"};
-  int parts_i = 0;
+  const std::string key = parts.at(0);
+  const std::string value = parts.size() == 1 ? "1" : parts.at(1);
 
-  for (; it != end; it++) {
-    if (((std::string)*it).empty()) {
-      continue;
-    }
-
-    parts[parts_i] = *it;
-
-    parts_i++;
-  }
-
-  return {parts[0], parts[1]};
+  return {key, value};
 }
 
 std::map<std::string, std::string> extract_flags(int argc, char **argv) {
