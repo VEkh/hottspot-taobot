@@ -3,6 +3,7 @@
 
 #include "alpaca/client/client.cpp"             // Alpaca::Client
 #include "alpaca/quote/quote.cpp"               // Alpaca::Quote
+#include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
 #include "build_performance.cpp"                // build_performance
 #include "is_holiday.cpp"                       // is_holiday
 #include "lib/formatted.cpp"                    // Formatted::error_message
@@ -51,7 +52,12 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
   try {
     this->api_client = Alpaca::Client(this->flags);
-    this->started_at = this->api_client.config.current_epoch;
+    this->backtest = Alpaca::TaoBotBacktest(this->pg, this->flags);
+
+    if (this->backtest.is_active) {
+      this->current_epoch = this->backtest.config.start_epoch;
+      this->started_at = this->backtest.config.start_epoch;
+    }
 
     update_account_snapshot();
 

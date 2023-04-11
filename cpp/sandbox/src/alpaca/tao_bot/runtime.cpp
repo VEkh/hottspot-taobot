@@ -4,8 +4,6 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 #include <ctime>     // std::time
 
-int Alpaca::TaoBot::runtime() {
-  return this->api_client.config.current_epoch - this->started_at;
-}
+int Alpaca::TaoBot::runtime() { return this->current_epoch - this->started_at; }
 
 #endif

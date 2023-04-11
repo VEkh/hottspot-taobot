@@ -23,7 +23,7 @@
 
 void Alpaca::TaoBot::open_and_persist_position() {
   // TODO: Delete Backtest Guard
-  if (this->api_client.config.is_backtest) {
+  if (this->backtest.is_active) {
     return;
   }
 

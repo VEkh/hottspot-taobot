@@ -12,7 +12,7 @@ void Alpaca::TaoBot::cancel_stale_open_order() {
     return;
   }
 
-  if (this->api_client.config.is_backtest) {
+  if (this->backtest.is_active) {
     return;
   }
 

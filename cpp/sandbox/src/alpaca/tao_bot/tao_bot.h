@@ -4,6 +4,7 @@
 #include "alpaca/client/client.cpp"             // Alpaca::Client
 #include "alpaca/quote/quote.cpp"               // Alpaca::Quote
 #include "alpaca/types.cpp"                     // Alpaca::t
+#include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
 #include "lib/formatted.cpp"                    // Formatted
 #include "lib/pg/pg.cpp"                        // Pg
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
@@ -58,11 +59,13 @@ private:
 
   Alpaca::Client api_client;
   Alpaca::Quote quoter;
+  Alpaca::TaoBotBacktest backtest;
   DB::AccountStat db_account_stat;
   DB::Position db_position;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   account_snapshot_t account_snapshot;
+  double current_epoch = time(nullptr);
   double quantity;
   double started_at = time(nullptr);
   int init_closed_positions_count = 0;
@@ -97,7 +100,6 @@ private:
   bool is_price_moving();
   bool max_account_loss_reached();
   bool new_positions_opened();
-  bool should_backtest_exec_slow_query();
   bool should_close_position();
   bool should_open_position();
   bool should_stop_profit();
@@ -160,7 +162,6 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
   void update_account_snapshot();
-  void upsert_backtest_account_stat();
   void watch();
   void write_account_performance();
   void write_close_position();

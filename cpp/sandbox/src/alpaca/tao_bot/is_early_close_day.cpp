@@ -13,7 +13,7 @@ bool Alpaca::TaoBot::is_early_close_day() {
   };
 
   const std::string date_string =
-      ::utils::time_::date_string(this->api_client.config.current_epoch);
+      ::utils::time_::date_string(this->current_epoch);
 
   return DATES[date_string];
 }

@@ -18,21 +18,12 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Global::t::quote_t;
 
-  struct backtest_config_t {
-    double account_margin_multiplier = 0.00;
-    double account_starting_equity = 0.00;
-    int slow_query_countdown = 0;
-    static constexpr int SLOW_QUERY_EVERY = 100;
-  } backtest_config;
-
   struct config_t {
     std::string api_key;
     std::string api_key_id;
     std::string api_secret_key;
     std::string base_url;
-    double current_epoch;
     std::string data_base_url;
-    bool is_backtest;
     bool is_live;
   } config;
 
