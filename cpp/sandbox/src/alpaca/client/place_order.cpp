@@ -100,7 +100,7 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
 
   order->id = response["id"];
   order->status = order_status_t::ORDER_NEW;
-  order->timestamp = (int)std::time(nullptr);
+  order->timestamp = std::time(nullptr);
 
   return curl_client;
 }

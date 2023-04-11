@@ -27,7 +27,11 @@ void Alpaca::TaoBot::close_position() {
 
   const char *log_icon = this->ICONS[order_action];
 
-  this->api_client.place_order(this->close_order_ptr);
+  if (this->backtest.is_active) {
+    this->backtest.place_order(this->current_epoch, this->close_order_ptr);
+  } else {
+    this->api_client.place_order(this->close_order_ptr);
+  }
 
   std::cout << fmt.bold << fmt.cyan << std::endl;
   printf("%s %s: Placed closing order.\n", log_icon,

@@ -3,14 +3,18 @@
 
 #include "backtest.h" // Alpaca::TaoBotBacktest
 #include "fetch_order.cpp"
-#include "lib/pg/pg.cpp"   // Pg
-#include "load_config.cpp" // load_config
+#include "lib/pg/pg.cpp"                        // Pg
+#include "load_config.cpp"                      // load_config
+#include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "models/utils/utils.cpp"               // DB::Utils
+#include "place_order.cpp"
 #include "should_exec_slow_query.cpp"
 #include "upsert_account_stat.cpp"
 
 Alpaca::TaoBotBacktest::TaoBotBacktest(
     Pg conn, std::map<std::string, std::string> flags_) {
   this->db_account_stat = DB::AccountStat(conn);
+  this->db_utils = DB::Utils(conn);
   this->flags = flags_;
 
   load_config();

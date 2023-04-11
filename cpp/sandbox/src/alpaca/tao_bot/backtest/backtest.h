@@ -1,17 +1,20 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST_H
 #define ALPACA__TAO_BOT_BACKTEST_H
 
-#include "alpaca/types.cpp" // Alpaca::t
-#include "lib/pg/pg.cpp"    // Pg
-#include "types.cpp"        // Global::t
-#include <map>              // std::map
-#include <string>           // std::string
+#include "alpaca/types.cpp"                     // Alpaca::t
+#include "lib/pg/pg.cpp"                        // Pg
+#include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "models/utils/utils.cpp"               // DB::Utils
+#include "types.cpp"                            // Global::t
+#include <map>                                  // std::map
+#include <string>                               // std::string
 
 namespace Alpaca {
 class TaoBotBacktest {
 public:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using order_action_t = Alpaca::t::order_action_t;
+  using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
   using quote_t = Alpaca::t::quote_t;
 
@@ -33,10 +36,12 @@ public:
 
   std::string fetch_order(const order_t *, const quote_t &);
 
+  void place_order(const long int, order_t *);
   void upsert_account_stat(const double);
 
 private:
   DB::AccountStat db_account_stat;
+  DB::Utils db_utils;
 
   static constexpr int SLOW_QUERY_EVERY = 100;
 

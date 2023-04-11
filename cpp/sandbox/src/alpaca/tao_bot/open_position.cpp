@@ -48,7 +48,11 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
          order_description);
   std::cout << fmt.reset;
 
-  this->api_client.place_order(&new_open_order);
+  if (this->backtest.is_active) {
+    this->backtest.place_order(this->current_epoch, &new_open_order);
+  } else {
+    this->api_client.place_order(&new_open_order);
+  }
 
   if (!(new_open_order.status == order_status_t::ORDER_NEW ||
         new_open_order.status == order_status_t::ORDER_ACCEPTED)) {
