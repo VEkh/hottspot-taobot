@@ -7,11 +7,6 @@
 #include "write_close_position.cpp" // write_close_position
 
 void Alpaca::TaoBot::set_close_order_prices() {
-  // TODO: Delete Backtest Guard
-  if (this->backtest.is_active) {
-    return;
-  }
-
   if (!this->close_order_ptr || !this->open_order_ptr) {
     return;
   }

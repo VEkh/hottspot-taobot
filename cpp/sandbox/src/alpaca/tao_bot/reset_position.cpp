@@ -12,11 +12,6 @@
 #include "build_performance.cpp" // build_performance
 
 void Alpaca::TaoBot::reset_position() {
-  // TODO: Delete Backtest Guard
-  if (this->backtest.is_active) {
-    return;
-  }
-
   if (!(this->close_order_ptr && this->open_order_ptr)) {
     return;
   }

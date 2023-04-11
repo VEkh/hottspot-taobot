@@ -16,11 +16,6 @@
 #include <vector>                   // std::vector
 
 void Alpaca::TaoBot::set_open_order_prices() {
-  // TODO: Delete Backtest Guard
-  if (this->backtest.is_active) {
-    return;
-  }
-
   if (!this->open_order_ptr) {
     return;
   }

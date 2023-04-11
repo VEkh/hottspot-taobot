@@ -9,11 +9,6 @@
 #include <stdio.h>                   // printf
 
 void Alpaca::TaoBot::close_position() {
-  // TODO: Delete Backtest Guard
-  if (this->backtest.is_active) {
-    return;
-  }
-
   if (!this->open_order_ptr || !this->close_order_ptr) {
     return;
   }

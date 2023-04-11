@@ -22,11 +22,6 @@
 #include <utility>                     // std::pair
 
 void Alpaca::TaoBot::open_and_persist_position() {
-  // TODO: Delete Backtest Guard
-  if (this->backtest.is_active) {
-    return;
-  }
-
   if (!should_open_position()) {
     return;
   }
