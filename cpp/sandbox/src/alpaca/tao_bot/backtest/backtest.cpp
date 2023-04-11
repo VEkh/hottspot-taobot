@@ -1,7 +1,8 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST
 #define ALPACA__TAO_BOT_BACKTEST
 
-#include "backtest.h"      // Alpaca::TaoBotBacktest
+#include "backtest.h" // Alpaca::TaoBotBacktest
+#include "fetch_order.cpp"
 #include "lib/pg/pg.cpp"   // Pg
 #include "load_config.cpp" // load_config
 #include "should_exec_slow_query.cpp"

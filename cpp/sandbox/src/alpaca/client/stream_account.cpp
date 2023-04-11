@@ -82,6 +82,7 @@ void Alpaca::Client::stream_account() {
           .inserted_at = 0.00,
           .margin_buying_power = margin_buying_power,
           .margin_multiplier = margin_multiplier,
+          .debug = true,
       });
 
       ::utils::io::write_to_file(account_json.dump(2), filepath.c_str());

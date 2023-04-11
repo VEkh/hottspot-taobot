@@ -22,10 +22,8 @@ void Alpaca::TaoBot::log_quote() {
     return;
   }
 
-  const quote_t *previous_quote =
-      ticks > 1 ? &(this->quotes.at(ticks - 2)) : nullptr;
-
-  const quote_t current_quote = this->quotes.back();
+  const quote_t *previous_quote = &(this->quotes.at(1));
+  const quote_t current_quote = this->quotes.front();
 
   if (previous_quote) {
     if (current_quote.price > previous_quote->price) {

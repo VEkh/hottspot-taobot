@@ -7,7 +7,7 @@
 #include <math.h>                      // floor
 
 double Alpaca::TaoBot::compute_quantity() {
-  const quote_t quote = this->quotes.back();
+  const quote_t quote = this->quotes.front();
   const double margin_throttle = 1.0;
 
   const double max_buying_power =

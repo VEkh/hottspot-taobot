@@ -33,7 +33,7 @@ DB::Quote::result_to_quotes(const query_result_t &result) {
         quote.symbol = value;
       }
 
-      if (field == "timestamp") {
+      if (field == "timestamp" || field == "timestamp_epoch") {
         quote.timestamp = std::stod(value);
       }
     }

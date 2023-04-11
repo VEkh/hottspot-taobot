@@ -17,7 +17,6 @@
 #include <vector>               // std::vector
 
 std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
-  const bool debug = args.debug;
   const int limit = args.limit;
   const std::string symbol = args.symbol;
   const double timestamp_upper_bound = args.timestamp_upper_bound;
@@ -30,37 +29,27 @@ std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
       ask,
       bid,
       symbol,
-      extract(epoch from timestamp) as timestamp
+      extract(epoch from timestamp) as timestamp_epoch
     from
       quotes
     where
       symbol = %s
-      and id in (
-        select
-          id
-        from
-          quotes
-        where
-          symbol = %s
-          and timestamp <= to_timestamp(%f)
-        order by
-          timestamp desc
-        limit %i)
+      and timestamp <= to_timestamp(%f)
     order by
-      timestamp asc;
+      timestamp desc
+    limit %i
   )";
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
-                         strlen(sanitized_symbol) +
                          std::to_string(timestamp_upper_bound).size() +
                          std::to_string(limit).size();
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, sanitized_symbol, sanitized_symbol,
+  snprintf(query, query_l, query_format, sanitized_symbol,
            timestamp_upper_bound, limit);
 
-  query_result_t query_result = this->conn.exec(query, debug);
+  query_result_t query_result = this->conn.exec(query, args.debug);
   PQfreemem(sanitized_symbol);
 
   std::vector<quote_t> result = result_to_quotes(query_result);

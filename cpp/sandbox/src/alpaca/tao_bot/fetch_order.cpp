@@ -22,7 +22,10 @@ json Alpaca::TaoBot::fetch_order(const order_t *order) {
     return empty_order;
   }
 
-  std::string order_response = this->api_client.fetch_order(order->id);
+  const std::string order_response =
+      this->backtest.is_active
+          ? this->backtest.fetch_order(order, this->quotes.front())
+          : this->api_client.fetch_order(order->id);
 
   return ::utils::json::parse_with_catch(order_response,
                                          "ALPACA__TAO_BOT_fetch_order");
