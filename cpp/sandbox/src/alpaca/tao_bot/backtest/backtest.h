@@ -8,6 +8,7 @@
 #include "types.cpp"                            // Global::t
 #include <map>                                  // std::map
 #include <string>                               // std::string
+#include <time.h>                               // time
 
 namespace Alpaca {
 class TaoBotBacktest {
@@ -31,6 +32,7 @@ public:
 
   bool is_active = false;
   int slow_query_countdown = 0;
+  long int started_at = time(nullptr);
 
   bool should_exec_slow_query();
 
