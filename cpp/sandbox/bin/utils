@@ -1,5 +1,7 @@
 #!/bin/bash
 
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+
 declare -A ASCII=(
   ["bold"]="\033[1m"
   ["cyan"]="\033[36m"
@@ -75,6 +77,42 @@ function get_env_flag() {
   extract_flags_to_map flags "${@}"
 
   echo -e "${flags["env"]}"
+}
+
+function load_config() {
+  scope="${1}"
+  config_filepath="${app_dir}/config/${scope}/credentials.json"
+
+  if [[ ! -f "${config_filepath}" ]]; then
+    ascii_print "❗ Config file does not exist.\n" "red" >&2
+    ascii_print "Create it using ${config_filepath}.example" "yellow" >&2
+
+    exit 1
+  fi
+
+  config=$(cat "${config_filepath}")
+
+  env="${2}"
+
+  if [[ -z "${env}" ]]; then
+    echo -e "${config}"
+    exit 0
+  fi
+
+  env_config=$(jq ".${env} // empty" "${config_filepath}")
+
+  if [[ -z "${env_config}" ]]; then
+    error_message=$(
+      echo -e "❗ Config environment ${ASCII["yellow"]}${env}"\
+              "${ASCII["red"]}is not specified in ${config_filepath}."
+    )
+
+    ascii_print "${error_message}" "red" >&2
+
+    exit 1
+  fi
+
+  echo -e "${env_config}"
 }
 
 function to_lower() {

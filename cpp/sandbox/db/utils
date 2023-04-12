@@ -4,39 +4,19 @@ set -e
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 db_dir="${app_dir}/db"
-config_filepath="$app_dir/config/db/credentials.json"
 
 # shellcheck disable=1090
-source "${app_dir}/bin/utils" # ASCII, ascii_print, extract_flags_to_map
+source "${app_dir}/bin/utils" # ASCII, ascii_print, extract_flags_to_map, load_config
 
 function build_db_uri() {
   env=$(get_env_flag "${@}")
+  db_config=$(load_config "db" "${env}")
 
-  if [[ ! -f "$config_filepath" ]]; then
-    ascii_print "❗ Database config file does not exist.\n" "red" >&2
-    ascii_print "Create it using ${config_filepath}.example" "yellow" >&2
-
-    exit 1
-  fi
-
-  credentials=$(jq ".${env} // empty" "${config_filepath}")
-
-  if [[ -z "${credentials}" ]]; then
-    error_message=$(
-      echo -e "❗ Database environment ${ASCII["yellow"]}${env}"\
-              "${ASCII["red"]}is not specified in ${config_filepath}."
-    )
-
-    ascii_print "${error_message}" "red" >&2
-
-    exit 1
-  fi
-
-  database_host="$(echo "${credentials}" | jq -r ".host // empty")"
-  database_name="$(echo "${credentials}" | jq -r ".name")"
-  database_password="$(echo "${credentials}" | jq -r ".password")"
-  database_port="$(echo "${credentials}" | jq -r ".port // empty")"
-  database_username="$(echo "${credentials}" | jq -r ".username")"
+  database_host="$(echo "${db_config}" | jq -r ".host // empty")"
+  database_name="$(echo "${db_config}" | jq -r ".name")"
+  database_password="$(echo "${db_config}" | jq -r ".password")"
+  database_port="$(echo "${db_config}" | jq -r ".port // empty")"
+  database_username="$(echo "${db_config}" | jq -r ".username")"
 
   # Fallbacks
   database_host="${database_host:-localhost}"
