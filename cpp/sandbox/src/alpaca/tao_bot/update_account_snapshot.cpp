@@ -7,7 +7,7 @@
 void Alpaca::TaoBot::update_account_snapshot() {
   this->backtest.upsert_account_stat(this->current_epoch);
 
-  if (!this->backtest.should_exec_slow_query()) {
+  if (!this->backtest.should_exec_slow_query(this->current_epoch)) {
     return;
   }
 

@@ -15,8 +15,8 @@ bool Alpaca::TaoBot::is_holiday() {
       {"2023-12-25", true},
   };
 
-  std::time_t now = std::time(nullptr);
-  const std::string date_string = ::utils::time_::date_string(now);
+  const std::string date_string =
+      ::utils::time_::date_string(this->current_epoch);
 
   return HOLIDAYS[date_string];
 }

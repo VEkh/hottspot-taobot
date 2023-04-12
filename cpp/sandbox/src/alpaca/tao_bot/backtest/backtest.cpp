@@ -3,10 +3,12 @@
 
 #include "backtest.h" // Alpaca::TaoBotBacktest
 #include "fetch_order.cpp"
+#include "has_reached_now.cpp"                  // has_reached_now
 #include "lib/pg/pg.cpp"                        // Pg
 #include "load_config.cpp"                      // load_config
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
 #include "models/utils/utils.cpp"               // DB::Utils
+#include "next_day_market_open_epoch.cpp"
 #include "place_order.cpp"
 #include "should_exec_slow_query.cpp"
 #include "upsert_account_stat.cpp"

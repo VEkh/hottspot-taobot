@@ -2,7 +2,6 @@
 #define UTILS__TIME
 
 #include <chrono>   // std::chrono, std::duration
-#include <ctime>    // std::localtime, std::mktime, struct std::tm
 #include <iomanip>  // std::setw
 #include <iostream> // std::fixed
 #include <map>      // std::map
@@ -11,7 +10,7 @@
 #include <sstream>  // std::ostringstream
 #include <stdlib.h> // getenv, setenv, unsetenv
 #include <string>   // std::string
-#include <time.h>   // localtime, strftime, struct tm, time, time_t
+#include <time.h>   // localtime, mktime, strftime, struct tm, time, time_t
 #include <vector>   // std::vector
 
 namespace utils {
@@ -164,8 +163,8 @@ double beginning_of_day_to_epoch(const long int now) {
 }
 
 double quote_timestamp_to_epoch_double(const char *timestamp) {
-  std::tm parsed = parse_timestamp(timestamp, "%Y-%m-%dT%H:%M:%SZ");
-  const int epoch = std::mktime(&parsed);
+  tm parsed = parse_timestamp(timestamp, "%Y-%m-%dT%H:%M:%SZ");
+  const int epoch = mktime(&parsed);
   double seconds_decimal = 0;
 
   std::cmatch match;

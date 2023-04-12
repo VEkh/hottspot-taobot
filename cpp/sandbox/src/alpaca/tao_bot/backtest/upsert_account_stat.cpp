@@ -10,7 +10,7 @@ void Alpaca::TaoBotBacktest::upsert_account_stat(const double current_epoch) {
     return;
   }
 
-  if (!should_exec_slow_query()) {
+  if (!should_exec_slow_query(current_epoch)) {
     return;
   }
 

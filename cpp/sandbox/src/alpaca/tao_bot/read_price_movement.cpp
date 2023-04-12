@@ -4,7 +4,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 void Alpaca::TaoBot::read_price_movement() {
-  if (!this->backtest.should_exec_slow_query()) {
+  if (!this->backtest.should_exec_slow_query(this->current_epoch)) {
     return;
   }
 

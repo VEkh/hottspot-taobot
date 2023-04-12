@@ -1,6 +1,7 @@
 #ifndef ALPACA__TAO_BOT_is_market_open
 #define ALPACA__TAO_BOT_is_market_open
 
+#include "is_market_day.cpp"  // is_market_day
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "tao_bot.h"          // Alpaca::TaoBot
 
@@ -8,6 +9,14 @@ bool Alpaca::TaoBot::is_market_open() {
   const int day_of_week_ = ::utils::time_::day_of_week(this->current_epoch);
 
   if (day_of_week_ < 1 || day_of_week_ > 5) {
+    return false;
+  }
+
+  if (!is_market_day()) {
+    return false;
+  }
+
+  if (is_holiday()) {
     return false;
   }
 

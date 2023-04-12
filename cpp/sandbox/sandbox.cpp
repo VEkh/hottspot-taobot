@@ -2,18 +2,22 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/pg/pg.cpp"          // Pg
-#include "models/utils/utils.cpp" // DB::Utils
+#include "lib/utils/time.cpp" // ::utils::time_
+#include <time.h>             // time
 
 int main(int argc, char *argv[]) {
-  Pg pg;
-  pg.connect();
+  const long int now = time(nullptr);
+  const double today_start_epoch =
+      ::utils::time_::beginning_of_day_to_epoch(now);
 
-  DB::Utils db_utils(pg);
+  const long int tomorrow_start = today_start_epoch + (24 * 60 * 60);
 
-  const std::string uuid = db_utils.generate_uuid();
+  tm local_time = *localtime(&tomorrow_start);
+  local_time.tm_hour = 13;
+  local_time.tm_min = 30;
+  local_time.tm_sec = 0;
+  const long int new_epoch = mktime(&local_time);
 
-  printf("%s\n", uuid.c_str());
-
-  pg.disconnect();
+  printf("%i:%i\n", local_time.tm_hour, local_time.tm_min);
+  printf("new_epoch: %li\n", new_epoch);
 }

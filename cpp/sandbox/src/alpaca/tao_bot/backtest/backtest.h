@@ -34,7 +34,10 @@ public:
   int slow_query_countdown = 0;
   long int started_at = time(nullptr);
 
-  bool should_exec_slow_query();
+  bool has_reached_now(const double);
+  bool should_exec_slow_query(const double);
+
+  int next_day_market_open_epoch(const double);
 
   std::string fetch_order(const order_t *, const quote_t &);
 

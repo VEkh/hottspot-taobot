@@ -94,6 +94,7 @@ private:
   bool is_end_of_trading_period();
   bool is_first_position_long();
   bool is_holiday();
+  bool is_market_day();
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
@@ -135,6 +136,7 @@ private:
                                             const order_action_t, const char *,
                                             const double);
   void advance_current_epoch();
+  void advance_current_epoch(const double);
   void await_market_open();
   void cancel_stale_open_order();
   void close_position();

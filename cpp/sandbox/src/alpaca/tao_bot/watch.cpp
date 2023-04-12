@@ -56,6 +56,14 @@ void Alpaca::TaoBot::watch() {
 
   log_end_of_trading_period();
   write_account_performance();
+
+  if (!this->backtest.has_reached_now(this->current_epoch)) {
+    advance_current_epoch(
+        this->backtest.next_day_market_open_epoch(this->current_epoch));
+
+    return watch();
+  }
+
   this->pg.disconnect();
 }
 
