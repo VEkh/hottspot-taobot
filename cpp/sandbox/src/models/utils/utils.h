@@ -3,6 +3,7 @@
 
 #include "lib/pg/pg.cpp" // Pg
 #include <string>        // std::string
+#include <utility>       // std::pair
 
 namespace DB {
 class Utils {
@@ -13,6 +14,7 @@ public:
   Utils(Pg c) : conn(c) {}
 
   std::string generate_uuid(const bool);
+  void set_param(const std::pair<std::string, std::string>, const bool);
 
 private:
   Pg conn;

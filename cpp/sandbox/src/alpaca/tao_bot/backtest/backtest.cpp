@@ -13,11 +13,14 @@
 #include "should_exec_slow_query.cpp"
 #include "upsert_account_stat.cpp"
 
-Alpaca::TaoBotBacktest::TaoBotBacktest(
-    Pg conn, std::map<std::string, std::string> flags_) {
+Alpaca::TaoBotBacktest::TaoBotBacktest(const init_args_t args) {
+  Pg conn = args.conn;
+
   this->db_account_stat = DB::AccountStat(conn);
   this->db_utils = DB::Utils(conn);
-  this->flags = flags_;
+  this->flags = args.flags;
+
+  this->db_utils.set_param({"statement_timeout", "1000"});
 
   load_config();
 }

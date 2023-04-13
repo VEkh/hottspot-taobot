@@ -27,8 +27,14 @@ public:
     double start_epoch = 0;
   } config;
 
+  struct init_args_t {
+    Pg conn;
+    std::map<std::string, std::string> flags;
+    std::string symbol;
+  };
+
   TaoBotBacktest(){};
-  TaoBotBacktest(Pg, std::map<std::string, std::string>);
+  TaoBotBacktest(const init_args_t);
 
   bool is_active = false;
   int slow_query_countdown = 0;

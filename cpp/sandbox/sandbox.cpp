@@ -2,22 +2,16 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <time.h>             // time
+#include "lib/pg/pg.cpp"          // Pg
+#include "models/utils/utils.cpp" // DB::Utils
 
 int main(int argc, char *argv[]) {
-  const long int now = time(nullptr);
-  const double today_start_epoch =
-      ::utils::time_::beginning_of_day_to_epoch(now);
+  Pg pg;
+  pg.connect();
 
-  const long int tomorrow_start = today_start_epoch + (24 * 60 * 60);
+  DB::Utils db_utils(pg);
 
-  tm local_time = *localtime(&tomorrow_start);
-  local_time.tm_hour = 13;
-  local_time.tm_min = 30;
-  local_time.tm_sec = 0;
-  const long int new_epoch = mktime(&local_time);
+  db_utils.set_param({"statement_timeout", "1000"}, true);
 
-  printf("%i:%i\n", local_time.tm_hour, local_time.tm_min);
-  printf("new_epoch: %li\n", new_epoch);
+  pg.disconnect();
 }

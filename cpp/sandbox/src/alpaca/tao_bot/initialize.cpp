@@ -52,7 +52,11 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
   try {
     this->api_client = Alpaca::Client(this->flags);
-    this->backtest = Alpaca::TaoBotBacktest(this->pg, this->flags);
+    this->backtest = Alpaca::TaoBotBacktest({
+        .conn = this->pg,
+        .flags = this->flags,
+        .symbol = this->symbol,
+    });
 
     if (this->backtest.is_active) {
       this->current_epoch = this->backtest.config.start_epoch;
