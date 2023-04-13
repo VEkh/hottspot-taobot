@@ -155,6 +155,7 @@ private:
   void open_and_persist_position();
   void read_price_movement();
   void read_quotes();
+  void reset_backtest();
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);

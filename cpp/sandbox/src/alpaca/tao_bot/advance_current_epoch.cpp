@@ -6,7 +6,8 @@
 #include <unistd.h>  // usleep
 
 void Alpaca::TaoBot::advance_current_epoch() {
-  if (!this->backtest.has_reached_end(this->current_epoch)) {
+  if (this->backtest.is_active &&
+      !this->backtest.has_reached_end(this->current_epoch)) {
     advance_current_epoch(this->current_epoch + 0.5);
     this->backtest.slow_query_countdown += 1;
   } else {

@@ -15,6 +15,7 @@
 #include "open_and_persist_position.cpp" // open_and_persist_position
 #include "read_price_movement.cpp"       // price_movement
 #include "read_quotes.cpp"               // read_quotes
+#include "reset_backtest.cpp"            // reset_backtest
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
@@ -57,9 +58,9 @@ void Alpaca::TaoBot::watch() {
   log_end_of_trading_period();
   write_account_performance();
 
-  if (!this->backtest.has_reached_end(this->current_epoch)) {
-    advance_current_epoch(
-        this->backtest.next_day_market_open_epoch(this->current_epoch));
+  if (this->backtest.is_active &&
+      !this->backtest.has_reached_end(this->current_epoch)) {
+    reset_backtest();
 
     return watch();
   }
