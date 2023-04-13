@@ -32,7 +32,7 @@ DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
       session_max.equity as session_max_equity,
       extract(epoch from session_max.inserted_at) as session_max_equity_timestamp,
       session_original.equity as session_original_equity,
-      extract(epoch from latest.inserted_at) as timestamp
+      extract(epoch from latest.inserted_at) as timestamp_epoch
     from (
       select
         *

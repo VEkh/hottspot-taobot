@@ -22,7 +22,7 @@ DB::AccountStat::get_snapshot_with_computed_equity(
       computed_equity.api_key_id,
       computed_equity.equity,
       coalesce(original.margin_buying_power, 0.0) as original_margin_buying_power,
-      latest.inserted_at as timestamp
+      latest.inserted_at as timestamp_epoch
     from (
       select
         api_key_id,

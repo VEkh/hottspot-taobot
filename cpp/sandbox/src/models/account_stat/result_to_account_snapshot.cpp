@@ -72,7 +72,7 @@ DB::AccountStat::result_to_account_snapshot(const query_result_t &result) {
         out.session_original_equity = std::stod(value);
       }
 
-      if (field == "timestamp") {
+      if (field == "timestamp" || field == "timestamp_epoch") {
         out.timestamp = std::stod(value);
       }
     }
