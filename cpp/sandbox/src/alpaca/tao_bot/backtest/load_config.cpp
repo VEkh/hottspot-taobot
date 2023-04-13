@@ -1,14 +1,15 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST_load_config
 #define ALPACA__TAO_BOT_BACKTEST_load_config
 
-#include "backtest.h"         // Alpaca::TaoBotBacktest
+#include "backtest.h"         // Alpaca::TaoBotBacktest, quote_t
 #include "deps.cpp"           // json
 #include "lib/formatted.cpp"  // Formatted::error_message
 #include "lib/utils/time.cpp" // ::utils::time_
 #include <fstream>            // std::ifstream, std::ios
-#include <stdexcept>          // std::invalid_argument
+#include <stdexcept>          // std::invalid_argument, std::runtime_error
 #include <string>             // std::string
 #include <time.h>             // mktime, time, tm
+#include <vector>             // std::vector
 
 void Alpaca::TaoBotBacktest::load_config() {
   std::string config_path =
@@ -94,6 +95,20 @@ void Alpaca::TaoBotBacktest::load_config() {
 
   const double current_epoch = (double)mktime(&backtest_start_at);
 
+  const std::vector<quote_t> last_quotes = this->db_quote.get_last({
+      .limit = 1,
+      .symbol = this->symbol,
+      .timestamp_upper_bound = (double)time(nullptr),
+  });
+
+  if (last_quotes.empty()) {
+    const std::string error_message = Formatted::error_message(
+        "No available quotes for " + this->symbol + " in the database.");
+    throw std::runtime_error(error_message);
+  }
+
+  const double end_epoch = last_quotes.front().timestamp;
+
   this->config = {
       .account_margin_multiplier =
           config_json[api_key]["backtest_account_margin_multiplier"],
@@ -101,6 +116,7 @@ void Alpaca::TaoBotBacktest::load_config() {
           config_json[api_key]["backtest_account_starting_equity"],
       .api_key = api_key,
       .api_key_id = config_json[api_key]["id"],
+      .end_epoch = end_epoch,
       .start_epoch = current_epoch,
   };
 }

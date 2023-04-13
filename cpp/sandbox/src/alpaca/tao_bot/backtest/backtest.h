@@ -4,6 +4,7 @@
 #include "alpaca/types.cpp"                     // Alpaca::t
 #include "lib/pg/pg.cpp"                        // Pg
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "models/quote/quote.cpp"               // DB::Quote
 #include "models/utils/utils.cpp"               // DB::Utils
 #include "types.cpp"                            // Global::t
 #include <map>                                  // std::map
@@ -24,6 +25,7 @@ public:
     double account_starting_equity = 0.00;
     std::string api_key;
     std::string api_key_id;
+    double end_epoch = 0;
     double start_epoch = 0;
   } config;
 
@@ -39,8 +41,9 @@ public:
   bool is_active = false;
   int slow_query_countdown = 0;
   long int started_at = time(nullptr);
+  std::string symbol;
 
-  bool has_reached_now(const double);
+  bool has_reached_end(const double);
   bool should_exec_slow_query(const double);
 
   int next_day_market_open_epoch(const double);
@@ -52,6 +55,7 @@ public:
 
 private:
   DB::AccountStat db_account_stat;
+  DB::Quote db_quote;
   DB::Utils db_utils;
 
   static constexpr int SLOW_QUERY_EVERY = 100;

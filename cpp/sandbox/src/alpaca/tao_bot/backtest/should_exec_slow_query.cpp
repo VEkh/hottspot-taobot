@@ -2,11 +2,11 @@
 #define ALPACA__TAO_BOT_BACKTEST_should_exec_slow_query
 
 #include "backtest.h"          // Alpaca::TaoBotBacktest
-#include "has_reached_now.cpp" // has_reached_now
+#include "has_reached_end.cpp" // has_reached_end
 
 bool Alpaca::TaoBotBacktest::should_exec_slow_query(
     const double current_epoch) {
-  if (has_reached_now(current_epoch)) {
+  if (has_reached_end(current_epoch)) {
     return true;
   }
 

@@ -27,6 +27,17 @@ bool Alpaca::TaoBot::should_terminate() {
     return are_positions_closed;
   }
 
+  if (this->backtest.is_active &&
+      this->backtest.has_reached_end(this->current_epoch)) {
+    if (are_positions_closed) {
+      std::cout << fmt.bold << fmt.red << std::endl;
+      puts("⌛ Reached end of backtest time range.");
+      std::cout << fmt.reset;
+    }
+
+    return are_positions_closed;
+  }
+
   if (max_account_loss_reached()) {
     if (are_positions_closed) {
       std::cout << fmt.bold << fmt.red << std::endl;

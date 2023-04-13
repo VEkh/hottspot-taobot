@@ -28,6 +28,11 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
+  if (this->backtest.is_active &&
+      this->backtest.has_reached_end(this->current_epoch)) {
+    return true;
+  }
+
   this->exit_prices = build_exit_prices();
 
   if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
