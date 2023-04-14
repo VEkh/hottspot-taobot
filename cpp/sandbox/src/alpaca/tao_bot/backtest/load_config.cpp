@@ -93,21 +93,32 @@ void Alpaca::TaoBotBacktest::load_config() {
   tm backtest_start_at =
       ::utils::time_::parse_timestamp(start_at_string, "%Y-%m-%d %H:%M:%S");
 
-  const double current_epoch = (double)mktime(&backtest_start_at);
+  const double start_epoch = (double)mktime(&backtest_start_at);
+  double end_epoch;
 
-  const std::vector<quote_t> last_quotes = this->db_quote.get_last({
-      .limit = 1,
-      .symbol = this->symbol,
-      .timestamp_upper_bound = (double)time(nullptr),
-  });
+  if (config_json[api_key].contains("backtest_end_at")) {
+    const std::string end_at_string = config_json[api_key]["backtest_end_at"];
 
-  if (last_quotes.empty()) {
-    const std::string error_message = Formatted::error_message(
-        "No available quotes for " + this->symbol + " in the database.");
-    throw std::runtime_error(error_message);
+    tm backtest_end_at =
+        ::utils::time_::parse_timestamp(end_at_string, "%Y-%m-%d %H:%M:%S");
+
+    end_epoch = (double)mktime(&backtest_end_at);
+
+  } else {
+    const std::vector<quote_t> last_quotes = this->db_quote.get_last({
+        .limit = 1,
+        .symbol = this->symbol,
+        .timestamp_upper_bound = (double)time(nullptr),
+    });
+
+    if (last_quotes.empty()) {
+      const std::string error_message = Formatted::error_message(
+          "No available quotes for " + this->symbol + " in the database.");
+      throw std::runtime_error(error_message);
+    }
+
+    end_epoch = last_quotes.front().timestamp;
   }
-
-  const double end_epoch = last_quotes.front().timestamp;
 
   this->config = {
       .account_margin_multiplier =
@@ -117,7 +128,7 @@ void Alpaca::TaoBotBacktest::load_config() {
       .api_key = api_key,
       .api_key_id = config_json[api_key]["id"],
       .end_epoch = end_epoch,
-      .start_epoch = current_epoch,
+      .start_epoch = start_epoch,
   };
 }
 
