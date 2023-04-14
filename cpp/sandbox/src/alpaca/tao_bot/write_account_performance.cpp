@@ -8,7 +8,6 @@
 #include "new_positions_opened.cpp" // new_positions_opened
 #include "runtime.cpp"              // runtime
 #include "tao_bot.h"                // Alpaca::TaoBot
-#include <ctime>                    // std::time
 #include <iostream>                 // std::cout, std::endl
 #include <stdexcept>                // std::invalid_argument
 #include <string>                   // std::string
@@ -46,9 +45,8 @@ void Alpaca::TaoBot::write_account_performance() {
     file >> persisted_performances;
     file.close();
 
-    const long int now = std::time(nullptr);
-    const std::string timestamp_key =
-        ::utils::time_::date_string(now, "%FT%R", "America/Chicago");
+    const std::string timestamp_key = ::utils::time_::date_string(
+        this->current_epoch, "%FT%R", "America/Chicago");
 
     persisted_performances[timestamp_key] = account_performance;
 

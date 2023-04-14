@@ -6,7 +6,6 @@
 #include "dynamic_one_sec_variance.cpp" // dynamic_one_sec_variance
 #include "lib/utils/float.cpp"          // ::utils::float_
 #include "tao_bot.h"                    // Alpaca::TaoBot
-#include <ctime>                        // std::time
 
 double Alpaca::TaoBot::target_position_profit() {
   const double static_one_sec_variance =
@@ -19,7 +18,7 @@ double Alpaca::TaoBot::target_position_profit() {
   const double max = max_profit_to_price_movement_ratio + 25;
 
   const int duration =
-      std::time(nullptr) - this->open_order_ptr->max_profit_timestamp;
+      this->current_epoch - this->open_order_ptr->max_profit_timestamp;
 
   return ::utils::float_::sigmoid(max, min, duration, -0.005, 2.5 * 60) *
          dynamic_one_sec_variance();

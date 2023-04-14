@@ -10,10 +10,10 @@
 #include "lib/utils/json.cpp"                   // ::utils::json
 #include "models/account_stat/account_stat.cpp" // DB::AccountStat
 #include <algorithm>                            // std::max
-#include <ctime>                                // std::time
 #include <iostream>                             // std::cout, std::endl
 #include <math.h>                               // abs
 #include <string>                               // std::stod, std::string
+#include <time.h>                               // time
 #include <unistd.h>                             // usleep
 
 void Alpaca::Client::stream_account() {
@@ -67,7 +67,7 @@ void Alpaca::Client::stream_account() {
       account_json["original_balance"] = original_equity;
       account_json["original_margin_buying_power"] =
           original_margin_buying_power;
-      account_json["timestamp"] = (long int)std::time(nullptr);
+      account_json["timestamp"] = (long int)time(nullptr);
 
       std::cout << fmt.bold << fmt.cyan << account_json.dump(2) << fmt.reset
                 << std::endl

@@ -58,7 +58,7 @@ DB::Quote::one_sec_variance_avgs_t DB::Quote::get_one_sec_variance_avgs(
   snprintf(query, query_l, query_format, sanitized_symbol,
            timestamp_upper_bound, timestamp_upper_bound);
 
-  query_result_t result = this->conn.exec(query, debug);
+  query_result_t result = this->conn.exec(query, args.debug);
 
   PQfreemem(sanitized_symbol);
 

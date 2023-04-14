@@ -3,10 +3,9 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot
 #include <algorithm> // std::max
-#include <ctime>     // std::time
 
 int Alpaca::TaoBot::profit_duration(const double timestamp) {
-  return std::max(0.0, std::time(nullptr) - timestamp);
+  return std::max(0.0, this->current_epoch - timestamp);
 }
 
 #endif

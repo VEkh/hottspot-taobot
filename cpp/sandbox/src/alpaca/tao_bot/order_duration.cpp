@@ -9,7 +9,7 @@ int Alpaca::TaoBot::order_duration(const order_t *order_ptr) {
     return 0;
   }
 
-  return std::time(nullptr) - order_ptr->timestamp;
+  return this->current_epoch - order_ptr->timestamp;
 }
 
 #endif

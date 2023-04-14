@@ -5,7 +5,6 @@
 #include "open_position_profit.cpp" // open_position_profit
 #include "tao_bot.h"                // Alpaca::TaoBot, order_t
 #include <algorithm>                // std::max
-#include <ctime>                    // std::time
 
 void Alpaca::TaoBot::set_profit(order_t *order) {
   const double profit = compute_profit(order, &(this->quotes.front()));
@@ -19,7 +18,7 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
   order->profit = profit;
 
   if (profit == order->max_profit) {
-    order->max_profit_timestamp = std::time(nullptr);
+    order->max_profit_timestamp = this->current_epoch;
   }
 }
 

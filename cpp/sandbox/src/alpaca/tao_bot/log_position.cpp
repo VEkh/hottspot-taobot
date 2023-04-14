@@ -12,7 +12,6 @@
 #include "profit_percentage.cpp"    // profit_percentage
 #include "tao_bot.h"                // Alpaca::TaoBot, fmt, order_action_t
 #include <algorithm>                // std::max
-#include <ctime>                    // std::time
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 
@@ -72,7 +71,7 @@ void Alpaca::TaoBot::log_position() {
 
   const int duration = order_duration(this->open_order_ptr);
   const int max_profit_duration =
-      std::time(nullptr) - this->open_order_ptr->max_profit_timestamp;
+      this->current_epoch - this->open_order_ptr->max_profit_timestamp;
 
   printf("Duration: %s • Max Profit Duration: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str(),

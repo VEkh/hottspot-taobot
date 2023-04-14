@@ -12,7 +12,6 @@
 
 #include "alpaca/constants.cpp" // Alpaca::constants
 #include "lib/utils/string.cpp" // ::utils::string
-#include <ctime>                // std::time
 #include <iostream>             // std::cout, std::endl
 #include <stdio.h>              // printf
 #include <string>               // std::string
@@ -25,14 +24,14 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
                               const double quantity_) {
   order_t new_open_order;
   new_open_order.action = open_action;
-  new_open_order.max_profit_timestamp = std::time(nullptr);
+  new_open_order.max_profit_timestamp = this->current_epoch;
   new_open_order.quantity = quantity_;
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;
   new_close_order.action = close_action;
-  new_close_order.max_profit_timestamp = std::time(nullptr);
+  new_close_order.max_profit_timestamp = this->current_epoch;
   new_close_order.quantity = quantity_;
   new_close_order.symbol = this->symbol;
   new_close_order.type = order_type_t::MARKET;

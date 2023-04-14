@@ -17,11 +17,11 @@
 #include "lib/utils/float.cpp"                    // ::utils::float_
 #include "lib/utils/json.cpp"                     // ::utils::json
 #include "post.cpp"                               // post
-#include <ctime>                                  // std::time, std::time_t
 #include <iostream>                               // std::cout, std::endl
 #include <regex>     // std::regex, std::regex_search
 #include <stdexcept> // std::invalid_argument
 #include <string>    // std::stod
+#include <time.h>    // time
 #include <unistd.h>  // usleep
 
 namespace Alpaca {
@@ -100,7 +100,7 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
 
   order->id = response["id"];
   order->status = order_status_t::ORDER_NEW;
-  order->timestamp = std::time(nullptr);
+  order->timestamp = time(nullptr);
 
   return curl_client;
 }

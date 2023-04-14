@@ -4,7 +4,6 @@
 #include "lib/utils/float.cpp" // ::utils::float_
 #include "tao_bot.h"           // Alpaca::TaoBot
 #include <algorithm>           // std::max
-#include <ctime>               // std::time
 
 double Alpaca::TaoBot::target_account_profit() {
   const double min_target = 0.0105;
@@ -19,7 +18,7 @@ double Alpaca::TaoBot::target_account_profit() {
       std::max(session_max_profit_ratio, min_target) + 0.03;
 
   const double max_equity_duration =
-      (std::time(nullptr) -
+      (this->current_epoch -
        this->account_snapshot.session_max_equity_timestamp) /
       one_hour_seconds;
 

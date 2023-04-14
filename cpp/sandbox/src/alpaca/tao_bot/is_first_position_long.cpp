@@ -3,8 +3,8 @@
 
 #include "lib/utils/io.cpp" // ::utils::io
 #include "tao_bot.h"        // Alpaca::TaoBot
-#include <ctime>            // std::localtime, std::time, std::time_t
 #include <string>           // std::string
+#include <time.h>           // localtime, tm
 #include <vector>           // std::vector
 
 bool Alpaca::TaoBot::is_first_position_long() {
@@ -21,9 +21,8 @@ bool Alpaca::TaoBot::is_first_position_long() {
   }
 
   const int is_index_even = index % 2 == 0;
-  std::time_t local_now;
-  std::time(&local_now);
-  std::tm local_time = *std::localtime(&local_now);
+  const long int current_epoch_int = this->current_epoch;
+  tm local_time = *localtime(&current_epoch_int);
 
   return (local_time.tm_mday + local_time.tm_min + is_index_even) % 2 == 0;
 }
