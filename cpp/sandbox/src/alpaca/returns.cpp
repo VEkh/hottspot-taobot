@@ -60,7 +60,7 @@ void log() {
   int consecutive_wins = 0;
   int nasdaq_returns_length = nasdaq_returns.size();
   int sp500_returns_length = sp500_returns.size();
-  int start_weekday = 0;
+  int max_week_of_year = 0;
   int total_losses = 0;
   int total_wins = 0;
 
@@ -98,12 +98,13 @@ void log() {
     const double open = return_json["open"];
     const double profit_dollars = close - open;
     const double profit_ratio = profit_dollars / open;
+    const int week_of_year =
+        (parsed_date.tm_yday - parsed_date.tm_wday + 7) / 7;
 
-    start_weekday = std::max(start_weekday, parsed_date.tm_wday);
+    max_week_of_year = std::max(max_week_of_year, week_of_year);
 
-    is_week_total_complete = (bool)(is_week_total_complete ||
-                                    (it != hottspot_returns.rbegin() &&
-                                     parsed_date.tm_wday >= start_weekday));
+    is_week_total_complete =
+        (bool)(is_week_total_complete || week_of_year < max_week_of_year);
 
     avg_profit_ratio += profit_ratio / hottspot_returns_length;
     grand_total += profit_dollars;
