@@ -28,16 +28,21 @@
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
-    log_timestamps();
+    if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+      log_timestamps();
+    }
+
     read_quotes();
     read_price_movement();
     update_account_snapshot();
 
-    log_account_snapshot();
-    log_quote();
-    log_price_movement();
-    log_position();
-    log_performance();
+    if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+      log_account_snapshot();
+      log_quote();
+      log_price_movement();
+      log_position();
+      log_performance();
+    }
 
     set_position_status();
     cancel_stale_open_order();
@@ -50,11 +55,14 @@ void Alpaca::TaoBot::watch() {
     log_position_results();
     reset_position();
 
-    std::cout << "\n\n\n\n\n\n\n\n\n\n" << std::flush;
+    if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+      std::cout << "\n\n\n\n\n\n\n\n\n\n" << std::flush;
+    }
 
     advance_current_epoch();
   }
 
+  log_account_snapshot();
   log_end_of_trading_period();
   write_account_performance();
 
