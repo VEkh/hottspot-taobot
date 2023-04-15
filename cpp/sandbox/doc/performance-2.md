@@ -1,4 +1,4 @@
-### 2023-04-05:
+### 2023-04-15:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -11,9 +11,694 @@ Original Balance:      $ (-) (-%)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-03-08)
-* Win Record: 9W (47.37%) 10L (Total 19)
+* Win Record: 13W (50.0%) 13L (Total 26)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2023-04-14:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Fri Apr 14 14:59:00 2023 • Runtime: 06:59:00
+Current Equity:          $26,739.67 (-1,716.26) (-6.03%)
+Max Equity:              $28,737.54 (+281.61) (+0.99%) @ 09:03 CDT
+Overall Max Equity:      $28,737.54 (+281.61) (+0.99%) @ 09:03 CDT
+Min Equity:              $26,218.71 (-2,237.22) (-7.86%) @ 14:21 CDT
+Original Equity:         $28,455.93
+Session Original Equity: $28,455.93 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Fri Apr 14 14:59:00 2023 • Runtime: 06:59:01
+Current Equity:          $40,505.55 (+1,944.70) (+5.04%)
+Max Equity:              $40,690.20 (+2,129.35) (+5.52%) @ 13:34 CDT
+Overall Max Equity:      $40,690.20 (+2,129.35) (+5.52%) @ 13:34 CDT
+Min Equity:              $37,432.06 (-1,128.79) (-2.93%) @ 08:42 CDT
+Original Equity:         $38,560.85
+Session Original Equity: $38,560.85 (+0.00) (+0.00%)
+```
+
+
+**All Backtest Start Dates Are 2023-03-27**
+
+**Backtest (Infinity:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:49:27
+Current Equity:                   $30,212.51 (+3,300.35) (+12.26%)
+Max Equity:                       $32,091.40 (+5,179.24) (+19.24%) @ 08:36 CDT
+Overall Max Equity:               $30,212.51 (+3,300.35) (+12.26%) @ 14:58 CDT
+Min Equity:                       $26,207.33 (-704.83) (-2.62%) @ 08:38 CDT
+Original Equity:                  $26,912.16
+Session Original Equity:          $30,000.00 (+3,087.84) (+11.47%)
+
+Wed, Apr 12, 2023 14:58:19 CDT • Runtime: 390:28:19 • Backtest Runtime: 02:47:56
+Current Equity:                   $30,165.10 (+3,395.15) (+12.68%)
+Max Equity:                       $32,144.10 (+5,374.15) (+20.08%) @ 08:38 CDT
+Overall Max Equity:               $30,165.10 (+3,395.15) (+12.68%) @ 14:58 CDT
+Min Equity:                       $26,179.19 (-590.76) (-2.21%) @ 08:40 CDT
+Original Equity:                  $26,769.95
+Session Original Equity:          $30,000.00 (+3,230.05) (+12.07%)
+```
+
+**Backtest (1.5:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:48:55
+Current Equity:                   $21,360.08 (+435.60) (+2.08%)
+Max Equity:                       $30,349.47 (+9,424.99) (+45.04%) @ 08:40 CDT
+Overall Max Equity:               $22,174.76 (+1,250.28) (+5.98%) @ 13:29 CDT
+Min Equity:                       $20,850.03 (-74.45) (-0.36%) @ 08:34 CDT
+Original Equity:                  $20,924.48
+Session Original Equity:          $30,000.00 (+9,075.52) (+43.37%)
+
+Wed, Apr 12, 2023 14:58:19 CDT • Runtime: 390:28:19 • Backtest Runtime: 02:47:55
+Current Equity:                   $21,352.67 (+389.57) (+1.86%)
+Max Equity:                       $30,241.69 (+9,278.59) (+44.26%) @ 08:40 CDT
+Overall Max Equity:               $22,139.18 (+1,176.08) (+5.61%) @ 13:29 CDT
+Min Equity:                       $20,899.73 (-63.37) (-0.30%) @ 08:34 CDT
+Original Equity:                  $20,963.10
+Session Original Equity:          $30,000.00 (+9,036.90) (+43.11%)
+```
+
+**Backtest (2.0:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:49:30
+Current Equity:                   $24,877.83 (+1,387.13) (+5.91%)
+Max Equity:                       $30,000.00 (+6,509.30) (+27.71%) @ 08:30 CDT
+Overall Max Equity:               $25,166.19 (+1,675.49) (+7.13%) @ 13:20 CDT
+Min Equity:                       $23,211.31 (-279.39) (-1.19%) @ 08:34 CDT
+Original Equity:                  $23,490.70
+Session Original Equity:          $30,000.00 (+6,509.30) (+27.71%)
+
+💡 Second run didn't finish because of a timed out quote fetch
+```
+
+**Backtest (2.25:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:49:06
+Current Equity:                   $22,567.30 (-456.07) (-1.98%)
+Max Equity:                       $30,953.72 (+7,930.35) (+34.44%) @ 12:02 CDT
+Overall Max Equity:               $24,297.52 (+1,274.15) (+5.53%) @ 08:51 CDT
+Min Equity:                       $22,452.47 (-570.89) (-2.48%) @ 13:04 CDT
+Original Equity:                  $23,023.37
+Session Original Equity:          $30,000.00 (+6,976.63) (+30.30%)
+
+Wed, Apr 12, 2023 14:58:19 CDT • Runtime: 390:28:19 • Backtest Runtime: 02:47:57
+Current Equity:                   $22,527.19 (-715.83) (-3.08%)
+Max Equity:                       $30,919.32 (+7,676.29) (+33.03%) @ 12:01 CDT
+Overall Max Equity:               $24,286.71 (+1,043.68) (+4.49%) @ 08:56 CDT
+Min Equity:                       $22,445.94 (-797.08) (-3.43%) @ 13:04 CDT
+Original Equity:                  $23,243.03
+Session Original Equity:          $30,000.00 (+6,756.97) (+29.07%)
+```
+
+**🥇 Backtest (2.5:1 Ratio) 🥇**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:49:36
+Current Equity:                   $34,599.64 (+57.48) (+0.17%)
+Max Equity:                       $40,746.99 (+6,204.83) (+17.96%) @ 13:57 CDT
+Overall Max Equity:               $35,848.83 (+1,306.68) (+3.78%) @ 10:39 CDT
+Min Equity:                       $33,241.96 (-1,300.19) (-3.76%) @ 13:03 CDT
+Original Equity:                  $34,542.15
+Session Original Equity:          $30,000.00 (-4,542.15) (-13.15%)
+
+Wed, Apr 12, 2023 14:58:19 CDT • Runtime: 390:28:19 • Backtest Runtime: 02:47:57
+Current Equity:                   $34,608.41 (+66.61) (+0.19%)
+Max Equity:                       $40,747.97 (+6,206.17) (+17.97%) @ 13:20 CDT
+Overall Max Equity:               $35,853.14 (+1,311.33) (+3.80%) @ 10:39 CDT
+Min Equity:                       $33,219.49 (-1,322.32) (-3.83%) @ 13:03 CDT
+Original Equity:                  $34,541.80
+Session Original Equity:          $30,000.00 (-4,541.80) (-13.15%)
+```
+
+**Backtest (2.75:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:49:30
+Current Equity:                   $32,079.69 (+788.15) (+2.52%)
+Max Equity:                       $36,189.12 (+4,897.59) (+15.65%) @ 13:23 CDT
+Overall Max Equity:               $32,721.32 (+1,429.78) (+4.57%) @ 09:15 CDT
+Min Equity:                       $30,475.22 (-816.31) (-2.61%) @ 08:40 CDT
+Original Equity:                  $31,291.53
+Session Original Equity:          $30,000.00 (-1,291.53) (-4.13%)
+
+Wed, Apr 12, 2023 14:58:19 CDT • Runtime: 390:28:19 • Backtest Runtime: 02:47:55
+Current Equity:                   $32,104.38 (+799.36) (+2.55%)
+Max Equity:                       $36,205.82 (+4,900.80) (+15.65%) @ 13:23 CDT
+Overall Max Equity:               $32,747.16 (+1,442.14) (+4.61%) @ 09:11 CDT
+Min Equity:                       $30,533.60 (-771.42) (-2.46%) @ 08:40 CDT
+Original Equity:                  $31,305.02
+Session Original Equity:          $30,000.00 (-1,305.02) (-4.17%)
+```
+
+**Backtest (3.0:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 03:48:49
+Current Equity:                   $29,835.40 (+837.51) (+2.89%)
+Max Equity:                       $35,415.03 (+6,417.14) (+22.13%) @ 13:02 CDT
+Overall Max Equity:               $30,420.79 (+1,422.90) (+4.91%) @ 09:13 CDT
+Min Equity:                       $28,272.09 (-725.80) (-2.50%) @ 08:39 CDT
+Original Equity:                  $28,997.89
+Session Original Equity:          $30,000.00 (+1,002.11) (+3.46%)
+
+Wed, Apr 12, 2023 14:58:19 CDT • Runtime: 390:28:19 • Backtest Runtime: 02:47:54
+Current Equity:                   $29,811.51 (+1,056.43) (+3.67%)
+Max Equity:                       $35,425.43 (+6,670.35) (+23.20%) @ 13:02 CDT
+Overall Max Equity:               $30,383.58 (+1,628.50) (+5.66%) @ 09:11 CDT
+Min Equity:                       $28,273.50 (-481.58) (-1.67%) @ 08:40 CDT
+Original Equity:                  $28,755.08
+Session Original Equity:          $30,000.00 (+1,244.92) (+4.33%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 13W (50.0%) 13L (Total 26)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 46W (51.69%) (Consecutive: 0) 43L (Consecutive: 1)
+* Latest Return: -$1,720.14 (-6.04%) (-298.16% 9-5 Salary) (vs. NASDAQ: -0.21%) (vs. S&P 500: -0.21%)
+* Week's Return: +$66.37 • Total Return: -$9,834.70
+* Average Return: -0.36% • Average NASDAQ Return: +0.04% • Average S&P 500 Return: +0.04%
+
+###### Notes
+* The prior backtests can't fully be trusted because they had some bugs that
+  precluded idempotence. I fixed those and got a more honest account of each
+  strategy's performance.
+* I need to double check their idempotence.
+* The good news is that TaoBot is profitable with two stop-profit-to-stop-loss
+  ratios: 2.5:1 and 2.75:1
+* 2.5:1 had the highest finish and max. This is fittiingly the ratio that I've
+  been using.
+* I still need to understand why this is and how subject to change it is.
+* Other interesting findings
+  * The `No Stop Profit` strategy ended up at basically break even
+  * The smaller ratios < 2.25 resulted in large losses. This is consistent with
+    my historical findings.
+* After correcting bugs and running a second backtest, the tests appear to be
+  idempotent. I'll continue to run them and assess their findings.
+
+###### Next Thing(s) to Try
+
+### 2023-04-13:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thu Apr 13 14:59:00 2023 • Runtime: 06:42:00
+Current Equity:          $28,460.23 (+1,659.84) (+6.19%)
+Max Equity:              $28,682.17 (+1,881.78) (+7.02%) @ 14:02 CDT
+Overall Max Equity:      $28,682.17 (+1,881.78) (+7.02%) @ 14:02 CDT
+Min Equity:              $26,686.32 (-114.07) (-0.43%) @ 09:04 CDT
+Original Equity:         $26,800.39
+Session Original Equity: $26,800.39 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Thu Apr 13 14:59:00 2023 • Runtime: 06:42:06
+Current Equity:          $38,578.09 (+1,584.51) (+4.28%)
+Max Equity:              $38,657.90 (+1,664.32) (+4.50%) @ 13:20 CDT
+Overall Max Equity:      $38,657.90 (+1,664.32) (+4.50%) @ 13:20 CDT
+Min Equity:              $36,687.36 (-306.22) (-0.83%) @ 08:59 CDT
+Original Equity:         $36,993.58
+Session Original Equity: $36,993.58 (+0.00) (+0.00%)
+```
+
+**All Backtest Start Dates Are 2023-03-27**
+
+**Backtest (Infinity:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:54:17
+Current Equity:                   $32,073.85 (+4,887.38) (+17.98%)
+Max Equity:                       $34,526.65 (+7,340.17) (+27.00%) @ 08:38 CDT
+Overall Max Equity:               $32,073.85 (+4,887.38) (+17.98%) @ 14:58 CDT
+Min Equity:                       $27,148.63 (-37.85) (-0.14%) @ 08:33 CDT
+Original Equity:                  $27,186.48
+Session Original Equity:          $29,726.46 (+2,539.98) (+9.34%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:19
+Current Equity:                   $29,512.69 (+4,500.18) (+17.99%)
+Max Equity:                       $30,820.92 (+5,808.41) (+23.22%) @ 08:38 CDT
+Overall Max Equity:               $29,512.69 (+4,500.18) (+17.99%) @ 14:58 CDT
+Min Equity:                       $24,977.77 (-34.74) (-0.14%) @ 08:33 CDT
+Original Equity:                  $25,012.51
+Session Original Equity:          $29,723.55 (+4,711.04) (+18.83%)
+```
+
+**Backtest (1.5:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:54:41
+Current Equity:                   $26,439.74 (+1,801.83) (+7.31%)
+Max Equity:                       $30,414.36 (+5,776.44) (+23.45%) @ 10:26 CDT
+Overall Max Equity:               $27,382.76 (+2,744.84) (+11.14%) @ 13:29 CDT
+Min Equity:                       $24,637.92 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:                  $24,637.92
+Session Original Equity:          $29,896.40 (+5,258.48) (+21.34%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:33
+Current Equity:                   $20,239.84 (+357.56) (+1.80%)
+Max Equity:                       $30,557.86 (+10,675.58) (+53.69%) @ 14:25 CDT
+Overall Max Equity:               $20,976.10 (+1,093.82) (+5.50%) @ 13:27 CDT
+Min Equity:                       $19,882.28 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:                  $19,882.28
+Session Original Equity:          $29,723.55 (+9,841.27) (+49.50%)
+```
+
+**Backtest (2.0:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:53:42
+Current Equity:                   $40,921.21 (+801.61) (+2.00%)
+Max Equity:                       $41,881.41 (+1,761.82) (+4.39%) @ 09:34 CDT
+Overall Max Equity:               $41,881.41 (+1,761.82) (+4.39%) @ 09:34 CDT
+Min Equity:                       $39,304.75 (-814.84) (-2.03%) @ 13:19 CDT
+Original Equity:                  $40,119.60
+Session Original Equity:          $30,110.58 (-10,009.01) (-24.95%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:43
+Current Equity:                   $33,679.54 (+1,716.00) (+5.37%)
+Max Equity:                       $34,060.06 (+2,096.52) (+6.56%) @ 13:19 CDT
+Overall Max Equity:               $34,060.06 (+2,096.52) (+6.56%) @ 13:19 CDT
+Min Equity:                       $31,440.70 (-522.84) (-1.64%) @ 09:33 CDT
+Original Equity:                  $31,963.54
+Session Original Equity:          $30,055.29 (-1,908.25) (-5.97%)
+```
+
+**Backtest (2.25:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:54:46
+Current Equity:                   $35,871.53 (-972.71) (-2.64%)
+Max Equity:                       $38,673.00 (+1,828.76) (+4.96%) @ 08:51 CDT
+Overall Max Equity:               $38,673.00 (+1,828.76) (+4.96%) @ 08:51 CDT
+Min Equity:                       $35,743.43 (-1,100.80) (-2.99%) @ 13:04 CDT
+Original Equity:                  $36,844.23
+Session Original Equity:          $30,133.86 (-6,710.37) (-18.21%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:45
+Current Equity:                   $40,966.79 (+3,722.57) (+10.00%)
+Max Equity:                       $41,251.82 (+4,007.60) (+10.76%) @ 14:17 CDT
+Overall Max Equity:               $41,251.82 (+4,007.60) (+10.76%) @ 14:17 CDT
+Min Equity:                       $37,191.18 (-53.04) (-0.14%) @ 08:33 CDT
+Original Equity:                  $37,244.22
+Session Original Equity:          $30,014.55 (-7,229.67) (-19.41%)
+```
+
+**Backtest (2.5:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:53:53
+Current Equity:                   $38,493.33 (+322.25) (+0.84%)
+Max Equity:                       $39,895.84 (+1,724.75) (+4.52%) @ 10:38 CDT
+Overall Max Equity:               $39,895.84 (+1,724.75) (+4.52%) @ 10:38 CDT
+Min Equity:                       $37,010.25 (-1,160.83) (-3.04%) @ 12:37 CDT
+Original Equity:                  $38,171.08
+Session Original Equity:          $30,119.31 (-8,051.77) (-21.09%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:48
+Current Equity:                   $41,589.37 (+474.08) (+1.15%)
+Max Equity:                       $43,364.49 (+2,249.20) (+5.47%) @ 08:55 CDT
+Overall Max Equity:               $43,364.49 (+2,249.20) (+5.47%) @ 08:55 CDT
+Min Equity:                       $39,955.88 (-1,159.42) (-2.82%) @ 12:37 CDT
+Original Equity:                  $41,115.29
+Session Original Equity:          $30,014.55 (-11,100.74) (-27.00%)
+```
+
+**Backtest (2.75:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:54:20
+Current Equity:                   $32,307.49 (+1,051.84) (+3.37%)
+Max Equity:                       $34,215.46 (+2,959.81) (+9.47%) @ 08:36 CDT
+Overall Max Equity:               $32,756.17 (+1,500.51) (+4.80%) @ 08:51 CDT
+Min Equity:                       $30,948.78 (-306.88) (-0.98%) @ 13:02 CDT
+Original Equity:                  $31,255.65
+Session Original Equity:          $30,056.24 (-1,199.41) (-3.84%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:51
+Current Equity:                   $29,647.94 (+1,290.51) (+4.55%)
+Max Equity:                       $34,156.53 (+5,799.10) (+20.45%) @ 08:36 CDT
+Overall Max Equity:               $30,141.18 (+1,783.76) (+6.29%) @ 08:55 CDT
+Min Equity:                       $28,319.01 (-38.42) (-0.14%) @ 08:33 CDT
+Original Equity:                  $28,357.42
+Session Original Equity:          $30,014.55 (+1,657.12) (+5.84%)
+```
+
+**Backtest (3.0:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:54:23
+Current Equity:                   $30,663.01 (+765.53) (+2.56%)
+Max Equity:                       $34,606.39 (+4,708.91) (+15.75%) @ 09:37 CDT
+Overall Max Equity:               $31,189.94 (+1,292.47) (+4.32%) @ 09:13 CDT
+Min Equity:                       $29,150.69 (-746.78) (-2.50%) @ 08:39 CDT
+Original Equity:                  $29,897.48
+Session Original Equity:          $30,090.28 (+192.80) (+0.64%)
+
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:52:58
+Current Equity:                   $25,423.23 (+820.19) (+3.33%)
+Max Equity:                       $32,654.76 (+8,051.72) (+32.73%) @ 13:02 CDT
+Overall Max Equity:               $25,921.43 (+1,318.40) (+5.36%) @ 09:15 CDT
+Min Equity:                       $24,143.99 (-459.04) (-1.87%) @ 08:39 CDT
+Original Equity:                  $24,603.03
+Session Original Equity:          $29,851.59 (+5,248.56) (+21.33%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 13W (52.0%) 12L (Total 25)
+
+###### Notes
+* Nice win in production 🙌
+* I suspect the backtest hangs are from db queries that inexplicably stall. I'm
+  adding a `statement_timeout` of 1 second to help avoid this if it is indeed
+  the problem.
+* After two successful full backtest runs there were no more hangs so that's
+  good 🎈
+* The backtest runs, however, are not idempotent 😬
+* Tomorrow I'll investigate why this may be, but the silver lining is that
+  their relative performance was consistent across both runs: 2.0:1, 2.25:1,
+  and 2.5:1 consistently had the highest returns. This is great!
+* For now, I'll keep the 2.5:1 ratio for live trading. When I achieve backtest
+  idempotence, I'll adjust (if necessary) to the most profitable
+  stop-profit-to-stop-loss ratio.
+* Great job so far though! This thing is really coming together 😊
+
+###### Next Thing(s) to Try
+
+### 2023-04-12:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wed Apr 12 14:59:00 2023 • Runtime: 06:58:58
+Current Equity:          $26,816.86 (+1,394.57) (+5.49%)
+Max Equity:              $26,952.88 (+1,530.59) (+6.02%) @ 14:46 CDT
+Overall Max Equity:      $26,952.88 (+1,530.59) (+6.02%) @ 14:46 CDT
+Min Equity:              $25,193.17 (-229.12) (-0.90%) @ 09:49 CDT
+Original Equity:         $25,422.29
+Session Original Equity: $25,422.29 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Wed Apr 12 14:59:00 2023 • Runtime: 06:59:06
+Current Equity:          $37,014.96 (+1,187.52) (+3.31%)
+Max Equity:              $37,793.23 (+1,965.79) (+5.49%) @ 11:34 CDT
+Overall Max Equity:      $37,793.23 (+1,965.79) (+5.49%) @ 11:34 CDT
+Min Equity:              $35,118.92 (-708.52) (-1.98%) @ 08:40 CDT
+Original Equity:         $35,827.44
+Session Original Equity: $35,827.44 (+0.00) (+0.00%)
+```
+
+**Backtest (Infinity:1 Ratio)**
+```
+Tue, Apr 11, 2023 13:14:11 CDT • Runtime: 364:44:11 • Backtest Runtime: 02:15:47
+Current Equity:                   $31,093.16 (-691.01) (-2.17%)
+Max Equity:                       $33,052.50 (+1,268.33) (+3.99%) @ 14:56 CDT
+Overall Max Equity:               $31,928.36 (+144.19) (+0.45%) @ 10:09 CDT
+Min Equity:                       $30,758.60 (-1,025.57) (-3.23%) @ 09:27 CDT
+Original Equity:                  $31,784.17
+Session Original Equity:          $29,761.38 (-2,022.79) (-6.36%)
+```
+
+**Backtest (2.0:1 Ratio)**
+```
+Mon, Apr 10, 2023 09:50:32 CDT • Runtime: 337:20:32 • Backtest Runtime: 01:58:10
+Current Equity:                   $31,751.06 (+465.91) (+1.49%)
+Max Equity:                       $36,093.43 (+4,808.28) (+15.37%) @ 10:35 CDT
+Overall Max Equity:               $32,560.46 (+1,275.31) (+4.08%) @ 09:00 CDT
+Min Equity:                       $31,285.15 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:                  $31,285.15
+Session Original Equity:          $29,889.42 (-1,395.73) (-4.46%)
+```
+
+**Backtest (2.5:1 Ratio)**
+```
+Wed, Apr 12, 2023 14:59:00 CDT • Runtime: 390:29:00 • Backtest Runtime: 02:28:30
+Current Equity:                   $35,293.49 (+209.40) (+0.60%)
+Max Equity:                       $41,452.07 (+6,367.99) (+18.15%) @ 08:30 CDT
+Overall Max Equity:               $36,575.38 (+1,491.30) (+4.25%) @ 10:38 CDT
+Min Equity:                       $33,948.78 (-1,135.30) (-3.24%) @ 13:07 CDT
+Original Equity:                  $35,084.08
+Session Original Equity:          $29,679.90 (-5,404.18) (-15.40%)
+```
+
+**Backtest (2.75:1 Ratio)**
+```
+Mon, Apr 10, 2023 09:07:16 CDT • Runtime: 336:37:16 • Backtest Runtime: 01:56:44
+Current Equity:                   $34,491.03 (+2,354.00) (+7.32%)
+Max Equity:                       $35,478.84 (+3,341.81) (+10.40%) @ 13:02 CDT
+Overall Max Equity:               $34,804.39 (+2,667.36) (+8.30%) @ 08:56 CDT
+Min Equity:                       $32,137.03 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:                  $32,137.03
+Session Original Equity:          $29,726.46 (-2,410.57) (-7.50%)
+```
+
+**Backtest (3.0:1 Ratio)**
+```
+Thu, Apr 06, 2023 14:50:44 CDT • Runtime: 246:20:44 • Backtest Runtime: 01:55:07
+Current Equity:                   $30,947.42 (-312.37) (-1.00%)
+Max Equity:                       $34,432.81 (+3,173.02) (+10.15%) @ 09:37 CDT
+Overall Max Equity:               $31,871.42 (+611.62) (+1.96%) @ 08:56 CDT
+Min Equity:                       $29,881.27 (-1,378.52) (-4.41%) @ 10:30 CDT
+Original Equity:                  $31,259.79
+Session Original Equity:          $30,000.00 (-1,259.79) (-4.03%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 12W (50.0%) 12L (Total 24)
+
+###### Notes
+* As anticipated, changing nothing between yesterday's big loss and today was
+  the correct thing to do.
+* In the past I would have eiher changed the algorithm or abstained from
+  trading today out of fear.
+* The week could still close at a loss, but for now, I've bought some time.
+* More importantly...I FINISHED BUILDING BACKTESTING!! 🎉🎈🎊🥳
+* Now I have to run several different strategies and observe their performance
+  to tell whether TaoBot's current iteration is theoretically / historically
+  profitable.
+* I can only start as soon at 3/27, but it's better than nothing!
+* Potential problem with backtesting. It looks like the margin buying power
+  keeps getting updated instead of staying at the original margin buying for
+  the day. Buuut, I think that's just in the log. Double check that the actual
+  quantity computations are using the right values.
+* WOW! After the first round of comparative backtesting, the 2.5:1 ratio is the
+  winner! 🥳
+* This should come as no surprise as it has performed the best in the past
+  several weeks.
+* The more surprising finding is that all approaches were profitable, even if
+  only mildly.
+* The most profitable ratios are 2.5:1 and 2.75:1. I'll keep experimenting and
+  analyzing the data to learn why this may be and if I can further optimize,
+  but great job building this!
+* WAIT!! None of the backtests finished!! 😱 They all stalled. Maybe this is
+  because I was running them concurrently?
+* I guess I'll have to try again and run them one-by-one 😬
+
+###### Next Thing(s) to Try
+
+### 2023-04-11:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tue Apr 11 14:59:00 2023 • Runtime: 06:59:00
+Current Equity:          $25,433.35 (-3,379.55) (-11.73%)
+Max Equity:              $28,969.69 (+156.79) (+0.54%) @ 08:31 CDT
+Overall Max Equity:      $28,969.69 (+156.79) (+0.54%) @ 08:31 CDT
+Min Equity:              $24,782.78 (-4,030.12) (-13.99%) @ 12:14 CDT
+Original Equity:         $28,812.90
+Session Original Equity: $28,812.90 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Tue Apr 11 14:59:00 2023 • Runtime: 06:59:04
+Current Equity:          $35,882.64 (-7,346.82) (-16.99%)
+Max Equity:              $43,276.73 (+47.27) (+0.11%) @ 08:31 CDT
+Overall Max Equity:      $43,276.73 (+47.27) (+0.11%) @ 08:31 CDT
+Min Equity:              $35,736.54 (-7,492.92) (-17.33%) @ 14:54 CDT
+Original Equity:         $43,229.46
+Session Original Equity: $43,229.46 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 11W (47.83%) 12L (Total 23)
+
+###### Notes
+* Wow! This was the worst recorded for both production and staging.
+* Staging is still profiting, so I'm not necessarily dissuaded about the the
+  strategy's overal profitability.
+* I also anticipated that this could / would happen. In the past, I would close
+  down production or change its strategy only to find that staging / the prior
+  strategy profits the following day.
+* I'll only shut down production if I can demonstrate in backtesting that the
+  strategy is in fact unprofitable in the long run.
+
+###### Next Thing(s) to Try
+
+### 2023-04-10:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Mon Apr 10 14:59:00 2023 • Runtime: 06:59:00
+Current Equity:          $28,818.97 (+2,119.18) (+7.94%)
+Max Equity:              $28,990.59 (+2,290.80) (+8.58%) @ 13:22 CDT
+Overall Max Equity:      $28,990.59 (+2,290.80) (+8.58%) @ 13:22 CDT
+Min Equity:              $26,545.54 (-154.25) (-0.58%) @ 08:31 CDT
+Original Equity:         $26,699.79
+Session Original Equity: $26,699.79 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Mon Apr 10 14:59:00 2023 • Runtime: 06:59:01
+Current Equity:          $43,259.96 (+4,893.35) (+12.75%)
+Max Equity:              $43,727.25 (+5,360.64) (+13.97%) @ 13:21 CDT
+Overall Max Equity:      $43,727.25 (+5,360.64) (+13.97%) @ 13:21 CDT
+Min Equity:              $37,943.85 (-422.76) (-1.10%) @ 08:31 CDT
+Original Equity:         $38,366.61
+Session Original Equity: $38,366.61 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 11W (50.0%) 11L (Total 22)
+
+###### Notes
+* Today was Production's highest return (I think), at least with the current
+  iteration of TaoBot.
+* Staging had another very large return and...for the first time ever...IT
+  BROKE $40K!!! 🎉🥳 🎈
+* This is a really major landmark for staging and is when I would have gone
+  live if I hadn't been already running live, concurrently for the last couple
+  of weeks.
+* Hitting this threshold increases my confidence in the current TaoBot
+  iteration and affirms its three major components:
+  1. STAY IN -- Don't close at predetermined account profit / loss levels. You
+     need mega wins to overcome mega losses and the only way to do that is by
+     staying in, even after a sizeable gain.
+
+     The only way this is profitable, however, is if you avoid catastrophic loss
+     days (<-6%). This seems to only be achieveable by having stop profit
+     threshold. This brings me to my second point.
+
+  2. TAKE PROFIT -- You have to take intraday profits in order to take
+     advantage large intraday (reversing) trends. Being able to capture on
+     these treds introduces the possibility of capturing very large profits.
+
+     The question this presents is, "At what point should you take your
+     profit?" with a follow up of, "How does it compare to my stop loss?". See
+     the final point.
+
+  3. YOU WILL BOTH INEVITABLY WIN _AND_ LOSE -- You can count on losing at
+     least one position just about every day, but you can also almost always
+     count on winning at least one position every day. Anothing I discovered is
+     that **if your single loss magnitude outweighs your single win magnitude,
+     you will almost certainly lose money**.
+
+     My theory, however, is that the inverse must also be true: if your single
+     win magnitude outweighs your single loss magnitude, you should win over
+     time. If, however, your take profit is too high, you'll rarely reach it
+     and it's effectively the same as not taking any profit.
+
+* The final piece of this puzzle has been determining what the take profit
+  threshold should be. More specifically, what should its ratio to the current
+  stop loss be? A `stop_profit` that is too small, doesn't take full advantage
+  of large trends and is easily overcome by lossess. A `stop_profit` that's too
+  large will never be reached. The ratio that I've found most successful over
+  the last month has been a 2.5:1 stop-profit-to-stop-loss ratio.
+
+* I want to confirm this with backtesting and see if perhaps another ratio is
+  more profitable. Does this ratio change over time? If so, is it computable?
+* All these will be uncovered over the next couple of weeks.
+
+###### Next Thing(s) to Try
+
+### 2023-04-06:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thu, Apr 06, 2023 09:03:42 CDT • Runtime: 01:03:40
+Current Equity:                   $26369.36 (+492.13) (+1.90%)
+Max Equity:                       $26491.06 (+613.83) (+2.37%) @ 08:37 CDT
+Overall Max Equity:               $26491.06 (+613.83) (+2.37%) @ 08:37 CDT
+Min Equity:                       $25544.59 (-332.64) (-1.29%) @ 08:32 CDT
+Original Equity:                  $25877.23
+Session Original Equity:          $25877.23 (+0.00) (+0.00%)
+
+**Revert to 2.5:1 ratio
+
+Thu Apr  6 14:59:00 2023 • Runtime: 05:54:58
+Current Equity:          $26,715.38 (+838.15) (+3.24%)
+Max Equity:              $27,252.22 (+1,374.99) (+5.31%) @ 13:04 CDT
+Overall Max Equity:      $27,252.22 (+1,374.99) (+5.31%) @ 13:04 CDT
+Min Equity:              $25,544.59 (-332.64) (-1.29%) @ 08:32 CDT
+Original Equity:         $25,877.23
+Session Original Equity: $26,369.36 (+492.13) (+1.90%)
+```
+
+**Alpha (STAGING)**
+```
+Thu Apr  6 14:59:00 2023 • Runtime: 06:59:00
+Current Equity:          $38,384.12 (+3,705.95) (+10.69%)
+Max Equity:              $38,899.07 (+4,220.90) (+12.17%) @ 14:20 CDT
+Overall Max Equity:      $38,899.07 (+4,220.90) (+12.17%) @ 14:20 CDT
+Min Equity:              $34,322.49 (-355.68) (-1.03%) @ 08:32 CDT
+Original Equity:         $34,678.17
+Session Original Equity: $34,678.17 (+0.00) (+0.00%)
+```
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 10W (45.0%) 11L (Total 21)
+
+###### Notes
+* Okay, the 2.5:1 strategy was outperforming the Avg Max Profit strategy so I
+  reverted after 30 min in production.
+* Production ended up winning as a result.
+* Smaller take profits do poorly during long trending periods and may do well
+  in consolidation, but it's not definitive.
+* This is all the more reason to keep building backtesting. It will give me
+  more confidence in each iteration I draft.
+* In even better news, staging is at its higher balance ever 🎉 and it still
+  hasn't sustained a loss greater than ~-6% since 3/10. Since the 2.5:1 ratio,
+  it has suffered a couple of ~-6% losses, but it has overall profited.
+* Demonstrate this in backtesting and see if that ratio can be computed, in
+  case it changes.
+
+###### Next Thing(s) to Try
+
+### 2023-04-05:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wed Apr  5 14:59:00 2023 • Runtime: 06:59:00
+Current Equity:          $25,887.83 (-395.65) (-1.51%)
+Max Equity:              $27,229.55 (+946.07) (+3.60%) @ 12:02 CDT
+Overall Max Equity:      $27,229.55 (+946.07) (+3.60%) @ 12:02 CDT
+Min Equity:              $25,787.50 (-495.98) (-1.89%) @ 14:56 CDT
+Original Equity:         $26,283.48
+Session Original Equity: $26,283.48 (+0.00) (+0.00%)
+```
+
+**Alpha (STAGING)**
+```
+Wed Apr  5 14:59:00 2023 • Runtime: 06:59:05
+Current Equity:          $34,692.54 (+3,310.35) (+10.55%)
+Max Equity:              $34,864.52 (+3,482.33) (+11.10%) @ 14:25 CDT
+Overall Max Equity:      $34,864.52 (+3,482.33) (+11.10%) @ 14:25 CDT
+Min Equity:              $31,076.94 (-305.25) (-0.97%) @ 08:33 CDT
+Original Equity:         $31,382.19
+Session Original Equity: $31,382.19 (+0.00) (+0.00%)
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 9W (45.0%) 11L (Total 20)
+
+###### Notes
+* Of course the old strategy would yield a big win in staging and not
+  production the first day I change strategies 😭
+* The peak was high and I'm still curious to see how this plays out. Either
+  way, I'm building backtesting and will test all kinds of strategies to see
+  which is actually profitable.
+
 ###### Next Thing(s) to Try
 
 ### 2023-04-04:
@@ -323,7 +1008,7 @@ Session Original Balance: $34,108.03 (+0.00) (+0.00%)
 
 ###### Next Thing(s) to Try
 
-### 2023-03-23:
+### 2023-03-23: 🚨 First day of 2.5:1 Ratio 🚨
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**

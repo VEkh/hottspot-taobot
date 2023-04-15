@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_read_streamed_account
 #define ALPACA__TAO_BOT_read_streamed_account
 
+// NOTE: Deprecated
+
 #include "deps.cpp"           // json, nlohmann
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/utils/time.cpp" // ::utils::time_

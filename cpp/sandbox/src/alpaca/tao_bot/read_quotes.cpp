@@ -3,7 +3,6 @@
 
 #include "lib/formatted.cpp" // Formatted
 #include "tao_bot.h"         // Alpaca::TaoBot, quote_t
-#include <stdexcept>         // std::runtime_error
 #include <vector>            // std::vector
 
 void Alpaca::TaoBot::read_quotes() {
@@ -16,7 +15,10 @@ void Alpaca::TaoBot::read_quotes() {
   if (quotes_.empty()) {
     const std::string error_message = Formatted::error_message(
         "No available quotes for " + this->symbol + " in the database.");
-    throw std::runtime_error(error_message);
+
+    printf("%s\n", error_message.c_str());
+
+    return read_quotes();
   }
 
   this->quotes = quotes_;

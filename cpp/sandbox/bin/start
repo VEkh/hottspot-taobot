@@ -4,10 +4,11 @@ set -e
 shopt -s extglob
 
 app_dir=$(realpath "$(dirname "$0")/../../")
-project=$(dirname "$0" | xargs basename)
+project=$(dirname "${0}" | xargs basename)
 
+# ASCII, ascii_print, extract_flags, to_lower, to_upper
 # shellcheck disable=1090
-source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
+source "${app_dir}/bin/utils"
 
 flags=($(extract_flags "${@}"))
 declare -A flag_map

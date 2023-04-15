@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_target_account_profit
 #define ALPACA__TAO_BOT_target_account_profit
 
+// NOTE: Deprecated
+
 #include "lib/utils/float.cpp" // ::utils::float_
 #include "tao_bot.h"           // Alpaca::TaoBot
 #include <algorithm>           // std::max

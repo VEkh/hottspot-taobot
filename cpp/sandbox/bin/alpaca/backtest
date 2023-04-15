@@ -1,0 +1,47 @@
+#!/bin/bash
+
+set -e
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+project=$(dirname "${0}" | xargs basename)
+
+# ASCII, ascii_print,to_title
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils"
+
+# shellcheck disable=1090,1091
+source "${app_dir}/db/utils" # build_db_uri
+
+api_keys_filepath="${app_dir}/bin/${project}/backtest_api_keys"
+
+if [[ ! -f "${api_keys_filepath}" ]]; then
+  ascii_print "❗ Missing a file with backtest api keys at ${api_keys_filepath}" "red" >&2
+
+  exit 1
+fi
+
+backtest_db_name="hottspot_capital_backtest"
+master_db_env="production"
+master_db_name="hottspot_capital_${master_db_env}"
+master_db_uri=$(build_db_uri "${master_db_env}")
+
+
+if psql -lqt | cut -d \| -f 1 | grep -qw "${backtest_db_name}"; then
+  ascii_print "🐘 Dropping Old ${ASCII["red"]}Backtest ${ASCII["yellow"]}Database" "yellow"
+
+  dropdb -f "${backtest_db_name}"
+fi
+
+ascii_print "🐘 Re-creating Backtest Database From ${ASCII["red"]}$(to_title "${master_db_env}")" "yellow"
+
+psql "${master_db_uri}" -c "create database ${backtest_db_name} template ${master_db_name}"
+
+
+api_keys=($(cat "${api_keys_filepath}"))
+
+for api_key in "${api_keys[@]}"; do
+  "${app_dir}/db/backtest" truncate --api-key="${api_key}" --env=backtest &&
+  "${app_dir}/bin/alpaca/restart" --api-key="${api_key}" --env=backtest
+done
+
+printf "%b" "${ASCII["reset"]}"

@@ -2,14 +2,16 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include <time.h>
+#include "lib/pg/pg.cpp"          // Pg
+#include "models/utils/utils.cpp" // DB::Utils
 
 int main(int argc, char *argv[]) {
-  time_t now = time(nullptr);
-  tm now_tm = *localtime(&now);
+  Pg pg;
+  pg.connect();
 
-  const int week_of_year = (now_tm.tm_yday - now_tm.tm_wday + 7) / 7;
+  DB::Utils db_utils(pg);
 
-  printf("yday: %i • wday: %i\n", now_tm.tm_yday, now_tm.tm_wday);
-  printf("week_of_year: %i\n", week_of_year);
+  db_utils.set_param({"statement_timeout", "1000"}, true);
+
+  pg.disconnect();
 }

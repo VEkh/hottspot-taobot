@@ -7,6 +7,7 @@
 #include "lib/utils/time.cpp" // ::utils::time_
 #include <fstream>            // std::ifstream, std::ios
 #include <stdexcept>          // std::invalid_argument, std::runtime_error
+#include <stdio.h>            // printf
 #include <string>             // std::string
 #include <time.h>             // mktime, time, tm
 #include <vector>             // std::vector
@@ -114,7 +115,10 @@ void Alpaca::TaoBotBacktest::load_config() {
     if (last_quotes.empty()) {
       const std::string error_message = Formatted::error_message(
           "No available quotes for " + this->symbol + " in the database.");
-      throw std::runtime_error(error_message);
+
+      printf("%s\n", error_message.c_str());
+
+      return load_config();
     }
 
     end_epoch = last_quotes.front().timestamp;

@@ -1,6 +1,8 @@
 #ifndef ALPACA__TAO_BOT_write_account_performance
 #define ALPACA__TAO_BOT_write_account_performance
 
+// NOTE: Deprecated
+
 #include "deps.cpp"                 // json, nlohmann
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/io.cpp"         // ::utils::io
