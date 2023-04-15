@@ -37,13 +37,15 @@ case $1 in
       ps aux |
       grep "[t]ao_bot" |
       grep "${project}" |
-      grep -i "$(to_lower "${symbol}")"
+      grep -i "$(to_lower "${symbol}")" ||
+      true
     )
 
     if [[ "${project}" = "alpaca" ]]; then
       state=$(
         echo -e "${state}" |
-        grep -- "--api-key=.*${api_key}" || true
+        grep -- "--api-key=.*${api_key}" ||
+        true
       )
     fi
 
@@ -58,12 +60,13 @@ case $1 in
     ;;
 
   *)
-    state=$(ps aux | grep "[t]ao_bot" | grep "${project}")
+    state=$(ps aux | grep "[t]ao_bot" | grep "${project}" || true)
 
     if [[ "${project}" = "alpaca" ]]; then
       state=$(
         echo -e "${state}" |
-        grep -- "--api-key=.*${api_key}" || true
+        grep -- "--api-key=.*${api_key}" ||
+        true
       )
     fi
 

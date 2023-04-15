@@ -5,7 +5,7 @@ set -e
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 project=$(dirname "${0}" | xargs basename)
 
-# ASCII, ascii_print,to_title
+# ASCII, ascii_print, to_title, to_upper
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
@@ -14,34 +14,109 @@ source "${app_dir}/db/utils" # build_db_uri
 
 api_keys_filepath="${app_dir}/bin/${project}/backtest_api_keys"
 
-if [[ ! -f "${api_keys_filepath}" ]]; then
-  ascii_print "❗ Missing a file with backtest api keys at ${api_keys_filepath}" "red" >&2
-
-  exit 1
-fi
-
-backtest_db_name="hottspot_capital_backtest"
-master_db_env="production"
-master_db_name="hottspot_capital_${master_db_env}"
-master_db_uri=$(build_db_uri "${master_db_env}")
+function reset_db() {
+  backtest_db_name="hottspot_capital_backtest"
+  master_db_env="production"
+  master_db_name="hottspot_capital_${master_db_env}"
+  master_db_uri=$(build_db_uri "${master_db_env}")
 
 
-if psql -lqt | cut -d \| -f 1 | grep -qw "${backtest_db_name}"; then
-  ascii_print "🐘 Dropping Old ${ASCII["red"]}Backtest ${ASCII["yellow"]}Database" "yellow"
+  if psql -lqt | cut -d \| -f 1 | grep -qw "${backtest_db_name}"; then
+    ascii_print "🐘 Dropping Old ${ASCII["red"]}Backtest ${ASCII["yellow"]}Database" "yellow"
 
-  dropdb -f "${backtest_db_name}"
-fi
+    dropdb -f "${backtest_db_name}"
+  fi
 
-ascii_print "🐘 Re-creating Backtest Database From ${ASCII["red"]}$(to_title "${master_db_env}")" "yellow"
+  ascii_print "🐘 Re-Creating Backtest Database From ${ASCII["red"]}$(to_title "${master_db_env}")" "yellow"
 
-psql "${master_db_uri}" -c "create database ${backtest_db_name} template ${master_db_name}"
+  psql "${master_db_uri}" -c "create database ${backtest_db_name} template ${master_db_name}"
+}
 
+function restart_all() {
+  stop_all
+  start_all
+}
 
-api_keys=($(cat "${api_keys_filepath}"))
+function restart_single() {
+  stop_single "${@}"
+  start_single "${@}"
+}
 
-for api_key in "${api_keys[@]}"; do
-  "${app_dir}/db/backtest" truncate --api-key="${api_key}" --env=backtest &&
-  "${app_dir}/bin/alpaca/restart" --api-key="${api_key}" --env=backtest
-done
+function start_all() {
+  if [[ ! -f "${api_keys_filepath}" ]]; then
+    ascii_print "❗ Missing a file with backtest api keys at ${api_keys_filepath}" "red" >&2
+
+    exit 1
+  fi
+
+  reset_db
+
+  api_keys=($(cat "${api_keys_filepath}"))
+
+  for api_key in "${api_keys[@]}"; do
+    start_single "--api-key=${api_key}"
+  done
+}
+
+function start_single() {
+  "${app_dir}/db/backtest" truncate "${@}" --env=backtest &&
+  "${app_dir}/bin/${project}/restart" "${@}" --env=backtest
+}
+
+function stop_all() {
+  if [[ ! -f "${api_keys_filepath}" ]]; then
+    ascii_print "❗ Missing a file with backtest api keys at ${api_keys_filepath}" "red" >&2
+
+    exit 1
+  fi
+
+  api_keys=($(cat "${api_keys_filepath}"))
+
+  for api_key in "${api_keys[@]}"; do
+    stop_single "--api-key=${api_key}"
+  done
+}
+
+function stop_single() {
+  "${app_dir}/bin/${project}/stop" "${@}"
+}
+
+ascii_print "\n$(date)\n" "cyan"
+
+case $1 in
+  reset_db)
+    reset_db
+    ;;
+  restart)
+    if [[ -z "${2}" ]]; then
+      restart_all
+    else
+      restart_single "${@:2}"
+    fi
+    ;;
+  start)
+    if [[ -z "${2}" ]]; then
+      start_all
+    else
+      start_single "${@:2}"
+    fi
+    ;;
+  stop)
+    if [[ -z "${2}" ]]; then
+      stop_all
+    else
+      stop_single "${@:2}"
+    fi
+    ;;
+  *|help)
+    ascii_print "⌛ $(to_upper "${project}") BACKTESTING\n" "underline" "yellow"
+    ascii_print "Description: Control backtest operations\n" "cyan"
+    ascii_print "Usage: backtest [COMMAND] [ARGS]" "yellow"
+    ascii_print "  reset_db                       Drop backtest database and re-create it from master." "yellow"
+    ascii_print "  restart (--api-key=<API_KEY>)  Restart all (single) backtest(s)." "yellow"
+    ascii_print "  start (--api-key=<API_KEY>)    Start all (single) backtest(s)." "yellow"
+    ascii_print "  stop  (--api-key=<API_KEY>)    Stop all (single) currently running backtest(s)." "yellow"
+    ;;
+esac
 
 printf "%b" "${ASCII["reset"]}"
