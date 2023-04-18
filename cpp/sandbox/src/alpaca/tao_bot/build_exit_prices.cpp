@@ -2,31 +2,45 @@
 #define ALPACA__TAO_BOT_build_exit_prices
 
 #include "tao_bot.h" // Alpaca::TaoBot
-#include <map>       // std::map
 #include <math.h>    // abs
-#include <string>    // std::string
+
+#include <regex> // std::regex, std::regex_replace, std::regex_search, std::smatch
+#include <string> // std::string, std::stod
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->one_sec_variance_avgs.running;
 
-  const int max_loss_coefficient = -62.5;
   const double trailing_stop_profit_ratio = 1 / 1.1;
+  double max_loss_coefficient = -62.5;
   double stop_profit_stop_loss_ratio = 2.5;
 
   if (this->backtest.is_active) {
-    std::map<std::string, double> ratios = {
-        {"backtest_no_stop_profit", 99999.0},
-        {"backtest_1_5", 1.5},
-        {"backtest_2_0", 2.0},
-        {"backtest_2_25", 2.25},
-        {"backtest_2_5", 2.5},
-        {"backtest_2_75", 2.75},
-        {"backtest_3_0", 3},
-    };
+    std::smatch l_match;
+    std::smatch p_match;
 
-    const double ratio = ratios[this->backtest.config.api_key_id];
+    std::regex_search(this->backtest.config.api_key_id, l_match,
+                      std::regex("__(.+)$"));
 
-    stop_profit_stop_loss_ratio = ratio ? ratio : stop_profit_stop_loss_ratio;
+    std::regex_search(this->backtest.config.api_key_id, p_match,
+                      std::regex("^backtest_(.+)__"));
+
+    if (l_match.size() > 1) {
+      const std::string loss_coefficient_string =
+          std::regex_replace(l_match[1].str(), std::regex("_"), ".");
+
+      max_loss_coefficient = -1 * std::stod(loss_coefficient_string);
+    }
+
+    if (p_match.size() > 1) {
+      if (p_match[1].str() == "no_stop_profit") {
+        stop_profit_stop_loss_ratio = 99999;
+      } else {
+        const std::string ratio_string =
+            std::regex_replace(p_match[1].str(), std::regex("_"), ".");
+
+        stop_profit_stop_loss_ratio = std::stod(ratio_string);
+      }
+    }
   }
 
   const double max_loss = max_loss_coefficient * static_one_sec_variance;
