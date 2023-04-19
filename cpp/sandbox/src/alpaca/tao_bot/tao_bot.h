@@ -82,14 +82,9 @@ private:
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_snapshot_t get_account_balance(); // NOTE: Deprecated
-  account_snapshot_t
-  get_account_balance(const account_snapshot_t &); // NOTE: Deprecated
-
   account_exit_prices_t build_account_exit_prices();
 
   bool has_super_profited();
-  bool is_breaking_out();
   bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_first_position_long();
@@ -106,32 +101,22 @@ private:
   bool should_stop_profit();
   bool should_terminate();
   double account_profit_expanding_trailing_stop_ratio(const double);
-  double batch_volatility(); // NOTE: Deprecated
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity();
-  double current_price();
-  double dynamic_one_sec_variance();
-  double min_target_tick_movement();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
-  double target_account_profit();
-  double target_position_profit();
-  double volatility();
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *);
   int profit_duration(const double);
   int runtime();
   int tradeable_symbols_count();
-  json fetch_account_balance(); // NOTE: Deprecated
   json fetch_order(const order_t *);
-  json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
 
-  std::pair<double, double> get_quote_price_range();
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
