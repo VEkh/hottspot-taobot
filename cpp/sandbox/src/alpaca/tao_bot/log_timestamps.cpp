@@ -12,26 +12,25 @@
 #include <time.h>                // time
 
 void Alpaca::TaoBot::log_timestamps() {
-  std::string backtest_runtime = "";
+  std::cout << fmt.bold << fmt.cyan;
+
+  printf("⌚ Current Time: %s • Runtime: %s\n",
+         ::utils::time_::date_string(this->current_epoch, "%a, %b %d, %Y %X %Z",
+                                     "America/Chicago")
+             .c_str(),
+         ::utils::integer_::seconds_to_clock(runtime()).c_str());
 
   if (this->backtest.is_active) {
     const long int backtest_duration =
         time(nullptr) - this->backtest.started_at;
 
-    const std::string backtest_duration_clock =
-        ::utils::integer_::seconds_to_clock(backtest_duration);
-
-    backtest_runtime =
-        std::string(" • Backtest Runtime: ") + backtest_duration_clock;
+    printf("⌛ Backtest Start Epoch: %s • Runtime: %s\n",
+           ::utils::time_::date_string(this->backtest.config.start_epoch,
+                                       "%a, %b %d, %Y %X %Z", "America/Chicago")
+               .c_str(),
+           ::utils::integer_::seconds_to_clock(backtest_duration).c_str());
   }
 
-  std::cout << fmt.bold << fmt.cyan;
-  printf("⌚ Current Time: %s • Runtime: %s%s\n",
-         ::utils::time_::date_string(this->current_epoch, "%a, %b %d, %Y %X %Z",
-                                     "America/Chicago")
-             .c_str(),
-         ::utils::integer_::seconds_to_clock(runtime()).c_str(),
-         backtest_runtime.c_str());
   std::cout << fmt.reset << std::endl;
 }
 
