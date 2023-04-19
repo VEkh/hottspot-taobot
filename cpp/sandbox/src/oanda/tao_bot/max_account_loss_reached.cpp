@@ -5,6 +5,8 @@
 #include "tao_bot.h"                     // Oanda::TaoBot
 
 bool Oanda::TaoBot::max_account_loss_reached() {
+  return false;
+
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
   return (exit_prices_.current_profit /

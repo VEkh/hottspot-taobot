@@ -39,6 +39,8 @@ void Oanda::TaoBot::write_quotes() {
 
     quotes_json = quotes_list;
 
+    this->db_quote.upsert(this->quotes.back());
+
     ::utils::io::write_to_file(quotes_json.dump(2), filepath.c_str());
   } catch (nlohmann::detail::parse_error &) {
     std::string error_message =

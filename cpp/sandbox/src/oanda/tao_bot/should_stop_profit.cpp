@@ -6,6 +6,8 @@
 #include "tao_bot.h"                     // Oanda::TaoBot, account_exit_prices_t
 
 bool Oanda::TaoBot::should_stop_profit() {
+  return false;
+
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
   const bool is_session_profit_slipping =

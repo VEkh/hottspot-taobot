@@ -3,6 +3,8 @@
 
 #include "deps.cpp"                // json
 #include "lib/formatted.cpp"       // Formatted
+#include "lib/pg/pg.cpp"           // Pg
+#include "models/quote/quote.cpp"  // DB::Quote
 #include "oanda/client/client.cpp" // Oanda::Client
 #include "oanda/types.cpp"         // Oanda::t
 #include "types.cpp"               // Global::t
@@ -14,7 +16,7 @@
 namespace Oanda {
 class TaoBot {
 public:
-  TaoBot(char *, std::map<std::string, std::string> &);
+  TaoBot(const std::string, std::map<std::string, std::string> &);
 
   void run();
 
@@ -36,18 +38,18 @@ private:
   using quote_t = Global::t::quote_t;
   using trade_status_t = Oanda::t::trade_status_t;
 
-  const double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  const double MAX_ACCOUNT_LOSS_RATIO = -0.04;
-  const double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
-  const double MIN_TARGET_TICK_MOVEMENT = 40.0;
-  const double POLLING_INTERVAL_SECONDS = 1.0;
-  const double TARGET_ACCOUNT_MIN_PROFIT_RATIO = 0.0025;
-  const double TARGET_ACCOUNT_PROFIT_RATIO = 0.04;
-  const double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
-  const int CONSOLIDATION_TIME_SECONDS = 45 * 60;
-  const int MAX_EXPECTED_LOSS_STREAK = 18;
-  const int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  const int QUOTES_MAX_SIZE = 6e3;
+  static constexpr double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
+  static constexpr double MAX_ACCOUNT_LOSS_RATIO = -0.04;
+  static constexpr double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
+  static constexpr double MIN_TARGET_TICK_MOVEMENT = 40.0;
+  static constexpr double POLLING_INTERVAL_SECONDS = 1.0;
+  static constexpr double TARGET_ACCOUNT_MIN_PROFIT_RATIO = 0.0025;
+  static constexpr double TARGET_ACCOUNT_PROFIT_RATIO = 0.04;
+  static constexpr double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  static constexpr int CONSOLIDATION_TIME_SECONDS = 45 * 60;
+  static constexpr int MAX_EXPECTED_LOSS_STREAK = 18;
+  static constexpr int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
+  static constexpr int QUOTES_MAX_SIZE = 6e3;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -68,10 +70,11 @@ private:
       {"USD_JPY", 1.8e-2}, {"USD_SEK", 4.2e-3},
   };
 
+  DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
+  Pg pg;
   account_snapshot_t account_snapshot;
-  char *symbol;
   exit_prices_t exit_prices;
   int init_closed_positions_count = 0;
   order_t *close_order_ptr = nullptr;
@@ -81,6 +84,7 @@ private:
   performance_t performance;
   price_movement_t price_movement;
   std::map<std::string, std::string> flags;
+  std::string symbol;
   std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
@@ -144,7 +148,7 @@ private:
   void fetch_and_persist_quote();
   void fetch_quote();
   void handle_partially_filled_close_order(const order_t *);
-  void initialize(char *, std::map<std::string, std::string> &);
+  void initialize(const std::string, std::map<std::string, std::string> &);
   void load_price_movement();
   void load_quotes();
   void log_account_snapshot();

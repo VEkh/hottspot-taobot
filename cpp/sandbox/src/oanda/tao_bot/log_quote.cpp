@@ -37,7 +37,7 @@ void Oanda::TaoBot::log_quote() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote (%i Min Range)\n", this->symbol,
+  printf("%s Quote (%i Min Range)\n", this->symbol.c_str(),
          this->CONSOLIDATION_TIME_SECONDS / 60);
   std::cout << fmt.no_underline;
 

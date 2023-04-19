@@ -4,6 +4,7 @@
 #include "sessions.cpp"        // Oanda::Sessions
 #include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
 #include <iostream>            // std::cout, std::endl
+#include <list>                // std::list
 #include <map>                 // std::map
 #include <sstream>             // std::ostringstream
 #include <stdio.h>             // printf
@@ -42,9 +43,26 @@ int main(int argc, char *argv[]) {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::string command = argv[1];
 
+  std::list<std::string> args = ::utils::io::extract_args(argc, argv);
+  args.pop_front(); // Remove `tao_bot` arg
+
+  std::list<std::string> upcased_args =
+      ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
+  upcased_args.pop_front(); // Remove `tao_bot` arg
+
+  std::map<std::string, std::string> flags =
+      ::utils::io::extract_flags(argc, argv);
+
   if (command == "fetch_quote") {
-    Oanda::Client oanda_client;
-    char *symbol = argc < 3 ? nullptr : argv[2];
+    if (upcased_args.empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to trade.");
+
+      throw std::invalid_argument(message);
+    }
+
+    const std::string symbol = upcased_args.front();
+    Oanda::Client oanda_client(flags);
 
     std::string quote = oanda_client.fetch_quote(symbol);
     puts(quote.c_str());
@@ -58,9 +76,6 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "stream_account") {
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
-
     Oanda::Client oanda_client(flags);
     oanda_client.stream_account();
 
@@ -68,9 +83,14 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "tao_bot") {
-    char *symbol = argc < 3 ? nullptr : argv[2];
-    std::map<std::string, std::string> flags =
-        ::utils::io::extract_flags(argc, argv);
+    if (upcased_args.empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to trade.");
+
+      throw std::invalid_argument(message);
+    }
+
+    const std::string symbol = upcased_args.front();
 
     Oanda::TaoBot tao_bot(symbol, flags);
     tao_bot.run();

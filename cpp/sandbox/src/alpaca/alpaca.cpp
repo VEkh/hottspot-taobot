@@ -91,10 +91,16 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "fetch_quote") {
-    Alpaca::Client alpaca_client;
-    char *symbol = argc < 3 ? nullptr : argv[2];
+    if (upcased_args.empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to trade.");
 
-    std::string quote = alpaca_client.fetch_quote(symbol);
+      throw std::invalid_argument(message);
+    }
+
+    Alpaca::Client alpaca_client(flags);
+
+    std::string quote = alpaca_client.fetch_quote(upcased_args.front());
     puts(quote.c_str());
 
     exit(0);

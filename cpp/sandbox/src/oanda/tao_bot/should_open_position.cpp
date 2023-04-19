@@ -8,6 +8,8 @@
 #include "tao_bot.h"           // Oanda::TaoBot, fmt, order_action_t
 
 bool Oanda::TaoBot::should_open_position() {
+  return false;
+
   if (!is_market_open()) {
     return false;
   }

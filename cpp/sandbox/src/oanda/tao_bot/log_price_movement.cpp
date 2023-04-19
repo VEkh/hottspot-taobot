@@ -20,7 +20,7 @@ void Oanda::TaoBot::log_price_movement() {
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
   printf(
-      "💲 %s Avg Tick Price Δ: (%s)\n", this->symbol,
+      "💲 %s Avg Tick Price Δ: (%s)\n", this->symbol.c_str(),
       ::utils::integer_::seconds_to_clock(this->AVG_ONE_SEC_VARIANCE_TIMEFRAME)
           .c_str());
 

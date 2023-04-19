@@ -21,7 +21,7 @@ class TaoBot {
 public:
   using position_t = Alpaca::t::position_t;
 
-  TaoBot(std::string, std::map<std::string, std::string> &);
+  TaoBot(const std::string, std::map<std::string, std::string> &);
 
   void run();
 

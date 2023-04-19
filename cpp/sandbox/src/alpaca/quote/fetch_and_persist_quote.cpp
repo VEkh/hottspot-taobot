@@ -26,7 +26,7 @@ void Alpaca::Quote::fetch_and_persist_quote(
     return fetch_and_persist_quote(symbol);
   }
 
-  db_quote.upsert(new_quote);
+  this->db_quote.upsert(new_quote);
 
   this->previous_quotes[symbol] =
       !current_price_ ? new_quote : this->current_quotes[symbol];

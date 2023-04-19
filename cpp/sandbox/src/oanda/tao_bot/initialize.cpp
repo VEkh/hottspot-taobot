@@ -5,9 +5,11 @@
 #include "fetch_and_persist_quote.cpp" // fetch_and_persist_quote
 #include "get_account_snapshot.cpp"    // get_account_snapshot
 #include "lib/formatted.cpp"           // Formatted::error_message
+#include "lib/pg/pg.cpp"               // Pg
 #include "lib/utils/boolean.cpp"       // ::utils::boolean
 #include "load_price_movement.cpp"     // load_rice_movement
 #include "load_quotes.cpp"             // load_quotes
+#include "models/quote/quote.cpp"      // DB::Quote
 #include "spread_limit.cpp"            // spread_limit
 #include "tao_bot.h"                   // Oanda::TaoBot, quantity, symbol
 #include <locale.h>                    // setlocale
@@ -15,9 +17,9 @@
 #include <stdexcept>                   // std::invalid_argument
 #include <string>                      // std::map
 
-void Oanda::TaoBot::initialize(char *symbol_,
+void Oanda::TaoBot::initialize(const std::string symbol_,
                                std::map<std::string, std::string> &flags_) {
-  if (symbol_ == nullptr) {
+  if (symbol_.empty()) {
     std::string message =
         Formatted::error_message("Must provide a currency pair");
 
@@ -36,9 +38,13 @@ void Oanda::TaoBot::initialize(char *symbol_,
   setlocale(LC_NUMERIC, "");
 
   this->flags = flags_;
-  this->symbol = symbol_;
+  this->pg = Pg(this->flags);
+  this->pg.connect();
 
   this->api_client = Oanda::Client(this->flags);
+  this->db_quote = DB::Quote(this->pg);
+  this->symbol = symbol_;
+
   this->account_snapshot = get_account_snapshot();
 
   load_quotes();

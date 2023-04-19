@@ -5,7 +5,7 @@
 #include "close_position.cpp"                 // close_position
 #include "fetch_and_persist_quote.cpp"        // fetch_and_persist_quote
 #include "is_market_open.cpp"                 // is_market_open
-#include "log_account_snapshot.cpp"            // log_account_snapshot
+#include "log_account_snapshot.cpp"           // log_account_snapshot
 #include "log_end_of_trading_period.cpp"      // log_end_of_trading_period
 #include "log_performance.cpp"                // log_performance
 #include "log_position.cpp"                   // log_position
@@ -21,7 +21,7 @@
 #include "set_position_status.cpp"            // set_order_statuses
 #include "should_terminate.cpp"               // should_terminate
 #include "tao_bot.h"                          // Oanda::TaoBot
-#include "update_account_snapshot.cpp"         // update_account_snapshot
+#include "update_account_snapshot.cpp"        // update_account_snapshot
 #include "write_account_performance.cpp"      // write_account_performance
 #include <iostream>                           // std::cout, std::flush
 #include <unistd.h>                           // usleep
@@ -57,6 +57,8 @@ void Oanda::TaoBot::watch() {
 
   log_end_of_trading_period();
   write_account_performance();
+
+  this->pg.disconnect();
 }
 
 #endif
