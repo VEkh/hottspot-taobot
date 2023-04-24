@@ -99,7 +99,7 @@ function load_config() {
     exit 0
   fi
 
-  env_config=$(jq ".${env} // empty" "${config_filepath}")
+  env_config=$(jq ".[\"${env}\"] // empty" "${config_filepath}")
 
   if [[ -z "${env_config}" ]]; then
     error_message=$(
