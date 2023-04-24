@@ -36,18 +36,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
       max_loss_coefficient = -1 * std::stod(loss_coefficient_string);
     }
-
-    if (std::regex_search(this->backtest.config.api_key_id,
-                          std::regex("^backtest_lab"))) {
-      const int loss_streak = this->performance.loss_streaks.current;
-
-      max_loss_coefficient = volatility() > 1.2 ? -45 : -62;
-      stop_profit_stop_loss_ratio = 2.5;
-    } else if (this->backtest.config.api_key_id ==
-               "backtest_2_5__62__act_stop") {
-      max_loss_coefficient = -62;
-      stop_profit_stop_loss_ratio = 2.5;
-    }
   }
 
   const double max_loss = max_loss_coefficient * static_one_sec_variance;
