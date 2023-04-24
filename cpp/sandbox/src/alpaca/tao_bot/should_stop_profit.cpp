@@ -4,8 +4,14 @@
 #include "build_account_exit_prices.cpp" // build_account_exit_prices
 #include "tao_bot.h" // Alpaca::TaoBot, account_exit_prices_t
 
+#include <regex> // std::regex, std::regex_search
+
 bool Alpaca::TaoBot::should_stop_profit() {
-  return false;
+  if (!this->backtest.is_active ||
+      !std::regex_search(this->backtest.config.api_key_id,
+                         std::regex("-act_(.+)__(.+)$"))) {
+    return false;
+  }
 
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
@@ -13,17 +19,6 @@ bool Alpaca::TaoBot::should_stop_profit() {
       exit_prices_.session_max_profit >=
           exit_prices_.session_target_max_profit &&
       exit_prices_.current_profit <= exit_prices_.session_stop_profit_loss;
-
-  const double current_profit_ratio =
-      exit_prices_.current_profit / this->account_snapshot.original_equity;
-
-  if (this->api_client.config.is_live &&
-      exit_prices_.overall_max_profit >= exit_prices_.target_max_profit &&
-      exit_prices_.session_max_profit <
-          exit_prices_.session_target_max_profit &&
-      current_profit_ratio > this->TARGET_ACCOUNT_PROFIT_RATIO) {
-    return true;
-  }
 
   return is_session_profit_slipping;
 }

@@ -36,17 +36,14 @@ private:
   using order_type_t = Alpaca::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
-  using performance_t = Alpaca::t::performance_t;
-  using price_movement_average_t =
-      Global::t::price_movement_average_t;              // NOTE: Deprecated
-  using price_movement_t = Global::t::price_movement_t; // NOTE: Deprecated
+  using performance_t = Global::t::performance_t;
   using quote_scoreboard_t = Alpaca::t::quote_scoreboard_t;
   using quote_t = Global::t::quote_t;
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  constexpr static double MAX_ACCOUNT_LOSS_RATIO = -0.03;
+  constexpr static double MAX_ACCOUNT_LOSS_RATIO = -0.025;
   constexpr static double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
-  constexpr static double TARGET_ACCOUNT_PROFIT_RATIO = 0.03;
+  constexpr static double TARGET_ACCOUNT_PROFIT_RATIO = 0.0625;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   const static int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   const static int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
@@ -76,7 +73,6 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  price_movement_t price_movement; // NOTE: Deprecated
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::vector<position_t> closed_positions;
@@ -149,7 +145,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *order);
-  void update_account_snapshot();
+  void update_account_snapshot(const bool);
   void watch();
   void write_account_performance();
   void write_close_position();

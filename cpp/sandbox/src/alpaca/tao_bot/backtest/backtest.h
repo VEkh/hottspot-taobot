@@ -51,7 +51,7 @@ public:
   std::string fetch_order(const order_t *, const quote_t &);
 
   void place_order(const long int, order_t *);
-  void upsert_account_stat(const double);
+  void upsert_account_stat(const double, const bool);
 
 private:
   DB::AccountStat db_account_stat;

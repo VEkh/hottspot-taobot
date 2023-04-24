@@ -10,30 +10,45 @@ Alpaca::TaoBot::build_account_exit_prices() {
   const double session_max_profit = this->account_snapshot.session_max_equity -
                                     this->account_snapshot.original_equity;
 
-  const double overall_max_profit =
-      this->account_snapshot.max_equity - this->account_snapshot.original_equity;
+  double target_account_profit_ratio = this->TARGET_ACCOUNT_PROFIT_RATIO;
+
+  if (this->backtest.is_active) {
+    std::smatch match;
+
+    std::regex_search(this->backtest.config.api_key_id, match,
+                      std::regex("-act_(.+)__(.+)$"));
+
+    if (match.size() > 2) {
+      const std::string ratio_string =
+          std::regex_replace(match[1].str(), std::regex("_"), ".");
+
+      target_account_profit_ratio = (std::stod(ratio_string) / 100.0);
+    }
+  }
+
+  const double overall_max_profit = this->account_snapshot.max_equity -
+                                    this->account_snapshot.original_equity;
 
   const double session_original_profit =
       this->account_snapshot.session_original_equity -
       this->account_snapshot.original_equity;
 
   const double session_target_profit_cash =
-      (this->account_snapshot.original_equity *
-       this->TARGET_ACCOUNT_PROFIT_RATIO) +
+      (this->account_snapshot.original_equity * target_account_profit_ratio) +
       session_original_profit;
 
   const double session_target_max_profit =
       (this->account_snapshot.original_equity *
-       (this->TARGET_ACCOUNT_PROFIT_RATIO +
+       (target_account_profit_ratio +
         this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP)) +
       session_original_profit;
 
-  const double target_profit_cash = (this->account_snapshot.original_equity *
-                                     this->TARGET_ACCOUNT_PROFIT_RATIO);
+  const double target_profit_cash =
+      (this->account_snapshot.original_equity * target_account_profit_ratio);
 
   const double target_max_profit =
       (this->account_snapshot.original_equity *
-       (this->TARGET_ACCOUNT_PROFIT_RATIO +
+       (target_account_profit_ratio +
         this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP));
 
   const double current_profit =

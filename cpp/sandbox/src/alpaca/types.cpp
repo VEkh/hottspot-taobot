@@ -6,7 +6,6 @@
 
 namespace Alpaca {
 namespace t {
-using order_win_result_streak_t = Global::t::order_win_result_streak_t;
 using order_win_result_t = Global::t::order_win_result_t;
 using quote_t = Global::t::quote_t;
 
@@ -54,16 +53,6 @@ struct order_t {
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   double timestamp = 0;
   order_type_t type = order_type_t::MARKET;
-};
-
-struct performance_t {
-  double current_balance = 0.00;
-  double current_loss_streak_balance = 0.00;
-  order_win_result_streak_t loss_streaks;
-  double max_balance = 0.00;
-  std::map<order_win_result_t, int> results;
-  std::string symbol;
-  order_win_result_streak_t win_streaks;
 };
 
 struct position_t {

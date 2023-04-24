@@ -63,7 +63,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       this->started_at = this->backtest.config.start_epoch;
     }
 
-    update_account_snapshot();
+    update_account_snapshot(true);
 
     this->init_closed_positions_count = this->closed_positions.size();
     this->performance = build_performance();

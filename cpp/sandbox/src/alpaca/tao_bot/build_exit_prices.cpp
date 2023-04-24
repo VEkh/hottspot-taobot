@@ -11,35 +11,42 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->one_sec_variance_avgs.running;
 
   const double trailing_stop_profit_ratio = 1 / 1.1;
-  double max_loss_coefficient = -62.5;
+  double max_loss_coefficient = -62.0;
   double stop_profit_stop_loss_ratio = 2.5;
 
   if (this->backtest.is_active) {
-    std::smatch l_match;
-    std::smatch p_match;
+    std::smatch match;
+    const std::string id = this->backtest.config.api_key_id;
 
-    std::regex_search(this->backtest.config.api_key_id, l_match,
-                      std::regex("__(.+)$"));
+    std::regex_search(id, match, std::regex("-pos_(.+)__(.+)-act")) ||
+        std::regex_search(id, match, std::regex("-pos_(.+)__(.+)$"));
 
-    std::regex_search(this->backtest.config.api_key_id, p_match,
-                      std::regex("^backtest_(.+)__"));
+    if (match.size() > 2) {
+      if (match[1].str() == "no_stop_profit") {
+        stop_profit_stop_loss_ratio = 99999;
+      } else {
+        const std::string ratio_string =
+            std::regex_replace(match[1].str(), std::regex("_"), ".");
 
-    if (l_match.size() > 1) {
+        stop_profit_stop_loss_ratio = std::stod(ratio_string);
+      }
+
       const std::string loss_coefficient_string =
-          std::regex_replace(l_match[1].str(), std::regex("_"), ".");
+          std::regex_replace(match[2].str(), std::regex("_"), ".");
 
       max_loss_coefficient = -1 * std::stod(loss_coefficient_string);
     }
 
-    if (p_match.size() > 1) {
-      if (p_match[1].str() == "no_stop_profit") {
-        stop_profit_stop_loss_ratio = 99999;
-      } else {
-        const std::string ratio_string =
-            std::regex_replace(p_match[1].str(), std::regex("_"), ".");
+    if (std::regex_search(this->backtest.config.api_key_id,
+                          std::regex("^backtest_lab"))) {
+      const int loss_streak = this->performance.loss_streaks.current;
 
-        stop_profit_stop_loss_ratio = std::stod(ratio_string);
-      }
+      max_loss_coefficient = volatility() > 1.2 ? -45 : -62;
+      stop_profit_stop_loss_ratio = 2.5;
+    } else if (this->backtest.config.api_key_id ==
+               "backtest_2_5__62__act_stop") {
+      max_loss_coefficient = -62;
+      stop_profit_stop_loss_ratio = 2.5;
     }
   }
 

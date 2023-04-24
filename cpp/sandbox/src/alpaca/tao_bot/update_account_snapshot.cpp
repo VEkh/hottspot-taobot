@@ -4,10 +4,10 @@
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "tao_bot.h"          // Alpaca::TaoBot
 
-void Alpaca::TaoBot::update_account_snapshot() {
-  this->backtest.upsert_account_stat(this->current_epoch);
+void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
+  this->backtest.upsert_account_stat(this->current_epoch, force);
 
-  if (!this->backtest.should_exec_slow_query(this->current_epoch)) {
+  if (!force && !this->backtest.should_exec_slow_query(this->current_epoch)) {
     return;
   }
 

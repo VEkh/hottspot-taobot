@@ -5,12 +5,13 @@
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "should_exec_slow_query.cpp" // should_exec_slow_query
 
-void Alpaca::TaoBotBacktest::upsert_account_stat(const double current_epoch) {
+void Alpaca::TaoBotBacktest::upsert_account_stat(const double current_epoch,
+                                                 const bool force = false) {
   if (!this->is_active) {
     return;
   }
 
-  if (!should_exec_slow_query(current_epoch)) {
+  if (!force && !should_exec_slow_query(current_epoch)) {
     return;
   }
 
