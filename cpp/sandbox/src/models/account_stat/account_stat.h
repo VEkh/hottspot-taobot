@@ -3,6 +3,7 @@
 
 #include "lib/pg/pg.cpp" // Pg
 #include "types.cpp"     // Global::t
+#include <list>          // std::list
 #include <string>        // std::string
 
 namespace DB {
@@ -35,6 +36,8 @@ public:
   AccountStat(){};
   AccountStat(Pg c) : conn(c){};
 
+  std::list<account_snapshot_t> get_daily_snapshots(const std::string,
+                                                    const bool);
   account_snapshot_t get_snapshot(const get_snapshot_args_t);
   account_snapshot_t get_snapshot_with_computed_equity(
       const get_snapshot_with_computed_equity_args_t);
@@ -46,7 +49,8 @@ private:
 
   Pg conn;
 
-  account_snapshot_t result_to_account_snapshot(const query_result_t &);
+  std::list<account_snapshot_t>
+  result_to_account_snapshots(const query_result_t &);
 };
 } // namespace DB
 

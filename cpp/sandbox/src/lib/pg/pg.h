@@ -22,6 +22,7 @@ public:
   };
 
   PGconn *conn = nullptr;
+  std::map<std::string, std::string> flags;
 
   PGconn *connect();
 
@@ -42,7 +43,6 @@ private:
   std::map<std::string, std::string> default_flags = {
       {"env", "development"},
   };
-  std::map<std::string, std::string> flags;
   std::string db_uri;
 
   std::string build_connect_uri();

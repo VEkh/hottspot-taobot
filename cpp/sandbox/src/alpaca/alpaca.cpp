@@ -1,27 +1,27 @@
-#include "client/client.cpp"   // Alpaca::Client
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/pg/pg.cpp"       // Pg
-#include "lib/utils/io.cpp"    // utils::io
-#include "quote/quote.cpp"     // Alpaca::Quote
-#include "returns.cpp"         // Alpaca::Returns
-#include "sessions.cpp"        // Alpaca::Sessions
-#include "tao_bot/tao_bot.cpp" // Alpaca::TaoBot
-#include <iostream>            // std::cout, std::endl
-#include <list>                // std::list
-#include <map>                 // std::map
-#include <sstream>             // std::ostringstream
-#include <stdexcept>           // std::invalid_argument
-#include <stdio.h>             // printf
-#include <string>              // std::string
-#include <vector>              // std::vector
+#include "client/client.cpp"                         // Alpaca::Client
+#include "lib/formatted.cpp"                         // Formatted
+#include "lib/pg/pg.cpp"                             // Pg
+#include "lib/utils/io.cpp"                          // utils::io
+#include "performance_logger/performance_logger.cpp" // Alpaca::PerformanceLogger
+#include "quote/quote.cpp"                           // Alpaca::Quote
+#include "returns.cpp"                               // Alpaca::Returns
+#include "tao_bot/tao_bot.cpp"                       // Alpaca::TaoBot
+#include <iostream>                                  // std::cout, std::endl
+#include <list>                                      // std::list
+#include <map>                                       // std::map
+#include <sstream>                                   // std::ostringstream
+#include <stdexcept>                                 // std::invalid_argument
+#include <stdio.h>                                   // printf
+#include <string>                                    // std::string
+#include <vector>                                    // std::vector
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"log_returns                  ", "Print cumulative return"},
-      {"log_sessions                 ",
-       "Print account performance for recorded sessions"},
+      {"log_snapshots <API_KEY>      ",
+       "Print daily account performance for the given api key"},
       {"quotes_stream <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
       {"quotes_watch <SYMBOLS>       ",
        "Persist and make computations for fetched/streamed quotes"},
@@ -112,7 +112,7 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "log_sessions") {
+  if (command == "log_snapshots") {
     if (args.empty()) {
       std::string message =
           Formatted::error_message("Please provide an api key.");
@@ -120,7 +120,15 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    Alpaca::Sessions::log(args.front());
+    Pg pg(flags);
+    pg.connect();
+
+    Alpaca::PerformanceLogger logger(pg);
+
+    logger.log_daily_snapshots(args.front());
+
+    pg.disconnect();
+
     exit(0);
   }
 

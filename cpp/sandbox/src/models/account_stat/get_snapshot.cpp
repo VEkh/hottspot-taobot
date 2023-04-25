@@ -1,12 +1,14 @@
 #ifndef DB__ACCOUNT_STAT_get_snapshot
 #define DB__ACCOUNT_STAT_get_snapshot
 
-#include "account_stat.h"                 // DB::AccountStat, query_result_t
-#include "result_to_account_snapshot.cpp" // result_to_account_snapshot
-#include <libpq-fe.h>                     // PQescapeLiteral, PQfreemem
-#include <stdio.h>                        // snprintf
-#include <string.h>                       // strlen
-#include <string>                         // std::string, std::to_string
+#include "account_stat.h"                  // DB::AccountStat, query_result_t
+#include "lib/formatted.cpp"               // Formatted
+#include "result_to_account_snapshots.cpp" // result_to_account_snapshots
+#include <iostream>                        // std::cout, std::endl
+#include <libpq-fe.h>                      // PQescapeLiteral, PQfreemem
+#include <stdio.h>                         // snprintf
+#include <string.h>                        // strlen
+#include <string>                          // std::string, std::to_string
 
 DB::AccountStat::account_snapshot_t
 DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
@@ -123,7 +125,19 @@ DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
 
   const query_result_t result = this->conn.exec(query, args.debug);
 
-  return result_to_account_snapshot(result);
+  std::list<account_snapshot_t> snapshots = result_to_account_snapshots(result);
+
+  if (snapshots.empty()) {
+    const std::string error_message = Formatted::error_message(
+        std::string("DB__ACCOUNT_STAT_get_snapshot: No account stats for ") +
+        api_key_id);
+
+    std::cout << error_message << std::endl;
+
+    return account_snapshot_t();
+  }
+
+  return snapshots.front();
 };
 
 #endif
