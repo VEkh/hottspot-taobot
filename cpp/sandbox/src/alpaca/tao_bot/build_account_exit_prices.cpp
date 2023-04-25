@@ -7,8 +7,6 @@
 Alpaca::TaoBot::account_exit_prices_t
 Alpaca::TaoBot::build_account_exit_prices() {
   const double current_equity = this->account_snapshot.equity;
-  const double session_max_profit = this->account_snapshot.session_max_equity -
-                                    this->account_snapshot.original_equity;
 
   double target_account_profit_ratio = this->TARGET_ACCOUNT_PROFIT_RATIO;
 
@@ -26,22 +24,8 @@ Alpaca::TaoBot::build_account_exit_prices() {
     }
   }
 
-  const double overall_max_profit = this->account_snapshot.max_equity -
-                                    this->account_snapshot.original_equity;
-
-  const double session_original_profit =
-      this->account_snapshot.session_original_equity -
-      this->account_snapshot.original_equity;
-
-  const double session_target_profit_cash =
-      (this->account_snapshot.original_equity * target_account_profit_ratio) +
-      session_original_profit;
-
-  const double session_target_max_profit =
-      (this->account_snapshot.original_equity *
-       (target_account_profit_ratio +
-        this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP)) +
-      session_original_profit;
+  const double max_profit = this->account_snapshot.max_equity -
+                            this->account_snapshot.original_equity;
 
   const double target_profit_cash =
       (this->account_snapshot.original_equity * target_account_profit_ratio);
@@ -55,14 +39,7 @@ Alpaca::TaoBot::build_account_exit_prices() {
       current_equity - this->account_snapshot.original_equity;
 
   const double max_profit_ratio =
-      session_max_profit / this->account_snapshot.original_equity;
-
-  const double overall_max_profit_ratio =
-      overall_max_profit / this->account_snapshot.original_equity;
-
-  const double session_stop_loss =
-      this->account_snapshot.session_original_equity +
-      (this->MAX_ACCOUNT_LOSS_RATIO * this->account_snapshot.original_equity);
+      max_profit / this->account_snapshot.original_equity;
 
   const double trailing_stop_cash =
       this->account_snapshot.original_equity *
@@ -70,27 +47,12 @@ Alpaca::TaoBot::build_account_exit_prices() {
           this->account_snapshot.max_equity -
           this->account_snapshot.original_equity);
 
-  const double overall_stop_profit_loss =
-      overall_max_profit - trailing_stop_cash;
-
-  const double session_trailing_stop_cash =
-      this->account_snapshot.original_equity *
-      account_profit_expanding_trailing_stop_ratio(
-          this->account_snapshot.session_max_equity -
-          this->account_snapshot.session_original_equity);
-
-  const double session_stop_profit_loss =
-      session_max_profit - session_trailing_stop_cash;
+  const double stop_profit_loss = max_profit - trailing_stop_cash;
 
   return {
       .current_profit = current_profit,
-      .overall_max_profit = overall_max_profit,
-      .overall_stop_profit_loss = overall_stop_profit_loss,
-      .session_max_profit = session_max_profit,
-      .session_stop_loss = session_stop_loss,
-      .session_stop_profit_loss = session_stop_profit_loss,
-      .session_target_account_profit = session_target_profit_cash,
-      .session_target_max_profit = session_target_max_profit,
+      .max_profit = max_profit,
+      .stop_profit_loss = stop_profit_loss,
       .target_account_profit = target_profit_cash,
       .target_max_profit = target_max_profit,
   };

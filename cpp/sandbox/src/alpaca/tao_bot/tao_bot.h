@@ -26,8 +26,8 @@ public:
   void run();
 
 private:
-  using account_snapshot_t = Global::t::account_snapshot_t;
-  using account_exit_prices_t = Global::t::account_exit_prices_t;
+  using account_snapshot_t = Alpaca::t::account_snapshot_t;
+  using account_exit_prices_t = Alpaca::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Alpaca::t::order_action_t;
@@ -147,7 +147,6 @@ private:
   void set_status(order_t *order);
   void update_account_snapshot(const bool);
   void watch();
-  void write_account_performance();
   void write_close_position();
   void write_open_position();
 };

@@ -23,7 +23,6 @@
 #include "should_terminate.cpp"          // should_terminate
 #include "tao_bot.h"                     // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"   // update_account_snapshot
-#include "write_account_performance.cpp" // write_account_performance
 #include <iostream>                      // std::cout, std::flush
 
 void Alpaca::TaoBot::watch() {
@@ -66,7 +65,6 @@ void Alpaca::TaoBot::watch() {
   log_timestamps();
   log_account_snapshot();
   log_end_of_trading_period();
-  write_account_performance();
 
   if (this->backtest.is_active &&
       !this->backtest.has_reached_end(this->current_epoch)) {

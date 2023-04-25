@@ -16,11 +16,6 @@ void Alpaca::TaoBot::log_account_snapshot() {
       (exit_prices_.current_profit / this->account_snapshot.original_equity) *
       100.0;
 
-  const double session_max_equity_delta_percentage =
-      (exit_prices_.session_max_profit /
-       this->account_snapshot.original_equity) *
-      100.0;
-
   const double max_loss = this->account_snapshot.min_equity -
                           this->account_snapshot.original_equity;
 
@@ -28,16 +23,7 @@ void Alpaca::TaoBot::log_account_snapshot() {
       (max_loss / this->account_snapshot.original_equity) * 100.0;
 
   const double max_equity_delta_percentage =
-      (exit_prices_.overall_max_profit /
-       this->account_snapshot.original_equity) *
-      100.0;
-
-  const double session_original_profit =
-      this->account_snapshot.session_original_equity -
-      this->account_snapshot.original_equity;
-
-  const double session_original_profit_percentage =
-      (session_original_profit / this->account_snapshot.original_equity) *
+      (exit_prices_.max_profit / this->account_snapshot.original_equity) *
       100.0;
 
   Formatted::Stream log_color = fmt.green;
@@ -47,28 +33,19 @@ void Alpaca::TaoBot::log_account_snapshot() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("💰 Account Stats\n");
+  printf("💰 Account Snapshot\n");
   std::cout << fmt.reset << fmt.bold << log_color;
 
   printf("Current Equity:                   $%'.2f (%+'.2f) (%+'.2f%%)%s\n",
          this->account_snapshot.equity, exit_prices_.current_profit,
          equity_delta_percentage,
-         this->account_snapshot.equity ==
-                 this->account_snapshot.session_max_equity
+         this->account_snapshot.equity == this->account_snapshot.max_equity
              ? " 🔥"
              : "");
 
-  printf("Max Equity:                       $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-         this->account_snapshot.session_max_equity,
-         exit_prices_.session_max_profit, session_max_equity_delta_percentage,
-         ::utils::time_::date_string(
-             this->account_snapshot.session_max_equity_timestamp, "%H:%M %Z",
-             "America/Chicago")
-             .c_str());
-
   printf(
-      "Overall Max Equity:               $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
-      this->account_snapshot.max_equity, exit_prices_.overall_max_profit,
+      "Max Equity:                       $%'.2f (%+'.2f) (%+'.2f%%) @ %s\n",
+      this->account_snapshot.max_equity, exit_prices_.max_profit,
       max_equity_delta_percentage,
       ::utils::time_::date_string(this->account_snapshot.max_equity_timestamp,
                                   "%H:%M %Z", "America/Chicago")
@@ -84,34 +61,18 @@ void Alpaca::TaoBot::log_account_snapshot() {
   printf("Original Equity:                  $%'.2f\n",
          this->account_snapshot.original_equity);
 
-  printf("Session Original Equity:          $%'.2f (%+'.2f) (%+'.2f%%)\n",
-         this->account_snapshot.session_original_equity,
-         session_original_profit, session_original_profit_percentage);
-
   printf("Margin Buying Power:              $%'.2f\n",
          this->account_snapshot.margin_buying_power);
 
   printf("Stop Loss Profit:                 $%'.2f\n",
-         exit_prices_.session_stop_profit_loss);
-
-  printf("Session Target Account Profit:    $%'.2f\n",
-         exit_prices_.session_target_account_profit);
-
-  printf("Session Target Max Profit:        $%'.2f%s\n",
-         exit_prices_.session_target_max_profit,
-         exit_prices_.session_max_profit >=
-                 exit_prices_.session_target_max_profit
-             ? " ✅"
-             : "");
+         exit_prices_.stop_profit_loss);
 
   printf("Target Account Profit:            $%'.2f\n",
          exit_prices_.target_account_profit);
 
   printf("Target Max Profit:                $%'.2f%s%s\n",
          exit_prices_.target_max_profit,
-         exit_prices_.overall_max_profit >= exit_prices_.target_max_profit
-             ? " ✅"
-             : "",
+         exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "",
          has_super_profited() ? "🤑" : "");
 
   std::cout << fmt.reset << std::endl;

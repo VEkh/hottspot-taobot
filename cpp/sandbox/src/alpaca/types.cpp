@@ -9,6 +9,28 @@ namespace t {
 using order_win_result_t = Global::t::order_win_result_t;
 using quote_t = Global::t::quote_t;
 
+struct account_exit_prices_t {
+  double current_profit = 0.00;
+  double max_profit = 0.00;
+  double stop_profit_loss = 0.00;
+  double target_account_profit = 0.00;
+  double target_max_profit = 0.00;
+};
+
+struct account_snapshot_t {
+  double equity = 0.00;
+  double margin_buying_power = 0.00;
+  double margin_multiplier = 0.00;
+  double max_equity = 0.00;
+  double max_equity_timestamp = 0;
+  double min_equity = 0.00;
+  double min_equity_timestamp = 0;
+  double original_equity = 0.00;
+  double original_margin_buying_power = 0.00;
+  double timestamp = 0;
+  std::string api_key_id = "";
+};
+
 enum order_action_t {
   BUY,
   SELL,

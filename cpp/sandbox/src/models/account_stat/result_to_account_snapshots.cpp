@@ -62,18 +62,6 @@ DB::AccountStat::result_to_account_snapshots(const query_result_t &result) {
         record.original_margin_buying_power = std::stod(value);
       }
 
-      if (field == "session_max_equity") {
-        record.session_max_equity = std::stod(value);
-      }
-
-      if (field == "session_max_equity_timestamp") {
-        record.session_max_equity_timestamp = std::stod(value);
-      }
-
-      if (field == "session_original_equity") {
-        record.session_original_equity = std::stod(value);
-      }
-
       if (field == "timestamp" || field == "timestamp_epoch") {
         record.timestamp = std::stod(value);
       }

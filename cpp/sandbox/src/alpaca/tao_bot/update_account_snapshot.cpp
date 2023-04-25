@@ -13,7 +13,6 @@ void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
 
   this->account_snapshot = this->db_account_stat.get_snapshot({
       .api_key_id = this->api_client.config.api_key_id,
-      .session_started_at = this->started_at,
       .starting_from =
           ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
   });
