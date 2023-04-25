@@ -1,19 +1,54 @@
+### 2023-04-26:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Current Equity:          $25,758.60 (-23.56) (-0.09%)
+Max Equity:              $25,952.74 (+170.59) (+0.66%) @ 08:31 CDT
+Overall Max Equity:      $25,952.74 (+170.59) (+0.66%) @ 08:31 CDT
+Min Equity:              $23,774.71 (-2,007.44) (-7.79%) @ 09:07 CDT
+Original Equity:         $25,782.15
+```
+
+###### Stats (PRODUCTION) (as of 2023-03-08)
+* Win Record: 15W (48.39%) 16L (Total 31)
+
+###### Notes
+###### Next Thing(s) to Try
+
 ### 2023-04-25:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
 ```
-Runtime: 00:00:00
-Current Balance:       $ (+) (+%)
-Max Balance:           $ (+) (+%)
-Min Balance:           $ (-) (-%)
-Original Balance:      $ (-) (-%)
+Tuesday, April 25 2023
+Current Equity:          $25,758.60 (-23.56) (-0.09%)
+Max Equity:              $25,952.74 (+170.59) (+0.66%) @ 08:31 CDT
+Overall Max Equity:      $25,952.74 (+170.59) (+0.66%) @ 08:31 CDT
+Min Equity:              $23,774.71 (-2,007.44) (-7.79%) @ 09:07 CDT
+Original Equity:         $25,782.15
 ```
 
+**Alpha (STAGING)**
+```
+Tuesday, April 25 2023
+Current Equity:          $45,108.16 (+907.95) (+2.05%)
+Max Equity:              $45,309.75 (+1,109.54) (+2.51%) @ 14:52 CDT
+Overall Max Equity:      $45,309.75 (+1,109.54) (+2.51%) @ 14:52 CDT
+Min Equity:              $41,527.34 (-2,672.87) (-6.05%) @ 08:49 CDT
+Original Equity:         $44,200.21
+```
 ###### Stats (PRODUCTION) (as of 2023-03-08)
-* Win Record: 15W (50.0%) 15L (Total 30)
+* Win Record: 15W (48.39%) 16L (Total 31)
 
 ###### Notes
+* Another somewhat frustrating day where I goofed at the beginning. TSLA's log
+  was hanging and I didn't realize it was silenced so I restarted its instance.
+* It put TSLA in a position where it incurred one more loss than it needed to.
+* The good news is that both production and staging recovered from massive
+  deficits further demonstrating the current strategy's profitability.
+* Keep the faith, keep your money in, and don't switch strategies.
+
 ###### Next Thing(s) to Try
 
 ### 2023-04-24:

@@ -9,8 +9,10 @@
 namespace Alpaca {
 class PerformanceLogger {
 public:
+  PerformanceLogger(){};
   PerformanceLogger(Pg c);
 
+  void log_benchmark();
   void log_daily_snapshots(const std::string);
 
 private:
@@ -18,6 +20,10 @@ private:
 
   DB::AccountStat db_account_stat;
   Pg conn;
+
+  char sign_char(const double n);
+
+  json read_json_file(const std::string);
 };
 } // namespace Alpaca
 

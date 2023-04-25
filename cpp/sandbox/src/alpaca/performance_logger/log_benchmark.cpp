@@ -1,48 +1,26 @@
-#ifndef ALPACA_RETURNS
-#define ALPACA_RETURNS
+#ifndef ALPACA__PERFORMANCE_LOGGER_log_benchmark
+#define ALPACA__PERFORMANCE_LOGGER_log_benchmark
 
-#include "deps.cpp"           // json
-#include "lib/formatted.cpp"  // Formatted
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <algorithm>          // std::max
-#include <ctime>              // std::tm
-#include <fstream>            // std::ifstream, std::ios
-#include <iomanip>            // std::get_time
-#include <iostream>           // std::cout, std::endl
-#include <locale.h>           // setlocale
-#include <math.h>             // abs
-#include <sstream>            // std::istringstream
-#include <stdexcept>          // std::invalid_argument
-#include <stdio.h>            // printf
-#include <string>             // std::string
+#include "deps.cpp"             // json
+#include "lib/formatted.cpp"    // Formatted
+#include "lib/utils/time.cpp"   // ::utils::time_
+#include "performance_logger.h" // PerformanceLogger
+#include "read_json_file.cpp"   // read_json_file
+#include "sign_char.cpp"        // sign_char
+#include <algorithm>            // std::max
+#include <iomanip>              // std::get_time
+#include <iostream>             // std::cout, std::endl
+#include <locale.h>             // setlocale
+#include <math.h>               // abs
+#include <stdio.h>              // printf
+#include <string>               // std::string
+#include <time.h>               // tm
 
-namespace Alpaca {
-namespace Returns {
-char sign(double n) { return n >= 0 ? '+' : '-'; };
-
-json load() {
-  std::string path = std::string(DATA_DIR) + "/alpaca/returns.json";
-  std::ifstream file(path.c_str(), std::ios::in);
-
-  if (!file.good()) {
-    std::string error_message = Formatted::error_message(
-        "Returns data missing at " + std::string(path));
-
-    throw std::invalid_argument(error_message);
-  }
-
-  json returns_json;
-  file >> returns_json;
-  file.close();
-
-  return returns_json;
-}
-
-void log() {
+void Alpaca::PerformanceLogger::log_benchmark() {
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
-  json returns = load();
+  json returns = read_json_file("returns");
   json hottspot_returns = returns["HOTT"];
   json nasdaq_returns = returns["NDX"];
   json sp500_returns = returns["SPX"];
@@ -166,12 +144,12 @@ void log() {
   std::cout << fmt.cyan;
   printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% 9-5 Salary)"
          " (vs. NASDAQ: %+.2f%%) (vs. S&P 500: %+.2f%%)\n",
-         sign(todays_profit_dollars), abs(todays_profit_dollars),
+         sign_char(todays_profit_dollars), abs(todays_profit_dollars),
          todays_profit_ratio * 100, todays_profit_salary_ratio * 100,
          todays_nasdaq_profit_ratio * 100, todays_sp500_profit_ratio * 100);
 
   printf("* Week's Return: %c$%'.2f • Total Return: %c$%'.2f\n",
-         sign(week_total), abs(week_total), sign(grand_total),
+         sign_char(week_total), abs(week_total), sign_char(grand_total),
          abs(grand_total));
 
   std::cout << fmt.yellow;
@@ -181,7 +159,5 @@ void log() {
          avg_sp500_profit_ratio * 100);
   std::cout << fmt.reset << std::endl;
 }
-} // namespace Returns
-} // namespace Alpaca
 
 #endif

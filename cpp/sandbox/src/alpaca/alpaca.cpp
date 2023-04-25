@@ -4,7 +4,6 @@
 #include "lib/utils/io.cpp"                          // utils::io
 #include "performance_logger/performance_logger.cpp" // Alpaca::PerformanceLogger
 #include "quote/quote.cpp"                           // Alpaca::Quote
-#include "returns.cpp"                               // Alpaca::Returns
 #include "tao_bot/tao_bot.cpp"                       // Alpaca::TaoBot
 #include <iostream>                                  // std::cout, std::endl
 #include <list>                                      // std::list
@@ -19,7 +18,8 @@ void print_usage() {
   std::map<std::string, const char *> commands = {
       {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
-      {"log_returns                  ", "Print cumulative return"},
+      {"log_benchmark                ",
+       "Print cumulative return and compare to benchmark indexes"},
       {"log_snapshots <API_KEY>      ",
        "Print daily account performance for the given api key"},
       {"quotes_stream <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
@@ -106,8 +106,10 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "log_returns") {
-    Alpaca::Returns::log();
+  if (command == "log_benchmark") {
+    Alpaca::PerformanceLogger logger;
+
+    logger.log_benchmark();
 
     exit(0);
   }
