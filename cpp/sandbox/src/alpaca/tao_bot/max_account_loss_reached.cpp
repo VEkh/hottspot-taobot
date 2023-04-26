@@ -8,7 +8,12 @@
 #include <string> // std::string, std::stod
 
 bool Alpaca::TaoBot::max_account_loss_reached() {
-  if (!this->backtest.is_active ||
+  if (!this->backtest.is_active &&
+      this->api_client.config.api_key != "paper-beta") {
+    return false;
+  }
+
+  if (this->backtest.is_active &&
       !std::regex_search(this->backtest.config.api_key_id,
                          std::regex("-act_(.+)__(.+)$"))) {
     return false;

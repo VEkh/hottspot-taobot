@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
-equity_api_keys=("live-alpha" "paper-alpha")
+equity_api_keys=("live-alpha" "paper-alpha" "paper-beta")
 equity_project="alpaca"
 equity_symbols=()
 forex_project="oanda"
@@ -72,6 +72,9 @@ tmux new-window -t "${session}" \
 
 tmux split-window -t "${session}:stock-account-streams" -h \
   "$(tail_cmd "${equity_project}/${equity_api_keys[1]}"  "account_stream")"
+
+tmux split-window -t "${session}:stock-account-streams.1" \
+  "$(tail_cmd "${equity_project}/${equity_api_keys[2]}"  "account_stream")"
 
 symbol_i=0
 window=0

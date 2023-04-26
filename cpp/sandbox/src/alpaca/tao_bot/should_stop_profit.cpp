@@ -7,7 +7,12 @@
 #include <regex> // std::regex, std::regex_search
 
 bool Alpaca::TaoBot::should_stop_profit() {
-  if (!this->backtest.is_active ||
+  if (!this->backtest.is_active &&
+      this->api_client.config.api_key != "paper-beta") {
+    return false;
+  }
+
+  if (this->backtest.is_active &&
       !std::regex_search(this->backtest.config.api_key_id,
                          std::regex("-act_(.+)__(.+)$"))) {
     return false;
