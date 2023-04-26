@@ -18,7 +18,15 @@ while IFS="" read -r line; do
 done < <(cat "${app_dir}/bin/${forex_project}/symbols")
 
 function tail_cmd() {
-  echo -e "tail -f ${app_dir}/log/${1}/${2}.log"
+  log_file_dir="${app_dir}/log/${1}"
+
+  mkdir -p "${log_file_dir}"
+
+  filepath="${log_file_dir}/${2}.log"
+
+  touch "${filepath}"
+
+  echo -e "tail -f ${filepath}"
 }
 
 session="hottspot_taobot"
@@ -56,6 +64,7 @@ done
 
 tmux new-window -t "${session}" -n "stock-quote-streams" "$(tail_cmd "${equity_project}"  "quotes_stream")"
 tmux split-window -t "${session}:stock-quote-streams" -h "$(tail_cmd "${equity_project}" "quotes_watch")"
+tmux split-window -t "${session}:stock-quote-streams.1" "$(tail_cmd "${equity_project}" "quotes_watch_avg_one_sec_variances")"
 
 tmux new-window -t "${session}" \
   -n "stock-account-streams" \

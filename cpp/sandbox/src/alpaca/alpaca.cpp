@@ -172,6 +172,18 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
+  if (command == "quotes_watch_avg_one_sec_variances") {
+    Pg pg(flags);
+    pg.connect();
+
+    Alpaca::Quote watcher(pg, flags);
+    watcher.watch_avg_one_sec_variances();
+
+    pg.disconnect();
+
+    exit(0);
+  }
+
   if (command == "stream_account") {
     Alpaca::Client alpaca_client(flags);
     alpaca_client.stream_account();

@@ -11,6 +11,7 @@
 
 #include "stream.cpp"
 #include "watch.cpp"
+#include "watch_avg_one_sec_variances.cpp"
 
 Alpaca::Quote::Quote(Pg p, std::map<std::string, std::string> flags) {
   this->api_client = Alpaca::Client(flags);

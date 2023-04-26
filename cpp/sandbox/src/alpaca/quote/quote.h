@@ -37,6 +37,7 @@ public:
 
   void stream(const std::list<std::string> &);
   void watch(const std::list<std::string> &);
+  void watch_avg_one_sec_variances();
 
 private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;

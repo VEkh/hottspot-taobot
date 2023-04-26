@@ -21,20 +21,7 @@ void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
       std::cout << fmt.reset;
 
       fetch_and_persist_quote(symbol);
-
-      std::cout << fmt.bold << fmt.yellow;
-      puts("Fetched and Persisted Quote");
-      std::cout << fmt.reset;
     }
-
-    this->db_quote.insert_latest_avg_one_sec_variances();
-    std::cout << fmt.bold << fmt.yellow;
-    puts("Set and Persisted Price Movement");
-    std::cout << fmt.reset << std::endl;
-
-    std::cout << fmt.bold << fmt.magenta;
-    puts("================================");
-    std::cout << fmt.reset << std::endl;
 
     std::cout << std::flush;
     usleep(5e5);

@@ -27,13 +27,13 @@ date
 echo
 
 case $(to_lower "$1") in
-  stream|watch)
+  stream|watch|watch_avg_one_sec_variances)
     action=$(to_lower "$1")
     action_gerund="${action}ing"
     ;;
   *)
     echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}ALPACA QUOTES${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_cyan}Provide an action (stream|watch) to proceed${fmt_reset}\n"
+    echo -e "${fmt_bold}${fmt_cyan}Provide an action (stream|watch|watch_avg_one_sec_variances) to proceed${fmt_reset}\n"
     exit 1
     ;;
 esac
