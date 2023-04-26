@@ -52,7 +52,6 @@ private:
   quote_t fetch_quote(const std::string);
   quote_t get_quote(const std::string);
   quote_t get_streamed_quote(const std::string);
-  quote_t read_streamed_quote(const std::string); // NOTE: Deprecated
 
   void fetch_and_persist_quote(const std::string, const bool);
   void read(const std::string);

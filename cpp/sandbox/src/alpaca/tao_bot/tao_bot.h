@@ -65,7 +65,6 @@ private:
   double current_epoch = time(nullptr);
   double quantity;
   double started_at = time(nullptr);
-  int init_closed_positions_count = 0;
   exit_prices_t exit_prices;
   one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;

@@ -87,7 +87,6 @@ function start_stream() {
 
   ascii_print "Starting ${ASCII["normal"]}${ASCII["cyan"]}${api_key} ${ASCII["bold"]}${ASCII["yellow"]}Account Stream" "yellow"
 
-  echo "{}" > "$project_data_dir/account.json"
   "${app_dir}/build/${project}" stream_account "${@}" > "${log_file}" 2>&1 &
 }
 

@@ -7,9 +7,8 @@
 #include <stdexcept>            // std::invalid_argument
 #include <string>               // std::string
 
-json Alpaca::PerformanceLogger::read_json_file(const std::string filename) {
-  std::string path =
-      std::string(DATA_DIR) + std::string("/alpaca/") + filename + ".json";
+json Alpaca::PerformanceLogger::read_json_file(const std::string filepath) {
+  std::string path = std::string(DATA_DIR) + std::string("/alpaca/") + filepath;
 
   std::ifstream file(path.c_str(), std::ios::in);
 

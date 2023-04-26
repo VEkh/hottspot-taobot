@@ -65,7 +65,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
     update_account_snapshot(true);
 
-    this->init_closed_positions_count = this->closed_positions.size();
     this->performance = build_performance();
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(
