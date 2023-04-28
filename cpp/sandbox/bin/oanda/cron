@@ -5,9 +5,11 @@ project=$(dirname "$0" | xargs basename)
 case $1 in
   "generate")
     app_dir=$(realpath "$(dirname "$0")/../../")
-    cmd="* 8-14 * * 1-5 $app_dir/bin/$project/heartbeat --paper >> $app_dir/log/development.log 2>&1"
-    cmd+="\n* 8-14 * * 1-5 $app_dir/bin/$project/stream_account heartbeat --paper >> $app_dir/log/development.log 2>&1"
-    cmd+="\n0 15 * * 1-5 $app_dir/bin/$project/stream_account stop >> $app_dir/log/development.log 2>&1"
+    cmd="* 8-14 * * 1-5 ${app_dir}/bin/${project}/heartbeat --paper >> ${app_dir}/log/development.log 2>&1"
+    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes watch heartbeat >> ${app_dir}/log/development.log 2>&1"
+    cmd+="\n0 15 * * 1-5 ${app_dir}/bin/${project}/quotes watch stop >> ${app_dir}/log/development.log 2>&1"
+    cmd+="\n* 8-14 * * 1-5 ${app_dir}/bin/${project}/stream_account heartbeat --paper >> ${app_dir}/log/development.log 2>&1"
+    cmd+="\n0 15 * * 1-5 ${app_dir}/bin/${project}/stream_account stop >> ${app_dir}/log/development.log 2>&1"
 
     echo -e "$cmd"
   ;;

@@ -1,6 +1,8 @@
 #include "client/client.cpp"   // Oanda::Client
 #include "lib/formatted.cpp"   // Formatted
+#include "lib/pg/pg.cpp"       // Pg
 #include "lib/utils/io.cpp"    // ::utils::io
+#include "quote/quote.cpp"     // Oanda::Quote
 #include "sessions.cpp"        // Oanda::Sessions
 #include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
 #include <iostream>            // std::cout, std::endl
@@ -15,6 +17,8 @@ void print_usage() {
       {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
       {"log_sessions                 ",
        "Print account performance for recorded sessions"},
+      {"quotes_watch <SYMBOLS>       ",
+       "Persist and make computations for fetched/streamed quotes"},
       {"stream_account               ", "Stream account info"},
       {"tao_bot <SYMBOL> <QUANTITY>  ",
        "Launch trading bot for the given currency pair"},
@@ -72,6 +76,25 @@ int main(int argc, char *argv[]) {
 
   if (command == "log_sessions") {
     Oanda::Sessions::log();
+    exit(0);
+  }
+
+  if (command == "quotes_watch") {
+    if (upcased_args.empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to stream.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Pg pg(flags);
+    pg.connect();
+
+    Oanda::Quote watcher(pg, flags);
+    watcher.watch(upcased_args);
+
+    pg.disconnect();
+
     exit(0);
   }
 

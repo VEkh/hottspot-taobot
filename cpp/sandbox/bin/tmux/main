@@ -103,5 +103,8 @@ tmux new-window -t "${session}" \
   -n "forex-streams" \
   "$(tail_cmd "${forex_project}"  "account_stream")"
 
+tmux split-window -h -t "${session}:forex-streams" \
+  "$(tail_cmd "${forex_project}" "quotes_watch")"
+
 tmux select-window -t "${session}:0"
 tmux attach-session -t "${session}"
