@@ -6,6 +6,7 @@
 #include "lib/pg/pg.cpp"           // Pg
 #include "models/quote/quote.cpp"  // DB::Quote
 #include "oanda/client/client.cpp" // Oanda::Client
+#include "oanda/quote/quote.cpp"   // Oanda::Quote
 #include "oanda/types.cpp"         // Oanda::t
 #include "types.cpp"               // Global::t
 #include <list>                    // std::list
@@ -24,6 +25,7 @@ private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
+  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
   using order_t = Oanda::t::order_t;
@@ -33,8 +35,6 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
-  using price_movement_t = Global::t::price_movement_t;
-  using quote_scoreboard_t = Oanda::t::quote_scoreboard_t;
   using quote_t = Global::t::quote_t;
   using trade_status_t = Oanda::t::trade_status_t;
 
@@ -48,8 +48,6 @@ private:
   static constexpr double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
   static constexpr int CONSOLIDATION_TIME_SECONDS = 45 * 60;
   static constexpr int MAX_EXPECTED_LOSS_STREAK = 18;
-  static constexpr int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  static constexpr int QUOTES_MAX_SIZE = 6e3;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -73,16 +71,18 @@ private:
   DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
+  Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
   exit_prices_t exit_prices;
+  double current_epoch = time(nullptr);
   int init_closed_positions_count = 0;
+  one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  price_movement_t price_movement;
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::time_t started_at = std::time(nullptr);
@@ -114,14 +114,11 @@ private:
   double convert_price(const double, const std::string, const std::string);
   double current_price();
   double current_spread();
-  double dynamic_one_sec_variance();
   double loss_to_recover();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double spread_limit();
   double target_account_profit();
-  double target_position_profit();
-  double volatility();
   exit_prices_t build_exit_prices();
   int compute_quantity();
   int order_duration(const order_t *);
@@ -141,15 +138,14 @@ private:
                                             const int);
 
   std::string base_currency();
+  void advance_current_epoch();
+  void advance_current_epoch(const double);
   void await_market_open();
   void clear_stale_open_order();
   void close_position();
   void complete_filled_order(order_t *);
-  void fetch_and_persist_quote();
-  void fetch_quote();
   void handle_partially_filled_close_order(const order_t *);
   void initialize(const std::string, std::map<std::string, std::string> &);
-  void load_price_movement();
   void load_quotes();
   void log_account_snapshot();
   void log_end_of_trading_period();
@@ -161,22 +157,21 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
+  void read_quotes();
   void reset_orders();
+  void read_price_movement();
   void reset_position();
-  void set_and_persist_price_movement();
   void set_close_order_prices();
   void set_execution_price(order_t *);
   void set_execution_price(order_t *, json);
   void set_open_order_prices();
   void set_position_status();
-  void set_price_movement();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *, order_t *);
   void update_account_snapshot();
   void watch();
   void write_account_performance();
-  void write_price_movement();
   void write_quotes();
 };
 } // namespace Oanda

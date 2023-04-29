@@ -46,13 +46,11 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double trailing_stop_profit =
       this->open_order_ptr->max_profit * trailing_stop_profit_ratio;
 
-  exit_prices_t out = {
+  return {
       .max_loss = max_loss,
       .min_profit = min_profit,
       .trailing_stop_profit = trailing_stop_profit,
   };
-
-  return out;
 }
 
 #endif

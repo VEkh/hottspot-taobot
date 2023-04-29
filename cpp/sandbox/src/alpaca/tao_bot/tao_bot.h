@@ -37,7 +37,6 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
-  using quote_scoreboard_t = Alpaca::t::quote_scoreboard_t;
   using quote_t = Global::t::quote_t;
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;

@@ -56,12 +56,6 @@ struct position_t {
   order_t close_order;
   order_t open_order;
 };
-
-struct quote_scoreboard_t {
-  quote_t quote;
-  double score = 0.00;
-  std::string type;
-};
 } // namespace t
 } // namespace Oanda
 #endif
