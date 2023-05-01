@@ -3,7 +3,7 @@
 
 #include "quote.h"                 // Oanda::Quote
 #include "lib/pg/pg.cpp"           // Pg
-#include "models/quote/quote.cpp"  // DB::Quote
+#include "db/quote/quote.cpp"  // DB::Quote
 #include "oanda/client/client.cpp" // Oanda::Client
 #include <map>                     // std::map
 #include <string>                  // std::string

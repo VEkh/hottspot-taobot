@@ -1,4 +1,5 @@
 #include "client/client.cpp"   // Oanda::Client
+#include "db/quote/quote.cpp"  // DB::Quote
 #include "lib/formatted.cpp"   // Formatted
 #include "lib/pg/pg.cpp"       // Pg
 #include "lib/utils/io.cpp"    // ::utils::io
@@ -14,13 +15,16 @@
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
-      {"log_sessions                 ",
+      {"fetch_quote <SYMBOL>                          ",
+       "Get quote for the given symbol"},
+      {"log_sessions                                  ",
        "Print account performance for recorded sessions"},
-      {"quotes_watch <SYMBOLS>       ",
+      {"quotes_watch <SYMBOLS>                        ",
        "Persist and make computations for fetched/streamed quotes"},
-      {"stream_account               ", "Stream account info"},
-      {"tao_bot <SYMBOL> <QUANTITY>  ",
+      {"quotes_watch_avg_one_sec_variances <SYMBOLS>  ",
+       "Periodically update quote average one sec variances"},
+      {"stream_account                                ", "Stream account info"},
+      {"tao_bot <SYMBOL> <QUANTITY>                   ",
        "Launch trading bot for the given currency pair"},
   };
 
@@ -92,6 +96,18 @@ int main(int argc, char *argv[]) {
 
     Oanda::Quote watcher(pg, flags);
     watcher.watch(upcased_args);
+
+    pg.disconnect();
+
+    exit(0);
+  }
+
+  if (command == "quotes_watch_avg_one_sec_variances") {
+    Pg pg(flags);
+    pg.connect();
+
+    DB::Quote db_quote(pg);
+    db_quote.watch_avg_one_sec_variances(upcased_args);
 
     pg.disconnect();
 

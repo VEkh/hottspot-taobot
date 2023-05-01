@@ -1,4 +1,5 @@
 #include "client/client.cpp"                         // Alpaca::Client
+#include "db/quote/quote.cpp"                        // DB::Quote
 #include "lib/formatted.cpp"                         // Formatted
 #include "lib/pg/pg.cpp"                             // Pg
 #include "lib/utils/io.cpp"                          // utils::io
@@ -16,17 +17,22 @@
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"cancel_orders <ORDER_IDS>    ", "Cancel outsanding orders"},
-      {"fetch_quote <SYMBOL>         ", "Get quote for the given symbol"},
-      {"log_benchmark                ",
+      {"cancel_orders <ORDER_IDS>                     ",
+       "Cancel outsanding orders"},
+      {"fetch_quote <SYMBOL>                          ",
+       "Get quote for the given symbol"},
+      {"log_benchmark                                 ",
        "Print cumulative return and compare to benchmark indexes"},
-      {"log_snapshots <API_KEY>      ",
+      {"log_snapshots <API_KEY>                       ",
        "Print daily account performance for the given api key"},
-      {"quotes_stream <SYMBOLS>      ", "Stream quotes for given symbol(s)"},
-      {"quotes_watch <SYMBOLS>       ",
+      {"quotes_stream <SYMBOLS>                       ",
+       "Stream quotes for given symbol(s)"},
+      {"quotes_watch <SYMBOLS>                        ",
        "Persist and make computations for fetched/streamed quotes"},
-      {"stream_account               ", "Stream account info"},
-      {"tao_bot <SYMBOL> <QUANTITY>  ",
+      {"quotes_watch_avg_one_sec_variances <SYMBOLS>  ",
+       "Periodically update quote average one sec variances"},
+      {"stream_account                                ", "Stream account info"},
+      {"tao_bot <SYMBOL> <QUANTITY>                   ",
        "Launch trading bot for the given currency pair"},
   };
 
@@ -176,8 +182,8 @@ int main(int argc, char *argv[]) {
     Pg pg(flags);
     pg.connect();
 
-    Alpaca::Quote watcher(pg, flags);
-    watcher.watch_avg_one_sec_variances();
+    DB::Quote db_quote(pg);
+    db_quote.watch_avg_one_sec_variances(upcased_args);
 
     pg.disconnect();
 

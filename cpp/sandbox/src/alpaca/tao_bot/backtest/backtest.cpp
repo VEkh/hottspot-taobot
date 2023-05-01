@@ -1,14 +1,14 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST
 #define ALPACA__TAO_BOT_BACKTEST
 
-#include "backtest.h" // Alpaca::TaoBotBacktest
+#include "backtest.h"                       // Alpaca::TaoBotBacktest
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/quote/quote.cpp"               // DB::Quote
+#include "db/utils/utils.cpp"               // DB::Utils
 #include "fetch_order.cpp"
-#include "has_reached_end.cpp"                  // has_reached_end
-#include "lib/pg/pg.cpp"                        // Pg
-#include "load_config.cpp"                      // load_config
-#include "models/account_stat/account_stat.cpp" // DB::AccountStat
-#include "models/quote/quote.cpp"               // DB::Quote
-#include "models/utils/utils.cpp"               // DB::Utils
+#include "has_reached_end.cpp" // has_reached_end
+#include "lib/pg/pg.cpp"       // Pg
+#include "load_config.cpp"     // load_config
 #include "next_day_market_open_epoch.cpp"
 #include "place_order.cpp"
 #include "should_exec_slow_query.cpp"

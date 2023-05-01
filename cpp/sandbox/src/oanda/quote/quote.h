@@ -3,7 +3,7 @@
 
 #include "lib/formatted.cpp"       // Formatted
 #include "lib/pg/pg.cpp"           // Pg
-#include "models/quote/quote.cpp"  // DB::Quote
+#include "db/quote/quote.cpp"  // DB::Quote
 #include "oanda/client/client.cpp" // Oanda::Client
 #include "oanda/types.cpp"         // Oanda::t
 #include "types.cpp"               // Global::t

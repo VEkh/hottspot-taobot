@@ -5,15 +5,10 @@ set -e
 shopt -s extglob
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_green="\033[32m"
-fmt_normal="\033[10m"
-fmt_reset="\033[0m"
-fmt_underline="\033[4m"
-fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
+# ASCII
+# ascii_print
 # extract_args
 # extract_flags
 # extract_flags_to_map
@@ -22,13 +17,11 @@ project=$(dirname "$0" | xargs basename)
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
-echo -e "${fmt_bold}${fmt_cyan}"
-date
-echo
+ascii_print "$(date)\n" "cyan"
 
 declare -A project_actions=(
   ["alpaca"]="stream watch watch_avg_one_sec_variances"
-  ["oanda"]="watch"
+  ["oanda"]="watch watch_avg_one_sec_variances"
 )
 
 action="$(to_lower "${1}")"
@@ -38,8 +31,8 @@ actions_whitelist="${project_actions["${project}"]}"
 if [[ " ${actions_whitelist} " =~ " ${action} " ]]; then
     action_gerund="${action}ing"
 else
-  echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}$(to_upper "${project}") QUOTES${fmt_reset}\n"
-  echo -e "${fmt_bold}${fmt_cyan}Provide an action (${actions_whitelist}) to proceed${fmt_reset}\n"
+  ascii_print "${ASCII["underline"]}$(to_upper "${project}") QUOTES" "yellow"
+  ascii_print "Provide an action (${actions_whitelist}) to proceed" "cyan"
   exit 1
 fi
 
@@ -58,9 +51,9 @@ function print_status() {
   state=$(get_status)
 
   if [[ -z "${state}" ]]; then
-    echo -e "${fmt_green}✅ Not ${action_gerund} any quotes"
+    ascii_print "✅ Not ${action_gerund} any quotes" "green"
   else
-    printf "%b" "$fmt_reset"
+    printf "%b" "${ASCII["reset"]}"
     get_status
   fi
 }
@@ -69,18 +62,18 @@ function start_if_stopped() {
   state=$(get_status)
 
   if [[ -z "${state}" ]]; then
-    echo -e "${fmt_green}😴 Not ${action_gerund} any quotes. Starting.\n${fmt_reset}"
+    ascii_print "😴 Not ${action_gerund} any quotes. Starting." "green"
     start_action "${@}"
   else
-    echo -e "${fmt_cyan}💖 Already ${action_gerund} quotes. Doing nothing.${fmt_reset}"
+    ascii_print "💖 Already ${action_gerund} quotes. Doing nothing." "cyan"
   fi
 }
 
 function start_action() {
-  all_symbols=($(cat "$app_dir/bin/$project/symbols"))
+  all_symbols=($(cat "${app_dir}/bin/${project}/symbols"))
   cmd="quotes_${action}"
   flags=($(extract_flags "${@}"))
-  log_dir="$app_dir/log/$project"
+  log_dir="${app_dir}/log/${project}"
 
   local -A flag_map
   extract_flags_to_map flag_map "${flags[@]}"
@@ -97,22 +90,25 @@ function start_action() {
 
   mkdir -p "$log_dir"
 
-  log_file="$log_dir/quotes_${action}.log"
+  log_file="${log_dir}/quotes_${action}.log"
 
-  echo -e "${fmt_bold}${fmt_yellow}Starting Quotes $(to_title "$action")"\
-    "for ${fmt_normal}${fmt_cyan}${symbols[*]}"
+  start_message=$(
+    echo -e "Starting Quotes $(to_title "${action}")"\
+      "for ${ASCII["normal"]}${ASCII["cyan"]}${symbols[*]}"
+  )
 
-  "$app_dir/build/$project" "$cmd" "${symbols[@]}" "${flags[@]}" > "$log_file" 2>&1 &
+  ascii_print "${start_message}" "yellow"
+
+  "${app_dir}/build/${project}" "${cmd}" "${symbols[@]}" "${flags[@]}" > "${log_file}" 2>&1 &
 }
 
 function stop_action() {
   state=$(get_status)
 
-  if [[ -z $state ]]
-  then
-    echo -e "${fmt_green}✅ Not ${action_gerund} any quotes"
+  if [[ -z "${state}" ]]; then
+    ascii_print "✅ Not ${action_gerund} any quotes" "green"
   else
-    echo -e "${fmt_cyan}🛑 Stopping Quotes $(to_title "$action")${fmt_reset}"
+    ascii_print "🛑 Stopping Quotes $(to_title "${action}")" "cyan"
 
     get_status | awk '{print $2}' | xargs kill
   fi
@@ -142,17 +138,17 @@ case $2 in
     ;;
 
   *)
-    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}ALPACA QUOTES $(to_upper "$action")${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_cyan}Description: $(to_title "$action") the quotes for provided symbols.${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_yellow}Usage: quotes $action [COMMAND] [ARGS]\n"
-    echo -e "Commands:"
-    echo -e "  heartbeat               Check status. Restart if stopped."
-    echo -e "  restart   <SYMBOLS>     Stop, then start ${action_gerund}. See stop and start documentation."
-    echo -e "  start     <SYMBOLS>     Start ${action_gerund} one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)."
-    echo -e "  status                  Print running ${action} processes, if any."
-    echo -e "  stop                    Stop ${action_gerund} all symbols."
+    ascii_print "${ASCII["underline"]}$(to_upper "${project}") QUOTES $(to_upper "${action}")\n" "yellow"
+    ascii_print "Description: $(to_title "${action}") the quotes for provided symbols.\n" "cyan"
+    ascii_print "Usage: quotes ${action} [COMMAND] [ARGS]\n" "yellow"
+    ascii_print "Commands:" "yellow"
+    ascii_print "  heartbeat               Check status. Restart if stopped." "yellow"
+    ascii_print "  restart   <SYMBOLS>     Stop, then start ${action_gerund}. See stop and start documentation." "yellow"
+    ascii_print "  start     <SYMBOLS>     Start ${action_gerund} one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)." "yellow"
+    ascii_print "  status                  Print running ${action} processes, if any." "yellow"
+    ascii_print "  stop                    Stop ${action_gerund} all symbols." "yellow"
 
     ;;
 esac
 
-printf "%b" "${fmt_reset}"
+printf "%b" "${ASCII["reset"]}"

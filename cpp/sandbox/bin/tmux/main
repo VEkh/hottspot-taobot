@@ -62,9 +62,15 @@ for api_key in "${equity_api_keys[@]}"; do
   done
 done
 
-tmux new-window -t "${session}" -n "stock-quote-streams" "$(tail_cmd "${equity_project}"  "quotes_stream")"
-tmux split-window -t "${session}:stock-quote-streams" -h "$(tail_cmd "${equity_project}" "quotes_watch")"
-tmux split-window -t "${session}:stock-quote-streams.1" "$(tail_cmd "${equity_project}" "quotes_watch_avg_one_sec_variances")"
+tmux new-window -t "${session}" \
+  -n "stock-quote-streams" \
+  "$(tail_cmd "${equity_project}"  "quotes_stream")"
+
+tmux split-window -t "${session}:stock-quote-streams" -h \
+  "$(tail_cmd "${equity_project}" "quotes_watch")"
+
+tmux split-window -t "${session}:stock-quote-streams.1" \
+  "$(tail_cmd "${equity_project}" "quotes_watch_avg_one_sec_variances")"
 
 tmux new-window -t "${session}" \
   -n "stock-account-streams" \
@@ -105,6 +111,9 @@ tmux new-window -t "${session}" \
 
 tmux split-window -h -t "${session}:forex-streams" \
   "$(tail_cmd "${forex_project}" "quotes_watch")"
+
+tmux split-window -t "${session}:forex-streams.1" \
+  "$(tail_cmd "${forex_project}" "quotes_watch_avg_one_sec_variances")"
 
 tmux select-window -t "${session}:0"
 tmux attach-session -t "${session}"

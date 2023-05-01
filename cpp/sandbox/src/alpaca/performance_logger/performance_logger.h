@@ -3,7 +3,7 @@
 
 #include "alpaca/types.cpp"                     // Alpaca::t
 #include "lib/pg/pg.cpp"                        // Pg
-#include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include <string>                               // std::string
 
 namespace Alpaca {

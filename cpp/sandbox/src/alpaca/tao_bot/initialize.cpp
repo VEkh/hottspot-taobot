@@ -10,8 +10,8 @@
 #include "lib/pg/pg.cpp"                        // Pg
 #include "lib/utils/boolean.cpp"                // ::utils::boolean
 #include "lib/utils/string.cpp"                 // ::utils::string
-#include "models/account_stat/account_stat.cpp" // DB::AccountStat
-#include "models/position/position.cpp"         // DB::Position
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/position/position.cpp"         // DB::Position
 #include "tao_bot.h"                            // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"          // update_account_snapshot
 #include <iostream>                             // std::cout, std::endl

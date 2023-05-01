@@ -11,7 +11,7 @@ function build_project() {
   source "${app_dir}/bin/utils" # to_title
 
   data_dir="${app_dir}/data/"
-  project="$1"
+  project="${1}"
   project_title=$(to_title "$project")
 
   echo -e "${fmt_bold}${fmt_cyan}🔨 Building: ${fmt_yellow}${project_title}${fmt_reset}"
@@ -20,15 +20,15 @@ function build_project() {
 
   args=(
     "-D'APP_DIR=\"${app_dir}\"'"
-    "-D'DATA_DIR=\"$data_dir\"'"
+    "-D'DATA_DIR=\"${data_dir}\"'"
     "-iquote'${app_dir}'"
     "-iquote'${app_dir}/src'"
     "-isystem'${app_dir}/deps/build/include'"
     "-isystem'/usr/include/postgresql'"
     "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-isystem/opt/homebrew/opt/openssl@3/include")"
     "-std=c++17"
-    "-o '${app_dir}/build/$project'"
-    "${app_dir}/src/$project/$project.cpp"
+    "-o '${app_dir}/build/${project}'"
+    "${app_dir}/src/${project}/${project}.cpp"
     "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-L/opt/homebrew/opt/openssl@3/lib")"
     "-lcrypto"
     "-lcurl"
@@ -40,16 +40,14 @@ function build_project() {
   echo -e "${args[@]}" | xargs g++
 }
 
-if [[ $project = "bin" ]]
-then
-  app_dir="$(realpath "$(dirname "$0")/../")"
+if [[ $project = "bin" ]]; then
+  app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
   projects=("alpaca" "oanda")
 
-  for project in "${projects[@]}"
-  do
-    build_project "$project"
+  for project in "${projects[@]}"; do
+    build_project "${project}"
   done
 else
-  app_dir="$(realpath "$(dirname "$0")/../../")"
-  build_project "$project"
+  app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
+  build_project "${project}"
 fi

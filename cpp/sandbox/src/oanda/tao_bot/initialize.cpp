@@ -6,7 +6,7 @@
 #include "lib/formatted.cpp"        // Formatted::error_message
 #include "lib/pg/pg.cpp"            // Pg
 #include "lib/utils/boolean.cpp"    // ::utils::boolean
-#include "models/quote/quote.cpp"   // DB::Quote
+#include "db/quote/quote.cpp"   // DB::Quote
 #include "oanda/quote/quote.cpp"    // Oanda::Quote
 #include "spread_limit.cpp"         // spread_limit
 #include "tao_bot.h"                // Oanda::TaoBot, quantity, symbol

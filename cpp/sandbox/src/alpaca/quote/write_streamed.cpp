@@ -2,7 +2,7 @@
 #define ALPACA__QUOTE_write_streamed
 
 #include "lib/formatted.cpp"                        // Formatted
-#include "models/streamed_quote/streamed_quote.cpp" // DB::StreamedQuote
+#include "db/streamed_quote/streamed_quote.cpp" // DB::StreamedQuote
 #include "quote.h"                             // Alpaca::Quote, beast, quote_t
 #include "src/deps.cpp"                        // json
 #include <boost/beast/core/flat_buffer.hpp>    // boost::beast::flat_buffer

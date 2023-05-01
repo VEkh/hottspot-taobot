@@ -8,7 +8,7 @@
 #include "lib/pg/pg.cpp"                        // Pg
 #include "lib/utils/io.cpp"                     // ::utils::io
 #include "lib/utils/json.cpp"                   // ::utils::json
-#include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include <algorithm>                            // std::max
 #include <iostream>                             // std::cout, std::endl
 #include <math.h>                               // abs

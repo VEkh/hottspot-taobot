@@ -2,8 +2,8 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/pg/pg.cpp"                        // Pg
-#include "models/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "lib/pg/pg.cpp"                    // Pg
 
 int main(int argc, char *argv[]) {
   Pg pg;
