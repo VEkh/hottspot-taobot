@@ -1,15 +1,16 @@
 #ifndef OANDA__QUOTE_H
 #define OANDA__QUOTE_H
 
-#include "lib/formatted.cpp"       // Formatted
-#include "lib/pg/pg.cpp"           // Pg
-#include "db/quote/quote.cpp"  // DB::Quote
-#include "oanda/client/client.cpp" // Oanda::Client
-#include "oanda/types.cpp"         // Oanda::t
-#include "types.cpp"               // Global::t
-#include <list>                    // std::list
-#include <map>                     // std::map
-#include <string>                  // std::string
+#include "db/margin_rate/margin_rate.h" // DB::MarginRate
+#include "db/quote/quote.h"             // DB::Quote
+#include "lib/formatted.cpp"            // Formatted
+#include "lib/pg/pg.cpp"                // Pg
+#include "oanda/client/client.cpp"      // Oanda::Client
+#include "oanda/types.cpp"              // Oanda::t
+#include "types.cpp"                    // Global::t
+#include <list>                         // std::list
+#include <map>                          // std::map
+#include <string>                       // std::string
 
 namespace Oanda {
 class Quote {
@@ -20,13 +21,13 @@ public:
   Quote(Pg, std::map<std::string, std::string>);
   Quote(std::map<std::string, std::string>);
 
-  DB::Quote db_quote;
-
   void watch(const std::list<std::string> &);
 
 private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
 
+  DB::MarginRate db_margin_rate;
+  DB::Quote db_quote;
   Oanda::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
@@ -38,6 +39,7 @@ private:
   quote_t get_quote(const std::string);
 
   void fetch_and_persist_quote(const std::string, const bool);
+  void fetch_and_persist_margin_rates(const std::list<std::string> &);
   void read(const std::string);
   void write();
 };

@@ -1,18 +1,20 @@
 #ifndef OANDA__QUOTE
 #define OANDA__QUOTE
 
-#include "quote.h"                 // Oanda::Quote
-#include "lib/pg/pg.cpp"           // Pg
-#include "db/quote/quote.cpp"  // DB::Quote
-#include "oanda/client/client.cpp" // Oanda::Client
-#include <map>                     // std::map
-#include <string>                  // std::string
+#include "quote.h"                        // Oanda::Quote
+#include "db/margin_rate/margin_rate.cpp" // DB::MarginRate
+#include "db/quote/quote.cpp"             // DB::Quote
+#include "lib/pg/pg.cpp"                  // Pg
+#include "oanda/client/client.cpp"        // Oanda::Client
+#include <map>                            // std::map
+#include <string>                         // std::string
 
 #include "watch.cpp"
 
 Oanda::Quote::Quote(Pg p, std::map<std::string, std::string> flags) {
   this->api_client = Oanda::Client(flags);
   this->pg = p;
+  this->db_margin_rate = DB::MarginRate(this->pg);
   this->db_quote = DB::Quote(this->pg);
 }
 
