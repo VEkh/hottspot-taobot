@@ -2,23 +2,25 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "db/account_stat/account_stat.cpp" // DB::AccountStat
-#include "lib/pg/pg.cpp"                    // Pg
+#include "db/margin_rate/margin_rate.cpp" // DB::MarginRate
+#include "lib/pg/pg.cpp"                  // Pg
 
 int main(int argc, char *argv[]) {
   Pg pg;
   pg.connect();
 
-  std::list<DB::AccountStat::account_snapshot_t> arr;
+  DB::MarginRate db_margin_rate(pg);
 
-  DB::AccountStat db_account_stat(pg);
+  db_margin_rate.insert({
+      .multiplier = (100.0 / 3),
+      .symbol = "eur_usd",
+      .debug = true,
+  });
 
-  std::list<DB::AccountStat::account_snapshot_t> snapshots =
-      db_account_stat.get_daily_snapshots("AKC4P5UKCWADG8WE6ZEV");
+  const DB::MarginRate::margin_rate_t margin_rate =
+      db_margin_rate.get("EUR_USD");
 
-  DB::AccountStat::account_snapshot_t snapshot = snapshots.back();
-
-  printf("equity: %f\n", snapshot.equity);
+  printf("multiplier: %f\n", margin_rate.multiplier);
 
   pg.disconnect();
 }
