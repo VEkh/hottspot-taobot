@@ -3,6 +3,7 @@
 
 #include "lib/pg/pg.cpp" // Pg
 #include "types.cpp"     // Global::t
+#include <list>          // std::list
 #include <string>        // std::string
 #include <vector>        // std::vector
 
@@ -36,7 +37,7 @@ public:
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(const get_last_args_t);
 
-  void insert_latest_avg_one_sec_variances();
+  void insert_latest_avg_one_sec_variances(const std::list<std::string> &);
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
 
