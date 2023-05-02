@@ -9,6 +9,7 @@
 #include <stdio.h>                         // snprintf
 #include <string.h>                        // strlen
 #include <string>                          // std::string, std::to_string
+#include <unistd.h>                        // usleep
 
 DB::AccountStat::account_snapshot_t
 DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
@@ -103,7 +104,9 @@ DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
 
     std::cout << error_message << std::endl;
 
-    return account_snapshot_t();
+    usleep(5e5);
+
+    return get_snapshot(args);
   }
 
   return snapshots.front();
