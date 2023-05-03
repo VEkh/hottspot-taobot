@@ -14,6 +14,7 @@
 #include <list>                           // std::list
 #include <map>                            // std::map
 #include <string>                         // std::string
+#include <time.h>                         // time_t
 #include <vector>                         // std::map
 
 namespace Oanda {
@@ -43,14 +44,8 @@ private:
 
   static constexpr double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   static constexpr double MAX_ACCOUNT_LOSS_RATIO = -0.04;
-  static constexpr double MAX_SPREAD_TO_OPEN_RATIO = 3.0;
-  static constexpr double MIN_TARGET_TICK_MOVEMENT = 40.0;
-  static constexpr double POLLING_INTERVAL_SECONDS = 1.0;
-  static constexpr double TARGET_ACCOUNT_MIN_PROFIT_RATIO = 0.0025;
   static constexpr double TARGET_ACCOUNT_PROFIT_RATIO = 0.04;
   static constexpr double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
-  static constexpr int CONSOLIDATION_TIME_SECONDS = 45 * 60;
-  static constexpr int MAX_EXPECTED_LOSS_STREAK = 18;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -81,7 +76,6 @@ private:
   account_snapshot_t account_snapshot;
   exit_prices_t exit_prices;
   double current_epoch = time(nullptr);
-  int init_closed_positions_count = 0;
   margin_rate_t margin_rate;
   one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;
@@ -91,19 +85,17 @@ private:
   performance_t performance;
   std::map<std::string, std::string> flags;
   std::string symbol;
-  std::time_t started_at = std::time(nullptr);
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
+  time_t started_at = std::time(nullptr);
 
   account_exit_prices_t build_account_exit_prices();
   bool has_super_profited();
-  bool is_breaking_out();
   bool is_end_of_trading_period();
   bool is_first_position_long();
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
-  bool is_price_moving();
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();
@@ -117,12 +109,10 @@ private:
   double convert_price(const double, const std::string, const std::string);
   double current_price();
   double current_spread();
-  double loss_to_recover();
   double margin_buying_power();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double spread_limit();
-  double target_account_profit();
   exit_prices_t build_exit_prices();
   int compute_quantity();
   int order_duration(const order_t *);
@@ -131,7 +121,6 @@ private:
   json fetch_account_snapshot();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
-  json read_streamed_account();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
@@ -150,7 +139,6 @@ private:
   void fetch_and_persist_margin_rates(const std::list<std::string>);
   void handle_partially_filled_close_order(const order_t *);
   void initialize(const std::string, std::map<std::string, std::string> &);
-  void load_quotes();
   void log_account_snapshot();
   void log_end_of_trading_period();
   void log_performance();
@@ -176,7 +164,6 @@ private:
   void update_account_snapshot();
   void update_margin_rate();
   void watch();
-  void write_quotes();
 };
 } // namespace Oanda
 

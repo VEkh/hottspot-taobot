@@ -41,12 +41,8 @@ private:
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double MAX_ACCOUNT_LOSS_RATIO = -0.025;
-  constexpr static double POSITION_TARGET_PROFIT_RATIO = 1.0e-6;
   constexpr static double TARGET_ACCOUNT_PROFIT_RATIO = 0.0625;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
-  const static int CONSOLIDATION_TIME_SECONDS = 45 * 60;
-  const static int PRICE_MOVEMENT_SAMPLE_SIZE = 5e5;
-  const static int QUOTES_MAX_SIZE = 8e3;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -87,7 +83,6 @@ private:
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
-  bool is_price_moving();
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();

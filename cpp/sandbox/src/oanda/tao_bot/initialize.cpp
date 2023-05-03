@@ -50,7 +50,6 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
 
   update_account_snapshot();
 
-  this->init_closed_positions_count = this->closed_positions.size();
   this->performance = build_performance();
 }
 
