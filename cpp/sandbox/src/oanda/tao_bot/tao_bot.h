@@ -136,7 +136,6 @@ private:
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
 
-  std::pair<double, double> get_quote_price_range();
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const int);
