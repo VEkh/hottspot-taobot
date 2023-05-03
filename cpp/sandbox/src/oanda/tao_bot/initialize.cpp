@@ -1,19 +1,20 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
-#include "build_performance.cpp"    // build_performance
-#include "get_account_snapshot.cpp" // get_account_snapshot
-#include "lib/formatted.cpp"        // Formatted::error_message
-#include "lib/pg/pg.cpp"            // Pg
-#include "lib/utils/boolean.cpp"    // ::utils::boolean
-#include "db/quote/quote.cpp"   // DB::Quote
-#include "oanda/quote/quote.cpp"    // Oanda::Quote
-#include "spread_limit.cpp"         // spread_limit
-#include "tao_bot.h"                // Oanda::TaoBot, quantity, symbol
-#include <locale.h>                 // setlocale
-#include <map>                      // std::map
-#include <stdexcept>                // std::invalid_argument
-#include <string>                   // std::map
+#include "build_performance.cpp"          // build_performance
+#include "db/margin_rate/margin_rate.cpp" // DB::MarginRate
+#include "db/quote/quote.cpp"             // DB::Quote
+#include "get_account_snapshot.cpp"       // get_account_snapshot
+#include "lib/formatted.cpp"              // Formatted::error_message
+#include "lib/pg/pg.cpp"                  // Pg
+#include "lib/utils/boolean.cpp"          // ::utils::boolean
+#include "oanda/quote/quote.cpp"          // Oanda::Quote
+#include "spread_limit.cpp"               // spread_limit
+#include "tao_bot.h"                      // Oanda::TaoBot, quantity, symbol
+#include <locale.h>                       // setlocale
+#include <map>                            // std::map
+#include <stdexcept>                      // std::invalid_argument
+#include <string>                         // std::map
 
 void Oanda::TaoBot::initialize(const std::string symbol_,
                                std::map<std::string, std::string> &flags_) {
@@ -40,6 +41,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->pg.connect();
 
   this->api_client = Oanda::Client(this->flags);
+  this->db_margin_rate = DB::MarginRate(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->quoter = Oanda::Quote(this->pg, this->flags);
   this->symbol = symbol_;

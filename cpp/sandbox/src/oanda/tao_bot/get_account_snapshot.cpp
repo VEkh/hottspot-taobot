@@ -71,15 +71,6 @@ Oanda::TaoBot::account_snapshot_t Oanda::TaoBot::get_account_snapshot() {
     const std::string equity = account_json["account"]["balance"];
     const std::string unrealized_pl_string =
         account_json["account"]["unrealizedPL"];
-    const std::string margin_rate_string =
-        account_json["marginRates"][this->symbol];
-    const std::string margin_buying_power_string =
-        account_json["account"]["marginAvailable"];
-
-    const double margin_rate = std::stod(margin_rate_string);
-
-    const double margin_buying_power =
-        floor(std::stod(margin_buying_power_string)) / margin_rate;
 
     double original_equity = this->account_snapshot.original_equity;
 
@@ -102,21 +93,16 @@ Oanda::TaoBot::account_snapshot_t Oanda::TaoBot::get_account_snapshot() {
             ? (double)account_json["maxBalance"]
             : std::max(this->account_snapshot.max_equity, equity_d);
 
-    const double original_margin_buying_power =
-        this->account_snapshot.original_margin_buying_power
-            ? this->account_snapshot.original_margin_buying_power
-            : margin_buying_power;
-
     return {
         .equity = equity_d,
-        .margin_buying_power = margin_buying_power,
-        .margin_multiplier = 1 / margin_rate,
+        .margin_buying_power = 0.00,
+        .margin_multiplier = 0.00,
         .max_equity = max_equity,
         .max_equity_timestamp = now,
         .min_equity = equity_d,
         .min_equity_timestamp = now,
         .original_equity = original_equity,
-        .original_margin_buying_power = original_margin_buying_power,
+        .original_margin_buying_power = 0.00,
         .session_max_equity = equity_d,
         .session_max_equity_timestamp = now,
         .session_original_equity = session_original_equity,

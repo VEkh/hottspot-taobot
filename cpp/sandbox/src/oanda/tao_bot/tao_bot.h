@@ -1,18 +1,19 @@
 #ifndef OANDA__TAO_BOT_H
 #define OANDA__TAO_BOT_H
 
-#include "deps.cpp"                // json
-#include "lib/formatted.cpp"       // Formatted
-#include "lib/pg/pg.cpp"           // Pg
-#include "db/quote/quote.cpp"  // DB::Quote
-#include "oanda/client/client.cpp" // Oanda::Client
-#include "oanda/quote/quote.cpp"   // Oanda::Quote
-#include "oanda/types.cpp"         // Oanda::t
-#include "types.cpp"               // Global::t
-#include <list>                    // std::list
-#include <map>                     // std::map
-#include <string>                  // std::string
-#include <vector>                  // std::map
+#include "db/margin_rate/margin_rate.h" // DB::MarginRate
+#include "db/quote/quote.h"             // DB::Quote
+#include "deps.cpp"                     // json
+#include "lib/formatted.cpp"            // Formatted
+#include "lib/pg/pg.cpp"                // Pg
+#include "oanda/client/client.cpp"      // Oanda::Client
+#include "oanda/quote/quote.cpp"        // Oanda::Quote
+#include "oanda/types.cpp"              // Oanda::t
+#include "types.cpp"                    // Global::t
+#include <list>                         // std::list
+#include <map>                          // std::map
+#include <string>                       // std::string
+#include <vector>                       // std::map
 
 namespace Oanda {
 class TaoBot {
@@ -25,6 +26,7 @@ private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
+  using margin_rate_t = DB::MarginRate::margin_rate_t;
   using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
@@ -68,6 +70,7 @@ private:
       {"USD_JPY", 1.8e-2}, {"USD_SEK", 4.2e-3},
   };
 
+  DB::MarginRate db_margin_rate;
   DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
@@ -77,6 +80,7 @@ private:
   exit_prices_t exit_prices;
   double current_epoch = time(nullptr);
   int init_closed_positions_count = 0;
+  margin_rate_t margin_rate;
   one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
@@ -107,7 +111,6 @@ private:
   bool should_stop_profit();
   bool should_terminate();
   double account_profit_expanding_trailing_stop_ratio(const double);
-  double base_quantity();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -115,6 +118,7 @@ private:
   double current_price();
   double current_spread();
   double loss_to_recover();
+  double margin_buying_power();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double spread_limit();
@@ -144,6 +148,7 @@ private:
   void clear_stale_open_order();
   void close_position();
   void complete_filled_order(order_t *);
+  void fetch_and_persist_margin_rates(const std::list<std::string>);
   void handle_partially_filled_close_order(const order_t *);
   void initialize(const std::string, std::map<std::string, std::string> &);
   void load_quotes();
@@ -170,6 +175,7 @@ private:
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *, order_t *);
   void update_account_snapshot();
+  void update_margin_rate();
   void watch();
   void write_account_performance();
   void write_quotes();

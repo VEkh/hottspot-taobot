@@ -23,7 +23,6 @@ public:
 
   CurlClient place_order(order_t *order);
 
-  std::map<std::string, std::string> map_margin_rates(json);
   std::string cancel_order(const int);
   std::string cancel_order(order_t *order);
   std::string fetch_account();

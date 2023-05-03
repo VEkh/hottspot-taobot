@@ -5,6 +5,7 @@
 #include "has_super_profited.cpp"        // has_super_profited
 #include "lib/formatted.cpp"             // Formatted
 #include "lib/utils/time.cpp"            // ::utils::time_
+#include "margin_buying_power.cpp"       // margin_buying_power
 #include "tao_bot.h"                     // Oanda::TaoBot
 #include <iostream>                      // std::cout, std::endl
 #include <stdio.h>                       // printf
@@ -88,8 +89,7 @@ void Oanda::TaoBot::log_account_snapshot() {
          this->account_snapshot.session_original_equity,
          session_original_profit, session_original_profit_percentage);
 
-  printf("Margin Buying Power:              $%'.5f\n",
-         this->account_snapshot.margin_buying_power);
+  printf("Margin Buying Power:              $%'.5f\n", margin_buying_power());
 
   printf("Stop Loss Profit:                 $%'.5f\n",
          exit_prices_.session_stop_profit_loss);

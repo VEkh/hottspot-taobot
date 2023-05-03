@@ -14,7 +14,6 @@
 Oanda::Quote::Quote(Pg p, std::map<std::string, std::string> flags) {
   this->api_client = Oanda::Client(flags);
   this->pg = p;
-  this->db_margin_rate = DB::MarginRate(this->pg);
   this->db_quote = DB::Quote(this->pg);
 }
 

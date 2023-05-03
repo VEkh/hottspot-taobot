@@ -8,7 +8,6 @@
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/io.cpp"      // ::utils::io
 #include "lib/utils/json.cpp"    // ::utils::json
-#include "map_margin_rates.cpp"  // map_margin_rates
 #include <algorithm>             // std::max
 #include <ctime>                 // std::time
 #include <iostream>              // std::cout, std::endl
@@ -65,7 +64,6 @@ void Oanda::Client::stream_account() {
         original_equity = equity;
       }
 
-      account_json["marginRates"] = map_margin_rates(instruments_json);
       account_json["maxBalance"] = max_equity;
       account_json["originalBalance"] = original_equity;
       account_json["timestamp"] = (long int)std::time(nullptr);
