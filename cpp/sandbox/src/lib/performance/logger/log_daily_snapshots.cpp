@@ -1,31 +1,25 @@
-#ifndef ALPACA__PERFORMANCE_LOGGER_log_daily_snapshots
-#define ALPACA__PERFORMANCE_LOGGER_log_daily_snapshots
+#ifndef PERFORMANCE__LOGGER_log_daily_snapshots
+#define PERFORMANCE__LOGGER_log_daily_snapshots
 
-#include "alpaca/client/client.cpp" // Alpaca::Client
-#include "lib/formatted.cpp"        // Formatted
-#include "lib/utils/time.cpp"       // ::utils::time_
-#include "performance_logger.h" // Alpaca::PerformanceLogger, account_snapshot_t
-#include <iostream>             // std::cout, std::endl
-#include <list>                 // std::list
-#include <locale.h>             // setlocale
-#include <stdio.h>              // printf
-#include <string>               // std::string
+#include "lib/formatted.cpp"  // Formatted
+#include "lib/utils/time.cpp" // ::utils::time_
+#include "logger.h"           // Performance::Logger, account_snapshot_t
+#include <iostream>           // std::cout, std::endl
+#include <list>               // std::list
+#include <locale.h>           // setlocale
+#include <stdio.h>            // printf
+#include <string>             // std::string
 
-void Alpaca::PerformanceLogger::log_daily_snapshots(const std::string api_key) {
+void Performance::Logger::log_daily_snapshots(const std::string api_key_id) {
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
-  std::map<std::string, std::string> api_client_flags = this->conn.flags;
-  api_client_flags["api-key"] = api_key;
-
-  Alpaca::Client api_client(api_client_flags);
-
   std::list<account_snapshot_t> snapshots =
-      this->db_account_stat.get_daily_snapshots(api_client.config.api_key_id);
+      this->db_account_stat.get_daily_snapshots(api_key_id);
 
   if (snapshots.empty()) {
     std::cout << fmt.bold << fmt.red;
-    printf("❌ Failed to read snapshots for %s.", api_key.c_str());
+    printf("❌ Failed to read snapshots for %s.", api_key_id.c_str());
     std::cout << fmt.reset << std::endl;
     return;
   }

@@ -28,6 +28,8 @@ double sigmoid(const double max, const double min, const double x,
   return (y_coefficient / (1 + exp(-x_coefficient * (x - x_shift)))) + y_shift;
 }
 
+char sign_char(const double n) { return n >= 0 ? '+' : '-'; };
+
 double to_currency(float val) { return round_to(val, 2); }
 
 std::string to_rounded_percentage(double val) {

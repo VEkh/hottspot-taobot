@@ -1,24 +1,24 @@
-#include "client/client.cpp"   // Oanda::Client
-#include "db/quote/quote.cpp"  // DB::Quote
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/pg/pg.cpp"       // Pg
-#include "lib/utils/io.cpp"    // ::utils::io
-#include "quote/quote.cpp"     // Oanda::Quote
-#include "sessions.cpp"        // Oanda::Sessions
-#include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
-#include <iostream>            // std::cout, std::endl
-#include <list>                // std::list
-#include <map>                 // std::map
-#include <sstream>             // std::ostringstream
-#include <stdio.h>             // printf
-#include <string>              // std::string
+#include "client/client.cpp"                 // Oanda::Client
+#include "db/quote/quote.cpp"                // DB::Quote
+#include "lib/formatted.cpp"                 // Formatted
+#include "lib/performance/logger/logger.cpp" // Performance::Logger
+#include "lib/pg/pg.cpp"                     // Pg
+#include "lib/utils/io.cpp"                  // ::utils::io
+#include "quote/quote.cpp"                   // Oanda::Quote
+#include "tao_bot/tao_bot.cpp"               // Oanda::TaoBot
+#include <iostream>                          // std::cout, std::endl
+#include <list>                              // std::list
+#include <map>                               // std::map
+#include <sstream>                           // std::ostringstream
+#include <stdio.h>                           // printf
+#include <string>                            // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"fetch_quote <SYMBOL>                          ",
        "Get quote for the given symbol"},
-      {"log_sessions                                  ",
-       "Print account performance for recorded sessions"},
+      {"log_snapshots <FLAGS>                         ",
+       "Print daily account performance for the given api key"},
       {"quotes_watch <SYMBOLS>                        ",
        "Persist and make computations for fetched/streamed quotes"},
       {"quotes_watch_avg_one_sec_variances <SYMBOLS>  ",
@@ -78,8 +78,18 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "log_sessions") {
-    Oanda::Sessions::log();
+  if (command == "log_snapshots") {
+    Oanda::Client api_client(flags);
+
+    Pg pg(flags);
+    pg.connect();
+
+    Performance::Logger logger(pg);
+
+    logger.log_daily_snapshots(api_client.config.account_id);
+
+    pg.disconnect();
+
     exit(0);
   }
 

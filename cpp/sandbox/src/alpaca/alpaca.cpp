@@ -1,19 +1,20 @@
-#include "client/client.cpp"                         // Alpaca::Client
-#include "db/quote/quote.cpp"                        // DB::Quote
-#include "lib/formatted.cpp"                         // Formatted
-#include "lib/pg/pg.cpp"                             // Pg
-#include "lib/utils/io.cpp"                          // utils::io
-#include "performance_logger/performance_logger.cpp" // Alpaca::PerformanceLogger
-#include "quote/quote.cpp"                           // Alpaca::Quote
-#include "tao_bot/tao_bot.cpp"                       // Alpaca::TaoBot
-#include <iostream>                                  // std::cout, std::endl
-#include <list>                                      // std::list
-#include <map>                                       // std::map
-#include <sstream>                                   // std::ostringstream
-#include <stdexcept>                                 // std::invalid_argument
-#include <stdio.h>                                   // printf
-#include <string>                                    // std::string
-#include <vector>                                    // std::vector
+#include "client/client.cpp"                 // Alpaca::Client
+#include "db/quote/quote.cpp"                // DB::Quote
+#include "lib/formatted.cpp"                 // Formatted
+#include "lib/performance/logger/logger.cpp" // Performance::Logger
+#include "lib/pg/pg.cpp"                     // Pg
+#include "lib/utils/io.cpp"                  // utils::io
+#include "performance/logger/logger.cpp"     // Alpaca::Performance::Logger
+#include "quote/quote.cpp"                   // Alpaca::Quote
+#include "tao_bot/tao_bot.cpp"               // Alpaca::TaoBot
+#include <iostream>                          // std::cout, std::endl
+#include <list>                              // std::list
+#include <map>                               // std::map
+#include <sstream>                           // std::ostringstream
+#include <stdexcept>                         // std::invalid_argument
+#include <stdio.h>                           // printf
+#include <string>                            // std::string
+#include <vector>                            // std::vector
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -23,7 +24,7 @@ void print_usage() {
        "Get quote for the given symbol"},
       {"log_benchmark                                 ",
        "Print cumulative return and compare to benchmark indexes"},
-      {"log_snapshots <API_KEY>                       ",
+      {"log_snapshots <FLAGS>                         ",
        "Print daily account performance for the given api key"},
       {"quotes_stream <SYMBOLS>                       ",
        "Stream quotes for given symbol(s)"},
@@ -113,7 +114,7 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "log_benchmark") {
-    Alpaca::PerformanceLogger logger;
+    Alpaca::Performance::Logger logger;
 
     logger.log_benchmark();
 
@@ -121,19 +122,14 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "log_snapshots") {
-    if (args.empty()) {
-      std::string message =
-          Formatted::error_message("Please provide an api key.");
-
-      throw std::invalid_argument(message);
-    }
+    Alpaca::Client api_client(flags);
 
     Pg pg(flags);
     pg.connect();
 
-    Alpaca::PerformanceLogger logger(pg);
+    Performance::Logger logger(pg);
 
-    logger.log_daily_snapshots(args.front());
+    logger.log_daily_snapshots(api_client.config.api_key_id);
 
     pg.disconnect();
 

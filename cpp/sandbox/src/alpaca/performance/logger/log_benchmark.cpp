@@ -1,22 +1,20 @@
-#ifndef ALPACA__PERFORMANCE_LOGGER_log_benchmark
-#define ALPACA__PERFORMANCE_LOGGER_log_benchmark
+#ifndef ALPACA__PERFORMANCE__LOGGER_log_benchmark
+#define ALPACA__PERFORMANCE__LOGGER_log_benchmark
 
-#include "deps.cpp"             // json
-#include "lib/formatted.cpp"    // Formatted
-#include "lib/utils/time.cpp"   // ::utils::time_
-#include "performance_logger.h" // PerformanceLogger
-#include "read_json_file.cpp"   // read_json_file
-#include "sign_char.cpp"        // sign_char
-#include <algorithm>            // std::max
-#include <iomanip>              // std::get_time
-#include <iostream>             // std::cout, std::endl
-#include <locale.h>             // setlocale
-#include <math.h>               // abs
-#include <stdio.h>              // printf
-#include <string>               // std::string
-#include <time.h>               // tm
+#include "deps.cpp"            // json
+#include "lib/formatted.cpp"   // Formatted
+#include "lib/utils/float.cpp" // ::utils::float_
+#include "lib/utils/time.cpp"  // ::utils::time_
+#include "logger.h"            // Alpaca::Performance::Logger
+#include "read_json_file.cpp"  // read_json_file
+#include <algorithm>           // std::max
+#include <iostream>            // std::cout, std::endl
+#include <locale.h>            // setlocale
+#include <math.h>              // abs
+#include <stdio.h>             // printf
+#include <time.h>              // tm
 
-void Alpaca::PerformanceLogger::log_benchmark() {
+void Alpaca::Performance::Logger::log_benchmark() {
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
@@ -144,13 +142,14 @@ void Alpaca::PerformanceLogger::log_benchmark() {
   std::cout << fmt.cyan;
   printf("* Latest Return: %c$%'.2f (%+.2f%%) (%+.2f%% 9-5 Salary)"
          " (vs. NASDAQ: %+.2f%%) (vs. S&P 500: %+.2f%%)\n",
-         sign_char(todays_profit_dollars), abs(todays_profit_dollars),
-         todays_profit_ratio * 100, todays_profit_salary_ratio * 100,
-         todays_nasdaq_profit_ratio * 100, todays_sp500_profit_ratio * 100);
+         ::utils::float_::sign_char(todays_profit_dollars),
+         abs(todays_profit_dollars), todays_profit_ratio * 100,
+         todays_profit_salary_ratio * 100, todays_nasdaq_profit_ratio * 100,
+         todays_sp500_profit_ratio * 100);
 
   printf("* Week's Return: %c$%'.2f • Total Return: %c$%'.2f\n",
-         sign_char(week_total), abs(week_total), sign_char(grand_total),
-         abs(grand_total));
+         ::utils::float_::sign_char(week_total), abs(week_total),
+         ::utils::float_::sign_char(grand_total), abs(grand_total));
 
   std::cout << fmt.yellow;
   printf("* Average Return: %+.2f%% • Average NASDAQ Return: %+.2f%% • Average "
