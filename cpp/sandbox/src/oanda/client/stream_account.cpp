@@ -1,41 +1,27 @@
 #ifndef OANDA__CLIENT_stream_account
 #define OANDA__CLIENT_stream_account
 
-#include "client.h"              // Oanda::Client, fmt
-#include "deps.cpp"              // json, nlohmann
-#include "fetch_account.cpp"     // fetch_account
-#include "fetch_instruments.cpp" // fetch_instruments
-#include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/io.cpp"      // ::utils::io
-#include "lib/utils/json.cpp"    // ::utils::json
-#include <algorithm>             // std::max
-#include <ctime>                 // std::time
-#include <iostream>              // std::cout, std::endl
-#include <string>                // std::stod, std::string
-#include <unistd.h>              // usleep
+#include "client.h"                         // Oanda::Client, fmt
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/utils/utils.cpp"               // DB::Utils
+#include "deps.cpp"                         // json, nlohmann
+#include "fetch_account.cpp"                // fetch_account
+#include "lib/formatted.cpp"                // Formatted
+#include "lib/pg/pg.cpp"                    // Pg
+#include "lib/utils/json.cpp"               // ::utils::json
+#include <iostream>                         // std::cout, std::endl
+#include <string>                           // std::stod, std::string
+#include <time.h>                           // time
+#include <unistd.h>                         // usleep
 
 void Oanda::Client::stream_account() {
-  double max_equity = 0.00;
-  double original_equity = 0.00;
-  json instruments_json;
+  Pg pg(this->flags);
+  pg.connect();
 
-  try {
+  DB::AccountStat db_account_stat(pg);
+  DB::Utils db_utils(pg);
 
-    instruments_json = ::utils::json::parse_with_catch(
-        fetch_instruments(::utils::io::tradeable_symbols("oanda")),
-        "OANDA__CLIENT_stream_account-fetch_instruments");
-
-  } catch (nlohmann::detail::type_error &) {
-    std::string error_message = Formatted::error_message(
-        std::string("[OANDA__CLIENT_stream_account]: "
-                    "nlohmann::detail::type_error when fetching instruments. "
-                    "Trying again."));
-
-    std::cout << error_message << fmt.reset << std::endl;
-
-    usleep(1e6);
-    return stream_account();
-  }
+  db_utils.set_param({"statement_timeout", "1000"});
 
   while (true) {
     json account_json;
@@ -58,24 +44,20 @@ void Oanda::Client::stream_account() {
       const double unrealized_pl = std::stod(unrealized_pl_string);
       const double equity = std::stod(equity_string) + unrealized_pl;
 
-      max_equity = std::max(max_equity, equity);
+      account_json["timestamp"] = (long int)time(nullptr);
 
-      if (!original_equity) {
-        original_equity = equity;
-      }
+      std::cout << fmt.bold << fmt.cyan;
+      std::cout << account_json.dump(2);
+      std::cout << fmt.reset << std::endl << std::endl;
 
-      account_json["maxBalance"] = max_equity;
-      account_json["originalBalance"] = original_equity;
-      account_json["timestamp"] = (long int)std::time(nullptr);
-
-      std::cout << fmt.bold << fmt.cyan << account_json.dump(2) << fmt.reset
-                << std::endl
-                << std::endl;
-
-      const std::string filepath =
-          std::string(DATA_DIR) + "/oanda/account.json";
-
-      ::utils::io::write_to_file(account_json.dump(2), filepath.c_str());
+      db_account_stat.upsert({
+          .api_key_id = this->config.account_id,
+          .equity = equity,
+          .inserted_at = 0.00,
+          .margin_buying_power = 0.00,
+          .margin_multiplier = 0.00,
+          .debug = true,
+      });
 
       usleep(1e6);
     } catch (nlohmann::detail::type_error &) {

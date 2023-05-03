@@ -1,20 +1,20 @@
 #ifndef ALPACA__TAO_BOT_H
 #define ALPACA__TAO_BOT_H
 
-#include "alpaca/client/client.cpp"             // Alpaca::Client
-#include "alpaca/quote/quote.cpp"               // Alpaca::Quote
-#include "alpaca/types.cpp"                     // Alpaca::t
-#include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
-#include "lib/formatted.cpp"                    // Formatted
-#include "lib/pg/pg.cpp"                        // Pg
+#include "alpaca/client/client.cpp"         // Alpaca::Client
+#include "alpaca/quote/quote.cpp"           // Alpaca::Quote
+#include "alpaca/types.cpp"                 // Alpaca::t
+#include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/position/position.cpp"         // DB::Position
-#include "types.cpp"                            // Global::t
-#include <list>                                 // std::list
-#include <math.h>                               // INFINITY
-#include <time.h>                               // time
-#include <utility>                              // std::pair
-#include <vector>                               // std::vector
+#include "lib/formatted.cpp"                // Formatted
+#include "lib/pg/pg.cpp"                    // Pg
+#include "types.cpp"                        // Global::t
+#include <list>                             // std::list
+#include <math.h>                           // INFINITY
+#include <time.h>                           // time
+#include <utility>                          // std::pair
+#include <vector>                           // std::vector
 
 namespace Alpaca {
 class TaoBot {
@@ -26,8 +26,8 @@ public:
   void run();
 
 private:
-  using account_snapshot_t = Alpaca::t::account_snapshot_t;
-  using account_exit_prices_t = Alpaca::t::account_exit_prices_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
+  using account_exit_prices_t = Global::t::account_exit_prices_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Alpaca::t::order_action_t;

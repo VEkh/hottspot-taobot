@@ -5,24 +5,20 @@ set -e
 shopt -s extglob
 
 app_dir=$(realpath "$(dirname "$0")/../../")
-data_dir="$app_dir/data/"
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_green="\033[32m"
-fmt_red="\033[31m"
-fmt_reset="\033[0m"
-fmt_underline="\033[4m"
-fmt_yellow="\033[33m"
 project=$(dirname "$0" | xargs basename)
 
+# ASCII
+# ascii_print
+# extract_flags
+# to_lower
+# to_upper
 # shellcheck disable=1090
-source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
+source "${app_dir}/bin/utils"
 
 if [[ $project = "bin" ]]; then
   cmd=$(basename "$0")
 
-  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
-  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
+  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
 
   exit 1;
 fi
@@ -39,9 +35,7 @@ if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
   exit 1
 fi
 
-echo -e "${fmt_bold}${fmt_cyan}"
-date
-echo
+ascii_print "$(date)\n" "cyan"
 
 function get_status() {
   state=$(
@@ -49,7 +43,7 @@ function get_status() {
     grep "[s]tream_account" |
     grep -vE "heartbeat|restart|status|stop" |
     grep "${project}" |
-    grep --color "${api_key}"
+    grep --color "${api_key}" || true
   )
 
   echo -e "${state}"
@@ -59,9 +53,9 @@ function print_status() {
   state=$(get_status)
 
   if [[ -z "${state}" ]]; then
-    echo -e "${fmt_green}✅ Account is not streaming."
+    ascii_print "✅ Account is not streaming." "green"
   else
-    printf "%b" "$fmt_reset"
+    printf "%b" "${ASCII["reset"]}"
     get_status
   fi
 }
@@ -70,20 +64,18 @@ function start_if_stopped() {
   state=$(get_status)
 
   if [[ -z "${state}" ]]; then
-    echo -e "${fmt_green}😴 Account is not streaming. Starting stream.\n${fmt_reset}"
+    ascii_print "😴 Account is not streaming. Starting stream.\n" "green"
     start_stream "${@}"
   else
-    echo -e "${fmt_cyan}💖 Account is streaming. Doing nothing.${fmt_reset}"
+    ascii_print "💖 Account is streaming. Doing nothing." "cyan"
   fi
 }
 
 function start_stream() {
   log_dir="${app_dir}/log/${project}/${api_key}"
   log_file="${log_dir}/account_stream.log"
-  project_data_dir="${data_dir}/${project}/${api_key}"
 
   mkdir -p "${log_dir}"
-  mkdir -p "${project_data_dir}"
 
   ascii_print "Starting ${ASCII["normal"]}${ASCII["cyan"]}${api_key} ${ASCII["bold"]}${ASCII["yellow"]}Account Stream" "yellow"
 
@@ -94,9 +86,9 @@ function stop_stream() {
   state=$(get_status)
 
   if [[ -z "${state}" ]]; then
-    echo -e "${fmt_green}✅ Account is not streaming."
+    ascii_print "✅ Account is not streaming." "green"
   else
-    echo -e "${fmt_cyan}🛑 Stopping Account Stream${fmt_reset}"
+    ascii_print "🛑 Stopping Account Stream}" "cyan"
 
     get_status | awk '{print $2}' | xargs kill
   fi
@@ -126,17 +118,17 @@ case $1 in
     ;;
 
   *)
-    echo -e "${fmt_bold}${fmt_underline}${fmt_yellow}🦙 ALPACA ACCOUNT STREAM${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_cyan}Description: Stream the brokerage account iinfo.${fmt_reset}\n"
-    echo -e "${fmt_bold}${fmt_yellow}Usage: stream_account [COMMAND]\n"
-    echo -e "Commands:"
-    echo -e "  heartbeat               Check status. Restart if stopped."
-    echo -e "  restart   <OPTIONS>     Stop, then start streaming. See stop and start documentation."
-    echo -e "  start     <OPTIONS>     Start streaming with <OPTIONS> (e.g. --paper, etc.)."
-    echo -e "  status                  Print running stream processes, if any."
-    echo -e "  stop                    Stop streawming account."
+    ascii_print "${ASCII["underline"]}$(to_upper "${project}") ACCOUNT STREAM\n" "yellow"
+    ascii_print "Description: Stream the brokerage account info.\n" "cyan"
+    ascii_print "Usage: stream_account [COMMAND]\n" "yellow"
+    ascii_print "Commands:" "yellow"
+    ascii_print "  heartbeat               Check status. Restart if stopped." "yellow"
+    ascii_print "  restart   <OPTIONS>     Stop, then start streaming. See stop and start documentation." "yellow"
+    ascii_print "  start     <OPTIONS>     Start streaming with <OPTIONS> (e.g. --paper, etc.)." "yellow"
+    ascii_print "  status                  Print running stream processes, if any." "yellow"
+    ascii_print "  stop                    Stop streawming account." "yellow"
 
     ;;
 esac
 
-printf "%b" "$fmt_reset"
+printf "%b" "${ASCII["reset"]}"

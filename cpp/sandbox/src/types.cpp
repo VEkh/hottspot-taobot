@@ -6,6 +6,14 @@
 
 namespace Global {
 namespace t {
+struct account_exit_prices_t {
+  double current_profit = 0.00;
+  double max_profit = 0.00;
+  double stop_profit_loss = 0.00;
+  double target_account_profit = 0.00;
+  double target_max_profit = 0.00;
+};
+
 struct account_snapshot_t {
   double equity = 0.00;
   double margin_buying_power = 0.00;
@@ -16,9 +24,6 @@ struct account_snapshot_t {
   double min_equity_timestamp = 0;
   double original_equity = 0.00;
   double original_margin_buying_power = 0.00;
-  double session_max_equity = 0.00;
-  double session_max_equity_timestamp = 0;
-  double session_original_equity = 0.00;
   double timestamp = 0;
   std::string api_key_id = "";
 };
@@ -27,19 +32,6 @@ enum order_win_result_t {
   LOSS,
   TIE,
   WIN,
-};
-
-struct account_exit_prices_t {
-  double current_profit = 0.00;
-  double overall_max_profit = 0.00;
-  double overall_stop_profit_loss = 0.00;
-  double session_max_profit = 0.00;
-  double session_stop_loss = 0.00;
-  double session_stop_profit_loss = 0.00;
-  double session_target_account_profit = 0.00;
-  double session_target_max_profit = 0.00;
-  double target_account_profit = 0.00;
-  double target_max_profit = 0.00;
 };
 
 struct exit_prices_t {

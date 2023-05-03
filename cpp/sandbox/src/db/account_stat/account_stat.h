@@ -1,15 +1,15 @@
 #ifndef DB__ACCOUNT_STAT_H
 #define DB__ACCOUNT_STAT_H
 
-#include "alpaca/types.cpp" // Alpaca::t
-#include "lib/pg/pg.cpp"    // Pg
-#include <list>             // std::list
-#include <string>           // std::string
+#include "lib/pg/pg.cpp" // Pg
+#include "types.cpp"     // Global::t
+#include <list>          // std::list
+#include <string>        // std::string
 
 namespace DB {
 class AccountStat {
 public:
-  using account_snapshot_t = Alpaca::t::account_snapshot_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
 
   struct get_snapshot_args_t {
     std::string api_key_id;

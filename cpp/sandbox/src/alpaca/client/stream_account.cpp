@@ -8,11 +8,8 @@
 #include "fetch_account.cpp"                // fetch_account
 #include "lib/formatted.cpp"                // Formatted
 #include "lib/pg/pg.cpp"                    // Pg
-#include "lib/utils/io.cpp"                 // ::utils::io
 #include "lib/utils/json.cpp"               // ::utils::json
-#include <algorithm>                        // std::max
 #include <iostream>                         // std::cout, std::endl
-#include <math.h>                           // abs
 #include <string>                           // std::stod, std::string
 #include <time.h>                           // time
 #include <unistd.h>                         // usleep

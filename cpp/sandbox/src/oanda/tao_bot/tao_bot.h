@@ -1,19 +1,20 @@
 #ifndef OANDA__TAO_BOT_H
 #define OANDA__TAO_BOT_H
 
-#include "db/margin_rate/margin_rate.h" // DB::MarginRate
-#include "db/quote/quote.h"             // DB::Quote
-#include "deps.cpp"                     // json
-#include "lib/formatted.cpp"            // Formatted
-#include "lib/pg/pg.cpp"                // Pg
-#include "oanda/client/client.cpp"      // Oanda::Client
-#include "oanda/quote/quote.cpp"        // Oanda::Quote
-#include "oanda/types.cpp"              // Oanda::t
-#include "types.cpp"                    // Global::t
-#include <list>                         // std::list
-#include <map>                          // std::map
-#include <string>                       // std::string
-#include <vector>                       // std::map
+#include "db/account_stat/account_stat.h" // DB::AccountStat
+#include "db/margin_rate/margin_rate.h"   // DB::MarginRate
+#include "db/quote/quote.h"               // DB::Quote
+#include "deps.cpp"                       // json
+#include "lib/formatted.cpp"              // Formatted
+#include "lib/pg/pg.cpp"                  // Pg
+#include "oanda/client/client.cpp"        // Oanda::Client
+#include "oanda/quote/quote.cpp"          // Oanda::Quote
+#include "oanda/types.cpp"                // Oanda::t
+#include "types.cpp"                      // Global::t
+#include <list>                           // std::list
+#include <map>                            // std::map
+#include <string>                         // std::string
+#include <vector>                         // std::map
 
 namespace Oanda {
 class TaoBot {
@@ -70,6 +71,7 @@ private:
       {"USD_JPY", 1.8e-2}, {"USD_SEK", 4.2e-3},
   };
 
+  DB::AccountStat db_account_stat;
   DB::MarginRate db_margin_rate;
   DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -93,8 +95,6 @@ private:
   std::vector<position_t> closed_positions;
   std::vector<quote_t> quotes;
 
-  account_snapshot_t get_account_snapshot();
-  account_snapshot_t get_account_snapshot(const account_snapshot_t &);
   account_exit_prices_t build_account_exit_prices();
   bool has_super_profited();
   bool is_breaking_out();
@@ -177,7 +177,6 @@ private:
   void update_account_snapshot();
   void update_margin_rate();
   void watch();
-  void write_account_performance();
   void write_quotes();
 };
 } // namespace Oanda

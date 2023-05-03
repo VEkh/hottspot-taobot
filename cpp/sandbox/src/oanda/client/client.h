@@ -19,6 +19,12 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Global::t::quote_t;
 
+  struct config_t {
+    std::string account_id;
+    std::string authentication_token;
+    std::string base_url;
+  } config;
+
   Client(std::map<std::string, std::string> = {});
 
   CurlClient place_order(order_t *order);
@@ -37,12 +43,6 @@ public:
   void stream_account();
 
 private:
-  struct config_t {
-    std::string account_id;
-    std::string authentication_token;
-    std::string base_url;
-  } config;
-
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::map<std::string, std::string> flags = {{"paper", "0"}};
 
