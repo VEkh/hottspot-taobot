@@ -1,11 +1,12 @@
 #ifndef DB__QUOTE_H
 #define DB__QUOTE_H
 
-#include "lib/pg/pg.cpp" // Pg
-#include "types.cpp"     // Global::t
-#include <list>          // std::list
-#include <string>        // std::string
-#include <vector>        // std::vector
+#include "db/utils/utils.h" // DB::Utils
+#include "lib/pg/pg.h"      // Pg
+#include "types.cpp"        // Global::t
+#include <list>             // std::list
+#include <string>           // std::string
+#include <vector>           // std::vector
 
 namespace DB {
 class Quote {
@@ -27,7 +28,7 @@ public:
   };
 
   Quote(){};
-  Quote(Pg &c) : conn(c){};
+  Quote(Pg c);
 
   double get_stop_profit(const std::string symbol, const bool debug);
 
@@ -44,6 +45,7 @@ public:
 private:
   using query_result_t = Pg::query_result_t;
 
+  DB::Utils db_utils;
   Pg conn;
 
   double result_to_stop_profit(const query_result_t &);

@@ -1,27 +1,30 @@
 #ifndef ALPACA__CLIENT_stream_account
 #define ALPACA__CLIENT_stream_account
 
-#include "client.h"                             // Alpaca::Client, fmt
-#include "deps.cpp"                             // json, nlohmann
-#include "fetch_account.cpp"                    // fetch_account
-#include "lib/formatted.cpp"                    // Formatted
-#include "lib/pg/pg.cpp"                        // Pg
-#include "lib/utils/io.cpp"                     // ::utils::io
-#include "lib/utils/json.cpp"                   // ::utils::json
+#include "client.h"                         // Alpaca::Client, fmt
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
-#include <algorithm>                            // std::max
-#include <iostream>                             // std::cout, std::endl
-#include <math.h>                               // abs
-#include <string>                               // std::stod, std::string
-#include <time.h>                               // time
-#include <unistd.h>                             // usleep
+#include "db/utils/utils.cpp"               // DB::Utils
+#include "deps.cpp"                         // json, nlohmann
+#include "fetch_account.cpp"                // fetch_account
+#include "lib/formatted.cpp"                // Formatted
+#include "lib/pg/pg.cpp"                    // Pg
+#include "lib/utils/io.cpp"                 // ::utils::io
+#include "lib/utils/json.cpp"               // ::utils::json
+#include <algorithm>                        // std::max
+#include <iostream>                         // std::cout, std::endl
+#include <math.h>                           // abs
+#include <string>                           // std::stod, std::string
+#include <time.h>                           // time
+#include <unistd.h>                         // usleep
 
 void Alpaca::Client::stream_account() {
-
   Pg pg(this->flags);
   pg.connect();
 
   DB::AccountStat db_account_stat(pg);
+  DB::Utils db_utils(pg);
+
+  db_utils.set_param({"statement_timeout", "1000"});
 
   while (true) {
     json account_json;
