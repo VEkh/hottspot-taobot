@@ -41,6 +41,7 @@ private:
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double MAX_ACCOUNT_LOSS_RATIO = -0.025;
+  constexpr static double MEGA_MAX_ACCOUNT_LOSS_RATIO = -0.1;
   constexpr static double TARGET_ACCOUNT_PROFIT_RATIO = 0.0625;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
 

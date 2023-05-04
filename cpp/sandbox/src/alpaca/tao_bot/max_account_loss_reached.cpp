@@ -8,6 +8,15 @@
 #include <string> // std::string, std::stod
 
 bool Alpaca::TaoBot::max_account_loss_reached() {
+  const account_exit_prices_t exit_prices_ = build_account_exit_prices();
+
+  const double current_profit_ratio =
+      exit_prices_.current_profit / this->account_snapshot.original_equity;
+
+  if (current_profit_ratio <= this->MEGA_MAX_ACCOUNT_LOSS_RATIO) {
+    return true;
+  }
+
   if (!this->backtest.is_active &&
       this->api_client.config.api_key != "paper-beta") {
     return false;
@@ -36,11 +45,6 @@ bool Alpaca::TaoBot::max_account_loss_reached() {
 
     loss_ratio = -1 * (std::stod(ratio_string) / 100.0);
   }
-
-  const account_exit_prices_t exit_prices_ = build_account_exit_prices();
-
-  const double current_profit_ratio =
-      exit_prices_.current_profit / this->account_snapshot.original_equity;
 
   return current_profit_ratio <= loss_ratio;
 }
