@@ -16,9 +16,9 @@ create table positions(
   symbol text not null
 );
 
-create index positions_api_key_id_id on positions(api_key_id);
+create index positions_api_key_id_idx on positions(api_key_id);
 
-create index positions_symbol_id on positions(symbol);
+create index positions_symbol_idx on positions(symbol);
 
 create sequence positions_id_seq
   cache 1 start with 1

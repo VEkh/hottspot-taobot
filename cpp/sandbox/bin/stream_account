@@ -88,7 +88,7 @@ function stop_stream() {
   if [[ -z "${state}" ]]; then
     ascii_print "✅ Account is not streaming." "green"
   else
-    ascii_print "🛑 Stopping Account Stream}" "cyan"
+    ascii_print "🛑 Stopping Account Stream" "cyan"
 
     get_status | awk '{print $2}' | xargs kill
   fi
