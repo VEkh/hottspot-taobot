@@ -30,8 +30,6 @@ public:
   Quote(){};
   Quote(Pg c);
 
-  double get_stop_profit(const std::string symbol, const bool debug);
-
   one_sec_variance_avgs_t
   get_one_sec_variance_avgs(const get_one_sec_variance_avgs_args_t);
 
