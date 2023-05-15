@@ -29,6 +29,10 @@ DB::Quote::result_to_quotes(const query_result_t &result) {
         quote.bid = std::stod(value);
       }
 
+      if (field == "id") {
+        quote.id = std::stoi(value);
+      }
+
       if (field == "symbol") {
         quote.symbol = value;
       }

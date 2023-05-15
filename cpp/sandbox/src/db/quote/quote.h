@@ -27,6 +27,12 @@ public:
     bool debug = false;
   };
 
+  struct insert_avg_one_sec_variance_args_t {
+    long int id = 0;
+    std::string symbol;
+    bool debug = true;
+  };
+
   Quote(){};
   Quote(Pg c);
 
@@ -36,6 +42,7 @@ public:
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(const get_last_args_t);
 
+  void insert_avg_one_sec_variance(const insert_avg_one_sec_variance_args_t);
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
   void watch_avg_one_sec_variances(const std::list<std::string> &);
