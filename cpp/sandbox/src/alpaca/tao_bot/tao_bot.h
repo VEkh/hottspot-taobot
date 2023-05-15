@@ -26,10 +26,10 @@ public:
   void run();
 
 private:
-  using account_snapshot_t = Global::t::account_snapshot_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
+  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using exit_prices_t = Global::t::exit_prices_t;
-  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -63,11 +63,11 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   account_snapshot_t account_snapshot;
+  avg_one_sec_variances_t avg_one_sec_variances;
   double current_epoch = time(nullptr);
   double quantity;
   double started_at = time(nullptr);
   exit_prices_t exit_prices;
-  one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;

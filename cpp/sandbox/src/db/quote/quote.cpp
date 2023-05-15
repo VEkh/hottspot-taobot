@@ -6,8 +6,8 @@
 #include "lib/pg/pg.h"        // Pg
 
 #include "get.cpp"
+#include "get_avg_one_sec_variances.cpp"
 #include "get_last.cpp"
-#include "get_one_sec_variance_avgs.cpp"
 #include "upsert.cpp"
 #include "watch_avg_one_sec_variances.cpp"
 

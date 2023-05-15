@@ -1,16 +1,16 @@
-#ifndef DB__QUOTE_result_to_one_sec_variance_avgs
-#define DB__QUOTE_result_to_one_sec_variance_avgs
+#ifndef DB__QUOTE_result_to_avg_one_sec_variances
+#define DB__QUOTE_result_to_avg_one_sec_variances
 
 #include "lib/utils/string.cpp" // ::utils::string
-#include "quote.h" // DB::Quote, one_sec_variance_avgs_t, query_result_t
+#include "quote.h" // DB::Quote, avg_one_sec_variances_t, query_result_t
 #include <string>  // std::stod, std::string
 #include <vector>  // std::vector
 
-DB::Quote::one_sec_variance_avgs_t
-DB::Quote::result_to_one_sec_variance_avgs(const query_result_t &result) {
+DB::Quote::avg_one_sec_variances_t
+DB::Quote::result_to_avg_one_sec_variances(const query_result_t &result) {
   const std::vector<std::string> fields = result.fields;
   const std::vector<std::string> tuples = result.tuples;
-  one_sec_variance_avgs_t out;
+  avg_one_sec_variances_t out;
 
   for (std::vector<std::string>::const_iterator it = tuples.begin();
        it != tuples.end(); it++) {

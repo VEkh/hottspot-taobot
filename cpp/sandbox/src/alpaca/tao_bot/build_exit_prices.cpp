@@ -8,7 +8,7 @@
 #include <string> // std::string, std::stod
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
-  const double static_one_sec_variance = this->one_sec_variance_avgs.running;
+  const double static_one_sec_variance = this->avg_one_sec_variances.running;
 
   const double trailing_stop_profit_ratio = 1 / 1.1;
   double max_loss_coefficient = -62.0;

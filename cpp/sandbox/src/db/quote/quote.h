@@ -11,7 +11,7 @@
 namespace DB {
 class Quote {
 public:
-  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
+  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using quote_t = Global::t::quote_t;
 
   struct get_last_args_t {
@@ -21,7 +21,7 @@ public:
     bool debug = false;
   };
 
-  struct get_one_sec_variance_avgs_args_t {
+  struct get_avg_one_sec_variances_args_t {
     std::string symbol;
     double timestamp_upper_bound;
     bool debug = false;
@@ -30,8 +30,8 @@ public:
   Quote(){};
   Quote(Pg c);
 
-  one_sec_variance_avgs_t
-  get_one_sec_variance_avgs(const get_one_sec_variance_avgs_args_t);
+  avg_one_sec_variances_t
+  get_avg_one_sec_variances(const get_avg_one_sec_variances_args_t);
 
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(const get_last_args_t);
@@ -48,8 +48,8 @@ private:
 
   double result_to_stop_profit(const query_result_t &);
 
-  one_sec_variance_avgs_t
-  result_to_one_sec_variance_avgs(const query_result_t &);
+  avg_one_sec_variances_t
+  result_to_avg_one_sec_variances(const query_result_t &);
 
   std::vector<quote_t> result_to_quotes(const query_result_t &);
   void insert_latest_avg_one_sec_variances(const std::list<std::string> &);

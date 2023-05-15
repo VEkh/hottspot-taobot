@@ -8,8 +8,9 @@ void Alpaca::TaoBot::read_price_movement() {
     return;
   }
 
-  this->one_sec_variance_avgs =
-      this->quoter.db_quote.get_one_sec_variance_avgs({
+
+  this->avg_one_sec_variances =
+      this->quoter.db_quote.get_avg_one_sec_variances({
           .symbol = this->symbol,
           .timestamp_upper_bound = this->current_epoch,
       });

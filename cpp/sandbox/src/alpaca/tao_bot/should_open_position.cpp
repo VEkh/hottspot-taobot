@@ -13,7 +13,7 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->one_sec_variance_avgs.latest) {
+  if (!this->avg_one_sec_variances.latest) {
     return false;
   }
 

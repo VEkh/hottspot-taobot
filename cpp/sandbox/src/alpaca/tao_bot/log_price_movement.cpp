@@ -7,14 +7,14 @@
 #include <stdio.h>               // printf
 
 void Alpaca::TaoBot::log_price_movement() {
-  const double running_one_sec_variance_avg =
-      this->one_sec_variance_avgs.running;
+  const double running_avg_one_sec_variance =
+      this->avg_one_sec_variances.running;
 
-  if (!running_one_sec_variance_avg) {
+  if (!running_avg_one_sec_variance) {
     return;
   }
 
-  const double latest_one_sec_variance_avg = this->one_sec_variance_avgs.latest;
+  const double latest_avg_one_sec_variance = this->avg_one_sec_variances.latest;
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
 
@@ -25,16 +25,16 @@ void Alpaca::TaoBot::log_price_movement() {
 
   std::cout << fmt.reset << fmt.bold << fmt.cyan;
 
-  if (latest_one_sec_variance_avg) {
+  if (latest_avg_one_sec_variance) {
     const double latest_to_running_percentage =
-        100.0 * (latest_one_sec_variance_avg / running_one_sec_variance_avg);
+        100.0 * (latest_avg_one_sec_variance / running_avg_one_sec_variance);
 
-    printf("Latest:  %.5f (%.3f%% Long-Term) %s\n", latest_one_sec_variance_avg,
+    printf("Latest:  %.5f (%.3f%% Long-Term) %s\n", latest_avg_one_sec_variance,
            latest_to_running_percentage,
            latest_to_running_percentage > 100 ? "🥵" : "🥶");
   }
 
-  printf("Running: %.5f\n", running_one_sec_variance_avg);
+  printf("Running: %.5f\n", running_avg_one_sec_variance);
 
   std::cout << fmt.reset << std::endl;
 }

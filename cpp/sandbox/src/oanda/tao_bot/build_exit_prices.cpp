@@ -5,7 +5,7 @@
 #include <math.h>    // abs
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
-  const double static_one_sec_variance = this->one_sec_variance_avgs.running;
+  const double static_one_sec_variance = this->avg_one_sec_variances.running;
 
   const double stop_profit_stop_loss_ratio = 2.5;
   const double trailing_stop_profit_ratio = 1 / 1.1;

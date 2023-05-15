@@ -25,11 +25,11 @@ public:
   void run();
 
 private:
-  using account_snapshot_t = Global::t::account_snapshot_t;
   using account_exit_prices_t = Global::t::account_exit_prices_t;
+  using account_snapshot_t = Global::t::account_snapshot_t;
+  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
-  using one_sec_variance_avgs_t = Global::t::one_sec_variance_avgs_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
   using order_t = Oanda::t::order_t;
@@ -74,10 +74,10 @@ private:
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
+  avg_one_sec_variances_t avg_one_sec_variances;
   exit_prices_t exit_prices;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
-  one_sec_variance_avgs_t one_sec_variance_avgs;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;
