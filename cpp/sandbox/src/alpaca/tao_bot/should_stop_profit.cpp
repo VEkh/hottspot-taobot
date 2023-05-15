@@ -8,7 +8,7 @@
 
 bool Alpaca::TaoBot::should_stop_profit() {
   if (!this->backtest.is_active &&
-      this->api_client.config.api_key != "paper-beta") {
+      this->api_client.config.api_key == "paper-alpha") {
     return false;
   }
 

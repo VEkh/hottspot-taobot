@@ -50,6 +50,11 @@ private:
       {"sell", "📉"},
   };
 
+  std::map<std::string, double> TARGET_ACCOUNT_PROFIT_RATIOS = {
+      {"live-alpha", 0.004},
+      {"paper-beta", 0.0625},
+  };
+
   Alpaca::Client api_client;
   Alpaca::Quote quoter;
   Alpaca::TaoBotBacktest backtest;
@@ -97,6 +102,7 @@ private:
   double compute_quantity();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
+  double target_account_profit_ratio();
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *);
   int profit_duration(const double);

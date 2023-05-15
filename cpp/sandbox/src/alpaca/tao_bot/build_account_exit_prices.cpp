@@ -3,12 +3,13 @@
 
 #include "account_profit_expanding_trailing_stop_ratio.cpp" // account_profit_expanding_trailing_stop_ratio
 #include "tao_bot.h"                                        // Alpaca::TaoBot
+#include "target_account_profit_ratio.cpp" // target_account_profit_ratio
 
 Alpaca::TaoBot::account_exit_prices_t
 Alpaca::TaoBot::build_account_exit_prices() {
   const double current_equity = this->account_snapshot.equity;
 
-  double target_account_profit_ratio = this->TARGET_ACCOUNT_PROFIT_RATIO;
+  double target_account_profit_ratio_ = target_account_profit_ratio();
 
   if (this->backtest.is_active) {
     std::smatch match;
@@ -20,7 +21,7 @@ Alpaca::TaoBot::build_account_exit_prices() {
       const std::string ratio_string =
           std::regex_replace(match[1].str(), std::regex("_"), ".");
 
-      target_account_profit_ratio = (std::stod(ratio_string) / 100.0);
+      target_account_profit_ratio_ = (std::stod(ratio_string) / 100.0);
     }
   }
 
@@ -28,11 +29,11 @@ Alpaca::TaoBot::build_account_exit_prices() {
                             this->account_snapshot.original_equity;
 
   const double target_profit_cash =
-      (this->account_snapshot.original_equity * target_account_profit_ratio);
+      (this->account_snapshot.original_equity * target_account_profit_ratio_);
 
   const double target_max_profit =
       (this->account_snapshot.original_equity *
-       (target_account_profit_ratio +
+       (target_account_profit_ratio_ +
         this->TARGET_ACCOUNT_PROFIT_TRAILING_STOP));
 
   const double current_profit =
