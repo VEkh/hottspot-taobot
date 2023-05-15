@@ -12,8 +12,6 @@ DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
     const get_avg_one_sec_variances_args_t args) {
   const bool debug = args.debug;
   const double timestamp_upper_bound = args.timestamp_upper_bound;
-  const int timestamp_lower_bound_interval_days =
-      args.timestamp_lower_bound_interval_days;
   const std::string symbol = args.symbol;
 
   const char *query_format = R"(
@@ -35,27 +33,29 @@ DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
       limit 1) as latest_avg
       join lateral (
         select
-          avg(avg_one_sec_variance)
-        from
-          avg_one_sec_variances
-        where
-          symbol = latest_avg.symbol
-          and timestamp >= to_timestamp(%f) - '%i days'::interval
-          and timestamp <= to_timestamp(%f)) as limited_agg on true
+          avg(limited.avg_one_sec_variance) as avg
+        from (
+          select
+            avg_one_sec_variance
+          from
+            avg_one_sec_variances
+          where
+            symbol = latest_avg.symbol
+            and timestamp <= to_timestamp(%f)
+          order by
+            timestamp desc
+          limit 500000) as limited) as limited_agg on true;
   )";
 
   char *sanitized_symbol =
       PQescapeLiteral(this->conn.conn, symbol.c_str(), symbol.size());
 
-  const size_t query_l =
-      strlen(query_format) + strlen(sanitized_symbol) +
-      3 * (std::to_string(timestamp_upper_bound).size()) +
-      std::to_string(timestamp_lower_bound_interval_days).size();
+  const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
+                         2 * std::to_string(timestamp_upper_bound).size();
 
   char query[query_l];
   snprintf(query, query_l, query_format, sanitized_symbol,
-           timestamp_upper_bound, timestamp_upper_bound,
-           timestamp_lower_bound_interval_days, timestamp_upper_bound);
+           timestamp_upper_bound, timestamp_upper_bound);
 
   query_result_t result = this->conn.exec(query, args.debug);
 

@@ -23,7 +23,6 @@ public:
 
   struct get_avg_one_sec_variances_args_t {
     std::string symbol;
-    int timestamp_lower_bound_interval_days = 45;
     double timestamp_upper_bound;
     bool debug = false;
   };
