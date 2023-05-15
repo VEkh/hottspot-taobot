@@ -45,7 +45,6 @@ public:
   void insert_avg_one_sec_variance(const insert_avg_one_sec_variance_args_t);
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
-  void watch_avg_one_sec_variances(const std::list<std::string> &);
 
 private:
   using query_result_t = Pg::query_result_t;
@@ -59,7 +58,6 @@ private:
   result_to_avg_one_sec_variances(const query_result_t &);
 
   std::vector<quote_t> result_to_quotes(const query_result_t &);
-  void insert_latest_avg_one_sec_variances(const std::list<std::string> &);
 };
 } // namespace DB
 

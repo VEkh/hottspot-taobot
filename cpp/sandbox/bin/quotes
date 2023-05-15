@@ -20,8 +20,8 @@ source "${app_dir}/bin/utils"
 ascii_print "$(date)\n" "cyan"
 
 declare -A project_actions=(
-  ["alpaca"]="stream watch watch_avg_one_sec_variances"
-  ["oanda"]="watch watch_avg_one_sec_variances"
+  ["alpaca"]="stream watch"
+  ["oanda"]="watch"
 )
 
 action="$(to_lower "${1}")"

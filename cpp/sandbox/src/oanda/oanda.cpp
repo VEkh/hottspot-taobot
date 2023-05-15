@@ -21,8 +21,6 @@ void print_usage() {
        "Print daily account performance for the given api key"},
       {"quotes_watch <SYMBOLS>                        ",
        "Persist and make computations for fetched/streamed quotes"},
-      {"quotes_watch_avg_one_sec_variances <SYMBOLS>  ",
-       "Periodically update quote average one sec variances"},
       {"stream_account                                ", "Stream account info"},
       {"tao_bot <SYMBOL> <QUANTITY>                   ",
        "Launch trading bot for the given currency pair"},
@@ -106,18 +104,6 @@ int main(int argc, char *argv[]) {
 
     Oanda::Quote watcher(pg, flags);
     watcher.watch(upcased_args);
-
-    pg.disconnect();
-
-    exit(0);
-  }
-
-  if (command == "quotes_watch_avg_one_sec_variances") {
-    Pg pg(flags);
-    pg.connect();
-
-    DB::Quote db_quote(pg);
-    db_quote.watch_avg_one_sec_variances(upcased_args);
 
     pg.disconnect();
 
