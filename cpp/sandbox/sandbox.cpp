@@ -2,25 +2,23 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "db/margin_rate/margin_rate.cpp" // DB::MarginRate
-#include "lib/pg/pg.cpp"                  // Pg
-
+#include "db/quote/quote.cpp" // DB::Quote
+#include "lib/pg/pg.cpp"      // Pg
 int main(int argc, char *argv[]) {
   Pg pg;
   pg.connect();
 
-  DB::MarginRate db_margin_rate(pg);
+  DB::Quote db_quote(pg);
 
-  db_margin_rate.insert({
-      .multiplier = (100.0 / 3),
-      .symbol = "eur_usd",
-      .debug = true,
+  db_quote.upsert_all_avg_one_sec_variances({
+      .starting_from = "",
+      .symbol = "amzn",
   });
 
-  const DB::MarginRate::margin_rate_t margin_rate =
-      db_margin_rate.get("EUR_USD");
-
-  printf("multiplier: %f\n", margin_rate.multiplier);
+  db_quote.upsert_all_avg_one_sec_variances({
+      .starting_from = "",
+      .symbol = "tsla",
+  });
 
   pg.disconnect();
 }

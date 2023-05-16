@@ -50,11 +50,11 @@ int main(int argc, char *argv[]) {
   std::string command = argv[1];
 
   std::list<std::string> args = ::utils::io::extract_args(argc, argv);
-  args.pop_front(); // Remove `tao_bot` arg
+  args.pop_front(); // Remove command arg
 
   std::list<std::string> upcased_args =
       ::utils::io::extract_args(argc, argv, ::utils::string::upcase);
-  upcased_args.pop_front(); // Remove `tao_bot` arg
+  upcased_args.pop_front(); // Remove command arg
 
   std::map<std::string, std::string> flags =
       ::utils::io::extract_flags(argc, argv);

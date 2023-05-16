@@ -16,6 +16,7 @@ public:
 
   struct get_last_args_t {
     int limit = 1;
+    long int limit_offset = 0;
     std::string symbol;
     double timestamp_upper_bound;
     bool debug = false;
@@ -33,6 +34,12 @@ public:
     bool debug = true;
   };
 
+  struct upsert_all_avg_one_sec_variances_args_t {
+    std::string starting_from;
+    std::string symbol;
+    bool debug = false;
+  };
+
   Quote(){};
   Quote(Pg c);
 
@@ -44,6 +51,8 @@ public:
 
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
+  void upsert_all_avg_one_sec_variances(
+      const upsert_all_avg_one_sec_variances_args_t);
   void upsert_avg_one_sec_variance(const upsert_avg_one_sec_variance_args_t);
 
 private:

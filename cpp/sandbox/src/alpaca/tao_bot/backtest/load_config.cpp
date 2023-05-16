@@ -108,6 +108,7 @@ void Alpaca::TaoBotBacktest::load_config() {
   } else {
     const std::vector<quote_t> last_quotes = this->db_quote.get_last({
         .limit = 1,
+        .limit_offset = 0,
         .symbol = this->symbol,
         .timestamp_upper_bound = (double)time(nullptr),
     });
