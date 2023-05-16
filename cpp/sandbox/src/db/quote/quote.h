@@ -27,7 +27,7 @@ public:
     bool debug = false;
   };
 
-  struct insert_avg_one_sec_variance_args_t {
+  struct upsert_avg_one_sec_variance_args_t {
     long int id = 0;
     std::string symbol;
     bool debug = true;
@@ -42,9 +42,9 @@ public:
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(const get_last_args_t);
 
-  void insert_avg_one_sec_variance(const insert_avg_one_sec_variance_args_t);
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
+  void upsert_avg_one_sec_variance(const upsert_avg_one_sec_variance_args_t);
 
 private:
   using query_result_t = Pg::query_result_t;

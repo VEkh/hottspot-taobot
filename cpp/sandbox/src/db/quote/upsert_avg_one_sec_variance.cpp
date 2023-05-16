@@ -1,14 +1,14 @@
-#ifndef DB__QUOTE_insert_avg_one_sec_variance
-#define DB__QUOTE_insert_avg_one_sec_variance
+#ifndef DB__QUOTE_upsert_avg_one_sec_variance
+#define DB__QUOTE_upsert_avg_one_sec_variance
 
-#include "quote.h"    // DB::Quote, insert_avg_one_sec_variance_args_t
+#include "quote.h"    // DB::Quote, upsert_avg_one_sec_variance_args_t
 #include <libpq-fe.h> // PQescapeLiteral, PQfreemem
 #include <stdio.h>    // snprintf
 #include <string.h>   // strlen
 #include <string>     // std::string, std::to_string
 
-void DB::Quote::insert_avg_one_sec_variance(
-    const insert_avg_one_sec_variance_args_t args) {
+void DB::Quote::upsert_avg_one_sec_variance(
+    const upsert_avg_one_sec_variance_args_t args) {
   const long int id = args.id;
   const std::string symbol = args.symbol;
 
@@ -74,6 +74,7 @@ void DB::Quote::insert_avg_one_sec_variance(
       where
         quotes.symbol = ref_quotes.symbol
         and quotes.timestamp >=(ref_quotes.timestamp - '3 minutes'::interval)
+        and quotes.timestamp <= ref_quotes.timestamp
     ),
     one_sec_variances as (
       select
@@ -100,12 +101,20 @@ void DB::Quote::insert_avg_one_sec_variance(
       symbol)
       insert into avg_one_sec_variances(avg_one_sec_variance, quote_id, symbol, timestamp)(
         select
-          averages.avg,
-          quote_id,
-          symbol,
-          timestamp
+          coalesce(averages.avg, fallback.avg) as "avg",
+          coalesce(averages.quote_id, fallback.quote_id) as quote_id,
+          coalesce(averages.symbol, fallback.symbol) as symbol,
+          coalesce(averages.timestamp, fallback.timestamp)
         from
-          averages)
+          averages
+        right join (
+          select
+            0 as "avg",
+            id as quote_id,
+            symbol,
+            "timestamp"
+          from
+            ref_quotes) as fallback on true)
     on conflict (quote_id)
       do update set
         avg_one_sec_variance = excluded.avg_one_sec_variance
