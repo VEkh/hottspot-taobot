@@ -6,7 +6,10 @@
 #include <string>    // std::string
 
 double Alpaca::TaoBot::target_account_profit_ratio() {
-  return this->TARGET_ACCOUNT_PROFIT_RATIOS[this->api_client.config.api_key];
+  const double ratio =
+      this->TARGET_ACCOUNT_PROFIT_RATIOS[this->api_client.config.api_key];
+
+  return ratio ? ratio : this->TARGET_ACCOUNT_PROFIT_RATIOS["live-alpha"];
 }
 
 #endif
