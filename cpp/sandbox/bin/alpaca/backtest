@@ -5,14 +5,12 @@ set -e
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 project=$(dirname "${0}" | xargs basename)
 
-# ASCII, ascii_print, to_title, to_upper
+# ASCII, ascii_print, backtest_api_keys, to_title, to_upper
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
 # shellcheck disable=1090,1091
 source "${app_dir}/db/utils" # build_db_uri
-
-api_keys_filepath="${app_dir}/bin/${project}/backtest_api_keys"
 
 function reset_db() {
   backtest_db_name="hottspot_capital_backtest"
@@ -43,15 +41,15 @@ function restart_single() {
 }
 
 function start_all() {
-  if [[ ! -f "${api_keys_filepath}" ]]; then
-    ascii_print "❗ Missing a file with backtest api keys at ${api_keys_filepath}" "red" >&2
+  api_keys=($(backtest_api_keys "${project}"))
+
+  if (( "${#api_keys[@]}" == 0 )); then
+    ascii_print "❗ There are no configured backtests" "red" >&2
 
     exit 1
   fi
 
   reset_db
-
-  api_keys=($(cat "${api_keys_filepath}"))
 
   for api_key in "${api_keys[@]}"; do
     start_single "--api-key=${api_key}"
@@ -64,13 +62,13 @@ function start_single() {
 }
 
 function stop_all() {
-  if [[ ! -f "${api_keys_filepath}" ]]; then
-    ascii_print "❗ Missing a file with backtest api keys at ${api_keys_filepath}" "red" >&2
+  api_keys=($(backtest_api_keys "${project}"))
+
+  if (( "${#api_keys[@]}" == 0 )); then
+    ascii_print "❗ There are no configured backtests" "red" >&2
 
     exit 1
   fi
-
-  api_keys=($(cat "${api_keys_filepath}"))
 
   for api_key in "${api_keys[@]}"; do
     stop_single "--api-key=${api_key}"

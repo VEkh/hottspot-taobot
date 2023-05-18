@@ -7,10 +7,10 @@ symbols=()
 
 log_dir="${app_dir}/log/${project}"
 
-while IFS="" read -r line; do
-  api_key="${line}"
-  api_keys+=("${api_key}")
-done < <(cat "${app_dir}/bin/${project}/backtest_api_keys")
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # backtest_api_keys
+
+api_keys=($(backtest_api_keys "${project}"))
 
 while IFS="" read -r line; do
   symbol="${line}"

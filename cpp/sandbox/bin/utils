@@ -25,6 +25,23 @@ function ascii_print() {
   echo -e "${message}${1}${ASCII["reset"]}"
 }
 
+function backtest_api_keys() {
+  app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+  project="${1}"
+
+  credentials_filepath="${app_dir}/config/${project}/credentials.json"
+
+  if [[ ! -f "${credentials_filepath}" ]]; then
+    ascii_print "❗ Missing a config file with backtest api keys at ${credentials_filepath}" "red" >&2
+
+    exit 1
+  fi
+
+  jq -r \
+    ". | to_entries | map(select(.value.is_backtest?)) | map(.key) | join(\" \")" \
+    "${credentials_filepath}"
+}
+
 function extract_args() {
   args=()
 
