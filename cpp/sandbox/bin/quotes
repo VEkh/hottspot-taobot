@@ -36,36 +36,69 @@ else
   exit 1
 fi
 
-function get_status() {
+function get_action_status() {
   state=$(
     ps aux |
     grep "[q]uotes_${action}" |
     grep -vE "heartbeat|log|restart|status|stop" |
-    grep --color "${project}"
+    grep --color "${project}" || true
   )
 
   echo -e "${state}"
 }
 
+function heartbeat() {
+  case "${3}" in
+    start)
+      log_file="${app_dir}/log/${project}/quotes_${1}_${2}.log"
+
+      start_heartbeat "${@}" > "${log_file}" &
+      ascii_print "✅ Successfully started ${action} heartbeat 💖" "green"
+      ;;
+    stop)
+      stop_heartbeat "${@}"
+      ;;
+    *)
+      ascii_print "💖 $(to_title "${action}") Heartbeat Error: Specify valid control command (start|stop)." "red" >&2
+      ;;
+  esac
+}
+
+function is_market_open() {
+  dow=$(TZ=UTC date +%u)
+  hr=$(TZ=UTC date +%k)
+
+  if [[ "${project}" = "alpaca" ]]; then
+    if (( "${dow}" >= 1 && "${dow}" <= 5 && "${hr}" >= 13 && "${hr}" < 20 )); then
+      echo "true"
+    else
+      echo "false"
+    fi
+
+    exit 0
+  else
+    if ((
+      ("${dow}" >= 1 && "${dow}" < 5) ||
+      ("${dow}" == 5 && "${hr}" < 21) ||
+      ("${dow}" == 7 && "${hr}" >= 21)
+    )); then
+      echo "true"
+    else
+      echo "false"
+    fi
+
+    exit 0
+  fi
+}
+
 function print_status() {
-  state=$(get_status)
+  state=$(get_action_status)
 
   if [[ -z "${state}" ]]; then
     ascii_print "✅ Not ${action_gerund} any quotes" "green"
   else
     printf "%b" "${ASCII["reset"]}"
-    get_status
-  fi
-}
-
-function start_if_stopped() {
-  state=$(get_status)
-
-  if [[ -z "${state}" ]]; then
-    ascii_print "😴 Not ${action_gerund} any quotes. Starting." "green"
-    start_action "${@}"
-  else
-    ascii_print "💖 Already ${action_gerund} quotes. Doing nothing." "cyan"
+    get_action_status
   fi
 }
 
@@ -103,20 +136,76 @@ function start_action() {
 }
 
 function stop_action() {
-  state=$(get_status)
+  state=$(get_action_status)
 
   if [[ -z "${state}" ]]; then
     ascii_print "✅ Not ${action_gerund} any quotes" "green"
   else
     ascii_print "🛑 Stopping Quotes $(to_title "${action}")" "cyan"
 
-    get_status | awk '{print $2}' | xargs kill
+    get_action_status | awk '{print $2}' | xargs kill
+  fi
+}
+
+function start_heartbeat() {
+  args=($(extract_args "${@}"))
+  pid0="${BASHPID}"
+
+  state=$(
+    pid1="${BASHPID}";
+    ps aux |
+    grep -vE "grep|${pid0}|${pid1}" |
+    grep "${args[*]}" |
+    grep --color "${project}" || true
+  )
+
+  if [[ -n "${state}" ]]; then
+    ascii_print "👀 Already watching ${action} heartbeat. Doing nothing." "cyan" >&2
+
+    exit 0
+  fi
+
+  while [[ $(is_market_open) == "true" ]]; do
+    state=$(get_action_status)
+
+    if [[ -z "${state}" ]]; then
+      ascii_print "😴 Not ${action_gerund} any quotes. Starting." "green"
+      start_action "${@:4}"
+    else
+      ascii_print "💖 Already ${action_gerund} quotes. Doing nothing." "cyan"
+    fi
+
+    sleep 1
+  done
+
+  ascii_print "😴 Market is closed." "cyan"
+  stop_action
+}
+
+function stop_heartbeat() {
+  args=($(extract_args "${@}"))
+  pid0="${BASHPID}"
+
+  state=$(
+    pid1="${BASHPID}";
+    ps aux |
+    grep -vE "grep|${pid0}|${pid1}" |
+    grep "${args[*]:0:2} start" |
+    grep --color "${project}" || true
+  )
+
+  if [[ -n "${state}" ]]; then
+    ascii_print "💔 Stopping heartbeat" "cyan"
+
+    echo -e "${state}" | awk '{ print $2 }' | xargs kill
+  else
+    ascii_print "✅ No running ${action} heartbeat to stop." "green"
   fi
 }
 
 case $2 in
   heartbeat)
-    start_if_stopped "${@:3}"
+    heartbeat "${@}"
     ;;
 
   restart)
@@ -142,7 +231,7 @@ case $2 in
     ascii_print "Description: $(to_title "${action}") the quotes for provided symbols.\n" "cyan"
     ascii_print "Usage: quotes ${action} [COMMAND] [ARGS]\n" "yellow"
     ascii_print "Commands:" "yellow"
-    ascii_print "  heartbeat               Check status. Restart if stopped." "yellow"
+    ascii_print "  heartbeat <start|stop>  Control heartbeat which checks ${action} status, then restarts if stopped." "yellow"
     ascii_print "  restart   <SYMBOLS>     Stop, then start ${action_gerund}. See stop and start documentation." "yellow"
     ascii_print "  start     <SYMBOLS>     Start ${action_gerund} one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)." "yellow"
     ascii_print "  status                  Print running ${action} processes, if any." "yellow"
