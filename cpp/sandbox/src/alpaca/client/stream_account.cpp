@@ -16,6 +16,8 @@
 
 void Alpaca::Client::stream_account() {
   Pg pg(this->flags);
+  double current_equity = 0.00;
+
   pg.connect();
 
   DB::AccountStat db_account_stat(pg);
@@ -46,6 +48,21 @@ void Alpaca::Client::stream_account() {
       const double equity = std::stod(equity_string);
       const double margin_buying_power = std::stod(margin_buying_power_string);
       const double margin_multiplier = std::stod(margin_multiplier_string);
+
+      const double equity_delta_ratio =
+          current_equity ? abs(equity - current_equity) / current_equity : 0;
+
+      if (equity_delta_ratio >= 0.1) {
+        std::cout << fmt.bold << fmt.yellow;
+        printf("Account equity (%+'.2f) spiked by an unusual amount (%.2f%%). "
+               "Skipping",
+               current_equity, equity_delta_ratio * 100);
+        std::cout << fmt.reset << std::endl;
+
+        continue;
+      }
+
+      current_equity = equity;
 
       account_json["timestamp"] = (long int)time(nullptr);
 
