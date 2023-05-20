@@ -7,13 +7,18 @@
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
 void Alpaca::TaoBot::reset_backtest() {
+  update_account_snapshot(true);
+
   advance_current_epoch(
       this->backtest.next_day_market_open_epoch(this->current_epoch));
+
+  // `slow_query_countdown` may cause skipping of first daily quote. This
+  // will falsely reset the next day's equity to the initial equity.
+  update_account_snapshot(true);
 
   this->closed_positions = {};
   this->performance = build_performance();
   this->started_at = this->current_epoch;
-  update_account_snapshot(true);
 }
 
 #endif

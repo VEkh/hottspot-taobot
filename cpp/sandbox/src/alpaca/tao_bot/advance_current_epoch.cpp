@@ -7,7 +7,7 @@
 
 void Alpaca::TaoBot::advance_current_epoch() {
   if (this->backtest.is_active) {
-    advance_current_epoch(this->current_epoch + 0.5);
+    advance_current_epoch(this->current_epoch + 1);
     this->backtest.slow_query_countdown += 1;
   } else {
     usleep(5e5);
