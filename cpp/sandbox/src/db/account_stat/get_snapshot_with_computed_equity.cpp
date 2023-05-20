@@ -6,6 +6,7 @@
 #include "result_to_account_snapshots.cpp" // result_to_account_snapshots
 #include <iostream>                        // std::cout, std::endl
 #include <libpq-fe.h>                      // PQescapeLiteral, PQfreemem
+#include <regex>                           // std::regex, std::regex_search
 #include <stdio.h>                         // snprintf
 #include <string.h>                        // strlen
 #include <string>                          // std::string, std::to_string
@@ -39,7 +40,7 @@ DB::AccountStat::get_snapshot_with_computed_equity(
       join lateral (
         select
           init_balance.api_key_id,
-    (init_balance.equity + coalesce(net.profit, 0)) as equity
+          (init_balance.equity + coalesce(net.profit, 0)) as equity
         from (
           select
             api_key_id,
@@ -51,16 +52,16 @@ DB::AccountStat::get_snapshot_with_computed_equity(
           order by
             inserted_at asc
           limit 1) as init_balance
-      left join lateral (
-        select
-          api_key_id,
-          sum((current_profit * abs(open_order_quantity))) as profit
-        from
-          positions
-        where
-          api_key_id = init_balance.api_key_id
-        group by
-          api_key_id) as net on net.api_key_id = init_balance.api_key_id) as computed_equity on computed_equity.api_key_id = latest.api_key_id
+        left join lateral (
+          select
+            api_key_id,
+            sum((current_profit * abs(open_order_quantity))) as profit
+          from
+            positions
+          where
+            api_key_id = init_balance.api_key_id
+          group by
+            api_key_id) as net on net.api_key_id = init_balance.api_key_id) as computed_equity on computed_equity.api_key_id = latest.api_key_id
       left join lateral (
         select
           api_key_id,
@@ -96,7 +97,12 @@ DB::AccountStat::get_snapshot_with_computed_equity(
 
     std::cout << error_message << std::endl;
 
-    return account_snapshot_t();
+    if (std::regex_search(result.error_message,
+                          std::regex("statement timeout"))) {
+      return get_snapshot_with_computed_equity(args);
+    } else {
+      return account_snapshot_t();
+    }
   }
 
   return snapshots.front();
