@@ -2,7 +2,7 @@
 app_dir=$(realpath "$(dirname "$0")/../../")
 project=$(dirname "$0" | xargs basename)
 
-case $1 in
+case "${1}" in
   "generate")
     app_dir=$(realpath "$(dirname "$0")/../../")
     cmd="* 8-14 * * 1-5 ${app_dir}/bin/${project}/heartbeat --paper >> ${app_dir}/log/development.log 2>&1"
@@ -11,10 +11,5 @@ case $1 in
     cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes watch heartbeat >> ${app_dir}/log/development.log 2>&1"
 
     echo -e "$cmd"
-  ;;
-
-  "restart")
-    sudo service rsyslog restart
-    sudo service cron restart
   ;;
 esac

@@ -1,0 +1,10 @@
+#!/bin/bash
+
+case $1 in
+  "restart")
+    if [[ $OSTYPE =~ ^linux.* ]]; then
+      sudo service rsyslog restart
+      sudo service cron restart
+    fi
+  ;;
+esac

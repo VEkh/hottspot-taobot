@@ -2,6 +2,7 @@
 
 api_keys=()
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
+filename=$(basename "${BASH_SOURCE[0]}")
 project="alpaca"
 symbols=()
 
@@ -17,7 +18,7 @@ while IFS="" read -r line; do
   symbols+=("${symbol}")
 done < <(cat "${app_dir}/bin/${project}/symbols")
 
-session="hottspot_taobot_backtest"
+session="hottspot_taobot-${filename}"
 tmux -2 new-session -d -s "${session}" -n code
 
 window=0
