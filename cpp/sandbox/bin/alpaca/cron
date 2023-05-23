@@ -2,13 +2,18 @@
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
 
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # get_env_flag
+
+env=$(get_env_flag "${@}")
+
 case "${1}" in
   "generate")
-    cmd="0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/heartbeat --api-key=paper-alpha --env=development >> ${app_dir}/log/development.log 2>&1"
-    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/stream_account heartbeat --api-key=paper-alpha --env=development >> ${app_dir}/log/development.log 2>&1"
-    cmd+="\n0 15 * * 1-5 ${app_dir}/bin/${project}/stream_account stop >> ${app_dir}/log/development.log 2>&1"
-    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes stream heartbeat start --api-key=live-alpha --env=development >> ${app_dir}/log/development.log 2>&1"
-    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes watch heartbeat start --api-key=live-alpha --env=development >> ${app_dir}/log/development.log 2>&1"
+    cmd="0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/heartbeat --api-key=paper-alpha --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/stream_account heartbeat --api-key=paper-alpha --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0 15 * * 1-5 ${app_dir}/bin/${project}/stream_account stop >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes stream heartbeat start --api-key=live-alpha --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0-59 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes watch heartbeat start --api-key=live-alpha --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
 
     echo -e "$cmd"
   ;;

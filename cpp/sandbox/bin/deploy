@@ -64,8 +64,8 @@ function update_crontab() {
   ascii_print "⏰ Updating ${ASCII["yellow"]}crontab" "cyan"
 
   cmd="(crontab -l 2>/dev/null; "
-  # cmd+="${remote_app_dir}/bin/alpaca/cron generate 2>/dev/null "
-  cmd+="${remote_app_dir}/bin/oanda/cron generate 2>/dev/null) "
+  # cmd+="${remote_app_dir}/bin/alpaca/cron generate --env=${remote_db_env}  2>/dev/null "
+  cmd+="${remote_app_dir}/bin/oanda/cron generate --env=${remote_db_env} 2>/dev/null) "
   cmd+="| grep -v '^#' | grep -v 'no crontab' | sort -u | crontab -"
 
   ssh "${remote_address}" "${cmd}"
