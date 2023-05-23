@@ -2,7 +2,7 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "$0")/../")
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../../")
 
 # shellcheck disable=1090
 source "${app_dir}/bin/utils" # ASCII, ascii_print
@@ -33,7 +33,7 @@ function migrate_single() {
 
   ascii_print "${action_emoji} Migrating ${ASCII["yellow"]}${version} ${ASCII["cyan"]}${action}" "cyan"
 
-  cmd="psql ${db_uri} < ${filename}"
+  cmd="psql -v ON_ERROR_STOP=1 ${db_uri} < ${filename}"
   [[ "${action}" = "down" ]] && persist_action="delete" || persist_action="write"
 
   sh -c "${cmd}"
