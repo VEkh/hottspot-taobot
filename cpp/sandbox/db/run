@@ -2,8 +2,8 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "$0")/../")
-current_dir=$(realpath "$(dirname "$0")")
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+current_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 scripts_dir="${current_dir}/scripts"
 
 # shellcheck disable=1090,1091

@@ -2,8 +2,8 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "$0")/../")
-db_dir=$(realpath "$(dirname "$0")")
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 seeds_dir="$db_dir/seeds"
 
 # shellcheck disable=1090

@@ -10,7 +10,7 @@ fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 
 function build_app_dir() {
-  echo -e "$(realpath "$(dirname "$0")/../")"
+  echo -e "$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
 }
 
 function install_apt_packages() {

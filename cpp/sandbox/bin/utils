@@ -132,6 +132,11 @@ function load_config() {
   echo -e "${env_config}"
 }
 
+function mk_file_dir() {
+  dir=$(dirname "${1}")
+  mkdir -p "${dir}"
+}
+
 function to_lower() {
   echo -e "$1" | awk '{ print tolower($0) }'
 }

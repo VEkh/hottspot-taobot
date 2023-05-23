@@ -1,0 +1,43 @@
+#!/bin/bash
+
+set -e
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+current_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+
+# ASCII
+# ascii_print
+# get_env_flag
+# load_config
+# to_title
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils"
+
+ascii_print "\n$(date)\n" "cyan"
+
+env=$(get_env_flag "${@}")
+db_config=$(load_config "db" "${env}")
+db_name="$(echo "${db_config}" | jq -r ".name")"
+existing_dbs=$(sudo -u postgres psql -lqt)
+
+if echo -e "${existing_dbs}" | cut -d \| -f 1 | grep -qw "${db_name}"; then
+  ascii_print "❗ $(to_title "${env}") database already exists. Skipping init." "red" >&2
+
+  exit 1
+fi
+
+ascii_print "🐘 Initializing ${ASCII["red"]}$(to_title "${env}") ${ASCII["yellow"]}Database\n" "yellow"
+
+db_password="$(echo "${db_config}" | jq -r ".password")"
+db_username="$(echo "${db_config}" | jq -r ".username")"
+
+psql_cmd="psql"
+psql_cmd+=" -v DB_NAME=\"${db_name}\""
+psql_cmd+=" -v DB_PASSWORD=\"${db_password}\""
+psql_cmd+=" -v DB_USERNAME=\"${db_username}\""
+psql_cmd+=" < ${current_dir}/scripts/init.sql"
+
+sudo -u postgres sh -c "${psql_cmd}"
+
+printf "%b" "${ASCII["reset"]}"

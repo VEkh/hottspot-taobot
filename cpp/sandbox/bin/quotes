@@ -5,13 +5,14 @@ set -e
 shopt -s extglob
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-project=$(dirname "$0" | xargs basename)
+project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
 
 # ASCII
 # ascii_print
 # extract_args
 # extract_flags
 # extract_flags_to_map
+# mk_file_dir
 # to_title
 # to_upper
 # shellcheck disable=1090,1091
@@ -51,6 +52,7 @@ function heartbeat() {
   case "${3}" in
     start)
       log_file="${app_dir}/log/${project}/quotes_${1}_${2}.log"
+      mk_file_dir "${log_file}"
 
       start_heartbeat "${@}" > "${log_file}" &
       ascii_print "✅ Successfully started ${action} heartbeat 💖" "green"
@@ -124,6 +126,7 @@ function start_action() {
   mkdir -p "$log_dir"
 
   log_file="${log_dir}/quotes_${action}.log"
+  mk_file_dir "${log_file}"
 
   start_message=$(
     echo -e "Starting Quotes $(to_title "${action}")"\

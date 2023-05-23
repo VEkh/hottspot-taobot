@@ -2,8 +2,8 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "$0")/../")
-current_dir=$(realpath "$(dirname "$0")")
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+current_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
 migrations_dir="${current_dir}/migrations"
 
 # shellcheck disable=1090

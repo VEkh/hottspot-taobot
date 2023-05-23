@@ -3,7 +3,7 @@
 set -e
 
 
-app_dir=$(realpath "$(dirname "$0")/../")
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
 
 # shellcheck disable=1090
 source "${app_dir}/bin/utils" # ASCII, ascii_print, get_env_flag, to_title

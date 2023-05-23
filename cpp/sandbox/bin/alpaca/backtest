@@ -3,7 +3,7 @@
 set -e
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-project=$(dirname "${0}" | xargs basename)
+project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
 
 # ASCII, ascii_print, backtest_api_keys, to_title, to_upper
 # shellcheck disable=1090,1091
