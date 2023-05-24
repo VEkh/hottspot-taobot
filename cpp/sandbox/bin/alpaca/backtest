@@ -5,12 +5,21 @@ set -e
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
 
-# ASCII, ascii_print, backtest_api_keys, to_title, to_upper
+# ASCII
+# ascii_print
+# backtest_api_keys
+# extract_flags_to_map
+# to_title
+# to_upper
+
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
 # shellcheck disable=1090,1091
 source "${app_dir}/db/utils" # build_db_uri
+
+declare -A flags=(["reset-db"]="1")
+extract_flags_to_map flags "${@}"
 
 function reset_db() {
   backtest_db_name="hottspot_capital_backtest"
@@ -49,7 +58,7 @@ function start_all() {
     exit 1
   fi
 
-  reset_db
+  (( "${flags["reset-db"]}" == 1 )) && reset_db
 
   for api_key in "${api_keys[@]}"; do
     start_single "--api-key=${api_key}"
@@ -81,19 +90,19 @@ function stop_single() {
 
 ascii_print "\n$(date)\n" "cyan"
 
-case $1 in
+case "${1}" in
   reset_db)
     reset_db
     ;;
   restart)
-    if [[ -z "${2}" ]]; then
+    if [[ -z "${flags["api-key"]}" ]]; then
       restart_all
     else
       restart_single "${@:2}"
     fi
     ;;
   start)
-    if [[ -z "${2}" ]]; then
+    if [[ -z "${flags["api-key"]}" ]]; then
       start_all
     else
       start_single "${@:2}"
