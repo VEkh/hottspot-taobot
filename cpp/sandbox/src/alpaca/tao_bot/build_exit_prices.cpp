@@ -11,7 +11,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->avg_one_sec_variances.running;
 
   const double trailing_stop_profit_ratio = 1 / 1.1;
-  double max_loss_coefficient = -53.0;
+  double max_loss_coefficient = -61.0;
   double stop_profit_stop_loss_ratio = 2.5;
 
   if (this->backtest.is_active) {

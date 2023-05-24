@@ -1,4 +1,4 @@
-### 2023-05-20:
+### 2023-05-25:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -26,8 +26,244 @@ Original Equity:      $ (-) (-%)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-05-12)
-* Win Record: 6W (100%) 0L (Total 6)
-* Reached +0.5% (Since 2023-03-30): 35W (97.22%) 1L (Total: 36)
+* Win Record: 9W (100%) 0L (Total 9)
+* Reached +0.5% (Since 2023-03-30): 38W (97.44%) 1L (Total: 39)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-05-24:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, May 24 2023
+Current Equity:          $27,214.73 (+126.40) (+0.47%)
+Max Equity:              $27,352.83 (+264.50) (+0.98%) @ 08:30 CDT
+Min Equity:              $27,048.83 (-39.50) (-0.15%) @ 08:30 CDT
+Original Equity:         $27,088.33
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, May 24 2023
+Current Equity:          $48,203.64 (+239.05) (+0.50%)
+Max Equity:              $48,926.64 (+962.05) (+2.01%) @ 08:45 CDT
+Min Equity:              $45,852.96 (-2,111.63) (-4.40%) @ 11:30 CDT
+Original Equity:         $47,964.59
+```
+
+**Beta (STAGING)**
+```
+Wednesday, May 24 2023
+Current Equity:          $55,959.25 (-1,435.54) (-2.50%)
+Max Equity:              $58,245.67 (+850.88) (+1.48%) @ 08:45 CDT
+Min Equity:              $55,956.40 (-1,438.39) (-2.51%) @ 09:57 CDT
+Original Equity:         $57,394.79
+```
+
+###### Stats (PRODUCTION) (as of 2023-05-12)
+* Win Record: 9W (100%) 0L (Total 9)
+* Reached +0.5% (Since 2023-03-30): 38W (97.44%) 1L (Total: 39)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-05-23:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, May 23 2023
+Current Equity:          $27,090.67 (+90.38) (+0.33%)
+Max Equity:              $27,139.41 (+139.12) (+0.52%) @ 08:37 CDT
+Min Equity:              $26,544.64 (-455.65) (-1.69%) @ 08:32 CDT
+Original Equity:         $27,000.29
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, May 23 2023
+Current Equity:          $48,000.75 (+1,260.90) (+2.70%)
+Max Equity:              $49,651.16 (+2,911.31) (+6.23%) @ 12:18 CDT
+Min Equity:              $46,022.17 (-717.68) (-1.54%) @ 08:32 CDT
+Original Equity:         $46,739.85
+```
+
+**Beta (STAGING)**
+```
+Tuesday, May 23 2023
+Current Equity:          $57,424.36 (-1,484.37) (-2.52%)
+Max Equity:              $61,731.14 (+2,822.41) (+4.79%) @ 08:47 CDT
+Min Equity:              $57,421.99 (-1,486.74) (-2.52%) @ 09:51 CDT
+Original Equity:         $58,908.73
+```
+
+###### Stats (PRODUCTION) (as of 2023-05-12)
+* Win Record: 8W (100%) 0L (Total 8)
+* Reached +0.5% (Since 2023-03-30): 37W (97.37%) 1L (Total: 38)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-05-22:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, May 22 2023
+Current Equity:          $27,001.23 (+103.80) (+0.39%)
+Max Equity:              $27,044.45 (+147.02) (+0.55%) @ 08:30 CDT
+Min Equity:              $26,840.32 (-57.11) (-0.21%) @ 08:30 CDT
+Original Equity:         $26,897.43
+```
+
+**Alpha (STAGING)**
+```
+Monday, May 22 2023
+Current Equity:          $46,772.44 (-843.20) (-1.77%)
+Max Equity:              $50,424.44 (+2,808.80) (+5.90%) @ 08:47 CDT
+Min Equity:              $45,456.25 (-2,159.39) (-4.54%) @ 12:15 CDT
+Original Equity:         $47,615.64
+```
+
+**Beta (STAGING)**
+```
+Monday, May 22 2023
+Current Equity:          $58,916.40 (+3,455.00) (+6.23%)
+Max Equity:              $58,987.22 (+3,525.82) (+6.36%) @ 08:48 CDT
+Min Equity:              $54,933.48 (-527.92) (-0.95%) @ 08:31 CDT
+Original Equity:         $55,461.40
+```
+
+**Backtest 2.5:1 Profit, 51x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $31,081.74 (-117.72) (-0.38%)
+Max Equity:              $32,058.88 (+859.42) (+2.75%) @ 08:46 CDT
+Min Equity:              $30,061.58 (-1,137.88) (-3.65%) @ 10:19 CDT
+Original Equity:         $31,199.46
+```
+
+**Backtest 2.5:1 Profit, 52x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $33,815.56 (-78.89) (-0.23%)
+Max Equity:              $34,890.26 (+995.81) (+2.94%) @ 08:47 CDT
+Min Equity:              $32,730.62 (-1,163.83) (-3.43%) @ 09:59 CDT
+Original Equity:         $33,894.45
+```
+
+**Backtest 2.5:1 Profit, 53x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $33,150.73 (-154.39) (-0.46%)
+Max Equity:              $34,173.32 (+868.20) (+2.61%) @ 08:48 CDT
+Min Equity:              $32,136.56 (-1,168.57) (-3.51%) @ 10:24 CDT
+Original Equity:         $33,305.12
+```
+
+**Backtest 2.5:1 Profit, 54x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $21,248.76 (-110.55) (-0.52%)
+Max Equity:              $21,992.94 (+633.63) (+2.97%) @ 08:47 CDT
+Min Equity:              $20,613.51 (-745.80) (-3.49%) @ 10:00 CDT
+Original Equity:         $21,359.31
+```
+
+**Backtest 2.5:1 Profit, 55x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $29,351.08 (-219.69) (-0.74%)
+Max Equity:              $31,495.11 (+1,924.34) (+6.51%) @ 12:17 CDT
+Min Equity:              $28,466.97 (-1,103.81) (-3.73%) @ 10:34 CDT
+Original Equity:         $29,570.77
+```
+
+**Backtest 2.5:1 Profit, 56x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $29,613.72 (-1,262.94) (-4.09%)
+Max Equity:              $31,689.62 (+812.97) (+2.63%) @ 12:19 CDT
+Min Equity:              $29,374.01 (-1,502.65) (-4.87%) @ 14:50 CDT
+Original Equity:         $30,876.66
+```
+
+**Backtest 2.5:1 Profit, 57x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $25,732.41 (-1,322.64) (-4.89%)
+Max Equity:              $27,665.35 (+610.30) (+2.26%) @ 12:18 CDT
+Min Equity:              $25,545.06 (-1,509.99) (-5.58%) @ 14:50 CDT
+Original Equity:         $27,055.05
+```
+
+**Backtest 2.5:1 Profit, 58x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $27,153.17 (-1,514.97) (-5.28%)
+Max Equity:              $29,173.56 (+505.42) (+1.76%) @ 12:18 CDT
+Min Equity:              $26,965.77 (-1,702.37) (-5.94%) @ 14:49 CDT
+Original Equity:         $28,668.14
+```
+
+**Backtest 2.5:1 Profit, 59x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $24,706.88 (-1,499.17) (-5.72%)
+Max Equity:              $26,630.09 (+424.03) (+1.62%) @ 12:19 CDT
+Min Equity:              $24,589.58 (-1,616.47) (-6.17%) @ 14:50 CDT
+Original Equity:         $26,206.06
+```
+
+**Backtest 2.5:1 Profit, 60x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $35,940.82 (-1,920.60) (-5.07%)
+Max Equity:              $38,416.92 (+555.50) (+1.47%) @ 08:47 CDT
+Min Equity:              $35,626.66 (-2,234.76) (-5.90%) @ 14:50 CDT
+Original Equity:         $37,861.42
+```
+
+**Backtest 2.5:1 Profit, 61x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $38,635.15 (-2,031.95) (-5.00%)
+Max Equity:              $41,392.29 (+725.19) (+1.78%) @ 08:47 CDT
+Min Equity:              $38,343.11 (-2,323.99) (-5.71%) @ 14:50 CDT
+Original Equity:         $40,667.10
+```
+
+**Backtest 2.5:1 Profit, 62x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $30,479.62 (-880.81) (-2.81%)
+Max Equity:              $32,513.91 (+1,153.49) (+3.68%) @ 12:19 CDT
+Min Equity:              $30,235.36 (-1,125.06) (-3.59%) @ 14:50 CDT
+Original Equity:         $31,360.42
+```
+
+**Backtest 2.5:1 Profit, 63x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $35,244.67 (+406.43) (+1.17%)
+Max Equity:              $36,922.04 (+2,083.80) (+5.98%) @ 12:18 CDT
+Min Equity:              $34,478.71 (-359.53) (-1.03%) @ 08:33 CDT
+Original Equity:         $34,838.24
+```
+
+**Backtest 2.5:1 Profit, 64x Loss**
+```
+Tuesday, May 23 2023
+Current Equity:          $34,120.26 (+389.39) (+1.15%)
+Max Equity:              $35,746.30 (+2,015.43) (+5.98%) @ 12:18 CDT
+Min Equity:              $33,221.00 (-509.87) (-1.51%) @ 08:32 CDT
+Original Equity:         $33,730.87
+```
+###### Stats (PRODUCTION) (as of 2023-05-12)
+* Win Record: 7W (100%) 0L (Total 7)
+* Reached +0.5% (Since 2023-03-30): 36W (97.3%) 1L (Total: 37)
 
 ###### Notes
 ###### Next Thing(s) to Try
@@ -62,6 +298,95 @@ Min Equity:              $50,758.53 (-1,084.37) (-2.09%) @ 08:33 CDT
 Original Equity:         $51,842.90
 ```
 
+**Backtest 2.5:1 Profit, 51x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $29,935.85 (+1,407.65) (+4.93%)
+Max Equity:              $30,628.26 (+2,100.06) (+7.36%) @ 11:20 CDT
+Min Equity:              $27,722.91 (-805.28) (-2.82%) @ 08:50 CDT
+Original Equity:         $28,528.19
+```
+
+**Backtest 2.5:1 Profit, 52x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $32,806.75 (+1,585.46) (+5.08%)
+Max Equity:              $33,439.29 (+2,218.00) (+7.10%) @ 11:20 CDT
+Min Equity:              $30,537.58 (-683.71) (-2.19%) @ 08:50 CDT
+Original Equity:         $31,221.29
+```
+
+**Backtest 2.5:1 Profit, 53x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $33,466.38 (+1,486.96) (+4.65%)
+Max Equity:              $34,152.11 (+2,172.69) (+6.79%) @ 11:22 CDT
+Min Equity:              $31,064.69 (-914.72) (-2.86%) @ 08:51 CDT
+Original Equity:         $31,979.42
+```
+
+**Backtest 2.5:1 Profit, 54x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $28,988.87 (+2,025.08) (+7.51%)
+Max Equity:              $29,406.65 (+2,442.86) (+9.06%) @ 12:29 CDT
+Min Equity:              $26,196.78 (-767.01) (-2.84%) @ 08:51 CDT
+Original Equity:         $26,963.79
+```
+
+**Backtest 2.5:1 Profit, 55x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $27,265.68 (+1,881.09) (+7.41%)
+Max Equity:              $27,630.11 (+2,245.52) (+8.85%) @ 12:31 CDT
+Min Equity:              $24,596.08 (-788.51) (-3.11%) @ 08:51 CDT
+Original Equity:         $25,384.59
+```
+
+**Backtest 2.5:1 Profit, 56x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $31,411.36 (+1,742.21) (+5.87%)
+Max Equity:              $32,183.92 (+2,514.76) (+8.48%) @ 11:20 CDT
+Min Equity:              $29,172.94 (-496.22) (-1.67%) @ 08:50 CDT
+Original Equity:         $29,669.15
+```
+
+**Backtest 2.5:1 Profit, 57x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $24,745.33 (+1,571.28) (+6.78%)
+Max Equity:              $25,266.39 (+2,092.34) (+9.03%) @ 12:29 CDT
+Min Equity:              $22,376.58 (-797.47) (-3.44%) @ 08:51 CDT
+Original Equity:         $23,174.05
+```
+
+**Backtest 2.5:1 Profit, 58x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $33,737.75 (+2,150.49) (+6.81%)
+Max Equity:              $34,466.94 (+2,879.69) (+9.12%) @ 11:20 CDT
+Min Equity:              $30,497.36 (-1,089.90) (-3.45%) @ 08:50 CDT
+Original Equity:         $31,587.26
+```
+
+**Backtest 2.5:1 Profit, 59x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $25,866.23 (+1,527.28) (+6.28%)
+Max Equity:              $26,438.47 (+2,099.52) (+8.63%) @ 12:29 CDT
+Min Equity:              $23,419.48 (-919.47) (-3.78%) @ 08:51 CDT
+Original Equity:         $24,338.94
+```
+
+**Backtest 2.5:1 Profit, 60x Loss**
+```
+Friday, May 19 2023
+Current Equity:          $29,188.53 (+1,743.15) (+6.35%)
+Max Equity:              $29,862.38 (+2,417.00) (+8.81%) @ 12:30 CDT
+Min Equity:              $26,352.63 (-1,092.75) (-3.98%) @ 08:50 CDT
+Original Equity:         $27,445.38
+```
 ###### Stats (PRODUCTION) (as of 2023-05-12)
 * Win Record: 6W (100%) 0L (Total 6)
 * Reached +0.5% (Since 2023-03-30): 35W (97.22%) 1L (Total: 36)
