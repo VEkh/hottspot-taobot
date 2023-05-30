@@ -12,6 +12,7 @@ project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
 # extract_args
 # extract_flags
 # extract_flags_to_map
+# is_market_open
 # mk_file_dir
 # to_title
 # to_upper
@@ -64,33 +65,6 @@ function heartbeat() {
       ascii_print "💖 $(to_title "${action}") Heartbeat Error: Specify valid control command (start|stop)." "red" >&2
       ;;
   esac
-}
-
-function is_market_open() {
-  dow=$(TZ=UTC date +%u)
-  hr=$(TZ=UTC date +%k)
-
-  if [[ "${project}" = "alpaca" ]]; then
-    if (( "${dow}" >= 1 && "${dow}" <= 5 && "${hr}" >= 13 && "${hr}" < 20 )); then
-      echo "true"
-    else
-      echo "false"
-    fi
-
-    exit 0
-  else
-    if ((
-      ("${dow}" >= 1 && "${dow}" < 5) ||
-      ("${dow}" == 5 && "${hr}" < 21) ||
-      ("${dow}" == 7 && "${hr}" >= 21)
-    )); then
-      echo "true"
-    else
-      echo "false"
-    fi
-
-    exit 0
-  fi
 }
 
 function print_status() {
@@ -168,7 +142,7 @@ function start_heartbeat() {
     exit 0
   fi
 
-  while [[ $(is_market_open) == "true" ]]; do
+  while [[ $(is_market_open "${project}") == "true" ]]; do
     state=$(get_action_status)
 
     if [[ -z "${state}" ]]; then

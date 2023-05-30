@@ -15,6 +15,15 @@ declare -A ASCII=(
 
 export ASCII
 
+EQUITY_MARKET_HOLIDAYS=(
+  "2023-05-29"
+  "2023-06-19"
+  "2023-07-04"
+  "2023-09-04"
+  "2023-11-23"
+  "2023-12-25"
+)
+
 function ascii_print() {
   message="${ASCII["bold"]}"
 
@@ -86,6 +95,42 @@ function extract_flags_to_map() {
       map["${key}"]="${value}"
     fi
   done
+}
+
+function is_market_open() {
+  dow=$(TZ=UTC date +%u)
+  hr=$(TZ=UTC date +%k)
+  iso_date=$(TZ=UTC date +%F)
+  project="${1}"
+
+  if [[ "${project}" = "alpaca" ]]; then
+    # shellcheck disable=2076
+    if [[ " ${EQUITY_MARKET_HOLIDAYS[*]} " =~ " ${iso_date} " ]]; then
+      ascii_print "It's a holiday yabish! Go have fun 🎉" "red" >&2
+
+      exit 0
+    fi
+
+    if (( "${dow}" >= 1 && "${dow}" <= 5 && "${hr}" >= 13 && "${hr}" < 20 )); then
+      echo "true"
+    else
+      echo "false"
+    fi
+
+    exit 0
+  else
+    if ((
+      ("${dow}" >= 1 && "${dow}" < 5) ||
+      ("${dow}" == 5 && "${hr}" < 21) ||
+      ("${dow}" == 7 && "${hr}" >= 21)
+    )); then
+      echo "true"
+    else
+      echo "false"
+    fi
+
+    exit 0
+  fi
 }
 
 function get_env_flag() {
