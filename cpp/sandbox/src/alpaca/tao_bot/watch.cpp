@@ -61,7 +61,7 @@ void Alpaca::TaoBot::watch() {
     advance_current_epoch();
   }
 
-  update_account_snapshot();
+  update_account_snapshot(true);
   log_timestamps();
   log_account_snapshot();
   log_end_of_trading_period();
