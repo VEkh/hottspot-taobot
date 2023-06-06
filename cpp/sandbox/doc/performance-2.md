@@ -1,4 +1,4 @@
-### 2023-06-06:
+### 2023-06-07:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -31,6 +31,56 @@ Original Equity:      $ (-) (-%)
 * Failed to Re-Reach +0.5% (Since 2023-06-06): 0 Days (0.00%) (Total: 0)
 
 ###### Notes
+###### Next Thing(s) to Try
+
+### 2023-06-06:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, June  6 2023
+Current Equity:          $25,709.13 (+141.25) (+0.55%)
+Max Equity:              $25,734.57 (+166.69) (+0.65%) @ 09:03 CDT
+Min Equity:              $25,523.47 (-44.41) (-0.17%) @ 08:57 CDT
+Original Equity:         $25,567.88
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, June  6 2023
+Current Equity:          $50,041.59 (-70.00) (-0.14%)
+Max Equity:              $51,651.91 (+1,540.32) (+3.07%) @ 11:50 CDT
+Min Equity:              $47,959.60 (-2,151.99) (-4.29%) @ 09:39 CDT
+Original Equity:         $50,111.59
+```
+
+**Beta (STAGING)**
+```
+Tuesday, June  6 2023
+Current Equity:          $51,857.72 (-1,373.56) (-2.58%)
+Max Equity:              $53,487.64 (+256.36) (+0.48%) @ 08:30 CDT
+Min Equity:              $51,854.02 (-1,377.26) (-2.59%) @ 08:34 CDT
+Original Equity:         $53,231.28
+```
+
+###### Stats (PRODUCTION) (as of 2023-05-12)
+* Win Record: 16W (94.12%) 1L (Total 17)
+* Reached +0.5% (Since 2023-03-30): 46W (97.87%) 1L (Total: 47)
+* Failed to Re-Reach +0.5% (Since 2023-06-06): 0 Days (0.00%) (Total: 1)
+
+###### Notes
+* The day started with Alpaca incorrectly setting my account balance to
+  $24,975.02, making it ineligible for margin trading.
+* When it was restored to the correct amount ($25,567.88) at 8:04am CT, my
+  margin buying power was still $0.00.
+* I contacted customer service and the problem was resolved within 10 minutes!
+* It was really impressive, and I was able to start trading.
+* The new +0.5% target algorithm worked. It didn't, however, keep trading
+  closed after the first termination.
+* I fixed that bug, and all worked correctly.
+* I'm fairly certain that this is the iteration that I'll keep until I can use
+  machine learning to increase the target daily profit.
+
 ###### Next Thing(s) to Try
 
 ### 2023-06-05:

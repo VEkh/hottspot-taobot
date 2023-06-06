@@ -24,11 +24,19 @@ bool Alpaca::TaoBot::should_stop_profit() {
       exit_prices_.max_profit >= exit_prices_.target_max_profit &&
       exit_prices_.current_profit <= exit_prices_.stop_profit_loss;
 
+  const double init_profit =
+      this->session_init_account_snapshot.equity -
+      this->session_init_account_snapshot.original_equity;
+
+  if (init_profit >= exit_prices_.target_max_profit) {
+    return true;
+  }
+
   if (this->has_target_profit_slipped) {
     return exit_prices_.current_profit >= exit_prices_.target_max_profit;
   }
 
-  if (is_profit_slipping && !this->has_target_profit_slipped) {
+  if (is_profit_slipping) {
     this->has_target_profit_slipped = true;
 
     return true;

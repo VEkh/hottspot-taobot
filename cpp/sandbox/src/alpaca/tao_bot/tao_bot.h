@@ -63,6 +63,7 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   account_snapshot_t account_snapshot;
+  account_snapshot_t session_init_account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
   bool has_target_profit_slipped = false;
   double current_epoch = time(nullptr);

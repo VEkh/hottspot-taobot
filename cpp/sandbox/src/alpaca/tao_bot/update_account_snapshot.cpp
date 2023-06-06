@@ -11,11 +11,18 @@ void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
     return;
   }
 
-  this->account_snapshot = this->db_account_stat.get_snapshot({
-      .api_key_id = this->api_client.config.api_key_id,
-      .starting_from =
-          ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
-  });
+  const account_snapshot_t current_snapshot =
+      this->db_account_stat.get_snapshot({
+          .api_key_id = this->api_client.config.api_key_id,
+          .starting_from =
+              ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
+      });
+
+  this->account_snapshot = current_snapshot;
+
+  if (!this->session_init_account_snapshot.equity) {
+    this->session_init_account_snapshot = current_snapshot;
+  }
 }
 
 #endif

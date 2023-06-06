@@ -1,22 +1,22 @@
 #ifndef ALPACA__TAO_BOT_initialize
 #define ALPACA__TAO_BOT_initialize
 
-#include "alpaca/client/client.cpp"             // Alpaca::Client
-#include "alpaca/quote/quote.cpp"               // Alpaca::Quote
-#include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
-#include "build_performance.cpp"                // build_performance
-#include "is_holiday.cpp"                       // is_holiday
-#include "lib/formatted.cpp"                    // Formatted::error_message
-#include "lib/pg/pg.cpp"                        // Pg
-#include "lib/utils/boolean.cpp"                // ::utils::boolean
-#include "lib/utils/string.cpp"                 // ::utils::string
+#include "alpaca/client/client.cpp"         // Alpaca::Client
+#include "alpaca/quote/quote.cpp"           // Alpaca::Quote
+#include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
+#include "build_performance.cpp"            // build_performance
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/position/position.cpp"         // DB::Position
-#include "tao_bot.h"                            // Alpaca::TaoBot
-#include "update_account_snapshot.cpp"          // update_account_snapshot
-#include <iostream>                             // std::cout, std::endl
-#include <locale.h>                             // setlocale
-#include <map>                                  // std::map
+#include "is_holiday.cpp"                   // is_holiday
+#include "lib/formatted.cpp"                // Formatted::error_message
+#include "lib/pg/pg.cpp"                    // Pg
+#include "lib/utils/boolean.cpp"            // ::utils::boolean
+#include "lib/utils/string.cpp"             // ::utils::string
+#include "tao_bot.h"                        // Alpaca::TaoBot
+#include "update_account_snapshot.cpp"      // update_account_snapshot
+#include <iostream>                         // std::cout, std::endl
+#include <locale.h>                         // setlocale
+#include <map>                              // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
 
