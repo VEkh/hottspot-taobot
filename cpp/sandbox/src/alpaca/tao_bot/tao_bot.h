@@ -64,6 +64,7 @@ private:
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
+  bool has_target_profit_slipped = false;
   double current_epoch = time(nullptr);
   double quantity;
   double started_at = time(nullptr);
