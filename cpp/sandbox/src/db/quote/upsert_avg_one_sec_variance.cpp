@@ -99,25 +99,14 @@ void DB::Quote::upsert_avg_one_sec_variance(
       ref_id,
       ref_timestamp,
       symbol)
-      insert into avg_one_sec_variances(avg_one_sec_variance, quote_id, symbol, timestamp)(
-        select
-          coalesce(averages.avg, fallback.avg) as "avg",
-          coalesce(averages.quote_id, fallback.quote_id) as quote_id,
-          coalesce(averages.symbol, fallback.symbol) as symbol,
-          coalesce(averages.timestamp, fallback.timestamp)
-        from
-          averages
-        right join (
-          select
-            0 as "avg",
-            id as quote_id,
-            symbol,
-            "timestamp"
-          from
-            ref_quotes) as fallback on true)
-    on conflict (quote_id)
-      do update set
-        avg_one_sec_variance = excluded.avg_one_sec_variance
+    update
+      quotes
+    set
+      avg_one_sec_variance = coalesce(averages.avg, 0)
+    from
+      averages
+    where
+      id = averages.quote_id
   )";
 
   const size_t query_l = strlen(query_format) + find_quote_filter.size();

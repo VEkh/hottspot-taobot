@@ -24,7 +24,7 @@ DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
         avg_one_sec_variance,
         symbol
       from
-        avg_one_sec_variances
+        quotes
       where
         symbol = %s
         and timestamp <= to_timestamp(%f)
@@ -38,7 +38,7 @@ DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
           select
             avg_one_sec_variance
           from
-            avg_one_sec_variances
+            quotes
           where
             symbol = latest_avg.symbol
             and timestamp <= to_timestamp(%f)
