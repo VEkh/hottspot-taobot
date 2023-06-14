@@ -27,7 +27,7 @@ case $1 in
     migrate_single "${@}"
     ;;
   generate)
-    generate "$2"
+    generate "${2}"
     ;;
   *|help)
     ascii_print "💿 DATABASE MIGRATIONS\n" "underline" "yellow"

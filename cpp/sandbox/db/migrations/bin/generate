@@ -22,9 +22,10 @@ function generate() {
 
   timestamp=$(date "+%Y%m%d%I%M%S")
   filepath="${timestamp}_${formatted_name}.sql"
+  template="\\\\timing\nbegin;\n\n\n\ncommit;"
 
-  touch "$migrations_dir/down/${filepath}"
-  touch "$migrations_dir/up/${filepath}"
+  echo -e "${template}" > "${migrations_dir}/down/${filepath}"
+  echo -e "${template}" > "${migrations_dir}/up/${filepath}"
 
   ascii_print "🎉 Migration successfully written to ${ASCII["yellow"]}${migrations_dir}/(down|up)/${filepath}" "green"
 }
