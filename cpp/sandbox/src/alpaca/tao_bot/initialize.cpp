@@ -7,6 +7,7 @@
 #include "build_performance.cpp"            // build_performance
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/position/position.cpp"         // DB::Position
+#include "db/utils/utils.cpp"               // DB::Utils
 #include "is_holiday.cpp"                   // is_holiday
 #include "lib/formatted.cpp"                // Formatted::error_message
 #include "lib/pg/pg.cpp"                    // Pg
@@ -47,10 +48,12 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
   this->db_account_stat = DB::AccountStat(this->pg);
   this->db_position = DB::Position(this->pg);
+  this->db_utils = DB::Utils(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
   this->symbol = ::utils::string::upcase(symbol_);
 
   try {
+    this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
     this->backtest = Alpaca::TaoBotBacktest({
         .conn = this->pg,

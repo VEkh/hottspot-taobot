@@ -7,6 +7,7 @@
 #include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/position/position.cpp"         // DB::Position
+#include "db/utils/utils.cpp"               // DB::Utils
 #include "lib/formatted.cpp"                // Formatted
 #include "lib/pg/pg.cpp"                    // Pg
 #include "types.cpp"                        // Global::t
@@ -60,6 +61,7 @@ private:
   Alpaca::TaoBotBacktest backtest;
   DB::AccountStat db_account_stat;
   DB::Position db_position;
+  DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   account_snapshot_t account_snapshot;
