@@ -6,6 +6,7 @@
 #include <iostream>      // std::cout, std::endl
 #include <math.h>        // abs
 #include <string>        // std::string
+#include <unistd.h>      // usleep
 
 void Alpaca::Quote::fetch_and_persist_quote(
     const std::string symbol, const bool skip_anomaly_check = false) {
@@ -22,6 +23,8 @@ void Alpaca::Quote::fetch_and_persist_quote(
     printf("Last Quote: %.2f • New Quote: %.2f\n", current_price_,
            new_quote.price);
     std::cout << fmt.reset << std::endl;
+
+    usleep(5e5);
 
     return fetch_and_persist_quote(symbol);
   }
