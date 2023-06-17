@@ -44,7 +44,7 @@ DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
             and timestamp <= to_timestamp(%f)
           order by
             timestamp desc
-          limit 500000) as limited) as limited_agg on true;
+          limit 100000) as limited) as limited_agg on true;
   )";
 
   char *sanitized_symbol =
