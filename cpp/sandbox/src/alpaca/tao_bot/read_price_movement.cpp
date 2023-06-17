@@ -11,11 +11,15 @@ void Alpaca::TaoBot::read_price_movement() {
     return;
   }
 
-  this->avg_one_sec_variances =
+  const avg_one_sec_variances_t new_avg_one_sec_variances =
       this->quoter.db_quote.get_avg_one_sec_variances({
           .symbol = this->symbol,
           .timestamp_upper_bound = this->current_epoch,
       });
+
+  if (new_avg_one_sec_variances.running) {
+    this->avg_one_sec_variances = new_avg_one_sec_variances;
+  }
 }
 
 #endif
