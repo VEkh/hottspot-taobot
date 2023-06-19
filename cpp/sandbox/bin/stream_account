@@ -10,6 +10,7 @@ project=$(dirname "$0" | xargs basename)
 # ASCII
 # ascii_print
 # extract_flags
+# is_market_open
 # to_lower
 # to_upper
 # shellcheck disable=1090
@@ -72,6 +73,10 @@ function start_if_stopped() {
 }
 
 function start_stream() {
+  if [[ $(is_market_open "${project}") != "true" ]]; then
+    exit 1
+  fi
+
   log_dir="${app_dir}/log/${project}/${api_key}"
   log_file="${log_dir}/account_stream.log"
 
