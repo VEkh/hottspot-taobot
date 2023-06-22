@@ -12,16 +12,19 @@
 #include "load_config.cpp"     // load_config
 #include "next_day_market_open_epoch.cpp"
 #include "place_order.cpp"
+#include "publish_clock.cpp"
 #include "should_exec_slow_query.cpp"
+#include "subscribe_clock.cpp"
 #include "upsert_account_stat.cpp"
 
 Alpaca::TaoBotBacktest::TaoBotBacktest(const init_args_t args) {
   Pg conn = args.conn;
 
-  this->db_account_stat = DB::AccountStat(conn);
-  this->db_backtest_clock = DB::BacktestClock(conn);
-  this->db_quote = DB::Quote(conn);
-  this->db_utils = DB::Utils(conn);
+  this->pg = conn;
+  this->db_account_stat = DB::AccountStat(this->pg);
+  this->db_backtest_clock = DB::BacktestClock(this->pg);
+  this->db_quote = DB::Quote(this->pg);
+  this->db_utils = DB::Utils(this->pg);
   this->flags = args.flags;
   this->symbol = args.symbol;
 

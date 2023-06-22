@@ -5,6 +5,7 @@
 #include "initialize.cpp" // initialize
 #include <map>            // std::map
 
+#include "await_notification.cpp"
 #include "connect.cpp"
 #include "disconnect.cpp"
 #include "exec.cpp"

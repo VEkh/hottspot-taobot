@@ -52,18 +52,23 @@ public:
   int next_day_market_open_epoch(const double);
 
   std::string fetch_order(const order_t *, const quote_t &);
+  std::string subscribe_clock(const bool);
 
   void place_order(const long int, order_t *);
+  void publish_clock(const double, const bool);
   void upsert_account_stat(const double, const bool);
 
 private:
   DB::AccountStat db_account_stat;
   DB::Quote db_quote;
   DB::Utils db_utils;
+  Pg pg;
 
   static constexpr int SLOW_QUERY_EVERY = 100;
 
   std::map<std::string, std::string> flags;
+
+  std::string pub_sub_clock_key();
 
   void load_config();
 };

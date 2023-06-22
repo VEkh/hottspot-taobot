@@ -12,6 +12,14 @@ class Pg {
 public:
   Pg(std::map<std::string, std::string> f);
 
+  struct await_notification_args_t {
+    std::string channel;
+    // Optional
+    bool debug = false;
+    int timeout_microseconds = 0;
+    int timeout_seconds = 0;
+  };
+
   struct query_result_t {
     std::string error_message = "";
     std::vector<std::string> fields = {};
@@ -28,6 +36,7 @@ public:
 
   query_result_t exec(const std::string, const bool);
 
+  std::string await_notification(const await_notification_args_t);
   void disconnect();
 
 private:
