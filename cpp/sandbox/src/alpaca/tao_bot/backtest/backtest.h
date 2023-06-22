@@ -20,8 +20,15 @@ public:
   using order_t = Alpaca::t::order_t;
   using quote_t = Alpaca::t::quote_t;
 
+  // NOTES:
+  // * clock_sync - Ensures that all tradeable assets' clocks are synced.
+  //                However, it slows backtest runs. If set to `false`, spurious
+  //                account max stop losses may trigger. A `false` setting
+  //                should therefore accompany an `account_max_stop_loss`
+  //                setting of `false`.
   struct config_t {
     double account_margin_multiplier = 0.00;
+    bool account_max_stop_loss = true;
     double account_starting_equity = 0.00;
     std::string api_key;
     std::string api_key_id;

@@ -13,18 +13,17 @@ bool Alpaca::TaoBot::max_account_loss_reached() {
   const double current_profit_ratio =
       exit_prices_.current_profit / this->account_snapshot.original_equity;
 
+  if (this->backtest.is_active &&
+      !this->backtest.config.account_max_stop_loss) {
+    return false;
+  }
+
   if (current_profit_ratio <= this->MEGA_MAX_ACCOUNT_LOSS_RATIO) {
     return true;
   }
 
   if (!this->backtest.is_active &&
       this->api_client.config.api_key != "paper-beta") {
-    return false;
-  }
-
-  if (this->backtest.is_active &&
-      !std::regex_search(this->backtest.config.api_key_id,
-                         std::regex("-act_(.+)__(.+)$"))) {
     return false;
   }
 
