@@ -30,6 +30,26 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     throw std::invalid_argument(message);
   }
 
+  // Support comma separation in print output
+  setlocale(LC_NUMERIC, "");
+
+  this->flags = flags_;
+  this->symbol = ::utils::string::upcase(symbol_);
+
+  this->pg = Pg(this->flags);
+  this->pg.connect();
+
+  this->backtest = Alpaca::TaoBotBacktest({
+      .conn = this->pg,
+      .flags = this->flags,
+      .symbol = this->symbol,
+  });
+
+  if (this->backtest.is_active) {
+    this->current_epoch = this->backtest.config.start_epoch;
+    this->started_at = this->backtest.config.start_epoch;
+  }
+
   if (is_holiday()) {
     const std::string message = Formatted::error_message(
         "🎉 Today is a holiday! The markets are closed, so go have "
@@ -38,33 +58,14 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     throw std::runtime_error(message);
   }
 
-  // Support comma separation in print output
-  setlocale(LC_NUMERIC, "");
-
-  this->flags = flags_;
-
-  this->pg = Pg(this->flags);
-  this->pg.connect();
-
   this->db_account_stat = DB::AccountStat(this->pg);
   this->db_position = DB::Position(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
-  this->symbol = ::utils::string::upcase(symbol_);
 
   try {
     this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
-    this->backtest = Alpaca::TaoBotBacktest({
-        .conn = this->pg,
-        .flags = this->flags,
-        .symbol = this->symbol,
-    });
-
-    if (this->backtest.is_active) {
-      this->current_epoch = this->backtest.config.start_epoch;
-      this->started_at = this->backtest.config.start_epoch;
-    }
 
     update_account_snapshot(true);
 

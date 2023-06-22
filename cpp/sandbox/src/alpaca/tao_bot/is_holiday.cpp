@@ -3,7 +3,6 @@
 
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "tao_bot.h"          // Alpaca::TaoBot, fmt
-#include <ctime>              // std::time, std::time_t
 #include <map>                // std::map
 #include <string>             // std::string
 
