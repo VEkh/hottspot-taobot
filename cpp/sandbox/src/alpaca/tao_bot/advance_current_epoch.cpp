@@ -9,20 +9,28 @@
 
 void Alpaca::TaoBot::advance_current_epoch() {
   if (this->backtest.is_active) {
-    this->backtest.publish_clock(this->current_epoch);
+    const double clock_tick_seconds = 1.0;
 
-    const std::string sibling_epoch_string = this->backtest.subscribe_clock();
+    if (this->tradeable_symbols_count == 1) {
+      advance_current_epoch(this->current_epoch + clock_tick_seconds);
+    } else {
 
-    const double sibling_epoch =
-        sibling_epoch_string.empty() ? 0 : std::stod(sibling_epoch_string);
+      this->backtest.publish_clock(this->current_epoch);
 
-    if (sibling_epoch < this->current_epoch) {
-      return advance_current_epoch();
+      const std::string sibling_epoch_string = this->backtest.subscribe_clock();
+
+      const double sibling_epoch =
+          sibling_epoch_string.empty() ? 0 : std::stod(sibling_epoch_string);
+
+      if (sibling_epoch < this->current_epoch) {
+        return advance_current_epoch();
+      }
+
+      const double new_epoch =
+          std::max(this->current_epoch + clock_tick_seconds, sibling_epoch);
+
+      advance_current_epoch(new_epoch);
     }
-
-    const double new_epoch = std::max(this->current_epoch + 1, sibling_epoch);
-
-    advance_current_epoch(new_epoch);
 
     this->backtest.slow_query_countdown += 1;
   } else {

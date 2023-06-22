@@ -12,6 +12,7 @@
 #include "lib/formatted.cpp"                // Formatted::error_message
 #include "lib/pg/pg.cpp"                    // Pg
 #include "lib/utils/boolean.cpp"            // ::utils::boolean
+#include "lib/utils/io.cpp"                 // ::utils::io
 #include "lib/utils/string.cpp"             // ::utils::string
 #include "tao_bot.h"                        // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"      // update_account_snapshot
@@ -20,6 +21,7 @@
 #include <map>                              // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
+#include <vector>    // std::vector
 
 void Alpaca::TaoBot::initialize(std::string symbol_,
                                 std::map<std::string, std::string> &flags_) {
@@ -67,9 +69,15 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
 
+    std::vector<std::string> tradeable_symbols =
+        ::utils::io::tradeable_symbols("alpaca");
+
+    this->tradeable_symbols_count = tradeable_symbols.size();
+
     update_account_snapshot(true);
 
     this->performance = build_performance();
+
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(
              "❌ JSON type error during initialization. Retrying.")

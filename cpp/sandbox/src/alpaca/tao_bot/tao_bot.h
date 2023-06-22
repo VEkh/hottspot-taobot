@@ -71,6 +71,7 @@ private:
   double current_epoch = time(nullptr);
   double quantity;
   double started_at = time(nullptr);
+  int tradeable_symbols_count = 1;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
@@ -111,7 +112,6 @@ private:
   int order_duration(const order_t *);
   int profit_duration(const double);
   int runtime();
-  int tradeable_symbols_count();
   json fetch_order(const order_t *);
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
