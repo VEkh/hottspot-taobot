@@ -1,16 +1,15 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST_H
 #define ALPACA__TAO_BOT_BACKTEST_H
 
-#include "alpaca/types.cpp"                     // Alpaca::t
-#include "db/account_stat/account_stat.cpp"     // DB::AccountStat
-#include "db/backtest_clock/backtest_clock.cpp" // DB::BacktestClock
-#include "db/quote/quote.cpp"                   // DB::Quote
-#include "db/utils/utils.cpp"                   // DB::Utils
-#include "lib/pg/pg.cpp"                        // Pg
-#include "types.cpp"                            // Global::t
-#include <map>                                  // std::map
-#include <string>                               // std::string
-#include <time.h>                               // time
+#include "alpaca/types.cpp"                 // Alpaca::t
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/quote/quote.cpp"               // DB::Quote
+#include "db/utils/utils.cpp"               // DB::Utils
+#include "lib/pg/pg.cpp"                    // Pg
+#include "types.cpp"                        // Global::t
+#include <map>                              // std::map
+#include <string>                           // std::string
+#include <time.h>                           // time
 
 namespace Alpaca {
 class TaoBotBacktest {
@@ -39,8 +38,6 @@ public:
 
   TaoBotBacktest(){};
   TaoBotBacktest(const init_args_t);
-
-  DB::BacktestClock db_backtest_clock;
 
   bool is_active = false;
   int slow_query_countdown = 0;

@@ -1,11 +1,10 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST
 #define ALPACA__TAO_BOT_BACKTEST
 
-#include "backtest.h"                           // Alpaca::TaoBotBacktest
-#include "db/account_stat/account_stat.cpp"     // DB::AccountStat
-#include "db/backtest_clock/backtest_clock.cpp" // DB::BacktestClock
-#include "db/quote/quote.cpp"                   // DB::Quote
-#include "db/utils/utils.cpp"                   // DB::Utils
+#include "backtest.h"                       // Alpaca::TaoBotBacktest
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/quote/quote.cpp"               // DB::Quote
+#include "db/utils/utils.cpp"               // DB::Utils
 #include "fetch_order.cpp"
 #include "has_reached_end.cpp" // has_reached_end
 #include "lib/pg/pg.cpp"       // Pg
@@ -22,7 +21,6 @@ Alpaca::TaoBotBacktest::TaoBotBacktest(const init_args_t args) {
 
   this->pg = conn;
   this->db_account_stat = DB::AccountStat(this->pg);
-  this->db_backtest_clock = DB::BacktestClock(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->flags = args.flags;
