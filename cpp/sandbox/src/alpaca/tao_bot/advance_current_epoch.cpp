@@ -11,7 +11,8 @@ void Alpaca::TaoBot::advance_current_epoch() {
   if (this->backtest.is_active) {
     const double clock_tick_seconds = 1.0;
 
-    if (this->tradeable_symbols_count == 1) {
+    if (this->tradeable_symbols_count == 1 ||
+        !this->backtest.config.clock_sync) {
       advance_current_epoch(this->current_epoch + clock_tick_seconds);
     } else {
 

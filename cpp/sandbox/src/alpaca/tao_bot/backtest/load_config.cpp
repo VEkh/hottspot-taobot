@@ -125,14 +125,14 @@ void Alpaca::TaoBotBacktest::load_config() {
     end_epoch = last_quotes.front().timestamp;
   }
 
-  const bool clock_sync = config_json[api_key].contains("clock_sync")
-                              ? (bool)config_json[api_key]["clock_sync"]
-                              : this->config.clock_sync;
-
   const bool account_max_stop_loss =
       config_json[api_key].contains("backtest_account_max_stop_loss")
           ? (bool)config_json[api_key]["backtest_account_max_stop_loss"]
           : this->config.account_max_stop_loss;
+
+  const bool clock_sync = config_json[api_key].contains("clock_sync")
+                              ? (bool)config_json[api_key]["clock_sync"]
+                              : this->config.clock_sync;
 
   this->config = {
       .account_margin_multiplier =
@@ -141,6 +141,7 @@ void Alpaca::TaoBotBacktest::load_config() {
           config_json[api_key]["backtest_account_starting_equity"],
       .api_key = api_key,
       .api_key_id = config_json[api_key]["id"],
+      .clock_sync = clock_sync,
       .end_epoch = end_epoch,
       .start_epoch = start_epoch,
   };

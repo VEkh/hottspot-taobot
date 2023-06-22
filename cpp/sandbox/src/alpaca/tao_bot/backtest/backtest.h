@@ -26,6 +26,7 @@ public:
     double account_starting_equity = 0.00;
     std::string api_key;
     std::string api_key_id;
+    bool clock_sync = true;
     double end_epoch = 0;
     double start_epoch = 0;
   } config;
