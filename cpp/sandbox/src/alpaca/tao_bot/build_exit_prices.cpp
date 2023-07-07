@@ -18,8 +18,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     std::smatch match;
     const std::string id = this->backtest.config.api_key_id;
 
-    std::regex_search(id, match, std::regex("-pos_(.+)__(.+)-act")) ||
-        std::regex_search(id, match, std::regex("-pos_(.+)__(.+)-one_sec")) ||
+    std::regex_search(id, match, std::regex("-pos_(.+)__(.+)-\\w+")) ||
         std::regex_search(id, match, std::regex("-pos_(.+)__(.+)$"));
 
     if (match.size() > 2) {
