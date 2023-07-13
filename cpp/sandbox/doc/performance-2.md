@@ -1,38 +1,3 @@
-### 2023-07-10:
-#### Performance
-##### Equities
-**Alpha (PRODUCTION)**
-```
-Current Equity:       $ (+) (+%)
-Max Equity:           $ (+) (+%)
-Min Equity:           $ (-) (-%)
-Original Equity:      $ (-) (-%)
-```
-
-**Alpha (STAGING)**
-```
-Current Equity:       $ (+) (+%)
-Max Equity:           $ (+) (+%)
-Min Equity:           $ (-) (-%)
-Original Equity:      $ (-) (-%)
-```
-
-**Beta (STAGING)**
-```
-Current Equity:       $ (+) (+%)
-Max Equity:           $ (+) (+%)
-Min Equity:           $ (-) (-%)
-Original Equity:      $ (-) (-%)
-```
-
-###### Stats (PRODUCTION) (as of 2023-05-12)
-* Win Record: 34W (91.89%) 3L (Total 37)
-* Reached +0.5% (Since 2023-03-30): 64W (95.52%) 3L (Total: 67)
-* Failed to Re-Reach +0.5% (Since 2023-06-06): 0 Days (0.00%) (Total: 17)
-
-###### Notes
-###### Next Thing(s) to Try
-
 ### 2023-07-07:
 #### Performance
 ##### Equities
@@ -63,6 +28,42 @@ Min Equity:              $57,503.57 (-1,334.45) (-2.27%) @ 08:36 CDT
 Original Equity:         $58,838.02
 ```
 
+**Backtest 2.5:1 Profit, 55x Loss, 9:00am Start**
+```
+Friday, July  7 2023
+Current Equity:          $15,831.74 (+1,428.05) (+9.91%)
+Max Equity:              $15,900.83 (+1,497.14) (+10.39%) @ 14:41 CDT
+Min Equity:              $14,330.26 (-73.43) (-0.51%) @ 09:02 CDT
+Original Equity:         $14,403.69
+```
+
+**Backtest 2.5:1 Profit, 57.5x Loss, 9:00am Start**
+```
+Friday, July  7 2023
+Current Equity:          $24,486.76 (+2,289.43) (+10.31%)
+Max Equity:              $24,547.83 (+2,350.49) (+10.59%) @ 14:57 CDT
+Min Equity:              $22,197.33 (+0.00) (+0.00%) @ 09:00 CDT
+Original Equity:         $22,197.33
+```
+
+**Backtest 2.5:1 Profit, 60x Loss, 9:00am Start**
+```
+Friday, July  7 2023
+Current Equity:          $22,003.31 (+2,220.32) (+11.22%)
+Max Equity:              $22,035.11 (+2,252.12) (+11.38%) @ 14:57 CDT
+Min Equity:              $19,774.58 (-8.41) (-0.04%) @ 09:02 CDT
+Original Equity:         $19,782.99
+```
+
+**Backtest 2.5:1 | +6.25% Profit, 60 | -2.5% Loss, 9:00am Start**
+```
+Friday, July  7 2023
+Current Equity:          $27,048.50 (+1,614.67) (+6.35%)
+Max Equity:              $27,054.15 (+1,620.32) (+6.37%) @ 11:05 CDT
+Min Equity:              $25,433.83 (+0.00) (+0.00%) @ 09:00 CDT
+Original Equity:         $25,433.83
+```
+
 ###### Stats (PRODUCTION) (as of 2023-05-12)
 * Win Record: 34W (91.89%) 3L (Total 37)
 * Reached +0.5% (Since 2023-03-30): 64W (95.52%) 3L (Total: 67)
@@ -75,6 +76,10 @@ Original Equity:         $58,838.02
 * Average Return: -0.34% • Average NASDAQ Return: +0.11% • Average S&P 500 Return: +0.06%
 
 ###### Notes
+* I suspected that starting trading 30 minutes after open might help avoid
+  destructive early morning volatility.
+* Backtesting suggests this would lead to significant loss, so I removed it.
+
 ###### Next Thing(s) to Try
 
 ### 2023-07-06:

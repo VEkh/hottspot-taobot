@@ -13,6 +13,7 @@ void DB::Position::open(const open_args_t args) {
   const double max_profit_at = args.max_profit_at;
   const double open_order_execution_mid = args.open_order_execution_mid;
   const double open_order_quantity = args.open_order_quantity;
+  const double opened_at = args.opened_at;
   const double stop_loss = args.stop_loss;
   const double stop_profit = args.stop_profit;
 
@@ -21,8 +22,8 @@ void DB::Position::open(const open_args_t args) {
   const std::string symbol = args.symbol;
 
   const char *query_format = R"(
-    insert into positions(api_key_id, current_profit, max_profit, max_profit_at, open_order_execution_mid, open_order_id, open_order_quantity, stop_loss, stop_profit, symbol)
-      values (%s, %f, %f, to_timestamp(%f), %f, %s, %f, %f, %f, %s)
+    insert into positions(api_key_id, current_profit, max_profit, max_profit_at, open_order_execution_mid, open_order_id, open_order_quantity, opened_at, stop_loss, stop_profit, symbol)
+      values (%s, %f, %f, to_timestamp(%f), %f, %s, %f, %s, %f, %f, %s)
     on conflict (api_key_id, open_order_id)
       do update set
         current_profit = excluded.current_profit, max_profit = excluded.max_profit, max_profit_at = excluded.max_profit_at, stop_loss = excluded.stop_loss, stop_profit = excluded.stop_profit;
@@ -37,13 +38,17 @@ void DB::Position::open(const open_args_t args) {
   char *sanitized_symbol =
       PQescapeLiteral(this->conn.conn, symbol.c_str(), symbol.size());
 
+  const std::string opened_at_str =
+      opened_at ? std::string("to_timestamp(") + std::to_string(opened_at) + ")"
+                : "now()";
+
   const size_t query_l =
       strlen(query_format) + strlen(sanitized_api_key_id) +
       std::to_string(current_profit).size() +
       std::to_string(max_profit).size() + std::to_string(max_profit_at).size() +
       std::to_string(open_order_execution_mid).size() +
       strlen(sanitized_open_order_id) +
-      std::to_string(open_order_quantity).size() +
+      std::to_string(open_order_quantity).size() + opened_at_str.size() +
       std::to_string(stop_loss).size() + std::to_string(stop_profit).size() +
       strlen(sanitized_symbol);
 
@@ -51,8 +56,8 @@ void DB::Position::open(const open_args_t args) {
 
   snprintf(query, query_l, query_format, sanitized_api_key_id, current_profit,
            max_profit, max_profit_at, open_order_execution_mid,
-           sanitized_open_order_id, open_order_quantity, stop_loss, stop_profit,
-           sanitized_symbol);
+           sanitized_open_order_id, open_order_quantity, opened_at_str.c_str(),
+           stop_loss, stop_profit, sanitized_symbol);
 
   PQfreemem(sanitized_api_key_id);
   PQfreemem(sanitized_open_order_id);

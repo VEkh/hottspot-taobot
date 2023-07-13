@@ -87,57 +87,47 @@ int day_of_week() {
   return day_of_week(now);
 }
 
-bool is_at_least(const long int epoch, const std::vector<int> time_parts,
+bool is_at_least(const long int epoch, const tm time_parts,
                  const char *time_zone = "America/New_York") {
-  if (time_parts.empty()) {
-    return false;
-  }
-
   return in_time_zone<bool>(time_zone, [&]() -> bool {
-    tm local_time = *localtime(&epoch);
+    tm ref_time = *localtime(&epoch);
+    tm comparison_time = ref_time;
 
-    const int hours = time_parts[0];
-    const int minutes = time_parts.size() > 1 ? time_parts[1] : 0;
+    comparison_time.tm_hour = time_parts.tm_hour;
+    comparison_time.tm_min = time_parts.tm_min;
+    comparison_time.tm_sec = time_parts.tm_sec;
 
-    bool out = local_time.tm_hour >= hours;
+    const long int comparison_time_epoch = mktime(&comparison_time);
+    const long int ref_time_epoch = mktime(&ref_time);
 
-    if (out && local_time.tm_hour == hours && minutes) {
-      out = local_time.tm_min >= minutes;
-    }
-
-    return out;
+    return ref_time_epoch >= comparison_time_epoch;
   });
 }
 
-bool is_at_least(const std::vector<int> time_parts,
+bool is_at_least(const tm time_parts,
                  const char *time_zone = "America/New_York") {
   const long int now = time(nullptr);
   return is_at_least(now, time_parts, time_zone);
 }
 
-bool is_before(const long int epoch, const std::vector<int> time_parts,
+bool is_before(const long int epoch, const tm time_parts,
                const char *time_zone = "America/New_York") {
-  if (time_parts.empty()) {
-    return false;
-  }
-
   return in_time_zone<bool>(time_zone, [&]() -> bool {
-    tm local_time = *localtime(&epoch);
+    tm ref_time = *localtime(&epoch);
+    tm comparison_time = ref_time;
 
-    const int hours = time_parts[0];
-    const int minutes = time_parts.size() > 1 ? time_parts[1] : 0;
+    comparison_time.tm_hour = time_parts.tm_hour;
+    comparison_time.tm_min = time_parts.tm_min;
+    comparison_time.tm_sec = time_parts.tm_sec;
 
-    bool out = local_time.tm_hour < hours;
+    const long int comparison_time_epoch = mktime(&comparison_time);
+    const long int ref_time_epoch = mktime(&ref_time);
 
-    if (!out && local_time.tm_hour == hours && minutes) {
-      out = local_time.tm_min < minutes;
-    }
-
-    return out;
+    return ref_time_epoch < comparison_time_epoch;
   });
 }
 
-bool is_before(const std::vector<int> time_parts,
+bool is_before(const tm time_parts,
                const char *time_zone = "America/New_York") {
   const long int now = time(nullptr);
   return is_before(now, time_parts, time_zone);

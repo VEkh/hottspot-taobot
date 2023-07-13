@@ -7,11 +7,21 @@
 
 bool Alpaca::TaoBot::is_end_of_trading_period() {
   if (is_early_close_day()) {
-    return ::utils::time_::is_at_least(this->current_epoch, {11, 59},
+    return ::utils::time_::is_at_least(this->current_epoch,
+                                       {
+                                           .tm_sec = 0,
+                                           .tm_min = 59,
+                                           .tm_hour = 11,
+                                       },
                                        "America/Chicago");
   }
 
-  return ::utils::time_::is_at_least(this->current_epoch, {14, 59},
+  return ::utils::time_::is_at_least(this->current_epoch,
+                                     {
+                                         .tm_sec = 0,
+                                         .tm_min = 59,
+                                         .tm_hour = 14,
+                                     },
                                      "America/Chicago");
 }
 

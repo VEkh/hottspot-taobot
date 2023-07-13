@@ -24,6 +24,7 @@ void Alpaca::TaoBot::write_open_position() {
       .open_order_id = this->open_order_ptr->id,
       .open_order_quantity =
           quantity_multiplier * this->open_order_ptr->quantity,
+      .opened_at = this->backtest.is_active ? this->current_epoch : 0,
       .stop_loss = this->exit_prices.max_loss,
       .stop_profit = this->exit_prices.min_profit,
       .symbol = this->symbol,

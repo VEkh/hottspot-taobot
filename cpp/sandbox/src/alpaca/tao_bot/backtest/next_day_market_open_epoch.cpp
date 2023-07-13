@@ -18,11 +18,6 @@ int Alpaca::TaoBotBacktest::next_day_market_open_epoch(
   market_open.tm_min = 30;
   market_open.tm_sec = 0;
 
-  if (this->config.is_late_start) {
-    market_open.tm_hour = 14;
-    market_open.tm_min = 0;
-  }
-
   const long int next_open_epoch = mktime(&market_open);
   const long int now = time(nullptr);
 

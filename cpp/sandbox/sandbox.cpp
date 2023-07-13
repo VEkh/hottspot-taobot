@@ -2,35 +2,15 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/pg/pg.cpp" // Pg
-#include <future>        // std::future
-#include <time.h>        // time
-#include <unistd.h>      // usleep
-
-void poll_notice(Pg pg) {
-  while (true) {
-    usleep(1e6);
-
-    pg.exec(
-        "select pg_notify('backtest-pos_2_5__61-clock', '1687413552.00000')",
-        true);
-  }
-}
+#include "lib/utils/time.cpp" // ::utils::time_
+#include <time.h>             // time
 
 int main(int argc, char *argv[]) {
-  Pg pg;
-  pg.connect();
+  const tm time_parts = {
+      .tm_sec = 30,
+      .tm_min = 21,
+      .tm_hour = 17,
+  };
 
-  while (true) {
-    const std::string notification = pg.await_notification({
-        .channel = "backtest-pos_2_5__61-clock",
-        .debug = true,
-    });
-
-    std::cout << "Notification: " << notification << std::endl;
-  }
-
-  poll_notice(pg);
-
-  pg.disconnect();
+  printf("is at least?: %i\n", (int)::utils::time_::is_before(time_parts));
 }
