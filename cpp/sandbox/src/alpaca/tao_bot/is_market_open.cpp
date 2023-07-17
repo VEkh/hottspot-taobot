@@ -27,9 +27,9 @@ bool Alpaca::TaoBot::is_market_open() {
       .tm_hour = 9,
   };
 
-  if (this->backtest.is_active && this->backtest.config.is_late_start) {
+  if (this->backtest.is_active && this->backtest.config.late_start_seconds) {
     market_open_time = {
-        .tm_sec = 30,
+        .tm_sec = this->backtest.config.late_start_seconds,
         .tm_min = 30,
         .tm_hour = 9,
     };

@@ -126,17 +126,19 @@ void Alpaca::TaoBotBacktest::load_config() {
   }
 
   const bool account_max_stop_loss =
-      config_json[api_key].contains("account_max_stop_loss")
-          ? (bool)config_json[api_key]["account_max_stop_loss"]
+      config_json[api_key].contains("backtest_account_max_stop_loss")
+          ? (bool)config_json[api_key]["backtest_account_max_stop_loss"]
           : this->config.account_max_stop_loss;
 
-  const bool clock_sync = config_json[api_key].contains("clock_sync")
-                              ? (bool)config_json[api_key]["clock_sync"]
-                              : this->config.clock_sync;
+  const bool clock_sync =
+      config_json[api_key].contains("backtest_clock_sync")
+          ? (bool)config_json[api_key]["backtest_clock_sync"]
+          : this->config.clock_sync;
 
-  const bool is_late_start = config_json[api_key].contains("is_late_start")
-                                 ? (bool)config_json[api_key]["is_late_start"]
-                                 : this->config.is_late_start;
+  const int late_start_seconds =
+      config_json[api_key].contains("backtest_late_start_seconds")
+          ? (int)config_json[api_key]["backtest_late_start_seconds"]
+          : this->config.late_start_seconds;
 
   this->config = {
       .account_margin_multiplier =
@@ -148,7 +150,7 @@ void Alpaca::TaoBotBacktest::load_config() {
       .api_key_id = config_json[api_key]["id"],
       .clock_sync = clock_sync,
       .end_epoch = end_epoch,
-      .is_late_start = is_late_start,
+      .late_start_seconds = late_start_seconds,
       .start_epoch = start_epoch,
   };
 }
