@@ -51,9 +51,15 @@ private:
       {"sell", "📉"},
   };
 
+  std::map<std::string, double> MAX_ACCOUNT_LOSS_RATIOS = {
+      {"live-alpha", -0.025},
+      {"paper-alpha", MEGA_MAX_ACCOUNT_LOSS_RATIO},
+      {"paper-beta", -0.025},
+  };
+
   std::map<std::string, double> TARGET_ACCOUNT_PROFIT_RATIOS = {
-      {"live-alpha", 0.004},
-      {"paper-beta", 0.0625},
+      {"live-alpha", 0.0615},
+      {"paper-beta", 0.0615},
   };
 
   Alpaca::Client api_client;

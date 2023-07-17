@@ -22,12 +22,12 @@ bool Alpaca::TaoBot::max_account_loss_reached() {
     return true;
   }
 
-  if (!this->backtest.is_active &&
-      this->api_client.config.api_key != "paper-beta") {
-    return false;
-  }
+  double loss_ratio =
+      this->MAX_ACCOUNT_LOSS_RATIOS[this->api_client.config.api_key];
 
-  double loss_ratio = this->MAX_ACCOUNT_LOSS_RATIO;
+  if (!loss_ratio) {
+    loss_ratio = this->MAX_ACCOUNT_LOSS_RATIO;
+  }
 
   if (this->backtest.is_active) {
     std::smatch match;
