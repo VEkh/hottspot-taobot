@@ -58,8 +58,8 @@ private:
   };
 
   std::map<std::string, double> TARGET_ACCOUNT_PROFIT_RATIOS = {
-      {"live-alpha", 0.0615},
-      {"paper-beta", 0.0615},
+      {"live-alpha", 0.0625},
+      {"paper-beta", 0.0625},
   };
 
   Alpaca::Client api_client;
