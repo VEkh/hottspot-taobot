@@ -1,0 +1,244 @@
+#!/bin/bash
+# shellcheck disable=2016
+
+file_args="${*}"
+fmt_bold="\033[1m"
+fmt_cyan="\033[36m"
+fmt_green="\033[32m"
+fmt_red="\033[31m"
+fmt_reset="\033[0m"
+fmt_yellow="\033[33m"
+
+function build_app_dir() {
+  echo -e "$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+}
+
+function install_apt_packages() {
+  to_install=()
+
+  for arg in "$@"; do
+    if ! (dpkg -l | grep -v "^rc" | grep "$arg" | awk '{print $2}' | grep -q "^$arg\(:\w\+\)\?$"); then
+      to_install+=("$arg")
+    fi
+  done
+
+  [[ "${#to_install[*]}" = "0" ]] && return 0
+
+  log_install_start "${to_install[*]}" && \
+  sudo apt-get install -y "${to_install[@]}"
+
+}
+
+function install_asdf() {
+  asdf_completion_cmd='. $HOME/.asdf/completions/asdf.bash'
+  asdf_source_cmd='. $HOME/.asdf/asdf.sh'
+
+  [ ! -d "$HOME/.asdf" ] && \
+    log_install_start "💻 asdf" && \
+    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
+
+  touch ~/.bashrc
+
+  bashrc_contents=$(cat ~/.bashrc)
+
+  if ! (echo "$bashrc_contents" | grep -q "$asdf_source_cmd"); then
+    echo -e "\n$asdf_source_cmd" >> ~/.bashrc
+  fi
+
+  if ! (echo "$bashrc_contents" | grep -q "$asdf_completion_cmd"); then
+    echo -e "\n$asdf_completion_cmd" >> ~/.bashrc
+  fi
+}
+
+function install_boost() {
+  app_dir=$(build_app_dir)
+
+  [ -d "$app_dir/deps/boost" ] && return 0
+
+  log_install_start "⚡ Boost"
+
+  mkdir -p "$app_dir/deps/build/"
+
+  git clone --recursive \
+    "https://github.com/boostorg/boost.git" "$app_dir/deps/boost"
+
+  cmd="cd $app_dir/deps/boost/"
+  cmd+=" && ./bootstrap.sh"
+  cmd+=" && ./b2 install --prefix=\"$app_dir/deps/build/\""
+
+  sh -c "$cmd"
+}
+
+function install_brew_packages() {
+  if [[ $(which brew) =~ .*not\\sfound.* ]]; then
+    log_install_start "🍺 Homerew Package Installer"
+    /bin/bash -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+  fi
+
+  to_install=()
+
+  for arg in "$@"; do
+    if ! (brew list | grep "$arg" | grep -q "^$arg\(:\w\+\)\?$"); then
+      to_install+=("$arg")
+    fi
+  done
+
+  [[ "${#to_install[*]}" = "0" ]] && return 0
+
+  # log_install_start "${to_install[*]}"
+
+  log_install_start "${to_install[*]}" && \
+  brew install "${to_install[@]}"
+}
+
+function install_cpp_dependencies() {
+  log_install_start "C++ Dependencies"
+
+  mkdir -p "$(build_app_dir)/deps/"
+
+  install_boost
+  install_nlohmann_json
+}
+
+function install_etrade_dependencies() {
+  install_apt_packages firefox firefox-geckodriver
+
+  if [[ "$file_args" =~ .*--server.* ]]
+  then
+    echo "installing server ruby"
+    install_ruby_from_source
+  else
+    echo "installing local"
+    install_ruby_from_asdf
+  fi
+
+  install_ruby_gems bundler
+}
+
+function install_postgresql() {
+  if [[ $OSTYPE =~ ^linux.* ]]; then
+    package="postgresql"
+
+    if (dpkg -l | grep -v "^rc" | grep "$package" | awk '{print $2}' | grep -q "^${package}\(:\w\+\)\?$"); then
+      return 0;
+    fi
+
+    log_install_start "🐘 PostgreSQL"
+
+    sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt $(lsb_release -cs)-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
+    wget --quiet -O - https://www.postgresql.org/media/keys/ACCC4CF8.asc | \
+      sudo apt-key add -
+    sudo apt-get update
+    sudo apt-get -y install postgresql
+  fi
+}
+
+function install_nlohmann_json() {
+  app_dir=$(build_app_dir)
+
+  [ -d "$app_dir/deps/nlohmann" ] && return 0
+
+  log_install_start "{} nlohmann/json"
+
+  git clone "https://github.com/nlohmann/json.git" /tmp/nlohmann/
+  mv /tmp/nlohmann/single_include/nlohmann "$app_dir/deps/"
+  'rm' -rf /tmp/nlohmann/
+}
+
+function install_ruby_from_asdf() {
+  asdf_bin="$HOME/.asdf/bin/asdf"
+  ruby_version="3.0.3"
+
+  install_asdf
+
+  [ ! -d "$HOME/.asdf" ] && \
+    echo -e "${fmt_bold}${fmt_red}❌ Install asdf before ruby${fmt_reset}" &&
+    return 1
+
+  [ ! -d "$HOME/.asdf/plugins/ruby" ] && \
+    log_install_start "ruby plugin" && \
+    "$asdf_bin" plugin add ruby
+
+  [ ! -d "$HOME/.asdf/installs/ruby/$ruby_version" ] && \
+    log_install_start "💎 Ruby $ruby_version" && \
+    "$asdf_bin" install ruby "$ruby_version" &&
+    "$asdf_bin" reshim ruby
+
+  if [[ -f "$HOME/.tool-versions" ]]; then
+    if ! (grep -q "\bruby\b" "$HOME/.tool-versions"); then
+      echo -e "ruby $ruby_version" >> "$HOME/.tool-versions"
+    fi
+  else
+    echo -e "ruby $ruby_version" > "$HOME/.tool-versions"
+  fi
+}
+
+function install_ruby_from_source() {
+  [[ "$(which ruby)" != "" ]] && return 0
+
+  ruby_version="ruby-3.0.3"
+  zip_filename="$ruby_version.tar.gz"
+
+  install_apt_packages build-essential libssl-dev zlib1g-dev
+  sudo wget "https://cache.ruby-lang.org/pub/ruby/3.0/$zip_filename" -P /opt/
+
+  cd /opt/ || return 0
+  sudo tar -xzvf "$zip_filename"
+  cd "$ruby_version/" || return 0
+  sudo ./configure
+  sudo make
+  sudo make install
+  sudo 'rm' "/opt/$zip_filename"
+
+  sudo chown -R "$(whoami):$(whoami)" /usr/local/lib/ruby/
+  sudo chown -R "$(whoami):$(whoami)" /usr/local/bin/
+
+  echo -e "---\ngem: --no-document" > ~/.gemrc
+}
+
+function install_ruby_gems() {
+  to_install=()
+
+  [[ "$(which gem)" = "" ]] && return 0
+
+  for arg in "$@"; do
+    if ! (gem list | grep "$arg" | awk '{print $1}' | grep -q "^$arg$"); then
+      to_install+=("$arg")
+    fi
+  done
+
+  [[ "${#to_install[*]}" = "0" ]] && return 0
+
+  gem install "${to_install[*]}"
+}
+
+function log_install_start() {
+  echo -e "${fmt_bold}${fmt_yellow}📦 Installing ${fmt_reset}${fmt_cyan}$1${fmt_reset}"
+}
+
+install_postgresql
+
+if [[ $OSTYPE =~ ^linux.* ]]; then
+  packages=(
+    "g++"
+    "gcc"
+    "jq"
+    "libcurl4-openssl-dev"
+    "libpq-dev"
+    "libssl-dev"
+    "lsb-release"
+    "netplan.io"
+    "openssl"
+    "python3"
+  )
+
+  sudo apt-get update
+  install_apt_packages "${packages[@]}"
+fi
+
+[[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3" "python@3.10"
+
+install_cpp_dependencies
+
+echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"

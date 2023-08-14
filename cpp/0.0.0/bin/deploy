@@ -1,0 +1,90 @@
+#!/bin/bash
+# shellcheck disable=2029
+
+build_app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+
+# shellcheck disable=1090,1091
+source "${build_app_dir}/bin/utils" # ASCII, ascii_print
+
+ascii_print "Who is the remote server user👨🏾? (Default: '$(whoami)')" "yellow"
+read -r remote_user
+remote_user=${remote_user:-$(whoami)}
+
+ascii_print "What is the remote server host 📬? (e.g. 192.x.x.x, example.com) (Default: '${HOTTSPOT_TAOBOT_REMOTE_HOST}')" "yellow"
+read -r remote_host
+remote_host=${remote_host:-$HOTTSPOT_TAOBOT_REMOTE_HOST}
+
+ascii_print "What is the database environment 🐘? (Default: 'staging')" "yellow"
+read -r remote_db_env
+remote_db_env="${remote_db_env:-staging}"
+
+remote_address="${remote_user}@${remote_host}"
+remote_app_dir="/home/${remote_user}/apps/hottspot/taobot"
+
+function copy_files() {
+  deploy_entities=(
+    ".tool-versions"
+    "bin/"
+    "config/"
+    "db/"
+    "src/"
+  )
+
+  ascii_print "📋 Copying files" "cyan"
+
+  rsync -arv --delete -e ssh --exclude='*.sw[nop]' \
+    --files-from=<( printf "%s\n" "${deploy_entities[@]}" ) \
+    "${build_app_dir}/" \
+    "${remote_address}:${remote_app_dir}/"
+}
+
+function create_directory() {
+  ascii_print "📂 Creating app directory" "cyan"
+
+  ssh "${remote_address}" \
+    "mkdir -p ${remote_app_dir} && mkdir -p ${remote_app_dir}/log"
+  echo
+}
+
+function install_dependencies() {
+  ascii_print "📦 Installing Dependencies" "cyan"
+
+  ssh -t "${remote_address}" "${remote_app_dir}/bin/install_dependencies"
+}
+
+function install_ruby_dependencies() {
+  ssh "${remote_address}" "cd ${remote_app_dir} && bundle install"
+}
+
+function build() {
+  ssh "${remote_address}" "cd ${remote_app_dir} && ./bin/build"
+}
+
+function update_crontab() {
+  ascii_print "⏰ Updating ${ASCII["yellow"]}crontab" "cyan"
+
+  cmd="(crontab -l 2>/dev/null; "
+  # cmd+="${remote_app_dir}/bin/alpaca/cron generate --env=${remote_db_env}  2>/dev/null "
+  cmd+="${remote_app_dir}/bin/oanda/cron generate --env=${remote_db_env} 2>/dev/null) "
+  cmd+="| grep -v '^#' | grep -v 'no crontab' | sort -u | crontab -"
+
+  ssh "${remote_address}" "${cmd}"
+}
+
+function update_db() {
+  cmd=$(
+    echo -e "${remote_app_dir}/db/init --env=${remote_db_env};" \
+      "${remote_app_dir}/db/migrate --env=${remote_db_env}"
+  )
+
+  ssh -t "${remote_address}" "${cmd}"
+}
+
+create_directory
+copy_files
+install_dependencies
+build
+update_db
+update_crontab
+
+ascii_print "🚀 Successfully deployed Hottspot Capital!" "green"

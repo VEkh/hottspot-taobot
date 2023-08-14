@@ -1,0 +1,49 @@
+#!/bin/bash
+
+set -e
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../../")
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+
+function migrate_single() {
+  db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+
+  # build_db_uri, migration_version_to_filename
+  # shellcheck disable=1090
+  source "${db_dir}/utils"
+
+  action="${1}"
+  [[ "${action}" = "up" ]] && action_emoji="🔼" || action_emoji="🔽"
+  version="${2}"
+  filename="$(migration_version_to_filename "${version}" "${action}")"
+
+  if [[ ! -f "${filename}" ]]; then
+    error_message=$(
+      echo -e "❗ Migration ${ASCII["yellow"]}${version}" \
+              "${ASCII["red"]}doesn't have a corresponding file"\
+              "in ${ASCII["yellow"]}${db_dir}/${action}/"
+    )
+    ascii_print "${error_message}" "red"
+    exit 1
+  fi
+
+  db_uri="$(build_db_uri "${@}")"
+
+  ascii_print "${action_emoji} Migrating ${ASCII["yellow"]}${version} ${ASCII["cyan"]}${action}" "cyan"
+
+  cmd="psql -v ON_ERROR_STOP=1 ${db_uri} < ${filename}"
+  [[ "${action}" = "down" ]] && persist_action="delete" || persist_action="write"
+
+  sh -c "${cmd}"
+
+  persist_cmd=$(
+    echo -e "psql ${db_uri} -v VERSION=\"${version}\"" \
+    "< ${db_dir}/scripts/${persist_action}_migration_version.sql"
+  )
+
+  sh -c "${persist_cmd}"
+
+  ascii_print "🎉 Successfully migrated ${ASCII["yellow"]}${version} ${ASCII["green"]}${action}" "green"
+}

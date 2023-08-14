@@ -1,0 +1,27 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+
+# shellcheck disable=1090,1091
+source "$app_dir/bin/utils" # ASCII, ascii_print, to_title
+
+ascii_print "\n$(date)\n" "cyan"
+
+case $1 in
+  *start|stop)
+    gerund=$([[ $1 = "stop" ]] && echo -e "${1}ping" || echo -e "${1}ing")
+
+    ascii_print "💿 $(to_title "$gerund") Database\n" "yellow"
+
+    if [[ $OSTYPE =~ ^linux.* ]]; then
+      sudo service postgresql "$1"
+    fi
+    ;;
+  *)
+    ascii_print "💿 DATABASE CONTROL\n" "underline" "yellow"
+    ascii_print "Provide an action (restart|start|stop) to proceed\n" "cyan"
+    exit 1;
+    ;;
+esac
+
+printf "%b" "${ASCII["reset"]}"

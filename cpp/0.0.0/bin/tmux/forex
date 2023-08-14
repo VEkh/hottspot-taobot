@@ -1,0 +1,63 @@
+#!/bin/bash
+
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
+filename=$(basename "${BASH_SOURCE[0]}")
+project="oanda"
+symbols=()
+
+while IFS="" read -r line; do
+  symbol="${line}"
+  symbols+=("${symbol}")
+done < <(cat "${app_dir}/bin/${project}/symbols")
+
+function tail_cmd() {
+  log_file_dir="${app_dir}/log/${1}"
+
+  mkdir -p "${log_file_dir}"
+
+  filepath="${log_file_dir}/${2}.log"
+
+  touch "${filepath}"
+
+  echo -e "tail -f ${filepath}"
+}
+
+session="hottspot_taobot-${filename}"
+window=0
+
+tmux -2 new-session -d -s "${session}" -n code
+tmux split-window -h -p 100 -t "${session}:${window}"  "vim ."
+
+
+symbol_i=0
+window=0
+
+for symbol in "${symbols[@]}"; do
+  log_dir="${app_dir}/log/${project}"
+
+  mkdir -p "${log_dir}"
+
+  log_filepath="${log_dir}/${symbol}.log"
+
+  touch "${log_filepath}"
+
+  window=$(((symbol_i / 2) + 1))
+
+  if [[ $((symbol_i % 2)) == 0 ]]; then
+    tmux new-window -t "${session}" -n "forex-${window}" "tail -f ${log_filepath}"
+  else
+    tmux split-window -t "${session}:forex-${window}" -h "tail -f ${log_filepath}"
+  fi
+
+  symbol_i=$((symbol_i + 1))
+done
+
+tmux new-window -t "${session}" \
+  -n "forex-streams" \
+  "$(tail_cmd "${project}"  "account_stream")"
+
+tmux split-window -h -t "${session}:forex-streams" \
+  "$(tail_cmd "${project}" "quotes_watch")"
+
+tmux select-window -t "${session}:0"
+tmux attach-session -t "${session}"

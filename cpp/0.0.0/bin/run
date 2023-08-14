@@ -1,0 +1,29 @@
+#!/bin/bash
+
+
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+data_dir="${app_dir}/data/"
+srcs="${*:-./sandbox.cpp}"
+
+args=(
+  "-D'APP_DIR=\"${app_dir}\"'"
+  "-D'DATA_DIR=\"${data_dir}\"'"
+  "-iquote'.'"
+  "-iquote'./src'"
+  "-isystem'./deps/build/include'"
+  "-isystem'/usr/include/postgresql'"
+  "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-isystem/opt/homebrew/opt/openssl@3/include")"
+  "-std=c++17"
+  "-o './.output'"
+  "$srcs"
+  "$([[ $OSTYPE =~ ^darwin.* ]] && echo "-L/opt/homebrew/opt/openssl@3/lib")"
+  "-lcrypto"
+  "-lcurl"
+  "-lpq"
+  "-lpthread"
+  "-lssl"
+)
+
+echo -e "${args[@]}" | xargs g++ && ./.output
+
+'rm' -f ./.output

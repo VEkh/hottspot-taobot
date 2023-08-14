@@ -1,0 +1,21 @@
+#!/bin/bash
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # get_env_flag
+
+env=$(get_env_flag "${@}")
+
+case "${1}" in
+  "generate")
+    cmd="# * 8-14 * * 1-5 ${app_dir}/bin/${project}/heartbeat --paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n# * 8-14 * * 1-5 ${app_dir}/bin/${project}/stream_account heartbeat --paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n# 0 15 * * 1-5 ${app_dir}/bin/${project}/stream_account stop >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0-59 16-23 * * 7 ${app_dir}/bin/${project}/quotes watch heartbeat start --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0-59 0-23 * * 1-4 ${app_dir}/bin/${project}/quotes watch heartbeat start --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0-59 0-15 * * 5 ${app_dir}/bin/${project}/quotes watch heartbeat start --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+
+    echo -e "$cmd"
+  ;;
+esac

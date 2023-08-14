@@ -1,0 +1,195 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+
+declare -A ASCII=(
+  ["bold"]="\033[1m"
+  ["cyan"]="\033[36m"
+  ["green"]="\033[32m"
+  ["normal"]="\033[10m"
+  ["red"]="\033[31m"
+  ["reset"]="\033[0m"
+  ["underline"]="\033[4m"
+  ["yellow"]="\033[33m"
+)
+
+export ASCII
+
+EQUITY_MARKET_HOLIDAYS=(
+  "2023-05-29"
+  "2023-06-19"
+  "2023-07-04"
+  "2023-09-04"
+  "2023-11-23"
+  "2023-12-25"
+)
+
+function ascii_print() {
+  message="${ASCII["bold"]}"
+
+  for fmt in "${@:2}"; do
+    message+="${ASCII["${fmt}"]}"
+  done
+
+  echo -e "${message}${1}${ASCII["reset"]}"
+}
+
+function backtest_api_keys() {
+  app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+  project="${1}"
+
+  credentials_filepath="${app_dir}/config/${project}/credentials.json"
+
+  if [[ ! -f "${credentials_filepath}" ]]; then
+    ascii_print "❗ Missing a config file with backtest api keys at ${credentials_filepath}" "red" >&2
+
+    exit 1
+  fi
+
+  jq -r \
+    ". | to_entries | map(select(.value.is_backtest?)) | map(.key) | join(\" \")" \
+    "${credentials_filepath}"
+}
+
+function extract_args() {
+  args=()
+
+  for arg in "${@}"; do
+    [[ ! "${arg}" =~ ^-- ]] && args+=("${arg}")
+  done
+
+  echo -e "${args[@]}"
+}
+
+function extract_flags() {
+  flags=()
+
+  for flag in "${@}"; do
+    [[ "${flag}" =~ ^-- ]] && flags+=("${flag}")
+  done
+
+  echo -e "${flags[@]}"
+}
+
+function extract_flags_to_map() {
+  if [[ ! "$(declare -p "${1}" 2>/dev/null)" =~ ^(declare -A) ]]; then
+    ascii_print "You must pass in a map as the first arg. You passed: \`${1}\`" "red" >&2
+    exit 1
+  fi
+
+
+  local -n map=${1} 2>/dev/null
+
+  for flag in "${@:2}"; do
+    key_value=($(
+      echo -e "${flag}" |
+      awk '{ gsub("--", "", $0); gsub("=", " ", $0); print $0 }'
+    ))
+
+    key="${key_value[0]}"
+
+    if [[ -n "${key}" ]]; then
+      [[ -z "${key_value[1]}" ]] && value="1" || value="${key_value[1]}"
+
+      # shellcheck disable=SC2034
+      map["${key}"]="${value}"
+    fi
+  done
+}
+
+function is_market_open() {
+  dow=$(TZ=UTC date +%u)
+  hr=$(TZ=UTC date +%k)
+  iso_date=$(TZ=UTC date +%F)
+  project="${1}"
+
+  if [[ "${project}" = "alpaca" ]]; then
+    # shellcheck disable=2076
+    if [[ " ${EQUITY_MARKET_HOLIDAYS[*]} " =~ " ${iso_date} " ]]; then
+      ascii_print "It's a holiday yabish! Go have fun 🎉" "red" >&2
+
+      exit 0
+    fi
+
+    if (( "${dow}" >= 1 && "${dow}" <= 5 && "${hr}" >= 13 && "${hr}" < 20 )); then
+      echo "true"
+    else
+      echo "false"
+    fi
+
+    exit 0
+  else
+    if ((
+      ("${dow}" >= 1 && "${dow}" < 5) ||
+      ("${dow}" == 5 && "${hr}" < 21) ||
+      ("${dow}" == 7 && "${hr}" >= 21)
+    )); then
+      echo "true"
+    else
+      echo "false"
+    fi
+
+    exit 0
+  fi
+}
+
+function get_env_flag() {
+  local -A flags=(["env"]="development")
+
+  extract_flags_to_map flags "${@}"
+
+  echo -e "${flags["env"]}"
+}
+
+function load_config() {
+  scope="${1}"
+  config_filepath="${app_dir}/config/${scope}/credentials.json"
+
+  if [[ ! -f "${config_filepath}" ]]; then
+    ascii_print "❗ Config file does not exist.\n" "red" >&2
+    ascii_print "Create it using ${config_filepath}.example" "yellow" >&2
+
+    exit 1
+  fi
+
+  config=$(cat "${config_filepath}")
+
+  env="${2}"
+
+  if [[ -z "${env}" ]]; then
+    echo -e "${config}"
+    exit 0
+  fi
+
+  env_config=$(jq ".[\"${env}\"] // empty" "${config_filepath}")
+
+  if [[ -z "${env_config}" ]]; then
+    error_message=$(
+      echo -e "❗ Config environment ${ASCII["yellow"]}${env}"\
+              "${ASCII["red"]}is not specified in ${config_filepath}."
+    )
+
+    ascii_print "${error_message}" "red" >&2
+
+    exit 1
+  fi
+
+  echo -e "${env_config}"
+}
+
+function mk_file_dir() {
+  dir=$(dirname "${1}")
+  mkdir -p "${dir}"
+}
+
+function to_lower() {
+  echo -e "$1" | awk '{ print tolower($0) }'
+}
+
+function to_title() {
+  echo -e "$1" | awk '{ print toupper(substr($0, 1, 1)) substr($0, 2) }'
+}
+
+function to_upper() {
+  echo -e "$1" | awk '{ print toupper($0) }'
+}

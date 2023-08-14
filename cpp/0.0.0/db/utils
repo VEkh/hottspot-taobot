@@ -1,0 +1,44 @@
+#!/bin/bash
+
+set -e
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+db_dir="${app_dir}/db"
+
+# shellcheck disable=1090
+source "${app_dir}/bin/utils" # ASCII, ascii_print, extract_flags_to_map, load_config
+
+function build_db_uri() {
+  env=$(get_env_flag "${@}")
+  db_config=$(load_config "db" "${env}")
+
+  database_host="$(echo "${db_config}" | jq -r ".host // empty")"
+  database_name="$(echo "${db_config}" | jq -r ".name")"
+  database_password="$(echo "${db_config}" | jq -r ".password")"
+  database_port="$(echo "${db_config}" | jq -r ".port // empty")"
+  database_username="$(echo "${db_config}" | jq -r ".username")"
+
+  # Fallbacks
+  database_host="${database_host:-localhost}"
+  database_port="${database_port:-5432}"
+
+  uri="postgres://"
+  uri+="${database_username}"
+  uri+=":${database_password}"
+  uri+="@${database_host}"
+  uri+=":${database_port}"
+  uri+="/${database_name}"
+
+  echo -e "${uri}"
+}
+
+function migration_filename_to_version() {
+  echo -e "${1}" |
+  awk '{ match($0, /\/([[:digit:]]+).*\.sql$/, arr); print arr[1] }'
+}
+
+function migration_version_to_filename() {
+  action="${2}"
+  version="${1}"
+  find "${db_dir}/migrations/${action}" -name "${version}_*.sql"
+}

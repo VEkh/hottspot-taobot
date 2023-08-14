@@ -1,0 +1,51 @@
+#!/bin/bash
+
+api_keys=()
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
+filename=$(basename "${BASH_SOURCE[0]}")
+project="alpaca"
+symbols=()
+
+log_dir="${app_dir}/log/${project}"
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # backtest_api_keys
+
+api_keys=($(backtest_api_keys "${project}"))
+
+while IFS="" read -r line; do
+  symbol="${line}"
+  symbols+=("${symbol}")
+done < <(cat "${app_dir}/bin/${project}/symbols")
+
+session="hottspot_taobot-${filename}"
+tmux -2 new-session -d -s "${session}" -n code
+
+window=0
+tmux split-window -h -p 100 -t "${session}:${window}" "vim ."
+
+symbol_i=0
+
+for api_key in "${api_keys[@]}"; do
+  api_key_log_dir="${log_dir}/${api_key}"
+
+  mkdir -p "${api_key_log_dir}"
+
+  for symbol in "${symbols[@]}"; do
+    log_filepath="${api_key_log_dir}/${symbol}.log"
+
+    touch "${log_filepath}"
+
+    if [[ $((symbol_i % 2)) == 0 ]]; then
+      tmux new-window -t "${session}" -n "${api_key}" "tail -f ${log_filepath}"
+    else
+      window=$(((symbol_i / 2) + 1))
+      tmux split-window -t "${session}:${window}" -h "tail -f ${log_filepath}"
+    fi
+
+    symbol_i=$((symbol_i + 1))
+  done
+done
+
+tmux select-window -t "${session}:0"
+tmux attach-session -t "${session}"

@@ -1,0 +1,220 @@
+#!/bin/bash
+# shellcheck disable=2009
+
+set -e
+shopt -s extglob
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+
+# ASCII
+# ascii_print
+# extract_args
+# extract_flags
+# extract_flags_to_map
+# is_market_open
+# mk_file_dir
+# to_title
+# to_upper
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils"
+
+ascii_print "$(date)\n" "cyan"
+
+declare -A project_actions=(
+  ["alpaca"]="stream watch"
+  ["oanda"]="watch"
+)
+
+action="$(to_lower "${1}")"
+actions_whitelist="${project_actions["${project}"]}"
+
+# shellcheck disable=2076
+if [[ " ${actions_whitelist} " =~ " ${action} " ]]; then
+    action_gerund="${action}ing"
+else
+  ascii_print "${ASCII["underline"]}$(to_upper "${project}") QUOTES" "yellow"
+  ascii_print "Provide an action (${actions_whitelist}) to proceed" "cyan"
+  exit 1
+fi
+
+function get_action_status() {
+  state=$(
+    ps aux |
+    grep "[q]uotes_${action}" |
+    grep -vE "heartbeat|log|restart|status|stop" |
+    grep --color "${project}" || true
+  )
+
+  echo -e "${state}"
+}
+
+function heartbeat() {
+  case "${3}" in
+    start)
+      log_file="${app_dir}/log/${project}/quotes_${1}_${2}.log"
+      mk_file_dir "${log_file}"
+
+      start_heartbeat "${@}" > "${log_file}" &
+      ascii_print "✅ Successfully started ${action} heartbeat 💖" "green"
+      ;;
+    stop)
+      stop_heartbeat "${@}"
+      ;;
+    *)
+      ascii_print "💖 $(to_title "${action}") Heartbeat Error: Specify valid control command (start|stop)." "red" >&2
+      ;;
+  esac
+}
+
+function print_status() {
+  state=$(get_action_status)
+
+  if [[ -z "${state}" ]]; then
+    ascii_print "✅ Not ${action_gerund} any quotes" "green"
+  else
+    printf "%b" "${ASCII["reset"]}"
+    get_action_status
+  fi
+}
+
+function start_action() {
+  all_symbols=($(cat "${app_dir}/bin/${project}/symbols"))
+  cmd="quotes_${action}"
+  flags=($(extract_flags "${@}"))
+  log_dir="${app_dir}/log/${project}"
+
+  local -A flag_map
+  extract_flags_to_map flag_map "${flags[@]}"
+
+  api_key="${flag_map["api-key"]}"
+
+  if [[ "${project}" == "alpaca" &&  -z "${api_key}" ]]; then
+    ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
+    exit 1
+  fi
+
+  symbols=($(extract_args "${@}"))
+  [[ ${#symbols[@]} = 0 ]] && symbols=(${all_symbols[@]})
+
+  mkdir -p "$log_dir"
+
+  log_file="${log_dir}/quotes_${action}.log"
+  mk_file_dir "${log_file}"
+
+  start_message=$(
+    echo -e "Starting Quotes $(to_title "${action}")"\
+      "for ${ASCII["normal"]}${ASCII["cyan"]}${symbols[*]}"
+  )
+
+  ascii_print "${start_message}" "yellow"
+
+  "${app_dir}/build/${project}" "${cmd}" "${symbols[@]}" "${flags[@]}" > "${log_file}" 2>&1 &
+}
+
+function stop_action() {
+  state=$(get_action_status)
+
+  if [[ -z "${state}" ]]; then
+    ascii_print "✅ Not ${action_gerund} any quotes" "green"
+  else
+    ascii_print "🛑 Stopping Quotes $(to_title "${action}")" "cyan"
+
+    get_action_status | awk '{print $2}' | xargs kill
+  fi
+}
+
+function start_heartbeat() {
+  args=($(extract_args "${@}"))
+  pid0="${BASHPID}"
+
+  state=$(
+    pid1="${BASHPID}";
+    ps aux |
+    grep -vE "grep|${pid0}|${pid1}" |
+    grep "${args[*]}" |
+    grep --color "${project}" || true
+  )
+
+  if [[ -n "${state}" ]]; then
+    ascii_print "👀 Already watching ${action} heartbeat. Doing nothing." "cyan" >&2
+
+    exit 0
+  fi
+
+  while [[ $(is_market_open "${project}") == "true" ]]; do
+    state=$(get_action_status)
+
+    if [[ -z "${state}" ]]; then
+      ascii_print "😴 Not ${action_gerund} any quotes. Starting." "green"
+      start_action "${@:4}"
+    else
+      ascii_print "💖 Already ${action_gerund} quotes. Doing nothing." "cyan"
+    fi
+
+    sleep 1
+  done
+
+  ascii_print "😴 Market is closed." "cyan"
+  stop_action
+}
+
+function stop_heartbeat() {
+  args=($(extract_args "${@}"))
+  pid0="${BASHPID}"
+
+  state=$(
+    pid1="${BASHPID}";
+    ps aux |
+    grep -vE "grep|${pid0}|${pid1}" |
+    grep "${args[*]:0:2} start" |
+    grep --color "${project}" || true
+  )
+
+  if [[ -n "${state}" ]]; then
+    ascii_print "💔 Stopping heartbeat" "cyan"
+
+    echo -e "${state}" | awk '{ print $2 }' | xargs kill
+  else
+    ascii_print "✅ No running ${action} heartbeat to stop." "green"
+  fi
+}
+
+case $2 in
+  heartbeat)
+    heartbeat "${@}"
+    ;;
+
+  restart)
+    stop_action
+    start_action "${@:3}"
+    ;;
+
+  start)
+    start_action "${@:3}"
+    ;;
+
+  status)
+    print_status
+    ;;
+
+  stop)
+    stop_action
+
+    ;;
+
+  *)
+    ascii_print "${ASCII["underline"]}$(to_upper "${project}") QUOTES $(to_upper "${action}")\n" "yellow"
+    ascii_print "Description: $(to_title "${action}") the quotes for provided symbols.\n" "cyan"
+    ascii_print "Usage: quotes ${action} [COMMAND] [ARGS]\n" "yellow"
+    ascii_print "Commands:" "yellow"
+    ascii_print "  heartbeat <start|stop>  Control heartbeat which checks ${action} status, then restarts if stopped." "yellow"
+    ascii_print "  restart   <SYMBOLS>     Stop, then start ${action_gerund}. See stop and start documentation." "yellow"
+    ascii_print "  start     <SYMBOLS>     Start ${action_gerund} one or more <SYMBOL>s (e.g. AAPL, QQQ, etc.)." "yellow"
+    ascii_print "  status                  Print running ${action} processes, if any." "yellow"
+    ascii_print "  stop                    Stop ${action_gerund} all symbols." "yellow"
+
+    ;;
+esac
+
+printf "%b" "${ASCII["reset"]}"

@@ -1,0 +1,84 @@
+#!/bin/bash
+# shellcheck disable=2009
+
+set -e
+shopt -s extglob
+
+app_dir=$(realpath "$(dirname "${0}")/../../")
+project=$(dirname "$0" | xargs basename)
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
+
+flags=($(extract_flags "${@}"))
+declare -A flag_map
+extract_flags_to_map flag_map "${flags[@]}"
+
+if [[ $project = "bin" ]]; then
+  cmd=$(basename "$0")
+
+  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
+
+  exit 1;
+fi
+
+api_key="${flag_map["api-key"]}"
+
+if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
+  ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
+  exit 1
+fi
+
+case $1 in
+  +([[:alpha:]_[:alpha:]]))
+    symbol="$(to_upper "${1}")"
+
+    state=$(
+      ps aux |
+      grep "[t]ao_bot" |
+      grep "${project}" |
+      grep -i "$(to_lower "${symbol}")" ||
+      true
+    )
+
+    if [[ "${project}" = "alpaca" ]]; then
+      state=$(
+        echo -e "${state}" |
+        grep -- "--api-key=.*${api_key}" ||
+        true
+      )
+    fi
+
+    if [[ -z "${state}" ]]; then
+      ascii_print "✅ TaoBot is not running for ${symbol}" "green"
+    else
+      ascii_print "🛑 Stopping TaoBot for ${symbol}" "cyan"
+
+      echo -e "${state}" | awk '{print $2}' | xargs kill
+    fi
+
+    ;;
+
+  *)
+    state=$(ps aux | grep "[t]ao_bot" | grep "${project}" || true)
+
+    if [[ "${project}" = "alpaca" ]]; then
+      state=$(
+        echo -e "${state}" |
+        grep -- "--api-key=.*${api_key}" ||
+        true
+      )
+    fi
+
+    if [[ -z "${state}" ]]; then
+      ascii_print "✅ No TaoBot instances are running" "green"
+    else
+      ascii_print "🛑 Stopping all TaoBot instances" "cyan"
+
+      echo -e "${state}" | awk '{print $2}' | xargs kill
+    fi
+    ;;
+esac
+echo
+
+printf "%b" "${ASCII["reset"]}"

@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+db_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")")
+
+# shellcheck disable=1090
+source "${db_dir}/utils" # build_db_uri
+
+uri=$(build_db_uri "${@}")
+echo -e "${uri}"
