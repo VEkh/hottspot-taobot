@@ -11,7 +11,7 @@
     1. Prediction
     2. Classifcation / Categorization / Grouping / Clustering
 
--[ ] Figure out what machine learning algorithms are applicable for predicting
+-[x] Figure out what machine learning algorithms are applicable for predicting
 future price
   * Neural Networks seem most applicable. So far the most applicable-seeming
     models are:
@@ -19,7 +19,10 @@ future price
       * Maybe feed this into a Recurrent Neural Network (RNN)
     * Radial Basis Function Neural Networks
 
--[ ] Seek or custom build implementations of said algorithm(s)
+-[x] Learn how to implement the applicable algorithms
+  * [Deep Learning Specialization](https://bit.ly/443s7DE)
+
+-[ ] Build implementations of applicable algorithm(s)
 
 ## LSTM Notes
 * Its key application is to make time series predictions based on prior information.
@@ -48,6 +51,7 @@ future price
   More](https://www.simplilearn.com/10-algorithms-machine-learning-engineers-need-to-know-article)
 * [Top 10 Deep Learning Algorithms You Should Know in
   2023](https://www.simplilearn.com/tutorials/deep-learning-tutorial/deep-learning-algorithm)
+* [Deep Learning Book by MIT](https://www.deeplearningbook.org)
 * [Deep Learning Specialization](https://bit.ly/443s7DE)
 * [clstm](https://github.com/tmbdev/clstm)
 * [lstm-rnn](https://github.com/lephong/lstm-rnn)
