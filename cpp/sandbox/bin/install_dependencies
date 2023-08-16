@@ -9,6 +9,8 @@ fmt_red="\033[31m"
 fmt_reset="\033[0m"
 fmt_yellow="\033[33m"
 
+set -e
+
 function build_app_dir() {
   echo -e "$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
 }
@@ -134,6 +136,13 @@ function install_postgresql() {
   fi
 }
 
+function install_python_dependencies() {
+  app_dir=$(build_app_dir)
+  log_install_start "🐍 Python Dependencies"
+
+  pip3 install -r "${app_dir}/deps/requirements.py"
+}
+
 function install_nlohmann_json() {
   app_dir=$(build_app_dir)
 
@@ -240,5 +249,6 @@ fi
 [[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3" "python@3.10"
 
 install_cpp_dependencies
+install_python_dependencies
 
 echo -e "${fmt_bold}${fmt_green}🎉 Successfully installed dependencies!${fmt_reset}"
