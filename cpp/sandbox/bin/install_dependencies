@@ -10,6 +10,21 @@ function build_app_dir() {
 # shellcheck disable=1090,1091
 source "$(build_app_dir)/bin/utils" # ASCII, ascii_print
 
+function exempt_service_passwords() {
+  content="%sudo ALL=(ALL) NOPASSWD: /usr/sbin/service"
+
+  if [[ -f "/etc/sudoers.d/service_no_passwd" ]]; then
+    existing_content=$(sudo cat "/etc/sudoers.d/service_no_passwd")
+
+    if ( echo "${existing_content}" | grep -q "${content}" ); then
+      return 0
+    fi
+  fi
+
+  ascii_print "📝 Editing sudoers" "yellow"
+  echo -e "${content}" | sudo tee /etc/sudoers.d/service_no_passwd > /dev/null
+}
+
 function install_apt_packages() {
   to_install=()
 
@@ -215,5 +230,6 @@ install_asdf
 install_language_from_asdf "python" "3.11.4"
 install_cpp_dependencies
 install_python_dependencies
+exempt_service_passwords
 
 ascii_print "🎉 Successfully installed dependencies!" "green"
