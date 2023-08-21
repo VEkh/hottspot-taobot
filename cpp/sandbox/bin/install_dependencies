@@ -203,6 +203,13 @@ function log_install_start() {
   ascii_print "📦 Installing ${ASCII["reset"]}${ASCII["cyan"]}${1}" "yellow"
 }
 
+function set_cron_timezone() {
+  ascii_print "⌚ Setting cron time zone" "yellow"
+  # shellcheck disable=1012
+  sudo \rm /etc/localtime
+  sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
+}
+
 if [[ $OSTYPE =~ ^linux.* ]]; then
   packages=(
     "clang-format" # C Formatting
@@ -231,5 +238,6 @@ install_language_from_asdf "python" "3.11.4"
 install_cpp_dependencies
 install_python_dependencies
 exempt_service_passwords
+set_cron_timezone
 
 ascii_print "🎉 Successfully installed dependencies!" "green"
