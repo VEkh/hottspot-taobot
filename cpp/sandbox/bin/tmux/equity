@@ -30,7 +30,7 @@ tmux -2 new-session -d -s "${session}" -n code
 tmux send-keys -t "${session}:${window}" "${app_dir}/bin/cron restart &&" "Enter"
 tmux send-keys -t "${session}:${window}" "${app_dir}/bin/ssh restart &&" "Enter"
 tmux send-keys -t "${session}:${window}" "${app_dir}/db/ctl restart" "Enter"
-tmux split-window -h -p 75 -t "${session}:${window}"  "vim ."
+tmux split-window -h -p 75 -t "${session}:${window}" "vim ."
 
 
 symbol_i=0

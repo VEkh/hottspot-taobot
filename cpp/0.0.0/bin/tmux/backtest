@@ -11,6 +11,7 @@ log_dir="${app_dir}/log/${project}"
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils" # backtest_api_keys
 
+# shellcheck disable=2207
 api_keys=($(backtest_api_keys "${project}"))
 
 while IFS="" read -r line; do
@@ -22,7 +23,7 @@ session="hottspot_taobot-${filename}"
 tmux -2 new-session -d -s "${session}" -n code
 
 window=0
-tmux split-window -h -p 100 -t "${session}:${window}" "vim ."
+tmux split-window -h -p 75 -t "${session}:${window}" "vim ."
 
 symbol_i=0
 
