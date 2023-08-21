@@ -7,7 +7,7 @@ app_dir=$(realpath "$(dirname "$0")/../../")
 project=$(dirname "${0}" | xargs basename)
 
 # ASCII, ascii_print, extract_flags, to_lower, to_upper
-# shellcheck disable=1090
+# shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
 flags=($(extract_flags "${@}"))

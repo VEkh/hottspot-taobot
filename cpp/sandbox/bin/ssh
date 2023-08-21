@@ -1,14 +1,23 @@
 #!/bin/bash
 
-case $1 in
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # ascii_print
+
+case "${1}" in
   "restart")
-    case $OSTYPE in
+    case "${OSTYPE}" in
       darwin*)
+        ascii_print "🚪 Restarting SSH" "yellow"
+
         sudo launchctl stop com.openssh.sshd
         sudo launchctl start com.openssh.sshd
       ;;
 
       linux*)
+        ascii_print "🚪 Restarting SSH" "yellow"
+
         sudo service ssh restart
       ;;
     esac
