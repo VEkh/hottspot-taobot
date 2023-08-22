@@ -1,4 +1,4 @@
-### 2023-08-22:
+### 2023-08-23:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 8W (88.89%) 1L (Total: 9)
+Win Rate: 8W (80.00%) 2L (Total: 10)
 ```
 
 **Beta (STAGING)**
@@ -26,13 +26,55 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 36W (45.0%) 44L (Total: 80)
+Win Rate: 36W (44.44%) 45L (Total: 81)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 12W (48.0%) 13L (Total 25)
-* Better Performer: Live Alpha: 8 • Paper Beta: 12 (Total: 20)
-* Failed to Re-Reach +6.35% (Since 2023-07-18): 0 Days (0.00%) (Total: 6)
+* Win Record: 13W (50.0%) 13L (Total 26)
+* Better Performer: Live Alpha: 9 • Paper Beta: 12 (Total: 21)
+* Failed to Re-Reach +6.25% (Since 2023-07-18): 0 Days (0.00%) (Total: 7)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-08-22:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, August 22 2023
+Current Equity:          $38630.51 (+2315.80) (+6.38%)
+Max Equity:              $38679.17 (+2364.46) (+6.51%) @ 09:18 CDT
+Min Equity:              $35996.39 (-318.32) (-0.88%) @ 08:48 CDT
+Original Equity:         $36314.71
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, August 22 2023
+Current Equity:          $236173.67 (-20703.51) (-8.06%)
+Max Equity:              $256877.18 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:              $236173.67 (-20703.51) (-8.06%) @ 10:08 CDT
+Original Equity:         $256877.18
+
+Win Rate: 8W (80.00%) 2L (Total: 10)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, August 22 2023
+Current Equity:          $79829.97 (-2083.40) (-2.54%)
+Max Equity:              $81913.37 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:              $79829.97 (-2083.40) (-2.54%) @ 08:45 CDT
+Original Equity:         $81913.37
+
+Win Rate: 36W (44.44%) 45L (Total: 81)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 13W (50.0%) 13L (Total 26)
+* Better Performer: Live Alpha: 9 • Paper Beta: 12 (Total: 21)
+* Failed to Re-Reach +6.25% (Since 2023-07-18): 0 Days (0.00%) (Total: 7)
 
 ###### Notes
 ###### Next Thing(s) to Try

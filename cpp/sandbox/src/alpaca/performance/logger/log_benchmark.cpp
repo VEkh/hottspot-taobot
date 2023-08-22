@@ -18,7 +18,7 @@ void Alpaca::Performance::Logger::log_benchmark() {
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
-  json returns = read_json_file("returns.json");
+  json returns = read_json_file("benchmark.json");
   json hottspot_returns = returns["HOTT"];
   json nasdaq_returns = returns["NDX"];
   json sp500_returns = returns["SPX"];
