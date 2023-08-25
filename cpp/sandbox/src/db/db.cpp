@@ -1,17 +1,20 @@
-#include "db/quote/quote.cpp" // DB::Quote
-#include "lib/formatted.cpp"  // Formatted
-#include "lib/pg/pg.cpp"      // Pg
-#include "lib/utils/io.cpp"   // utils::io
-#include <iostream>           // std::cout, std::endl
-#include <list>               // std::list
-#include <map>                // std::map
-#include <sstream>            // std::ostringstream
-#include <stdexcept>          // std::invalid_argument
-#include <stdio.h>            // printf
-#include <string>             // std::string
+#include "db/five_min_candles/five_min_candles.cpp" // DB::FiveMinCandles
+#include "db/quote/quote.cpp"                       // DB::Quote
+#include "lib/formatted.cpp"                        // Formatted
+#include "lib/pg/pg.cpp"                            // Pg
+#include "lib/utils/io.cpp"                         // utils::io
+#include <iostream>                                 // std::cout, std::endl
+#include <list>                                     // std::list
+#include <map>                                      // std::map
+#include <sstream>                                  // std::ostringstream
+#include <stdexcept>                                // std::invalid_argument
+#include <stdio.h>                                  // printf
+#include <string>                                   // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
+      {"build_five_min_candles <SYMBOL> <OPTS>",
+       "Build five minute candles for the given symbol"},
       {"quote:upsert_all_avg_one_sec_variances <SYMBOL> <OPTS> ",
        "Retroactively upsert a symbol's average one second variances"},
   };
@@ -48,6 +51,26 @@ int main(int argc, char *argv[]) {
 
   std::map<std::string, std::string> flags =
       ::utils::io::extract_flags(argc, argv);
+
+  if (command == "build_five_min_candles") {
+    if (upcased_args.empty()) {
+      std::string message =
+          Formatted::error_message("Please provide at least one symbol.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Pg pg(flags);
+    pg.connect();
+
+    DB::FiveMinCandles builder(pg, upcased_args.front());
+
+    builder.build();
+
+    pg.disconnect();
+
+    exit(0);
+  }
 
   if (command == "quote:upsert_all_avg_one_sec_variances") {
     if (upcased_args.empty()) {

@@ -12,6 +12,7 @@ namespace DB {
 class Quote {
 public:
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
+  using query_result_t = Pg::query_result_t;
   using quote_t = Global::t::quote_t;
 
   struct get_last_args_t {
@@ -48,6 +49,7 @@ public:
 
   std::vector<quote_t> get(const std::string, const double);
   std::vector<quote_t> get_last(const get_last_args_t);
+  std::vector<quote_t> result_to_quotes(const query_result_t &);
 
   void upsert(const quote_t);
   void upsert(const std::vector<quote_t>);
@@ -56,8 +58,6 @@ public:
   void upsert_avg_one_sec_variance(const upsert_avg_one_sec_variance_args_t);
 
 private:
-  using query_result_t = Pg::query_result_t;
-
   DB::Utils db_utils;
   Pg conn;
 
@@ -65,8 +65,6 @@ private:
 
   avg_one_sec_variances_t
   result_to_avg_one_sec_variances(const query_result_t &);
-
-  std::vector<quote_t> result_to_quotes(const query_result_t &);
 };
 } // namespace DB
 
