@@ -10,11 +10,25 @@
 #include <string>                          // std::string
 
 std::list<DB::AccountStat::account_snapshot_t>
-DB::AccountStat::get_daily_snapshots(const std::string api_key_id,
-                                     const bool debug = false) {
+DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
+
+  const bool debug = args.debug;
+  const std::string api_key_id = args.api_key_id;
+  std::string starting_from = "now() - '1 week'::interval";
 
   char *sanitized_api_key_id =
       PQescapeLiteral(this->conn.conn, api_key_id.c_str(), api_key_id.size());
+
+  if (args.starting_from == "earliest") {
+    starting_from = "min(inserted_at)";
+  } else if (!args.starting_from.empty()) {
+    char *sanitized_starting_from = PQescapeLiteral(
+        this->conn.conn, args.starting_from.c_str(), args.starting_from.size());
+
+    starting_from = std::string(sanitized_starting_from) + "::date";
+
+    PQfreemem(sanitized_starting_from);
+  }
 
   const char *query_format = R"(
     select
@@ -38,7 +52,7 @@ DB::AccountStat::get_daily_snapshots(const std::string api_key_id,
           generate_series(range.begin_date, range.end_date, '1 day'::interval) date_timestamp
         from (
           select
-            date_trunc('day', min(inserted_at)) as begin_date,
+            date_trunc('day', %s) as begin_date,
             date_trunc('day', max(inserted_at)) as end_date
           from
             account_stats
@@ -109,13 +123,14 @@ DB::AccountStat::get_daily_snapshots(const std::string api_key_id,
       and original.inserted_at <(trading_days.day + interval '1 day')
   )";
 
-  const size_t query_l =
-      strlen(query_format) + 2 * strlen(sanitized_api_key_id);
+  const size_t query_l = strlen(query_format) +
+                         2 * strlen(sanitized_api_key_id) +
+                         starting_from.size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_api_key_id,
-           sanitized_api_key_id);
+           starting_from.c_str(), sanitized_api_key_id);
 
   PQfreemem(sanitized_api_key_id);
 

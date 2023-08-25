@@ -7,15 +7,23 @@
 #include <iostream>           // std::cout, std::endl
 #include <list>               // std::list
 #include <locale.h>           // setlocale
+#include <map>                // std::map
 #include <stdio.h>            // printf
 #include <string>             // std::string
 
-void Performance::Logger::log_daily_snapshots(const std::string api_key_id) {
+void Performance::Logger::log_daily_snapshots(
+    const log_daily_snapshots_args_t args) {
+  const std::string api_key_id = args.api_key_id;
+  std::map<std::string, std::string> flags = args.flags;
+
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   std::list<account_snapshot_t> snapshots =
-      this->db_account_stat.get_daily_snapshots(api_key_id);
+      this->db_account_stat.get_daily_snapshots({
+          .api_key_id = api_key_id,
+          .starting_from = flags["starting-from"],
+      });
 
   if (snapshots.empty()) {
     std::cout << fmt.bold << fmt.red;

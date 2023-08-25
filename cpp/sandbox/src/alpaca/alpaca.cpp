@@ -126,7 +126,10 @@ int main(int argc, char *argv[]) {
 
     Performance::Logger logger(pg);
 
-    logger.log_daily_snapshots(api_client.config.api_key_id);
+    logger.log_daily_snapshots({
+        .api_key_id = api_client.config.api_key_id,
+        .flags = flags,
+    });
 
     pg.disconnect();
 
