@@ -3,11 +3,11 @@
 
 #include "five_min_candles.h" // DB::FiveMinCandles
 #include <libpq-fe.h>         // PQescapeLiteral, PQfreemem
+#include <list>               // std::list
 #include <stdio.h>            // snprintf
 #include <string.h>           // strlen
-#include <vector>             // std::vector
 
-std::vector<DB::FiveMinCandles::quote_t>
+std::list<DB::FiveMinCandles::quote_t>
 DB::FiveMinCandles::get_latest_quotes(const bool debug = false) {
   const char *query_format = R"(
     with latest_opened_at as (

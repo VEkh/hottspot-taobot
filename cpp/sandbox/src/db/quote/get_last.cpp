@@ -11,12 +11,12 @@
 
 #include "result_to_quotes.cpp" // result_to_quotes
 #include <libpq-fe.h>           // PQescapeLiteral, PQfreemem
+#include <list>                 // std::list
 #include <stdio.h>              // snprintf
 #include <string.h>             // strlen
 #include <string>               // std::string, std::to_string
-#include <vector>               // std::list
 
-std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
+std::list<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
   const double timestamp_upper_bound = args.timestamp_upper_bound;
   const int limit = args.limit;
   const long int limit_offset = args.limit_offset;
@@ -63,7 +63,7 @@ std::vector<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
   query_result_t query_result = this->conn.exec(query, args.debug);
   PQfreemem(sanitized_symbol);
 
-  std::vector<quote_t> result = result_to_quotes(query_result);
+  std::list<quote_t> result = result_to_quotes(query_result);
 
   return result;
 }

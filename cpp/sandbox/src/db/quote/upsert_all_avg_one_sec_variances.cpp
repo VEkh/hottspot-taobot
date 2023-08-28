@@ -6,9 +6,9 @@
 #include "quote.h"                         // DB::Quote, quote_t
 #include "upsert_avg_one_sec_variance.cpp" // upsert_avg_one_sec_variance
 #include <iostream>                        // std::cout, std::endl
+#include <list>                            // std::list
 #include <string>                          // std::string
 #include <time.h>                          // time
-#include <vector>                          // std::vector
 
 void DB::Quote::upsert_all_avg_one_sec_variances(
     const upsert_all_avg_one_sec_variances_args_t args) {
@@ -21,7 +21,7 @@ void DB::Quote::upsert_all_avg_one_sec_variances(
   double timestamp_upper_bound =
       starting_from.empty() ? time(nullptr) : std::stod(starting_from);
 
-  std::vector<quote_t> quotes = get_last({
+  std::list<quote_t> quotes = get_last({
       .limit = 1,
       .limit_offset = 0,
       .symbol = symbol,

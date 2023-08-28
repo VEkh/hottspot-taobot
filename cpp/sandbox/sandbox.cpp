@@ -3,14 +3,17 @@
 #include <string>   // std::string
 
 #include "lib/utils/time.cpp" // ::utils::time_
-#include <time.h>             // time
+#include <list>               // std::list
 
 int main(int argc, char *argv[]) {
-  const tm time_parts = {
-      .tm_sec = 30,
-      .tm_min = 21,
-      .tm_hour = 17,
-  };
+  std::list<int> nums = {1, 2, 3};
 
-  printf("is at least?: %i\n", (int)::utils::time_::is_before(time_parts));
+  std::list<int>::iterator it;
+
+  it = nums.begin();
+  std::cout << "it: " << &(*it) << std::endl;
+
+  printf("first: %i\n", *it);
+  it++;
+  printf("second: %i\n", *it);
 }

@@ -5,8 +5,8 @@
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/pg/pg.cpp"      // Pg
 #include "types.cpp"          // Global::t
+#include <list>               // std::list
 #include <string>             // std::string
-#include <vector>             // std::vector
 
 namespace DB {
 class FiveMinCandles {
@@ -24,7 +24,7 @@ private:
   Pg conn;
   std::string symbol;
 
-  std::vector<quote_t> get_latest_quotes(const bool);
+  std::list<quote_t> get_latest_quotes(const bool);
 };
 } // namespace DB
 

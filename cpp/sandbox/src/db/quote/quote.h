@@ -6,7 +6,6 @@
 #include "types.cpp"        // Global::t
 #include <list>             // std::list
 #include <string>           // std::string
-#include <vector>           // std::vector
 
 namespace DB {
 class Quote {
@@ -47,12 +46,12 @@ public:
   avg_one_sec_variances_t
   get_avg_one_sec_variances(const get_avg_one_sec_variances_args_t);
 
-  std::vector<quote_t> get(const std::string, const double);
-  std::vector<quote_t> get_last(const get_last_args_t);
-  std::vector<quote_t> result_to_quotes(const query_result_t &);
+  std::list<quote_t> get(const std::string, const double);
+  std::list<quote_t> get_last(const get_last_args_t);
+  std::list<quote_t> result_to_quotes(const query_result_t &);
 
   void upsert(const quote_t);
-  void upsert(const std::vector<quote_t>);
+  void upsert(const std::list<quote_t>);
   void upsert_all_avg_one_sec_variances(
       const upsert_all_avg_one_sec_variances_args_t);
   void upsert_avg_one_sec_variance(const upsert_avg_one_sec_variance_args_t);

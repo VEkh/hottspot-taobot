@@ -4,8 +4,8 @@
 #include "five_min_candles.h"    // DB::FiveMinCandles, fmt, quote_t
 #include "get_latest_quotes.cpp" // get_latest_quotes
 #include <iostream>              // std::cout, std::endl
+#include <list>                  // std::list
 #include <stdio.h>               // printf
-#include <vector>                // std::vector
 
 void DB::FiveMinCandles::build() {
   std::cout << fmt.bold << fmt.cyan;
@@ -13,9 +13,8 @@ void DB::FiveMinCandles::build() {
   std::cout << fmt.yellow << this->symbol << std::endl;
   std::cout << fmt.reset;
 
-  // Get most recent candle's opened_at
-  // Get all quotes since that time
-  const std::vector<quote_t> latest_quotes = get_latest_quotes(true);
+  // Get all quotes since recent candle's opened_at
+  const std::list<quote_t> latest_quotes = get_latest_quotes(true);
   printf("Loading %i quotes for %s\n", (int)latest_quotes.size(),
          this->symbol.c_str());
 

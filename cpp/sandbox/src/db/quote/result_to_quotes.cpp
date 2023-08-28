@@ -3,14 +3,15 @@
 
 #include "lib/utils/string.cpp" // ::utils::string
 #include "quote.h"              // DB::Quote, query_result_t, quote_t
+#include <list>                 // std::list
 #include <string>               // std::stod, std::string
 #include <vector>               // std::vector
 
-std::vector<DB::Quote::quote_t>
+std::list<DB::Quote::quote_t>
 DB::Quote::result_to_quotes(const query_result_t &result) {
   const std::vector<std::string> fields = result.fields;
   const std::vector<std::string> tuples = result.tuples;
-  std::vector<quote_t> out;
+  std::list<quote_t> out;
 
   for (std::vector<std::string>::const_iterator it = tuples.begin();
        it != tuples.end(); it++) {

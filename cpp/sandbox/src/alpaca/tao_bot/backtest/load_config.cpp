@@ -6,6 +6,7 @@
 #include "lib/formatted.cpp"  // Formatted::error_message
 #include "lib/utils/time.cpp" // ::utils::time_
 #include <fstream>            // std::ifstream, std::ios
+#include <list>               // std::list
 #include <stdexcept>          // std::invalid_argument, std::runtime_error
 #include <stdio.h>            // printf
 #include <string>             // std::string
@@ -106,7 +107,7 @@ void Alpaca::TaoBotBacktest::load_config() {
     end_epoch = (double)mktime(&backtest_end_at);
 
   } else {
-    const std::vector<quote_t> last_quotes = this->db_quote.get_last({
+    const std::list<quote_t> last_quotes = this->db_quote.get_last({
         .limit = 1,
         .limit_offset = 0,
         .symbol = this->symbol,

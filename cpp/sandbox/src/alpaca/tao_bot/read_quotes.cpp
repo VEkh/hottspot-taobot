@@ -3,10 +3,10 @@
 
 #include "lib/formatted.cpp" // Formatted
 #include "tao_bot.h"         // Alpaca::TaoBot, quote_t
-#include <vector>            // std::vector
+#include <list>              // std::list
 
 void Alpaca::TaoBot::read_quotes() {
-  const std::vector<quote_t> quotes_ = this->quoter.db_quote.get_last({
+  const std::list<quote_t> quotes_ = this->quoter.db_quote.get_last({
       .limit = 2,
       .limit_offset = 0,
       .symbol = this->symbol,

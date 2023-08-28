@@ -3,17 +3,18 @@
 
 #include "quote.h"    // DB::Quote
 #include <libpq-fe.h> // PQescapeLiteral, PQfreemem
+#include <list>       // std::list
 #include <string>     // std::string
 #include <vector>     // std::vector
 
 void DB::Quote::upsert(const quote_t quote) {
-  upsert((const std::vector<quote_t>){quote});
+  upsert((const std::list<quote_t>){quote});
 }
 
-void DB::Quote::upsert(const std::vector<quote_t> quotes) {
+void DB::Quote::upsert(const std::list<quote_t> quotes) {
   std::string query = "insert into quotes(ask, bid, symbol, timestamp) values ";
 
-  for (std::vector<quote_t>::const_iterator it = quotes.begin();
+  for (std::list<quote_t>::const_iterator it = quotes.begin();
        it != quotes.end(); it++) {
     if (it != quotes.begin()) {
       query += ", ";

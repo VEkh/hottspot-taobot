@@ -4,14 +4,14 @@
 #include "quote.h"              // DB::Quote, quote_t, query_result_t
 #include "result_to_quotes.cpp" // result_to_quotes
 #include <libpq-fe.h>           // PQescapeLiteral, PQfreemem
+#include <list>                 // std::list
 #include <math.h>               // INFINITY
 #include <stdio.h>              // snprintf
 #include <string.h>             // strlen
 #include <string>               // std::string, std::to_string
-#include <vector>               // std::vector
 
-std::vector<DB::Quote::quote_t> DB::Quote::get(const std::string symbol,
-                                               const double limit = INFINITY) {
+std::list<DB::Quote::quote_t> DB::Quote::get(const std::string symbol,
+                                             const double limit = INFINITY) {
 
   char *sanitized_symbol =
       PQescapeLiteral(this->conn.conn, symbol.c_str(), symbol.size());
@@ -38,7 +38,7 @@ std::vector<DB::Quote::quote_t> DB::Quote::get(const std::string symbol,
   query_result_t query_result = this->conn.exec(query);
   PQfreemem(sanitized_symbol);
 
-  std::vector<quote_t> result = result_to_quotes(query_result);
+  std::list<quote_t> result = result_to_quotes(query_result);
 
   return result;
 }

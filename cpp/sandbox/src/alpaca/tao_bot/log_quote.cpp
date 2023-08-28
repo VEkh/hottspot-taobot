@@ -22,8 +22,13 @@ void Alpaca::TaoBot::log_quote() {
     return;
   }
 
-  const quote_t *previous_quote = &(this->quotes.at(1));
-  const quote_t current_quote = this->quotes.front();
+  std::list<quote_t>::iterator it = this->quotes.begin();
+
+  const quote_t current_quote = *it;
+
+  it++;
+
+  const quote_t *previous_quote = &(*it);
 
   if (previous_quote) {
     if (current_quote.price > previous_quote->price) {

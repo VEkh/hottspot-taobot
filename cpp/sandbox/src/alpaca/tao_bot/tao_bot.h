@@ -84,10 +84,10 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  std::list<quote_t> quotes;
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::vector<position_t> closed_positions;
-  std::vector<quote_t> quotes;
 
   account_exit_prices_t build_account_exit_prices();
 
