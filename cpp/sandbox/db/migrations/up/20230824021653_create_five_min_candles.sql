@@ -5,10 +5,12 @@ create table five_min_candles(
   closed_at timestamp with time zone not null,
   high double precision not null,
   id bigint primary key,
+  inserted_at timestamp with time zone not null default now(),
   low double precision not null,
   open double precision not null,
   opened_at timestamp with time zone not null,
-  symbol text not null
+  symbol text not null,
+  updated_at timestamp with time zone not null default now()
 );
 create sequence five_min_candles_id_seq
   cache 1 start with 1

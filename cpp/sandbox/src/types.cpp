@@ -68,6 +68,8 @@ struct quote_t {
   double price = 0.00;
   std::string symbol = "";
   double timestamp;
+
+  double mid() const { return (ask + bid) / 2.0; };
 };
 } // namespace t
 } // namespace Global

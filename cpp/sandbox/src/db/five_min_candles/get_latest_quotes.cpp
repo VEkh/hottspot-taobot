@@ -29,7 +29,8 @@ DB::FiveMinCandles::get_latest_quotes(const bool debug = false) {
             symbol = %s) as first_quotes on true
     )
     select
-      quotes.*
+      quotes.*,
+      extract(epoch from quotes."timestamp") as timestamp_epoch
     from
       quotes
     where
@@ -41,7 +42,6 @@ DB::FiveMinCandles::get_latest_quotes(const bool debug = false) {
           latest_opened_at)
     order by
       quotes."timestamp" asc
-    limit 100
   )";
 
   char *sanitized_symbol = PQescapeLiteral(
