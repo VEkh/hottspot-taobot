@@ -1,0 +1,7 @@
+#!/bin/bash
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+
+export PYTHONPATH="${PYTHONPATH}:${app_dir}/src/"
+
+python3 "${app_dir}/src/ml/five_min_predict/main.py" "${@}"
