@@ -12,21 +12,21 @@ class Conn:
         self.config = self.__read_config()
 
     def connect(self):
+        self.conn = psycopg2.connect(**self.config)
+
         ascii.puts(
-            f"🚪 Connecting to {ascii.GREEN}{self.env}{ascii.YELLOW} database",
+            f"🚪 Successfully connected to {ascii.GREEN}{self.config['dbname']}",
             ascii.YELLOW,
         )
 
-        self.conn = psycopg2.connect(**self.config)
-
     def disconnect(self):
         if self.conn:
+            self.conn.close()
+
             ascii.puts(
-                f"👋 Disonnecting from {ascii.GREEN}{self.env}{ascii.YELLOW} database",
+                f"👋 Successfully disconnected from {ascii.GREEN}{self.config['dbname']}",
                 ascii.YELLOW,
             )
-
-            self.conn.close()
         else:
             ascii.puts("❗ No connection to disconnect", ascii.RED)
 

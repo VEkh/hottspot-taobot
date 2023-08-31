@@ -33,7 +33,7 @@ match args.command:
         conn = Conn(args.env)
         conn.connect()
 
-        trainer = Train(args)
+        trainer = Train(db_conn=conn, env=args.env, symbol=args.symbol)
         trainer.run()
 
         conn.disconnect()
