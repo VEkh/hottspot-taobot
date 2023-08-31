@@ -27,6 +27,13 @@ args.symbol = args.symbol.upper()
 
 match args.command:
     case "train":
-        import train
+        from ml.db import Conn
+        from train import Train
 
-        train.run(args)
+        conn = Conn(args.env)
+        conn.connect()
+
+        trainer = Train(args)
+        trainer.run()
+
+        conn.disconnect()

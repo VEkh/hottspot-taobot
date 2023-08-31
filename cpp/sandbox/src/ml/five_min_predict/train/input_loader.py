@@ -2,7 +2,7 @@ from ml.utils import ascii
 
 
 class InputLoader:
-    def __init__(self, symbol: str):
+    def __init__(self, symbol):
         self.symbol = symbol
 
     def load(self):

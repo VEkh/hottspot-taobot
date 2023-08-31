@@ -8,7 +8,7 @@ UNDERLINE = "\033[4m"
 YELLOW = "\033[33m"
 
 
-def puts(msg: str, *fmts: list[str]):
+def puts(msg, *fmts):
     fmt_chain = f"{BOLD}"
 
     for fmt in fmts:
