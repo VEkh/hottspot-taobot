@@ -13,3 +13,4 @@ class Train:
 
         loader = InputLoader(db_conn=self.db_conn, symbol=self.symbol)
         inputs = loader.load()
+        loader.preprocess()

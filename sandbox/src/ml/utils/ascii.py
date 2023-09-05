@@ -1,6 +1,7 @@
 BOLD = "\033[1m"
 CYAN = "\033[36m"
 GREEN = "\033[32m"
+MAGENTA = "\033[35m"
 NORMAL = "\033[10m"
 RED = "\033[31m"
 RESET = "\033[0m"
