@@ -13,54 +13,31 @@ class InputLoader:
     def load(self):
         ascii.puts(f"💿 Loading input data for {ascii.CYAN}{self.symbol}", ascii.YELLOW)
 
-        batches_n, rows = self.__get_batch_limted_candles()
-        inputs = np.array(np.split(np.array(rows), batches_n, axis=0))
+        candles = self.__get_candles()
+        inputs = np.array(candles)
 
         return inputs
 
-    def __get_batch_limted_candles(self):
-        batches_n = self.__get_batches_n()
-
+    def __get_candles(self):
         with self.db_conn.conn.cursor() as cursor:
             query = """
                 select
                   close,
                   high,
                   low,
-                  open
+                  open,
+                  cos((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_cos,
+                  sin((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_sin
                 from
                   five_min_candles
                 where
                   symbol = %(symbol)s
                 order by
                   opened_at asc
-                limit %(limit)s
             """
 
-            cursor.execute(
-                query,
-                {
-                    "limit": batches_n * InputLoader.BATCH_SIZE,
-                    "symbol": self.symbol,
-                },
-            )
+            cursor.execute(query, {"symbol": self.symbol})
 
             rows = cursor.fetchall()
 
-        return (batches_n, rows)
-
-    def __get_batches_n(self):
-        with self.db_conn.conn.cursor() as cursor:
-            query = """
-                select
-                  count(*)
-                from
-                  five_min_candles
-                where
-                  symbol = %s
-            """
-
-            cursor.execute(query, [self.symbol])
-            candles_count = cursor.fetchone()[0]
-
-        return floor(candles_count / InputLoader.BATCH_SIZE)
+        return rows
