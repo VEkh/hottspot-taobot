@@ -42,6 +42,65 @@ class WindowGenerator:
         self.labels_slice = slice(self.label_start, None)
         self.label_indices = np.arange(self.total_window_size)[self.labels_slice]
 
+    def plot(self, max_subplots=3, model=None, plot_column=""):
+        mpl.rcParams["axes.grid"] = False
+        mpl.rcParams["figure.figsize"] = (8, 6)
+
+        inputs, labels = self.example
+        plt.figure(figsize=(12, 8))
+        plot_column_index = self.column_indices[plot_column]
+
+        max_n = min(max_subplots, len(inputs))
+
+        for n in range(max_n):
+            plt.subplot(max_n, 1, n + 1)
+            plt.ylabel(f"{plot_column} [normed]")
+            plt.plot(
+                self.input_indices,
+                inputs[n, :, plot_column_index],
+                label="Inputs",
+                marker=".",
+                zorder=-10,
+            )
+
+            if self.label_columns:
+                label_column_index = self.label_column_indices.get(plot_column, None)
+            else:
+                label_column_index = plot_column_index
+
+            plt.scatter(
+                self.label_indices,
+                labels[n, :, label_column_index],
+                c="#2ca02c",
+                edgecolors="k",
+                label="Labels",
+                marker="X",
+                s=64,
+            )
+
+            if model is not None:
+                predictions = model(inputs)
+
+                plt.scatter(
+                    self.label_indices,
+                    predictions[n, :, label_column_index],
+                    c="#ff7f0e",
+                    edgecolors="k",
+                    label="Predictions",
+                    marker="X",
+                    s=64,
+                )
+
+            if n == 0:
+                plt.legend()
+
+        plt.xlabel("Time [5 min]")
+        savepath = "tmp/plot.png"
+
+        plt.savefig(savepath)
+
+        ascii.puts(f"\n📊 Plot saved to {savepath}.", ascii.YELLOW)
+
     def split_window(self, features):
         inputs = features[:, self.input_slice, :]
         labels = features[:, self.labels_slice, :]

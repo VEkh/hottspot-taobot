@@ -37,3 +37,5 @@ class Train:
         )
 
         window.example = window.split_window(example_window)
+
+        window.plot(plot_column="close")
