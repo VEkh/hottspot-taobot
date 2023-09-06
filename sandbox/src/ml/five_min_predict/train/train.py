@@ -26,16 +26,9 @@ class Train:
             label_columns=["close"],
             label_width=1,
             shift=1,
+            training_set=loader.training_set,
+            test_set=loader.test_set,
+            validation_set=loader.validation_set,
         )
 
-        example_window = tf.stack(
-            [
-                np.array(loader.training_set[: window.total_window_size]),
-                np.array(loader.training_set[100 : 100 + window.total_window_size]),
-                np.array(loader.training_set[200 : 200 + window.total_window_size]),
-            ]
-        )
-
-        window.example = window.split_window(example_window)
-
-        window.plot(plot_column="close")
+        window.train

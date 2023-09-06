@@ -42,6 +42,41 @@ class WindowGenerator:
         self.labels_slice = slice(self.label_start, None)
         self.label_indices = np.arange(self.total_window_size)[self.labels_slice]
 
+    @property
+    def example(self):
+        """Get and cache an example batch of `inputs, labels` for plotting."""
+        result = getattr(self, "_example", None)
+
+        if result is None:
+            result = next(iter(self.train))
+            self._example = result
+
+        return result
+
+    @property
+    def test(self):
+        return self.make_dataset(self.test_set)
+
+    @property
+    def train(self):
+        return self.make_dataset(self.training_set)
+
+    @property
+    def validation(self):
+        return self.make_dataset(self.validation_set)
+
+    def make_dataset(self, data):
+        data = np.array(data, dtype=np.float32)
+
+        return tf.keras.utils.timeseries_dataset_from_array(
+            batch_size=32,
+            data=data,
+            sequence_length=self.total_window_size,
+            sequence_stride=1,
+            shuffle=True,
+            targets=None,
+        ).map(self.split_window)
+
     def plot(self, max_subplots=3, model=None, plot_column=""):
         mpl.rcParams["axes.grid"] = False
         mpl.rcParams["figure.figsize"] = (8, 6)
@@ -101,9 +136,9 @@ class WindowGenerator:
 
         ascii.puts(f"\n📊 Plot saved to {savepath}.", ascii.YELLOW)
 
-    def split_window(self, features):
-        inputs = features[:, self.input_slice, :]
-        labels = features[:, self.labels_slice, :]
+    def split_window(self, batch):
+        inputs = batch[:, self.input_slice, :]
+        labels = batch[:, self.labels_slice, :]
 
         if self.label_columns is not None:
             labels = tf.stack(
