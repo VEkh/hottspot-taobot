@@ -133,6 +133,7 @@ class WindowGenerator:
         savepath = f"tmp/{filename}"
 
         plt.savefig(savepath)
+        plt.clf()
 
         ascii.puts(f"📊 Plot saved to {ascii.CYAN}{savepath}.", ascii.YELLOW)
 
