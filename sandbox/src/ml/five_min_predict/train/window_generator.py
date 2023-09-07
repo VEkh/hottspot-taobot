@@ -77,7 +77,7 @@ class WindowGenerator:
             targets=None,
         ).map(self.split_window)
 
-    def plot(self, max_subplots=3, model=None, plot_column=""):
+    def plot(self, filename="plot.png", max_subplots=3, model=None, plot_column=""):
         mpl.rcParams["axes.grid"] = False
         mpl.rcParams["figure.figsize"] = (8, 6)
 
@@ -130,11 +130,11 @@ class WindowGenerator:
                 plt.legend()
 
         plt.xlabel("Time [5 min]")
-        savepath = "tmp/plot.png"
+        savepath = f"tmp/{filename}"
 
         plt.savefig(savepath)
 
-        ascii.puts(f"\n📊 Plot saved to {savepath}.", ascii.YELLOW)
+        ascii.puts(f"📊 Plot saved to {ascii.CYAN}{savepath}.", ascii.YELLOW)
 
     def split_window(self, batch):
         inputs = batch[:, self.input_slice, :]
