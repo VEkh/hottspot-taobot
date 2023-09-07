@@ -1,3 +1,4 @@
+import json
 import numpy as np
 import tensorflow as tf
 
@@ -28,6 +29,7 @@ class Train:
 
         self.__train_baseline()
         self.__train_linear()
+        self.__train_convolutional()
         self.__print_performance()
 
     def __compile_and_fit(self, model=None, patience=2, window=None):
@@ -64,8 +66,11 @@ class Train:
     def __print_performance(self):
         ascii.puts("📈 PERFORMANCE", ascii.GREEN, ascii.UNDERLINE)
         ascii.puts(ascii.GREEN, begin="", end="", print_end="")
-        print("Validation: ", self.validation_performance)
-        print("Test:       ", self.performance)
+        print(
+            "Validation: ",
+            json.dumps(self.validation_performance, indent=2, sort_keys=True),
+        )
+        print("Test:       ", json.dumps(self.performance, indent=2, sort_keys=True))
         print(ascii.RESET, end="")
 
     def __train_baseline(self):
@@ -95,6 +100,50 @@ class Train:
             loss=tf.keras.losses.MeanSquaredError(),
             metrics=[tf.keras.metrics.MeanAbsoluteError()],
         )
+
+        self.__evaluate(compiled_model=model, model_name=model_name, window=window)
+
+        print(ascii.RESET, end="")
+
+        window.plot(filename=f"{model_name}.png", model=model, plot_column="close")
+
+    def __train_convolutional(self):
+        conv_size = 3
+        label_width = 100
+        model_name = "convolutional"
+
+        window = WindowGenerator(
+            input_columns=self.loader.columns,
+            input_width=label_width + (conv_size - 1),
+            label_columns=["close"],
+            label_width=label_width,
+            shift=1,
+            training_set=self.loader.training_set,
+            test_set=self.loader.test_set,
+            validation_set=self.loader.validation_set,
+        )
+
+        ascii.puts(
+            f"🤖🔨 Training {ascii.CYAN}{model_name.upper()}\n",
+            ascii.MAGENTA,
+            ascii.UNDERLINE,
+        )
+
+        ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
+
+        model = tf.keras.Sequential(
+            [
+                tf.keras.layers.Conv1D(
+                    activation="relu",
+                    filters=32,
+                    kernel_size=(conv_size,),
+                ),
+                tf.keras.layers.Dense(activation="relu", units=32),
+                tf.keras.layers.Dense(units=1),
+            ]
+        )
+
+        history = self.__compile_and_fit(model=model, window=window)
 
         self.__evaluate(compiled_model=model, model_name=model_name, window=window)
 
