@@ -118,7 +118,7 @@ class WindowGenerator:
 
                 plt.scatter(
                     self.label_indices,
-                    predictions[n, :, label_column_index],
+                    predictions[n, : len(self.label_indices), label_column_index],
                     c="#ff7f0e",
                     edgecolors="k",
                     label="Predictions",

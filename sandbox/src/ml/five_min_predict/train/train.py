@@ -113,7 +113,7 @@ class Train:
             input_columns=self.loader.columns,
             input_width=100,
             label_columns=["close"],
-            label_width=100,
+            label_width=1,
             shift=1,
             training_set=self.loader.training_set,
             test_set=self.loader.test_set,
@@ -128,7 +128,7 @@ class Train:
 
         ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = Baseline(label_index=window.column_indices["close"])
+        model = Baseline(window=window)
         model.compile(
             loss=tf.keras.losses.MeanSquaredError(),
             metrics=[tf.keras.metrics.MeanAbsoluteError()],
