@@ -1,8 +1,13 @@
 #!/bin/bash
+# shellcheck disable=1090,1091
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 
+source "${app_dir}/bin/install/python" # activate_conda_env
+
 export APP_DIR="${app_dir}"
 export PYTHONPATH="${PYTHONPATH}:${app_dir}/src/"
+
+activate_conda_env "taobot"
 
 python3 "${app_dir}/src/ml/five_min_predict/main.py" "${@}"

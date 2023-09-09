@@ -1,0 +1,104 @@
+#!/bin/bash
+# shellcheck disable=1090,1091
+
+set -e
+
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
+conda_env="taobot"
+conda_dir="${HOME}/.miniconda3"
+
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+source "${app_dir}/bin/install/shared" # log_install_start
+
+function activate_conda_env() {
+  env="${1}"
+
+  if [ -f "${conda_dir}/etc/profile.d/conda.sh" ]; then
+    source "${conda_dir}/etc/profile.d/conda.sh"
+  fi
+
+  conda activate "${env}"
+}
+
+function create_conda_env() {
+  if [[ ! -d "${conda_dir}" ]]; then
+    ascii_print "❗ Install Miniconda first" "red"
+    return 0
+  fi
+
+  conda_bin="${conda_dir}/bin/conda"
+  python_version="3.11.4"
+
+  if ("${conda_bin}" env list | awk '{print $1}' | grep -q "^${conda_env}\b"); then
+    return 0
+  fi
+
+  ascii_print "🟢 Creating Conda Environment ${ASCII["cyan"]}${conda_env}" "yellow"
+
+  "${conda_bin}" create --name "${conda_env}" -y python="${python_version}"
+}
+
+function install_gpu_support() {
+  log_install_start "📺 GPU Support"
+
+  activate_conda_env "${conda_env}"
+  conda install -y -c conda-forge cudatoolkit
+  conda install -y -c nvidia cuda-nvcc
+  set_gpu_env_vars
+}
+
+function install_conda() {
+  if [[ -n "$(which conda)" || -f "${conda_dir}/bin/conda" ]]; then
+    return 0
+  fi
+
+  log_install_start "🟢 Conda"
+
+  installer_path="/tmp/Miniconda3-latest-Linux-x86_64.sh"
+
+  curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -o "${installer_path}"
+    bash "${installer_path}" -p "${conda_dir}" &&
+    \rm "${installer_path}"
+
+  conda_bin="${conda_dir}/bin/conda"
+
+  conda config --set auto_activate_base false
+}
+
+function install_pip_packages() {
+  log_install_start "🐍📦 Python Packages"
+
+  activate_conda_env "${conda_env}"
+  pip3 install -r "${app_dir}/deps/requirements.txt"
+}
+
+function install_python_dependencies() {
+  log_install_start "🐍 Python Dependencies"
+
+  install_conda
+  create_conda_env
+  install_pip_packages
+  install_gpu_support
+}
+
+function set_gpu_env_vars() {
+  ascii_print "📝 Set GPU Support Environment Variables" "yellow"
+  activate_conda_env "${conda_env}"
+
+  mkdir -p "${CONDA_PREFIX}/etc/conda/activate.d"
+  mkdir -p "${CONDA_PREFIX}/lib/nvvm/libdevice"
+
+  # export XLA_FLAGS... addresses bug in Ubuntu 22.02
+  rc_contents=$(
+    cat <<- "EOF"
+			CUDNN_PATH="$(dirname "$(python3 -c "import nvidia.cudnn;print(nvidia.cudnn.__file__)")")"
+			export LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:${CUDNN_PATH}/lib:${CONDA_PREFIX}/lib/
+			export XLA_FLAGS=--xla_gpu_cuda_data_dir=${CONDA_PREFIX}/lib
+		EOF
+  )
+
+  echo "${rc_contents}" > "${CONDA_PREFIX}/etc/conda/activate.d/env_vars.sh"
+
+  # Addresses bug in Ubuntu 22.02
+  \cp "${CONDA_PREFIX}/lib/libdevice.10.bc" "${CONDA_PREFIX}/lib/nvvm/libdevice"
+}

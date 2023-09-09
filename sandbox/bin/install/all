@@ -1,14 +1,13 @@
 #!/bin/bash
-# shellcheck disable=2016
+# shellcheck disable=1090,1091,2016
 
 set -e
 
-function build_app_dir() {
-  echo -e "$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
-}
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
 
-# shellcheck disable=1090,1091
-source "$(build_app_dir)/bin/utils" # ASCII, ascii_print
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+source "${app_dir}/bin/install/python" # install_python_dependencies
+source "${app_dir}/bin/install/shared" # log_install_start
 
 function exempt_service_passwords() {
   content="%sudo ALL=(ALL) NOPASSWD: /usr/sbin/service"
@@ -29,8 +28,8 @@ function install_apt_packages() {
   to_install=()
 
   for arg in "$@"; do
-    if ! (dpkg -l | grep -v "^rc" | grep "$arg" | awk '{print $2}' | grep -q "^$arg\(:\w\+\)\?$"); then
-      to_install+=("$arg")
+    if ! (dpkg -l | grep -v "^rc" | grep "${arg}" | awk '{print $2}' | grep -q "^${arg}\(:\w\+\)\?$"); then
+      to_install+=("${arg}")
     fi
   done
 
@@ -41,44 +40,19 @@ function install_apt_packages() {
 
 }
 
-function install_asdf() {
-  asdf_completion_cmd='. $HOME/.asdf/completions/asdf.bash'
-  asdf_source_cmd='. $HOME/.asdf/asdf.sh'
-
-  [ ! -d "${HOME}/.asdf" ] && \
-    log_install_start "💻 asdf" && \
-    git clone https://github.com/asdf-vm/asdf.git ~/.asdf
-
-  bashrc_path="${HOME}/.bashrc"
-
-  touch "${bashrc_path}"
-
-  bashrc_contents=$(cat "${bashrc_path}")
-
-  if ! (echo "${bashrc_contents}" | grep -q "${asdf_source_cmd}"); then
-    echo -e "\n${asdf_source_cmd}" >> "${bashrc_path}"
-  fi
-
-  if ! (echo "${bashrc_contents}" | grep -q "${asdf_completion_cmd}"); then
-    echo -e "\n${asdf_completion_cmd}" >> "${bashrc_path}"
-  fi
-}
-
 function install_boost() {
-  app_dir=$(build_app_dir)
-
-  [ -d "$app_dir/deps/boost" ] && return 0
+  [ -d "${app_dir}/deps/boost" ] && return 0
 
   log_install_start "⚡ Boost"
 
-  mkdir -p "$app_dir/deps/build/"
+  mkdir -p "${app_dir}/deps/build/"
 
   git clone --recursive \
-    "https://github.com/boostorg/boost.git" "$app_dir/deps/boost"
+    "https://github.com/boostorg/boost.git" "${app_dir}/deps/boost"
 
-  cmd="cd $app_dir/deps/boost/"
+  cmd="cd ${app_dir}/deps/boost/"
   cmd+=" && ./bootstrap.sh"
-  cmd+=" && ./b2 install --prefix=\"$app_dir/deps/build/\""
+  cmd+=" && ./b2 install --prefix=\"${app_dir}/deps/build/\""
 
   sh -c "$cmd"
 }
@@ -107,40 +81,10 @@ function install_brew_packages() {
 function install_cpp_dependencies() {
   log_install_start "C++ Dependencies"
 
-  mkdir -p "$(build_app_dir)/deps/"
+  mkdir -p "${app_dir}/deps/"
 
   install_boost
   install_nlohmann_json
-}
-
-function install_language_from_asdf() {
-  asdf_bin="${HOME}/.asdf/bin/asdf"
-  language="${1}"
-  version="${2}"
-
-  if [[ ! -d "${HOME}/.asdf" ]]; then
-    ascii_print "❗ Install asdf before $(to_title "${language}") ${version}" "red"
-    install_asdf
-  fi
-
-  [ ! -d "${HOME}/.asdf/plugins/${language}" ] && \
-    log_install_start "$(to_title "${language}") plugin" && \
-    "${asdf_bin}" plugin add "${language}"
-
-  [ ! -d "${HOME}/.asdf/installs/${language}/${version}" ] && \
-    log_install_start "💻 $(to_title "${language}") ${version}" && \
-    "${asdf_bin}" install "${language}" "${version}" &&
-    "${asdf_bin}" reshim "${language}"
-
-  tool_versions_path="${app_dir}/.tool-versions"
-
-  if [[ -f "${tool_versions_path}" ]]; then
-    if ! (grep -q "\b${language}\b" "${tool_versions_path}"); then
-      echo -e "${language} ${version}" >> "${tool_versions_path}"
-    fi
-  else
-    echo -e "${language} ${version}" > "${tool_versions_path}"
-  fi
 }
 
 function install_pgformatter() {
@@ -180,27 +124,13 @@ function install_postgresql() {
 }
 
 function install_nlohmann_json() {
-  app_dir=$(build_app_dir)
-
-  [ -d "$app_dir/deps/nlohmann" ] && return 0
+  [ -d "${app_dir}/deps/nlohmann" ] && return 0
 
   log_install_start "{} nlohmann/json"
 
   git clone "https://github.com/nlohmann/json.git" /tmp/nlohmann/
-  mv /tmp/nlohmann/single_include/nlohmann "$app_dir/deps/"
+  mv /tmp/nlohmann/single_include/nlohmann "${app_dir}/deps/"
   'rm' -rf /tmp/nlohmann/
-}
-
-function install_python_dependencies() {
-  app_dir=$(build_app_dir)
-  log_install_start "🐍 Python Dependencies"
-
-  pip3 install -r "${app_dir}/deps/requirements.txt"
-  asdf reshim python
-}
-
-function log_install_start() {
-  ascii_print "📦 Installing ${ASCII["reset"]}${ASCII["cyan"]}${1}" "yellow"
 }
 
 function set_cron_timezone() {
@@ -217,7 +147,6 @@ if [[ $OSTYPE =~ ^linux.* ]]; then
     "gcc" # C++
     "jq"
     "libcurl4-openssl-dev" # Curl Client
-    "libffi-dev" # Python
     "libpq-dev" # LibPQ
     "netplan.io"
     "openssh-server" # sshd
@@ -233,8 +162,6 @@ fi
 
 install_postgresql
 install_pgformatter
-install_asdf
-install_language_from_asdf "python" "3.11.4"
 install_cpp_dependencies
 install_python_dependencies
 exempt_service_passwords

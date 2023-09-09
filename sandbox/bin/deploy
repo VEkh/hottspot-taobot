@@ -49,7 +49,7 @@ function create_directory() {
 function install_dependencies() {
   ascii_print "📦 Installing Dependencies" "cyan"
 
-  ssh -t "${remote_address}" "${remote_app_dir}/bin/install_dependencies"
+  ssh -t "${remote_address}" "${remote_app_dir}/bin/install/all"
 }
 
 function install_ruby_dependencies() {
