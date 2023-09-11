@@ -12,7 +12,7 @@ std::string Oanda::Client::fetch_trade(const int trade_id) {
                             config.account_id + "/trades/" +
                             std::to_string(trade_id);
 
-  CurlClient curl_client = fetch(request_url);
+  CurlClient curl_client = fetch({.timeout_seconds = 0, .url = request_url});
 
   std::string response_body = curl_client.response.body;
   json response = ::utils::json::parse_with_catch(response_body,

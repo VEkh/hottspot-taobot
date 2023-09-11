@@ -58,7 +58,9 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 } // namespace fetch
 } // namespace Alpaca
 
-CurlClient Alpaca::Client::fetch(std::string url) {
+CurlClient Alpaca::Client::fetch(const fetch_params_t params) {
+  const std::string url = params.url;
+
   if (url.empty()) {
     std::string error_message =
         Formatted::error_message("Please provide a url.");
@@ -79,6 +81,7 @@ CurlClient Alpaca::Client::fetch(std::string url) {
                 },
             .method = CurlClient::http_method_t::GET,
             .query_params = {},
+            .timeout_seconds = params.timeout_seconds,
             .url = url,
         });
 

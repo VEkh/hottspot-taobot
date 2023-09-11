@@ -30,6 +30,7 @@ public:
     std::map<std::string, std::string> headers;
     http_method_t method;
     std::map<std::string, std::string> query_params;
+    int timeout_seconds = 0;
     std::string url;
   } props = {
       .body = "",
@@ -91,6 +92,7 @@ private:
   void set_debug();
   void set_headers();
   void set_method();
+  void set_options();
   void set_url();
 };
 #endif

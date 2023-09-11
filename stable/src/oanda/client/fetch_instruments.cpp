@@ -18,7 +18,10 @@ Oanda::Client::fetch_instruments(const std::vector<std::string> symbols) {
                                   config.account_id +
                                   "/instruments?instruments=" + symbols_string;
 
-  const CurlClient curl_client = fetch(request_url);
+  const CurlClient curl_client = fetch({
+      .timeout_seconds = 0,
+      .url = request_url,
+  });
 
   const std::string response_body = curl_client.response.body;
   json out;

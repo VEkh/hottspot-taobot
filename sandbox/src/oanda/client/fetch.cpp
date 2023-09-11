@@ -38,7 +38,9 @@ bool is_immediate_retry_error(const CurlClient &curl_client) {
 } // namespace fetch
 } // namespace Oanda
 
-CurlClient Oanda::Client::fetch(std::string url) {
+CurlClient Oanda::Client::fetch(const fetch_params_t params) {
+  const std::string url = params.url;
+
   if (url.empty()) {
     std::string error_message =
         Formatted::error_message("Please provide a url.");
@@ -59,6 +61,7 @@ CurlClient Oanda::Client::fetch(std::string url) {
                 },
             .method = CurlClient::http_method_t::GET,
             .query_params = {},
+            .timeout_seconds = 0,
             .url = url,
         });
 

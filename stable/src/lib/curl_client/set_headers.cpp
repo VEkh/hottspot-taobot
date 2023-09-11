@@ -1,4 +1,4 @@
-#if !defined CURL_CLIENT_set_headers
+#ifndef CURL_CLIENT_set_headers
 #define CURL_CLIENT_set_headers
 
 #include "curl_client.h"        // CurlClient, curl, props, transformed_props

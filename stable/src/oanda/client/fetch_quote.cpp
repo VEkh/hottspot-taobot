@@ -40,7 +40,9 @@ std::string Oanda::Client::fetch_quote(std::string symbol) {
                             "/candles?count=1&price=BAM";
 
   CurlClient curl_client = CurlClient::request_with_retry(
-      [&]() -> CurlClient { return fetch(request_url); },
+      [&]() -> CurlClient {
+        return fetch({.timeout_seconds = 0, .url = request_url});
+      },
       Oanda::fetch_quote::is_retriable_response);
 
   return curl_client.response.body;

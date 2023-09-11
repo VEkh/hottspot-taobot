@@ -8,6 +8,7 @@
 #include "set_debug.cpp"        // set_debug
 #include "set_headers.cpp"      // set_headers
 #include "set_method.cpp"       // set_method
+#include "set_options.cpp"      // set_options
 #include "set_request_body.cpp" // set_request_body
 #include "set_url.cpp"          // set_url
 
@@ -21,6 +22,7 @@ void CurlClient::prepare_request() {
   set_debug();
   set_headers();
   set_method();
+  set_options();
   set_url();
 }
 

@@ -35,7 +35,9 @@ std::string Alpaca::Client::fetch_quote(const std::string &symbol) {
       config.data_base_url + "/v2/stocks/" + symbol + "/quotes/latest";
 
   CurlClient curl_client = CurlClient::request_with_retry(
-      [&]() -> CurlClient { return fetch(request_url); },
+      [&]() -> CurlClient {
+        return fetch({.timeout_seconds = 0, .url = request_url});
+      },
       Alpaca::fetch_quote::is_retriable_response);
 
   return curl_client.response.body;

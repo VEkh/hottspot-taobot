@@ -23,6 +23,7 @@ CurlClient Oanda::Client::post(const post_params_t params) {
           },
       .method = params.method,
       .query_params = {},
+      .timeout_seconds = 0,
       .url = params.url,
   });
 

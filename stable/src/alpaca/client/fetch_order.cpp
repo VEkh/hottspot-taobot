@@ -10,7 +10,7 @@
 std::string Alpaca::Client::fetch_order(const std::string &order_id) {
   std::string request_url = config.base_url + "/v2/orders/" + order_id;
 
-  CurlClient curl_client = fetch(request_url);
+  CurlClient curl_client = fetch({.timeout_seconds = 0, .url = request_url});
 
   return curl_client.response.body;
 }

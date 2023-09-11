@@ -10,7 +10,7 @@ std::string Oanda::Client::fetch_account() {
   std::string request_url =
       config.base_url + "/v3/accounts/" + config.account_id + "/summary";
 
-  CurlClient curl_client = fetch(request_url);
+  CurlClient curl_client = fetch({.timeout_seconds = 0, .url = request_url});
 
   return curl_client.response.body;
 }

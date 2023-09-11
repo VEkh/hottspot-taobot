@@ -24,7 +24,9 @@ std::string Oanda::Client::fetch_order(const int order_id) {
                             std::to_string(order_id);
 
   CurlClient curl_client = CurlClient::request_with_retry(
-      [&]() -> CurlClient { return fetch(request_url); },
+      [&]() -> CurlClient {
+        return fetch({.timeout_seconds = 0, .url = request_url});
+      },
       Oanda::fetch_order::is_retriable_response);
 
   std::string response_body = curl_client.response.body;

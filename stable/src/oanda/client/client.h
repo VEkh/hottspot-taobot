@@ -43,11 +43,16 @@ public:
   void stream_account();
 
 private:
+  struct fetch_params_t {
+    int timeout_seconds = 0;
+    std::string url;
+  };
+
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::map<std::string, std::string> flags = {{"paper", "0"}};
 
-  CurlClient fetch(std::string);
-  CurlClient post(const post_params_t params);
+  CurlClient fetch(const fetch_params_t);
+  CurlClient post(const post_params_t);
   bool is_live();
   void load_config();
 };
