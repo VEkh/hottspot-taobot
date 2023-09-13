@@ -17,6 +17,12 @@ class Train:
     def __init__(self, db_conn=None, env="", symbol=""):
         self.db_conn = db_conn
         self.env = env
+        self.label_columns = [
+            "close",
+            "high",
+            "low",
+            "open",
+        ]
         self.symbol = symbol
         self.test_performance = {}
         self.validation_performance = {}
@@ -29,10 +35,11 @@ class Train:
         self.loader.load()
         self.loader.preprocess()
 
-        self.__train_baseline()
-        self.__train_linear()
-        self.__train_convolutional()
-        self.__train_lstm()
+        input_width = 150
+        self.__train_baseline(input_width)
+        self.__train_linear(input_width)
+        self.__train_convolutional(input_width)
+        self.__train_lstm(input_width)
         self.__log_performance()
 
     def __compile_and_fit(self, model=None, patience=2, window=None):
@@ -106,14 +113,16 @@ class Train:
 
         ascii.puts(f"📊 Performance plot saved to {ascii.CYAN}{filepath}", ascii.YELLOW)
 
-    def __train_baseline(self):
+    def __train_baseline(self, input_width):
         model_name = "baseline"
 
+        columns = self.loader.columns
+
         window = WindowGenerator(
-            input_columns=self.loader.columns,
-            input_width=100,
-            label_columns=["close"],
-            label_width=1,
+            input_columns=columns,
+            input_width=input_width,
+            label_columns=columns,
+            label_width=input_width,
             shift=1,
             training_set=self.loader.training_set,
             test_set=self.loader.test_set,
@@ -146,15 +155,15 @@ class Train:
             plot_column="close",
         )
 
-    def __train_convolutional(self):
+    def __train_convolutional(self, input_width):
         conv_size = 3
-        label_width = 100
+        label_width = input_width
         model_name = "convolutional"
 
         window = WindowGenerator(
             input_columns=self.loader.columns,
             input_width=label_width + (conv_size - 1),
-            label_columns=["close"],
+            label_columns=self.label_columns,
             label_width=label_width,
             shift=1,
             training_set=self.loader.training_set,
@@ -178,7 +187,7 @@ class Train:
                     kernel_size=(conv_size,),
                 ),
                 tf.keras.layers.Dense(activation="relu", units=32),
-                tf.keras.layers.Dense(units=1),
+                tf.keras.layers.Dense(units=len(self.label_columns)),
             ]
         )
 
@@ -194,14 +203,14 @@ class Train:
             plot_column="close",
         )
 
-    def __train_linear(self):
+    def __train_linear(self, input_width):
         model_name = "linear"
 
         window = WindowGenerator(
             input_columns=self.loader.columns,
-            input_width=100,
-            label_columns=["close"],
-            label_width=100,
+            input_width=input_width,
+            label_columns=self.label_columns,
+            label_width=input_width,
             shift=1,
             training_set=self.loader.training_set,
             test_set=self.loader.test_set,
@@ -216,7 +225,9 @@ class Train:
 
         ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = tf.keras.Sequential([tf.keras.layers.Dense(units=1)])
+        model = tf.keras.Sequential(
+            [tf.keras.layers.Dense(units=len(self.label_columns))]
+        )
         history = self.__compile_and_fit(model=model, window=window)
 
         self.__evaluate(compiled_model=model, model_name=model_name, window=window)
@@ -229,14 +240,14 @@ class Train:
             plot_column="close",
         )
 
-    def __train_lstm(self):
-        model_name = "lstm"
+    def __train_lstm(self, input_width):
+        model_name = f"lstm-{input_width}"
 
         window = WindowGenerator(
             input_columns=self.loader.columns,
-            input_width=100,
-            label_columns=["close"],
-            label_width=100,
+            input_width=input_width,
+            label_columns=self.label_columns,
+            label_width=input_width,
             shift=1,
             training_set=self.loader.training_set,
             test_set=self.loader.test_set,
@@ -254,7 +265,10 @@ class Train:
         model = tf.keras.Sequential(
             [
                 tf.keras.layers.LSTM(return_sequences=True, units=32),
-                tf.keras.layers.Dense(units=1),
+                tf.keras.layers.Dense(
+                    kernel_initializer=tf.initializers.zeros(),
+                    units=len(self.label_columns),
+                ),
             ]
         )
         history = self.__compile_and_fit(model=model, window=window)

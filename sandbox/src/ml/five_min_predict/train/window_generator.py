@@ -19,12 +19,12 @@ class WindowGenerator:
         validation_set=np.array([]),
     ):
         self.input_width = input_width
+        self.label_columns = label_columns
         self.label_width = label_width
         self.shift = shift
         self.test_set = test_set
         self.training_set = training_set
         self.validation_set = validation_set
-        self.label_columns = label_columns
 
         if label_columns is not None:
             self.label_column_indices = {
@@ -117,8 +117,8 @@ class WindowGenerator:
                 predictions = model(inputs)
 
                 plt.scatter(
-                    self.label_indices,
-                    predictions[n, : len(self.label_indices), label_column_index],
+                    x=self.label_indices,
+                    y=predictions[n, :, label_column_index],
                     c="#ff7f0e",
                     edgecolors="k",
                     label="Predictions",
