@@ -1,7 +1,8 @@
-from ml.utils import ascii
 import json
 import os
 import psycopg2
+
+import ml.utils as u
 
 
 class Conn:
@@ -14,21 +15,21 @@ class Conn:
     def connect(self):
         self.conn = psycopg2.connect(**self.config)
 
-        ascii.puts(
-            f"🚪 Successfully connected to {ascii.GREEN}{self.config['dbname']}",
-            ascii.YELLOW,
+        u.ascii.puts(
+            f"🚪 Successfully connected to {u.ascii.GREEN}{self.config['dbname']}",
+            u.ascii.YELLOW,
         )
 
     def disconnect(self):
         if self.conn:
             self.conn.close()
 
-            ascii.puts(
-                f"👋 Successfully disconnected from {ascii.GREEN}{self.config['dbname']}",
-                ascii.YELLOW,
+            u.ascii.puts(
+                f"👋 Successfully disconnected from {u.ascii.GREEN}{self.config['dbname']}",
+                u.ascii.YELLOW,
             )
         else:
-            ascii.puts("❗ No connection to disconnect", ascii.RED)
+            u.ascii.puts("❗ No connection to disconnect", u.ascii.RED)
 
     def __read_config(self):
         app_dir = os.environ.get("APP_DIR")

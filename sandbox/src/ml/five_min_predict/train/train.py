@@ -5,8 +5,7 @@ import numpy as np
 import tensorflow as tf
 import time
 
-from ml.utils import ascii
-from ml.utils import time as u_time
+import ml.utils as u
 
 from .baseline import Baseline
 from .input_loader import InputLoader
@@ -33,7 +32,7 @@ class Train:
         self.loader = InputLoader(db_conn=self.db_conn, symbol=self.symbol)
 
     def run(self):
-        ascii.puts("🤖 Training five minute prediction model", ascii.YELLOW)
+        u.ascii.puts("🤖 Training five minute prediction model", u.ascii.YELLOW)
 
         self.loader.load()
         self.loader.preprocess()
@@ -69,12 +68,12 @@ class Train:
         return history
 
     def __evaluate(self, compiled_model=None, model_name="", window=None):
-        ascii.puts("Evaluating Validation", end="")
+        u.ascii.puts("Evaluating Validation", end="")
         self.validation_performance[model_name] = compiled_model.evaluate(
             window.validation
         )
 
-        ascii.puts("Evaluating Test", end="")
+        u.ascii.puts("Evaluating Test", end="")
         self.test_performance[model_name] = compiled_model.evaluate(
             window.test, verbose=1
         )
@@ -82,14 +81,14 @@ class Train:
     def __log_duration(self):
         duration = round(time.time() - self.start_epoch, 3)
 
-        ascii.puts(
-            f"⌚ Finished in {ascii.CYAN}{u_time.seconds_to_clock(duration)}",
-            ascii.YELLOW,
+        u.ascii.puts(
+            f"⌚ Finished in {u.ascii.CYAN}{u.time.seconds_to_clock(duration)}",
+            u.ascii.YELLOW,
         )
 
     def __log_performance(self):
-        ascii.puts("📈 PERFORMANCE", ascii.GREEN, ascii.UNDERLINE)
-        ascii.puts(ascii.GREEN, begin="", end="", print_end="")
+        u.ascii.puts("📈 PERFORMANCE", u.ascii.GREEN, u.ascii.UNDERLINE)
+        u.ascii.puts(u.ascii.GREEN, begin="", end="", print_end="")
         print(
             "Validation: ",
             json.dumps(self.validation_performance, indent=2, sort_keys=True),
@@ -97,7 +96,7 @@ class Train:
         print(
             "Test:       ", json.dumps(self.test_performance, indent=2, sort_keys=True)
         )
-        print(ascii.RESET, end="")
+        print(u.ascii.RESET, end="")
 
         self.__plot_performance()
 
@@ -123,7 +122,9 @@ class Train:
         plt.savefig(filepath)
         plt.clf()
 
-        ascii.puts(f"📊 Performance plot saved to {ascii.CYAN}{filepath}", ascii.YELLOW)
+        u.ascii.puts(
+            f"📊 Performance plot saved to {u.ascii.CYAN}{filepath}", u.ascii.YELLOW
+        )
 
     def __train_baseline(self, input_width):
         model_name = "baseline"
@@ -141,13 +142,13 @@ class Train:
             validation_set=self.loader.validation_set,
         )
 
-        ascii.puts(
-            f"🤖🔨 Training {ascii.CYAN}{model_name.upper()}\n",
-            ascii.MAGENTA,
-            ascii.UNDERLINE,
+        u.ascii.puts(
+            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            u.ascii.MAGENTA,
+            u.ascii.UNDERLINE,
         )
 
-        ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
+        u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = Baseline(window=window)
         model.compile(
@@ -157,7 +158,7 @@ class Train:
 
         self.__evaluate(compiled_model=model, model_name=model_name, window=window)
 
-        print(ascii.RESET, end="")
+        print(u.ascii.RESET, end="")
 
         setattr(self, f"{model_name}_model", model)
 
@@ -183,13 +184,13 @@ class Train:
             validation_set=self.loader.validation_set,
         )
 
-        ascii.puts(
-            f"🤖🔨 Training {ascii.CYAN}{model_name.upper()}\n",
-            ascii.MAGENTA,
-            ascii.UNDERLINE,
+        u.ascii.puts(
+            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            u.ascii.MAGENTA,
+            u.ascii.UNDERLINE,
         )
 
-        ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
+        u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = tf.keras.Sequential(
             [
@@ -207,7 +208,7 @@ class Train:
 
         self.__evaluate(compiled_model=model, model_name=model_name, window=window)
 
-        print(ascii.RESET, end="")
+        print(u.ascii.RESET, end="")
 
         window.plot(
             filename=f"{self.symbol}_{model_name}.png",
@@ -229,13 +230,13 @@ class Train:
             validation_set=self.loader.validation_set,
         )
 
-        ascii.puts(
-            f"🤖🔨 Training {ascii.CYAN}{model_name.upper()}\n",
-            ascii.MAGENTA,
-            ascii.UNDERLINE,
+        u.ascii.puts(
+            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            u.ascii.MAGENTA,
+            u.ascii.UNDERLINE,
         )
 
-        ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
+        u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = tf.keras.Sequential(
             [tf.keras.layers.Dense(units=len(self.label_columns))]
@@ -244,7 +245,7 @@ class Train:
 
         self.__evaluate(compiled_model=model, model_name=model_name, window=window)
 
-        print(ascii.RESET, end="")
+        print(u.ascii.RESET, end="")
 
         window.plot(
             filename=f"{self.symbol}_{model_name}.png",
@@ -266,13 +267,13 @@ class Train:
             validation_set=self.loader.validation_set,
         )
 
-        ascii.puts(
-            f"🤖🔨 Training {ascii.CYAN}{model_name.upper()}\n",
-            ascii.MAGENTA,
-            ascii.UNDERLINE,
+        u.ascii.puts(
+            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            u.ascii.MAGENTA,
+            u.ascii.UNDERLINE,
         )
 
-        ascii.puts(ascii.MAGENTA, begin="", end="", print_end="")
+        u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = tf.keras.Sequential(
             [
@@ -287,7 +288,7 @@ class Train:
 
         self.__evaluate(compiled_model=model, model_name=model_name, window=window)
 
-        print(ascii.RESET, end="")
+        print(u.ascii.RESET, end="")
 
         window.plot(
             filename=f"{self.symbol}_{model_name}.png",

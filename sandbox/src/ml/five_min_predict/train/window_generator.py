@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
 
-from ml.utils import ascii
+import ml.utils as u
 
 
 class WindowGenerator:
@@ -135,7 +135,7 @@ class WindowGenerator:
         plt.savefig(savepath)
         plt.clf()
 
-        ascii.puts(f"📊 Plot saved to {ascii.CYAN}{savepath}.", ascii.YELLOW)
+        u.ascii.puts(f"📊 Plot saved to {u.ascii.CYAN}{savepath}.", u.ascii.YELLOW)
 
     def split_window(self, batch):
         inputs = batch[:, self.input_slice, :]
