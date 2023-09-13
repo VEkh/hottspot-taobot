@@ -3,8 +3,10 @@ import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
 import tensorflow as tf
+import time
 
 from ml.utils import ascii
+from ml.utils import time as u_time
 
 from .baseline import Baseline
 from .input_loader import InputLoader
@@ -23,6 +25,7 @@ class Train:
             "low",
             "open",
         ]
+        self.start_epoch = time.time()
         self.symbol = symbol
         self.test_performance = {}
         self.validation_performance = {}
@@ -41,6 +44,7 @@ class Train:
         self.__train_convolutional(input_width)
         self.__train_lstm(input_width)
         self.__log_performance()
+        self.__log_duration()
 
     def __compile_and_fit(self, model=None, patience=2, window=None):
         early_stopping = tf.keras.callbacks.EarlyStopping(
@@ -73,6 +77,14 @@ class Train:
         ascii.puts("Evaluating Test", end="")
         self.test_performance[model_name] = compiled_model.evaluate(
             window.test, verbose=1
+        )
+
+    def __log_duration(self):
+        duration = round(time.time() - self.start_epoch, 3)
+
+        ascii.puts(
+            f"⌚ Finished in {ascii.CYAN}{u_time.seconds_to_clock(duration)}",
+            ascii.YELLOW,
         )
 
     def __log_performance(self):
