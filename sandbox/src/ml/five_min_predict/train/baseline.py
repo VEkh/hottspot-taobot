@@ -2,8 +2,8 @@ import tensorflow as tf
 
 
 class Baseline(tf.keras.Model):
-    def __init__(self, label_index=None, window=None):
-        super().__init__()
+    def __init__(self, label_index=None, name=None, window=None):
+        super().__init__(name=name)
         self.label_index = label_index
 
         if window.shift != 1:

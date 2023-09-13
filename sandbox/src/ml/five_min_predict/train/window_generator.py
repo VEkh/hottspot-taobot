@@ -1,6 +1,7 @@
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import tensorflow as tf
 
 import ml.utils as u
@@ -18,6 +19,7 @@ class WindowGenerator:
         training_set=np.array([]),
         validation_set=np.array([]),
     ):
+        self.app_dir = os.environ.get("APP_DIR", ".")
         self.input_width = input_width
         self.label_columns = label_columns
         self.label_width = label_width
@@ -130,7 +132,8 @@ class WindowGenerator:
                 plt.legend()
 
         plt.xlabel("Time [5 min]")
-        savepath = f"tmp/{filename}"
+
+        savepath = f"{self.app_dir}/tmp/{filename}"
 
         plt.savefig(savepath)
         plt.clf()

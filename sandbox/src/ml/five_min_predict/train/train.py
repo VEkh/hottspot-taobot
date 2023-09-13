@@ -2,6 +2,7 @@ import json
 import matplotlib as mpl
 import matplotlib.pyplot as plt
 import numpy as np
+import os
 import tensorflow as tf
 import time
 
@@ -16,6 +17,7 @@ class Train:
     MAX_EPOCHS = 20
 
     def __init__(self, db_conn=None, env="", symbol=""):
+        self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
         self.env = env
         self.label_columns = [
@@ -67,14 +69,14 @@ class Train:
 
         return history
 
-    def __evaluate(self, compiled_model=None, model_name="", window=None):
+    def __evaluate(self, compiled_model=None, window=None):
         u.ascii.puts("Evaluating Validation", end="")
-        self.validation_performance[model_name] = compiled_model.evaluate(
+        self.validation_performance[compiled_model.name] = compiled_model.evaluate(
             window.validation
         )
 
         u.ascii.puts("Evaluating Test", end="")
-        self.test_performance[model_name] = compiled_model.evaluate(
+        self.test_performance[compiled_model.name] = compiled_model.evaluate(
             window.test, verbose=1
         )
 
@@ -118,7 +120,7 @@ class Train:
         plt.xticks(labels=self.test_performance.keys(), rotation=45, ticks=x)
         plt.legend()
 
-        filepath = f"tmp/{self.symbol}_performance.png"
+        filepath = f"{self.app_dir}/tmp/{self.symbol}_performance.png"
         plt.savefig(filepath)
         plt.clf()
 
@@ -126,10 +128,30 @@ class Train:
             f"📊 Performance plot saved to {u.ascii.CYAN}{filepath}", u.ascii.YELLOW
         )
 
-    def __train_baseline(self, input_width):
-        model_name = "baseline"
+    def __plot_weights(self, model=None):
+        columns_n = len(self.loader.columns)
 
+        plt.figure(figsize=(12, 8))
+
+        plt.bar(
+            height=model.layers[0].kernel[:, 0].numpy(),
+            x=range(columns_n),
+        )
+
+        axis = plt.gca()
+
+        axis.set_xticks(range(columns_n))
+        axis.set_xticklabels(self.loader.columns, rotation=90)
+
+        savepath = f"{self.app_dir}/tmp/{self.symbol}_{model.name}_weights.png"
+        plt.savefig(savepath)
+        plt.clf()
+
+        u.ascii.puts(f"📊 Weight plot saved to {u.ascii.CYAN}{savepath}", u.ascii.YELLOW)
+
+    def __train_baseline(self, input_width):
         columns = self.loader.columns
+        model_name = "baseline"
 
         window = WindowGenerator(
             input_columns=columns,
@@ -150,13 +172,13 @@ class Train:
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = Baseline(window=window)
+        model = Baseline(name=model_name, window=window)
         model.compile(
             loss=tf.keras.losses.MeanSquaredError(),
             metrics=[tf.keras.metrics.MeanAbsoluteError()],
         )
 
-        self.__evaluate(compiled_model=model, model_name=model_name, window=window)
+        self.__evaluate(compiled_model=model, window=window)
 
         print(u.ascii.RESET, end="")
 
@@ -193,7 +215,7 @@ class Train:
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = tf.keras.Sequential(
-            [
+            layers=[
                 tf.keras.layers.Conv1D(
                     activation="relu",
                     filters=32,
@@ -201,12 +223,13 @@ class Train:
                 ),
                 tf.keras.layers.Dense(activation="relu", units=32),
                 tf.keras.layers.Dense(units=len(self.label_columns)),
-            ]
+            ],
+            name=model_name,
         )
 
         history = self.__compile_and_fit(model=model, window=window)
 
-        self.__evaluate(compiled_model=model, model_name=model_name, window=window)
+        self.__evaluate(compiled_model=model, window=window)
 
         print(u.ascii.RESET, end="")
 
@@ -239,11 +262,13 @@ class Train:
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = tf.keras.Sequential(
-            [tf.keras.layers.Dense(units=len(self.label_columns))]
+            layers=[tf.keras.layers.Dense(units=len(self.label_columns))],
+            name=model_name,
         )
         history = self.__compile_and_fit(model=model, window=window)
 
-        self.__evaluate(compiled_model=model, model_name=model_name, window=window)
+        self.__evaluate(compiled_model=model, window=window)
+        self.__plot_weights(model)
 
         print(u.ascii.RESET, end="")
 
@@ -276,17 +301,18 @@ class Train:
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
         model = tf.keras.Sequential(
-            [
+            layers=[
                 tf.keras.layers.LSTM(return_sequences=True, units=32),
                 tf.keras.layers.Dense(
                     kernel_initializer=tf.initializers.zeros(),
                     units=len(self.label_columns),
                 ),
-            ]
+            ],
+            name=model_name,
         )
         history = self.__compile_and_fit(model=model, window=window)
 
-        self.__evaluate(compiled_model=model, model_name=model_name, window=window)
+        self.__evaluate(compiled_model=model, window=window)
 
         print(u.ascii.RESET, end="")
 
