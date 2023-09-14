@@ -19,10 +19,6 @@ void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
       });
 
   this->account_snapshot = current_snapshot;
-
-  if (!this->session_init_account_snapshot.equity) {
-    this->session_init_account_snapshot = current_snapshot;
-  }
 }
 
 #endif

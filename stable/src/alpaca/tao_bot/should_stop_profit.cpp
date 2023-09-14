@@ -20,29 +20,7 @@ bool Alpaca::TaoBot::should_stop_profit() {
 
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
-  const bool is_profit_slipping =
-      exit_prices_.max_profit >= exit_prices_.target_max_profit &&
-      exit_prices_.current_profit <= exit_prices_.stop_profit_loss;
-
-  const double init_profit =
-      this->session_init_account_snapshot.equity -
-      this->session_init_account_snapshot.original_equity;
-
-  if (init_profit >= exit_prices_.target_max_profit) {
-    return true;
-  }
-
-  if (this->has_target_profit_slipped) {
-    return exit_prices_.current_profit >= exit_prices_.target_max_profit;
-  }
-
-  if (is_profit_slipping) {
-    this->has_target_profit_slipped = true;
-
-    return true;
-  }
-
-  return false;
+  return exit_prices_.max_profit >= exit_prices_.target_max_profit;
 }
 
 #endif
