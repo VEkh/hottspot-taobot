@@ -102,6 +102,18 @@ class Train:
 
         self.__plot_performance()
 
+    def __persist_model(self, model):
+        data_dir = f"{self.app_dir}/data/ml/five_minute_predict/models"
+        os.makedirs(data_dir, exist_ok=True)
+
+        filepath = f"{data_dir}/{self.symbol}_{model.name}.h5"
+        model.save_weights(filepath=filepath, overwrite=True)
+
+        u.ascii.puts(
+            f"🧱 Persisted {u.ascii.CYAN}{model.name.upper()}{u.ascii.YELLOW} weights to {u.ascii.CYAN}{filepath}",
+            u.ascii.YELLOW,
+        )
+
     def __plot_performance(self):
         plt.figure(figsize=(12, 8))
 
@@ -147,7 +159,9 @@ class Train:
         plt.savefig(savepath)
         plt.clf()
 
-        u.ascii.puts(f"📊 Weight plot saved to {u.ascii.CYAN}{savepath}", u.ascii.YELLOW)
+        u.ascii.puts(
+            f"🧱📊 Weight plot saved to {u.ascii.CYAN}{savepath}", u.ascii.YELLOW
+        )
 
     def __train_baseline(self, input_width):
         columns = self.loader.columns
@@ -189,6 +203,8 @@ class Train:
             model=model,
             plot_column="close",
         )
+
+        self.__persist_model(model)
 
     def __train_convolutional(self, input_width):
         conv_size = 3
@@ -239,6 +255,8 @@ class Train:
             plot_column="close",
         )
 
+        self.__persist_model(model)
+
     def __train_linear(self, input_width):
         model_name = "linear"
 
@@ -277,6 +295,8 @@ class Train:
             model=model,
             plot_column="close",
         )
+
+        self.__persist_model(model)
 
     def __train_lstm(self, input_width):
         model_name = f"lstm-{input_width}"
@@ -321,3 +341,5 @@ class Train:
             model=model,
             plot_column="close",
         )
+
+        self.__persist_model(model)
