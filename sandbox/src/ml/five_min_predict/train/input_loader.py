@@ -1,6 +1,7 @@
 from math import floor
 import numpy as np
 
+import ml.five_min_predict.models as models
 import ml.utils as u
 
 
@@ -9,6 +10,7 @@ class InputLoader:
         self.db_conn = db_conn
         self.columns = []
         self.inputs = np.array([])
+        self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.symbol = symbol
         self.test_set = np.array([])
         self.training_set = np.array([])
@@ -27,14 +29,9 @@ class InputLoader:
 
     def __get_from_db(self):
         with self.db_conn.conn.cursor() as cursor:
-            query = """
+            query = f"""
                 select
-                  close,
-                  high,
-                  low,
-                  open,
-                  cos((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_cos,
-                  sin((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_sin
+                  {models.config.SELECTED_INPUT_COLUMNS}
                 from
                   five_min_candles
                 where
@@ -56,6 +53,11 @@ class InputLoader:
     def __normalize(self):
         training_set_mean = self.training_set.mean(axis=0)
         training_set_std = self.training_set.std(axis=0)
+
+        self.norm_factors = {
+            "mean": training_set_mean,
+            "std": training_set_std,
+        }
 
         self.test_set = (self.test_set - training_set_mean) / training_set_std
         self.training_set = (self.training_set - training_set_mean) / training_set_std

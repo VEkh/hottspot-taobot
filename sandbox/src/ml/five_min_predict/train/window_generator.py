@@ -20,6 +20,7 @@ class WindowGenerator:
         validation_set=np.array([]),
     ):
         self.app_dir = os.environ.get("APP_DIR", ".")
+        self.input_columns = input_columns
         self.input_width = input_width
         self.label_columns = label_columns
         self.label_width = label_width

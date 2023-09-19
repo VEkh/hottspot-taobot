@@ -6,9 +6,9 @@ import os
 import tensorflow as tf
 import time
 
+import ml.five_min_predict.models as models
 import ml.utils as u
 
-from .baseline import Baseline
 from .input_loader import InputLoader
 from .window_generator import WindowGenerator
 
@@ -16,48 +16,43 @@ from .window_generator import WindowGenerator
 class Train:
     MAX_EPOCHS = 20
 
-    def __init__(self, db_conn=None, env="", symbol=""):
+    def __init__(self, db_conn=None, symbol=""):
         self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
-        self.env = env
-        self.label_columns = [
-            "close",
-            "high",
-            "low",
-            "open",
-        ]
+        self.input_width = models.config.INPUT_WIDTH
+        self.label_columns = models.config.LABEL_COLUMNS
         self.start_epoch = time.time()
         self.symbol = symbol
         self.test_performance = {}
         self.validation_performance = {}
 
-        self.loader = InputLoader(db_conn=self.db_conn, symbol=self.symbol)
+        self.input_loader = InputLoader(db_conn=self.db_conn, symbol=self.symbol)
 
     def run(self):
         u.ascii.puts("🤖 Training five minute prediction model", u.ascii.YELLOW)
 
-        self.loader.load()
-        self.loader.preprocess()
+        self.input_loader.load()
+        self.input_loader.preprocess()
 
-        input_width = 150
-        self.__train_baseline(input_width)
-        self.__train_linear(input_width)
-        self.__train_convolutional(input_width)
-        self.__train_lstm(input_width)
+        self.__train_baseline()
+        self.__train_linear()
+        self.__train_convolutional()
+        self.__train_lstm()
         self.__log_performance()
         self.__log_duration()
 
-    def __compile_and_fit(self, model=None, patience=2, window=None):
+    def __evaluate(self, model=None, window=None):
+        u.ascii.puts("Evaluating Validation", end="")
+        self.validation_performance[model.name] = model.evaluate(window.validation)
+
+        u.ascii.puts("Evaluating Test", end="")
+        self.test_performance[model.name] = model.evaluate(window.test, verbose=1)
+
+    def __fit(self, model=None, patience=2, window=None):
         early_stopping = tf.keras.callbacks.EarlyStopping(
             mode="min",
             monitor="val_loss",
             patience=patience,
-        )
-
-        model.compile(
-            loss=tf.keras.losses.MeanSquaredError(),
-            metrics=[tf.keras.metrics.MeanAbsoluteError()],
-            optimizer=tf.keras.optimizers.Adam(),
         )
 
         history = model.fit(
@@ -68,17 +63,6 @@ class Train:
         )
 
         return history
-
-    def __evaluate(self, compiled_model=None, window=None):
-        u.ascii.puts("Evaluating Validation", end="")
-        self.validation_performance[compiled_model.name] = compiled_model.evaluate(
-            window.validation
-        )
-
-        u.ascii.puts("Evaluating Test", end="")
-        self.test_performance[compiled_model.name] = compiled_model.evaluate(
-            window.test, verbose=1
-        )
 
     def __log_duration(self):
         duration = round(time.time() - self.start_epoch, 3)
@@ -103,11 +87,11 @@ class Train:
         self.__plot_performance()
 
     def __persist_model(self, model):
-        data_dir = f"{self.app_dir}/data/ml/five_minute_predict/models"
+        data_dir = f"{self.app_dir}/data/ml/five_min_predict/models"
         os.makedirs(data_dir, exist_ok=True)
 
-        filepath = f"{data_dir}/{self.symbol}_{model.name}.h5"
-        model.save_weights(filepath=filepath, overwrite=True)
+        filepath = f"{data_dir}/{self.symbol}_{model.name}.keras"
+        model.save(filepath=filepath, overwrite=True)
 
         u.ascii.puts(
             f"🧱 Persisted {u.ascii.CYAN}{model.name.upper()}{u.ascii.YELLOW} weights to {u.ascii.CYAN}{filepath}",
@@ -141,7 +125,7 @@ class Train:
         )
 
     def __plot_weights(self, model=None):
-        columns_n = len(self.loader.columns)
+        columns_n = len(self.input_loader.columns)
 
         plt.figure(figsize=(12, 8))
 
@@ -153,7 +137,7 @@ class Train:
         axis = plt.gca()
 
         axis.set_xticks(range(columns_n))
-        axis.set_xticklabels(self.loader.columns, rotation=90)
+        axis.set_xticklabels(self.input_loader.columns, rotation=90)
 
         savepath = f"{self.app_dir}/tmp/{self.symbol}_{model.name}_weights.png"
         plt.savefig(savepath)
@@ -163,19 +147,19 @@ class Train:
             f"🧱📊 Weight plot saved to {u.ascii.CYAN}{savepath}", u.ascii.YELLOW
         )
 
-    def __train_baseline(self, input_width):
-        columns = self.loader.columns
+    def __train_baseline(self):
+        columns = self.input_loader.columns
         model_name = "baseline"
 
         window = WindowGenerator(
             input_columns=columns,
-            input_width=input_width,
+            input_width=self.input_width,
             label_columns=columns,
-            label_width=input_width,
+            label_width=self.input_width,
             shift=1,
-            training_set=self.loader.training_set,
-            test_set=self.loader.test_set,
-            validation_set=self.loader.validation_set,
+            training_set=self.input_loader.training_set,
+            test_set=self.input_loader.test_set,
+            validation_set=self.input_loader.validation_set,
         )
 
         u.ascii.puts(
@@ -186,13 +170,19 @@ class Train:
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = Baseline(name=model_name, window=window)
+        model = models.baseline.create(
+            input_columns=window.input_columns,
+            label_columns=window.label_columns,
+            name=model_name,
+            norm_factors=self.input_loader.norm_factors,
+        )
+
         model.compile(
             loss=tf.keras.losses.MeanSquaredError(),
             metrics=[tf.keras.metrics.MeanAbsoluteError()],
         )
 
-        self.__evaluate(compiled_model=model, window=window)
+        self.__evaluate(model=model, window=window)
 
         print(u.ascii.RESET, end="")
 
@@ -206,138 +196,121 @@ class Train:
 
         self.__persist_model(model)
 
-    def __train_convolutional(self, input_width):
-        conv_size = 3
-        label_width = input_width
-        model_name = "convolutional"
+    def __train_convolutional(self):
+        conv_size = models.config.CONVOLUTION_SIZE
+        label_width = self.input_width
 
         window = WindowGenerator(
-            input_columns=self.loader.columns,
+            input_columns=self.input_loader.columns,
             input_width=label_width + (conv_size - 1),
             label_columns=self.label_columns,
             label_width=label_width,
             shift=1,
-            training_set=self.loader.training_set,
-            test_set=self.loader.test_set,
-            validation_set=self.loader.validation_set,
+            training_set=self.input_loader.training_set,
+            test_set=self.input_loader.test_set,
+            validation_set=self.input_loader.validation_set,
+        )
+
+        model = models.convolutional.create(
+            input_columns=window.input_columns,
+            label_columns=window.label_columns,
+            norm_factors=self.input_loader.norm_factors,
         )
 
         u.ascii.puts(
-            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            f"🤖🔨 Training {u.ascii.CYAN}{model.name.upper()}\n",
             u.ascii.MAGENTA,
             u.ascii.UNDERLINE,
         )
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = tf.keras.Sequential(
-            layers=[
-                tf.keras.layers.Conv1D(
-                    activation="relu",
-                    filters=32,
-                    kernel_size=(conv_size,),
-                ),
-                tf.keras.layers.Dense(activation="relu", units=32),
-                tf.keras.layers.Dense(units=len(self.label_columns)),
-            ],
-            name=model_name,
-        )
-
-        history = self.__compile_and_fit(model=model, window=window)
-
-        self.__evaluate(compiled_model=model, window=window)
+        self.__fit(model=model, window=window)
+        self.__evaluate(model=model, window=window)
 
         print(u.ascii.RESET, end="")
 
         window.plot(
-            filename=f"{self.symbol}_{model_name}.png",
+            filename=f"{self.symbol}_{model.name}.png",
             model=model,
             plot_column="close",
         )
 
         self.__persist_model(model)
 
-    def __train_linear(self, input_width):
-        model_name = "linear"
-
+    def __train_linear(self):
         window = WindowGenerator(
-            input_columns=self.loader.columns,
-            input_width=input_width,
+            input_columns=self.input_loader.columns,
+            input_width=self.input_width,
             label_columns=self.label_columns,
-            label_width=input_width,
+            label_width=self.input_width,
             shift=1,
-            training_set=self.loader.training_set,
-            test_set=self.loader.test_set,
-            validation_set=self.loader.validation_set,
+            training_set=self.input_loader.training_set,
+            test_set=self.input_loader.test_set,
+            validation_set=self.input_loader.validation_set,
+        )
+
+        model = models.linear.create(
+            input_columns=window.input_columns,
+            label_columns=window.label_columns,
+            norm_factors=self.input_loader.norm_factors,
         )
 
         u.ascii.puts(
-            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            f"🤖🔨 Training {u.ascii.CYAN}{model.name.upper()}\n",
             u.ascii.MAGENTA,
             u.ascii.UNDERLINE,
         )
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = tf.keras.Sequential(
-            layers=[tf.keras.layers.Dense(units=len(self.label_columns))],
-            name=model_name,
-        )
-        history = self.__compile_and_fit(model=model, window=window)
-
-        self.__evaluate(compiled_model=model, window=window)
+        self.__fit(model=model, window=window)
+        self.__evaluate(model=model, window=window)
         self.__plot_weights(model)
 
         print(u.ascii.RESET, end="")
 
         window.plot(
-            filename=f"{self.symbol}_{model_name}.png",
+            filename=f"{self.symbol}_{model.name}.png",
             model=model,
             plot_column="close",
         )
 
         self.__persist_model(model)
 
-    def __train_lstm(self, input_width):
-        model_name = f"lstm-{input_width}"
-
+    def __train_lstm(self):
         window = WindowGenerator(
-            input_columns=self.loader.columns,
-            input_width=input_width,
+            input_columns=self.input_loader.columns,
+            input_width=self.input_width,
             label_columns=self.label_columns,
-            label_width=input_width,
+            label_width=self.input_width,
             shift=1,
-            training_set=self.loader.training_set,
-            test_set=self.loader.test_set,
-            validation_set=self.loader.validation_set,
+            training_set=self.input_loader.training_set,
+            test_set=self.input_loader.test_set,
+            validation_set=self.input_loader.validation_set,
+        )
+
+        model = models.lstm.create(
+            input_columns=window.input_columns,
+            label_columns=window.label_columns,
+            norm_factors=self.input_loader.norm_factors,
         )
 
         u.ascii.puts(
-            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            f"🤖🔨 Training {u.ascii.CYAN}{model.name.upper()}\n",
             u.ascii.MAGENTA,
             u.ascii.UNDERLINE,
         )
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
-        model = tf.keras.Sequential(
-            layers=[
-                tf.keras.layers.LSTM(return_sequences=True, units=32),
-                tf.keras.layers.Dense(
-                    kernel_initializer=tf.initializers.zeros(),
-                    units=len(self.label_columns),
-                ),
-            ],
-            name=model_name,
-        )
-        history = self.__compile_and_fit(model=model, window=window)
-
-        self.__evaluate(compiled_model=model, window=window)
+        self.__fit(model=model, window=window)
+        self.__evaluate(model=model, window=window)
 
         print(u.ascii.RESET, end="")
 
         window.plot(
-            filename=f"{self.symbol}_{model_name}.png",
+            filename=f"{self.symbol}_{model.name}.png",
             model=model,
             plot_column="close",
         )
