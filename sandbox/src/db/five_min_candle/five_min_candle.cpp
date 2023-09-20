@@ -1,13 +1,13 @@
-#ifndef DB__FIVE_MIN_CANDLES
-#define DB__FIVE_MIN_CANDLES
+#ifndef DB__FIVE_MIN_CANDLE
+#define DB__FIVE_MIN_CANDLE
 
-#include "five_min_candles.h" // DB::FiveMinCandles
 #include "build.cpp"
 #include "db/quote/quote.cpp" // DB::Quote
+#include "five_min_candle.h"  // DB::FiveMinCandle
 #include "lib/pg/pg.cpp"      // Pg
 #include <string>             // std::string
 
-DB::FiveMinCandles::FiveMinCandles(const Pg c, const std::string symbol_) {
+DB::FiveMinCandle::FiveMinCandle(const Pg c, const std::string symbol_) {
   this->conn = c;
   this->symbol = symbol_;
 

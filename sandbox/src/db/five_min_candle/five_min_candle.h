@@ -1,5 +1,5 @@
-#ifndef DB__FIVE_MIN_CANDLES_H
-#define DB__FIVE_MIN_CANDLES_H
+#ifndef DB__FIVE_MIN_CANDLE_H
+#define DB__FIVE_MIN_CANDLE_H
 
 #include "db/quote/quote.cpp" // DB::Quote
 #include "lib/formatted.cpp"  // Formatted
@@ -10,9 +10,9 @@
 #include <string>             // std::string
 
 namespace DB {
-class FiveMinCandles {
+class FiveMinCandle {
 public:
-  FiveMinCandles(const Pg, const std::string);
+  FiveMinCandle(const Pg, const std::string);
 
   void build();
 

@@ -1,14 +1,14 @@
-#ifndef DB__FIVE_MIN_CANDLES_upsert
-#define DB__FIVE_MIN_CANDLES_upsert
+#ifndef DB__FIVE_MIN_CANDLE_upsert
+#define DB__FIVE_MIN_CANDLE_upsert
 
-#include "five_min_candles.h" // DB::FiveMinCandles
-#include <libpq-fe.h>         // PQescapeLiteral, PQfreemem
-#include <stdio.h>            // snprintf
-#include <string.h>           // strlen
-#include <string>             // std::to_string
+#include "five_min_candle.h" // DB::FiveMinCandle
+#include <libpq-fe.h>        // PQescapeLiteral, PQfreemem
+#include <stdio.h>           // snprintf
+#include <string.h>          // strlen
+#include <string>            // std::to_string
 
-void DB::FiveMinCandles::upsert(const candle_t candle,
-                                const bool debug = false) {
+void DB::FiveMinCandle::upsert(const candle_t candle,
+                               const bool debug = false) {
   const char *query_format = R"(
     insert into five_min_candles(close, closed_at, high, low, open, opened_at, symbol)
       values (%f, to_timestamp(%f), %f, %f, %f, to_timestamp(%f), %s)

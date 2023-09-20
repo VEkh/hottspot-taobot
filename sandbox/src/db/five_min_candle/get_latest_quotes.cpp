@@ -1,14 +1,14 @@
-#ifndef DB__FIVE_MIN_CANDLES_get_latest_quotes
-#define DB__FIVE_MIN_CANDLES_get_latest_quotes
+#ifndef DB__FIVE_MIN_CANDLE_get_latest_quotes
+#define DB__FIVE_MIN_CANDLE_get_latest_quotes
 
-#include "five_min_candles.h" // DB::FiveMinCandles
-#include <libpq-fe.h>         // PQescapeLiteral, PQfreemem
-#include <list>               // std::list
-#include <stdio.h>            // snprintf
-#include <string.h>           // strlen
+#include "five_min_candle.h" // DB::FiveMinCandle
+#include <libpq-fe.h>        // PQescapeLiteral, PQfreemem
+#include <list>              // std::list
+#include <stdio.h>           // snprintf
+#include <string.h>          // strlen
 
-std::list<DB::FiveMinCandles::quote_t>
-DB::FiveMinCandles::get_latest_quotes(const bool debug = false) {
+std::list<DB::FiveMinCandle::quote_t>
+DB::FiveMinCandle::get_latest_quotes(const bool debug = false) {
   const char *query_format = R"(
     with latest_opened_at as (
       select

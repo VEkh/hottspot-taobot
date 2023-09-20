@@ -1,15 +1,15 @@
-#include "db/five_min_candles/five_min_candles.cpp" // DB::FiveMinCandles
-#include "db/quote/quote.cpp"                       // DB::Quote
-#include "lib/formatted.cpp"                        // Formatted
-#include "lib/pg/pg.cpp"                            // Pg
-#include "lib/utils/io.cpp"                         // utils::io
-#include <iostream>                                 // std::cout, std::endl
-#include <list>                                     // std::list
-#include <map>                                      // std::map
-#include <sstream>                                  // std::ostringstream
-#include <stdexcept>                                // std::invalid_argument
-#include <stdio.h>                                  // printf
-#include <string>                                   // std::string
+#include "db/five_min_candle/five_min_candle.cpp" // DB::FiveMinCandle
+#include "db/quote/quote.cpp"                     // DB::Quote
+#include "lib/formatted.cpp"                      // Formatted
+#include "lib/pg/pg.cpp"                          // Pg
+#include "lib/utils/io.cpp"                       // utils::io
+#include <iostream>                               // std::cout, std::endl
+#include <list>                                   // std::list
+#include <map>                                    // std::map
+#include <sstream>                                // std::ostringstream
+#include <stdexcept>                              // std::invalid_argument
+#include <stdio.h>                                // printf
+#include <string>                                 // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -63,7 +63,7 @@ int main(int argc, char *argv[]) {
     Pg pg(flags);
     pg.connect();
 
-    DB::FiveMinCandles builder(pg, upcased_args.front());
+    DB::FiveMinCandle builder(pg, upcased_args.front());
 
     builder.build();
 

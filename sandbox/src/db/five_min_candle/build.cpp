@@ -1,8 +1,8 @@
-#ifndef DB__FIVE_MIN_CANDLES_build
-#define DB__FIVE_MIN_CANDLES_build
+#ifndef DB__FIVE_MIN_CANDLE_build
+#define DB__FIVE_MIN_CANDLE_build
 
 #include "db/quote/quote.cpp"    // DB::Quote
-#include "five_min_candles.h"    // DB::FiveMinCandles, candle_t, fmt, quote_t
+#include "five_min_candle.h"     // DB::FiveMinCandle, candle_t, fmt, quote_t
 #include "get_latest_quotes.cpp" // get_latest_quotes
 #include "lib/utils/integer.cpp" // ::utils::integer_
 #include "lib/utils/time.cpp"    // ::utils::time_
@@ -14,7 +14,7 @@
 #include <stdio.h>               // printf
 #include <time.h>                // time
 
-void DB::FiveMinCandles::build() {
+void DB::FiveMinCandle::build() {
   std::cout << fmt.bold << fmt.cyan;
   std::cout << "🔥 Building 5 Minute Candles for ";
   std::cout << fmt.yellow << this->symbol << std::endl;
