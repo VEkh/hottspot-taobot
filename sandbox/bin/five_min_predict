@@ -1,0 +1,48 @@
+#!/bin/bash
+# shellcheck disable=1090,1091,2207
+
+set -e
+
+project=$(dirname "${0}" | xargs basename)
+
+if [[ "${project}" = "bin" ]]; then
+  app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+  cmd=$(basename "${0}")
+
+  source "${app_dir}/bin/utils" # ascii_print
+
+  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
+
+  exit 1;
+fi
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+
+function update_predictions() {
+  ascii_print "🤖 Updating Predictions" "yellow"
+
+  log_dir="${app_dir}/log/${project}/ml/five_min_predict"
+
+  mkdir -p "${log_dir}"
+
+  symbols=($(cat "${app_dir}/bin/${project}/symbols"))
+
+  for symbol in "${symbols[@]}"; do
+    "${app_dir}/build/db" build_five_min_candles "${symbol}" "${@}" > "${log_dir}/${symbol}.log"
+  done
+
+  for symbol in "${symbols[@]}"; do
+    "${app_dir}/bin/ml/five_min_predict" predict "${symbol}" "${@}" >> "${log_dir}/${symbol}.log"
+  done
+}
+
+case "${1}" in
+  update_predictions)
+    update_predictions "${@:2}"
+    ;;
+  *)
+    ascii_print "🤖 ${ASCII["underline"]}FIVE MINUTE PREDICTIONS" "yellow"
+    ascii_print "Commands: " "yellow"
+    ascii_print "update_predictions <PROJECT> [--env]....Update the predictions using the trained models." "yellow"
+esac

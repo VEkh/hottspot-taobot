@@ -1,4 +1,5 @@
 #!/bin/bash
+# shellcheck disable=1090,1091,2207
 
 set -e
 shopt -s extglob
@@ -7,7 +8,6 @@ app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 project=$(dirname "${0}" | xargs basename)
 
 # ASCII, ascii_print, extract_flags, to_lower, to_upper
-# shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
 flags=($(extract_flags "${@}"))
@@ -15,7 +15,7 @@ declare -A flag_map
 extract_flags_to_map flag_map "${flags[@]}"
 
 if [[ "${project}" = "bin" ]]; then
-  cmd=$(basename "$0")
+  cmd=$(basename "${0}")
 
   ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
 
