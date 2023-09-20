@@ -18,7 +18,7 @@ class Predict:
         self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
         self.input_loader = None
-        self.model_names = ["baseline", "convolutional", "linear", "lstm"]
+        self.model_names = ["convolutional", "linear", "lstm"]
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.ref_epoch = ref_epoch
         self.symbol = symbol
@@ -89,9 +89,16 @@ class Predict:
             u.ascii.YELLOW,
             begin="",
         )
+
+        prediction_color = (
+            u.ascii.RED
+            if last_prediction_json["close"] < last_input_json["close"]
+            else u.ascii.GREEN
+        )
+
         u.ascii.puts(
             f"Prediction: {json.dumps(last_prediction_json, indent=2)}",
-            u.ascii.GREEN,
+            prediction_color,
             begin="",
         )
 
