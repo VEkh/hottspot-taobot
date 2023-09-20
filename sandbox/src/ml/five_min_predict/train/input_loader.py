@@ -28,10 +28,12 @@ class InputLoader:
         self.__normalize()
 
     def __get_from_db(self):
+        selected_input_columns = ",\n".join(models.config.SELECTED_INPUT_COLUMNS)
+
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
                 select
-                  {models.config.SELECTED_INPUT_COLUMNS}
+                  {selected_input_columns}
                 from
                   five_min_candles
                 where

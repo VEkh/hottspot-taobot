@@ -14,6 +14,7 @@ create table five_min_candles(
 );
 create sequence five_min_candles_id_seq
   cache 1 start with 1
+  increment by 1
   no maxvalue
   no minvalue;
 alter sequence five_min_candles_id_seq owned by five_min_candles.id;

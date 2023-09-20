@@ -71,35 +71,30 @@ class Predict:
                     u.ascii.YELLOW,
                 )
 
-    def __log_prediction(self, model_name):
-        last_input = self.input_loader.inputs[-1, :].tolist()
-        last_prediction = self.predictions[model_name][-1, :].round(2).tolist()
-
-        model = self.models[model_name]
-        last_input_json = dict(zip(model.input_columns, last_input))
-        last_prediction_json = dict(zip(model.label_columns, last_prediction))
-
+    def __log_prediction(
+        self,
+        _input={},
+        model_name="",
+        prediction={},
+    ):
         u.ascii.puts(
             f"{model_name.upper()} {u.ascii.MAGENTA}PREDICTION",
             u.ascii.CYAN,
             u.ascii.UNDERLINE,
         )
+
         u.ascii.puts(
-            f"Last Input: {json.dumps(last_input_json, indent=2)}",
+            f"Last Input: {json.dumps(_input, indent=2)}",
             u.ascii.YELLOW,
-            begin="",
         )
 
         prediction_color = (
-            u.ascii.RED
-            if last_prediction_json["close"] < last_input_json["close"]
-            else u.ascii.GREEN
+            u.ascii.RED if prediction["close"] < _input["close"] else u.ascii.GREEN
         )
 
         u.ascii.puts(
-            f"Prediction: {json.dumps(last_prediction_json, indent=2)}",
+            f"Prediction: {json.dumps(prediction, indent=2)}",
             prediction_color,
-            begin="",
         )
 
     def __predict_next(self):
@@ -108,4 +103,46 @@ class Predict:
 
             self.predictions[model_name] = self.input_loader.postprocess(predictions)
 
-            self.__log_prediction(model_name)
+            last_input_dict = self.input_loader.named_inputs[-1]
+
+            last_prediction = self.predictions[model_name][-1, :].round(2).tolist()
+            model = self.models[model_name]
+            last_prediction_dict = dict(zip(model.label_columns, last_prediction))
+
+            self.__log_prediction(
+                _input=last_input_dict,
+                model_name=model_name,
+                prediction=last_prediction_dict,
+            )
+
+            self.__write_prediction(
+                _input=last_input_dict,
+                model_name=model_name,
+                prediction=last_prediction_dict,
+            )
+
+    def __write_prediction(self, _input={}, model_name="", prediction={}):
+        with self.db_conn.conn.cursor() as cursor:
+            query = """
+                insert into five_min_predictions(close, five_min_candle_id, high, low, model_name, open, symbol)
+                  values (%(close)s, %(five_min_candle_id)s, %(high)s, %(low)s, %(model_name)s, %(open)s, %(symbol)s)
+                on conflict (five_min_candle_id, model_name)
+                  do update set close = excluded.close, high = excluded.high, low = excluded.low, open = excluded.open, updated_at = now();
+            """
+
+            cursor.execute(
+                query,
+                {
+                    "close": prediction["close"],
+                    "five_min_candle_id": _input["id"],
+                    "high": prediction["high"],
+                    "low": prediction["low"],
+                    "model_name": model_name,
+                    "open": prediction["open"],
+                    "symbol": self.symbol,
+                },
+            )
+
+            u.ascii.puts(cursor.statusmessage, u.ascii.CYAN)
+
+        u.ascii.puts("💾 Wrote prediction to database.", u.ascii.GREEN)

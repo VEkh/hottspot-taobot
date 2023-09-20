@@ -13,11 +13,11 @@ LABEL_COLUMNS = [
     "open",
 ]
 
-SELECTED_INPUT_COLUMNS = """
-  close,
-  high,
-  low,
-  open,
-  cos((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_cos,
-  sin((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_sin
-""".strip()
+SELECTED_INPUT_COLUMNS = [
+    "close",
+    "high",
+    "low",
+    "open",
+    "cos((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_cos",
+    "sin((extract(epoch from opened_at) * pi()) /(24 * 60 * 60)) as opened_at_day_sin",
+]

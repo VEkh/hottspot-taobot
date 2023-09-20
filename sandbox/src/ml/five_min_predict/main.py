@@ -57,6 +57,7 @@ match args.command:
 
         conn = Conn(args.env)
         conn.connect()
+        conn.conn.autocommit = True
 
         try:
             args.ref_epoch = float(args.ref_epoch)

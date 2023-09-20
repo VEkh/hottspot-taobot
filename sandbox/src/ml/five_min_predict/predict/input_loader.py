@@ -19,6 +19,7 @@ class InputLoader:
         self.input_width = input_width
         self.inputs = np.array([])
         self.inputs_norm = np.array([])
+        self.named_inputs = []
         self.norm_factors = norm_factors
         self.ref_epoch = ref_epoch
         self.symbol = symbol
@@ -51,6 +52,8 @@ class InputLoader:
         ]
 
     def __get_inputs_from_db(self):
+        selected_input_columns = ",\n".join(models.config.SELECTED_INPUT_COLUMNS)
+
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
                 with most_recent_batch as (
@@ -66,7 +69,9 @@ class InputLoader:
                   limit %(input_width)s
                 )
                 select
-                  {models.config.SELECTED_INPUT_COLUMNS}
+                  {selected_input_columns},
+                  id,
+                  extract(epoch from opened_at)::float as opened_at_epoch
                 from
                   five_min_candles
                 where
@@ -88,6 +93,7 @@ class InputLoader:
                 },
             )
 
+            columns = [c.name for c in cursor.description]
             rows = cursor.fetchall()
 
         if not len(rows):
@@ -95,7 +101,8 @@ class InputLoader:
 
             sys.exit(1)
 
-        self.inputs = np.array(rows)
+        self.inputs = np.array(rows)[:, : len(models.config.SELECTED_INPUT_COLUMNS)]
+        self.named_inputs = [dict(zip(columns, row)) for row in rows]
 
         u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
 
