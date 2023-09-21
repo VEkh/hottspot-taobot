@@ -5,6 +5,7 @@ set -e
 
 project=$(dirname "${0}" | xargs basename)
 
+
 if [[ "${project}" = "bin" ]]; then
   app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
   cmd=$(basename "${0}")
@@ -17,32 +18,62 @@ if [[ "${project}" = "bin" ]]; then
 fi
 
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+log_dir="${app_dir}/log/${project}/ml/five_min_predict"
+
 source "${app_dir}/bin/utils" # ASCII, ascii_print
 
-function update_predictions() {
-  ascii_print "🤖 Updating Predictions" "yellow"
+ascii_print "$(date)\n" "cyan"
 
-  log_dir="${app_dir}/log/${project}/ml/five_min_predict"
+mkdir -p "${log_dir}"
 
-  mkdir -p "${log_dir}"
+function build_candles_all() {
+  ascii_print "🔨 Building candles for all symbols" "cyan"
 
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/build/db" build_five_min_candles "${symbol}" "${@}" > "${log_dir}/${symbol}.log"
   done
+}
+
+function predict_all() {
+  ascii_print "🤖 Updating predictions" "cyan"
+
+  build_candles_all "${@}"
+
+  symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/bin/ml/five_min_predict" predict "${symbol}" "${@}" >> "${log_dir}/${symbol}.log"
   done
 }
 
+function train_all() {
+  ascii_print "🤖 Re-training models for all symbols" "cyan"
+
+  build_candles_all "${@}"
+
+  symbols=($(cat "${app_dir}/bin/${project}/symbols"))
+
+  for symbol in "${symbols[@]}"; do
+    "${app_dir}/bin/ml/five_min_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log"
+  done
+}
+
 case "${1}" in
-  update_predictions)
-    update_predictions "${@:2}"
+  build_candles_all)
+    build_candles_all "${@:2}"
+    ;;
+  predict_all)
+    predict_all "${@:2}"
+    ;;
+  train_all)
+    train_all "${@:2}"
     ;;
   *)
     ascii_print "🤖 ${ASCII["underline"]}FIVE MINUTE PREDICTIONS" "yellow"
     ascii_print "Commands: " "yellow"
-    ascii_print "update_predictions <PROJECT> [--env]....Update the predictions using the trained models." "yellow"
+    ascii_print "build_candles_all [--env]....Build candles for all symbols" "yellow"
+    ascii_print "predict_all [--env]..........Update the predictions for all symbols" "yellow"
+    ascii_print "train_all [--env]............Train models for all symbols" "yellow"
 esac

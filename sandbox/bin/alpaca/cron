@@ -14,6 +14,7 @@ case "${1}" in
     cmd+="\n0 15 * * 1-5 ${app_dir}/bin/${project}/stream_account stop --api-key=paper-alpha >> ${app_dir}/log/${env}.log 2>&1"
     cmd+="\n* 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes stream heartbeat start --api-key=live-alpha --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
     cmd+="\n* 8-14 * * 1-5 ${app_dir}/bin/${project}/quotes watch heartbeat start --api-key=live-alpha --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0 15 * * 1-5 ${app_dir}/bin/${project}/five_min_predict train_all --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
 
     echo -e "$cmd"
   ;;
