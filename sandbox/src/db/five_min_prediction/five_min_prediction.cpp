@@ -5,10 +5,4 @@
 #include "get_fresh_predictions.cpp"
 #include "lib/pg/pg.cpp" // Pg
 
-DB::FiveMinPrediction::FiveMinPrediction(const Pg conn_,
-                                         const std::string symbol_) {
-  this->conn = conn_;
-  this->symbol = symbol_;
-}
-
 #endif

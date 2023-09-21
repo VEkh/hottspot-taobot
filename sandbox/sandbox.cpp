@@ -19,6 +19,7 @@ int main(int argc, char *argv[]) {
       db_five_min_predictor.get_fresh_predictions((double)time(nullptr), true);
 
   printf("predictions count: %i\n", (int)predictions.size());
+  printf("predictions empty: %i\n", (bool)predictions.empty());
 
   conn.disconnect();
 }

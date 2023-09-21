@@ -6,19 +6,20 @@
 #include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
 #include "build_performance.cpp"            // build_performance
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
-#include "db/position/position.cpp"         // DB::Position
-#include "db/utils/utils.cpp"               // DB::Utils
-#include "is_holiday.cpp"                   // is_holiday
-#include "lib/formatted.cpp"                // Formatted::error_message
-#include "lib/pg/pg.cpp"                    // Pg
-#include "lib/utils/boolean.cpp"            // ::utils::boolean
-#include "lib/utils/io.cpp"                 // ::utils::io
-#include "lib/utils/string.cpp"             // ::utils::string
-#include "tao_bot.h"                        // Alpaca::TaoBot
-#include "update_account_snapshot.cpp"      // update_account_snapshot
-#include <iostream>                         // std::cout, std::endl
-#include <locale.h>                         // setlocale
-#include <map>                              // std::map
+#include "db/five_min_prediction/five_min_prediction.cpp" // DB::FiveMinPrediction
+#include "db/position/position.cpp"                       // DB::Position
+#include "db/utils/utils.cpp"                             // DB::Utils
+#include "is_holiday.cpp"                                 // is_holiday
+#include "lib/formatted.cpp"           // Formatted::error_message
+#include "lib/pg/pg.cpp"               // Pg
+#include "lib/utils/boolean.cpp"       // ::utils::boolean
+#include "lib/utils/io.cpp"            // ::utils::io
+#include "lib/utils/string.cpp"        // ::utils::string
+#include "tao_bot.h"                   // Alpaca::TaoBot
+#include "update_account_snapshot.cpp" // update_account_snapshot
+#include <iostream>                    // std::cout, std::endl
+#include <locale.h>                    // setlocale
+#include <map>                         // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -61,6 +62,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   }
 
   this->db_account_stat = DB::AccountStat(this->pg);
+  this->db_five_min_prediction = DB::FiveMinPrediction(this->pg, this->symbol);
   this->db_position = DB::Position(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);

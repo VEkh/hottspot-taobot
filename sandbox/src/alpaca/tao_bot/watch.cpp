@@ -6,6 +6,7 @@
 #include "close_position.cpp"            // close_position
 #include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
+#include "log_five_min_predictions.cpp"  // log_five_min_predictions
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
@@ -39,6 +40,7 @@ void Alpaca::TaoBot::watch() {
       log_account_snapshot();
       log_quote();
       log_price_movement();
+      log_five_min_predictions();
       log_position();
       log_performance();
     }

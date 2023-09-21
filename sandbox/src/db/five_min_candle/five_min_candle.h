@@ -12,14 +12,6 @@
 namespace DB {
 class FiveMinCandle {
 public:
-  FiveMinCandle(const Pg, const std::string);
-
-  void build();
-
-private:
-  using query_result_t = Pg::query_result_t;
-  using quote_t = Global::t::quote_t;
-
   struct candle_t {
     double close = 0;
     double closed_at = 0;
@@ -29,6 +21,14 @@ private:
     double opened_at = 0;
     std::string symbol;
   };
+
+  FiveMinCandle(const Pg, const std::string);
+
+  void build();
+
+private:
+  using query_result_t = Pg::query_result_t;
+  using quote_t = Global::t::quote_t;
 
   constexpr static int CANDLE_DURATION_SECONDS = 5 * 60;
 

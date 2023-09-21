@@ -17,24 +17,32 @@ DB::FiveMinPrediction::get_fresh_predictions(
 
   const char *query_format = R"(
     select
-      *,
-      extract(epoch from inserted_at) as inserted_at_epoch
+      five_min_predictions.*,
+      extract(epoch from five_min_predictions.inserted_at) as inserted_at_epoch,
+      five_min_candles.close as candle_close,
+      five_min_candles.high as candle_high,
+      five_min_candles.low as candle_low,
+      five_min_candles.open as candle_open,
+      five_min_candles.symbol as candle_symbol
     from
       five_min_predictions
+      join five_min_candles on five_min_candles.id = five_min_predictions.five_min_candle_id
     where
-      symbol = %s
-      and (to_timestamp(%f) - inserted_at) <= '5 minutes'::interval
+      five_min_predictions.symbol = %s
+      and (to_timestamp(%f) - five_min_predictions.inserted_at) <= '%i seconds'::interval
   )";
 
   char *sanitized_symbol = PQescapeLiteral(
       this->conn.conn, this->symbol.c_str(), this->symbol.size());
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
-                         std::to_string(ref_epoch).size();
+                         std::to_string(ref_epoch).size() +
+                         std::to_string(this->EXIRATION_SECONDS).size();
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, sanitized_symbol, ref_epoch);
+  snprintf(query, query_l, query_format, sanitized_symbol, ref_epoch,
+           this->EXIRATION_SECONDS);
 
   PQfreemem(sanitized_symbol);
 

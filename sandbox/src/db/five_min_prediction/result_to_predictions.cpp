@@ -22,6 +22,26 @@ DB::FiveMinPrediction::result_to_predictions(const query_result_t &result) {
       const std::string field = fields.at(i);
       const std::string value = values.at(i);
 
+      if (field == "candle_close") {
+        record.candle.close = std::stod(value);
+      }
+
+      if (field == "candle_high") {
+        record.candle.high = std::stod(value);
+      }
+
+      if (field == "candle_low") {
+        record.candle.low = std::stod(value);
+      }
+
+      if (field == "candle_open") {
+        record.candle.open = std::stod(value);
+      }
+
+      if (field == "candle_symbol") {
+        record.candle.symbol = value;
+      }
+
       if (field == "close") {
         record.close = std::stod(value);
       }
