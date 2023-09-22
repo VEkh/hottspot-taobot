@@ -14,6 +14,7 @@ class Predict:
         db_conn=None,
         ref_epoch=0,
         symbol="",
+        timestamps="now()",
     ):
         self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
@@ -22,6 +23,7 @@ class Predict:
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.ref_epoch = ref_epoch
         self.symbol = symbol
+        self.timestamps = timestamps
 
         self.models = {k: None for k in self.model_names}
         self.predictions = {k: [] for k in self.model_names}
@@ -123,11 +125,17 @@ class Predict:
 
     def __write_prediction(self, _input={}, model_name="", prediction={}):
         with self.db_conn.conn.cursor() as cursor:
-            query = """
-                insert into five_min_predictions(close, five_min_candle_id, high, low, model_name, open, symbol)
-                  values (%(close)s, %(five_min_candle_id)s, %(high)s, %(low)s, %(model_name)s, %(open)s, %(symbol)s)
+            timestamp_val_format = (
+                "%(timestamp)s"
+                if self.timestamps == "now()"
+                else "to_timestamp(%(timestamp)s)"
+            )
+
+            query = f"""
+                insert into five_min_predictions(close, five_min_candle_id, high, inserted_at, low, model_name, open, symbol, updated_at)
+                  values (%(close)s, %(five_min_candle_id)s, %(high)s, {timestamp_val_format}, %(low)s, %(model_name)s, %(open)s, %(symbol)s, {timestamp_val_format})
                 on conflict (five_min_candle_id, model_name)
-                  do update set close = excluded.close, high = excluded.high, low = excluded.low, open = excluded.open, updated_at = now();
+                  do update set close = excluded.close, high = excluded.high, low = excluded.low, open = excluded.open, updated_at = {timestamp_val_format};
             """
 
             cursor.execute(
@@ -140,6 +148,7 @@ class Predict:
                     "model_name": model_name,
                     "open": prediction["open"],
                     "symbol": self.symbol,
+                    "timestamp": self.timestamps,
                 },
             )
 

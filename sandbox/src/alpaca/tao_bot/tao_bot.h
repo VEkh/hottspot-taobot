@@ -1,22 +1,22 @@
 #ifndef ALPACA__TAO_BOT_H
 #define ALPACA__TAO_BOT_H
 
-#include "alpaca/client/client.cpp"         // Alpaca::Client
-#include "alpaca/quote/quote.cpp"           // Alpaca::Quote
-#include "alpaca/types.cpp"                 // Alpaca::t
-#include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
-#include "db/account_stat/account_stat.cpp" // DB::AccountStat
-#include "db/five_min_prediction/five_min_prediction.cpp" // DB::FiveMinPrediction
-#include "db/position/position.cpp"                       // DB::Position
-#include "db/utils/utils.cpp"                             // DB::Utils
-#include "lib/formatted.cpp"                              // Formatted
-#include "lib/pg/pg.cpp"                                  // Pg
-#include "types.cpp"                                      // Global::t
-#include <list>                                           // std::list
-#include <math.h>                                         // INFINITY
-#include <time.h>                                         // time
-#include <utility>                                        // std::pair
-#include <vector>                                         // std::vector
+#include "alpaca/client/client.cpp"                 // Alpaca::Client
+#include "alpaca/quote/quote.cpp"                   // Alpaca::Quote
+#include "alpaca/types.cpp"                         // Alpaca::t
+#include "backtest/backtest.cpp"                    // Alpaca::TaoBotBacktest
+#include "db/account_stat/account_stat.cpp"         // DB::AccountStat
+#include "db/position/position.cpp"                 // DB::Position
+#include "db/utils/utils.cpp"                       // DB::Utils
+#include "lib/formatted.cpp"                        // Formatted
+#include "lib/pg/pg.cpp"                            // Pg
+#include "ml/five_min_predict/five_min_predict.cpp" // ML::FiveMinPredict
+#include "types.cpp"                                // Global::t
+#include <list>                                     // std::list
+#include <math.h>                                   // INFINITY
+#include <time.h>                                   // time
+#include <utility>                                  // std::pair
+#include <vector>                                   // std::vector
 
 namespace Alpaca {
 class TaoBot {
@@ -32,7 +32,6 @@ private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using exit_prices_t = Global::t::exit_prices_t;
-  using five_min_prediction_t = DB::FiveMinPrediction::prediction_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -68,10 +67,10 @@ private:
   Alpaca::Quote quoter;
   Alpaca::TaoBotBacktest backtest;
   DB::AccountStat db_account_stat;
-  DB::FiveMinPrediction db_five_min_prediction;
   DB::Position db_position;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  ML::FiveMinPredict five_min_predict;
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
@@ -85,7 +84,6 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  std::list<five_min_prediction_t> five_min_predictions;
   std::list<quote_t> quotes;
   std::map<std::string, std::string> flags;
   std::string symbol;
@@ -137,7 +135,6 @@ private:
   void initialize(std::string, std::map<std::string, std::string> &);
   void log_account_snapshot();
   void log_end_of_trading_period();
-  void log_five_min_predictions();
   void log_performance();
   void log_position();
   void log_position_results();
@@ -147,6 +144,7 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
+  void read_five_min_predictions();
   void read_price_movement();
   void read_quotes();
   void reset_backtest();

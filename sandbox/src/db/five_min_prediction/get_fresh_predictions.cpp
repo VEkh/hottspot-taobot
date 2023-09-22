@@ -29,7 +29,7 @@ DB::FiveMinPrediction::get_fresh_predictions(
       join five_min_candles on five_min_candles.id = five_min_predictions.five_min_candle_id
     where
       five_min_predictions.symbol = %s
-      and (to_timestamp(%f) - five_min_predictions.inserted_at) <= '%i seconds'::interval
+      and (to_timestamp(%f) - five_min_predictions.inserted_at) between '0 seconds'::interval and '%i seconds'::interval
   )";
 
   char *sanitized_symbol = PQescapeLiteral(

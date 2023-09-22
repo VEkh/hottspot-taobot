@@ -5,7 +5,7 @@ import time
 import ml.utils as u
 
 usage = """
-        main.h {predict} symbol [--env] [--ref-epoch]
+        main.h {predict} symbol [--env] [--ref-epoch] [--timestamps]
         main.h {train}   symbol [--env]
 """
 
@@ -31,7 +31,7 @@ arg_parser.add_argument(
 arg_parser.add_argument(
     "--env",
     "-e",
-    choices=["development", "production"],
+    choices=["backtest", "development", "production"],
     default="development",
     dest="env",
     help="Database environment",
@@ -45,6 +45,21 @@ arg_parser.add_argument(
     default=f"{now}",
     dest="ref_epoch",
     help=f"Reference epoch from which a prediction will be made (e.g. {int(now)})",
+)
+
+timestamps_help = u.string.strip_heredoc(
+    f"""
+    Time to be written to database timestamp columns (inserted_at, updated_at)
+    (e.g. 'now()', to_timestamp({int(now)}), etc.)
+    """
+)
+
+arg_parser.add_argument(
+    "--timestamps",
+    "-t",
+    default=f"now()",
+    dest="timestamps",
+    help=timestamps_help,
 )
 
 args = arg_parser.parse_args()
@@ -73,6 +88,7 @@ match args.command:
             db_conn=conn,
             ref_epoch=args.ref_epoch,
             symbol=args.symbol,
+            timestamps=args.timestamps,
         )
 
         predictor.run()

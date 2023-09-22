@@ -6,7 +6,6 @@
 #include "close_position.cpp"            // close_position
 #include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
-#include "log_five_min_predictions.cpp"  // log_five_min_predictions
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
@@ -14,7 +13,8 @@
 #include "log_quote.cpp"                 // log_quote
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_and_persist_position.cpp" // open_and_persist_position
-#include "read_price_movement.cpp"       // price_movement
+#include "read_five_min_predictions.cpp" // read_five_min_predictions
+#include "read_price_movement.cpp"       // read_price_movement
 #include "read_quotes.cpp"               // read_quotes
 #include "reset_backtest.cpp"            // reset_backtest
 #include "reset_position.cpp"            // reset_position
@@ -34,13 +34,14 @@ void Alpaca::TaoBot::watch() {
 
     read_quotes();
     read_price_movement();
+    read_five_min_predictions();
     update_account_snapshot();
 
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
       log_price_movement();
-      log_five_min_predictions();
+      this->five_min_predict.log_predictions();
       log_position();
       log_performance();
     }
