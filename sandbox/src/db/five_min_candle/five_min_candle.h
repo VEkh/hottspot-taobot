@@ -22,6 +22,7 @@ public:
     std::string symbol;
   };
 
+  FiveMinCandle(){};
   FiveMinCandle(const Pg, const std::string);
 
   void build();

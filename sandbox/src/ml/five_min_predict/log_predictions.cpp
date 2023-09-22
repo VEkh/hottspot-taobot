@@ -4,6 +4,7 @@
 #include "five_min_predict.h"    // ML::FiveMinPredict, fmt, prediction_t
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/integer.cpp" // ::utils::integer_
+#include "predict_action.cpp"    // predict_action
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
@@ -33,8 +34,8 @@ void ML::FiveMinPredict::log_predictions() {
       printf(" • ");
     }
 
-    log_color =
-        prediction.close < prediction.candle.close ? fmt.red : fmt.green;
+    log_color = predict_action(prediction) == order_action_t::SELL ? fmt.red
+                                                                   : fmt.green;
 
     std::cout << log_color;
     printf("%s: %.2f", prediction.model_name.c_str(), prediction.close);

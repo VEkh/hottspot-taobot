@@ -139,12 +139,13 @@ private:
   void log_position();
   void log_position_results();
   void log_positions();
+  void log_predictions();
   void log_price_movement();
   void log_quote();
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
-  void read_five_min_predictions();
+  void read_predictions();
   void read_price_movement();
   void read_quotes();
   void reset_backtest();

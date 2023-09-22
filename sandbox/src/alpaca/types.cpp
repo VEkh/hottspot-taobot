@@ -6,13 +6,9 @@
 
 namespace Alpaca {
 namespace t {
+using order_action_t = Global::t::order_action_t;
 using order_win_result_t = Global::t::order_win_result_t;
 using quote_t = Global::t::quote_t;
-
-enum order_action_t {
-  BUY,
-  SELL,
-};
 
 enum order_status_t {
   ORDER_ACCEPTED,

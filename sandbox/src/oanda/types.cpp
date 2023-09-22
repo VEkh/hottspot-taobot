@@ -5,6 +5,7 @@
 
 namespace Oanda {
 namespace t {
+using order_action_t = Global::t::order_action_t;
 using quote_t = Global::t::quote_t;
 
 enum order_action_t {

@@ -17,6 +17,12 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
+  if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
+    if (this->five_min_predict.predictions.empty()) {
+      return false;
+    }
+  }
+
   return true;
 }
 

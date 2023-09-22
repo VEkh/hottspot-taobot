@@ -45,6 +45,11 @@ struct exit_prices_t {
   double trailing_stop_profit = 0.00;
 };
 
+enum order_action_t {
+  BUY,
+  SELL,
+};
+
 struct order_win_result_streak_t {
   std::map<int, int> counts;
   int current = 0;

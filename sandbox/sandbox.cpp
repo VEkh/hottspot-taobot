@@ -2,10 +2,10 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "db/five_min_prediction/five_min_prediction.cpp" // DB::FiveMinPrediction
-#include <list>                                           // std::list
-#include <map>                                            // std::map
-#include <time.h>                                         // time
+#include "ml/five_min_predict/five_min_predict.cpp" // ML::FiveMinPredict
+#include <list>                                     // std::list
+#include <map>                                      // std::map
+#include <time.h>                                   // time
 
 int main(int argc, char *argv[]) {
   Pg conn((std::map<std::string, std::string>){
@@ -13,13 +13,10 @@ int main(int argc, char *argv[]) {
   });
   conn.connect();
 
-  DB::FiveMinPrediction db_five_min_predictor(conn, "AMZN");
+  ML::FiveMinPredict five_min_predict(conn, "AMZN");
 
-  std::list<DB::FiveMinPrediction::prediction_t> predictions =
-      db_five_min_predictor.get_fresh_predictions((double)time(nullptr), true);
-
-  printf("predictions count: %i\n", (int)predictions.size());
-  printf("predictions empty: %i\n", (bool)predictions.empty());
+  printf("should predict: %i\n",
+         (int)five_min_predict.should_predict("live-alpha"));
 
   conn.disconnect();
 }
