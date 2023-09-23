@@ -12,9 +12,10 @@ void Alpaca::TaoBot::read_predictions() {
 
   this->five_min_predict.get_fresh_predictions(this->current_epoch);
 
-  if (this->five_min_predict.predictions.empty()) {
+  if (this->five_min_predict.predictions.empty() &&
+      this->api_client.config.ml__on_demand_predictions) {
     std::cout << fmt.bold << fmt.yellow;
-    puts("🤖 No 5 Minute Predictions. Making new ones.");
+    puts("🤖 No fresh 5 Minute Predictions. Making new ones.");
     std::cout << fmt.reset << std::endl;
 
     this->five_min_predict.predict(this->current_epoch);

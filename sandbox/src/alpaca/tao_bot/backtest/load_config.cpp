@@ -71,9 +71,9 @@ void Alpaca::TaoBotBacktest::load_config() {
   }
 
   std::vector<std::string> nested_required_keys = {
-      "backtest_account_margin_multiplier",
-      "backtest_account_starting_equity",
-      "backtest_start_at",
+      "backtest__account_margin_multiplier",
+      "backtest__account_starting_equity",
+      "backtest__start_at",
       "is_backtest",
   };
 
@@ -90,7 +90,8 @@ void Alpaca::TaoBotBacktest::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  const std::string start_at_string = config_json[api_key]["backtest_start_at"];
+  const std::string start_at_string =
+      config_json[api_key]["backtest__start_at"];
 
   tm backtest_start_at =
       ::utils::time_::parse_timestamp(start_at_string, "%Y-%m-%d %H:%M:%S");
@@ -98,8 +99,8 @@ void Alpaca::TaoBotBacktest::load_config() {
   const double start_epoch = (double)mktime(&backtest_start_at);
   double end_epoch;
 
-  if (config_json[api_key].contains("backtest_end_at")) {
-    const std::string end_at_string = config_json[api_key]["backtest_end_at"];
+  if (config_json[api_key].contains("backtest__end_at")) {
+    const std::string end_at_string = config_json[api_key]["backtest__end_at"];
 
     tm backtest_end_at =
         ::utils::time_::parse_timestamp(end_at_string, "%Y-%m-%d %H:%M:%S");
@@ -127,26 +128,26 @@ void Alpaca::TaoBotBacktest::load_config() {
   }
 
   const bool account_max_stop_loss =
-      config_json[api_key].contains("backtest_account_max_stop_loss")
-          ? (bool)config_json[api_key]["backtest_account_max_stop_loss"]
+      config_json[api_key].contains("backtest__account_max_stop_loss")
+          ? (bool)config_json[api_key]["backtest__account_max_stop_loss"]
           : this->config.account_max_stop_loss;
 
   const bool clock_sync =
-      config_json[api_key].contains("backtest_clock_sync")
-          ? (bool)config_json[api_key]["backtest_clock_sync"]
+      config_json[api_key].contains("backtest__clock_sync")
+          ? (bool)config_json[api_key]["backtest__clock_sync"]
           : this->config.clock_sync;
 
   const int late_start_seconds =
-      config_json[api_key].contains("backtest_late_start_seconds")
-          ? (int)config_json[api_key]["backtest_late_start_seconds"]
+      config_json[api_key].contains("backtest__late_start_seconds")
+          ? (int)config_json[api_key]["backtest__late_start_seconds"]
           : this->config.late_start_seconds;
 
   this->config = {
       .account_margin_multiplier =
-          config_json[api_key]["backtest_account_margin_multiplier"],
+          config_json[api_key]["backtest__account_margin_multiplier"],
       .account_max_stop_loss = account_max_stop_loss,
       .account_starting_equity =
-          config_json[api_key]["backtest_account_starting_equity"],
+          config_json[api_key]["backtest__account_starting_equity"],
       .api_key = api_key,
       .api_key_id = config_json[api_key]["id"],
       .clock_sync = clock_sync,

@@ -80,6 +80,11 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  const bool ml__on_demand_predictions =
+      config_json[api_key].contains("ml__on_demand_predictions")
+          ? (bool)config_json[api_key]["ml__on_demand_predictions"]
+          : this->config.ml__on_demand_predictions;
+
   this->config = {
       .api_key = api_key,
       .api_key_id = config_json[api_key]["id"],
@@ -87,6 +92,7 @@ void Alpaca::Client::load_config() {
       .base_url = config_json[api_key]["base_url"],
       .data_base_url = config_json["data_base_url"],
       .is_live = config_json[api_key]["is_live"],
+      .ml__on_demand_predictions = ml__on_demand_predictions,
   };
 }
 

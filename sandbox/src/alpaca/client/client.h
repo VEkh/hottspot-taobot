@@ -25,6 +25,7 @@ public:
     std::string base_url;
     std::string data_base_url;
     bool is_live;
+    bool ml__on_demand_predictions = false;
   } config;
 
   Client(){};
