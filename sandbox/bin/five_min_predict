@@ -44,7 +44,7 @@ function predict_all() {
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
   for symbol in "${symbols[@]}"; do
-    "${app_dir}/bin/ml/five_min_predict" predict "${symbol}" "${@}" >> "${log_dir}/${symbol}.log"
+    "${app_dir}/bin/ml/five_min_predict" predict "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
   done
 }
 
@@ -56,7 +56,7 @@ function train_all() {
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
   for symbol in "${symbols[@]}"; do
-    "${app_dir}/bin/ml/five_min_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log"
+    "${app_dir}/bin/ml/five_min_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
   done
 }
 
