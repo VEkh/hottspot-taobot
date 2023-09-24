@@ -33,7 +33,7 @@ tmux send-keys -t "${session}:${window}" "${app_dir}/db/ctl restart" "Enter"
 tmux split-window -h -p 75 -t "${session}:${window}" "vim ."
 
 
-symbol_i=0
+window_i=0
 
 for api_key in "${api_keys[@]}"; do
   api_key_log_dir="${app_dir}/log/${project}/${api_key}"
@@ -45,14 +45,14 @@ for api_key in "${api_keys[@]}"; do
 
     touch "${log_filepath}"
 
-    if [[ $((symbol_i % 2)) == 0 ]]; then
+    if [[ $((window_i % 2)) == 0 ]]; then
       tmux new-window -t "${session}" -n "${api_key}" "tail -f ${log_filepath}"
     else
-      window=$(((symbol_i / 2) + 1))
+      window=$(((window_i / 2) + 1))
       tmux split-window -t "${session}:${window}" -h "tail -f ${log_filepath}"
     fi
 
-    symbol_i=$((symbol_i + 1))
+    window_i=$((window_i + 1))
   done
 done
 
@@ -72,6 +72,27 @@ tmux split-window -t "${session}:stock-account-streams" -h \
 
 tmux split-window -t "${session}:stock-account-streams.1" \
   "$(tail_cmd "${project}/${api_keys[2]}"  "account_stream")"
+
+window_i=$((window_i + 4))
+for symbol in "${symbols[@]}"; do
+  log_dir="${app_dir}/../sandbox/log/${project}/ml/five_min_predict"
+
+  mkdir -p
+
+  log_filepath="${log_dir}/${symbol}.log"
+
+  touch "${log_filepath}"
+
+  if [[ $((window_i % 2)) == 0 ]]; then
+    tmux new-window -t "${session}" -n "ml" "tail -f ${log_filepath}"
+  else
+    window=$(((window_i / 2) + 1))
+    tmux split-window -t "${session}:${window}" -h "tail -f ${log_filepath}"
+  fi
+
+  window_i=$((window_i + 1))
+done
+
 
 tmux select-window -t "${session}:0"
 tmux attach-session -t "${session}"
