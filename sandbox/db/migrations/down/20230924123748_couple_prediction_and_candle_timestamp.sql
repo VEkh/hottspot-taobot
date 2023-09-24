@@ -1,0 +1,8 @@
+\timing
+begin;
+alter table five_min_predictions
+  drop constraint five_min_predictions_candle_opened_at_fkey;
+alter table five_min_predictions rename column candle_opened_at to inserted_at;
+alter table five_min_predictions rename constraint five_min_predictions_five_min_candle_fkey to five_min_predictions_five_min_candle_key;
+drop index five_min_candles_id_opened_at_key;
+commit;

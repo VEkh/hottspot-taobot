@@ -132,10 +132,24 @@ class Predict:
             )
 
             query = f"""
-                insert into five_min_predictions(close, five_min_candle_id, high, inserted_at, low, model_name, open, symbol, updated_at)
-                  values (%(close)s, %(five_min_candle_id)s, %(high)s, {timestamp_val_format}, %(low)s, %(model_name)s, %(open)s, %(symbol)s, {timestamp_val_format})
-                on conflict (five_min_candle_id, model_name)
-                  do update set close = excluded.close, high = excluded.high, low = excluded.low, open = excluded.open, updated_at = {timestamp_val_format};
+                insert into five_min_predictions(candle_opened_at, close, five_min_candle_id, high, low, model_name, open, symbol, updated_at)
+                select
+                  opened_at,
+                  %(close)s,
+                  %(five_min_candle_id)s,
+                  %(high)s,
+                  %(low)s,
+                  %(model_name)s,
+                  %(open)s,
+                  %(symbol)s,
+                  {timestamp_val_format}
+                from
+                  five_min_candles
+                where
+                  id = %(five_min_candle_id)s
+                on conflict (five_min_candle_id,
+                  model_name)
+                  do update set close = excluded.close, high = excluded.high, low = excluded.low, open = excluded.open, updated_at = {timestamp_val_format}
             """
 
             cursor.execute(

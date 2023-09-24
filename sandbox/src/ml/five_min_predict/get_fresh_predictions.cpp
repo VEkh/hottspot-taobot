@@ -3,9 +3,10 @@
 
 #include "five_min_predict.h" // ML::FiveMinPredict
 
-void ML::FiveMinPredict::get_fresh_predictions(const double ref_epoch) {
+void ML::FiveMinPredict::get_fresh_predictions(const double ref_epoch,
+                                               const bool debug = false) {
   this->predictions =
-      this->db_five_min_prediction.get_fresh_predictions(ref_epoch);
+      this->db_five_min_prediction.get_fresh_predictions(ref_epoch, debug);
 }
 
 #endif

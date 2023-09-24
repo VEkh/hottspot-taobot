@@ -18,7 +18,6 @@ DB::FiveMinPrediction::get_fresh_predictions(
   const char *query_format = R"(
     select
       five_min_predictions.*,
-      extract(epoch from five_min_predictions.inserted_at) as inserted_at_epoch,
       five_min_candles.close as candle_close,
       five_min_candles.high as candle_high,
       five_min_candles.low as candle_low,
@@ -29,7 +28,9 @@ DB::FiveMinPrediction::get_fresh_predictions(
       join five_min_candles on five_min_candles.id = five_min_predictions.five_min_candle_id
     where
       five_min_predictions.symbol = %s
-      and (to_timestamp(%f) - five_min_predictions.inserted_at) between '0 seconds'::interval and '%i seconds'::interval
+      and (to_timestamp(%f) - five_min_predictions.candle_opened_at) between '0 seconds'::interval and '%i seconds'::interval
+    order by
+      five_min_predictions.model_name asc
   )";
 
   char *sanitized_symbol = PQescapeLiteral(

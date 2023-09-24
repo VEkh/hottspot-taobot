@@ -34,7 +34,7 @@ public:
   order_action_t predict_action();
   order_action_t predict_action(const prediction_t);
 
-  void get_fresh_predictions(const double);
+  void get_fresh_predictions(const double, const bool);
   void log_predictions();
   void predict(const double);
 

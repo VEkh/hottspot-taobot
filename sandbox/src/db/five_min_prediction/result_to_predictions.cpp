@@ -50,10 +50,6 @@ DB::FiveMinPrediction::result_to_predictions(const query_result_t &result) {
         record.high = std::stod(value);
       }
 
-      if (field == "inserted_at" || field == "inserted_at_epoch") {
-        record.inserted_at = std::stod(value);
-      }
-
       if (field == "low") {
         record.low = std::stod(value);
       }
