@@ -135,11 +135,6 @@ void Alpaca::TaoBotBacktest::load_config() {
           ? (bool)config_json[api_key]["backtest_clock_sync"]
           : this->config.clock_sync;
 
-  const int late_start_seconds =
-      config_json[api_key].contains("backtest_late_start_seconds")
-          ? (int)config_json[api_key]["backtest_late_start_seconds"]
-          : this->config.late_start_seconds;
-
   this->config = {
       .account_margin_multiplier =
           config_json[api_key]["backtest_account_margin_multiplier"],
@@ -150,7 +145,6 @@ void Alpaca::TaoBotBacktest::load_config() {
       .api_key_id = config_json[api_key]["id"],
       .clock_sync = clock_sync,
       .end_epoch = end_epoch,
-      .late_start_seconds = late_start_seconds,
       .start_epoch = start_epoch,
   };
 }

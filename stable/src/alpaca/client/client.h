@@ -25,6 +25,7 @@ public:
     std::string base_url;
     std::string data_base_url;
     bool is_live;
+    int late_start_seconds = 6; // Production's average
   } config;
 
   Client(){};

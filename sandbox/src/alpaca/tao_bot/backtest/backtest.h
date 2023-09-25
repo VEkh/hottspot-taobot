@@ -34,7 +34,6 @@ public:
     std::string api_key_id;
     bool clock_sync = true;
     double end_epoch = 0;
-    int late_start_seconds = 6; // Production's average latency
     double start_epoch = 0;
   } config;
 

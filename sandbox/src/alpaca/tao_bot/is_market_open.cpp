@@ -21,26 +21,11 @@ bool Alpaca::TaoBot::is_market_open() {
     return false;
   }
 
-  tm market_open_time = {
-      .tm_sec = 0,
+  const tm market_open_time = {
+      .tm_sec = this->api_client.config.late_start_seconds,
       .tm_min = 30,
       .tm_hour = 9,
   };
-
-  if (this->api_client.config.api_key == "live-alpha") {
-    market_open_time = {
-        .tm_sec = 25,
-        .tm_min = 30,
-        .tm_hour = 9,
-    };
-  } else if (this->backtest.is_active &&
-             this->backtest.config.late_start_seconds) {
-    market_open_time = {
-        .tm_sec = this->backtest.config.late_start_seconds,
-        .tm_min = 30,
-        .tm_hour = 9,
-    };
-  }
 
   return ::utils::time_::is_at_least(this->current_epoch, market_open_time) &&
          ::utils::time_::is_before(this->current_epoch, {

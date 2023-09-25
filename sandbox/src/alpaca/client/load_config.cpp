@@ -64,6 +64,7 @@ void Alpaca::Client::load_config() {
   std::vector<std::string> nested_required_keys = {
       "base_url",
       "is_live",
+      "late_start_seconds",
       "secret_key",
   };
 
@@ -92,6 +93,7 @@ void Alpaca::Client::load_config() {
       .base_url = config_json[api_key]["base_url"],
       .data_base_url = config_json["data_base_url"],
       .is_live = config_json[api_key]["is_live"],
+      .late_start_seconds = config_json[api_key]["late_start_seconds"],
       .ml__on_demand_predictions = ml__on_demand_predictions,
   };
 }
