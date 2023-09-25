@@ -16,21 +16,39 @@ DB::FiveMinPrediction::get_fresh_predictions(
   ;
 
   const char *query_format = R"(
-    select
-      five_min_predictions.*,
-      five_min_candles.close as candle_close,
-      five_min_candles.high as candle_high,
-      five_min_candles.low as candle_low,
-      five_min_candles.open as candle_open,
-      five_min_candles.symbol as candle_symbol
+    with predictions as (
+      select
+        five_min_predictions.*,
+        five_min_candles.close as candle_close,
+        five_min_candles.high as candle_high,
+        five_min_candles.low as candle_low,
+        five_min_candles.open as candle_open,
+        five_min_candles.symbol as candle_symbol
+      from
+        five_min_predictions
+        join five_min_candles on five_min_candles.id = five_min_predictions.five_min_candle_id
+      where
+        five_min_predictions.symbol = %s
+        and (to_timestamp(%f) - five_min_predictions.candle_closed_at) between '0 seconds'::interval and '%i seconds'::interval
+      order by
+        five_min_predictions.candle_closed_at desc,
+        five_min_predictions.model_name asc
+    ),
+    unique_names as (
+      select
+        count(distinct model_name) as n
     from
-      five_min_predictions
-      join five_min_candles on five_min_candles.id = five_min_predictions.five_min_candle_id
-    where
-      five_min_predictions.symbol = %s
-      and (to_timestamp(%f) - five_min_predictions.candle_opened_at) between '0 seconds'::interval and '%i seconds'::interval
-    order by
-      five_min_predictions.model_name asc
+      predictions
+    )
+    select
+      *
+    from
+      predictions
+    limit (
+      select
+        n
+      from
+        unique_names);
   )";
 
   char *sanitized_symbol = PQescapeLiteral(
