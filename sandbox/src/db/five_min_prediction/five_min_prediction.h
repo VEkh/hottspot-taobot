@@ -11,8 +11,7 @@ class FiveMinPrediction {
 public:
   using candle_t = DB::FiveMinCandle::candle_t;
 
-  // 10 second buffer accounts for candles not being exactly 5 minutes apart.
-  constexpr static int EXIRATION_SECONDS = 5 * 60 + 10;
+  constexpr static int EXIRATION_SECONDS = 5 * 60;
 
   struct prediction_t {
     candle_t candle;

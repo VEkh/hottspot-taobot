@@ -63,7 +63,7 @@ class InputLoader:
                     five_min_candles
                   where
                     symbol = %(symbol)s
-                    and opened_at <= to_timestamp(%(ref_epoch)s)
+                    and (to_timestamp(%(ref_epoch)s) - date_trunc('minute', opened_at)) >= '%(candle_duration_seconds)s seconds'::interval
                   order by
                     opened_at desc
                   limit %(input_width)s
@@ -87,6 +87,7 @@ class InputLoader:
             cursor.execute(
                 query,
                 {
+                    "candle_duration_seconds": models.config.CANDLE_DURATION_SECONDS,
                     "input_width": self.input_width,
                     "ref_epoch": self.ref_epoch,
                     "symbol": self.symbol,
