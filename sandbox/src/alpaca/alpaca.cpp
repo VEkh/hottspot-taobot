@@ -19,6 +19,8 @@ void print_usage() {
   std::map<std::string, const char *> commands = {
       {"cancel_orders <ORDER_IDS>                     ",
        "Cancel outsanding orders"},
+      {"fetch_asset <SYMBOL>                          ",
+       "Get asset info for the given symbol"},
       {"fetch_quote <SYMBOL>                          ",
        "Get quote for the given symbol"},
       {"log_benchmark                                 ",
@@ -94,10 +96,26 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
+  if (command == "fetch_asset") {
+    if (upcased_args.empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide at least one symbol to fetch.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Alpaca::Client alpaca_client(flags);
+
+    std::string quote = alpaca_client.fetch_asset(upcased_args.front());
+    puts(quote.c_str());
+
+    exit(0);
+  }
+
   if (command == "fetch_quote") {
     if (upcased_args.empty()) {
       std::string message = Formatted::error_message(
-          "Please provide at least one symbol to trade.");
+          "Please provide at least one symbol to fetch.");
 
       throw std::invalid_argument(message);
     }

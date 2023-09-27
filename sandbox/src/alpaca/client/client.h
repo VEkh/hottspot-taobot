@@ -37,6 +37,7 @@ public:
   std::string cancel_order(const std::string &);
   std::string cancel_order(const order_t *order);
   std::string fetch_account();
+  std::string fetch_asset(const std::string &);
   std::string fetch_order(const std::string &);
   std::string fetch_quote(char *);
   std::string fetch_quote(const std::string &);
