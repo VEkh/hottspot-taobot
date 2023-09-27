@@ -6,6 +6,7 @@
 #include "get_latest_quotes.cpp" // get_latest_quotes
 #include "lib/utils/integer.cpp" // ::utils::integer_
 #include "lib/utils/time.cpp"    // ::utils::time_
+#include "quote_to_bounds.cpp"   // quote_to_bounds
 #include "upsert.cpp"            // upsert
 #include <algorithm>             // std::max, std::min
 #include <iostream>              // std::cout, std::endl
@@ -16,7 +17,8 @@
 
 void DB::FiveMinCandle::build() {
   std::cout << fmt.bold << fmt.cyan;
-  std::cout << "🔥 Building 5 Minute Candles for ";
+  std::cout << "🔥 Building " << this->CANDLE_DURATION_MINUTES
+            << " Minute Candles for ";
   std::cout << fmt.yellow << this->symbol << std::endl;
   std::cout << fmt.reset << std::endl;
 
@@ -30,17 +32,27 @@ void DB::FiveMinCandle::build() {
   std::list<quote_t>::const_iterator quote = latest_quotes.begin();
 
   for (; quote != latest_quotes.end(); quote++, quotes_count++) {
+    const candle_bounds_t bounds = quote_to_bounds(*quote);
     const double mid = quote->mid();
+
+    if (candle.closed_at && quote->timestamp > candle.closed_at) {
+      upsert(candle);
+      candle = candle_t();
+      candles_count++;
+    }
+
+    candle.close = mid;
+    candle.closed_at = bounds.closed_at;
     candle.high = std::max(candle.high, mid);
     candle.low = std::min(candle.low, mid);
     candle.open = candle.open ? candle.open : mid;
-    candle.opened_at = candle.opened_at ? candle.opened_at : quote->timestamp;
+    candle.opened_at = bounds.opened_at;
     candle.symbol = quote->symbol;
 
     if (quotes_count % 1000 == 0) {
       std::cout << fmt.bold << fmt.yellow << fmt.underline;
       std::cout << "📝 " << this->symbol;
-      printf(" 5 Min Candle Build Report\n");
+      printf(" %i Min Candle Build Report\n", this->CANDLE_DURATION_MINUTES);
 
       std::cout << fmt.no_underline << fmt.cyan;
       printf("Candles Upserted: %i\n", candles_count);
@@ -50,15 +62,6 @@ void DB::FiveMinCandle::build() {
                  .c_str());
       printf("Quotes Processed: %i\n", quotes_count);
       std::cout << fmt.reset << std::endl;
-    }
-
-    if (quote->id == latest_quotes.back().id ||
-        (quote->timestamp - candle.opened_at) >= CANDLE_DURATION_SECONDS) {
-      candle.close = mid;
-      candle.closed_at = quote->timestamp;
-      upsert(candle);
-      candle = candle_t();
-      candles_count++;
     }
   }
 

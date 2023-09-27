@@ -31,14 +31,23 @@ private:
   using query_result_t = Pg::query_result_t;
   using quote_t = Global::t::quote_t;
 
-  constexpr static int CANDLE_DURATION_SECONDS = 5 * 60;
+  struct candle_bounds_t {
+    double closed_at;
+    double opened_at;
+  };
+
+  constexpr static int CANDLE_DURATION_MINUTES = 5;
+  constexpr static int CANDLE_DURATION_SECONDS = CANDLE_DURATION_MINUTES * 60;
 
   DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
   std::string symbol;
 
+  candle_bounds_t quote_to_bounds(const quote_t &);
+
   std::list<quote_t> get_latest_quotes(const bool);
+
   void upsert(const candle_t, const bool);
 };
 } // namespace DB

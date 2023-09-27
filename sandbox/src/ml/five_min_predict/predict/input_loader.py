@@ -63,7 +63,7 @@ class InputLoader:
                     five_min_candles
                   where
                     symbol = %(symbol)s
-                    and (to_timestamp(%(ref_epoch)s) - date_trunc('minute', opened_at)) >= '%(candle_duration_seconds)s seconds'::interval
+                    and (to_timestamp(%(ref_epoch)s) - opened_at) >= '%(candle_duration_seconds)s seconds'::interval
                   order by
                     opened_at desc
                   limit %(input_width)s

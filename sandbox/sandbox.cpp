@@ -2,21 +2,21 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "ml/five_min_predict/five_min_predict.cpp" // ML::FiveMinPredict
-#include <list>                                     // std::list
-#include <map>                                      // std::map
-#include <time.h>                                   // time
+#include <time.h> // localtime, mktime, time, tm
 
 int main(int argc, char *argv[]) {
-  Pg conn((std::map<std::string, std::string>){
-      {"env", "production"},
-  });
-  conn.connect();
+  const int min = 58;
 
-  ML::FiveMinPredict five_min_predict(conn, "AMZN");
+  const int closed_at_min = ((min + 5) / 5) * 5;
+  const int opened_at_min = (min / 5) * 5;
 
-  printf("should predict: %i\n",
-         (int)five_min_predict.should_predict("live-alpha"));
+  printf("opened_at min: %i\n", opened_at_min);
+  printf("closed_at min: %i\n", closed_at_min);
 
-  conn.disconnect();
+  const long int epoch = 1695845408.010215;
+  tm epoch_tm = *localtime(&epoch);
+
+  epoch_tm.tm_min = 60;
+
+  printf("epoch at 60th min: %li\n", (long int)mktime(&epoch_tm));
 }
