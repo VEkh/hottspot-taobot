@@ -20,39 +20,36 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
-    this->exit_prices = build_exit_prices();
+  if (max_account_loss_reached()) {
+    return true;
+  }
 
+  if (this->backtest.is_active &&
+      this->backtest.has_reached_end(this->current_epoch)) {
+    return true;
+  }
+
+  this->exit_prices = build_exit_prices();
+
+  if (!this->exit_prices.max_loss || !this->exit_prices.min_profit) {
+    return false;
+  }
+
+  if (this->open_order_ptr->profit <= this->exit_prices.max_loss) {
+    return true;
+  }
+
+  if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
     return this->five_min_predict.should_close_position(
         this->open_order_ptr->action);
-
   } else {
-    if (max_account_loss_reached()) {
-      return true;
-    }
-
     if (should_stop_profit()) {
       return true;
-    }
-
-    if (this->backtest.is_active &&
-        this->backtest.has_reached_end(this->current_epoch)) {
-      return true;
-    }
-
-    this->exit_prices = build_exit_prices();
-
-    if (!this->exit_prices.max_loss || !this->exit_prices.min_profit) {
-      return false;
     }
 
     if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
         this->open_order_ptr->profit <=
             this->exit_prices.trailing_stop_profit) {
-      return true;
-    }
-
-    if (this->open_order_ptr->profit <= this->exit_prices.max_loss) {
       return true;
     }
   }

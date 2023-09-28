@@ -103,6 +103,7 @@ private:
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();
+  bool should_ml_open_position();
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();

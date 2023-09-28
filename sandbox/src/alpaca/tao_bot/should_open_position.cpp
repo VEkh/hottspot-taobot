@@ -1,8 +1,9 @@
 #ifndef ALPACA__TAO_BOT_should_open_position
 #define ALPACA__TAO_BOT_should_open_position
 
-#include "is_market_open.cpp" // is_market_open
-#include "tao_bot.h"          // Alpaca::TaoBot, quote_t
+#include "is_market_open.cpp"          // is_market_open
+#include "should_ml_open_position.cpp" // should_ml_open_position
+#include "tao_bot.h"                   // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::should_open_position() {
   if (!is_market_open()) {
@@ -18,7 +19,7 @@ bool Alpaca::TaoBot::should_open_position() {
   }
 
   if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
-    return !this->five_min_predict.predictions.empty();
+    return should_ml_open_position();
   }
 
   return true;
