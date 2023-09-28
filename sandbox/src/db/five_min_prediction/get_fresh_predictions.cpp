@@ -20,6 +20,7 @@ DB::FiveMinPrediction::get_fresh_predictions(
       select
         five_min_predictions.*,
         five_min_candles.close as candle_close,
+        extract(epoch from five_min_predictions.candle_closed_at) as candle_closed_at_epoch,
         five_min_candles.high as candle_high,
         five_min_candles.low as candle_low,
         five_min_candles.open as candle_open,

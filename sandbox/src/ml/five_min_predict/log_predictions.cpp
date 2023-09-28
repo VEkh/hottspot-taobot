@@ -37,8 +37,12 @@ void ML::FiveMinPredict::log_predictions() {
     log_color = predict_action(prediction) == order_action_t::SELL ? fmt.red
                                                                    : fmt.green;
 
+    const std::string timestamp_str = ::utils::time_::date_string(
+        prediction.candle.closed_at, "%H:%M", "America/Chicago");
+
     std::cout << log_color;
-    printf("%s: %.2f", prediction.model_name.c_str(), prediction.close);
+    printf("%s (%s): %.2f", prediction.model_name.c_str(),
+           timestamp_str.c_str(), prediction.close);
   }
 
   std::cout << fmt.reset << std::endl << std::endl;

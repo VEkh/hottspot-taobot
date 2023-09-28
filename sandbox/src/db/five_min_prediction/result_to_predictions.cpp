@@ -26,6 +26,10 @@ DB::FiveMinPrediction::result_to_predictions(const query_result_t &result) {
         record.candle.close = std::stod(value);
       }
 
+      if (field == "candle_closed_at_epoch") {
+        record.candle.closed_at = std::stod(value);
+      }
+
       if (field == "candle_high") {
         record.candle.high = std::stod(value);
       }
