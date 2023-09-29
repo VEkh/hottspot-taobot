@@ -4,27 +4,15 @@
 #include "five_min_predict.h" // ML::FiveMinPredict
 
 ML::FiveMinPredict::order_action_t ML::FiveMinPredict::predict_action() {
-  int buy_count = 0;
-  int sell_count = 0;
+  prediction_t deciding_prediction;
 
   for (const prediction_t prediction : this->predictions) {
-    switch (predict_action(prediction)) {
-    case order_action_t::BUY: {
-      buy_count += 1;
-      break;
-    }
-    case order_action_t::SELL: {
-      sell_count += 1;
-      break;
-    }
+    if (prediction.model_name == "lstm") {
+      deciding_prediction = prediction;
     }
   }
 
-  if (buy_count >= sell_count) {
-    return order_action_t::BUY;
-  }
-
-  return order_action_t::SELL;
+  return predict_action(deciding_prediction);
 }
 
 ML::FiveMinPredict::order_action_t
