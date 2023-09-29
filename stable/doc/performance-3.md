@@ -1,4 +1,4 @@
-### 2023-09-15:
+### 2023-10-02:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 18W (75.00%) 6L (Total: 24)
+Win Rate: 1W (16.67%) 5L (Total: 6)
 ```
 
 **Beta (STAGING)**
@@ -26,13 +26,563 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 41W (43.16%) 54L (Total: 95)
+Win Rate: 4W (100.00%) 0L (Total: 4)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 20W (48.78%) 21L (Total 41)
-* Better Performer: Live Alpha: 17 • Paper Beta: 19 (Total: 36)
-* Failed to Re-Reach +6.35% (Since 2023-07-18): 1 Days (9.09%) (Total: 11)
+* Win Record: 26W (50.00%) 26L (Total 52)
+* Better Performer: Live Alpha: 2 • Paper Beta: 2 (Total: 4)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-09-29:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Friday, September 29 2023
+Current Equity:          $69470.08 (+4135.10) (+6.33%)
+Max Equity:              $69526.91 (+4191.93) (+6.42%) @ 14:55 CDT
+Min Equity:              $63910.19 (-1424.79) (-2.18%) @ 12:00 CDT
+Original Equity:         $65334.98
+```
+
+**Alpha (STAGING)**
+```
+Friday, September 29 2023
+Current Equity:          $153403.83 (+10689.10) (+7.49%)
+Max Equity:              $153730.35 (+11015.62) (+7.72%) @ 14:57 CDT
+Min Equity:              $140413.23 (-2301.50) (-1.61%) @ 08:32 CDT
+Original Equity:         $142714.73
+
+Win Rate: 1W (16.67%) 5L (Total: 6)
+```
+
+**Beta (STAGING)**
+```
+Friday, September 29 2023
+Current Equity:          $71900.99 (+4246.93) (+6.28%)
+Max Equity:              $71962.19 (+4308.13) (+6.37%) @ 13:00 CDT
+Min Equity:              $66379.61 (-1274.45) (-1.88%) @ 08:42 CDT
+Original Equity:         $67654.06
+
+Win Rate: 4W (100.00%) 0L (Total: 4)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 26W (50.00%) 26L (Total 52)
+* Better Performer: Live Alpha: 2 • Paper Beta: 2 (Total: 4)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 116W (57.43%) (Consecutive: 6) 86L (Consecutive: 0)
+* Latest Return: +$4135.10 (+6.33%) (+716.75% 9-5 Salary) (vs. NASDAQ: +0.10%) (vs. S&P 500: -0.27%)
+* Week's Return: +$16525.97 • Total Return: +$4650.86
+* Average Return: -0.03% • Average NASDAQ Return: +0.07% • Average S&P 500 Return: +0.04%
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-09-28:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thursday, September 28 2023
+Current Equity:          $65351.95 (+3904.54) (+6.35%)
+Max Equity:              $65354.05 (+3906.64) (+6.36%) @ 11:05 CDT
+Min Equity:              $59982.62 (-1464.79) (-2.38%) @ 08:38 CDT
+Original Equity:         $61447.41
+```
+
+**Alpha (STAGING)**
+```
+Thursday, September 28 2023
+Current Equity:          $142925.84 (-4167.16) (-2.83%)
+Max Equity:              $151930.02 (+4837.02) (+3.29%) @ 08:58 CDT
+Min Equity:              $139185.51 (-7907.49) (-5.38%) @ 11:55 CDT
+Original Equity:         $147093.00
+
+Win Rate: 0W (0.00%) 5L (Total: 5)
+```
+
+**Beta (STAGING)**
+```
+Thursday, September 28 2023
+Current Equity:          $67670.59 (+3982.72) (+6.25%)
+Max Equity:              $67732.93 (+4045.06) (+6.35%) @ 10:58 CDT
+Min Equity:              $62230.48 (-1457.39) (-2.29%) @ 08:38 CDT
+Original Equity:         $63687.87
+
+Win Rate: 3W (100.00%) 0L (Total: 3)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 25W (49.02%) 26L (Total 51)
+* Better Performer: Live Alpha: 2 • Paper Beta: 1 (Total: 3)
+
+###### Notes
+* ML is going well in that every day is maxxing out above +2%, but it's failing
+  in that it ultimately loses at the end of each day.
+* I would feel way more confident if this strategy made money every day, or if
+  it were at least evident that it would make money over time.
+* Backtesting ML using only LSTM was going well. It made at least +3% on 57% of
+  days. At the end of the month it hit two big losses.
+
+###### Next Thing(s) to Try
+
+### 2023-09-27:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, September 27 2023
+Current Equity:          $61460.50 (+1144.29) (+1.90%)
+Max Equity:              $63307.85 (+2991.64) (+4.96%) @ 14:13 CDT
+Min Equity:              $60041.38 (-274.83) (-0.46%) @ 08:36 CDT
+Original Equity:         $60316.21
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, September 27 2023
+Current Equity:          $147169.53 (-11390.74) (-7.18%)
+Max Equity:              $162027.92 (+3467.65) (+2.19%) @ 08:45 CDT
+Min Equity:              $145566.88 (-12993.39) (-8.19%) @ 12:27 CDT
+Original Equity:         $158560.27
+
+Win Rate: 0W (0.00%) 4L (Total: 4)
+```
+
+**Beta (STAGING)**
+```
+Wednesday, September 27 2023
+Current Equity:          $63700.86 (+875.07) (+1.39%)
+Max Equity:              $65518.66 (+2692.87) (+4.29%) @ 14:13 CDT
+Min Equity:              $62573.84 (-251.95) (-0.40%) @ 08:36 CDT
+Original Equity:         $62825.79
+
+Win Rate: 2W (100.00%) 0L (Total: 2)
+```
+
+**Backtesting (backtest-ml)**
+```
+Thursday, April 13 2023
+Current Equity:          $40716.17 (+1248.61) (+3.16%)
+Max Equity:              $41294.92 (+1827.36) (+4.63%) @ 11:19 CDT
+Min Equity:              $38756.58 (-710.98) (-1.80%) @ 08:53 CDT
+Original Equity:         $39467.56
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 24W (46.00%) 26L (Total 50)
+* Better Performer: Live Alpha: 2 • Paper Beta: 0 (Total: 2)
+
+###### Notes
+* Really good news! Overnight backtesting did REALLY well while testing the machine
+  learning strategy 🎉🎈🎊
+* Most days reached +3% profit and after just under a month, the return was 33.33%
+* Today revealed some interesting issues:
+  1. Alpaca spazzed out and disabled shorting of all stocks. This kept me out
+     of trading for almost an hour during which I very likely could have hit
+     another full win 😳.
+     * This was out of my control and was resolved quickly.
+
+  2. I discovered that the candle `opened_at`s and `closed_at`s have slowly
+     been sliding forward in the future.
+     * This was affecting when predictions were made and when they expired.
+     * As a result, the predictions weren't very accurate.
+     * I fixed the bug in the candle building code and rebuilt them.
+     * Now I'll build a script to build all historical predictions for
+       backtesting purposes.
+
+###### Next Thing(s) to Try
+
+### 2023-09-26:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, September 26 2023
+Current Equity:          $63323.42 (+3765.09) (+6.32%)
+Max Equity:              $63344.65 (+3786.32) (+6.36%) @ 09:18 CDT
+Min Equity:              $59307.87 (-250.46) (-0.42%) @ 08:31 CDT
+Original Equity:         $59558.33
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, September 26 2023
+Current Equity:          $158768.86 (-10114.06) (-5.99%)
+Max Equity:              $172285.66 (+3402.74) (+2.01%) @ 08:38 CDT
+Min Equity:              $155694.53 (-13188.39) (-7.81%) @ 13:14 CDT
+Original Equity:         $168882.92
+
+Win Rate: 0W (0.00%) 3L (Total: 3)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, September 26 2023
+Current Equity:          $62844.14 (+35.47) (+0.06%)
+Max Equity:              $66743.99 (+3935.32) (+6.27%) @ 09:18 CDT
+Min Equity:              $61502.66 (-1306.01) (-2.08%) @ 12:17 CDT
+Original Equity:         $62808.67
+
+Win Rate: 1W (100.00%) 0L (Total: 1)
+```
+
+**Backtest (backtest-ml)**
+```
+All 3 Models
+Current Equity:                   $27715.51 (-2284.49) (-7.61%)
+Max Equity:                       $30196.75 (+196.75) (+0.66%) @ 08:35 CDT
+Min Equity:                       $27270.31 (-2729.69) (-9.10%) @ 13:00 CDT
+Original Equity:                  $30000.00
+
+LSTM Only
+Current Equity:                   $28513.92 (-1486.08) (-4.95%)
+Max Equity:                       $30218.90 (+218.90) (+0.73%) @ 08:35 CDT
+Min Equity:                       $26871.98 (-3128.02) (-10.43%) @ 09:55 CDT
+Original Equity:                  $30000.00
+```
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 23W (45.83%) 26L (Total 49)
+* Better Performer: Live Alpha: 23 • Paper Beta: 20 (Total: 43)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-09-25:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, September 25 2023
+Current Equity:          $59562.17 (+3576.95) (+6.39%)
+Max Equity:              $59562.17 (+3576.95) (+6.39%) @ 12:55 CDT
+Min Equity:              $55976.50 (-8.72) (-0.02%) @ 08:30 CDT
+Original Equity:         $55985.22
+```
+
+**Alpha (STAGING)**
+```
+Monday, September 25 2023
+Current Equity:          $169142.54 (-3796.36) (-2.20%)
+Max Equity:              $182695.05 (+9756.15) (+5.64%) @ 08:44 CDT
+Min Equity:              $167170.46 (-5768.44) (-3.34%) @ 09:42 CDT
+Original Equity:         $172938.90
+
+❗ 9am is when the ML algorithm actually starts.
+
+(Post 9am Stats)
+Current Equity:          $169142.54 (-3796.36) (-3.79%)
+Max Equity:              $178524.06 (+2725.36) (+1.55%) @ 11:09 CDT
+Min Equity:              $167170.46 (-5768.44) (-4.91%) @ 09:42 CDT
+Original Equity:         $175798.7
+
+Win Rate: 0W (0.00%) 2L (Total: 2)
+```
+
+**Beta (STAGING)**
+```
+Monday, September 25 2023
+Current Equity:          $62827.38 (-1680.76) (-2.61%)
+Max Equity:              $66101.40 (+1593.26) (+2.47%) @ 08:52 CDT
+Min Equity:              $62827.38 (-1680.76) (-2.61%) @ 09:18 CDT
+Original Equity:         $64508.14
+
+Win Rate: 42W (41.58%) 60L (Total: 102)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 22W (45.83%) 26L (Total 48)
+* Better Performer: Live Alpha: 22 • Paper Beta: 20 (Total: 42)
+
+###### Notes
+* I introduced a bug into getting the freshest predictions with this weekend's
+  refactors.
+* I fixed it by 9am so after then is when you can start measuring the
+  prediction algorithm's effectiveness.
+* Paper Beta is now on a prolonged downturn. It's time to introduce its delayed
+  first trade by 30 seconds.
+* I may have fixed the backtest bug! I ran it against today's data and it
+  yielded the results I've been anticipating.
+* I'm going to run in further in the past and see how it performs.
+
+###### Next Thing(s) to Try
+
+### 2023-09-22:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Friday, September 22 2023
+Current Equity:          $55990.60 (+3347.11) (+6.36%)
+Max Equity:              $55992.60 (+3349.11) (+6.36%) @ 09:45 CDT
+Min Equity:              $51973.95 (-669.54) (-1.27%) @ 08:31 CDT
+Original Equity:         $52643.49
+```
+
+**Alpha (STAGING)**
+```
+Friday, September 22 2023
+Current Equity:          $173140.00 (-1183.22) (-0.68%)
+Max Equity:              $179736.96 (+5413.74) (+3.11%) @ 10:17 CDT
+Min Equity:              $167977.20 (-6346.02) (-3.64%) @ 13:59 CDT
+Original Equity:         $174323.22
+
+Win Rate: 0W (0.00%) 1L (Total: 1)
+```
+
+**Beta (STAGING)**
+```
+Friday, September 22 2023
+Current Equity:          $64528.41 (+1601.82) (+2.55%)
+Max Equity:              $65213.24 (+2286.65) (+3.63%) @ 13:18 CDT
+Min Equity:              $61932.82 (-993.77) (-1.58%) @ 08:33 CDT
+Original Equity:         $62926.59
+
+
+Win Rate: 42W (41.58%) 59L (Total: 101)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 21W (44.68%) 26L (Total 47)
+* Better Performer: Live Alpha: 21 • Paper Beta: 20 (Total: 41)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 111W (56.35%) (Consecutive: 1) 86L (Consecutive: 0)
+* Latest Return: +$3347.11 (+6.36%) (+580.17% 9-5 Salary) (vs. NASDAQ: +0.03%) (vs. S&P 500: -0.20%)
+* Week's Return: -$2576.16 • Total Return: -$11875.11
+* Average Return: -0.17% • Average NASDAQ Return: +0.07% • Average S&P 500 Return: +0.04%
+
+###### Notes
+* Today was the first day where machine learning controlled positions in Paper
+  Alpha.
+* It actually went as I was hoping -- a reasonable range of loss and profit
+  that surpassed the goal of +1-2%.
+* Backtest is demonstrating that the models fail abysmally, but I think there
+  may be a bug.
+* My goal this weekend is to tweak the ML strategy to see if I can guarantee a
+  target profit of +1-2%
+
+###### Next Thing(s) to Try
+
+### 2023-09-21:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thursday, September 21 2023
+Current Equity:          $52648.11 (-1402.74) (-2.60%)
+Max Equity:              $54050.85 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:              $52648.11 (-1402.74) (-2.60%) @ 08:31 CDT
+Original Equity:         $54050.85
+```
+
+**Alpha (STAGING)**
+```
+Thursday, September 21 2023
+Current Equity:          $174387.74 (-15252.20) (-8.04%)
+Max Equity:              $189639.94 (+0.00) (+0.00%) @ 08:00 CDT
+Min Equity:              $174387.74 (-15252.20) (-8.04%) @ 13:26 CDT
+Original Equity:         $189639.94
+
+Win Rate: 18W (62.07%) 11L (Total: 29)
+```
+
+**Beta (STAGING)**
+```
+Thursday, September 21 2023
+Current Equity:          $62931.05 (-1630.83) (-2.53%)
+Max Equity:              $64561.88 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:              $62921.64 (-1640.24) (-2.54%) @ 08:31 CDT
+Original Equity:         $64561.88
+
+Win Rate: 41W (41.00%) 59L (Total: 100)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 20W (43.48%) 26L (Total 46)
+* Better Performer: Live Alpha: 20 • Paper Beta: 20 (Total: 40)
+
+###### Notes
+* Wow! Looks like I may be wrong about the Paper Beta strategy 😭
+* After 100 rounds, it is up 28.94% from its 4/25 start, but down -26.34% from
+  its 8/16 peak.
+* I guess I should continue to watch
+
+###### Next Thing(s) to Try
+
+### 2023-09-20:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, September 20 2023
+Current Equity:          $54055.51 (-1405.77) (-2.53%)
+Max Equity:              $55500.85 (+39.57) (+0.07%) @ 08:30 CDT
+Min Equity:              $54055.51 (-1405.77) (-2.53%) @ 08:48 CDT
+Original Equity:         $55461.28
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, September 20 2023
+Current Equity:          $189713.75 (-16832.56) (-8.15%)
+Max Equity:              $208547.70 (+2001.39) (+0.97%) @ 08:30 CDT
+Min Equity:              $189654.92 (-16891.39) (-8.18%) @ 13:24 CDT
+Original Equity:         $206546.31
+
+Win Rate: 18W (64.29%) 10L (Total: 28)
+```
+
+**Beta (STAGING)**
+```
+Wednesday, September 20 2023
+Current Equity:          $64567.45 (-1673.05) (-2.53%)
+Max Equity:              $66930.24 (+689.74) (+1.04%) @ 08:30 CDT
+Min Equity:              $64535.23 (-1705.27) (-2.57%) @ 08:36 CDT
+Original Equity:         $66240.50
+
+
+Win Rate: 41W (41.41%) 58L (Total: 99)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 20W (44.44%) 25L (Total 45)
+* Better Performer: Live Alpha: 19 • Paper Beta: 20 (Total: 39)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-09-19:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, September 19 2023
+Current Equity:          $55468.11 (-1472.36) (-2.59%)
+Max Equity:              $56949.09 (+8.62) (+0.02%) @ 08:30 CDT
+Min Equity:              $55468.11 (-1472.36) (-2.59%) @ 08:42 CDT
+Original Equity:         $56940.47
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, September 19 2023
+Current Equity:          $206605.52 (-12272.88) (-5.61%)
+Max Equity:              $218903.64 (+25.24) (+0.01%) @ 08:30 CDT
+Min Equity:              $202061.66 (-16816.74) (-7.68%) @ 11:56 CDT
+Original Equity:         $218878.40
+
+Win Rate: 18W (66.67%) 9L (Total: 27)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, September 19 2023
+Current Equity:          $66249.69 (-1754.86) (-2.58%)
+Max Equity:              $68505.64 (+501.09) (+0.74%) @ 08:34 CDT
+Min Equity:              $66249.69 (-1754.86) (-2.58%) @ 09:27 CDT
+Original Equity:         $68004.55
+
+
+Win Rate: 41W (41.84%) 57L (Total: 98)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 20W (45.45%) 24L (Total 44)
+* Better Performer: Live Alpha: 18 • Paper Beta: 20 (Total: 38)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-09-18:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, September 18 2023
+Current Equity:          $56945.39 (-1642.40) (-2.80%)
+Max Equity:              $58950.00 (+362.21) (+0.62%) @ 08:31 CDT
+Min Equity:              $56945.39 (-1642.40) (-2.80%) @ 08:34 CDT
+Original Equity:         $58587.79
+```
+
+**Alpha (STAGING)**
+```
+Monday, September 18 2023
+Current Equity:          $218954.44 (-2557.08) (-1.15%)
+Max Equity:              $226558.39 (+5046.87) (+2.28%) @ 09:38 CDT
+Min Equity:              $213917.58 (-7593.94) (-3.43%) @ 08:40 CDT
+Original Equity:         $221511.52
+
+Win Rate: 18W (69.23%) 8L (Total: 26)
+```
+
+**Beta (STAGING)**
+```
+Monday, September 18 2023
+Current Equity:          $68010.41 (-1911.49) (-2.73%)
+Max Equity:              $70087.65 (+165.75) (+0.24%) @ 08:31 CDT
+Min Equity:              $68010.41 (-1911.49) (-2.73%) @ 08:34 CDT
+Original Equity:         $69921.90
+
+Win Rate: 41W (42.27%) 56L (Total: 97)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 20W (46.51%) 23L (Total 43)
+* Better Performer: Live Alpha: 18 • Paper Beta: 20 (Total: 38)
+
+###### Notes
+###### Next Thing(s) to Try
+
+### 2023-09-15:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Friday, September 15 2023
+Current Equity:          $58598.79 (-1543.19) (-2.57%)
+Max Equity:              $61507.13 (+1365.15) (+2.27%) @ 08:45 CDT
+Min Equity:              $58598.79 (-1543.19) (-2.57%) @ 09:05 CDT
+Original Equity:         $60141.98
+```
+
+**Alpha (STAGING)**
+```
+Friday, September 15 2023
+Current Equity:          $221571.49 (-2349.92) (-1.05%)
+Max Equity:              $227505.30 (+3583.89) (+1.60%) @ 12:16 CDT
+Min Equity:              $217770.39 (-6151.02) (-2.75%) @ 08:32 CDT
+Original Equity:         $223921.41
+
+Win Rate: 18W (72.0%) 7L (Total: 25)
+```
+
+**Beta (STAGING)**
+```
+Friday, September 15 2023
+Current Equity:          $69935.01 (-1698.50) (-2.37%)
+Max Equity:              $73394.68 (+1761.17) (+2.46%) @ 08:45 CDT
+Min Equity:              $69819.96 (-1813.55) (-2.53%) @ 09:02 CDT
+Original Equity:         $71633.51
+
+Win Rate: 41W (42.71%) 55L (Total: 96)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 20W (48.78%) 22L (Total 42)
+* Better Performer: Live Alpha: 17 • Paper Beta: 20 (Total: 37)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 110W (57.29%) (Consecutive: 0) 82L (Consecutive: 1)
+* Latest Return: -$1543.19 (-2.57%) (-267.49% 9-5 Salary) (vs. NASDAQ: -1.74%) (vs. S&P 500: -1.23%)
+* Week's Return: -$3466.89 • Total Return: -$9298.95
+* Average Return: -0.15% • Average NASDAQ Return: +0.09% • Average S&P 500 Return: +0.06%
 
 ###### Notes
 ###### Next Thing(s) to Try
