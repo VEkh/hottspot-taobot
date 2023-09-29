@@ -1,7 +1,5 @@
 import numpy as np
 
-CANDLE_DURATION_SECONDS = 5 * 60
-
 CONVOLUTION_SIZE = 3
 
 DEFAULT_NORM_FACTORS = {"mean": np.array([]), "std": np.array([])}
