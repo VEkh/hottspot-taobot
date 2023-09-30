@@ -1,15 +1,15 @@
 #ifndef DB__FIVE_MIN_PREDICTION_H
 #define DB__FIVE_MIN_PREDICTION_H
 
-#include "db/five_min_candle/five_min_candle.cpp" // DB::FiveMinCandle
-#include "lib/pg/pg.cpp"                          // Pg
-#include <list>                                   // std::list
-#include <string>                                 // std::string
+#include "db/candle/candle.cpp" // DB::Candle
+#include "lib/pg/pg.cpp"        // Pg
+#include <list>                 // std::list
+#include <string>               // std::string
 
 namespace DB {
 class FiveMinPrediction {
 public:
-  using candle_t = DB::FiveMinCandle::candle_t;
+  using candle_t = DB::Candle::candle_t;
 
   constexpr static int EXIRATION_SECONDS = 5 * 60;
 

@@ -1,7 +1,7 @@
 #ifndef ML__FIVE_MIN_PREDICT_H
 #define ML__FIVE_MIN_PREDICT_H
 
-#include "db/five_min_candle/five_min_candle.cpp"         // DB::FiveMinCandle
+#include "db/candle/candle.cpp"                           // DB::Candle
 #include "db/five_min_prediction/five_min_prediction.cpp" // DB::FiveMinPrediction
 #include "lib/formatted.cpp"                              // Formatted
 #include "lib/pg/pg.cpp"                                  // Pg
@@ -24,7 +24,7 @@ public:
   FiveMinPredict(){};
   FiveMinPredict(Pg, const std::string);
 
-  DB::FiveMinCandle db_five_min_candle;
+  DB::Candle db_candle;
   DB::FiveMinPrediction db_five_min_prediction;
   std::list<prediction_t> predictions;
 

@@ -1,5 +1,5 @@
-#ifndef DB__FIVE_MIN_CANDLE_H
-#define DB__FIVE_MIN_CANDLE_H
+#ifndef DB__CANDLE_H
+#define DB__CANDLE_H
 
 #include "db/quote/quote.cpp" // DB::Quote
 #include "lib/formatted.cpp"  // Formatted
@@ -10,7 +10,7 @@
 #include <string>             // std::string
 
 namespace DB {
-class FiveMinCandle {
+class Candle {
 public:
   struct candle_t {
     double close = 0;
@@ -22,8 +22,8 @@ public:
     std::string symbol;
   };
 
-  FiveMinCandle(){};
-  FiveMinCandle(const Pg, const std::string);
+  Candle(){};
+  Candle(const Pg, const int, const std::string);
 
   void build();
 
@@ -36,12 +36,10 @@ private:
     double opened_at;
   };
 
-  constexpr static int CANDLE_DURATION_MINUTES = 5;
-  constexpr static int CANDLE_DURATION_SECONDS = CANDLE_DURATION_MINUTES * 60;
-
   DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
+  int duration_minutes = 0;
   std::string symbol;
 
   candle_bounds_t quote_to_bounds(const quote_t &);

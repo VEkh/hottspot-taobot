@@ -1,14 +1,16 @@
-#ifndef DB__FIVE_MIN_CANDLE
-#define DB__FIVE_MIN_CANDLE
+#ifndef DB__CANDLE
+#define DB__CANDLE
 
+#include "candle.h" // DB::Candle
 #include "build.cpp"
 #include "db/quote/quote.cpp" // DB::Quote
-#include "five_min_candle.h"  // DB::FiveMinCandle
 #include "lib/pg/pg.cpp"      // Pg
 #include <string>             // std::string
 
-DB::FiveMinCandle::FiveMinCandle(const Pg c, const std::string symbol_) {
+DB::Candle::Candle(const Pg c, const int duration_minutes_,
+                   const std::string symbol_) {
   this->conn = c;
+  this->duration_minutes = duration_minutes_;
   this->symbol = symbol_;
 
   this->db_quote = DB::Quote(this->conn);

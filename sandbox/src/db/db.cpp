@@ -1,19 +1,19 @@
-#include "db/five_min_candle/five_min_candle.cpp" // DB::FiveMinCandle
-#include "db/quote/quote.cpp"                     // DB::Quote
-#include "lib/formatted.cpp"                      // Formatted
-#include "lib/pg/pg.cpp"                          // Pg
-#include "lib/utils/io.cpp"                       // utils::io
-#include <iostream>                               // std::cout, std::endl
-#include <list>                                   // std::list
-#include <map>                                    // std::map
-#include <sstream>                                // std::ostringstream
-#include <stdexcept>                              // std::invalid_argument
-#include <stdio.h>                                // printf
-#include <string>                                 // std::string
+#include "db/candle/candle.cpp" // DB::Candle
+#include "db/quote/quote.cpp"   // DB::Quote
+#include "lib/formatted.cpp"    // Formatted
+#include "lib/pg/pg.cpp"        // Pg
+#include "lib/utils/io.cpp"     // utils::io
+#include <iostream>             // std::cout, std::endl
+#include <list>                 // std::list
+#include <map>                  // std::map
+#include <sstream>              // std::ostringstream
+#include <stdexcept>            // std::invalid_argument
+#include <stdio.h>              // printf
+#include <string>               // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
-      {"build_five_min_candles <SYMBOL> <OPTS>",
+      {"build_candles <SYMBOL> <OPTS>",
        "Build five minute candles for the given symbol"},
       {"quote:upsert_all_avg_one_sec_variances <SYMBOL> <OPTS> ",
        "Retroactively upsert a symbol's average one second variances"},
@@ -52,7 +52,7 @@ int main(int argc, char *argv[]) {
   std::map<std::string, std::string> flags =
       ::utils::io::extract_flags(argc, argv);
 
-  if (command == "build_five_min_candles") {
+  if (command == "build_candles") {
     if (upcased_args.empty()) {
       std::string message =
           Formatted::error_message("Please provide at least one symbol.");
@@ -60,12 +60,19 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
+    if (flags["min"].empty()) {
+      std::string message = Formatted::error_message(
+          "Please provide duration minutes with the --min flag.");
+
+      throw std::invalid_argument(message);
+    }
+
     Pg pg(flags);
     pg.connect();
 
-    DB::FiveMinCandle builder(pg, upcased_args.front());
+    DB::Candle candle(pg, std::stoi(flags["min"]), upcased_args.front());
 
-    builder.build();
+    candle.build();
 
     pg.disconnect();
 

@@ -35,7 +35,7 @@ class InputLoader:
                 select
                   {selected_input_columns}
                 from
-                  five_min_candles
+                  candles
                 where
                   symbol = %(symbol)s
                 order by

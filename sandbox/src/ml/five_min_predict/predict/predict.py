@@ -132,11 +132,11 @@ class Predict:
             )
 
             query = f"""
-                insert into five_min_predictions(candle_closed_at, close, five_min_candle_id, high, low, model_name, open, symbol, updated_at)
+                insert into five_min_predictions(candle_closed_at, close, candle_id, high, low, model_name, open, symbol, updated_at)
                 select
                   closed_at,
                   %(close)s,
-                  %(five_min_candle_id)s,
+                  %(candle_id)s,
                   %(high)s,
                   %(low)s,
                   %(model_name)s,
@@ -144,10 +144,10 @@ class Predict:
                   %(symbol)s,
                   {timestamp_val_format}
                 from
-                  five_min_candles
+                  candles
                 where
-                  id = %(five_min_candle_id)s
-                on conflict (five_min_candle_id,
+                  id = %(candle_id)s
+                on conflict (candle_id,
                   model_name)
                   do update set close = excluded.close, high = excluded.high, low = excluded.low, open = excluded.open, updated_at = {timestamp_val_format}
             """
@@ -156,7 +156,7 @@ class Predict:
                 query,
                 {
                     "close": prediction["close"],
-                    "five_min_candle_id": _input["id"],
+                    "candle_id": _input["id"],
                     "high": prediction["high"],
                     "low": prediction["low"],
                     "model_name": model_name,

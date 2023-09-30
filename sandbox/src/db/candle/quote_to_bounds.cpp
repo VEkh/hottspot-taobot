@@ -1,12 +1,11 @@
-#ifndef DB__FIVE_MIN_CANDLE_quote_to_bounds
-#define DB__FIVE_MIN_CANDLE_quote_to_bounds
+#ifndef DB__CANDLE_quote_to_bounds
+#define DB__CANDLE_quote_to_bounds
 
-#include "five_min_candle.h" // DB::FiveMinCandle, quote_t
-#include <time.h>            // localtime, mktime, time, tm
+#include "candle.h" // DB::Candle, quote_t
+#include <time.h>   // localtime, mktime, time, tm
 
-DB::FiveMinCandle::candle_bounds_t
-DB::FiveMinCandle::quote_to_bounds(const quote_t &quote) {
-  const int n = this->CANDLE_DURATION_MINUTES;
+DB::Candle::candle_bounds_t DB::Candle::quote_to_bounds(const quote_t &quote) {
+  const int n = this->duration_minutes;
   const long int timestamp = quote.timestamp;
 
   tm closed_at = *localtime(&timestamp);

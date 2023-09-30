@@ -1,8 +1,8 @@
-#ifndef DB__FIVE_MIN_CANDLE_build
-#define DB__FIVE_MIN_CANDLE_build
+#ifndef DB__CANDLE_build
+#define DB__CANDLE_build
 
+#include "candle.h"              // DB::Candle, candle_t, fmt, quote_t
 #include "db/quote/quote.cpp"    // DB::Quote
-#include "five_min_candle.h"     // DB::FiveMinCandle, candle_t, fmt, quote_t
 #include "get_latest_quotes.cpp" // get_latest_quotes
 #include "lib/utils/integer.cpp" // ::utils::integer_
 #include "lib/utils/time.cpp"    // ::utils::time_
@@ -16,9 +16,9 @@
 #include <stdio.h>               // printf
 #include <time.h>                // time
 
-void DB::FiveMinCandle::build() {
+void DB::Candle::build() {
   std::cout << fmt.bold << fmt.cyan;
-  std::cout << "🔥 Building " << this->CANDLE_DURATION_MINUTES
+  std::cout << "🔥 Building " << this->duration_minutes
             << " Minute Candles for ";
   std::cout << fmt.yellow << this->symbol << std::endl;
   std::cout << fmt.reset << std::endl;
@@ -58,7 +58,7 @@ void DB::FiveMinCandle::build() {
     if (quotes_count % 1000 == 0) {
       std::cout << fmt.bold << fmt.yellow << fmt.underline;
       std::cout << "📝 " << this->symbol;
-      printf(" %i Min Candle Build Report\n", this->CANDLE_DURATION_MINUTES);
+      printf(" %i Min Candle Build Report\n", this->duration_minutes);
 
       std::cout << fmt.no_underline << fmt.cyan;
       printf("Candles Upserted: %i\n", candles_count);

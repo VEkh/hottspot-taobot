@@ -7,7 +7,7 @@
 #include <string.h>           // strlen
 
 void ML::FiveMinPredict::predict(const double ref_epoch) {
-  this->db_five_min_candle.build();
+  this->db_candle.build();
 
   const char *cmd_format = "%s/bin/ml/five_min_predict predict %s --env=%s "
                            "--ref-epoch=%f --timestamps=%f > /dev/null 2>&1";

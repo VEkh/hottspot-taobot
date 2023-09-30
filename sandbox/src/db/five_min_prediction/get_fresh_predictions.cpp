@@ -19,15 +19,15 @@ DB::FiveMinPrediction::get_fresh_predictions(
     with predictions as (
       select
         five_min_predictions.*,
-        five_min_candles.close as candle_close,
+        candles.close as candle_close,
         extract(epoch from five_min_predictions.candle_closed_at) as candle_closed_at_epoch,
-        five_min_candles.high as candle_high,
-        five_min_candles.low as candle_low,
-        five_min_candles.open as candle_open,
-        five_min_candles.symbol as candle_symbol
+        candles.high as candle_high,
+        candles.low as candle_low,
+        candles.open as candle_open,
+        candles.symbol as candle_symbol
       from
         five_min_predictions
-        join five_min_candles on five_min_candles.id = five_min_predictions.five_min_candle_id
+        join candles on candles.id = five_min_predictions.candle_id
       where
         five_min_predictions.symbol = %s
         and (to_timestamp(%f) - five_min_predictions.candle_closed_at) between '0 seconds'::interval and '%i seconds'::interval

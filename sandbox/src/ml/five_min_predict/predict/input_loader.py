@@ -60,7 +60,7 @@ class InputLoader:
                   select
                     id
                   from
-                    five_min_candles
+                    candles
                   where
                     symbol = %(symbol)s
                     and closed_at <= to_timestamp(%(ref_epoch)s)
@@ -73,7 +73,7 @@ class InputLoader:
                   id,
                   extract(epoch from opened_at)::float as opened_at_epoch
                 from
-                  five_min_candles
+                  candles
                 where
                   id in (
                     select
