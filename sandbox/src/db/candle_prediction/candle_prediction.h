@@ -1,5 +1,5 @@
-#ifndef DB__FIVE_MIN_PREDICTION_H
-#define DB__FIVE_MIN_PREDICTION_H
+#ifndef DB__CANDLE_PREDICTION_H
+#define DB__CANDLE_PREDICTION_H
 
 #include "db/candle/candle.cpp" // DB::Candle
 #include "lib/pg/pg.cpp"        // Pg
@@ -7,11 +7,9 @@
 #include <string>               // std::string
 
 namespace DB {
-class FiveMinPrediction {
+class CandlePrediction {
 public:
   using candle_t = DB::Candle::candle_t;
-
-  constexpr static int EXIRATION_SECONDS = 5 * 60;
 
   struct prediction_t {
     candle_t candle;
@@ -23,8 +21,8 @@ public:
     std::string symbol;
   };
 
-  FiveMinPrediction(){};
-  FiveMinPrediction(const Pg c, const std::string s) : conn(c), symbol(s){};
+  CandlePrediction(){};
+  CandlePrediction(const Pg, const int, const std::string);
 
   std::list<prediction_t> get_fresh_predictions(const double, const bool);
 
@@ -32,6 +30,7 @@ private:
   using query_result_t = Pg::query_result_t;
 
   Pg conn;
+  int duration_minutes;
   std::string symbol;
 
   std::list<prediction_t> result_to_predictions(const query_result_t &);

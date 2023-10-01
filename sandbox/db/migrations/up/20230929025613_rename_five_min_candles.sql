@@ -5,6 +5,8 @@ alter table candles
   add column duration_minutes int not null default 5;
 alter table candles
   alter column duration_minutes drop default;
+alter sequence five_min_candles_id_seq
+  rename to candles_id_seq;
 alter table five_min_predictions rename column five_min_candle_id to candle_id;
 alter index five_min_candles_pkey rename to candles_pkey;
 alter index five_min_candles_closed_at_idx rename to candles_closed_at_idx;

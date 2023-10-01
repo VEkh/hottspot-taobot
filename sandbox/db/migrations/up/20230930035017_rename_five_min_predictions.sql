@@ -1,0 +1,11 @@
+\timing
+begin;
+alter table five_min_predictions rename to candle_predictions;
+alter sequence five_min_predictions_id_seq
+  rename to candle_predictions_id_seq;
+alter index five_min_predictions_pkey rename to candle_predictions_pkey;
+alter index five_min_predictions_five_min_candle_id_model_name_key rename to candle_predictions_candle_id_model_name_key;
+alter index five_min_predictions_symbol_idx rename to candle_predictions_symbol_idx;
+alter table candle_predictions rename constraint five_min_predictions_candle_closed_at_fkey to candle_predictions_candle_closed_at_fkey;
+alter table candle_predictions rename constraint five_min_predictions_five_min_candle_fkey to candle_predictions_candle_id_fkey;
+commit;

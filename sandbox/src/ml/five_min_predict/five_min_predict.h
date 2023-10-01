@@ -1,20 +1,20 @@
 #ifndef ML__FIVE_MIN_PREDICT_H
 #define ML__FIVE_MIN_PREDICT_H
 
-#include "db/candle/candle.cpp"                           // DB::Candle
-#include "db/five_min_prediction/five_min_prediction.cpp" // DB::FiveMinPrediction
-#include "lib/formatted.cpp"                              // Formatted
-#include "lib/pg/pg.cpp"                                  // Pg
-#include "types.cpp"                                      // Global::t
-#include <list>                                           // std::list
-#include <map>                                            // std::map
-#include <string>                                         // std::string
+#include "db/candle/candle.cpp"                       // DB::Candle
+#include "db/candle_prediction/candle_prediction.cpp" // DB::CandlePrediction
+#include "lib/formatted.cpp"                          // Formatted
+#include "lib/pg/pg.cpp"                              // Pg
+#include "types.cpp"                                  // Global::t
+#include <list>                                       // std::list
+#include <map>                                        // std::map
+#include <string>                                     // std::string
 
 namespace ML {
 class FiveMinPredict {
 public:
   using order_action_t = Global::t::order_action_t;
-  using prediction_t = DB::FiveMinPrediction::prediction_t;
+  using prediction_t = DB::CandlePrediction::prediction_t;
 
   std::map<std::string, bool> API_KEYS_WHITELIST = {
       {"backtest-ml", true},
@@ -25,7 +25,7 @@ public:
   FiveMinPredict(Pg, const std::string);
 
   DB::Candle db_candle;
-  DB::FiveMinPrediction db_five_min_prediction;
+  DB::CandlePrediction db_candle_prediction;
   std::list<prediction_t> predictions;
 
   bool should_close_position(const order_action_t);

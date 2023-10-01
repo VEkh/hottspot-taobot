@@ -6,7 +6,7 @@
 void ML::FiveMinPredict::get_fresh_predictions(const double ref_epoch,
                                                const bool debug = false) {
   this->predictions =
-      this->db_five_min_prediction.get_fresh_predictions(ref_epoch, debug);
+      this->db_candle_prediction.get_fresh_predictions(ref_epoch, debug);
 }
 
 #endif

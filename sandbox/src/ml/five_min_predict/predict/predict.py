@@ -132,7 +132,7 @@ class Predict:
             )
 
             query = f"""
-                insert into five_min_predictions(candle_closed_at, close, candle_id, high, low, model_name, open, symbol, updated_at)
+                insert into candle_predictions(candle_closed_at, close, candle_id, high, low, model_name, open, symbol, updated_at)
                 select
                   closed_at,
                   %(close)s,

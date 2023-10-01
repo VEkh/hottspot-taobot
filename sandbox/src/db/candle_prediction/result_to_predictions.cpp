@@ -1,14 +1,14 @@
-#ifndef DB__FIVE_MIN_PREDICTION_result_to_predictions
-#define DB__FIVE_MIN_PREDICTION_result_to_predictions
+#ifndef DB__CANDLE_PREDICTION_result_to_predictions
+#define DB__CANDLE_PREDICTION_result_to_predictions
 
-#include "five_min_prediction.h" // DB::FiveMinPrediction, prediction_t, query_result_t
+#include "candle_prediction.h" // DB::CandlePrediction, prediction_t, query_result_t
 #include "lib/utils/string.cpp" // ::utils::string
 #include <list>                 // std::list
 #include <string>               // std::stod, std::string
 #include <vector>               // std::vector
 
-std::list<DB::FiveMinPrediction::prediction_t>
-DB::FiveMinPrediction::result_to_predictions(const query_result_t &result) {
+std::list<DB::CandlePrediction::prediction_t>
+DB::CandlePrediction::result_to_predictions(const query_result_t &result) {
   const std::vector<std::string> fields = result.fields;
   const std::vector<std::string> tuples = result.tuples;
   std::list<prediction_t> out;
