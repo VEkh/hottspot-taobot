@@ -1,13 +1,14 @@
 from math import floor
 import numpy as np
 
-import ml.five_min_predict.models as models
+import ml.candle_predict.models as models
 import ml.utils as u
 
 
 class InputLoader:
-    def __init__(self, db_conn=None, symbol=""):
+    def __init__(self, db_conn=None, duration_minutes=0, symbol=""):
         self.db_conn = db_conn
+        self.duration_minutes = duration_minutes
         self.columns = []
         self.inputs = np.array([])
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
@@ -38,11 +39,18 @@ class InputLoader:
                   candles
                 where
                   symbol = %(symbol)s
+                  and duration_minutes = %(duration_minutes)s
                 order by
                   opened_at asc
             """
 
-            cursor.execute(query, {"symbol": self.symbol})
+            cursor.execute(
+                query,
+                {
+                    "duration_minutes": self.duration_minutes,
+                    "symbol": self.symbol,
+                },
+            )
 
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()

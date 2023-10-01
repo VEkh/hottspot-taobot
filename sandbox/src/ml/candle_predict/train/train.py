@@ -6,7 +6,7 @@ import os
 import tensorflow as tf
 import time
 
-import ml.five_min_predict.models as models
+import ml.candle_predict.models as models
 import ml.utils as u
 
 from .input_loader import InputLoader
@@ -16,20 +16,29 @@ from .window_generator import WindowGenerator
 class Train:
     MAX_EPOCHS = 20
 
-    def __init__(self, db_conn=None, symbol=""):
+    def __init__(self, db_conn=None, duration_minutes=5, symbol=""):
         self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
+        self.duration_minutes = duration_minutes
         self.input_width = models.config.INPUT_WIDTH
         self.label_columns = models.config.LABEL_COLUMNS
+        self.ref_model = None
         self.start_epoch = time.time()
         self.symbol = symbol
         self.test_performance = {}
         self.validation_performance = {}
 
-        self.input_loader = InputLoader(db_conn=self.db_conn, symbol=self.symbol)
+        self.input_loader = InputLoader(
+            db_conn=self.db_conn,
+            duration_minutes=self.duration_minutes,
+            symbol=self.symbol,
+        )
 
     def run(self):
-        u.ascii.puts("🤖 Training five minute prediction model", u.ascii.YELLOW)
+        u.ascii.puts(
+            f"🤖 Training {self.duration_minutes} minute prediction model",
+            u.ascii.YELLOW,
+        )
 
         self.input_loader.load()
         self.input_loader.preprocess()
@@ -86,11 +95,14 @@ class Train:
 
         self.__plot_performance()
 
+    def __model_filename(self, model_name):
+        return f"{self.symbol}_{model_name}_{self.duration_minutes}min"
+
     def __persist_model(self, model):
-        data_dir = f"{self.app_dir}/data/ml/five_min_predict/models"
+        data_dir = f"{self.app_dir}/data/ml/candle_predict/models"
         os.makedirs(data_dir, exist_ok=True)
 
-        filepath = f"{data_dir}/{self.symbol}_{model.name}.keras"
+        filepath = f"{data_dir}/{self.__model_filename(model.name)}.keras"
         model.save(filepath=filepath, overwrite=True)
 
         u.ascii.puts(
@@ -105,7 +117,7 @@ class Train:
         x = np.arange(len(self.test_performance))
 
         metric_name = "mean_absolute_error"
-        metric_index = self.baseline_model.metrics_names.index("mean_absolute_error")
+        metric_index = self.ref_model.metrics_names.index("mean_absolute_error")
 
         test_y = [v[metric_index] for v in self.test_performance.values()]
         validation_y = [v[metric_index] for v in self.validation_performance.values()]
@@ -116,7 +128,7 @@ class Train:
         plt.xticks(labels=self.test_performance.keys(), rotation=45, ticks=x)
         plt.legend()
 
-        filepath = f"{self.app_dir}/tmp/{self.symbol}_performance.png"
+        filepath = f"{self.app_dir}/tmp/{self.symbol}_{self.duration_minutes}min_performance.png"
         plt.savefig(filepath)
         plt.clf()
 
@@ -139,7 +151,7 @@ class Train:
         axis.set_xticks(range(columns_n))
         axis.set_xticklabels(self.input_loader.columns, rotation=90)
 
-        savepath = f"{self.app_dir}/tmp/{self.symbol}_{model.name}_weights.png"
+        savepath = f"{self.app_dir}/tmp/{self.__model_filename(model.name)}_weights.png"
         plt.savefig(savepath)
         plt.clf()
 
@@ -149,7 +161,6 @@ class Train:
 
     def __train_baseline(self):
         columns = self.input_loader.columns
-        model_name = "baseline"
 
         window = WindowGenerator(
             input_columns=columns,
@@ -162,20 +173,19 @@ class Train:
             validation_set=self.input_loader.validation_set,
         )
 
+        model = models.baseline.create(
+            input_columns=window.input_columns,
+            label_columns=window.label_columns,
+            norm_factors=self.input_loader.norm_factors,
+        )
+
         u.ascii.puts(
-            f"🤖🔨 Training {u.ascii.CYAN}{model_name.upper()}\n",
+            f"🤖🔨 Training {u.ascii.CYAN}{model.name.upper()}\n",
             u.ascii.MAGENTA,
             u.ascii.UNDERLINE,
         )
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
-
-        model = models.baseline.create(
-            input_columns=window.input_columns,
-            label_columns=window.label_columns,
-            name=model_name,
-            norm_factors=self.input_loader.norm_factors,
-        )
 
         model.compile(
             loss=tf.keras.losses.MeanSquaredError(),
@@ -186,10 +196,10 @@ class Train:
 
         print(u.ascii.RESET, end="")
 
-        setattr(self, f"{model_name}_model", model)
+        self.ref_model = model
 
         window.plot(
-            filename=f"{self.symbol}_{model_name}.png",
+            filename=f"{self.__model_filename(model.name)}.png",
             model=model,
             plot_column="close",
         )
@@ -231,7 +241,7 @@ class Train:
         print(u.ascii.RESET, end="")
 
         window.plot(
-            filename=f"{self.symbol}_{model.name}.png",
+            filename=f"{self.__model_filename(model.name)}.png",
             model=model,
             plot_column="close",
         )
@@ -271,7 +281,7 @@ class Train:
         print(u.ascii.RESET, end="")
 
         window.plot(
-            filename=f"{self.symbol}_{model.name}.png",
+            filename=f"{self.__model_filename(model.name)}.png",
             model=model,
             plot_column="close",
         )
@@ -310,7 +320,7 @@ class Train:
         print(u.ascii.RESET, end="")
 
         window.plot(
-            filename=f"{self.symbol}_{model.name}.png",
+            filename=f"{self.__model_filename(model.name)}.png",
             model=model,
             plot_column="close",
         )

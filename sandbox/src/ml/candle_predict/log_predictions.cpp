@@ -1,24 +1,25 @@
-#ifndef ML__FIVE_MIN_PREDICT_log_predictions
-#define ML__FIVE_MIN_PREDICT_log_predictions
+#ifndef ML__CANDLE_PREDICT_log_predictions
+#define ML__CANDLE_PREDICT_log_predictions
 
-#include "five_min_predict.h"    // ML::FiveMinPredict, fmt, prediction_t
+#include "candle_predict.h"      // ML::CandlePredict, fmt, prediction_t
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/integer.cpp" // ::utils::integer_
 #include "predict_action.cpp"    // predict_action
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
-void ML::FiveMinPredict::log_predictions() {
+void ML::CandlePredict::log_predictions() {
   if (this->predictions.empty()) {
     std::cout << fmt.bold << fmt.cyan;
-    puts("🤖💀 No 5 Minute Predictions to log.");
+    printf("🤖💀 No %i Minute Predictions to log.\n",
+           this->duration_minutes);
     std::cout << fmt.reset << std::endl;
 
     return;
   }
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
-  printf("🤖 5 Minute Predictions (Close)\n");
+  printf("🤖 %i Minute Predictions (Close)\n", this->duration_minutes);
   std::cout << fmt.reset;
 
   std::list<prediction_t>::iterator it;

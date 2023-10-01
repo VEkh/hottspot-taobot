@@ -4,7 +4,7 @@ import tensorflow as tf
 import time as t
 
 from .input_loader import InputLoader
-import ml.five_min_predict.models as models
+import ml.candle_predict.models as models
 import ml.utils as u
 
 
@@ -12,12 +12,14 @@ class Predict:
     def __init__(
         self,
         db_conn=None,
+        duration_minutes=0,
         ref_epoch=0,
         symbol="",
         timestamps="now()",
     ):
         self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
+        self.duration_minutes = duration_minutes
         self.input_loader = None
         self.model_names = ["convolutional", "linear", "lstm"]
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
@@ -34,7 +36,7 @@ class Predict:
         start_prompt = u.string.strip_heredoc(
             f"""
             🤖 Predicting {u.ascii.CYAN}{self.symbol}'s{u.ascii.YELLOW}
-            next five minute candle from: {u.ascii.CYAN}{formatted_ref_epoch}
+            next {self.duration_minutes} minute candle from: {u.ascii.CYAN}{formatted_ref_epoch}
             """
         )
 
@@ -47,6 +49,7 @@ class Predict:
     def __load_inputs(self):
         self.input_loader = InputLoader(
             db_conn=self.db_conn,
+            duration_minutes=self.duration_minutes,
             input_width=models.config.INPUT_WIDTH,
             norm_factors=self.norm_factors,
             ref_epoch=self.ref_epoch,
@@ -57,10 +60,10 @@ class Predict:
         self.input_loader.preprocess()
 
     def __load_models(self):
-        data_dir = f"{self.app_dir}/data/ml/five_min_predict/models"
+        data_dir = f"{self.app_dir}/data/ml/candle_predict/models"
 
         for model_name in self.model_names:
-            filepath = f"{data_dir}/{self.symbol}_{model_name}.keras"
+            filepath = f"{data_dir}/{self.__model_filename(model_name)}.keras"
 
             if os.path.isfile(filepath):
                 model = tf.keras.models.load_model(filepath)
@@ -98,6 +101,9 @@ class Predict:
             f"Prediction: {json.dumps(prediction, indent=2)}",
             prediction_color,
         )
+
+    def __model_filename(self, model_name):
+        return f"{self.symbol}_{model_name}_{self.duration_minutes}min"
 
     def __predict_next(self):
         for model_name in self.model_names:

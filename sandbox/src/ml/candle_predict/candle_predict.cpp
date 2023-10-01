@@ -1,7 +1,7 @@
-#ifndef ML__FIVE_MIN_PREDICT
-#define ML__FIVE_MIN_PREDICT
+#ifndef ML__CANDLE_PREDICT
+#define ML__CANDLE_PREDICT
 
-#include "five_min_predict.h"                         // ML::FiveMinPredict
+#include "candle_predict.h"                           // ML::CandlePredict
 #include "db/candle/candle.cpp"                       // DB::Candle
 #include "db/candle_prediction/candle_prediction.cpp" // DB::CandlePrediction
 #include "lib/pg/pg.cpp"                              // Pg
@@ -14,12 +14,14 @@
 #include "should_close_position.cpp"
 #include "should_predict.cpp"
 
-ML::FiveMinPredict::FiveMinPredict(Pg conn_, const std::string symbol_) {
-  this->db_env = conn_.flags["env"];
-  this->symbol = symbol_;
+ML::CandlePredict::CandlePredict(Pg conn, const int dm, const std::string s) {
+  this->db_env = conn.flags["env"];
+  this->duration_minutes = dm;
+  this->symbol = s;
 
-  this->db_candle = DB::Candle(conn_, 5, this->symbol);
-  this->db_candle_prediction = DB::CandlePrediction(conn_, 5, this->symbol);
+  this->db_candle = DB::Candle(conn, this->duration_minutes, this->symbol);
+  this->db_candle_prediction =
+      DB::CandlePrediction(conn, this->duration_minutes, this->symbol);
 }
 
 #endif

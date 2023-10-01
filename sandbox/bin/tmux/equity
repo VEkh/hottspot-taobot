@@ -75,7 +75,7 @@ tmux split-window -t "${session}:stock-account-streams.1" \
 
 window_i=$((window_i + 4))
 for symbol in "${symbols[@]}"; do
-  log_dir="${app_dir}/../sandbox/log/${project}/ml/five_min_predict"
+  log_dir="${app_dir}/../sandbox/log/${project}/ml/candle_predict"
 
   mkdir -p
 

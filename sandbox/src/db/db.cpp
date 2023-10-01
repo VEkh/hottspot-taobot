@@ -60,9 +60,9 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    if (flags["min"].empty()) {
+    if (flags["duration-min"].empty()) {
       std::string message = Formatted::error_message(
-          "Please provide duration minutes with the --min flag.");
+          "Please provide duration minutes with the --duration-min flag.");
 
       throw std::invalid_argument(message);
     }
@@ -70,7 +70,8 @@ int main(int argc, char *argv[]) {
     Pg pg(flags);
     pg.connect();
 
-    DB::Candle candle(pg, std::stoi(flags["min"]), upcased_args.front());
+    DB::Candle candle(pg, std::stoi(flags["duration-min"]),
+                      upcased_args.front());
 
     candle.build();
 

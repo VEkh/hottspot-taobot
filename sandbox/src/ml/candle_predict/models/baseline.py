@@ -10,10 +10,9 @@ class Baseline(tf.keras.Model):
         input_columns=[],
         label_columns=[],
         label_index=None,
-        name=None,
         norm_factors=config.DEFAULT_NORM_FACTORS,
     ):
-        super().__init__(name=name)
+        super().__init__(name="baseline")
 
         self.input_columns = input_columns
         self.label_columns = label_columns

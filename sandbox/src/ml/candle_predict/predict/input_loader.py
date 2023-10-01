@@ -2,7 +2,7 @@ import numpy as np
 import tensorflow as tf
 import sys
 
-import ml.five_min_predict.models as models
+import ml.candle_predict.models as models
 import ml.utils as u
 
 
@@ -10,12 +10,14 @@ class InputLoader:
     def __init__(
         self,
         db_conn=None,
+        duration_minutes=0,
         input_width=0,
         norm_factors=models.config.DEFAULT_NORM_FACTORS,
         ref_epoch=0,
         symbol="",
     ):
         self.db_conn = db_conn
+        self.duration_minutes = duration_minutes
         self.input_width = input_width
         self.inputs = np.array([])
         self.inputs_norm = np.array([])
@@ -64,6 +66,7 @@ class InputLoader:
                   where
                     symbol = %(symbol)s
                     and closed_at <= to_timestamp(%(ref_epoch)s)
+                    and duration_minutes = %(duration_minutes)s
                   order by
                     opened_at desc
                   limit %(input_width)s
@@ -87,6 +90,7 @@ class InputLoader:
             cursor.execute(
                 query,
                 {
+                    "duration_minutes": self.duration_minutes,
                     "input_width": self.input_width,
                     "ref_epoch": self.ref_epoch,
                     "symbol": self.symbol,

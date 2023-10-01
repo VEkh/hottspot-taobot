@@ -1,10 +1,10 @@
-#ifndef ML__FIVE_MIN_PREDICT_should_close_position
-#define ML__FIVE_MIN_PREDICT_should_close_position
+#ifndef ML__CANDLE_PREDICT_should_close_position
+#define ML__CANDLE_PREDICT_should_close_position
 
-#include "five_min_predict.h" // ML::FiveMinPredict
+#include "candle_predict.h"   // ML::CandlePredict
 #include "predict_action.cpp" // predict_action
 
-bool ML::FiveMinPredict::should_close_position(
+bool ML::CandlePredict::should_close_position(
     const order_action_t open_order_action) {
   if (this->predictions.empty()) {
     return false;

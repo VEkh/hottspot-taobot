@@ -1,5 +1,5 @@
-#ifndef ML__FIVE_MIN_PREDICT_H
-#define ML__FIVE_MIN_PREDICT_H
+#ifndef ML__CANDLE_PREDICT_H
+#define ML__CANDLE_PREDICT_H
 
 #include "db/candle/candle.cpp"                       // DB::Candle
 #include "db/candle_prediction/candle_prediction.cpp" // DB::CandlePrediction
@@ -11,7 +11,7 @@
 #include <string>                                     // std::string
 
 namespace ML {
-class FiveMinPredict {
+class CandlePredict {
 public:
   using order_action_t = Global::t::order_action_t;
   using prediction_t = DB::CandlePrediction::prediction_t;
@@ -21,8 +21,8 @@ public:
       {"paper-alpha", true},
   };
 
-  FiveMinPredict(){};
-  FiveMinPredict(Pg, const std::string);
+  CandlePredict(){};
+  CandlePredict(Pg, const int, const std::string);
 
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
@@ -40,6 +40,7 @@ public:
 
 private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  int duration_minutes;
   std::string db_env;
   std::string symbol;
 };
