@@ -17,7 +17,7 @@ public:
   using prediction_t = DB::CandlePrediction::prediction_t;
 
   std::map<std::string, bool> API_KEYS_WHITELIST = {
-      {"backtest-ml-3", true},
+      {"backtest-ml-10", true},
       {"backtest-ml-5", true},
       {"paper-alpha", true},
   };
@@ -27,6 +27,7 @@ public:
 
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
+  int duration_minutes;
   std::list<prediction_t> predictions;
 
   bool should_close_position(const order_action_t);
@@ -41,7 +42,6 @@ public:
 
 private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  int duration_minutes;
   std::string db_env;
   std::string symbol;
 };

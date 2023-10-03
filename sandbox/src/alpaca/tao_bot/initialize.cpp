@@ -65,7 +65,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   this->db_position = DB::Position(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->five_min_predict = ML::CandlePredict(this->pg, 5, this->symbol);
-  this->three_min_predict = ML::CandlePredict(this->pg, 3, this->symbol);
+  this->ten_min_predict = ML::CandlePredict(this->pg, 10, this->symbol);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
 
   try {

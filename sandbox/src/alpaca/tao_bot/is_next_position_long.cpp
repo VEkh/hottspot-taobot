@@ -10,9 +10,9 @@
 bool Alpaca::TaoBot::is_next_position_long() {
   const std::string api_key = this->api_client.config.api_key;
 
-  if (api_key == "backtest-ml-3" &&
-      this->three_min_predict.should_predict(api_key)) {
-    return this->three_min_predict.predict_action() == order_action_t::BUY;
+  if (api_key == "backtest-ml-10" &&
+      this->ten_min_predict.should_predict(api_key)) {
+    return this->ten_min_predict.predict_action() == order_action_t::BUY;
   } else if (this->five_min_predict.should_predict(api_key)) {
     return this->five_min_predict.predict_action() == order_action_t::BUY;
   } else {

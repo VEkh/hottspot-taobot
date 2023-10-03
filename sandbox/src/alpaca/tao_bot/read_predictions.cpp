@@ -3,7 +3,7 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot, fmt
 #include <iostream>  // std::cout, std::endl
-#include <stdio.h>   // puts
+#include <stdio.h>   // printf
 
 #include <string> // std::string
 
@@ -14,16 +14,17 @@ void Alpaca::TaoBot::read_predictions() {
     return;
   }
 
-  this->three_min_predict.get_fresh_predictions(this->current_epoch);
+  this->ten_min_predict.get_fresh_predictions(this->current_epoch);
 
-  if (api_key == "backtest-ml-3") {
-    if (this->three_min_predict.predictions.empty() &&
+  if (api_key == "backtest-ml-10") {
+    if (this->ten_min_predict.predictions.empty() &&
         this->api_client.config.ml__on_demand_predictions) {
       std::cout << fmt.bold << fmt.yellow;
-      puts("🤖 No fresh 3 Minute Predictions. Making new ones.");
+      printf("🤖 No fresh %i Minute Predictions. Making new ones.\n",
+             this->ten_min_predict.duration_minutes);
       std::cout << fmt.reset << std::endl;
 
-      this->three_min_predict.predict(this->current_epoch);
+      this->ten_min_predict.predict(this->current_epoch);
     }
   } else {
     this->five_min_predict.get_fresh_predictions(this->current_epoch);
@@ -31,7 +32,8 @@ void Alpaca::TaoBot::read_predictions() {
     if (this->five_min_predict.predictions.empty() &&
         this->api_client.config.ml__on_demand_predictions) {
       std::cout << fmt.bold << fmt.yellow;
-      puts("🤖 No fresh 5 Minute Predictions. Making new ones.");
+      printf("🤖 No fresh %i Minute Predictions. Making new ones.\n",
+             this->five_min_predict.duration_minutes);
       std::cout << fmt.reset << std::endl;
 
       this->five_min_predict.predict(this->current_epoch);
