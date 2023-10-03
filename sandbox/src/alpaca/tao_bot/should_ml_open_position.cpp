@@ -1,10 +1,11 @@
 #ifndef ALPACA__TAO_BOT_should_ml_open_position
 #define ALPACA__TAO_BOT_should_ml_open_position
 
+#include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, position_t
 
-bool Alpaca::TaoBot::should_ml_open_position() {
-  if (this->five_min_predict.predictions.empty()) {
+bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
+  if (predictor.predictions.empty()) {
     return false;
   }
 
@@ -18,7 +19,7 @@ bool Alpaca::TaoBot::should_ml_open_position() {
     return true;
   }
 
-  const order_action_t next_direction = this->five_min_predict.predict_action();
+  const order_action_t next_direction = predictor.predict_action();
 
   if (last_position.open_order.action != next_direction) {
     return true;

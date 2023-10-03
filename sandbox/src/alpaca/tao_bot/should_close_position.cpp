@@ -7,6 +7,8 @@
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
 
+#include <string> // std::string
+
 bool Alpaca::TaoBot::should_close_position() {
   if (this->open_order_ptr->status != order_status_t::ORDER_FILLED) {
     return false;
@@ -39,7 +41,13 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
+  const std::string api_key = this->api_client.config.api_key;
+
+  if (api_key == "backtest-ml-3" &&
+      this->three_min_predict.should_predict(api_key)) {
+    return this->three_min_predict.should_close_position(
+        this->open_order_ptr->action);
+  } else if (this->five_min_predict.should_predict(api_key)) {
     return this->five_min_predict.should_close_position(
         this->open_order_ptr->action);
   } else {

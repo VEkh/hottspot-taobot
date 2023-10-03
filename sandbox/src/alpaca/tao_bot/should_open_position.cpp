@@ -5,6 +5,8 @@
 #include "should_ml_open_position.cpp" // should_ml_open_position
 #include "tao_bot.h"                   // Alpaca::TaoBot
 
+#include <string> // std::string
+
 bool Alpaca::TaoBot::should_open_position() {
   if (!is_market_open()) {
     return false;
@@ -18,8 +20,14 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
-    return should_ml_open_position();
+  const std::string api_key = this->api_client.config.api_key;
+
+  if (api_key == "backtest-ml-3") {
+    if (this->three_min_predict.should_predict(api_key)) {
+      return should_ml_open_position(this->three_min_predict);
+    }
+  } else if (this->five_min_predict.should_predict(api_key)) {
+    return should_ml_open_position(this->five_min_predict);
   }
 
   return true;

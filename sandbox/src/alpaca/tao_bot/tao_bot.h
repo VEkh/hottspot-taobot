@@ -71,6 +71,7 @@ private:
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   ML::CandlePredict five_min_predict;
+  ML::CandlePredict three_min_predict;
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
@@ -103,7 +104,7 @@ private:
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();
-  bool should_ml_open_position();
+  bool should_ml_open_position(ML::CandlePredict &);
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();

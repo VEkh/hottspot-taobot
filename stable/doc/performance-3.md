@@ -1,4 +1,4 @@
-### 2023-10-02:
+### 2023-10-03:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -34,6 +34,63 @@ Win Rate: 4W (100.00%) 0L (Total: 4)
 * Better Performer: Live Alpha: 2 • Paper Beta: 2 (Total: 4)
 
 ###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-02:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, October  2 2023
+Current Equity:          $73865.26 (+4411.91) (+6.35%)
+Max Equity:              $73867.77 (+4414.42) (+6.36%) @ 09:03 CDT
+Min Equity:              $67812.57 (-1640.78) (-2.36%) @ 08:36 CDT
+Original Equity:         $69453.35
+```
+
+**Alpha (STAGING)**
+```
+Monday, October  2 2023
+Current Equity:          $162987.52 (+9811.86) (+6.41%)
+Max Equity:              $167287.72 (+14112.06) (+9.21%) @ 09:11 CDT
+Min Equity:              $151622.28 (-1553.38) (-1.01%) @ 08:31 CDT
+Original Equity:         $153175.66
+
+Win Rate: 2W (28.57%) 5L (Total: 7)
+```
+
+**Beta (STAGING)**
+```
+Monday, October  2 2023
+Current Equity:          $70047.11 (-1837.75) (-2.56%)
+Max Equity:              $72378.72 (+493.86) (+0.69%) @ 08:32 CDT
+Min Equity:              $70047.11 (-1837.75) (-2.56%) @ 08:52 CDT
+Original Equity:         $71884.86
+
+Win Rate: 4W (80.00%) 1L (Total: 5)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 27W (50.94%) 26L (Total 53)
+* Better Performer: Live Alpha: 3 • Paper Beta: 2 (Total: 5)
+
+###### Notes
+* I ran a backtest this weekend on 3 minute predictions. On a daily basis, it
+  performed about the same as 5 minute predictions.
+* Over the long run, it was unprofitable.
+* The goal is still to have long term profit or guaranteed daily profit. Until
+  I get that, this is no better than the finely tuned momentum algorithm.
+* Meanwhile, Paper Alpha continues to do very well. Since introducing five
+  minute predictions, it has always reached at least +2.00% in daily profit.
+* Today and this past Friday have been the first two days where the ML
+  algorithm has been able to run uninterrupted all day.
+  * On Friday there was a 10-15 min interruption while as a I began a
+    re-factor. Beyond that, the day ran smoothly.
+* I'm waiting for a sequence of days in Paper Alpha whose max profit is <
+  +2.00% and/or a backtest run that guarantees daily profit, before promoting
+  the ML strategy to production.
+
 ###### Next Thing(s) to Try
 
 ### 2023-09-29:

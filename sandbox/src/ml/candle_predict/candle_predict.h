@@ -17,7 +17,8 @@ public:
   using prediction_t = DB::CandlePrediction::prediction_t;
 
   std::map<std::string, bool> API_KEYS_WHITELIST = {
-      {"backtest-ml", true},
+      {"backtest-ml-3", true},
+      {"backtest-ml-5", true},
       {"paper-alpha", true},
   };
 

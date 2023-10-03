@@ -5,8 +5,15 @@
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
 
+#include <string> // std::string
+
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (this->five_min_predict.should_predict(this->api_client.config.api_key)) {
+  const std::string api_key = this->api_client.config.api_key;
+
+  if (api_key == "backtest-ml-3" &&
+      this->three_min_predict.should_predict(api_key)) {
+    return this->three_min_predict.predict_action() == order_action_t::BUY;
+  } else if (this->five_min_predict.should_predict(api_key)) {
     return this->five_min_predict.predict_action() == order_action_t::BUY;
   } else {
     if (this->closed_positions.empty()) {
