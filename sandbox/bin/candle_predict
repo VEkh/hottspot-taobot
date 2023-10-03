@@ -26,8 +26,8 @@ ascii_print "$(date)\n" "cyan"
 
 mkdir -p "${log_dir}"
 
-function build_candles_all() {
-  ascii_print "🔨 Building candles for all symbols" "cyan"
+function build_candles_each() {
+  ascii_print "🔨 Building candles for each symbol" "cyan"
 
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
@@ -39,7 +39,7 @@ function build_candles_all() {
 function predict_all() {
   ascii_print "🤖 Updating predictions" "cyan"
 
-  build_candles_all "${@}"
+  build_candles_each "${@}"
 
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
@@ -48,32 +48,32 @@ function predict_all() {
   done
 }
 
-function train_all() {
-  ascii_print "🤖 Re-training models for all symbols" "cyan"
+function train_each() {
+  ascii_print "🤖 Re-training models for each symbol" "cyan"
 
-  build_candles_all "${@}"
+  build_candles_each "${@}"
 
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
   for symbol in "${symbols[@]}"; do
-    "${app_dir}/bin/ml/candle_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
+    "${app_dir}/bin/ml/candle_predict" train_single "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
   done
 }
 
 case "${1}" in
-  build_candles_all)
-    build_candles_all "${@:2}"
+  build_candles_each)
+    build_candles_each "${@:2}"
     ;;
   predict_all)
     predict_all "${@:2}"
     ;;
-  train_all)
-    train_all "${@:2}"
+  train_each)
+    train_each "${@:2}"
     ;;
   *)
     ascii_print "🤖 ${ASCII["underline"]}FIVE MINUTE PREDICTIONS" "yellow"
     ascii_print "Commands: " "yellow"
-    ascii_print "build_candles_all [--env]....Build candles for all symbols" "yellow"
+    ascii_print "build_candles_each [--env]....Build candles for all symbols" "yellow"
     ascii_print "predict_all [--env]..........Update the predictions for all symbols" "yellow"
-    ascii_print "train_all [--env]............Train models for all symbols" "yellow"
+    ascii_print "train_each [--env]............Train models for all symbols" "yellow"
 esac

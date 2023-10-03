@@ -5,8 +5,8 @@ import time
 import ml.utils as u
 
 usage = """
-        main.h {predict} symbol [--duration-min] [--env] [--ref-epoch] [--timestamps]
-        main.h {train}   symbol [--duration-min] [--env]
+        main.h {predict}        symbol [--duration-min] [--env] [--ref-epoch] [--timestamps]
+        main.h {train_single}   symbol [--duration-min] [--env]
 """
 
 arg_parser = ArgumentParser(
@@ -20,7 +20,7 @@ cmd_help = """
 
 arg_parser.add_argument(
     "command",
-    choices=["predict", "train"],
+    choices=["predict", "train_single"],
     help=cmd_help,
 )
 
@@ -105,14 +105,14 @@ match args.command:
 
         conn.disconnect()
 
-    case "train":
+    case "train_single":
         from ml.db import Conn
-        from train import Train
+        from train import TrainSingle
 
         conn = Conn(args.env)
         conn.connect()
 
-        trainer = Train(
+        trainer = TrainSingle(
             db_conn=conn,
             duration_minutes=args.duration_minutes,
             symbol=args.symbol,

@@ -1,1 +1,1 @@
-from .train import Train
+from .train_single import TrainSingle
