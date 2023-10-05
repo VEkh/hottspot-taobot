@@ -134,18 +134,12 @@ void Alpaca::TaoBotBacktest::load_config() {
     end_epoch = last_quotes.front().timestamp;
   }
 
-  const bool account_max_stop_loss =
-      backtest_json.contains("account_max_stop_loss")
-          ? (bool)backtest_json["account_max_stop_loss"]
-          : this->config.account_max_stop_loss;
-
   const bool clock_sync = backtest_json.contains("clock_sync")
                               ? (bool)backtest_json["clock_sync"]
                               : this->config.clock_sync;
 
   this->config = {
       .account_margin_multiplier = backtest_json["account_margin_multiplier"],
-      .account_max_stop_loss = account_max_stop_loss,
       .account_starting_equity = backtest_json["account_starting_equity"],
       .api_key = api_key,
       .api_key_id = api_key_json["id"],

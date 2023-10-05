@@ -24,11 +24,10 @@ public:
   // * clock_sync - Ensures that all tradeable assets' clocks are synced.
   //                However, it slows backtest runs. If set to `false`, spurious
   //                account max stop losses may trigger. A `false` setting
-  //                should therefore accompany an `account_max_stop_loss`
-  //                setting of `false`.
+  //                should therefore accompany an `..account_stop_loss_ratio`
+  //                setting of `0.0`.
   struct config_t {
     double account_margin_multiplier = 0.00;
-    bool account_max_stop_loss = true;
     double account_starting_equity = 0.00;
     std::string api_key;
     std::string api_key_id;

@@ -64,10 +64,8 @@ void Alpaca::Client::load_config() {
   json api_key_json = config_json[api_key];
 
   std::vector<std::string> nested_required_keys = {
-      "base_url",
-      "is_live",
-      "late_start_seconds",
-      "secret_key",
+      "account_stop_loss_ratio", "base_url",   "is_live",
+      "late_start_seconds",      "secret_key",
   };
 
   for (std::string key : nested_required_keys) {
@@ -93,6 +91,7 @@ void Alpaca::Client::load_config() {
   }
 
   this->config = {
+      .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
