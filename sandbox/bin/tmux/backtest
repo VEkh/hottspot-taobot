@@ -23,7 +23,7 @@ session="hottspot_taobot-${filename}"
 tmux -2 new-session -d -s "${session}" -n code
 
 window=0
-tmux split-window -h -p 75 -t "${session}:${window}" "vim ."
+tmux split-window -h -p 66 -t "${session}:${window}" "vim ."
 
 symbol_i=0
 

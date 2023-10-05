@@ -47,7 +47,7 @@ function backtest_api_keys() {
   fi
 
   jq -r \
-    ". | to_entries | map(select(.value.is_backtest?)) | map(.key) | join(\" \")" \
+    ". | to_entries | map(select(.value.backtest?.is_active?)) | map(.key) | join(\" \")" \
     "${credentials_filepath}"
 }
 

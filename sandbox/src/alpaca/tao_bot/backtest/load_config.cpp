@@ -63,35 +63,42 @@ void Alpaca::TaoBotBacktest::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  this->is_active = config_json[api_key].contains("is_backtest") &&
-                    config_json[api_key]["is_backtest"];
+  json api_key_json = config_json[api_key];
+
+  if (!api_key_json.contains("backtest")) {
+    return;
+  }
+
+  json backtest_json = api_key_json["backtest"];
+
+  this->is_active =
+      backtest_json.contains("is_active") && (bool)backtest_json["is_active"];
 
   if (!this->is_active) {
     return;
   }
 
   std::vector<std::string> nested_required_keys = {
-      "backtest__account_margin_multiplier",
-      "backtest__account_starting_equity",
-      "backtest__start_at",
-      "is_backtest",
+      "account_margin_multiplier",
+      "account_starting_equity",
+      "is_active",
+      "start_at",
   };
 
   for (std::string key : nested_required_keys) {
-    if (config_json[api_key].contains(key)) {
+    if (backtest_json.contains(key)) {
       continue;
     }
 
     error_message = Formatted::error_message(
-        "Config file is missing the `" + api_key + std::string(".") +
+        "Config file is missing the `" + api_key + std::string(".backtest.") +
         std::string(key) + "` key. Please ensure it is in the config file at " +
         std::string(config_path));
 
     throw std::invalid_argument(error_message);
   }
 
-  const std::string start_at_string =
-      config_json[api_key]["backtest__start_at"];
+  const std::string start_at_string = backtest_json["start_at"];
 
   tm backtest_start_at =
       ::utils::time_::parse_timestamp(start_at_string, "%Y-%m-%d %H:%M:%S");
@@ -99,8 +106,8 @@ void Alpaca::TaoBotBacktest::load_config() {
   const double start_epoch = (double)mktime(&backtest_start_at);
   double end_epoch;
 
-  if (config_json[api_key].contains("backtest__end_at")) {
-    const std::string end_at_string = config_json[api_key]["backtest__end_at"];
+  if (backtest_json.contains("end_at")) {
+    const std::string end_at_string = backtest_json["end_at"];
 
     tm backtest_end_at =
         ::utils::time_::parse_timestamp(end_at_string, "%Y-%m-%d %H:%M:%S");
@@ -128,23 +135,20 @@ void Alpaca::TaoBotBacktest::load_config() {
   }
 
   const bool account_max_stop_loss =
-      config_json[api_key].contains("backtest__account_max_stop_loss")
-          ? (bool)config_json[api_key]["backtest__account_max_stop_loss"]
+      backtest_json.contains("account_max_stop_loss")
+          ? (bool)backtest_json["account_max_stop_loss"]
           : this->config.account_max_stop_loss;
 
-  const bool clock_sync =
-      config_json[api_key].contains("backtest__clock_sync")
-          ? (bool)config_json[api_key]["backtest__clock_sync"]
-          : this->config.clock_sync;
+  const bool clock_sync = backtest_json.contains("clock_sync")
+                              ? (bool)backtest_json["clock_sync"]
+                              : this->config.clock_sync;
 
   this->config = {
-      .account_margin_multiplier =
-          config_json[api_key]["backtest__account_margin_multiplier"],
+      .account_margin_multiplier = backtest_json["account_margin_multiplier"],
       .account_max_stop_loss = account_max_stop_loss,
-      .account_starting_equity =
-          config_json[api_key]["backtest__account_starting_equity"],
+      .account_starting_equity = backtest_json["account_starting_equity"],
       .api_key = api_key,
-      .api_key_id = config_json[api_key]["id"],
+      .api_key_id = api_key_json["id"],
       .clock_sync = clock_sync,
       .end_epoch = end_epoch,
       .start_epoch = start_epoch,
