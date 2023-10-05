@@ -18,6 +18,10 @@ public:
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Global::t::quote_t;
 
+  struct ml_config_t {
+    bool on_demand_predictions = false;
+  };
+
   struct config_t {
     std::string api_key;
     std::string api_key_id;
@@ -26,7 +30,7 @@ public:
     std::string data_base_url;
     bool is_live;
     int late_start_seconds = 6; // Production's average
-    bool ml__on_demand_predictions = false;
+    ml_config_t ml;
   } config;
 
   Client(){};

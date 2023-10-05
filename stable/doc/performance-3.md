@@ -1,4 +1,4 @@
-### 2023-10-03:
+### 2023-10-06:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 1W (16.67%) 5L (Total: 6)
+Win Rate: 3W (75.00%) 1L (Total: 4) 💡
 ```
 
 **Beta (STAGING)**
@@ -26,14 +26,159 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 4W (100.00%) 0L (Total: 4)
+Win Rate: 4W (57.14%) 3L (Total: 7)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 26W (50.00%) 26L (Total 52)
-* Better Performer: Live Alpha: 2 • Paper Beta: 2 (Total: 4)
+* Win Record: 27W (49.09%) 28L (Total 55)
+* Better Performer: Live Alpha: 4 • Paper Beta: 3 (Total: 7)
 
 ###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-05:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thursday, October  5 2023
+Current Equity:          $71828.38 (+1811.64) (+2.59%)
+Max Equity:              $72739.63 (+2722.89) (+3.89%) @ 13:40 CDT
+Min Equity:              $68537.63 (-1479.11) (-2.11%) @ 08:56 CDT
+Original Equity:         $70016.74
+```
+
+**Alpha (STAGING)**
+```
+Thursday, October  5 2023
+Current Equity:          $185362.91 (+11047.24) (+6.34%)
+Max Equity:              $185596.65 (+11280.98) (+6.47%) @ 14:57 CDT
+Min Equity:              $166664.12 (-7651.55) (-4.39%) @ 08:53 CDT
+Original Equity:         $174315.67
+
+Win Rate: 4W (80.00%) 1L (Total: 5)
+```
+
+**Beta (STAGING)**
+```
+Thursday, October  5 2023
+Current Equity:          $70635.15 (+2629.55) (+3.87%)
+Max Equity:              $71258.68 (+3253.08) (+4.78%) @ 13:02 CDT
+Min Equity:              $66881.18 (-1124.42) (-1.65%) @ 08:49 CDT
+Original Equity:         $68005.60
+
+Win Rate: 5W (62.5%) 3L (Total: 8)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 28W (50.00%) 28L (Total 56)
+* Better Performer: Live Alpha: 4 • Paper Beta: 4 (Total: 8)
+
+###### Notes
+* It's time to promote machine learning to production.
+* I'm going to keep Paper Alpha the same: max account loss of -8%, no target
+  profit.
+* I'm going to keep Paper Beta the same: max account loss of -2.5%, +6.35%
+  target profit.
+* I'll also move much of the environment configs to credentials.json
+
+###### Next Thing(s) to Try
+
+### 2023-10-04:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, October  4 2023
+Current Equity:          $70030.41 (-1810.13) (-2.52%)
+Max Equity:              $74537.39 (+2696.85) (+3.75%) @ 09:09 CDT
+Min Equity:              $70011.09 (-1829.45) (-2.55%) @ 09:48 CDT
+Original Equity:         $71840.54
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, October  4 2023
+Current Equity:          $174604.12 (+14647.12) (+9.16%)
+Max Equity:              $178896.45 (+18939.45) (+11.84%) @ 14:02 CDT
+Min Equity:              $157182.04 (-2774.96) (-1.73%) @ 08:39 CDT
+Original Equity:         $159957.00
+
+Win Rate: 3W (75.00%) 1L (Total: 4) 💡
+```
+
+**Beta (STAGING)**
+```
+Wednesday, October  4 2023
+Current Equity:          $68024.20 (-131.95) (-0.19%)
+Max Equity:              $70465.15 (+2309.00) (+3.39%) @ 08:43 CDT
+Min Equity:              $66922.78 (-1233.37) (-1.81%) @ 14:19 CDT
+Original Equity:         $68156.15
+
+Win Rate: 4W (57.14%) 3L (Total: 7)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 27W (49.09%) 28L (Total 55)
+* Better Performer: Live Alpha: 4 • Paper Beta: 3 (Total: 7)
+
+###### Notes
+* 💡 Note: I'm changing the Paper Alpha record to reflect a start date of
+  2023-09-29. That's the first time when 5 Min Predict ran (almost) continously
+  the whole day.
+
+###### Next Thing(s) to Try
+
+### 2023-10-03:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, October  3 2023
+Current Equity:          $71849.45 (-2002.72) (-2.71%)
+Max Equity:              $74594.00 (+741.83) (+1.00%) @ 08:32 CDT
+Min Equity:              $71849.45 (-2002.72) (-2.71%) @ 09:00 CDT
+Original Equity:         $73852.17
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, October  3 2023
+Current Equity:          $160138.47 (-2585.55) (-1.59%)
+Max Equity:              $168385.49 (+5661.47) (+3.48%) @ 09:27 CDT
+Min Equity:              $159519.88 (-3204.14) (-1.97%) @ 14:56 CDT
+Original Equity:         $162724.02
+
+Win Rate: 2W (25.00%) 6L (Total: 8)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, October  3 2023
+Current Equity:          $68162.22 (-1876.27) (-2.68%)
+Max Equity:              $70358.91 (+320.42) (+0.46%) @ 08:32 CDT
+Min Equity:              $68162.22 (-1876.27) (-2.68%) @ 08:51 CDT
+Original Equity:         $70038.49
+
+Win Rate: 4W (66.67%) 2L (Total: 6)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 27W (50.00%) 27L (Total 54)
+* Better Performer: Live Alpha: 4 • Paper Beta: 2 (Total: 6)
+
+###### Notes
+* 3rd consecutive day in Paper Alpha that reached +3%
+
+* **ML-5 No Gain Days**
+  * 2023-03-24
+  * 2023-03-27
+  * 2023-03-31
+
+* **ML-10 No Gain Days**
+  * 2023-03-21
+  * 2023-03-31
 
 ###### Next Thing(s) to Try
 
@@ -71,6 +216,15 @@ Original Equity:         $71884.86
 Win Rate: 4W (80.00%) 1L (Total: 5)
 ```
 
+**Backtest (backtest-ml-10)**
+```
+Monday, April  3 2023
+Current Equity:          $27927.55 (-320.20) (-1.13%)
+Max Equity:              $29191.63 (+943.88) (+3.34%) @ 09:40 CDT
+Min Equity:              $27756.36 (-491.39) (-1.74%) @ 12:32 CDT
+Original Equity:         $28247.75
+```
+
 ###### Stats (PRODUCTION) (as of 2023-07-18)
 * Win Record: 27W (50.94%) 26L (Total 53)
 * Better Performer: Live Alpha: 3 • Paper Beta: 2 (Total: 5)
@@ -90,8 +244,15 @@ Win Rate: 4W (80.00%) 1L (Total: 5)
 * I'm waiting for a sequence of days in Paper Alpha whose max profit is <
   +2.00% and/or a backtest run that guarantees daily profit, before promoting
   the ML strategy to production.
+* The 10-min prediction backtest performed better than the 3-min backtest, and
+  just about the same as the 5-minute. That is, most days exceeded a +1-3%
+  profit, but no specific profit was guaranteed.
+* **ML-10 No Gain Days**
+  * 2023-03-21
+  * 2023-03-31
 
 ###### Next Thing(s) to Try
+* Try running the same backtest, but with a delay of 30 seconds then 5 minutes.
 
 ### 2023-09-29:
 #### Performance
@@ -369,7 +530,7 @@ Win Rate: 42W (41.58%) 60L (Total: 102)
 
 ###### Next Thing(s) to Try
 
-### 2023-09-22:
+### 2023-09-22 🚨 ML Soft Launch in Paper 🚨:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**

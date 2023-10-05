@@ -61,6 +61,8 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  json api_key_json = config_json[api_key];
+
   std::vector<std::string> nested_required_keys = {
       "base_url",
       "is_live",
@@ -69,7 +71,7 @@ void Alpaca::Client::load_config() {
   };
 
   for (std::string key : nested_required_keys) {
-    if (config_json[api_key].contains(key)) {
+    if (api_key_json.contains(key)) {
       continue;
     }
 
@@ -81,20 +83,24 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  const bool ml__on_demand_predictions =
-      config_json[api_key].contains("ml__on_demand_predictions")
-          ? (bool)config_json[api_key]["ml__on_demand_predictions"]
-          : this->config.ml__on_demand_predictions;
+  ml_config_t ml_config;
+
+  if (api_key_json.contains("ml")) {
+    ml_config.on_demand_predictions =
+        api_key_json["ml"].contains("on_demand_predictions")
+            ? (bool)api_key_json["ml"]["on_demand_predictions"]
+            : ml_config.on_demand_predictions;
+  }
 
   this->config = {
       .api_key = api_key,
-      .api_key_id = config_json[api_key]["id"],
-      .api_secret_key = config_json[api_key]["secret_key"],
-      .base_url = config_json[api_key]["base_url"],
+      .api_key_id = api_key_json["id"],
+      .api_secret_key = api_key_json["secret_key"],
+      .base_url = api_key_json["base_url"],
       .data_base_url = config_json["data_base_url"],
-      .is_live = config_json[api_key]["is_live"],
-      .late_start_seconds = config_json[api_key]["late_start_seconds"],
-      .ml__on_demand_predictions = ml__on_demand_predictions,
+      .is_live = api_key_json["is_live"],
+      .late_start_seconds = api_key_json["late_start_seconds"],
+      .ml = ml_config,
   };
 }
 
