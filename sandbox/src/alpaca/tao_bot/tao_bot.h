@@ -42,17 +42,11 @@ private:
   using quote_t = Global::t::quote_t;
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-  constexpr static double TARGET_ACCOUNT_PROFIT_RATIO = 0.0625;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
       {"sell", "📉"},
-  };
-
-  std::map<std::string, double> TARGET_ACCOUNT_PROFIT_RATIOS = {
-      {"live-alpha", 0.0625},
-      {"paper-beta", 0.0625},
   };
 
   Alpaca::Client api_client;

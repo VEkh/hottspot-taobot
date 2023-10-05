@@ -3,18 +3,10 @@
 
 #include "build_account_exit_prices.cpp" // build_account_exit_prices
 #include "tao_bot.h" // Alpaca::TaoBot, account_exit_prices_t
-
-#include <regex> // std::regex, std::regex_search
+#include "target_account_profit_ratio.cpp" // target_account_profit_ratio
 
 bool Alpaca::TaoBot::should_stop_profit() {
-  if (!this->backtest.is_active &&
-      this->api_client.config.api_key == "paper-alpha") {
-    return false;
-  }
-
-  if (this->backtest.is_active &&
-      !std::regex_search(this->backtest.config.api_key_id,
-                         std::regex("-act_(.+)__(.+)$"))) {
+  if (!target_account_profit_ratio()) {
     return false;
   }
 

@@ -11,20 +11,6 @@ Alpaca::TaoBot::build_account_exit_prices() {
 
   double target_account_profit_ratio_ = target_account_profit_ratio();
 
-  if (this->backtest.is_active) {
-    std::smatch match;
-
-    std::regex_search(this->backtest.config.api_key_id, match,
-                      std::regex("-act_(.+)__(.+)$"));
-
-    if (match.size() > 2) {
-      const std::string ratio_string =
-          std::regex_replace(match[1].str(), std::regex("_"), ".");
-
-      target_account_profit_ratio_ = (std::stod(ratio_string) / 100.0);
-    }
-  }
-
   const double max_profit = this->account_snapshot.max_equity -
                             this->account_snapshot.original_equity;
 

@@ -1,13 +1,14 @@
 #ifndef ALPACA__TAO_BOT_log_account_snapshot
 #define ALPACA__TAO_BOT_log_account_snapshot
 
-#include "build_account_exit_prices.cpp" // build_account_exit_prices
-#include "has_super_profited.cpp"        // has_super_profited
-#include "lib/formatted.cpp"             // Formatted
-#include "lib/utils/time.cpp"            // ::utils::time_
-#include "tao_bot.h"                     // Alpaca::TaoBot
-#include <iostream>                      // std::cout, std::endl
-#include <stdio.h>                       // printf
+#include "build_account_exit_prices.cpp"   // build_account_exit_prices
+#include "has_super_profited.cpp"          // has_super_profited
+#include "lib/formatted.cpp"               // Formatted
+#include "lib/utils/time.cpp"              // ::utils::time_
+#include "tao_bot.h"                       // Alpaca::TaoBot
+#include "target_account_profit_ratio.cpp" // target_account_profit_ratio
+#include <iostream>                        // std::cout, std::endl
+#include <stdio.h>                         // printf
 
 void Alpaca::TaoBot::log_account_snapshot() {
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
@@ -64,16 +65,19 @@ void Alpaca::TaoBot::log_account_snapshot() {
   printf("Margin Buying Power:              $%'.2f\n",
          this->account_snapshot.margin_buying_power);
 
-  printf("Stop Loss Profit:                 $%'.2f\n",
-         exit_prices_.stop_profit_loss);
+  if (target_account_profit_ratio()) {
+    printf("Stop Loss Profit:                 $%'.2f\n",
+           exit_prices_.stop_profit_loss);
 
-  printf("Target Account Profit:            $%'.2f\n",
-         exit_prices_.target_account_profit);
+    printf("Target Account Profit:            $%'.2f\n",
+           exit_prices_.target_account_profit);
 
-  printf("Target Max Profit:                $%'.2f%s%s\n",
-         exit_prices_.target_max_profit,
-         exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅" : "",
-         has_super_profited() ? "🤑" : "");
+    printf("Target Max Profit:                $%'.2f%s%s\n",
+           exit_prices_.target_max_profit,
+           exit_prices_.max_profit >= exit_prices_.target_max_profit ? " ✅"
+                                                                     : "",
+           has_super_profited() ? "🤑" : "");
+  }
 
   std::cout << fmt.reset << std::endl;
 }
