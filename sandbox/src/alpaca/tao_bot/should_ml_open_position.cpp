@@ -9,6 +9,10 @@ bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
     return false;
   }
 
+  if (predictor.predictions.size() % 2 == 0) {
+    return false;
+  }
+
   if (this->closed_positions.empty()) {
     return true;
   }
