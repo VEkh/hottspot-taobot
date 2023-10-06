@@ -10,7 +10,7 @@
 void Alpaca::TaoBot::read_predictions() {
   const std::string api_key = this->api_client.config.api_key;
 
-  if (!this->five_min_predict.should_predict(api_key)) {
+  if (!this->five_min_predict.should_predict()) {
     return;
   }
 
@@ -18,7 +18,7 @@ void Alpaca::TaoBot::read_predictions() {
 
   if (api_key == "backtest-ml-10") {
     if (this->ten_min_predict.predictions.empty() &&
-        this->api_client.config.ml.on_demand_predictions) {
+        this->ten_min_predict.should_on_demand_predict()) {
       std::cout << fmt.bold << fmt.yellow;
       printf("🤖 No fresh %i Minute Predictions. Making new ones.\n",
              this->ten_min_predict.duration_minutes);
@@ -30,7 +30,7 @@ void Alpaca::TaoBot::read_predictions() {
     this->five_min_predict.get_fresh_predictions(this->current_epoch);
 
     if (this->five_min_predict.predictions.empty() &&
-        this->api_client.config.ml.on_demand_predictions) {
+        this->five_min_predict.should_on_demand_predict()) {
       std::cout << fmt.bold << fmt.yellow;
       printf("🤖 No fresh %i Minute Predictions. Making new ones.\n",
              this->five_min_predict.duration_minutes);

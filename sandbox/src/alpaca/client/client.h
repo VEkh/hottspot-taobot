@@ -11,16 +11,13 @@
 namespace Alpaca {
 class Client {
 public:
+  using ml_config_t = Global::t::ml_config_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
   using order_type_t = Alpaca::t::order_type_t;
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Global::t::quote_t;
-
-  struct ml_config_t {
-    bool on_demand_predictions = false;
-  };
 
   struct config_t {
     double account_stop_loss_ratio = 0.0;

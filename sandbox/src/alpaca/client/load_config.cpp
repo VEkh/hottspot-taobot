@@ -88,10 +88,21 @@ void Alpaca::Client::load_config() {
   ml_config_t ml_config;
 
   if (api_key_json.contains("ml")) {
-    ml_config.on_demand_predictions =
-        api_key_json["ml"].contains("on_demand_predictions")
-            ? (bool)api_key_json["ml"]["on_demand_predictions"]
-            : ml_config.on_demand_predictions;
+    json ml_json = api_key_json["ml"];
+
+    if (ml_json.contains("candle_predict")) {
+      json candle_predict_json = ml_json["candle_predict"];
+
+      ml_config.candle_predict.enabled =
+          candle_predict_json.contains("enabled")
+              ? (bool)candle_predict_json["enabled"]
+              : ml_config.candle_predict.enabled;
+
+      ml_config.candle_predict.on_demand_predictions =
+          candle_predict_json.contains("on_demand_predictions")
+              ? (bool)candle_predict_json["on_demand_predictions"]
+              : ml_config.candle_predict.on_demand_predictions;
+    }
   }
 
   this->config = {

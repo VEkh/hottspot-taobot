@@ -12,9 +12,12 @@
 #include "predict.cpp"
 #include "predict_action.cpp"
 #include "should_close_position.cpp"
+#include "should_on_demand_predict.cpp"
 #include "should_predict.cpp"
 
-ML::CandlePredict::CandlePredict(Pg conn, const int dm, const std::string s) {
+ML::CandlePredict::CandlePredict(Pg conn, const candle_predict_config_t conf,
+                                 const int dm, const std::string s) {
+  this->config = conf;
   this->db_env = conn.flags["env"];
   this->duration_minutes = dm;
   this->symbol = s;

@@ -3,8 +3,6 @@
 
 #include "candle_predict.h" // ML::CandlePredict
 
-bool ML::CandlePredict::should_predict(const std::string api_key) {
-  return this->API_KEYS_WHITELIST[api_key];
-}
+bool ML::CandlePredict::should_predict() { return this->config.enabled; }
 
 #endif

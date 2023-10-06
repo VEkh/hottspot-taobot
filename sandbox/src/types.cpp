@@ -33,6 +33,15 @@ struct avg_one_sec_variances_t {
   double running = 0.00;
 };
 
+struct candle_predict_config_t {
+  bool enabled = false;
+  bool on_demand_predictions = false;
+};
+
+struct ml_config_t {
+  candle_predict_config_t candle_predict;
+};
+
 enum order_win_result_t {
   LOSS,
   TIE,

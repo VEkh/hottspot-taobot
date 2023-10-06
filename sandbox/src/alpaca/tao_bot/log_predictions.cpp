@@ -4,7 +4,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 void Alpaca::TaoBot::log_predictions() {
-  if (!this->five_min_predict.should_predict(this->api_client.config.api_key)) {
+  if (!this->five_min_predict.should_predict()) {
     return;
   }
 

@@ -13,17 +13,13 @@
 namespace ML {
 class CandlePredict {
 public:
+  using candle_predict_config_t = Global::t::candle_predict_config_t;
   using order_action_t = Global::t::order_action_t;
   using prediction_t = DB::CandlePrediction::prediction_t;
 
-  std::map<std::string, bool> API_KEYS_WHITELIST = {
-      {"backtest-ml-10", true},
-      {"backtest-ml-5", true},
-      {"paper-alpha", true},
-  };
-
   CandlePredict(){};
-  CandlePredict(Pg, const int, const std::string);
+  CandlePredict(Pg, const candle_predict_config_t, const int,
+                const std::string);
 
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
@@ -31,7 +27,8 @@ public:
   std::list<prediction_t> predictions;
 
   bool should_close_position(const order_action_t);
-  bool should_predict(const std::string);
+  bool should_on_demand_predict();
+  bool should_predict();
 
   order_action_t predict_action();
   order_action_t predict_action(const prediction_t);
@@ -42,6 +39,7 @@ public:
 
 private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  candle_predict_config_t config;
   std::string db_env;
   std::string symbol;
 };
