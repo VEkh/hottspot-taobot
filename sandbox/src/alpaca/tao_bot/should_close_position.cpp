@@ -41,6 +41,10 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
+  if (should_stop_profit()) {
+    return true;
+  }
+
   const std::string api_key = this->api_client.config.api_key;
 
   if (api_key == "backtest-ml-10" && this->ten_min_predict.should_predict()) {
@@ -50,10 +54,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return this->five_min_predict.should_close_position(
         this->open_order_ptr->action);
   } else {
-    if (should_stop_profit()) {
-      return true;
-    }
-
     if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
         this->open_order_ptr->profit <=
             this->exit_prices.trailing_stop_profit) {
