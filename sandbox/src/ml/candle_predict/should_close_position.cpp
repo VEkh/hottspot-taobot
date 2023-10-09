@@ -10,6 +10,10 @@ bool ML::CandlePredict::should_close_position(
     return false;
   }
 
+  if (this->predictions.size() % 2 == 0) {
+    return false;
+  }
+
   const order_action_t predicted_action = predict_action();
 
   return predicted_action != open_order_action;
