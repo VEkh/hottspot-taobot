@@ -3,19 +3,6 @@
 
 #include "candle_predict.h" // ML::CandlePredict
 
-// TODO: Remove when done experimenting
-// ML::CandlePredict::order_action_t ML::CandlePredict::predict_action() {
-//   prediction_t deciding_prediction;
-
-//   for (const prediction_t prediction : this->predictions) {
-//     if (prediction.model_name == "lstm") {
-//       deciding_prediction = prediction;
-//     }
-//   }
-
-//   return predict_action(deciding_prediction);
-// }
-
 ML::CandlePredict::order_action_t ML::CandlePredict::predict_action() {
   int buy_count = 0;
   int sell_count = 0;
