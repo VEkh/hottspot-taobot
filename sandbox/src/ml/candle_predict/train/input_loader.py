@@ -6,35 +6,99 @@ import ml.utils as u
 
 
 class InputLoader:
-    def __init__(self, db_conn=None, duration_minutes=0, symbol=""):
+    def __init__(self, db_conn=None, duration_minutes=0, symbol=None):
         self.db_conn = db_conn
         self.duration_minutes = duration_minutes
         self.columns = []
         self.inputs = np.array([])
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
+        self.selected_input_columns = ",\n".join(models.config.SELECTED_INPUT_COLUMNS)
         self.symbol = symbol
         self.test_set = np.array([])
         self.training_set = np.array([])
         self.validation_set = np.array([])
 
     def load(self):
-        u.ascii.puts(
-            f"💿 Loading input data for {u.ascii.CYAN}{self.symbol}", u.ascii.YELLOW
-        )
-
-        self.__get_from_db()
+        if self.symbol:
+            self.__get_inputs_for_symbol()
+        else:
+            self.__get_inputs_for_all()
 
     def preprocess(self):
         self.__split_into_sets()
         self.__normalize()
 
-    def __get_from_db(self):
-        selected_input_columns = ",\n".join(models.config.SELECTED_INPUT_COLUMNS)
+    def __get_inputs_for_all(self):
+        u.ascii.puts(
+            f"💿 Loading input data for {u.ascii.CYAN}all symbols", u.ascii.YELLOW
+        )
 
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
                 select
-                  {selected_input_columns}
+                  candles.*
+                from (
+                  select
+                    symbol,
+                    (count(*) / %(input_width)s) as multiplier
+                  from
+                    candles
+                  where
+                    duration_minutes = %(duration_minutes)s
+                  group by
+                    symbol) as symbols
+                  join lateral (
+                    select
+                      {self.selected_input_columns},
+                      symbol
+                    from
+                      candles
+                    where
+                      symbol = symbols.symbol
+                      and duration_minutes = %(duration_minutes)s
+                    order by
+                      opened_at asc
+                    limit (symbols.multiplier * %(input_width)s)) as candles on candles.symbol = symbols.symbol;
+            """
+
+            cursor.execute(
+                query,
+                {
+                    "duration_minutes": self.duration_minutes,
+                    "input_width": models.config.INPUT_WIDTH,
+                },
+            )
+
+            columns = [column.name for column in cursor.description]
+            rows = cursor.fetchall()
+
+        input_width = models.config.INPUT_WIDTH
+        m = len(rows)
+        n = len(models.config.SELECTED_INPUT_COLUMNS)
+
+        batches_n = int(m / input_width)
+
+        inputs = np.array(rows)[:, :n].astype(float).reshape(batches_n, input_width, n)
+
+        idx = np.arange(inputs.shape[0])
+        np.random.shuffle(idx)
+
+        shuffled_inputs = inputs[idx, :]
+
+        self.columns = columns[:n]
+        self.inputs = shuffled_inputs.reshape(m, n)
+
+        u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
+
+    def __get_inputs_for_symbol(self):
+        u.ascii.puts(
+            f"💿 Loading input data for {u.ascii.CYAN}{self.symbol}", u.ascii.YELLOW
+        )
+
+        with self.db_conn.conn.cursor() as cursor:
+            query = f"""
+                select
+                  {self.selected_input_columns}
                 from
                   candles
                 where
@@ -78,11 +142,11 @@ class InputLoader:
         u.ascii.puts(f"✅ Normalized data sets.", u.ascii.GREEN)
 
     def __split_into_sets(self):
-        n = len(self.inputs)
+        m = len(self.inputs)
 
-        self.test_set = self.inputs[int(n * 0.9) :]
-        self.training_set = self.inputs[0 : int(n * 0.7)]
-        self.validation_set = self.inputs[int(n * 0.7) : int(n * 0.9)]
+        self.test_set = self.inputs[int(m * 0.9) :]
+        self.training_set = self.inputs[0 : int(m * 0.7)]
+        self.validation_set = self.inputs[int(m * 0.7) : int(m * 0.9)]
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="")
         u.ascii.puts(
@@ -94,5 +158,5 @@ class InputLoader:
         print(f"Training:   {len(self.training_set)}")
         print(f"Validation: {len(self.validation_set)}")
         print(f"Test:       {len(self.test_set)}")
-        print(f"Total:      {n}")
+        print(f"Total:      {m}")
         print(u.ascii.RESET, end="")

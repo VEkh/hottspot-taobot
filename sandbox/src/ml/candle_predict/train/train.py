@@ -13,10 +13,10 @@ from .input_loader import InputLoader
 from .window_generator import WindowGenerator
 
 
-class TrainSingle:
+class Train:
     MAX_EPOCHS = 20
 
-    def __init__(self, db_conn=None, duration_minutes=5, symbol=""):
+    def __init__(self, db_conn=None, duration_minutes=5, symbol=None):
         self.app_dir = os.environ.get("APP_DIR", ".")
         self.db_conn = db_conn
         self.duration_minutes = duration_minutes
@@ -67,7 +67,7 @@ class TrainSingle:
         history = model.fit(
             window.train,
             callbacks=[early_stopping],
-            epochs=TrainSingle.MAX_EPOCHS,
+            epochs=Train.MAX_EPOCHS,
             validation_data=window.validation,
         )
 
@@ -96,7 +96,7 @@ class TrainSingle:
         self.__plot_performance()
 
     def __model_filename(self, model_name):
-        return f"{self.symbol}_{model_name}_{self.duration_minutes}min"
+        return f"{self.__scope_filename()}{model_name}_{self.duration_minutes}min"
 
     def __persist_model(self, model):
         data_dir = f"{self.app_dir}/data/ml/candle_predict/models"
@@ -128,7 +128,7 @@ class TrainSingle:
         plt.xticks(labels=self.test_performance.keys(), rotation=45, ticks=x)
         plt.legend()
 
-        filepath = f"{self.app_dir}/tmp/{self.symbol}_{self.duration_minutes}min_performance.png"
+        filepath = f"{self.app_dir}/tmp/{self.__scope_filename()}{self.duration_minutes}min_performance.png"
         plt.savefig(filepath)
         plt.clf()
 
@@ -158,6 +158,9 @@ class TrainSingle:
         u.ascii.puts(
             f"🧱📊 Weight plot saved to {u.ascii.CYAN}{savepath}", u.ascii.YELLOW
         )
+
+    def __scope_filename(self):
+        return f"{self.symbol}_" if self.symbol else ""
 
     def __train_baseline(self):
         columns = self.input_loader.columns

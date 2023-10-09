@@ -56,7 +56,7 @@ function train_each() {
   symbols=($(cat "${app_dir}/bin/${project}/symbols"))
 
   for symbol in "${symbols[@]}"; do
-    "${app_dir}/bin/ml/candle_predict" train_single "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
+    "${app_dir}/bin/ml/candle_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
   done
 }
 
