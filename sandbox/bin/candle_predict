@@ -48,6 +48,14 @@ function predict_all() {
   done
 }
 
+function train_all() {
+  ascii_print "🤖 Re-training models for all symbols" "cyan"
+
+  build_candles_each "${@}"
+
+  "${app_dir}/bin/ml/candle_predict" train "${@}" >> "${log_dir}/train_all.log" 2>/dev/null
+}
+
 function train_each() {
   ascii_print "🤖 Re-training models for each symbol" "cyan"
 
