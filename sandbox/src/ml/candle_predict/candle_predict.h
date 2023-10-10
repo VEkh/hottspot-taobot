@@ -26,6 +26,7 @@ public:
   int duration_minutes;
   std::list<prediction_t> predictions;
 
+  bool is_ready_to_predict();
   bool should_close_position(const order_action_t);
   bool should_on_demand_predict();
   bool should_predict();

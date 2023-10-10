@@ -8,6 +8,7 @@
 #include <string>                                     // std::string
 
 #include "get_fresh_predictions.cpp"
+#include "is_ready_to_predict.cpp"
 #include "log_predictions.cpp"
 #include "predict.cpp"
 #include "predict_action.cpp"

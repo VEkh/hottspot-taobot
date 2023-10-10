@@ -5,11 +5,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, position_t
 
 bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
-  if (predictor.predictions.empty()) {
-    return false;
-  }
-
-  if (predictor.predictions.size() % 2 == 0) {
+  if (!predictor.is_ready_to_predict()) {
     return false;
   }
 
