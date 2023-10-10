@@ -11,17 +11,19 @@ void ML::CandlePredict::predict(const double ref_epoch) {
 
   const char *cmd_format =
       "%s/bin/ml/candle_predict predict %s --duration-min=%i --env=%s "
-      "--ref-epoch=%f --timestamps=%f > /dev/null 2>&1";
+      "--ref-epoch=%f --scope=%s --timestamps=%f > /dev/null 2>&1";
 
   const size_t cmd_l =
       strlen(cmd_format) + strlen(APP_DIR) + this->symbol.size() +
       std::to_string(this->duration_minutes).size() + this->db_env.size() +
-      2 * std::to_string(ref_epoch).size();
+      2 * std::to_string(ref_epoch).size() +
+      this->config.prediction_scope.size();
 
   char cmd[cmd_l];
 
   snprintf(cmd, cmd_l, cmd_format, APP_DIR, this->symbol.c_str(),
-           this->duration_minutes, this->db_env.c_str(), ref_epoch, ref_epoch);
+           this->duration_minutes, this->db_env.c_str(), ref_epoch,
+           this->config.prediction_scope.c_str(), ref_epoch);
 
   ::utils::io::system_exec(cmd);
 }

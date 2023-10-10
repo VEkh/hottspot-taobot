@@ -102,6 +102,11 @@ void Alpaca::Client::load_config() {
           candle_predict_json.contains("on_demand_predictions")
               ? (bool)candle_predict_json["on_demand_predictions"]
               : ml_config.candle_predict.on_demand_predictions;
+
+      ml_config.candle_predict.prediction_scope =
+          candle_predict_json.contains("prediction_scope")
+              ? (std::string)candle_predict_json["prediction_scope"]
+              : ml_config.candle_predict.prediction_scope;
     }
   }
 

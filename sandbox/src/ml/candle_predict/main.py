@@ -5,7 +5,7 @@ import time
 import ml.utils as u
 
 usage = """
-        main.h {predict} symbol   --duration-min [--env] [--ref-epoch] [--timestamps]
+        main.h {predict} symbol   --duration-min [--env] [--ref-epoch] [--scope] [--timestamps]
         main.h {train}   [symbol] --duration-min [--env]
 """
 
@@ -56,6 +56,14 @@ arg_parser.add_argument(
     help=f"Reference epoch from which a prediction will be made (e.g. {int(now)})",
 )
 
+arg_parser.add_argument(
+    "--scope",
+    choices=["all", "single"],
+    default="single",
+    dest="scope",
+    help="Use models trained on (all|a single) instrument(s). ",
+)
+
 timestamps_help = u.string.strip_heredoc(
     f"""
     Time to be written to database timestamp columns (inserted_at, updated_at)
@@ -98,6 +106,7 @@ match args.command:
             db_conn=conn,
             duration_minutes=args.duration_minutes,
             ref_epoch=args.ref_epoch,
+            scope=args.scope,
             symbol=args.symbol,
             timestamps=args.timestamps,
         )

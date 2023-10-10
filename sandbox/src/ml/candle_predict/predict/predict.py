@@ -14,6 +14,7 @@ class Predict:
         db_conn=None,
         duration_minutes=0,
         ref_epoch=0,
+        scope="single",
         symbol="",
         timestamps="now()",
     ):
@@ -24,6 +25,7 @@ class Predict:
         self.model_names = ["convolutional", "linear", "lstm"]
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.ref_epoch = ref_epoch
+        self.scope = scope
         self.symbol = symbol
         self.timestamps = timestamps
 
@@ -103,7 +105,8 @@ class Predict:
         )
 
     def __model_filename(self, model_name):
-        return f"{self.symbol}_{model_name}_{self.duration_minutes}min"
+        prefix = f"{self.symbol}_" if self.scope == "single" else ""
+        return f"{prefix}{model_name}_{self.duration_minutes}min"
 
     def __predict_next(self):
         for model_name in self.model_names:
