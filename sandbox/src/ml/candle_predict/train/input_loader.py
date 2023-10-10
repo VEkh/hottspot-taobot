@@ -72,21 +72,10 @@ class InputLoader:
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()
 
-        input_width = models.config.INPUT_WIDTH
-        m = len(rows)
         n = len(models.config.SELECTED_INPUT_COLUMNS)
 
-        batches_n = int(m / input_width)
-
-        inputs = np.array(rows)[:, :n].astype(float).reshape(batches_n, input_width, n)
-
-        idx = np.arange(inputs.shape[0])
-        np.random.shuffle(idx)
-
-        shuffled_inputs = inputs[idx, :]
-
         self.columns = columns[:n]
-        self.inputs = shuffled_inputs.reshape(m, n)
+        self.inputs = self.__shuffle_rows(features_n=n, rows=rows)
 
         u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
 
@@ -97,6 +86,15 @@ class InputLoader:
 
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
+                with counter as (
+                  select
+                    (count(*) / 150) as multiplier
+                  from
+                    candles
+                  where
+                    symbol = %(symbol)s
+                    and duration_minutes = %(duration_minutes)s
+                )
                 select
                   {self.selected_input_columns}
                 from
@@ -106,6 +104,11 @@ class InputLoader:
                   and duration_minutes = %(duration_minutes)s
                 order by
                   opened_at asc
+                limit (
+                  select
+                    multiplier * 150
+                  from
+                    counter)
             """
 
             cursor.execute(
@@ -119,8 +122,10 @@ class InputLoader:
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()
 
-        self.columns = columns
-        self.inputs = np.array(rows)
+        n = len(models.config.SELECTED_INPUT_COLUMNS)
+
+        self.columns = columns[:n]
+        self.inputs = self.__shuffle_rows(features_n=n, rows=rows)
 
         u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
 
@@ -140,6 +145,24 @@ class InputLoader:
         ) / training_set_std
 
         u.ascii.puts(f"✅ Normalized data sets.", u.ascii.GREEN)
+
+    def __shuffle_rows(self, features_n=0, rows=[]):
+        input_width = models.config.INPUT_WIDTH
+        m = len(rows)
+        n = features_n
+
+        groups_n = int(m / input_width)
+
+        grouped_rows = (
+            np.array(rows)[:, :n].astype(float).reshape(groups_n, input_width, n)
+        )
+
+        idx = np.arange(grouped_rows.shape[0])
+        np.random.shuffle(idx)
+
+        shuffled_rows = grouped_rows[idx, :]
+
+        return shuffled_rows.reshape(m, n)
 
     def __split_into_sets(self):
         m = len(self.inputs)
