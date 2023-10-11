@@ -43,10 +43,45 @@ class Train:
         self.input_loader.load()
         self.input_loader.preprocess()
 
+        self.standard_window = WindowGenerator(
+            input_columns=self.input_loader.columns,
+            input_width=self.input_width,
+            label_columns=self.label_columns,
+            label_width=self.input_width,
+            shift=1,
+            training_set=self.input_loader.training_set,
+            test_set=self.input_loader.test_set,
+            validation_set=self.input_loader.validation_set,
+        )
+
         self.__train_baseline()
         self.__train_linear()
         self.__train_convolutional()
-        self.__train_lstm()
+
+        self.__train_rnn(
+            models.gru.create(
+                input_columns=self.standard_window.input_columns,
+                label_columns=self.standard_window.label_columns,
+                norm_factors=self.input_loader.norm_factors,
+            )
+        )
+
+        self.__train_rnn(
+            models.lstm.create(
+                input_columns=self.standard_window.input_columns,
+                label_columns=self.standard_window.label_columns,
+                norm_factors=self.input_loader.norm_factors,
+            )
+        )
+
+        self.__train_rnn(
+            models.simple_rnn.create(
+                input_columns=self.standard_window.input_columns,
+                label_columns=self.standard_window.label_columns,
+                norm_factors=self.input_loader.norm_factors,
+            )
+        )
+
         self.__log_performance()
         self.__log_duration()
 
@@ -252,16 +287,7 @@ class Train:
         self.__persist_model(model)
 
     def __train_linear(self):
-        window = WindowGenerator(
-            input_columns=self.input_loader.columns,
-            input_width=self.input_width,
-            label_columns=self.label_columns,
-            label_width=self.input_width,
-            shift=1,
-            training_set=self.input_loader.training_set,
-            test_set=self.input_loader.test_set,
-            validation_set=self.input_loader.validation_set,
-        )
+        window = self.standard_window
 
         model = models.linear.create(
             input_columns=window.input_columns,
@@ -291,24 +317,7 @@ class Train:
 
         self.__persist_model(model)
 
-    def __train_lstm(self):
-        window = WindowGenerator(
-            input_columns=self.input_loader.columns,
-            input_width=self.input_width,
-            label_columns=self.label_columns,
-            label_width=self.input_width,
-            shift=1,
-            training_set=self.input_loader.training_set,
-            test_set=self.input_loader.test_set,
-            validation_set=self.input_loader.validation_set,
-        )
-
-        model = models.lstm.create(
-            input_columns=window.input_columns,
-            label_columns=window.label_columns,
-            norm_factors=self.input_loader.norm_factors,
-        )
-
+    def __train_rnn(self, model):
         u.ascii.puts(
             f"🤖🔨 Training {u.ascii.CYAN}{model.name.upper()}\n",
             u.ascii.MAGENTA,
@@ -317,12 +326,12 @@ class Train:
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="", print_end="")
 
-        self.__fit(model=model, window=window)
-        self.__evaluate(model=model, window=window)
+        self.__fit(model=model, window=self.standard_window)
+        self.__evaluate(model=model, window=self.standard_window)
 
         print(u.ascii.RESET, end="")
 
-        window.plot(
+        self.standard_window.plot(
             filename=f"{self.__model_filename(model.name)}.png",
             model=model,
             plot_column="close",

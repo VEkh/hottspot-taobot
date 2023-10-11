@@ -22,7 +22,13 @@ class Predict:
         self.db_conn = db_conn
         self.duration_minutes = duration_minutes
         self.input_loader = None
-        self.model_names = ["convolutional", "linear", "lstm"]
+        self.model_names = [
+            "convolutional",
+            "gru",
+            "linear",
+            "lstm",
+            "simple_rnn",
+        ]
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.ref_epoch = ref_epoch
         self.scope = scope
