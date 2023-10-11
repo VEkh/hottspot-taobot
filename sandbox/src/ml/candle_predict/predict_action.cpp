@@ -6,11 +6,25 @@
 #include <list>                   // std::list
 
 ML::CandlePredict::order_action_t ML::CandlePredict::predict_action() {
+  std::list<prediction_t> latest_predictions_ = latest_predictions().second;
+  return predict_action(latest_predictions_);
+}
+
+ML::CandlePredict::order_action_t
+ML::CandlePredict::predict_action(const prediction_t prediction) {
+  if (prediction.close < prediction.candle.close) {
+    return order_action_t::SELL;
+  }
+
+  return order_action_t::BUY;
+}
+
+ML::CandlePredict::order_action_t
+ML::CandlePredict::predict_action(const std::list<prediction_t> predictions_) {
   int buy_count = 0;
   int sell_count = 0;
-  std::list<prediction_t> latest_predictions_ = latest_predictions().second;
 
-  for (const prediction_t prediction : latest_predictions_) {
+  for (const prediction_t prediction : predictions_) {
     switch (predict_action(prediction)) {
     case order_action_t::BUY: {
       buy_count += 1;
@@ -28,15 +42,6 @@ ML::CandlePredict::order_action_t ML::CandlePredict::predict_action() {
   }
 
   return order_action_t::SELL;
-}
-
-ML::CandlePredict::order_action_t
-ML::CandlePredict::predict_action(const prediction_t prediction) {
-  if (prediction.close < prediction.candle.close) {
-    return order_action_t::SELL;
-  }
-
-  return order_action_t::BUY;
 }
 
 #endif

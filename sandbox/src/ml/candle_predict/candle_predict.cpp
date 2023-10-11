@@ -7,8 +7,12 @@
 #include "lib/pg/pg.cpp"                              // Pg
 #include <string>                                     // std::string
 
+#include "are_predictions_stale.cpp"
+#include "build_opposing_predictions.cpp"
 #include "get_fresh_predictions.cpp"
 #include "is_ready_to_predict.cpp"
+#include "latest_predictions.cpp"
+#include "log_opposing_predictions.cpp"
 #include "log_predictions.cpp"
 #include "predict.cpp"
 #include "predict_action.cpp"

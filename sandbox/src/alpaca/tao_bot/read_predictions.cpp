@@ -16,8 +16,13 @@ void Alpaca::TaoBot::read_predictions() {
 
   this->five_min_predict.get_fresh_predictions(this->current_epoch);
 
-  if (this->five_min_predict.predictions.empty() &&
-      this->five_min_predict.should_on_demand_predict()) {
+  if (this->open_order_ptr) {
+    this->five_min_predict.build_opposing_predictions(
+        this->open_order_ptr->action);
+  }
+
+  if (this->five_min_predict.should_on_demand_predict() &&
+      this->five_min_predict.are_predictions_stale(this->current_epoch)) {
     std::cout << fmt.bold << fmt.yellow;
     printf("🤖 No fresh %i Minute Predictions. Making new ones.\n",
            this->five_min_predict.duration_minutes);

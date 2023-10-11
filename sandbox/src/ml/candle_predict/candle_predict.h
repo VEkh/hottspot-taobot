@@ -25,8 +25,10 @@ public:
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   int duration_minutes;
+  std::map<double, std::list<prediction_t>> opposing_predictions;
   std::map<double, std::list<prediction_t>> predictions;
 
+  bool are_predictions_stale(const double);
   bool is_ready_to_predict();
   bool should_close_position(const order_action_t);
   bool should_on_demand_predict();
@@ -34,12 +36,17 @@ public:
 
   order_action_t predict_action();
   order_action_t predict_action(const prediction_t);
+  order_action_t predict_action(const std::list<prediction_t>);
 
+  void build_opposing_predictions(const order_action_t);
   void get_fresh_predictions(const double, const bool);
+  void log_opposing_predictions();
   void log_predictions(const double);
   void predict(const double);
 
 private:
+  constexpr static int OPPOSING_PREDICTIONS_LIMIT = 2;
+
   Formatted::fmt_stream_t fmt = Formatted::stream();
   candle_predict_config_t config;
   std::string db_env;

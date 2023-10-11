@@ -1,16 +1,15 @@
 #ifndef ML__CANDLE_PREDICT_log_predictions
 #define ML__CANDLE_PREDICT_log_predictions
 
-#include "candle_predict.h"       // ML::CandlePredict, fmt, prediction_t
-#include "db/candle/candle.cpp"   // DB::Candle
-#include "latest_predictions.cpp" // latest_predictions
-#include "lib/formatted.cpp"      // Formatted
-#include "lib/utils/integer.cpp"  // ::utils::integer_
-#include "predict_action.cpp"     // predict_action
-#include <iostream>               // std::cout, std::endl
-#include <list>                   // std::list
-#include <stdio.h>                // printf
-#include <utility>                // std::pair
+#include "are_predictions_stale.cpp" // are_predictions_stale
+#include "candle_predict.h"          // ML::CandlePredict, fmt, prediction_t
+#include "latest_predictions.cpp"    // latest_predictions
+#include "lib/formatted.cpp"         // Formatted
+#include "lib/utils/integer.cpp"     // ::utils::integer_
+#include "predict_action.cpp"        // predict_action
+#include <iostream>                  // std::cout, std::endl
+#include <list>                      // std::list
+#include <stdio.h>                   // printf
 
 void ML::CandlePredict::log_predictions(const double current_epoch) {
   if (this->predictions.empty()) {
@@ -22,13 +21,7 @@ void ML::CandlePredict::log_predictions(const double current_epoch) {
     return;
   }
 
-  std::pair<double, std::list<prediction_t>> latest_predictions_pair =
-      latest_predictions();
-
-  DB::Candle::candle_bounds_t current_bounds =
-      DB::Candle::timestamp_to_bounds(this->duration_minutes, current_epoch);
-
-  if (current_bounds.opened_at != latest_predictions_pair.first) {
+  if (are_predictions_stale(current_epoch)) {
     std::cout << fmt.bold << fmt.cyan;
     printf("🤖💀 No Current %i Minute Predictions to log.\n",
            this->duration_minutes);
@@ -41,7 +34,7 @@ void ML::CandlePredict::log_predictions(const double current_epoch) {
   printf("🤖 %i Minute Predictions (Close)\n", this->duration_minutes);
   std::cout << fmt.reset;
 
-  std::list<prediction_t> latest_predictions_ = latest_predictions_pair.second;
+  std::list<prediction_t> latest_predictions_ = latest_predictions().second;
   std::list<prediction_t>::iterator it;
 
   for (it = latest_predictions_.begin(); it != latest_predictions_.end();
