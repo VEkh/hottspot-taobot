@@ -46,7 +46,9 @@ class InputLoader:
                   where
                     duration_minutes = %(duration_minutes)s
                   group by
-                    symbol) as symbols
+                    symbol
+                  order by
+                    symbol asc) as symbols
                   join lateral (
                     select
                       {self.selected_input_columns},
@@ -75,7 +77,7 @@ class InputLoader:
         n = len(models.config.SELECTED_INPUT_COLUMNS)
 
         self.columns = columns[:n]
-        self.inputs = self.__shuffle_rows(features_n=n, rows=rows)
+        self.inputs = np.array(rows)[:, :n].astype(float)
 
         u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
 
@@ -86,15 +88,6 @@ class InputLoader:
 
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
-                with counter as (
-                  select
-                    (count(*) / 150) as multiplier
-                  from
-                    candles
-                  where
-                    symbol = %(symbol)s
-                    and duration_minutes = %(duration_minutes)s
-                )
                 select
                   {self.selected_input_columns}
                 from
@@ -104,11 +97,6 @@ class InputLoader:
                   and duration_minutes = %(duration_minutes)s
                 order by
                   opened_at asc
-                limit (
-                  select
-                    multiplier * 150
-                  from
-                    counter)
             """
 
             cursor.execute(
@@ -122,10 +110,8 @@ class InputLoader:
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()
 
-        n = len(models.config.SELECTED_INPUT_COLUMNS)
-
-        self.columns = columns[:n]
-        self.inputs = self.__shuffle_rows(features_n=n, rows=rows)
+        self.columns = columns
+        self.inputs = np.array(rows)
 
         u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
 
