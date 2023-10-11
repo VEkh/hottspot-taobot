@@ -22,11 +22,7 @@ bool Alpaca::TaoBot::should_open_position() {
 
   const std::string api_key = this->api_client.config.api_key;
 
-  if (api_key == "backtest-ml-10") {
-    if (this->ten_min_predict.should_predict()) {
-      return should_ml_open_position(this->ten_min_predict);
-    }
-  } else if (this->five_min_predict.should_predict()) {
+  if (this->five_min_predict.should_predict()) {
     return should_ml_open_position(this->five_min_predict);
   }
 

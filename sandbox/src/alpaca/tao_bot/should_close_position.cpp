@@ -47,10 +47,7 @@ bool Alpaca::TaoBot::should_close_position() {
 
   const std::string api_key = this->api_client.config.api_key;
 
-  if (api_key == "backtest-ml-10" && this->ten_min_predict.should_predict()) {
-    return this->ten_min_predict.should_close_position(
-        this->open_order_ptr->action);
-  } else if (this->five_min_predict.should_predict()) {
+  if (this->five_min_predict.should_predict()) {
     return this->five_min_predict.should_close_position(
         this->open_order_ptr->action);
   } else {

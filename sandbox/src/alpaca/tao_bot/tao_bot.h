@@ -57,7 +57,6 @@ private:
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   ML::CandlePredict five_min_predict;
-  ML::CandlePredict ten_min_predict;
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;

@@ -73,9 +73,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->five_min_predict = ML::CandlePredict(
         this->pg, this->api_client.config.ml.candle_predict, 5, this->symbol);
 
-    this->ten_min_predict = ML::CandlePredict(
-        this->pg, this->api_client.config.ml.candle_predict, 10, this->symbol);
-
     std::vector<std::string> tradeable_symbols =
         ::utils::io::tradeable_symbols("alpaca");
 
