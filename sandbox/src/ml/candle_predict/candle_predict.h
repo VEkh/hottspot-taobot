@@ -9,6 +9,7 @@
 #include <list>                                       // std::list
 #include <map>                                        // std::map
 #include <string>                                     // std::string
+#include <utility>                                    // std::pair
 
 namespace ML {
 class CandlePredict {
@@ -24,7 +25,7 @@ public:
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   int duration_minutes;
-  std::list<prediction_t> predictions;
+  std::map<double, std::list<prediction_t>> predictions;
 
   bool is_ready_to_predict();
   bool should_close_position(const order_action_t);
@@ -35,7 +36,7 @@ public:
   order_action_t predict_action(const prediction_t);
 
   void get_fresh_predictions(const double, const bool);
-  void log_predictions();
+  void log_predictions(const double);
   void predict(const double);
 
 private:
@@ -43,6 +44,8 @@ private:
   candle_predict_config_t config;
   std::string db_env;
   std::string symbol;
+
+  std::pair<double, std::list<prediction_t>> latest_predictions();
 };
 } // namespace ML
 

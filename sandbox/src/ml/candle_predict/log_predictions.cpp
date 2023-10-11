@@ -1,17 +1,36 @@
 #ifndef ML__CANDLE_PREDICT_log_predictions
 #define ML__CANDLE_PREDICT_log_predictions
 
-#include "candle_predict.h"      // ML::CandlePredict, fmt, prediction_t
-#include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/integer.cpp" // ::utils::integer_
-#include "predict_action.cpp"    // predict_action
-#include <iostream>              // std::cout, std::endl
-#include <stdio.h>               // printf
+#include "candle_predict.h"       // ML::CandlePredict, fmt, prediction_t
+#include "db/candle/candle.cpp"   // DB::Candle
+#include "latest_predictions.cpp" // latest_predictions
+#include "lib/formatted.cpp"      // Formatted
+#include "lib/utils/integer.cpp"  // ::utils::integer_
+#include "predict_action.cpp"     // predict_action
+#include <iostream>               // std::cout, std::endl
+#include <list>                   // std::list
+#include <stdio.h>                // printf
+#include <utility>                // std::pair
 
-void ML::CandlePredict::log_predictions() {
+void ML::CandlePredict::log_predictions(const double current_epoch) {
   if (this->predictions.empty()) {
     std::cout << fmt.bold << fmt.cyan;
     printf("🤖💀 No %i Minute Predictions to log.\n",
+           this->duration_minutes);
+    std::cout << fmt.reset << std::endl;
+
+    return;
+  }
+
+  std::pair<double, std::list<prediction_t>> latest_predictions_pair =
+      latest_predictions();
+
+  DB::Candle::candle_bounds_t current_bounds =
+      DB::Candle::timestamp_to_bounds(this->duration_minutes, current_epoch);
+
+  if (current_bounds.opened_at != latest_predictions_pair.first) {
+    std::cout << fmt.bold << fmt.cyan;
+    printf("🤖💀 No Current %i Minute Predictions to log.\n",
            this->duration_minutes);
     std::cout << fmt.reset << std::endl;
 
@@ -22,17 +41,19 @@ void ML::CandlePredict::log_predictions() {
   printf("🤖 %i Minute Predictions (Close)\n", this->duration_minutes);
   std::cout << fmt.reset;
 
+  std::list<prediction_t> latest_predictions_ = latest_predictions_pair.second;
   std::list<prediction_t>::iterator it;
 
-  for (it = this->predictions.begin(); it != this->predictions.end(); it++) {
+  for (it = latest_predictions_.begin(); it != latest_predictions_.end();
+       it++) {
     Formatted::Stream log_color = fmt.yellow;
 
     const prediction_t prediction = *it;
 
     std::cout << fmt.bold << log_color;
 
-    if (it != this->predictions.begin()) {
-      printf(" • ");
+    if (it != latest_predictions_.begin()) {
+      printf("\n");
     }
 
     log_color = predict_action(prediction) == order_action_t::SELL ? fmt.red

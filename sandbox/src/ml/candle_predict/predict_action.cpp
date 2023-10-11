@@ -1,13 +1,16 @@
 #ifndef ML__CANDLE_PREDICT_predict_action
 #define ML__CANDLE_PREDICT_predict_action
 
-#include "candle_predict.h" // ML::CandlePredict
+#include "candle_predict.h"       // ML::CandlePredict, prediction_t
+#include "latest_predictions.cpp" // latest_predictions
+#include <list>                   // std::list
 
 ML::CandlePredict::order_action_t ML::CandlePredict::predict_action() {
   int buy_count = 0;
   int sell_count = 0;
+  std::list<prediction_t> latest_predictions_ = latest_predictions().second;
 
-  for (const prediction_t prediction : this->predictions) {
+  for (const prediction_t prediction : latest_predictions_) {
     switch (predict_action(prediction)) {
     case order_action_t::BUY: {
       buy_count += 1;

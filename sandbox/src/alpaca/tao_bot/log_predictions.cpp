@@ -8,7 +8,7 @@ void Alpaca::TaoBot::log_predictions() {
     return;
   }
 
-  this->five_min_predict.log_predictions();
+  this->five_min_predict.log_predictions(this->current_epoch);
 }
 
 #endif

@@ -1,20 +1,20 @@
 #ifndef DB__CANDLE_build
 #define DB__CANDLE_build
 
-#include "candle.h"              // DB::Candle, candle_t, fmt, quote_t
-#include "db/quote/quote.cpp"    // DB::Quote
-#include "get_latest_quotes.cpp" // get_latest_quotes
-#include "lib/utils/integer.cpp" // ::utils::integer_
-#include "lib/utils/time.cpp"    // ::utils::time_
-#include "quote_to_bounds.cpp"   // quote_to_bounds
-#include "upsert.cpp"            // upsert
-#include <algorithm>             // std::max, std::min
-#include <iostream>              // std::cout, std::endl
-#include <iterator>              // std::next
-#include <list>                  // std::list
-#include <math.h>                // INFINITY
-#include <stdio.h>               // printf
-#include <time.h>                // time
+#include "candle.h"                // DB::Candle, candle_t, fmt, quote_t
+#include "db/quote/quote.cpp"      // DB::Quote
+#include "get_latest_quotes.cpp"   // get_latest_quotes
+#include "lib/utils/integer.cpp"   // ::utils::integer_
+#include "lib/utils/time.cpp"      // ::utils::time_
+#include "timestamp_to_bounds.cpp" // timestamp_to_bounds
+#include "upsert.cpp"              // upsert
+#include <algorithm>               // std::max, std::min
+#include <iostream>                // std::cout, std::endl
+#include <iterator>                // std::next
+#include <list>                    // std::list
+#include <math.h>                  // INFINITY
+#include <stdio.h>                 // printf
+#include <time.h>                  // time
 
 void DB::Candle::build() {
   std::cout << fmt.bold << fmt.cyan;
@@ -37,7 +37,9 @@ void DB::Candle::build() {
   std::cout << fmt.reset << std::endl;
 
   for (; quote != latest_quotes.end(); quote++, quotes_count++) {
-    const candle_bounds_t bounds = quote_to_bounds(*quote);
+    const candle_bounds_t bounds =
+        timestamp_to_bounds(this->duration_minutes, quote->timestamp);
+
     const double mid = quote->mid();
 
     if (candle.closed_at && (quote->timestamp > candle.closed_at ||

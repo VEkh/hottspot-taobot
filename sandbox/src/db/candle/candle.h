@@ -12,6 +12,11 @@
 namespace DB {
 class Candle {
 public:
+  struct candle_bounds_t {
+    double closed_at;
+    double opened_at;
+  };
+
   struct candle_t {
     double close = 0;
     double closed_at = 0;
@@ -25,24 +30,19 @@ public:
   Candle(){};
   Candle(const Pg, const int, const std::string);
 
+  static candle_bounds_t timestamp_to_bounds(const int, const long int);
+
   void build();
 
 private:
   using query_result_t = Pg::query_result_t;
   using quote_t = Global::t::quote_t;
 
-  struct candle_bounds_t {
-    double closed_at;
-    double opened_at;
-  };
-
   DB::Quote db_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
   int duration_minutes = 0;
   std::string symbol;
-
-  candle_bounds_t quote_to_bounds(const quote_t &);
 
   std::list<quote_t> get_latest_quotes(const bool);
 
