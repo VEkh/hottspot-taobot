@@ -30,7 +30,7 @@ public:
 
   bool are_predictions_stale(const double);
   bool is_ready_to_predict();
-  bool should_close_position(const order_action_t);
+  bool should_close_position(const double, const double, const order_action_t);
   bool should_on_demand_predict();
   bool should_predict();
 
@@ -51,6 +51,8 @@ private:
   candle_predict_config_t config;
   std::string db_env;
   std::string symbol;
+
+  bool is_profitable_trend_finished(const double, const order_action_t);
 
   std::pair<double, std::list<prediction_t>> latest_predictions();
 };

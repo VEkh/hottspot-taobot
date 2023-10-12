@@ -2,12 +2,11 @@
 #define ALPACA__TAO_BOT_should_close_position
 
 #include "build_exit_prices.cpp"        // build_exit_prices
+#include "current_mid.cpp"              // current_mid
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
-
-#include <string> // std::string
 
 bool Alpaca::TaoBot::should_close_position() {
   if (this->open_order_ptr->status != order_status_t::ORDER_FILLED) {
@@ -45,10 +44,9 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  const std::string api_key = this->api_client.config.api_key;
-
   if (this->five_min_predict.should_predict()) {
     return this->five_min_predict.should_close_position(
+        current_mid(), this->open_order_ptr->profit,
         this->open_order_ptr->action);
   } else {
     if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&

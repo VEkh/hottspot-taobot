@@ -1,4 +1,4 @@
-### 2023-10-09:
+### 2023-10-11:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (75.00%) 1L (Total: 4) 💡
+Win Rate: 4W (57.14%) 3L (Total: 7)
 ```
 
 **Beta (STAGING)**
@@ -26,12 +26,107 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 4W (57.14%) 3L (Total: 7)
+Win Rate: 5W (50.00%) 5L (Total: 10)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 27W (49.09%) 28L (Total 55)
-* Better Performer: Live Alpha: 4 • Paper Beta: 3 (Total: 7)
+* Win Record: 3W (100.00%) 0L (Total 3)
+* Better Performer: Live Alpha: 2 • Paper Beta: 1 (Total: 3)
+
+###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-10:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, October 10 2023
+Current Equity:          $83386.41 (+2901.97) (+3.61%)
+Max Equity:              $83551.95 (+3067.51) (+3.81%) @ 13:35 CDT
+Min Equity:              $79141.86 (-1342.58) (-1.67%) @ 08:36 CDT
+Original Equity:         $80484.44
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, October 10 2023
+Current Equity:          $186980.98 (+5055.13) (+2.78%)
+Max Equity:              $187472.69 (+5546.84) (+3.05%) @ 13:35 CDT
+Min Equity:              $178569.75 (-3356.10) (-1.84%) @ 08:36 CDT
+Original Equity:         $181925.85
+
+Win Rate: 4W (57.14%) 3L (Total: 7)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, October 10 2023
+Current Equity:          $71450.55 (+4391.02) (+6.55%)
+Max Equity:              $71460.37 (+4400.84) (+6.56%) @ 12:04 CDT
+Min Equity:              $66875.47 (-184.06) (-0.27%) @ 08:31 CDT
+Original Equity:         $67059.53
+
+Win Rate: 5W (50.00%) 5L (Total: 10)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 3W (100.00%) 0L (Total 3)
+* Better Performer: Live Alpha: 2 • Paper Beta: 1 (Total: 3)
+
+###### Notes
+* Last night I ran all-scope predictions in backtesting and it far outperformed
+  single-scope predictions, so I decided to try it in staging and production.
+* Though it was profitable, it wasn't making predictions as intuitively as the
+  single-scope predictions. For instance, AMZN held a long position for
+  05:48:46, despite there being numerous indicators of bear trends.
+* Maybe this is because the test set (each individual instrument's recent
+  candles) is a different distribution than the training set?
+
+###### Next Thing(s) to Try
+* In either case, I'd like to see two things:
+  1. What happens when I shuffle the training data, grouped by the input width
+     of the model?
+  2. What happens if add a GRU and SimpleRNN in the mix of predictions?
+
+### 2023-10-09:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, October  9 2023
+Current Equity:          $73847.36 (+538.15) (+0.73%)
+Max Equity:              $75751.68 (+2442.47) (+3.33%) @ 10:20 CDT
+Min Equity:              $71555.36 (-1753.85) (-2.39%) @ 08:42 CDT
+Original Equity:         $73309.21
+```
+
+**Alpha (STAGING)**
+```
+Monday, October  9 2023
+Current Equity:          $182202.26 (-1614.60) (-0.88%)
+Max Equity:              $187541.80 (+3724.94) (+2.03%) @ 10:20 CDT
+Min Equity:              $177867.66 (-5949.20) (-3.24%) @ 08:42 CDT
+Original Equity:         $183816.86
+
+Win Rate: 3W (50.00%) 3L (Total: 6)
+```
+
+**Beta (STAGING)**
+```
+Monday, October  9 2023
+Current Equity:          $67066.71 (-1753.74) (-2.55%)
+Max Equity:              $70131.95 (+1311.50) (+1.91%) @ 08:35 CDT
+Min Equity:              $67066.71 (-1753.74) (-2.55%) @ 09:16 CDT
+Original Equity:         $68820.45
+
+Win Rate: 4W (44.44%) 5L (Total: 9)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 2W (100.00%) 0L (Total 2)
+* Better Performer: Live Alpha: 2 • Paper Beta: 0 (Total: 2)
 
 ###### Notes
 

@@ -98,6 +98,7 @@ private:
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity();
+  double current_mid();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double target_account_profit_ratio();
