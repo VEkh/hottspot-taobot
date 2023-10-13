@@ -20,7 +20,7 @@ void ML::CandlePredict::log_opposing_predictions() {
   }
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("🤖⏪ Opposing Prediction Closes\n");
+  printf("🤖⏪ Correct Opposing Prediction Closes\n");
   std::cout << fmt.reset;
 
   std::map<double, predictions_t>::iterator it =

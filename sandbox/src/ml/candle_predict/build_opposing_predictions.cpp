@@ -26,7 +26,7 @@ void ML::CandlePredict::build_opposing_predictions(
     const order_action_t predicted_action =
         predict_action(predictions_.predictions);
 
-    if (predicted_action == opposite_action) {
+    if (predicted_action == opposite_action && it->second.is_correct) {
       this->opposing_predictions[it->first] = predictions_;
       count++;
     }

@@ -27,6 +27,14 @@ public:
     std::list<prediction_t> predictions;
   };
 
+  struct should_close_position_args_t {
+    double current_mid;
+    order_action_t open_order_action;
+    double open_order_execution;
+    double open_order_max_profit;
+    double open_order_profit;
+  };
+
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   int duration_minutes;
@@ -35,7 +43,7 @@ public:
 
   bool are_predictions_stale(const double);
   bool is_ready_to_predict();
-  bool should_close_position(const double, const double, const order_action_t);
+  bool should_close_position(const should_close_position_args_t);
   bool should_on_demand_predict();
   bool should_predict();
 
@@ -57,7 +65,7 @@ private:
   std::string db_env;
   std::string symbol;
 
-  bool is_profitable_trend_finished(const double, const order_action_t);
+  bool is_profitable_trend_finished(should_close_position_args_t);
 
   std::pair<double, predictions_t> latest_predictions();
 };

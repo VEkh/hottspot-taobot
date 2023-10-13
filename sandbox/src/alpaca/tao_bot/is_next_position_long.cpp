@@ -5,8 +5,6 @@
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
 
-#include <string> // std::string
-
 bool Alpaca::TaoBot::is_next_position_long() {
   const std::string api_key = this->api_client.config.api_key;
 
@@ -24,4 +22,5 @@ bool Alpaca::TaoBot::is_next_position_long() {
 
   return true;
 };
+
 #endif

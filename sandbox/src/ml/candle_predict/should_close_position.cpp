@@ -1,14 +1,16 @@
 #ifndef ML__CANDLE_PREDICT_should_close_position
 #define ML__CANDLE_PREDICT_should_close_position
 
-#include "candle_predict.h"                 // ML::CandlePredict, order_action_t
+#include "candle_predict.h" // ML::CandlePredict, order_action_t, should_close_position_args_t
 #include "is_profitable_trend_finished.cpp" // is_profitable_trend_finished
 #include "is_ready_to_predict.cpp"          // is_ready_to_predict
 #include "predict_action.cpp"               // predict_action
 
 bool ML::CandlePredict::should_close_position(
-    const double current_mid, const double open_order_profit,
-    const order_action_t open_order_action) {
+    const should_close_position_args_t args) {
+  const double open_order_profit = args.open_order_profit;
+  const order_action_t open_order_action = args.open_order_action;
+
   if (!is_ready_to_predict()) {
     return false;
   }
@@ -27,7 +29,7 @@ bool ML::CandlePredict::should_close_position(
     return true;
   }
 
-  if (is_profitable_trend_finished(current_mid, open_order_action)) {
+  if (is_profitable_trend_finished(args)) {
     return true;
   }
 
