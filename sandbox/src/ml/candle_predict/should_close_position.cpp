@@ -19,6 +19,10 @@ bool ML::CandlePredict::should_close_position(
     return false;
   }
 
+  if (!this->config.hold_trend) {
+    return true;
+  }
+
   if (open_order_profit < 0) {
     return true;
   }

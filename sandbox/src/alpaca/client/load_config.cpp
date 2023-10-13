@@ -98,6 +98,11 @@ void Alpaca::Client::load_config() {
               ? (bool)candle_predict_json["enabled"]
               : ml_config.candle_predict.enabled;
 
+      ml_config.candle_predict.hold_trend =
+          candle_predict_json.contains("hold_trend")
+              ? (bool)candle_predict_json["hold_trend"]
+              : ml_config.candle_predict.enabled;
+
       ml_config.candle_predict.on_demand_predictions =
           candle_predict_json.contains("on_demand_predictions")
               ? (bool)candle_predict_json["on_demand_predictions"]
