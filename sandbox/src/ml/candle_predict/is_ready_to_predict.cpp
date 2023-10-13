@@ -10,7 +10,7 @@ bool ML::CandlePredict::is_ready_to_predict() {
   }
 
   const std::list<prediction_t> latest_predictions_ =
-      latest_predictions().second.predictions;
+      latest_predictions().second;
 
   if (latest_predictions_.size() < 2) {
     return false;

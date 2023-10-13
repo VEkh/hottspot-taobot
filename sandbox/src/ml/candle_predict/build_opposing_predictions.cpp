@@ -1,7 +1,7 @@
 #ifndef ML__CANDLE_PREDICT_build_opposing_predictions
 #define ML__CANDLE_PREDICT_build_opposing_predictions
 
-#include "candle_predict.h" // ML::CandlePredict, order_action_t, prediction_t, predictions_t
+#include "candle_predict.h"   // ML::CandlePredict, order_action_t, prediction_t
 #include "predict_action.cpp" // predict_action
 #include <list>               // std::list
 #include <map>                // std::map
@@ -17,16 +17,15 @@ void ML::CandlePredict::build_opposing_predictions(
 
   this->opposing_predictions = {};
 
-  std::map<double, predictions_t>::reverse_iterator it =
-      this->predictions.rbegin();
+  std::map<double, std::list<prediction_t>>::reverse_iterator it =
+      this->correct_predictions.rbegin();
 
-  for (; it != this->predictions.rend() && count != limit; it++) {
-    const predictions_t predictions_ = it->second;
+  for (; it != this->correct_predictions.rend() && count != limit; it++) {
+    const std::list<prediction_t> predictions_ = it->second;
 
-    const order_action_t predicted_action =
-        predict_action(predictions_.predictions);
+    const order_action_t predicted_action = predict_action(predictions_);
 
-    if (predicted_action == opposite_action && it->second.is_correct) {
+    if (predicted_action == opposite_action) {
       this->opposing_predictions[it->first] = predictions_;
       count++;
     }

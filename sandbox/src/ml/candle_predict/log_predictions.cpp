@@ -34,8 +34,7 @@ void ML::CandlePredict::log_predictions(const double current_epoch) {
   printf("🤖 %i Minute Predictions (Close)\n", this->duration_minutes);
   std::cout << fmt.reset;
 
-  std::list<prediction_t> latest_predictions_ =
-      latest_predictions().second.predictions;
+  std::list<prediction_t> latest_predictions_ = latest_predictions().second;
 
   std::list<prediction_t>::iterator it;
 

@@ -12,6 +12,7 @@
 #include "get_fresh_predictions.cpp"
 #include "is_ready_to_predict.cpp"
 #include "latest_predictions.cpp"
+#include "log_correct_predictions.cpp"
 #include "log_opposing_predictions.cpp"
 #include "log_predictions.cpp"
 #include "predict.cpp"

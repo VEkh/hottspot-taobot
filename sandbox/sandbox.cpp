@@ -2,20 +2,17 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include <map> // std::map
-
-class Foo {
-public:
-  static int mult(const int);
-};
-
-int Foo::mult(const int n) { return n * 2; }
+#include <iterator> // std::advance
+#include <map>      // std::map
 
 int main(int argc, char *argv[]) {
-  std::map<int, int> nums = {{1, 1}};
+  std::map<int, int> nums = {{1, 1}, {2, 4}, {3, 9}};
 
-  std::map<int, int>::reverse_iterator it = nums.rbegin();
+  std::map<int, int>::iterator it = nums.begin();
+  const int offset = nums.size() - 2;
+  std::advance(it, offset);
 
-  printf("%i: %i\n", it->first, it->second);
-  printf("%i\n", Foo::mult(2));
+  for (; it != nums.end(); it++) {
+    printf("%i\n", it->second);
+  }
 }

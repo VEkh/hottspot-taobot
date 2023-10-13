@@ -6,8 +6,7 @@
 #include <list>                   // std::list
 
 ML::CandlePredict::order_action_t ML::CandlePredict::predict_action() {
-  std::list<prediction_t> latest_predictions_ =
-      latest_predictions().second.predictions;
+  std::list<prediction_t> latest_predictions_ = latest_predictions().second;
 
   return predict_action(latest_predictions_);
 }

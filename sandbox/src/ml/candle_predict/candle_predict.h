@@ -23,7 +23,6 @@ public:
                 const std::string);
 
   struct predictions_t {
-    bool is_correct = false;
     std::list<prediction_t> predictions;
   };
 
@@ -38,8 +37,9 @@ public:
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   int duration_minutes;
-  std::map<double, predictions_t> opposing_predictions;
-  std::map<double, predictions_t> predictions;
+  std::map<double, std::list<prediction_t>> correct_predictions;
+  std::map<double, std::list<prediction_t>> opposing_predictions;
+  std::map<double, std::list<prediction_t>> predictions;
 
   bool are_predictions_stale(const double);
   bool is_ready_to_predict();
@@ -53,6 +53,7 @@ public:
 
   void build_opposing_predictions(const order_action_t);
   void get_fresh_predictions(const double, const bool);
+  void log_correct_predictions();
   void log_opposing_predictions();
   void log_predictions(const double);
   void predict(const double);
@@ -67,7 +68,7 @@ private:
 
   bool is_profitable_trend_finished(should_close_position_args_t);
 
-  std::pair<double, predictions_t> latest_predictions();
+  std::pair<double, std::list<prediction_t>> latest_predictions();
 };
 } // namespace ML
 
