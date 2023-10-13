@@ -24,10 +24,8 @@ class Predict:
         self.input_loader = None
         self.model_names = [
             "convolutional",
-            "gru",
             "linear",
             "lstm",
-            "simple_rnn",
         ]
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.ref_epoch = ref_epoch

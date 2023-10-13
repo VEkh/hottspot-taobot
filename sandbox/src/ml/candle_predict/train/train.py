@@ -59,23 +59,7 @@ class Train:
         self.__train_convolutional()
 
         self.__train_rnn(
-            models.gru.create(
-                input_columns=self.standard_window.input_columns,
-                label_columns=self.standard_window.label_columns,
-                norm_factors=self.input_loader.norm_factors,
-            )
-        )
-
-        self.__train_rnn(
             models.lstm.create(
-                input_columns=self.standard_window.input_columns,
-                label_columns=self.standard_window.label_columns,
-                norm_factors=self.input_loader.norm_factors,
-            )
-        )
-
-        self.__train_rnn(
-            models.simple_rnn.create(
                 input_columns=self.standard_window.input_columns,
                 label_columns=self.standard_window.label_columns,
                 norm_factors=self.input_loader.norm_factors,
