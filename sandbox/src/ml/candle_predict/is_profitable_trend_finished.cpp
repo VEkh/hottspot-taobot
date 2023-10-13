@@ -10,7 +10,9 @@ bool ML::CandlePredict::is_profitable_trend_finished(
   }
 
   const double deciding_opposing_prediction_close =
-      this->opposing_predictions.begin()->second.front().candle.close;
+      this->opposing_predictions.begin()
+          ->second.predictions.front()
+          .candle.close;
 
   if (open_order_action == order_action_t::BUY &&
       current_mid < deciding_opposing_prediction_close) {

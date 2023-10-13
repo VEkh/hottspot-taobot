@@ -22,11 +22,16 @@ public:
   CandlePredict(Pg, const candle_predict_config_t, const int,
                 const std::string);
 
+  struct predictions_t {
+    bool is_correct = false;
+    std::list<prediction_t> predictions;
+  };
+
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   int duration_minutes;
-  std::map<double, std::list<prediction_t>> opposing_predictions;
-  std::map<double, std::list<prediction_t>> predictions;
+  std::map<double, predictions_t> opposing_predictions;
+  std::map<double, predictions_t> predictions;
 
   bool are_predictions_stale(const double);
   bool is_ready_to_predict();
@@ -54,7 +59,7 @@ private:
 
   bool is_profitable_trend_finished(const double, const order_action_t);
 
-  std::pair<double, std::list<prediction_t>> latest_predictions();
+  std::pair<double, predictions_t> latest_predictions();
 };
 } // namespace ML
 
