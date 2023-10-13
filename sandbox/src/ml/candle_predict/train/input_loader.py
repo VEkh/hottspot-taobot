@@ -46,9 +46,7 @@ class InputLoader:
                   where
                     duration_minutes = %(duration_minutes)s
                   group by
-                    symbol
-                  order by
-                    symbol asc) as symbols
+                    symbol) as symbols
                   join lateral (
                     select
                       {self.selected_input_columns},
@@ -77,7 +75,7 @@ class InputLoader:
         n = len(models.config.SELECTED_INPUT_COLUMNS)
 
         self.columns = columns[:n]
-        self.inputs = np.array(rows)[:, :n].astype(float)
+        self.inputs = self.__shuffle_rows(features_n=n, rows=rows)
 
         u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
 

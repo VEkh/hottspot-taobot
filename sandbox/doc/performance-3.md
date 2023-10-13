@@ -1,4 +1,4 @@
-### 2023-10-11:
+### 2023-10-13:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 4W (57.14%) 3L (Total: 7)
+Win Rate: 5W (55.56%) 4L (Total: 9)
 ```
 
 **Beta (STAGING)**
@@ -26,14 +26,117 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 5W (50.00%) 5L (Total: 10)
+Win Rate: 5W (41.67%) 7L (Total: 12)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 3W (100.00%) 0L (Total 3)
-* Better Performer: Live Alpha: 2 • Paper Beta: 1 (Total: 3)
+* Win Record: 3W (60.00%) 2L (Total 5)
+* Better Performer: Live Alpha: 3 • Paper Beta: 2 (Total: 5)
 
 ###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-12:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thursday, October 12 2023
+Current Equity:          $79117.69 (-2139.03) (-2.63%)
+Max Equity:              $81606.46 (+349.74) (+0.43%) @ 08:31 CDT
+Min Equity:              $79112.71 (-2144.01) (-2.64%) @ 08:36 CDT
+Original Equity:         $81256.72
+```
+
+**Alpha (STAGING)**
+```
+Thursday, October 12 2023
+Current Equity:          $186622.02 (-3101.96) (-1.63%)
+Max Equity:              $190936.12 (+1212.14) (+0.64%) @ 08:43 CDT
+Min Equity:              $182827.31 (-6896.67) (-3.64%) @ 13:42 CDT
+Original Equity:         $189723.98
+
+Win Rate: 5W (55.56%) 4L (Total: 9)
+```
+
+**Beta (STAGING)**
+```
+Thursday, October 12 2023
+Current Equity:          $67778.16 (-1831.54) (-2.63%)
+Max Equity:              $71555.33 (+1945.63) (+2.80%) @ 09:27 CDT
+Min Equity:              $67778.16 (-1831.54) (-2.63%) @ 12:03 CDT
+Original Equity:         $69609.70
+
+Win Rate: 5W (41.67%) 7L (Total: 12)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 3W (60.00%) 2L (Total 5)
+* Better Performer: Live Alpha: 3 • Paper Beta: 2 (Total: 5)
+
+###### Notes
+* I introduced the hold trend strategy today. It actually saved paper alpha
+  from a big loss! Maybe I need to give it more time.
+* Single-scope training with shuffled training set seems to yield a similar
+  behavior to non-shuffled training.
+* 🌟 Single-scope training, three models, inputs not shuffled, with trend holding
+  far outperformed the other strategies (see
+  `doc/backtest_runs/20231012-backtest-ml-5-single-hold_trend.txt`)
+* I'll backtest this through other low performing time periods and note
+  performance.
+* With ML predictions, I can so far profit during:
+  * Sideways conslidation, prediction right 🎉
+  * Trending, prediction right
+* The last situation I need to handle is when the prediction is wrong and
+  tredning begins in the other direction.
+* Currently, I stay out unless the trending returns to the original direction,
+  OR until ML predicts in the losing direction. I wonder, however, if there's a
+  way to enter the opposite direction before the prediction correctly predicts
+  it.
+
+###### Next Thing(s) to Try
+
+### 2023-10-11:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, October 11 2023
+Current Equity:          $81268.13 (-2085.90) (-2.50%)
+Max Equity:              $84287.38 (+933.35) (+1.12%) @ 08:32 CDT
+Min Equity:              $81263.57 (-2090.46) (-2.51%) @ 08:51 CDT
+Original Equity:         $83354.03
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, October 11 2023
+Current Equity:          $190043.95 (+3145.14) (+1.68%)
+Max Equity:              $192410.11 (+5511.30) (+2.95%) @ 14:02 CDT
+Min Equity:              $179456.17 (-7442.64) (-3.98%) @ 09:02 CDT
+Original Equity:         $186898.81
+
+Win Rate: 5W (62.5%) 3L (Total: 8)
+```
+
+**Beta (STAGING)**
+```
+Wednesday, October 11 2023
+Current Equity:          $69622.91 (-1817.47) (-2.54%)
+Max Equity:              $72804.01 (+1363.63) (+1.91%) @ 10:10 CDT
+Min Equity:              $69622.91 (-1817.47) (-2.54%) @ 14:28 CDT
+Original Equity:         $71440.38
+
+Win Rate: 5W (45.45%) 6L (Total: 11)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 3W (75.00%) 1L (Total 4)
+* Better Performer: Live Alpha: 3 • Paper Beta: 1 (Total: 4)
+
+###### Notes
+* Testing out what happens if I try to hold trends
 
 ###### Next Thing(s) to Try
 
