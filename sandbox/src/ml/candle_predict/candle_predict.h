@@ -22,10 +22,6 @@ public:
   CandlePredict(Pg, const candle_predict_config_t, const int,
                 const std::string);
 
-  struct predictions_t {
-    std::list<prediction_t> predictions;
-  };
-
   struct should_close_position_args_t {
     double current_mid;
     order_action_t open_order_action;
@@ -34,12 +30,7 @@ public:
     double open_order_profit;
   };
 
-  DB::Candle db_candle;
-  DB::CandlePrediction db_candle_prediction;
   int duration_minutes;
-  std::map<double, std::list<prediction_t>> correct_predictions;
-  std::map<double, std::list<prediction_t>> opposing_predictions;
-  std::map<double, std::list<prediction_t>> predictions;
 
   bool are_predictions_stale(const double);
   bool is_ready_to_predict();
@@ -53,16 +44,31 @@ public:
 
   void build_opposing_predictions(const order_action_t);
   void get_fresh_predictions(const double, const bool);
+  void log_consolidation_range(const double);
   void log_correct_predictions();
   void log_opposing_predictions();
   void log_predictions(const double);
   void predict(const double);
+  void set_consolidation_range();
 
 private:
   constexpr static int OPPOSING_PREDICTIONS_LIMIT = 2;
 
+  struct consolidation_range_t {
+    double high;
+    double high_at;
+    double low;
+    double low_at;
+  };
+
+  DB::Candle db_candle;
+  DB::CandlePrediction db_candle_prediction;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   candle_predict_config_t config;
+  consolidation_range_t consolidation_range;
+  std::map<double, std::list<prediction_t>> correct_predictions;
+  std::map<double, std::list<prediction_t>> opposing_predictions;
+  std::map<double, std::list<prediction_t>> predictions;
   std::string db_env;
   std::string symbol;
 

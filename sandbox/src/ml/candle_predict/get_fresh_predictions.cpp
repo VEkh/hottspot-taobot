@@ -18,15 +18,17 @@ void ML::CandlePredict::get_fresh_predictions(const double ref_epoch,
     new_predictions[prediction.candle.closed_at].push_back(prediction);
   }
 
-  std::map<double, std::list<prediction_t>>::iterator it;
+  std::map<double, std::list<prediction_t>>::iterator it, next;
 
   for (it = new_predictions.begin(); it != new_predictions.end(); it++) {
-    if (std::next(it) == new_predictions.end()) {
+    next = std::next(it);
+
+    if (next == new_predictions.end()) {
       continue;
     }
 
     const double current_close = it->second.front().candle.close;
-    const double next_close = std::next(it)->second.front().candle.close;
+    const double next_close = next->second.front().candle.close;
 
     const order_action_t predicted_action = predict_action(it->second);
 

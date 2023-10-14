@@ -3,6 +3,7 @@
 
 #include "candle_predict.h" // ML::CandlePredict, fmt, order_action_t, prediction_t
 #include "lib/formatted.cpp"  // Formatted
+#include "lib/utils/time.cpp" // ::utils::time_
 #include "predict_action.cpp" // predict_action
 #include <algorithm>          // std::max
 #include <iostream>           // std::cout, std::endl
@@ -23,7 +24,7 @@ void ML::CandlePredict::log_correct_predictions() {
 
   const double accuracy = 100.0 * (double)this->correct_predictions.size() /
                           (double)this->predictions.size();
-  const int limit = 10;
+  const int limit = 5;
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("🤖✅ Correct Predictions (Last %i) (Accuracy: %.2f%%)\n", limit,

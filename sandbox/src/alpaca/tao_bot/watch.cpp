@@ -59,7 +59,7 @@ void Alpaca::TaoBot::watch() {
     reset_position();
 
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
-      std::cout << "\n\n\n\n\n\n\n\n\n\n" << std::flush;
+      std::cout << "\n\n" << std::flush;
     }
 
     advance_current_epoch();
