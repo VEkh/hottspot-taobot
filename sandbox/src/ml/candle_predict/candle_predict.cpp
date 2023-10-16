@@ -10,6 +10,8 @@
 #include "are_predictions_stale.cpp"
 #include "build_opposing_predictions.cpp"
 #include "get_fresh_predictions.cpp"
+#include "is_consolidation_range_set.cpp"
+#include "is_next_position_long.cpp"
 #include "is_ready_to_predict.cpp"
 #include "latest_predictions.cpp"
 #include "log_consolidation_range.cpp"

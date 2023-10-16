@@ -1,13 +1,14 @@
 #ifndef ML__CANDLE_PREDICT_log_consolidation_range
 #define ML__CANDLE_PREDICT_log_consolidation_range
 
-#include "candle_predict.h"   // ML::CandlePredict, consolidation_range_t, fmt
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <iostream>           // std::cout, std::endl
-#include <stdio.h>            // printf
+#include "candle_predict.h" // ML::CandlePredict, consolidation_range_t, fmt
+#include "is_consolidation_range_set.cpp" // is_consolidation_range_set
+#include "lib/utils/time.cpp"             // ::utils::time_
+#include <iostream>                       // std::cout, std::endl
+#include <stdio.h>                        // printf
 
 void ML::CandlePredict::log_consolidation_range(const double current_mid) {
-  if (!this->consolidation_range.high || !this->consolidation_range.low) {
+  if (!is_consolidation_range_set()) {
     std::cout << fmt.bold << fmt.yellow;
     puts("📊❌ No Consolidation Range");
     std::cout << fmt.reset << std::endl;
@@ -27,7 +28,7 @@ void ML::CandlePredict::log_consolidation_range(const double current_mid) {
                            current_mid > this->consolidation_range.low;
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("📊 Consolidation Range%s", mid_location_icon.c_str());
+  printf("📊 Consolidation Range %s", mid_location_icon.c_str());
   std::cout << fmt.reset << std::endl;
 
   const std::string high_at_str = ::utils::time_::date_string(

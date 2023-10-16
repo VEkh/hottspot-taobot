@@ -22,8 +22,8 @@ void ML::CandlePredict::log_correct_predictions() {
     return;
   }
 
-  const double accuracy = 100.0 * (double)this->correct_predictions.size() /
-                          (double)this->predictions.size();
+  const double accuracy = 100.0 * ((double)this->correct_predictions.size() /
+                                   (double)this->predictions.size());
   const int limit = 5;
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;

@@ -22,17 +22,25 @@ public:
   CandlePredict(Pg, const candle_predict_config_t, const int,
                 const std::string);
 
+  struct is_next_position_long_args_t {
+    double current_mid;
+    double range_buffer;
+  };
+
   struct should_close_position_args_t {
     double current_mid;
     order_action_t open_order_action;
     double open_order_execution;
     double open_order_max_profit;
     double open_order_profit;
+    double range_buffer;
   };
 
   int duration_minutes;
 
   bool are_predictions_stale(const double);
+  bool is_consolidation_range_set();
+  bool is_next_position_long(const is_next_position_long_args_t);
   bool is_ready_to_predict();
   bool should_close_position(const should_close_position_args_t);
   bool should_on_demand_predict();

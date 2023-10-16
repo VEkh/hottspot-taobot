@@ -51,6 +51,7 @@ bool Alpaca::TaoBot::should_close_position() {
         .open_order_execution = this->open_order_ptr->execution_price,
         .open_order_max_profit = this->open_order_ptr->max_profit,
         .open_order_profit = this->open_order_ptr->profit,
+        .range_buffer = this->avg_one_sec_variances.running * 60,
     });
   } else {
     if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&

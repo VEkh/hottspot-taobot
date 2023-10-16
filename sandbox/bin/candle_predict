@@ -81,7 +81,7 @@ case "${1}" in
   *)
     ascii_print "🤖 ${ASCII["underline"]}FIVE MINUTE PREDICTIONS" "yellow"
     ascii_print "Commands: " "yellow"
-    ascii_print "build_candles_each [--env]....Build candles for all symbols" "yellow"
-    ascii_print "predict_all [--env]..........Update the predictions for all symbols" "yellow"
-    ascii_print "train_each [--env]............Train models for all symbols" "yellow"
+    ascii_print "build_candles_each --duration-min [--env]....Build candles for all symbols" "yellow"
+    ascii_print "predict_all        --duration-min [--env]....Update the predictions for all symbols" "yellow"
+    ascii_print "train_each         --duration-min [--env]....Train models for all symbols" "yellow"
 esac
