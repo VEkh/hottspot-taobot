@@ -25,12 +25,16 @@ public:
     double open = 0;
     double opened_at = 0;
     std::string symbol;
+
+    std::string color() { return this->close >= this->open ? "green" : "red"; };
   };
 
   Candle(){};
   Candle(const Pg, const int, const std::string);
 
   static candle_bounds_t timestamp_to_bounds(const int, const long int);
+
+  std::list<candle_t> get_latest(const double, const bool);
 
   void build();
 
@@ -44,6 +48,7 @@ private:
   int duration_minutes = 0;
   std::string symbol;
 
+  std::list<candle_t> result_to_candles(const query_result_t &);
   std::list<quote_t> get_latest_quotes(const bool);
 
   void upsert(const candle_t, const bool);

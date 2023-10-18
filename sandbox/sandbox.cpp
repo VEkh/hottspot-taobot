@@ -2,17 +2,22 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include <iterator> // std::advance
-#include <map>      // std::map
+#include "db/candle/candle.cpp" // DB::Candle
+#include "lib/pg/pg.cpp"        // Pg
+#include <list>                 // std::list
 
 int main(int argc, char *argv[]) {
-  std::map<int, int> nums = {{1, 1}, {2, 4}, {3, 9}};
+  Pg conn;
+  conn.connect();
 
-  std::map<int, int>::iterator it = nums.begin();
-  const int offset = nums.size() - 2;
-  std::advance(it, offset);
+  DB::Candle candle(conn, 1, "AMZN");
 
-  for (; it != nums.end(); it++) {
-    printf("%i\n", it->second);
+  std::list<DB::Candle::candle_t> candles =
+      candle.get_latest(1697486400.000000);
+
+  for (DB::Candle::candle_t candle : candles) {
+    printf("%s\n", candle.color().c_str());
   }
+
+  conn.disconnect();
 }

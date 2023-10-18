@@ -14,6 +14,7 @@
 namespace ML {
 class CandlePredict {
 public:
+  using candle_t = DB::Candle::candle_t;
   using candle_predict_config_t = Global::t::candle_predict_config_t;
   using order_action_t = Global::t::order_action_t;
   using prediction_t = DB::CandlePrediction::prediction_t;

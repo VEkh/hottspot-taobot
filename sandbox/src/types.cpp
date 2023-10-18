@@ -85,7 +85,7 @@ struct quote_t {
   std::string symbol = "";
   double timestamp;
 
-  double mid() const { return (ask + bid) / 2.0; };
+  double mid() const { return (this->ask + this->bid) / 2.0; };
 };
 } // namespace t
 } // namespace Global
