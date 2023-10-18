@@ -9,6 +9,9 @@
 
 void ML::CandlePredict::get_fresh_predictions(const double ref_epoch,
                                               const bool debug = false) {
+  this->correct_predictions = {};
+  this->predictions = {};
+
   std::map<double, std::list<prediction_t>> new_predictions;
 
   const std::list<prediction_t> fresh_predictions =
