@@ -12,6 +12,8 @@
 namespace DB {
 class Candle {
 public:
+  using trend_t = Global::t::trend_t;
+
   struct candle_bounds_t {
     double closed_at;
     double opened_at;
@@ -26,7 +28,24 @@ public:
     double opened_at = 0;
     std::string symbol;
 
-    std::string color() { return this->close >= this->open ? "green" : "red"; };
+    trend_t trend() {
+      if (this->close > this->open) {
+        return trend_t::UP;
+      }
+
+      if (this->close < this->open) {
+        return trend_t::DOWN;
+      }
+
+      return trend_t::CONSOLIDATION;
+    };
+  };
+
+  struct get_latest_args_t {
+    double end_at_epoch;
+    int limit = 50;
+    // Optional
+    bool debug = false;
   };
 
   Candle(){};
@@ -34,7 +53,7 @@ public:
 
   static candle_bounds_t timestamp_to_bounds(const int, const long int);
 
-  std::list<candle_t> get_latest(const double, const bool);
+  std::list<candle_t> get_latest(const get_latest_args_t);
 
   void build();
 

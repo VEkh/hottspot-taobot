@@ -23,6 +23,8 @@ public:
   CandlePredict(Pg, const candle_predict_config_t, const int,
                 const std::string);
 
+  constexpr static int TREND_WINDOW_SIZE = 4;
+
   struct is_next_position_long_args_t {
     double current_mid;
     double range_buffer;
@@ -54,9 +56,11 @@ public:
   void build_opposing_predictions(const order_action_t);
   void get_fresh_predictions(const double, const bool);
   void log_consolidation_range(const double);
+  void get_trend_candles(const double);
   void log_correct_predictions();
   void log_opposing_predictions();
   void log_predictions(const double);
+  void log_trend();
   void predict(const double);
   void set_consolidation_range();
 
@@ -75,6 +79,7 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   candle_predict_config_t config;
   consolidation_range_t consolidation_range;
+  std::list<candle_t> trend_candles;
   std::map<double, std::list<prediction_t>> correct_predictions;
   std::map<double, std::list<prediction_t>> opposing_predictions;
   std::map<double, std::list<prediction_t>> predictions;

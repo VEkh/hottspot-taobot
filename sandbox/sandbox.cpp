@@ -13,10 +13,10 @@ int main(int argc, char *argv[]) {
   DB::Candle candle(conn, 1, "AMZN");
 
   std::list<DB::Candle::candle_t> candles =
-      candle.get_latest(1697486400.000000);
+      candle.get_latest({.end_at_epoch = 1697486400.000000});
 
   for (DB::Candle::candle_t candle : candles) {
-    printf("%s\n", candle.color().c_str());
+    printf("%i\n", candle.trend());
   }
 
   conn.disconnect();

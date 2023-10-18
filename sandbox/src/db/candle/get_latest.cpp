@@ -10,7 +10,10 @@
 #include <string>                // std::to_string
 
 std::list<DB::Candle::candle_t>
-DB::Candle::get_latest(const double end_at_epoch, const bool debug = false) {
+DB::Candle::get_latest(const get_latest_args_t args) {
+  const double end_at_epoch = args.end_at_epoch;
+  const int limit = args.limit;
+
   const char *query_format = R"(
     with latest_candles as (
       select
@@ -25,7 +28,7 @@ DB::Candle::get_latest(const double end_at_epoch, const bool debug = false) {
         and closed_at <= to_timestamp(%f)
       order by
         closed_at desc
-      limit 50
+      limit %i
     )
     select
       *
@@ -40,16 +43,17 @@ DB::Candle::get_latest(const double end_at_epoch, const bool debug = false) {
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
                          std::to_string(this->duration_minutes).size() +
-                         std::to_string(end_at_epoch).size();
+                         std::to_string(end_at_epoch).size() +
+                         std::to_string(limit).size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_symbol,
-           this->duration_minutes, end_at_epoch);
+           this->duration_minutes, end_at_epoch, limit);
 
   PQfreemem(sanitized_symbol);
 
-  const query_result_t result = this->conn.exec(query, debug);
+  const query_result_t result = this->conn.exec(query, args.debug);
 
   return result_to_candles(result);
 }

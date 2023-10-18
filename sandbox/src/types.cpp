@@ -87,6 +87,12 @@ struct quote_t {
 
   double mid() const { return (this->ask + this->bid) / 2.0; };
 };
+
+enum trend_t {
+  CONSOLIDATION = 0,
+  DOWN = -1,
+  UP = 1,
+};
 } // namespace t
 } // namespace Global
 #endif

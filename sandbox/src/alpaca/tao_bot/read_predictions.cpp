@@ -15,7 +15,7 @@ void Alpaca::TaoBot::read_predictions() {
   }
 
   this->five_min_predict.get_fresh_predictions(this->current_epoch);
-  this->five_min_predict.set_consolidation_range();
+  this->five_min_predict.get_trend_candles(this->current_epoch);
 
   if (this->open_order_ptr) {
     this->five_min_predict.build_opposing_predictions(

@@ -11,6 +11,7 @@ void Alpaca::TaoBot::log_predictions() {
 
   this->five_min_predict.log_predictions(this->current_epoch);
   this->five_min_predict.log_correct_predictions();
+  this->five_min_predict.log_trend();
 
   if (this->open_order_ptr) {
     this->five_min_predict.log_opposing_predictions();

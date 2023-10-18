@@ -89,5 +89,21 @@ std::string error_message(std::string message) {
 
   return output.str();
 }
+
+Stream int_to_stream(const int code) {
+  fmt_stream_t fmt = stream();
+
+  switch (code) {
+  case -1: {
+    return fmt.red;
+  }
+  case 1: {
+    return fmt.green;
+  }
+  default: {
+    return fmt.yellow;
+  }
+  }
+}
 } // namespace Formatted
 #endif
