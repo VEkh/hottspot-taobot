@@ -89,9 +89,9 @@ struct quote_t {
 };
 
 enum trend_t {
-  CONSOLIDATION = 0,
-  DOWN = -1,
-  UP = 1,
+  TREND_CONSOLIDATION = 0,
+  TREND_DOWN = -1,
+  TREND_UP = 1,
 };
 } // namespace t
 } // namespace Global

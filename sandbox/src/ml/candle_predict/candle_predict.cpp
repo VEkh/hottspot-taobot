@@ -37,6 +37,7 @@ ML::CandlePredict::CandlePredict(Pg conn, const candle_predict_config_t conf,
   this->db_candle = DB::Candle(conn, this->duration_minutes, this->symbol);
   this->db_candle_prediction =
       DB::CandlePrediction(conn, this->duration_minutes, this->symbol);
+  this->db_trend_candle = DB::Candle(conn, 5, this->symbol);
 }
 
 #endif

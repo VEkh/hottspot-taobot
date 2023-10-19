@@ -30,14 +30,14 @@ public:
 
     trend_t trend() {
       if (this->close > this->open) {
-        return trend_t::UP;
+        return trend_t::TREND_UP;
       }
 
       if (this->close < this->open) {
-        return trend_t::DOWN;
+        return trend_t::TREND_DOWN;
       }
 
-      return trend_t::CONSOLIDATION;
+      return trend_t::TREND_CONSOLIDATION;
     };
   };
 

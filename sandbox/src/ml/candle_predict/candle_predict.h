@@ -23,7 +23,6 @@ public:
   CandlePredict(Pg, const candle_predict_config_t, const int,
                 const std::string);
 
-  constexpr static int TREND_WINDOW_SIZE = 4;
 
   struct is_next_position_long_args_t {
     double current_mid;
@@ -65,7 +64,10 @@ public:
   void set_consolidation_range();
 
 private:
+  using trend_t = Global::t::trend_t;
+
   constexpr static int OPPOSING_PREDICTIONS_LIMIT = 2;
+  constexpr static int TREND_WINDOW_SIZE = 4;
 
   struct consolidation_range_t {
     double high;
@@ -75,6 +77,7 @@ private:
   };
 
   DB::Candle db_candle;
+  DB::Candle db_trend_candle;
   DB::CandlePrediction db_candle_prediction;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   candle_predict_config_t config;
@@ -89,6 +92,8 @@ private:
   bool is_profitable_trend_finished(should_close_position_args_t);
 
   std::pair<double, std::list<prediction_t>> latest_predictions();
+
+  trend_t current_trend();
 };
 } // namespace ML
 
