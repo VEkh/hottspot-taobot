@@ -64,7 +64,6 @@ public:
 private:
   using trend_t = Global::t::trend_t;
 
-  constexpr static int OPPOSING_PREDICTIONS_LIMIT = 2;
   constexpr static int TREND_WINDOW_SIZE = 4;
 
   struct consolidation_range_t {
