@@ -1,11 +1,16 @@
 #ifndef ML__CANDLE_PREDICT_is_ready_to_predict
 #define ML__CANDLE_PREDICT_is_ready_to_predict
 
-#include "candle_predict.h"       // ML::CandlePredict
-#include "latest_predictions.cpp" // latest_predictions
+#include "are_predictions_stale.cpp" // are_predictions_stale
+#include "candle_predict.h"          // ML::CandlePredict
+#include "latest_predictions.cpp"    // latest_predictions
 
-bool ML::CandlePredict::is_ready_to_predict() {
+bool ML::CandlePredict::is_ready_to_predict(const double current_epoch) {
   if (this->predictions.empty()) {
+    return false;
+  }
+
+  if (are_predictions_stale(current_epoch)) {
     return false;
   }
 

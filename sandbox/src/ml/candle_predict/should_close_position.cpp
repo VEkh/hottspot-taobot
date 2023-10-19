@@ -11,7 +11,7 @@ bool ML::CandlePredict::should_close_position(
     const should_close_position_args_t args) {
   const order_action_t open_order_action = args.open_order_action;
 
-  if (!is_ready_to_predict()) {
+  if (!is_ready_to_predict(args.current_epoch)) {
     return false;
   }
 

@@ -6,7 +6,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, position_t
 
 bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
-  if (!predictor.is_ready_to_predict()) {
+  if (!predictor.is_ready_to_predict(this->current_epoch)) {
     return false;
   }
 
