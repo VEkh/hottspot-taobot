@@ -43,6 +43,7 @@ private:
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  constexpr static int EXCESS_TRIGGER_BUFFER_COEFFICIENT = 60;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -99,6 +100,7 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity();
   double current_mid();
+  double excess_trigger_buffer();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *);
   double target_account_profit_ratio();
