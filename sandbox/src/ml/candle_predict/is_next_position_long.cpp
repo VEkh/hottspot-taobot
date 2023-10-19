@@ -1,7 +1,8 @@
 #ifndef ML__CANDLE_PREDICT_is_next_position_long
 #define ML__CANDLE_PREDICT_is_next_position_long
 
-#include "candle_predict.h"               // ML::CandlePredict
+#include "candle_predict.h"  // ML::CandlePredict, order_action_t, trend_t
+#include "current_trend.cpp" // current_trend
 #include "is_consolidation_range_set.cpp" // is_consolidation_range_set
 #include "predict_action.cpp"             // predict_action
 

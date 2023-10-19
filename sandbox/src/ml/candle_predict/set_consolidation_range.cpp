@@ -6,9 +6,12 @@
 #include <algorithm>          // std::max, std::min
 #include <iterator>           // std::next
 #include <list>               // std::list
+#include <map>                // std::map
 
-void ML::CandlePredict::set_consolidation_range() {
-  std::map<double, std::list<prediction_t>>::reverse_iterator it, next;
+void ML::CandlePredict::set_consolidation_range(const double _) {
+  std::map<double, std::list<prediction_t>>::reverse_iterator it;
+  std::map<double, std::list<prediction_t>>::reverse_iterator next;
+  this->consolidation_range = consolidation_range_t();
 
   for (it = this->correct_predictions.rbegin();
        it != this->correct_predictions.rend(); it++) {

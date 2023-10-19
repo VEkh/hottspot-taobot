@@ -46,6 +46,7 @@ bool Alpaca::TaoBot::should_close_position() {
 
   if (this->five_min_predict.should_predict()) {
     return this->five_min_predict.should_close_position({
+        .current_epoch = this->current_epoch,
         .current_mid = current_mid(),
         .open_order_action = this->open_order_ptr->action,
         .open_order_execution = this->open_order_ptr->execution_price,

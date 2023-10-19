@@ -20,11 +20,38 @@ bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
     return true;
   }
 
-  if (!predictor.is_consolidation_range_set()) {
-    return false;
+  const double current_mid_ = current_mid();
+
+  // Last position lost
+  const bool is_next_action_buy = predictor.is_next_position_long({
+      .current_mid = current_mid_,
+      .range_buffer = this->avg_one_sec_variances.running * 60,
+  });
+
+  if (is_next_action_buy &&
+      last_position.open_order.action != order_action_t::BUY) {
+    return true;
   }
 
-  return true;
+  if (!is_next_action_buy &&
+      last_position.open_order.action == order_action_t::BUY) {
+    return true;
+  }
+
+  // Prediction matches last position
+  bool has_reentered_profit = false;
+
+  if (last_position.open_order.action == order_action_t::BUY) {
+    has_reentered_profit =
+        current_mid_ >= last_position.close_order.execution_price +
+                            (15 * this->avg_one_sec_variances.running);
+  } else {
+    has_reentered_profit =
+        current_mid_ <= last_position.close_order.execution_price -
+                            (15 * this->avg_one_sec_variances.running);
+  }
+
+  return has_reentered_profit;
 }
 
 #endif

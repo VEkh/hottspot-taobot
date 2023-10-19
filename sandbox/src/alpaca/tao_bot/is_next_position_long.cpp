@@ -7,8 +7,6 @@
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  const std::string api_key = this->api_client.config.api_key;
-
   if (this->five_min_predict.should_predict()) {
     return this->five_min_predict.is_next_position_long({
         .current_mid = current_mid(),

@@ -2,22 +2,17 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "db/candle/candle.cpp" // DB::Candle
-#include "lib/pg/pg.cpp"        // Pg
-#include <list>                 // std::list
+#include <time.h>
 
 int main(int argc, char *argv[]) {
-  Pg conn;
-  conn.connect();
+  long int now = time(nullptr);
+  tm market_start_tm = *localtime(&now);
 
-  DB::Candle candle(conn, 1, "AMZN");
+  market_start_tm.tm_hour = 13;
+  market_start_tm.tm_min = 30;
+  market_start_tm.tm_sec = 0;
 
-  std::list<DB::Candle::candle_t> candles =
-      candle.get_latest({.end_at_epoch = 1697486400.000000});
+  const double market_start = mktime(&market_start_tm);
 
-  for (DB::Candle::candle_t candle : candles) {
-    printf("%i\n", candle.trend());
-  }
-
-  conn.disconnect();
+  printf("%f\n", market_start);
 }

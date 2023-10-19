@@ -23,13 +23,13 @@ public:
   CandlePredict(Pg, const candle_predict_config_t, const int,
                 const std::string);
 
-
   struct is_next_position_long_args_t {
     double current_mid;
     double range_buffer;
   };
 
   struct should_close_position_args_t {
+    double current_epoch;
     double current_mid;
     order_action_t open_order_action;
     double open_order_execution;
@@ -43,7 +43,7 @@ public:
   bool are_predictions_stale(const double);
   bool is_consolidation_range_set();
   bool is_next_position_long(const is_next_position_long_args_t);
-  bool is_ready_to_predict();
+  bool is_ready_to_predict(const double);
   bool should_close_position(const should_close_position_args_t);
   bool should_on_demand_predict();
   bool should_predict();
@@ -52,16 +52,14 @@ public:
   order_action_t predict_action(const prediction_t);
   order_action_t predict_action(const std::list<prediction_t>);
 
-  void build_opposing_predictions(const order_action_t);
   void get_fresh_predictions(const double, const bool);
-  void log_consolidation_range(const double);
   void get_trend_candles(const double);
+  void log_consolidation_range(const double);
   void log_correct_predictions();
-  void log_opposing_predictions();
   void log_predictions(const double);
   void log_trend();
   void predict(const double);
-  void set_consolidation_range();
+  void set_consolidation_range(const double);
 
 private:
   using trend_t = Global::t::trend_t;
@@ -84,7 +82,6 @@ private:
   consolidation_range_t consolidation_range;
   std::list<candle_t> trend_candles;
   std::map<double, std::list<prediction_t>> correct_predictions;
-  std::map<double, std::list<prediction_t>> opposing_predictions;
   std::map<double, std::list<prediction_t>> predictions;
   std::string db_env;
   std::string symbol;

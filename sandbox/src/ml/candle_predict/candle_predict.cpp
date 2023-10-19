@@ -8,7 +8,6 @@
 #include <string>                                     // std::string
 
 #include "are_predictions_stale.cpp"
-#include "build_opposing_predictions.cpp"
 #include "get_fresh_predictions.cpp"
 #include "get_trend_candles.cpp"
 #include "is_consolidation_range_set.cpp"
@@ -17,7 +16,6 @@
 #include "latest_predictions.cpp"
 #include "log_consolidation_range.cpp"
 #include "log_correct_predictions.cpp"
-#include "log_opposing_predictions.cpp"
 #include "log_predictions.cpp"
 #include "log_trend.cpp"
 #include "predict.cpp"
