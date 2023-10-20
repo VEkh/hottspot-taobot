@@ -28,6 +28,11 @@ public:
     double range_buffer;
   };
 
+  struct log_consolidation_range_args_t {
+    double current_mid;
+    double range_buffer;
+  };
+
   struct should_close_position_args_t {
     double current_epoch;
     double current_mid;
@@ -56,7 +61,7 @@ public:
 
   void get_fresh_predictions(const double, const bool);
   void get_trend_candles(const double);
-  void log_consolidation_range(const double);
+  void log_consolidation_range(const log_consolidation_range_args_t);
   void log_correct_predictions();
   void log_predictions(const double);
   void log_trend();
