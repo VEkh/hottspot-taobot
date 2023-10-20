@@ -10,21 +10,21 @@
 void Alpaca::TaoBot::read_predictions() {
   const std::string api_key = this->api_client.config.api_key;
 
-  if (!this->five_min_predict.should_predict()) {
+  if (!this->candle_predictor.should_predict()) {
     return;
   }
 
-  this->five_min_predict.get_fresh_predictions(this->current_epoch);
-  this->five_min_predict.set_consolidation_range(this->current_epoch);
+  this->candle_predictor.get_fresh_predictions(this->current_epoch);
+  this->candle_predictor.set_consolidation_range(this->current_epoch);
 
-  if (this->five_min_predict.should_on_demand_predict() &&
-      this->five_min_predict.are_predictions_stale(this->current_epoch)) {
+  if (this->candle_predictor.should_on_demand_predict() &&
+      this->candle_predictor.are_predictions_stale(this->current_epoch)) {
     std::cout << fmt.bold << fmt.yellow;
     printf("🤖 No fresh %i Minute Predictions. Making new ones.\n",
-           this->five_min_predict.duration_minutes);
+           this->candle_predictor.duration_minutes);
     std::cout << fmt.reset << std::endl;
 
-    this->five_min_predict.predict(this->current_epoch);
+    this->candle_predictor.predict(this->current_epoch);
   }
 }
 

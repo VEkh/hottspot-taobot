@@ -18,8 +18,8 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (this->five_min_predict.should_predict()) {
-    return should_ml_open_position(this->five_min_predict);
+  if (this->candle_predictor.should_predict()) {
+    return should_ml_open_position(this->candle_predictor);
   }
 
   return true;

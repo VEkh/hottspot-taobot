@@ -70,8 +70,8 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
 
-    this->five_min_predict = ML::CandlePredict(
-        this->pg, this->api_client.config.ml.candle_predict, 5, this->symbol);
+    this->candle_predictor = ML::CandlePredict(
+        this->pg, this->api_client.config.ml.candle_predict, 3, this->symbol);
 
     std::vector<std::string> tradeable_symbols =
         ::utils::io::tradeable_symbols("alpaca");
