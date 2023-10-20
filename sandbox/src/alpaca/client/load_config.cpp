@@ -93,6 +93,11 @@ void Alpaca::Client::load_config() {
     if (ml_json.contains("candle_predict")) {
       json candle_predict_json = ml_json["candle_predict"];
 
+      ml_config.candle_predict.duration_minutes =
+          candle_predict_json.contains("duration_minutes")
+              ? (int)candle_predict_json["duration_minutes"]
+              : ml_config.candle_predict.duration_minutes;
+
       ml_config.candle_predict.enabled =
           candle_predict_json.contains("enabled")
               ? (bool)candle_predict_json["enabled"]

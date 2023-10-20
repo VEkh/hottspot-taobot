@@ -1,4 +1,4 @@
-### 2023-10-20:
+### 2023-10-23:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 6W (42.86%) 8L (Total: 14)
+Win Rate: 6W (40.00%) 9L (Total: 15)
 ```
 
 **Beta (STAGING)**
@@ -26,12 +26,60 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 6W (35.29%) 11L (Total: 17)
+Win Rate: 6W (33.33%) 12L (Total: 18)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 4W (44.44%) 5L (Total 9)
-* Better Performer: Live Alpha: 4 • Paper Beta: 5 (Total: 9)
+* Win Record: 4W (40.00%) 6L (Total 10)
+* Better Performer: Live Alpha: 5 • Paper Beta: 5 (Total: 10)
+
+###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-20:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Friday, October 20 2023
+Current Equity:          $73873.63 (-1922.01) (-2.54%)
+Max Equity:              $78286.40 (+2490.76) (+3.29%) @ 08:35 CDT
+Min Equity:              $73873.63 (-1922.01) (-2.54%) @ 09:14 CDT
+Original Equity:         $75795.64
+```
+
+**Alpha (STAGING)**
+```
+Friday, October 20 2023
+Current Equity:          $140088.28 (-16274.38) (-10.41%)
+Max Equity:              $162779.38 (+6416.72) (+4.10%) @ 08:35 CDT
+Min Equity:              $139315.09 (-17047.57) (-10.90%) @ 14:52 CDT
+Original Equity:         $156362.66
+
+Win Rate: 6W (40.00%) 9L (Total: 15)
+```
+
+**Beta (STAGING)**
+```
+Friday, October 20 2023
+Current Equity:          $63295.08 (-1678.82) (-2.58%)
+Max Equity:              $66564.13 (+1590.23) (+2.45%) @ 08:31 CDT
+Min Equity:              $63294.92 (-1678.98) (-2.58%) @ 08:44 CDT
+Original Equity:         $64973.90
+
+Win Rate: 6W (33.33%) 12L (Total: 18)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 4W (40.00%) 6L (Total 10)
+* Better Performer: Live Alpha: 5 • Paper Beta: 5 (Total: 10)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 122W (56.22%) (Consecutive: 0) 95L (Consecutive: 5)
+* Latest Return: -$1922.01 (-2.54%) (-333.15% 9-5 Salary) (vs. NASDAQ: -1.49%) (vs. S&P 500: -1.26%)
+* Week's Return: -$10093.24 • Total Return: +$2792.81
+* Average Return: -0.03% • Average NASDAQ Return: +0.06% • Average S&P 500 Return: +0.03%
 
 ###### Notes
 

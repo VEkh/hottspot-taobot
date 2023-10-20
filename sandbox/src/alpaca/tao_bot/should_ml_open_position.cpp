@@ -40,10 +40,6 @@ bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
     return true;
   }
 
-  // TODO
-  if (predictor.is_consolidation_range_set()) {
-  }
-
   // Prediction matches last position
   bool has_reentered_profit = false;
 

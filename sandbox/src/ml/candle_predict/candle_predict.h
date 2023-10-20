@@ -20,8 +20,7 @@ public:
   using prediction_t = DB::CandlePrediction::prediction_t;
 
   CandlePredict(){};
-  CandlePredict(Pg, const candle_predict_config_t, const int,
-                const std::string);
+  CandlePredict(Pg, const candle_predict_config_t, const std::string);
 
   struct is_next_position_long_args_t {
     double current_mid;

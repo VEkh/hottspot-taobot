@@ -26,10 +26,10 @@
 #include "should_predict.cpp"
 
 ML::CandlePredict::CandlePredict(Pg conn, const candle_predict_config_t conf,
-                                 const int dm, const std::string s) {
+                                 const std::string s) {
   this->config = conf;
   this->db_env = conn.flags["env"];
-  this->duration_minutes = dm;
+  this->duration_minutes = conf.duration_minutes;
   this->symbol = s;
 
   this->db_candle = DB::Candle(conn, this->duration_minutes, this->symbol);
