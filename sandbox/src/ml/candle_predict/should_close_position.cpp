@@ -18,6 +18,15 @@ bool ML::CandlePredict::should_close_position(
 
   const order_action_t predicted_action = predict_action();
 
+  if (args.was_last_position_profit_stopped) {
+    if (predict_at(args.open_order_opened_at) == open_order_action &&
+        predicted_action != open_order_action) {
+      return true;
+    }
+
+    return false;
+  }
+
   if (!is_consolidation_range_set()) {
     return predicted_action != open_order_action;
   }

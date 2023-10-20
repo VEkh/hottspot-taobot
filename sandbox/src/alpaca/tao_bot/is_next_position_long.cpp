@@ -6,24 +6,29 @@
 #include "is_first_position_long.cpp" // is_first_position_long
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
+#include "was_last_position_profit_stopped.cpp" // was_last_position_profit_stopped
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (this->five_min_predict.should_predict()) {
-    return this->five_min_predict.is_next_position_long({
-        .current_mid = current_mid(),
-        .range_buffer = excess_trigger_buffer(),
-    });
-  } else {
-    if (this->closed_positions.empty()) {
-      return is_first_position_long();
-    }
-
+  if (was_last_position_profit_stopped()) {
     const position_t last_position = this->closed_positions.back();
 
     return last_position.close_order.action == order_action_t::BUY;
   }
 
-  return true;
+  if (this->candle_predictor.should_predict()) {
+    return this->candle_predictor.is_next_position_long({
+        .current_mid = current_mid(),
+        .range_buffer = excess_trigger_buffer(),
+    });
+  }
+
+  if (this->closed_positions.empty()) {
+    return is_first_position_long();
+  }
+
+  const position_t last_position = this->closed_positions.back();
+
+  return last_position.close_order.action == order_action_t::BUY;
 };
 
 #endif

@@ -34,8 +34,10 @@ public:
     order_action_t open_order_action;
     double open_order_execution;
     double open_order_max_profit;
+    double open_order_opened_at;
     double open_order_profit;
     double range_buffer;
+    bool was_last_position_profit_stopped;
   };
 
   int duration_minutes;
@@ -86,6 +88,8 @@ private:
   std::string symbol;
 
   bool is_profitable_trend_finished(should_close_position_args_t);
+
+  order_action_t predict_at(const double);
 
   std::pair<double, std::list<prediction_t>> latest_predictions();
 
