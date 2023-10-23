@@ -22,20 +22,23 @@ void ML::CandlePredict::log_correct_predictions() {
     return;
   }
 
-  const double accuracy = 100.0 * ((double)this->correct_predictions.size() /
-                                   (double)this->predictions.size());
+  const int correct_predictions_n = this->correct_predictions.size();
+  const int predictions_n = this->predictions.size();
+
+  const double accuracy =
+      100.0 * ((double)correct_predictions_n / (double)predictions_n);
   const int limit = 5;
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("🤖✅ Correct Predictions (Last %i) (Accuracy: %.2f%%)\n", limit,
-         accuracy);
+  printf("🤖✅ Last %i Correct Predictions (Accuracy: %i/%i • %.2f%%)\n",
+         limit, correct_predictions_n, predictions_n, accuracy);
   std::cout << fmt.reset;
 
   std::map<double, std::list<prediction_t>>::iterator it =
-      this->correct_predictions.begin();
+      this->correct_predictions.end();
 
-  const int offset = std::max((int)this->correct_predictions.size() - limit, 0);
-  std::advance(it, offset);
+  const int offset = std::min((int)this->correct_predictions.size(), limit);
+  std::advance(it, -offset);
 
   for (; it != this->correct_predictions.end(); it++) {
     const std::list<prediction_t> predictions_ = it->second;
@@ -47,14 +50,14 @@ void ML::CandlePredict::log_correct_predictions() {
     const std::string timestamp_str =
         ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago");
 
-    std::cout << fmt.bold << fmt.yellow;
-    if (it != this->correct_predictions.begin()) {
-      printf(" • ");
-    }
-
     std::cout << fmt.bold << log_color;
     printf("%.2f (%s)", predictions_.front().candle.close,
            timestamp_str.c_str());
+
+    std::cout << fmt.bold << fmt.yellow;
+    if (std::next(it) != this->correct_predictions.end()) {
+      printf(" • ");
+    }
     std::cout << fmt.reset;
   }
 
