@@ -3,7 +3,6 @@
 
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "current_mid.cpp"              // current_mid
-#include "excess_trigger_buffer.cpp"    // excess_trigger_buffer
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit

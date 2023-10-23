@@ -1,4 +1,4 @@
-### 2023-10-23:
+### 2023-10-24:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -34,6 +34,72 @@ Win Rate: 6W (33.33%) 12L (Total: 18)
 * Better Performer: Live Alpha: 5 • Paper Beta: 5 (Total: 10)
 
 ###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-23:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, October 23 2023
+Current Equity:          $73523.98 (-327.44) (-0.44%)
+Max Equity:              $78324.88 (+4473.46) (+6.06%) @ 09:27 CDT
+Min Equity:              $73471.62 (-379.80) (-0.51%) @ 14:58 CDT
+Original Equity:         $73851.42
+```
+
+**Alpha (STAGING)**
+```
+Monday, October 23 2023
+Current Equity:          $131039.26 (-8754.55) (-6.26%)
+Max Equity:              $143638.44 (+3844.63) (+2.75%) @ 09:17 CDT
+Min Equity:              $130482.97 (-9310.84) (-6.66%) @ 09:03 CDT
+Original Equity:         $139793.81
+
+Win Rate: 6W (37.5%) 10L (Total: 16)
+```
+
+**Beta (STAGING)**
+```
+Monday, October 23 2023
+Current Equity:          $67350.27 (+4067.51) (+6.43%)
+Max Equity:              $67350.27 (+4067.51) (+6.43%) @ 15:00 CDT
+Min Equity:              $63113.22 (-169.54) (-0.27%) @ 08:35 CDT
+Original Equity:         $63282.76
+
+Win Rate: 7W (36.84%) 12L (Total: 19)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 4W (36.36%) 7L (Total 11)
+* Better Performer: Live Alpha: 5 • Paper Beta: 6 (Total: 10)
+
+###### Notes
+* I now know what I need to do.
+* This weekend was a good weekend of backtesting. It reavealed a few things:
+  1. Backtesting is actually a decently reliable litmus test for performance.
+  2. Profit-biased momentum outperforms all machine learning approaches. +5.00%
+     Is perhaps a better target than +6.25% because it was more often attained.
+  3. All the consolidation, opposing predictions, etc. algorthims were me
+     trying to outsmart the trained models. Doing so didn't yield better
+     performance than pure momentum.
+  4. When, however, I made changes that only and always listened to predictions
+     whenever new ones are made, I observed that catastrophic (< -8.00%) losses
+     were almost entirely avoided. This is because the model predicts at a
+     40-50% accuracy virtually every day. Despite this, almost every day ended
+     in a loss. This made me realize that I should be focusing instead on two
+     things:
+    1. The stop loss threshold is too large. Wins are unable to balance out
+        losses despite a near 50/50 win rate. I need to tweak the stop loss
+        threshold to get results closer to break even.
+    2. Beyond this, I should only focus on increasing the accuracy of the
+       models. This will give me a higher possibility of reaching the holy
+       grail, which is a strategy that makes money over time no matter when it
+       is started.
+* Until I resolve 4.1 and 4.2, I'll revert production to win-biased momentum
+  and reduce the target profit from +6.25% to +5.00%.
+
 
 ###### Next Thing(s) to Try
 

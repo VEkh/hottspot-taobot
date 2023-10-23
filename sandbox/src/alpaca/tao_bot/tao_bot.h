@@ -43,7 +43,6 @@ private:
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
-  constexpr static int EXCESS_TRIGGER_BUFFER_COEFFICIENT = 60;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},

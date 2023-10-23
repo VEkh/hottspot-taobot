@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_is_next_position_long
 
 #include "current_mid.cpp"            // current_mid
-#include "excess_trigger_buffer.cpp"  // excess_trigger_buffer
 #include "is_first_position_long.cpp" // is_first_position_long
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
