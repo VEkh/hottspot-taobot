@@ -39,6 +39,8 @@ public:
   order_action_t predict_action();
   order_action_t predict_action(const prediction_t);
   order_action_t predict_action(const std::list<prediction_t>);
+  order_action_t predict_action(const std::list<prediction_t>,
+                                const std::string);
 
   void get_fresh_predictions(const double, const bool);
   void log_correct_predictions();

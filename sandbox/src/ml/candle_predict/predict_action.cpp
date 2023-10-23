@@ -25,6 +25,12 @@ ML::CandlePredict::predict_action(const std::list<prediction_t> predictions_) {
   int buy_count = 0;
   int sell_count = 0;
 
+  const std::string model_name = this->config.symbol_model_map[this->symbol];
+
+  if (!model_name.empty()) {
+    return predict_action(predictions_, model_name);
+  }
+
   for (const prediction_t prediction : predictions_) {
     switch (predict_action(prediction)) {
     case order_action_t::BUY: {
@@ -43,6 +49,21 @@ ML::CandlePredict::predict_action(const std::list<prediction_t> predictions_) {
   }
 
   return order_action_t::SELL;
+}
+
+ML::CandlePredict::order_action_t
+ML::CandlePredict::predict_action(const std::list<prediction_t> predictions_,
+                                  const std::string model_name) {
+  int buy_count = 0;
+  int sell_count = 0;
+
+  for (const prediction_t prediction : predictions_) {
+    if (prediction.model_name == model_name) {
+      return predict_action(prediction);
+    }
+  }
+
+  return order_action_t::BUY;
 }
 
 #endif

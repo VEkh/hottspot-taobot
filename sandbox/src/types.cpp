@@ -39,6 +39,7 @@ struct candle_predict_config_t {
   bool hold_trend = false;
   bool on_demand_predictions = false;
   std::string prediction_scope = "single";
+  std::map<std::string, std::string> symbol_model_map;
 };
 
 struct ml_config_t {

@@ -6,6 +6,7 @@
 #include "lib/formatted.cpp"  // Formatted::error_message
 #include "lib/utils/time.cpp" // ::utils::time_
 #include <fstream>            // std::ifstream, std::ios
+#include <map>                // std::map
 #include <stdexcept>          // std::invalid_argument
 #include <string>             // std::string
 #include <time.h>             // mktime, time, tm
@@ -119,6 +120,12 @@ void Alpaca::Client::load_config() {
           candle_predict_json.contains("prediction_scope")
               ? (std::string)candle_predict_json["prediction_scope"]
               : ml_config.candle_predict.prediction_scope;
+
+      ml_config.candle_predict.symbol_model_map =
+          candle_predict_json.contains("symbol_model_map")
+              ? (std::map<std::string, std::string>)
+                    candle_predict_json["symbol_model_map"]
+              : ml_config.candle_predict.symbol_model_map;
     }
   }
 
