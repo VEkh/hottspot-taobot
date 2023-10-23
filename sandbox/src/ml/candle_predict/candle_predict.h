@@ -48,7 +48,9 @@ public:
 
   bool are_predictions_stale(const double);
   bool is_consolidation_range_set();
+  // TODO: Delete
   bool is_next_position_long(const is_next_position_long_args_t);
+  // bool is_next_position_long();
   bool is_ready_to_predict(const double);
   bool should_close_position(const should_close_position_args_t);
   bool should_on_demand_predict();
@@ -66,6 +68,8 @@ public:
   void log_trend();
   void predict(const double);
   void set_consolidation_range(const double);
+
+  std::pair<double, std::list<prediction_t>> latest_predictions();
 
 private:
   using trend_t = Global::t::trend_t;
@@ -94,8 +98,6 @@ private:
   bool is_profitable_trend_finished(should_close_position_args_t);
 
   order_action_t predict_at(const double);
-
-  std::pair<double, std::list<prediction_t>> latest_predictions();
 
   trend_t current_trend();
 };

@@ -46,11 +46,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
-      this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
-    return true;
-  }
-
   if (this->candle_predictor.should_predict()) {
     return this->candle_predictor.should_close_position({
         .current_epoch = this->current_epoch,
@@ -63,6 +58,11 @@ bool Alpaca::TaoBot::should_close_position() {
         .range_buffer = excess_trigger_buffer(),
         .was_last_position_profit_stopped = was_last_position_profit_stopped(),
     });
+  }
+
+  if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
+      this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
+    return true;
   }
 
   return false;
