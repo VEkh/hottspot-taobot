@@ -9,17 +9,8 @@
 #include "was_last_position_profit_stopped.cpp" // was_last_position_profit_stopped
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (was_last_position_profit_stopped()) {
-    const position_t last_position = this->closed_positions.back();
-
-    return last_position.close_order.action == order_action_t::BUY;
-  }
-
   if (this->candle_predictor.should_predict()) {
-    return this->candle_predictor.is_next_position_long({
-        .current_mid = current_mid(),
-        .range_buffer = excess_trigger_buffer(),
-    });
+    return this->candle_predictor.is_next_position_long();
   }
 
   if (this->closed_positions.empty()) {

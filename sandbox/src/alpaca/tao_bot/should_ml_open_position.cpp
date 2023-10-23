@@ -30,10 +30,7 @@ bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
   const double range_buffer = excess_trigger_buffer();
 
   // Last position lost
-  const bool is_next_action_buy = predictor.is_next_position_long({
-      .current_mid = current_mid_,
-      .range_buffer = range_buffer,
-  });
+  const bool is_next_action_buy = predictor.is_next_position_long();
 
   if (is_next_action_buy &&
       last_position.open_order.action != order_action_t::BUY) {

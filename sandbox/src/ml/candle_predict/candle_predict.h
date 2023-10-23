@@ -22,35 +22,15 @@ public:
   CandlePredict(){};
   CandlePredict(Pg, const candle_predict_config_t, const std::string);
 
-  struct is_next_position_long_args_t {
-    double current_mid;
-    double range_buffer;
-  };
-
-  struct log_consolidation_range_args_t {
-    double current_mid;
-    double range_buffer;
-  };
-
   struct should_close_position_args_t {
     double current_epoch;
-    double current_mid;
     order_action_t open_order_action;
-    double open_order_execution;
-    double open_order_max_profit;
-    double open_order_opened_at;
-    double open_order_profit;
-    double range_buffer;
-    bool was_last_position_profit_stopped;
   };
 
   int duration_minutes;
 
   bool are_predictions_stale(const double);
-  bool is_consolidation_range_set();
-  // TODO: Delete
-  bool is_next_position_long(const is_next_position_long_args_t);
-  // bool is_next_position_long();
+  bool is_next_position_long();
   bool is_ready_to_predict(const double);
   bool should_close_position(const should_close_position_args_t);
   bool should_on_demand_predict();
@@ -61,13 +41,9 @@ public:
   order_action_t predict_action(const std::list<prediction_t>);
 
   void get_fresh_predictions(const double, const bool);
-  void get_trend_candles(const double);
-  void log_consolidation_range(const log_consolidation_range_args_t);
   void log_correct_predictions();
   void log_predictions(const double);
-  void log_trend();
   void predict(const double);
-  void set_consolidation_range(const double);
 
   std::pair<double, std::list<prediction_t>> latest_predictions();
 
@@ -84,20 +60,13 @@ private:
   };
 
   DB::Candle db_candle;
-  DB::Candle db_trend_candle;
   DB::CandlePrediction db_candle_prediction;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   candle_predict_config_t config;
-  consolidation_range_t consolidation_range;
-  std::list<candle_t> trend_candles;
   std::map<double, std::list<prediction_t>> correct_predictions;
   std::map<double, std::list<prediction_t>> predictions;
   std::string db_env;
   std::string symbol;
-
-  bool is_profitable_trend_finished(should_close_position_args_t);
-
-  order_action_t predict_at(const double);
 
   trend_t current_trend();
 };

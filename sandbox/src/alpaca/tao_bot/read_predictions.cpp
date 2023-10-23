@@ -5,17 +5,12 @@
 #include <iostream>  // std::cout, std::endl
 #include <stdio.h>   // printf
 
-#include <string> // std::string
-
 void Alpaca::TaoBot::read_predictions() {
-  const std::string api_key = this->api_client.config.api_key;
-
   if (!this->candle_predictor.should_predict()) {
     return;
   }
 
   this->candle_predictor.get_fresh_predictions(this->current_epoch);
-  this->candle_predictor.set_consolidation_range(this->current_epoch);
 
   if (this->candle_predictor.should_on_demand_predict() &&
       this->candle_predictor.are_predictions_stale(this->current_epoch)) {

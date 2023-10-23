@@ -12,10 +12,6 @@ void Alpaca::TaoBot::log_predictions() {
 
   this->candle_predictor.log_predictions(this->current_epoch);
   this->candle_predictor.log_correct_predictions();
-  this->candle_predictor.log_consolidation_range({
-      .current_mid = current_mid(),
-      .range_buffer = excess_trigger_buffer(),
-  });
 }
 
 #endif

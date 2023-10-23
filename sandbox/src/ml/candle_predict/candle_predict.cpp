@@ -9,18 +9,13 @@
 
 #include "are_predictions_stale.cpp"
 #include "get_fresh_predictions.cpp"
-#include "get_trend_candles.cpp"
-#include "is_consolidation_range_set.cpp"
 #include "is_next_position_long.cpp"
 #include "is_ready_to_predict.cpp"
 #include "latest_predictions.cpp"
-#include "log_consolidation_range.cpp"
 #include "log_correct_predictions.cpp"
 #include "log_predictions.cpp"
-#include "log_trend.cpp"
 #include "predict.cpp"
 #include "predict_action.cpp"
-#include "set_consolidation_range.cpp"
 #include "should_close_position.cpp"
 #include "should_on_demand_predict.cpp"
 #include "should_predict.cpp"
@@ -35,8 +30,6 @@ ML::CandlePredict::CandlePredict(Pg conn, const candle_predict_config_t conf,
   this->db_candle = DB::Candle(conn, this->duration_minutes, this->symbol);
   this->db_candle_prediction =
       DB::CandlePrediction(conn, this->duration_minutes, this->symbol);
-  this->db_trend_candle =
-      DB::Candle(conn, this->duration_minutes, this->symbol);
 }
 
 #endif
