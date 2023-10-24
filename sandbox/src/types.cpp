@@ -36,7 +36,6 @@ struct avg_one_sec_variances_t {
 struct candle_predict_config_t {
   int duration_minutes = 5;
   bool enabled = false;
-  bool hold_trend = false;
   bool on_demand_predictions = false;
   std::string prediction_scope = "single";
   std::map<std::string, std::string> symbol_model_map;
