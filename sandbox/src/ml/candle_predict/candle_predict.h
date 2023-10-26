@@ -27,6 +27,7 @@ public:
     order_action_t open_order_action;
   };
 
+  candle_predict_config_t config;
   int duration_minutes;
 
   bool are_predictions_stale(const double);
@@ -42,12 +43,12 @@ public:
   order_action_t predict_action(const std::list<prediction_t>,
                                 const std::string);
 
+  std::pair<double, std::list<prediction_t>> latest_predictions();
+
   void get_fresh_predictions(const double, const bool);
   void log_correct_predictions();
   void log_predictions(const double);
   void predict(const double);
-
-  std::pair<double, std::list<prediction_t>> latest_predictions();
 
 private:
   using trend_t = Global::t::trend_t;
@@ -64,7 +65,6 @@ private:
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  candle_predict_config_t config;
   std::map<double, std::list<prediction_t>> correct_predictions;
   std::map<double, std::list<prediction_t>> predictions;
   std::string db_env;
