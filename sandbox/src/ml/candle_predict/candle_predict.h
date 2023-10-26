@@ -69,8 +69,6 @@ private:
   std::map<double, std::list<prediction_t>> predictions;
   std::string db_env;
   std::string symbol;
-
-  trend_t current_trend();
 };
 } // namespace ML
 
