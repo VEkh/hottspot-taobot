@@ -17,7 +17,7 @@ DB::CandlePrediction::get_fresh_predictions(
   tm market_start_tm = *localtime(&ref_epoch_int);
 
   market_start_tm.tm_hour = 13;
-  market_start_tm.tm_min = 30;
+  market_start_tm.tm_min = 0;
   market_start_tm.tm_sec = 0;
 
   const double market_start_epoch = mktime(&market_start_tm);
