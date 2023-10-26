@@ -4,11 +4,19 @@
 #include "candle_predict.h" // ML::CandlePredict
 
 bool ML::CandlePredict::should_predict(const double volatility = 0) {
+  if (!this->config.enabled) {
+    return false;
+  }
+
+  if (!this->config.switch_to_momentum) {
+    return true;
+  }
+
   if (volatility && volatility < 2.0) {
     return false;
   }
 
-  return this->config.enabled;
+  return true;
 }
 
 #endif
