@@ -34,7 +34,7 @@ public:
   bool is_ready_to_predict(const double);
   bool should_close_position(const should_close_position_args_t);
   bool should_on_demand_predict();
-  bool should_predict();
+  bool should_predict(const double);
 
   order_action_t predict_action();
   order_action_t predict_action(const prediction_t);

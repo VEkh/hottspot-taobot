@@ -3,6 +3,12 @@
 
 #include "candle_predict.h" // ML::CandlePredict
 
-bool ML::CandlePredict::should_predict() { return this->config.enabled; }
+bool ML::CandlePredict::should_predict(const double volatility = 0) {
+  if (volatility && volatility < 2.0) {
+    return false;
+  }
+
+  return this->config.enabled;
+}
 
 #endif

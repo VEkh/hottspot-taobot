@@ -5,10 +5,10 @@
 #include "is_first_position_long.cpp" // is_first_position_long
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
-#include "was_last_position_profit_stopped.cpp" // was_last_position_profit_stopped
+#include "volatility.cpp"             // volatility
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (this->candle_predictor.should_predict()) {
+  if (this->candle_predictor.should_predict(volatility())) {
     return this->candle_predictor.is_next_position_long();
   }
 

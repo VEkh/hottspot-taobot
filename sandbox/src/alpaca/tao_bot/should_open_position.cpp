@@ -4,6 +4,7 @@
 #include "is_market_open.cpp"          // is_market_open
 #include "should_ml_open_position.cpp" // should_ml_open_position
 #include "tao_bot.h"                   // Alpaca::TaoBot
+#include "volatility.cpp"              // volatility
 
 bool Alpaca::TaoBot::should_open_position() {
   if (!is_market_open()) {
@@ -18,7 +19,7 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (this->candle_predictor.should_predict()) {
+  if (this->candle_predictor.should_predict(volatility())) {
     return should_ml_open_position(this->candle_predictor);
   }
 

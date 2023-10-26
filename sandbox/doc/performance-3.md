@@ -1,4 +1,4 @@
-### 2023-10-24:
+### 2023-10-26:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 6W (40.00%) 9L (Total: 15)
+Win Rate: 6W (37.50%) 10L (Total: 16)
 ```
 
 **Beta (STAGING)**
@@ -26,16 +26,137 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 6W (33.33%) 12L (Total: 18)
+Win Rate: 6W (31.58%) 13L (Total: 19)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 4W (40.00%) 6L (Total 10)
-* Better Performer: Live Alpha: 5 • Paper Beta: 5 (Total: 10)
+* Win Record: 4W (36.36%) 7L (Total 11)
+* Better Performer: Live Alpha: 6 • Paper Beta: 5 (Total: 11)
 
 ###### Notes
 
 ###### Next Thing(s) to Try
+
+### 2023-10-25:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, October 25 2023
+Current Equity:          $69673.86 (-1816.50) (-2.54%)
+Max Equity:              $72176.35 (+685.99) (+0.96%) @ 08:30 CDT
+Min Equity:              $69673.86 (-1816.50) (-2.54%) @ 08:37 CDT
+Original Equity:         $71490.36
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, October 25 2023
+Current Equity:          $127964.96 (-1042.50) (-0.81%)
+Max Equity:              $137430.35 (+8422.89) (+6.53%) @ 08:59 CDT
+Min Equity:              $124621.31 (-4386.15) (-3.40%) @ 14:05 CDT
+Original Equity:         $129007.46
+
+Win Rate: 6W (37.50%) 10L (Total: 16)
+```
+
+**Beta (STAGING)**
+```
+Wednesday, October 25 2023
+Current Equity:          $63927.62 (-1655.18) (-2.52%)
+Max Equity:              $66082.38 (+499.58) (+0.76%) @ 08:30 CDT
+Min Equity:              $63891.27 (-1691.53) (-2.58%) @ 08:37 CDT
+Original Equity:         $65582.80
+
+Win Rate: 6W (31.58%) 13L (Total: 19)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 4W (36.36%) 7L (Total 11)
+* Better Performer: Live Alpha: 6 • Paper Beta: 5 (Total: 11)
+
+###### Notes
+* I've noticed that ML-3 tends to do best in the morning then poorly throughout
+  the day.
+* I also had the idea to scale the momentum stop loss threshold by the current
+  volatility.
+* This seemed to improve the performance of momentum. I'll run a backtest to
+  verify this.
+* Since momentum can get destroyed during a large consolidation morning, but do
+  better throughout the day, and ML-3 does best during a high consolidation
+  morning but poorly throughout the day, I'm going to try and use each strategy
+  when they're most advantageous: ML-3 during high volatility (most mornings)
+  and Momentum during low volatility.
+* At first glance this works very well. I'll run backtesting all night and see
+  what the results are.
+
+###### Next Thing(s) to Try
+
+### 2023-10-24:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, October 24 2023
+Current Equity:          $71502.92 (-1859.48) (-2.53%)
+Max Equity:              $74767.81 (+1405.41) (+1.92%) @ 08:50 CDT
+Min Equity:              $71500.40 (-1862.00) (-2.54%) @ 09:11 CDT
+Original Equity:         $73362.40
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, October 24 2023
+Current Equity:          $129351.91 (-1345.84) (-1.03%)
+Max Equity:              $132942.24 (+2244.49) (+1.72%) @ 08:34 CDT
+Min Equity:              $123520.02 (-7177.73) (-5.49%) @ 10:30 CDT
+Original Equity:         $130697.75
+
+Win Rate: 6W (37.5%) 10L (Total: 16)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, October 24 2023
+Current Equity:          $65594.33 (-1744.00) (-2.59%)
+Max Equity:              $68414.69 (+1076.36) (+1.60%) @ 08:50 CDT
+Min Equity:              $65594.33 (-1744.00) (-2.59%) @ 09:11 CDT
+Original Equity:         $67338.33
+
+Win Rate: 6W (31.58%) 13L (Total: 19)
+```
+
+**Backtest ML-5 Prediction Accuracy**
+_From 2023-09-25 to 2023-10-20_
+```
+Strategy      |  AMZN  |  TSLA
+-------------------------------
+all           | 52.12% | 51.15%
+convolutional | 52.24% | 51.92%
+linear        | 46.86% | 52.05%
+lstm          | 52.56% | 50.90%
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 4W (36.36%) 7L (Total 11)
+* Better Performer: Live Alpha: 6 • Paper Beta: 5 (Total: 11)
+
+###### Notes
+* I ran backtesting on the 3-min predictions in the `all` prediction scope.
+* Though the performance hasn't been horrible, I'm noticing, that it really
+  only guesses buy for AMZN and sell for TSLA.
+* Even if this happens to be correct, depending on the day, it's not a properly
+  trained model.
+* After running backtest with an ML, duration minutes 5 strategy, it seems
+  apparent that duration minutes 3 performs slightly better.
+* This lower performance is despite higher prediction accuracy.
+* The brightest news is that `backtest-momentum` closed at a profit when I
+  changed the `stop_profit_ratio` from 2.5 to 2. I'll make this change in
+  production and see if it has any impact.
+
+###### Next Thing(s) to Try
+* Train 3-min Predictions All without shuffling and see if this changes
+  prediction behavior.
 
 ### 2023-10-23:
 #### Performance
@@ -71,6 +192,48 @@ Original Equity:         $63282.76
 Win Rate: 7W (36.84%) 12L (Total: 19)
 ```
 
+**Backtest ML-3 Prediction Accuracy**
+_Day By Day_
+```
+Date       | Strategy |  AMZN  |  TSLA
+---------------------------------------
+2023-09-27 | all      | 39.23% | 46.15%
+2023-09-27 | lstm     | 37.69% | 41.54%
+2023-09-28 | all      | 53.08% | 47.69%
+2023-09-28 | lstm     | 47.69% | 51.54%
+2023-10-02 | all      | 43.85% | 44.62%
+2023-10-02 | lstm     | 46.92% | 46.15%
+2023-10-06 | all      | 51.54% | 51.54%
+2023-10-06 | lstm     | 48.46% | 53.85%
+2023-10-12 | all      | 55.38% | 60.00%
+2023-10-12 | lstm     | 55.38% | 63.85%
+2023-10-16 | all      | 48.84% | 52.31%
+2023-10-16 | lstm     | 49.61% | 49.61%
+2023-10-18 | all      | 48.46% | 43.85%
+2023-10-18 | lstm     | 47.69% | 43.85%
+2023-10-19 | all      | 45.38% | 40.00%
+2023-10-19 | lstm     | 44.62% | 41.54%
+```
+
+_From 2023-09-25 to 2023-10-20_
+```
+Strategy      |  AMZN  |  TSLA
+-------------------------------
+all           | 50.12% | 50.53%
+convolutional | 49.31% | 50.36%
+linear        | 50.85% | 49.88%
+lstm          | 49.39% | 51.54%
+```
+
+```
+Strategy            | # +%5 Days
+--------------------------
+Momentum            | 6
+ML 3 (45 stop loss) | 9
+ML 3                | 4
+ML 5                | 6
+```
+
 ###### Stats (PRODUCTION) (as of 2023-07-18)
 * Win Record: 4W (36.36%) 7L (Total 11)
 * Better Performer: Live Alpha: 5 • Paper Beta: 6 (Total: 10)
@@ -100,40 +263,14 @@ Win Rate: 7W (36.84%) 12L (Total: 19)
 * Until I resolve 4.1 and 4.2, I'll revert production to win-biased momentum
   and reduce the target profit from +6.25% to +5.00%.
 * Model performance
-
-**Day By Day**
-```
-Date       | Strategy |  AMZN  |  TSLA
----------------------------------------
-2023-09-27 | all      | 39.23% | 46.15%
-2023-09-27 | lstm     | 37.69% | 41.54%
-2023-09-28 | all      | 53.08% | 47.69%
-2023-09-28 | lstm     | 47.69% | 51.54%
-2023-10-02 | all      | 43.85% | 44.62%
-2023-10-02 | lstm     | 46.92% | 46.15%
-2023-10-06 | all      | 51.54% | 51.54%
-2023-10-06 | lstm     | 48.46% | 53.85%
-2023-10-12 | all      | 55.38% | 60.00%
-2023-10-12 | lstm     | 55.38% | 63.85%
-2023-10-16 | all      | 48.84% | 52.31%
-2023-10-16 | lstm     | 49.61% | 49.61%
-2023-10-18 | all      | 48.46% | 43.85%
-2023-10-18 | lstm     | 47.69% | 43.85%
-2023-10-19 | all      | 45.38% | 40.00%
-2023-10-19 | lstm     | 44.62% | 41.54%
-```
-
-**From 2023-09-25 to 2023-10-20**
-```
-Strategy      |  AMZN  |  TSLA
--------------------------------
-all           | 50.12% | 50.53%
-convolutional | 49.31% | 50.36%
-linear        | 50.85% | 49.88%
-lstm          | 49.39% | 51.54%
-```
+* I ran a backtest run for duration 3 minutes and for the first time only saw a
+  max equity of < +%1 five times. That's a really big deal!
 
 ###### Next Thing(s) to Try
+* Run predictions only backtest need to run with using all models instead of
+  the highest performing one for each symbol.
+* Check to see if there's a time after which the prediction success rate is
+  near 50%.
 
 ### 2023-10-20:
 #### Performance
