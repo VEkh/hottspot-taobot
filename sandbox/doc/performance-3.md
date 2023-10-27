@@ -1,4 +1,4 @@
-### 2023-10-27:
+### 2023-10-30:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -16,7 +16,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 6W (37.50%) 10L (Total: 16)
+Win Rate: 6W (33.33%) 12L (Total: 18)
 ```
 
 **Beta (STAGING)**
@@ -26,12 +26,60 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 6W (31.58%) 13L (Total: 19)
+Win Rate: 8W (36.36%) 13L (Total: 21)
 ```
 
 ###### Stats (PRODUCTION) (as of 2023-07-18)
-* Win Record: 4W (36.36%) 7L (Total 11)
-* Better Performer: Live Alpha: 6 • Paper Beta: 5 (Total: 11)
+* Win Record: 5W (38.46%) 8L (Total 13)
+* Better Performer: Live Alpha: 6 • Paper Beta: 7 (Total: 13)
+
+###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-10-27:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Friday, October 27 2023
+Current Equity:          $71396.60 (+3506.59) (+5.17%)
+Max Equity:              $71396.60 (+3506.59) (+5.17%) @ 15:00 CDT
+Min Equity:              $66894.09 (-995.92) (-1.47%) @ 08:36 CDT
+Original Equity:         $67890.01
+```
+
+**Alpha (STAGING)**
+```
+Friday, October 27 2023
+Current Equity:          $115715.78 (-1476.43) (-1.26%)
+Max Equity:              $119962.65 (+2770.44) (+2.36%) @ 10:24 CDT
+Min Equity:              $113351.72 (-3840.49) (-3.28%) @ 08:48 CDT
+Original Equity:         $117192.21
+
+Win Rate: 6W (33.33%) 12L (Total: 18)
+```
+
+**Beta (STAGING)**
+```
+Friday, October 27 2023
+Current Equity:          $69965.92 (+4081.08) (+6.19%)
+Max Equity:              $70072.73 (+4187.89) (+6.36%) @ 09:19 CDT
+Min Equity:              $65109.30 (-775.54) (-1.18%) @ 08:33 CDT
+Original Equity:         $65884.84
+
+Win Rate: 8W (36.36%) 13L (Total: 21)
+```
+
+###### Stats (PRODUCTION) (as of 2023-07-18)
+* Win Record: 5W (38.46%) 8L (Total 13)
+* Better Performer: Live Alpha: 6 • Paper Beta: 7 (Total: 13)
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 123W (55.41%) (Consecutive: 1) 99L (Consecutive: 0)
+* Latest Return: +$3506.59 (+5.17%) (+607.81% 9-5 Salary) (vs. NASDAQ: +0.51%) (vs. S&P 500: -0.42%)
+* Week's Return: -$2270.82 • Total Return: +$521.99
+* Average Return: -0.04% • Average NASDAQ Return: +0.05% • Average S&P 500 Return: +0.02%
 
 ###### Notes
 
@@ -76,6 +124,11 @@ Win Rate: 7W (35.0%) 13L (Total: 20)
 * Better Performer: Live Alpha: 6 • Paper Beta: 6 (Total: 12)
 
 ###### Notes
+* I re-trained the all scope models without shuffling the inputs and it
+  performed much better and with a greater variety in orders than when I
+  shuffled the inputs.
+* Perhaps this means I should look into more properly training the all scope
+  models.
 
 ###### Next Thing(s) to Try
 

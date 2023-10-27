@@ -17,7 +17,7 @@ void Alpaca::TaoBot::read_price_movement() {
           .timestamp_upper_bound = this->current_epoch,
       });
 
-  if (new_avg_one_sec_variances.running) {
+  if (new_avg_one_sec_variances.latest && new_avg_one_sec_variances.running) {
     this->avg_one_sec_variances = new_avg_one_sec_variances;
   }
 }
