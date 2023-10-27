@@ -10,7 +10,7 @@ class InputLoader:
         self.db_conn = db_conn
         self.duration_minutes = duration_minutes
         self.columns = []
-        self.inputs = np.array([])
+        self.inputs = {}
         self.norm_factors = models.config.DEFAULT_NORM_FACTORS
         self.selected_input_columns = ",\n".join(models.config.SELECTED_INPUT_COLUMNS)
         self.symbol = symbol
@@ -20,7 +20,7 @@ class InputLoader:
 
     def load(self):
         if self.symbol:
-            self.__get_inputs_for_symbol()
+            self.__get_inputs_for_symbol(self.symbol)
         else:
             self.__get_inputs_for_all()
 
@@ -36,29 +36,14 @@ class InputLoader:
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
                 select
-                  candles.*
-                from (
-                  select
-                    symbol,
-                    (count(*) / %(input_width)s) as multiplier
-                  from
-                    candles
-                  where
-                    duration_minutes = %(duration_minutes)s
-                  group by
-                    symbol) as symbols
-                  join lateral (
-                    select
-                      {self.selected_input_columns},
-                      symbol
-                    from
-                      candles
-                    where
-                      symbol = symbols.symbol
-                      and duration_minutes = %(duration_minutes)s
-                    order by
-                      opened_at asc
-                    limit (symbols.multiplier * %(input_width)s)) as candles on candles.symbol = symbols.symbol;
+                  symbol,
+                  (count(*) / %(input_width)s) as multiplier
+                from
+                  candles
+                where
+                  duration_minutes = %(duration_minutes)s
+                group by
+                  symbol
             """
 
             cursor.execute(
@@ -72,19 +57,19 @@ class InputLoader:
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()
 
-        n = len(models.config.SELECTED_INPUT_COLUMNS)
+        for symbol, multiplier in rows:
+            self.__get_inputs_for_symbol(
+                limit=multiplier * models.config.INPUT_WIDTH, symbol=symbol
+            )
 
-        self.columns = columns[:n]
-        self.inputs = self.__shuffle_rows(features_n=n, rows=rows)
+        u.ascii.puts(f"✅ Fetched candles for all symbols", u.ascii.GREEN)
 
-        u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
-
-    def __get_inputs_for_symbol(self):
-        u.ascii.puts(
-            f"💿 Loading input data for {u.ascii.CYAN}{self.symbol}", u.ascii.YELLOW
-        )
+    def __get_inputs_for_symbol(self, limit=0, symbol=""):
+        u.ascii.puts(f"💿 Loading input data for {u.ascii.CYAN}{symbol}", u.ascii.YELLOW)
 
         with self.db_conn.conn.cursor() as cursor:
+            limit_clause = f"limit %(limit)s" if limit else ""
+
             query = f"""
                 select
                   {self.selected_input_columns}
@@ -95,13 +80,15 @@ class InputLoader:
                   and duration_minutes = %(duration_minutes)s
                 order by
                   opened_at asc
+                {limit_clause}
             """
 
             cursor.execute(
                 query,
                 {
                     "duration_minutes": self.duration_minutes,
-                    "symbol": self.symbol,
+                    "limit": limit,
+                    "symbol": symbol,
                 },
             )
 
@@ -109,9 +96,12 @@ class InputLoader:
             rows = cursor.fetchall()
 
         self.columns = columns
-        self.inputs = np.array(rows)
+        self.inputs[symbol] = [list(r) for r in rows]
 
-        u.ascii.puts(f"✅ Fetched candles. Shape: {self.inputs.shape}", u.ascii.GREEN)
+        u.ascii.puts(
+            f"✅ Fetched candles. Shape: {np.array(self.inputs[symbol]).shape}",
+            u.ascii.GREEN,
+        )
 
     def __normalize(self):
         training_set_mean = self.training_set.mean(axis=0)
@@ -130,30 +120,23 @@ class InputLoader:
 
         u.ascii.puts(f"✅ Normalized data sets.", u.ascii.GREEN)
 
-    def __shuffle_rows(self, features_n=0, rows=[]):
-        input_width = models.config.INPUT_WIDTH
-        m = len(rows)
-        n = features_n
-
-        groups_n = int(m / input_width)
-
-        grouped_rows = (
-            np.array(rows)[:, :n].astype(float).reshape(groups_n, input_width, n)
-        )
-
-        idx = np.arange(grouped_rows.shape[0])
-        np.random.shuffle(idx)
-
-        shuffled_rows = grouped_rows[idx, :]
-
-        return shuffled_rows.reshape(m, n)
-
     def __split_into_sets(self):
-        m = len(self.inputs)
+        M = 0
+        test_set = []
+        training_set = []
+        validation_set = []
 
-        self.test_set = self.inputs[int(m * 0.9) :]
-        self.training_set = self.inputs[0 : int(m * 0.7)]
-        self.validation_set = self.inputs[int(m * 0.7) : int(m * 0.9)]
+        for key, inputs in self.inputs.items():
+            m = len(inputs)
+            M += m
+
+            training_set += inputs[0 : int(m * 0.7)]
+            validation_set += inputs[int(m * 0.7) : int(m * 0.9)]
+            test_set += inputs[int(m * 0.9) :]
+
+        self.test_set = np.array(test_set)
+        self.training_set = np.array(training_set)
+        self.validation_set = np.array(validation_set)
 
         u.ascii.puts(u.ascii.MAGENTA, begin="", end="")
         u.ascii.puts(
@@ -165,5 +148,5 @@ class InputLoader:
         print(f"Training:   {len(self.training_set)}")
         print(f"Validation: {len(self.validation_set)}")
         print(f"Test:       {len(self.test_set)}")
-        print(f"Total:      {m}")
+        print(f"Total:      {M}")
         print(u.ascii.RESET, end="")
