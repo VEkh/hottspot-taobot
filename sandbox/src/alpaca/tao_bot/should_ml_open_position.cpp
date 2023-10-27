@@ -21,8 +21,7 @@ bool Alpaca::TaoBot::should_ml_open_position(ML::CandlePredict &predictor) {
     return true;
   }
 
-  if (last_position.open_order.timestamp <
-      predictor.latest_predictions().second.front().candle.closed_at) {
+  if (predictor.are_predictions_stale(last_position.open_order.timestamp)) {
     return true;
   }
 

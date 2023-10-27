@@ -93,7 +93,6 @@ private:
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
-  bool was_last_position_profit_stopped();
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);

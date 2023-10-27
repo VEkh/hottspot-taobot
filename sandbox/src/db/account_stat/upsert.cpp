@@ -23,7 +23,8 @@ void DB::AccountStat::upsert(const upsert_args_t args) {
     insert into account_stats(api_key_id, equity, inserted_at, margin_buying_power, margin_multiplier)
       values (%s, %f, %s, %f, %f)
     on conflict (api_key_id, inserted_at)
-      do nothing;
+      do update set
+        equity = excluded.equity
   )";
 
   char *sanitized_api_key_id =

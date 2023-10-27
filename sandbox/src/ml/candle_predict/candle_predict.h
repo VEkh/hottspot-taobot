@@ -43,8 +43,6 @@ public:
   order_action_t predict_action(const std::list<prediction_t>,
                                 const std::string);
 
-  std::pair<double, std::list<prediction_t>> latest_predictions();
-
   void get_fresh_predictions(const double, const bool);
   void log_correct_predictions();
   void log_predictions(const double);
@@ -67,6 +65,7 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::map<double, std::list<prediction_t>> correct_predictions;
   std::map<double, std::list<prediction_t>> predictions;
+  std::pair<double, std::list<prediction_t>> latest_predictions();
   std::string db_env;
   std::string symbol;
 };

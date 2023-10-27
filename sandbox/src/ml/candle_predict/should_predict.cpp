@@ -12,7 +12,7 @@ bool ML::CandlePredict::should_predict(const double volatility = 0) {
     return true;
   }
 
-  if (volatility && volatility < 2.0) {
+  if (volatility && volatility < 2.5) {
     return false;
   }
 
