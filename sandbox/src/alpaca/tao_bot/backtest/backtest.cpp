@@ -11,9 +11,8 @@
 #include "load_config.cpp"     // load_config
 #include "next_day_market_open_epoch.cpp"
 #include "place_order.cpp"
-#include "publish_clock.cpp"
+#include "should_await_epoch_advance.cpp"
 #include "should_exec_slow_query.cpp"
-#include "subscribe_clock.cpp"
 #include "upsert_account_stat.cpp"
 
 Alpaca::TaoBotBacktest::TaoBotBacktest(const init_args_t args) {

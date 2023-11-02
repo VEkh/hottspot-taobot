@@ -51,15 +51,14 @@ public:
   std::string symbol;
 
   bool has_reached_end(const double);
+  bool should_await_epoch_advance(const long int, const long int);
   bool should_exec_slow_query(const double);
 
   int next_day_market_open_epoch(const double);
 
   std::string fetch_order(const order_t *, const quote_t &);
-  std::string subscribe_clock(const bool);
 
   void place_order(const long int, order_t *);
-  void publish_clock(const double, const bool);
   void upsert_account_stat(const double, const bool);
 
 private:
@@ -73,8 +72,10 @@ private:
   std::map<std::string, std::string> flags;
 
   std::string pub_sub_clock_key();
+  std::string subscribe_clock(const bool);
 
   void load_config();
+  void publish_clock(const double, const bool);
 };
 } // namespace Alpaca
 
