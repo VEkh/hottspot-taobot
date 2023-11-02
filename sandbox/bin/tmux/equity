@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
-api_keys=("live-alpha" "paper-alpha" "paper-beta")
+api_keys=("live-alpha" "paper-alpha" "paper-beta" "paper-gamma" "paper-delta")
 filename=$(basename "${BASH_SOURCE[0]}")
 project="alpaca"
 symbols=()
@@ -70,14 +70,20 @@ tmux new-window -t "${session}" \
 tmux split-window -t "${session}:stock-account-streams" -h \
   "$(tail_cmd "${project}/${api_keys[1]}"  "account_stream")"
 
-tmux split-window -t "${session}:stock-account-streams.1" \
+tmux split-window -t "${session}:stock-account-streams.0" \
   "$(tail_cmd "${project}/${api_keys[2]}"  "account_stream")"
+
+tmux split-window -t "${session}:stock-account-streams.2" \
+  "$(tail_cmd "${project}/${api_keys[3]}"  "account_stream")"
+
+tmux split-window -t "${session}:stock-account-streams.3" -h \
+  "$(tail_cmd "${project}/${api_keys[4]}"  "account_stream")"
 
 window_i=$((window_i + 4))
 for symbol in "${symbols[@]}"; do
   log_dir="${app_dir}/../sandbox/log/${project}/ml/candle_predict"
 
-  mkdir -p
+  mkdir -p "${log_dir}"
 
   log_filepath="${log_dir}/${symbol}.log"
 
