@@ -21,67 +21,91 @@ DB::AccountStat::get_snapshot_with_computed_equity(
       PQescapeLiteral(this->conn.conn, api_key_id.c_str(), api_key_id.size());
 
   const char *query_format = R"(
-    select
-      computed_equity.api_key_id,
-      computed_equity.equity,
-      coalesce(original.margin_buying_power, 0.0) as original_margin_buying_power,
-      latest.inserted_at as timestamp_epoch
-    from (
+    with day_original as (
       select
         api_key_id,
-        inserted_at
+        equity,
+        inserted_at,
+        margin_buying_power
+      from
+        account_stats
+      where
+        api_key_id = %s
+        and inserted_at >= to_timestamp(%f)
+      order by
+        inserted_at asc
+      limit 1
+    ),
+    day_computed as (
+      select
+        coalesce(net.profit, 0.0) as profit
+    from
+      day_original
+      left join lateral (
+        select
+          api_key_id,
+          sum((current_profit * abs(open_order_quantity))) as profit
+      from
+        positions
+      where
+        opened_at between day_original.inserted_at and day_original.inserted_at + '1 day'::interval
+        and api_key_id = day_original.api_key_id
+      group by
+        api_key_id) as net on net.api_key_id = day_original.api_key_id
+    ),
+    day_latest as (
+      select
+        extract(epoch from account_stats.inserted_at) as inserted_at_epoch
+      from
+        day_original
+        join account_stats on account_stats.api_key_id = day_original.api_key_id
+      where
+        account_stats.inserted_at between day_original.inserted_at and day_original.inserted_at + '1 day'::interval
+      order by
+        account_stats.inserted_at desc
+      limit 1
+    ),
+    day as (
+      select
+        day_original.api_key_id,
+    (day_original.equity + day_computed.profit) as equity,
+    (day_original.margin_buying_power) as original_margin_buying_power,
+      day_latest.inserted_at_epoch
+    from
+      day_original
+      join day_computed on true
+      join day_latest on true
+    ),
+    latest as (
+      select
+        api_key_id,
+        equity,
+        extract(epoch from inserted_at) as inserted_at_epoch
       from
         account_stats
       where
         api_key_id = %s
       order by
         inserted_at desc
-      limit 1) as latest
-      join lateral (
-        select
-          init_balance.api_key_id,
-          (init_balance.equity + coalesce(net.profit, 0)) as equity
-        from (
-          select
-            api_key_id,
-            equity
-          from
-            account_stats
-          where
-            api_key_id = latest.api_key_id
-          order by
-            inserted_at asc
-          limit 1) as init_balance
-        left join lateral (
-          select
-            api_key_id,
-            sum((current_profit * abs(open_order_quantity))) as profit
-          from
-            positions
-          where
-            api_key_id = init_balance.api_key_id
-          group by
-            api_key_id) as net on net.api_key_id = init_balance.api_key_id) as computed_equity on computed_equity.api_key_id = latest.api_key_id
-      left join lateral (
-        select
-          api_key_id,
-          margin_buying_power
-        from
-          account_stats
-        where
-          api_key_id = computed_equity.api_key_id
-          and inserted_at >= to_timestamp(%f)
-        order by
-          inserted_at asc
-        limit 1) as original on original.api_key_id = computed_equity.api_key_id
+      limit 1
+    )
+    select
+      coalesce(day.equity, latest.equity) as equity,
+      coalesce(day.inserted_at_epoch, latest.inserted_at_epoch, 0.0) as timestamp_epoch,
+      coalesce(day.original_margin_buying_power, 0.0) as original_margin_buying_power
+    from
+      latest
+      left join day on day.api_key_id = latest.api_key_id
   )";
 
-  const size_t query_l = strlen(query_format) + strlen(sanitized_api_key_id) +
+  const size_t query_l = strlen(query_format) +
+                         2 * strlen(sanitized_api_key_id) +
                          std::to_string(starting_from).size();
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, sanitized_api_key_id, starting_from);
+  snprintf(query, query_l, query_format, sanitized_api_key_id, starting_from,
+           sanitized_api_key_id);
 
   PQfreemem(sanitized_api_key_id);
 
