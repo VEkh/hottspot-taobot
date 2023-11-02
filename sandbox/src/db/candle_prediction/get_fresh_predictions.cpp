@@ -13,15 +13,6 @@
 std::list<DB::CandlePrediction::prediction_t>
 DB::CandlePrediction::get_fresh_predictions(
     const double ref_epoch = time(nullptr), const bool debug = false) {
-  const long int ref_epoch_int = ref_epoch;
-  tm market_start_tm = *localtime(&ref_epoch_int);
-
-  market_start_tm.tm_hour = 13;
-  market_start_tm.tm_min = 0;
-  market_start_tm.tm_sec = 0;
-
-  const double market_start_epoch = mktime(&market_start_tm);
-
   const char *query_format = R"(
     select
       candle_predictions.*,
@@ -37,7 +28,7 @@ DB::CandlePrediction::get_fresh_predictions(
         and candles.duration_minutes = %i
     where
       candle_predictions.symbol = %s
-      and candle_predictions.candle_closed_at between to_timestamp(%f) and to_timestamp(%f)
+      and candle_predictions.candle_closed_at between date_trunc('day', to_timestamp(%f)) and to_timestamp(%f)
     order by
       candle_predictions.candle_closed_at desc,
       candle_predictions.model_name asc
@@ -48,13 +39,12 @@ DB::CandlePrediction::get_fresh_predictions(
 
   const size_t query_l =
       strlen(query_format) + std::to_string(this->duration_minutes).size() +
-      strlen(sanitized_symbol) + std::to_string(market_start_epoch).size() +
-      std::to_string(ref_epoch).size();
+      strlen(sanitized_symbol) + 2 * std::to_string(ref_epoch).size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, this->duration_minutes,
-           sanitized_symbol, market_start_epoch, ref_epoch);
+           sanitized_symbol, ref_epoch, ref_epoch);
 
   PQfreemem(sanitized_symbol);
 
