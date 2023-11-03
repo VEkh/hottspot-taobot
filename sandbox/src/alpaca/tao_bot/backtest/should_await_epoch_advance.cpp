@@ -17,28 +17,35 @@ bool Alpaca::TaoBotBacktest::should_await_epoch_advance(
     return false;
   }
 
-  tm current_tm = *localtime(&current_epoch);
-  tm new_epoch_tm = *localtime(&new_epoch);
+  if (has_reached_end(new_epoch)) {
+    return false;
+  }
 
-  const bool is_new_day = new_epoch_tm.tm_mday != current_tm.tm_mday;
+  const double current_begin_day_epoch =
+      ::utils::time_::beginning_of_day_to_epoch(current_epoch);
 
-  publish_clock(new_epoch, is_new_day);
+  const double new_begin_day_epoch =
+      ::utils::time_::beginning_of_day_to_epoch(new_epoch);
+
+  const bool is_new_day = new_begin_day_epoch != current_begin_day_epoch;
+
+  publish_clock(new_epoch);
 
   if (!is_new_day) {
     return false;
   }
 
-  const std::string sibling_epoch_string = subscribe_clock(true);
+  const std::string sibling_epoch_string = subscribe_clock();
 
   if (sibling_epoch_string.empty()) {
     return true;
   }
 
-  const long int sibling_epoch = std::stod(sibling_epoch_string);
+  const double sibling_begin_day_epoch =
+      ::utils::time_::beginning_of_day_to_epoch(
+          std::stod(sibling_epoch_string));
 
-  tm sibling_epoch_tm = *localtime(&sibling_epoch);
-
-  if (sibling_epoch_tm.tm_mday < new_epoch_tm.tm_mday) {
+  if (sibling_begin_day_epoch < new_begin_day_epoch) {
     return true;
   }
 

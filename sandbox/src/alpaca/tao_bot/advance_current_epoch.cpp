@@ -1,7 +1,8 @@
 #ifndef ALPACA__TAO_BOT_advance_current_epoch
 #define ALPACA__TAO_BOT_advance_current_epoch
 
-#include "tao_bot.h" // Alpaca::TaoBot
+#include "tao_bot.h" // Alpaca::TaoBot, fmt
+#include <iostream>  // std::cout, std::endl
 #include <time.h>    // time
 #include <unistd.h>  // usleep
 
@@ -21,6 +22,12 @@ void Alpaca::TaoBot::advance_current_epoch() {
 
 void Alpaca::TaoBot::advance_current_epoch(const double epoch) {
   if (this->backtest.should_await_epoch_advance(this->current_epoch, epoch)) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("😴 Awaiting epoch advance...");
+    std::cout << fmt.reset << std::endl;
+
+    usleep(5e5);
+
     return advance_current_epoch(epoch);
   }
 
