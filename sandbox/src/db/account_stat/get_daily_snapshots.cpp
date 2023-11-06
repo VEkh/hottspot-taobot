@@ -1,7 +1,7 @@
 #ifndef DB__ACCOUNT_STAT_get_daily_snapshots
 #define DB__ACCOUNT_STAT_get_daily_snapshots
 
-#include "account_stat.h"                  // DB::AccountStat, query_result_t
+#include "account_stat.h" // DB::AccountStat, get_daily_snapshots_args_t, query_result_t
 #include "result_to_account_snapshots.cpp" // result_to_account_snapshots
 #include <libpq-fe.h>                      // PQescapeLiteral, PQfreemem
 #include <list>                            // std::list
@@ -14,20 +14,20 @@ DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
 
   const bool debug = args.debug;
   const std::string api_key_id = args.api_key_id;
-  std::string starting_from = "now() - '1 week'::interval";
+  std::string start_at = "now() - '1 week'::interval";
 
   char *sanitized_api_key_id =
       PQescapeLiteral(this->conn.conn, api_key_id.c_str(), api_key_id.size());
 
-  if (args.starting_from == "earliest") {
-    starting_from = "min(inserted_at)";
-  } else if (!args.starting_from.empty()) {
-    char *sanitized_starting_from = PQescapeLiteral(
-        this->conn.conn, args.starting_from.c_str(), args.starting_from.size());
+  if (args.start_at == "earliest") {
+    start_at = "min(inserted_at)";
+  } else if (!args.start_at.empty()) {
+    char *sanitized_start_at = PQescapeLiteral(
+        this->conn.conn, args.start_at.c_str(), args.start_at.size());
 
-    starting_from = std::string(sanitized_starting_from) + "::date";
+    start_at = std::string(sanitized_start_at) + "::date";
 
-    PQfreemem(sanitized_starting_from);
+    PQfreemem(sanitized_start_at);
   }
 
   const char *query_format = R"(
@@ -123,14 +123,13 @@ DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
       and original.inserted_at <(trading_days.day + interval '1 day')
   )";
 
-  const size_t query_l = strlen(query_format) +
-                         2 * strlen(sanitized_api_key_id) +
-                         starting_from.size();
+  const size_t query_l =
+      strlen(query_format) + 2 * strlen(sanitized_api_key_id) + start_at.size();
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, sanitized_api_key_id,
-           starting_from.c_str(), sanitized_api_key_id);
+  snprintf(query, query_l, query_format, sanitized_api_key_id, start_at.c_str(),
+           sanitized_api_key_id);
 
   PQfreemem(sanitized_api_key_id);
 

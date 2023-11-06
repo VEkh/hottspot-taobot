@@ -1,4 +1,4 @@
-### 2023-11-03:
+### 2023-11-06:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -8,8 +8,8 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 5W (29.41%) 12L (Total 17)
-Vs: Live Alpha: 9 • Paper Beta: 8 (Total: 17)
+Win Rate: 5W (27.78%) 13L (Total 18)
+Vs: Live Alpha: 10 • Paper Beta: 8 (Total: 18)
 ```
 
 **Alpha (STAGING)**
@@ -19,7 +19,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 1W (25.00%) 3L (Total: 4)
+Win Rate: 1W (20.00%) 4L (Total: 5)
 ```
 
 **Beta (STAGING)**
@@ -29,7 +29,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 8W (30.77%) 18L (Total: 26)
+Win Rate: 8W (29.63%) 19L (Total: 27)
 ```
 
 **Gamma (STAGING)**
@@ -39,7 +39,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 1W (33.33%) 2L (Total: 3)
+Win Rate: 1W (25.00%) 3L (Total: 4)
 ```
 
 **Delta (STAGING)**
@@ -49,8 +49,77 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 1W (33.33%) 2L (Total: 2)
+Win Rate: 1W (25.00%) 3L (Total: 4)
 ```
+
+###### Notes
+
+###### Next Thing(s) to Try
+
+### 2023-11-03:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Friday, November  3 2023
+Current Equity:          $63740.88 (-662.42) (-1.03%)
+Max Equity:              $65958.33 (+1555.03) (+2.41%) @ 09:49 CDT
+Min Equity:              $63152.01 (-1251.29) (-1.94%) @ 09:06 CDT
+Original Equity:         $64403.30
+
+Win Rate: 5W (27.78%) 13L (Total 18)
+Vs: Live Alpha: 10 • Paper Beta: 8 (Total: 18)
+```
+
+**Alpha (STAGING)**
+```
+Friday, November  3 2023
+Current Equity:          $87547.32 (-8259.93) (-8.62%)
+Max Equity:              $96712.68 (+905.43) (+0.95%) @ 08:31 CDT
+Min Equity:              $86905.00 (-8902.25) (-9.29%) @ 14:06 CDT
+Original Equity:         $95807.25
+
+Win Rate: 1W (20.00%) 4L (Total: 5)
+```
+
+**Beta (STAGING)**
+```
+Friday, November  3 2023
+Current Equity:          $61349.79 (-1636.19) (-2.60%)
+Max Equity:              $63202.74 (+216.76) (+0.34%) @ 08:30 CDT
+Min Equity:              $61349.79 (-1636.19) (-2.60%) @ 08:34 CDT
+Original Equity:         $62985.98
+
+Win Rate: 8W (29.63%) 19L (Total: 27)
+```
+
+**Gamma (STAGING)**
+```
+Friday, November  3 2023
+Current Equity:          $95542.82 (-2471.61) (-2.52%)
+Max Equity:              $98650.16 (+635.73) (+0.65%) @ 08:30 CDT
+Min Equity:              $95436.97 (-2577.46) (-2.63%) @ 08:41 CDT
+Original Equity:         $98014.43
+
+Win Rate: 1W (25.00%) 3L (Total: 4)
+```
+
+**Delta (STAGING)**
+```
+Friday, November  3 2023
+Current Equity:          $94361.99 (-2660.27) (-2.74%)
+Max Equity:              $98017.40 (+995.14) (+1.03%) @ 08:31 CDT
+Min Equity:              $94361.99 (-2660.27) (-2.74%) @ 08:45 CDT
+Original Equity:         $97022.26
+
+Win Rate: 1W (25.00%) 3L (Total: 4)
+```
+
+###### Stats (PRODUCTION) (All Time)
+* Wins / Losses: 123W (54.19%) (Consecutive: 0) 104L (Consecutive: 5)
+* Latest Return: -$662.42 (-1.03%) (-114.82% 9-5 Salary) (vs. NASDAQ: +1.18%) (vs. S&P 500: -0.01%)
+* Week's Return: -$7608.66 • Total Return: -$7086.67
+* Average Return: -0.09% • Average NASDAQ Return: +0.07% • Average S&P 500 Return: +0.04%
 
 ###### Notes
 
@@ -112,7 +181,7 @@ Max Equity:              $99737.08 (+172.40) (+0.17%) @ 08:30 CDT
 Min Equity:              $97014.78 (-2549.90) (-2.56%) @ 08:37 CDT
 Original Equity:         $99564.68
 
-Win Rate: 1W (33.33%) 2L (Total: 2)
+Win Rate: 1W (33.33%) 2L (Total: 3)
 ```
 
 ###### Notes
