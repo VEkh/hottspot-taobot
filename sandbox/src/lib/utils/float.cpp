@@ -21,11 +21,21 @@ double round_to(double input, int precision) {
   return std::stod(round_to_s(input, precision));
 }
 
-double sigmoid(const double max, const double min, const double x,
-               const double x_coefficient = 1.0, const double x_shift = 0.0) {
-  const double y_shift = min;
-  const double y_coefficient = max - min;
-  return (y_coefficient / (1 + exp(-x_coefficient * (x - x_shift)))) + y_shift;
+struct sigmoid_args_t {
+  double decay_rate = 1.0;
+  double max;
+  double min;
+  double x;
+  double x_shift = 0.0;
+};
+
+double sigmoid(const sigmoid_args_t args) {
+  const double y_shift = args.min;
+  const double y_coefficient = args.max - args.min;
+
+  return (y_coefficient /
+          (1 + exp(-args.decay_rate * (args.x - args.x_shift)))) +
+         y_shift;
 }
 
 char sign_char(const double n) { return n >= 0 ? '+' : '-'; };

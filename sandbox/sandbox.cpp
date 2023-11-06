@@ -2,17 +2,16 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include <time.h>
+#include "lib/utils/float.cpp" // ::utils::float::sigmoid
 
 int main(int argc, char *argv[]) {
-  long int now = time(nullptr);
-  tm market_start_tm = *localtime(&now);
+  const double val = ::utils::float_::sigmoid({
+      .max = 1,
+      .min = 0.1,
+      .x = 0.9,
+      .x_coefficient = 15.0,
+      .x_shift = 0.75,
+  });
 
-  market_start_tm.tm_hour = 13;
-  market_start_tm.tm_min = 30;
-  market_start_tm.tm_sec = 0;
-
-  const double market_start = mktime(&market_start_tm);
-
-  printf("%f\n", market_start);
+  printf("%f\n", val);
 }

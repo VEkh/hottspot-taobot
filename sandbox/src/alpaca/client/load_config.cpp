@@ -88,6 +88,11 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  const bool is_stop_loss_scaled =
+      api_key_json.contains("is_stop_loss_scaled")
+          ? (bool)api_key_json["is_stop_loss_scaled"]
+          : config.is_stop_loss_scaled;
+
   ml_config_t ml_config;
 
   if (api_key_json.contains("ml")) {
@@ -143,6 +148,7 @@ void Alpaca::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .data_base_url = config_json["data_base_url"],
       .is_live = api_key_json["is_live"],
+      .is_stop_loss_scaled = is_stop_loss_scaled,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],

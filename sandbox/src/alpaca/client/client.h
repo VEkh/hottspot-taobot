@@ -28,6 +28,7 @@ public:
     std::string base_url;
     std::string data_base_url;
     bool is_live;
+    bool is_stop_loss_scaled = false;
     int late_start_seconds = 6; // Production's average
     ml_config_t ml;
     double stop_loss_ratio = -60.0;
