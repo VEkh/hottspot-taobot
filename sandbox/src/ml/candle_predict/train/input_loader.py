@@ -20,7 +20,7 @@ class InputLoader:
 
     def load(self):
         if self.symbol:
-            self.__get_inputs_for_symbol(self.symbol)
+            self.__get_inputs_for_symbol(symbol=self.symbol)
         else:
             self.__get_inputs_for_all()
 
