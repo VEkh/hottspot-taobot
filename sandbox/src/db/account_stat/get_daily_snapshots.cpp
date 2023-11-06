@@ -11,13 +11,21 @@
 
 std::list<DB::AccountStat::account_snapshot_t>
 DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
-
-  const bool debug = args.debug;
   const std::string api_key_id = args.api_key_id;
+  std::string end_at = "max(inserted_at)";
   std::string start_at = "now() - '1 week'::interval";
 
   char *sanitized_api_key_id =
       PQescapeLiteral(this->conn.conn, api_key_id.c_str(), api_key_id.size());
+
+  if (!args.end_at.empty()) {
+    char *sanitized_end_at = PQescapeLiteral(
+        this->conn.conn, args.end_at.c_str(), args.end_at.size());
+
+    end_at = std::string(sanitized_end_at) + "::date";
+
+    PQfreemem(sanitized_end_at);
+  }
 
   if (args.start_at == "earliest") {
     start_at = "min(inserted_at)";
@@ -52,12 +60,15 @@ DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
           generate_series(range.begin_date, range.end_date, '1 day'::interval) date_timestamp
         from (
           select
+            api_key_id,
             date_trunc('day', %s) as begin_date,
-            date_trunc('day', max(inserted_at)) as end_date
+            date_trunc('day', %s) as end_date
           from
             account_stats
           where
-            api_key_id = %s) as range) as full_date_range
+            api_key_id = %s
+          group by
+            api_key_id) as range) as full_date_range
       where
         extract(isodow from full_date_range.date_timestamp) < 6) as trading_days
       join lateral (
@@ -123,17 +134,18 @@ DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
       and original.inserted_at <(trading_days.day + interval '1 day')
   )";
 
-  const size_t query_l =
-      strlen(query_format) + 2 * strlen(sanitized_api_key_id) + start_at.size();
+  const size_t query_l = strlen(query_format) +
+                         2 * strlen(sanitized_api_key_id) + start_at.size() +
+                         end_at.size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_api_key_id, start_at.c_str(),
-           sanitized_api_key_id);
+           end_at.c_str(), sanitized_api_key_id);
 
   PQfreemem(sanitized_api_key_id);
 
-  const query_result_t result = this->conn.exec(query, debug);
+  const query_result_t result = this->conn.exec(query, args.debug);
 
   return result_to_account_snapshots(result);
 };

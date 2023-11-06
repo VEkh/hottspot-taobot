@@ -13,6 +13,7 @@ public:
 
   struct get_daily_snapshots_args_t {
     std::string api_key_id;
+    std::string end_at;
     std::string start_at;
     // Optional
     bool debug = false;

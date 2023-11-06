@@ -11,12 +11,14 @@
 #include <map>                 // std::map
 #include <math.h>              // abs
 #include <stdio.h>             // printf
-#include <string>              // std::string
+#include <string>              // std::stoi, std::string
 
 void Performance::Logger::log_daily_snapshots(
     const log_daily_snapshots_args_t args) {
   const std::string api_key_id = args.api_key_id;
   std::map<std::string, std::string> flags = args.flags;
+
+  const bool debug = flags["debug"].empty() ? false : std::stoi(flags["debug"]);
 
   double daily_dollars = 0.0;
   double daily_ratio = 0.0;
@@ -28,7 +30,9 @@ void Performance::Logger::log_daily_snapshots(
   std::list<account_snapshot_t> snapshots =
       this->db_account_stat.get_daily_snapshots({
           .api_key_id = api_key_id,
+          .end_at = flags["end-at"],
           .start_at = flags["start-at"],
+          .debug = debug,
       });
 
   if (snapshots.empty()) {
@@ -94,10 +98,10 @@ void Performance::Logger::log_daily_snapshots(
   const double avg_daily_ratio = daily_ratio / count;
 
   Formatted::Stream avg_daily_dollars_color =
-      avg_daily_dollars < 0 ? fmt.red : fmt.red;
+      avg_daily_dollars < 0 ? fmt.red : fmt.green;
   Formatted::Stream avg_daily_ratio_color =
-      avg_daily_ratio < 0 ? fmt.red : fmt.red;
-  Formatted::Stream total_color = daily_dollars < 0 ? fmt.red : fmt.red;
+      avg_daily_ratio < 0 ? fmt.red : fmt.green;
+  Formatted::Stream total_color = daily_dollars < 0 ? fmt.red : fmt.green;
 
   std::cout << fmt.bold << avg_daily_dollars_color;
   printf("Avg Daily Return:        %c$%'.2f\n",
