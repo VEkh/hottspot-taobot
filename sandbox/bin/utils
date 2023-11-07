@@ -98,9 +98,9 @@ function extract_flags_to_map() {
 }
 
 function is_market_open() {
-  dow=$(TZ=UTC date +%u)
-  hr=$(TZ=UTC date +%k)
-  iso_date=$(TZ=UTC date +%F)
+  dow=$(TZ="America/Chicago" date +%u)
+  hr=$(TZ="America/Chicago" date +%k)
+  iso_date=$(TZ="America/Chicago" date +%F)
   project="${1}"
 
   if [[ "${project}" = "alpaca" ]]; then
@@ -111,7 +111,7 @@ function is_market_open() {
       exit 0
     fi
 
-    if (( "${dow}" >= 1 && "${dow}" <= 5 && "${hr}" >= 13 && "${hr}" < 20 )); then
+    if (( "${dow}" >= 1 && "${dow}" <= 5 && "${hr}" >= 8 && "${hr}" < 15 )); then
       echo "true"
     else
       echo "false"
@@ -121,8 +121,8 @@ function is_market_open() {
   else
     if ((
       ("${dow}" >= 1 && "${dow}" < 5) ||
-      ("${dow}" == 5 && "${hr}" < 21) ||
-      ("${dow}" == 7 && "${hr}" >= 21)
+      ("${dow}" == 5 && "${hr}" < 16) ||
+      ("${dow}" == 7 && "${hr}" >= 16)
     )); then
       echo "true"
     else
