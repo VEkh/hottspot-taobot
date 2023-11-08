@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
-api_keys=("live-alpha" "paper-alpha" "paper-beta" "paper-gamma" "paper-delta")
+api_keys=("live-alpha" "live-beta" "paper-alpha" "paper-beta" "paper-gamma")
 filename=$(basename "${BASH_SOURCE[0]}")
 project="alpaca"
 symbols=()
