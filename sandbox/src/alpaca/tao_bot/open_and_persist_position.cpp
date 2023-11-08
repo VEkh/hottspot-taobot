@@ -29,7 +29,7 @@ void Alpaca::TaoBot::open_and_persist_position() {
   bool open_order_opened = false;
 
   while (!open_order_opened) {
-    update_account_snapshot();
+    update_account_snapshot(true);
 
     const double quantity = compute_quantity();
 
