@@ -6,6 +6,10 @@
 
 bool Alpaca::TaoBotBacktest::should_exec_slow_query(
     const double current_epoch) {
+  if (this->config.force_exec_slow_queries) {
+    return true;
+  }
+
   if (has_reached_end(current_epoch)) {
     return true;
   }

@@ -135,6 +135,11 @@ void Alpaca::TaoBotBacktest::load_config() {
                               ? (bool)backtest_json["clock_sync"]
                               : this->config.clock_sync;
 
+  const bool force_exec_slow_queries =
+      backtest_json.contains("force_exec_slow_queries")
+          ? (bool)backtest_json["force_exec_slow_queries"]
+          : this->config.force_exec_slow_queries;
+
   this->config = {
       .account_margin_multiplier = backtest_json["account_margin_multiplier"],
       .account_starting_equity = backtest_json["account_starting_equity"],
@@ -142,6 +147,7 @@ void Alpaca::TaoBotBacktest::load_config() {
       .api_key_id = api_key_json["id"],
       .clock_sync = clock_sync,
       .end_epoch = end_epoch,
+      .force_exec_slow_queries = force_exec_slow_queries,
       .start_epoch = start_epoch,
   };
 }

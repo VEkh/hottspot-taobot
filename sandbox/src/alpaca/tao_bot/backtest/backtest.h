@@ -33,6 +33,7 @@ public:
     std::string api_key_id;
     bool clock_sync = true;
     double end_epoch = 0;
+    bool force_exec_slow_queries = false;
     double start_epoch = 0;
   } config;
 
