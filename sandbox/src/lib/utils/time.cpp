@@ -59,8 +59,8 @@ ReturnType in_time_zone(const char *time_zone, Predicate *fn) {
 
 std::string date_string(const long int timestamp_seconds,
                         const char *format = "%F",
-                        const char *timezone = "America/New_York") {
-  return in_time_zone<std::string>(timezone, [&]() -> std::string {
+                        const char *time_zone = "America/New_York") {
+  return in_time_zone<std::string>(time_zone, [&]() -> std::string {
     struct tm *timeinfo;
     const int buffer_size = 100;
 
@@ -138,8 +138,6 @@ tm parse_timestamp(std::string in, const char *format) {
   std::istringstream date_string_(in);
 
   date_string_ >> std::get_time(&datetime, format);
-
-  mktime(&datetime);
 
   return datetime;
 }

@@ -10,7 +10,7 @@
 #include <stdexcept>          // std::invalid_argument, std::runtime_error
 #include <stdio.h>            // printf
 #include <string>             // std::string
-#include <time.h>             // mktime, time, tm
+#include <time.h>             // time
 #include <vector>             // std::vector
 
 void Alpaca::TaoBotBacktest::load_config() {
@@ -100,19 +100,16 @@ void Alpaca::TaoBotBacktest::load_config() {
 
   const std::string start_at_string = backtest_json["start_at"];
 
-  tm backtest_start_at =
-      ::utils::time_::parse_timestamp(start_at_string, "%Y-%m-%d %H:%M:%S");
+  const double start_epoch =
+      this->db_utils.timestamp_to_epoch(start_at_string, "America/Chicago");
 
-  const double start_epoch = (double)mktime(&backtest_start_at);
   double end_epoch;
 
   if (backtest_json.contains("end_at")) {
     const std::string end_at_string = backtest_json["end_at"];
 
-    tm backtest_end_at =
-        ::utils::time_::parse_timestamp(end_at_string, "%Y-%m-%d %H:%M:%S");
-
-    end_epoch = (double)mktime(&backtest_end_at);
+    end_epoch =
+        this->db_utils.timestamp_to_epoch(end_at_string, "America/Chicago");
 
   } else {
     const std::list<quote_t> last_quotes = this->db_quote.get_last({

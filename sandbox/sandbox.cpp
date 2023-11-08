@@ -2,16 +2,27 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/utils/float.cpp" // ::utils::float::sigmoid
+#include "db/utils/utils.cpp" // DB::Utils
+#include "lib/pg/pg.cpp"      // Pg
+#include "lib/utils/time.cpp" // ::utils::time_
 
 int main(int argc, char *argv[]) {
-  const double val = ::utils::float_::sigmoid({
-      .max = 1,
-      .min = 0.1,
-      .x = 0.9,
-      .x_coefficient = 15.0,
-      .x_shift = 0.75,
-  });
+  Pg pg;
+  pg.connect();
 
-  printf("%f\n", val);
+  DB::Utils db_utils(pg);
+
+  const double tomorrow = time(nullptr) + (24 * 60 * 60);
+  std::string tomorrow_date_string =
+      ::utils::time_::date_string(tomorrow, "%F", "America/Chicago");
+
+  printf("tomorrow: %f • tomorrow string: %s\n", tomorrow,
+         tomorrow_date_string.c_str());
+
+  const double epoch = db_utils.timestamp_to_epoch(
+      tomorrow_date_string + " 08:30:00", "America/Chicago");
+
+  printf("Epoch: %f\n", epoch);
+
+  pg.disconnect();
 }

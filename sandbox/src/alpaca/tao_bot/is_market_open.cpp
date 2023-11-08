@@ -24,15 +24,18 @@ bool Alpaca::TaoBot::is_market_open() {
   const tm market_open_time = {
       .tm_sec = this->api_client.config.late_start_seconds,
       .tm_min = 30,
-      .tm_hour = 9,
+      .tm_hour = 8,
   };
 
-  return ::utils::time_::is_at_least(this->current_epoch, market_open_time) &&
-         ::utils::time_::is_before(this->current_epoch, {
-                                                            .tm_sec = 0,
-                                                            .tm_min = 0,
-                                                            .tm_hour = 16,
-                                                        });
+  return ::utils::time_::is_at_least(this->current_epoch, market_open_time,
+                                     "America/Chicago") &&
+         ::utils::time_::is_before(this->current_epoch,
+                                   {
+                                       .tm_sec = 0,
+                                       .tm_min = 0,
+                                       .tm_hour = 15,
+                                   },
+                                   "America/Chicago");
 }
 
 #endif

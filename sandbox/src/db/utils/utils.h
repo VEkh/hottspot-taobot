@@ -13,7 +13,10 @@ public:
   Utils(){};
   Utils(Pg c) : conn(c) {}
 
+  double timestamp_to_epoch(const std::string, const char *, const bool);
+
   std::string generate_uuid(const bool);
+
   void set_param(const std::pair<std::string, std::string>, const bool);
 
 private:

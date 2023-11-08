@@ -4,21 +4,18 @@
 #include "backtest.h"         // Alpaca::TaoBotBacktest
 #include "lib/utils/time.cpp" // ::utils::time_
 #include <algorithm>          // std::min
-#include <time.h>             // localtime, mktime
+#include <string>             // std::string
 
 int Alpaca::TaoBotBacktest::next_day_market_open_epoch(
     const double current_epoch) {
-  const double today_start_epoch =
-      ::utils::time_::beginning_of_day_to_epoch(current_epoch);
+  const double tomorrow_epoch = current_epoch + (24 * 60 * 60);
 
-  const long int tomorrow_start = today_start_epoch + (24 * 60 * 60);
+  const std::string tomorrow_date_string =
+      ::utils::time_::date_string(tomorrow_epoch, "%F", "America/Chicago");
 
-  tm market_open = *localtime(&tomorrow_start);
-  market_open.tm_hour = 13;
-  market_open.tm_min = 30;
-  market_open.tm_sec = 0;
+  const long int next_open_epoch = this->db_utils.timestamp_to_epoch(
+      tomorrow_date_string + " 08:30:00", "America/Chicago");
 
-  const long int next_open_epoch = mktime(&market_open);
   const long int now = time(nullptr);
 
   return std::min(now, next_open_epoch);
