@@ -10,6 +10,7 @@ project=$(dirname "$0" | xargs basename)
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
 
+# shellcheck disable=2207
 flags=($(extract_flags "${@}"))
 declare -A flag_map
 extract_flags_to_map flag_map "${flags[@]}"
@@ -44,7 +45,7 @@ case $1 in
     if [[ "${project}" = "alpaca" ]]; then
       state=$(
         echo -e "${state}" |
-        grep -- "--api-key=.*${api_key}" ||
+        grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
         true
       )
     fi
@@ -65,7 +66,7 @@ case $1 in
     if [[ "${project}" = "alpaca" ]]; then
       state=$(
         echo -e "${state}" |
-        grep -- "--api-key=.*${api_key}" ||
+        grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
         true
       )
     fi
