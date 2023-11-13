@@ -48,19 +48,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       .symbol = this->symbol,
   });
 
-  if (this->backtest.is_active) {
-    this->current_epoch = this->backtest.config.start_epoch;
-    this->started_at = this->backtest.config.start_epoch;
-  }
-
-  if (is_holiday()) {
-    const std::string message = Formatted::error_message(
-        "🎉 Today is a holiday! The markets are closed, so go have "
-        "fun yabish!! 🥳 ");
-
-    throw std::runtime_error(message);
-  }
-
   this->db_account_stat = DB::AccountStat(this->pg);
   this->db_position = DB::Position(this->pg);
   this->db_utils = DB::Utils(this->pg);
@@ -69,6 +56,21 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   try {
     this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
+
+    if (this->backtest.is_active) {
+      this->current_epoch = this->backtest.config.start_epoch +
+                            this->api_client.config.late_start_seconds;
+
+      this->started_at = this->backtest.config.start_epoch;
+    }
+
+    if (is_holiday()) {
+      const std::string message = Formatted::error_message(
+          "🎉 Today is a holiday! The markets are closed, so go have "
+          "fun yabish!! 🥳 ");
+
+      throw std::runtime_error(message);
+    }
 
     this->candle_predictor = ML::CandlePredict(
         this->pg, this->api_client.config.ml.candle_predict, this->symbol);

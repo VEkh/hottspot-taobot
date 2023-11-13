@@ -55,7 +55,7 @@ public:
   bool should_await_epoch_advance(const long int, const long int);
   bool should_exec_slow_query(const double);
 
-  int next_day_market_open_epoch(const double);
+  int next_day_market_open_epoch(const double, const int);
 
   std::string fetch_order(const order_t *, const quote_t &);
 

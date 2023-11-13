@@ -8,8 +8,8 @@
 void Alpaca::TaoBot::reset_backtest() {
   update_account_snapshot(true);
 
-  advance_current_epoch(
-      this->backtest.next_day_market_open_epoch(this->current_epoch));
+  advance_current_epoch(this->backtest.next_day_market_open_epoch(
+      this->current_epoch, this->api_client.config.late_start_seconds));
 
   // `slow_query_countdown` may cause skipping of first daily quote. This
   // will falsely reset the next day's equity to the initial equity.
