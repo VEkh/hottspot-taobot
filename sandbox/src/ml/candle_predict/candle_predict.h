@@ -25,6 +25,10 @@ public:
   struct should_close_position_args_t {
     double current_epoch;
     order_action_t open_order_action;
+    double open_order_max_profit;
+    double open_order_opened_at;
+    double open_order_profit;
+    double stop_profit;
   };
 
   candle_predict_config_t config;
@@ -65,9 +69,13 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::map<double, std::list<prediction_t>> correct_predictions;
   std::map<double, std::list<prediction_t>> predictions;
-  std::pair<double, std::list<prediction_t>> latest_predictions();
   std::string db_env;
   std::string symbol;
+
+  double latest_opposite_prediction_closed_at(
+      std::map<double, std::list<prediction_t>>, const order_action_t);
+
+  std::pair<double, std::list<prediction_t>> latest_predictions();
 };
 } // namespace ML
 

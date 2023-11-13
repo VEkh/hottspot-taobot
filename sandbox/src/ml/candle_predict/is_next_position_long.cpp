@@ -5,6 +5,10 @@
 #include "predict_action.cpp" // predict_action
 
 bool ML::CandlePredict::is_next_position_long() {
+  if (this->config.inverse_predictions) {
+    return predict_action() != order_action_t::BUY;
+  }
+
   return predict_action() == order_action_t::BUY;
 }
 

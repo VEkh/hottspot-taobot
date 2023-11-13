@@ -8,7 +8,8 @@
 #include "volatility.cpp"             // volatility
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (this->candle_predictor.should_predict(volatility())) {
+  if (this->closed_positions.empty() &&
+      this->candle_predictor.should_predict(volatility())) {
     return this->candle_predictor.is_next_position_long();
   }
 

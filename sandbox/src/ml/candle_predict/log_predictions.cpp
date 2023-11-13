@@ -10,6 +10,7 @@
 #include <iostream>                  // std::cout, std::endl
 #include <list>                      // std::list
 #include <stdio.h>                   // printf
+#include <string>                    // std::string
 
 void ML::CandlePredict::log_predictions(const double current_epoch) {
   if (this->predictions.empty()) {
@@ -31,8 +32,18 @@ void ML::CandlePredict::log_predictions(const double current_epoch) {
   }
 
   std::cout << fmt.bold << fmt.underline << fmt.cyan;
-  printf("🤖 %i Minute Predictions (Close)\n", this->duration_minutes);
+  printf("🤖 %i Minute Predictions (Close)", this->duration_minutes);
   std::cout << fmt.reset;
+
+  const Formatted::Stream inv_predictions_color =
+      this->config.inverse_predictions ? fmt.green : fmt.red;
+
+  const std::string inv_predictions_text =
+      this->config.inverse_predictions ? "ON" : "OFF";
+
+  std::cout << fmt.bold << fmt.yellow;
+  std::cout << " Inverse: " << inv_predictions_color << inv_predictions_text
+            << std::endl;
 
   std::list<prediction_t> latest_predictions_ = latest_predictions().second;
 

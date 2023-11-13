@@ -49,6 +49,10 @@ bool Alpaca::TaoBot::should_close_position() {
     return this->candle_predictor.should_close_position({
         .current_epoch = this->current_epoch,
         .open_order_action = this->open_order_ptr->action,
+        .open_order_max_profit = this->open_order_ptr->max_profit,
+        .open_order_opened_at = this->open_order_ptr->timestamp,
+        .open_order_profit = this->open_order_ptr->profit,
+        .stop_profit = this->exit_prices.min_profit,
     });
   }
 
