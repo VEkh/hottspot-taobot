@@ -53,8 +53,6 @@ public:
   void predict(const double);
 
 private:
-  using trend_t = Global::t::trend_t;
-
   constexpr static int TREND_WINDOW_SIZE = 4;
 
   struct consolidation_range_t {
