@@ -12,7 +12,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   double stop_loss_ratio = this->api_client.config.stop_loss_ratio;
 
-  if (this->candle_predictor.should_predict(volatility()) &&
+  if (this->candle_predictor.should_predict() &&
       this->candle_predictor.config.stop_loss_ratio) {
     stop_loss_ratio = this->candle_predictor.config.stop_loss_ratio;
   }

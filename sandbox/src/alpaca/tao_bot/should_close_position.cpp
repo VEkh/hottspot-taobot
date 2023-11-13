@@ -45,7 +45,7 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->candle_predictor.should_predict(volatility())) {
+  if (this->candle_predictor.should_predict()) {
     return this->candle_predictor.should_close_position({
         .current_epoch = this->current_epoch,
         .open_order_action = this->open_order_ptr->action,

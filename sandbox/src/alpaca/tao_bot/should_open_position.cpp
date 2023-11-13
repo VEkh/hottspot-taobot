@@ -20,7 +20,7 @@ bool Alpaca::TaoBot::should_open_position() {
   }
 
   if (this->closed_positions.empty() &&
-      this->candle_predictor.should_predict(volatility())) {
+      this->candle_predictor.should_predict()) {
     return should_ml_open_position(this->candle_predictor);
   }
 
