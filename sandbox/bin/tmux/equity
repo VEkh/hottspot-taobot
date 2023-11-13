@@ -1,7 +1,7 @@
 #!/bin/bash
 
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
-api_keys=("live-alpha" "live-beta" "paper-alpha" "paper-beta" "paper-gamma")
+api_keys=("live-alpha" "live-beta" "paper-alpha" "paper-beta" "paper-gamma" "paper-delta")
 filename=$(basename "${BASH_SOURCE[0]}")
 project="alpaca"
 symbols=()
@@ -78,6 +78,9 @@ tmux split-window -t "${session}:stock-account-streams.2" \
 
 tmux split-window -t "${session}:stock-account-streams.3" -h \
   "$(tail_cmd "${project}/${api_keys[4]}"  "account_stream")"
+
+tmux split-window -t "${session}:stock-account-streams.2" -h \
+  "$(tail_cmd "${project}/${api_keys[5]}"  "account_stream")"
 
 window_i=$((window_i + 4))
 for symbol in "${symbols[@]}"; do
