@@ -72,6 +72,8 @@ private:
   std::string db_env;
   std::string symbol;
 
+  bool has_been_predicting_since(const double);
+
   double latest_opposite_prediction_closed_at(
       std::map<double, std::list<prediction_t>>, const order_action_t);
 

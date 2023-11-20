@@ -7,7 +7,6 @@
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
-#include "volatility.cpp"               // volatility
 
 bool Alpaca::TaoBot::should_close_position() {
   if (this->open_order_ptr->status != order_status_t::ORDER_FILLED) {

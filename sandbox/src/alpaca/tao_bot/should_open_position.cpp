@@ -19,9 +19,8 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (this->closed_positions.empty() &&
-      this->candle_predictor.should_predict()) {
-    return should_ml_open_position(this->candle_predictor);
+  if (this->candle_predictor.should_predict()) {
+    return this->candle_predictor.is_ready_to_predict(this->current_epoch);
   }
 
   return true;
