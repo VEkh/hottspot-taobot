@@ -2,6 +2,7 @@
 #define DB__CANDLE_H
 
 #include "db/quote/quote.cpp" // DB::Quote
+#include "db/utils/utils.cpp" // DB::Utils
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/pg/pg.cpp"      // Pg
 #include "types.cpp"          // Global::t
@@ -62,6 +63,7 @@ private:
   using quote_t = Global::t::quote_t;
 
   DB::Quote db_quote;
+  DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
   int duration_minutes = 0;

@@ -37,7 +37,8 @@ void Alpaca::TaoBot::watch() {
     read_price_movement();
     read_predictions();
 
-    if (!this->backtest.is_active) {
+    if (!this->backtest.is_active ||
+        !this->backtest.config.force_exec_slow_queries) {
       update_account_snapshot();
     }
 
