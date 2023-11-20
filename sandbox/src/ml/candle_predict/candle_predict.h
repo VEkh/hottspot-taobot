@@ -51,6 +51,8 @@ public:
   void log_correct_predictions();
   void log_predictions(const double);
   void predict(const double);
+  void toggle_inverse_predictions();
+  void toggle_inverse_predictions(const bool);
 
 private:
   constexpr static int TREND_WINDOW_SIZE = 4;
