@@ -21,7 +21,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     const double stop_loss_multiplier = ::utils::float_::sigmoid({
         .decay_rate = 15.0,
         .max = 1,
-        .min = 0.2,
+        .min = 0.6,
         .x = volatility(),
         .x_shift = 0.75,
     });
