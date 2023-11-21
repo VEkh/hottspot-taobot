@@ -2,7 +2,7 @@
 #define ALPACA__TAO_BOT_write_close_position
 
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, order_status_t
-#include <algorithm> // std::max
+#include <algorithm> // std::max, std::min
 
 void Alpaca::TaoBot::write_close_position() {
   if (!this->close_order_ptr) {
@@ -20,6 +20,13 @@ void Alpaca::TaoBot::write_close_position() {
                                    ? this->close_order_ptr->timestamp
                                    : this->open_order_ptr->max_profit_at;
 
+  const double min_profit =
+      std::min(this->close_order_ptr->profit, this->open_order_ptr->min_profit);
+
+  const double min_profit_at = min_profit == this->close_order_ptr->profit
+                                   ? this->close_order_ptr->timestamp
+                                   : this->open_order_ptr->min_profit_at;
+
   const int quantity_multiplier =
       this->close_order_ptr->action == order_action_t::BUY ? 1 : -1;
 
@@ -33,6 +40,8 @@ void Alpaca::TaoBot::write_close_position() {
       .current_profit = this->close_order_ptr->profit,
       .max_profit = max_profit,
       .max_profit_at = max_profit_at,
+      .min_profit = min_profit,
+      .min_profit_at = min_profit_at,
       .open_order_id = this->open_order_ptr->id,
       .stop_loss = this->exit_prices.stop_loss,
       .stop_profit = this->exit_prices.stop_profit,

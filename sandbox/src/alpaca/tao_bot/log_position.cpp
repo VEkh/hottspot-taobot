@@ -37,7 +37,7 @@ void Alpaca::TaoBot::log_position() {
 
   std::cout << fmt.bold << log_color;
   printf("Open   => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f "
-         "@ %s%s\n",
+         "@ %s%s • Min Profit: %.2f @ %s%s\n",
          this->open_order_ptr->execution_price, this->open_order_ptr->profit,
          profit_percentage(this->open_order_ptr),
          this->open_order_ptr->max_profit,
@@ -45,13 +45,17 @@ void Alpaca::TaoBot::log_position() {
                                      "%H:%M %Z", "America/Chicago")
              .c_str(),
          this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
+                                                                          : "",
+         this->open_order_ptr->min_profit,
+         ::utils::time_::date_string(this->open_order_ptr->min_profit_at,
+                                     "%H:%M %Z", "America/Chicago")
+             .c_str(),
+         this->open_order_ptr->profit == this->open_order_ptr->min_profit ? " 💣"
                                                                           : "");
 
-  printf(
-      "Close  => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f\n",
-      this->close_order_ptr->execution_price, this->close_order_ptr->profit,
-      profit_percentage(this->close_order_ptr),
-      this->close_order_ptr->max_profit);
+  printf("Close  => Execution: %.2f • Profit: %.2f (%.2f%%)\n",
+         this->close_order_ptr->execution_price, this->close_order_ptr->profit,
+         profit_percentage(this->close_order_ptr));
 
   printf("Status => Open: %s • Close: %s\n",
          ::utils::string::upcase(
@@ -61,7 +65,7 @@ void Alpaca::TaoBot::log_position() {
              Alpaca::constants::ORDER_STATUSES[this->close_order_ptr->status])
              .c_str());
 
-  printf("Min Profit: %.2f%s • Max Loss: %.2f • Trailing Stop Profit: %.2f\n",
+  printf("Stop Profit: %.2f%s • Stop Loss: %.2f • Trailing Stop Profit: %.2f\n",
          this->exit_prices.stop_profit,
          this->open_order_ptr->max_profit >= this->exit_prices.stop_profit
              ? " ✅"

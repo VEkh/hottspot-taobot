@@ -16,6 +16,8 @@ public:
     double current_profit = 0.00;
     double max_profit = 0.00;
     double max_profit_at = 0.00;
+    double min_profit = 0.00;
+    double min_profit_at = 0.00;
     std::string open_order_id;
     double stop_loss = 0.00;
     double stop_profit = 0.00;
@@ -27,6 +29,8 @@ public:
     double current_profit = 0.00;
     double max_profit = 0.00;
     double max_profit_at = 0.00;
+    double min_profit = 0.00;
+    double min_profit_at = 0.00;
     double open_order_execution_mid = 0.00;
     std::string open_order_id;
     double open_order_quantity = 0.00;

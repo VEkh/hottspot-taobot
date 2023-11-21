@@ -25,6 +25,7 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
   order_t new_open_order;
   new_open_order.action = open_action;
   new_open_order.max_profit_at = this->current_epoch;
+  new_open_order.min_profit_at = this->current_epoch;
   new_open_order.quantity = quantity_;
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;
@@ -32,6 +33,7 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
   order_t new_close_order;
   new_close_order.action = close_action;
   new_close_order.max_profit_at = this->current_epoch;
+  new_close_order.min_profit_at = this->current_epoch;
   new_close_order.quantity = quantity_;
   new_close_order.symbol = this->symbol;
   new_close_order.type = order_type_t::MARKET;

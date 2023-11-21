@@ -20,6 +20,8 @@ void Alpaca::TaoBot::write_open_position() {
       .current_profit = this->open_order_ptr->profit,
       .max_profit = this->open_order_ptr->max_profit,
       .max_profit_at = this->open_order_ptr->max_profit_at,
+      .min_profit = this->open_order_ptr->min_profit,
+      .min_profit_at = this->open_order_ptr->min_profit_at,
       .open_order_execution_mid = this->open_order_ptr->execution_price,
       .open_order_id = this->open_order_ptr->id,
       .open_order_quantity =

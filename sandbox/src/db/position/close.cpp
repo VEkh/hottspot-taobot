@@ -14,6 +14,8 @@ void DB::Position::close(const close_args_t args) {
   const double current_profit = args.current_profit;
   const double max_profit = args.max_profit;
   const double max_profit_at = args.max_profit_at;
+  const double min_profit = args.min_profit;
+  const double min_profit_at = args.min_profit_at;
   const double stop_loss = args.stop_loss;
   const double stop_profit = args.stop_profit;
 
@@ -32,6 +34,8 @@ void DB::Position::close(const close_args_t args) {
       current_profit = %f,
       max_profit = %f,
       max_profit_at = to_timestamp(%f),
+      min_profit = %f,
+      min_profit_at = to_timestamp(%f),
       stop_loss = %f,
       stop_profit = %f
     where
@@ -54,6 +58,7 @@ void DB::Position::close(const close_args_t args) {
       std::to_string(close_order_quantity).size() +
       std::to_string(closed_at).size() + std::to_string(current_profit).size() +
       std::to_string(max_profit).size() + std::to_string(max_profit_at).size() +
+      std::to_string(min_profit).size() + std::to_string(min_profit_at).size() +
       std::to_string(stop_loss).size() + std::to_string(stop_profit).size() +
       strlen(sanitized_api_key_id) + strlen(sanitized_open_order_id);
 
@@ -61,8 +66,9 @@ void DB::Position::close(const close_args_t args) {
 
   snprintf(query, query_l, query_format, close_order_execution_mid,
            sanitized_close_order_id, close_order_quantity, closed_at,
-           current_profit, max_profit, max_profit_at, stop_loss, stop_profit,
-           sanitized_api_key_id, sanitized_open_order_id);
+           current_profit, max_profit, max_profit_at, min_profit, min_profit_at,
+           stop_loss, stop_profit, sanitized_api_key_id,
+           sanitized_open_order_id);
 
   PQfreemem(sanitized_api_key_id);
   PQfreemem(sanitized_close_order_id);

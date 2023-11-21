@@ -11,6 +11,8 @@ void DB::Position::open(const open_args_t args) {
   const double current_profit = args.current_profit;
   const double max_profit = args.max_profit;
   const double max_profit_at = args.max_profit_at;
+  const double min_profit = args.min_profit;
+  const double min_profit_at = args.min_profit_at;
   const double open_order_execution_mid = args.open_order_execution_mid;
   const double open_order_quantity = args.open_order_quantity;
   const double opened_at = args.opened_at;
@@ -22,11 +24,11 @@ void DB::Position::open(const open_args_t args) {
   const std::string symbol = args.symbol;
 
   const char *query_format = R"(
-    insert into positions(api_key_id, current_profit, max_profit, max_profit_at, open_order_execution_mid, open_order_id, open_order_quantity, opened_at, stop_loss, stop_profit, symbol)
-      values (%s, %f, %f, to_timestamp(%f), %f, %s, %f, %s, %f, %f, %s)
+    insert into positions(api_key_id, current_profit, max_profit, max_profit_at, min_profit, min_profit_at, open_order_execution_mid, open_order_id, open_order_quantity, opened_at, stop_loss, stop_profit, symbol)
+      values (%s, %f, %f, to_timestamp(%f), %f, to_timestamp(%f), %f, %s, %f, %s, %f, %f, %s)
     on conflict (api_key_id, open_order_id)
       do update set
-        current_profit = excluded.current_profit, max_profit = excluded.max_profit, max_profit_at = excluded.max_profit_at, stop_loss = excluded.stop_loss, stop_profit = excluded.stop_profit;
+        current_profit = excluded.current_profit, max_profit = excluded.max_profit, max_profit_at = excluded.max_profit_at, min_profit = excluded.max_profit, min_profit_at = excluded.max_profit_at, stop_loss = excluded.stop_loss, stop_profit = excluded.stop_profit;
   )";
 
   char *sanitized_api_key_id =
@@ -46,6 +48,7 @@ void DB::Position::open(const open_args_t args) {
       strlen(query_format) + strlen(sanitized_api_key_id) +
       std::to_string(current_profit).size() +
       std::to_string(max_profit).size() + std::to_string(max_profit_at).size() +
+      std::to_string(min_profit).size() + std::to_string(min_profit_at).size() +
       std::to_string(open_order_execution_mid).size() +
       strlen(sanitized_open_order_id) +
       std::to_string(open_order_quantity).size() + opened_at_str.size() +
@@ -55,9 +58,10 @@ void DB::Position::open(const open_args_t args) {
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_api_key_id, current_profit,
-           max_profit, max_profit_at, open_order_execution_mid,
-           sanitized_open_order_id, open_order_quantity, opened_at_str.c_str(),
-           stop_loss, stop_profit, sanitized_symbol);
+           max_profit, max_profit_at, min_profit, min_profit_at,
+           open_order_execution_mid, sanitized_open_order_id,
+           open_order_quantity, opened_at_str.c_str(), stop_loss, stop_profit,
+           sanitized_symbol);
 
   PQfreemem(sanitized_api_key_id);
   PQfreemem(sanitized_open_order_id);
