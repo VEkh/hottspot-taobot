@@ -41,7 +41,7 @@ void Alpaca::TaoBot::log_position() {
          this->open_order_ptr->execution_price, this->open_order_ptr->profit,
          profit_percentage(this->open_order_ptr),
          this->open_order_ptr->max_profit,
-         ::utils::time_::date_string(this->open_order_ptr->max_profit_timestamp,
+         ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
                                      "%H:%M %Z", "America/Chicago")
              .c_str(),
          this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
@@ -62,16 +62,17 @@ void Alpaca::TaoBot::log_position() {
              .c_str());
 
   printf("Min Profit: %.2f%s • Max Loss: %.2f • Trailing Stop Profit: %.2f\n",
-         this->exit_prices.min_profit,
-         this->open_order_ptr->max_profit >= this->exit_prices.min_profit ? " ✅"
-                                                                          : "",
-         this->exit_prices.max_loss, this->exit_prices.trailing_stop_profit);
+         this->exit_prices.stop_profit,
+         this->open_order_ptr->max_profit >= this->exit_prices.stop_profit
+             ? " ✅"
+             : "",
+         this->exit_prices.stop_loss, this->exit_prices.trailing_stop_profit);
 
   printf("Quantity: %.5f\n", this->open_order_ptr->quantity);
 
   const int duration = order_duration(this->open_order_ptr);
   const int max_profit_duration =
-      this->current_epoch - this->open_order_ptr->max_profit_timestamp;
+      this->current_epoch - this->open_order_ptr->max_profit_at;
 
   printf("Duration: %s • Max Profit Duration: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str(),

@@ -32,7 +32,7 @@ bool Oanda::TaoBot::should_close_position() {
 
   this->exit_prices = build_exit_prices();
 
-  if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
+  if (this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
       this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
     return true;
   }
@@ -41,7 +41,7 @@ bool Oanda::TaoBot::should_close_position() {
     return false;
   }
 
-  if (this->open_order_ptr->profit <= this->exit_prices.max_loss) {
+  if (this->open_order_ptr->profit <= this->exit_prices.stop_loss) {
     return true;
   }
 

@@ -18,7 +18,7 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
   order->profit = profit;
 
   if (profit == order->max_profit) {
-    order->max_profit_timestamp = this->current_epoch;
+    order->max_profit_at = this->current_epoch;
   }
 }
 

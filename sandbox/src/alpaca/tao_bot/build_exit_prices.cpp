@@ -34,17 +34,17 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
           ? this->api_client.config.stop_profit_ratio
           : 99999;
 
-  const double max_loss = stop_loss_ratio * static_one_sec_variance;
-  const double stop_profit = abs(stop_profit_ratio * max_loss);
+  const double stop_loss = stop_loss_ratio * static_one_sec_variance;
+  const double stop_profit = abs(stop_profit_ratio * stop_loss);
 
-  const double min_profit = stop_profit / trailing_stop_profit_ratio;
+  const double adjusted_stop_profit = stop_profit / trailing_stop_profit_ratio;
 
   const double trailing_stop_profit =
       this->open_order_ptr->max_profit * trailing_stop_profit_ratio;
 
   return {
-      .max_loss = max_loss,
-      .min_profit = min_profit,
+      .stop_loss = stop_loss,
+      .stop_profit = adjusted_stop_profit,
       .trailing_stop_profit = trailing_stop_profit,
   };
 }

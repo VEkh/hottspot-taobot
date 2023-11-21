@@ -40,7 +40,7 @@ void Oanda::TaoBot::log_position() {
          this->open_order_ptr->execution_price, this->open_order_ptr->profit,
          profit_percentage(this->open_order_ptr),
          this->open_order_ptr->max_profit,
-         ::utils::time_::date_string(this->open_order_ptr->max_profit_timestamp,
+         ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
                                      "%H:%M %Z", "America/Chicago")
              .c_str(),
          this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
@@ -61,14 +61,14 @@ void Oanda::TaoBot::log_position() {
              .c_str());
 
   printf("Min Profit: %.5f • Max Loss: %.5f • Trailing Stop Profit: %.5f\n",
-         this->exit_prices.min_profit, this->exit_prices.max_loss,
+         this->exit_prices.stop_profit, this->exit_prices.stop_loss,
          this->exit_prices.trailing_stop_profit);
 
   printf("Quantity: %i\n", this->open_order_ptr->quantity);
 
   const int duration = order_duration(this->open_order_ptr);
   const int max_profit_duration =
-      std::time(nullptr) - this->open_order_ptr->max_profit_timestamp;
+      std::time(nullptr) - this->open_order_ptr->max_profit_at;
 
   printf("Duration: %s • Max Profit Duration: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str(),

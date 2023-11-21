@@ -26,7 +26,7 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
                              const int quantity) {
   order_t new_open_order;
   new_open_order.action = open_action;
-  new_open_order.max_profit_timestamp = std::time(nullptr);
+  new_open_order.max_profit_at = std::time(nullptr);
   new_open_order.quantity = quantity;
   new_open_order.symbol = this->symbol;
   new_open_order.time_in_force = order_time_in_force_t::FOK;
@@ -34,7 +34,7 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
 
   order_t new_close_order;
   new_close_order.action = close_action;
-  new_close_order.max_profit_timestamp = std::time(nullptr);
+  new_close_order.max_profit_at = std::time(nullptr);
   new_close_order.quantity = quantity;
   new_close_order.symbol = this->symbol;
   new_close_order.time_in_force = order_time_in_force_t::FOK;

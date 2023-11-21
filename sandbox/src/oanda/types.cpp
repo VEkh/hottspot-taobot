@@ -42,7 +42,7 @@ struct order_t {
   int id = 0;
   double max_position_profit = 0.00;
   double max_profit = 0.00;
-  long int max_profit_timestamp = 0;
+  long int max_profit_at = 0;
   double profit = 0.00;
   int quantity;
   order_status_t status = order_status_t::ORDER_INIT;

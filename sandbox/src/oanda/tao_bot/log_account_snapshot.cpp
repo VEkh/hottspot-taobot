@@ -17,11 +17,11 @@ void Oanda::TaoBot::log_account_snapshot() {
       (exit_prices_.current_profit / this->account_snapshot.original_equity) *
       100.0;
 
-  const double max_loss = this->account_snapshot.min_equity -
-                          this->account_snapshot.original_equity;
+  const double min_profit = this->account_snapshot.min_equity -
+                            this->account_snapshot.original_equity;
 
-  const double max_loss_percentage =
-      (max_loss / this->account_snapshot.original_equity) * 100.0;
+  const double min_profit_percentage =
+      (min_profit / this->account_snapshot.original_equity) * 100.0;
 
   const double max_equity_delta_percentage =
       (exit_prices_.max_profit / this->account_snapshot.original_equity) *
@@ -54,7 +54,7 @@ void Oanda::TaoBot::log_account_snapshot() {
 
   printf(
       "Min Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
-      this->account_snapshot.min_equity, max_loss, max_loss_percentage,
+      this->account_snapshot.min_equity, min_profit, min_profit_percentage,
       ::utils::time_::date_string(this->account_snapshot.min_equity_timestamp,
                                   "%H:%M %Z", "America/Chicago")
           .c_str());

@@ -18,7 +18,7 @@ void Alpaca::TaoBot::write_close_position() {
 
   const double max_profit_at = max_profit == this->close_order_ptr->profit
                                    ? this->close_order_ptr->timestamp
-                                   : this->open_order_ptr->max_profit_timestamp;
+                                   : this->open_order_ptr->max_profit_at;
 
   const int quantity_multiplier =
       this->close_order_ptr->action == order_action_t::BUY ? 1 : -1;
@@ -34,8 +34,8 @@ void Alpaca::TaoBot::write_close_position() {
       .max_profit = max_profit,
       .max_profit_at = max_profit_at,
       .open_order_id = this->open_order_ptr->id,
-      .stop_loss = this->exit_prices.max_loss,
-      .stop_profit = this->exit_prices.min_profit,
+      .stop_loss = this->exit_prices.stop_loss,
+      .stop_profit = this->exit_prices.stop_profit,
   });
 }
 

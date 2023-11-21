@@ -19,14 +19,14 @@ void Alpaca::TaoBot::write_open_position() {
       .api_key_id = this->api_client.config.api_key_id,
       .current_profit = this->open_order_ptr->profit,
       .max_profit = this->open_order_ptr->max_profit,
-      .max_profit_at = this->open_order_ptr->max_profit_timestamp,
+      .max_profit_at = this->open_order_ptr->max_profit_at,
       .open_order_execution_mid = this->open_order_ptr->execution_price,
       .open_order_id = this->open_order_ptr->id,
       .open_order_quantity =
           quantity_multiplier * this->open_order_ptr->quantity,
       .opened_at = this->backtest.is_active ? this->current_epoch : 0,
-      .stop_loss = this->exit_prices.max_loss,
-      .stop_profit = this->exit_prices.min_profit,
+      .stop_loss = this->exit_prices.stop_loss,
+      .stop_profit = this->exit_prices.stop_profit,
       .symbol = this->symbol,
   });
 }

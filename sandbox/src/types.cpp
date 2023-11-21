@@ -55,8 +55,8 @@ enum order_win_result_t {
 };
 
 struct exit_prices_t {
-  double max_loss = 0.00;
-  double min_profit = 0.00;
+  double stop_loss = 0.00;
+  double stop_profit = 0.00;
   double trailing_stop_profit = 0.00;
 };
 

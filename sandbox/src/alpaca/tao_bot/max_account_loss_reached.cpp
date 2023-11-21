@@ -13,12 +13,12 @@ bool Alpaca::TaoBot::max_account_loss_reached() {
 
   const account_exit_prices_t exit_prices_ = build_account_exit_prices();
 
-  const double current_max_loss_ratio =
+  const double current_stop_loss_ratio =
       (this->account_snapshot.min_equity -
        this->account_snapshot.original_equity) /
       this->account_snapshot.original_equity;
 
-  return current_max_loss_ratio <= loss_ratio;
+  return current_stop_loss_ratio <= loss_ratio;
 }
 
 #endif

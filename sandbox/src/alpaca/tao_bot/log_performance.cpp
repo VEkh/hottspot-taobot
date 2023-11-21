@@ -74,7 +74,7 @@ void Alpaca::TaoBot::log_performance() {
 
   const int l = this->closed_positions.size();
   const int start_index = std::max(l - 20, 0);
-  const double max_loss = this->exit_prices.max_loss;
+  const double stop_loss = this->exit_prices.stop_loss;
 
   for (int i = start_index; i < l; i++) {
     const position_t position = this->closed_positions[i];
@@ -85,16 +85,16 @@ void Alpaca::TaoBot::log_performance() {
 
     const double profit = closed_position_profit(position);
 
-    const bool did_profit_exceed_max_loss =
-        position.close_order.profit >= abs(max_loss);
-    const bool did_loss_exceed_max_loss =
-        position.close_order.profit <= max_loss;
+    const bool did_profit_exceed_stop_loss =
+        position.close_order.profit >= abs(stop_loss);
+    const bool did_loss_exceed_stop_loss =
+        position.close_order.profit <= stop_loss;
 
     std::string special_char = "";
 
-    if (did_profit_exceed_max_loss) {
+    if (did_profit_exceed_stop_loss) {
       special_char = "🌟";
-    } else if (did_loss_exceed_max_loss) {
+    } else if (did_loss_exceed_stop_loss) {
       special_char = "💣";
     }
 

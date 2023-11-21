@@ -32,7 +32,7 @@ bool Alpaca::TaoBot::should_close_position() {
 
   this->exit_prices = build_exit_prices();
 
-  if (!this->exit_prices.max_loss || !this->exit_prices.min_profit) {
+  if (!this->exit_prices.stop_loss || !this->exit_prices.stop_profit) {
     return false;
   }
 
@@ -40,7 +40,7 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->open_order_ptr->profit <= this->exit_prices.max_loss) {
+  if (this->open_order_ptr->profit <= this->exit_prices.stop_loss) {
     return true;
   }
 
@@ -51,11 +51,11 @@ bool Alpaca::TaoBot::should_close_position() {
         .open_order_max_profit = this->open_order_ptr->max_profit,
         .open_order_opened_at = this->open_order_ptr->timestamp,
         .open_order_profit = this->open_order_ptr->profit,
-        .stop_profit = this->exit_prices.min_profit,
+        .stop_profit = this->exit_prices.stop_profit,
     });
   }
 
-  if (this->open_order_ptr->max_profit >= this->exit_prices.min_profit &&
+  if (this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
       this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
     return true;
   }
