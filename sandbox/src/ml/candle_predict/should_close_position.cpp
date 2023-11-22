@@ -14,7 +14,6 @@ bool ML::CandlePredict::should_close_position(
   const double open_order_max_profit = args.open_order_max_profit;
   const double open_order_opened_at = args.open_order_opened_at;
   const double open_order_profit = args.open_order_profit;
-  const double stop_profit = args.stop_profit;
   const order_action_t open_order_action = args.open_order_action;
 
   if (!is_ready_to_predict(args.current_epoch)) {
@@ -27,9 +26,13 @@ bool ML::CandlePredict::should_close_position(
   const double capturable_profit =
       capturable_profit_ratio * open_order_max_profit;
 
+  const bool is_profiting =
+      !this->config.should_secure_profit ||
+      (this->config.should_secure_profit && open_order_profit > 0);
+
   const bool is_capturable_profit_slipping =
-      has_been_predicting_since(open_order_opened_at) &&
-      open_order_profit > 0 && open_order_profit <= capturable_profit;
+      has_been_predicting_since(open_order_opened_at) && is_profiting &&
+      open_order_profit <= capturable_profit;
 
   if (is_capturable_profit_slipping) {
     return true;
@@ -40,7 +43,7 @@ bool ML::CandlePredict::should_close_position(
                                            open_order_action);
 
   if (latest_opposite_prediction_closed_at_ > open_order_opened_at &&
-      open_order_profit > 0 && predicted_action == open_order_action) {
+      is_profiting && predicted_action == open_order_action) {
     return true;
   }
 
