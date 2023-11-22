@@ -86,6 +86,7 @@ private:
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
+  bool is_quote_stale(const quote_t, const double);
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();
