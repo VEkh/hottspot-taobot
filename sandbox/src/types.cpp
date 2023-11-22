@@ -40,7 +40,6 @@ struct candle_predict_config_t {
   bool on_demand_predictions = false;
   std::string prediction_scope = "single";
   double stop_loss_ratio = 0.0;
-  bool switch_to_momentum = false;
   std::map<std::string, std::string> symbol_model_map;
 };
 

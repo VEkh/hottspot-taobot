@@ -3,16 +3,6 @@
 
 #include "candle_predict.h" // ML::CandlePredict
 
-bool ML::CandlePredict::should_predict() {
-  if (!this->config.enabled) {
-    return false;
-  }
-
-  if (!this->config.switch_to_momentum) {
-    return true;
-  }
-
-  return true;
-}
+bool ML::CandlePredict::should_predict() { return this->config.enabled; }
 
 #endif
