@@ -31,7 +31,6 @@ public:
     bool is_stop_loss_scaled = false;
     int late_start_seconds = 6; // Production's average
     ml_config_t ml;
-    bool should_reinvest_win = false;
     double stop_loss_ratio = -60.0;
     double stop_profit_ratio = 2.5;
   } config;
