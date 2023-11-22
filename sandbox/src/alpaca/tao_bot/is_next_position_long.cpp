@@ -18,6 +18,11 @@ bool Alpaca::TaoBot::is_next_position_long() {
 
   const position_t last_position = this->closed_positions.back();
 
+  if (this->api_client.config.should_reinvest_win &&
+      last_position.close_order.profit > 0) {
+    return last_position.open_order.action == order_action_t::BUY;
+  }
+
   return last_position.close_order.action == order_action_t::BUY;
 };
 

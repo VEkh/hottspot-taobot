@@ -93,6 +93,11 @@ void Alpaca::Client::load_config() {
           ? (bool)api_key_json["is_stop_loss_scaled"]
           : config.is_stop_loss_scaled;
 
+  const bool should_reinvest_win =
+      api_key_json.contains("should_reinvest_win")
+          ? (bool)api_key_json["should_reinvest_win"]
+          : config.should_reinvest_win;
+
   ml_config_t ml_config;
 
   if (api_key_json.contains("ml")) {
@@ -151,6 +156,7 @@ void Alpaca::Client::load_config() {
       .is_stop_loss_scaled = is_stop_loss_scaled,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
+      .should_reinvest_win = should_reinvest_win,
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
   };
