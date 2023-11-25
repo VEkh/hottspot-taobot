@@ -3,12 +3,12 @@
 
 #include "alpaca/client/client.cpp"             // Alpaca::Client
 #include "alpaca/quote/quote.cpp"               // Alpaca::Quote
+#include "alpaca/utils.cpp"                     // Alpaca::Utils
 #include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
 #include "build_performance.cpp"                // build_performance
 #include "db/account_stat/account_stat.cpp"     // DB::AccountStat
 #include "db/position/position.cpp"             // DB::Position
 #include "db/utils/utils.cpp"                   // DB::Utils
-#include "is_holiday.cpp"                       // is_holiday
 #include "lib/formatted.cpp"                    // Formatted::error_message
 #include "lib/pg/pg.cpp"                        // Pg
 #include "lib/utils/boolean.cpp"                // ::utils::boolean
@@ -64,7 +64,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       this->started_at = this->backtest.config.start_epoch;
     }
 
-    if (is_holiday()) {
+    if (Alpaca::Utils::is_holiday(this->current_epoch)) {
       const std::string message = Formatted::error_message(
           "🎉 Today is a holiday! The markets are closed, so go have "
           "fun yabish!! 🥳 ");

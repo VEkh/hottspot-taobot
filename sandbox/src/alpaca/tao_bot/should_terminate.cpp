@@ -1,9 +1,7 @@
 #ifndef ALPACA__TAO_BOT_should_terminate
 #define ALPACA__TAO_BOT_should_terminate
 
-#include "is_end_of_trading_period.cpp" // is_end_of_trading_period
-#include "is_holiday.cpp"               // is_holiday
-#include "is_market_day.cpp"            // is_market_day
+#include "alpaca/utils.cpp"             // Alpaca::Utils
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
@@ -15,15 +13,15 @@ bool Alpaca::TaoBot::should_terminate() {
       (!this->close_order_ptr ||
        this->close_order_ptr->status == order_status_t::ORDER_FILLED);
 
-  if (is_holiday()) {
+  if (Alpaca::Utils::is_holiday(this->current_epoch)) {
     return are_positions_closed;
   }
 
-  if (!is_market_day()) {
+  if (!Alpaca::Utils::is_market_day(this->current_epoch)) {
     return are_positions_closed;
   }
 
-  if (is_end_of_trading_period()) {
+  if (Alpaca::Utils::is_end_of_trading_period(this->current_epoch)) {
     return are_positions_closed;
   }
 

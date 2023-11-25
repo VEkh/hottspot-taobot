@@ -11,6 +11,7 @@
  */
 #include "quote.h"
 
+#include "alpaca/utils.cpp"                   // Alpaca::Utils
 #include "lib/utils/io.cpp"                   // ::utils::io
 #include "lib/utils/string.cpp"               // ::utils::string
 #include "lib/utils/websocket.cpp"            // ::utils::websocket
@@ -31,6 +32,7 @@
 #include <openssl/ssl.h>                      // SSL_set_tlsext_host_name
 #include <sstream>                            // std::ostringstream
 #include <string>                             // std::string, std::to_string
+#include <time.h>                             // time
 
 void Alpaca::Quote::stream(const std::list<std::string> &symbols) {
   net::io_context ioc;
@@ -88,23 +90,32 @@ void Alpaca::Quote::stream(const std::list<std::string> &symbols) {
 
   ws.write(net::buffer(subscribe_message.dump()));
   ws.read(buffer);
-
   ::utils::websocket::log_and_consume_buffer(buffer);
 
   boost::system::error_code stream_error;
 
-  while (!stream_error) {
+  bool is_market_open = Alpaca::Utils::is_market_open(time(nullptr), -30 * 60);
+
+  while (!stream_error && is_market_open) {
     try {
       ws.read(buffer, stream_error);
       write_streamed(buffer);
       ::utils::websocket::log_and_consume_buffer(buffer);
+
+      is_market_open = Alpaca::Utils::is_market_open(time(nullptr), -30 * 60);
     } catch (boost::wrapexcept<boost::system::system_error> &) {
       puts("❌ Websocket Stream failed.");
       continue;
     }
   }
 
-  ws.close(websocket::close_code::normal);
+  if (!is_market_open) {
+    std::cout << fmt.bold << fmt.cyan;
+    printf("😴 Market is closed.\n");
+    std::cout << fmt.reset;
+  }
+
+  ws.close(websocket::close_code::normal, stream_error);
 }
 
 #endif

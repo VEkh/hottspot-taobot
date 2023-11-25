@@ -81,8 +81,6 @@ private:
   bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_first_position_long();
-  bool is_holiday();
-  bool is_market_day();
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();

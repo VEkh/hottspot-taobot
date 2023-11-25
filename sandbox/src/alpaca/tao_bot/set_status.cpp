@@ -42,7 +42,7 @@ void Alpaca::TaoBot::set_status(order_t *order) {
   }
 
   const std::string status = order_json["status"];
-  order->status = Alpaca::utils::to_order_status_t(status);
+  order->status = Alpaca::Utils::to_order_status_t(status);
 
   if (order->status == order_status_t::ORDER_REJECTED) {
     order->status = order_status_t::ORDER_INIT;
