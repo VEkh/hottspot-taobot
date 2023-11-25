@@ -15,21 +15,24 @@ void DB::Quote::upsert_all_avg_one_sec_variances(
   const Formatted::fmt_stream_t fmt = Formatted::stream();
 
   const bool debug = args.debug;
+  const std::string end_at_arg = args.end_at;
   const std::string symbol = args.symbol;
-  const std::string starting_from = args.starting_from;
+  const std::string start_at_arg = args.start_at;
 
-  double timestamp_upper_bound =
-      starting_from.empty() ? time(nullptr) : std::stod(starting_from);
+  double end_at = end_at_arg.empty() ? time(nullptr) : std::stod(end_at_arg);
+
+  const double start_at =
+      start_at_arg.empty() ? time(nullptr) : std::stod(start_at_arg);
 
   std::list<quote_t> quotes = get_last({
       .limit = 1,
       .limit_offset = 0,
       .symbol = symbol,
-      .timestamp_upper_bound = timestamp_upper_bound,
+      .timestamp_upper_bound = end_at,
       .debug = debug,
   });
 
-  while (quotes.size()) {
+  while (quotes.size() && end_at > start_at) {
     for (const quote_t quote : quotes) {
       upsert_avg_one_sec_variance({
           .id = quote.id,
@@ -49,14 +52,14 @@ void DB::Quote::upsert_all_avg_one_sec_variances(
         std::cout << fmt.reset << std::endl;
       }
 
-      timestamp_upper_bound = quote.timestamp;
+      end_at = quote.timestamp;
     }
 
     quotes = get_last({
         .limit = 1,
         .limit_offset = 1,
         .symbol = symbol,
-        .timestamp_upper_bound = timestamp_upper_bound,
+        .timestamp_upper_bound = end_at,
         .debug = debug,
     });
   }

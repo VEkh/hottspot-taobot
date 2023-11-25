@@ -35,7 +35,8 @@ public:
   };
 
   struct upsert_all_avg_one_sec_variances_args_t {
-    std::string starting_from;
+    std::string end_at;
+    std::string start_at;
     std::string symbol;
     bool debug = false;
   };

@@ -93,7 +93,8 @@ int main(int argc, char *argv[]) {
 
     DB::Quote db_quote(pg);
     db_quote.upsert_all_avg_one_sec_variances({
-        .starting_from = flags["starting-from"],
+        .end_at = flags["end-at"],
+        .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
     });
 

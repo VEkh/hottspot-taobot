@@ -21,10 +21,11 @@ std::list<DB::Quote::quote_t> DB::Quote::get(const std::string symbol,
 
   const char *query_format = R"(
     select
-      ask, bid, symbol, extract(epoch from timestamp) as timestamp
+      ask, bid, symbol, extract(epoch from timestamp) as timestamp_epoch
     from quotes
     where symbol=%s
-    order by timestamp asc%s
+    order by timestamp asc
+    %s
   )";
 
   const size_t query_l =
