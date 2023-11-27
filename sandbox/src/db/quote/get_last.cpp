@@ -17,6 +17,7 @@
 #include <string>               // std::string, std::to_string
 
 std::list<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
+  const double timestamp_lower_bound = args.timestamp_lower_bound;
   const double timestamp_upper_bound = args.timestamp_upper_bound;
   const int limit = args.limit;
   const long int limit_offset = args.limit_offset;
@@ -27,6 +28,12 @@ std::list<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
 
   const std::string limit_offset_clause =
       limit_offset ? std::string("offset ") + std::to_string(limit_offset) : "";
+
+  const std::string timestamp_lower_bound_clause =
+      !timestamp_lower_bound
+          ? ""
+          : std::string("and \"timestamp\" >= to_timestamp(") +
+                std::to_string(timestamp_lower_bound) + ")";
 
   char *sanitized_symbol =
       PQescapeLiteral(this->conn.conn, symbol.c_str(), symbol.size());
@@ -43,6 +50,7 @@ std::list<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
     where
       symbol = upper(%s)
       and timestamp <= to_timestamp(%f)
+      %s
     order by
       timestamp desc
     %s
@@ -51,14 +59,14 @@ std::list<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
                          std::to_string(timestamp_upper_bound).size() +
+                         timestamp_lower_bound_clause.size() +
                          limit_clause.size() + limit_offset_clause.size();
-  ;
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_symbol,
-           timestamp_upper_bound, limit_clause.c_str(),
-           limit_offset_clause.c_str());
+           timestamp_upper_bound, timestamp_lower_bound_clause.c_str(),
+           limit_clause.c_str(), limit_offset_clause.c_str());
 
   query_result_t query_result = this->conn.exec(query, args.debug);
   PQfreemem(sanitized_symbol);

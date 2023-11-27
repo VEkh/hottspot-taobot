@@ -24,44 +24,33 @@ void DB::Quote::upsert_all_avg_one_sec_variances(
   const double start_at =
       start_at_arg.empty() ? time(nullptr) : std::stod(start_at_arg);
 
-  std::list<quote_t> quotes = get_last({
-      .limit = 1,
+  const std::list<quote_t> quotes = get_last({
+      .limit = 0,
       .limit_offset = 0,
       .symbol = symbol,
       .timestamp_upper_bound = end_at,
       .debug = debug,
+      .timestamp_lower_bound = start_at,
   });
 
-  while (quotes.size() && end_at > start_at) {
-    for (const quote_t quote : quotes) {
-      upsert_avg_one_sec_variance({
-          .id = quote.id,
-          .symbol = symbol,
-          .debug = debug,
-      });
-
-      if (!debug) {
-        std::cout << fmt.bold << fmt.yellow;
-        printf("✅ Successfully upserted ");
-        std::cout << fmt.no_bold << fmt.cyan << symbol;
-        std::cout << fmt.bold << fmt.yellow;
-
-        std::cout << " quote " << fmt.red << quote.id;
-        std::cout << fmt.yellow;
-        printf("'s (@ %f) average one second variance.\n", quote.timestamp);
-        std::cout << fmt.reset << std::endl;
-      }
-
-      end_at = quote.timestamp;
-    }
-
-    quotes = get_last({
-        .limit = 1,
-        .limit_offset = 1,
+  for (const quote_t quote : quotes) {
+    upsert_avg_one_sec_variance({
+        .id = quote.id,
         .symbol = symbol,
-        .timestamp_upper_bound = end_at,
         .debug = debug,
     });
+
+    if (!debug) {
+      std::cout << fmt.bold << fmt.yellow;
+      printf("✅ Successfully upserted ");
+      std::cout << fmt.no_bold << fmt.cyan << symbol;
+      std::cout << fmt.bold << fmt.yellow;
+
+      std::cout << " quote " << fmt.red << quote.id;
+      std::cout << fmt.yellow;
+      printf("'s (@ %f) average one second variance.\n", quote.timestamp);
+      std::cout << fmt.reset << std::endl;
+    }
   }
 }
 

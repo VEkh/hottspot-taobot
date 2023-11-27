@@ -19,7 +19,9 @@ public:
     long int limit_offset = 0;
     std::string symbol;
     double timestamp_upper_bound;
+    // Optional
     bool debug = false;
+    double timestamp_lower_bound = 0.0;
   };
 
   struct get_avg_one_sec_variances_args_t {
