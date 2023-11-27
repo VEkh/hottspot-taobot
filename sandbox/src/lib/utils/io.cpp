@@ -76,6 +76,18 @@ std::map<std::string, std::string> extract_flags(int argc, char **argv) {
   return flags;
 }
 
+bool flag_to_bool(const std::string key, const std::string val) {
+  if (val.empty()) {
+    return false;
+  }
+
+  if (key == val) {
+    return true;
+  }
+
+  return val == "1";
+}
+
 std::ifstream read_file(const char *filepath) {
   std::ifstream file(filepath, std::ios::in);
 

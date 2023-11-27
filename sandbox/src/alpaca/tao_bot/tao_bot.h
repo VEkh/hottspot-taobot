@@ -8,6 +8,7 @@
 #include "db/account_stat/account_stat.cpp"     // DB::AccountStat
 #include "db/position/position.cpp"             // DB::Position
 #include "db/utils/utils.cpp"                   // DB::Utils
+#include "deps.cpp"                             // json
 #include "lib/formatted.cpp"                    // Formatted
 #include "lib/pg/pg.cpp"                        // Pg
 #include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
