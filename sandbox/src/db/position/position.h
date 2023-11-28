@@ -26,12 +26,18 @@ public:
     bool debug = false;
   };
 
+  struct compute_golden_ratio_args_t {
+    std::string api_key_id;
+    bool debug = false;
+    bool log_positions = false;
+    std::string symbol;
+  };
+
   struct get_golden_ratio_positions_args_t {
     std::string api_key_id;
+    bool debug = false;
     int limit = 0;
     std::string symbol;
-    // Optional
-    bool debug = false;
   };
 
   struct open_args_t {
@@ -56,7 +62,7 @@ public:
   Position(Pg c) : conn(c){};
 
   void close(const close_args_t);
-  void compute_golden_stop_ratio(const get_golden_ratio_positions_args_t);
+  void compute_golden_stop_ratio(const compute_golden_ratio_args_t);
   void open(const open_args_t);
 
 private:

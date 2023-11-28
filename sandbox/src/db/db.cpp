@@ -100,8 +100,10 @@ int main(int argc, char *argv[]) {
     DB::Position db_position(pg);
     db_position.compute_golden_stop_ratio({
         .api_key_id = api_client.config.api_key_id,
-        .symbol = upcased_args.front(),
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
+        .log_positions =
+            ::utils::io::flag_to_bool("log-positions", flags["log-positions"]),
+        .symbol = upcased_args.front(),
     });
 
     pg.disconnect();

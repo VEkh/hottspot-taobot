@@ -14,15 +14,15 @@
 #include <utility>                        // std::pair
 
 void DB::Position::compute_golden_stop_ratio(
-    const get_golden_ratio_positions_args_t args) {
+    const compute_golden_ratio_args_t args) {
   DB::Quote db_quote(this->conn);
   const double start_epoch = time(nullptr);
 
   const std::list<position_t> positions = get_golden_ratio_positions({
       .api_key_id = args.api_key_id,
+      .debug = args.debug,
       .limit = 0,
       .symbol = args.symbol,
-      .debug = args.debug,
   });
 
   const int total_positions = positions.size();
@@ -51,9 +51,11 @@ void DB::Position::compute_golden_stop_ratio(
 
   std::cout << std::endl;
 
-  std::cout << fmt.bold << fmt.magenta;
-  printf("Max Profit | Min Profit | Avg One Sec Variance | #\n");
-  printf("------------------------------------------------------------\n");
+  if (args.log_positions) {
+    std::cout << fmt.bold << fmt.magenta;
+    printf("Max Profit | Min Profit | Avg One Sec Variance | #\n");
+    printf("------------------------------------------------------------\n");
+  }
 
   int position_i = 0;
   for (const position_t position : positions) {
@@ -83,10 +85,20 @@ void DB::Position::compute_golden_stop_ratio(
     position_i++;
 
     std::cout << fmt.bold << fmt.magenta;
-    printf("%.2f       |  %.2f     | %.5f              | %i of %i \n",
-           position.max_profit, position.min_profit,
-           avg_one_sec_variances.running, position_i, total_positions);
-    printf("------------------------------------------------------------\n");
+
+    if (args.log_positions) {
+      printf("%.2f       |  %.2f     | %.5f              | %i of %i \n",
+             position.max_profit, position.min_profit,
+             avg_one_sec_variances.running, position_i, total_positions);
+      printf("------------------------------------------------------------\n");
+    } else {
+      std::cout << "Positions Processed: " << position_i << " of "
+                << total_positions << "\r";
+    }
+  }
+
+  if (!args.log_positions) {
+    std::cout << std::endl;
   }
 
   std::cout << std::endl;
@@ -97,7 +109,8 @@ void DB::Position::compute_golden_stop_ratio(
   }
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("🥇 %s Golden Ratio Report\n\n", args.symbol.c_str());
+  printf("🥇 %s Golden Ratio Report: %s\n\n", args.symbol.c_str(),
+         args.api_key_id.c_str());
   std::cout << fmt.no_underline;
 
   std::cout << fmt.yellow;
