@@ -39,7 +39,6 @@ struct candle_predict_config_t {
   bool inverse_predictions = false;
   bool on_demand_predictions = false;
   std::string prediction_scope = "single";
-  bool should_secure_profit = true;
   bool rollover_positions = true;
   double stop_loss_ratio = 0.0;
   std::map<std::string, std::string> symbol_model_map;

@@ -21,11 +21,8 @@ bool ML::CandlePredict::should_close_position(
 
   const order_action_t predicted_action = predict_action();
 
+  const bool is_profiting = open_order_profit > 0;
   const double cis_prediction_profit = 0.5 * open_order_max_profit;
-
-  const bool is_profiting =
-      !this->config.should_secure_profit ||
-      (this->config.should_secure_profit && open_order_profit > 0);
 
   const bool is_cis_prediction_profit_slipping =
       has_been_predicting_since(open_order_opened_at) && is_profiting &&

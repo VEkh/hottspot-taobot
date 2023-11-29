@@ -126,10 +126,6 @@ void Alpaca::Client::load_config() {
               ? (std::string)candle_predict_json["prediction_scope"]
               : ml_config.candle_predict.prediction_scope;
 
-      ml_config.candle_predict.should_secure_profit =
-          candle_predict_json.contains("should_secure_profit")
-              ? (bool)candle_predict_json["should_secure_profit"]
-              : ml_config.candle_predict.should_secure_profit;
       ml_config.candle_predict.rollover_positions =
           candle_predict_json.contains("rollover_positions")
               ? (bool)candle_predict_json["rollover_positions"]
