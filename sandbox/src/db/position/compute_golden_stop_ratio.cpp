@@ -127,10 +127,12 @@ void DB::Position::compute_golden_stop_ratio(
     const double target_percentage = 100 * (1 / (1 + stop_profit_ratio));
     const double win_percentage = 100.0 * count / total_positions;
 
-    Formatted::Stream row_color = fmt.yellow;
+    Formatted::Stream row_color = fmt.red;
 
     if (win_percentage >= target_percentage) {
       row_color = fmt.green;
+    } else if (target_percentage - win_percentage < 5.0) {
+      row_color = fmt.yellow;
     }
 
     std::cout << row_color;
