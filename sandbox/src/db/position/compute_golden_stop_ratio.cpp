@@ -7,6 +7,7 @@
 #include "position.h"                     // DB::Position, fmt, position_t
 #include <algorithm>                      // std::max, std::min
 #include <iostream>                       // std::cout, std::endl
+#include <list>                           // std::list
 #include <map>                            // std::map
 #include <math.h>                         // INFINITY, abs
 #include <stdio.h>                        // printf
@@ -21,43 +22,30 @@ void DB::Position::compute_golden_stop_ratio(
   const std::list<position_t> positions = get_golden_ratio_positions({
       .api_key_id = args.api_key_id,
       .debug = args.debug,
-      .limit = 0,
+      .limit = 100, // TODO: Revert to 0
       .symbol = args.symbol,
   });
 
   const int total_positions = positions.size();
 
-  std::map<std::pair<double, double>, int> ratios = {
-      {{0.1, -5.0}, 0},   {{0.1, -10.0}, 0},  {{0.1, -20.0}, 0},
-      {{0.1, -30.0}, 0},  {{0.1, -45.0}, 0},  {{0.1, -60.0}, 0},
+  std::map<std::pair<double, double>, int> ratios = {};
+  std::list<double> stop_loss_ratios = {};
+  std::list<double> stop_profit_ratios = {};
 
-      {{0.2, -5.0}, 0},   {{0.2, -10.0}, 0},  {{0.2, -20.0}, 0},
-      {{0.2, -30.0}, 0},  {{0.2, -45.0}, 0},  {{0.2, -60.0}, 0},
+  for (double i = 0.2; i < 3.1; i += 0.1) {
+    stop_profit_ratios.push_back(i);
+  }
 
-      {{0.25, -5.0}, 0},  {{0.25, -10.0}, 0}, {{0.25, -20.0}, 0},
-      {{0.25, -30.0}, 0}, {{0.25, -45.0}, 0}, {{0.25, -60.0}, 0},
+  for (double i = -60.0; i < -10.0; i += 10.0) {
+    stop_loss_ratios.push_back(i);
+  }
 
-      {{0.5, -5.0}, 0},   {{0.5, -10.0}, 0},  {{0.5, -20.0}, 0},
-      {{0.5, -30.0}, 0},  {{0.5, -45.0}, 0},  {{0.5, -60.0}, 0},
-
-      {{0.75, -5.0}, 0},  {{0.75, -10.0}, 0}, {{0.75, -20.0}, 0},
-      {{0.75, -30.0}, 0}, {{0.75, -45.0}, 0}, {{0.75, -60.0}, 0},
-
-      {{1.0, -5.0}, 0},   {{1.0, -10.0}, 0},  {{1.0, -20.0}, 0},
-      {{1.0, -30.0}, 0},  {{1.0, -45.0}, 0},  {{1.0, -60.0}, 0},
-
-      {{1.5, -5.0}, 0},   {{1.5, -10.0}, 0},  {{1.5, -20.0}, 0},
-      {{1.5, -30.0}, 0},  {{1.5, -45.0}, 0},  {{1.5, -60.0}, 0},
-
-      {{2.0, -5.0}, 0},   {{2.0, -10.0}, 0},  {{2.0, -20.0}, 0},
-      {{2.0, -30.0}, 0},  {{2.0, -45.0}, 0},  {{2.0, -60.0}, 0},
-
-      {{2.5, -5.0}, 0},   {{2.5, -10.0}, 0},  {{2.5, -20.0}, 0},
-      {{2.5, -30.0}, 0},  {{2.5, -45.0}, 0},  {{2.5, -60.0}, 0},
-
-      {{3.0, -5.0}, 0},   {{3.0, -10.0}, 0},  {{3.0, -20.0}, 0},
-      {{3.0, -30.0}, 0},  {{3.0, -45.0}, 0},  {{3.0, -60.0}, 0},
-  };
+  for (const double stop_profit_ratio : stop_profit_ratios) {
+    for (const double stop_loss_ratio : stop_loss_ratios) {
+      std::pair<double, double> key = {stop_profit_ratio, stop_loss_ratio};
+      ratios[key] = 0;
+    }
+  }
 
   double max_count = -INFINITY;
   double min_count = INFINITY;
