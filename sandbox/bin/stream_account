@@ -13,7 +13,7 @@ project=$(dirname "$0" | xargs basename)
 # is_market_open
 # to_lower
 # to_upper
-# shellcheck disable=1090
+# shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
 if [[ $project = "bin" ]]; then

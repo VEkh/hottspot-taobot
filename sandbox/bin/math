@@ -1,0 +1,55 @@
+#! /bin/bash
+
+
+set -e
+shopt -s extglob
+
+app_dir=$(realpath "$(dirname "$0")/../")
+
+# ASCII
+# ascii_print
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils"
+
+function percent() {
+  printf "%b" "${ASCII["bold"]}${ASCII["yellow"]}"
+
+  printf "Numerator: "
+  read -r numerator
+
+  printf "Denominator: "
+  read -r denominator
+
+  printf "%b" "${ASCII["reset"]}"
+
+  if [[ -z "${numerator}" ]]; then
+    ascii_print "Must provide numeric numerator" "red" >&2
+    exit 1
+  fi
+
+  if [[ -z "${denominator}" ]]; then
+    ascii_print "Must provide numeric denominator" "red" >&2
+    exit 1
+  fi
+
+  result=$(awk '{printf("\n%.2f%%\n", 100.0 * $1 / $2)}' <<< "${numerator} ${denominator}")
+
+  ascii_print "${result}" "green"
+}
+
+case "${1}" in
+  percent)
+    percent
+    ;;
+
+  *)
+    ascii_print "${ASCII["underline"]}🔢 MATH\n" "yellow"
+    ascii_print "Description: Perform miscellaneous math operations.\n" "cyan"
+    ascii_print "Usage: math [COMMAND]\n" "yellow"
+    ascii_print "Commands:" "yellow"
+    ascii_print "  percent                 Compute percent from ratio." "yellow"
+
+    ;;
+esac
+
+printf "%b" "${ASCII["reset"]}"
