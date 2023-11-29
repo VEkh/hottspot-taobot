@@ -29,6 +29,7 @@ public:
   struct compute_golden_ratio_args_t {
     std::string api_key;
     bool debug = false;
+    int limit = 0;
     bool log_positions = false;
     std::string project;
     std::string symbol;

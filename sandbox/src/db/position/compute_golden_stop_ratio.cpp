@@ -38,7 +38,7 @@ void DB::Position::compute_golden_stop_ratio(
   const std::list<position_t> positions = get_golden_ratio_positions({
       .api_key_id = api_key_id,
       .debug = args.debug,
-      .limit = 100, // TODO: Revert to 0
+      .limit = args.limit,
       .symbol = args.symbol,
   });
 

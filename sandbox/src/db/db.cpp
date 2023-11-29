@@ -10,7 +10,7 @@
 #include <sstream>                  // std::ostringstream
 #include <stdexcept>                // std::invalid_argument
 #include <stdio.h>                  // printf
-#include <string>                   // std::string
+#include <string>                   // std::string, std::stoi
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -91,6 +91,13 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
+    std::map<std::string, std::string> default_flags = {
+        {"limit", "0"},
+        {"project", "alpaca"},
+    };
+
+    flags = ::utils::map::merge(default_flags, flags);
+
     Pg pg(flags);
     pg.connect();
 
@@ -98,9 +105,10 @@ int main(int argc, char *argv[]) {
     db_position.compute_golden_stop_ratio({
         .api_key = flags["api-key"],
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
+        .limit = std::stoi(flags["limit"]),
         .log_positions =
             ::utils::io::flag_to_bool("log-positions", flags["log-positions"]),
-        .project = flags["project"].empty() ? "alpaca" : flags["project"],
+        .project = flags["project"],
         .symbol = upcased_args.front(),
     });
 
