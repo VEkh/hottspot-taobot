@@ -1,6 +1,7 @@
 #ifndef UTILS__IO
 #define UTILS__IO
 
+#include "deps.cpp"          // json
 #include "lib/formatted.cpp" // Formatted
 #include "string.cpp"        // ::utils::string
 #include <cstring>           // strcpy, strlen
@@ -17,6 +18,8 @@
 
 namespace utils {
 namespace io {
+using json = nlohmann::json;
+
 template <typename TransformPredicate>
 std::list<std::string> extract_args(int argc, char **argv,
                                     TransformPredicate fn) {
@@ -86,6 +89,42 @@ bool flag_to_bool(const std::string key, const std::string val) {
   }
 
   return val == "1";
+}
+
+json load_config(const std::string project, const std::string api_key) {
+  const std::string config_path =
+      std::string(APP_DIR) + "/config/" + project + "/credentials.json";
+
+  std::string error_message;
+
+  std::ifstream config_file(config_path.c_str(), std::ios::in);
+
+  if (!config_file.good()) {
+    error_message = Formatted::error_message("Config file missing at " +
+                                             std::string(config_path));
+
+    throw std::invalid_argument(error_message);
+  }
+
+  if (api_key.empty()) {
+    error_message = Formatted::error_message(
+        "Please provide an --api-key=<API_KEY> option");
+
+    throw std::invalid_argument(error_message);
+  }
+
+  json config_json;
+  config_file >> config_json;
+  config_file.close();
+
+  if (!config_json.contains(api_key)) {
+    error_message = Formatted::error_message(
+        "There is no entry for the `api-key` \"" + api_key + "\"");
+
+    throw std::invalid_argument(error_message);
+  }
+
+  return config_json;
 }
 
 std::ifstream read_file(const char *filepath) {

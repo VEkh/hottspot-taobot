@@ -4,45 +4,21 @@
 #include "client.h"           // Alpaca::Client
 #include "deps.cpp"           // json
 #include "lib/formatted.cpp"  // Formatted::error_message
+#include "lib/utils/io.cpp"   // ::utils::io
 #include "lib/utils/time.cpp" // ::utils::time_
-#include <fstream>            // std::ifstream, std::ios
 #include <map>                // std::map
 #include <stdexcept>          // std::invalid_argument
 #include <string>             // std::string
 #include <time.h>             // mktime, time, tm
 
 void Alpaca::Client::load_config() {
-  std::string config_path =
+  const std::string config_path =
       std::string(APP_DIR) + "/config/alpaca/credentials.json";
+
   std::string error_message;
 
-  std::ifstream config_file(config_path.c_str(), std::ios::in);
-
-  if (!config_file.good()) {
-    error_message = Formatted::error_message("Config file missing at " +
-                                             std::string(config_path));
-    throw std::invalid_argument(error_message);
-  }
-
   const std::string api_key = this->flags["api-key"];
-
-  if (api_key.empty()) {
-    error_message = Formatted::error_message(
-        "Please provide an --api-key=<API_KEY> option");
-
-    throw std::invalid_argument(error_message);
-  }
-
-  json config_json;
-  config_file >> config_json;
-  config_file.close();
-
-  if (!config_json.contains(api_key)) {
-    error_message = Formatted::error_message(
-        "There is no entry for the `api-key` \"" + api_key + "\"");
-
-    throw std::invalid_argument(error_message);
-  }
+  json config_json = ::utils::io::load_config("alpaca", api_key);
 
   const char *required_keys[] = {
       "data_base_url",

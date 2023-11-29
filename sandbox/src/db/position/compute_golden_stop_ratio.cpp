@@ -1,9 +1,11 @@
 #ifndef DB__POSITION_compute_golden_stop_ratio
 #define DB__POSITION_compute_golden_stop_ratio
 
+#include "deps.cpp"                       // json
 #include "get_golden_ratio_positions.cpp" // get
 #include "lib/formatted.cpp"              // Formatted
 #include "lib/utils/integer.cpp"          // ::utils::integer_
+#include "lib/utils/io.cpp"               // ::utils::io
 #include "position.h"                     // DB::Position, fmt, position_t
 #include <algorithm>                      // std::max, std::min
 #include <iostream>                       // std::cout, std::endl
@@ -11,16 +13,30 @@
 #include <map>                            // std::map
 #include <math.h>                         // INFINITY, abs
 #include <stdio.h>                        // printf
+#include <string>                         // std::string
 #include <time.h>                         // time
 #include <utility>                        // std::pair
 
 void DB::Position::compute_golden_stop_ratio(
     const compute_golden_ratio_args_t args) {
-  DB::Quote db_quote(this->conn);
+  const std::string api_key = args.api_key;
   const double start_epoch = time(nullptr);
 
+  json config_json = ::utils::io::load_config(args.project, api_key);
+  json api_key_json = config_json[api_key];
+
+  std::cout << fmt.bold << fmt.cyan;
+  std::cout << "\nEnvironment: " << fmt.yellow << api_key.c_str();
+  std::cout << fmt.cyan << std::endl << std::endl;
+  puts(api_key_json.dump(2).c_str());
+  std::cout << fmt.reset;
+
+  const std::string api_key_id = api_key_json["id"];
+
+  DB::Quote db_quote(this->conn);
+
   const std::list<position_t> positions = get_golden_ratio_positions({
-      .api_key_id = args.api_key_id,
+      .api_key_id = api_key_id,
       .debug = args.debug,
       .limit = 100, // TODO: Revert to 0
       .symbol = args.symbol,
@@ -46,9 +62,6 @@ void DB::Position::compute_golden_stop_ratio(
       ratios[key] = 0;
     }
   }
-
-  double max_count = -INFINITY;
-  double min_count = INFINITY;
 
   std::map<std::pair<double, double>, int>::iterator ratio_it;
 
@@ -106,14 +119,9 @@ void DB::Position::compute_golden_stop_ratio(
 
   std::cout << std::endl;
 
-  for (ratio_it = ratios.begin(); ratio_it != ratios.end(); ratio_it++) {
-    max_count = std::max(max_count, (double)ratio_it->second);
-    min_count = std::min(min_count, (double)ratio_it->second);
-  }
-
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("🥇 %s Golden Ratio Report: %s\n\n", args.symbol.c_str(),
-         args.api_key_id.c_str());
+         api_key_id.c_str());
   std::cout << fmt.no_underline;
 
   std::cout << fmt.yellow;

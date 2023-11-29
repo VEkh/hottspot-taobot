@@ -1,4 +1,3 @@
-#include "alpaca/client/client.cpp" // Alpaca::Client
 #include "db/candle/candle.cpp"     // DB::Candle
 #include "db/position/position.cpp" // DB::Position
 #include "db/quote/quote.cpp"       // DB::Quote
@@ -26,7 +25,7 @@ void print_usage() {
   Formatted::fmt_stream_t fmt = Formatted::stream();
   std::ostringstream message;
 
-  message << fmt.bold << fmt.cyan << "Alpaca Client Usage:" << std::endl;
+  message << fmt.bold << fmt.cyan << "Data CLI Usage:" << std::endl;
 
   std::map<std::string, const char *>::iterator it;
   for (it = commands.begin(); it != commands.end(); ++it) {
@@ -92,17 +91,16 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    Alpaca::Client api_client(flags);
-
     Pg pg(flags);
     pg.connect();
 
     DB::Position db_position(pg);
     db_position.compute_golden_stop_ratio({
-        .api_key_id = api_client.config.api_key_id,
+        .api_key = flags["api-key"],
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
         .log_positions =
             ::utils::io::flag_to_bool("log-positions", flags["log-positions"]),
+        .project = flags["project"].empty() ? "alpaca" : flags["project"],
         .symbol = upcased_args.front(),
     });
 
