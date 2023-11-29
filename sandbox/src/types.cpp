@@ -42,6 +42,7 @@ struct candle_predict_config_t {
   bool should_secure_profit = true;
   double stop_loss_ratio = 0.0;
   std::map<std::string, std::string> symbol_model_map;
+  std::map<std::string, double> symbol_stop_loss_ratios;
 };
 
 struct ml_config_t {

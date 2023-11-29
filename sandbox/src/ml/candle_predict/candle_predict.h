@@ -28,6 +28,7 @@ public:
     double open_order_max_profit;
     double open_order_opened_at;
     double open_order_profit;
+    double open_order_stop_profit;
   };
 
   candle_predict_config_t config;

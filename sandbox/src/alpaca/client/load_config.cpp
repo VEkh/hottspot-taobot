@@ -141,6 +141,12 @@ void Alpaca::Client::load_config() {
               ? (std::map<std::string, std::string>)
                     candle_predict_json["symbol_model_map"]
               : ml_config.candle_predict.symbol_model_map;
+
+      ml_config.candle_predict.symbol_stop_loss_ratios =
+          candle_predict_json.contains("symbol_stop_loss_ratios")
+              ? (std::map<std::string, double>)
+                    candle_predict_json["symbol_stop_loss_ratios"]
+              : ml_config.candle_predict.symbol_stop_loss_ratios;
     }
   }
 

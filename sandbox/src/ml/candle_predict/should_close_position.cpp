@@ -7,7 +7,6 @@
 #include "latest_opposite_prediction_closed_at.cpp" // latest_opposite_prediction_closed_at
 #include "lib/utils/float.cpp"                      // ::utils::float_
 #include "predict_action.cpp"                       // predict_action
-#include <algorithm>                                // std::max
 
 bool ML::CandlePredict::should_close_position(
     const should_close_position_args_t args) {
@@ -22,20 +21,26 @@ bool ML::CandlePredict::should_close_position(
 
   const order_action_t predicted_action = predict_action();
 
-  const double capturable_profit_ratio = 0.5;
-  const double capturable_profit =
-      capturable_profit_ratio * open_order_max_profit;
+  const double cis_prediction_profit = 0.5 * open_order_max_profit;
 
   const bool is_profiting =
       !this->config.should_secure_profit ||
       (this->config.should_secure_profit && open_order_profit > 0);
 
-  const bool is_capturable_profit_slipping =
+  const bool is_cis_prediction_profit_slipping =
       has_been_predicting_since(open_order_opened_at) && is_profiting &&
-      open_order_profit <= capturable_profit;
+      open_order_profit <= cis_prediction_profit;
 
-  if (is_capturable_profit_slipping) {
+  if (is_cis_prediction_profit_slipping) {
     return true;
+  }
+
+  if (this->config.symbol_stop_loss_ratios[this->symbol]) {
+    const double stop_profit = args.open_order_stop_profit;
+
+    if (open_order_profit >= stop_profit) {
+      return true;
+    }
   }
 
   const double latest_opposite_prediction_closed_at_ =
