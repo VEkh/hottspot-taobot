@@ -7,9 +7,14 @@
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (this->closed_positions.empty() &&
-      this->candle_predictor.should_predict()) {
-    return this->candle_predictor.is_next_position_long();
+  if (this->candle_predictor.should_predict()) {
+    if (this->closed_positions.empty()) {
+      return this->candle_predictor.is_next_position_long();
+    }
+
+    if (!this->candle_predictor.config.rollover_positions) {
+      return this->candle_predictor.is_next_position_long();
+    }
   }
 
   if (this->closed_positions.empty()) {

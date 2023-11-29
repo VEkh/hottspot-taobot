@@ -130,6 +130,10 @@ void Alpaca::Client::load_config() {
           candle_predict_json.contains("should_secure_profit")
               ? (bool)candle_predict_json["should_secure_profit"]
               : ml_config.candle_predict.should_secure_profit;
+      ml_config.candle_predict.rollover_positions =
+          candle_predict_json.contains("rollover_positions")
+              ? (bool)candle_predict_json["rollover_positions"]
+              : ml_config.candle_predict.rollover_positions;
 
       ml_config.candle_predict.stop_loss_ratio =
           candle_predict_json.contains("stop_loss_ratio")
