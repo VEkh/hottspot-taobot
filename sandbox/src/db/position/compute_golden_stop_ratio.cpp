@@ -45,15 +45,32 @@ void DB::Position::compute_golden_stop_ratio(
   const int total_positions = positions.size();
 
   std::map<std::pair<double, double>, int> ratios = {};
+
+  double config_stop_loss_ratio = 0.0;
+
+  if (api_key_json.contains("ml") &&
+      api_key_json["ml"].contains("candle_predict") &&
+      api_key_json["ml"]["candle_predict"].contains("stop_loss_ratio")) {
+    config_stop_loss_ratio =
+        (double)api_key_json["ml"]["candle_predict"]["stop_loss_ratio"];
+  } else if (api_key_json.contains("stop_loss_ratio")) {
+    config_stop_loss_ratio = (double)api_key_json["stop_loss_ratio"];
+  }
+
   std::list<double> stop_loss_ratios = {};
+
+  if (config_stop_loss_ratio) {
+    stop_loss_ratios.push_back(config_stop_loss_ratio);
+  } else {
+    for (double i = -60.0; i < -10.0; i += 10.0) {
+      stop_loss_ratios.push_back(i);
+    }
+  }
+
   std::list<double> stop_profit_ratios = {};
 
   for (double i = 0.2; i < 3.1; i += 0.1) {
     stop_profit_ratios.push_back(i);
-  }
-
-  for (double i = -60.0; i < -10.0; i += 10.0) {
-    stop_loss_ratios.push_back(i);
   }
 
   for (const double stop_profit_ratio : stop_profit_ratios) {
@@ -121,7 +138,7 @@ void DB::Position::compute_golden_stop_ratio(
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("🥇 %s Golden Ratio Report: %s\n\n", args.symbol.c_str(),
-         api_key_id.c_str());
+         api_key.c_str());
   std::cout << fmt.no_underline;
 
   std::cout << fmt.yellow;
