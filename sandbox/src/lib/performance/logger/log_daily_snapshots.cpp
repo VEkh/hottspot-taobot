@@ -1,18 +1,22 @@
 #ifndef PERFORMANCE__LOGGER_log_daily_snapshots
 #define PERFORMANCE__LOGGER_log_daily_snapshots
 
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/float.cpp" // ::utils::float_
-#include "lib/utils/map.cpp"   // ::utils::map
-#include "lib/utils/time.cpp"  // ::utils::time_
-#include "logger.h"            // Performance::Logger, account_snapshot_t
-#include <iostream>            // std::cout, std::endl
-#include <list>                // std::list
-#include <locale.h>            // setlocale
-#include <map>                 // std::map
-#include <math.h>              // abs
-#include <stdio.h>             // printf
-#include <string>              // std::stod, std::stoi, std::string
+#include "deps.cpp"              // json
+#include "lib/formatted.cpp"     // Formatted
+#include "lib/utils/float.cpp"   // ::utils::float_
+#include "lib/utils/integer.cpp" // ::utils::integer_
+#include "lib/utils/io.cpp"      // ::utils::io
+#include "lib/utils/map.cpp"     // ::utils::map
+#include "lib/utils/time.cpp"    // ::utils::time_
+#include "logger.h"              // Performance::Logger, account_snapshot_t
+#include <iostream>              // std::cout, std::endl
+#include <list>                  // std::list
+#include <locale.h>              // setlocale
+#include <map>                   // std::map
+#include <math.h>                // abs
+#include <stdio.h>               // printf
+#include <string>                // std::stod, std::stoi, std::string
+#include <time.h>                // time
 
 struct should_increment_stop_profit_reached_count_args_t {
   double max_equity_timestamp;
@@ -44,20 +48,22 @@ bool should_increment_stop_profit_reached_count(
 }
 
 void Performance::Logger::log_daily_snapshots(
-    const log_daily_snapshots_args_t args) {
+    std::map<std::string, std::string> args) {
   std::map<std::string, std::string> default_flags = {
       {"debug", "0"},
+      {"project", "alpaca"},
       {"stop-loss", "-2.0"},
       {"stop-profit", "2.0"},
   };
 
-  const std::string api_key_id = args.api_key_id;
   std::map<std::string, std::string> flags =
-      ::utils::map::merge(default_flags, args.flags);
+      ::utils::map::merge(default_flags, args);
 
-  const bool debug = std::stoi(flags["debug"]);
+  const bool debug = ::utils::io::flag_to_bool("debug", flags["debug"]);
+  const double start_epoch = time(nullptr);
   const double stop_loss_percent = std::stod(flags["stop-loss"]);
   const double stop_profit_percent = std::stod(flags["stop-profit"]);
+  const std::string api_key = flags["api-key"];
 
   double daily_dollars = 0.0;
   double daily_ratio = 0.0;
@@ -66,6 +72,17 @@ void Performance::Logger::log_daily_snapshots(
 
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
+
+  json config_json = ::utils::io::load_config(flags["project"], api_key);
+  json api_key_json = config_json[api_key];
+
+  const std::string api_key_id = api_key_json["id"];
+
+  std::cout << fmt.bold << fmt.cyan;
+  std::cout << "\nEnvironment: " << fmt.yellow << api_key.c_str();
+  std::cout << fmt.cyan << std::endl << std::endl;
+  puts(api_key_json.dump(2).c_str());
+  std::cout << fmt.reset;
 
   std::list<account_snapshot_t> snapshots =
       this->db_account_stat.get_daily_snapshots({
@@ -169,7 +186,14 @@ void Performance::Logger::log_daily_snapshots(
   printf("Days %.2f%% Target Reached:  %i/%i (%.2f%%)\n", stop_profit_percent,
          stop_profit_reached_day_count, day_count,
          100.0 * stop_profit_reached_day_count / day_count);
-  std::cout << fmt.reset << fmt.cyan;
+  std::cout << fmt.reset << std::endl;
+
+  const double end_epoch = time(nullptr);
+
+  std::cout << fmt.bold << fmt.cyan;
+  printf("⌚ Finished in %s\n",
+         ::utils::integer_::seconds_to_clock(end_epoch - start_epoch).c_str());
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

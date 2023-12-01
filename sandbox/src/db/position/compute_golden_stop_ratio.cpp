@@ -177,7 +177,7 @@ void DB::Position::compute_golden_stop_ratio(
   std::cout << fmt.bold << fmt.cyan;
   printf("⌚ Finished in %s\n",
          ::utils::integer_::seconds_to_clock(end_epoch - start_epoch).c_str());
-  std::cout << fmt.reset;
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

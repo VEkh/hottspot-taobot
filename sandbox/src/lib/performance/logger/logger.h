@@ -13,12 +13,7 @@ public:
   Logger(){};
   Logger(Pg c);
 
-  struct log_daily_snapshots_args_t {
-    std::string api_key_id;
-    std::map<std::string, std::string> flags;
-  };
-
-  void log_daily_snapshots(const log_daily_snapshots_args_t);
+  void log_daily_snapshots(std::map<std::string, std::string>);
 
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;

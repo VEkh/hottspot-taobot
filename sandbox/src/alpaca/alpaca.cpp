@@ -137,17 +137,12 @@ int main(int argc, char *argv[]) {
   }
 
   if (command == "log_snapshots") {
-    Alpaca::Client api_client(flags);
-
     Pg pg(flags);
     pg.connect();
 
     Performance::Logger logger(pg);
 
-    logger.log_daily_snapshots({
-        .api_key_id = api_client.config.api_key_id,
-        .flags = flags,
-    });
+    logger.log_daily_snapshots(flags);
 
     pg.disconnect();
 
