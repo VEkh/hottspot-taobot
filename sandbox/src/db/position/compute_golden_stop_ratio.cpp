@@ -4,6 +4,7 @@
 #include "deps.cpp"                       // json
 #include "get_golden_ratio_positions.cpp" // get
 #include "lib/formatted.cpp"              // Formatted
+#include "lib/utils/float.cpp"            // ::utils::float_
 #include "lib/utils/integer.cpp"          // ::utils::integer_
 #include "lib/utils/io.cpp"               // ::utils::io
 #include "position.h"                     // DB::Position, fmt, position_t
@@ -19,8 +20,13 @@
 
 void DB::Position::compute_golden_stop_ratio(
     const compute_golden_ratio_args_t args) {
-  const std::string api_key = args.api_key;
   const double start_epoch = time(nullptr);
+  const std::string api_key = args.api_key;
+  double config_stop_loss_ratio = 0.0;
+  double total_return = 0.0;
+  std::list<double> stop_loss_ratios = {};
+  std::list<double> stop_profit_ratios = {};
+  std::map<std::pair<double, double>, int> ratios = {};
 
   json config_json = ::utils::io::load_config(args.project, api_key);
   json api_key_json = config_json[api_key];
@@ -31,9 +37,8 @@ void DB::Position::compute_golden_stop_ratio(
   puts(api_key_json.dump(2).c_str());
   std::cout << fmt.reset;
 
-  const std::string api_key_id = api_key_json["id"];
-
   DB::Quote db_quote(this->conn);
+  const std::string api_key_id = api_key_json["id"];
 
   const std::list<position_t> positions = get_golden_ratio_positions({
       .api_key_id = api_key_id,
@@ -44,10 +49,6 @@ void DB::Position::compute_golden_stop_ratio(
 
   const int total_positions = positions.size();
 
-  std::map<std::pair<double, double>, int> ratios = {};
-
-  double config_stop_loss_ratio = 0.0;
-
   if (api_key_json.contains("ml") &&
       api_key_json["ml"].contains("candle_predict") &&
       api_key_json["ml"]["candle_predict"].contains("stop_loss_ratio")) {
@@ -57,8 +58,6 @@ void DB::Position::compute_golden_stop_ratio(
     config_stop_loss_ratio = (double)api_key_json["stop_loss_ratio"];
   }
 
-  std::list<double> stop_loss_ratios = {};
-
   if (config_stop_loss_ratio) {
     stop_loss_ratios.push_back(config_stop_loss_ratio);
   } else {
@@ -67,9 +66,7 @@ void DB::Position::compute_golden_stop_ratio(
     }
   }
 
-  std::list<double> stop_profit_ratios = {};
-
-  for (double i = 0.2; i < 3.1; i += 0.1) {
+  for (double i = 0.1; i < 3.1; i += 0.1) {
     stop_profit_ratios.push_back(i);
   }
 
@@ -80,8 +77,6 @@ void DB::Position::compute_golden_stop_ratio(
     }
   }
 
-  std::map<std::pair<double, double>, int>::iterator ratio_it;
-
   std::cout << std::endl;
 
   if (args.log_positions) {
@@ -91,6 +86,8 @@ void DB::Position::compute_golden_stop_ratio(
   }
 
   int position_i = 0;
+  std::map<std::pair<double, double>, int>::iterator ratio_it;
+
   for (const position_t position : positions) {
     const avg_one_sec_variances_t avg_one_sec_variances =
         db_quote.get_avg_one_sec_variances({
@@ -98,6 +95,9 @@ void DB::Position::compute_golden_stop_ratio(
             .timestamp_upper_bound = position.opened_at,
             .debug = args.debug,
         });
+
+    total_return +=
+        position.current_profit * abs(position.close_order_quantity);
 
     for (ratio_it = ratios.begin(); ratio_it != ratios.end(); ratio_it++) {
       const double stop_loss_ratio = ratio_it->first.second;
@@ -170,6 +170,14 @@ void DB::Position::compute_golden_stop_ratio(
            "--\n");
   }
 
+  std::cout << fmt.reset << std::endl;
+
+  Formatted::Stream total_return_color =
+      total_return >= 0.0 ? fmt.green : fmt.red;
+
+  std::cout << fmt.bold << total_return_color;
+  printf("💰 Total Return: %c$%.2f\n", ::utils::float_::sign_char(total_return),
+         abs(total_return));
   std::cout << fmt.reset << std::endl;
 
   const double end_epoch = time(nullptr);

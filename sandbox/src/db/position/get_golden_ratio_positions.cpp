@@ -25,6 +25,7 @@ std::list<DB::Position::position_t> DB::Position::get_golden_ratio_positions(
 
   const char *query_format = R"(
     select
+      close_order_quantity,
       current_profit,
       max_profit,
       extract(epoch from max_profit_at) as max_profit_at,

@@ -72,6 +72,7 @@ private:
   using query_result_t = Pg::query_result_t;
 
   struct position_t {
+    double close_order_quantity;
     double closed_at;
     double current_profit;
     double max_profit;

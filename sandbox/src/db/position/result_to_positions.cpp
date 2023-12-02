@@ -22,6 +22,10 @@ DB::Position::result_to_positions(const query_result_t &result) {
       const std::string field = fields.at(i);
       const std::string value = values.at(i);
 
+      if (field == "close_order_quantity") {
+        record.close_order_quantity = std::stod(value);
+      }
+
       if (field == "closed_at") {
         record.closed_at = std::stod(value);
       }
