@@ -69,6 +69,16 @@ void Alpaca::Client::load_config() {
           ? (bool)api_key_json["is_stop_loss_scaled"]
           : config.is_stop_loss_scaled;
 
+  std::map<std::string, double> stop_loss_ratios =
+      api_key_json.contains("stop_loss_ratios")
+          ? (std::map<std::string, double>)api_key_json["stop_loss_ratios"]
+          : config.stop_loss_ratios;
+
+  std::map<std::string, double> stop_profit_ratios =
+      api_key_json.contains("stop_profit_ratios")
+          ? (std::map<std::string, double>)api_key_json["stop_profit_ratios"]
+          : config.stop_profit_ratios;
+
   ml_config_t ml_config;
 
   if (api_key_json.contains("ml")) {
@@ -107,22 +117,11 @@ void Alpaca::Client::load_config() {
               ? (bool)candle_predict_json["rollover_positions"]
               : ml_config.candle_predict.rollover_positions;
 
-      ml_config.candle_predict.stop_loss_ratio =
-          candle_predict_json.contains("stop_loss_ratio")
-              ? (double)candle_predict_json["stop_loss_ratio"]
-              : ml_config.candle_predict.stop_loss_ratio;
-
       ml_config.candle_predict.symbol_model_map =
           candle_predict_json.contains("symbol_model_map")
               ? (std::map<std::string, std::string>)
                     candle_predict_json["symbol_model_map"]
               : ml_config.candle_predict.symbol_model_map;
-
-      ml_config.candle_predict.symbol_stop_loss_ratios =
-          candle_predict_json.contains("symbol_stop_loss_ratios")
-              ? (std::map<std::string, double>)
-                    candle_predict_json["symbol_stop_loss_ratios"]
-              : ml_config.candle_predict.symbol_stop_loss_ratios;
     }
   }
 
@@ -139,7 +138,9 @@ void Alpaca::Client::load_config() {
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
+      .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
+      .stop_profit_ratios = stop_profit_ratios,
   };
 }
 

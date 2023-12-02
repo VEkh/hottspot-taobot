@@ -11,14 +11,15 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double trailing_stop_profit_ratio = 1 / 1.1;
 
   double stop_loss_ratio = this->api_client.config.stop_loss_ratio;
+  double stop_profit_ratio = this->api_client.config.stop_profit_ratio;
 
-  if (this->candle_predictor.should_predict()) {
-    if (this->candle_predictor.config.symbol_stop_loss_ratios[this->symbol]) {
-      stop_loss_ratio =
-          this->candle_predictor.config.symbol_stop_loss_ratios[this->symbol];
-    } else if (this->candle_predictor.config.stop_loss_ratio) {
-      stop_loss_ratio = this->candle_predictor.config.stop_loss_ratio;
-    }
+  if (this->api_client.config.stop_loss_ratios[this->symbol]) {
+    stop_loss_ratio = this->api_client.config.stop_loss_ratios[this->symbol];
+  }
+
+  if (this->api_client.config.stop_profit_ratios[this->symbol]) {
+    stop_profit_ratio =
+        this->api_client.config.stop_profit_ratios[this->symbol];
   }
 
   if (this->api_client.config.is_stop_loss_scaled) {
@@ -32,11 +33,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
     stop_loss_ratio = stop_loss_ratio * stop_loss_multiplier;
   }
-
-  const double stop_profit_ratio =
-      this->api_client.config.stop_profit_ratio
-          ? this->api_client.config.stop_profit_ratio
-          : 99999;
 
   const double stop_loss = stop_loss_ratio * static_one_sec_variance;
   const double stop_profit = abs(stop_profit_ratio * stop_loss);

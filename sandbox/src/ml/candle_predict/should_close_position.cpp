@@ -32,14 +32,6 @@ bool ML::CandlePredict::should_close_position(
     return true;
   }
 
-  if (this->config.symbol_stop_loss_ratios[this->symbol]) {
-    const double stop_profit = args.open_order_stop_profit;
-
-    if (open_order_profit >= stop_profit) {
-      return true;
-    }
-  }
-
   const double latest_opposite_prediction_closed_at_ =
       latest_opposite_prediction_closed_at(this->predictions,
                                            open_order_action);

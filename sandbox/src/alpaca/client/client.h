@@ -32,7 +32,9 @@ public:
     int late_start_seconds = 6; // Production's average
     ml_config_t ml;
     double stop_loss_ratio = -60.0;
+    std::map<std::string, double> stop_loss_ratios;
     double stop_profit_ratio = 2.5;
+    std::map<std::string, double> stop_profit_ratios;
   } config;
 
   Client(){};
