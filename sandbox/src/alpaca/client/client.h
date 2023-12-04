@@ -35,6 +35,7 @@ public:
     std::map<std::string, double> stop_loss_ratios;
     double stop_profit_ratio = 2.5;
     std::map<std::string, double> stop_profit_ratios;
+    int terminate_after_seconds = 0;
   } config;
 
   Client(){};

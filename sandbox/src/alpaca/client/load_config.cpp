@@ -79,6 +79,11 @@ void Alpaca::Client::load_config() {
           ? (std::map<std::string, double>)api_key_json["stop_profit_ratios"]
           : config.stop_profit_ratios;
 
+  const int terminate_after_seconds =
+      api_key_json.contains("terminate_after_seconds")
+          ? (int)api_key_json["terminate_after_seconds"]
+          : config.terminate_after_seconds;
+
   ml_config_t ml_config;
 
   if (api_key_json.contains("ml")) {
@@ -141,6 +146,7 @@ void Alpaca::Client::load_config() {
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
       .stop_profit_ratios = stop_profit_ratios,
+      .terminate_after_seconds = terminate_after_seconds,
   };
 }
 

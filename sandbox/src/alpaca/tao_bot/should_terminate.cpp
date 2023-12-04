@@ -21,7 +21,9 @@ bool Alpaca::TaoBot::should_terminate() {
     return are_positions_closed;
   }
 
-  if (Alpaca::Utils::is_end_of_trading_period(this->current_epoch)) {
+  if (Alpaca::Utils::is_end_of_trading_period(
+          this->current_epoch,
+          this->api_client.config.terminate_after_seconds)) {
     return are_positions_closed;
   }
 

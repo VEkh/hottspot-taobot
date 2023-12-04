@@ -58,13 +58,24 @@ bool is_early_close_day(const double epoch) {
   return DATES[date_string];
 }
 
-bool is_end_of_trading_period(const double epoch) {
+bool is_end_of_trading_period(const double epoch,
+                              const int terminate_after_seconds = 0) {
   if (is_early_close_day(epoch)) {
     return ::utils::time_::is_at_least(epoch,
                                        {
                                            .tm_sec = 0,
                                            .tm_min = 59,
                                            .tm_hour = 11,
+                                       },
+                                       "America/Chicago");
+  }
+
+  if (terminate_after_seconds) {
+    return ::utils::time_::is_at_least(epoch,
+                                       {
+                                           .tm_sec = terminate_after_seconds,
+                                           .tm_min = 30,
+                                           .tm_hour = 8,
                                        },
                                        "America/Chicago");
   }
