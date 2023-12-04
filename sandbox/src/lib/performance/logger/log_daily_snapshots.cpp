@@ -162,6 +162,10 @@ void Performance::Logger::log_daily_snapshots(
 
   const double avg_daily_dollars = daily_dollars / day_count;
   const double avg_daily_ratio = daily_ratio / day_count;
+  const double stop_profit_reached_percent =
+      100.0 * stop_profit_reached_day_count / day_count;
+  const double target_stop_profit_reached_percent =
+      100.0 / (1 + abs(stop_profit_percent / stop_loss_percent));
 
   Formatted::Stream avg_daily_dollars_color =
       avg_daily_dollars < 0 ? fmt.red : fmt.green;
@@ -183,9 +187,9 @@ void Performance::Logger::log_daily_snapshots(
   std::cout << std::endl;
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Days %.2f%% Target Reached:  %i/%i (%.2f%%)\n", stop_profit_percent,
-         stop_profit_reached_day_count, day_count,
-         100.0 * stop_profit_reached_day_count / day_count);
+  printf("Days %.2f%% Target Reached:  %i/%i (%.2f%% 🎯 %.2f%%)\n",
+         stop_profit_percent, stop_profit_reached_day_count, day_count,
+         stop_profit_reached_percent, target_stop_profit_reached_percent);
   std::cout << fmt.reset << std::endl;
 
   const double end_epoch = time(nullptr);
