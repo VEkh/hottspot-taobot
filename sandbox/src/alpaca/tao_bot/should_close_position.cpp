@@ -43,7 +43,8 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->candle_predictor.should_predict()) {
+  if (this->candle_predictor.should_predict() &&
+      !this->candle_predictor.config.hold_winning_prediction) {
     if (this->candle_predictor.config.rollover_positions) {
       return this->candle_predictor.should_close_position({
           .current_epoch = this->current_epoch,

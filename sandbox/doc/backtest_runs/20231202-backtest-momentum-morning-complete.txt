@@ -1,0 +1,962 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2023-04-26 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum",
+  "is_live": false,
+  "is_stop_loss_scaled": false,
+  "late_start_seconds": 25,
+  "secret_key": "secret_key",
+  "stop_loss_ratio": -60.0,
+  "stop_loss_ratios": {
+    "AMZN": -0.01,
+    "TSLA": -0.015
+  },
+  "stop_profit_ratio": 0.1,
+  "stop_profit_ratios": {
+    "AMZN": 0.15,
+    "TSLA": 0.1
+  },
+  "terminate_after_seconds": 1800
+}
+[0m[0m[1m[36m[4m
+Wednesday, April 26 2023[24m[31m
+Current Equity:             $96672.17 (-3327.83) (-3.33%)
+Max Equity:                 $100000.00 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $95232.57 (-4767.43) (-4.77%) @ 08:47 CDT
+Original Equity:            $100000.00
+[1m[36m[4m
+Thursday, April 27 2023[24m[32m
+Current Equity:             $96858.54 (+168.11) (+0.17%)
+Max Equity:                 $97882.15 (+1191.73) (+1.23%) @ 08:56 CDT
+Min Equity:                 $94719.59 (-1970.84) (-2.04%) @ 08:32 CDT
+Original Equity:            $96690.43
+[1m[36m[4m
+Friday, April 28 2023[24m[31m
+Current Equity:             $87257.93 (-7444.36) (-7.86%)
+Max Equity:                 $94702.29 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $85156.98 (-9545.31) (-10.08%) @ 08:33 CDT
+Original Equity:            $94702.29
+[1m[36m[4m
+Monday, May  1 2023[24m[31m
+Current Equity:             $84830.37 (-2092.40) (-2.41%)
+Max Equity:                 $86922.76 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $84052.82 (-2869.95) (-3.30%) @ 08:36 CDT
+Original Equity:            $86922.76
+[1m[36m[4m
+Tuesday, May  2 2023[24m[31m
+Current Equity:             $83365.01 (-1610.16) (-1.89%)
+Max Equity:                 $85592.63 (+617.46) (+0.73%) @ 08:32 CDT
+Min Equity:                 $81655.88 (-3319.29) (-3.91%) @ 08:36 CDT
+Original Equity:            $84975.18
+[1m[36m[4m
+Wednesday, May  3 2023[24m[31m
+Current Equity:             $79822.91 (-3866.34) (-4.62%)
+Max Equity:                 $84024.18 (+334.92) (+0.40%) @ 08:32 CDT
+Min Equity:                 $79337.53 (-4351.73) (-5.20%) @ 08:54 CDT
+Original Equity:            $83689.26
+[1m[36m[4m
+Thursday, May  4 2023[24m[31m
+Current Equity:             $74788.75 (-3489.09) (-4.46%)
+Max Equity:                 $78569.76 (+291.93) (+0.37%) @ 08:37 CDT
+Min Equity:                 $74788.75 (-3489.09) (-4.46%) @ 09:00 CDT
+Original Equity:            $78277.84
+[1m[36m[4m
+Friday, May  5 2023[24m[31m
+Current Equity:             $72827.43 (-2140.49) (-2.86%)
+Max Equity:                 $75559.80 (+591.88) (+0.79%) @ 08:33 CDT
+Min Equity:                 $72387.51 (-2580.41) (-3.44%) @ 08:53 CDT
+Original Equity:            $74967.92
+[1m[36m[4m
+Monday, May  8 2023[24m[32m
+Current Equity:             $71946.23 (+291.85) (+0.41%)
+Max Equity:                 $72146.07 (+491.69) (+0.69%) @ 08:53 CDT
+Min Equity:                 $69899.01 (-1755.38) (-2.45%) @ 08:40 CDT
+Original Equity:            $71654.38
+[1m[36m[4m
+Tuesday, May  9 2023[24m[31m
+Current Equity:             $71224.43 (-492.20) (-0.69%)
+Max Equity:                 $71716.63 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $70761.48 (-955.15) (-1.33%) @ 08:32 CDT
+Original Equity:            $71716.63
+[1m[36m[4m
+Wednesday, May 10 2023[24m[31m
+Current Equity:             $69974.43 (-1122.64) (-1.58%)
+Max Equity:                 $71097.07 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $68337.05 (-2760.02) (-3.88%) @ 08:50 CDT
+Original Equity:            $71097.07
+[1m[36m[4m
+Thursday, May 11 2023[24m[32m
+Current Equity:             $70318.09 (+279.74) (+0.40%)
+Max Equity:                 $70402.19 (+363.84) (+0.52%) @ 08:59 CDT
+Min Equity:                 $68104.49 (-1933.86) (-2.76%) @ 08:32 CDT
+Original Equity:            $70038.35
+[1m[36m[4m
+Friday, May 12 2023[24m[32m
+Current Equity:             $71291.16 (+1401.20) (+2.00%)
+Max Equity:                 $71409.72 (+1519.76) (+2.17%) @ 08:50 CDT
+Min Equity:                 $69500.21 (-389.75) (-0.56%) @ 08:38 CDT
+Original Equity:            $69889.96
+[1m[36m[4m
+Monday, May 15 2023[24m[31m
+Current Equity:             $66633.28 (-4805.84) (-6.73%)
+Max Equity:                 $71439.12 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $66633.28 (-4805.84) (-6.73%) @ 09:00 CDT
+Original Equity:            $71439.12
+[1m[36m[4m
+Tuesday, May 16 2023[24m[32m
+Current Equity:             $67280.99 (+311.87) (+0.47%)
+Max Equity:                 $67673.27 (+704.15) (+1.05%) @ 08:30 CDT
+Min Equity:                 $66271.66 (-697.46) (-1.04%) @ 08:39 CDT
+Original Equity:            $66969.12
+[1m[36m[4m
+Wednesday, May 17 2023[24m[31m
+Current Equity:             $66214.07 (-831.47) (-1.24%)
+Max Equity:                 $68315.35 (+1269.82) (+1.89%) @ 08:36 CDT
+Min Equity:                 $65880.12 (-1165.41) (-1.74%) @ 08:48 CDT
+Original Equity:            $67045.54
+[1m[36m[4m
+Thursday, May 18 2023[24m[31m
+Current Equity:             $64596.72 (-879.57) (-1.34%)
+Max Equity:                 $65476.29 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $63574.18 (-1902.11) (-2.91%) @ 08:38 CDT
+Original Equity:            $65476.29
+[1m[36m[4m
+Friday, May 19 2023[24m[31m
+Current Equity:             $62606.43 (-1860.42) (-2.89%)
+Max Equity:                 $64466.85 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $61749.17 (-2717.68) (-4.22%) @ 08:38 CDT
+Original Equity:            $64466.85
+[1m[36m[4m
+Monday, May 22 2023[24m[31m
+Current Equity:             $61232.19 (-1436.22) (-2.29%)
+Max Equity:                 $63053.79 (+385.38) (+0.61%) @ 08:31 CDT
+Min Equity:                 $60492.69 (-2175.72) (-3.47%) @ 08:50 CDT
+Original Equity:            $62668.41
+[1m[36m[4m
+Tuesday, May 23 2023[24m[31m
+Current Equity:             $58038.14 (-2789.57) (-4.59%)
+Max Equity:                 $60827.71 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $56840.54 (-3987.17) (-6.55%) @ 08:49 CDT
+Original Equity:            $60827.71
+[1m[36m[4m
+Wednesday, May 24 2023[24m[32m
+Current Equity:             $58953.19 (+826.31) (+1.42%)
+Max Equity:                 $59346.79 (+1219.91) (+2.10%) @ 08:57 CDT
+Min Equity:                 $56969.94 (-1156.93) (-1.99%) @ 08:31 CDT
+Original Equity:            $58126.88
+[1m[36m[4m
+Thursday, May 25 2023[24m[31m
+Current Equity:             $57899.26 (-1272.37) (-2.15%)
+Max Equity:                 $59220.27 (+48.64) (+0.08%) @ 08:30 CDT
+Min Equity:                 $57280.21 (-1891.42) (-3.20%) @ 08:45 CDT
+Original Equity:            $59171.63
+[1m[36m[4m
+Friday, May 26 2023[24m[31m
+Current Equity:             $56983.76 (-891.62) (-1.54%)
+Max Equity:                 $58329.40 (+454.02) (+0.78%) @ 08:33 CDT
+Min Equity:                 $56799.18 (-1076.21) (-1.86%) @ 08:37 CDT
+Original Equity:            $57875.39
+[1m[36m[4m
+Monday, May 29 2023[24m[32m
+Current Equity:             $56983.76 (+0.00) (+0.00%)
+Max Equity:                 $56983.76 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $56983.76 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $56983.76
+[1m[36m[4m
+Tuesday, May 30 2023[24m[31m
+Current Equity:             $56704.19 (-402.87) (-0.71%)
+Max Equity:                 $58167.61 (+1060.55) (+1.86%) @ 08:50 CDT
+Min Equity:                 $55770.91 (-1336.15) (-2.34%) @ 08:37 CDT
+Original Equity:            $57107.07
+[1m[36m[4m
+Wednesday, May 31 2023[24m[32m
+Current Equity:             $58031.50 (+922.30) (+1.61%)
+Max Equity:                 $58684.14 (+1574.94) (+2.76%) @ 08:52 CDT
+Min Equity:                 $56713.51 (-395.68) (-0.69%) @ 08:31 CDT
+Original Equity:            $57109.19
+[1m[36m[4m
+Thursday, June  1 2023[24m[31m
+Current Equity:             $52981.61 (-2657.38) (-4.78%)
+Max Equity:                 $55639.00 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $52551.74 (-3087.26) (-5.55%) @ 08:48 CDT
+Original Equity:            $55639.00
+[1m[36m[4m
+Friday, June  2 2023[24m[32m
+Current Equity:             $54067.89 (+757.83) (+1.42%)
+Max Equity:                 $54201.31 (+891.25) (+1.67%) @ 08:49 CDT
+Min Equity:                 $52742.51 (-567.54) (-1.06%) @ 08:42 CDT
+Original Equity:            $53310.06
+[1m[36m[4m
+Monday, June  5 2023[24m[31m
+Current Equity:             $52867.29 (-1028.19) (-1.91%)
+Max Equity:                 $54067.89 (+172.40) (+0.32%) @ 08:32 CDT
+Min Equity:                 $52152.81 (-1742.67) (-3.23%) @ 08:44 CDT
+Original Equity:            $53895.48
+[1m[36m[4m
+Tuesday, June  6 2023[24m[31m
+Current Equity:             $50700.78 (-1882.77) (-3.58%)
+Max Equity:                 $52583.54 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $50465.54 (-2118.00) (-4.03%) @ 08:42 CDT
+Original Equity:            $52583.54
+[1m[36m[4m
+Wednesday, June  7 2023[24m[32m
+Current Equity:             $51205.18 (+213.36) (+0.42%)
+Max Equity:                 $52481.86 (+1490.05) (+2.92%) @ 08:35 CDT
+Min Equity:                 $50377.00 (-614.82) (-1.21%) @ 08:53 CDT
+Original Equity:            $50991.82
+[1m[36m[4m
+Thursday, June  8 2023[24m[31m
+Current Equity:             $48643.61 (-2047.64) (-4.04%)
+Max Equity:                 $51354.08 (+662.83) (+1.31%) @ 08:35 CDT
+Min Equity:                 $48498.10 (-2193.16) (-4.33%) @ 08:53 CDT
+Original Equity:            $50691.25
+[1m[36m[4m
+Friday, June  9 2023[24m[32m
+Current Equity:             $50414.29 (+1815.68) (+3.74%)
+Max Equity:                 $50414.29 (+1815.68) (+3.74%) @ 09:00 CDT
+Min Equity:                 $47841.42 (-757.20) (-1.56%) @ 08:38 CDT
+Original Equity:            $48598.61
+[1m[36m[4m
+Monday, June 12 2023[24m[32m
+Current Equity:             $51747.47 (+878.85) (+1.73%)
+Max Equity:                 $52258.69 (+1390.07) (+2.73%) @ 08:38 CDT
+Min Equity:                 $50636.60 (-232.03) (-0.46%) @ 08:30 CDT
+Original Equity:            $50868.62
+[1m[36m[4m
+Tuesday, June 13 2023[24m[32m
+Current Equity:             $51202.73 (+91.92) (+0.18%)
+Max Equity:                 $51588.43 (+477.62) (+0.93%) @ 08:32 CDT
+Min Equity:                 $50526.83 (-583.98) (-1.14%) @ 08:46 CDT
+Original Equity:            $51110.81
+[1m[36m[4m
+Wednesday, June 14 2023[24m[31m
+Current Equity:             $48996.59 (-1162.86) (-2.32%)
+Max Equity:                 $50159.45 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $48283.64 (-1875.81) (-3.74%) @ 08:37 CDT
+Original Equity:            $50159.45
+[1m[36m[4m
+Thursday, June 15 2023[24m[31m
+Current Equity:             $46869.00 (-2178.89) (-4.44%)
+Max Equity:                 $49047.89 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $46793.60 (-2254.29) (-4.60%) @ 08:57 CDT
+Original Equity:            $49047.89
+[1m[36m[4m
+Friday, June 16 2023[24m[31m
+Current Equity:             $46628.38 (-194.60) (-0.42%)
+Max Equity:                 $47271.51 (+448.53) (+0.96%) @ 08:35 CDT
+Min Equity:                 $46058.29 (-764.69) (-1.63%) @ 08:44 CDT
+Original Equity:            $46822.98
+[1m[36m[4m
+Monday, June 19 2023[24m[32m
+Current Equity:             $46628.38 (+0.00) (+0.00%)
+Max Equity:                 $46628.38 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $46628.38 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $46628.38
+[1m[36m[4m
+Tuesday, June 20 2023[24m[31m
+Current Equity:             $43080.71 (-3708.41) (-7.93%)
+Max Equity:                 $46789.12 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $43023.75 (-3765.37) (-8.05%) @ 08:59 CDT
+Original Equity:            $46789.12
+[1m[36m[4m
+Wednesday, June 21 2023[24m[32m
+Current Equity:             $44124.30 (+954.49) (+2.21%)
+Max Equity:                 $44508.49 (+1338.68) (+3.10%) @ 08:36 CDT
+Min Equity:                 $43098.03 (-71.78) (-0.17%) @ 08:57 CDT
+Original Equity:            $43169.81
+[1m[36m[4m
+Thursday, June 22 2023[24m[31m
+Current Equity:             $42879.83 (-1095.75) (-2.49%)
+Max Equity:                 $44460.24 (+484.65) (+1.10%) @ 08:31 CDT
+Min Equity:                 $42081.39 (-1894.19) (-4.31%) @ 08:37 CDT
+Original Equity:            $43975.58
+[1m[36m[4m
+Friday, June 23 2023[24m[31m
+Current Equity:             $42170.12 (-400.03) (-0.94%)
+Max Equity:                 $43389.31 (+819.15) (+1.92%) @ 08:38 CDT
+Min Equity:                 $41674.31 (-895.84) (-2.10%) @ 08:52 CDT
+Original Equity:            $42570.15
+[1m[36m[4m
+Monday, June 26 2023[24m[31m
+Current Equity:             $40363.75 (-1961.41) (-4.63%)
+Max Equity:                 $42325.16 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $40043.48 (-2281.68) (-5.39%) @ 08:42 CDT
+Original Equity:            $42325.16
+[1m[36m[4m
+Tuesday, June 27 2023[24m[32m
+Current Equity:             $42449.77 (+2086.02) (+5.17%)
+Max Equity:                 $43427.89 (+3064.14) (+7.59%) @ 08:48 CDT
+Min Equity:                 $39868.08 (-495.67) (-1.23%) @ 08:31 CDT
+Original Equity:            $40363.75
+[1m[36m[4m
+Wednesday, June 28 2023[24m[31m
+Current Equity:             $41440.14 (-403.50) (-0.96%)
+Max Equity:                 $42485.52 (+641.88) (+1.53%) @ 08:32 CDT
+Min Equity:                 $40720.94 (-1122.70) (-2.68%) @ 08:51 CDT
+Original Equity:            $41843.64
+[1m[36m[4m
+Thursday, June 29 2023[24m[32m
+Current Equity:             $42726.35 (+1035.18) (+2.48%)
+Max Equity:                 $43148.60 (+1457.43) (+3.50%) @ 08:50 CDT
+Min Equity:                 $41568.78 (-122.39) (-0.29%) @ 08:33 CDT
+Original Equity:            $41691.17
+[1m[36m[4m
+Friday, June 30 2023[24m[32m
+Current Equity:             $44301.06 (+1629.84) (+3.82%)
+Max Equity:                 $44338.74 (+1667.52) (+3.91%) @ 08:59 CDT
+Min Equity:                 $42671.22 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $42671.22
+[1m[36m[4m
+Monday, July  3 2023[24m[31m
+Current Equity:             $42342.92 (-1906.22) (-4.31%)
+Max Equity:                 $44412.57 (+163.43) (+0.37%) @ 09:32 CDT
+Min Equity:                 $42342.92 (-1906.22) (-4.31%) @ 11:59 CDT
+Original Equity:            $44249.14
+[1m[36m[4m
+Tuesday, July  4 2023[24m[32m
+Current Equity:             $42342.92 (+0.00) (+0.00%)
+Max Equity:                 $42342.92 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $42342.92 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $42342.92
+[1m[36m[4m
+Wednesday, July  5 2023[24m[32m
+Current Equity:             $42188.94 (+93.37) (+0.22%)
+Max Equity:                 $42811.48 (+715.91) (+1.70%) @ 08:36 CDT
+Min Equity:                 $42028.74 (-66.83) (-0.16%) @ 08:34 CDT
+Original Equity:            $42095.57
+[1m[36m[4m
+Thursday, July  6 2023[24m[31m
+Current Equity:             $41712.61 (-381.38) (-0.91%)
+Max Equity:                 $42656.32 (+562.33) (+1.34%) @ 08:37 CDT
+Min Equity:                 $41573.61 (-520.38) (-1.24%) @ 08:53 CDT
+Original Equity:            $42093.99
+[1m[36m[4m
+Friday, July  7 2023[24m[32m
+Current Equity:             $41703.61 (+562.13) (+1.37%)
+Max Equity:                 $41957.93 (+816.45) (+1.98%) @ 08:38 CDT
+Min Equity:                 $40792.10 (-349.38) (-0.85%) @ 08:31 CDT
+Original Equity:            $41141.48
+[1m[36m[4m
+Monday, July 10 2023[24m[31m
+Current Equity:             $40137.89 (-1510.81) (-3.63%)
+Max Equity:                 $42133.08 (+484.38) (+1.16%) @ 08:32 CDT
+Min Equity:                 $39533.34 (-2115.36) (-5.08%) @ 08:55 CDT
+Original Equity:            $41648.70
+[1m[36m[4m
+Tuesday, July 11 2023[24m[32m
+Current Equity:             $40680.37 (+596.82) (+1.49%)
+Max Equity:                 $40680.37 (+596.82) (+1.49%) @ 09:00 CDT
+Min Equity:                 $39370.37 (-713.18) (-1.78%) @ 08:39 CDT
+Original Equity:            $40083.55
+[1m[36m[4m
+Wednesday, July 12 2023[24m[31m
+Current Equity:             $40489.39 (-190.98) (-0.47%)
+Max Equity:                 $40750.39 (+70.02) (+0.17%) @ 08:56 CDT
+Min Equity:                 $39845.48 (-834.89) (-2.05%) @ 08:36 CDT
+Original Equity:            $40680.37
+[1m[36m[4m
+Thursday, July 13 2023[24m[32m
+Current Equity:             $41607.98 (+982.75) (+2.42%)
+Max Equity:                 $41870.14 (+1244.90) (+3.06%) @ 08:51 CDT
+Min Equity:                 $40605.42 (-19.81) (-0.05%) @ 08:31 CDT
+Original Equity:            $40625.23
+[1m[36m[4m
+Friday, July 14 2023[24m[31m
+Current Equity:             $41226.15 (-372.90) (-0.90%)
+Max Equity:                 $41935.04 (+335.99) (+0.81%) @ 08:35 CDT
+Min Equity:                 $41226.15 (-372.90) (-0.90%) @ 09:00 CDT
+Original Equity:            $41599.06
+[1m[36m[4m
+Monday, July 17 2023[24m[31m
+Current Equity:             $40235.47 (-1025.90) (-2.49%)
+Max Equity:                 $41739.21 (+477.83) (+1.16%) @ 08:32 CDT
+Min Equity:                 $40069.50 (-1191.88) (-2.89%) @ 08:49 CDT
+Original Equity:            $41261.38
+[1m[36m[4m
+Tuesday, July 18 2023[24m[32m
+Current Equity:             $40583.79 (+331.02) (+0.82%)
+Max Equity:                 $40660.92 (+408.15) (+1.01%) @ 08:39 CDT
+Min Equity:                 $39693.18 (-559.59) (-1.39%) @ 08:31 CDT
+Original Equity:            $40252.76
+[1m[36m[4m
+Wednesday, July 19 2023[24m[32m
+Current Equity:             $40414.10 (+69.23) (+0.17%)
+Max Equity:                 $40948.89 (+604.02) (+1.50%) @ 08:39 CDT
+Min Equity:                 $40067.53 (-277.33) (-0.69%) @ 08:56 CDT
+Original Equity:            $40344.86
+[1m[36m[4m
+Thursday, July 20 2023[24m[32m
+Current Equity:             $41563.75 (+1284.97) (+3.19%)
+Max Equity:                 $42211.67 (+1932.89) (+4.80%) @ 08:54 CDT
+Min Equity:                 $40050.61 (-228.17) (-0.57%) @ 08:35 CDT
+Original Equity:            $40278.78
+[1m[36m[4m
+Friday, July 21 2023[24m[31m
+Current Equity:             $40662.48 (-730.47) (-1.76%)
+Max Equity:                 $41392.95 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $39413.75 (-1979.20) (-4.78%) @ 08:45 CDT
+Original Equity:            $41392.95
+[1m[36m[4m
+Monday, July 24 2023[24m[32m
+Current Equity:             $42722.77 (+2185.45) (+5.39%)
+Max Equity:                 $42747.09 (+2209.77) (+5.45%) @ 08:53 CDT
+Min Equity:                 $40077.99 (-459.33) (-1.13%) @ 08:31 CDT
+Original Equity:            $40537.32
+[1m[36m[4m
+Tuesday, July 25 2023[24m[32m
+Current Equity:             $42991.64 (+214.90) (+0.50%)
+Max Equity:                 $43407.01 (+630.27) (+1.47%) @ 08:47 CDT
+Min Equity:                 $42248.25 (-528.50) (-1.24%) @ 08:36 CDT
+Original Equity:            $42776.75
+[1m[36m[4m
+Wednesday, July 26 2023[24m[31m
+Current Equity:             $41011.90 (-1852.41) (-4.32%)
+Max Equity:                 $42864.31 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $41011.90 (-1852.41) (-4.32%) @ 09:00 CDT
+Original Equity:            $42864.31
+[1m[36m[4m
+Thursday, July 27 2023[24m[32m
+Current Equity:             $40951.37 (+44.82) (+0.11%)
+Max Equity:                 $41225.27 (+318.72) (+0.78%) @ 08:48 CDT
+Min Equity:                 $40349.42 (-557.13) (-1.36%) @ 08:42 CDT
+Original Equity:            $40906.55
+[1m[36m[4m
+Friday, July 28 2023[24m[31m
+Current Equity:             $40222.29 (-510.56) (-1.25%)
+Max Equity:                 $40732.85 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $39977.12 (-755.73) (-1.86%) @ 08:35 CDT
+Original Equity:            $40732.85
+[1m[36m[4m
+Monday, July 31 2023[24m[32m
+Current Equity:             $40558.38 (+600.52) (+1.50%)
+Max Equity:                 $40944.07 (+986.22) (+2.47%) @ 08:35 CDT
+Min Equity:                 $39645.86 (-312.00) (-0.78%) @ 08:31 CDT
+Original Equity:            $39957.86
+[1m[36m[4m
+Tuesday, August  1 2023[24m[31m
+Current Equity:             $39426.39 (-1184.73) (-2.92%)
+Max Equity:                 $40628.69 (+17.58) (+0.04%) @ 08:31 CDT
+Min Equity:                 $39411.29 (-1199.83) (-2.95%) @ 08:58 CDT
+Original Equity:            $40611.11
+[1m[36m[4m
+Wednesday, August  2 2023[24m[32m
+Current Equity:             $39700.85 (+459.46) (+1.17%)
+Max Equity:                 $40479.53 (+1238.14) (+3.16%) @ 08:43 CDT
+Min Equity:                 $38943.65 (-297.73) (-0.76%) @ 08:35 CDT
+Original Equity:            $39241.39
+[1m[36m[4m
+Thursday, August  3 2023[24m[31m
+Current Equity:             $39024.28 (-373.57) (-0.95%)
+Max Equity:                 $39397.85 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $38517.05 (-880.79) (-2.24%) @ 08:39 CDT
+Original Equity:            $39397.85
+[1m[36m[4m
+Friday, August  4 2023[24m[31m
+Current Equity:             $38463.96 (-724.76) (-1.85%)
+Max Equity:                 $39446.40 (+257.68) (+0.66%) @ 08:31 CDT
+Min Equity:                 $38438.69 (-750.03) (-1.91%) @ 08:46 CDT
+Original Equity:            $39188.72
+[1m[36m[4m
+Monday, August  7 2023[24m[31m
+Current Equity:             $38479.45 (-494.88) (-1.27%)
+Max Equity:                 $39753.01 (+778.68) (+2.00%) @ 08:34 CDT
+Min Equity:                 $38476.82 (-497.51) (-1.28%) @ 08:59 CDT
+Original Equity:            $38974.33
+[1m[36m[4m
+Tuesday, August  8 2023[24m[31m
+Current Equity:             $38364.52 (-86.00) (-0.22%)
+Max Equity:                 $39278.29 (+827.77) (+2.15%) @ 08:35 CDT
+Min Equity:                 $37893.44 (-557.07) (-1.45%) @ 08:50 CDT
+Original Equity:            $38450.52
+[1m[36m[4m
+Wednesday, August  9 2023[24m[31m
+Current Equity:             $37375.96 (-875.47) (-2.29%)
+Max Equity:                 $38251.43 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $36966.50 (-1284.93) (-3.36%) @ 08:50 CDT
+Original Equity:            $38251.43
+[1m[36m[4m
+Thursday, August 10 2023[24m[31m
+Current Equity:             $36540.69 (-804.31) (-2.15%)
+Max Equity:                 $37904.65 (+559.65) (+1.50%) @ 08:34 CDT
+Min Equity:                 $36364.18 (-980.82) (-2.63%) @ 08:56 CDT
+Original Equity:            $37345.00
+[1m[36m[4m
+Friday, August 11 2023[24m[31m
+Current Equity:             $36628.33 (-19.46) (-0.05%)
+Max Equity:                 $37374.54 (+726.75) (+1.98%) @ 08:38 CDT
+Min Equity:                 $36249.48 (-398.31) (-1.09%) @ 08:53 CDT
+Original Equity:            $36647.79
+[1m[36m[4m
+Monday, August 14 2023[24m[31m
+Current Equity:             $36348.44 (-48.16) (-0.13%)
+Max Equity:                 $37159.65 (+763.04) (+2.10%) @ 08:47 CDT
+Min Equity:                 $35897.40 (-499.20) (-1.37%) @ 08:31 CDT
+Original Equity:            $36396.61
+[1m[36m[4m
+Tuesday, August 15 2023[24m[31m
+Current Equity:             $36054.33 (-236.96) (-0.65%)
+Max Equity:                 $37432.41 (+1141.12) (+3.14%) @ 08:40 CDT
+Min Equity:                 $36054.33 (-236.96) (-0.65%) @ 09:00 CDT
+Original Equity:            $36291.29
+[1m[36m[4m
+Wednesday, August 16 2023[24m[32m
+Current Equity:             $36280.33 (+187.98) (+0.52%)
+Max Equity:                 $36429.99 (+337.63) (+0.94%) @ 08:52 CDT
+Min Equity:                 $35766.00 (-326.36) (-0.90%) @ 08:39 CDT
+Original Equity:            $36092.36
+[1m[36m[4m
+Thursday, August 17 2023[24m[31m
+Current Equity:             $35540.71 (-721.63) (-1.99%)
+Max Equity:                 $36637.38 (+375.03) (+1.03%) @ 08:33 CDT
+Min Equity:                 $35467.01 (-795.33) (-2.19%) @ 08:56 CDT
+Original Equity:            $36262.35
+[1m[36m[4m
+Friday, August 18 2023[24m[31m
+Current Equity:             $35213.97 (-403.06) (-1.13%)
+Max Equity:                 $35617.04 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $34706.56 (-910.48) (-2.56%) @ 08:38 CDT
+Original Equity:            $35617.04
+[1m[36m[4m
+Monday, August 21 2023[24m[31m
+Current Equity:             $33145.53 (-2005.20) (-5.70%)
+Max Equity:                 $35396.35 (+245.62) (+0.70%) @ 08:33 CDT
+Min Equity:                 $32955.60 (-2195.13) (-6.24%) @ 08:56 CDT
+Original Equity:            $35150.72
+[1m[36m[4m
+Tuesday, August 22 2023[24m[31m
+Current Equity:             $32642.22 (-419.51) (-1.27%)
+Max Equity:                 $33702.39 (+640.65) (+1.94%) @ 08:32 CDT
+Min Equity:                 $32380.38 (-681.36) (-2.06%) @ 08:52 CDT
+Original Equity:            $33061.74
+[1m[36m[4m
+Wednesday, August 23 2023[24m[32m
+Current Equity:             $33982.89 (+1476.10) (+4.54%)
+Max Equity:                 $34031.50 (+1524.70) (+4.69%) @ 08:58 CDT
+Min Equity:                 $32151.67 (-355.12) (-1.09%) @ 08:31 CDT
+Original Equity:            $32506.79
+[1m[36m[4m
+Thursday, August 24 2023[24m[31m
+Current Equity:             $33574.14 (-327.33) (-0.97%)
+Max Equity:                 $34179.64 (+278.17) (+0.82%) @ 08:31 CDT
+Min Equity:                 $32456.90 (-1444.56) (-4.26%) @ 08:38 CDT
+Original Equity:            $33901.46
+[1m[36m[4m
+Friday, August 25 2023[24m[31m
+Current Equity:             $33186.10 (-456.08) (-1.36%)
+Max Equity:                 $33642.18 (+0.00) (+0.00%) @ 08:31 CDT
+Min Equity:                 $33049.89 (-592.28) (-1.76%) @ 08:46 CDT
+Original Equity:            $33642.18
+[1m[36m[4m
+Monday, August 28 2023[24m[31m
+Current Equity:             $33256.14 (-69.35) (-0.21%)
+Max Equity:                 $34361.33 (+1035.85) (+3.11%) @ 08:36 CDT
+Min Equity:                 $32459.96 (-865.53) (-2.60%) @ 08:49 CDT
+Original Equity:            $33325.49
+[1m[36m[4m
+Tuesday, August 29 2023[24m[32m
+Current Equity:             $34016.29 (+661.37) (+1.98%)
+Max Equity:                 $34909.79 (+1554.87) (+4.66%) @ 08:45 CDT
+Min Equity:                 $33354.93 (+0.00) (+0.00%) @ 08:31 CDT
+Original Equity:            $33354.93
+[1m[36m[4m
+Wednesday, August 30 2023[24m[31m
+Current Equity:             $32495.71 (-1265.87) (-3.75%)
+Max Equity:                 $33761.57 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $32363.47 (-1398.10) (-4.14%) @ 08:58 CDT
+Original Equity:            $33761.57
+[1m[36m[4m
+Thursday, August 31 2023[24m[31m
+Current Equity:             $30330.44 (-2418.81) (-7.39%)
+Max Equity:                 $32749.26 (+0.00) (+0.00%) @ 08:31 CDT
+Min Equity:                 $30330.44 (-2418.81) (-7.39%) @ 09:00 CDT
+Original Equity:            $32749.26
+[1m[36m[4m
+Friday, September  1 2023[24m[31m
+Current Equity:             $29367.81 (-931.00) (-3.07%)
+Max Equity:                 $30482.51 (+183.70) (+0.61%) @ 08:31 CDT
+Min Equity:                 $28872.26 (-1426.55) (-4.71%) @ 08:48 CDT
+Original Equity:            $30298.81
+[1m[36m[4m
+Monday, September  4 2023[24m[32m
+Current Equity:             $29367.81 (+0.00) (+0.00%)
+Max Equity:                 $29367.81 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $29367.81 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $29367.81
+[1m[36m[4m
+Tuesday, September  5 2023[24m[31m
+Current Equity:             $28281.67 (-1030.93) (-3.52%)
+Max Equity:                 $29312.60 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $27619.72 (-1692.88) (-5.78%) @ 08:45 CDT
+Original Equity:            $29312.60
+[1m[36m[4m
+Wednesday, September  6 2023[24m[31m
+Current Equity:             $27425.35 (-884.02) (-3.12%)
+Max Equity:                 $28420.42 (+111.05) (+0.39%) @ 08:31 CDT
+Min Equity:                 $27228.96 (-1080.41) (-3.82%) @ 08:56 CDT
+Original Equity:            $28309.37
+[1m[36m[4m
+Thursday, September  7 2023[24m[31m
+Current Equity:             $26506.40 (-877.57) (-3.20%)
+Max Equity:                 $28030.42 (+646.44) (+2.36%) @ 08:36 CDT
+Min Equity:                 $26094.72 (-1289.25) (-4.71%) @ 08:58 CDT
+Original Equity:            $27383.97
+[1m[36m[4m
+Friday, September  8 2023[24m[31m
+Current Equity:             $25420.72 (-1030.04) (-3.89%)
+Max Equity:                 $26497.18 (+46.42) (+0.18%) @ 08:31 CDT
+Min Equity:                 $25355.04 (-1095.71) (-4.14%) @ 08:58 CDT
+Original Equity:            $26450.76
+[1m[36m[4m
+Monday, September 11 2023[24m[32m
+Current Equity:             $25566.38 (+67.96) (+0.27%)
+Max Equity:                 $25985.72 (+487.31) (+1.91%) @ 08:47 CDT
+Min Equity:                 $25279.08 (-219.34) (-0.86%) @ 08:57 CDT
+Original Equity:            $25498.42
+[1m[36m[4m
+Tuesday, September 12 2023[24m[32m
+Current Equity:             $25686.43 (+152.83) (+0.60%)
+Max Equity:                 $26226.38 (+692.78) (+2.71%) @ 08:42 CDT
+Min Equity:                 $25296.46 (-237.14) (-0.93%) @ 08:36 CDT
+Original Equity:            $25533.60
+[1m[36m[4m
+Wednesday, September 13 2023[24m[32m
+Current Equity:             $25948.59 (+197.41) (+0.77%)
+Max Equity:                 $25948.59 (+197.41) (+0.77%) @ 09:00 CDT
+Min Equity:                 $25265.90 (-485.28) (-1.88%) @ 08:33 CDT
+Original Equity:            $25751.18
+[1m[36m[4m
+Thursday, September 14 2023[24m[31m
+Current Equity:             $25551.40 (-131.36) (-0.51%)
+Max Equity:                 $26034.34 (+351.58) (+1.37%) @ 08:30 CDT
+Min Equity:                 $25320.56 (-362.21) (-1.41%) @ 08:46 CDT
+Original Equity:            $25682.76
+[1m[36m[4m
+Friday, September 15 2023[24m[31m
+Current Equity:             $25306.67 (-184.56) (-0.72%)
+Max Equity:                 $26040.51 (+549.28) (+2.15%) @ 08:37 CDT
+Min Equity:                 $24856.13 (-635.09) (-2.49%) @ 08:48 CDT
+Original Equity:            $25491.22
+[1m[36m[4m
+Monday, September 18 2023[24m[31m
+Current Equity:             $24857.63 (-510.23) (-2.01%)
+Max Equity:                 $25626.10 (+258.23) (+1.02%) @ 08:38 CDT
+Min Equity:                 $24593.37 (-774.50) (-3.05%) @ 08:52 CDT
+Original Equity:            $25367.87
+[1m[36m[4m
+Tuesday, September 19 2023[24m[31m
+Current Equity:             $24246.97 (-514.06) (-2.08%)
+Max Equity:                 $24761.03 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $23893.28 (-867.75) (-3.50%) @ 08:34 CDT
+Original Equity:            $24761.03
+[1m[36m[4m
+Wednesday, September 20 2023[24m[32m
+Current Equity:             $24997.76 (+663.16) (+2.73%)
+Max Equity:                 $25023.85 (+689.26) (+2.83%) @ 08:58 CDT
+Min Equity:                 $24037.17 (-297.43) (-1.22%) @ 08:36 CDT
+Original Equity:            $24334.60
+[1m[36m[4m
+Thursday, September 21 2023[24m[32m
+Current Equity:             $25234.11 (+511.93) (+2.07%)
+Max Equity:                 $25604.62 (+882.44) (+3.57%) @ 08:42 CDT
+Min Equity:                 $24635.96 (-86.22) (-0.35%) @ 08:32 CDT
+Original Equity:            $24722.18
+[1m[36m[4m
+Friday, September 22 2023[24m[32m
+Current Equity:             $25496.94 (+222.24) (+0.88%)
+Max Equity:                 $25626.93 (+352.23) (+1.39%) @ 08:57 CDT
+Min Equity:                 $24666.85 (-607.85) (-2.40%) @ 08:39 CDT
+Original Equity:            $25274.70
+[1m[36m[4m
+Monday, September 25 2023[24m[31m
+Current Equity:             $23834.97 (-1679.02) (-6.58%)
+Max Equity:                 $25907.70 (+393.71) (+1.54%) @ 08:31 CDT
+Min Equity:                 $23763.81 (-1750.19) (-6.86%) @ 08:44 CDT
+Original Equity:            $25513.99
+[1m[36m[4m
+Tuesday, September 26 2023[24m[31m
+Current Equity:             $23481.90 (-426.99) (-1.79%)
+Max Equity:                 $24442.79 (+533.90) (+2.23%) @ 08:35 CDT
+Min Equity:                 $23445.04 (-463.85) (-1.94%) @ 08:51 CDT
+Original Equity:            $23908.90
+[1m[36m[4m
+Wednesday, September 27 2023[24m[32m
+Current Equity:             $24103.88 (+387.48) (+1.63%)
+Max Equity:                 $24892.69 (+1176.30) (+4.96%) @ 08:36 CDT
+Min Equity:                 $23614.37 (-102.03) (-0.43%) @ 08:31 CDT
+Original Equity:            $23716.40
+[1m[36m[4m
+Thursday, September 28 2023[24m[32m
+Current Equity:             $24576.94 (+226.22) (+0.93%)
+Max Equity:                 $24838.06 (+487.35) (+2.00%) @ 08:44 CDT
+Min Equity:                 $24166.16 (-184.56) (-0.76%) @ 08:30 CDT
+Original Equity:            $24350.72
+[1m[36m[4m
+Friday, September 29 2023[24m[31m
+Current Equity:             $24443.01 (-376.22) (-1.52%)
+Max Equity:                 $25125.93 (+306.71) (+1.24%) @ 08:42 CDT
+Min Equity:                 $24417.52 (-401.70) (-1.62%) @ 08:49 CDT
+Original Equity:            $24819.22
+[1m[36m[4m
+Monday, October  2 2023[24m[32m
+Current Equity:             $25266.51 (+532.62) (+2.15%)
+Max Equity:                 $25266.51 (+532.62) (+2.15%) @ 09:00 CDT
+Min Equity:                 $24278.40 (-455.48) (-1.84%) @ 08:43 CDT
+Original Equity:            $24733.88
+[1m[36m[4m
+Tuesday, October  3 2023[24m[31m
+Current Equity:             $24948.60 (-113.78) (-0.45%)
+Max Equity:                 $25070.40 (+8.02) (+0.03%) @ 08:50 CDT
+Min Equity:                 $24458.10 (-604.29) (-2.41%) @ 08:40 CDT
+Original Equity:            $25062.38
+[1m[36m[4m
+Wednesday, October  4 2023[24m[31m
+Current Equity:             $24284.28 (-732.73) (-2.93%)
+Max Equity:                 $25017.01 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $23842.27 (-1174.74) (-4.70%) @ 08:52 CDT
+Original Equity:            $25017.01
+[1m[36m[4m
+Thursday, October  5 2023[24m[32m
+Current Equity:             $24333.56 (+200.58) (+0.83%)
+Max Equity:                 $24338.06 (+205.08) (+0.85%) @ 08:59 CDT
+Min Equity:                 $23506.19 (-626.80) (-2.60%) @ 08:36 CDT
+Original Equity:            $24132.99
+[1m[36m[4m
+Friday, October  6 2023[24m[31m
+Current Equity:             $23898.12 (-311.36) (-1.29%)
+Max Equity:                 $24420.21 (+210.72) (+0.87%) @ 08:34 CDT
+Min Equity:                 $23725.17 (-484.32) (-2.00%) @ 08:56 CDT
+Original Equity:            $24209.49
+[1m[36m[4m
+Monday, October  9 2023[24m[31m
+Current Equity:             $23831.49 (-4.76) (-0.02%)
+Max Equity:                 $23842.67 (+6.43) (+0.03%) @ 08:57 CDT
+Min Equity:                 $22822.89 (-1013.35) (-4.25%) @ 08:48 CDT
+Original Equity:            $23836.24
+[1m[36m[4m
+Tuesday, October 10 2023[24m[31m
+Current Equity:             $23685.19 (-156.97) (-0.66%)
+Max Equity:                 $24147.24 (+305.08) (+1.28%) @ 08:37 CDT
+Min Equity:                 $23673.31 (-168.85) (-0.71%) @ 08:52 CDT
+Original Equity:            $23842.17
+[1m[36m[4m
+Wednesday, October 11 2023[24m[32m
+Current Equity:             $23922.31 (+202.11) (+0.85%)
+Max Equity:                 $24151.35 (+431.15) (+1.82%) @ 08:53 CDT
+Min Equity:                 $23468.69 (-251.51) (-1.06%) @ 08:35 CDT
+Original Equity:            $23720.19
+[1m[36m[4m
+Thursday, October 12 2023[24m[32m
+Current Equity:             $24175.24 (+295.57) (+1.24%)
+Max Equity:                 $24220.49 (+340.81) (+1.43%) @ 08:40 CDT
+Min Equity:                 $23653.24 (-226.43) (-0.95%) @ 08:42 CDT
+Original Equity:            $23879.67
+[1m[36m[4m
+Friday, October 13 2023[24m[31m
+Current Equity:             $23421.10 (-630.60) (-2.62%)
+Max Equity:                 $24051.71 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $23421.10 (-630.60) (-2.62%) @ 09:00 CDT
+Original Equity:            $24051.71
+[1m[36m[4m
+Monday, October 16 2023[24m[31m
+Current Equity:             $23073.26 (-421.23) (-1.79%)
+Max Equity:                 $23494.49 (+0.00) (+0.00%) @ 08:31 CDT
+Min Equity:                 $23002.44 (-492.06) (-2.09%) @ 08:35 CDT
+Original Equity:            $23494.49
+[1m[36m[4m
+Tuesday, October 17 2023[24m[31m
+Current Equity:             $22815.49 (-252.49) (-1.09%)
+Max Equity:                 $23349.25 (+281.26) (+1.22%) @ 08:33 CDT
+Min Equity:                 $22541.03 (-526.96) (-2.28%) @ 08:54 CDT
+Original Equity:            $23067.99
+[1m[36m[4m
+Wednesday, October 18 2023[24m[32m
+Current Equity:             $23641.10 (+761.39) (+3.33%)
+Max Equity:                 $23759.01 (+879.29) (+3.84%) @ 08:46 CDT
+Min Equity:                 $22879.72 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $22879.72
+[1m[36m[4m
+Thursday, October 19 2023[24m[31m
+Current Equity:             $22672.94 (-1100.41) (-4.63%)
+Max Equity:                 $23773.35 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $22534.90 (-1238.45) (-5.21%) @ 08:56 CDT
+Original Equity:            $23773.35
+[1m[36m[4m
+Friday, October 20 2023[24m[32m
+Current Equity:             $23083.83 (+240.90) (+1.05%)
+Max Equity:                 $23480.78 (+637.85) (+2.79%) @ 08:40 CDT
+Min Equity:                 $22578.83 (-264.10) (-1.16%) @ 08:33 CDT
+Original Equity:            $22842.94
+[1m[36m[4m
+Monday, October 23 2023[24m[31m
+Current Equity:             $22293.64 (-905.19) (-3.90%)
+Max Equity:                 $23343.42 (+144.58) (+0.62%) @ 08:30 CDT
+Min Equity:                 $21449.22 (-1749.61) (-7.54%) @ 08:47 CDT
+Original Equity:            $23198.83
+[1m[36m[4m
+Tuesday, October 24 2023[24m[32m
+Current Equity:             $22391.24 (+141.15) (+0.63%)
+Max Equity:                 $22761.64 (+511.55) (+2.30%) @ 08:33 CDT
+Min Equity:                 $22250.09 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $22250.09
+[1m[36m[4m
+Wednesday, October 25 2023[24m[31m
+Current Equity:             $21231.67 (-1248.75) (-5.55%)
+Max Equity:                 $22854.88 (+374.47) (+1.67%) @ 08:33 CDT
+Min Equity:                 $21231.67 (-1248.75) (-5.55%) @ 09:00 CDT
+Original Equity:            $22480.42
+[1m[36m[4m
+Thursday, October 26 2023[24m[31m
+Current Equity:             $20864.49 (-461.26) (-2.16%)
+Max Equity:                 $21401.11 (+75.36) (+0.35%) @ 08:31 CDT
+Min Equity:                 $20224.79 (-1100.96) (-5.16%) @ 08:50 CDT
+Original Equity:            $21325.75
+[1m[36m[4m
+Friday, October 27 2023[24m[32m
+Current Equity:             $22040.45 (+1221.32) (+5.87%)
+Max Equity:                 $22106.99 (+1287.85) (+6.19%) @ 08:59 CDT
+Min Equity:                 $20819.13 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $20819.13
+[1m[36m[4m
+Monday, October 30 2023[24m[31m
+Current Equity:             $21962.72 (-167.62) (-0.76%)
+Max Equity:                 $22767.46 (+637.12) (+2.88%) @ 08:33 CDT
+Min Equity:                 $21940.60 (-189.74) (-0.86%) @ 08:50 CDT
+Original Equity:            $22130.34
+[1m[36m[4m
+Tuesday, October 31 2023[24m[31m
+Current Equity:             $21962.04 (-62.74) (-0.28%)
+Max Equity:                 $22683.63 (+658.85) (+2.99%) @ 08:32 CDT
+Min Equity:                 $21228.79 (-795.99) (-3.61%) @ 08:44 CDT
+Original Equity:            $22024.78
+[1m[36m[4m
+Wednesday, November  1 2023[24m[32m
+Current Equity:             $22201.77 (+125.40) (+0.57%)
+Max Equity:                 $22552.99 (+476.62) (+2.16%) @ 08:45 CDT
+Min Equity:                 $21782.22 (-294.15) (-1.33%) @ 08:33 CDT
+Original Equity:            $22076.37
+[1m[36m[4m
+Thursday, November  2 2023[24m[31m
+Current Equity:             $20787.98 (-1116.79) (-5.10%)
+Max Equity:                 $21917.21 (+12.44) (+0.06%) @ 08:32 CDT
+Min Equity:                 $20787.98 (-1116.79) (-5.10%) @ 09:00 CDT
+Original Equity:            $21904.77
+[1m[36m[4m
+Friday, November  3 2023[24m[32m
+Current Equity:             $21405.08 (+278.79) (+1.32%)
+Max Equity:                 $21673.46 (+547.17) (+2.59%) @ 08:41 CDT
+Min Equity:                 $21080.65 (-45.65) (-0.22%) @ 08:30 CDT
+Original Equity:            $21126.29
+[1m[36m[4m
+Monday, November  6 2023[24m[31m
+Current Equity:             $21189.29 (-190.63) (-0.89%)
+Max Equity:                 $21639.27 (+259.35) (+1.21%) @ 08:37 CST
+Min Equity:                 $20933.99 (-445.93) (-2.09%) @ 08:55 CST
+Original Equity:            $21379.92
+[1m[36m[4m
+Tuesday, November  7 2023[24m[31m
+Current Equity:             $21021.87 (-210.62) (-0.99%)
+Max Equity:                 $21872.85 (+640.36) (+3.02%) @ 08:33 CST
+Min Equity:                 $20956.79 (-275.70) (-1.30%) @ 08:58 CST
+Original Equity:            $21232.49
+[1m[36m[4m
+Wednesday, November  8 2023[24m[32m
+Current Equity:             $20810.81 (+115.64) (+0.56%)
+Max Equity:                 $20965.25 (+270.08) (+1.31%) @ 08:56 CST
+Min Equity:                 $20141.71 (-553.46) (-2.67%) @ 08:37 CST
+Original Equity:            $20695.17
+[1m[36m[4m
+Thursday, November  9 2023[24m[32m
+Current Equity:             $21137.70 (+221.91) (+1.06%)
+Max Equity:                 $21261.24 (+345.45) (+1.65%) @ 08:33 CST
+Min Equity:                 $20874.16 (-41.63) (-0.20%) @ 08:30 CST
+Original Equity:            $20915.79
+[1m[36m[4m
+Friday, November 10 2023[24m[31m
+Current Equity:             $20712.38 (-394.28) (-1.87%)
+Max Equity:                 $21790.12 (+683.46) (+3.24%) @ 08:39 CST
+Min Equity:                 $20712.38 (-394.28) (-1.87%) @ 09:00 CST
+Original Equity:            $21106.66
+[1m[36m[4m
+Monday, November 13 2023[24m[32m
+Current Equity:             $20934.81 (+487.39) (+2.38%)
+Max Equity:                 $21066.77 (+619.35) (+3.03%) @ 08:57 CST
+Min Equity:                 $20108.88 (-338.53) (-1.66%) @ 08:41 CST
+Original Equity:            $20447.42
+[1m[36m[4m
+Tuesday, November 14 2023[24m[31m
+Current Equity:             $19370.54 (-1306.91) (-6.32%)
+Max Equity:                 $20677.46 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $19058.05 (-1619.41) (-7.83%) @ 08:50 CST
+Original Equity:            $20677.46
+[1m[36m[4m
+Wednesday, November 15 2023[24m[32m
+Current Equity:             $19558.92 (+193.03) (+1.00%)
+Max Equity:                 $19719.65 (+353.76) (+1.83%) @ 08:32 CST
+Min Equity:                 $18830.85 (-535.05) (-2.76%) @ 08:40 CST
+Original Equity:            $19365.90
+[1m[36m[4m
+Thursday, November 16 2023[24m[32m
+Current Equity:             $19981.67 (+385.31) (+1.97%)
+Max Equity:                 $20086.33 (+489.97) (+2.50%) @ 08:50 CST
+Min Equity:                 $19492.37 (-104.00) (-0.53%) @ 08:30 CST
+Original Equity:            $19596.37
+[1m[36m[4m
+Friday, November 17 2023[24m[32m
+Current Equity:             $20602.17 (+635.23) (+3.18%)
+Max Equity:                 $20602.17 (+635.23) (+3.18%) @ 09:00 CST
+Min Equity:                 $19966.94 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $19966.94
+[1m[36m[4m
+Monday, November 20 2023[24m[32m
+Current Equity:             $21207.26 (+652.70) (+3.18%)
+Max Equity:                 $21207.26 (+652.70) (+3.18%) @ 09:00 CST
+Min Equity:                 $19996.50 (-558.06) (-2.72%) @ 08:34 CST
+Original Equity:            $20554.56
+[1m[36m[4m
+Tuesday, November 21 2023[24m[31m
+Current Equity:             $20598.63 (-607.21) (-2.86%)
+Max Equity:                 $21564.37 (+358.52) (+1.69%) @ 08:32 CST
+Min Equity:                 $20579.33 (-626.52) (-2.95%) @ 08:55 CST
+Original Equity:            $21205.85
+[1m[36m[4m
+Wednesday, November 22 2023[24m[31m
+Current Equity:             $20341.17 (-287.49) (-1.39%)
+Max Equity:                 $20774.91 (+146.24) (+0.71%) @ 08:31 CST
+Min Equity:                 $19920.44 (-708.23) (-3.43%) @ 08:41 CST
+Original Equity:            $20628.67
+[1m[36m[4m
+Thursday, November 23 2023[24m[32m
+Current Equity:             $20341.17 (+0.00) (+0.00%)
+Max Equity:                 $20341.17 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $20341.17 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $20341.17
+[1m[36m[4m
+Friday, November 24 2023[24m[31m
+Current Equity:             $20259.06 (-112.82) (-0.55%)
+Max Equity:                 $20516.81 (+144.92) (+0.71%) @ 11:31 CST
+Min Equity:                 $19991.92 (-379.97) (-1.87%) @ 08:34 CST
+Original Equity:            $20371.88
+[1m[36m[4m
+📊 Stats
+[0m[1m[31mAvg Daily Return:           -$442.68
+[1m[31mAvg Daily % Return:         -0.88%
+[1m[31mTotal Return:               -$67730.59
+
+[1m[33mDays 2.00% Target Reached:  43/153 (28.10% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:01
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

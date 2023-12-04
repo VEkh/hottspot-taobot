@@ -102,6 +102,11 @@ void Alpaca::Client::load_config() {
               ? (bool)candle_predict_json["enabled"]
               : ml_config.candle_predict.enabled;
 
+      ml_config.candle_predict.hold_winning_prediction =
+          candle_predict_json.contains("hold_winning_prediction")
+              ? (bool)candle_predict_json["hold_winning_prediction"]
+              : ml_config.candle_predict.hold_winning_prediction;
+
       ml_config.candle_predict.inverse_predictions =
           candle_predict_json.contains("inverse_predictions")
               ? (bool)candle_predict_json["inverse_predictions"]
