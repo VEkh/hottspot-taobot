@@ -64,10 +64,6 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  const double alt_stop_profit = api_key_json.contains("alt_stop_profit")
-                                     ? (double)api_key_json["alt_stop_profit"]
-                                     : config.alt_stop_profit;
-
   const bool is_stop_loss_scaled =
       api_key_json.contains("is_stop_loss_scaled")
           ? (bool)api_key_json["is_stop_loss_scaled"]
@@ -87,11 +83,6 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("terminate_after_seconds")
           ? (int)api_key_json["terminate_after_seconds"]
           : config.terminate_after_seconds;
-
-  const bool use_alt_stop_profit =
-      api_key_json.contains("use_alt_stop_profit")
-          ? (bool)api_key_json["use_alt_stop_profit"]
-          : config.use_alt_stop_profit;
 
   ml_config_t ml_config;
 
@@ -147,7 +138,6 @@ void Alpaca::Client::load_config() {
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .account_stop_profit_ratio = api_key_json["account_stop_profit_ratio"],
-      .alt_stop_profit = alt_stop_profit,
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
@@ -162,7 +152,6 @@ void Alpaca::Client::load_config() {
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
       .stop_profit_ratios = stop_profit_ratios,
       .terminate_after_seconds = terminate_after_seconds,
-      .use_alt_stop_profit = use_alt_stop_profit,
   };
 }
 

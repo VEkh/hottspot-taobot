@@ -16,10 +16,6 @@ void Alpaca::TaoBot::reset_backtest() {
         this->api_client.config.ml.candle_predict.inverse_predictions);
   }
 
-  if (this->api_client.config.alt_stop_profit) {
-    this->api_client.config.use_alt_stop_profit = false;
-  }
-
   // `slow_query_countdown` may cause skipping of first daily quote. This
   // will falsely reset the next day's equity to the initial equity.
   update_account_snapshot(true);
