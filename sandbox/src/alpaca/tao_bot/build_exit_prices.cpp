@@ -17,7 +17,9 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     stop_loss_ratio = this->api_client.config.stop_loss_ratios[this->symbol];
   }
 
-  if (this->api_client.config.stop_profit_ratios[this->symbol]) {
+  if (this->api_client.config.use_alt_stop_profit) {
+    stop_profit_ratio = this->api_client.config.alt_stop_profit;
+  } else if (this->api_client.config.stop_profit_ratios[this->symbol]) {
     stop_profit_ratio =
         this->api_client.config.stop_profit_ratios[this->symbol];
   }

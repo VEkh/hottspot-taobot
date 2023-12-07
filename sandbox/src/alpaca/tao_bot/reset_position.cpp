@@ -21,6 +21,11 @@ void Alpaca::TaoBot::reset_position() {
     return;
   }
 
+  if (this->close_order.profit < 0 && this->api_client.config.alt_stop_profit) {
+    this->api_client.config.use_alt_stop_profit =
+        !this->api_client.config.use_alt_stop_profit;
+  }
+
   const position_t position = {
       .close_order = this->close_order,
       .open_order = this->open_order,

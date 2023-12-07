@@ -22,6 +22,7 @@ public:
   struct config_t {
     double account_stop_loss_ratio = 0.0;
     double account_stop_profit_ratio = 0.0;
+    double alt_stop_profit = 0.0;
     std::string api_key;
     std::string api_key_id;
     std::string api_secret_key;
@@ -36,6 +37,7 @@ public:
     double stop_profit_ratio = 2.5;
     std::map<std::string, double> stop_profit_ratios;
     int terminate_after_seconds = 0;
+    bool use_alt_stop_profit = false;
   } config;
 
   Client(){};
