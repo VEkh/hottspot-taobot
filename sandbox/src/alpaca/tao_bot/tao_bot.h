@@ -78,6 +78,7 @@ private:
 
   account_exit_prices_t build_account_exit_prices();
 
+  bool does_position_exist();
   bool has_super_profited();
   bool is_early_close_day();
   bool is_end_of_trading_period();

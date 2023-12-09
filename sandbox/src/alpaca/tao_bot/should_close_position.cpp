@@ -4,6 +4,7 @@
 #include "alpaca/utils.cpp"             // Alpaca::Utils
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "current_mid.cpp"              // current_mid
+#include "does_position_exist.cpp"      // does_position_exist
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
@@ -43,7 +44,7 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->candle_predictor.should_predict() &&
+  if (this->candle_predictor.should_predict(does_position_exist()) &&
       !this->candle_predictor.config.hold_winning_prediction) {
     if (this->candle_predictor.config.rollover_positions) {
       return this->candle_predictor.should_close_position({
