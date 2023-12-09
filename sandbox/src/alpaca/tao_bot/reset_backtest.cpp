@@ -11,11 +11,6 @@ void Alpaca::TaoBot::reset_backtest() {
   advance_current_epoch(this->backtest.next_day_market_open_epoch(
       this->current_epoch, this->api_client.config.late_start_seconds));
 
-  if (this->candle_predictor.should_predict()) {
-    this->candle_predictor.toggle_inverse_predictions(
-        this->api_client.config.ml.candle_predict.inverse_predictions);
-  }
-
   // `slow_query_countdown` may cause skipping of first daily quote. This
   // will falsely reset the next day's equity to the initial equity.
   update_account_snapshot(true);

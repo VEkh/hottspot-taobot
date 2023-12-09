@@ -19,7 +19,6 @@
 #include "should_close_position.cpp"
 #include "should_on_demand_predict.cpp"
 #include "should_predict.cpp"
-#include "toggle_inverse_predictions.cpp"
 
 ML::CandlePredict::CandlePredict(Pg conn, const candle_predict_config_t conf,
                                  const std::string s) {
