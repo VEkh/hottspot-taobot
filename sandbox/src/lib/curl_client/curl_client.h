@@ -20,6 +20,7 @@ public:
   struct post_params_t {
     std::string body;
     http_method_t method = http_method_t::POST;
+    int timeout_seconds = 0;
     std::string url;
   };
 

@@ -2,4 +2,18 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-int main(int argc, char *argv[]) { printf("%05.1f\n", -2.1234); }
+#include "deps.cpp"           // json
+#include "lib/utils/json.cpp" // ::utils::json
+
+int main(int argc, char *argv[]) {
+  std::string input = "empty";
+  json j;
+
+  try {
+    j = ::utils::json::parse_with_catch(input, "sandbox");
+  } catch (...) {
+    printf("🎉\n");
+  }
+
+  printf("input: %s\n", j.dump().c_str());
+}

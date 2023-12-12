@@ -76,6 +76,7 @@ CurlClient Alpaca::Client::place_order(order_t *order) {
         return post({
             .body = body.dump(),
             .method = CurlClient::http_method_t::POST,
+            .timeout_seconds = 3,
             .url = url,
         });
       },
