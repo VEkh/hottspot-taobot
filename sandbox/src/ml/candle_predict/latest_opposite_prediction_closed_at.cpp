@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ML__CANDLE_PREDICT_latest_opposite_prediction_closed_at
 #define ML__CANDLE_PREDICT_latest_opposite_prediction_closed_at
 
