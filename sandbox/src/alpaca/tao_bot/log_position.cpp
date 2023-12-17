@@ -76,7 +76,7 @@ void Alpaca::TaoBot::log_position() {
 
   const int duration = order_duration(this->open_order_ptr);
   const int max_profit_duration =
-      this->current_epoch - this->open_order_ptr->max_profit_at;
+      order_duration(this->open_order_ptr, "max_profit");
 
   printf("Duration: %s • Max Profit Duration: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str(),

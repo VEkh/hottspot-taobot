@@ -15,6 +15,10 @@ void Alpaca::TaoBot::reset_backtest() {
   // will falsely reset the next day's equity to the initial equity.
   update_account_snapshot(true);
 
+  if (this->api_client.config.alt_stop_loss_ratio) {
+    this->api_client.config.should_use_alt_stop_loss = false;
+  }
+
   this->closed_positions = {};
   this->performance = performance_t();
   this->started_at = this->current_epoch;

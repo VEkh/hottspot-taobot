@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_build_exit_prices
 
 #include "lib/utils/float.cpp" // ::utils::float_
+#include "order_duration.cpp"  // order_duration
 #include "tao_bot.h"           // Alpaca::TaoBot
 #include "volatility.cpp"      // volatility
 #include <math.h>              // abs
@@ -17,9 +18,8 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     stop_loss_ratio = this->api_client.config.stop_loss_ratios[this->symbol];
   }
 
-  if (this->api_client.config.stop_profit_ratios[this->symbol]) {
-    stop_profit_ratio =
-        this->api_client.config.stop_profit_ratios[this->symbol];
+  if (this->api_client.config.should_use_alt_stop_loss) {
+    stop_loss_ratio = this->api_client.config.alt_stop_loss_ratio;
   }
 
   if (this->api_client.config.is_stop_loss_scaled) {
@@ -32,6 +32,22 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     });
 
     stop_loss_ratio = stop_loss_ratio * stop_loss_multiplier;
+  }
+
+  if (this->api_client.config.stop_profit_ratios[this->symbol]) {
+    stop_profit_ratio =
+        this->api_client.config.stop_profit_ratios[this->symbol];
+  }
+
+  if (this->api_client.config.is_stop_profit_decayed &&
+      !this->api_client.config.should_use_alt_stop_loss) { // TODO: Temp
+    stop_profit_ratio = ::utils::float_::sigmoid({
+        .decay_rate = -1e-2,
+        .max = 10.0,
+        .min = 1e-4,
+        .x = (double)order_duration(this->open_order_ptr, "max_profit"),
+        .x_shift = 30,
+    });
   }
 
   const double stop_loss = stop_loss_ratio * static_one_sec_variance;

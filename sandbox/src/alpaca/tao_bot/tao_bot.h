@@ -106,7 +106,7 @@ private:
   double target_account_profit_ratio();
   double volatility(const bool);
   exit_prices_t build_exit_prices();
-  int order_duration(const order_t *);
+  int order_duration(const order_t *, const std::string);
   int profit_duration(const double);
   int runtime();
   json fetch_order(const order_t *);

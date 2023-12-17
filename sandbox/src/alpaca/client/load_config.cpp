@@ -64,10 +64,25 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
+  const double alt_stop_loss_ratio =
+      api_key_json.contains("alt_stop_loss_ratio")
+          ? (double)api_key_json["alt_stop_loss_ratio"]
+          : config.alt_stop_loss_ratio;
+
   const bool is_stop_loss_scaled =
       api_key_json.contains("is_stop_loss_scaled")
           ? (bool)api_key_json["is_stop_loss_scaled"]
           : config.is_stop_loss_scaled;
+
+  const bool is_stop_profit_decayed =
+      api_key_json.contains("is_stop_profit_decayed")
+          ? (bool)api_key_json["is_stop_profit_decayed"]
+          : config.is_stop_profit_decayed;
+
+  const bool should_use_alt_stop_loss =
+      api_key_json.contains("should_use_alt_stop_loss")
+          ? (bool)api_key_json["should_use_alt_stop_loss"]
+          : config.should_use_alt_stop_loss;
 
   std::map<std::string, double> stop_loss_ratios =
       api_key_json.contains("stop_loss_ratios")
@@ -138,6 +153,7 @@ void Alpaca::Client::load_config() {
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .account_stop_profit_ratio = api_key_json["account_stop_profit_ratio"],
+      .alt_stop_loss_ratio = alt_stop_loss_ratio,
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
@@ -145,8 +161,10 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .is_live = api_key_json["is_live"],
       .is_stop_loss_scaled = is_stop_loss_scaled,
+      .is_stop_profit_decayed = is_stop_profit_decayed,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
+      .should_use_alt_stop_loss = should_use_alt_stop_loss,
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],

@@ -22,6 +22,7 @@ public:
   struct config_t {
     double account_stop_loss_ratio = 0.0;
     double account_stop_profit_ratio = 0.0;
+    double alt_stop_loss_ratio = 0.0;
     std::string api_key;
     std::string api_key_id;
     std::string api_secret_key;
@@ -29,8 +30,10 @@ public:
     std::string data_base_url;
     bool is_live;
     bool is_stop_loss_scaled = false;
+    bool is_stop_profit_decayed = false;
     int late_start_seconds = 6; // Production's average
     ml_config_t ml;
+    bool should_use_alt_stop_loss = false;
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;
     double stop_profit_ratio = 2.5;
