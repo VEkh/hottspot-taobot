@@ -136,6 +136,22 @@ void DB::Position::compute_golden_stop_ratio(
 
   std::cout << std::endl;
 
+  double max_win_percent = -INFINITY;
+  double min_target_win_percent_delta = INFINITY;
+
+  for (ratio_it = ratios.begin(); ratio_it != ratios.end(); ratio_it++) {
+    const double count = ratio_it->second;
+    const double stop_profit_ratio = ratio_it->first.first;
+    const double target_percent = 100 * (1 / (1 + stop_profit_ratio));
+    const double win_percent = 100.0 * count / total_positions;
+
+    const double target_win_percent_delta = target_percent - win_percent;
+
+    max_win_percent = std::max(max_win_percent, win_percent);
+    min_target_win_percent_delta =
+        std::min(min_target_win_percent_delta, target_win_percent_delta);
+  }
+
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("🥇 %s Golden Ratio Report: %s\n\n", args.symbol.c_str(),
          api_key.c_str());
@@ -149,21 +165,31 @@ void DB::Position::compute_golden_stop_ratio(
   for (ratio_it = ratios.begin(); ratio_it != ratios.end(); ratio_it++) {
     const double count = ratio_it->second;
     const double stop_profit_ratio = ratio_it->first.first;
-    const double target_percentage = 100 * (1 / (1 + stop_profit_ratio));
-    const double win_percentage = 100.0 * count / total_positions;
+    const double target_percent = 100 * (1 / (1 + stop_profit_ratio));
+    const double win_percent = 100.0 * count / total_positions;
+
+    const double target_win_percent_delta = target_percent - win_percent;
+
+    const char *max_win_percent_char =
+        win_percent == max_win_percent ? " 🏆" : "";
+
+    const char *min_target_win_percent_delta_char =
+        target_win_percent_delta == min_target_win_percent_delta ? " 🌟" : "";
 
     Formatted::Stream row_color = fmt.red;
 
-    if (win_percentage >= target_percentage) {
+    if (win_percent >= target_percent) {
       row_color = fmt.green;
-    } else if (target_percentage - win_percentage < 5.0) {
+    } else if (target_percent - win_percent < 5.0) {
       row_color = fmt.yellow;
     }
 
     std::cout << row_color;
-    printf("%.2f              | %05.1f           | %i / %i (%.2f%% 🎯 %.2f%%)\n",
+    printf("%.2f              | %05.1f           | %i / %i (%.2f%% 🎯 "
+           "%.2f%%)%s%s\n",
            ratio_it->first.first, ratio_it->first.second, (int)count,
-           total_positions, win_percentage, target_percentage);
+           total_positions, win_percent, target_percent, max_win_percent_char,
+           min_target_win_percent_delta_char);
 
     std::cout << fmt.yellow;
     printf("-------------------------------------------------------------------"

@@ -1,0 +1,348 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-ml-inv[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2023-04-03 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-ml-inv",
+  "is_live": false,
+  "is_stop_loss_scaled": false,
+  "late_start_seconds": 25,
+  "ml": {
+    "candle_predict": {
+      "duration_minutes": 3,
+      "enabled": true,
+      "hold_winning_prediction": false,
+      "inverse_predictions": true,
+      "on_demand_predictions": true,
+      "prediction_scope": "single",
+      "rollover_positions": false
+    }
+  },
+  "secret_key": "secret_key",
+  "stop_loss_ratio": -0.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[0m
+[0m[1m[35mPositions Processed: 1 of 787[0m[1m[35mPositions Processed: 2 of 787[0m[1m[35mPositions Processed: 3 of 787[0m[1m[35mPositions Processed: 4 of 787[0m[1m[35mPositions Processed: 5 of 787[0m[1m[35mPositions Processed: 6 of 787[0m[1m[35mPositions Processed: 7 of 787[0m[1m[35mPositions Processed: 8 of 787[0m[1m[35mPositions Processed: 9 of 787[0m[1m[35mPositions Processed: 10 of 787[0m[1m[35mPositions Processed: 11 of 787[0m[1m[35mPositions Processed: 12 of 787[0m[1m[35mPositions Processed: 13 of 787[0m[1m[35mPositions Processed: 14 of 787[0m[1m[35mPositions Processed: 15 of 787[0m[1m[35mPositions Processed: 16 of 787[0m[1m[35mPositions Processed: 17 of 787[0m[1m[35mPositions Processed: 18 of 787[0m[1m[35mPositions Processed: 19 of 787[0m[1m[35mPositions Processed: 20 of 787[0m[1m[35mPositions Processed: 21 of 787[0m[1m[35mPositions Processed: 22 of 787[0m[1m[35mPositions Processed: 23 of 787[0m[1m[35mPositions Processed: 24 of 787[0m[1m[35mPositions Processed: 25 of 787[0m[1m[35mPositions Processed: 26 of 787[0m[1m[35mPositions Processed: 27 of 787[0m[1m[35mPositions Processed: 28 of 787[0m[1m[35mPositions Processed: 29 of 787[0m[1m[35mPositions Processed: 30 of 787[0m[1m[35mPositions Processed: 31 of 787[0m[1m[35mPositions Processed: 32 of 787[0m[1m[35mPositions Processed: 33 of 787[0m[1m[35mPositions Processed: 34 of 787[0m[1m[35mPositions Processed: 35 of 787[0m[1m[35mPositions Processed: 36 of 787[0m[1m[35mPositions Processed: 37 of 787[0m[1m[35mPositions Processed: 38 of 787[0m[1m[35mPositions Processed: 39 of 787[0m[1m[35mPositions Processed: 40 of 787[0m[1m[35mPositions Processed: 41 of 787[0m[1m[35mPositions Processed: 42 of 787[0m[1m[35mPositions Processed: 43 of 787[0m[1m[35mPositions Processed: 44 of 787[0m[1m[35mPositions Processed: 45 of 787[0m[1m[35mPositions Processed: 46 of 787[0m[1m[35mPositions Processed: 47 of 787[0m[1m[35mPositions Processed: 48 of 787[0m[1m[35mPositions Processed: 49 of 787[0m[1m[35mPositions Processed: 50 of 787[0m[1m[35mPositions Processed: 51 of 787[0m[1m[35mPositions Processed: 52 of 787[0m[1m[35mPositions Processed: 53 of 787[0m[1m[35mPositions Processed: 54 of 787[0m[1m[35mPositions Processed: 55 of 787[0m[1m[35mPositions Processed: 56 of 787[0m[1m[35mPositions Processed: 57 of 787[0m[1m[35mPositions Processed: 58 of 787[0m[1m[35mPositions Processed: 59 of 787[0m[1m[35mPositions Processed: 60 of 787[0m[1m[35mPositions Processed: 61 of 787[0m[1m[35mPositions Processed: 62 of 787[0m[1m[35mPositions Processed: 63 of 787[0m[1m[35mPositions Processed: 64 of 787[0m[1m[35mPositions Processed: 65 of 787[0m[1m[35mPositions Processed: 66 of 787[0m[1m[35mPositions Processed: 67 of 787[0m[1m[35mPositions Processed: 68 of 787[0m[1m[35mPositions Processed: 69 of 787[0m[1m[35mPositions Processed: 70 of 787[0m[1m[35mPositions Processed: 71 of 787[0m[1m[35mPositions Processed: 72 of 787[0m[1m[35mPositions Processed: 73 of 787[0m[1m[35mPositions Processed: 74 of 787[0m[1m[35mPositions Processed: 75 of 787[0m[1m[35mPositions Processed: 76 of 787[0m[1m[35mPositions Processed: 77 of 787[0m[1m[35mPositions Processed: 78 of 787[0m[1m[35mPositions Processed: 79 of 787[0m[1m[35mPositions Processed: 80 of 787[0m[1m[35mPositions Processed: 81 of 787[0m[1m[35mPositions Processed: 82 of 787[0m[1m[35mPositions Processed: 83 of 787[0m[1m[35mPositions Processed: 84 of 787[0m[1m[35mPositions Processed: 85 of 787[0m[1m[35mPositions Processed: 86 of 787[0m[1m[35mPositions Processed: 87 of 787[0m[1m[35mPositions Processed: 88 of 787[0m[1m[35mPositions Processed: 89 of 787[0m[1m[35mPositions Processed: 90 of 787[0m[1m[35mPositions Processed: 91 of 787[0m[1m[35mPositions Processed: 92 of 787[0m[1m[35mPositions Processed: 93 of 787[0m[1m[35mPositions Processed: 94 of 787[0m[1m[35mPositions Processed: 95 of 787[0m[1m[35mPositions Processed: 96 of 787[0m[1m[35mPositions Processed: 97 of 787[0m[1m[35mPositions Processed: 98 of 787[0m[1m[35mPositions Processed: 99 of 787[0m[1m[35mPositions Processed: 100 of 787[0m[1m[35mPositions Processed: 101 of 787[0m[1m[35mPositions Processed: 102 of 787[0m[1m[35mPositions Processed: 103 of 787[0m[1m[35mPositions Processed: 104 of 787[0m[1m[35mPositions Processed: 105 of 787[0m[1m[35mPositions Processed: 106 of 787[0m[1m[35mPositions Processed: 107 of 787[0m[1m[35mPositions Processed: 108 of 787[0m[1m[35mPositions Processed: 109 of 787[0m[1m[35mPositions Processed: 110 of 787[0m[1m[35mPositions Processed: 111 of 787[0m[1m[35mPositions Processed: 112 of 787[0m[1m[35mPositions Processed: 113 of 787[0m[1m[35mPositions Processed: 114 of 787[0m[1m[35mPositions Processed: 115 of 787[0m[1m[35mPositions Processed: 116 of 787[0m[1m[35mPositions Processed: 117 of 787[0m[1m[35mPositions Processed: 118 of 787[0m[1m[35mPositions Processed: 119 of 787[0m[1m[35mPositions Processed: 120 of 787[0m[1m[35mPositions Processed: 121 of 787[0m[1m[35mPositions Processed: 122 of 787[0m[1m[35mPositions Processed: 123 of 787[0m[1m[35mPositions Processed: 124 of 787[0m[1m[35mPositions Processed: 125 of 787[0m[1m[35mPositions Processed: 126 of 787[0m[1m[35mPositions Processed: 127 of 787[0m[1m[35mPositions Processed: 128 of 787[0m[1m[35mPositions Processed: 129 of 787[0m[1m[35mPositions Processed: 130 of 787[0m[1m[35mPositions Processed: 131 of 787[0m[1m[35mPositions Processed: 132 of 787[0m[1m[35mPositions Processed: 133 of 787[0m[1m[35mPositions Processed: 134 of 787[0m[1m[35mPositions Processed: 135 of 787[0m[1m[35mPositions Processed: 136 of 787[0m[1m[35mPositions Processed: 137 of 787[0m[1m[35mPositions Processed: 138 of 787[0m[1m[35mPositions Processed: 139 of 787[0m[1m[35mPositions Processed: 140 of 787[0m[1m[35mPositions Processed: 141 of 787[0m[1m[35mPositions Processed: 142 of 787[0m[1m[35mPositions Processed: 143 of 787[0m[1m[35mPositions Processed: 144 of 787[0m[1m[35mPositions Processed: 145 of 787[0m[1m[35mPositions Processed: 146 of 787[0m[1m[35mPositions Processed: 147 of 787[0m[1m[35mPositions Processed: 148 of 787[0m[1m[35mPositions Processed: 149 of 787[0m[1m[35mPositions Processed: 150 of 787[0m[1m[35mPositions Processed: 151 of 787[0m[1m[35mPositions Processed: 152 of 787[0m[1m[35mPositions Processed: 153 of 787[0m[1m[35mPositions Processed: 154 of 787[0m[1m[35mPositions Processed: 155 of 787[0m[1m[35mPositions Processed: 156 of 787[0m[1m[35mPositions Processed: 157 of 787[0m[1m[35mPositions Processed: 158 of 787[0m[1m[35mPositions Processed: 159 of 787[0m[1m[35mPositions Processed: 160 of 787[0m[1m[35mPositions Processed: 161 of 787[0m[1m[35mPositions Processed: 162 of 787[0m[1m[35mPositions Processed: 163 of 787[0m[1m[35mPositions Processed: 164 of 787[0m[1m[35mPositions Processed: 165 of 787[0m[1m[35mPositions Processed: 166 of 787[0m[1m[35mPositions Processed: 167 of 787[0m[1m[35mPositions Processed: 168 of 787[0m[1m[35mPositions Processed: 169 of 787[0m[1m[35mPositions Processed: 170 of 787[0m[1m[35mPositions Processed: 171 of 787[0m[1m[35mPositions Processed: 172 of 787[0m[1m[35mPositions Processed: 173 of 787[0m[1m[35mPositions Processed: 174 of 787[0m[1m[35mPositions Processed: 175 of 787[0m[1m[35mPositions Processed: 176 of 787[0m[1m[35mPositions Processed: 177 of 787[0m[1m[35mPositions Processed: 178 of 787[0m[1m[35mPositions Processed: 179 of 787[0m[1m[35mPositions Processed: 180 of 787[0m[1m[35mPositions Processed: 181 of 787[0m[1m[35mPositions Processed: 182 of 787[0m[1m[35mPositions Processed: 183 of 787[0m[1m[35mPositions Processed: 184 of 787[0m[1m[35mPositions Processed: 185 of 787[0m[1m[35mPositions Processed: 186 of 787[0m[1m[35mPositions Processed: 187 of 787[0m[1m[35mPositions Processed: 188 of 787[0m[1m[35mPositions Processed: 189 of 787[0m[1m[35mPositions Processed: 190 of 787[0m[1m[35mPositions Processed: 191 of 787[0m[1m[35mPositions Processed: 192 of 787[0m[1m[35mPositions Processed: 193 of 787[0m[1m[35mPositions Processed: 194 of 787[0m[1m[35mPositions Processed: 195 of 787[0m[1m[35mPositions Processed: 196 of 787[0m[1m[35mPositions Processed: 197 of 787[0m[1m[35mPositions Processed: 198 of 787[0m[1m[35mPositions Processed: 199 of 787[0m[1m[35mPositions Processed: 200 of 787[0m[1m[35mPositions Processed: 201 of 787[0m[1m[35mPositions Processed: 202 of 787[0m[1m[35mPositions Processed: 203 of 787[0m[1m[35mPositions Processed: 204 of 787[0m[1m[35mPositions Processed: 205 of 787[0m[1m[35mPositions Processed: 206 of 787[0m[1m[35mPositions Processed: 207 of 787[0m[1m[35mPositions Processed: 208 of 787[0m[1m[35mPositions Processed: 209 of 787[0m[1m[35mPositions Processed: 210 of 787[0m[1m[35mPositions Processed: 211 of 787[0m[1m[35mPositions Processed: 212 of 787[0m[1m[35mPositions Processed: 213 of 787[0m[1m[35mPositions Processed: 214 of 787[0m[1m[35mPositions Processed: 215 of 787[0m[1m[35mPositions Processed: 216 of 787[0m[1m[35mPositions Processed: 217 of 787[0m[1m[35mPositions Processed: 218 of 787[0m[1m[35mPositions Processed: 219 of 787[0m[1m[35mPositions Processed: 220 of 787[0m[1m[35mPositions Processed: 221 of 787[0m[1m[35mPositions Processed: 222 of 787[0m[1m[35mPositions Processed: 223 of 787[0m[1m[35mPositions Processed: 224 of 787[0m[1m[35mPositions Processed: 225 of 787[0m[1m[35mPositions Processed: 226 of 787[0m[1m[35mPositions Processed: 227 of 787[0m[1m[35mPositions Processed: 228 of 787[0m[1m[35mPositions Processed: 229 of 787[0m[1m[35mPositions Processed: 230 of 787[0m[1m[35mPositions Processed: 231 of 787[0m[1m[35mPositions Processed: 232 of 787[0m[1m[35mPositions Processed: 233 of 787[0m[1m[35mPositions Processed: 234 of 787[0m[1m[35mPositions Processed: 235 of 787[0m[1m[35mPositions Processed: 236 of 787[0m[1m[35mPositions Processed: 237 of 787[0m[1m[35mPositions Processed: 238 of 787[0m[1m[35mPositions Processed: 239 of 787[0m[1m[35mPositions Processed: 240 of 787[0m[1m[35mPositions Processed: 241 of 787[0m[1m[35mPositions Processed: 242 of 787[0m[1m[35mPositions Processed: 243 of 787[0m[1m[35mPositions Processed: 244 of 787[0m[1m[35mPositions Processed: 245 of 787[0m[1m[35mPositions Processed: 246 of 787[0m[1m[35mPositions Processed: 247 of 787[0m[1m[35mPositions Processed: 248 of 787[0m[1m[35mPositions Processed: 249 of 787[0m[1m[35mPositions Processed: 250 of 787[0m[1m[35mPositions Processed: 251 of 787[0m[1m[35mPositions Processed: 252 of 787[0m[1m[35mPositions Processed: 253 of 787[0m[1m[35mPositions Processed: 254 of 787[0m[1m[35mPositions Processed: 255 of 787[0m[1m[35mPositions Processed: 256 of 787[0m[1m[35mPositions Processed: 257 of 787[0m[1m[35mPositions Processed: 258 of 787[0m[1m[35mPositions Processed: 259 of 787[0m[1m[35mPositions Processed: 260 of 787[0m[1m[35mPositions Processed: 261 of 787[0m[1m[35mPositions Processed: 262 of 787[0m[1m[35mPositions Processed: 263 of 787[0m[1m[35mPositions Processed: 264 of 787[0m[1m[35mPositions Processed: 265 of 787[0m[1m[35mPositions Processed: 266 of 787[0m[1m[35mPositions Processed: 267 of 787[0m[1m[35mPositions Processed: 268 of 787[0m[1m[35mPositions Processed: 269 of 787[0m[1m[35mPositions Processed: 270 of 787[0m[1m[35mPositions Processed: 271 of 787[0m[1m[35mPositions Processed: 272 of 787[0m[1m[35mPositions Processed: 273 of 787[0m[1m[35mPositions Processed: 274 of 787[0m[1m[35mPositions Processed: 275 of 787[0m[1m[35mPositions Processed: 276 of 787[0m[1m[35mPositions Processed: 277 of 787[0m[1m[35mPositions Processed: 278 of 787[0m[1m[35mPositions Processed: 279 of 787[0m[1m[35mPositions Processed: 280 of 787[0m[1m[35mPositions Processed: 281 of 787[0m[1m[35mPositions Processed: 282 of 787[0m[1m[35mPositions Processed: 283 of 787[0m[1m[35mPositions Processed: 284 of 787[0m[1m[35mPositions Processed: 285 of 787[0m[1m[35mPositions Processed: 286 of 787[0m[1m[35mPositions Processed: 287 of 787[0m[1m[35mPositions Processed: 288 of 787[0m[1m[35mPositions Processed: 289 of 787[0m[1m[35mPositions Processed: 290 of 787[0m[1m[35mPositions Processed: 291 of 787[0m[1m[35mPositions Processed: 292 of 787[0m[1m[35mPositions Processed: 293 of 787[0m[1m[35mPositions Processed: 294 of 787[0m[1m[35mPositions Processed: 295 of 787[0m[1m[35mPositions Processed: 296 of 787[0m[1m[35mPositions Processed: 297 of 787[0m[1m[35mPositions Processed: 298 of 787[0m[1m[35mPositions Processed: 299 of 787[0m[1m[35mPositions Processed: 300 of 787[0m[1m[35mPositions Processed: 301 of 787[0m[1m[35mPositions Processed: 302 of 787[0m[1m[35mPositions Processed: 303 of 787[0m[1m[35mPositions Processed: 304 of 787[0m[1m[35mPositions Processed: 305 of 787[0m[1m[35mPositions Processed: 306 of 787[0m[1m[35mPositions Processed: 307 of 787[0m[1m[35mPositions Processed: 308 of 787[0m[1m[35mPositions Processed: 309 of 787[0m[1m[35mPositions Processed: 310 of 787[0m[1m[35mPositions Processed: 311 of 787[0m[1m[35mPositions Processed: 312 of 787[0m[1m[35mPositions Processed: 313 of 787[0m[1m[35mPositions Processed: 314 of 787[0m[1m[35mPositions Processed: 315 of 787[0m[1m[35mPositions Processed: 316 of 787[0m[1m[35mPositions Processed: 317 of 787[0m[1m[35mPositions Processed: 318 of 787[0m[1m[35mPositions Processed: 319 of 787[0m[1m[35mPositions Processed: 320 of 787[0m[1m[35mPositions Processed: 321 of 787[0m[1m[35mPositions Processed: 322 of 787[0m[1m[35mPositions Processed: 323 of 787[0m[1m[35mPositions Processed: 324 of 787[0m[1m[35mPositions Processed: 325 of 787[0m[1m[35mPositions Processed: 326 of 787[0m[1m[35mPositions Processed: 327 of 787[0m[1m[35mPositions Processed: 328 of 787[0m[1m[35mPositions Processed: 329 of 787[0m[1m[35mPositions Processed: 330 of 787[0m[1m[35mPositions Processed: 331 of 787[0m[1m[35mPositions Processed: 332 of 787[0m[1m[35mPositions Processed: 333 of 787[0m[1m[35mPositions Processed: 334 of 787[0m[1m[35mPositions Processed: 335 of 787[0m[1m[35mPositions Processed: 336 of 787[0m[1m[35mPositions Processed: 337 of 787[0m[1m[35mPositions Processed: 338 of 787[0m[1m[35mPositions Processed: 339 of 787[0m[1m[35mPositions Processed: 340 of 787[0m[1m[35mPositions Processed: 341 of 787[0m[1m[35mPositions Processed: 342 of 787[0m[1m[35mPositions Processed: 343 of 787[0m[1m[35mPositions Processed: 344 of 787[0m[1m[35mPositions Processed: 345 of 787[0m[1m[35mPositions Processed: 346 of 787[0m[1m[35mPositions Processed: 347 of 787[0m[1m[35mPositions Processed: 348 of 787[0m[1m[35mPositions Processed: 349 of 787[0m[1m[35mPositions Processed: 350 of 787[0m[1m[35mPositions Processed: 351 of 787[0m[1m[35mPositions Processed: 352 of 787[0m[1m[35mPositions Processed: 353 of 787[0m[1m[35mPositions Processed: 354 of 787[0m[1m[35mPositions Processed: 355 of 787[0m[1m[35mPositions Processed: 356 of 787[0m[1m[35mPositions Processed: 357 of 787[0m[1m[35mPositions Processed: 358 of 787[0m[1m[35mPositions Processed: 359 of 787[0m[1m[35mPositions Processed: 360 of 787[0m[1m[35mPositions Processed: 361 of 787[0m[1m[35mPositions Processed: 362 of 787[0m[1m[35mPositions Processed: 363 of 787[0m[1m[35mPositions Processed: 364 of 787[0m[1m[35mPositions Processed: 365 of 787[0m[1m[35mPositions Processed: 366 of 787[0m[1m[35mPositions Processed: 367 of 787[0m[1m[35mPositions Processed: 368 of 787[0m[1m[35mPositions Processed: 369 of 787[0m[1m[35mPositions Processed: 370 of 787[0m[1m[35mPositions Processed: 371 of 787[0m[1m[35mPositions Processed: 372 of 787[0m[1m[35mPositions Processed: 373 of 787[0m[1m[35mPositions Processed: 374 of 787[0m[1m[35mPositions Processed: 375 of 787[0m[1m[35mPositions Processed: 376 of 787[0m[1m[35mPositions Processed: 377 of 787[0m[1m[35mPositions Processed: 378 of 787[0m[1m[35mPositions Processed: 379 of 787[0m[1m[35mPositions Processed: 380 of 787[0m[1m[35mPositions Processed: 381 of 787[0m[1m[35mPositions Processed: 382 of 787[0m[1m[35mPositions Processed: 383 of 787[0m[1m[35mPositions Processed: 384 of 787[0m[1m[35mPositions Processed: 385 of 787[0m[1m[35mPositions Processed: 386 of 787[0m[1m[35mPositions Processed: 387 of 787[0m[1m[35mPositions Processed: 388 of 787[0m[1m[35mPositions Processed: 389 of 787[0m[1m[35mPositions Processed: 390 of 787[0m[1m[35mPositions Processed: 391 of 787[0m[1m[35mPositions Processed: 392 of 787[0m[1m[35mPositions Processed: 393 of 787[0m[1m[35mPositions Processed: 394 of 787[0m[1m[35mPositions Processed: 395 of 787[0m[1m[35mPositions Processed: 396 of 787[0m[1m[35mPositions Processed: 397 of 787[0m[1m[35mPositions Processed: 398 of 787[0m[1m[35mPositions Processed: 399 of 787[0m[1m[35mPositions Processed: 400 of 787[0m[1m[35mPositions Processed: 401 of 787[0m[1m[35mPositions Processed: 402 of 787[0m[1m[35mPositions Processed: 403 of 787[0m[1m[35mPositions Processed: 404 of 787[0m[1m[35mPositions Processed: 405 of 787[0m[1m[35mPositions Processed: 406 of 787[0m[1m[35mPositions Processed: 407 of 787[0m[1m[35mPositions Processed: 408 of 787[0m[1m[35mPositions Processed: 409 of 787[0m[1m[35mPositions Processed: 410 of 787[0m[1m[35mPositions Processed: 411 of 787[0m[1m[35mPositions Processed: 412 of 787[0m[1m[35mPositions Processed: 413 of 787[0m[1m[35mPositions Processed: 414 of 787[0m[1m[35mPositions Processed: 415 of 787[0m[1m[35mPositions Processed: 416 of 787[0m[1m[35mPositions Processed: 417 of 787[0m[1m[35mPositions Processed: 418 of 787[0m[1m[35mPositions Processed: 419 of 787[0m[1m[35mPositions Processed: 420 of 787[0m[1m[35mPositions Processed: 421 of 787[0m[1m[35mPositions Processed: 422 of 787[0m[1m[35mPositions Processed: 423 of 787[0m[1m[35mPositions Processed: 424 of 787[0m[1m[35mPositions Processed: 425 of 787[0m[1m[35mPositions Processed: 426 of 787[0m[1m[35mPositions Processed: 427 of 787[0m[1m[35mPositions Processed: 428 of 787[0m[1m[35mPositions Processed: 429 of 787[0m[1m[35mPositions Processed: 430 of 787[0m[1m[35mPositions Processed: 431 of 787[0m[1m[35mPositions Processed: 432 of 787[0m[1m[35mPositions Processed: 433 of 787[0m[1m[35mPositions Processed: 434 of 787[0m[1m[35mPositions Processed: 435 of 787[0m[1m[35mPositions Processed: 436 of 787[0m[1m[35mPositions Processed: 437 of 787[0m[1m[35mPositions Processed: 438 of 787[0m[1m[35mPositions Processed: 439 of 787[0m[1m[35mPositions Processed: 440 of 787[0m[1m[35mPositions Processed: 441 of 787[0m[1m[35mPositions Processed: 442 of 787[0m[1m[35mPositions Processed: 443 of 787[0m[1m[35mPositions Processed: 444 of 787[0m[1m[35mPositions Processed: 445 of 787[0m[1m[35mPositions Processed: 446 of 787[0m[1m[35mPositions Processed: 447 of 787[0m[1m[35mPositions Processed: 448 of 787[0m[1m[35mPositions Processed: 449 of 787[0m[1m[35mPositions Processed: 450 of 787[0m[1m[35mPositions Processed: 451 of 787[0m[1m[35mPositions Processed: 452 of 787[0m[1m[35mPositions Processed: 453 of 787[0m[1m[35mPositions Processed: 454 of 787[0m[1m[35mPositions Processed: 455 of 787[0m[1m[35mPositions Processed: 456 of 787[0m[1m[35mPositions Processed: 457 of 787[0m[1m[35mPositions Processed: 458 of 787[0m[1m[35mPositions Processed: 459 of 787[0m[1m[35mPositions Processed: 460 of 787[0m[1m[35mPositions Processed: 461 of 787[0m[1m[35mPositions Processed: 462 of 787[0m[1m[35mPositions Processed: 463 of 787[0m[1m[35mPositions Processed: 464 of 787[0m[1m[35mPositions Processed: 465 of 787[0m[1m[35mPositions Processed: 466 of 787[0m[1m[35mPositions Processed: 467 of 787[0m[1m[35mPositions Processed: 468 of 787[0m[1m[35mPositions Processed: 469 of 787[0m[1m[35mPositions Processed: 470 of 787[0m[1m[35mPositions Processed: 471 of 787[0m[1m[35mPositions Processed: 472 of 787[0m[1m[35mPositions Processed: 473 of 787[0m[1m[35mPositions Processed: 474 of 787[0m[1m[35mPositions Processed: 475 of 787[0m[1m[35mPositions Processed: 476 of 787[0m[1m[35mPositions Processed: 477 of 787[0m[1m[35mPositions Processed: 478 of 787[0m[1m[35mPositions Processed: 479 of 787[0m[1m[35mPositions Processed: 480 of 787[0m[1m[35mPositions Processed: 481 of 787[0m[1m[35mPositions Processed: 482 of 787[0m[1m[35mPositions Processed: 483 of 787[0m[1m[35mPositions Processed: 484 of 787[0m[1m[35mPositions Processed: 485 of 787[0m[1m[35mPositions Processed: 486 of 787[0m[1m[35mPositions Processed: 487 of 787[0m[1m[35mPositions Processed: 488 of 787[0m[1m[35mPositions Processed: 489 of 787[0m[1m[35mPositions Processed: 490 of 787[0m[1m[35mPositions Processed: 491 of 787[0m[1m[35mPositions Processed: 492 of 787[0m[1m[35mPositions Processed: 493 of 787[0m[1m[35mPositions Processed: 494 of 787[0m[1m[35mPositions Processed: 495 of 787[0m[1m[35mPositions Processed: 496 of 787[0m[1m[35mPositions Processed: 497 of 787[0m[1m[35mPositions Processed: 498 of 787[0m[1m[35mPositions Processed: 499 of 787[0m[1m[35mPositions Processed: 500 of 787[0m[1m[35mPositions Processed: 501 of 787[0m[1m[35mPositions Processed: 502 of 787[0m[1m[35mPositions Processed: 503 of 787[0m[1m[35mPositions Processed: 504 of 787[0m[1m[35mPositions Processed: 505 of 787[0m[1m[35mPositions Processed: 506 of 787[0m[1m[35mPositions Processed: 507 of 787[0m[1m[35mPositions Processed: 508 of 787[0m[1m[35mPositions Processed: 509 of 787[0m[1m[35mPositions Processed: 510 of 787[0m[1m[35mPositions Processed: 511 of 787[0m[1m[35mPositions Processed: 512 of 787[0m[1m[35mPositions Processed: 513 of 787[0m[1m[35mPositions Processed: 514 of 787[0m[1m[35mPositions Processed: 515 of 787[0m[1m[35mPositions Processed: 516 of 787[0m[1m[35mPositions Processed: 517 of 787[0m[1m[35mPositions Processed: 518 of 787[0m[1m[35mPositions Processed: 519 of 787[0m[1m[35mPositions Processed: 520 of 787[0m[1m[35mPositions Processed: 521 of 787[0m[1m[35mPositions Processed: 522 of 787[0m[1m[35mPositions Processed: 523 of 787[0m[1m[35mPositions Processed: 524 of 787[0m[1m[35mPositions Processed: 525 of 787[0m[1m[35mPositions Processed: 526 of 787[0m[1m[35mPositions Processed: 527 of 787[0m[1m[35mPositions Processed: 528 of 787[0m[1m[35mPositions Processed: 529 of 787[0m[1m[35mPositions Processed: 530 of 787[0m[1m[35mPositions Processed: 531 of 787[0m[1m[35mPositions Processed: 532 of 787[0m[1m[35mPositions Processed: 533 of 787[0m[1m[35mPositions Processed: 534 of 787[0m[1m[35mPositions Processed: 535 of 787[0m[1m[35mPositions Processed: 536 of 787[0m[1m[35mPositions Processed: 537 of 787[0m[1m[35mPositions Processed: 538 of 787[0m[1m[35mPositions Processed: 539 of 787[0m[1m[35mPositions Processed: 540 of 787[0m[1m[35mPositions Processed: 541 of 787[0m[1m[35mPositions Processed: 542 of 787[0m[1m[35mPositions Processed: 543 of 787[0m[1m[35mPositions Processed: 544 of 787[0m[1m[35mPositions Processed: 545 of 787[0m[1m[35mPositions Processed: 546 of 787[0m[1m[35mPositions Processed: 547 of 787[0m[1m[35mPositions Processed: 548 of 787[0m[1m[35mPositions Processed: 549 of 787[0m[1m[35mPositions Processed: 550 of 787[0m[1m[35mPositions Processed: 551 of 787[0m[1m[35mPositions Processed: 552 of 787[0m[1m[35mPositions Processed: 553 of 787[0m[1m[35mPositions Processed: 554 of 787[0m[1m[35mPositions Processed: 555 of 787[0m[1m[35mPositions Processed: 556 of 787[0m[1m[35mPositions Processed: 557 of 787[0m[1m[35mPositions Processed: 558 of 787[0m[1m[35mPositions Processed: 559 of 787[0m[1m[35mPositions Processed: 560 of 787[0m[1m[35mPositions Processed: 561 of 787[0m[1m[35mPositions Processed: 562 of 787[0m[1m[35mPositions Processed: 563 of 787[0m[1m[35mPositions Processed: 564 of 787[0m[1m[35mPositions Processed: 565 of 787[0m[1m[35mPositions Processed: 566 of 787[0m[1m[35mPositions Processed: 567 of 787[0m[1m[35mPositions Processed: 568 of 787[0m[1m[35mPositions Processed: 569 of 787[0m[1m[35mPositions Processed: 570 of 787[0m[1m[35mPositions Processed: 571 of 787[0m[1m[35mPositions Processed: 572 of 787[0m[1m[35mPositions Processed: 573 of 787[0m[1m[35mPositions Processed: 574 of 787[0m[1m[35mPositions Processed: 575 of 787[0m[1m[35mPositions Processed: 576 of 787[0m[1m[35mPositions Processed: 577 of 787[0m[1m[35mPositions Processed: 578 of 787[0m[1m[35mPositions Processed: 579 of 787[0m[1m[35mPositions Processed: 580 of 787[0m[1m[35mPositions Processed: 581 of 787[0m[1m[35mPositions Processed: 582 of 787[0m[1m[35mPositions Processed: 583 of 787[0m[1m[35mPositions Processed: 584 of 787[0m[1m[35mPositions Processed: 585 of 787[0m[1m[35mPositions Processed: 586 of 787[0m[1m[35mPositions Processed: 587 of 787[0m[1m[35mPositions Processed: 588 of 787[0m[1m[35mPositions Processed: 589 of 787[0m[1m[35mPositions Processed: 590 of 787[0m[1m[35mPositions Processed: 591 of 787[0m[1m[35mPositions Processed: 592 of 787[0m[1m[35mPositions Processed: 593 of 787[0m[1m[35mPositions Processed: 594 of 787[0m[1m[35mPositions Processed: 595 of 787[0m[1m[35mPositions Processed: 596 of 787[0m[1m[35mPositions Processed: 597 of 787[0m[1m[35mPositions Processed: 598 of 787[0m[1m[35mPositions Processed: 599 of 787[0m[1m[35mPositions Processed: 600 of 787[0m[1m[35mPositions Processed: 601 of 787[0m[1m[35mPositions Processed: 602 of 787[0m[1m[35mPositions Processed: 603 of 787[0m[1m[35mPositions Processed: 604 of 787[0m[1m[35mPositions Processed: 605 of 787[0m[1m[35mPositions Processed: 606 of 787[0m[1m[35mPositions Processed: 607 of 787[0m[1m[35mPositions Processed: 608 of 787[0m[1m[35mPositions Processed: 609 of 787[0m[1m[35mPositions Processed: 610 of 787[0m[1m[35mPositions Processed: 611 of 787[0m[1m[35mPositions Processed: 612 of 787[0m[1m[35mPositions Processed: 613 of 787[0m[1m[35mPositions Processed: 614 of 787[0m[1m[35mPositions Processed: 615 of 787[0m[1m[35mPositions Processed: 616 of 787[0m[1m[35mPositions Processed: 617 of 787[0m[1m[35mPositions Processed: 618 of 787[0m[1m[35mPositions Processed: 619 of 787[0m[1m[35mPositions Processed: 620 of 787[0m[1m[35mPositions Processed: 621 of 787[0m[1m[35mPositions Processed: 622 of 787[0m[1m[35mPositions Processed: 623 of 787[0m[1m[35mPositions Processed: 624 of 787[0m[1m[35mPositions Processed: 625 of 787[0m[1m[35mPositions Processed: 626 of 787[0m[1m[35mPositions Processed: 627 of 787[0m[1m[35mPositions Processed: 628 of 787[0m[1m[35mPositions Processed: 629 of 787[0m[1m[35mPositions Processed: 630 of 787[0m[1m[35mPositions Processed: 631 of 787[0m[1m[35mPositions Processed: 632 of 787[0m[1m[35mPositions Processed: 633 of 787[0m[1m[35mPositions Processed: 634 of 787[0m[1m[35mPositions Processed: 635 of 787[0m[1m[35mPositions Processed: 636 of 787[0m[1m[35mPositions Processed: 637 of 787[0m[1m[35mPositions Processed: 638 of 787[0m[1m[35mPositions Processed: 639 of 787[0m[1m[35mPositions Processed: 640 of 787[0m[1m[35mPositions Processed: 641 of 787[0m[1m[35mPositions Processed: 642 of 787[0m[1m[35mPositions Processed: 643 of 787[0m[1m[35mPositions Processed: 644 of 787[0m[1m[35mPositions Processed: 645 of 787[0m[1m[35mPositions Processed: 646 of 787[0m[1m[35mPositions Processed: 647 of 787[0m[1m[35mPositions Processed: 648 of 787[0m[1m[35mPositions Processed: 649 of 787[0m[1m[35mPositions Processed: 650 of 787[0m[1m[35mPositions Processed: 651 of 787[0m[1m[35mPositions Processed: 652 of 787[0m[1m[35mPositions Processed: 653 of 787[0m[1m[35mPositions Processed: 654 of 787[0m[1m[35mPositions Processed: 655 of 787[0m[1m[35mPositions Processed: 656 of 787[0m[1m[35mPositions Processed: 657 of 787[0m[1m[35mPositions Processed: 658 of 787[0m[1m[35mPositions Processed: 659 of 787[0m[1m[35mPositions Processed: 660 of 787[0m[1m[35mPositions Processed: 661 of 787[0m[1m[35mPositions Processed: 662 of 787[0m[1m[35mPositions Processed: 663 of 787[0m[1m[35mPositions Processed: 664 of 787[0m[1m[35mPositions Processed: 665 of 787[0m[1m[35mPositions Processed: 666 of 787[0m[1m[35mPositions Processed: 667 of 787[0m[1m[35mPositions Processed: 668 of 787[0m[1m[35mPositions Processed: 669 of 787[0m[1m[35mPositions Processed: 670 of 787[0m[1m[35mPositions Processed: 671 of 787[0m[1m[35mPositions Processed: 672 of 787[0m[1m[35mPositions Processed: 673 of 787[0m[1m[35mPositions Processed: 674 of 787[0m[1m[35mPositions Processed: 675 of 787[0m[1m[35mPositions Processed: 676 of 787[0m[1m[35mPositions Processed: 677 of 787[0m[1m[35mPositions Processed: 678 of 787[0m[1m[35mPositions Processed: 679 of 787[0m[1m[35mPositions Processed: 680 of 787[0m[1m[35mPositions Processed: 681 of 787[0m[1m[35mPositions Processed: 682 of 787[0m[1m[35mPositions Processed: 683 of 787[0m[1m[35mPositions Processed: 684 of 787[0m[1m[35mPositions Processed: 685 of 787[0m[1m[35mPositions Processed: 686 of 787[0m[1m[35mPositions Processed: 687 of 787[0m[1m[35mPositions Processed: 688 of 787[0m[1m[35mPositions Processed: 689 of 787[0m[1m[35mPositions Processed: 690 of 787[0m[1m[35mPositions Processed: 691 of 787[0m[1m[35mPositions Processed: 692 of 787[0m[1m[35mPositions Processed: 693 of 787[0m[1m[35mPositions Processed: 694 of 787[0m[1m[35mPositions Processed: 695 of 787[0m[1m[35mPositions Processed: 696 of 787[0m[1m[35mPositions Processed: 697 of 787[0m[1m[35mPositions Processed: 698 of 787[0m[1m[35mPositions Processed: 699 of 787[0m[1m[35mPositions Processed: 700 of 787[0m[1m[35mPositions Processed: 701 of 787[0m[1m[35mPositions Processed: 702 of 787[0m[1m[35mPositions Processed: 703 of 787[0m[1m[35mPositions Processed: 704 of 787[0m[1m[35mPositions Processed: 705 of 787[0m[1m[35mPositions Processed: 706 of 787[0m[1m[35mPositions Processed: 707 of 787[0m[1m[35mPositions Processed: 708 of 787[0m[1m[35mPositions Processed: 709 of 787[0m[1m[35mPositions Processed: 710 of 787[0m[1m[35mPositions Processed: 711 of 787[0m[1m[35mPositions Processed: 712 of 787[0m[1m[35mPositions Processed: 713 of 787[0m[1m[35mPositions Processed: 714 of 787[0m[1m[35mPositions Processed: 715 of 787[0m[1m[35mPositions Processed: 716 of 787[0m[1m[35mPositions Processed: 717 of 787[0m[1m[35mPositions Processed: 718 of 787[0m[1m[35mPositions Processed: 719 of 787[0m[1m[35mPositions Processed: 720 of 787[0m[1m[35mPositions Processed: 721 of 787[0m[1m[35mPositions Processed: 722 of 787[0m[1m[35mPositions Processed: 723 of 787[0m[1m[35mPositions Processed: 724 of 787[0m[1m[35mPositions Processed: 725 of 787[0m[1m[35mPositions Processed: 726 of 787[0m[1m[35mPositions Processed: 727 of 787[0m[1m[35mPositions Processed: 728 of 787[0m[1m[35mPositions Processed: 729 of 787[0m[1m[35mPositions Processed: 730 of 787[0m[1m[35mPositions Processed: 731 of 787[0m[1m[35mPositions Processed: 732 of 787[0m[1m[35mPositions Processed: 733 of 787[0m[1m[35mPositions Processed: 734 of 787[0m[1m[35mPositions Processed: 735 of 787[0m[1m[35mPositions Processed: 736 of 787[0m[1m[35mPositions Processed: 737 of 787[0m[1m[35mPositions Processed: 738 of 787[0m[1m[35mPositions Processed: 739 of 787[0m[1m[35mPositions Processed: 740 of 787[0m[1m[35mPositions Processed: 741 of 787[0m[1m[35mPositions Processed: 742 of 787[0m[1m[35mPositions Processed: 743 of 787[0m[1m[35mPositions Processed: 744 of 787[0m[1m[35mPositions Processed: 745 of 787[0m[1m[35mPositions Processed: 746 of 787[0m[1m[35mPositions Processed: 747 of 787[0m[1m[35mPositions Processed: 748 of 787[0m[1m[35mPositions Processed: 749 of 787[0m[1m[35mPositions Processed: 750 of 787[0m[1m[35mPositions Processed: 751 of 787[0m[1m[35mPositions Processed: 752 of 787[0m[1m[35mPositions Processed: 753 of 787[0m[1m[35mPositions Processed: 754 of 787[0m[1m[35mPositions Processed: 755 of 787[0m[1m[35mPositions Processed: 756 of 787[0m[1m[35mPositions Processed: 757 of 787[0m[1m[35mPositions Processed: 758 of 787[0m[1m[35mPositions Processed: 759 of 787[0m[1m[35mPositions Processed: 760 of 787[0m[1m[35mPositions Processed: 761 of 787[0m[1m[35mPositions Processed: 762 of 787[0m[1m[35mPositions Processed: 763 of 787[0m[1m[35mPositions Processed: 764 of 787[0m[1m[35mPositions Processed: 765 of 787[0m[1m[35mPositions Processed: 766 of 787[0m[1m[35mPositions Processed: 767 of 787[0m[1m[35mPositions Processed: 768 of 787[0m[1m[35mPositions Processed: 769 of 787[0m[1m[35mPositions Processed: 770 of 787[0m[1m[35mPositions Processed: 771 of 787[0m[1m[35mPositions Processed: 772 of 787[0m[1m[35mPositions Processed: 773 of 787[0m[1m[35mPositions Processed: 774 of 787[0m[1m[35mPositions Processed: 775 of 787[0m[1m[35mPositions Processed: 776 of 787[0m[1m[35mPositions Processed: 777 of 787[0m[1m[35mPositions Processed: 778 of 787[0m[1m[35mPositions Processed: 779 of 787[0m[1m[35mPositions Processed: 780 of 787[0m[1m[35mPositions Processed: 781 of 787[0m[1m[35mPositions Processed: 782 of 787[0m[1m[35mPositions Processed: 783 of 787[0m[1m[35mPositions Processed: 784 of 787[0m[1m[35mPositions Processed: 785 of 787[0m[1m[35mPositions Processed: 786 of 787[0m[1m[35mPositions Processed: 787 of 787
+
+[1m[36m[4m🥇 AMZN Golden Ratio Report: backtest-ml-inv
+
+[24m[33mStop Profit Ratio | Stop Loss Ratio | Performance
+---------------------------------------------------------------------
+[31m0.10              | -60.0           | 564 / 787 (71.66% 🎯 90.91%)
+[33m---------------------------------------------------------------------
+[31m0.10              | -50.0           | 583 / 787 (74.08% 🎯 90.91%)
+[33m---------------------------------------------------------------------
+[31m0.10              | -40.0           | 583 / 787 (74.08% 🎯 90.91%)
+[33m---------------------------------------------------------------------
+[31m0.10              | -30.0           | 612 / 787 (77.76% 🎯 90.91%) 🏆
+[33m---------------------------------------------------------------------
+[31m0.10              | -20.0           | 581 / 787 (73.82% 🎯 90.91%)
+[33m---------------------------------------------------------------------
+[31m0.20              | -60.0           | 421 / 787 (53.49% 🎯 83.33%)
+[33m---------------------------------------------------------------------
+[31m0.20              | -50.0           | 469 / 787 (59.59% 🎯 83.33%)
+[33m---------------------------------------------------------------------
+[31m0.20              | -40.0           | 503 / 787 (63.91% 🎯 83.33%)
+[33m---------------------------------------------------------------------
+[31m0.20              | -30.0           | 543 / 787 (69.00% 🎯 83.33%)
+[33m---------------------------------------------------------------------
+[31m0.20              | -20.0           | 540 / 787 (68.61% 🎯 83.33%)
+[33m---------------------------------------------------------------------
+[31m0.30              | -60.0           | 330 / 787 (41.93% 🎯 76.92%)
+[33m---------------------------------------------------------------------
+[31m0.30              | -50.0           | 380 / 787 (48.28% 🎯 76.92%)
+[33m---------------------------------------------------------------------
+[31m0.30              | -40.0           | 413 / 787 (52.48% 🎯 76.92%)
+[33m---------------------------------------------------------------------
+[31m0.30              | -30.0           | 479 / 787 (60.86% 🎯 76.92%)
+[33m---------------------------------------------------------------------
+[31m0.30              | -20.0           | 514 / 787 (65.31% 🎯 76.92%) 🌟
+[33m---------------------------------------------------------------------
+[31m0.40              | -60.0           | 244 / 787 (31.00% 🎯 71.43%)
+[33m---------------------------------------------------------------------
+[31m0.40              | -50.0           | 287 / 787 (36.47% 🎯 71.43%)
+[33m---------------------------------------------------------------------
+[31m0.40              | -40.0           | 362 / 787 (46.00% 🎯 71.43%)
+[33m---------------------------------------------------------------------
+[31m0.40              | -30.0           | 401 / 787 (50.95% 🎯 71.43%)
+[33m---------------------------------------------------------------------
+[31m0.40              | -20.0           | 465 / 787 (59.09% 🎯 71.43%)
+[33m---------------------------------------------------------------------
+[31m0.50              | -60.0           | 181 / 787 (23.00% 🎯 66.67%)
+[33m---------------------------------------------------------------------
+[31m0.50              | -50.0           | 232 / 787 (29.48% 🎯 66.67%)
+[33m---------------------------------------------------------------------
+[31m0.50              | -40.0           | 283 / 787 (35.96% 🎯 66.67%)
+[33m---------------------------------------------------------------------
+[31m0.50              | -30.0           | 363 / 787 (46.12% 🎯 66.67%)
+[33m---------------------------------------------------------------------
+[31m0.50              | -20.0           | 427 / 787 (54.26% 🎯 66.67%)
+[33m---------------------------------------------------------------------
+[31m0.60              | -60.0           | 134 / 787 (17.03% 🎯 62.50%)
+[33m---------------------------------------------------------------------
+[31m0.60              | -50.0           | 180 / 787 (22.87% 🎯 62.50%)
+[33m---------------------------------------------------------------------
+[31m0.60              | -40.0           | 238 / 787 (30.24% 🎯 62.50%)
+[33m---------------------------------------------------------------------
+[31m0.60              | -30.0           | 312 / 787 (39.64% 🎯 62.50%)
+[33m---------------------------------------------------------------------
+[31m0.60              | -20.0           | 376 / 787 (47.78% 🎯 62.50%)
+[33m---------------------------------------------------------------------
+[31m0.70              | -60.0           | 94 / 787 (11.94% 🎯 58.82%)
+[33m---------------------------------------------------------------------
+[31m0.70              | -50.0           | 139 / 787 (17.66% 🎯 58.82%)
+[33m---------------------------------------------------------------------
+[31m0.70              | -40.0           | 195 / 787 (24.78% 🎯 58.82%)
+[33m---------------------------------------------------------------------
+[31m0.70              | -30.0           | 265 / 787 (33.67% 🎯 58.82%)
+[33m---------------------------------------------------------------------
+[31m0.70              | -20.0           | 360 / 787 (45.74% 🎯 58.82%)
+[33m---------------------------------------------------------------------
+[31m0.80              | -60.0           | 68 / 787 (8.64% 🎯 55.56%)
+[33m---------------------------------------------------------------------
+[31m0.80              | -50.0           | 102 / 787 (12.96% 🎯 55.56%)
+[33m---------------------------------------------------------------------
+[31m0.80              | -40.0           | 155 / 787 (19.70% 🎯 55.56%)
+[33m---------------------------------------------------------------------
+[31m0.80              | -30.0           | 230 / 787 (29.22% 🎯 55.56%)
+[33m---------------------------------------------------------------------
+[31m0.80              | -20.0           | 327 / 787 (41.55% 🎯 55.56%)
+[33m---------------------------------------------------------------------
+[31m0.90              | -60.0           | 48 / 787 (6.10% 🎯 52.63%)
+[33m---------------------------------------------------------------------
+[31m0.90              | -50.0           | 74 / 787 (9.40% 🎯 52.63%)
+[33m---------------------------------------------------------------------
+[31m0.90              | -40.0           | 130 / 787 (16.52% 🎯 52.63%)
+[33m---------------------------------------------------------------------
+[31m0.90              | -30.0           | 193 / 787 (24.52% 🎯 52.63%)
+[33m---------------------------------------------------------------------
+[31m0.90              | -20.0           | 291 / 787 (36.98% 🎯 52.63%)
+[33m---------------------------------------------------------------------
+[31m1.00              | -60.0           | 31 / 787 (3.94% 🎯 50.00%)
+[33m---------------------------------------------------------------------
+[31m1.00              | -50.0           | 58 / 787 (7.37% 🎯 50.00%)
+[33m---------------------------------------------------------------------
+[31m1.00              | -40.0           | 100 / 787 (12.71% 🎯 50.00%)
+[33m---------------------------------------------------------------------
+[31m1.00              | -30.0           | 171 / 787 (21.73% 🎯 50.00%)
+[33m---------------------------------------------------------------------
+[31m1.00              | -20.0           | 253 / 787 (32.15% 🎯 50.00%)
+[33m---------------------------------------------------------------------
+[31m1.10              | -60.0           | 25 / 787 (3.18% 🎯 47.62%)
+[33m---------------------------------------------------------------------
+[31m1.10              | -50.0           | 44 / 787 (5.59% 🎯 47.62%)
+[33m---------------------------------------------------------------------
+[31m1.10              | -40.0           | 80 / 787 (10.17% 🎯 47.62%)
+[33m---------------------------------------------------------------------
+[31m1.10              | -30.0           | 143 / 787 (18.17% 🎯 47.62%)
+[33m---------------------------------------------------------------------
+[31m1.10              | -20.0           | 231 / 787 (29.35% 🎯 47.62%)
+[33m---------------------------------------------------------------------
+[31m1.20              | -60.0           | 16 / 787 (2.03% 🎯 45.45%)
+[33m---------------------------------------------------------------------
+[31m1.20              | -50.0           | 31 / 787 (3.94% 🎯 45.45%)
+[33m---------------------------------------------------------------------
+[31m1.20              | -40.0           | 67 / 787 (8.51% 🎯 45.45%)
+[33m---------------------------------------------------------------------
+[31m1.20              | -30.0           | 124 / 787 (15.76% 🎯 45.45%)
+[33m---------------------------------------------------------------------
+[31m1.20              | -20.0           | 212 / 787 (26.94% 🎯 45.45%)
+[33m---------------------------------------------------------------------
+[31m1.30              | -60.0           | 10 / 787 (1.27% 🎯 43.48%)
+[33m---------------------------------------------------------------------
+[31m1.30              | -50.0           | 26 / 787 (3.30% 🎯 43.48%)
+[33m---------------------------------------------------------------------
+[31m1.30              | -40.0           | 54 / 787 (6.86% 🎯 43.48%)
+[33m---------------------------------------------------------------------
+[31m1.30              | -30.0           | 102 / 787 (12.96% 🎯 43.48%)
+[33m---------------------------------------------------------------------
+[31m1.30              | -20.0           | 193 / 787 (24.52% 🎯 43.48%)
+[33m---------------------------------------------------------------------
+[31m1.40              | -60.0           | 9 / 787 (1.14% 🎯 41.67%)
+[33m---------------------------------------------------------------------
+[31m1.40              | -50.0           | 19 / 787 (2.41% 🎯 41.67%)
+[33m---------------------------------------------------------------------
+[31m1.40              | -40.0           | 40 / 787 (5.08% 🎯 41.67%)
+[33m---------------------------------------------------------------------
+[31m1.40              | -30.0           | 86 / 787 (10.93% 🎯 41.67%)
+[33m---------------------------------------------------------------------
+[31m1.40              | -20.0           | 173 / 787 (21.98% 🎯 41.67%)
+[33m---------------------------------------------------------------------
+[31m1.50              | -60.0           | 7 / 787 (0.89% 🎯 40.00%)
+[33m---------------------------------------------------------------------
+[31m1.50              | -50.0           | 14 / 787 (1.78% 🎯 40.00%)
+[33m---------------------------------------------------------------------
+[31m1.50              | -40.0           | 31 / 787 (3.94% 🎯 40.00%)
+[33m---------------------------------------------------------------------
+[31m1.50              | -30.0           | 68 / 787 (8.64% 🎯 40.00%)
+[33m---------------------------------------------------------------------
+[31m1.50              | -20.0           | 156 / 787 (19.82% 🎯 40.00%)
+[33m---------------------------------------------------------------------
+[31m1.60              | -60.0           | 6 / 787 (0.76% 🎯 38.46%)
+[33m---------------------------------------------------------------------
+[31m1.60              | -50.0           | 10 / 787 (1.27% 🎯 38.46%)
+[33m---------------------------------------------------------------------
+[31m1.60              | -40.0           | 27 / 787 (3.43% 🎯 38.46%)
+[33m---------------------------------------------------------------------
+[31m1.60              | -30.0           | 62 / 787 (7.88% 🎯 38.46%)
+[33m---------------------------------------------------------------------
+[31m1.60              | -20.0           | 134 / 787 (17.03% 🎯 38.46%)
+[33m---------------------------------------------------------------------
+[31m1.70              | -60.0           | 5 / 787 (0.64% 🎯 37.04%)
+[33m---------------------------------------------------------------------
+[31m1.70              | -50.0           | 8 / 787 (1.02% 🎯 37.04%)
+[33m---------------------------------------------------------------------
+[31m1.70              | -40.0           | 21 / 787 (2.67% 🎯 37.04%)
+[33m---------------------------------------------------------------------
+[31m1.70              | -30.0           | 53 / 787 (6.73% 🎯 37.04%)
+[33m---------------------------------------------------------------------
+[31m1.70              | -20.0           | 123 / 787 (15.63% 🎯 37.04%)
+[33m---------------------------------------------------------------------
+[31m1.80              | -60.0           | 5 / 787 (0.64% 🎯 35.71%)
+[33m---------------------------------------------------------------------
+[31m1.80              | -50.0           | 7 / 787 (0.89% 🎯 35.71%)
+[33m---------------------------------------------------------------------
+[31m1.80              | -40.0           | 16 / 787 (2.03% 🎯 35.71%)
+[33m---------------------------------------------------------------------
+[31m1.80              | -30.0           | 43 / 787 (5.46% 🎯 35.71%)
+[33m---------------------------------------------------------------------
+[31m1.80              | -20.0           | 112 / 787 (14.23% 🎯 35.71%)
+[33m---------------------------------------------------------------------
+[31m1.90              | -60.0           | 5 / 787 (0.64% 🎯 34.48%)
+[33m---------------------------------------------------------------------
+[31m1.90              | -50.0           | 6 / 787 (0.76% 🎯 34.48%)
+[33m---------------------------------------------------------------------
+[31m1.90              | -40.0           | 12 / 787 (1.52% 🎯 34.48%)
+[33m---------------------------------------------------------------------
+[31m1.90              | -30.0           | 34 / 787 (4.32% 🎯 34.48%)
+[33m---------------------------------------------------------------------
+[31m1.90              | -20.0           | 100 / 787 (12.71% 🎯 34.48%)
+[33m---------------------------------------------------------------------
+[31m2.00              | -60.0           | 4 / 787 (0.51% 🎯 33.33%)
+[33m---------------------------------------------------------------------
+[31m2.00              | -50.0           | 5 / 787 (0.64% 🎯 33.33%)
+[33m---------------------------------------------------------------------
+[31m2.00              | -40.0           | 10 / 787 (1.27% 🎯 33.33%)
+[33m---------------------------------------------------------------------
+[31m2.00              | -30.0           | 28 / 787 (3.56% 🎯 33.33%)
+[33m---------------------------------------------------------------------
+[31m2.00              | -20.0           | 84 / 787 (10.67% 🎯 33.33%)
+[33m---------------------------------------------------------------------
+[31m2.10              | -60.0           | 2 / 787 (0.25% 🎯 32.26%)
+[33m---------------------------------------------------------------------
+[31m2.10              | -50.0           | 5 / 787 (0.64% 🎯 32.26%)
+[33m---------------------------------------------------------------------
+[31m2.10              | -40.0           | 9 / 787 (1.14% 🎯 32.26%)
+[33m---------------------------------------------------------------------
+[31m2.10              | -30.0           | 25 / 787 (3.18% 🎯 32.26%)
+[33m---------------------------------------------------------------------
+[31m2.10              | -20.0           | 77 / 787 (9.78% 🎯 32.26%)
+[33m---------------------------------------------------------------------
+[31m2.20              | -60.0           | 1 / 787 (0.13% 🎯 31.25%)
+[33m---------------------------------------------------------------------
+[31m2.20              | -50.0           | 5 / 787 (0.64% 🎯 31.25%)
+[33m---------------------------------------------------------------------
+[31m2.20              | -40.0           | 7 / 787 (0.89% 🎯 31.25%)
+[33m---------------------------------------------------------------------
+[31m2.20              | -30.0           | 23 / 787 (2.92% 🎯 31.25%)
+[33m---------------------------------------------------------------------
+[31m2.20              | -20.0           | 68 / 787 (8.64% 🎯 31.25%)
+[33m---------------------------------------------------------------------
+[31m2.30              | -60.0           | 1 / 787 (0.13% 🎯 30.30%)
+[33m---------------------------------------------------------------------
+[31m2.30              | -50.0           | 5 / 787 (0.64% 🎯 30.30%)
+[33m---------------------------------------------------------------------
+[31m2.30              | -40.0           | 6 / 787 (0.76% 🎯 30.30%)
+[33m---------------------------------------------------------------------
+[31m2.30              | -30.0           | 20 / 787 (2.54% 🎯 30.30%)
+[33m---------------------------------------------------------------------
+[31m2.30              | -20.0           | 60 / 787 (7.62% 🎯 30.30%)
+[33m---------------------------------------------------------------------
+[31m2.40              | -60.0           | 1 / 787 (0.13% 🎯 29.41%)
+[33m---------------------------------------------------------------------
+[31m2.40              | -50.0           | 4 / 787 (0.51% 🎯 29.41%)
+[33m---------------------------------------------------------------------
+[31m2.40              | -40.0           | 6 / 787 (0.76% 🎯 29.41%)
+[33m---------------------------------------------------------------------
+[31m2.40              | -30.0           | 15 / 787 (1.91% 🎯 29.41%)
+[33m---------------------------------------------------------------------
+[31m2.40              | -20.0           | 56 / 787 (7.12% 🎯 29.41%)
+[33m---------------------------------------------------------------------
+[31m2.50              | -60.0           | 0 / 787 (0.00% 🎯 28.57%)
+[33m---------------------------------------------------------------------
+[31m2.50              | -50.0           | 2 / 787 (0.25% 🎯 28.57%)
+[33m---------------------------------------------------------------------
+[31m2.50              | -40.0           | 5 / 787 (0.64% 🎯 28.57%)
+[33m---------------------------------------------------------------------
+[31m2.50              | -30.0           | 13 / 787 (1.65% 🎯 28.57%)
+[33m---------------------------------------------------------------------
+[31m2.50              | -20.0           | 48 / 787 (6.10% 🎯 28.57%)
+[33m---------------------------------------------------------------------
+[31m2.60              | -60.0           | 0 / 787 (0.00% 🎯 27.78%)
+[33m---------------------------------------------------------------------
+[31m2.60              | -50.0           | 1 / 787 (0.13% 🎯 27.78%)
+[33m---------------------------------------------------------------------
+[31m2.60              | -40.0           | 5 / 787 (0.64% 🎯 27.78%)
+[33m---------------------------------------------------------------------
+[31m2.60              | -30.0           | 9 / 787 (1.14% 🎯 27.78%)
+[33m---------------------------------------------------------------------
+[31m2.60              | -20.0           | 45 / 787 (5.72% 🎯 27.78%)
+[33m---------------------------------------------------------------------
+[31m2.70              | -60.0           | 0 / 787 (0.00% 🎯 27.03%)
+[33m---------------------------------------------------------------------
+[31m2.70              | -50.0           | 1 / 787 (0.13% 🎯 27.03%)
+[33m---------------------------------------------------------------------
+[31m2.70              | -40.0           | 5 / 787 (0.64% 🎯 27.03%)
+[33m---------------------------------------------------------------------
+[31m2.70              | -30.0           | 9 / 787 (1.14% 🎯 27.03%)
+[33m---------------------------------------------------------------------
+[31m2.70              | -20.0           | 38 / 787 (4.83% 🎯 27.03%)
+[33m---------------------------------------------------------------------
+[31m2.80              | -60.0           | 0 / 787 (0.00% 🎯 26.32%)
+[33m---------------------------------------------------------------------
+[31m2.80              | -50.0           | 1 / 787 (0.13% 🎯 26.32%)
+[33m---------------------------------------------------------------------
+[31m2.80              | -40.0           | 5 / 787 (0.64% 🎯 26.32%)
+[33m---------------------------------------------------------------------
+[31m2.80              | -30.0           | 8 / 787 (1.02% 🎯 26.32%)
+[33m---------------------------------------------------------------------
+[31m2.80              | -20.0           | 34 / 787 (4.32% 🎯 26.32%)
+[33m---------------------------------------------------------------------
+[31m2.90              | -60.0           | 0 / 787 (0.00% 🎯 25.64%)
+[33m---------------------------------------------------------------------
+[31m2.90              | -50.0           | 1 / 787 (0.13% 🎯 25.64%)
+[33m---------------------------------------------------------------------
+[31m2.90              | -40.0           | 5 / 787 (0.64% 🎯 25.64%)
+[33m---------------------------------------------------------------------
+[31m2.90              | -30.0           | 7 / 787 (0.89% 🎯 25.64%)
+[33m---------------------------------------------------------------------
+[31m2.90              | -20.0           | 31 / 787 (3.94% 🎯 25.64%)
+[33m---------------------------------------------------------------------
+[31m3.00              | -60.0           | 0 / 787 (0.00% 🎯 25.00%)
+[33m---------------------------------------------------------------------
+[31m3.00              | -50.0           | 0 / 787 (0.00% 🎯 25.00%)
+[33m---------------------------------------------------------------------
+[31m3.00              | -40.0           | 4 / 787 (0.51% 🎯 25.00%)
+[33m---------------------------------------------------------------------
+[31m3.00              | -30.0           | 7 / 787 (0.89% 🎯 25.00%)
+[33m---------------------------------------------------------------------
+[31m3.00              | -20.0           | 25 / 787 (3.18% 🎯 25.00%)
+[33m---------------------------------------------------------------------
+[0m
+[1m[31m💰 Total Return: -$8562.14
+[0m
+[1m[36m⌚ Finished in 00:40
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m
