@@ -17,6 +17,8 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
   order->max_profit = std::max(profit, order->max_profit);
   order->min_profit = std::min(profit, order->min_profit);
   order->profit = profit;
+  order->stop_loss = this->exit_prices.stop_loss;
+  order->stop_profit = this->exit_prices.stop_profit;
 
   if (profit == order->max_profit) {
     order->max_profit_at = this->current_epoch;
@@ -30,6 +32,8 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
 void Alpaca::TaoBot::set_profit(order_t *close_order_,
                                 const order_t *open_order_) {
   close_order_->profit = compute_profit(close_order_, open_order_);
+  close_order_->stop_loss = open_order_->stop_loss;
+  close_order_->stop_profit = open_order_->stop_profit;
 }
 
 #endif

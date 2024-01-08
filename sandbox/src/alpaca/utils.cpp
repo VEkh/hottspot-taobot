@@ -94,7 +94,7 @@ bool is_holiday(const double epoch) {
       {"2023-01-02", true}, {"2023-01-16", true}, {"2023-02-20", true},
       {"2023-04-07", true}, {"2023-05-29", true}, {"2023-06-19", true},
       {"2023-07-04", true}, {"2023-09-04", true}, {"2023-11-23", true},
-      {"2023-12-25", true},
+      {"2023-12-25", true}, {"2024-01-01", true},
   };
 
   const std::string date_string = ::utils::time_::date_string(epoch);

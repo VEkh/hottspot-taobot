@@ -22,18 +22,29 @@ public:
   struct config_t {
     double account_stop_loss_ratio = 0.0;
     double account_stop_profit_ratio = 0.0;
+    int alt_profit_timeout_seconds = 0; // TODO: Decide
     double alt_stop_loss_ratio = 0.0;
+    double alt_stop_profit_ratio = 0.0; // TODO: Decide
     std::string api_key;
     std::string api_key_id;
     std::string api_secret_key;
     std::string base_url;
     std::string data_base_url;
     bool is_live;
-    bool is_stop_loss_scaled = false;
+    bool is_stop_loss_decayed = false; // TODO: Decide
     bool is_stop_profit_decayed = false;
     int late_start_seconds = 6; // Production's average
     ml_config_t ml;
+    int profit_timeout_seconds = 0;             // TODO: Decide
+    bool should_await_reclaimed_profit = false; // TODO: Decide
+    bool should_expand_stop_loss = false;
+    bool should_toggle_profit_timeout_seconds = false;  // TODO: Decide
+    bool should_toggle_stop_loss = false;               // TODO: Decide
+    bool should_toggle_stop_profit = false;             // TODO: Decide
+    bool should_toggle_stop_profit_decay = false;       // TODO: Decide
+    bool should_use_alt_profit_timeout_seconds = false; // TODO: Decide
     bool should_use_alt_stop_loss = false;
+    bool should_use_alt_stop_profit = false; // TODO: Decide
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;
     double stop_profit_ratio = 2.5;

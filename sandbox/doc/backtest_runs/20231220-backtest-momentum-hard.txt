@@ -1,0 +1,45 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-hard[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "alt_stop_profit_ratio": 0.25,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2023-05-05 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum-hard",
+  "is_live": false,
+  "late_start_seconds": 25,
+  "profit_timeout_seconds": 1800,
+  "secret_key": "secret_key",
+  "should_expand_stop_loss": true,
+  "should_toggle_stop_profit": true,
+  "should_use_alt_stop_profit": false,
+  "stop_loss_ratio": -60.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[1m[36m[4m
+Friday, May  5 2023[24m[32m
+Current Equity:             $101195.10 (+1195.10) (+1.20%)
+Max Equity:                 $101621.94 (+1621.94) (+1.62%) @ 14:52 CDT
+Min Equity:                 $95693.15 (-4306.85) (-4.31%) @ 09:28 CDT
+Original Equity:            $100000.00
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$1195.10
+[1m[32mAvg Daily % Return:         +1.20%
+[1m[32mTotal Return:               +$1195.10
+
+[1m[33mDays 2.00% Target Reached:  0/1 (0.00% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

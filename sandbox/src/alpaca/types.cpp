@@ -48,6 +48,8 @@ struct order_t {
   double profit = 0.00;
   double quantity = 0.00;
   order_status_t status = order_status_t::ORDER_INIT;
+  double stop_loss = 0.00;
+  double stop_profit = 0.00;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   double timestamp = 0;

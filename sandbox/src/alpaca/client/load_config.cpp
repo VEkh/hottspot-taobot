@@ -69,15 +69,82 @@ void Alpaca::Client::load_config() {
           ? (double)api_key_json["alt_stop_loss_ratio"]
           : config.alt_stop_loss_ratio;
 
-  const bool is_stop_loss_scaled =
-      api_key_json.contains("is_stop_loss_scaled")
-          ? (bool)api_key_json["is_stop_loss_scaled"]
-          : config.is_stop_loss_scaled;
+  // TODO: Decide
+  const int alt_profit_timeout_seconds =
+      api_key_json.contains("alt_profit_timeout_seconds")
+          ? (int)api_key_json["alt_profit_timeout_seconds"]
+          : config.alt_profit_timeout_seconds;
+
+  // TODO: Decide
+  const double alt_stop_profit_ratio =
+      api_key_json.contains("alt_stop_profit_ratio")
+          ? (double)api_key_json["alt_stop_profit_ratio"]
+          : config.alt_stop_profit_ratio;
+
+  // TODO: Decide
+  const bool is_stop_loss_decayed =
+      api_key_json.contains("is_stop_loss_decayed")
+          ? (bool)api_key_json["is_stop_loss_decayed"]
+          : config.is_stop_loss_decayed;
 
   const bool is_stop_profit_decayed =
       api_key_json.contains("is_stop_profit_decayed")
           ? (bool)api_key_json["is_stop_profit_decayed"]
           : config.is_stop_profit_decayed;
+
+  // TODO: Decide
+  const int profit_timeout_seconds =
+      api_key_json.contains("profit_timeout_seconds")
+          ? (int)api_key_json["profit_timeout_seconds"]
+          : config.profit_timeout_seconds;
+
+  // TODO: Decide
+  const bool should_await_reclaimed_profit =
+      api_key_json.contains("should_await_reclaimed_profit")
+          ? (bool)api_key_json["should_await_reclaimed_profit"]
+          : config.should_await_reclaimed_profit;
+
+  // TODO: Decide
+  const bool should_expand_stop_loss =
+      api_key_json.contains("should_expand_stop_loss")
+          ? (bool)api_key_json["should_expand_stop_loss"]
+          : config.should_expand_stop_loss;
+
+  // TODO: Decide
+  const bool should_toggle_profit_timeout_seconds =
+      api_key_json.contains("should_toggle_profit_timeout_seconds")
+          ? (bool)api_key_json["should_toggle_profit_timeout_seconds"]
+          : config.should_toggle_profit_timeout_seconds;
+
+  // TODO: Decide
+  const bool should_toggle_stop_loss =
+      api_key_json.contains("should_toggle_stop_loss")
+          ? (bool)api_key_json["should_toggle_stop_loss"]
+          : config.should_toggle_stop_loss;
+
+  // TODO: Decide
+  const bool should_toggle_stop_profit =
+      api_key_json.contains("should_toggle_stop_profit")
+          ? (bool)api_key_json["should_toggle_stop_profit"]
+          : config.should_toggle_stop_profit;
+
+  // TODO: Decide
+  const bool should_toggle_stop_profit_decay =
+      api_key_json.contains("should_toggle_stop_profit_decay")
+          ? (bool)api_key_json["should_toggle_stop_profit_decay"]
+          : config.should_toggle_stop_profit_decay;
+
+  // TODO: Decide
+  const bool should_use_alt_profit_timeout_seconds =
+      api_key_json.contains("should_use_alt_profit_timeout_seconds")
+          ? (bool)api_key_json["should_use_alt_profit_timeout_seconds"]
+          : config.should_use_alt_profit_timeout_seconds;
+
+  // TODO: Decide
+  const bool should_use_alt_stop_profit =
+      api_key_json.contains("should_use_alt_stop_profit")
+          ? (bool)api_key_json["should_use_alt_stop_profit"]
+          : config.should_use_alt_stop_profit;
 
   const bool should_use_alt_stop_loss =
       api_key_json.contains("should_use_alt_stop_loss")
@@ -153,18 +220,33 @@ void Alpaca::Client::load_config() {
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .account_stop_profit_ratio = api_key_json["account_stop_profit_ratio"],
+      .alt_profit_timeout_seconds = alt_profit_timeout_seconds, // TODO: Decide
       .alt_stop_loss_ratio = alt_stop_loss_ratio,
+      .alt_stop_profit_ratio = alt_stop_profit_ratio, // TODO: Decide
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
       .base_url = api_key_json["base_url"],
       .data_base_url = config_json["data_base_url"],
       .is_live = api_key_json["is_live"],
-      .is_stop_loss_scaled = is_stop_loss_scaled,
+      .is_stop_loss_decayed = is_stop_loss_decayed, // TODO: Decide
       .is_stop_profit_decayed = is_stop_profit_decayed,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
+      .profit_timeout_seconds = profit_timeout_seconds, // TODO: Decide
+      .should_await_reclaimed_profit =
+          should_await_reclaimed_profit,                  // TODO: Decide
+      .should_expand_stop_loss = should_expand_stop_loss, // TODO: Decide
+      .should_toggle_profit_timeout_seconds =
+          should_toggle_profit_timeout_seconds,               // TODO: Decide
+      .should_toggle_stop_loss = should_toggle_stop_loss,     // TODO: Decide
+      .should_toggle_stop_profit = should_toggle_stop_profit, // TODO: Decide
+      .should_toggle_stop_profit_decay =
+          should_toggle_stop_profit_decay, // TODO: Decide
+      .should_use_alt_profit_timeout_seconds =
+          should_use_alt_profit_timeout_seconds, // TODO: Decide
       .should_use_alt_stop_loss = should_use_alt_stop_loss,
+      .should_use_alt_stop_profit = should_use_alt_stop_profit, // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],

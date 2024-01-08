@@ -77,10 +77,20 @@ void Alpaca::TaoBot::log_position() {
   const int duration = order_duration(this->open_order_ptr);
   const int max_profit_duration =
       order_duration(this->open_order_ptr, "max_profit");
+  const int min_profit_duration =
+      order_duration(this->open_order_ptr, "min_profit");
 
-  printf("Duration: %s • Max Profit Duration: %s\n",
+  const int profit_timeout_seconds =
+      this->api_client.config.should_use_alt_profit_timeout_seconds
+          ? this->api_client.config.alt_profit_timeout_seconds
+          : this->api_client.config.profit_timeout_seconds;
+
+  printf("Duration: %s • Max Profit Duration: %s • Min Profit Duration: %s • "
+         "Profit Timeout: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str(),
-         ::utils::integer_::seconds_to_clock(max_profit_duration).c_str());
+         ::utils::integer_::seconds_to_clock(max_profit_duration).c_str(),
+         ::utils::integer_::seconds_to_clock(min_profit_duration).c_str(),
+         ::utils::integer_::seconds_to_clock(profit_timeout_seconds).c_str());
 
   std::cout << fmt.reset << std::endl;
 

@@ -68,11 +68,75 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->api_client.config.is_stop_profit_decayed &&
-      this->exit_prices.stop_profit &&
-      this->exit_prices.stop_profit < this->avg_one_sec_variances.running) {
+  // TODO: Decide
+  const int profit_timeout_seconds =
+      this->api_client.config.should_use_alt_profit_timeout_seconds
+          ? this->api_client.config.alt_profit_timeout_seconds
+          : this->api_client.config.profit_timeout_seconds;
+
+  const int max_profit_duration =
+      order_duration(this->open_order_ptr, "max_profit");
+
+  const int min_profit_duration =
+      order_duration(this->open_order_ptr, "min_profit");
+
+  if (profit_timeout_seconds && !this->exit_prices.stop_profit &&
+      max_profit_duration >= profit_timeout_seconds) {
+    // TODO: Decide
+    if (this->api_client.config.should_await_reclaimed_profit) {
+      // TODO: Decide
+      // if (order_duration(this->open_order_ptr, "max_profit") >= 1800) {
+      //   return true;
+      // }
+
+      // TODO: Decide
+      // if (max_profit_duration >= 10 * profit_timeout_seconds &&
+      //     min_profit_duration < profit_timeout_seconds) {
+      //   return true;
+      // }
+
+      // TODO: Decide
+      // const double max_min_profit_ratio =
+      //     min_profit_duration
+      //         ? (double)max_profit_duration / min_profit_duration
+      //         : 0.0;
+
+      // if (max_min_profit_ratio > 1.0 && max_min_profit_ratio < 1.5) {
+      //   return true;
+      // }
+
+      // TODO: Decide
+      // const double loss_to_stop = 0.6 * this->open_order_ptr->min_profit;
+
+      // if (this->open_order_ptr->min_profit &&
+      //     min_profit_duration >= 0.1 * profit_timeout_seconds &&
+      //     this->open_order_ptr->profit <= loss_to_stop) {
+      //   return true;
+      // }
+
+      // TODO: Decide
+      const double profit_to_reclaim = 0.8 * this->open_order_ptr->max_profit;
+
+      return (this->open_order_ptr->profit > 0 &&
+              this->open_order_ptr->max_profit > 0 &&
+              this->open_order_ptr->profit >= profit_to_reclaim);
+
+      // const double profit_to_reclaim =
+      //     0.8 * (this->open_order_ptr->max_profit -
+      //            this->open_order_ptr->min_profit) +
+      //     this->open_order_ptr->min_profit;
+
+      // return (this->open_order_ptr->profit >= profit_to_reclaim);
+    }
+
     return true;
   }
+
+  // if (this->api_client.config.is_stop_profit_decayed &&
+  //     this->exit_prices.stop_profit &&
+  //     this->exit_prices.stop_profit < this->avg_one_sec_variances.running) {
+  //   return true;
+  // }
 
   return false;
 }

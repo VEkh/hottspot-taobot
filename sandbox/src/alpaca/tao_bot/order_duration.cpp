@@ -14,6 +14,10 @@ int Alpaca::TaoBot::order_duration(const order_t *order_ptr,
     return this->current_epoch - order_ptr->max_profit_at;
   }
 
+  if (key == "min_profit") {
+    return this->current_epoch - order_ptr->min_profit_at;
+  }
+
   return this->current_epoch - order_ptr->timestamp;
 }
 
