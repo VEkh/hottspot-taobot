@@ -6,6 +6,8 @@
 #include "should_ml_open_position.cpp" // should_ml_open_position
 #include "tao_bot.h"                   // Alpaca::TaoBot
 
+#include "is_entry_signal_present.cpp" // is_entry_signal_present // TODO: Decide
+
 bool Alpaca::TaoBot::should_open_position() {
   if (!is_market_open()) {
     return false;
@@ -27,6 +29,11 @@ bool Alpaca::TaoBot::should_open_position() {
     if (!this->candle_predictor.config.rollover_positions) {
       return should_ml_open_position(this->candle_predictor);
     }
+  }
+
+  if (this->api_client.config.should_await_consolidation_indicator ||
+      this->api_client.config.should_await_reversal_indicator) {
+    return is_entry_signal_present();
   }
 
   return true;

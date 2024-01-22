@@ -29,14 +29,18 @@ public:
     std::string api_key_id;
     std::string api_secret_key;
     std::string base_url;
+    int consolidation_duration_mintues = 10; // TODO: Decide
     std::string data_base_url;
     bool is_live;
     bool is_stop_loss_decayed = false; // TODO: Decide
     bool is_stop_profit_decayed = false;
     int late_start_seconds = 6; // Production's average
     ml_config_t ml;
-    int profit_timeout_seconds = 0;             // TODO: Decide
-    bool should_await_reclaimed_profit = false; // TODO: Decide
+    double profit_reclaim_ratio = 0.0;                 // TODO: Decide
+    int profit_timeout_seconds = 0;                    // TODO: Decide
+    int reversal_timeframe_minutes = 10;               // Production's average
+    bool should_await_consolidation_indicator = false; // TODO: Decide
+    bool should_await_reversal_indicator = false;      // TODO: Decide
     bool should_expand_stop_loss = false;
     bool should_toggle_profit_timeout_seconds = false;  // TODO: Decide
     bool should_toggle_stop_loss = false;               // TODO: Decide
@@ -45,6 +49,7 @@ public:
     bool should_use_alt_profit_timeout_seconds = false; // TODO: Decide
     bool should_use_alt_stop_loss = false;
     bool should_use_alt_stop_profit = false; // TODO: Decide
+    double stop_loss_percent = -0.0;
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;
     double stop_profit_ratio = 2.5;

@@ -1,10 +1,12 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
-#include "advance_current_epoch.cpp"     // advance_current_epoch
-#include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
-#include "close_position.cpp"            // close_position
-#include "log_account_snapshot.cpp"      // log_account_snapshot
+#include "advance_current_epoch.cpp"   // advance_current_epoch
+#include "build_reversals.cpp"         // build_reversals // TODO: Decide
+#include "cancel_stale_open_order.cpp" // cancel_stale_open_order
+#include "close_position.cpp"          // close_position
+#include "log_account_snapshot.cpp"    // log_account_snapshot
+#include "log_consolidation_durations.cpp" // log_consolidation_durations // TODO: Decide
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
@@ -12,8 +14,10 @@
 #include "log_predictions.cpp"           // log_predictions
 #include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
+#include "log_reversals.cpp"             // log_reversals // TODO: Decide
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_and_persist_position.cpp" // open_and_persist_position
+#include "read_candles.cpp"              // read_candles // TODO: Decide
 #include "read_predictions.cpp"          // read_predictions
 #include "read_price_movement.cpp"       // read_price_movement
 #include "read_quotes.cpp"               // read_quotes
@@ -34,8 +38,10 @@ void Alpaca::TaoBot::watch() {
     }
 
     read_quotes();
+    read_candles(); // TODO: Decide
     read_price_movement();
     read_predictions();
+    build_reversals(); // TODO: Decide
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
@@ -45,6 +51,8 @@ void Alpaca::TaoBot::watch() {
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
+      log_consolidation_durations(); // TODO: Decide
+      log_reversals();               // TODO: Decide
       log_price_movement();
       log_predictions();
       log_position();

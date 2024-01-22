@@ -7,6 +7,7 @@
 #include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
 #include "build_performance.cpp"                // build_performance
 #include "db/account_stat/account_stat.cpp"     // DB::AccountStat
+#include "db/candle/candle.cpp"                 // DB::Candle // TODO: Decide
 #include "db/position/position.cpp"             // DB::Position
 #include "db/utils/utils.cpp"                   // DB::Utils
 #include "lib/formatted.cpp"                    // Formatted::error_message
@@ -15,6 +16,7 @@
 #include "lib/utils/io.cpp"                     // ::utils::io
 #include "lib/utils/string.cpp"                 // ::utils::string
 #include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
+#include "read_price_movement.cpp"              // read_price_movement
 #include "tao_bot.h"                            // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"          // update_account_snapshot
 #include <iostream>                             // std::cout, std::endl
@@ -62,6 +64,11 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
                             this->api_client.config.late_start_seconds;
 
       this->started_at = this->backtest.config.start_epoch;
+    }
+
+    // TODO: Decide
+    if (this->api_client.config.should_await_consolidation_indicator) {
+      this->db_candle = DB::Candle(this->pg, 1, this->symbol);
     }
 
     if (Alpaca::Utils::is_holiday(this->current_epoch)) {

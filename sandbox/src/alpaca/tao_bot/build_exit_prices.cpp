@@ -8,7 +8,8 @@
 #include <math.h>              // abs, pow
 
 // TODO: Decide
-#include <algorithm> // std::max
+#include "current_mid.cpp" // current_mid
+#include <algorithm>       // std::max, std::min
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->avg_one_sec_variances.running;
@@ -53,12 +54,53 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     }
 
     stop_loss_ratio *= log(multiplier + 3);
-    // stop_loss_ratio *= log(this->performance.loss_streaks.longest + 3); //
-    // TODO: Decide
-    // stop_loss_ratio *= log(this->performance.loss_streaks.current + 3); //
   }
 
-  const double stop_loss = stop_loss_ratio * static_one_sec_variance;
+  // NOTE: 150x worked better during September season
+  double stop_loss = stop_loss_ratio * static_one_sec_variance;
+
+  const double stop_loss_percent = this->api_client.config.stop_loss_percent;
+
+  // TODO: Decide
+  if (stop_loss_percent) {
+    stop_loss =
+        (stop_loss_percent / 100.0) * this->open_order_ptr->execution_price;
+  }
+
+  // TODO: Decide
+  // if (this->api_client.config.should_await_consolidation_indicator &&
+  //     this->open_order_ptr->consolidation_range.opened_at) {
+  //   const range_t consolidation_range =
+  //       this->open_order_ptr->consolidation_range;
+
+  //   const double execution_price = this->open_order_ptr->execution_price;
+  //   const double high = consolidation_range.high;
+  //   const double low = consolidation_range.low;
+  //   const double trigger_padding = 15 * static_one_sec_variance;
+
+  //   const double high_delta = abs(execution_price - high);
+  //   const double low_delta = abs(execution_price - low);
+  //   const double smaller_delta = std::min(high_delta, low_delta);
+
+  //   stop_loss = -(smaller_delta + trigger_padding);
+  // }
+
+  // TODO: Decide
+  // if (this->api_client.config.should_await_consolidation_indicator &&
+  //     this->open_order_ptr->consolidation_range.opened_at) {
+  //   const range_t consolidation_range =
+  //       this->open_order_ptr->consolidation_range;
+
+  //   const double execution_price = this->open_order_ptr->execution_price;
+  //   const double high = consolidation_range.high;
+  //   const double low = consolidation_range.low;
+
+  //   const double high_delta = abs(execution_price - high);
+  //   const double low_delta = abs(execution_price - low);
+  //   const double larger_delta = std::max(high_delta, low_delta);
+
+  //   stop_loss = -larger_delta;
+  // }
 
   if (this->api_client.config.stop_profit_ratios[this->symbol]) {
     stop_profit_ratio =
@@ -93,10 +135,66 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   const double stop_profit = abs(stop_profit_ratio * stop_loss);
 
-  const double adjusted_stop_profit = stop_profit / trailing_stop_profit_ratio;
+  double adjusted_stop_profit = stop_profit / trailing_stop_profit_ratio;
 
-  const double trailing_stop_profit =
+  double trailing_stop_profit =
       this->open_order_ptr->max_profit * trailing_stop_profit_ratio;
+
+  // TODO: Decide
+  // if (this->api_client.config.should_await_consolidation_indicator &&
+  //     this->open_order_ptr->consolidation_range.opened_at) {
+  //   const range_t consolidation_range =
+  //       this->open_order_ptr->consolidation_range;
+
+  //   const double execution_price = this->open_order_ptr->execution_price;
+  //   const double high = consolidation_range.high;
+  //   const double low = consolidation_range.low;
+  //   const double trigger_padding = 15 * static_one_sec_variance;
+
+  //   const double high_delta = abs(execution_price - high);
+  //   const double low_delta = abs(execution_price - low);
+  //   const double larger_delta = std::max(high_delta, low_delta);
+
+  //   const double max_profit = this->open_order_ptr->max_profit;
+
+  //   if (execution_price > high || execution_price < low) {
+  //     adjusted_stop_profit = 0;
+  //     trailing_stop_profit = 0;
+  //   } else if (max_profit > larger_delta) {
+  //     adjusted_stop_profit = max_profit;
+  //     trailing_stop_profit = larger_delta - trigger_padding;
+  //   }
+  // }
+
+  // TODO: Decide
+  // if (this->api_client.config.should_await_reversal_indicator &&
+  //     this->open_order_ptr->reversal.mid) {
+  //   const double execution_price = this->open_order_ptr->execution_price;
+  //   const double max_profit = this->open_order_ptr->max_profit;
+  //   const double opening_reversal_mid = this->open_order_ptr->reversal.mid;
+  //   const double profit_reclaim_ratio =
+  //       this->api_client.config.profit_reclaim_ratio;
+
+  //   const order_action_t action = this->open_order_ptr->action;
+
+  //   if (action == order_action_t::BUY) {
+  //     const double max_mid = execution_price + max_profit;
+  //     const double trailing_stop_mid =
+  //         profit_reclaim_ratio * (max_mid - opening_reversal_mid) +
+  //         opening_reversal_mid;
+
+  //     trailing_stop_profit = trailing_stop_mid - execution_price;
+  //   } else {
+  //     const double max_mid = execution_price - max_profit;
+  //     const double trailing_stop_mid =
+  //         opening_reversal_mid -
+  //         profit_reclaim_ratio * (opening_reversal_mid - max_mid);
+
+  //     trailing_stop_profit = execution_price - trailing_stop_mid;
+  //   }
+
+  //   adjusted_stop_profit = max_profit;
+  // }
 
   return {
       .stop_loss = stop_loss,

@@ -7,6 +7,12 @@
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
 
+// TODO: Decide
+#include "candles_range.cpp"                       // candles_range
+#include "is_consolidation_next_position_long.cpp" // is_consolidation_next_position_long
+#include "is_nearest_reversal_low.cpp"             // is_nearest_reversal_low
+#include "is_reversing_loss.cpp"                   // is_reversing_loss
+
 bool Alpaca::TaoBot::is_next_position_long() {
   if (this->candle_predictor.should_predict(does_position_exist())) {
     if (this->closed_positions.empty()) {
@@ -16,6 +22,17 @@ bool Alpaca::TaoBot::is_next_position_long() {
     if (!this->candle_predictor.config.rollover_positions) {
       return this->candle_predictor.is_next_position_long();
     }
+  }
+
+  // TODO: Decide
+  if (this->api_client.config.should_await_reversal_indicator) {
+    return is_nearest_reversal_low();
+  }
+
+  // TODO: Decide
+  if (this->api_client.config.should_await_consolidation_indicator) {
+    return is_consolidation_next_position_long(
+        this->active_consolidation_duration_minutes);
   }
 
   if (this->closed_positions.empty()) {

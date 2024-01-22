@@ -7,6 +7,7 @@
  * order_action_t
  * order_type_t
  * order_t
+ * range_t // TODO: Decide
  */
 #include "tao_bot.h"
 
@@ -16,6 +17,10 @@
 #include <stdio.h>              // printf
 #include <string>               // std::string
 #include <utility>              // std::pair
+
+// TODO: Decide
+#include "candles_range.cpp"     // candles_range
+#include "is_reversing_loss.cpp" // is_reversing_loss
 
 std::pair<Alpaca::TaoBot::order_t, Alpaca::TaoBot::order_t>
 Alpaca::TaoBot::open_position(const order_action_t close_action,
@@ -29,6 +34,21 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
   new_open_order.quantity = quantity_;
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;
+
+  // TODO: Decide
+  if (this->api_client.config.should_await_consolidation_indicator) {
+    if (is_reversing_loss()) {
+      const position_t last_position = this->closed_positions.back();
+
+      new_open_order.consolidation_range =
+          last_position.open_order.consolidation_range;
+
+      new_open_order.is_loss_reversal = last_position.close_order.profit < 0;
+    } else {
+      const int range_n = this->active_consolidation_duration_minutes;
+      new_open_order.consolidation_range = candles_range(range_n);
+    }
+  }
 
   order_t new_close_order;
   new_close_order.action = close_action;

@@ -36,6 +36,7 @@ void Alpaca::TaoBot::reset_backtest() {
 
   this->closed_positions = {};
   this->performance = performance_t();
+  this->reversals = reversals_t(); // TODO: Decide
   this->started_at = this->current_epoch;
 }
 

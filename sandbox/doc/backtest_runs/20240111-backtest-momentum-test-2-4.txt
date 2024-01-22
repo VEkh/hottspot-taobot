@@ -1,0 +1,50 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-test-2[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2024-01-09 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum-test-2",
+  "is_live": false,
+  "late_start_seconds": 70,
+  "note": "breaking and riding consolidation, smaller init loss, enter close to edge",
+  "profit_reclaim_ratio": 0.0,
+  "profit_timeout_seconds": 120,
+  "secret_key": "secret_key",
+  "should_await_entry_indicator": true,
+  "stop_loss_ratio": -60.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[1m[36m[4m
+Tuesday, January  9 2024[24m[32m
+Current Equity:             $100267.40 (+267.40) (+0.27%)
+Max Equity:                 $101399.21 (+1399.21) (+1.40%) @ 09:42 CST
+Min Equity:                 $99041.12 (-958.88) (-0.96%) @ 12:17 CST
+Original Equity:            $100000.00
+[1m[36m[4m
+Wednesday, January 10 2024[24m[32m
+Current Equity:             $100588.87 (+321.47) (+0.32%)
+Max Equity:                 $102441.08 (+2173.68) (+2.17%) @ 11:58 CST
+Min Equity:                 $98952.57 (-1314.83) (-1.31%) @ 14:41 CST
+Original Equity:            $100267.40
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$294.43
+[1m[32mAvg Daily % Return:         +0.29%
+[1m[32mTotal Return:               +$588.87
+
+[1m[33mDays 2.00% Target Reached:  1/2 (50.00% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

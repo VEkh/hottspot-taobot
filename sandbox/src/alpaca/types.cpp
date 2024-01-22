@@ -2,6 +2,7 @@
 #define ALPACA__types
 
 #include "src/types.cpp" // Global::t
+#include <math.h>        // INFINITY
 #include <string>        // std::string
 
 namespace Alpaca {
@@ -35,10 +36,25 @@ enum order_type_t {
   MARKET,
 };
 
+// TODO: Decide
+struct range_t {
+  double closed_at = 0;
+  double high = -INFINITY;
+  double low = INFINITY;
+  double lower_mid = 0;
+  double mid = 0;
+  double opened_at = 0;
+  double upper_mid = 0;
+
+  double delta() { return this->high - this->low; }
+};
+
 struct order_t {
   order_action_t action = order_action_t::BUY;
+  range_t consolidation_range; // TODO: Decide
   double execution_price = 0.00;
   std::string id = "";
+  bool is_loss_reversal = false; // TODO: Decide
   double limit_price = 0.00;
   double max_position_profit = 0.00;
   double max_profit = 0.00;

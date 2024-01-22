@@ -1,0 +1,62 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-test-1[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2024-01-09 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum-test-1",
+  "is_live": false,
+  "late_start_seconds": 70,
+  "note": "ride and break consolidation; stricter consolidation; reverse wins; with reversal",
+  "profit_reclaim_ratio": 0.5,
+  "profit_timeout_seconds": 600,
+  "secret_key": "secret_key",
+  "should_await_entry_indicator": true,
+  "stop_loss_ratio": -60.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[1m[36m[4m
+Tuesday, January  9 2024[24m[32m
+Current Equity:             $102270.37 (+2270.37) (+2.27%)
+Max Equity:                 $103044.32 (+3044.32) (+3.04%) @ 14:37 CST
+Min Equity:                 $98870.65 (-1129.35) (-1.13%) @ 11:12 CST
+Original Equity:            $100000.00
+[1m[36m[4m
+Wednesday, January 10 2024[24m[32m
+Current Equity:             $104625.05 (+2354.68) (+2.30%)
+Max Equity:                 $105281.16 (+3010.79) (+2.94%) @ 14:51 CST
+Min Equity:                 $101712.43 (-557.93) (-0.55%) @ 10:05 CST
+Original Equity:            $102270.37
+[1m[36m[4m
+Thursday, January 11 2024[24m[31m
+Current Equity:             $102138.23 (-2486.82) (-2.38%)
+Max Equity:                 $105737.55 (+1112.50) (+1.06%) @ 10:50 CST
+Min Equity:                 $101462.96 (-3162.09) (-3.02%) @ 13:07 CST
+Original Equity:            $104625.05
+[1m[36m[4m
+Friday, January 12 2024[24m[32m
+Current Equity:             $105589.72 (+3451.49) (+3.38%)
+Max Equity:                 $105697.84 (+3559.61) (+3.49%) @ 14:55 CST
+Min Equity:                 $100815.43 (-1322.79) (-1.30%) @ 10:38 CST
+Original Equity:            $102138.23
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$1397.43
+[1m[32mAvg Daily % Return:         +1.39%
+[1m[32mTotal Return:               +$5589.72
+
+[1m[33mDays 2.00% Target Reached:  3/4 (75.00% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m
