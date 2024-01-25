@@ -36,7 +36,7 @@ std::string Alpaca::Client::fetch_quote(const std::string &symbol) {
 
   CurlClient curl_client = CurlClient::request_with_retry(
       [&]() -> CurlClient {
-        return fetch({.timeout_seconds = 0, .url = request_url});
+        return fetch({.timeout_seconds = 3, .url = request_url});
       },
       Alpaca::fetch_quote::is_retriable_response);
 
