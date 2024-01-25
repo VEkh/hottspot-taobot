@@ -32,7 +32,6 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
   return false;
 }
 
-// #include "is_breaking_consolidation.cpp"  // is_breaking_consolidation
 // #include "is_near_consolidation_edge.cpp" // is_near_consolidation_edge
 // #include "is_reversing_loss.cpp"          // is_reversing_loss
 

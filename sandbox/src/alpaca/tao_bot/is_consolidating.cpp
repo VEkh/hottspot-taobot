@@ -50,8 +50,14 @@ bool Alpaca::TaoBot::is_consolidating() {
   const double high_delta = abs(first_half_range.high - second_half_range.high);
   const double low_delta = abs(first_half_range.low - second_half_range.low);
 
-  return high_delta <= 10 * static_one_sec_variance &&
-         low_delta <= 10 * static_one_sec_variance;
+  const bool result = high_delta <= 10 * static_one_sec_variance &&
+                      low_delta <= 10 * static_one_sec_variance;
+
+  if (result && !this->active_consolidation.opened_at) {
+    this->active_consolidation = range;
+  }
+
+  return result;
 }
 
 #endif

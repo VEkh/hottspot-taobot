@@ -14,7 +14,6 @@ void Alpaca::TaoBot::build_reversals() {
   const double mid = current_mid();
   const int reversal_timeframe_seconds =
       this->api_client.config.reversal_timeframe_minutes * 60;
-  ;
 
   if (mid > this->reversals.pending_high) {
     this->reversals.pending_high_at = this->current_epoch;

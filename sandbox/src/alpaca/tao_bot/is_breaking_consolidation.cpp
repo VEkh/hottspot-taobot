@@ -8,16 +8,14 @@
 #include "tao_bot.h"            // Alpaca::TaoBot, range_t
 #include <math.h>               // abs
 
-bool Alpaca::TaoBot::is_breaking_consolidation(const int range_n) {
-  const double mid = current_mid();
-
-  if (!is_consolidating(range_n)) {
+bool Alpaca::TaoBot::is_breaking_consolidation(const range_t range) {
+  if (!range.opened_at) {
     return false;
   }
 
-  range_t range = candles_range(range_n);
-
+  const double mid = current_mid();
   const double static_one_sec_variance = this->avg_one_sec_variances.running;
+
   const double buffer = 0 * static_one_sec_variance;
 
   return mid >= range.high + buffer || mid < range.low - buffer;

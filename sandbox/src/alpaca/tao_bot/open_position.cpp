@@ -45,8 +45,7 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
 
       new_open_order.is_loss_reversal = last_position.close_order.profit < 0;
     } else {
-      const int range_n = this->active_consolidation_duration_minutes;
-      new_open_order.consolidation_range = candles_range(range_n);
+      new_open_order.consolidation_range = this->active_consolidation;
     }
   }
 

@@ -92,6 +92,7 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  range_t active_consolidation;       // TODO: Deicde
   reversals_t reversals;              // TODO: Decide
   std::list<candle_t> latest_candles; // TODO: Decide
   std::list<quote_t> quotes;
@@ -103,7 +104,7 @@ private:
 
   bool does_position_exist();
   bool has_super_profited();
-  bool is_breaking_consolidation(const int);           // TODO: Decide
+  bool is_breaking_consolidation(const range_t);       // TODO: Decide
   bool is_closer_to_consolidation_low(const int);      // TODO: Decide
   bool is_consolidating();                             // TODO: Decide
   bool is_consolidation_next_position_long(const int); // TODO: Decide
@@ -151,6 +152,9 @@ private:
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
+
+  trend_t relation_to_consolidation(const range_t); // TODO: Decide
+
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void await_market_open();
