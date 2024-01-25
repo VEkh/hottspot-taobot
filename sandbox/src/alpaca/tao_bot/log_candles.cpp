@@ -11,10 +11,6 @@
 #include <stdio.h>            // printf
 
 void Alpaca::TaoBot::log_candles(const int range_n) {
-  if (!this->api_client.config.should_await_trend_indicator) {
-    return;
-  }
-
   const range_t range = candles_range(range_n);
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;

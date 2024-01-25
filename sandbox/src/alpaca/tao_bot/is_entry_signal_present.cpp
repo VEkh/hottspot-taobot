@@ -6,24 +6,20 @@
 #include "is_consolidating.cpp"          // is_consolidating
 #include "is_nearest_reversal_low.cpp"   // is_nearest_reversal_low
 #include "is_reversing_loss.cpp"         // is_reversing_loss
-#include "is_trend_reversing.cpp"        // is_trend_reversing
-#include "is_trending.cpp"               // is_trending
 #include "lib/utils/time.cpp"            // ::utils::time_
 #include "relation_to_consolidation.cpp" // relation_to_consolidation
 #include "tao_bot.h"                     // Alpaca::TaoBot, range_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
   if (!this->api_client.config.should_await_reversal_indicator &&
-      !this->api_client.config.should_await_consolidation_indicator &&
-      !this->api_client.config.should_await_trend_indicator) {
+      !this->api_client.config.should_await_consolidation_indicator) {
     return false;
   }
 
-  if (this->api_client.config.should_await_trend_indicator) {
-    if (is_trending()) {
+  if (this->api_client.config.should_await_reversal_indicator) {
+    if (!this->closed_positions.empty()) {
       return true;
     }
-  }
 
   if (!is_consolidating()) {
     return false;

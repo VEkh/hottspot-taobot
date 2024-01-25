@@ -67,8 +67,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     }
 
     // TODO: Decide
-    if (this->api_client.config.should_await_consolidation_indicator ||
-        this->api_client.config.should_await_trend_indicator) {
+    if (this->api_client.config.should_await_consolidation_indicator) {
       this->db_candle = DB::Candle(this->pg, 1, this->symbol);
     }
 

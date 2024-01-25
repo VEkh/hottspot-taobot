@@ -52,7 +52,6 @@ void Alpaca::TaoBot::watch() {
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
-      log_candles(5);                // TODO: Decide
       log_consolidation_durations(); // TODO: Decide
       log_reversals();               // TODO: Decide
       log_price_movement();

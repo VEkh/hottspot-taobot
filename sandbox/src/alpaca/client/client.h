@@ -41,7 +41,6 @@ public:
     int reversal_timeframe_minutes = 10;               // Production's average
     bool should_await_consolidation_indicator = false; // TODO: Decide
     bool should_await_reversal_indicator = false;      // TODO: Decide
-    bool should_await_trend_indicator = false;         // TODO: Decide
     bool should_expand_stop_loss = false;
     bool should_toggle_profit_timeout_seconds = false;  // TODO: Decide
     bool should_toggle_stop_loss = false;               // TODO: Decide

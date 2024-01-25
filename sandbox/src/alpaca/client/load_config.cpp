@@ -130,12 +130,6 @@ void Alpaca::Client::load_config() {
           : config.should_await_reversal_indicator;
 
   // TODO: Decide
-  const bool should_await_trend_indicator =
-      api_key_json.contains("should_await_trend_indicator")
-          ? (bool)api_key_json["should_await_trend_indicator"]
-          : config.should_await_trend_indicator;
-
-  // TODO: Decide
   const bool should_expand_stop_loss =
       api_key_json.contains("should_expand_stop_loss")
           ? (bool)api_key_json["should_expand_stop_loss"]
@@ -278,9 +272,7 @@ void Alpaca::Client::load_config() {
       .should_await_consolidation_indicator =
           should_await_consolidation_indicator, // TODO: Decide
       .should_await_reversal_indicator =
-          should_await_reversal_indicator, // TODO: Decide
-      .should_await_trend_indicator =
-          should_await_trend_indicator,                   // TODO: Decide
+          should_await_reversal_indicator,                // TODO: Decide
       .should_expand_stop_loss = should_expand_stop_loss, // TODO: Decide
       .should_toggle_profit_timeout_seconds =
           should_toggle_profit_timeout_seconds,               // TODO: Decide

@@ -32,8 +32,7 @@ bool Alpaca::TaoBot::should_open_position() {
   }
 
   if (this->api_client.config.should_await_consolidation_indicator ||
-      this->api_client.config.should_await_reversal_indicator ||
-      this->api_client.config.should_await_trend_indicator) {
+      this->api_client.config.should_await_reversal_indicator) {
     return is_entry_signal_present();
   }
 
