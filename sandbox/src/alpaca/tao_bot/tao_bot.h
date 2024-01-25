@@ -117,7 +117,9 @@ private:
   bool is_next_position_long();
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);
-  bool is_reversing_loss(); // TODO: Decide
+  bool is_reversing_loss();  // TODO: Decide
+  bool is_trend_reversing(); // TODO: Decide
+  bool is_trending();        // TODO: Decide
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();

@@ -25,6 +25,11 @@ bool Alpaca::TaoBot::is_next_position_long() {
   }
 
   // TODO: Decide
+  if (this->api_client.config.should_await_trend_indicator) {
+    return this->latest_candles.back().trend() == trend_t::TREND_UP;
+  }
+
+  // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
     return is_nearest_reversal_low();
   }

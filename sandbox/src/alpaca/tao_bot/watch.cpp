@@ -6,6 +6,7 @@
 #include "cancel_stale_open_order.cpp" // cancel_stale_open_order
 #include "close_position.cpp"          // close_position
 #include "log_account_snapshot.cpp"    // log_account_snapshot
+#include "log_candles.cpp"             // log_candles // TODO: Decide
 #include "log_consolidation_durations.cpp" // log_consolidation_durations // TODO: Decide
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
@@ -51,6 +52,7 @@ void Alpaca::TaoBot::watch() {
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
+      log_candles(5);                // TODO: Decide
       log_consolidation_durations(); // TODO: Decide
       log_reversals();               // TODO: Decide
       log_price_movement();
