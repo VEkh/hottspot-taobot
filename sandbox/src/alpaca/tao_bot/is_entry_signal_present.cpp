@@ -21,12 +21,14 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       return true;
     }
 
-  if (!is_consolidating()) {
-    return false;
-  }
+    if (this->api_client.config.should_await_consolidation_indicator &&
+        !is_consolidating()) {
+      return false;
+    }
 
-  if (!this->reversals.highs.empty() || !this->reversals.lows.empty()) {
-    return true;
+    if (!this->reversals.highs.empty() || !this->reversals.lows.empty()) {
+      return true;
+    }
   }
 
   return false;

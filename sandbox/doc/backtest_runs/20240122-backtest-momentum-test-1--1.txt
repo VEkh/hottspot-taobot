@@ -1,0 +1,87 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-test-1[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2023-12-01 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum-test-1",
+  "is_live": false,
+  "late_start_seconds": 0,
+  "note": "predict trend reversal / consolidation start",
+  "profit_reclaim_ratio": 0.6,
+  "profit_timeout_seconds": 60,
+  "secret_key": "secret_key",
+  "should_await_trend_reverse_indicator": true,
+  "stop_loss_percent": -0.5,
+  "stop_loss_ratio": -250.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[1m[36m[4m
+Friday, December  1 2023[24m[32m
+Current Equity:             $103304.44 (+3304.44) (+3.30%)
+Max Equity:                 $104032.40 (+4032.40) (+4.03%) @ 11:23 CST
+Min Equity:                 $100000.00 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $100000.00
+[1m[36m[4m
+Monday, December  4 2023[24m[31m
+Current Equity:             $99791.92 (-3512.52) (-3.40%)
+Max Equity:                 $103304.44 (+0.00) (+0.00%) @ 08:32 CST
+Min Equity:                 $99403.85 (-3900.59) (-3.78%) @ 11:14 CST
+Original Equity:            $103304.44
+[1m[36m[4m
+Tuesday, December  5 2023[24m[31m
+Current Equity:             $93081.51 (-6710.41) (-6.72%)
+Max Equity:                 $99791.92 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $92963.97 (-6827.95) (-6.84%) @ 14:45 CST
+Original Equity:            $99791.92
+[1m[36m[4m
+Wednesday, December  6 2023[24m[31m
+Current Equity:             $92529.17 (-552.34) (-0.59%)
+Max Equity:                 $94045.72 (+964.21) (+1.04%) @ 13:59 CST
+Min Equity:                 $90919.98 (-2161.53) (-2.32%) @ 10:34 CST
+Original Equity:            $93081.51
+[1m[36m[4m
+Thursday, December  7 2023[24m[31m
+Current Equity:             $88719.15 (-3810.02) (-4.12%)
+Max Equity:                 $92874.69 (+345.52) (+0.37%) @ 09:10 CST
+Min Equity:                 $87848.00 (-4681.17) (-5.06%) @ 14:03 CST
+Original Equity:            $92529.17
+[1m[36m[4m
+Friday, December  8 2023[24m[32m
+Current Equity:             $89387.01 (+667.86) (+0.75%)
+Max Equity:                 $89549.13 (+829.98) (+0.94%) @ 14:50 CST
+Min Equity:                 $87388.42 (-1330.73) (-1.50%) @ 09:24 CST
+Original Equity:            $88719.15
+[1m[36m[4m
+Monday, December 11 2023[24m[31m
+Current Equity:             $86873.37 (-2513.64) (-2.81%)
+Max Equity:                 $89450.68 (+63.67) (+0.07%) @ 08:57 CST
+Min Equity:                 $86325.05 (-3061.96) (-3.43%) @ 14:44 CST
+Original Equity:            $89387.01
+[1m[36m[4m
+Tuesday, December 12 2023[24m[32m
+Current Equity:             $87231.85 (+358.48) (+0.41%)
+Max Equity:                 $87516.23 (+642.86) (+0.74%) @ 08:45 CST
+Min Equity:                 $86469.02 (-404.35) (-0.47%) @ 08:36 CST
+Original Equity:            $86873.37
+[1m[36m[4m
+📊 Stats
+[0m[1m[31mAvg Daily Return:           -$1596.02
+[1m[31mAvg Daily % Return:         -1.65%
+[1m[31mTotal Return:               -$12768.15
+
+[1m[33mDays 2.00% Target Reached:  1/8 (12.50% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

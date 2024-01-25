@@ -68,7 +68,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  // TODO: Decide
   const double profit_reclaim_ratio =
       this->api_client.config.profit_reclaim_ratio;
 
@@ -80,7 +79,6 @@ bool Alpaca::TaoBot::should_close_position() {
   const int max_profit_duration =
       order_duration(this->open_order_ptr, "max_profit");
 
-  // TODO: Decide
   if (profit_timeout_seconds && max_profit_duration >= profit_timeout_seconds) {
     if (profit_reclaim_ratio) {
       const double profit_to_reclaim =

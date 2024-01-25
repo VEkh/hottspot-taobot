@@ -18,15 +18,17 @@ void Alpaca::TaoBot::log_reversals() {
   }
 
   const int count = 5;
+  const int highs_n = this->reversals.highs.size();
+  const int lows_n = this->reversals.lows.size();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("🔀 Reversals\n");
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << fmt.green;
-  printf("Latest 5 Highs:");
+  printf("Latest 5 of %i High(s):", highs_n);
 
-  int start_index = std::max((int)(this->reversals.highs.size() - count), 0);
+  int start_index = std::max(highs_n - count, 0);
   std::list<reversal_t>::iterator it = this->reversals.highs.begin();
   std::advance(it, start_index);
 
@@ -45,9 +47,9 @@ void Alpaca::TaoBot::log_reversals() {
   std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.red;
-  printf("Latest 5 Lows: ");
+  printf("Latest 5 of %i Low(s): ", lows_n);
 
-  start_index = std::max((int)(this->reversals.lows.size() - count), 0);
+  start_index = std::max(lows_n - count, 0);
   it = this->reversals.lows.begin();
   std::advance(it, start_index);
 

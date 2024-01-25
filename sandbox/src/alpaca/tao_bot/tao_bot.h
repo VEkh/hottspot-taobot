@@ -154,6 +154,7 @@ private:
                                             const double);
 
   trend_t relation_to_consolidation(const range_t); // TODO: Decide
+  trend_t reversal_imbalance();                     // TODO: Decide
 
   void advance_current_epoch();
   void advance_current_epoch(const double);
@@ -164,6 +165,7 @@ private:
   void fetch_and_persist_quote(const bool);
   void initialize(std::string, std::map<std::string, std::string> &);
   void log_account_snapshot();
+  void log_candles(const int);        // TODO: Decide
   void log_consolidation_duration();  // TODO: Decide
   void log_consolidation_durations(); // TODO: Decide
   void log_end_of_trading_period();

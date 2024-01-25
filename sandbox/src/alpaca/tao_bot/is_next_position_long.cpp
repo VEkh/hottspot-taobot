@@ -12,6 +12,7 @@
 #include "is_consolidation_next_position_long.cpp" // is_consolidation_next_position_long
 #include "is_nearest_reversal_low.cpp"             // is_nearest_reversal_low
 #include "is_reversing_loss.cpp"                   // is_reversing_loss
+#include "reversal_imbalance.cpp"                  // reversal_imbalance
 
 bool Alpaca::TaoBot::is_next_position_long() {
   if (this->candle_predictor.should_predict(does_position_exist())) {
@@ -26,7 +27,19 @@ bool Alpaca::TaoBot::is_next_position_long() {
 
   // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
-    return is_nearest_reversal_low();
+    if (!this->closed_positions.empty()) {
+      const position_t last_position = this->closed_positions.back();
+
+      return last_position.close_order.action == order_action_t::BUY;
+    }
+
+    const trend_t imbalance = reversal_imbalance();
+
+    if (imbalance == trend_t::TREND_CONSOLIDATION) {
+      return is_nearest_reversal_low();
+    }
+
+    return imbalance == trend_t::TREND_UP;
   }
 
   // TODO: Decide
