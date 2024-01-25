@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_reset_backtest
 
 #include "advance_current_epoch.cpp"   // advance_current_epoch
+#include "set_market_open_epoch.cpp"   // set_market_open_epoch
 #include "tao_bot.h"                   // Alpaca::TaoBot
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
@@ -38,6 +39,8 @@ void Alpaca::TaoBot::reset_backtest() {
   this->performance = performance_t();
   this->reversals = reversals_t(); // TODO: Decide
   this->started_at = this->current_epoch;
+
+  set_market_open_epoch();
 }
 
 #endif

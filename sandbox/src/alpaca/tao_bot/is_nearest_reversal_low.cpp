@@ -9,10 +9,10 @@ bool Alpaca::TaoBot::is_nearest_reversal_low() {
   }
 
   const double recent_high_at =
-      this->reversals.highs.empty() ? 0 : this->reversals.highs.back().at;
+      this->reversals.highs.empty() ? 0 : this->reversals.highs.rbegin()->first;
 
   const double recent_low_at =
-      this->reversals.lows.empty() ? 0 : this->reversals.lows.back().at;
+      this->reversals.lows.empty() ? 0 : this->reversals.lows.rbegin()->first;
 
   if (recent_high_at && recent_high_at > recent_low_at) {
     return false;

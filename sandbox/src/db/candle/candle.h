@@ -44,7 +44,7 @@ public:
 
   struct get_latest_args_t {
     double end_at_epoch;
-    int limit = 50;
+    double start_at_epoch;
     // Optional
     bool debug = false;
   };

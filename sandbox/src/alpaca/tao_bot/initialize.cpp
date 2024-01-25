@@ -17,6 +17,7 @@
 #include "lib/utils/string.cpp"                 // ::utils::string
 #include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
 #include "read_price_movement.cpp"              // read_price_movement
+#include "set_market_open_epoch.cpp"            // set_market_open_epoch
 #include "tao_bot.h"                            // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"          // update_account_snapshot
 #include <iostream>                             // std::cout, std::endl
@@ -87,6 +88,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
     this->tradeable_symbols_count = tradeable_symbols.size();
 
+    set_market_open_epoch();
     update_account_snapshot(true);
 
     this->performance = build_performance();

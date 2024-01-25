@@ -3,75 +3,101 @@
 #define ALPACA__TAO_BOT_build_reversals
 
 #include "current_mid.cpp" // current_mid
-#include "tao_bot.h"       // Alpaca::TaoBot
-#include <math.h>          // INFINITY
+#include "tao_bot.h"       // Alpaca::TaoBot, candle_t
+#include <algorithm>       // std::max, std::min
+#include <list>            // std::list
+#include <math.h>          // INFINITY, floor
 
 void Alpaca::TaoBot::build_reversals() {
   if (!this->api_client.config.should_await_reversal_indicator) {
     return;
   }
 
-  const double mid = current_mid();
-  const int reversal_timeframe_seconds =
-      this->api_client.config.reversal_timeframe_minutes * 60;
+  const bool are_reversals_updated =
+      floor(this->reversals.updated_at / 60) == floor(this->current_epoch / 60);
 
-  if (mid > this->reversals.pending_high) {
-    this->reversals.pending_high_at = this->current_epoch;
-    this->reversals.pending_high = mid;
+  if (are_reversals_updated) {
+    return;
   }
 
-  if (this->current_epoch - this->reversals.pending_high_at >=
-      reversal_timeframe_seconds) {
-    bool should_append;
+  this->reversals.highs = {};
+  this->reversals.lows = {};
 
-    if (this->reversals.highs.empty()) {
-      should_append = true;
-    } else {
-      const reversal_t last_high = this->reversals.highs.back();
-      should_append = last_high.mid != this->reversals.pending_high &&
-                      this->reversals.pending_high_at - last_high.at >=
-                          reversal_timeframe_seconds;
+  const int duration_minutes =
+      this->api_client.config.consolidation_duration_mintues;
+  const int seek_n = duration_minutes / 2;
+  int i = 0;
+  std::list<candle_t>::iterator it;
+
+  for (it = this->latest_candles.begin(); it != this->latest_candles.end();
+       it++, i++) {
+    bool is_high = true;
+    bool is_low = true;
+
+    double high = std::max(it->close, it->open);
+    double low = std::min(it->close, it->open);
+
+    int back_seek_i = 0;
+    int front_seek_i = 0;
+
+    if (this->current_epoch - it->opened_at < duration_minutes * 60) {
+      continue;
     }
 
-    if (should_append) {
-      this->reversals.highs.push_back({
-          .at = this->reversals.pending_high_at,
-          .mid = this->reversals.pending_high,
-      });
+    for (; it != this->latest_candles.end() && front_seek_i < seek_n;
+         front_seek_i++) {
+      std::advance(it, 1);
 
-      this->reversals.pending_high_at = this->current_epoch;
-      this->reversals.pending_high = -INFINITY;
+      double next_high = std::max(it->close, it->open);
+      double next_low = std::min(it->close, it->open);
+
+      if (next_high > high) {
+        is_high = false;
+      }
+
+      if (next_low < low) {
+        is_low = false;
+      }
+
+      if (!next_high && !next_low) {
+        break;
+      }
+    }
+
+    std::advance(it, -front_seek_i);
+
+    for (; it != this->latest_candles.begin() && back_seek_i < seek_n;
+         back_seek_i++) {
+      std::advance(it, -1);
+
+      double next_high = std::max(it->close, it->open);
+      double next_low = std::min(it->close, it->open);
+
+      if (next_high >= high) {
+        is_high = false;
+      }
+
+      if (next_low <= low) {
+        is_low = false;
+      }
+
+      if (!next_high && !next_low) {
+        break;
+      }
+    }
+
+    std::advance(it, back_seek_i);
+
+    if (is_high) {
+      this->reversals.highs[it->opened_at] = high;
+    }
+
+    if (is_low) {
+      this->reversals.lows[it->opened_at] = low;
     }
   }
 
-  if (mid < this->reversals.pending_low) {
-    this->reversals.pending_low_at = this->current_epoch;
-    this->reversals.pending_low = mid;
-  }
-
-  if (this->current_epoch - this->reversals.pending_low_at >=
-      reversal_timeframe_seconds) {
-    bool should_append;
-
-    if (this->reversals.lows.empty()) {
-      should_append = true;
-    } else {
-      const reversal_t last_low = this->reversals.lows.back();
-      should_append = last_low.mid != this->reversals.pending_low &&
-                      this->reversals.pending_low_at - last_low.at >=
-                          reversal_timeframe_seconds;
-    }
-
-    if (should_append) {
-      this->reversals.lows.push_back({
-          .at = this->reversals.pending_low_at,
-          .mid = this->reversals.pending_low,
-      });
-
-      this->reversals.pending_low_at = this->current_epoch;
-      this->reversals.pending_low = INFINITY;
-    }
-  }
+  this->reversals.updated_at = this->latest_candles.back().opened_at;
 }
 
 #endif

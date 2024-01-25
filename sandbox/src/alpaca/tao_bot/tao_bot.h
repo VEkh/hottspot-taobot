@@ -46,19 +46,10 @@ private:
   using trend_t = Global::t::trend_t; // TODO: Decide
 
   // TODO: Decide
-  struct reversal_t {
-    double at;
-    double mid;
-  };
-
-  // TODO: Decide
   struct reversals_t {
-    std::list<reversal_t> highs;
-    std::list<reversal_t> lows;
-    double pending_high = -INFINITY;
-    double pending_high_at;
-    double pending_low = INFINITY;
-    double pending_low_at;
+    std::map<double, double> highs;
+    std::map<double, double> lows;
+    double updated_at;
   };
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
@@ -82,6 +73,7 @@ private:
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
   double current_epoch = time(nullptr);
+  double market_open_epoch;
   double quantity;
   double started_at = time(nullptr);
   int active_consolidation_duration_minutes = 10; // TODO: Decide
@@ -145,9 +137,10 @@ private:
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  range_t candles_range(const int);                     // TODO: Decide
-  range_t candles_range(const int, const int);          // TODO: Decide
-  reversal_t nearest_opening_reversal(const order_t *); // TODO: Decide
+  range_t candles_range(const int);            // TODO: Decide
+  range_t candles_range(const int, const int); // TODO: Decide
+  std::pair<double, double>
+  nearest_opening_reversal(const order_t *); // TODO: Decide
 
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
@@ -188,6 +181,7 @@ private:
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);
+  void set_market_open_epoch();
   void set_open_order_prices();
   void set_position_status();
   void set_profit(order_t *);

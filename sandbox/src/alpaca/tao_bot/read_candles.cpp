@@ -11,7 +11,7 @@ void Alpaca::TaoBot::read_candles() {
 
   this->latest_candles = this->db_candle.get_latest({
       .end_at_epoch = this->current_epoch,
-      .limit = 60,
+      .start_at_epoch = this->market_open_epoch,
   });
 }
 
