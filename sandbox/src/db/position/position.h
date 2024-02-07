@@ -3,6 +3,7 @@
 
 #include "lib/pg/pg.cpp" // Pg
 #include "types.cpp"     // Global::t
+#include <list>          // std::list
 #include <string>        // std::string
 
 namespace DB {
@@ -35,6 +36,13 @@ public:
     std::string symbol;
   };
 
+  struct get_day_positions_args_t {
+    std::string api_key_id;
+    bool debug = false;
+    double epoch = 0;
+    std::string symbol;
+  };
+
   struct get_golden_ratio_positions_args_t {
     std::string api_key_id;
     bool debug = false;
@@ -60,8 +68,30 @@ public:
     bool debug = false;
   };
 
+  struct position_t {
+    double close_order_quantity;
+    double close_order_execution_mid;
+    double closed_at;
+    std::string close_order_id;
+    double current_profit;
+    double max_position_profit;
+    double max_profit;
+    double max_profit_at;
+    double min_profit;
+    double min_profit_at;
+    double open_order_execution_mid;
+    double open_order_quantity;
+    double opened_at;
+    std::string open_order_id;
+    double stop_loss;
+    double stop_profit;
+    std::string symbol;
+  };
+
   Position(){};
   Position(Pg c) : conn(c){};
+
+  std::list<position_t> get_day_positions(const get_day_positions_args_t);
 
   void close(const close_args_t);
   void compute_golden_stop_ratio(const compute_golden_ratio_args_t);
@@ -70,18 +100,6 @@ public:
 private:
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using query_result_t = Pg::query_result_t;
-
-  struct position_t {
-    double close_order_quantity;
-    double closed_at;
-    double current_profit;
-    double max_profit;
-    double max_profit_at;
-    double min_profit;
-    double min_profit_at;
-    double opened_at;
-    std::string symbol;
-  };
 
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;

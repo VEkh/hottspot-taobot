@@ -16,6 +16,7 @@
 #include "lib/utils/io.cpp"                     // ::utils::io
 #include "lib/utils/string.cpp"                 // ::utils::string
 #include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
+#include "read_closed_positions.cpp"            // read_closed_positions
 #include "read_price_movement.cpp"              // read_price_movement
 #include "set_market_open_epoch.cpp"            // set_market_open_epoch
 #include "tao_bot.h"                            // Alpaca::TaoBot
@@ -90,9 +91,9 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
     set_market_open_epoch();
     update_account_snapshot(true);
+    read_closed_positions();
 
     this->performance = build_performance();
-
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(
              "❌ JSON type error during initialization. Retrying.")

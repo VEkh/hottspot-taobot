@@ -33,10 +33,12 @@ private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using candle_t = DB::Candle::candle_t; // TODO: Decide
+  using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
+  using order_time_in_force_t = Alpaca::t::order_time_in_force_t;
   using order_type_t = Alpaca::t::order_type_t;
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
@@ -174,6 +176,7 @@ private:
   void log_reversals(); // TODO: Decide
   void open_and_persist_position();
   void read_candles(); // TODO: Decide
+  void read_closed_positions();
   void read_predictions();
   void read_price_movement();
   void read_quotes();
