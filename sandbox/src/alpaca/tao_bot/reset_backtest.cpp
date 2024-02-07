@@ -3,7 +3,7 @@
 
 #include "advance_current_epoch.cpp"   // advance_current_epoch
 #include "set_market_open_epoch.cpp"   // set_market_open_epoch
-#include "tao_bot.h"                   // Alpaca::TaoBot
+#include "tao_bot.h"                   // Alpaca::TaoBot, candle_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
 void Alpaca::TaoBot::reset_backtest() {
@@ -36,8 +36,9 @@ void Alpaca::TaoBot::reset_backtest() {
   }
 
   this->closed_positions = {};
+  this->bulk_candle = candle_t(); // TODO: Decide
+  this->is_trending = false;      // TODO: Decide
   this->performance = performance_t();
-  this->reversals = reversals_t(); // TODO: Decide
   this->started_at = this->current_epoch;
 
   set_market_open_epoch();

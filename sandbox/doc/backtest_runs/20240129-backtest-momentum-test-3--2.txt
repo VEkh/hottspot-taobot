@@ -1,0 +1,106 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-test-3[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2023-09-01 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum-test-3",
+  "is_live": false,
+  "late_start_seconds": 0,
+  "note": "capture profits on record breaking reversals; reclaim deficit",
+  "profit_reclaim_ratio": 0.8,
+  "profit_timeout_seconds": 60,
+  "reversal_timeframe_minutes": 5,
+  "secret_key": "secret_key",
+  "should_await_reversal_indicator": true,
+  "should_reverse_losses": true,
+  "stop_loss_ratio": -60.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[1m[36m[4m
+Friday, September  1 2023[24m[32m
+Current Equity:             $100579.32 (+579.32) (+0.58%)
+Max Equity:                 $102620.14 (+2620.14) (+2.62%) @ 13:00 CDT
+Min Equity:                 $97336.80 (-2663.20) (-2.66%) @ 08:58 CDT
+Original Equity:            $100000.00
+[1m[36m[4m
+Monday, September  4 2023[24m[32m
+Current Equity:             $100579.32 (+0.00) (+0.00%)
+Max Equity:                 $100579.32 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $100579.32 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $100579.32
+[1m[36m[4m
+Tuesday, September  5 2023[24m[31m
+Current Equity:             $95779.93 (-4799.39) (-4.77%)
+Max Equity:                 $101487.55 (+908.23) (+0.90%) @ 08:42 CDT
+Min Equity:                 $94269.52 (-6309.80) (-6.27%) @ 11:16 CDT
+Original Equity:            $100579.32
+[1m[36m[4m
+Wednesday, September  6 2023[24m[32m
+Current Equity:             $98571.73 (+2791.80) (+2.91%)
+Max Equity:                 $98571.73 (+2791.80) (+2.91%) @ 12:48 CDT
+Min Equity:                 $95208.13 (-571.80) (-0.60%) @ 09:00 CDT
+Original Equity:            $95779.93
+[1m[36m[4m
+Thursday, September  7 2023[24m[32m
+Current Equity:             $102931.61 (+4359.88) (+4.42%)
+Max Equity:                 $103364.74 (+4793.01) (+4.86%) @ 14:56 CDT
+Min Equity:                 $98253.68 (-318.05) (-0.32%) @ 08:44 CDT
+Original Equity:            $98571.73
+[1m[36m[4m
+Friday, September  8 2023[24m[31m
+Current Equity:             $97499.82 (-5431.79) (-5.28%)
+Max Equity:                 $103018.01 (+86.40) (+0.08%) @ 08:38 CDT
+Min Equity:                 $97356.72 (-5574.89) (-5.42%) @ 14:35 CDT
+Original Equity:            $102931.61
+[1m[36m[4m
+Monday, September 11 2023[24m[32m
+Current Equity:             $98375.45 (+875.63) (+0.90%)
+Max Equity:                 $98948.08 (+1448.26) (+1.49%) @ 14:19 CDT
+Min Equity:                 $91198.12 (-6301.70) (-6.46%) @ 09:58 CDT
+Original Equity:            $97499.82
+[1m[36m[4m
+Tuesday, September 12 2023[24m[32m
+Current Equity:             $101931.40 (+3555.95) (+3.61%)
+Max Equity:                 $103493.19 (+5117.74) (+5.20%) @ 10:10 CDT
+Min Equity:                 $98375.45 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $98375.45
+[1m[36m[4m
+Wednesday, September 13 2023[24m[32m
+Current Equity:             $103475.90 (+1544.50) (+1.52%)
+Max Equity:                 $104646.04 (+2714.64) (+2.66%) @ 09:50 CDT
+Min Equity:                 $101417.10 (-514.30) (-0.50%) @ 08:35 CDT
+Original Equity:            $101931.40
+[1m[36m[4m
+Thursday, September 14 2023[24m[32m
+Current Equity:             $105224.01 (+1748.11) (+1.69%)
+Max Equity:                 $105477.09 (+2001.19) (+1.93%) @ 10:42 CDT
+Min Equity:                 $101310.92 (-2164.98) (-2.09%) @ 08:37 CDT
+Original Equity:            $103475.90
+[1m[36m[4m
+Friday, September 15 2023[24m[31m
+Current Equity:             $104940.68 (-283.33) (-0.27%)
+Max Equity:                 $105771.56 (+547.55) (+0.52%) @ 08:43 CDT
+Min Equity:                 $103770.99 (-1453.01) (-1.38%) @ 09:17 CDT
+Original Equity:            $105224.01
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$449.15
+[1m[32mAvg Daily % Return:         +0.48%
+[1m[32mTotal Return:               +$4940.68
+
+[1m[33mDays 2.00% Target Reached:  4/11 (36.36% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

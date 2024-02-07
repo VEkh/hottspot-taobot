@@ -2,6 +2,7 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "advance_current_epoch.cpp"   // advance_current_epoch
+#include "build_bulk_candle.cpp"       // build_bulk_candle // TODO: Decide
 #include "build_reversals.cpp"         // build_reversals // TODO: Decide
 #include "cancel_stale_open_order.cpp" // cancel_stale_open_order
 #include "close_position.cpp"          // close_position
@@ -42,7 +43,8 @@ void Alpaca::TaoBot::watch() {
     read_candles(); // TODO: Decide
     read_price_movement();
     read_predictions();
-    build_reversals(); // TODO: Decide
+    build_reversals();   // TODO: Decide
+    build_bulk_candle(); // TODO: Decide
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {

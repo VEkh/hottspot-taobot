@@ -29,6 +29,8 @@ public:
     double opened_at = 0;
     std::string symbol;
 
+    double range() { return this->high - this->low; };
+
     trend_t trend() {
       if (this->close > this->open) {
         return trend_t::TREND_UP;

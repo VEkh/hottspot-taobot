@@ -26,20 +26,19 @@ bool Alpaca::TaoBot::is_next_position_long() {
   }
 
   // TODO: Decide
+  if (this->api_client.config.should_reverse_losses && is_reversing_loss()) {
+    const position_t last_position = this->closed_positions.back();
+
+    return last_position.close_order.action == order_action_t::BUY;
+  }
+
+  // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
-    if (!this->closed_positions.empty()) {
-      const position_t last_position = this->closed_positions.back();
-
-      return last_position.close_order.action == order_action_t::BUY;
+    if (this->is_trending) {
+      return !is_nearest_reversal_low();
     }
 
-    const trend_t imbalance = reversal_imbalance();
-
-    if (imbalance == trend_t::TREND_CONSOLIDATION) {
-      return is_nearest_reversal_low();
-    }
-
-    return imbalance == trend_t::TREND_UP;
+    return is_nearest_reversal_low();
   }
 
   // TODO: Decide

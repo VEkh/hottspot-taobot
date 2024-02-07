@@ -44,13 +44,15 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using quote_t = Global::t::quote_t;
-  using range_t = Alpaca::t::range_t; // TODO: Decide
-  using trend_t = Global::t::trend_t; // TODO: Decide
+  using range_t = Alpaca::t::range_t;                 // TODO: Decide
+  using reversal_t = Alpaca::t::reversal_t;           // TODO: Decide
+  using reversal_type_t = Alpaca::t::reversal_type_t; // TODO: Decide
+  using trend_t = Global::t::trend_t;                 // TODO: Decide
 
   // TODO: Decide
   struct reversals_t {
-    std::map<double, double> highs;
-    std::map<double, double> lows;
+    std::map<double, reversal_t> highs;
+    std::map<double, reversal_t> lows;
     double updated_at;
   };
 
@@ -74,6 +76,8 @@ private:
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
+  candle_t bulk_candle;     // TODO: Decide
+  bool is_trending = false; // TODO: Decide
   double current_epoch = time(nullptr);
   double market_open_epoch;
   double quantity;
@@ -141,8 +145,11 @@ private:
   performance_t build_performance();
   range_t candles_range(const int);            // TODO: Decide
   range_t candles_range(const int, const int); // TODO: Decide
-  std::pair<double, double>
-  nearest_opening_reversal(const order_t *); // TODO: Decide
+  reversal_t nearest_reversal();               // TODO: Decide
+  std::pair<double, reversal_t>
+  nearest_opening_reversal(const order_action_t, const double); // TODO: Decide
+  std::pair<double, reversal_t>
+  nearest_record_reversal(const double); // TODO: Decide
 
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
@@ -154,7 +161,8 @@ private:
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void await_market_open();
-  void build_reversals(); // TODO: Decide
+  void build_reversals();   // TODO: Decide
+  void build_bulk_candle(); // TODO: Decide
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote(const bool);

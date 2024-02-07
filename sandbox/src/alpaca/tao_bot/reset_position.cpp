@@ -45,6 +45,17 @@ void Alpaca::TaoBot::reset_position() {
       this->api_client.config.is_stop_profit_decayed =
           !this->api_client.config.is_stop_profit_decayed;
     }
+
+    // TODO: Decide
+    if (this->api_client.config.toggle_is_trending_after_n &&
+        (this->performance.loss_streaks.current + 1) %
+                this->api_client.config.toggle_is_trending_after_n ==
+            0) {
+      this->is_trending = !this->is_trending;
+    }
+  } else {
+    // TODO: Decide
+    this->is_trending = false;
   }
 
   const position_t position = {

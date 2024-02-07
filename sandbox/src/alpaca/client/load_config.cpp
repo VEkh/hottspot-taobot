@@ -83,6 +83,12 @@ void Alpaca::Client::load_config() {
           : config.alt_stop_profit_ratio;
 
   // TODO: Decide
+  const int candles_timeframe_minutes =
+      api_key_json.contains("candles_timeframe_minutes")
+          ? (int)api_key_json["candles_timeframe_minutes"]
+          : config.candles_timeframe_minutes;
+
+  // TODO: Decide
   const int consolidation_duration_mintues =
       api_key_json.contains("consolidation_duration_mintues")
           ? (int)api_key_json["consolidation_duration_mintues"]
@@ -93,6 +99,12 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("is_stop_loss_decayed")
           ? (bool)api_key_json["is_stop_loss_decayed"]
           : config.is_stop_loss_decayed;
+
+  // TODO: Decide
+  const bool is_stop_loss_dynamic =
+      api_key_json.contains("is_stop_loss_dynamic")
+          ? (bool)api_key_json["is_stop_loss_dynamic"]
+          : config.is_stop_loss_dynamic;
 
   const bool is_stop_profit_decayed =
       api_key_json.contains("is_stop_profit_decayed")
@@ -140,6 +152,18 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("should_toggle_profit_timeout_seconds")
           ? (bool)api_key_json["should_toggle_profit_timeout_seconds"]
           : config.should_toggle_profit_timeout_seconds;
+
+  // TODO: Decide
+  const bool should_recover_deficit =
+      api_key_json.contains("should_recover_deficit")
+          ? (bool)api_key_json["should_recover_deficit"]
+          : config.should_recover_deficit;
+
+  // TODO: Decide
+  const bool should_reverse_losses =
+      api_key_json.contains("should_reverse_losses")
+          ? (bool)api_key_json["should_reverse_losses"]
+          : config.should_reverse_losses;
 
   // TODO: Decide
   const bool should_toggle_stop_loss =
@@ -196,6 +220,12 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("terminate_after_seconds")
           ? (int)api_key_json["terminate_after_seconds"]
           : config.terminate_after_seconds;
+
+  // TODO: Decide
+  const int toggle_is_trending_after_n =
+      api_key_json.contains("toggle_is_trending_after_n")
+          ? (int)api_key_json["toggle_is_trending_after_n"]
+          : config.toggle_is_trending_after_n;
 
   ml_config_t ml_config;
 
@@ -258,11 +288,13 @@ void Alpaca::Client::load_config() {
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
       .base_url = api_key_json["base_url"],
+      .candles_timeframe_minutes = candles_timeframe_minutes, // TODO: Decide
       .consolidation_duration_mintues =
           consolidation_duration_mintues, // TODO: Decide
       .data_base_url = config_json["data_base_url"],
       .is_live = api_key_json["is_live"],
       .is_stop_loss_decayed = is_stop_loss_decayed, // TODO: Decide
+      .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
       .is_stop_profit_decayed = is_stop_profit_decayed,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
@@ -274,6 +306,8 @@ void Alpaca::Client::load_config() {
       .should_await_reversal_indicator =
           should_await_reversal_indicator,                // TODO: Decide
       .should_expand_stop_loss = should_expand_stop_loss, // TODO: Decide
+      .should_recover_deficit = should_recover_deficit,   // TODO: Decide
+      .should_reverse_losses = should_reverse_losses,     // TODO: Decide
       .should_toggle_profit_timeout_seconds =
           should_toggle_profit_timeout_seconds,               // TODO: Decide
       .should_toggle_stop_loss = should_toggle_stop_loss,     // TODO: Decide
@@ -290,6 +324,7 @@ void Alpaca::Client::load_config() {
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
       .stop_profit_ratios = stop_profit_ratios,
       .terminate_after_seconds = terminate_after_seconds,
+      .toggle_is_trending_after_n = toggle_is_trending_after_n, // TODO: Decide
   };
 }
 

@@ -5,11 +5,9 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::is_reversing_loss() {
-  if (!this->api_client.config.should_await_consolidation_indicator) {
+  if (!this->api_client.config.should_reverse_losses) {
     return false;
   }
-
-  return false;
 
   if (this->closed_positions.empty()) {
     return false;
@@ -17,6 +15,7 @@ bool Alpaca::TaoBot::is_reversing_loss() {
 
   position_t last_position = this->closed_positions.back();
 
+  // TODO: Decide
   if (last_position.open_order.is_loss_reversal) {
     return false;
   }

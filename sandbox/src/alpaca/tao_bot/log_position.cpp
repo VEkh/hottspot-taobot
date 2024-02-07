@@ -115,8 +115,19 @@ void Alpaca::TaoBot::log_position() {
   log_color = position_profit >= 0 ? fmt.green : fmt.red;
 
   std::cout << fmt.bold << log_color << fmt.underline;
-  puts("💸 Position Profit");
+  printf("💸 Position Profit");
   std::cout << fmt.reset;
+
+  Formatted::Stream is_loss_reversal_color =
+      this->open_order_ptr->is_loss_reversal ? fmt.green : fmt.red;
+
+  std::string is_loss_reversal_text =
+      this->open_order_ptr->is_loss_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf(" Reversing Loss? ");
+  std::cout << is_loss_reversal_color << is_loss_reversal_text;
+  std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << log_color;
   printf("Current: %.2f • Max: %.2f\n", position_profit,

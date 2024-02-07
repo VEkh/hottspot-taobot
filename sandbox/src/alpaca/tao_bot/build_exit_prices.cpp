@@ -8,8 +8,9 @@
 #include <math.h>              // abs, pow
 
 // TODO: Decide
-#include "current_mid.cpp" // current_mid
-#include <algorithm>       // std::max, std::min
+#include "current_mid.cpp"              // current_mid
+#include "nearest_opening_reversal.cpp" // nearest_opening_reversal
+#include <algorithm>                    // std::max, std::min
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->avg_one_sec_variances.running;
@@ -56,7 +57,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     stop_loss_ratio *= log(multiplier + 3);
   }
 
-  // NOTE: 150x worked better during September season
   double stop_loss = stop_loss_ratio * static_one_sec_variance;
 
   const double stop_loss_percent = this->api_client.config.stop_loss_percent;
@@ -102,6 +102,20 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   //   stop_loss = -larger_delta;
   // }
 
+  // TODO: Decide
+  if (this->api_client.config.should_await_reversal_indicator &&
+      this->api_client.config.is_stop_loss_dynamic) {
+    const double execution_price = this->open_order_ptr->execution_price;
+    const double reversal_price = this->open_order_ptr->reversal.mid;
+
+    const double reversal_delta = abs(execution_price - reversal_price);
+
+    const double dynamic_loss =
+        reversal_delta ? reversal_delta : abs(stop_loss);
+
+    stop_loss = -std::min(dynamic_loss, abs(stop_loss));
+  }
+
   if (this->api_client.config.stop_profit_ratios[this->symbol]) {
     stop_profit_ratio =
         this->api_client.config.stop_profit_ratios[this->symbol];
@@ -133,7 +147,20 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     stop_profit_ratio = this->api_client.config.alt_stop_profit_ratio;
   }
 
-  const double stop_profit = abs(stop_profit_ratio * stop_loss);
+  double stop_profit = abs(stop_profit_ratio * stop_loss);
+
+  // TODO: Decide
+  if (this->api_client.config.should_recover_deficit) {
+    const double asset_deficit =
+        abs(this->performance.current_balance - this->performance.max_balance);
+
+    const double deficit_profit =
+        1.04 * (asset_deficit / this->open_order_ptr->quantity);
+
+    if (asset_deficit && deficit_profit >= abs(stop_loss)) {
+      stop_profit = std::min(0.2 * this->bulk_candle.range(), deficit_profit);
+    }
+  }
 
   double adjusted_stop_profit = stop_profit / trailing_stop_profit_ratio;
 

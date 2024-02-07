@@ -49,6 +49,19 @@ struct range_t {
   double delta() { return this->high - this->low; }
 };
 
+// TODO: Decide
+enum reversal_type_t {
+  REVERSAL_HIGH,
+  REVERSAL_LOW,
+};
+
+struct reversal_t {
+  double at;
+  bool is_record;
+  double mid;
+  reversal_type_t type;
+};
+
 struct order_t {
   order_action_t action = order_action_t::BUY;
   range_t consolidation_range; // TODO: Decide
@@ -63,6 +76,7 @@ struct order_t {
   double min_profit_at = 0;
   double profit = 0.00;
   double quantity = 0.00;
+  reversal_t reversal;
   order_status_t status = order_status_t::ORDER_INIT;
   double stop_loss = 0.00;
   double stop_profit = 0.00;

@@ -1,0 +1,160 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-test-3[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2024-01-02 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-momentum-test-3",
+  "is_live": false,
+  "late_start_seconds": 0,
+  "note": "capture profits on record breaking reversals; hold reversed loss",
+  "profit_reclaim_ratio": 0.8,
+  "profit_timeout_seconds": 60,
+  "reversal_timeframe_minutes": 7,
+  "secret_key": "secret_key",
+  "should_await_reversal_indicator": true,
+  "should_reverse_losses": true,
+  "stop_loss_ratio": -60.0,
+  "stop_profit_ratio": 0.0
+}
+[0m[0m[1m[36m[4m
+Tuesday, January  2 2024[24m[32m
+Current Equity:             $100863.10 (+863.10) (+0.86%)
+Max Equity:                 $102997.05 (+2997.05) (+3.00%) @ 09:51 CST
+Min Equity:                 $98715.03 (-1284.97) (-1.28%) @ 08:45 CST
+Original Equity:            $100000.00
+[1m[36m[4m
+Wednesday, January  3 2024[24m[31m
+Current Equity:             $100496.41 (-366.69) (-0.36%)
+Max Equity:                 $102877.14 (+2014.04) (+2.00%) @ 09:17 CST
+Min Equity:                 $98331.37 (-2531.73) (-2.51%) @ 14:22 CST
+Original Equity:            $100863.10
+[1m[36m[4m
+Thursday, January  4 2024[24m[31m
+Current Equity:             $100133.75 (-362.66) (-0.36%)
+Max Equity:                 $103409.26 (+2912.85) (+2.90%) @ 09:06 CST
+Min Equity:                 $100133.75 (-362.66) (-0.36%) @ 10:31 CST
+Original Equity:            $100496.41
+[1m[36m[4m
+Friday, January  5 2024[24m[32m
+Current Equity:             $100738.75 (+605.00) (+0.60%)
+Max Equity:                 $102204.76 (+2071.01) (+2.07%) @ 14:32 CST
+Min Equity:                 $98903.98 (-1229.77) (-1.23%) @ 10:21 CST
+Original Equity:            $100133.75
+[1m[36m[4m
+Monday, January  8 2024[24m[32m
+Current Equity:             $101778.16 (+1039.41) (+1.03%)
+Max Equity:                 $102169.85 (+1431.10) (+1.42%) @ 14:23 CST
+Min Equity:                 $100142.58 (-596.17) (-0.59%) @ 08:53 CST
+Original Equity:            $100738.75
+[1m[36m[4m
+Tuesday, January  9 2024[24m[31m
+Current Equity:             $99878.51 (-1899.65) (-1.87%)
+Max Equity:                 $101883.36 (+105.20) (+0.10%) @ 08:39 CST
+Min Equity:                 $98372.18 (-3405.99) (-3.35%) @ 09:59 CST
+Original Equity:            $101778.16
+[1m[36m[4m
+Wednesday, January 10 2024[24m[31m
+Current Equity:             $97898.93 (-1979.58) (-1.98%)
+Max Equity:                 $100224.38 (+345.87) (+0.35%) @ 09:09 CST
+Min Equity:                 $97737.21 (-2141.30) (-2.14%) @ 12:22 CST
+Original Equity:            $99878.51
+[1m[36m[4m
+Thursday, January 11 2024[24m[31m
+Current Equity:             $97182.11 (-716.82) (-0.73%)
+Max Equity:                 $98136.73 (+237.80) (+0.24%) @ 08:37 CST
+Min Equity:                 $96142.32 (-1756.61) (-1.79%) @ 08:38 CST
+Original Equity:            $97898.93
+[1m[36m[4m
+Friday, January 12 2024[24m[31m
+Current Equity:             $95774.81 (-1407.30) (-1.45%)
+Max Equity:                 $97419.21 (+237.10) (+0.24%) @ 08:56 CST
+Min Equity:                 $95346.47 (-1835.64) (-1.89%) @ 11:14 CST
+Original Equity:            $97182.11
+[1m[36m[4m
+Monday, January 15 2024[24m[32m
+Current Equity:             $95774.81 (+0.00) (+0.00%)
+Max Equity:                 $95774.81 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $95774.81 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $95774.81
+[1m[36m[4m
+Tuesday, January 16 2024[24m[31m
+Current Equity:             $94723.54 (-1051.27) (-1.10%)
+Max Equity:                 $96251.65 (+476.84) (+0.50%) @ 09:18 CST
+Min Equity:                 $93889.86 (-1884.95) (-1.97%) @ 10:17 CST
+Original Equity:            $95774.81
+[1m[36m[4m
+Wednesday, January 17 2024[24m[32m
+Current Equity:             $97505.48 (+2781.94) (+2.94%)
+Max Equity:                 $97574.12 (+2850.58) (+3.01%) @ 12:33 CST
+Min Equity:                 $94723.54 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $94723.54
+[1m[36m[4m
+Thursday, January 18 2024[24m[32m
+Current Equity:             $99786.86 (+2281.38) (+2.34%)
+Max Equity:                 $102570.82 (+5065.34) (+5.19%) @ 12:57 CST
+Min Equity:                 $97505.48 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $97505.48
+[1m[36m[4m
+Friday, January 19 2024[24m[31m
+Current Equity:             $99570.37 (-216.49) (-0.22%)
+Max Equity:                 $99786.86 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $97356.47 (-2430.39) (-2.44%) @ 09:03 CST
+Original Equity:            $99786.86
+[1m[36m[4m
+Monday, January 22 2024[24m[31m
+Current Equity:             $96262.89 (-3307.48) (-3.32%)
+Max Equity:                 $99616.89 (+46.52) (+0.05%) @ 08:44 CST
+Min Equity:                 $96188.81 (-3381.56) (-3.40%) @ 12:51 CST
+Original Equity:            $99570.37
+[1m[36m[4m
+Tuesday, January 23 2024[24m[31m
+Current Equity:             $92167.03 (-4095.86) (-4.25%)
+Max Equity:                 $96969.74 (+706.85) (+0.73%) @ 08:47 CST
+Min Equity:                 $90888.22 (-5374.67) (-5.58%) @ 09:57 CST
+Original Equity:            $96262.89
+[1m[36m[4m
+Wednesday, January 24 2024[24m[32m
+Current Equity:             $94372.97 (+2205.94) (+2.39%)
+Max Equity:                 $94372.97 (+2205.94) (+2.39%) @ 14:38 CST
+Min Equity:                 $92167.03 (+0.00) (+0.00%) @ 08:31 CST
+Original Equity:            $92167.03
+[1m[36m[4m
+Thursday, January 25 2024[24m[31m
+Current Equity:             $92527.11 (-1845.86) (-1.96%)
+Max Equity:                 $96731.26 (+2358.29) (+2.50%) @ 08:37 CST
+Min Equity:                 $92527.11 (-1845.86) (-1.96%) @ 14:02 CST
+Original Equity:            $94372.97
+[1m[36m[4m
+Friday, January 26 2024[24m[31m
+Current Equity:             $86180.97 (-6346.14) (-6.86%)
+Max Equity:                 $92527.11 (+0.00) (+0.00%) @ 08:33 CST
+Min Equity:                 $85198.24 (-7328.87) (-7.92%) @ 13:35 CST
+Original Equity:            $92527.11
+[1m[36m[4m
+Monday, January 29 2024[24m[31m
+Current Equity:             $83803.35 (-2377.62) (-2.76%)
+Max Equity:                 $87953.91 (+1772.94) (+2.06%) @ 08:39 CST
+Min Equity:                 $82308.26 (-3872.71) (-4.49%) @ 13:26 CST
+Original Equity:            $86180.97
+[1m[36m[4m
+📊 Stats
+[0m[1m[31mAvg Daily Return:           -$809.83
+[1m[31mAvg Daily % Return:         -0.85%
+[1m[31mTotal Return:               -$16196.65
+
+[1m[33mDays 2.00% Target Reached:  8/20 (40.00% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

@@ -2,13 +2,10 @@
 #ifndef ALPACA__TAO_BOT_is_entry_signal_present
 #define ALPACA__TAO_BOT_is_entry_signal_present
 
-#include "is_breaking_consolidation.cpp" // is_breaking_consolidation
-#include "is_consolidating.cpp"          // is_consolidating
-#include "is_nearest_reversal_low.cpp"   // is_nearest_reversal_low
-#include "is_reversing_loss.cpp"         // is_reversing_loss
-#include "lib/utils/time.cpp"            // ::utils::time_
-#include "relation_to_consolidation.cpp" // relation_to_consolidation
-#include "tao_bot.h"                     // Alpaca::TaoBot, range_t
+#include "is_consolidating.cpp"  // is_consolidating
+#include "is_reversing_loss.cpp" // is_reversing_loss
+#include "nearest_reversal.cpp"  // nearest_reversal
+#include "tao_bot.h"             // Alpaca::TaoBot, range_t, reversal_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
   if (!this->api_client.config.should_await_reversal_indicator &&
@@ -16,48 +13,31 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
     return false;
   }
 
-  if (this->api_client.config.should_await_reversal_indicator) {
-    if (!this->closed_positions.empty()) {
-      return true;
-    }
+  // TODO: Decide
+  if (this->api_client.config.should_reverse_losses && is_reversing_loss()) {
+    return true;
+  }
 
-    if (this->api_client.config.should_await_consolidation_indicator &&
-        !is_consolidating()) {
+  if (this->api_client.config.should_await_reversal_indicator) {
+    if (this->reversals.highs.empty() || this->reversals.lows.empty()) {
       return false;
     }
 
-    if (!this->reversals.highs.empty() || !this->reversals.lows.empty()) {
-      return true;
+    const reversal_t nearest_reversal_ = nearest_reversal();
+
+    if (!this->closed_positions.empty()) {
+      const position_t last_position = this->closed_positions.back();
+
+      if (last_position.open_order.reversal.type == nearest_reversal_.type &&
+          last_position.open_order.reversal.at == nearest_reversal_.at) {
+        return false;
+      }
     }
+
+    return nearest_reversal_.is_record;
   }
 
   return false;
 }
-
-// #include "is_near_consolidation_edge.cpp" // is_near_consolidation_edge
-// #include "is_reversing_loss.cpp"          // is_reversing_loss
-
-// bool Alpaca::TaoBot::is_entry_signal_present() {
-//   if (!this->api_client.config.should_await_consolidation_indicator) {
-//     return false;
-//   }
-
-//   // TODO: Decide
-//   if (is_reversing_loss()) {
-//     return true;
-//   }
-
-//   for (int duration : this->consolidation_durations) {
-//     if (is_consolidating(duration) && is_near_consolidation_edge(duration)) {
-//       return true;
-//     }
-
-//     if (is_breaking_consolidation(duration)) {
-//       return true;
-//     }
-//   }
-
-//   return false;
-// }
 
 #endif

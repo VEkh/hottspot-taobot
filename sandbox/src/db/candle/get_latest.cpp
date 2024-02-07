@@ -25,8 +25,8 @@ DB::Candle::get_latest(const get_latest_args_t args) {
       where
         symbol = %s
         and duration_minutes = %i
-        and opened_at between to_timestamp(%f)
-        and to_timestamp(%f)
+        and opened_at >= to_timestamp(%f)
+        and closed_at <= to_timestamp(%f)
       order by
         closed_at desc
     )
