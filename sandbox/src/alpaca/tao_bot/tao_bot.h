@@ -128,7 +128,7 @@ private:
   double current_mid();
   double excess_trigger_buffer();
   double open_position_profit(const order_t *);
-  double profit_percentage(const order_t *);
+  double profit_percentage(const order_t *, std::string);
   double target_account_profit_ratio();
   double volatility(const bool);
   exit_prices_t build_exit_prices();

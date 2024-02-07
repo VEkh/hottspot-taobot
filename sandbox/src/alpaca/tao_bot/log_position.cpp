@@ -36,26 +36,42 @@ void Alpaca::TaoBot::log_position() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
-  printf("Open   => Execution: %.2f • Profit: %.2f (%.2f%%) • Max Profit: %.2f "
-         "@ %s%s • Min Profit: %.2f @ %s%s\n",
-         this->open_order_ptr->execution_price, this->open_order_ptr->profit,
-         profit_percentage(this->open_order_ptr),
-         this->open_order_ptr->max_profit,
-         ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
+  printf("Open   => Execution: %.2f @ %s • Profit    : %+.2f (%+.2f%%)\n",
+         this->open_order_ptr->execution_price,
+         ::utils::time_::date_string(this->open_order_ptr->timestamp,
                                      "%H:%M %Z", "America/Chicago")
              .c_str(),
-         this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
-                                                                          : "",
-         this->open_order_ptr->min_profit,
-         ::utils::time_::date_string(this->open_order_ptr->min_profit_at,
-                                     "%H:%M %Z", "America/Chicago")
-             .c_str(),
-         this->open_order_ptr->profit == this->open_order_ptr->min_profit ? " 💣"
-                                                                          : "");
+         this->open_order_ptr->profit,
+         profit_percentage(this->open_order_ptr, "profit"));
 
-  printf("Close  => Execution: %.2f • Profit: %.2f (%.2f%%)\n",
-         this->close_order_ptr->execution_price, this->close_order_ptr->profit,
-         profit_percentage(this->close_order_ptr));
+  printf(
+      "                                          Max Profit: %+.2f (%+.2f%%) @ "
+      "%s%s\n",
+      this->open_order_ptr->max_profit,
+      profit_percentage(this->open_order_ptr, "max_profit"),
+      ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
+                                  "%H:%M %Z", "America/Chicago")
+          .c_str(),
+      this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
+                                                                       : "");
+
+  printf(
+      "                                          Min Profit: %+.2f (%+.2f%%) @ "
+      "%s%s\n",
+      this->open_order_ptr->min_profit,
+      profit_percentage(this->open_order_ptr, "min_profit"),
+      ::utils::time_::date_string(this->open_order_ptr->min_profit_at,
+                                  "%H:%M %Z", "America/Chicago")
+          .c_str(),
+      this->open_order_ptr->profit == this->open_order_ptr->min_profit ? " 💦"
+                                                                       : "");
+
+  if (this->close_order_ptr->execution_price) {
+    printf("Close  => Execution: %.2f • Profit: %.2f (%.2f%%)\n",
+           this->close_order_ptr->execution_price,
+           this->close_order_ptr->profit,
+           profit_percentage(this->close_order_ptr));
+  }
 
   printf("Status => Open: %s • Close: %s\n",
          ::utils::string::upcase(
