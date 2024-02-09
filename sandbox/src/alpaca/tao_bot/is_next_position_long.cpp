@@ -5,12 +5,11 @@
 #include "does_position_exist.cpp"    // does_position_exist
 #include "is_first_position_long.cpp" // is_first_position_long
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
-#include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t
+#include "tao_bot.h" // Alpaca::TaoBot, order_action_t reversal_type_t
 
 // TODO: Decide
 #include "candles_range.cpp"                       // candles_range
 #include "is_consolidation_next_position_long.cpp" // is_consolidation_next_position_long
-#include "is_nearest_reversal_low.cpp"             // is_nearest_reversal_low
 #include "is_reversing_loss.cpp"                   // is_reversing_loss
 #include "reversal_imbalance.cpp"                  // reversal_imbalance
 
@@ -32,13 +31,12 @@ bool Alpaca::TaoBot::is_next_position_long() {
     return last_position.close_order.action == order_action_t::BUY;
   }
 
-  // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
     if (this->is_trending) {
-      return !is_nearest_reversal_low();
+      return !this->entry_reversal.type == reversal_type_t::REVERSAL_LOW;
     }
 
-    return is_nearest_reversal_low();
+    return this->entry_reversal.type == reversal_type_t::REVERSAL_LOW;
   }
 
   // TODO: Decide

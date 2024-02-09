@@ -91,6 +91,7 @@ private:
   order_t open_order;
   performance_t performance;
   range_t active_consolidation;       // TODO: Deicde
+  reversal_t entry_reversal;          // TODO: Decide
   reversals_t reversals;              // TODO: Decide
   std::list<candle_t> latest_candles; // TODO: Decide
   std::list<quote_t> quotes;
@@ -112,7 +113,6 @@ private:
   bool is_first_position_long();
   bool is_market_open();
   bool is_near_consolidation_edge(const int); // TODO: Decide
-  bool is_nearest_reversal_low();             // TODO: Decide
   bool is_next_position_long();
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);
@@ -146,8 +146,6 @@ private:
   range_t candles_range(const int);            // TODO: Decide
   range_t candles_range(const int, const int); // TODO: Decide
   reversal_t nearest_reversal();               // TODO: Decide
-  std::pair<double, reversal_t>
-  nearest_opening_reversal(const order_action_t, const double); // TODO: Decide
   std::pair<double, reversal_t>
   nearest_record_reversal(const double); // TODO: Decide
 

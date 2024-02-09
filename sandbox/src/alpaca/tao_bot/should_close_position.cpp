@@ -9,10 +9,6 @@
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
 
-// TODO: Decide
-#include "nearest_opening_reversal.cpp" // nearest_opening_reversal
-#include <math.h>                       // abs
-
 bool Alpaca::TaoBot::should_close_position() {
   if (this->open_order_ptr->status != order_status_t::ORDER_FILLED) {
     return false;

@@ -21,7 +21,6 @@
 // TODO: Decide
 #include "candles_range.cpp"     // candles_range
 #include "is_reversing_loss.cpp" // is_reversing_loss
-#include "nearest_reversal.cpp"  // nearest_opening_reversal
 
 std::pair<Alpaca::TaoBot::order_t, Alpaca::TaoBot::order_t>
 Alpaca::TaoBot::open_position(const order_action_t close_action,
@@ -39,11 +38,16 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
   // TODO: Decide
   if (this->api_client.config.should_reverse_losses) {
     new_open_order.is_loss_reversal = is_reversing_loss();
+
+    if (new_open_order.is_loss_reversal) {
+      new_open_order.reversal =
+          this->closed_positions.back().open_order.reversal;
+    }
   }
 
   // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
-    new_open_order.reversal = nearest_reversal();
+    new_open_order.reversal = this->entry_reversal;
   }
 
   order_t new_close_order;

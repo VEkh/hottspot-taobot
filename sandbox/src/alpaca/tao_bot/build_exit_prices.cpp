@@ -8,9 +8,8 @@
 #include <math.h>              // abs, pow
 
 // TODO: Decide
-#include "current_mid.cpp"              // current_mid
-#include "nearest_opening_reversal.cpp" // nearest_opening_reversal
-#include <algorithm>                    // std::max, std::min
+#include "current_mid.cpp" // current_mid
+#include <algorithm>       // std::max, std::min
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->avg_one_sec_variances.running;

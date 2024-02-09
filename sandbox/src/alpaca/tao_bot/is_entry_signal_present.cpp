@@ -2,10 +2,11 @@
 #ifndef ALPACA__TAO_BOT_is_entry_signal_present
 #define ALPACA__TAO_BOT_is_entry_signal_present
 
-#include "is_consolidating.cpp"  // is_consolidating
-#include "is_reversing_loss.cpp" // is_reversing_loss
-#include "nearest_reversal.cpp"  // nearest_reversal
-#include "tao_bot.h"             // Alpaca::TaoBot, range_t, reversal_t
+#include "is_consolidating.cpp"        // is_consolidating
+#include "is_reversing_loss.cpp"       // is_reversing_loss
+#include "nearest_record_reversal.cpp" // nearest_record_reversal
+#include "nearest_reversal.cpp"        // nearest_reversal
+#include "tao_bot.h"                   // Alpaca::TaoBot, range_t, reversal_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
   if (!this->api_client.config.should_await_reversal_indicator &&
@@ -23,18 +24,21 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       return false;
     }
 
-    const reversal_t nearest_reversal_ = nearest_reversal();
+    const reversal_t ref_reversal =
+        nearest_record_reversal(this->current_epoch).second;
 
     if (!this->closed_positions.empty()) {
       const position_t last_position = this->closed_positions.back();
 
-      if (last_position.open_order.reversal.type == nearest_reversal_.type &&
-          last_position.open_order.reversal.at == nearest_reversal_.at) {
+      if (last_position.open_order.reversal.type == ref_reversal.type &&
+          last_position.open_order.reversal.at == ref_reversal.at) {
         return false;
       }
     }
 
-    return nearest_reversal_.is_record;
+    this->entry_reversal = ref_reversal;
+
+    return true;
   }
 
   return false;
