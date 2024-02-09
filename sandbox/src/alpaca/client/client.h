@@ -32,6 +32,7 @@ public:
     int candles_timeframe_minutes = 0;       // TODO: Decide
     int consolidation_duration_mintues = 10; // TODO: Decide
     std::string data_base_url;
+    double deficit_reclaim_ratio = 0.0; // TODO: Decide
     bool is_live;
     bool is_stop_loss_decayed = false; // TODO: Decide
     bool is_stop_loss_dynamic = false; // TODO: Decide
@@ -40,11 +41,10 @@ public:
     ml_config_t ml;
     double profit_reclaim_ratio = 0.0;                 // TODO: Decide
     int profit_timeout_seconds = 0;                    // TODO: Decide
-    int reversal_timeframe_minutes = 10;               // Production's average
+    int reversal_timeframe_minutes = 5;                // TODO: Decide
     bool should_await_consolidation_indicator = false; // TODO: Decide
     bool should_await_reversal_indicator = false;      // TODO: Decide
     bool should_expand_stop_loss = false;
-    bool should_recover_deficit = false;                // TODO: Decide
     bool should_reverse_losses = false;                 // TODO: Decide
     bool should_toggle_profit_timeout_seconds = false;  // TODO: Decide
     bool should_toggle_stop_loss = false;               // TODO: Decide

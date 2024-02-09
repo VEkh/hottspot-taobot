@@ -95,6 +95,12 @@ void Alpaca::Client::load_config() {
           : config.consolidation_duration_mintues;
 
   // TODO: Decide
+  const double deficit_reclaim_ratio =
+      api_key_json.contains("deficit_reclaim_ratio")
+          ? (double)api_key_json["deficit_reclaim_ratio"]
+          : config.deficit_reclaim_ratio;
+
+  // TODO: Decide
   const bool is_stop_loss_decayed =
       api_key_json.contains("is_stop_loss_decayed")
           ? (bool)api_key_json["is_stop_loss_decayed"]
@@ -152,12 +158,6 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("should_toggle_profit_timeout_seconds")
           ? (bool)api_key_json["should_toggle_profit_timeout_seconds"]
           : config.should_toggle_profit_timeout_seconds;
-
-  // TODO: Decide
-  const bool should_recover_deficit =
-      api_key_json.contains("should_recover_deficit")
-          ? (bool)api_key_json["should_recover_deficit"]
-          : config.should_recover_deficit;
 
   // TODO: Decide
   const bool should_reverse_losses =
@@ -292,6 +292,7 @@ void Alpaca::Client::load_config() {
       .consolidation_duration_mintues =
           consolidation_duration_mintues, // TODO: Decide
       .data_base_url = config_json["data_base_url"],
+      .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
       .is_stop_loss_decayed = is_stop_loss_decayed, // TODO: Decide
       .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
@@ -306,7 +307,6 @@ void Alpaca::Client::load_config() {
       .should_await_reversal_indicator =
           should_await_reversal_indicator,                // TODO: Decide
       .should_expand_stop_loss = should_expand_stop_loss, // TODO: Decide
-      .should_recover_deficit = should_recover_deficit,   // TODO: Decide
       .should_reverse_losses = should_reverse_losses,     // TODO: Decide
       .should_toggle_profit_timeout_seconds =
           should_toggle_profit_timeout_seconds,               // TODO: Decide

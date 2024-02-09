@@ -149,8 +149,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   double stop_profit = abs(stop_profit_ratio * stop_loss);
 
-  // TODO: Decide
-  if (this->api_client.config.should_recover_deficit) {
+  if (this->api_client.config.deficit_reclaim_ratio) {
     const double asset_deficit =
         abs(this->performance.current_balance - this->performance.max_balance);
 
@@ -158,7 +157,13 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
         1.04 * (asset_deficit / this->open_order_ptr->quantity);
 
     if (asset_deficit && deficit_profit >= abs(stop_loss)) {
-      stop_profit = std::min(0.2 * this->bulk_candle.range(), deficit_profit);
+      const double deficit_reclaim_ratio =
+          this->api_client.config.deficit_reclaim_ratio;
+
+      std::valarray<double> stop_profits = {
+          deficit_reclaim_ratio * this->bulk_candle.range(), deficit_profit};
+
+      stop_profit = stop_profits.min();
     }
   }
 
