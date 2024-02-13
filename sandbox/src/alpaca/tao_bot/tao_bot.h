@@ -145,9 +145,8 @@ private:
   performance_t build_performance();
   range_t candles_range(const int);            // TODO: Decide
   range_t candles_range(const int, const int); // TODO: Decide
+  reversal_t nearest_record_reversal();        // TODO: Decide
   reversal_t nearest_reversal();               // TODO: Decide
-  std::pair<double, reversal_t>
-  nearest_record_reversal(const double); // TODO: Decide
 
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,

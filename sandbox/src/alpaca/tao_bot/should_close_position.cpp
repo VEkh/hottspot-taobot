@@ -68,26 +68,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  // TODO: Decide
-  // if (this->api_client.config.should_await_reversal_indicator &&
-  //     this->open_order_ptr->profit > 0) {
-  //   const order_action_t action = this->open_order_ptr->action;
-
-  //   if (action == order_action_t::BUY && !this->reversals.highs.empty()) {
-  //     std::map<double, reversal_t>::reverse_iterator last_high =
-  //         this->reversals.highs.rbegin();
-
-  //     return last_high->first > this->open_order_ptr->reversal.at;
-  //   }
-
-  //   if (action == order_action_t::SELL && !this->reversals.lows.empty()) {
-  //     std::map<double, reversal_t>::reverse_iterator last_low =
-  //         this->reversals.lows.rbegin();
-
-  //     return last_low->first > this->open_order_ptr->reversal.at;
-  //   }
-  // }
-
   const double profit_reclaim_ratio =
       this->api_client.config.profit_reclaim_ratio;
 

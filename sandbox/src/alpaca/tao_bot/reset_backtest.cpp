@@ -3,7 +3,7 @@
 
 #include "advance_current_epoch.cpp"   // advance_current_epoch
 #include "set_market_open_epoch.cpp"   // set_market_open_epoch
-#include "tao_bot.h"                   // Alpaca::TaoBot, candle_t
+#include "tao_bot.h"                   // Alpaca::TaoBot, candle_t, reversals_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
 void Alpaca::TaoBot::reset_backtest() {

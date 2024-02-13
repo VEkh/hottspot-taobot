@@ -22,7 +22,6 @@ void Alpaca::TaoBot::log_reversals() {
   const int highs_n = this->reversals.highs.size();
   const int lows_n = this->reversals.lows.size();
 
-  // TODO: Decide
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("%i-Min 🔀 Reversals",
          this->api_client.config.reversal_timeframe_minutes);

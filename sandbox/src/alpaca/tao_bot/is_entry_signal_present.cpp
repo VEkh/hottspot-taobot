@@ -24,8 +24,9 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       return false;
     }
 
-    const reversal_t ref_reversal =
-        nearest_record_reversal(this->current_epoch).second;
+    reversal_t ref_reversal;
+
+    ref_reversal = nearest_record_reversal();
 
     if (!this->closed_positions.empty()) {
       const position_t last_position = this->closed_positions.back();
@@ -37,19 +38,6 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
     }
 
     this->entry_reversal = ref_reversal;
-
-    const double static_one_sec_variance = this->avg_one_sec_variances.running;
-    const double stop_loss_ratio = this->api_client.config.stop_loss_ratio;
-    const double stop_loss = stop_loss_ratio * static_one_sec_variance;
-
-    const double mid = current_mid();
-    const double reversal_price = ref_reversal.mid;
-
-    const double reversal_delta = abs(mid - reversal_price);
-
-    if (reversal_delta > abs(stop_loss)) {
-      return false;
-    };
 
     return true;
   }
