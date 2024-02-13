@@ -2,8 +2,7 @@
 #ifndef ALPACA__TAO_BOT_build_reversals
 #define ALPACA__TAO_BOT_build_reversals
 
-#include "current_mid.cpp"      // current_mid
-#include "db/candle/candle.cpp" // DB::Candle
+#include "current_mid.cpp" // current_mid
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max, std::min
 #include <list>      // std::list
@@ -15,16 +14,6 @@ void Alpaca::TaoBot::build_reversals() {
   }
 
   if (this->latest_candles.empty()) {
-    return;
-  }
-
-  DB::Candle::candle_bounds_t epoch_bounds =
-      DB::Candle::timestamp_to_bounds(1, this->current_epoch);
-
-  const bool are_candles_stale =
-      epoch_bounds.opened_at != this->latest_candles.back().closed_at;
-
-  if (are_candles_stale) {
     return;
   }
 
@@ -64,6 +53,22 @@ void Alpaca::TaoBot::build_reversals() {
       continue;
     }
 
+    bool near_end = false;
+    int end_seek_n = 1;
+
+    while (end_seek_n <= seek_n) {
+      if (std::next(it, end_seek_n) == this->latest_candles.end()) {
+        near_end = true;
+        break;
+      }
+
+      end_seek_n++;
+    }
+
+    if (near_end) {
+      continue;
+    }
+
     bool is_high = true;
     bool is_low = true;
 
@@ -72,10 +77,6 @@ void Alpaca::TaoBot::build_reversals() {
 
     int back_seek_i = 0;
     int front_seek_i = 0;
-
-    if (this->current_epoch - it->opened_at < seek_n * 60) {
-      continue;
-    }
 
     for (; it != this->latest_candles.end() && front_seek_i < seek_n;
          front_seek_i++) {
