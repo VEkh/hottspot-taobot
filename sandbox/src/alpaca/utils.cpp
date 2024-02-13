@@ -49,8 +49,8 @@ Alpaca::t::order_status_t to_order_status_t(const std::string &status) {
 
 bool is_early_close_day(const double epoch) {
   std::map<std::string, bool> DATES = {
-      {"2023-07-03", true},
-      {"2023-11-24", true},
+      {"2023-07-03", true}, {"2023-11-24", true}, {"2024-07-03", true},
+      {"2024-11-29", true}, {"2024-12-24", true},
   };
 
   const std::string date_string = ::utils::time_::date_string(epoch);
@@ -95,6 +95,9 @@ bool is_holiday(const double epoch) {
       {"2023-04-07", true}, {"2023-05-29", true}, {"2023-06-19", true},
       {"2023-07-04", true}, {"2023-09-04", true}, {"2023-11-23", true},
       {"2023-12-25", true}, {"2024-01-01", true}, {"2024-01-15", true},
+      {"2024-02-19", true}, {"2024-03-29", true}, {"2024-05-27", true},
+      {"2024-06-19", true}, {"2024-07-04", true}, {"2024-09-02", true},
+      {"2024-11-28", true}, {"2024-12-25", true},
   };
 
   const std::string date_string = ::utils::time_::date_string(epoch);
