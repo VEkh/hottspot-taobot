@@ -112,16 +112,11 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     const double dynamic_loss =
         reversal_delta ? reversal_delta : abs(stop_loss);
 
-    if (this->api_client.config.is_stop_loss_true_dynamic) {
-      stop_loss = -dynamic_loss;
+    stop_loss = -dynamic_loss;
 
-      if (this->is_trending) {
-        stop_loss =
-            std::min(stop_loss, stop_loss_ratio * static_one_sec_variance);
-      }
-
-    } else {
-      stop_loss = -std::min(dynamic_loss, abs(stop_loss));
+    if (this->is_trending) {
+      stop_loss =
+          std::min(stop_loss, stop_loss_ratio * static_one_sec_variance);
     }
   }
 

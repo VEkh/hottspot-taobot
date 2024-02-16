@@ -113,11 +113,6 @@ void Alpaca::Client::load_config() {
           : config.is_stop_loss_dynamic;
 
   // TODO: Decide
-  const bool is_stop_loss_true_dynamic =
-      api_key_json.contains("is_stop_loss_true_dynamic")
-          ? (bool)api_key_json["is_stop_loss_true_dynamic"]
-          : config.is_stop_loss_true_dynamic;
-
   const bool is_stop_profit_decayed =
       api_key_json.contains("is_stop_profit_decayed")
           ? (bool)api_key_json["is_stop_profit_decayed"]
@@ -300,9 +295,8 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
-      .is_stop_loss_decayed = is_stop_loss_decayed,           // TODO: Decide
-      .is_stop_loss_dynamic = is_stop_loss_dynamic,           // TODO: Decide
-      .is_stop_loss_true_dynamic = is_stop_loss_true_dynamic, // TODO: Decide
+      .is_stop_loss_decayed = is_stop_loss_decayed, // TODO: Decide
+      .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
       .is_stop_profit_decayed = is_stop_profit_decayed,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
