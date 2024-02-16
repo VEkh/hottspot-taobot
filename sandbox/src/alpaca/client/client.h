@@ -42,6 +42,7 @@ public:
     double profit_reclaim_ratio = 0.0;                 // TODO: Decide
     int profit_timeout_seconds = 0;                    // TODO: Decide
     int reversal_timeframe_minutes = 5;                // TODO: Decide
+    int secondary_reversal_timeframe_minutes = 0;      // TODO: Decide
     bool should_await_consolidation_indicator = false; // TODO: Decide
     bool should_await_reversal_indicator = false;      // TODO: Decide
     bool should_expand_stop_loss = false;

@@ -56,15 +56,17 @@ enum reversal_type_t {
 };
 
 struct reversal_t {
-  double at;
-  bool is_record;
-  double mid;
+  double at = 0;
+  bool is_record = false;
+  double mid = 0;
+  int timeframe_minutes = 0;
   reversal_type_t type;
 };
 
 struct order_t {
   order_action_t action = order_action_t::BUY;
-  range_t consolidation_range; // TODO: Decide
+  range_t consolidation_range;         // TODO: Decide
+  reversal_t deficit_reclaim_reversal; // TODO: Decide
   double execution_price = 0.00;
   std::string id = "";
   bool is_loss_reversal = false; // TODO: Decide

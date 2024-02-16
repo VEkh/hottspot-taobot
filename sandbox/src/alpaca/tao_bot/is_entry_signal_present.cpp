@@ -2,6 +2,7 @@
 #ifndef ALPACA__TAO_BOT_is_entry_signal_present
 #define ALPACA__TAO_BOT_is_entry_signal_present
 
+#include "has_reversal_been_used.cpp"  // has_reversal_been_used
 #include "is_consolidating.cpp"        // is_consolidating
 #include "is_reversing_loss.cpp"       // is_reversing_loss
 #include "nearest_record_reversal.cpp" // nearest_record_reversal
@@ -24,15 +25,17 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       return false;
     }
 
-    reversal_t ref_reversal;
-
-    ref_reversal = nearest_record_reversal();
+    reversal_t ref_reversal = nearest_record_reversal(this->reversals);
 
     if (!this->closed_positions.empty()) {
       const position_t last_position = this->closed_positions.back();
 
-      if (last_position.open_order.reversal.type == ref_reversal.type &&
-          last_position.open_order.reversal.at == ref_reversal.at) {
+      // TODO: Decide
+      if (last_position.open_order.deficit_reclaim_reversal.mid) {
+        ref_reversal = last_position.open_order.deficit_reclaim_reversal;
+      }
+
+      if (has_reversal_been_used(ref_reversal)) {
         return false;
       }
     }

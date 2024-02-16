@@ -43,8 +43,9 @@ void Alpaca::TaoBot::watch() {
     read_candles(); // TODO: Decide
     read_price_movement();
     read_predictions();
-    build_reversals();   // TODO: Decide
-    build_bulk_candle(); // TODO: Decide
+    build_reversals(this->reversals);           // TODO: Decide
+    build_reversals(this->secondary_reversals); // TODO: Decide
+    build_bulk_candle();                        // TODO: Decide
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
@@ -54,8 +55,9 @@ void Alpaca::TaoBot::watch() {
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
-      log_consolidation_durations(); // TODO: Decide
-      log_reversals();               // TODO: Decide
+      log_consolidation_durations();            // TODO: Decide
+      log_reversals(this->reversals);           // TODO: Decide
+      log_reversals(this->secondary_reversals); // TODO: Decide
       log_price_movement();
       log_predictions();
       log_position();

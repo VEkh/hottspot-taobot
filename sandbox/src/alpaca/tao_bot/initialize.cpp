@@ -88,6 +88,12 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     std::vector<std::string> tradeable_symbols =
         ::utils::io::tradeable_symbols("alpaca");
 
+    this->reversals.timeframe_minutes =
+        this->api_client.config.reversal_timeframe_minutes;
+
+    this->secondary_reversals.timeframe_minutes =
+        this->api_client.config.secondary_reversal_timeframe_minutes;
+
     this->tradeable_symbols_count = tradeable_symbols.size();
 
     set_market_open_epoch();

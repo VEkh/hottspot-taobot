@@ -8,8 +8,14 @@
 #include <list>      // std::list
 #include <math.h>    // INFINITY, floor
 
-void Alpaca::TaoBot::build_reversals() {
+void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
   if (!this->api_client.config.should_await_reversal_indicator) {
+    return;
+  }
+
+  const int timeframe_minutes = reversals_.timeframe_minutes;
+
+  if (!timeframe_minutes) {
     return;
   }
 
@@ -18,20 +24,17 @@ void Alpaca::TaoBot::build_reversals() {
   }
 
   const bool are_reversals_updated =
-      floor(this->reversals.updated_at / 60) == floor(this->current_epoch / 60);
+      floor(reversals_.updated_at / 60) == floor(this->current_epoch / 60);
 
   if (are_reversals_updated) {
     return;
   }
 
-  this->reversals.highs = {};
-  this->reversals.lows = {};
+  reversals_.highs = {};
+  reversals_.lows = {};
 
   const double candles_timeframe_minutes =
       this->api_client.config.candles_timeframe_minutes;
-
-  const int duration_minutes =
-      this->api_client.config.reversal_timeframe_minutes;
 
   const double start_epoch =
       candles_timeframe_minutes
@@ -42,7 +45,7 @@ void Alpaca::TaoBot::build_reversals() {
   double record_high = -INFINITY;
   double record_low = INFINITY;
 
-  const int seek_n = duration_minutes / 2;
+  const int seek_n = timeframe_minutes / 2;
 
   int i = 0;
   std::list<candle_t>::iterator it;
@@ -124,20 +127,22 @@ void Alpaca::TaoBot::build_reversals() {
 
     if (is_high) {
       record_high = std::max(record_high, high);
-      this->reversals.highs[it->opened_at] = {
+      reversals_.highs[it->opened_at] = {
           .at = it->opened_at,
           .is_record = false,
           .mid = high,
+          .timeframe_minutes = timeframe_minutes,
           .type = reversal_type_t::REVERSAL_HIGH,
       };
     }
 
     if (is_low) {
       record_low = std::min(record_low, low);
-      this->reversals.lows[it->opened_at] = {
+      reversals_.lows[it->opened_at] = {
           .at = it->opened_at,
           .is_record = false,
           .mid = low,
+          .timeframe_minutes = timeframe_minutes,
           .type = reversal_type_t::REVERSAL_LOW,
       };
     }
@@ -145,8 +150,8 @@ void Alpaca::TaoBot::build_reversals() {
 
   std::map<double, reversal_t>::reverse_iterator r_it;
 
-  for (r_it = this->reversals.highs.rbegin();
-       r_it != this->reversals.highs.rend(); r_it++) {
+  for (r_it = reversals_.highs.rbegin(); r_it != reversals_.highs.rend();
+       r_it++) {
     if (r_it->second.mid == record_high) {
       r_it->second.is_record = true;
 
@@ -154,8 +159,8 @@ void Alpaca::TaoBot::build_reversals() {
     }
   }
 
-  for (r_it = this->reversals.lows.rbegin();
-       r_it != this->reversals.lows.rend(); r_it++) {
+  for (r_it = reversals_.lows.rbegin(); r_it != reversals_.lows.rend();
+       r_it++) {
     if (r_it->second.mid == record_low) {
       r_it->second.is_record = true;
 
@@ -163,7 +168,7 @@ void Alpaca::TaoBot::build_reversals() {
     }
   }
 
-  this->reversals.updated_at = this->latest_candles.back().opened_at;
+  reversals_.updated_at = this->latest_candles.back().opened_at;
 }
 
 #endif

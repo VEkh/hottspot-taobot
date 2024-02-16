@@ -1,10 +1,11 @@
 #ifndef ALPACA__TAO_BOT_should_close_position
 #define ALPACA__TAO_BOT_should_close_position
 
-#include "alpaca/utils.cpp"             // Alpaca::Utils
-#include "build_exit_prices.cpp"        // build_exit_prices
-#include "current_mid.cpp"              // current_mid
-#include "does_position_exist.cpp"      // does_position_exist
+#include "alpaca/utils.cpp"        // Alpaca::Utils
+#include "build_exit_prices.cpp"   // build_exit_prices
+#include "current_mid.cpp"         // current_mid
+#include "does_position_exist.cpp" // does_position_exist
+#include "is_primary_reversal_reversing.cpp" // is_primary_reversal_reversing // TODO: Decide
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
@@ -65,6 +66,11 @@ bool Alpaca::TaoBot::should_close_position() {
       this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
       this->open_order_ptr->profit > 0 &&
       this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
+    return true;
+  }
+
+  // TODO: Decide
+  if (is_primary_reversal_reversing()) {
     return true;
   }
 

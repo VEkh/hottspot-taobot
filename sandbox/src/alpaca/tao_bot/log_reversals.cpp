@@ -4,7 +4,7 @@
 
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/utils/time.cpp" // ::utils::time_
-#include "tao_bot.h" // Alpaca::TaoBot, fmt, reversal_t, reversal_type_t
+#include "tao_bot.h" // Alpaca::TaoBot, fmt, reversals_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max
 #include <iostream>  // std::cout, std::endl
 #include <iterator>  // std::advance
@@ -13,18 +13,21 @@
 #include <string>    // std::string
 #include <utility>   // std::pair
 
-void Alpaca::TaoBot::log_reversals() {
+void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   if (!this->api_client.config.should_await_reversal_indicator) {
     return;
   }
 
+  if (!reversals_.timeframe_minutes) {
+    return;
+  }
+
   const int count = 5;
-  const int highs_n = this->reversals.highs.size();
-  const int lows_n = this->reversals.lows.size();
+  const int highs_n = reversals_.highs.size();
+  const int lows_n = reversals_.lows.size();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("%i-Min 🔀 Reversals",
-         this->api_client.config.reversal_timeframe_minutes);
+  printf("%i-Min 🔀 Reversals", reversals_.timeframe_minutes);
   std::cout << fmt.reset;
 
   Formatted::Stream is_trending_color = this->is_trending ? fmt.green : fmt.red;
@@ -39,10 +42,10 @@ void Alpaca::TaoBot::log_reversals() {
   printf("Latest 5 of %i High(s):", highs_n);
 
   int start_index = std::max(highs_n - count, 0);
-  std::map<double, reversal_t>::iterator it = this->reversals.highs.begin();
+  std::map<double, reversal_t>::iterator it = reversals_.highs.begin();
   std::advance(it, start_index);
 
-  for (; it != this->reversals.highs.end(); it++) {
+  for (; it != reversals_.highs.end(); it++) {
     Formatted::Stream log_color = it->second.is_record ? fmt.yellow : fmt.green;
 
     std::cout << log_color;
@@ -58,10 +61,10 @@ void Alpaca::TaoBot::log_reversals() {
   printf("Latest 5 of %i Low(s): ", lows_n);
 
   start_index = std::max(lows_n - count, 0);
-  it = this->reversals.lows.begin();
+  it = reversals_.lows.begin();
   std::advance(it, start_index);
 
-  for (; it != this->reversals.lows.end(); it++) {
+  for (; it != reversals_.lows.end(); it++) {
     Formatted::Stream log_color = it->second.is_record ? fmt.yellow : fmt.red;
 
     std::cout << log_color;

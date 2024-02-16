@@ -137,6 +137,12 @@ void Alpaca::Client::load_config() {
           : config.reversal_timeframe_minutes;
 
   // TODO: Decide
+  const int secondary_reversal_timeframe_minutes =
+      api_key_json.contains("secondary_reversal_timeframe_minutes")
+          ? (int)api_key_json["secondary_reversal_timeframe_minutes"]
+          : config.secondary_reversal_timeframe_minutes;
+
+  // TODO: Decide
   const bool should_await_consolidation_indicator =
       api_key_json.contains("should_await_consolidation_indicator")
           ? (bool)api_key_json["should_await_consolidation_indicator"]
@@ -303,6 +309,8 @@ void Alpaca::Client::load_config() {
       .profit_reclaim_ratio = profit_reclaim_ratio,             // TODO: Decide
       .profit_timeout_seconds = profit_timeout_seconds,         // TODO: Decide
       .reversal_timeframe_minutes = reversal_timeframe_minutes, // TODO: Decide
+      .secondary_reversal_timeframe_minutes =
+          secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_await_consolidation_indicator =
           should_await_consolidation_indicator, // TODO: Decide
       .should_await_reversal_indicator =

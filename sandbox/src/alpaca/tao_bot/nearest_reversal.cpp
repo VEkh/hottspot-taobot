@@ -4,18 +4,19 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot
 
-Alpaca::TaoBot::reversal_t Alpaca::TaoBot::nearest_reversal() {
+Alpaca::TaoBot::reversal_t
+Alpaca::TaoBot::nearest_reversal(reversals_t &reversals_) {
   const double recent_high_at =
-      this->reversals.highs.empty() ? 0 : this->reversals.highs.rbegin()->first;
+      reversals_.highs.empty() ? 0 : reversals_.highs.rbegin()->first;
 
   const double recent_low_at =
-      this->reversals.lows.empty() ? 0 : this->reversals.lows.rbegin()->first;
+      reversals_.lows.empty() ? 0 : reversals_.lows.rbegin()->first;
 
   if (recent_high_at && recent_high_at > recent_low_at) {
-    return this->reversals.highs.rbegin()->second;
+    return reversals_.highs.rbegin()->second;
   }
 
-  return this->reversals.lows.rbegin()->second;
+  return reversals_.lows.rbegin()->second;
 }
 
 #endif

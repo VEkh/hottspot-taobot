@@ -35,9 +35,13 @@ void Alpaca::TaoBot::reset_backtest() {
     this->api_client.config.is_stop_profit_decayed = false;
   }
 
-  this->closed_positions = {};
   this->bulk_candle = candle_t(); // TODO: Decide
-  this->is_trending = false;      // TODO: Decide
+  this->closed_positions = {};
+  this->reversals.lows = {};            // TODO: Decide
+  this->reversals.highs = {};           // TODO: Decide
+  this->secondary_reversals.lows = {};  // TODO: Decide
+  this->secondary_reversals.highs = {}; // TODO: Decide
+  this->is_trending = false;            // TODO: Decide
   this->performance = performance_t();
   this->started_at = this->current_epoch;
 
