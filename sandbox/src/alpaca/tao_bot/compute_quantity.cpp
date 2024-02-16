@@ -14,7 +14,7 @@ double Alpaca::TaoBot::compute_quantity() {
 
   const double buying_power = max_buying_power / this->tradeable_symbols_count;
 
-  return floor(buying_power / (1.04 * quote.ask));
+  return floor(buying_power / (1.3 * quote.ask));
 }
 
 #endif
