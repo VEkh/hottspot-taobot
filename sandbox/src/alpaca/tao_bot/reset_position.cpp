@@ -9,7 +9,8 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp" // build_performance
+#include "build_performance.cpp"         // build_performance
+#include "should_toggle_is_trending.cpp" // should_toggle_is_trending // TODO: Decide
 
 void Alpaca::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {
@@ -47,10 +48,7 @@ void Alpaca::TaoBot::reset_position() {
     }
 
     // TODO: Decide
-    if (this->api_client.config.toggle_is_trending_after_n &&
-        (this->performance.loss_streaks.current + 1) %
-                this->api_client.config.toggle_is_trending_after_n ==
-            0) {
+    if (should_toggle_is_trending()) {
       this->is_trending = !this->is_trending;
     }
   } else {

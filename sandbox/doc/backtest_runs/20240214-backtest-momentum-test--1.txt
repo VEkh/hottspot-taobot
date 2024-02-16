@@ -1,0 +1,98 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-momentum-test[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "account_stop_profit_ratio": 0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2024-02-01 08:30:00"
+  },
+  "base_url": "",
+  "candles_timeframe_minutes": 0,
+  "deficit_reclaim_ratio": 10.0,
+  "id": "backtest-momentum-test",
+  "is_live": false,
+  "is_stop_loss_dynamic": true,
+  "late_start_seconds": 0,
+  "note": "enter at record reversals; reclaim all deficit; secondary reversal chips at deficit; true dynamic stop loss",
+  "profit_reclaim_ratio": 0.0,
+  "profit_timeout_seconds": 0,
+  "reversal_timeframe_minutes": 3,
+  "secondary_reversal_timeframe_minutes": 10,
+  "secret_key": "secret_key",
+  "should_await_reversal_indicator": true,
+  "should_reverse_losses": false,
+  "stop_loss_ratio": -40.0,
+  "stop_profit_ratio": 0.6
+}
+[0m[0m[1m[36m[4m
+Thursday, February  1 2024[24m[31m
+Current Equity:             $98564.85 (-1435.15) (-1.44%)
+Max Equity:                 $100860.58 (+860.58) (+0.86%) @ 08:48 CST
+Min Equity:                 $97656.72 (-2343.28) (-2.34%) @ 10:26 CST
+Original Equity:            $100000.00
+[1m[36m[4m
+Friday, February  2 2024[24m[32m
+Current Equity:             $103535.45 (+4970.60) (+5.04%)
+Max Equity:                 $103697.97 (+5133.12) (+5.21%) @ 10:34 CST
+Min Equity:                 $98564.85 (+0.00) (+0.00%) @ 08:34 CST
+Original Equity:            $98564.85
+[1m[36m[4m
+Monday, February  5 2024[24m[31m
+Current Equity:             $102129.49 (-1405.96) (-1.36%)
+Max Equity:                 $103535.45 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $96198.24 (-7337.21) (-7.09%) @ 10:00 CST
+Original Equity:            $103535.45
+[1m[36m[4m
+Tuesday, February  6 2024[24m[32m
+Current Equity:             $102353.10 (+223.61) (+0.22%)
+Max Equity:                 $103468.26 (+1338.77) (+1.31%) @ 09:34 CST
+Min Equity:                 $100857.46 (-1272.03) (-1.25%) @ 08:58 CST
+Original Equity:            $102129.49
+[1m[36m[4m
+Wednesday, February  7 2024[24m[32m
+Current Equity:             $103600.21 (+1247.11) (+1.22%)
+Max Equity:                 $103778.46 (+1425.36) (+1.39%) @ 09:14 CST
+Min Equity:                 $101866.34 (-486.76) (-0.48%) @ 08:37 CST
+Original Equity:            $102353.10
+[1m[36m[4m
+Thursday, February  8 2024[24m[31m
+Current Equity:             $103160.62 (-439.59) (-0.42%)
+Max Equity:                 $104397.66 (+797.45) (+0.77%) @ 09:48 CST
+Min Equity:                 $102505.60 (-1094.61) (-1.06%) @ 08:46 CST
+Original Equity:            $103600.21
+[1m[36m[4m
+Friday, February  9 2024[24m[31m
+Current Equity:             $101289.03 (-1871.59) (-1.81%)
+Max Equity:                 $104258.39 (+1097.77) (+1.06%) @ 08:39 CST
+Min Equity:                 $101243.67 (-1916.95) (-1.86%) @ 13:59 CST
+Original Equity:            $103160.62
+[1m[36m[4m
+Monday, February 12 2024[24m[32m
+Current Equity:             $104011.64 (+2722.61) (+2.69%)
+Max Equity:                 $104527.61 (+3238.58) (+3.20%) @ 14:53 CST
+Min Equity:                 $100404.68 (-884.35) (-0.87%) @ 08:38 CST
+Original Equity:            $101289.03
+[1m[36m[4m
+Tuesday, February 13 2024[24m[31m
+Current Equity:             $103063.31 (-948.33) (-0.91%)
+Max Equity:                 $104246.85 (+235.21) (+0.23%) @ 08:39 CST
+Min Equity:                 $100757.70 (-3253.94) (-3.13%) @ 08:58 CST
+Original Equity:            $104011.64
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$340.37
+[1m[32mAvg Daily % Return:         +0.36%
+[1m[32mTotal Return:               +$3063.31
+
+[1m[33mDays 2.00% Target Reached:  2/9 (22.22% 🎯 50.00%)
+[0m
+[1m[36m⌚ Finished in 00:00
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m
