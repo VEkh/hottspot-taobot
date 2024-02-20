@@ -4,9 +4,11 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot, reversal_t
 #include <map>       // std::map
+#include <string>    // std::string
 
 Alpaca::TaoBot::reversal_t
-Alpaca::TaoBot::nearest_record_reversal(reversals_t &reversals_) {
+Alpaca::TaoBot::nearest_record_reversal(reversals_t &reversals_,
+                                        const std::string key = "") {
   std::map<double, reversal_t>::reverse_iterator it;
   reversal_t record_high;
   reversal_t record_low;
@@ -21,6 +23,14 @@ Alpaca::TaoBot::nearest_record_reversal(reversals_t &reversals_) {
     if (it->second.is_record) {
       record_low = it->second;
     }
+  }
+
+  if (key == "high") {
+    return record_high;
+  }
+
+  if (key == "low") {
+    return record_low;
   }
 
   if (record_high.at > record_low.at) {

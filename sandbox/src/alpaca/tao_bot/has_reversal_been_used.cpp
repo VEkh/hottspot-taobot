@@ -10,8 +10,13 @@ bool Alpaca::TaoBot::has_reversal_been_used(const reversal_t reversal) {
 
   for (it = this->closed_positions.rbegin();
        it != this->closed_positions.rend(); it++) {
-    if (it->open_order.reversal.type == reversal.type &&
-        it->open_order.reversal.at == reversal.at) {
+    if (it->open_order.entry_reversal.type == reversal.type &&
+        it->open_order.entry_reversal.at == reversal.at) {
+      return true;
+    }
+
+    if (it->open_order.ref_reversal.type == reversal.type &&
+        it->open_order.ref_reversal.at == reversal.at) {
       return true;
     }
   }

@@ -3,20 +3,27 @@
 #define ALPACA__TAO_BOT_nearest_reversal
 
 #include "tao_bot.h" // Alpaca::TaoBot
+#include <string>    // std::string
 
 Alpaca::TaoBot::reversal_t
-Alpaca::TaoBot::nearest_reversal(reversals_t &reversals_) {
-  const double recent_high_at =
-      reversals_.highs.empty() ? 0 : reversals_.highs.rbegin()->first;
+Alpaca::TaoBot::nearest_reversal(reversals_t &reversals_,
+                                 const std::string key = "") {
+  const reversal_t recent_high = reversals_.highs.rbegin()->second;
+  const reversal_t recent_low = reversals_.lows.rbegin()->second;
 
-  const double recent_low_at =
-      reversals_.lows.empty() ? 0 : reversals_.lows.rbegin()->first;
-
-  if (recent_high_at && recent_high_at > recent_low_at) {
-    return reversals_.highs.rbegin()->second;
+  if (key == "high") {
+    return recent_high;
   }
 
-  return reversals_.lows.rbegin()->second;
+  if (key == "low") {
+    return recent_low;
+  }
+
+  if (recent_high.at && recent_high.at > recent_low.at) {
+    return recent_high;
+  }
+
+  return recent_low;
 }
 
 #endif

@@ -80,7 +80,7 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
     printf("Open Position Reversal\n");
     std::cout << fmt.reset;
 
-    const reversal_t reversal = this->open_order_ptr->reversal;
+    const reversal_t reversal = this->open_order_ptr->entry_reversal;
 
     if (reversal.type == reversal_type_t::REVERSAL_LOW) {
       std::cout << fmt.bold << fmt.red;

@@ -105,7 +105,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   if (this->api_client.config.should_await_reversal_indicator &&
       this->api_client.config.is_stop_loss_dynamic) {
     const double execution_price = this->open_order_ptr->execution_price;
-    const double reversal_price = this->open_order_ptr->reversal.mid;
+    const double reversal_price = this->open_order_ptr->entry_reversal.mid;
 
     const double reversal_delta = abs(execution_price - reversal_price);
 
@@ -204,11 +204,12 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   // TODO: Decide
   // if (this->api_client.config.should_await_reversal_indicator &&
-  //     this->open_order_ptr->reversal.mid) {
+  //     this->open_order_ptr->entry_reversal.mid) {
   //   const double execution_price = this->open_order_ptr->execution_price;
   //   const double max_profit = this->open_order_ptr->max_profit;
-  //   const double opening_reversal_mid = this->open_order_ptr->reversal.mid;
-  //   const double profit_reclaim_ratio =
+  //   const double opening_reversal_mid =
+  //   this->open_order_ptr->entry_reversal.mid; const double
+  //   profit_reclaim_ratio =
   //       this->api_client.config.profit_reclaim_ratio;
 
   //   const order_action_t action = this->open_order_ptr->action;

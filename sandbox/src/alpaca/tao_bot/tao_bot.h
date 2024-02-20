@@ -93,6 +93,7 @@ private:
   performance_t performance;
   range_t active_consolidation;       // TODO: Deicde
   reversal_t entry_reversal;          // TODO: Decide
+  reversal_t ref_reversal;            // TODO: Decide
   reversals_t reversals;              // TODO: Decide
   reversals_t secondary_reversals;    // TODO: Decide
   std::list<candle_t> latest_candles; // TODO: Decide
@@ -148,10 +149,11 @@ private:
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  range_t candles_range(const int);                  // TODO: Decide
-  range_t candles_range(const int, const int);       // TODO: Decide
-  reversal_t nearest_record_reversal(reversals_t &); // TODO: Decide
-  reversal_t nearest_reversal(reversals_t &);        // TODO: Decide
+  range_t candles_range(const int);            // TODO: Decide
+  range_t candles_range(const int, const int); // TODO: Decide
+  reversal_t nearest_record_reversal(reversals_t &,
+                                     const std::string);         // TODO: Decide
+  reversal_t nearest_reversal(reversals_t &, const std::string); // TODO: Decide
 
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,

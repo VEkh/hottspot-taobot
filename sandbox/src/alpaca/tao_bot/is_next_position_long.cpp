@@ -32,10 +32,6 @@ bool Alpaca::TaoBot::is_next_position_long() {
   }
 
   if (this->api_client.config.should_await_reversal_indicator) {
-    if (this->is_trending) {
-      return !this->entry_reversal.type == reversal_type_t::REVERSAL_LOW;
-    }
-
     return this->entry_reversal.type == reversal_type_t::REVERSAL_LOW;
   }
 

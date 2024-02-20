@@ -67,6 +67,7 @@ struct order_t {
   order_action_t action = order_action_t::BUY;
   range_t consolidation_range;         // TODO: Decide
   reversal_t deficit_reclaim_reversal; // TODO: Decide
+  reversal_t entry_reversal;
   double execution_price = 0.00;
   std::string id = "";
   bool is_loss_reversal = false; // TODO: Decide
@@ -78,7 +79,7 @@ struct order_t {
   double min_profit_at = 0;
   double profit = 0.00;
   double quantity = 0.00;
-  reversal_t reversal;
+  reversal_t ref_reversal; // TODO: Decide
   order_status_t status = order_status_t::ORDER_INIT;
   double stop_loss = 0.00;
   double stop_profit = 0.00;

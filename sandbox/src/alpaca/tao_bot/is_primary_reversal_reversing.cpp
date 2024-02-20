@@ -2,6 +2,7 @@
 #ifndef ALPACA__TAO_BOT_is_primary_reversal_reversing
 #define ALPACA__TAO_BOT_is_primary_reversal_reversing
 
+#include "nearest_reversal.cpp" // nearest_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, reversal_type_t // TODO: Decide
 
 bool Alpaca::TaoBot::is_primary_reversal_reversing() {
@@ -22,7 +23,7 @@ bool Alpaca::TaoBot::is_primary_reversal_reversing() {
     return false;
   }
 
-  if (this->open_order_ptr->reversal.timeframe_minutes !=
+  if (this->open_order_ptr->entry_reversal.timeframe_minutes !=
       this->reversals.timeframe_minutes) {
     return false;
   }

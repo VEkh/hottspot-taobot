@@ -40,14 +40,18 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
     new_open_order.is_loss_reversal = is_reversing_loss();
 
     if (new_open_order.is_loss_reversal) {
-      new_open_order.reversal =
-          this->closed_positions.back().open_order.reversal;
+      new_open_order.entry_reversal =
+          this->closed_positions.back().open_order.entry_reversal;
+
+      new_open_order.ref_reversal =
+          this->closed_positions.back().open_order.ref_reversal;
     }
   }
 
   // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
-    new_open_order.reversal = this->entry_reversal;
+    new_open_order.entry_reversal = this->entry_reversal;
+    new_open_order.ref_reversal = this->ref_reversal;
   }
 
   order_t new_close_order;
