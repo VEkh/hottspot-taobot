@@ -155,7 +155,9 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     const double deficit_profit =
         1.04 * (asset_deficit / this->open_order_ptr->quantity);
 
-    if (asset_deficit && deficit_profit >= abs(stop_loss)) {
+    const double standard_stop_loss = stop_loss_ratio * static_one_sec_variance;
+
+    if (asset_deficit && deficit_profit >= abs(standard_stop_loss)) {
       const double deficit_reclaim_ratio =
           this->api_client.config.deficit_reclaim_ratio;
 
