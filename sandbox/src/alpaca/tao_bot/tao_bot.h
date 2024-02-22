@@ -91,7 +91,6 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  range_t active_consolidation;       // TODO: Deicde
   reversal_t entry_reversal;          // TODO: Decide
   reversal_t ref_reversal;            // TODO: Decide
   reversals_t reversals;              // TODO: Decide
@@ -107,10 +106,6 @@ private:
   bool does_position_exist();
   bool has_reversal_been_used(const reversal_t); // TODO: Decide
   bool has_super_profited();
-  bool is_breaking_consolidation(const range_t);       // TODO: Decide
-  bool is_closer_to_consolidation_low(const int);      // TODO: Decide
-  bool is_consolidating();                             // TODO: Decide
-  bool is_consolidation_next_position_long(const int); // TODO: Decide
   bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_entry_signal_present(); // TODO: Decide
@@ -172,9 +167,7 @@ private:
   void fetch_and_persist_quote(const bool);
   void initialize(std::string, std::map<std::string, std::string> &);
   void log_account_snapshot();
-  void log_candles(const int);        // TODO: Decide
-  void log_consolidation_duration();  // TODO: Decide
-  void log_consolidation_durations(); // TODO: Decide
+  void log_candles(const int); // TODO: Decide
   void log_end_of_trading_period();
   void log_performance();
   void log_position();

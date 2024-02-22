@@ -1,14 +1,13 @@
 #ifndef ALPACA__TAO_BOT_watch
 #define ALPACA__TAO_BOT_watch
 
-#include "advance_current_epoch.cpp"   // advance_current_epoch
-#include "build_bulk_candle.cpp"       // build_bulk_candle // TODO: Decide
-#include "build_reversals.cpp"         // build_reversals // TODO: Decide
-#include "cancel_stale_open_order.cpp" // cancel_stale_open_order
-#include "close_position.cpp"          // close_position
-#include "log_account_snapshot.cpp"    // log_account_snapshot
-#include "log_candles.cpp"             // log_candles // TODO: Decide
-#include "log_consolidation_durations.cpp" // log_consolidation_durations // TODO: Decide
+#include "advance_current_epoch.cpp"     // advance_current_epoch
+#include "build_bulk_candle.cpp"         // build_bulk_candle // TODO: Decide
+#include "build_reversals.cpp"           // build_reversals // TODO: Decide
+#include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
+#include "close_position.cpp"            // close_position
+#include "log_account_snapshot.cpp"      // log_account_snapshot
+#include "log_candles.cpp"               // log_candles // TODO: Decide
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
@@ -55,7 +54,6 @@ void Alpaca::TaoBot::watch() {
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
-      log_consolidation_durations();            // TODO: Decide
       log_reversals(this->reversals);           // TODO: Decide
       log_reversals(this->secondary_reversals); // TODO: Decide
       log_price_movement();

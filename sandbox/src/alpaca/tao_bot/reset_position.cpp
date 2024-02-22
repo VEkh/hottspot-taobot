@@ -61,7 +61,6 @@ void Alpaca::TaoBot::reset_position() {
       .open_order = this->open_order,
   };
 
-  this->active_consolidation = range_t(); // TODO: Decide
   this->closed_positions.push_back(position);
   this->entry_reversal = reversal_t();
   this->ref_reversal = reversal_t();

@@ -8,10 +8,9 @@
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t reversal_type_t
 
 // TODO: Decide
-#include "candles_range.cpp"                       // candles_range
-#include "is_consolidation_next_position_long.cpp" // is_consolidation_next_position_long
-#include "is_reversing_loss.cpp"                   // is_reversing_loss
-#include "reversal_imbalance.cpp"                  // reversal_imbalance
+#include "candles_range.cpp"      // candles_range
+#include "is_reversing_loss.cpp"  // is_reversing_loss
+#include "reversal_imbalance.cpp" // reversal_imbalance
 
 bool Alpaca::TaoBot::is_next_position_long() {
   if (this->candle_predictor.should_predict(does_position_exist())) {
@@ -33,12 +32,6 @@ bool Alpaca::TaoBot::is_next_position_long() {
 
   if (this->api_client.config.should_await_reversal_indicator) {
     return this->entry_reversal.type == reversal_type_t::REVERSAL_LOW;
-  }
-
-  // TODO: Decide
-  if (this->api_client.config.should_await_consolidation_indicator) {
-    return is_consolidation_next_position_long(
-        this->active_consolidation_duration_minutes);
   }
 
   if (this->closed_positions.empty()) {

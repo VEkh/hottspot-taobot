@@ -89,12 +89,6 @@ void Alpaca::Client::load_config() {
           : config.candles_timeframe_minutes;
 
   // TODO: Decide
-  const int consolidation_duration_mintues =
-      api_key_json.contains("consolidation_duration_mintues")
-          ? (int)api_key_json["consolidation_duration_mintues"]
-          : config.consolidation_duration_mintues;
-
-  // TODO: Decide
   const double deficit_reclaim_ratio =
       api_key_json.contains("deficit_reclaim_ratio")
           ? (double)api_key_json["deficit_reclaim_ratio"]
@@ -141,12 +135,6 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("secondary_reversal_timeframe_minutes")
           ? (int)api_key_json["secondary_reversal_timeframe_minutes"]
           : config.secondary_reversal_timeframe_minutes;
-
-  // TODO: Decide
-  const bool should_await_consolidation_indicator =
-      api_key_json.contains("should_await_consolidation_indicator")
-          ? (bool)api_key_json["should_await_consolidation_indicator"]
-          : config.should_await_consolidation_indicator;
 
   // TODO: Decide
   const bool should_await_reversal_indicator =
@@ -296,8 +284,6 @@ void Alpaca::Client::load_config() {
       .api_secret_key = api_key_json["secret_key"],
       .base_url = api_key_json["base_url"],
       .candles_timeframe_minutes = candles_timeframe_minutes, // TODO: Decide
-      .consolidation_duration_mintues =
-          consolidation_duration_mintues, // TODO: Decide
       .data_base_url = config_json["data_base_url"],
       .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
@@ -311,8 +297,6 @@ void Alpaca::Client::load_config() {
       .reversal_timeframe_minutes = reversal_timeframe_minutes, // TODO: Decide
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes, // TODO: Decide
-      .should_await_consolidation_indicator =
-          should_await_consolidation_indicator, // TODO: Decide
       .should_await_reversal_indicator =
           should_await_reversal_indicator,                // TODO: Decide
       .should_expand_stop_loss = should_expand_stop_loss, // TODO: Decide

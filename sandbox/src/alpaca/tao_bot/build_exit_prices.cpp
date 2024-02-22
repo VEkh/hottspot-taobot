@@ -67,41 +67,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   }
 
   // TODO: Decide
-  // if (this->api_client.config.should_await_consolidation_indicator &&
-  //     this->open_order_ptr->consolidation_range.opened_at) {
-  //   const range_t consolidation_range =
-  //       this->open_order_ptr->consolidation_range;
-
-  //   const double execution_price = this->open_order_ptr->execution_price;
-  //   const double high = consolidation_range.high;
-  //   const double low = consolidation_range.low;
-  //   const double trigger_padding = 15 * static_one_sec_variance;
-
-  //   const double high_delta = abs(execution_price - high);
-  //   const double low_delta = abs(execution_price - low);
-  //   const double smaller_delta = std::min(high_delta, low_delta);
-
-  //   stop_loss = -(smaller_delta + trigger_padding);
-  // }
-
-  // TODO: Decide
-  // if (this->api_client.config.should_await_consolidation_indicator &&
-  //     this->open_order_ptr->consolidation_range.opened_at) {
-  //   const range_t consolidation_range =
-  //       this->open_order_ptr->consolidation_range;
-
-  //   const double execution_price = this->open_order_ptr->execution_price;
-  //   const double high = consolidation_range.high;
-  //   const double low = consolidation_range.low;
-
-  //   const double high_delta = abs(execution_price - high);
-  //   const double low_delta = abs(execution_price - low);
-  //   const double larger_delta = std::max(high_delta, low_delta);
-
-  //   stop_loss = -larger_delta;
-  // }
-
-  // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator &&
       this->api_client.config.is_stop_loss_dynamic) {
     const double execution_price = this->open_order_ptr->execution_price;
@@ -172,32 +137,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   double trailing_stop_profit =
       this->open_order_ptr->max_profit * trailing_stop_profit_ratio;
-
-  // TODO: Decide
-  // if (this->api_client.config.should_await_consolidation_indicator &&
-  //     this->open_order_ptr->consolidation_range.opened_at) {
-  //   const range_t consolidation_range =
-  //       this->open_order_ptr->consolidation_range;
-
-  //   const double execution_price = this->open_order_ptr->execution_price;
-  //   const double high = consolidation_range.high;
-  //   const double low = consolidation_range.low;
-  //   const double trigger_padding = 15 * static_one_sec_variance;
-
-  //   const double high_delta = abs(execution_price - high);
-  //   const double low_delta = abs(execution_price - low);
-  //   const double larger_delta = std::max(high_delta, low_delta);
-
-  //   const double max_profit = this->open_order_ptr->max_profit;
-
-  //   if (execution_price > high || execution_price < low) {
-  //     adjusted_stop_profit = 0;
-  //     trailing_stop_profit = 0;
-  //   } else if (max_profit > larger_delta) {
-  //     adjusted_stop_profit = max_profit;
-  //     trailing_stop_profit = larger_delta - trigger_padding;
-  //   }
-  // }
 
   // TODO: Decide
   // if (this->api_client.config.should_await_reversal_indicator &&

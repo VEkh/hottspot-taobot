@@ -9,8 +9,7 @@
 #include "tao_bot.h"                   // Alpaca::TaoBot, range_t, reversal_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
-  if (!this->api_client.config.should_await_reversal_indicator &&
-      !this->api_client.config.should_await_consolidation_indicator) {
+  if (!this->api_client.config.should_await_reversal_indicator) {
     return false;
   }
 

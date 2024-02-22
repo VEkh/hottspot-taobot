@@ -5,8 +5,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 void Alpaca::TaoBot::read_candles() {
-  if (!this->api_client.config.should_await_consolidation_indicator &&
-      !this->api_client.config.should_await_reversal_indicator) {
+  if (!this->api_client.config.should_await_reversal_indicator) {
     return;
   }
 
