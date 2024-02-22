@@ -104,9 +104,7 @@ void Alpaca::TaoBot::log_position() {
       order_duration(this->open_order_ptr, "min_profit");
 
   const int profit_timeout_seconds =
-      this->api_client.config.should_use_alt_profit_timeout_seconds
-          ? this->api_client.config.alt_profit_timeout_seconds
-          : this->api_client.config.profit_timeout_seconds;
+      this->api_client.config.profit_timeout_seconds;
 
   printf("Duration: %s • Max Profit Duration: %s • Min Profit Duration: %s • "
          "Profit Timeout: %s\n",

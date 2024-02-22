@@ -95,22 +95,10 @@ void Alpaca::Client::load_config() {
           : config.deficit_reclaim_ratio;
 
   // TODO: Decide
-  const bool is_stop_loss_decayed =
-      api_key_json.contains("is_stop_loss_decayed")
-          ? (bool)api_key_json["is_stop_loss_decayed"]
-          : config.is_stop_loss_decayed;
-
-  // TODO: Decide
   const bool is_stop_loss_dynamic =
       api_key_json.contains("is_stop_loss_dynamic")
           ? (bool)api_key_json["is_stop_loss_dynamic"]
           : config.is_stop_loss_dynamic;
-
-  // TODO: Decide
-  const bool is_stop_profit_decayed =
-      api_key_json.contains("is_stop_profit_decayed")
-          ? (bool)api_key_json["is_stop_profit_decayed"]
-          : config.is_stop_profit_decayed;
 
   // TODO: Decide
   const double profit_reclaim_ratio =
@@ -143,57 +131,12 @@ void Alpaca::Client::load_config() {
           : config.should_await_reversal_indicator;
 
   // TODO: Decide
-  const bool should_expand_stop_loss =
-      api_key_json.contains("should_expand_stop_loss")
-          ? (bool)api_key_json["should_expand_stop_loss"]
-          : config.should_expand_stop_loss;
-
-  // TODO: Decide
-  const bool should_toggle_profit_timeout_seconds =
-      api_key_json.contains("should_toggle_profit_timeout_seconds")
-          ? (bool)api_key_json["should_toggle_profit_timeout_seconds"]
-          : config.should_toggle_profit_timeout_seconds;
 
   // TODO: Decide
   const bool should_reverse_losses =
       api_key_json.contains("should_reverse_losses")
           ? (bool)api_key_json["should_reverse_losses"]
           : config.should_reverse_losses;
-
-  // TODO: Decide
-  const bool should_toggle_stop_loss =
-      api_key_json.contains("should_toggle_stop_loss")
-          ? (bool)api_key_json["should_toggle_stop_loss"]
-          : config.should_toggle_stop_loss;
-
-  // TODO: Decide
-  const bool should_toggle_stop_profit =
-      api_key_json.contains("should_toggle_stop_profit")
-          ? (bool)api_key_json["should_toggle_stop_profit"]
-          : config.should_toggle_stop_profit;
-
-  // TODO: Decide
-  const bool should_toggle_stop_profit_decay =
-      api_key_json.contains("should_toggle_stop_profit_decay")
-          ? (bool)api_key_json["should_toggle_stop_profit_decay"]
-          : config.should_toggle_stop_profit_decay;
-
-  // TODO: Decide
-  const bool should_use_alt_profit_timeout_seconds =
-      api_key_json.contains("should_use_alt_profit_timeout_seconds")
-          ? (bool)api_key_json["should_use_alt_profit_timeout_seconds"]
-          : config.should_use_alt_profit_timeout_seconds;
-
-  // TODO: Decide
-  const bool should_use_alt_stop_profit =
-      api_key_json.contains("should_use_alt_stop_profit")
-          ? (bool)api_key_json["should_use_alt_stop_profit"]
-          : config.should_use_alt_stop_profit;
-
-  const bool should_use_alt_stop_loss =
-      api_key_json.contains("should_use_alt_stop_loss")
-          ? (bool)api_key_json["should_use_alt_stop_loss"]
-          : config.should_use_alt_stop_loss;
 
   // TODO: Decide
   const double stop_loss_percent =
@@ -287,9 +230,7 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
-      .is_stop_loss_decayed = is_stop_loss_decayed, // TODO: Decide
       .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
-      .is_stop_profit_decayed = is_stop_profit_decayed,
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
       .profit_reclaim_ratio = profit_reclaim_ratio,             // TODO: Decide
@@ -298,20 +239,9 @@ void Alpaca::Client::load_config() {
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_await_reversal_indicator =
-          should_await_reversal_indicator,                // TODO: Decide
-      .should_expand_stop_loss = should_expand_stop_loss, // TODO: Decide
-      .should_reverse_losses = should_reverse_losses,     // TODO: Decide
-      .should_toggle_profit_timeout_seconds =
-          should_toggle_profit_timeout_seconds,               // TODO: Decide
-      .should_toggle_stop_loss = should_toggle_stop_loss,     // TODO: Decide
-      .should_toggle_stop_profit = should_toggle_stop_profit, // TODO: Decide
-      .should_toggle_stop_profit_decay =
-          should_toggle_stop_profit_decay, // TODO: Decide
-      .should_use_alt_profit_timeout_seconds =
-          should_use_alt_profit_timeout_seconds, // TODO: Decide
-      .should_use_alt_stop_loss = should_use_alt_stop_loss,
-      .should_use_alt_stop_profit = should_use_alt_stop_profit, // TODO: Decide
-      .stop_loss_percent = stop_loss_percent,                   // TODO: Decide
+          should_await_reversal_indicator,                    // TODO: Decide
+      .should_reverse_losses = should_reverse_losses,         // TODO: Decide
+      .stop_loss_percent = stop_loss_percent,                 // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],

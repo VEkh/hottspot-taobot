@@ -24,30 +24,6 @@ void Alpaca::TaoBot::reset_position() {
 
   if (this->close_order.profit < 0) {
     // TODO: Decide
-    if (this->api_client.config.should_toggle_profit_timeout_seconds) {
-      this->api_client.config.should_use_alt_profit_timeout_seconds =
-          !this->api_client.config.should_use_alt_profit_timeout_seconds;
-    }
-
-    // TODO: Decide
-    if (this->api_client.config.should_toggle_stop_loss) {
-      this->api_client.config.should_use_alt_stop_loss =
-          !this->api_client.config.should_use_alt_stop_loss;
-    }
-
-    // TODO: Decide
-    if (this->api_client.config.should_toggle_stop_profit) {
-      this->api_client.config.should_use_alt_stop_profit =
-          !this->api_client.config.should_use_alt_stop_profit;
-    }
-
-    // TODO: Decide
-    if (this->api_client.config.should_toggle_stop_profit_decay) {
-      this->api_client.config.is_stop_profit_decayed =
-          !this->api_client.config.is_stop_profit_decayed;
-    }
-
-    // TODO: Decide
     if (should_toggle_is_trending()) {
       this->is_trending = !this->is_trending;
     }

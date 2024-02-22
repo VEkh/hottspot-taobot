@@ -33,25 +33,15 @@ public:
     std::string data_base_url;
     double deficit_reclaim_ratio = 0.0; // TODO: Decide
     bool is_live;
-    bool is_stop_loss_decayed = false; // TODO: Decide
     bool is_stop_loss_dynamic = false; // TODO: Decide
-    bool is_stop_profit_decayed = false;
-    int late_start_seconds = 6; // Production's average
+    int late_start_seconds = 6;        // Production's average
     ml_config_t ml;
     double profit_reclaim_ratio = 0.0;            // TODO: Decide
     int profit_timeout_seconds = 0;               // TODO: Decide
     int reversal_timeframe_minutes = 5;           // TODO: Decide
     int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
     bool should_await_reversal_indicator = false; // TODO: Decide
-    bool should_expand_stop_loss = false;
-    bool should_reverse_losses = false;                 // TODO: Decide
-    bool should_toggle_profit_timeout_seconds = false;  // TODO: Decide
-    bool should_toggle_stop_loss = false;               // TODO: Decide
-    bool should_toggle_stop_profit = false;             // TODO: Decide
-    bool should_toggle_stop_profit_decay = false;       // TODO: Decide
-    bool should_use_alt_profit_timeout_seconds = false; // TODO: Decide
-    bool should_use_alt_stop_loss = false;
-    bool should_use_alt_stop_profit = false; // TODO: Decide
+    bool should_reverse_losses = false;           // TODO: Decide
     double stop_loss_percent = -0.0;
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;

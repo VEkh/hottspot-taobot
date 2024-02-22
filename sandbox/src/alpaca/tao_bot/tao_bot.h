@@ -154,9 +154,6 @@ private:
                                             const order_action_t, const char *,
                                             const double);
 
-  trend_t relation_to_consolidation(const range_t); // TODO: Decide
-  trend_t reversal_imbalance();                     // TODO: Decide
-
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void await_market_open();

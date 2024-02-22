@@ -8,9 +8,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t reversal_type_t
 
 // TODO: Decide
-#include "candles_range.cpp"      // candles_range
-#include "is_reversing_loss.cpp"  // is_reversing_loss
-#include "reversal_imbalance.cpp" // reversal_imbalance
+#include "is_reversing_loss.cpp" // is_reversing_loss
 
 bool Alpaca::TaoBot::is_next_position_long() {
   if (this->candle_predictor.should_predict(does_position_exist())) {
@@ -23,7 +21,6 @@ bool Alpaca::TaoBot::is_next_position_long() {
     }
   }
 
-  // TODO: Decide
   if (this->api_client.config.should_reverse_losses && is_reversing_loss()) {
     const position_t last_position = this->closed_positions.back();
 

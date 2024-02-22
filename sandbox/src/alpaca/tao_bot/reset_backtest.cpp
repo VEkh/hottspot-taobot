@@ -16,25 +16,6 @@ void Alpaca::TaoBot::reset_backtest() {
   // will falsely reset the next day's equity to the initial equity.
   update_account_snapshot(true);
 
-  // TODO: Decide
-  if (this->api_client.config.should_toggle_profit_timeout_seconds) {
-    this->api_client.config.should_use_alt_profit_timeout_seconds = false;
-  }
-
-  if (this->api_client.config.should_toggle_stop_loss) {
-    this->api_client.config.should_use_alt_stop_loss = false;
-  }
-
-  // TODO: Decide
-  if (this->api_client.config.should_toggle_stop_profit) {
-    this->api_client.config.should_use_alt_stop_profit = false;
-  }
-
-  // TODO: Decide
-  if (this->api_client.config.should_toggle_stop_profit_decay) {
-    this->api_client.config.is_stop_profit_decayed = false;
-  }
-
   this->bulk_candle = candle_t(); // TODO: Decide
   this->closed_positions = {};
   this->reversals.lows = {};            // TODO: Decide

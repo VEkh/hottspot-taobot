@@ -78,9 +78,7 @@ bool Alpaca::TaoBot::should_close_position() {
       this->api_client.config.profit_reclaim_ratio;
 
   const int profit_timeout_seconds =
-      this->api_client.config.should_use_alt_profit_timeout_seconds
-          ? this->api_client.config.alt_profit_timeout_seconds
-          : this->api_client.config.profit_timeout_seconds;
+      this->api_client.config.profit_timeout_seconds;
 
   const int max_profit_duration =
       order_duration(this->open_order_ptr, "max_profit");
