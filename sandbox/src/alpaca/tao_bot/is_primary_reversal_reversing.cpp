@@ -3,7 +3,7 @@
 #define ALPACA__TAO_BOT_is_primary_reversal_reversing
 
 #include "latest_reversal.cpp" // latest_reversal
-#include "tao_bot.h" // Alpaca::TaoBot, order_action_t, reversal_type_t // TODO: Decide
+#include "tao_bot.h" // Alpaca::TaoBot, order_action_t, reversal_type_t
 
 bool Alpaca::TaoBot::is_primary_reversal_reversing() {
   if (!this->api_client.config.should_await_reversal_indicator) {

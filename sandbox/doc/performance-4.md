@@ -1,4 +1,4 @@
-### 2024-02-26:
+### 2024-02-27:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -8,7 +8,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (75.00%) 1L (Total 4)
+Win Rate: 4W (80.00%) 1L (Total 5)
 ```
 
 **Beta (PRODUCTION)**
@@ -18,7 +18,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (75.00%) 1L (Total 4)
+Win Rate: 4W (80.00%) 1L (Total 5)
 ```
 
 **Alpha (STAGING)**
@@ -28,7 +28,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 4W (100.00%) 0L (total: 4)
+Win Rate: 4W (80.00%) 1L (total: 5)
 ```
 
 **Beta (STAGING)**
@@ -38,7 +38,54 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 0W (0.00%) 4L (Total: 4)
+Win Rate: 0W (20.00%) 4L (Total: 5)
+```
+
+### 2024-02-26:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, February 26 2024
+Current Equity:             $33174.60 (+1252.83) (+3.92%)
+Max Equity:                 $33776.58 (+1854.81) (+5.81%) @ 10:51 CST
+Min Equity:                 $31715.63 (-206.14) (-0.65%) @ 08:34 CST
+Original Equity:            $31921.77
+
+Win Rate: 4W (80.00%) 1L (Total 5)
+```
+
+**Beta (PRODUCTION)**
+```
+Monday, February 26 2024
+Current Equity:             $84321.50 (+1230.95) (+1.48%)
+Max Equity:                 $85301.80 (+2211.25) (+2.66%) @ 11:20 CST
+Min Equity:                 $81959.30 (-1131.25) (-1.36%) @ 09:34 CST
+Original Equity:            $83090.55
+
+Win Rate: 4W (80.00%) 1L (Total 5)
+```
+
+**Alpha (STAGING)**
+```
+Monday, February 26 2024
+Current Equity:             $110180.12 (-2238.02) (-1.99%)
+Max Equity:                 $112737.55 (+319.41) (+0.28%) @ 08:35 CST
+Min Equity:                 $107642.57 (-4775.57) (-4.25%) @ 10:53 CST
+Original Equity:            $112418.14
+
+Win Rate: 4W (80.00%) 1L (total: 5)
+```
+
+**Beta (STAGING)**
+```
+Monday, February 26 2024
+Current Equity:             $104142.71 (+4930.35) (+4.97%)
+Max Equity:                 $105646.67 (+6434.31) (+6.49%) @ 11:20 CST
+Min Equity:                 $99126.22 (-86.14) (-0.09%) @ 08:30 CST
+Original Equity:            $99212.36
+
+Win Rate: 0W (20.00%) 4L (Total: 5)
 ```
 
 ### 2024-02-23:

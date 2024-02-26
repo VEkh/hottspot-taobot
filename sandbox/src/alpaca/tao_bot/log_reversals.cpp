@@ -30,12 +30,17 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   printf("%i-Min 🔀 Reversals", reversals_.timeframe_minutes);
   std::cout << fmt.reset;
 
-  Formatted::Stream is_trending_color = this->is_trending ? fmt.green : fmt.red;
-  const std::string is_trending_text = this->is_trending ? "YES" : "NO";
+  // TODO: Decide
+  const int trend_loss_count = this->performance.trend_loss_count;
+
+  Formatted::Stream trend_loss_count_color =
+      trend_loss_count == this->api_client.config.toggle_is_trending_after_n
+          ? fmt.green
+          : fmt.red;
 
   std::cout << fmt.bold << fmt.yellow;
-  printf(" Is trending? ");
-  std::cout << is_trending_color << is_trending_text << std::endl;
+  printf(" Trend-Indicating Losses: ");
+  std::cout << trend_loss_count_color << trend_loss_count << std::endl;
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << fmt.green;
