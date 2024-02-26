@@ -42,6 +42,7 @@ public:
     int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
     bool should_await_reversal_indicator = false; // TODO: Decide
     bool should_reverse_losses = false;           // TODO: Decide
+    bool should_ride_trans_reversals = false;     // TODO: Decide
     double stop_loss_percent = -0.0;
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;

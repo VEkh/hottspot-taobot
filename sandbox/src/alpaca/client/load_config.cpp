@@ -131,6 +131,10 @@ void Alpaca::Client::load_config() {
           : config.should_await_reversal_indicator;
 
   // TODO: Decide
+  const bool should_ride_trans_reversals =
+      api_key_json.contains("should_ride_trans_reversals")
+          ? (bool)api_key_json["should_ride_trans_reversals"]
+          : config.should_ride_trans_reversals;
 
   // TODO: Decide
   const bool should_reverse_losses =
@@ -239,9 +243,11 @@ void Alpaca::Client::load_config() {
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_await_reversal_indicator =
-          should_await_reversal_indicator,                    // TODO: Decide
-      .should_reverse_losses = should_reverse_losses,         // TODO: Decide
-      .stop_loss_percent = stop_loss_percent,                 // TODO: Decide
+          should_await_reversal_indicator,            // TODO: Decide
+      .should_reverse_losses = should_reverse_losses, // TODO: Decide
+      .should_ride_trans_reversals =
+          should_ride_trans_reversals,        // TODO: Decide
+      .stop_loss_percent = stop_loss_percent, // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],

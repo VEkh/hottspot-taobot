@@ -3,11 +3,8 @@
 
 #include "tao_bot.h"      // Alpaca::TaoBot
 #include "volatility.cpp" // volatility
-#include <math.h>         // abs, pow
-
-// TODO: Decide
-#include "current_mid.cpp" // current_mid
-#include <algorithm>       // std::max, std::min
+#include <algorithm>      // std::max, std::min
+#include <math.h>         // abs
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   const double static_one_sec_variance = this->avg_one_sec_variances.running;
@@ -53,7 +50,13 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   double stop_profit = abs(stop_profit_ratio * stop_loss);
 
-  if (this->api_client.config.deficit_reclaim_ratio) {
+  // TODO: Decide
+  if (this->api_client.config.should_ride_trans_reversals &&
+      this->is_trending) {
+    stop_profit = 0;
+  }
+
+  if (this->api_client.config.deficit_reclaim_ratio && !this->is_trending) {
     const double asset_deficit =
         abs(this->performance.current_balance - this->performance.max_balance);
 
@@ -64,10 +67,8 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
       const double deficit_reclaim_ratio =
           this->api_client.config.deficit_reclaim_ratio;
 
-      std::valarray<double> stop_profits = {
-          deficit_reclaim_ratio * this->bulk_candle.range(), deficit_profit};
-
-      stop_profit = stop_profits.min();
+      stop_profit = std::min(deficit_reclaim_ratio * this->bulk_candle.range(),
+                             deficit_profit);
     }
   }
 

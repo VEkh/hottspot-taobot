@@ -2,7 +2,7 @@
 #ifndef ALPACA__TAO_BOT_is_primary_reversal_reversing
 #define ALPACA__TAO_BOT_is_primary_reversal_reversing
 
-#include "nearest_reversal.cpp" // nearest_reversal
+#include "latest_reversal.cpp" // latest_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, reversal_type_t // TODO: Decide
 
 bool Alpaca::TaoBot::is_primary_reversal_reversing() {
@@ -35,7 +35,7 @@ bool Alpaca::TaoBot::is_primary_reversal_reversing() {
   const order_action_t open_action = this->open_order_ptr->action;
 
   const reversal_t secondary_reversal =
-      nearest_reversal(this->secondary_reversals);
+      latest_reversal(this->secondary_reversals);
 
   const bool is_trans_secondary =
       (open_action == order_action_t::BUY &&
