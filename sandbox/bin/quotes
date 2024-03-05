@@ -79,7 +79,7 @@ function print_status() {
 }
 
 function start_action() {
-  all_symbols=($(cat "${app_dir}/bin/${project}/symbols"))
+  all_symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
   cmd="quotes_${action}"
   flags=($(extract_flags "${@}"))
   log_dir="${app_dir}/log/${project}"

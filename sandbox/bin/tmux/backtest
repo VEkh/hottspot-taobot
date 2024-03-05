@@ -17,7 +17,7 @@ api_keys=($(backtest_api_keys "${project}"))
 while IFS="" read -r line; do
   symbol="${line}"
   symbols+=("${symbol}")
-done < <(cat "${app_dir}/bin/${project}/symbols")
+done < <(cat "${app_dir}/bin/${project}/trade_symbols")
 
 session="hottspot_taobot-${filename}"
 tmux -2 new-session -d -s "${session}" -n code

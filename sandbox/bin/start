@@ -58,7 +58,7 @@ case $1 in
     symbols=()
     while IFS="" read -r line; do
       symbols+=("$line")
-    done < <(cat "$app_dir/bin/$project/symbols")
+    done < <(cat "$app_dir/bin/$project/trade_symbols")
 
     for symbol in "${symbols[@]}"; do
       symbol_start "${symbol}"

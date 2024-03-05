@@ -9,7 +9,7 @@ symbols=()
 while IFS="" read -r line; do
   symbol="${line}"
   symbols+=("${symbol}")
-done < <(cat "${app_dir}/bin/${project}/symbols")
+done < <(cat "${app_dir}/bin/${project}/trade_symbols")
 
 function tail_cmd() {
   log_file_dir="${app_dir}/log/${1}"

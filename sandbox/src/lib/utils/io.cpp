@@ -178,7 +178,7 @@ std::string system_exec(const std::string &cmd) {
 
 std::vector<std::string> tradeable_symbols(const std::string project) {
   const std::string symbols_filepath =
-      std::string(APP_DIR) + "/bin/" + project + "/symbols";
+      std::string(APP_DIR) + "/bin/" + project + "/trade_symbols";
 
   std::ifstream file(symbols_filepath.c_str(), std::ios::in);
   std::string line;
