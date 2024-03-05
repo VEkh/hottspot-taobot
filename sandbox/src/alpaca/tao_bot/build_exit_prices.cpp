@@ -50,13 +50,21 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   double stop_profit = abs(stop_profit_ratio * stop_loss);
 
-  // TODO: Decide
-  if (this->api_client.config.should_ride_trans_reversals &&
-      this->is_trending) {
-    stop_profit = 0;
+  if (this->api_client.config.stop_profit_max_ratio) {
+    const double profit_ratio = this->api_client.config.stop_profit_max_ratio;
+
+    stop_profit = std::min(stop_profit, abs(profit_ratio * config_stop_loss));
   }
 
-  if (this->api_client.config.deficit_reclaim_ratio && !this->is_trending) {
+  // TODO: Decide
+  if (this->is_trending) {
+    const double profit_ratio = this->api_client.config.stop_profit_trend_ratio;
+
+    stop_profit = abs(config_stop_loss * profit_ratio);
+  }
+
+  // TODO: Decide
+  if (this->api_client.config.deficit_reclaim_ratio) {
     const double asset_deficit =
         abs(this->performance.current_balance - this->performance.max_balance);
 

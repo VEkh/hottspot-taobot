@@ -153,6 +153,18 @@ void Alpaca::Client::load_config() {
           ? (std::map<std::string, double>)api_key_json["stop_loss_ratios"]
           : config.stop_loss_ratios;
 
+  // TODO: Decide
+  const double stop_profit_max_ratio =
+      api_key_json.contains("stop_profit_max_ratio")
+          ? (double)api_key_json["stop_profit_max_ratio"]
+          : config.stop_profit_max_ratio;
+
+  // TODO: Decide
+  const double stop_profit_trend_ratio =
+      api_key_json.contains("stop_profit_trend_ratio")
+          ? (double)api_key_json["stop_profit_trend_ratio"]
+          : config.stop_profit_trend_ratio;
+
   std::map<std::string, double> stop_profit_ratios =
       api_key_json.contains("stop_profit_ratios")
           ? (std::map<std::string, double>)api_key_json["stop_profit_ratios"]
@@ -250,7 +262,9 @@ void Alpaca::Client::load_config() {
       .stop_loss_percent = stop_loss_percent, // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
+      .stop_profit_max_ratio = stop_profit_max_ratio, // TODO: Decide
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
+      .stop_profit_trend_ratio = stop_profit_trend_ratio, // TODO: Decide
       .stop_profit_ratios = stop_profit_ratios,
       .terminate_after_seconds = terminate_after_seconds,
       .toggle_is_trending_after_n = toggle_is_trending_after_n, // TODO: Decide

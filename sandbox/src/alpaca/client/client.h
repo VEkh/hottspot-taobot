@@ -46,7 +46,9 @@ public:
     double stop_loss_percent = -0.0;
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;
-    double stop_profit_ratio = 2.5;
+    double stop_profit_max_ratio = 0.0; // TODO: Decide
+    double stop_profit_ratio = 0.0;
+    double stop_profit_trend_ratio = 0.0; // TODO: Decide
     std::map<std::string, double> stop_profit_ratios;
     int terminate_after_seconds = 0;
     int toggle_is_trending_after_n = 0; // TODO: Decide
