@@ -24,7 +24,6 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
   bool loss_streak_broken = false;
   bool trend_indicating_loss_streak_broken = false; // TODO: Decide
   bool win_streak_broken = false;
-  double current_balance = 0.00;
   double current_loss_streak_balance = 0.00;
   int current_streak_count = 0;
   int l = this->closed_positions.size();
@@ -49,10 +48,9 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
         i == 0 ? nullptr : &(this->closed_positions[i - 1]);
     const order_win_result_t result = order_win_result(position);
 
-    const double position_profit_ = closed_position_profit(position);
+    const double position_profit = closed_position_profit(position);
 
     results[result]++;
-    current_balance += position_profit_;
 
     if (result == order_win_result_t::WIN) {
       loss_streak_broken = true;
@@ -69,11 +67,10 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
       win_streak_count = 0;
 
       if (!loss_streak_broken) {
-        current_loss_streak_balance += position_profit_;
+        current_loss_streak_balance += position_profit;
         streaks[order_win_result_t::LOSS].current++;
       }
 
-      // TODO: Decide
       if (!trend_indicating_loss_streak_broken) {
         trend_loss_count += (int)is_trend_indicating_loss(position);
       }
@@ -104,11 +101,19 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
     }
   }
 
+  double current_balance = 0.00;
+  double max_balance = this->performance.max_balance;
+
+  for (const position_t position : this->closed_positions) {
+    current_balance += closed_position_profit(position);
+    max_balance = std::max(current_balance, max_balance);
+  }
+
   return {
       .current_balance = current_balance,
       .current_loss_streak_balance = current_loss_streak_balance,
       .loss_streaks = streaks[order_win_result_t::LOSS],
-      .max_balance = std::max(current_balance, this->performance.max_balance),
+      .max_balance = max_balance,
       .results = results,
       .symbol = this->symbol,
       .trend_loss_count = trend_loss_count, // TODO: Decide
