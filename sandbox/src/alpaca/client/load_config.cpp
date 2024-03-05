@@ -131,12 +131,6 @@ void Alpaca::Client::load_config() {
           : config.should_await_reversal_indicator;
 
   // TODO: Decide
-  const bool should_ride_trans_reversals =
-      api_key_json.contains("should_ride_trans_reversals")
-          ? (bool)api_key_json["should_ride_trans_reversals"]
-          : config.should_ride_trans_reversals;
-
-  // TODO: Decide
   const bool should_reverse_losses =
       api_key_json.contains("should_reverse_losses")
           ? (bool)api_key_json["should_reverse_losses"]
@@ -180,6 +174,12 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("toggle_is_trending_after_n")
           ? (int)api_key_json["toggle_is_trending_after_n"]
           : config.toggle_is_trending_after_n;
+
+  // TODO: Decide
+  const std::string trend_trigger_type =
+      api_key_json.contains("trend_trigger_type")
+          ? (std::string)api_key_json["trend_trigger_type"]
+          : config.trend_trigger_type;
 
   ml_config_t ml_config;
 
@@ -257,9 +257,7 @@ void Alpaca::Client::load_config() {
       .should_await_reversal_indicator =
           should_await_reversal_indicator,            // TODO: Decide
       .should_reverse_losses = should_reverse_losses, // TODO: Decide
-      .should_ride_trans_reversals =
-          should_ride_trans_reversals,        // TODO: Decide
-      .stop_loss_percent = stop_loss_percent, // TODO: Decide
+      .stop_loss_percent = stop_loss_percent,         // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_max_ratio = stop_profit_max_ratio, // TODO: Decide
@@ -268,6 +266,7 @@ void Alpaca::Client::load_config() {
       .stop_profit_ratios = stop_profit_ratios,
       .terminate_after_seconds = terminate_after_seconds,
       .toggle_is_trending_after_n = toggle_is_trending_after_n, // TODO: Decide
+      .trend_trigger_type = trend_trigger_type,                 // TODO: Decide
   };
 }
 

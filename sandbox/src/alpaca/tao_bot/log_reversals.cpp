@@ -2,8 +2,9 @@
 #ifndef ALPACA__TAO_BOT_log_reversals
 #define ALPACA__TAO_BOT_log_reversals
 
-#include "lib/formatted.cpp"  // Formatted
-#include "lib/utils/time.cpp" // ::utils::time_
+#include "lib/formatted.cpp"    // Formatted
+#include "lib/utils/string.cpp" // ::utils::string
+#include "lib/utils/time.cpp"   // ::utils::time_
 #include "tao_bot.h" // Alpaca::TaoBot, fmt, reversals_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max
 #include <iostream>  // std::cout, std::endl
@@ -27,20 +28,7 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   const int lows_n = reversals_.lows.size();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("%i-Min 🔀 Reversals", reversals_.timeframe_minutes);
-  std::cout << fmt.reset;
-
-  // TODO: Decide
-  const int trend_loss_count = this->performance.trend_loss_count;
-
-  Formatted::Stream trend_loss_count_color =
-      trend_loss_count == this->api_client.config.toggle_is_trending_after_n
-          ? fmt.green
-          : fmt.red;
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf(" Trend-Indicating Losses: ");
-  std::cout << trend_loss_count_color << trend_loss_count << std::endl;
+  printf("%i-Min 🔀 Reversals\n", reversals_.timeframe_minutes);
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << fmt.green;
@@ -79,6 +67,36 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
                .c_str());
   }
 
+  std::cout << std::endl;
+
+  // TODO: Decide
+  const int trend_toggle_n = this->api_client.config.toggle_is_trending_after_n;
+
+  if (trend_toggle_n) {
+    const int trend_loss_count = this->performance.trend_loss_count;
+
+    Formatted::Stream trend_loss_count_color =
+        trend_loss_count == trend_toggle_n ? fmt.green : fmt.red;
+
+    Formatted::Stream is_trending_color =
+        this->is_trending ? fmt.green : fmt.red;
+
+    const std::string is_trending_text = this->is_trending ? "YES" : "NO";
+
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Trend-Indicating Losses: ");
+    std::cout << trend_loss_count_color << trend_loss_count << " / "
+              << trend_toggle_n;
+    std::cout << fmt.yellow;
+    printf(" • Is ");
+    std::cout << fmt.cyan;
+    std::cout << ::utils::string::upcase(
+        this->api_client.config.trend_trigger_type);
+    std::cout << fmt.yellow;
+    printf(" trending? ");
+    std::cout << is_trending_color << is_trending_text << std::endl;
+  }
+
   if (this->open_order_ptr) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl
               << std::endl;
@@ -100,9 +118,11 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
           ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
               .c_str());
     }
+
+    std::cout << std::endl;
   }
 
-  std::cout << fmt.reset << std::endl << std::endl;
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

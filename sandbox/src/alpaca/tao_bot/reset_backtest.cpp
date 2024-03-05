@@ -16,14 +16,14 @@ void Alpaca::TaoBot::reset_backtest() {
   // will falsely reset the next day's equity to the initial equity.
   update_account_snapshot(true);
 
-  this->bulk_candle = candle_t(); // TODO: Decide
+  this->bulk_candle = candle_t();
   this->closed_positions = {};
-  this->reversals.lows = {};            // TODO: Decide
-  this->reversals.highs = {};           // TODO: Decide
-  this->secondary_reversals.lows = {};  // TODO: Decide
-  this->secondary_reversals.highs = {}; // TODO: Decide
-  this->is_trending = false;            // TODO: Decide
+  this->is_trending = false;
   this->performance = performance_t();
+  this->reversals.highs = {};
+  this->reversals.lows = {};
+  this->secondary_reversals.highs = {}; // TODO: Decide
+  this->secondary_reversals.lows = {};  // TODO: Decide
   this->started_at = this->current_epoch;
 
   set_market_open_epoch();

@@ -42,7 +42,6 @@ public:
     int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
     bool should_await_reversal_indicator = false; // TODO: Decide
     bool should_reverse_losses = false;           // TODO: Decide
-    bool should_ride_trans_reversals = false;     // TODO: Decide
     double stop_loss_percent = -0.0;
     double stop_loss_ratio = -60.0;
     std::map<std::string, double> stop_loss_ratios;
@@ -51,7 +50,8 @@ public:
     double stop_profit_trend_ratio = 0.0; // TODO: Decide
     std::map<std::string, double> stop_profit_ratios;
     int terminate_after_seconds = 0;
-    int toggle_is_trending_after_n = 0; // TODO: Decide
+    int toggle_is_trending_after_n = 0;  // TODO: Decide
+    std::string trend_trigger_type = ""; // TODO: Decide
   } config;
 
   Client(){};

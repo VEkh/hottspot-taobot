@@ -118,6 +118,7 @@ private:
   bool is_quote_stale(const quote_t, const double);
   bool is_reversing_loss();                        // TODO: Decide
   bool is_trend_indicating_loss(const position_t); // TODO: Decide
+  bool is_within_entry_window(const reversal_t);   // TODO: Decide
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();
