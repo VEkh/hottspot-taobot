@@ -168,7 +168,7 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
     }
   }
 
-  reversals_.updated_at = this->latest_candles.back().opened_at;
+  reversals_.updated_at = this->latest_candles.back().closed_at;
 }
 
 #endif
