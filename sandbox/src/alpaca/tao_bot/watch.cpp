@@ -28,10 +28,11 @@
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
-#include "should_terminate.cpp"          // should_terminate
-#include "tao_bot.h"                     // Alpaca::TaoBot
-#include "update_account_snapshot.cpp"   // update_account_snapshot
-#include <iostream>                      // std::cout, std::flush
+#include "set_reversals_timeframe_minutes.cpp" // set_reversals_timeframe_minutes // TODO: Decide
+#include "should_terminate.cpp"        // should_terminate
+#include "tao_bot.h"                   // Alpaca::TaoBot
+#include "update_account_snapshot.cpp" // update_account_snapshot
+#include <iostream>                    // std::cout, std::flush
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
@@ -44,6 +45,8 @@ void Alpaca::TaoBot::watch() {
     read_price_movement();
     read_predictions();
     build_reversals(this->reversals);
+    set_reversals_timeframe_minutes(this->reversals,
+                                    this->secondary_reversals); // TODO: Decide
     build_reversals(this->secondary_reversals);                 // TODO: Decide
     build_bulk_candle();
 

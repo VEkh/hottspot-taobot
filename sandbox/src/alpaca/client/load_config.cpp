@@ -95,6 +95,12 @@ void Alpaca::Client::load_config() {
           : config.deficit_reclaim_ratio;
 
   // TODO: Decide
+  const bool is_secondary_reversal_timeframe_dynamic =
+      api_key_json.contains("is_secondary_reversal_timeframe_dynamic")
+          ? (bool)api_key_json["is_secondary_reversal_timeframe_dynamic"]
+          : config.is_secondary_reversal_timeframe_dynamic;
+
+  // TODO: Decide
   const bool is_stop_loss_dynamic =
       api_key_json.contains("is_stop_loss_dynamic")
           ? (bool)api_key_json["is_stop_loss_dynamic"]
@@ -246,6 +252,8 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
+      .is_secondary_reversal_timeframe_dynamic =
+          is_secondary_reversal_timeframe_dynamic,  // TODO: Decide
       .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,

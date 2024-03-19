@@ -20,10 +20,13 @@ void Alpaca::TaoBot::reset_backtest() {
   this->closed_positions = {};
   this->is_trending = false;
   this->performance = performance_t();
-  this->reversals.highs = {};
-  this->reversals.lows = {};
-  this->secondary_reversals.highs = {}; // TODO: Decide
-  this->secondary_reversals.lows = {};  // TODO: Decide
+  this->reversals = reversals_t();
+  this->reversals.timeframe_minutes =
+      this->api_client.config.reversal_timeframe_minutes;
+  this->secondary_reversals = reversals_t(); // TODO: Decide
+  this->secondary_reversals.timeframe_minutes =
+      this->api_client.config
+          .secondary_reversal_timeframe_minutes; // TODO: Decide
   this->started_at = this->current_epoch;
 
   set_market_open_epoch();

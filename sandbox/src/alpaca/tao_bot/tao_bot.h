@@ -188,6 +188,8 @@ private:
   void set_position_status();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
+  void set_reversals_timeframe_minutes(reversals_t &,
+                                       reversals_t &); // TODO: Decide
   void set_status(order_t *order);
   void update_account_snapshot(const bool);
   void watch();
