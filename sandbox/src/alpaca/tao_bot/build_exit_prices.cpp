@@ -43,6 +43,9 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     stop_loss = -dynamic_loss;
   }
 
+  const double same_peak_padding = 0.02;
+  stop_loss -= same_peak_padding;
+
   if (this->api_client.config.stop_profit_ratios[this->symbol]) {
     stop_profit_ratio =
         this->api_client.config.stop_profit_ratios[this->symbol];
