@@ -18,6 +18,8 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   }
 
   const double config_stop_loss = stop_loss_ratio * static_one_sec_variance;
+  const double execution_mid = this->open_order_ptr->execution_price;
+  const double entry_reversal_mid = this->open_order_ptr->entry_reversal.mid;
 
   double stop_loss = stop_loss_ratio * static_one_sec_variance;
 
@@ -25,17 +27,13 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   // TODO: Decide
   if (stop_loss_percent) {
-    stop_loss =
-        (stop_loss_percent / 100.0) * this->open_order_ptr->execution_price;
+    stop_loss = (stop_loss_percent / 100.0) * execution_mid;
   }
 
   // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator &&
       this->api_client.config.is_stop_loss_dynamic) {
-    const double execution_price = this->open_order_ptr->execution_price;
-    const double reversal_price = this->open_order_ptr->entry_reversal.mid;
-
-    const double reversal_delta = abs(execution_price - reversal_price);
+    const double reversal_delta = abs(execution_mid - entry_reversal_mid);
 
     const double dynamic_loss =
         reversal_delta ? reversal_delta : abs(stop_loss);
@@ -60,10 +58,8 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
   }
 
   // TODO: Decide
-  if (this->is_trending) {
-    const double profit_ratio = this->api_client.config.stop_profit_trend_ratio;
-
-    stop_profit = abs(config_stop_loss * profit_ratio);
+  if (this->is_trending && this->api_client.config.should_hold_trend_profit) {
+    stop_profit = 0;
   }
 
   // TODO: Decide
@@ -75,11 +71,7 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
         1.04 * (asset_deficit / this->open_order_ptr->quantity);
 
     if (asset_deficit && deficit_profit >= abs(config_stop_loss)) {
-      const double deficit_reclaim_ratio =
-          this->api_client.config.deficit_reclaim_ratio;
-
-      stop_profit = std::min(deficit_reclaim_ratio * this->bulk_candle.range(),
-                             deficit_profit);
+      stop_profit = deficit_profit;
     }
   }
 
