@@ -29,7 +29,7 @@ mkdir -p "${log_dir}"
 function build_candles_each() {
   ascii_print "🔨 Building candles for each symbol" "cyan"
 
-  symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
+  symbols=($(cat "${app_dir}/bin/${project}/trade_symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/build/db" build_candles "${symbol}" "${@}" > "${log_dir}/${symbol}.log"
@@ -41,7 +41,7 @@ function predict_all() {
 
   build_candles_each "${@}"
 
-  symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
+  symbols=($(cat "${app_dir}/bin/${project}/trade_symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/bin/ml/candle_predict" predict "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
@@ -61,7 +61,7 @@ function train_each() {
 
   build_candles_each "${@}"
 
-  symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
+  symbols=($(cat "${app_dir}/bin/${project}/trade_symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/bin/ml/candle_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
