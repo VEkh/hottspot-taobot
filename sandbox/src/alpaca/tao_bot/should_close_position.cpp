@@ -1,11 +1,10 @@
 #ifndef ALPACA__TAO_BOT_should_close_position
 #define ALPACA__TAO_BOT_should_close_position
 
-#include "alpaca/utils.cpp"        // Alpaca::Utils
-#include "build_exit_prices.cpp"   // build_exit_prices
-#include "current_mid.cpp"         // current_mid
-#include "does_position_exist.cpp" // does_position_exist
-#include "is_primary_reversal_reversing.cpp" // is_primary_reversal_reversing // TODO: Decide
+#include "alpaca/utils.cpp"             // Alpaca::Utils
+#include "build_exit_prices.cpp"        // build_exit_prices
+#include "current_mid.cpp"              // current_mid
+#include "does_position_exist.cpp"      // does_position_exist
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
@@ -69,11 +68,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  // TODO: Decide
-  if (is_primary_reversal_reversing()) {
-    return true;
-  }
-
   const double profit_reclaim_ratio =
       this->api_client.config.profit_reclaim_ratio;
 
@@ -83,8 +77,8 @@ bool Alpaca::TaoBot::should_close_position() {
   const int max_profit_duration =
       order_duration(this->open_order_ptr, "max_profit");
 
-  if (profit_timeout_seconds && max_profit_duration >= profit_timeout_seconds &&
-      !this->exit_prices.stop_profit) {
+  if (this->is_trending && profit_timeout_seconds &&
+      max_profit_duration >= profit_timeout_seconds) {
     if (profit_reclaim_ratio) {
       const double profit_to_reclaim =
           profit_reclaim_ratio * this->open_order_ptr->max_profit;

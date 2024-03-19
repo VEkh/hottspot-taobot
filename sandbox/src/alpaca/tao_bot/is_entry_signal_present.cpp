@@ -4,6 +4,7 @@
 #include "earliest_record_reversal.cpp" // earliest_record_reversal
 #include "has_reversal_been_used.cpp"   // has_reversal_been_used
 #include "is_reversing_loss.cpp"        // is_reversing_loss
+#include "is_within_entry_window.cpp"   // is_within_entry_window
 #include "latest_record_reversal.cpp"   // latest_record_reversal
 #include "latest_reversal.cpp"          // latest_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, range_t, reversal_t
@@ -18,7 +19,7 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
   }
 
   if (this->api_client.config.should_await_reversal_indicator) {
-    if (this->reversals.highs.empty() || this->reversals.lows.empty()) {
+    if (this->reversals.any_empty()) {
       return false;
     }
 
@@ -43,18 +44,47 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       }
     }
 
+    if (!this->is_trending && !is_within_entry_window(entry_reversal_)) {
+      return false;
+    }
+
     this->ref_reversal = entry_reversal_;
 
     if (this->api_client.config.trend_trigger_type == "cis" &&
         this->is_trending) {
       const position_t last_position = this->closed_positions.back();
 
-      if (last_position.open_order.entry_reversal.type ==
-          entry_reversal_.type) {
-        const std::string key =
-            entry_reversal_.type == reversal_type_t::REVERSAL_HIGH ? "low"
-                                                                   : "high";
+      const std::string key =
+          last_position.open_order.action == order_action_t::BUY ? "high"
+                                                                 : "low";
 
+      if (this->secondary_reversals.timeframe_minutes) {
+        if (last_position.open_order.action == order_action_t::SELL &&
+            this->secondary_reversals.lows.empty()) {
+          return false;
+        }
+
+        if (last_position.open_order.action == order_action_t::BUY &&
+            this->secondary_reversals.highs.empty()) {
+          return false;
+        }
+
+        const reversal_t secondary_reversal =
+            latest_reversal(this->secondary_reversals, key);
+
+        if (secondary_reversal.at < entry_reversal_.at) {
+          return false;
+        }
+
+        if (secondary_reversal.at < last_position.close_order.timestamp) {
+          return false;
+        }
+
+        entry_reversal_ =
+            this->api_client.config.should_secondary_reversal_stop_loss
+                ? secondary_reversal
+                : latest_record_reversal(this->reversals, key);
+      } else {
         entry_reversal_ = latest_record_reversal(this->reversals, key);
       }
     }

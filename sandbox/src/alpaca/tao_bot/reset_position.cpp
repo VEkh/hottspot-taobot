@@ -23,12 +23,10 @@ void Alpaca::TaoBot::reset_position() {
   }
 
   if (this->close_order.profit < 0) {
-    // TODO: Decide
     if (should_toggle_is_trending()) {
       this->is_trending = !this->is_trending;
     }
   } else {
-    // TODO: Decide
     this->is_trending = false;
   }
 

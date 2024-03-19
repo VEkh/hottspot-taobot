@@ -95,6 +95,12 @@ void Alpaca::Client::load_config() {
           : config.deficit_reclaim_ratio;
 
   // TODO: Decide
+  const bool is_entry_bound_strict =
+      api_key_json.contains("is_entry_bound_strict")
+          ? (bool)api_key_json["is_entry_bound_strict"]
+          : config.is_entry_bound_strict;
+
+  // TODO: Decide
   const bool is_secondary_reversal_timeframe_dynamic =
       api_key_json.contains("is_secondary_reversal_timeframe_dynamic")
           ? (bool)api_key_json["is_secondary_reversal_timeframe_dynamic"]
@@ -107,6 +113,12 @@ void Alpaca::Client::load_config() {
           : config.is_stop_loss_dynamic;
 
   // TODO: Decide
+  const bool is_trend_loss_strict =
+      api_key_json.contains("is_trend_loss_strict")
+          ? (bool)api_key_json["is_trend_loss_strict"]
+          : config.is_trend_loss_strict;
+
+  // TODO: Decide
   const double profit_reclaim_ratio =
       api_key_json.contains("profit_reclaim_ratio")
           ? (double)api_key_json["profit_reclaim_ratio"]
@@ -117,6 +129,12 @@ void Alpaca::Client::load_config() {
       api_key_json.contains("profit_timeout_seconds")
           ? (int)api_key_json["profit_timeout_seconds"]
           : config.profit_timeout_seconds;
+
+  // TODO: Decide
+  const int reversal_entry_delay =
+      api_key_json.contains("reversal_entry_delay")
+          ? (int)api_key_json["reversal_entry_delay"]
+          : config.reversal_entry_delay;
 
   // TODO: Decide
   const int reversal_timeframe_minutes =
@@ -137,10 +155,22 @@ void Alpaca::Client::load_config() {
           : config.should_await_reversal_indicator;
 
   // TODO: Decide
+  const bool should_hold_trend_profit =
+      api_key_json.contains("should_hold_trend_profit")
+          ? (bool)api_key_json["should_hold_trend_profit"]
+          : config.should_hold_trend_profit;
+
+  // TODO: Decide
   const bool should_reverse_losses =
       api_key_json.contains("should_reverse_losses")
           ? (bool)api_key_json["should_reverse_losses"]
           : config.should_reverse_losses;
+
+  // TODO: Decide
+  const bool should_secondary_reversal_stop_loss =
+      api_key_json.contains("should_secondary_reversal_stop_loss")
+          ? (bool)api_key_json["should_secondary_reversal_stop_loss"]
+          : config.should_secondary_reversal_stop_loss;
 
   // TODO: Decide
   const double stop_loss_percent =
@@ -252,20 +282,26 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
+      .is_entry_bound_strict = is_entry_bound_strict, // TODO: Decide
       .is_secondary_reversal_timeframe_dynamic =
           is_secondary_reversal_timeframe_dynamic,  // TODO: Decide
       .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
+      .is_trend_loss_strict = is_trend_loss_strict, // TODO: Decide
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
       .profit_reclaim_ratio = profit_reclaim_ratio,             // TODO: Decide
       .profit_timeout_seconds = profit_timeout_seconds,         // TODO: Decide
+      .reversal_entry_delay = reversal_entry_delay,             // TODO: Decide
       .reversal_timeframe_minutes = reversal_timeframe_minutes, // TODO: Decide
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_await_reversal_indicator =
-          should_await_reversal_indicator,            // TODO: Decide
-      .should_reverse_losses = should_reverse_losses, // TODO: Decide
-      .stop_loss_percent = stop_loss_percent,         // TODO: Decide
+          should_await_reversal_indicator,                  // TODO: Decide
+      .should_hold_trend_profit = should_hold_trend_profit, // TODO: Decide
+      .should_reverse_losses = should_reverse_losses,       // TODO: Decide
+      .should_secondary_reversal_stop_loss =
+          should_secondary_reversal_stop_loss, // TODO: Decide
+      .stop_loss_percent = stop_loss_percent,  // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_loss_ratios = stop_loss_ratios,
       .stop_profit_max_ratio = stop_profit_max_ratio, // TODO: Decide

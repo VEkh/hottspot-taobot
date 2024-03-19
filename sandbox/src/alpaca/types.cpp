@@ -83,6 +83,7 @@ struct order_t {
   double execution_price = 0.00;
   std::string id = "";
   bool is_loss_reversal = false; // TODO: Decide
+  bool is_trending = false;      // TODO: Decide
   double limit_price = 0.00;
   double max_position_profit = 0.00;
   double max_profit = 0.00;
