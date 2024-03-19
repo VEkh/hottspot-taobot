@@ -1,18 +1,12 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_log_reversals
 #define ALPACA__TAO_BOT_log_reversals
 
-#include "lib/formatted.cpp"    // Formatted
-#include "lib/utils/string.cpp" // ::utils::string
-#include "lib/utils/time.cpp"   // ::utils::time_
-#include "tao_bot.h" // Alpaca::TaoBot, fmt, reversals_t, reversal_t, reversal_type_t
-#include <algorithm> // std::max
-#include <iostream>  // std::cout, std::endl
-#include <iterator>  // std::advance
-#include <list>      // std::list
-#include <stdio.h>   // printf
-#include <string>    // std::string
-#include <utility>   // std::pair
+#include "lib/formatted.cpp"  // Formatted
+#include "lib/utils/time.cpp" // ::utils::time_
+#include "tao_bot.h"          // Alpaca::TaoBot, fmt, reversals_t, reversal_t
+#include <iostream>           // std::cout, std::endl
+#include <stdio.h>            // printf
+#include <string>             // std::string
 
 void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   if (!this->api_client.config.should_await_reversal_indicator) {
@@ -23,7 +17,7 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
     return;
   }
 
-  const int count = 5;
+  const int limit = 5;
   const int highs_n = reversals_.highs.size();
   const int lows_n = reversals_.lows.size();
 
@@ -34,18 +28,19 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   std::cout << fmt.bold << fmt.green;
   printf("Latest 5 of %i High(s):", highs_n);
 
-  int start_index = std::max(highs_n - count, 0);
-  std::map<double, reversal_t>::iterator it = reversals_.highs.begin();
-  std::advance(it, start_index);
+  std::map<double, reversal_t>::reverse_iterator it = reversals_.highs.rbegin();
+  int i = 0;
 
-  for (; it != reversals_.highs.end(); it++) {
+  for (; it != reversals_.highs.rend() && i < limit; it++, i++) {
     Formatted::Stream log_color = it->second.is_record ? fmt.yellow : fmt.green;
+    const std::string all_time_text = it->second.is_running_record ? "🌟" : "";
 
     std::cout << log_color;
 
-    printf(" %s",
+    printf(" %s%s",
            ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago")
-               .c_str());
+               .c_str(),
+           all_time_text.c_str());
   }
 
   std::cout << fmt.reset << std::endl;
@@ -53,75 +48,25 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   std::cout << fmt.bold << fmt.red;
   printf("Latest 5 of %i Low(s): ", lows_n);
 
-  start_index = std::max(lows_n - count, 0);
-  it = reversals_.lows.begin();
-  std::advance(it, start_index);
+  it = reversals_.lows.rbegin();
+  i = 0;
 
-  for (; it != reversals_.lows.end(); it++) {
+  for (; it != reversals_.lows.rend() && i < limit; it++, i++) {
     Formatted::Stream log_color = it->second.is_record ? fmt.yellow : fmt.red;
+    const std::string all_time_text = it->second.is_running_record ? "🌟" : "";
 
     std::cout << log_color;
 
-    printf(" %s",
+    printf(" %s%s",
            ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago")
-               .c_str());
+               .c_str(),
+           all_time_text.c_str());
   }
 
-  std::cout << std::endl;
-
-  // TODO: Decide
-  const int trend_toggle_n = this->api_client.config.toggle_is_trending_after_n;
-
-  if (trend_toggle_n) {
-    const int trend_loss_count = this->performance.trend_loss_count;
-
-    Formatted::Stream trend_loss_count_color =
-        trend_loss_count == trend_toggle_n ? fmt.green : fmt.red;
-
-    Formatted::Stream is_trending_color =
-        this->is_trending ? fmt.green : fmt.red;
-
-    const std::string is_trending_text = this->is_trending ? "YES" : "NO";
-
-    std::cout << fmt.bold << fmt.yellow;
-    printf("Trend-Indicating Losses: ");
-    std::cout << trend_loss_count_color << trend_loss_count << " / "
-              << trend_toggle_n;
-    std::cout << fmt.yellow;
-    printf(" • Is ");
-    std::cout << fmt.cyan;
-    std::cout << ::utils::string::upcase(
-        this->api_client.config.trend_trigger_type);
-    std::cout << fmt.yellow;
-    printf(" trending? ");
-    std::cout << is_trending_color << is_trending_text << std::endl;
-  }
-
-  if (this->open_order_ptr) {
-    std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl
-              << std::endl;
-    printf("Open Position Reversal\n");
-    std::cout << fmt.reset;
-
-    const reversal_t reversal = this->open_order_ptr->entry_reversal;
-
-    if (reversal.type == reversal_type_t::REVERSAL_LOW) {
-      std::cout << fmt.bold << fmt.red;
-      printf(
-          "Low: %.2f @ %s", reversal.mid,
-          ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-              .c_str());
-    } else {
-      std::cout << fmt.bold << fmt.green;
-      printf(
-          "High: %.2f @ %s", reversal.mid,
-          ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-              .c_str());
-    }
-
-    std::cout << std::endl;
-  }
-
+  std::cout << fmt.bold << fmt.magenta << std::endl;
+  printf("Record Highs: %i • Record Lows %i 🎯 %i\n",
+         reversals_.record_counts["highs"], reversals_.record_counts["lows"],
+         this->api_client.config.reversal_entry_delay);
   std::cout << fmt.reset << std::endl;
 }
 

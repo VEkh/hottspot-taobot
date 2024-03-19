@@ -15,7 +15,8 @@
 #include "log_predictions.cpp"           // log_predictions
 #include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
-#include "log_reversals.cpp"             // log_reversals // TODO: Decide
+#include "log_reversal_metadata.cpp"     // log_reversal_metadata
+#include "log_reversals.cpp"             // log_reversals
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_and_persist_position.cpp" // open_and_persist_position
 #include "read_candles.cpp"              // read_candles // TODO: Decide
@@ -42,9 +43,9 @@ void Alpaca::TaoBot::watch() {
     read_candles(); // TODO: Decide
     read_price_movement();
     read_predictions();
-    build_reversals(this->reversals);           // TODO: Decide
-    build_reversals(this->secondary_reversals); // TODO: Decide
-    build_bulk_candle();                        // TODO: Decide
+    build_reversals(this->reversals);
+    build_reversals(this->secondary_reversals);                 // TODO: Decide
+    build_bulk_candle();
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
@@ -54,8 +55,9 @@ void Alpaca::TaoBot::watch() {
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
       log_quote();
-      log_reversals(this->reversals);           // TODO: Decide
+      log_reversals(this->reversals);
       log_reversals(this->secondary_reversals); // TODO: Decide
+      log_reversal_metadata();
       log_price_movement();
       log_predictions();
       log_position();

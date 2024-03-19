@@ -47,15 +47,8 @@ private:
   using range_t = Alpaca::t::range_t;                 // TODO: Decide
   using reversal_t = Alpaca::t::reversal_t;           // TODO: Decide
   using reversal_type_t = Alpaca::t::reversal_type_t; // TODO: Decide
+  using reversals_t = Alpaca::t::reversals_t;         // TODO: Decide
   using trend_t = Global::t::trend_t;                 // TODO: Decide
-
-  // TODO: Decide
-  struct reversals_t {
-    std::map<double, reversal_t> highs;
-    std::map<double, reversal_t> lows;
-    int timeframe_minutes = 0;
-    double updated_at;
-  };
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
@@ -178,7 +171,8 @@ private:
   void log_quote();
   void log_start_message();
   void log_timestamps();
-  void log_reversals(reversals_t &); // TODO: Decide
+  void log_reversal_metadata();
+  void log_reversals(reversals_t &);
   void open_and_persist_position();
   void read_candles(); // TODO: Decide
   void read_closed_positions();

@@ -13,13 +13,13 @@ Alpaca::TaoBot::earliest_record_reversal(reversals_t &reversals_) {
   reversal_t record_low;
 
   for (it = reversals_.highs.begin(); it != reversals_.highs.end(); it++) {
-    if (it->second.is_record) {
+    if (it->second.is_running_record) {
       record_high = it->second;
     }
   }
 
   for (it = reversals_.lows.begin(); it != reversals_.lows.end(); it++) {
-    if (it->second.is_record) {
+    if (it->second.is_running_record) {
       record_low = it->second;
     }
   }

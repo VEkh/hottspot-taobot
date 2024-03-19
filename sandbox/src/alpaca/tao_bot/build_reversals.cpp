@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_build_reversals
 #define ALPACA__TAO_BOT_build_reversals
 
@@ -6,7 +5,7 @@
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max, std::min
 #include <list>      // std::list
-#include <math.h>    // INFINITY, floor
+#include <math.h>    // INFINITY, abs, floor
 
 void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
   if (!this->api_client.config.should_await_reversal_indicator) {
@@ -32,6 +31,7 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
 
   reversals_.highs = {};
   reversals_.lows = {};
+  reversals_.record_counts = {{"highs", 0}, {"lows", 0}};
 
   const double candles_timeframe_minutes =
       this->api_client.config.candles_timeframe_minutes;
@@ -42,8 +42,8 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
                      this->current_epoch - candles_timeframe_minutes * 60)
           : this->market_open_epoch;
 
-  double record_high = -INFINITY;
-  double record_low = INFINITY;
+  double running_record_high = -INFINITY;
+  double running_record_low = INFINITY;
 
   const int seek_n = timeframe_minutes / 2;
 
@@ -126,10 +126,12 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
     std::advance(it, back_seek_i);
 
     if (is_high) {
-      record_high = std::max(record_high, high);
+      running_record_high = std::max(running_record_high, high);
+
       reversals_.highs[it->opened_at] = {
           .at = it->opened_at,
           .is_record = false,
+          .is_running_record = false,
           .mid = high,
           .timeframe_minutes = timeframe_minutes,
           .type = reversal_type_t::REVERSAL_HIGH,
@@ -137,10 +139,12 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
     }
 
     if (is_low) {
-      record_low = std::min(record_low, low);
+      running_record_low = std::min(running_record_low, low);
+
       reversals_.lows[it->opened_at] = {
           .at = it->opened_at,
           .is_record = false,
+          .is_running_record = false,
           .mid = low,
           .timeframe_minutes = timeframe_minutes,
           .type = reversal_type_t::REVERSAL_LOW,
@@ -148,25 +152,80 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
     }
   }
 
-  std::map<double, reversal_t>::reverse_iterator r_it;
+  double record_high = -INFINITY;
+  double record_low = INFINITY;
+  std::list<double> record_high_epochs;
+  std::list<double> record_low_epochs;
+  std::map<double, reversal_t>::iterator r_it;
 
-  for (r_it = reversals_.highs.rbegin(); r_it != reversals_.highs.rend();
+  for (r_it = reversals_.highs.begin(); r_it != reversals_.highs.end();
        r_it++) {
+    record_high = std::max(record_high, r_it->second.mid);
+
     if (r_it->second.mid == record_high) {
-      r_it->second.is_record = true;
+      record_high_epochs.push_back(r_it->second.at);
+      reversals_.record_counts["highs"]++;
 
-      break;
+      r_it->second.is_record = true;
+    }
+
+    if (r_it->second.mid == running_record_high) {
+      r_it->second.is_running_record = true;
     }
   }
 
-  for (r_it = reversals_.lows.rbegin(); r_it != reversals_.lows.rend();
-       r_it++) {
+  for (r_it = reversals_.lows.begin(); r_it != reversals_.lows.end(); r_it++) {
+    record_low = std::min(record_low, r_it->second.mid);
+
     if (r_it->second.mid == record_low) {
-      r_it->second.is_record = true;
+      record_low_epochs.push_back(r_it->second.at);
+      reversals_.record_counts["lows"]++;
 
-      break;
+      r_it->second.is_record = true;
+    }
+
+    if (r_it->second.mid == running_record_low) {
+      r_it->second.is_running_record = true;
     }
   }
+
+  std::list<double>::reverse_iterator epoch_it;
+  double high_epoch_delta_total = 0;
+  double low_epoch_delta_total = 0;
+  int high_epoch_delta_n = 0;
+  int low_epoch_delta_n = 0;
+
+  for (epoch_it = record_high_epochs.rbegin();
+       epoch_it != record_high_epochs.rend(); epoch_it++) {
+    if (std::next(epoch_it) == record_high_epochs.rend()) {
+      break;
+    }
+
+    const double next_epoch = *std::next(epoch_it);
+    const double epoch_delta = abs(*epoch_it - next_epoch);
+
+    high_epoch_delta_total += epoch_delta;
+    high_epoch_delta_n++;
+  }
+
+  for (epoch_it = record_low_epochs.rbegin();
+       epoch_it != record_low_epochs.rend(); epoch_it++) {
+    if (std::next(epoch_it) == record_low_epochs.rend()) {
+      break;
+    }
+
+    const double next_epoch = *std::next(epoch_it);
+    const double epoch_delta = abs(*epoch_it - next_epoch);
+
+    low_epoch_delta_total += epoch_delta;
+    low_epoch_delta_n++;
+  }
+
+  reversals_.avg_record_delta_seconds["highs"] =
+      high_epoch_delta_n ? high_epoch_delta_total / high_epoch_delta_n : 0;
+
+  reversals_.avg_record_delta_seconds["lows"] =
+      low_epoch_delta_n ? low_epoch_delta_total / low_epoch_delta_n : 0;
 
   reversals_.updated_at = this->latest_candles.back().closed_at;
 }

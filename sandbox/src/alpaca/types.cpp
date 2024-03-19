@@ -58,9 +58,21 @@ enum reversal_type_t {
 struct reversal_t {
   double at = 0;
   bool is_record = false;
+  bool is_running_record = false;
   double mid = 0;
   int timeframe_minutes = 0;
   reversal_type_t type;
+};
+
+struct reversals_t {
+  std::map<std::string, double> avg_record_delta_seconds;
+  std::map<double, reversal_t> highs;
+  std::map<double, reversal_t> lows;
+  std::map<std::string, int> record_counts;
+  int timeframe_minutes = 0;
+  double updated_at;
+
+  bool any_empty() { return this->highs.empty() || this->lows.empty(); }
 };
 
 struct order_t {

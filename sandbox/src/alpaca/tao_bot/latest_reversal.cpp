@@ -8,8 +8,11 @@
 Alpaca::TaoBot::reversal_t
 Alpaca::TaoBot::latest_reversal(reversals_t &reversals_,
                                 const std::string key = "") {
-  const reversal_t recent_high = reversals_.highs.rbegin()->second;
-  const reversal_t recent_low = reversals_.lows.rbegin()->second;
+  const reversal_t recent_high = reversals_.highs.empty()
+                                     ? reversal_t()
+                                     : reversals_.highs.rbegin()->second;
+  const reversal_t recent_low =
+      reversals_.lows.empty() ? reversal_t() : reversals_.lows.rbegin()->second;
 
   if (key == "high") {
     return recent_high;
