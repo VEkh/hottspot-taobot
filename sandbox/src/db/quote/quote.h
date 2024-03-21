@@ -15,32 +15,31 @@ public:
   using quote_t = Global::t::quote_t;
 
   struct get_last_args_t {
+    bool debug = false;
     int limit = 1;
     long int limit_offset = 0;
     std::string symbol;
     double timestamp_upper_bound;
-    // Optional
-    bool debug = false;
     double timestamp_lower_bound = 0.0;
   };
 
   struct get_avg_one_sec_variances_args_t {
+    bool debug = false;
     std::string symbol;
     double timestamp_upper_bound;
-    bool debug = false;
   };
 
   struct upsert_avg_one_sec_variance_args_t {
+    bool debug = true;
     long int id = 0;
     std::string symbol;
-    bool debug = true;
   };
 
   struct upsert_all_avg_one_sec_variances_args_t {
+    bool debug = false;
     std::string end_at;
     std::string start_at;
     std::string symbol;
-    bool debug = false;
   };
 
   Quote(){};

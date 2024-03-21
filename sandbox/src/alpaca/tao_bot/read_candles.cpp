@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_read_candles
 #define ALPACA__TAO_BOT_read_candles
 
@@ -10,6 +9,7 @@ void Alpaca::TaoBot::read_candles() {
   }
 
   this->latest_candles = this->db_candle.get_latest({
+      .debug = this->api_client.config.debug_sql,
       .end_at_epoch = this->current_epoch,
       .start_at_epoch = this->market_open_epoch,
   });

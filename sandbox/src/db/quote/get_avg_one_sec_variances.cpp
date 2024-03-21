@@ -10,7 +10,6 @@
 
 DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
     const get_avg_one_sec_variances_args_t args) {
-  const bool debug = args.debug;
   const double timestamp_upper_bound = args.timestamp_upper_bound;
   const std::string symbol = args.symbol;
 

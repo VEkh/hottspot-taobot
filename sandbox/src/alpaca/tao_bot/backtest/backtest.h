@@ -43,6 +43,12 @@ public:
     std::string symbol;
   };
 
+  struct upsert_account_stat_args_t {
+    double current_epoch;
+    bool debug = false;
+    bool force = false;
+  };
+
   TaoBotBacktest(){};
   TaoBotBacktest(const init_args_t);
 
@@ -60,7 +66,7 @@ public:
   std::string fetch_order(const order_t *, const quote_t &);
 
   void place_order(const long int, order_t *);
-  void upsert_account_stat(const double, const bool);
+  void upsert_account_stat(const upsert_account_stat_args_t);
 
 private:
   DB::AccountStat db_account_stat;

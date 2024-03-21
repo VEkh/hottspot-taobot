@@ -25,19 +25,19 @@ void DB::Quote::upsert_all_avg_one_sec_variances(
       start_at_arg.empty() ? time(nullptr) : std::stod(start_at_arg);
 
   const std::list<quote_t> quotes = get_last({
+      .debug = debug,
       .limit = 0,
       .limit_offset = 0,
       .symbol = symbol,
       .timestamp_upper_bound = end_at,
-      .debug = debug,
       .timestamp_lower_bound = start_at,
   });
 
   for (const quote_t quote : quotes) {
     upsert_avg_one_sec_variance({
+        .debug = debug,
         .id = quote.id,
         .symbol = symbol,
-        .debug = debug,
     });
 
     if (!debug) {

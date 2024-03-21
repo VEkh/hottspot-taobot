@@ -13,6 +13,7 @@ void Alpaca::TaoBot::read_price_movement() {
 
   const avg_one_sec_variances_t new_avg_one_sec_variances =
       this->quoter.db_quote.get_avg_one_sec_variances({
+          .debug = this->api_client.config.debug_sql,
           .symbol = this->symbol,
           .timestamp_upper_bound = this->current_epoch,
       });

@@ -31,6 +31,7 @@ public:
     std::string base_url;
     int candles_timeframe_minutes = 0; // TODO: Decide
     std::string data_base_url;
+    bool debug_sql = false;
     double deficit_reclaim_ratio = 0.0; // TODO: Decide
     bool is_live;
     bool is_entry_bound_strict = false;                   // TODO: Decide

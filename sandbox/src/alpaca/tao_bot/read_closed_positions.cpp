@@ -8,6 +8,7 @@
 void Alpaca::TaoBot::read_closed_positions() {
   std::list<db_position_t> day_positions = this->db_position.get_day_positions({
       .api_key_id = this->api_client.config.api_key_id,
+      .debug = this->api_client.config.debug_sql,
       .epoch = this->current_epoch,
       .symbol = this->symbol,
   });

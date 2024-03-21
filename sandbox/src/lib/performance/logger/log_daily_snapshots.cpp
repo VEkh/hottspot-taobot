@@ -87,9 +87,9 @@ void Performance::Logger::log_daily_snapshots(
   std::list<account_snapshot_t> snapshots =
       this->db_account_stat.get_daily_snapshots({
           .api_key_id = api_key_id,
+          .debug = debug,
           .end_at = flags["end-at"],
           .start_at = flags["start-at"],
-          .debug = debug,
       });
 
   if (snapshots.empty()) {

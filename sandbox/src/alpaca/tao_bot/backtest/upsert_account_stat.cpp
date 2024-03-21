@@ -5,8 +5,11 @@
 #include "lib/utils/time.cpp" // ::utils::time_
 #include "should_exec_slow_query.cpp" // should_exec_slow_query
 
-void Alpaca::TaoBotBacktest::upsert_account_stat(const double current_epoch,
-                                                 const bool force = false) {
+void Alpaca::TaoBotBacktest::upsert_account_stat(
+    const upsert_account_stat_args_t args) {
+  const double current_epoch = args.current_epoch;
+  const bool force = args.force;
+
   if (!this->is_active) {
     return;
   }
@@ -18,6 +21,7 @@ void Alpaca::TaoBotBacktest::upsert_account_stat(const double current_epoch,
   const account_snapshot_t current_snapshot =
       this->db_account_stat.get_snapshot_with_computed_equity({
           .api_key_id = this->config.api_key_id,
+          .debug = args.debug,
           .starting_from =
               ::utils::time_::beginning_of_day_to_epoch(current_epoch),
       });

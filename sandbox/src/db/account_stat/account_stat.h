@@ -13,34 +13,30 @@ public:
 
   struct get_daily_snapshots_args_t {
     std::string api_key_id;
+    bool debug = false;
     std::string end_at;
     std::string start_at;
-    // Optional
-    bool debug = false;
   };
 
   struct get_snapshot_args_t {
     std::string api_key_id;
-    double starting_from;
-    // Optional
     bool debug = false;
+    double starting_from;
   };
 
   struct get_snapshot_with_computed_equity_args_t {
     std::string api_key_id;
-    double starting_from;
-    // Optional
     bool debug = false;
+    double starting_from;
   };
 
   struct upsert_args_t {
     std::string api_key_id;
+    bool debug = false;
     double equity = 0.00;
     double inserted_at = 0.00;
     double margin_buying_power = 0.00;
     double margin_multiplier = 0.00;
-    // Optional
-    bool debug = false;
   };
 
   AccountStat(){};

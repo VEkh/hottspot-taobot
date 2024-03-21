@@ -91,9 +91,9 @@ void DB::Position::compute_golden_stop_ratio(
   for (const position_t position : positions) {
     const avg_one_sec_variances_t avg_one_sec_variances =
         db_quote.get_avg_one_sec_variances({
+            .debug = args.debug,
             .symbol = args.symbol,
             .timestamp_upper_bound = position.opened_at,
-            .debug = args.debug,
         });
 
     total_return +=

@@ -88,6 +88,10 @@ void Alpaca::Client::load_config() {
           ? (int)api_key_json["candles_timeframe_minutes"]
           : config.candles_timeframe_minutes;
 
+  const bool debug_sql = api_key_json.contains("debug_sql")
+                             ? (bool)api_key_json["debug_sql"]
+                             : config.debug_sql;
+
   // TODO: Decide
   const double deficit_reclaim_ratio =
       api_key_json.contains("deficit_reclaim_ratio")
@@ -280,6 +284,7 @@ void Alpaca::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .candles_timeframe_minutes = candles_timeframe_minutes, // TODO: Decide
       .data_base_url = config_json["data_base_url"],
+      .debug_sql = debug_sql,
       .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
       .is_entry_bound_strict = is_entry_bound_strict, // TODO: Decide

@@ -30,9 +30,9 @@ void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
       const quote_t current_quote = this->current_quotes[symbol];
 
       this->db_quote.upsert_avg_one_sec_variance({
+          .debug = true,
           .id = current_quote.id,
           .symbol = symbol,
-          .debug = true,
       });
     }
 

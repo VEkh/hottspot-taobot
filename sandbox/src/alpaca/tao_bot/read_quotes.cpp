@@ -7,6 +7,7 @@
 
 void Alpaca::TaoBot::read_quotes() {
   const std::list<quote_t> quotes_ = this->quoter.db_quote.get_last({
+      .debug = this->api_client.config.debug_sql,
       .limit = 2,
       .limit_offset = 0,
       .symbol = this->symbol,

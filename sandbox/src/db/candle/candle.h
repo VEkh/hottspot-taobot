@@ -45,10 +45,9 @@ public:
   };
 
   struct get_latest_args_t {
+    bool debug = false; // Optional
     double end_at_epoch;
     double start_at_epoch;
-    // Optional
-    bool debug = false;
   };
 
   Candle(){};
