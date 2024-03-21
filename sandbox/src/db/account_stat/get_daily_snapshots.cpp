@@ -148,6 +148,6 @@ DB::AccountStat::get_daily_snapshots(const get_daily_snapshots_args_t args) {
   const query_result_t result = this->conn.exec(query, args.debug);
 
   return result_to_account_snapshots(result);
-};
+}
 
 #endif

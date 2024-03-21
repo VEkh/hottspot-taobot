@@ -39,28 +39,28 @@ DB::AccountStat::get_snapshot_with_computed_equity(
     day_computed as (
       select
         coalesce(net.profit, 0.0) as profit
-    from
-      day_original
-      left join lateral (
+      from (
         select
           api_key_id,
           sum((current_profit * abs(open_order_quantity))) as profit
-      from
-        positions
-      where
-        opened_at between day_original.inserted_at and day_original.inserted_at + '1 day'::interval
-        and api_key_id = day_original.api_key_id
-      group by
-        api_key_id) as net on net.api_key_id = day_original.api_key_id
+        from
+          positions
+          where
+            api_key_id = %s
+            and opened_at between to_timestamp(%f)
+            and to_timestamp(%f) + '1 day'::interval
+          group by
+            api_key_id) as net
     ),
     day_latest as (
       select
         extract(epoch from account_stats.inserted_at) as inserted_at_epoch
       from
-        day_original
-        join account_stats on account_stats.api_key_id = day_original.api_key_id
+        account_stats
       where
-        account_stats.inserted_at between day_original.inserted_at and day_original.inserted_at + '1 day'::interval
+        account_stats.api_key_id = %s
+        and account_stats.inserted_at between to_timestamp(%f)
+        and to_timestamp(%f) + '1 day'::interval
       order by
         account_stats.inserted_at desc
       limit 1
@@ -68,13 +68,13 @@ DB::AccountStat::get_snapshot_with_computed_equity(
     day as (
       select
         day_original.api_key_id,
-    (day_original.equity + day_computed.profit) as equity,
-    (day_original.margin_buying_power) as original_margin_buying_power,
-      day_latest.inserted_at_epoch
-    from
-      day_original
-      join day_computed on true
-      join day_latest on true
+        (day_original.equity + day_computed.profit) as equity,
+        (day_original.margin_buying_power) as original_margin_buying_power,
+        day_latest.inserted_at_epoch
+      from
+        day_original,
+        day_computed,
+        day_latest
     ),
     latest as (
       select
@@ -91,20 +91,23 @@ DB::AccountStat::get_snapshot_with_computed_equity(
     )
     select
       coalesce(day.equity, latest.equity) as equity,
-      coalesce(day.inserted_at_epoch, latest.inserted_at_epoch, 0.0) as timestamp_epoch,
-      coalesce(day.original_margin_buying_power, 0.0) as original_margin_buying_power
+      coalesce(day.inserted_at_epoch, latest.inserted_at_epoch, 0.0) as
+      timestamp_epoch, coalesce(day.original_margin_buying_power, 0.0) as
+      original_margin_buying_power
     from
       latest
       left join day on day.api_key_id = latest.api_key_id
   )";
 
   const size_t query_l = strlen(query_format) +
-                         2 * strlen(sanitized_api_key_id) +
-                         std::to_string(starting_from).size();
+                         4 * strlen(sanitized_api_key_id) +
+                         5 * std::to_string(starting_from).size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_api_key_id, starting_from,
+           sanitized_api_key_id, starting_from, starting_from,
+           sanitized_api_key_id, starting_from, starting_from,
            sanitized_api_key_id);
 
   PQfreemem(sanitized_api_key_id);
@@ -115,8 +118,8 @@ DB::AccountStat::get_snapshot_with_computed_equity(
 
   if (snapshots.empty()) {
     const std::string error_message = Formatted::error_message(
-        std::string("DB__ACCOUNT_STAT_get_snapshot_with_computed_equity: No "
-                    "account stats for ") +
+        std::string("DB__ACCOUNT_STAT_get_snapshot_with_computed_equity: No"
+                    " account stats for ") +
         api_key_id);
 
     std::cout << error_message << std::endl;
@@ -130,6 +133,6 @@ DB::AccountStat::get_snapshot_with_computed_equity(
   }
 
   return snapshots.front();
-};
+}
 
 #endif

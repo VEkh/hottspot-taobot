@@ -110,6 +110,6 @@ DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
   }
 
   return snapshots.front();
-};
+}
 
 #endif
