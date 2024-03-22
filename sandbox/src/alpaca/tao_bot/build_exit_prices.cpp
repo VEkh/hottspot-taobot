@@ -62,7 +62,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
     stop_profit = 0;
   }
 
-  // TODO: Decide
   if (this->api_client.config.deficit_reclaim_ratio) {
     const double asset_deficit =
         abs(this->performance.current_balance - this->performance.max_balance);

@@ -1,12 +1,17 @@
 #ifndef ALPACA__TAO_BOT_log_price_movement
 #define ALPACA__TAO_BOT_log_price_movement
 
-#include "lib/utils/integer.cpp" // ::utils::integer_
-#include "tao_bot.h"             // Alpaca::TaoBot, fmt
-#include <iostream>              // std::cout, std::endl
-#include <stdio.h>               // printf
+#include "lib/utils/integer.cpp"         // ::utils::integer_
+#include "should_use_price_movement.cpp" // should_use_price_movement
+#include "tao_bot.h"                     // Alpaca::TaoBot, fmt
+#include <iostream>                      // std::cout, std::endl
+#include <stdio.h>                       // printf
 
 void Alpaca::TaoBot::log_price_movement() {
+  if (!should_use_price_movement()) {
+    return;
+  }
+
   const double running_avg_one_sec_variance =
       this->avg_one_sec_variances.running;
 

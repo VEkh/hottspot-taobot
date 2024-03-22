@@ -3,10 +3,15 @@
 
 #include "tao_bot.h" // Alpaca::TaoBot
 
-#include <regex>  // std::regex, std::smatch
-#include <string> // std;:string, std::stoi
+#include "should_use_price_movement.cpp" // should_use_price_movement
+#include <regex>                         // std::regex, std::smatch
+#include <string>                        // std;:string, std::stoi
 
 void Alpaca::TaoBot::read_price_movement() {
+  if (!should_use_price_movement()) {
+    return;
+  }
+
   if (!this->backtest.should_exec_slow_query(this->current_epoch)) {
     return;
   }

@@ -120,6 +120,7 @@ private:
   bool should_stop_profit();
   bool should_terminate();
   bool should_toggle_is_trending(); // TODO: Decide
+  bool should_use_price_movement();
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);

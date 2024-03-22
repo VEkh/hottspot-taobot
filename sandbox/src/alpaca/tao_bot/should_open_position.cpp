@@ -1,12 +1,12 @@
 #ifndef ALPACA__TAO_BOT_should_open_position
 #define ALPACA__TAO_BOT_should_open_position
 
-#include "does_position_exist.cpp"     // does_position_exist
-#include "is_market_open.cpp"          // is_market_open
-#include "should_ml_open_position.cpp" // should_ml_open_position
-#include "tao_bot.h"                   // Alpaca::TaoBot
-
-#include "is_entry_signal_present.cpp" // is_entry_signal_present // TODO: Decide
+#include "does_position_exist.cpp"       // does_position_exist
+#include "is_entry_signal_present.cpp"   // is_entry_signal_present
+#include "is_market_open.cpp"            // is_market_open
+#include "should_ml_open_position.cpp"   // should_ml_open_position
+#include "should_use_price_movement.cpp" // should_use_price_movement
+#include "tao_bot.h"                     // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::should_open_position() {
   if (!is_market_open()) {
@@ -17,7 +17,7 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->avg_one_sec_variances.latest) {
+  if (should_use_price_movement() && !this->avg_one_sec_variances.latest) {
     return false;
   }
 
