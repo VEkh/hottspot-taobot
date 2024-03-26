@@ -1,6 +1,7 @@
 #ifndef ALPACA__TAO_BOT_log_reversal_metadata
 #define ALPACA__TAO_BOT_log_reversal_metadata
 
+#include "is_trending.cpp"      // is_trending
 #include "lib/formatted.cpp"    // Formatted
 #include "lib/utils/string.cpp" // ::utils::string
 #include "lib/utils/time.cpp"   // ::utils::time_
@@ -32,10 +33,28 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     Formatted::Stream trend_loss_count_color =
         trend_loss_count == trend_toggle_n ? fmt.green : fmt.red;
 
-    Formatted::Stream is_trending_color =
-        this->is_trending ? fmt.green : fmt.red;
+    Formatted::Stream trend_status_color = fmt.magenta;
+    std::string trend_status_text = "NONE";
 
-    const std::string is_trending_text = this->is_trending ? "YES" : "NO";
+    switch (this->current_trend.trend) {
+    case trend_t::TREND_DOWN: {
+      trend_status_color = fmt.red;
+      trend_status_text = "DOWN";
+      ;
+      break;
+    }
+    case trend_t::TREND_UP: {
+      trend_status_color = fmt.green;
+      trend_status_text = "UP";
+      break;
+    }
+    }
+
+    if (is_trending()) {
+      trend_status_text +=
+          (" @ " + ::utils::time_::date_string(this->current_trend.at, "%H:%M",
+                                               "America/Chicago"));
+    }
 
     Formatted::Stream trend_strictness_color =
         this->api_client.config.is_trend_loss_strict ? fmt.green : fmt.red;
@@ -48,14 +67,12 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     std::cout << trend_loss_count_color << trend_loss_count << " / "
               << trend_toggle_n << std::endl;
 
-    std::cout << fmt.bold << fmt.yellow;
-    printf("Is ");
-    std::cout << fmt.cyan;
+    std::cout << fmt.bold << fmt.cyan;
     std::cout << ::utils::string::upcase(
         this->api_client.config.trend_trigger_type);
     std::cout << fmt.yellow;
-    printf(" trending? ");
-    std::cout << is_trending_color << is_trending_text << std::endl;
+    printf(" trend status: ");
+    std::cout << trend_status_color << trend_status_text << std::endl;
 
     std::cout << fmt.bold << fmt.yellow;
     printf("Is trending strict? ");

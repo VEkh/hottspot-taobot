@@ -53,6 +53,11 @@ private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
 
+  struct trend_meta_t {
+    double at = 0;
+    trend_t trend = trend_t::TREND_CONSOLIDATION;
+  };
+
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
       {"sell", "📉"},
@@ -70,8 +75,7 @@ private:
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
-  candle_t bulk_candle;     // TODO: Decide
-  bool is_trending = false; // TODO: Decide
+  candle_t bulk_candle; // TODO: Decide
   double current_epoch = time(nullptr);
   double market_open_epoch;
   double quantity;
@@ -93,6 +97,7 @@ private:
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::vector<position_t> closed_positions;
+  trend_meta_t current_trend;
 
   account_exit_prices_t build_account_exit_prices();
 
@@ -111,7 +116,8 @@ private:
   bool is_quote_stale(const quote_t, const double);
   bool is_reversing_loss();                        // TODO: Decide
   bool is_trend_indicating_loss(const position_t); // TODO: Decide
-  bool is_within_entry_window(const reversal_t);   // TODO: Decide
+  bool is_trending();
+  bool is_within_entry_window(const reversal_t); // TODO: Decide
   bool max_account_loss_reached();
   bool new_positions_opened();
   bool should_close_position();
@@ -119,7 +125,7 @@ private:
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
-  bool should_toggle_is_trending(); // TODO: Decide
+  bool should_toggle_is_trending();
   bool should_use_price_movement();
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);

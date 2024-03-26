@@ -3,6 +3,7 @@
 #define ALPACA__TAO_BOT_should_toggle_is_trending
 
 #include "is_trend_indicating_loss.cpp" // is_trend_indicating_loss
+#include "is_trending.cpp"              // is_trending
 #include "tao_bot.h"                    // Alpaca::TaoBot, position_t
 
 bool Alpaca::TaoBot::should_toggle_is_trending() {
@@ -10,7 +11,7 @@ bool Alpaca::TaoBot::should_toggle_is_trending() {
     return false;
   }
 
-  if (this->is_trending) {
+  if (is_trending()) {
     return true;
   }
 

@@ -4,6 +4,7 @@
 #include "earliest_record_reversal.cpp" // earliest_record_reversal
 #include "has_reversal_been_used.cpp"   // has_reversal_been_used
 #include "is_reversing_loss.cpp"        // is_reversing_loss
+#include "is_trending.cpp"              // is_trending
 #include "is_within_entry_window.cpp"   // is_within_entry_window
 #include "latest_record_reversal.cpp"   // latest_record_reversal
 #include "latest_reversal.cpp"          // latest_reversal
@@ -23,10 +24,10 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       return false;
     }
 
+    const bool is_trending_ = is_trending();
     reversal_t entry_reversal_;
 
-    if (this->api_client.config.trend_trigger_type == "trans" &&
-        this->is_trending) {
+    if (this->api_client.config.trend_trigger_type == "trans" && is_trending_) {
       entry_reversal_ = earliest_record_reversal(this->reversals);
     } else {
       entry_reversal_ = latest_record_reversal(this->reversals);
@@ -44,27 +45,23 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       }
     }
 
-    if (!this->is_trending && !is_within_entry_window(entry_reversal_)) {
+    if (!is_trending_ && !is_within_entry_window(entry_reversal_)) {
       return false;
     }
 
     this->ref_reversal = entry_reversal_;
 
-    if (this->api_client.config.trend_trigger_type == "cis" &&
-        this->is_trending) {
-      const position_t last_position = this->closed_positions.back();
-
+    if (this->api_client.config.trend_trigger_type == "cis" && is_trending_) {
       const std::string key =
-          last_position.open_order.action == order_action_t::BUY ? "high"
-                                                                 : "low";
+          this->current_trend.trend == trend_t::TREND_DOWN ? "high" : "low";
 
       if (this->secondary_reversals.timeframe_minutes) {
-        if (last_position.open_order.action == order_action_t::SELL &&
+        if (this->current_trend.trend == trend_t::TREND_UP &&
             this->secondary_reversals.lows.empty()) {
           return false;
         }
 
-        if (last_position.open_order.action == order_action_t::BUY &&
+        if (this->current_trend.trend == trend_t::TREND_DOWN &&
             this->secondary_reversals.highs.empty()) {
           return false;
         }
@@ -76,7 +73,7 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
           return false;
         }
 
-        if (secondary_reversal.at < last_position.close_order.timestamp) {
+        if (secondary_reversal.at < this->current_trend.at) {
           return false;
         }
 

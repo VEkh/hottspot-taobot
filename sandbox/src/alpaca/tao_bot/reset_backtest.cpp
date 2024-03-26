@@ -1,9 +1,9 @@
 #ifndef ALPACA__TAO_BOT_reset_backtest
 #define ALPACA__TAO_BOT_reset_backtest
 
-#include "advance_current_epoch.cpp"   // advance_current_epoch
-#include "set_market_open_epoch.cpp"   // set_market_open_epoch
-#include "tao_bot.h"                   // Alpaca::TaoBot, candle_t, reversals_t
+#include "advance_current_epoch.cpp" // advance_current_epoch
+#include "set_market_open_epoch.cpp" // set_market_open_epoch
+#include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversals_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
 void Alpaca::TaoBot::reset_backtest() {
@@ -18,7 +18,7 @@ void Alpaca::TaoBot::reset_backtest() {
 
   this->bulk_candle = candle_t();
   this->closed_positions = {};
-  this->is_trending = false;
+  this->current_trend = trend_meta_t();
   this->performance = performance_t();
   this->reversals = reversals_t();
   this->reversals.timeframe_minutes =

@@ -2,9 +2,10 @@
 #ifndef ALPACA__TAO_BOT_set_reversals_timeframe_minutes
 #define ALPACA__TAO_BOT_set_reversals_timeframe_minutes
 
-#include "tao_bot.h" // Alpaca::TaoBot, reversals_t
-#include <algorithm> // std::max
-#include <string>    // std::string
+#include "is_trending.cpp" // is_trending
+#include "tao_bot.h"       // Alpaca::TaoBot, reversals_t
+#include <algorithm>       // std::max
+#include <string>          // std::string
 
 void Alpaca::TaoBot::set_reversals_timeframe_minutes(reversals_t &source,
                                                      reversals_t &target) {
@@ -12,7 +13,7 @@ void Alpaca::TaoBot::set_reversals_timeframe_minutes(reversals_t &source,
     return;
   }
 
-  if (!this->is_trending) {
+  if (!is_trending()) {
     return;
   }
 

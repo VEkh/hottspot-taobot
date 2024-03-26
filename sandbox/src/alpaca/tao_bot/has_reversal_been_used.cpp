@@ -1,15 +1,14 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_has_reversal_been_used
 #define ALPACA__TAO_BOT_has_reversal_been_used
 
-#include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t
-#include <vector>    // std::vector
+#include "is_trending.cpp" // is_trending
+#include "tao_bot.h"       // Alpaca::TaoBot, position_t, reversal_t
+#include <vector>          // std::vector
 
 bool Alpaca::TaoBot::has_reversal_been_used(const reversal_t reversal) {
   std::vector<position_t>::reverse_iterator it;
 
-  if (this->api_client.config.trend_trigger_type == "cis" &&
-      this->is_trending) {
+  if (this->api_client.config.trend_trigger_type == "cis" && is_trending()) {
     return false;
   }
 
