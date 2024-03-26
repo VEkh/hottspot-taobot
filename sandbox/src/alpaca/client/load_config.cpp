@@ -159,12 +159,6 @@ void Alpaca::Client::load_config() {
           : config.should_await_reversal_indicator;
 
   // TODO: Decide
-  const bool should_hold_trend_profit =
-      api_key_json.contains("should_hold_trend_profit")
-          ? (bool)api_key_json["should_hold_trend_profit"]
-          : config.should_hold_trend_profit;
-
-  // TODO: Decide
   const bool should_reverse_losses =
       api_key_json.contains("should_reverse_losses")
           ? (bool)api_key_json["should_reverse_losses"]
@@ -301,9 +295,8 @@ void Alpaca::Client::load_config() {
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_await_reversal_indicator =
-          should_await_reversal_indicator,                  // TODO: Decide
-      .should_hold_trend_profit = should_hold_trend_profit, // TODO: Decide
-      .should_reverse_losses = should_reverse_losses,       // TODO: Decide
+          should_await_reversal_indicator,            // TODO: Decide
+      .should_reverse_losses = should_reverse_losses, // TODO: Decide
       .should_secondary_reversal_stop_loss =
           should_secondary_reversal_stop_loss, // TODO: Decide
       .stop_loss_percent = stop_loss_percent,  // TODO: Decide

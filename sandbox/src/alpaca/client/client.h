@@ -46,7 +46,6 @@ public:
     int reversal_timeframe_minutes = 5;              // TODO: Decide
     int secondary_reversal_timeframe_minutes = 0;    // TODO: Decide
     bool should_await_reversal_indicator = false;    // TODO: Decide
-    bool should_hold_trend_profit = false;           // TODO: Decide
     bool should_reverse_losses = false;              // TODO: Decide
     bool should_secondary_reversal_stop_loss = true; // TODO: Decide
     double stop_loss_percent = -0.0;
