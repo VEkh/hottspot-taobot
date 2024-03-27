@@ -7,13 +7,12 @@
  * order_status_t
  * position_t
  * trend_meta_t
- * trend_t
  */
 #include "tao_bot.h"
 
 #include "build_performance.cpp"         // build_performance
-#include "is_trending.cpp"               // is_trending // TODO: Decide
-#include "should_toggle_is_trending.cpp" // should_toggle_is_trending // TODO: Decide
+#include "should_toggle_is_trending.cpp" // should_toggle_is_trending
+#include "toggle_is_trending.cpp"        // toggle_is_trending
 
 void Alpaca::TaoBot::reset_position() {
   if (!(this->close_order_ptr && this->open_order_ptr)) {
@@ -27,22 +26,7 @@ void Alpaca::TaoBot::reset_position() {
 
   if (this->close_order.profit < 0) {
     if (should_toggle_is_trending()) {
-      double new_trend_at = 0;
-      trend_t new_trend;
-
-      if (is_trending()) {
-        new_trend = trend_t::TREND_CONSOLIDATION;
-      } else {
-        new_trend = this->close_order.action == order_action_t::BUY
-                        ? trend_t::TREND_UP
-                        : trend_t::TREND_DOWN;
-        new_trend_at = this->current_epoch;
-      }
-
-      this->current_trend = {
-          .at = new_trend_at,
-          .trend = new_trend,
-      };
+      toggle_is_trending(this->close_order);
     }
   } else {
     this->current_trend = trend_meta_t();

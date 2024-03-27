@@ -7,7 +7,6 @@
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
 #include "log_account_snapshot.cpp"      // log_account_snapshot
-#include "log_candles.cpp"               // log_candles // TODO: Decide
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
