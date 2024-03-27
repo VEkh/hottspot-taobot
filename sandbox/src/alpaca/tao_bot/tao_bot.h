@@ -190,7 +190,6 @@ private:
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);
-  void set_first_trend(); // TODO: Decide
   void set_market_open_epoch();
   void set_open_order_prices();
   void set_position_status();
