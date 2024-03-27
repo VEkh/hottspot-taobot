@@ -73,6 +73,7 @@ struct reversals_t {
   double updated_at;
 
   bool any_empty() { return this->highs.empty() || this->lows.empty(); }
+  bool every_empty() { return this->highs.empty() && this->lows.empty(); }
 };
 
 struct order_t {

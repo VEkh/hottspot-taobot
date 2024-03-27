@@ -160,8 +160,8 @@ private:
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void await_market_open();
-  void build_reversals(reversals_t &); // TODO: Decide
-  void build_bulk_candle();            // TODO: Decide
+  void build_bulk_candle(); // TODO: Decide
+  void build_reversals(reversals_t &);
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote(const bool);
@@ -181,7 +181,7 @@ private:
   void log_reversal_metadata();
   void log_reversals(reversals_t &);
   void open_and_persist_position();
-  void read_candles(); // TODO: Decide
+  void read_candles();
   void read_closed_positions();
   void read_predictions();
   void read_price_movement();
@@ -190,6 +190,7 @@ private:
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);
+  void set_first_trend(); // TODO: Decide
   void set_market_open_epoch();
   void set_open_order_prices();
   void set_position_status();

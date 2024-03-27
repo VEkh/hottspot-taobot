@@ -153,10 +153,22 @@ void Alpaca::Client::load_config() {
           : config.secondary_reversal_timeframe_minutes;
 
   // TODO: Decide
+  const bool should_await_first_trend =
+      api_key_json.contains("should_await_first_trend")
+          ? (bool)api_key_json["should_await_first_trend"]
+          : config.should_await_first_trend;
+
+  // TODO: Decide
   const bool should_await_reversal_indicator =
       api_key_json.contains("should_await_reversal_indicator")
           ? (bool)api_key_json["should_await_reversal_indicator"]
           : config.should_await_reversal_indicator;
+
+  // TODO: Decide
+  const bool should_enter_at_first_reversal =
+      api_key_json.contains("should_enter_at_first_reversal")
+          ? (bool)api_key_json["should_enter_at_first_reversal"]
+          : config.should_enter_at_first_reversal;
 
   // TODO: Decide
   const bool should_reverse_losses =
@@ -293,9 +305,11 @@ void Alpaca::Client::load_config() {
       .reversal_entry_delay = reversal_entry_delay,             // TODO: Decide
       .reversal_timeframe_minutes = reversal_timeframe_minutes, // TODO: Decide
       .secondary_reversal_timeframe_minutes =
-          secondary_reversal_timeframe_minutes, // TODO: Decide
-      .should_await_reversal_indicator =
-          should_await_reversal_indicator,            // TODO: Decide
+          secondary_reversal_timeframe_minutes,             // TODO: Decide
+      .should_await_first_trend = should_await_first_trend, // TODO: Decide
+      .should_await_reversal_indicator = should_await_reversal_indicator,
+      .should_enter_at_first_reversal =
+          should_enter_at_first_reversal,             // TODO: Decide
       .should_reverse_losses = should_reverse_losses, // TODO: Decide
       .should_secondary_reversal_stop_loss =
           should_secondary_reversal_stop_loss, // TODO: Decide

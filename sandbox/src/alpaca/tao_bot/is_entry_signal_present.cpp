@@ -25,6 +25,7 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
     }
 
     const bool is_trending_ = is_trending();
+
     reversal_t entry_reversal_;
 
     if (this->api_client.config.trend_trigger_type == "trans" && is_trending_) {

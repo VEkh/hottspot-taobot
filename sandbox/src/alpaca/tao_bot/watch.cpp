@@ -26,6 +26,7 @@
 #include "reset_backtest.cpp"            // reset_backtest
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
+#include "set_first_trend.cpp"           // set_first_trend // TODO: Decide
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
 #include "set_reversals_timeframe_minutes.cpp" // set_reversals_timeframe_minutes // TODO: Decide
@@ -49,6 +50,7 @@ void Alpaca::TaoBot::watch() {
                                     this->secondary_reversals); // TODO: Decide
     build_reversals(this->secondary_reversals);                 // TODO: Decide
     build_bulk_candle();
+    set_first_trend(); // TODO: Decide
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
