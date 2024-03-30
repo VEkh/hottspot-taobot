@@ -34,6 +34,26 @@ EQUITY_MARKET_HOLIDAYS=(
   "2024-12-25"
 )
 
+function active_api_keys() {
+  app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+  project="${1}"
+  scope="${2}"
+
+  [[ -n "${scope}" ]] && scope=".${scope}?"
+
+  credentials_filepath="${app_dir}/config/${project}/credentials.json"
+
+  if [[ ! -f "${credentials_filepath}" ]]; then
+    ascii_print "❗ Missing a config file with api keys at ${credentials_filepath}" "red" >&2
+
+    exit 1
+  fi
+
+  query=". | to_entries | map(select(.value${scope}.is_active?)) | map(.key) | join(\" \")"
+
+  jq -r "${query}" "${credentials_filepath}"
+}
+
 function ascii_print() {
   message="${ASCII["bold"]}"
 
@@ -42,23 +62,6 @@ function ascii_print() {
   done
 
   echo -e "${message}${1}${ASCII["reset"]}"
-}
-
-function backtest_api_keys() {
-  app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
-  project="${1}"
-
-  credentials_filepath="${app_dir}/config/${project}/credentials.json"
-
-  if [[ ! -f "${credentials_filepath}" ]]; then
-    ascii_print "❗ Missing a config file with backtest api keys at ${credentials_filepath}" "red" >&2
-
-    exit 1
-  fi
-
-  jq -r \
-    ". | to_entries | map(select(.value.backtest?.is_active?)) | map(.key) | join(\" \")" \
-    "${credentials_filepath}"
 }
 
 function extract_args() {

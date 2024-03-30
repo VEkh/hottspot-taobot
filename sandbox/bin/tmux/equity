@@ -1,11 +1,16 @@
 #!/bin/bash
 
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
-api_keys=("live-alpha" "live-beta" "paper-alpha" "paper-beta")
 filename=$(basename "${BASH_SOURCE[0]}")
 project="alpaca"
-symbols=()
 
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # active_api_keys
+
+# shellcheck disable=2207
+api_keys=($(active_api_keys "${project}"))
+
+symbols=()
 while IFS="" read -r line; do
   symbol="${line}"
   symbols+=("${symbol}")
