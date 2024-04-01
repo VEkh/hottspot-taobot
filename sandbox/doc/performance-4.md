@@ -1,4 +1,4 @@
-### 2024-03-25:
+### 2024-04-01:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -8,7 +8,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (60.00%) 2L (Total 5)
+Win Rate: 5W (55.56%) 4L (Total 9)
 ```
 
 **Beta (PRODUCTION)**
@@ -18,7 +18,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 4W (80.00%) 1L (Total 5)
+Win Rate: 6W (66.67%) 3L (Total 9)
 ```
 
 **Alpha (STAGING)**
@@ -28,7 +28,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (60.00%) 2L (Total 5)
+Win Rate: 3W (33.33%) 6L (Total 9)
 ```
 
 **Beta (STAGING)**
@@ -38,8 +38,218 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 9W (37.50%) 15L (Total: 24)
+Win Rate: 11W (39.29%) 17L (Total: 28)
 ```
+
+### 2024-03-28:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Thursday, March 28 2024
+Current Equity:             $27392.45 (+238.01) (+0.88%)
+Max Equity:                 $27642.94 (+488.50) (+1.80%) @ 09:09 CDT
+Min Equity:                 $26815.23 (-339.21) (-1.25%) @ 11:40 CDT
+Original Equity:            $27154.44
+
+Win Rate: 5W (55.56%) 4L (Total 9)
+```
+
+**Beta (PRODUCTION)**
+```
+Thursday, March 28 2024
+Current Equity:             $63080.11 (+659.69) (+1.06%)
+Max Equity:                 $63629.57 (+1209.15) (+1.94%) @ 09:08 CDT
+Min Equity:                 $61724.08 (-696.34) (-1.12%) @ 11:40 CDT
+Original Equity:            $62420.42
+
+Win Rate: 6W (66.67%) 3L (Total 9)
+```
+
+**Alpha (STAGING)**
+```
+Thursday, March 28 2024
+Current Equity:             $76843.43 (-2297.69) (-2.90%)
+Max Equity:                 $79141.12 (+0.00) (+0.00%) @ 08:00 CDT
+Min Equity:                 $75422.10 (-3719.02) (-4.70%) @ 11:51 CDT
+Original Equity:            $79141.12
+
+Win Rate: 3W (33.33%) 6L (Total 9)
+```
+
+**Beta (STAGING)**
+```
+Thursday, March 28 2024
+Current Equity:             $78790.29 (-6469.02) (-7.59%)
+Max Equity:                 $85259.31 (+0.00) (+0.00%) @ 08:00 CDT
+Min Equity:                 $77163.94 (-8095.37) (-9.49%) @ 12:10 CDT
+Original Equity:            $85259.31
+
+Win Rate: 11W (39.29%) 17L (Total: 28)
+```
+
+### 2024-03-27:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Wednesday, March 27 2024
+Current Equity:             $27154.81 (+454.68) (+1.70%)
+Max Equity:                 $27366.58 (+666.45) (+2.50%) @ 11:43 CDT
+Min Equity:                 $26421.35 (-278.78) (-1.04%) @ 10:33 CDT
+Original Equity:            $26700.13
+
+Win Rate: 4W (50.00%) 4L (Total 8)
+```
+
+**Beta (PRODUCTION)**
+```
+Wednesday, March 27 2024
+Current Equity:             $65421.30 (+1078.64) (+1.68%)
+Max Equity:                 $65933.23 (+1590.57) (+2.47%) @ 11:43 CDT
+Min Equity:                 $63658.59 (-684.07) (-1.06%) @ 10:33 CDT
+Original Equity:            $64342.66
+
+Win Rate: 5W (62.50%) 3L (Total 8)
+```
+
+**Alpha (STAGING)**
+```
+Wednesday, March 27 2024
+Current Equity:             $79143.28 (-486.31) (-0.61%)
+Max Equity:                 $80466.86 (+837.27) (+1.05%) @ 08:50 CDT
+Min Equity:                 $78671.60 (-957.99) (-1.20%) @ 14:37 CDT
+Original Equity:            $79629.59
+
+Win Rate: 3W (37.50%) 5L (Total 8)
+```
+
+**Beta (STAGING)**
+```
+Wednesday, March 27 2024
+Current Equity:             $85264.01 (-1669.12) (-1.92%)
+Max Equity:                 $90329.06 (+3395.93) (+3.91%) @ 09:06 CDT
+Min Equity:                 $84562.98 (-2370.15) (-2.73%) @ 13:31 CDT
+Original Equity:            $86933.13
+
+Win Rate: 11W (40.74%) 16L (Total: 27)
+```
+
+### 2024-03-26:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, March 26 2024
+Current Equity:             $26700.50 (-641.84) (-2.35%)
+Max Equity:                 $28577.44 (+1235.10) (+4.52%) @ 09:56 CDT
+Min Equity:                 $26700.10 (-642.24) (-2.35%) @ 14:56 CDT
+Original Equity:            $27342.34
+
+Win Rate: 3W (42.86%) 4L (Total 7)
+```
+
+**Beta (PRODUCTION)**
+```
+Tuesday, March 26 2024
+Current Equity:             $64343.56 (-1635.52) (-2.48%)
+Max Equity:                 $68865.56 (+2886.48) (+4.37%) @ 09:56 CDT
+Min Equity:                 $64343.56 (-1635.52) (-2.48%) @ 14:56 CDT
+Original Equity:            $65979.08
+
+Win Rate: 4W (57.14%) 3L (Total 7)
+```
+
+**Alpha (STAGING)**
+```
+Tuesday, March 26 2024
+Current Equity:             $79638.39 (-1716.07) (-2.11%)
+Max Equity:                 $81999.57 (+645.11) (+0.79%) @ 09:09 CDT
+Min Equity:                 $79632.50 (-1721.96) (-2.12%) @ 14:32 CDT
+Original Equity:            $81354.46
+
+Win Rate: 3W (42.86%) 4L (Total 7)
+```
+
+**Beta (STAGING)**
+```
+Tuesday, March 26 2024
+Current Equity:             $86936.66 (+126.00) (+0.15%)
+Max Equity:                 $90005.55 (+3194.89) (+3.68%) @ 09:56 CDT
+Min Equity:                 $85364.27 (-1446.39) (-1.67%) @ 08:34 CDT
+Original Equity:            $86810.66
+
+Win Rate: 11W (42.31%) 15L (Total: 26)
+```
+
+### 2024-03-25:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Monday, March 25 2024
+Current Equity:             $27343.11 (-524.30) (-1.88%)
+Max Equity:                 $28394.85 (+527.44) (+1.89%) @ 09:20 CDT
+Min Equity:                 $27175.83 (-691.58) (-2.48%) @ 13:38 CDT
+Original Equity:            $27867.41
+
+Win Rate: 3W (50.00%) 3L (Total 6)
+```
+
+**Beta (PRODUCTION)**
+```
+Monday, March 25 2024
+Current Equity:             $65980.93 (-1218.83) (-1.81%)
+Max Equity:                 $68487.87 (+1288.11) (+1.92%) @ 09:20 CDT
+Min Equity:                 $65577.32 (-1622.44) (-2.41%) @ 13:21 CDT
+Original Equity:            $67199.76
+
+Win Rate: 4W (66.67%) 2L (Total 6)
+```
+
+**Alpha (STAGING)**
+```
+Monday, March 25 2024
+Current Equity:             $81356.74 (-2905.78) (-3.45%)
+Max Equity:                 $84488.82 (+226.30) (+0.27%) @ 08:33 CDT
+Min Equity:                 $79131.68 (-5130.84) (-6.09%) @ 09:56 CDT
+Original Equity:            $84262.52
+
+Win Rate: 3W (50.00%) 3L (Total 6)
+```
+
+**Beta (STAGING)**
+```
+Monday, March 25 2024
+Current Equity:             $86812.98 (+1491.58) (+1.75%)
+Max Equity:                 $89003.38 (+3681.98) (+4.32%) @ 08:40 CDT
+Min Equity:                 $84796.86 (-524.54) (-0.61%) @ 08:31 CDT
+Original Equity:            $85321.40
+
+Win Rate: 10W (40.00%) 15L (Total: 25)
+```
+
+##### Notes
+* Backtesting the revision of the momentum algorithm performed VERY well. See
+  `20240322-backtest-reversal--30_apr.txt` as well as its golden ratio reports.
+* Something that occurred to me is that most of the time the first position
+  fails. Maybe we can avoid this loss and increase gains by simply staying out
+  of the first position and awaiting trend formation.
+* The trade-off is that some percent of days have one position implying that
+  the whole day trends in the direction of the first reversal. This is the breakdown:
+
+  Symbol   | Single-Position Days | Total Days
+  --------------------------------------------
+  AMZN     | 57 (23.65%)          | 241
+  --------------------------------------------
+  TSLA     | 45 (18.67%)          | 241
+  --------------------------------------------
+
+* Though single-position days are a minority of days, I imagine that they offer
+  the greatest potential gains.
+* Also, skipping the first position won't necessarily guarantee a win for a day
+  that would have otherwise been a loss.
+* We'll try skipping the first position and measure the results.
 
 ### 2024-03-22:
 #### Performance
