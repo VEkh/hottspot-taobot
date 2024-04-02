@@ -1,14 +1,14 @@
 #ifndef ALPACA__TAO_BOT_is_entry_signal_present
 #define ALPACA__TAO_BOT_is_entry_signal_present
 
-#include "earliest_record_reversal.cpp" // earliest_record_reversal
-#include "has_reversal_been_used.cpp"   // has_reversal_been_used
-#include "is_reversing_loss.cpp"        // is_reversing_loss
-#include "is_trending.cpp"              // is_trending
-#include "is_within_entry_window.cpp"   // is_within_entry_window
-#include "latest_record_reversal.cpp"   // latest_record_reversal
-#include "latest_reversal.cpp"          // latest_reversal
-#include "tao_bot.h" // Alpaca::TaoBot, position_t, range_t, reversal_t
+#include "are_latest_records_epoch_same.cpp" // are_latest_records_epoch_same
+#include "earliest_record_reversal.cpp"      // earliest_record_reversal
+#include "has_reversal_been_used.cpp"        // has_reversal_been_used
+#include "is_trending.cpp"                   // is_trending
+#include "is_within_entry_window.cpp"        // is_within_entry_window
+#include "latest_record_reversal.cpp"        // latest_record_reversal
+#include "latest_reversal.cpp"               // latest_reversal
+#include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
   if (!this->api_client.config.should_await_reversal_indicator) {
@@ -21,6 +21,10 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
 
   if (this->api_client.config.should_await_reversal_indicator) {
     if (this->reversals.any_empty()) {
+      return false;
+    }
+
+    if (are_latest_records_epoch_same(this->reversals)) {
       return false;
     }
 
