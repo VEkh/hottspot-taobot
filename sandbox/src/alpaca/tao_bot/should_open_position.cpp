@@ -21,6 +21,10 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
+  if (this->api_client.config.should_await_reversal_indicator) {
+    return is_entry_signal_present();
+  }
+
   if (this->candle_predictor.should_predict(does_position_exist())) {
     if (this->closed_positions.empty()) {
       return this->candle_predictor.is_ready_to_predict(this->current_epoch);
@@ -29,10 +33,6 @@ bool Alpaca::TaoBot::should_open_position() {
     if (!this->candle_predictor.config.rollover_positions) {
       return should_ml_open_position(this->candle_predictor);
     }
-  }
-
-  if (this->api_client.config.should_await_reversal_indicator) {
-    return is_entry_signal_present();
   }
 
   return true;

@@ -7,9 +7,6 @@
 #include "lib/utils/boolean.cpp"      // ::utils::boolean
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t reversal_type_t
 
-// TODO: Decide
-#include "is_reversing_loss.cpp" // is_reversing_loss
-
 bool Alpaca::TaoBot::is_next_position_long() {
   if (this->candle_predictor.should_predict(does_position_exist())) {
     if (this->closed_positions.empty()) {
@@ -19,12 +16,6 @@ bool Alpaca::TaoBot::is_next_position_long() {
     if (!this->candle_predictor.config.rollover_positions) {
       return this->candle_predictor.is_next_position_long();
     }
-  }
-
-  if (this->api_client.config.should_reverse_losses && is_reversing_loss()) {
-    const position_t last_position = this->closed_positions.back();
-
-    return last_position.close_order.action == order_action_t::BUY;
   }
 
   if (this->api_client.config.should_await_reversal_indicator) {

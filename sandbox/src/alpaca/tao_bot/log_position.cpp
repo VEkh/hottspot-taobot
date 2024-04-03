@@ -103,15 +103,10 @@ void Alpaca::TaoBot::log_position() {
   const int min_profit_duration =
       order_duration(this->open_order_ptr, "min_profit");
 
-  const int profit_timeout_seconds =
-      this->api_client.config.profit_timeout_seconds;
-
-  printf("Duration: %s • Max Profit Duration: %s • Min Profit Duration: %s • "
-         "Profit Timeout: %s\n",
+  printf("Duration: %s • Max Profit Duration: %s • Min Profit Duration: %s\n",
          ::utils::integer_::seconds_to_clock(duration).c_str(),
          ::utils::integer_::seconds_to_clock(max_profit_duration).c_str(),
-         ::utils::integer_::seconds_to_clock(min_profit_duration).c_str(),
-         ::utils::integer_::seconds_to_clock(profit_timeout_seconds).c_str());
+         ::utils::integer_::seconds_to_clock(min_profit_duration).c_str());
 
   std::cout << fmt.reset << std::endl;
 
@@ -121,17 +116,6 @@ void Alpaca::TaoBot::log_position() {
 
   std::cout << fmt.bold << log_color << fmt.underline;
   printf("💸 Position Profit");
-  std::cout << fmt.reset;
-
-  Formatted::Stream is_loss_reversal_color =
-      this->open_order_ptr->is_loss_reversal ? fmt.green : fmt.red;
-
-  std::string is_loss_reversal_text =
-      this->open_order_ptr->is_loss_reversal ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf(" Reversing Loss? ");
-  std::cout << is_loss_reversal_color << is_loss_reversal_text;
   std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << log_color;

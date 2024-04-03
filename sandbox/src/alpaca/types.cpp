@@ -36,20 +36,6 @@ enum order_type_t {
   MARKET,
 };
 
-// TODO: Decide
-struct range_t {
-  double closed_at = 0;
-  double high = -INFINITY;
-  double low = INFINITY;
-  double lower_mid = 0;
-  double mid = 0;
-  double opened_at = 0;
-  double upper_mid = 0;
-
-  double delta() { return this->high - this->low; }
-};
-
-// TODO: Decide
 enum reversal_type_t {
   REVERSAL_HIGH,
   REVERSAL_LOW,
@@ -78,13 +64,10 @@ struct reversals_t {
 
 struct order_t {
   order_action_t action = order_action_t::BUY;
-  range_t consolidation_range;         // TODO: Decide
-  reversal_t deficit_reclaim_reversal; // TODO: Decide
   reversal_t entry_reversal;
   double execution_price = 0.00;
   std::string id = "";
-  bool is_loss_reversal = false; // TODO: Decide
-  bool is_trending = false;      // TODO: Decide
+  bool is_trending = false; // TODO: Delete when finalizing single loss trending
   double limit_price = 0.00;
   double max_position_profit = 0.00;
   double max_profit = 0.00;
@@ -93,7 +76,6 @@ struct order_t {
   double min_profit_at = 0;
   double profit = 0.00;
   double quantity = 0.00;
-  reversal_t ref_reversal; // TODO: Decide
   order_status_t status = order_status_t::ORDER_INIT;
   double stop_loss = 0.00;
   double stop_profit = 0.00;

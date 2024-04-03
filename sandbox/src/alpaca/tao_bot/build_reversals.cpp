@@ -33,14 +33,7 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
   reversals_.lows = {};
   reversals_.record_counts = {{"highs", 0}, {"lows", 0}};
 
-  const double candles_timeframe_minutes =
-      this->api_client.config.candles_timeframe_minutes;
-
-  const double start_epoch =
-      candles_timeframe_minutes
-          ? std::max(this->market_open_epoch,
-                     this->current_epoch - candles_timeframe_minutes * 60)
-          : this->market_open_epoch;
+  const double start_epoch = this->market_open_epoch;
 
   double running_record_high = -INFINITY;
   double running_record_low = INFINITY;

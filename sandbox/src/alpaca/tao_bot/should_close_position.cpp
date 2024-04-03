@@ -19,9 +19,7 @@ bool Alpaca::TaoBot::should_close_position() {
     return false;
   }
 
-  if (Alpaca::Utils::is_end_of_trading_period(
-          this->current_epoch,
-          this->api_client.config.terminate_after_seconds)) {
+  if (Alpaca::Utils::is_end_of_trading_period(this->current_epoch)) {
     return true;
   }
 
@@ -66,29 +64,6 @@ bool Alpaca::TaoBot::should_close_position() {
       this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
       this->open_order_ptr->profit > 0 &&
       this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
-    return true;
-  }
-
-  const double profit_reclaim_ratio =
-      this->api_client.config.profit_reclaim_ratio;
-
-  const int profit_timeout_seconds =
-      this->api_client.config.profit_timeout_seconds;
-
-  const int max_profit_duration =
-      order_duration(this->open_order_ptr, "max_profit");
-
-  if (is_trending() && profit_timeout_seconds &&
-      max_profit_duration >= profit_timeout_seconds) {
-    if (profit_reclaim_ratio) {
-      const double profit_to_reclaim =
-          profit_reclaim_ratio * this->open_order_ptr->max_profit;
-
-      return (this->open_order_ptr->profit > 0 &&
-              this->open_order_ptr->max_profit > 0 &&
-              this->open_order_ptr->profit >= profit_to_reclaim);
-    }
-
     return true;
   }
 

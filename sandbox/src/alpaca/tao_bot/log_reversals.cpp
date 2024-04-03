@@ -64,9 +64,8 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   }
 
   std::cout << fmt.bold << fmt.magenta << std::endl;
-  printf("Record Highs: %i • Record Lows %i 🎯 %i\n",
-         reversals_.record_counts["highs"], reversals_.record_counts["lows"],
-         this->api_client.config.reversal_entry_delay);
+  printf("Record Highs: %i • Record Lows %i\n",
+         reversals_.record_counts["highs"], reversals_.record_counts["lows"]);
   std::cout << fmt.reset << std::endl;
 }
 

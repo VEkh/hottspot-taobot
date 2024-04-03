@@ -42,11 +42,7 @@ void Alpaca::TaoBot::log_quote() {
   printf("%s Quote\n", current_quote.symbol.c_str());
   std::cout << fmt.no_underline;
 
-  printf("Current: %'.2f • High: %'.2f • Low: %'.2f • Δ: %'.2f\n",
-         ::utils::float_::to_currency(current_quote.price),
-         ::utils::float_::to_currency(this->bulk_candle.high),
-         ::utils::float_::to_currency(this->bulk_candle.low),
-         ::utils::float_::to_currency(this->bulk_candle.range()));
+  printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
   std::cout << fmt.reset << std::endl;
 }
 

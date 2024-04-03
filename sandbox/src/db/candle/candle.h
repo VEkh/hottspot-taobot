@@ -52,7 +52,6 @@ public:
 
   Candle(){};
   Candle(const Pg, const int, const std::string);
-  int duration_minutes = 0; // TODO: Decide (Promotion to public)
 
   static candle_bounds_t timestamp_to_bounds(const int, const long int);
 
@@ -68,6 +67,7 @@ private:
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
+  int duration_minutes = 0;
   std::string symbol;
 
   std::list<candle_t> result_to_candles(const query_result_t &);

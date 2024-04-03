@@ -6,7 +6,7 @@
 #include "alpaca/types.cpp"                     // Alpaca::t
 #include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
 #include "db/account_stat/account_stat.cpp"     // DB::AccountStat
-#include "db/candle/candle.cpp"                 // DB::Candle // TODO: Decide
+#include "db/candle/candle.cpp"                 // DB::Candle
 #include "db/position/position.cpp"             // DB::Position
 #include "db/utils/utils.cpp"                   // DB::Utils
 #include "deps.cpp"                             // json
@@ -32,7 +32,7 @@ private:
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using account_snapshot_t = Global::t::account_snapshot_t;
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
-  using candle_t = DB::Candle::candle_t; // TODO: Decide
+  using candle_t = DB::Candle::candle_t;
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Alpaca::t::order_action_t;
@@ -44,19 +44,14 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using quote_t = Global::t::quote_t;
-  using range_t = Alpaca::t::range_t;                 // TODO: Decide
-  using reversal_t = Alpaca::t::reversal_t;           // TODO: Decide
-  using reversal_type_t = Alpaca::t::reversal_type_t; // TODO: Decide
-  using reversals_t = Alpaca::t::reversals_t;         // TODO: Decide
-  using trend_t = Global::t::trend_t;                 // TODO: Decide
+  using reversal_t = Alpaca::t::reversal_t;
+  using reversal_type_t = Alpaca::t::reversal_type_t;
+  using reversals_t = Alpaca::t::reversals_t;
+  using trend_meta_t = Global::t::trend_meta_t;
+  using trend_t = Global::t::trend_t;
 
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
-
-  struct trend_meta_t {
-    double at = 0;
-    trend_t trend = trend_t::TREND_CONSOLIDATION;
-  };
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -67,7 +62,7 @@ private:
   Alpaca::Quote quoter;
   Alpaca::TaoBotBacktest backtest;
   DB::AccountStat db_account_stat;
-  DB::Candle db_candle; // TODO: Candle
+  DB::Candle db_candle;
   DB::Position db_position;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -75,12 +70,10 @@ private:
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
-  candle_t bulk_candle; // TODO: Decide
   double current_epoch = time(nullptr);
   double market_open_epoch;
   double quantity;
   double started_at = time(nullptr);
-  int active_consolidation_duration_minutes = 10; // TODO: Decide
   int tradeable_symbols_count = 1;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
@@ -88,11 +81,10 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  reversal_t entry_reversal;          // TODO: Decide
-  reversal_t ref_reversal;            // TODO: Decide
-  reversals_t reversals;              // TODO: Decide
-  reversals_t secondary_reversals;    // TODO: Decide
-  std::list<candle_t> latest_candles; // TODO: Decide
+  reversal_t entry_reversal;
+  reversals_t reversals;
+  reversals_t secondary_reversals;
+  std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::map<std::string, std::string> flags;
   std::string symbol;
@@ -102,24 +94,20 @@ private:
   account_exit_prices_t build_account_exit_prices();
 
   bool does_position_exist();
-  bool has_reversal_been_used(const reversal_t); // TODO: Decide
+  bool has_reversal_been_used(const reversal_t);
   bool has_super_profited();
   bool is_early_close_day();
   bool is_end_of_trading_period();
-  bool is_entry_signal_present(); // TODO: Decide
+  bool is_entry_signal_present();
   bool is_first_position_long();
   bool is_market_open();
-  bool is_near_consolidation_edge(const int); // TODO: Decide
   bool is_next_position_long();
   bool is_position_closed();
-  bool is_primary_reversal_reversing(); // TODO: Decide
   bool is_quote_stale(const quote_t, const double);
-  bool is_reversing_loss();                        // TODO: Decide
-  bool is_trend_indicating_loss(const position_t); // TODO: Decide
+  bool is_trend_indicating_loss(const position_t); // TODO: Delete
   bool is_trending();
-  bool is_within_entry_window(const reversal_t); // TODO: Decide
+  bool is_within_entry_window(const reversal_t);
   bool max_account_loss_reached();
-  bool new_positions_opened();
   bool should_close_position();
   bool should_ml_open_position(ML::CandlePredict &);
   bool should_open_position();
@@ -133,11 +121,9 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity();
   double current_mid();
-  double excess_trigger_buffer();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, std::string);
   double target_account_profit_ratio();
-  double volatility(const bool);
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *, const std::string);
   int profit_duration(const double);
@@ -146,13 +132,8 @@ private:
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
-  range_t candles_range(const int);                   // TODO: Decide
-  range_t candles_range(const int, const int);        // TODO: Decide
-  reversal_t earliest_record_reversal(reversals_t &); // TODO: Decide
-  reversal_t latest_record_reversal(reversals_t &,
-                                    const std::string);         // TODO: Decide
-  reversal_t latest_reversal(reversals_t &, const std::string); // TODO: Decide
-
+  reversal_t latest_record_reversal(reversals_t &, const std::string);
+  reversal_t latest_reversal(reversals_t &, const std::string);
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
@@ -160,14 +141,12 @@ private:
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void await_market_open();
-  void build_bulk_candle(); // TODO: Decide
   void build_reversals(reversals_t &);
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote(const bool);
   void initialize(std::string, std::map<std::string, std::string> &);
   void log_account_snapshot();
-  void log_candles(const int); // TODO: Decide
   void log_end_of_trading_period();
   void log_performance();
   void log_position();
@@ -195,8 +174,6 @@ private:
   void set_position_status();
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
-  void set_reversals_timeframe_minutes(reversals_t &,
-                                       reversals_t &); // TODO: Decide
   void set_status(order_t *);
   void toggle_is_trending(const order_t &);
   void update_account_snapshot(const bool);

@@ -64,152 +64,32 @@ void Alpaca::Client::load_config() {
     throw std::invalid_argument(error_message);
   }
 
-  // TODO: Decide
-  const double alt_stop_loss_ratio =
-      api_key_json.contains("alt_stop_loss_ratio")
-          ? (double)api_key_json["alt_stop_loss_ratio"]
-          : config.alt_stop_loss_ratio;
-
-  // TODO: Decide
-  const int alt_profit_timeout_seconds =
-      api_key_json.contains("alt_profit_timeout_seconds")
-          ? (int)api_key_json["alt_profit_timeout_seconds"]
-          : config.alt_profit_timeout_seconds;
-
-  // TODO: Decide
-  const double alt_stop_profit_ratio =
-      api_key_json.contains("alt_stop_profit_ratio")
-          ? (double)api_key_json["alt_stop_profit_ratio"]
-          : config.alt_stop_profit_ratio;
-
-  // TODO: Decide
-  const int candles_timeframe_minutes =
-      api_key_json.contains("candles_timeframe_minutes")
-          ? (int)api_key_json["candles_timeframe_minutes"]
-          : config.candles_timeframe_minutes;
-
   const bool debug_sql = api_key_json.contains("debug_sql")
                              ? (bool)api_key_json["debug_sql"]
                              : config.debug_sql;
 
-  // TODO: Decide
-  const double deficit_reclaim_ratio =
-      api_key_json.contains("deficit_reclaim_ratio")
-          ? (double)api_key_json["deficit_reclaim_ratio"]
-          : config.deficit_reclaim_ratio;
-
-  // TODO: Decide
-  const bool is_entry_bound_strict =
-      api_key_json.contains("is_entry_bound_strict")
-          ? (bool)api_key_json["is_entry_bound_strict"]
-          : config.is_entry_bound_strict;
-
-  // TODO: Decide
-  const bool is_secondary_reversal_timeframe_dynamic =
-      api_key_json.contains("is_secondary_reversal_timeframe_dynamic")
-          ? (bool)api_key_json["is_secondary_reversal_timeframe_dynamic"]
-          : config.is_secondary_reversal_timeframe_dynamic;
-
-  // TODO: Decide
-  const bool is_stop_loss_dynamic =
-      api_key_json.contains("is_stop_loss_dynamic")
-          ? (bool)api_key_json["is_stop_loss_dynamic"]
-          : config.is_stop_loss_dynamic;
-
-  // TODO: Decide
-  const bool is_trend_loss_strict =
-      api_key_json.contains("is_trend_loss_strict")
-          ? (bool)api_key_json["is_trend_loss_strict"]
-          : config.is_trend_loss_strict;
-
-  // TODO: Decide
-  const double profit_reclaim_ratio =
-      api_key_json.contains("profit_reclaim_ratio")
-          ? (double)api_key_json["profit_reclaim_ratio"]
-          : config.profit_reclaim_ratio;
-
-  // TODO: Decide
-  const int profit_timeout_seconds =
-      api_key_json.contains("profit_timeout_seconds")
-          ? (int)api_key_json["profit_timeout_seconds"]
-          : config.profit_timeout_seconds;
-
-  // TODO: Decide
-  const int reversal_entry_delay =
-      api_key_json.contains("reversal_entry_delay")
-          ? (int)api_key_json["reversal_entry_delay"]
-          : config.reversal_entry_delay;
-
-  // TODO: Decide
   const int reversal_timeframe_minutes =
       api_key_json.contains("reversal_timeframe_minutes")
           ? (int)api_key_json["reversal_timeframe_minutes"]
           : config.reversal_timeframe_minutes;
 
-  // TODO: Decide
   const int secondary_reversal_timeframe_minutes =
       api_key_json.contains("secondary_reversal_timeframe_minutes")
           ? (int)api_key_json["secondary_reversal_timeframe_minutes"]
           : config.secondary_reversal_timeframe_minutes;
 
-  // TODO: Decide
   const bool should_await_reversal_indicator =
       api_key_json.contains("should_await_reversal_indicator")
           ? (bool)api_key_json["should_await_reversal_indicator"]
           : config.should_await_reversal_indicator;
 
-  // TODO: Decide
-  const bool should_reverse_losses =
-      api_key_json.contains("should_reverse_losses")
-          ? (bool)api_key_json["should_reverse_losses"]
-          : config.should_reverse_losses;
-
-  // TODO: Decide
-  const bool should_secondary_reversal_stop_loss =
-      api_key_json.contains("should_secondary_reversal_stop_loss")
-          ? (bool)api_key_json["should_secondary_reversal_stop_loss"]
-          : config.should_secondary_reversal_stop_loss;
-
-  // TODO: Decide
-  const double stop_loss_percent =
-      api_key_json.contains("stop_loss_percent")
-          ? (double)api_key_json["stop_loss_percent"]
-          : config.stop_loss_percent;
-
-  std::map<std::string, double> stop_loss_ratios =
-      api_key_json.contains("stop_loss_ratios")
-          ? (std::map<std::string, double>)api_key_json["stop_loss_ratios"]
-          : config.stop_loss_ratios;
-
-  // TODO: Decide
-  const double stop_profit_max_ratio =
-      api_key_json.contains("stop_profit_max_ratio")
-          ? (double)api_key_json["stop_profit_max_ratio"]
-          : config.stop_profit_max_ratio;
-
-  // TODO: Decide
-  const double stop_profit_trend_ratio =
-      api_key_json.contains("stop_profit_trend_ratio")
-          ? (double)api_key_json["stop_profit_trend_ratio"]
-          : config.stop_profit_trend_ratio;
-
-  std::map<std::string, double> stop_profit_ratios =
-      api_key_json.contains("stop_profit_ratios")
-          ? (std::map<std::string, double>)api_key_json["stop_profit_ratios"]
-          : config.stop_profit_ratios;
-
-  const int terminate_after_seconds =
-      api_key_json.contains("terminate_after_seconds")
-          ? (int)api_key_json["terminate_after_seconds"]
-          : config.terminate_after_seconds;
-
-  // TODO: Decide
+  // TODO: Delete when converging trend strategies
   const int toggle_is_trending_after_n =
       api_key_json.contains("toggle_is_trending_after_n")
           ? (int)api_key_json["toggle_is_trending_after_n"]
           : config.toggle_is_trending_after_n;
 
-  // TODO: Decide
+  // TODO: Delete when converging trend strategies
   const std::string trend_trigger_type =
       api_key_json.contains("trend_trigger_type")
           ? (std::string)api_key_json["trend_trigger_type"]
@@ -269,45 +149,23 @@ void Alpaca::Client::load_config() {
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .account_stop_profit_ratio = api_key_json["account_stop_profit_ratio"],
-      .alt_profit_timeout_seconds = alt_profit_timeout_seconds, // TODO: Decide
-      .alt_stop_loss_ratio = alt_stop_loss_ratio,
-      .alt_stop_profit_ratio = alt_stop_profit_ratio, // TODO: Decide
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
       .base_url = api_key_json["base_url"],
-      .candles_timeframe_minutes = candles_timeframe_minutes, // TODO: Decide
       .data_base_url = config_json["data_base_url"],
       .debug_sql = debug_sql,
-      .deficit_reclaim_ratio = deficit_reclaim_ratio, // TODO: Decide
       .is_live = api_key_json["is_live"],
-      .is_entry_bound_strict = is_entry_bound_strict, // TODO: Decide
-      .is_secondary_reversal_timeframe_dynamic =
-          is_secondary_reversal_timeframe_dynamic,  // TODO: Decide
-      .is_stop_loss_dynamic = is_stop_loss_dynamic, // TODO: Decide
-      .is_trend_loss_strict = is_trend_loss_strict, // TODO: Decide
       .late_start_seconds = api_key_json["late_start_seconds"],
       .ml = ml_config,
-      .profit_reclaim_ratio = profit_reclaim_ratio,             // TODO: Decide
-      .profit_timeout_seconds = profit_timeout_seconds,         // TODO: Decide
-      .reversal_entry_delay = reversal_entry_delay,             // TODO: Decide
-      .reversal_timeframe_minutes = reversal_timeframe_minutes, // TODO: Decide
+      .reversal_timeframe_minutes = reversal_timeframe_minutes,
       .secondary_reversal_timeframe_minutes =
-          secondary_reversal_timeframe_minutes, // TODO: Decide
+          secondary_reversal_timeframe_minutes,
       .should_await_reversal_indicator = should_await_reversal_indicator,
-      .should_reverse_losses = should_reverse_losses, // TODO: Decide
-      .should_secondary_reversal_stop_loss =
-          should_secondary_reversal_stop_loss, // TODO: Decide
-      .stop_loss_percent = stop_loss_percent,  // TODO: Decide
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
-      .stop_loss_ratios = stop_loss_ratios,
-      .stop_profit_max_ratio = stop_profit_max_ratio, // TODO: Decide
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
-      .stop_profit_trend_ratio = stop_profit_trend_ratio, // TODO: Decide
-      .stop_profit_ratios = stop_profit_ratios,
-      .terminate_after_seconds = terminate_after_seconds,
-      .toggle_is_trending_after_n = toggle_is_trending_after_n, // TODO: Decide
-      .trend_trigger_type = trend_trigger_type,                 // TODO: Decide
+      .toggle_is_trending_after_n = toggle_is_trending_after_n, // TODO: Delete
+      .trend_trigger_type = trend_trigger_type,                 // TODO: Delete
   };
 }
 

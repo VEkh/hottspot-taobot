@@ -1,4 +1,4 @@
-// TODO: Decide
+// TODO: Delete when finalizing single loss trend
 #ifndef ALPACA__CLIENT_is_trend_indicating_loss
 #define ALPACA__CLIENT_is_trend_indicating_loss
 
@@ -13,13 +13,7 @@ bool Alpaca::TaoBot::is_trend_indicating_loss(const position_t position) {
     return false;
   }
 
-  if (!this->api_client.config.is_trend_loss_strict) {
-    return true;
-  }
-
-  const double static_one_sec_variance = this->avg_one_sec_variances.running;
-
-  return position.open_order.max_profit < 10 * static_one_sec_variance;
+  return true;
 }
 
 #endif

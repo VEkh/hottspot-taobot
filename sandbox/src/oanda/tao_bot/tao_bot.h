@@ -97,7 +97,6 @@ private:
   bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
-  bool new_positions_opened();
   bool should_close_position();
   bool should_open_position();
   bool should_stop_profit();

@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "advance_current_epoch.cpp"     // advance_current_epoch
-#include "build_bulk_candle.cpp"         // build_bulk_candle
 #include "build_reversals.cpp"           // build_reversals
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
@@ -27,11 +26,10 @@
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
-#include "set_reversals_timeframe_minutes.cpp" // set_reversals_timeframe_minutes // TODO: Decide
-#include "should_terminate.cpp"        // should_terminate
-#include "tao_bot.h"                   // Alpaca::TaoBot
-#include "update_account_snapshot.cpp" // update_account_snapshot
-#include <iostream>                    // std::cout, std::flush
+#include "should_terminate.cpp"          // should_terminate
+#include "tao_bot.h"                     // Alpaca::TaoBot
+#include "update_account_snapshot.cpp"   // update_account_snapshot
+#include <iostream>                      // std::cout, std::flush
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
@@ -44,10 +42,7 @@ void Alpaca::TaoBot::watch() {
     read_price_movement();
     read_predictions();
     build_reversals(this->reversals);
-    set_reversals_timeframe_minutes(this->reversals,
-                                    this->secondary_reversals); // TODO: Decide
-    build_reversals(this->secondary_reversals);                 // TODO: Decide
-    build_bulk_candle();
+    build_reversals(this->secondary_reversals);
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
@@ -58,7 +53,7 @@ void Alpaca::TaoBot::watch() {
       log_account_snapshot();
       log_quote();
       log_reversals(this->reversals);
-      log_reversals(this->secondary_reversals); // TODO: Decide
+      log_reversals(this->secondary_reversals);
       log_reversal_metadata();
       log_price_movement();
       log_predictions();

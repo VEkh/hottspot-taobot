@@ -23,7 +23,6 @@ void Alpaca::TaoBot::read_closed_positions() {
                                                        : order_action_t::SELL,
         .execution_price = db_position.close_order_execution_mid,
         .id = db_position.close_order_id,
-        .is_loss_reversal = false,
         .max_position_profit =
             db_position.max_profit * abs(db_position.close_order_quantity),
         .max_profit = db_position.max_profit,
@@ -46,7 +45,6 @@ void Alpaca::TaoBot::read_closed_positions() {
                                                       : order_action_t::SELL,
         .execution_price = db_position.open_order_execution_mid,
         .id = db_position.open_order_id,
-        .is_loss_reversal = false,
         .max_position_profit =
             db_position.max_profit * abs(db_position.open_order_quantity),
         .max_profit = db_position.max_profit,

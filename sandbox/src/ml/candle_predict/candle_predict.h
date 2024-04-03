@@ -55,13 +55,6 @@ public:
 private:
   constexpr static int TREND_WINDOW_SIZE = 4;
 
-  struct consolidation_range_t {
-    double high;
-    double high_at;
-    double low;
-    double low_at;
-  };
-
   DB::Candle db_candle;
   DB::CandlePrediction db_candle_prediction;
   Formatted::fmt_stream_t fmt = Formatted::stream();

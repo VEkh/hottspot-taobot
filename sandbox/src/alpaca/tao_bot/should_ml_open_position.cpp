@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_should_ml_open_position
 
 #include "current_mid.cpp"                      // current_mid
-#include "excess_trigger_buffer.cpp"            // excess_trigger_buffer
 #include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, position_t
 

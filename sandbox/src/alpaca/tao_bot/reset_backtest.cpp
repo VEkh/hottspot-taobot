@@ -16,17 +16,15 @@ void Alpaca::TaoBot::reset_backtest() {
   // will falsely reset the next day's equity to the initial equity.
   update_account_snapshot(true);
 
-  this->bulk_candle = candle_t();
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
   this->performance = performance_t();
   this->reversals = reversals_t();
   this->reversals.timeframe_minutes =
       this->api_client.config.reversal_timeframe_minutes;
-  this->secondary_reversals = reversals_t(); // TODO: Decide
+  this->secondary_reversals = reversals_t();
   this->secondary_reversals.timeframe_minutes =
-      this->api_client.config
-          .secondary_reversal_timeframe_minutes; // TODO: Decide
+      this->api_client.config.secondary_reversal_timeframe_minutes;
   this->started_at = this->current_epoch;
 
   set_market_open_epoch();

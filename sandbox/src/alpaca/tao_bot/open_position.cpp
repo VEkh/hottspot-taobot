@@ -18,9 +18,6 @@
 #include <string>               // std::string
 #include <utility>              // std::pair
 
-// TODO: Decide
-#include "is_reversing_loss.cpp" // is_reversing_loss
-
 std::pair<Alpaca::TaoBot::order_t, Alpaca::TaoBot::order_t>
 Alpaca::TaoBot::open_position(const order_action_t close_action,
                               const order_action_t open_action,
@@ -34,24 +31,9 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;
 
-  // TODO: Decide
-  if (this->api_client.config.should_reverse_losses) {
-    new_open_order.is_loss_reversal = is_reversing_loss();
-
-    if (new_open_order.is_loss_reversal) {
-      new_open_order.entry_reversal =
-          this->closed_positions.back().open_order.entry_reversal;
-
-      new_open_order.ref_reversal =
-          this->closed_positions.back().open_order.ref_reversal;
-    }
-  }
-
-  // TODO: Decide
   if (this->api_client.config.should_await_reversal_indicator) {
     new_open_order.entry_reversal = this->entry_reversal;
-    new_open_order.is_trending = is_trending();
-    new_open_order.ref_reversal = this->ref_reversal;
+    new_open_order.is_trending = is_trending(); // TODO: Delete
   }
 
   order_t new_close_order;

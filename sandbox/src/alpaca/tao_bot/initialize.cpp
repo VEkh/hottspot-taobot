@@ -7,7 +7,7 @@
 #include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
 #include "build_performance.cpp"                // build_performance
 #include "db/account_stat/account_stat.cpp"     // DB::AccountStat
-#include "db/candle/candle.cpp"                 // DB::Candle // TODO: Decide
+#include "db/candle/candle.cpp"                 // DB::Candle
 #include "db/position/position.cpp"             // DB::Position
 #include "db/utils/utils.cpp"                   // DB::Utils
 #include "lib/formatted.cpp"                    // Formatted::error_message
@@ -68,7 +68,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       this->started_at = this->backtest.config.start_epoch;
     }
 
-    // TODO: Decide
     if (this->api_client.config.should_await_reversal_indicator) {
       this->db_candle = DB::Candle(this->pg, 1, this->symbol);
     }

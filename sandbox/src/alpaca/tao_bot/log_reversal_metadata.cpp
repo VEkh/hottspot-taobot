@@ -56,12 +56,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
                                                "America/Chicago"));
     }
 
-    Formatted::Stream trend_strictness_color =
-        this->api_client.config.is_trend_loss_strict ? fmt.green : fmt.red;
-
-    const std::string trend_strictness_text =
-        this->api_client.config.is_trend_loss_strict ? "YES" : "NO";
-
     std::cout << fmt.bold << fmt.yellow;
     printf("Trend-Indicating Losses: ");
     std::cout << trend_loss_count_color << trend_loss_count << " / "
@@ -73,60 +67,30 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     std::cout << fmt.yellow;
     printf(" trend status: ");
     std::cout << trend_status_color << trend_status_text << std::endl;
-
-    std::cout << fmt.bold << fmt.yellow;
-    printf("Is trending strict? ");
-    std::cout << trend_strictness_color << trend_strictness_text << std::endl;
   }
 
-  if (this->open_order_ptr) {
-    if (this->open_order_ptr->entry_reversal.at) {
-      std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
-      printf("Open Position Entry Reversal\n");
-      std::cout << fmt.reset;
+  if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
+    std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
+    printf("Open Position Entry Reversal\n");
+    std::cout << fmt.reset;
 
-      const reversal_t reversal = this->open_order_ptr->entry_reversal;
+    const reversal_t reversal = this->open_order_ptr->entry_reversal;
 
-      if (reversal.type == reversal_type_t::REVERSAL_LOW) {
-        std::cout << fmt.bold << fmt.red;
-        printf(
-            "Low: %.2f @ %s", reversal.mid,
-            ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-                .c_str());
-      } else {
-        std::cout << fmt.bold << fmt.green;
-        printf(
-            "High: %.2f @ %s", reversal.mid,
-            ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-                .c_str());
-      }
-
-      std::cout << std::endl;
+    if (reversal.type == reversal_type_t::REVERSAL_LOW) {
+      std::cout << fmt.bold << fmt.red;
+      printf(
+          "Low: %.2f @ %s", reversal.mid,
+          ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
+              .c_str());
+    } else {
+      std::cout << fmt.bold << fmt.green;
+      printf(
+          "High: %.2f @ %s", reversal.mid,
+          ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
+              .c_str());
     }
 
-    if (this->open_order_ptr->ref_reversal.at) {
-      std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
-      printf("Open Position Ref Reversal\n");
-      std::cout << fmt.reset;
-
-      const reversal_t reversal = this->open_order_ptr->ref_reversal;
-
-      if (reversal.type == reversal_type_t::REVERSAL_LOW) {
-        std::cout << fmt.bold << fmt.red;
-        printf(
-            "Low: %.2f @ %s", reversal.mid,
-            ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-                .c_str());
-      } else {
-        std::cout << fmt.bold << fmt.green;
-        printf(
-            "High: %.2f @ %s", reversal.mid,
-            ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-                .c_str());
-      }
-
-      std::cout << std::endl;
-    }
+    std::cout << std::endl;
   }
 
   std::cout << fmt.reset << std::endl;

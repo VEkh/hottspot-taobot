@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_should_toggle_is_trending
 #define ALPACA__TAO_BOT_should_toggle_is_trending
 
