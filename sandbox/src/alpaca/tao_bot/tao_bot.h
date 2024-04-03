@@ -101,7 +101,6 @@ private:
 
   account_exit_prices_t build_account_exit_prices();
 
-  bool are_latest_records_epoch_same(reversals_t &);
   bool does_position_exist();
   bool has_reversal_been_used(const reversal_t); // TODO: Decide
   bool has_super_profited();
