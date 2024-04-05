@@ -8,16 +8,6 @@
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t reversal_type_t
 
 bool Alpaca::TaoBot::is_next_position_long() {
-  if (this->candle_predictor.should_predict(does_position_exist())) {
-    if (this->closed_positions.empty()) {
-      return this->candle_predictor.is_next_position_long();
-    }
-
-    if (!this->candle_predictor.config.rollover_positions) {
-      return this->candle_predictor.is_next_position_long();
-    }
-  }
-
   if (this->api_client.config.should_await_reversal_indicator) {
     return this->entry_reversal.type == reversal_type_t::REVERSAL_LOW;
   }

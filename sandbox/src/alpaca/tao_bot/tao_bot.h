@@ -1,23 +1,22 @@
 #ifndef ALPACA__TAO_BOT_H
 #define ALPACA__TAO_BOT_H
 
-#include "alpaca/client/client.cpp"             // Alpaca::Client
-#include "alpaca/quote/quote.cpp"               // Alpaca::Quote
-#include "alpaca/types.cpp"                     // Alpaca::t
-#include "backtest/backtest.cpp"                // Alpaca::TaoBotBacktest
-#include "db/account_stat/account_stat.cpp"     // DB::AccountStat
-#include "db/candle/candle.cpp"                 // DB::Candle
-#include "db/position/position.cpp"             // DB::Position
-#include "db/utils/utils.cpp"                   // DB::Utils
-#include "deps.cpp"                             // json
-#include "lib/formatted.cpp"                    // Formatted
-#include "lib/pg/pg.cpp"                        // Pg
-#include "ml/candle_predict/candle_predict.cpp" // ML::CandlePredict
-#include "types.cpp"                            // Global::t
-#include <list>                                 // std::list
-#include <time.h>                               // time
-#include <utility>                              // std::pair
-#include <vector>                               // std::vector
+#include "alpaca/client/client.cpp"         // Alpaca::Client
+#include "alpaca/quote/quote.cpp"           // Alpaca::Quote
+#include "alpaca/types.cpp"                 // Alpaca::t
+#include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/candle/candle.cpp"             // DB::Candle
+#include "db/position/position.cpp"         // DB::Position
+#include "db/utils/utils.cpp"               // DB::Utils
+#include "deps.cpp"                         // json
+#include "lib/formatted.cpp"                // Formatted
+#include "lib/pg/pg.cpp"                    // Pg
+#include "types.cpp"                        // Global::t
+#include <list>                             // std::list
+#include <time.h>                           // time
+#include <utility>                          // std::pair
+#include <vector>                           // std::vector
 
 namespace Alpaca {
 class TaoBot {
@@ -66,7 +65,6 @@ private:
   DB::Position db_position;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  ML::CandlePredict candle_predictor;
   Pg pg;
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
@@ -108,7 +106,6 @@ private:
   bool is_within_entry_window(const reversal_t);
   bool max_account_loss_reached();
   bool should_close_position();
-  bool should_ml_open_position(ML::CandlePredict &);
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
@@ -151,7 +148,6 @@ private:
   void log_position();
   void log_position_results();
   void log_positions();
-  void log_predictions();
   void log_price_movement();
   void log_quote();
   void log_start_message();
@@ -161,7 +157,6 @@ private:
   void open_and_persist_position();
   void read_candles();
   void read_closed_positions();
-  void read_predictions();
   void read_price_movement();
   void read_quotes();
   void reset_backtest();

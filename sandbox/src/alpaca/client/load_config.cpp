@@ -83,57 +83,6 @@ void Alpaca::Client::load_config() {
           ? (bool)api_key_json["should_await_reversal_indicator"]
           : config.should_await_reversal_indicator;
 
-  ml_config_t ml_config;
-
-  if (api_key_json.contains("ml")) {
-    json ml_json = api_key_json["ml"];
-
-    if (ml_json.contains("candle_predict")) {
-      json candle_predict_json = ml_json["candle_predict"];
-
-      ml_config.candle_predict.duration_minutes =
-          candle_predict_json.contains("duration_minutes")
-              ? (int)candle_predict_json["duration_minutes"]
-              : ml_config.candle_predict.duration_minutes;
-
-      ml_config.candle_predict.enabled =
-          candle_predict_json.contains("enabled")
-              ? (bool)candle_predict_json["enabled"]
-              : ml_config.candle_predict.enabled;
-
-      ml_config.candle_predict.hold_winning_prediction =
-          candle_predict_json.contains("hold_winning_prediction")
-              ? (bool)candle_predict_json["hold_winning_prediction"]
-              : ml_config.candle_predict.hold_winning_prediction;
-
-      ml_config.candle_predict.inverse_predictions =
-          candle_predict_json.contains("inverse_predictions")
-              ? (bool)candle_predict_json["inverse_predictions"]
-              : ml_config.candle_predict.inverse_predictions;
-
-      ml_config.candle_predict.on_demand_predictions =
-          candle_predict_json.contains("on_demand_predictions")
-              ? (bool)candle_predict_json["on_demand_predictions"]
-              : ml_config.candle_predict.on_demand_predictions;
-
-      ml_config.candle_predict.prediction_scope =
-          candle_predict_json.contains("prediction_scope")
-              ? (std::string)candle_predict_json["prediction_scope"]
-              : ml_config.candle_predict.prediction_scope;
-
-      ml_config.candle_predict.rollover_positions =
-          candle_predict_json.contains("rollover_positions")
-              ? (bool)candle_predict_json["rollover_positions"]
-              : ml_config.candle_predict.rollover_positions;
-
-      ml_config.candle_predict.symbol_model_map =
-          candle_predict_json.contains("symbol_model_map")
-              ? (std::map<std::string, std::string>)
-                    candle_predict_json["symbol_model_map"]
-              : ml_config.candle_predict.symbol_model_map;
-    }
-  }
-
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .account_stop_profit_ratio = api_key_json["account_stop_profit_ratio"],
@@ -145,7 +94,6 @@ void Alpaca::Client::load_config() {
       .debug_sql = debug_sql,
       .is_live = api_key_json["is_live"],
       .late_start_seconds = api_key_json["late_start_seconds"],
-      .ml = ml_config,
       .reversal_timeframe_minutes = reversal_timeframe_minutes,
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes,

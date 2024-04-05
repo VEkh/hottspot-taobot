@@ -49,15 +49,6 @@ void DB::Position::compute_golden_stop_ratio(
 
   const int total_positions = positions.size();
 
-  if (api_key_json.contains("ml") &&
-      api_key_json["ml"].contains("candle_predict") &&
-      api_key_json["ml"]["candle_predict"].contains("stop_loss_ratio")) {
-    config_stop_loss_ratio =
-        (double)api_key_json["ml"]["candle_predict"]["stop_loss_ratio"];
-  } else if (api_key_json.contains("stop_loss_ratio")) {
-    config_stop_loss_ratio = (double)api_key_json["stop_loss_ratio"];
-  }
-
   if (config_stop_loss_ratio) {
     stop_loss_ratios.push_back(config_stop_loss_ratio);
   } else {

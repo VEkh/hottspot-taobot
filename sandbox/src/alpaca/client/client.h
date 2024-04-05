@@ -11,7 +11,6 @@
 namespace Alpaca {
 class Client {
 public:
-  using ml_config_t = Global::t::ml_config_t;
   using order_action_t = Alpaca::t::order_action_t;
   using order_status_t = Alpaca::t::order_status_t;
   using order_t = Alpaca::t::order_t;
@@ -30,7 +29,6 @@ public:
     bool debug_sql = false;
     bool is_live;
     int late_start_seconds = 6; // Production's average
-    ml_config_t ml;
     int reversal_timeframe_minutes = 3;
     int secondary_reversal_timeframe_minutes = 0;
     bool should_await_reversal_indicator = false;

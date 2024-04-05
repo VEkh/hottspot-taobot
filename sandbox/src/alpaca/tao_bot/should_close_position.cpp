@@ -43,23 +43,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->candle_predictor.should_predict(does_position_exist()) &&
-      !this->candle_predictor.config.hold_winning_prediction) {
-    if (this->candle_predictor.config.rollover_positions) {
-      return this->candle_predictor.should_close_position({
-          .current_epoch = this->current_epoch,
-          .open_order_action = this->open_order_ptr->action,
-          .open_order_max_profit = this->open_order_ptr->max_profit,
-          .open_order_opened_at = this->open_order_ptr->timestamp,
-          .open_order_profit = this->open_order_ptr->profit,
-          .open_order_stop_profit = this->exit_prices.stop_profit,
-      });
-    }
-
-    return this->candle_predictor.are_predictions_stale(
-        this->open_order_ptr->timestamp);
-  }
-
   if (this->exit_prices.stop_profit &&
       this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
       this->open_order_ptr->profit > 0 &&

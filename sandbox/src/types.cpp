@@ -33,21 +33,6 @@ struct avg_one_sec_variances_t {
   double running = 0.00;
 };
 
-struct candle_predict_config_t {
-  int duration_minutes = 3;
-  bool enabled = false;
-  bool hold_winning_prediction = false;
-  bool inverse_predictions = false;
-  bool on_demand_predictions = false;
-  std::string prediction_scope = "single";
-  bool rollover_positions = true;
-  std::map<std::string, std::string> symbol_model_map;
-};
-
-struct ml_config_t {
-  candle_predict_config_t candle_predict;
-};
-
 enum order_win_result_t {
   LOSS,
   TIE,
