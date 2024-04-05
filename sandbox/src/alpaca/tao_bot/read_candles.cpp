@@ -4,10 +4,6 @@
 #include "tao_bot.h" // Alpaca::TaoBot
 
 void Alpaca::TaoBot::read_candles() {
-  if (!this->api_client.config.should_await_reversal_indicator) {
-    return;
-  }
-
   this->latest_candles = this->db_candle.get_latest({
       .debug = this->api_client.config.debug_sql,
       .end_at_epoch = this->current_epoch,

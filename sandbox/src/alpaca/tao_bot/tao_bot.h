@@ -83,12 +83,10 @@ private:
   std::vector<position_t> closed_positions;
   trend_meta_t current_trend;
 
-  bool does_position_exist();
   bool has_reversal_been_used(const reversal_t);
   bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_entry_signal_present();
-  bool is_first_position_long();
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
@@ -100,7 +98,6 @@ private:
   bool should_open_position();
   bool should_terminate();
   bool should_toggle_is_trending(const order_t &);
-  bool should_use_price_movement();
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);

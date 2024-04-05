@@ -4,7 +4,6 @@
 #include "alpaca/utils.cpp"             // Alpaca::Utils
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "current_mid.cpp"              // current_mid
-#include "does_position_exist.cpp"      // does_position_exist
 #include "is_trending.cpp"              // is_trending
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t

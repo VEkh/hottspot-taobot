@@ -1,20 +1,15 @@
 #ifndef ALPACA__TAO_BOT_log_reversal_metadata
 #define ALPACA__TAO_BOT_log_reversal_metadata
 
-#include "is_trending.cpp"      // is_trending
-#include "lib/formatted.cpp"    // Formatted
-#include "lib/utils/string.cpp" // ::utils::string
-#include "lib/utils/time.cpp"   // ::utils::time_
+#include "is_trending.cpp"    // is_trending
+#include "lib/formatted.cpp"  // Formatted
+#include "lib/utils/time.cpp" // ::utils::time_
 #include "tao_bot.h" // Alpaca::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
 void Alpaca::TaoBot::log_reversal_metadata() {
-  if (!this->api_client.config.should_await_reversal_indicator) {
-    return;
-  }
-
   Formatted::Stream trend_status_color = fmt.cyan;
   std::string trend_status_text = "REVERSING";
 

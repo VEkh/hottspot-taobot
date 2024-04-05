@@ -9,10 +9,6 @@
 #include <string>             // std::string
 
 void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
-  if (!this->api_client.config.should_await_reversal_indicator) {
-    return;
-  }
-
   if (!reversals_.timeframe_minutes) {
     return;
   }

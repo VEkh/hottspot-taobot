@@ -72,11 +72,6 @@ void Alpaca::Client::load_config() {
           ? (int)api_key_json["secondary_reversal_timeframe_minutes"]
           : config.secondary_reversal_timeframe_minutes;
 
-  const bool should_await_reversal_indicator =
-      api_key_json.contains("should_await_reversal_indicator")
-          ? (bool)api_key_json["should_await_reversal_indicator"]
-          : config.should_await_reversal_indicator;
-
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -90,7 +85,6 @@ void Alpaca::Client::load_config() {
       .reversal_timeframe_minutes = reversal_timeframe_minutes,
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes,
-      .should_await_reversal_indicator = should_await_reversal_indicator,
   };
 }
 

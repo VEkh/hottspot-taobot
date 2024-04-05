@@ -51,6 +51,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   });
 
   this->db_account_stat = DB::AccountStat(this->pg);
+  this->db_candle = DB::Candle(this->pg, 1, this->symbol);
   this->db_position = DB::Position(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
@@ -64,10 +65,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
                             this->api_client.config.late_start_seconds;
 
       this->started_at = this->backtest.config.start_epoch;
-    }
-
-    if (this->api_client.config.should_await_reversal_indicator) {
-      this->db_candle = DB::Candle(this->pg, 1, this->symbol);
     }
 
     if (Alpaca::Utils::is_holiday(this->current_epoch)) {

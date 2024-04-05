@@ -9,10 +9,6 @@ bool Alpaca::TaoBot::should_toggle_is_trending(const order_t &order) {
     return false;
   }
 
-  if (!this->api_client.config.should_await_reversal_indicator) {
-    return false;
-  }
-
   if (is_trending()) {
     return true;
   }

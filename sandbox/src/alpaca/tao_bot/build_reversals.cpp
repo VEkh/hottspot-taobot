@@ -1,17 +1,12 @@
 #ifndef ALPACA__TAO_BOT_build_reversals
 #define ALPACA__TAO_BOT_build_reversals
 
-#include "current_mid.cpp" // current_mid
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max, std::min
 #include <list>      // std::list
 #include <math.h>    // INFINITY, abs, floor
 
 void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
-  if (!this->api_client.config.should_await_reversal_indicator) {
-    return;
-  }
-
   const int timeframe_minutes = reversals_.timeframe_minutes;
 
   if (!timeframe_minutes) {
