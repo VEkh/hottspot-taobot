@@ -16,10 +16,6 @@ bool Alpaca::TaoBot::should_open_position() {
     return false;
   }
 
-  if (should_use_price_movement() && !this->avg_one_sec_variances.latest) {
-    return false;
-  }
-
   if (this->api_client.config.should_await_reversal_indicator) {
     return is_entry_signal_present();
   }

@@ -30,7 +30,6 @@ public:
 private:
   using account_exit_prices_t = Global::t::account_exit_prices_t;
   using account_snapshot_t = Global::t::account_snapshot_t;
-  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using candle_t = DB::Candle::candle_t;
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
@@ -49,7 +48,6 @@ private:
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
-  constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
 
   std::map<const char *, const char *> ICONS = {
@@ -67,7 +65,6 @@ private:
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
   account_snapshot_t account_snapshot;
-  avg_one_sec_variances_t avg_one_sec_variances;
   double current_epoch = time(nullptr);
   double market_open_epoch;
   double quantity;
@@ -148,7 +145,6 @@ private:
   void log_position();
   void log_position_results();
   void log_positions();
-  void log_price_movement();
   void log_quote();
   void log_start_message();
   void log_timestamps();
@@ -157,7 +153,6 @@ private:
   void open_and_persist_position();
   void read_candles();
   void read_closed_positions();
-  void read_price_movement();
   void read_quotes();
   void reset_backtest();
   void reset_position();

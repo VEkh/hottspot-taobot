@@ -10,14 +10,12 @@
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
-#include "log_price_movement.cpp"        // log_price_movement
 #include "log_quote.cpp"                 // log_quote
 #include "log_reversal_metadata.cpp"     // log_reversal_metadata
 #include "log_reversals.cpp"             // log_reversals
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_and_persist_position.cpp" // open_and_persist_position
 #include "read_candles.cpp"              // read_candles
-#include "read_price_movement.cpp"       // read_price_movement
 #include "read_quotes.cpp"               // read_quotes
 #include "reset_backtest.cpp"            // reset_backtest
 #include "reset_position.cpp"            // reset_position
@@ -37,7 +35,6 @@ void Alpaca::TaoBot::watch() {
 
     read_quotes();
     read_candles();
-    read_price_movement();
     build_reversals(this->reversals);
     build_reversals(this->secondary_reversals);
 
@@ -52,7 +49,6 @@ void Alpaca::TaoBot::watch() {
       log_reversals(this->reversals);
       log_reversals(this->secondary_reversals);
       log_reversal_metadata();
-      log_price_movement();
       log_position();
       log_performance();
     }

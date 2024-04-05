@@ -16,7 +16,6 @@
 #include "lib/utils/io.cpp"                 // ::utils::io
 #include "lib/utils/string.cpp"             // ::utils::string
 #include "read_closed_positions.cpp"        // read_closed_positions
-#include "read_price_movement.cpp"          // read_price_movement
 #include "set_market_open_epoch.cpp"        // set_market_open_epoch
 #include "tao_bot.h"                        // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"      // update_account_snapshot
