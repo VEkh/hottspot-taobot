@@ -43,13 +43,6 @@ bool Alpaca::TaoBot::should_close_position() {
     return true;
   }
 
-  if (this->exit_prices.stop_profit &&
-      this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
-      this->open_order_ptr->profit > 0 &&
-      this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
-    return true;
-  }
-
   return false;
 }
 

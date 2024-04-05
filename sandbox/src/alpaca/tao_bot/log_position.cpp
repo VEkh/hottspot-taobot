@@ -86,14 +86,13 @@ void Alpaca::TaoBot::log_position() {
 
   const double unit_deficit = asset_deficit / this->open_order_ptr->quantity;
 
-  printf("Stop Profit: %.2f%s • Stop Loss: %.2f • Trailing Stop Profit: %.2f • "
+  printf("Stop Profit: %.2f%s • Stop Loss: %.2f • "
          "Unit Deficit: %.2f\n",
          this->exit_prices.stop_profit,
          this->open_order_ptr->max_profit >= this->exit_prices.stop_profit
              ? " ✅"
              : "",
-         this->exit_prices.stop_loss, this->exit_prices.trailing_stop_profit,
-         unit_deficit);
+         this->exit_prices.stop_loss, unit_deficit);
 
   printf("Quantity: %.5f\n", this->open_order_ptr->quantity);
 

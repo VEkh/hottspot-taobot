@@ -32,8 +32,6 @@ public:
     int reversal_timeframe_minutes = 3;
     int secondary_reversal_timeframe_minutes = 0;
     bool should_await_reversal_indicator = false;
-    double stop_loss_ratio = -60.0;
-    double stop_profit_ratio = 0.0;
   } config;
 
   Client(){};

@@ -47,8 +47,6 @@ void Alpaca::Client::load_config() {
       "is_live",
       "late_start_seconds",
       "secret_key",
-      "stop_loss_ratio",
-      "stop_profit_ratio",
   };
 
   for (std::string key : nested_required_keys) {
@@ -98,8 +96,6 @@ void Alpaca::Client::load_config() {
       .secondary_reversal_timeframe_minutes =
           secondary_reversal_timeframe_minutes,
       .should_await_reversal_indicator = should_await_reversal_indicator,
-      .stop_loss_ratio = api_key_json["stop_loss_ratio"],
-      .stop_profit_ratio = api_key_json["stop_profit_ratio"],
   };
 }
 
