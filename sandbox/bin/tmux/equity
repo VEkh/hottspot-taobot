@@ -75,18 +75,6 @@ tmux new-window -t "${session}" \
 tmux split-window -t "${session}:stock-account-streams" -h \
   "$(tail_cmd "${project}/${api_keys[1]}"  "account_stream")"
 
-tmux split-window -t "${session}:stock-account-streams.0" \
-  "$(tail_cmd "${project}/${api_keys[2]}"  "account_stream")"
-
-tmux split-window -t "${session}:stock-account-streams.2" \
-  "$(tail_cmd "${project}/${api_keys[3]}"  "account_stream")"
-
-tmux split-window -t "${session}:stock-account-streams.3" -h \
-  "$(tail_cmd "${project}/${api_keys[4]}"  "account_stream")"
-
-tmux split-window -t "${session}:stock-account-streams.2" -h \
-  "$(tail_cmd "${project}/${api_keys[5]}"  "account_stream")"
-
 window_i=$((window_i + 4))
 for symbol in "${symbols[@]}"; do
   log_dir="${app_dir}/../sandbox/log/${project}/ml/candle_predict"
