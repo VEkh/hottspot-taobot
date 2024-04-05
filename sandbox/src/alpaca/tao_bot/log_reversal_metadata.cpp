@@ -15,18 +15,8 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     return;
   }
 
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Avg ⌚ Between Record Highs: %s • Lows: %s\n",
-         ::utils::integer_::seconds_to_clock(
-             this->reversals.avg_record_delta_seconds["highs"])
-             .c_str(),
-         ::utils::integer_::seconds_to_clock(
-             this->reversals.avg_record_delta_seconds["lows"])
-             .c_str());
-  std::cout << fmt.reset;
-
-  Formatted::Stream trend_status_color = fmt.magenta;
-  std::string trend_status_text = "NONE";
+  Formatted::Stream trend_status_color = fmt.cyan;
+  std::string trend_status_text = "REVERSING";
 
   switch (this->current_trend.trend) {
   case trend_t::TREND_DOWN: {

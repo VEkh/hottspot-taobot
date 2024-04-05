@@ -183,10 +183,6 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
   }
 
   std::list<double>::reverse_iterator epoch_it;
-  double high_epoch_delta_total = 0;
-  double low_epoch_delta_total = 0;
-  int high_epoch_delta_n = 0;
-  int low_epoch_delta_n = 0;
 
   for (epoch_it = record_high_epochs.rbegin();
        epoch_it != record_high_epochs.rend(); epoch_it++) {
@@ -196,9 +192,6 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
 
     const double next_epoch = *std::next(epoch_it);
     const double epoch_delta = abs(*epoch_it - next_epoch);
-
-    high_epoch_delta_total += epoch_delta;
-    high_epoch_delta_n++;
   }
 
   for (epoch_it = record_low_epochs.rbegin();
@@ -209,16 +202,7 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
 
     const double next_epoch = *std::next(epoch_it);
     const double epoch_delta = abs(*epoch_it - next_epoch);
-
-    low_epoch_delta_total += epoch_delta;
-    low_epoch_delta_n++;
   }
-
-  reversals_.avg_record_delta_seconds["highs"] =
-      high_epoch_delta_n ? high_epoch_delta_total / high_epoch_delta_n : 0;
-
-  reversals_.avg_record_delta_seconds["lows"] =
-      low_epoch_delta_n ? low_epoch_delta_total / low_epoch_delta_n : 0;
 
   reversals_.updated_at = this->latest_candles.back().closed_at;
 }

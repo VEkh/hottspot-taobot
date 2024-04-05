@@ -51,7 +51,6 @@ struct reversal_t {
 };
 
 struct reversals_t {
-  std::map<std::string, double> avg_record_delta_seconds;
   std::map<double, reversal_t> highs;
   std::map<double, reversal_t> lows;
   std::map<std::string, int> record_counts;
