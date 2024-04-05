@@ -78,7 +78,6 @@ struct performance_t {
   double max_balance = 0.00;
   std::map<order_win_result_t, int> results;
   std::string symbol;
-  int trend_loss_count = 0; // TODO: Delete Single loss will trigger trending
   order_win_result_streak_t win_streaks;
 };
 

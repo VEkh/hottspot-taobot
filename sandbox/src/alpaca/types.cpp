@@ -67,7 +67,6 @@ struct order_t {
   reversal_t entry_reversal;
   double execution_price = 0.00;
   std::string id = "";
-  bool is_trending = false; // TODO: Delete when finalizing single loss trending
   double limit_price = 0.00;
   double max_position_profit = 0.00;
   double max_profit = 0.00;

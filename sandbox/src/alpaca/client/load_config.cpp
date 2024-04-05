@@ -83,18 +83,6 @@ void Alpaca::Client::load_config() {
           ? (bool)api_key_json["should_await_reversal_indicator"]
           : config.should_await_reversal_indicator;
 
-  // TODO: Delete when converging trend strategies
-  const int toggle_is_trending_after_n =
-      api_key_json.contains("toggle_is_trending_after_n")
-          ? (int)api_key_json["toggle_is_trending_after_n"]
-          : config.toggle_is_trending_after_n;
-
-  // TODO: Delete when converging trend strategies
-  const std::string trend_trigger_type =
-      api_key_json.contains("trend_trigger_type")
-          ? (std::string)api_key_json["trend_trigger_type"]
-          : config.trend_trigger_type;
-
   ml_config_t ml_config;
 
   if (api_key_json.contains("ml")) {
@@ -164,8 +152,6 @@ void Alpaca::Client::load_config() {
       .should_await_reversal_indicator = should_await_reversal_indicator,
       .stop_loss_ratio = api_key_json["stop_loss_ratio"],
       .stop_profit_ratio = api_key_json["stop_profit_ratio"],
-      .toggle_is_trending_after_n = toggle_is_trending_after_n, // TODO: Delete
-      .trend_trigger_type = trend_trigger_type,                 // TODO: Delete
   };
 }
 

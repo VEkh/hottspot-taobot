@@ -8,7 +8,7 @@
 bool Alpaca::TaoBot::has_reversal_been_used(const reversal_t reversal) {
   std::vector<position_t>::reverse_iterator it;
 
-  if (this->api_client.config.trend_trigger_type == "cis" && is_trending()) {
+  if (is_trending()) {
     return false;
   }
 

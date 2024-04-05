@@ -24,10 +24,8 @@ void Alpaca::TaoBot::reset_position() {
     return;
   }
 
-  if (this->close_order.profit < 0) {
-    if (should_toggle_is_trending()) {
-      toggle_is_trending(this->close_order);
-    }
+  if (should_toggle_is_trending(this->close_order)) {
+    toggle_is_trending(this->close_order);
   } else {
     this->current_trend = trend_meta_t();
   }

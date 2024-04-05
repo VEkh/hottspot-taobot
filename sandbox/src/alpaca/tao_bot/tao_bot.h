@@ -104,7 +104,6 @@ private:
   bool is_next_position_long();
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);
-  bool is_trend_indicating_loss(const position_t); // TODO: Delete
   bool is_trending();
   bool is_within_entry_window(const reversal_t);
   bool max_account_loss_reached();
@@ -113,7 +112,7 @@ private:
   bool should_open_position();
   bool should_stop_profit();
   bool should_terminate();
-  bool should_toggle_is_trending();
+  bool should_toggle_is_trending(const order_t &);
   bool should_use_price_movement();
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);

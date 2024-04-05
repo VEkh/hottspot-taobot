@@ -33,7 +33,6 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
 
   if (this->api_client.config.should_await_reversal_indicator) {
     new_open_order.entry_reversal = this->entry_reversal;
-    new_open_order.is_trending = is_trending(); // TODO: Delete
   }
 
   order_t new_close_order;

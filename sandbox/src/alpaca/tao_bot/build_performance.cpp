@@ -22,13 +22,11 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
   };
 
   bool loss_streak_broken = false;
-  bool trend_indicating_loss_streak_broken = false; // TODO: Delete
   bool win_streak_broken = false;
   double current_loss_streak_balance = 0.00;
   int current_streak_count = 0;
   int l = this->closed_positions.size();
   int loss_streak_count = 0;
-  int trend_loss_count = 0; // TODO: Delete
   int win_streak_count = 0;
 
   std::map<order_win_result_t, order_win_result_streak_t> streaks = {
@@ -55,7 +53,6 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
     if (result == order_win_result_t::WIN) {
       loss_streak_broken = true;
       loss_streak_count = 0;
-      trend_indicating_loss_streak_broken = true; // TODO: Delete
       win_streak_count++;
 
       if (!win_streak_broken) {
@@ -69,11 +66,6 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
       if (!loss_streak_broken) {
         current_loss_streak_balance += position_profit;
         streaks[order_win_result_t::LOSS].current++;
-      }
-
-      // TODO: Delete
-      if (!trend_indicating_loss_streak_broken) {
-        trend_loss_count += (int)is_trend_indicating_loss(position);
       }
     }
 
@@ -117,7 +109,6 @@ Alpaca::TaoBot::performance_t Alpaca::TaoBot::build_performance() {
       .max_balance = max_balance,
       .results = results,
       .symbol = this->symbol,
-      .trend_loss_count = trend_loss_count, // TODO: Delete
       .win_streaks = streaks[order_win_result_t::WIN],
   };
 }

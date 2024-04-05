@@ -15,8 +15,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     return;
   }
 
-  const int trend_toggle_n = this->api_client.config.toggle_is_trending_after_n;
-
   std::cout << fmt.bold << fmt.yellow;
   printf("Avg ⌚ Between Record Highs: %s • Lows: %s\n",
          ::utils::integer_::seconds_to_clock(
@@ -27,47 +25,32 @@ void Alpaca::TaoBot::log_reversal_metadata() {
              .c_str());
   std::cout << fmt.reset;
 
-  if (trend_toggle_n) {
-    const int trend_loss_count = this->performance.trend_loss_count;
+  Formatted::Stream trend_status_color = fmt.magenta;
+  std::string trend_status_text = "NONE";
 
-    Formatted::Stream trend_loss_count_color =
-        trend_loss_count == trend_toggle_n ? fmt.green : fmt.red;
-
-    Formatted::Stream trend_status_color = fmt.magenta;
-    std::string trend_status_text = "NONE";
-
-    switch (this->current_trend.trend) {
-    case trend_t::TREND_DOWN: {
-      trend_status_color = fmt.red;
-      trend_status_text = "DOWN";
-      ;
-      break;
-    }
-    case trend_t::TREND_UP: {
-      trend_status_color = fmt.green;
-      trend_status_text = "UP";
-      break;
-    }
-    }
-
-    if (is_trending()) {
-      trend_status_text +=
-          (" @ " + ::utils::time_::date_string(this->current_trend.at, "%H:%M",
-                                               "America/Chicago"));
-    }
-
-    std::cout << fmt.bold << fmt.yellow;
-    printf("Trend-Indicating Losses: ");
-    std::cout << trend_loss_count_color << trend_loss_count << " / "
-              << trend_toggle_n << std::endl;
-
-    std::cout << fmt.bold << fmt.cyan;
-    std::cout << ::utils::string::upcase(
-        this->api_client.config.trend_trigger_type);
-    std::cout << fmt.yellow;
-    printf(" trend status: ");
-    std::cout << trend_status_color << trend_status_text << std::endl;
+  switch (this->current_trend.trend) {
+  case trend_t::TREND_DOWN: {
+    trend_status_color = fmt.red;
+    trend_status_text = "DOWN";
+    ;
+    break;
   }
+  case trend_t::TREND_UP: {
+    trend_status_color = fmt.green;
+    trend_status_text = "UP";
+    break;
+  }
+  }
+
+  if (is_trending()) {
+    trend_status_text +=
+        (" @ " + ::utils::time_::date_string(this->current_trend.at, "%H:%M",
+                                             "America/Chicago"));
+  }
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Trend status: ");
+  std::cout << trend_status_color << trend_status_text << std::endl;
 
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;

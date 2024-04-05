@@ -36,8 +36,6 @@ public:
     bool should_await_reversal_indicator = false;
     double stop_loss_ratio = -60.0;
     double stop_profit_ratio = 0.0;
-    int toggle_is_trending_after_n = 0;  // TODO: Delete
-    std::string trend_trigger_type = ""; // TODO: Delete
   } config;
 
   Client(){};
