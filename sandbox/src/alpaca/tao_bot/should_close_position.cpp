@@ -7,7 +7,6 @@
 #include "does_position_exist.cpp"      // does_position_exist
 #include "is_trending.cpp"              // is_trending
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
-#include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
 
 bool Alpaca::TaoBot::should_close_position() {
@@ -33,10 +32,6 @@ bool Alpaca::TaoBot::should_close_position() {
   }
 
   this->exit_prices = build_exit_prices();
-
-  if (should_stop_profit()) {
-    return true;
-  }
 
   if (this->exit_prices.stop_loss &&
       this->open_order_ptr->profit <= this->exit_prices.stop_loss) {

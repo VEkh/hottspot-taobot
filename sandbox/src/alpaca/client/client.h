@@ -20,7 +20,6 @@ public:
 
   struct config_t {
     double account_stop_loss_ratio = 0.0;
-    double account_stop_profit_ratio = 0.0;
     std::string api_key;
     std::string api_key_id;
     std::string api_secret_key;

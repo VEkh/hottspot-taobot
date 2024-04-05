@@ -6,14 +6,6 @@
 
 namespace Global {
 namespace t {
-struct account_exit_prices_t {
-  double current_profit = 0.00;
-  double max_profit = 0.00;
-  double stop_profit_loss = 0.00;
-  double target_account_profit = 0.00;
-  double target_max_profit = 0.00;
-};
-
 struct account_snapshot_t {
   double equity = 0.00;
   double margin_buying_power = 0.00;

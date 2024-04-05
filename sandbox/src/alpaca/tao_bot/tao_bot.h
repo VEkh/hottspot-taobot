@@ -28,7 +28,6 @@ public:
   void run();
 
 private:
-  using account_exit_prices_t = Global::t::account_exit_prices_t;
   using account_snapshot_t = Global::t::account_snapshot_t;
   using candle_t = DB::Candle::candle_t;
   using db_position_t = DB::Position::position_t;
@@ -47,8 +46,6 @@ private:
   using reversals_t = Alpaca::t::reversals_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
-
-  constexpr static double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -86,11 +83,8 @@ private:
   std::vector<position_t> closed_positions;
   trend_meta_t current_trend;
 
-  account_exit_prices_t build_account_exit_prices();
-
   bool does_position_exist();
   bool has_reversal_been_used(const reversal_t);
-  bool has_super_profited();
   bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_entry_signal_present();
@@ -104,11 +98,9 @@ private:
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
-  bool should_stop_profit();
   bool should_terminate();
   bool should_toggle_is_trending(const order_t &);
   bool should_use_price_movement();
-  double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -116,7 +108,6 @@ private:
   double current_mid();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, std::string);
-  double target_account_profit_ratio();
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *, const std::string);
   int profit_duration(const double);
