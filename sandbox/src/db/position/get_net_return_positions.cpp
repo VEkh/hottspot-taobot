@@ -1,5 +1,5 @@
-#ifndef DB__POSITION_get_golden_ratio_positions
-#define DB__POSITION_get_golden_ratio_positions
+#ifndef DB__POSITION_get_net_return_positions
+#define DB__POSITION_get_net_return_positions
 
 #include "position.h"              // DB::Position
 #include "result_to_positions.cpp" // result_to_positions
@@ -8,8 +8,8 @@
 #include <stdio.h>                 // snprintf
 #include <string.h>                // strlen
 
-std::list<DB::Position::position_t> DB::Position::get_golden_ratio_positions(
-    const get_golden_ratio_positions_args_t args) {
+std::list<DB::Position::position_t> DB::Position::get_net_return_positions(
+    const get_net_return_positions_args_t args) {
   const std::string api_key_id = args.api_key_id;
   const int limit = args.limit;
   const std::string symbol = args.symbol;

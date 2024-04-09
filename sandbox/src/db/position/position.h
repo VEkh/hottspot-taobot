@@ -27,15 +27,6 @@ public:
     bool debug = false;
   };
 
-  struct compute_golden_ratio_args_t {
-    std::string api_key;
-    bool debug = false;
-    int limit = 0;
-    bool log_positions = false;
-    std::string project;
-    std::string symbol;
-  };
-
   struct get_day_positions_args_t {
     std::string api_key_id;
     bool debug = false;
@@ -43,10 +34,19 @@ public:
     std::string symbol;
   };
 
-  struct get_golden_ratio_positions_args_t {
+  struct get_net_return_positions_args_t {
     std::string api_key_id;
     bool debug = false;
     int limit = 0;
+    std::string symbol;
+  };
+
+  struct net_return_args_t {
+    std::string api_key;
+    bool debug = false;
+    int limit = 0;
+    bool log_positions = false;
+    std::string project;
     std::string symbol;
   };
 
@@ -94,7 +94,7 @@ public:
   std::list<position_t> get_day_positions(const get_day_positions_args_t);
 
   void close(const close_args_t);
-  void compute_golden_stop_ratio(const compute_golden_ratio_args_t);
+  void net_return(const net_return_args_t);
   void open(const open_args_t);
 
 private:
@@ -105,7 +105,7 @@ private:
   Pg conn;
 
   std::list<position_t>
-  get_golden_ratio_positions(const get_golden_ratio_positions_args_t);
+  get_net_return_positions(const get_net_return_positions_args_t);
 
   std::list<position_t> result_to_positions(const query_result_t &);
 };

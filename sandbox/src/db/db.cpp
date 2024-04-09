@@ -16,8 +16,8 @@ void print_usage() {
   std::map<std::string, const char *> commands = {
       {"build_candles                          <SYMBOL> <OPTS>",
        "Build five minute candles for the given symbol"},
-      {"compute_golden_stop_ratio              <SYMBOL> <OPTS>",
-       "Compute golden stop profit:stop loss ratio"},
+      {"net_return                             <SYMBOL> <OPTS>",
+       "Compute symbol's net return"},
       {"quote:upsert_all_avg_one_sec_variances <SYMBOL> <OPTS> ",
        "Retroactively upsert a symbol's average one second variances"},
   };
@@ -83,7 +83,7 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "compute_golden_stop_ratio") {
+  if (command == "net_return") {
     if (upcased_args.empty()) {
       std::string message =
           Formatted::error_message("Please provide at least one symbol.");
@@ -102,7 +102,7 @@ int main(int argc, char *argv[]) {
     pg.connect();
 
     DB::Position db_position(pg);
-    db_position.compute_golden_stop_ratio({
+    db_position.net_return({
         .api_key = flags["api-key"],
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
         .limit = std::stoi(flags["limit"]),
