@@ -94,6 +94,7 @@ int main(int argc, char *argv[]) {
     std::map<std::string, std::string> default_flags = {
         {"limit", "0"},
         {"project", "alpaca"},
+        {"start-at", ""},
     };
 
     flags = ::utils::map::merge(default_flags, flags);
@@ -109,6 +110,7 @@ int main(int argc, char *argv[]) {
         .log_positions =
             ::utils::io::flag_to_bool("log-positions", flags["log-positions"]),
         .project = flags["project"],
+        .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
     });
 

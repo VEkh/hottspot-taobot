@@ -2,16 +2,14 @@
 #define DB__POSITION_net_return
 
 #include "deps.cpp"                     // json
-#include "get_net_return_positions.cpp" // get
+#include "get_net_return_positions.cpp" // get_net_return_positions
 #include "lib/formatted.cpp"            // Formatted
 #include "lib/utils/float.cpp"          // ::utils::float_
 #include "lib/utils/integer.cpp"        // ::utils::integer_
 #include "lib/utils/io.cpp"             // ::utils::io
 #include "position.h" // DB::Position, fmt, net_return_args_t, position_t
-#include <algorithm>  // std::max, std::min
 #include <iostream>   // std::cout, std::endl
 #include <list>       // std::list
-#include <map>        // std::map
 #include <math.h>     // INFINITY, abs
 #include <stdio.h>    // printf
 #include <string>     // std::string
@@ -21,6 +19,7 @@
 void DB::Position::net_return(const net_return_args_t args) {
   const double timer_start_epoch = time(nullptr);
   const std::string api_key = args.api_key;
+  const std::string start_at = args.start_at;
   double net_return_ = 0.0;
 
   json config_json = ::utils::io::load_config(args.project, api_key);
@@ -39,6 +38,7 @@ void DB::Position::net_return(const net_return_args_t args) {
       .api_key_id = api_key_id,
       .debug = args.debug,
       .limit = args.limit,
+      .start_at = args.start_at,
       .symbol = args.symbol,
   });
 
@@ -53,7 +53,6 @@ void DB::Position::net_return(const net_return_args_t args) {
   }
 
   int position_i = 0;
-  std::map<std::pair<double, double>, int>::iterator ratio_it;
 
   for (const position_t position : positions) {
     const avg_one_sec_variances_t avg_one_sec_variances =
@@ -85,9 +84,6 @@ void DB::Position::net_return(const net_return_args_t args) {
   }
 
   std::cout << std::endl;
-
-  double max_win_percent = -INFINITY;
-  double min_target_win_percent_delta = INFINITY;
 
   std::cout << fmt.bold << fmt.cyan;
   printf("💰 %s ", args.symbol.c_str());

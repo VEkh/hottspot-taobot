@@ -38,6 +38,7 @@ public:
     std::string api_key_id;
     bool debug = false;
     int limit = 0;
+    std::string start_at;
     std::string symbol;
   };
 
@@ -47,6 +48,7 @@ public:
     int limit = 0;
     bool log_positions = false;
     std::string project;
+    std::string start_at;
     std::string symbol;
   };
 
