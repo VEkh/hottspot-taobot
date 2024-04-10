@@ -1,4 +1,4 @@
-### 2024-04-09:
+### 2024-04-10:
 #### Performance
 ##### Equities
 **Alpha (PRODUCTION)**
@@ -8,7 +8,7 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (50.00%) 3L (Total 6)
+Win Rate: 3W (42.86%) 4L (Total 7)
 ```
 
 **Beta (PRODUCTION)**
@@ -18,7 +18,32 @@ Max Equity:           $ (+) (+%)
 Min Equity:           $ (-) (-%)
 Original Equity:      $ (-) (-%)
 
-Win Rate: 3W (50.00%) 3L (Total 6)
+Win Rate: 3W (42.86%) 4L (Total 7)
+```
+
+### 2024-04-09:
+#### Performance
+##### Equities
+**Alpha (PRODUCTION)**
+```
+Tuesday, April  9 2024
+Current Equity:             $26686.85 (-271.51) (-1.01%)
+Max Equity:                 $27455.35 (+496.99) (+1.84%) @ 14:15 CDT
+Min Equity:                 $26577.05 (-381.31) (-1.41%) @ 09:35 CDT
+Original Equity:            $26958.36
+
+Win Rate: 3W (42.86%) 4L (Total 7)
+```
+
+**Beta (PRODUCTION)**
+```
+Tuesday, April  9 2024
+Current Equity:             $61679.60 (-493.50) (-0.79%)
+Max Equity:                 $63453.41 (+1280.31) (+2.06%) @ 14:15 CDT
+Min Equity:                 $61426.24 (-746.86) (-1.20%) @ 09:35 CDT
+Original Equity:            $62173.10
+
+Win Rate: 3W (42.86%) 4L (Total 7)
 ```
 
 ### 2024-04-08:

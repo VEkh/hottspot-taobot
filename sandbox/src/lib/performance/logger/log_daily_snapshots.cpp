@@ -18,42 +18,11 @@
 #include <string>                // std::stod, std::stoi, std::string
 #include <time.h>                // time
 
-struct should_increment_stop_profit_reached_count_args_t {
-  double max_equity_timestamp;
-  double max_profit_percent;
-  double min_equity_timestamp;
-  double min_profit_percent;
-  double stop_loss_percent;
-  double stop_profit_percent;
-};
-
-bool should_increment_stop_profit_reached_count(
-    const should_increment_stop_profit_reached_count_args_t args) {
-  const double max_equity_timestamp = args.max_equity_timestamp;
-  const double max_profit_percent = args.max_profit_percent;
-  const double min_equity_timestamp = args.min_equity_timestamp;
-  const double min_profit_percent = args.min_profit_percent;
-  const double stop_loss_percent = args.stop_loss_percent;
-  const double stop_profit_percent = args.stop_profit_percent;
-
-  if (max_profit_percent < stop_profit_percent) {
-    return false;
-  }
-
-  if (min_profit_percent > stop_loss_percent) {
-    return true;
-  }
-
-  return max_equity_timestamp < min_equity_timestamp;
-}
-
 void Performance::Logger::log_daily_snapshots(
     std::map<std::string, std::string> args) {
   std::map<std::string, std::string> default_flags = {
       {"debug", "0"},
       {"project", "alpaca"},
-      {"stop-loss", "-2.0"},
-      {"stop-profit", "2.0"},
   };
 
   std::map<std::string, std::string> flags =
@@ -61,14 +30,11 @@ void Performance::Logger::log_daily_snapshots(
 
   const bool debug = ::utils::io::flag_to_bool("debug", flags["debug"]);
   const double start_epoch = time(nullptr);
-  const double stop_loss_percent = std::stod(flags["stop-loss"]);
-  const double stop_profit_percent = std::stod(flags["stop-profit"]);
   const std::string api_key = flags["api-key"];
 
   double daily_dollars = 0.0;
   double daily_ratio = 0.0;
   int day_count = 0;
-  int stop_profit_reached_day_count = 0;
 
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -122,15 +88,6 @@ void Performance::Logger::log_daily_snapshots(
 
     daily_dollars += current_profit;
     daily_ratio += current_profit / original_equity;
-    stop_profit_reached_day_count +=
-        (int)(should_increment_stop_profit_reached_count({
-            .max_equity_timestamp = max_equity_timestamp,
-            .max_profit_percent = max_profit_percent,
-            .min_equity_timestamp = min_equity_timestamp,
-            .min_profit_percent = min_profit_percent,
-            .stop_loss_percent = stop_loss_percent,
-            .stop_profit_percent = stop_profit_percent,
-        }));
 
     Formatted::Stream profit_color = current_profit >= 0 ? fmt.green : fmt.red;
 
@@ -162,10 +119,6 @@ void Performance::Logger::log_daily_snapshots(
 
   const double avg_daily_dollars = daily_dollars / day_count;
   const double avg_daily_ratio = daily_ratio / day_count;
-  const double stop_profit_reached_percent =
-      100.0 * stop_profit_reached_day_count / day_count;
-  const double target_stop_profit_reached_percent =
-      100.0 / (1 + abs(stop_profit_percent / stop_loss_percent));
 
   Formatted::Stream avg_daily_dollars_color =
       avg_daily_dollars < 0 ? fmt.red : fmt.green;
@@ -185,12 +138,6 @@ void Performance::Logger::log_daily_snapshots(
          ::utils::float_::sign_char(daily_dollars), abs(daily_dollars));
 
   std::cout << std::endl;
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Days %.2f%% Target Reached:  %i/%i (%.2f%% 🎯 %.2f%%)\n",
-         stop_profit_percent, stop_profit_reached_day_count, day_count,
-         stop_profit_reached_percent, target_stop_profit_reached_percent);
-  std::cout << fmt.reset << std::endl;
 
   const double end_epoch = time(nullptr);
 
