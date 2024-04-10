@@ -41,6 +41,7 @@ DB::Candle::get_latest_quotes(const bool debug = false) {
           value
         from
           latest_opened_at)
+      and quotes."timestamp" < date_trunc('minute', now())
     order by
       quotes."timestamp" asc
   )";

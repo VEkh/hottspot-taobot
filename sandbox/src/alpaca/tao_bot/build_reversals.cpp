@@ -18,7 +18,7 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
   }
 
   const bool are_reversals_updated =
-      floor(reversals_.updated_at / 60) == floor(this->current_epoch / 60);
+      reversals_.candles_count == this->latest_candles.size();
 
   if (are_reversals_updated) {
     return;
@@ -199,7 +199,7 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
     const double epoch_delta = abs(*epoch_it - next_epoch);
   }
 
-  reversals_.updated_at = this->latest_candles.back().closed_at;
+  reversals_.candles_count = (int)this->latest_candles.size();
 }
 
 #endif

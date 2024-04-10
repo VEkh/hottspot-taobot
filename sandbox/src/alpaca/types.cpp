@@ -51,11 +51,11 @@ struct reversal_t {
 };
 
 struct reversals_t {
+  int candles_count = 0;
   std::map<double, reversal_t> highs;
   std::map<double, reversal_t> lows;
   std::map<std::string, int> record_counts;
   int timeframe_minutes = 0;
-  double updated_at;
 
   bool any_empty() { return this->highs.empty() || this->lows.empty(); }
   bool every_empty() { return this->highs.empty() && this->lows.empty(); }
