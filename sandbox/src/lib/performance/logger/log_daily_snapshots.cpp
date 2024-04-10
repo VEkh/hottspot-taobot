@@ -35,6 +35,8 @@ void Performance::Logger::log_daily_snapshots(
   double daily_dollars = 0.0;
   double daily_ratio = 0.0;
   int day_count = 0;
+  int loss_count = 0;
+  int win_count = 0;
 
   setlocale(LC_NUMERIC, "");
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -89,6 +91,9 @@ void Performance::Logger::log_daily_snapshots(
     daily_dollars += current_profit;
     daily_ratio += current_profit / original_equity;
 
+    loss_count += (int)current_profit < 0;
+    win_count += (int)current_profit >= 0;
+
     Formatted::Stream profit_color = current_profit >= 0 ? fmt.green : fmt.red;
 
     const std::string snapshot_time =
@@ -119,6 +124,7 @@ void Performance::Logger::log_daily_snapshots(
 
   const double avg_daily_dollars = daily_dollars / day_count;
   const double avg_daily_ratio = daily_ratio / day_count;
+  const double win_rate_percent = 100 * ((double)win_count / day_count);
 
   Formatted::Stream avg_daily_dollars_color =
       avg_daily_dollars < 0 ? fmt.red : fmt.green;
@@ -136,6 +142,9 @@ void Performance::Logger::log_daily_snapshots(
   std::cout << fmt.bold << total_color;
   printf("Total Return:               %c$%'.2f\n",
          ::utils::float_::sign_char(daily_dollars), abs(daily_dollars));
+
+  printf("Win Rate:                   %iW (%.2f%%) %iL (Total: %i)\n",
+         win_count, win_rate_percent, loss_count, day_count);
 
   std::cout << std::endl;
 
