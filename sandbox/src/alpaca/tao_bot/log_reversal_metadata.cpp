@@ -34,7 +34,7 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   }
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Trend status: ");
+  printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
