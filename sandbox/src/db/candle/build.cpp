@@ -42,7 +42,7 @@ void DB::Candle::build() {
 
     const double mid = quote->mid();
 
-    if (candle.closed_at && (quote->timestamp > candle.closed_at ||
+    if (candle.closed_at && (quote->timestamp >= candle.closed_at ||
                              std::next(quote) == latest_quotes.end())) {
       upsert(candle);
       candle = candle_t();
