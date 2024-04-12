@@ -5,6 +5,7 @@
 #include "cancel_order.cpp"
 #include "fetch_account.cpp"
 #include "fetch_asset.cpp"
+#include "fetch_historical_quotes.cpp"
 #include "fetch_order.cpp"
 #include "fetch_quote.cpp"
 #include "load_config.cpp" // load_config

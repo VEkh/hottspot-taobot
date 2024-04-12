@@ -32,6 +32,13 @@ public:
     int secondary_reversal_timeframe_minutes = 0;
   } config;
 
+  struct fetch_historical_quotes_args_t {
+    int batch = 10000;
+    double end_at = 0;
+    double start_at = 0;
+    std::string symbol;
+  };
+
   Client(){};
   Client(std::map<std::string, std::string>);
 
@@ -44,6 +51,7 @@ public:
   std::string fetch_order(const std::string &);
   std::string fetch_quote(char *);
   std::string fetch_quote(const std::string &);
+  std::string fetch_historical_quotes(const fetch_historical_quotes_args_t);
 
   quote_t parse_quote(const std::string &);
 
@@ -51,6 +59,7 @@ public:
 
 private:
   struct fetch_params_t {
+    std::map<std::string, std::string> query_params;
     int timeout_seconds = 0;
     std::string url;
   };

@@ -31,6 +31,11 @@ void DB::Quote::upsert(const std::list<quote_t> quotes) {
     };
 
     query += "(" + ::utils::vector::join(values, ", ") + ")";
+    query += R"(
+      on conflict (symbol, "timestamp")
+        do update set
+          ask = excluded.ask, bid = excluded.bid
+    )";
 
     PQfreemem(sanitized_symbol);
   }

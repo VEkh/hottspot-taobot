@@ -1,21 +1,24 @@
-#include "db/candle/candle.cpp"     // DB::Candle
-#include "db/position/position.cpp" // DB::Position
-#include "db/quote/quote.cpp"       // DB::Quote
-#include "lib/formatted.cpp"        // Formatted
-#include "lib/pg/pg.cpp"            // Pg
-#include "lib/utils/io.cpp"         // ::utils::io
-#include <iostream>                 // std::cout, std::endl
-#include <list>                     // std::list
-#include <map>                      // std::map
-#include <sstream>                  // std::ostringstream
-#include <stdexcept>                // std::invalid_argument
-#include <stdio.h>                  // printf
-#include <string>                   // std::string, std::stoi
+#include "db/candle/candle.cpp"                     // DB::Candle
+#include "db/historical_quote/historical_quote.cpp" // DB::HistoricalQuote
+#include "db/position/position.cpp"                 // DB::Position
+#include "db/quote/quote.cpp"                       // DB::Quote
+#include "lib/formatted.cpp"                        // Formatted
+#include "lib/pg/pg.cpp"                            // Pg
+#include "lib/utils/io.cpp"                         // ::utils::io
+#include <iostream>                                 // std::cout, std::endl
+#include <list>                                     // std::list
+#include <map>                                      // std::map
+#include <sstream>                                  // std::ostringstream
+#include <stdexcept>                                // std::invalid_argument
+#include <stdio.h>                                  // printf
+#include <string>                                   // std::string, std::stoi
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
       {"build_candles                          <SYMBOL> <OPTS>",
        "Build five minute candles for the given symbol"},
+      {"import_historical_quotes               <SYMBOL> <OPTS>",
+       "Import symbol's historical quotes"},
       {"net_return                             <SYMBOL> <OPTS>",
        "Compute symbol's net return"},
       {"quote:upsert_all_avg_one_sec_variances <SYMBOL> <OPTS> ",
@@ -77,6 +80,32 @@ int main(int argc, char *argv[]) {
                       upcased_args.front());
 
     candle.build();
+
+    pg.disconnect();
+
+    exit(0);
+  }
+
+  if (command == "import_historical_quotes") {
+    if (upcased_args.empty()) {
+      std::string message =
+          Formatted::error_message("Please provide at least one symbol.");
+
+      throw std::invalid_argument(message);
+    }
+
+    Pg pg(flags);
+    pg.connect();
+
+    DB::HistoricalQuote db_historical_quote({
+        .batch = flags["batch"],
+        .conn = pg,
+        .end_at = flags["end-at"],
+        .start_at = flags["start-at"],
+        .symbol = upcased_args.front(),
+    });
+
+    db_historical_quote.download();
 
     pg.disconnect();
 

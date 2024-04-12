@@ -80,7 +80,7 @@ CurlClient Alpaca::Client::fetch(const fetch_params_t params) {
                     {"APCA-API-SECRET-KEY", this->config.api_secret_key},
                 },
             .method = CurlClient::http_method_t::GET,
-            .query_params = {},
+            .query_params = params.query_params,
             .timeout_seconds = params.timeout_seconds,
             .url = url,
         });
