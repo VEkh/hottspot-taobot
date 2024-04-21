@@ -24,19 +24,21 @@ DB::HistoricalQuote::prepare_for_upsert(json &quote_json) {
   quote.symbol = this->symbol;
   quote.timestamp = half_second_rounded_epoch;
 
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Upserting ");
-  std::cout << fmt.cyan << this->symbol;
-  std::cout << fmt.yellow;
-  printf(" quote of ");
-  std::cout << fmt.green;
-  printf("%.2f", quote.mid());
-  std::cout << fmt.yellow;
-  printf(" at ");
-  std::cout << fmt.magenta;
-  printf("%s (%f rounded)", timestamp_string.c_str(),
-         half_second_rounded_epoch);
-  std::cout << fmt.reset << std::endl;
+  if (this->debug) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Upserting ");
+    std::cout << fmt.cyan << this->symbol;
+    std::cout << fmt.yellow;
+    printf(" quote of ");
+    std::cout << fmt.green;
+    printf("%.2f", quote.mid());
+    std::cout << fmt.yellow;
+    printf(" at ");
+    std::cout << fmt.magenta;
+    printf("%s (%f rounded)", timestamp_string.c_str(),
+           half_second_rounded_epoch);
+    std::cout << fmt.reset << std::endl;
+  }
 
   return quote;
 }

@@ -25,19 +25,25 @@ void DB::HistoricalQuote::download() {
     });
 
     json quotes_json = json::parse(quotes_resp)["quotes"][this->symbol];
+    std::list<quote_t> quotes;
 
     for (json quote_json : quotes_json) {
       const quote_t quote = prepare_for_upsert(quote_json);
 
-      this->start_at = quote.timestamp;
-      this->db_quote.upsert(quote);
-
-      if (quotes_json.size() == 1) {
-        this->start_at = this->end_at;
+      if (quotes.empty() || quote.timestamp != this->start_at) {
+        quotes.push_back(quote);
       }
 
-      quotes_n++;
+      this->start_at = quote.timestamp;
     }
+
+    this->db_quote.upsert(quotes);
+
+    if (quotes.size() == 1) {
+      this->start_at = this->end_at;
+    }
+
+    quotes_n += quotes.size();
   }
 
   const long int duration = time(nullptr) - clock_start;

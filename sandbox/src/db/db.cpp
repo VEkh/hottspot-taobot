@@ -97,6 +97,12 @@ int main(int argc, char *argv[]) {
     Pg pg(flags);
     pg.connect();
 
+    std::map<std::string, std::string> default_flags = {
+        {"batch", "10000"},
+    };
+
+    flags = ::utils::map::merge(default_flags, flags);
+
     DB::HistoricalQuote db_historical_quote({
         .batch = flags["batch"],
         .conn = pg,
