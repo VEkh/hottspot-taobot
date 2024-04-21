@@ -18,7 +18,7 @@ DB::Candle::Candle(const Pg c, const int duration_minutes_,
   this->db_quote = DB::Quote(this->conn);
   this->db_utils = DB::Utils(this->conn);
 
-  this->db_utils.set_param({"statement_timeout", "15000"});
+  this->db_utils.set_param({"statement_timeout", "600000"});
 }
 
 #endif
