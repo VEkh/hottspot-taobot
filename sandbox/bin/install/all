@@ -10,7 +10,8 @@ source "${app_dir}/bin/install/python" # install_python_dependencies
 source "${app_dir}/bin/install/shared" # log_install_start
 
 function exempt_service_passwords() {
-  content="%sudo ALL=(ALL) NOPASSWD: /usr/sbin/service"
+  content="%sudo ALL=(ALL) NOPASSWD: /usr/sbin/ntpdate"
+  content+="\n%sudo ALL=(ALL) NOPASSWD: /usr/sbin/service"
 
   if [[ -f "/etc/sudoers.d/service_no_passwd" ]]; then
     existing_content=$(sudo cat "/etc/sudoers.d/service_no_passwd")
@@ -149,6 +150,7 @@ if [[ $OSTYPE =~ ^linux.* ]]; then
     "libcurl4-openssl-dev" # Curl Client
     "libpq-dev" # LibPQ
     "netplan.io"
+    "ntpdate"
     "openssh-server" # sshd
     "openssl"
     "shellcheck" # Shell Formatting

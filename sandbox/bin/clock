@@ -1,0 +1,16 @@
+#!/bin/bash
+
+app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # ascii_print
+
+case "${1}" in
+  "sync")
+    if [[ "${OSTYPE}" =~ ^linux.* ]]; then
+      ascii_print "⌚ Syncing date and time" "yellow"
+
+      sudo ntpdate time.windows.com
+    fi
+  ;;
+esac
