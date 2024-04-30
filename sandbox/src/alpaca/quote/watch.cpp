@@ -26,14 +26,6 @@ void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
       std::cout << fmt.reset;
 
       fetch_and_persist_quote(symbol);
-
-      const quote_t current_quote = this->current_quotes[symbol];
-
-      this->db_quote.upsert_avg_one_sec_variance({
-          .debug = true,
-          .id = current_quote.id,
-          .symbol = symbol,
-      });
     }
 
     std::cout << std::flush;
