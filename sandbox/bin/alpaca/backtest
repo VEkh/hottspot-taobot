@@ -7,7 +7,7 @@ project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
 
 # ASCII
 # ascii_print
-# backtest_api_keys
+# active_api_keys
 # extract_flags_to_map
 # to_title
 # to_upper
@@ -50,7 +50,8 @@ function restart_single() {
 }
 
 function start_all() {
-  api_keys=($(backtest_api_keys "${project}"))
+  # shellcheck disable=2207
+  api_keys=($(active_api_keys "${project}" "backtest"))
 
   if (( "${#api_keys[@]}" == 0 )); then
     ascii_print "❗ There are no configured backtests" "red" >&2
@@ -71,7 +72,8 @@ function start_single() {
 }
 
 function stop_all() {
-  api_keys=($(backtest_api_keys "${project}"))
+  # shellcheck disable=2207
+  api_keys=($(active_api_keys "${project}" "backtest"))
 
   if (( "${#api_keys[@]}" == 0 )); then
     ascii_print "❗ There are no configured backtests" "red" >&2
@@ -115,7 +117,7 @@ case "${1}" in
       stop_single "${@:2}"
     fi
     ;;
-  *|help)
+  *)
     ascii_print "⌛ $(to_upper "${project}") BACKTESTING\n" "underline" "yellow"
     ascii_print "Description: Control backtest operations\n" "cyan"
     ascii_print "Usage: backtest [COMMAND] [ARGS]" "yellow"
