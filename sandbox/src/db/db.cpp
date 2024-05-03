@@ -127,6 +127,7 @@ int main(int argc, char *argv[]) {
     }
 
     std::map<std::string, std::string> default_flags = {
+        {"end-at", ""},
         {"limit", "0"},
         {"project", "alpaca"},
         {"start-at", ""},
@@ -141,6 +142,7 @@ int main(int argc, char *argv[]) {
     db_position.net_return({
         .api_key = flags["api-key"],
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
+        .end_at = flags["end-at"],
         .limit = std::stoi(flags["limit"]),
         .log_positions =
             ::utils::io::flag_to_bool("log-positions", flags["log-positions"]),

@@ -37,6 +37,7 @@ public:
   struct get_net_return_positions_args_t {
     std::string api_key_id;
     bool debug = false;
+    std::string end_at;
     int limit = 0;
     std::string start_at;
     std::string symbol;
@@ -45,6 +46,7 @@ public:
   struct net_return_args_t {
     std::string api_key;
     bool debug = false;
+    std::string end_at;
     int limit = 0;
     bool log_positions = false;
     std::string project;

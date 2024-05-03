@@ -19,7 +19,6 @@
 void DB::Position::net_return(const net_return_args_t args) {
   const double timer_start_epoch = time(nullptr);
   const std::string api_key = args.api_key;
-  const std::string start_at = args.start_at;
   double net_return_ = 0.0;
 
   json config_json = ::utils::io::load_config(args.project, api_key);
@@ -37,6 +36,7 @@ void DB::Position::net_return(const net_return_args_t args) {
   const std::list<position_t> positions = get_net_return_positions({
       .api_key_id = api_key_id,
       .debug = args.debug,
+      .end_at = args.end_at,
       .limit = args.limit,
       .start_at = args.start_at,
       .symbol = args.symbol,
