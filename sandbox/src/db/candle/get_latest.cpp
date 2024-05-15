@@ -1,7 +1,7 @@
 #ifndef DB__CANDLE_get_latest
 #define DB__CANDLE_get_latest
 
-#include "candle.h"              // DB::Candle, candle_t
+#include "candle.h"              // DB::Candle, candle_t, time_range_args_t
 #include "result_to_candles.cpp" // result_to_candles
 #include <libpq-fe.h>            // PQescapeLiteral, PQfreemem
 #include <list>                  // std::list
@@ -10,9 +10,9 @@
 #include <string>                // std::to_string
 
 std::list<DB::Candle::candle_t>
-DB::Candle::get_latest(const get_latest_args_t args) {
-  const double end_at_epoch = args.end_at_epoch;
-  const double start_at_epoch = args.start_at_epoch;
+DB::Candle::get_latest(const time_range_args_t args) {
+  const double end_at = args.end_at;
+  const double start_at = args.start_at;
 
   const char *query_format = R"(
     with latest_candles as (
@@ -43,13 +43,13 @@ DB::Candle::get_latest(const get_latest_args_t args) {
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
                          std::to_string(this->duration_minutes).size() +
-                         std::to_string(start_at_epoch).size() +
-                         std::to_string(end_at_epoch).size();
+                         std::to_string(start_at).size() +
+                         std::to_string(end_at).size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_symbol,
-           this->duration_minutes, start_at_epoch, end_at_epoch);
+           this->duration_minutes, start_at, end_at);
 
   PQfreemem(sanitized_symbol);
 

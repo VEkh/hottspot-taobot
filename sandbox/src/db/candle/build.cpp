@@ -6,6 +6,7 @@
 #include "get_latest_quotes.cpp"   // get_latest_quotes
 #include "lib/utils/integer.cpp"   // ::utils::integer_
 #include "lib/utils/time.cpp"      // ::utils::time_
+#include "print_build_intro.cpp"   // print_build_intro
 #include "timestamp_to_bounds.cpp" // timestamp_to_bounds
 #include "upsert.cpp"              // upsert
 #include <algorithm>               // std::max, std::min
@@ -14,18 +15,29 @@
 #include <list>                    // std::list
 #include <math.h>                  // INFINITY
 #include <stdio.h>                 // printf
+#include <string>                  // std::string
 #include <time.h>                  // time
 
-void DB::Candle::build() {
-  std::cout << fmt.bold << fmt.cyan;
-  std::cout << "🔥 Building " << this->duration_minutes
-            << " Minute Candles for ";
-  std::cout << fmt.yellow << this->symbol << std::endl;
-  std::cout << fmt.reset << std::endl;
+void DB::Candle::build(const build_args_t args) {
+  double end_at = 0.0;
+  double start_at = 0.0;
+
+  if (!args.end_at.empty()) {
+    end_at = this->db_utils.timestamp_to_epoch(args.end_at, "UTC");
+  }
+
+  if (!args.start_at.empty()) {
+    start_at = this->db_utils.timestamp_to_epoch(args.start_at, "UTC");
+  }
+
+  print_build_intro({.end_at = end_at, .start_at = start_at});
 
   const long int clock_start = time(nullptr);
 
-  const std::list<quote_t> latest_quotes = get_latest_quotes();
+  const std::list<quote_t> latest_quotes = get_latest_quotes({
+      .end_at = end_at,
+      .start_at = start_at,
+  });
 
   candle_t candle;
   int candles_count = 0;

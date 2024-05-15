@@ -73,13 +73,23 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
+    std::map<std::string, std::string> default_flags = {
+        {"end-at", ""},
+        {"start-at", ""},
+    };
+
+    flags = ::utils::map::merge(default_flags, flags);
+
     Pg pg(flags);
     pg.connect();
 
     DB::Candle candle(pg, std::stoi(flags["duration-min"]),
                       upcased_args.front());
 
-    candle.build();
+    candle.build({
+        .end_at = flags["end-at"],
+        .start_at = flags["start-at"],
+    });
 
     pg.disconnect();
 

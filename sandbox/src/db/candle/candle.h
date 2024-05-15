@@ -44,10 +44,15 @@ public:
     };
   };
 
-  struct get_latest_args_t {
+  struct build_args_t {
+    std::string end_at;
+    std::string start_at;
+  };
+
+  struct time_range_args_t {
     bool debug = false; // Optional
-    double end_at_epoch;
-    double start_at_epoch;
+    double end_at = 0.0;
+    double start_at = 0.0;
   };
 
   Candle(){};
@@ -55,9 +60,9 @@ public:
 
   static candle_bounds_t timestamp_to_bounds(const int, const long int);
 
-  std::list<candle_t> get_latest(const get_latest_args_t);
+  std::list<candle_t> get_latest(const time_range_args_t);
 
-  void build();
+  void build(const build_args_t);
 
 private:
   using query_result_t = Pg::query_result_t;
@@ -71,8 +76,9 @@ private:
   std::string symbol;
 
   std::list<candle_t> result_to_candles(const query_result_t &);
-  std::list<quote_t> get_latest_quotes(const bool);
+  std::list<quote_t> get_latest_quotes(const time_range_args_t);
 
+  void print_build_intro(const time_range_args_t);
   void upsert(const candle_t, const bool);
 };
 } // namespace DB
