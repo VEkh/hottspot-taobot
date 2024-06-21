@@ -6,7 +6,8 @@
 #include <list>      // std::list
 #include <math.h>    // INFINITY, abs, floor
 
-void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
+void Alpaca::TaoBot::build_reversals(reversals_t &reversals_,
+                                     const bool enforce_symmetry = false) {
   const int timeframe_minutes = reversals_.timeframe_minutes;
 
   if (!timeframe_minutes) {
@@ -58,6 +59,30 @@ void Alpaca::TaoBot::build_reversals(reversals_t &reversals_) {
 
     if (near_end) {
       continue;
+    }
+
+    if (enforce_symmetry) {
+      bool near_begin = false;
+      int begin_seek_n = 1;
+
+      while (begin_seek_n <= seek_n) {
+        if (it == this->latest_candles.begin()) {
+          near_begin = true;
+          break;
+        }
+
+        if (std::next(it, -(begin_seek_n - 1)) ==
+            this->latest_candles.begin()) {
+          near_begin = true;
+          break;
+        }
+
+        begin_seek_n++;
+      }
+
+      if (near_begin) {
+        continue;
+      }
     }
 
     bool is_high = true;

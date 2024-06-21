@@ -1,0 +1,39 @@
+🚪 Successfully connected to hottspot_capital_backtest
+
+Environment: backtest-reversal-3
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2024-01-02 08:30:00"
+  },
+  "base_url": "",
+  "id": "backtest-reversal-3",
+  "is_live": false,
+  "late_start_seconds": 0,
+  "note": "hold reversals and trends; trans reversal stops profit",
+  "reversal_timeframe_minutes": 3,
+  "secondary_reversal_timeframe_minutes": 30,
+  "secret_key": "secret_key",
+  "should_stop_profit": true,
+  "should_trend_entry_await_correction": false,
+  "stop_profit_ratio": 0.8,
+  "stop_profit_symbols": {
+    "AMZN": true,
+    "TSLA": true
+  },
+  "tertiary_reversal_timeframe_minutes": 20
+}
+
+Positions Processed: 158 of 158
+
+💰 TSLA Total Return: -$18637.49
+
+⌚ Finished in 00:13
+
+👋 Successfully disconnected from hottspot_capital_backtest

@@ -13,13 +13,18 @@ void Alpaca::TaoBot::toggle_is_trending(const order_t &order) {
   } else {
     new_trend = order.action == order_action_t::BUY ? trend_t::TREND_UP
                                                     : trend_t::TREND_DOWN;
+
+    // TODO: Decide
+    if (this->should_stop_profit && order.profit > 0) {
+      new_trend = order.action == order_action_t::BUY ? trend_t::TREND_DOWN
+                                                      : trend_t::TREND_UP;
+    }
+
     new_trend_at = this->current_epoch;
   }
 
-  this->current_trend = {
-      .at = new_trend_at,
-      .trend = new_trend,
-  };
+  this->current_trend.at = new_trend_at;
+  this->current_trend.trend = new_trend;
 }
 
 #endif

@@ -1,23 +1,22 @@
 #ifndef ALPACA__TAO_BOT_latest_reversal
 #define ALPACA__TAO_BOT_latest_reversal
 
-#include "tao_bot.h" // Alpaca::TaoBot
-#include <string>    // std::string
+#include "tao_bot.h" // Alpaca::TaoBot, reversal_type_t
 
-Alpaca::TaoBot::reversal_t
-Alpaca::TaoBot::latest_reversal(reversals_t &reversals_,
-                                const std::string key = "") {
+Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_reversal(
+    reversals_t &reversals_,
+    const reversal_type_t type = reversal_type_t::REVERSAL_NULL) {
   const reversal_t recent_high = reversals_.highs.empty()
                                      ? reversal_t()
                                      : reversals_.highs.rbegin()->second;
   const reversal_t recent_low =
       reversals_.lows.empty() ? reversal_t() : reversals_.lows.rbegin()->second;
 
-  if (key == "high") {
+  if (type == reversal_type_t::REVERSAL_HIGH) {
     return recent_high;
   }
 
-  if (key == "low") {
+  if (type == reversal_type_t::REVERSAL_LOW) {
     return recent_low;
   }
 

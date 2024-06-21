@@ -1,13 +1,13 @@
 #ifndef ALPACA__TAO_BOT_latest_record_reversal
 #define ALPACA__TAO_BOT_latest_record_reversal
 
-#include "tao_bot.h" // Alpaca::TaoBot, reversal_t
+#include "tao_bot.h" // Alpaca::TaoBot, reversal_t, reversal_type_t
 #include <map>       // std::map
 #include <string>    // std::string
 
-Alpaca::TaoBot::reversal_t
-Alpaca::TaoBot::latest_record_reversal(reversals_t &reversals_,
-                                       const std::string key = "") {
+Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_record_reversal(
+    reversals_t &reversals_,
+    const reversal_type_t type = reversal_type_t::REVERSAL_NULL) {
   std::map<double, reversal_t>::reverse_iterator it;
   reversal_t record_high;
   reversal_t record_low;
@@ -24,11 +24,11 @@ Alpaca::TaoBot::latest_record_reversal(reversals_t &reversals_,
     }
   }
 
-  if (key == "high") {
+  if (type == reversal_type_t::REVERSAL_HIGH) {
     return record_high;
   }
 
-  if (key == "low") {
+  if (type == reversal_type_t::REVERSAL_LOW) {
     return record_low;
   }
 

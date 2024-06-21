@@ -15,6 +15,12 @@
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 
+// TODO: Decide
+#include "is_in_win_percentile.cpp"         // is_in_win_percentile
+#include "max_profit_day_range_percent.cpp" // max_profit_day_range_percent
+#include "max_profit_target_icon.cpp"       // max_profit_target_icon
+#include "position_range_percentile.cpp"    // position_range_percentile
+
 void Alpaca::TaoBot::log_position() {
   if (is_position_closed()) {
     std::cout << fmt.bold << fmt.cyan;
@@ -86,13 +92,33 @@ void Alpaca::TaoBot::log_position() {
 
   const double unit_deficit = asset_deficit / this->open_order_ptr->quantity;
 
-  printf("Stop Profit: %.2f%s • Stop Loss: %.2f • "
-         "Unit Deficit: %.2f\n",
-         this->exit_prices.stop_profit,
-         this->open_order_ptr->max_profit >= this->exit_prices.stop_profit
-             ? " ✅"
-             : "",
-         this->exit_prices.stop_loss, unit_deficit);
+  // TODO: Decide
+  printf(
+      "Stop Profit: %.2f%s • Stop Loss: %.2f • "
+      "Unit Deficit: %.2f\n",
+      this->exit_prices.stop_profit,
+      is_in_win_percentile(this->open_order_ptr, this->exit_prices.stop_profit)
+          ? " ✅"
+          : "",
+      this->exit_prices.stop_loss, unit_deficit);
+
+  // TODO: Decide
+  printf("Max Profit Day Range %%: %.2f%%%s\n",
+         max_profit_day_range_percent(this->open_order_ptr),
+         max_profit_target_icon(this->open_order_ptr).c_str());
+
+  // TODO: Decide
+  printf("Position Profit Percentile: p%.2f%%\n",
+         position_range_percentile(this->open_order_ptr,
+                                   this->open_order_ptr->profit));
+
+  printf("Stop Profit Day Percentile: p%.2f%%\n",
+         day_range_percentile(this->open_order_ptr,
+                              this->exit_prices.stop_profit));
+
+  printf("Stop Profit Position Percentile: p%.2f%%\n",
+         position_range_percentile(this->open_order_ptr,
+                                   this->exit_prices.stop_profit));
 
   printf("Quantity: %.5f\n", this->open_order_ptr->quantity);
 

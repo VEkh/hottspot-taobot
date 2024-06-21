@@ -8,10 +8,13 @@
  */
 #include "tao_bot.h"
 
-#include "lib/formatted.cpp"   // Formatted
-#include "lib/utils/float.cpp" // utils::float_
-#include <iostream>            // std::cout, std::endl
-#include <stdio.h>             // printf
+#include "lib/formatted.cpp" // Formatted
+#include <iostream>          // std::cout, std::endl
+#include <stdio.h>           // printf
+
+// TODO: Decide
+#include "current_mid.cpp"          // current_mid
+#include "day_range_percentile.cpp" // day_range_percentile
 
 void Alpaca::TaoBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
@@ -42,7 +45,10 @@ void Alpaca::TaoBot::log_quote() {
   printf("%s Quote\n", current_quote.symbol.c_str());
   std::cout << fmt.no_underline;
 
-  printf("Current: %'.2f\n", ::utils::float_::to_currency(current_quote.price));
+  // TODO: Decide
+  printf("Current: %'.2f • High: %'.2f • Low: %'.2f • Δ %'.2f • p%'.2f%%\n",
+         current_quote.price, this->day_candle.high, this->day_candle.low,
+         this->day_candle.range(), day_range_percentile(current_mid()));
   std::cout << fmt.reset << std::endl;
 }
 

@@ -12,6 +12,12 @@ bool Alpaca::TaoBot::has_reversal_been_used(const reversal_t reversal) {
     return false;
   }
 
+  // TODO: Decide
+  if (this->should_stop_profit ||
+      !this->api_client.config.reverse_profit_during.empty()) {
+    return false;
+  }
+
   for (it = this->closed_positions.rbegin();
        it != this->closed_positions.rend(); it++) {
     if (it->open_order.entry_reversal.type == reversal.type &&

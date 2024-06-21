@@ -21,12 +21,12 @@ public:
   };
 
   struct candle_t {
-    double close = 0;
-    double closed_at = 0;
+    double close = 0.0;
+    double closed_at = 0.0;
     double high = -INFINITY;
     double low = INFINITY;
-    double open = 0;
-    double opened_at = 0;
+    double open = 0.0;
+    double opened_at = 0.0;
     std::string symbol;
 
     double range() { return this->high - this->low; };

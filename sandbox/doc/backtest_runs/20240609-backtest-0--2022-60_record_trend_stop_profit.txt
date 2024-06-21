@@ -1,0 +1,732 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-1[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "backtest": {
+    "account_margin_multiplier": 4,
+    "account_starting_equity": 100000,
+    "clock_sync": true,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2022-01-03 08:30:00"
+  },
+  "base_url": "",
+  "dynamic_trend_type": "TRANS",
+  "id": "backtest-1",
+  "is_live": false,
+  "late_start_seconds": 0,
+  "note": "",
+  "reversal_timeframe_minutes": 3,
+  "reverse_profit_during": "TRENDING",
+  "secondary_reversal_timeframe_minutes": 60,
+  "secret_key": "secret_key",
+  "should_trend_enter_at_record": false,
+  "should_trend_entry_await_correction": false,
+  "stop_profit_symbols": {
+    "AMZN": false,
+    "TSLA": false
+  },
+  "tertiary_reversal_timeframe_minutes": 60
+}
+[0m[0m[1m[36m[4m
+Monday, January  3 2022[24m[32m
+Current Equity:             $105354.30 (+5354.30) (+5.35%)
+Max Equity:                 $105401.20 (+5401.20) (+5.40%) @ 14:58 CST
+Min Equity:                 $99176.59 (-823.41) (-0.82%) @ 08:35 CST
+Original Equity:            $100000.00
+[1m[36m[4m
+Tuesday, January  4 2022[24m[31m
+Current Equity:             $101154.05 (-4200.25) (-3.99%)
+Max Equity:                 $106250.54 (+896.24) (+0.85%) @ 08:42 CST
+Min Equity:                 $98456.89 (-6897.41) (-6.55%) @ 13:09 CST
+Original Equity:            $105354.30
+[1m[36m[4m
+Wednesday, January  5 2022[24m[32m
+Current Equity:             $105942.53 (+4788.48) (+4.73%)
+Max Equity:                 $106458.33 (+5304.28) (+5.24%) @ 14:21 CST
+Min Equity:                 $96968.63 (-4185.42) (-4.14%) @ 10:11 CST
+Original Equity:            $101154.05
+[1m[36m[4m
+Thursday, January  6 2022[24m[31m
+Current Equity:             $103293.47 (-2649.06) (-2.50%)
+Max Equity:                 $109752.93 (+3810.40) (+3.60%) @ 10:16 CST
+Min Equity:                 $102003.83 (-3938.70) (-3.72%) @ 11:44 CST
+Original Equity:            $105942.53
+[1m[36m[4m
+Friday, January  7 2022[24m[31m
+Current Equity:             $96778.86 (-6514.61) (-6.31%)
+Max Equity:                 $104057.81 (+764.34) (+0.74%) @ 08:47 CST
+Min Equity:                 $95190.82 (-8102.65) (-7.84%) @ 13:50 CST
+Original Equity:            $103293.47
+[1m[36m[4m
+Monday, January 10 2022[24m[32m
+Current Equity:             $102292.05 (+5513.19) (+5.70%)
+Max Equity:                 $102292.05 (+5513.19) (+5.70%) @ 14:59 CST
+Min Equity:                 $93354.77 (-3424.09) (-3.54%) @ 11:21 CST
+Original Equity:            $96778.86
+[1m[36m[4m
+Tuesday, January 11 2022[24m[31m
+Current Equity:             $98964.74 (-3327.31) (-3.25%)
+Max Equity:                 $103855.60 (+1563.55) (+1.53%) @ 11:17 CST
+Min Equity:                 $98760.98 (-3531.07) (-3.45%) @ 14:50 CST
+Original Equity:            $102292.05
+[1m[36m[4m
+Wednesday, January 12 2022[24m[31m
+Current Equity:             $95659.08 (-3305.66) (-3.34%)
+Max Equity:                 $98964.74 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $95168.38 (-3796.36) (-3.84%) @ 14:43 CST
+Original Equity:            $98964.74
+[1m[36m[4m
+Thursday, January 13 2022[24m[32m
+Current Equity:             $97580.84 (+1921.76) (+2.01%)
+Max Equity:                 $97580.84 (+1921.76) (+2.01%) @ 14:59 CST
+Min Equity:                 $90869.66 (-4789.42) (-5.01%) @ 11:15 CST
+Original Equity:            $95659.08
+[1m[36m[4m
+Friday, January 14 2022[24m[31m
+Current Equity:             $94674.66 (-2906.18) (-2.98%)
+Max Equity:                 $97580.84 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $90747.99 (-6832.85) (-7.00%) @ 13:30 CST
+Original Equity:            $97580.84
+[1m[36m[4m
+Monday, January 17 2022[24m[32m
+Current Equity:             $94674.66 (+0.00) (+0.00%)
+Max Equity:                 $94674.66 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $94674.66 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $94674.66
+[1m[36m[4m
+Tuesday, January 18 2022[24m[31m
+Current Equity:             $93321.98 (-1352.68) (-1.43%)
+Max Equity:                 $95865.32 (+1190.66) (+1.26%) @ 10:33 CST
+Min Equity:                 $89675.98 (-4998.68) (-5.28%) @ 13:51 CST
+Original Equity:            $94674.66
+[1m[36m[4m
+Wednesday, January 19 2022[24m[32m
+Current Equity:             $102790.86 (+9468.88) (+10.15%)
+Max Equity:                 $102803.78 (+9481.80) (+10.16%) @ 14:58 CST
+Min Equity:                 $92933.45 (-388.53) (-0.42%) @ 08:35 CST
+Original Equity:            $93321.98
+[1m[36m[4m
+Thursday, January 20 2022[24m[32m
+Current Equity:             $108065.16 (+5274.30) (+5.13%)
+Max Equity:                 $108179.91 (+5389.05) (+5.24%) @ 14:54 CST
+Min Equity:                 $98266.99 (-4523.87) (-4.40%) @ 13:04 CST
+Original Equity:            $102790.86
+[1m[36m[4m
+Friday, January 21 2022[24m[32m
+Current Equity:             $117228.58 (+9163.42) (+8.48%)
+Max Equity:                 $117993.21 (+9928.04) (+9.19%) @ 14:15 CST
+Min Equity:                 $107559.49 (-505.67) (-0.47%) @ 08:34 CST
+Original Equity:            $108065.16
+[1m[36m[4m
+Monday, January 24 2022[24m[32m
+Current Equity:             $125860.38 (+8631.80) (+7.36%)
+Max Equity:                 $126007.17 (+8778.59) (+7.49%) @ 14:58 CST
+Min Equity:                 $114781.26 (-2447.32) (-2.09%) @ 09:20 CST
+Original Equity:            $117228.58
+[1m[36m[4m
+Tuesday, January 25 2022[24m[31m
+Current Equity:             $113068.03 (-12792.35) (-10.16%)
+Max Equity:                 $125860.38 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $108687.12 (-17173.26) (-13.64%) @ 13:59 CST
+Original Equity:            $125860.38
+[1m[36m[4m
+Wednesday, January 26 2022[24m[31m
+Current Equity:             $101898.01 (-11170.02) (-9.88%)
+Max Equity:                 $113480.85 (+412.82) (+0.37%) @ 10:33 CST
+Min Equity:                 $99835.60 (-13232.43) (-11.70%) @ 14:40 CST
+Original Equity:            $113068.03
+[1m[36m[4m
+Thursday, January 27 2022[24m[31m
+Current Equity:             $98800.93 (-3097.08) (-3.04%)
+Max Equity:                 $105218.46 (+3320.45) (+3.26%) @ 10:28 CST
+Min Equity:                 $96218.97 (-5679.04) (-5.57%) @ 13:19 CST
+Original Equity:            $101898.01
+[1m[36m[4m
+Friday, January 28 2022[24m[32m
+Current Equity:             $99970.54 (+1169.61) (+1.18%)
+Max Equity:                 $102607.88 (+3806.95) (+3.85%) @ 13:09 CST
+Min Equity:                 $95702.49 (-3098.44) (-3.14%) @ 10:49 CST
+Original Equity:            $98800.93
+[1m[36m[4m
+Monday, January 31 2022[24m[32m
+Current Equity:             $115321.50 (+15350.96) (+15.36%)
+Max Equity:                 $115321.50 (+15350.96) (+15.36%) @ 14:59 CST
+Min Equity:                 $99863.74 (-106.79) (-0.11%) @ 08:34 CST
+Original Equity:            $99970.54
+[1m[36m[4m
+Tuesday, February  1 2022[24m[31m
+Current Equity:             $115301.13 (-20.37) (-0.02%)
+Max Equity:                 $116614.21 (+1292.71) (+1.12%) @ 11:34 CST
+Min Equity:                 $112222.66 (-3098.84) (-2.69%) @ 12:57 CST
+Original Equity:            $115321.50
+[1m[36m[4m
+Wednesday, February  2 2022[24m[31m
+Current Equity:             $114073.48 (-1227.65) (-1.06%)
+Max Equity:                 $116684.62 (+1383.49) (+1.20%) @ 12:00 CST
+Min Equity:                 $113013.87 (-2287.26) (-1.98%) @ 11:20 CST
+Original Equity:            $115301.13
+[1m[36m[4m
+Thursday, February  3 2022[24m[32m
+Current Equity:             $118124.33 (+4050.85) (+3.55%)
+Max Equity:                 $118196.87 (+4123.39) (+3.61%) @ 14:52 CST
+Min Equity:                 $111006.51 (-3066.97) (-2.69%) @ 10:01 CST
+Original Equity:            $114073.48
+[1m[36m[4m
+Friday, February  4 2022[24m[32m
+Current Equity:             $127945.57 (+9821.24) (+8.31%)
+Max Equity:                 $129306.07 (+11181.74) (+9.47%) @ 14:47 CST
+Min Equity:                 $115319.10 (-2805.24) (-2.37%) @ 08:37 CST
+Original Equity:            $118124.33
+[1m[36m[4m
+Monday, February  7 2022[24m[31m
+Current Equity:             $127284.89 (-660.68) (-0.52%)
+Max Equity:                 $132007.30 (+4061.73) (+3.17%) @ 08:59 CST
+Min Equity:                 $123924.57 (-4021.00) (-3.14%) @ 13:58 CST
+Original Equity:            $127945.57
+[1m[36m[4m
+Tuesday, February  8 2022[24m[31m
+Current Equity:             $125925.69 (-1359.20) (-1.07%)
+Max Equity:                 $128415.11 (+1130.22) (+0.89%) @ 11:55 CST
+Min Equity:                 $123844.82 (-3440.07) (-2.70%) @ 08:40 CST
+Original Equity:            $127284.89
+[1m[36m[4m
+Wednesday, February  9 2022[24m[31m
+Current Equity:             $124973.38 (-952.31) (-0.76%)
+Max Equity:                 $127803.05 (+1877.36) (+1.49%) @ 11:06 CST
+Min Equity:                 $124107.67 (-1818.02) (-1.44%) @ 09:50 CST
+Original Equity:            $125925.69
+[1m[36m[4m
+Thursday, February 10 2022[24m[32m
+Current Equity:             $125748.18 (+774.80) (+0.62%)
+Max Equity:                 $126631.47 (+1658.09) (+1.33%) @ 14:41 CST
+Min Equity:                 $120767.51 (-4205.88) (-3.37%) @ 11:51 CST
+Original Equity:            $124973.38
+[1m[36m[4m
+Friday, February 11 2022[24m[32m
+Current Equity:             $134723.45 (+8975.27) (+7.14%)
+Max Equity:                 $137590.89 (+11842.71) (+9.42%) @ 14:42 CST
+Min Equity:                 $124656.15 (-1092.03) (-0.87%) @ 09:55 CST
+Original Equity:            $125748.18
+[1m[36m[4m
+Monday, February 14 2022[24m[31m
+Current Equity:             $132478.91 (-2244.54) (-1.67%)
+Max Equity:                 $142240.81 (+7517.36) (+5.58%) @ 10:16 CST
+Min Equity:                 $129735.04 (-4988.42) (-3.70%) @ 12:59 CST
+Original Equity:            $134723.45
+[1m[36m[4m
+Tuesday, February 15 2022[24m[32m
+Current Equity:             $138919.03 (+6440.12) (+4.86%)
+Max Equity:                 $139095.36 (+6616.45) (+4.99%) @ 13:19 CST
+Min Equity:                 $132478.91 (+0.00) (+0.00%) @ 08:30 CST
+Original Equity:            $132478.91
+[1m[36m[4m
+Wednesday, February 16 2022[24m[32m
+Current Equity:             $139181.01 (+261.98) (+0.19%)
+Max Equity:                 $141981.83 (+3062.80) (+2.20%) @ 13:35 CST
+Min Equity:                 $135933.87 (-2985.16) (-2.15%) @ 09:54 CST
+Original Equity:            $138919.03
+[1m[36m[4m
+Thursday, February 17 2022[24m[32m
+Current Equity:             $139804.43 (+623.42) (+0.45%)
+Max Equity:                 $141284.45 (+2103.44) (+1.51%) @ 08:35 CST
+Min Equity:                 $133449.14 (-5731.88) (-4.12%) @ 11:09 CST
+Original Equity:            $139181.01
+[1m[36m[4m
+Friday, February 18 2022[24m[32m
+Current Equity:             $141122.88 (+1318.45) (+0.94%)
+Max Equity:                 $143258.75 (+3454.32) (+2.47%) @ 14:31 CST
+Min Equity:                 $135286.26 (-4518.17) (-3.23%) @ 11:20 CST
+Original Equity:            $139804.43
+[1m[36m[4m
+Monday, February 21 2022[24m[32m
+Current Equity:             $141122.88 (+0.00) (+0.00%)
+Max Equity:                 $141122.88 (+0.00) (+0.00%) @ 08:31 CST
+Min Equity:                 $141122.88 (+0.00) (+0.00%) @ 08:31 CST
+Original Equity:            $141122.88
+[1m[36m[4m
+Tuesday, February 22 2022[24m[31m
+Current Equity:             $135516.13 (-5606.75) (-3.97%)
+Max Equity:                 $143671.14 (+2548.26) (+1.81%) @ 08:35 CST
+Min Equity:                 $132236.07 (-8886.81) (-6.30%) @ 13:45 CST
+Original Equity:            $141122.88
+[1m[36m[4m
+Wednesday, February 23 2022[24m[32m
+Current Equity:             $139822.96 (+4306.83) (+3.18%)
+Max Equity:                 $140532.98 (+5016.85) (+3.70%) @ 14:46 CST
+Min Equity:                 $128866.15 (-6649.98) (-4.91%) @ 11:24 CST
+Original Equity:            $135516.13
+[1m[36m[4m
+Thursday, February 24 2022[24m[31m
+Current Equity:             $135711.78 (-4111.18) (-2.94%)
+Max Equity:                 $139822.96 (+0.00) (+0.00%) @ 08:30 CST
+Min Equity:                 $125694.14 (-14128.82) (-10.10%) @ 13:52 CST
+Original Equity:            $139822.96
+[1m[36m[4m
+Friday, February 25 2022[24m[31m
+Current Equity:             $130954.14 (-4757.64) (-3.51%)
+Max Equity:                 $137094.49 (+1382.71) (+1.02%) @ 08:35 CST
+Min Equity:                 $127150.13 (-8561.65) (-6.31%) @ 14:08 CST
+Original Equity:            $135711.78
+[1m[36m[4m
+Monday, February 28 2022[24m[31m
+Current Equity:             $125743.93 (-5210.21) (-3.98%)
+Max Equity:                 $131943.49 (+989.35) (+0.76%) @ 08:39 CST
+Min Equity:                 $121025.24 (-9928.90) (-7.58%) @ 13:54 CST
+Original Equity:            $130954.14
+[1m[36m[4m
+Tuesday, March  1 2022[24m[31m
+Current Equity:             $121060.23 (-4683.70) (-3.72%)
+Max Equity:                 $126770.29 (+1026.36) (+0.82%) @ 08:40 CST
+Min Equity:                 $120293.55 (-5450.38) (-4.33%) @ 14:05 CST
+Original Equity:            $125743.93
+[1m[36m[4m
+Wednesday, March  2 2022[24m[32m
+Current Equity:             $122029.59 (+969.36) (+0.80%)
+Max Equity:                 $123288.57 (+2228.35) (+1.84%) @ 14:49 CST
+Min Equity:                 $118650.81 (-2409.42) (-1.99%) @ 12:08 CST
+Original Equity:            $121060.23
+[1m[36m[4m
+Thursday, March  3 2022[24m[32m
+Current Equity:             $123734.87 (+1705.28) (+1.40%)
+Max Equity:                 $125253.85 (+3224.26) (+2.64%) @ 14:47 CST
+Min Equity:                 $114951.07 (-7078.51) (-5.80%) @ 12:15 CST
+Original Equity:            $122029.59
+[1m[36m[4m
+Friday, March  4 2022[24m[31m
+Current Equity:             $118067.42 (-5667.45) (-4.58%)
+Max Equity:                 $124451.71 (+716.84) (+0.58%) @ 11:18 CST
+Min Equity:                 $115226.37 (-8508.50) (-6.88%) @ 14:38 CST
+Original Equity:            $123734.87
+[1m[36m[4m
+Monday, March  7 2022[24m[32m
+Current Equity:             $119193.74 (+1126.32) (+0.95%)
+Max Equity:                 $119289.55 (+1222.13) (+1.04%) @ 14:49 CST
+Min Equity:                 $111879.50 (-6187.92) (-5.24%) @ 10:57 CST
+Original Equity:            $118067.42
+[1m[36m[4m
+Tuesday, March  8 2022[24m[32m
+Current Equity:             $119304.14 (+110.40) (+0.09%)
+Max Equity:                 $126731.29 (+7537.55) (+6.32%) @ 12:03 CST
+Min Equity:                 $111026.49 (-8167.26) (-6.85%) @ 10:31 CST
+Original Equity:            $119193.74
+[1m[36m[4m
+Wednesday, March  9 2022[24m[31m
+Current Equity:             $113417.65 (-5886.49) (-4.93%)
+Max Equity:                 $119706.35 (+402.21) (+0.34%) @ 08:33 CST
+Min Equity:                 $112772.90 (-6531.24) (-5.47%) @ 13:47 CST
+Original Equity:            $119304.14
+[1m[36m[4m
+Thursday, March 10 2022[24m[32m
+Current Equity:             $119622.97 (+6205.32) (+5.47%)
+Max Equity:                 $121628.44 (+8210.79) (+7.24%) @ 13:53 CST
+Min Equity:                 $112502.05 (-915.60) (-0.81%) @ 08:37 CST
+Original Equity:            $113417.65
+[1m[36m[4m
+Friday, March 11 2022[24m[32m
+Current Equity:             $125430.23 (+5807.26) (+4.85%)
+Max Equity:                 $127728.32 (+8105.35) (+6.78%) @ 13:19 CST
+Min Equity:                 $119042.23 (-580.74) (-0.49%) @ 08:38 CST
+Original Equity:            $119622.97
+[1m[36m[4m
+Monday, March 14 2022[24m[31m
+Current Equity:             $121818.66 (-3611.57) (-2.88%)
+Max Equity:                 $132828.83 (+7398.60) (+5.90%) @ 09:27 CDT
+Min Equity:                 $121347.14 (-4083.09) (-3.26%) @ 14:49 CDT
+Original Equity:            $125430.23
+[1m[36m[4m
+Tuesday, March 15 2022[24m[32m
+Current Equity:             $121818.66 (+0.00) (+0.00%)
+Max Equity:                 $121818.66 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $121818.66 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $121818.66
+[1m[36m[4m
+Wednesday, March 16 2022[24m[31m
+Current Equity:             $111381.39 (-10437.27) (-8.57%)
+Max Equity:                 $121818.66 (+0.00) (+0.00%) @ 08:31 CDT
+Min Equity:                 $111381.39 (-10437.27) (-8.57%) @ 14:59 CDT
+Original Equity:            $121818.66
+[1m[36m[4m
+Thursday, March 17 2022[24m[32m
+Current Equity:             $119646.74 (+8265.35) (+7.42%)
+Max Equity:                 $120419.44 (+9038.05) (+8.11%) @ 13:48 CDT
+Min Equity:                 $110456.59 (-924.80) (-0.83%) @ 08:37 CDT
+Original Equity:            $111381.39
+[1m[36m[4m
+Friday, March 18 2022[24m[31m
+Current Equity:             $119322.72 (-324.02) (-0.27%)
+Max Equity:                 $120473.86 (+827.12) (+0.69%) @ 08:33 CDT
+Min Equity:                 $114226.92 (-5419.82) (-4.53%) @ 10:58 CDT
+Original Equity:            $119646.74
+[1m[36m[4m
+Monday, March 21 2022[24m[32m
+Current Equity:             $123376.48 (+4053.76) (+3.40%)
+Max Equity:                 $125320.53 (+5997.81) (+5.03%) @ 12:05 CDT
+Min Equity:                 $117586.15 (-1736.57) (-1.46%) @ 10:09 CDT
+Original Equity:            $119322.72
+[1m[36m[4m
+Tuesday, March 22 2022[24m[32m
+Current Equity:             $130783.64 (+7407.16) (+6.00%)
+Max Equity:                 $131443.92 (+8067.44) (+6.54%) @ 14:48 CDT
+Min Equity:                 $121365.80 (-2010.68) (-1.63%) @ 10:58 CDT
+Original Equity:            $123376.48
+[1m[36m[4m
+Wednesday, March 23 2022[24m[31m
+Current Equity:             $114405.73 (-16377.91) (-12.52%)
+Max Equity:                 $130783.64 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $112814.60 (-17969.04) (-13.74%) @ 13:10 CDT
+Original Equity:            $130783.64
+[1m[36m[4m
+Thursday, March 24 2022[24m[31m
+Current Equity:             $111506.86 (-2898.87) (-2.53%)
+Max Equity:                 $114760.41 (+354.68) (+0.31%) @ 10:48 CDT
+Min Equity:                 $110500.89 (-3904.84) (-3.41%) @ 09:51 CDT
+Original Equity:            $114405.73
+[1m[36m[4m
+Friday, March 25 2022[24m[31m
+Current Equity:             $103573.86 (-7933.00) (-7.11%)
+Max Equity:                 $112515.85 (+1008.99) (+0.90%) @ 08:41 CDT
+Min Equity:                 $103535.60 (-7971.26) (-7.15%) @ 13:54 CDT
+Original Equity:            $111506.86
+[1m[36m[4m
+Monday, March 28 2022[24m[32m
+Current Equity:             $103951.99 (+378.13) (+0.37%)
+Max Equity:                 $105305.34 (+1731.48) (+1.67%) @ 12:35 CDT
+Min Equity:                 $101800.90 (-1772.96) (-1.71%) @ 11:07 CDT
+Original Equity:            $103573.86
+[1m[36m[4m
+Tuesday, March 29 2022[24m[32m
+Current Equity:             $104697.97 (+745.98) (+0.72%)
+Max Equity:                 $108411.23 (+4459.24) (+4.29%) @ 09:23 CDT
+Min Equity:                 $103222.99 (-729.01) (-0.70%) @ 14:09 CDT
+Original Equity:            $103951.99
+[1m[36m[4m
+Wednesday, March 30 2022[24m[31m
+Current Equity:             $100805.16 (-3892.81) (-3.72%)
+Max Equity:                 $104824.39 (+126.42) (+0.12%) @ 08:33 CDT
+Min Equity:                 $99156.41 (-5541.56) (-5.29%) @ 14:09 CDT
+Original Equity:            $104697.97
+[1m[36m[4m
+Thursday, March 31 2022[24m[31m
+Current Equity:             $94180.99 (-6624.17) (-6.57%)
+Max Equity:                 $100812.26 (+7.10) (+0.01%) @ 08:32 CDT
+Min Equity:                 $94180.99 (-6624.17) (-6.57%) @ 14:58 CDT
+Original Equity:            $100805.16
+[1m[36m[4m
+Friday, April  1 2022[24m[31m
+Current Equity:             $94076.11 (-104.88) (-0.11%)
+Max Equity:                 $95474.53 (+1293.54) (+1.37%) @ 14:21 CDT
+Min Equity:                 $92920.35 (-1260.65) (-1.34%) @ 10:22 CDT
+Original Equity:            $94180.99
+[1m[36m[4m
+Monday, April  4 2022[24m[32m
+Current Equity:             $97404.45 (+3328.34) (+3.54%)
+Max Equity:                 $97404.45 (+3328.34) (+3.54%) @ 14:59 CDT
+Min Equity:                 $94076.11 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $94076.11
+[1m[36m[4m
+Tuesday, April  5 2022[24m[32m
+Current Equity:             $97719.65 (+315.20) (+0.32%)
+Max Equity:                 $98394.20 (+989.75) (+1.02%) @ 14:47 CDT
+Min Equity:                 $93708.73 (-3695.72) (-3.79%) @ 10:51 CDT
+Original Equity:            $97404.45
+[1m[36m[4m
+Wednesday, April  6 2022[24m[32m
+Current Equity:             $103362.05 (+5642.40) (+5.77%)
+Max Equity:                 $106272.16 (+8552.51) (+8.75%) @ 11:47 CDT
+Min Equity:                 $97719.65 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $97719.65
+[1m[36m[4m
+Thursday, April  7 2022[24m[31m
+Current Equity:             $96538.21 (-6823.84) (-6.60%)
+Max Equity:                 $106022.05 (+2660.00) (+2.57%) @ 09:08 CDT
+Min Equity:                 $95485.62 (-7876.43) (-7.62%) @ 14:41 CDT
+Original Equity:            $103362.05
+[1m[36m[4m
+Friday, April  8 2022[24m[32m
+Current Equity:             $100467.71 (+3929.50) (+4.07%)
+Max Equity:                 $100539.42 (+4001.21) (+4.14%) @ 14:57 CDT
+Min Equity:                 $95739.16 (-799.05) (-0.83%) @ 11:29 CDT
+Original Equity:            $96538.21
+[1m[36m[4m
+Monday, April 11 2022[24m[31m
+Current Equity:             $96245.75 (-4221.96) (-4.20%)
+Max Equity:                 $100655.50 (+187.79) (+0.19%) @ 09:10 CDT
+Min Equity:                 $96112.25 (-4355.46) (-4.34%) @ 14:36 CDT
+Original Equity:            $100467.71
+[1m[36m[4m
+Tuesday, April 12 2022[24m[32m
+Current Equity:             $96846.68 (+600.93) (+0.62%)
+Max Equity:                 $98891.12 (+2645.38) (+2.75%) @ 14:29 CDT
+Min Equity:                 $94326.89 (-1918.86) (-1.99%) @ 11:17 CDT
+Original Equity:            $96245.75
+[1m[36m[4m
+Wednesday, April 13 2022[24m[32m
+Current Equity:             $108298.92 (+11452.24) (+11.83%)
+Max Equity:                 $109128.55 (+12281.87) (+12.68%) @ 14:33 CDT
+Min Equity:                 $96123.20 (-723.48) (-0.75%) @ 08:33 CDT
+Original Equity:            $96846.68
+[1m[36m[4m
+Thursday, April 14 2022[24m[32m
+Current Equity:             $109230.14 (+931.22) (+0.86%)
+Max Equity:                 $109932.11 (+1633.19) (+1.51%) @ 13:16 CDT
+Min Equity:                 $106015.76 (-2283.16) (-2.11%) @ 11:08 CDT
+Original Equity:            $108298.92
+[1m[36m[4m
+Friday, April 15 2022[24m[32m
+Current Equity:             $109230.14 (+0.00) (+0.00%)
+Max Equity:                 $109230.14 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $109230.14 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $109230.14
+[1m[36m[4m
+Monday, April 18 2022[24m[32m
+Current Equity:             $119159.09 (+9928.95) (+9.09%)
+Max Equity:                 $120797.33 (+11567.19) (+10.59%) @ 14:40 CDT
+Min Equity:                 $107339.71 (-1890.43) (-1.73%) @ 10:11 CDT
+Original Equity:            $109230.14
+[1m[36m[4m
+Tuesday, April 19 2022[24m[31m
+Current Equity:             $113545.49 (-5613.60) (-4.71%)
+Max Equity:                 $119679.76 (+520.67) (+0.44%) @ 08:34 CDT
+Min Equity:                 $112674.65 (-6484.44) (-5.44%) @ 14:19 CDT
+Original Equity:            $119159.09
+[1m[36m[4m
+Wednesday, April 20 2022[24m[32m
+Current Equity:             $119201.83 (+5656.34) (+4.98%)
+Max Equity:                 $120774.30 (+7228.81) (+6.37%) @ 11:11 CDT
+Min Equity:                 $112513.94 (-1031.55) (-0.91%) @ 08:35 CDT
+Original Equity:            $113545.49
+[1m[36m[4m
+Thursday, April 21 2022[24m[32m
+Current Equity:             $132560.32 (+13358.49) (+11.21%)
+Max Equity:                 $134064.55 (+14862.72) (+12.47%) @ 13:56 CDT
+Min Equity:                 $116492.18 (-2709.65) (-2.27%) @ 08:41 CDT
+Original Equity:            $119201.83
+[1m[36m[4m
+Friday, April 22 2022[24m[32m
+Current Equity:             $134513.31 (+1952.99) (+1.47%)
+Max Equity:                 $135907.93 (+3347.61) (+2.53%) @ 13:02 CDT
+Min Equity:                 $126386.40 (-6173.92) (-4.66%) @ 10:20 CDT
+Original Equity:            $132560.32
+[1m[36m[4m
+Monday, April 25 2022[24m[31m
+Current Equity:             $127647.85 (-6865.46) (-5.10%)
+Max Equity:                 $134513.31 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $124203.35 (-10309.96) (-7.66%) @ 12:51 CDT
+Original Equity:            $134513.31
+[1m[36m[4m
+Tuesday, April 26 2022[24m[32m
+Current Equity:             $129203.35 (+1555.50) (+1.22%)
+Max Equity:                 $129361.80 (+1713.95) (+1.34%) @ 14:57 CDT
+Min Equity:                 $121722.31 (-5925.54) (-4.64%) @ 11:34 CDT
+Original Equity:            $127647.85
+[1m[36m[4m
+Wednesday, April 27 2022[24m[31m
+Current Equity:             $124928.22 (-4275.13) (-3.31%)
+Max Equity:                 $130769.39 (+1566.04) (+1.21%) @ 08:55 CDT
+Min Equity:                 $123102.44 (-6100.91) (-4.72%) @ 13:38 CDT
+Original Equity:            $129203.35
+[1m[36m[4m
+Thursday, April 28 2022[24m[32m
+Current Equity:             $128645.70 (+3717.48) (+2.98%)
+Max Equity:                 $134539.05 (+9610.83) (+7.69%) @ 13:51 CDT
+Min Equity:                 $120544.16 (-4384.06) (-3.51%) @ 11:26 CDT
+Original Equity:            $124928.22
+[1m[36m[4m
+Friday, April 29 2022[24m[31m
+Current Equity:             $125032.55 (-3613.15) (-2.81%)
+Max Equity:                 $132527.45 (+3881.75) (+3.02%) @ 08:35 CDT
+Min Equity:                 $123759.44 (-4886.26) (-3.80%) @ 11:45 CDT
+Original Equity:            $128645.70
+[1m[36m[4m
+Monday, May  2 2022[24m[31m
+Current Equity:             $110051.76 (-14980.79) (-11.98%)
+Max Equity:                 $125734.95 (+702.40) (+0.56%) @ 11:21 CDT
+Min Equity:                 $110051.76 (-14980.79) (-11.98%) @ 14:46 CDT
+Original Equity:            $125032.55
+[1m[36m[4m
+Tuesday, May  3 2022[24m[31m
+Current Equity:             $104436.37 (-5615.39) (-5.10%)
+Max Equity:                 $112447.30 (+2395.54) (+2.18%) @ 09:47 CDT
+Min Equity:                 $102034.43 (-8017.33) (-7.29%) @ 14:50 CDT
+Original Equity:            $110051.76
+[1m[36m[4m
+Wednesday, May  4 2022[24m[32m
+Current Equity:             $118117.45 (+13681.08) (+13.10%)
+Max Equity:                 $118129.80 (+13693.43) (+13.11%) @ 14:53 CDT
+Min Equity:                 $101877.73 (-2558.64) (-2.45%) @ 10:05 CDT
+Original Equity:            $104436.37
+[1m[36m[4m
+Thursday, May  5 2022[24m[32m
+Current Equity:             $126794.02 (+8676.57) (+7.35%)
+Max Equity:                 $130397.93 (+12280.49) (+10.40%) @ 11:00 CDT
+Min Equity:                 $117421.32 (-696.12) (-0.59%) @ 08:34 CDT
+Original Equity:            $118117.45
+[1m[36m[4m
+Friday, May  6 2022[24m[31m
+Current Equity:             $111298.71 (-15495.31) (-12.22%)
+Max Equity:                 $128869.16 (+2075.14) (+1.64%) @ 08:57 CDT
+Min Equity:                 $110469.68 (-16324.35) (-12.87%) @ 14:22 CDT
+Original Equity:            $126794.02
+[1m[36m[4m
+Monday, May  9 2022[24m[32m
+Current Equity:             $111756.48 (+457.77) (+0.41%)
+Max Equity:                 $115635.19 (+4336.48) (+3.90%) @ 13:48 CDT
+Min Equity:                 $109405.26 (-1893.46) (-1.70%) @ 11:44 CDT
+Original Equity:            $111298.71
+[1m[36m[4m
+Tuesday, May 10 2022[24m[31m
+Current Equity:             $109933.58 (-1822.90) (-1.63%)
+Max Equity:                 $118120.22 (+6363.74) (+5.69%) @ 10:39 CDT
+Min Equity:                 $108211.37 (-3545.11) (-3.17%) @ 09:14 CDT
+Original Equity:            $111756.48
+[1m[36m[4m
+Wednesday, May 11 2022[24m[32m
+Current Equity:             $117329.03 (+7395.45) (+6.73%)
+Max Equity:                 $118118.86 (+8185.28) (+7.45%) @ 14:49 CDT
+Min Equity:                 $102867.04 (-7066.54) (-6.43%) @ 11:25 CDT
+Original Equity:            $109933.58
+[1m[36m[4m
+Thursday, May 12 2022[24m[32m
+Current Equity:             $118754.57 (+1425.54) (+1.21%)
+Max Equity:                 $125544.59 (+8215.56) (+7.00%) @ 08:40 CDT
+Min Equity:                 $112330.17 (-4998.86) (-4.26%) @ 10:41 CDT
+Original Equity:            $117329.03
+[1m[36m[4m
+Friday, May 13 2022[24m[32m
+Current Equity:             $121806.52 (+3051.95) (+2.57%)
+Max Equity:                 $122171.60 (+3417.03) (+2.88%) @ 14:51 CDT
+Min Equity:                 $115162.51 (-3592.06) (-3.02%) @ 10:30 CDT
+Original Equity:            $118754.57
+[1m[36m[4m
+Monday, May 16 2022[24m[31m
+Current Equity:             $118970.01 (-2836.51) (-2.33%)
+Max Equity:                 $121806.52 (+0.00) (+0.00%) @ 08:31 CDT
+Min Equity:                 $111915.42 (-9891.10) (-8.12%) @ 11:04 CDT
+Original Equity:            $121806.52
+[1m[36m[4m
+Tuesday, May 17 2022[24m[32m
+Current Equity:             $123305.24 (+4335.23) (+3.64%)
+Max Equity:                 $123455.88 (+4485.87) (+3.77%) @ 14:45 CDT
+Min Equity:                 $115444.29 (-3525.72) (-2.96%) @ 13:22 CDT
+Original Equity:            $118970.01
+[1m[36m[4m
+Wednesday, May 18 2022[24m[32m
+Current Equity:             $132162.62 (+8857.38) (+7.18%)
+Max Equity:                 $135017.57 (+11712.33) (+9.50%) @ 14:26 CDT
+Min Equity:                 $120454.18 (-2851.06) (-2.31%) @ 09:51 CDT
+Original Equity:            $123305.24
+[1m[36m[4m
+Thursday, May 19 2022[24m[31m
+Current Equity:             $118425.89 (-13736.73) (-10.39%)
+Max Equity:                 $132648.13 (+485.51) (+0.37%) @ 08:34 CDT
+Min Equity:                 $117792.17 (-14370.45) (-10.87%) @ 12:22 CDT
+Original Equity:            $132162.62
+[1m[36m[4m
+Friday, May 20 2022[24m[31m
+Current Equity:             $117213.94 (-1211.95) (-1.02%)
+Max Equity:                 $129242.01 (+10816.12) (+9.13%) @ 12:29 CDT
+Min Equity:                 $113259.99 (-5165.90) (-4.36%) @ 09:51 CDT
+Original Equity:            $118425.89
+[1m[36m[4m
+Monday, May 23 2022[24m[31m
+Current Equity:             $115054.79 (-2159.15) (-1.84%)
+Max Equity:                 $120617.90 (+3403.96) (+2.90%) @ 08:37 CDT
+Min Equity:                 $112436.43 (-4777.51) (-4.08%) @ 12:17 CDT
+Original Equity:            $117213.94
+[1m[36m[4m
+Tuesday, May 24 2022[24m[31m
+Current Equity:             $113027.89 (-2026.90) (-1.76%)
+Max Equity:                 $120148.89 (+5094.10) (+4.43%) @ 11:03 CDT
+Min Equity:                 $111600.45 (-3454.34) (-3.00%) @ 14:56 CDT
+Original Equity:            $115054.79
+[1m[36m[4m
+Wednesday, May 25 2022[24m[32m
+Current Equity:             $117002.79 (+3974.90) (+3.52%)
+Max Equity:                 $123146.65 (+10118.76) (+8.95%) @ 10:33 CDT
+Min Equity:                 $112013.43 (-1014.46) (-0.90%) @ 08:56 CDT
+Original Equity:            $113027.89
+[1m[36m[4m
+Thursday, May 26 2022[24m[32m
+Current Equity:             $134395.20 (+17392.41) (+14.86%)
+Max Equity:                 $139458.95 (+22456.16) (+19.19%) @ 11:57 CDT
+Min Equity:                 $117002.79 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $117002.79
+[1m[36m[4m
+Friday, May 27 2022[24m[32m
+Current Equity:             $135696.04 (+1300.84) (+0.97%)
+Max Equity:                 $135707.42 (+1312.21) (+0.98%) @ 14:58 CDT
+Min Equity:                 $130206.02 (-4189.18) (-3.12%) @ 12:51 CDT
+Original Equity:            $134395.20
+[1m[36m[4m
+Monday, May 30 2022[24m[32m
+Current Equity:             $135696.04 (+0.00) (+0.00%)
+Max Equity:                 $135696.04 (+0.00) (+0.00%) @ 08:30 CDT
+Min Equity:                 $135696.04 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $135696.04
+[1m[36m[4m
+Tuesday, May 31 2022[24m[32m
+Current Equity:             $136482.71 (+786.67) (+0.58%)
+Max Equity:                 $142153.93 (+6457.89) (+4.76%) @ 13:10 CDT
+Min Equity:                 $133883.72 (-1812.32) (-1.34%) @ 14:01 CDT
+Original Equity:            $135696.04
+[1m[36m[4m
+Wednesday, June  1 2022[24m[31m
+Current Equity:             $131860.38 (-4622.33) (-3.39%)
+Max Equity:                 $137554.65 (+1071.95) (+0.79%) @ 10:51 CDT
+Min Equity:                 $127811.41 (-8671.29) (-6.35%) @ 13:21 CDT
+Original Equity:            $136482.71
+[1m[36m[4m
+Thursday, June  2 2022[24m[32m
+Current Equity:             $151297.18 (+19436.80) (+14.74%)
+Max Equity:                 $153024.23 (+21163.85) (+16.05%) @ 11:33 CDT
+Min Equity:                 $130332.15 (-1528.24) (-1.16%) @ 08:37 CDT
+Original Equity:            $131860.38
+[1m[36m[4m
+Friday, June  3 2022[24m[32m
+Current Equity:             $166034.89 (+14737.71) (+9.74%)
+Max Equity:                 $168437.89 (+17140.71) (+11.33%) @ 10:14 CDT
+Min Equity:                 $151297.18 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $151297.18
+[1m[36m[4m
+Monday, June  6 2022[24m[31m
+Current Equity:             $156697.89 (-9337.00) (-5.62%)
+Max Equity:                 $167722.91 (+1688.02) (+1.02%) @ 11:10 CDT
+Min Equity:                 $156457.83 (-9577.07) (-5.77%) @ 14:55 CDT
+Original Equity:            $166034.89
+[1m[36m[4m
+Tuesday, June  7 2022[24m[32m
+Current Equity:             $168569.67 (+11871.78) (+7.58%)
+Max Equity:                 $170438.44 (+13740.55) (+8.77%) @ 09:50 CDT
+Min Equity:                 $156697.89 (+0.00) (+0.00%) @ 08:30 CDT
+Original Equity:            $156697.89
+[1m[36m[4m
+Wednesday, June  8 2022[24m[31m
+Current Equity:             $168397.95 (-171.72) (-0.10%)
+Max Equity:                 $181393.36 (+12823.69) (+7.61%) @ 09:09 CDT
+Min Equity:                 $167179.08 (-1390.60) (-0.82%) @ 12:39 CDT
+Original Equity:            $168569.67
+[1m[36m[4m
+Thursday, June  9 2022[24m[32m
+Current Equity:             $177312.62 (+8914.67) (+5.29%)
+Max Equity:                 $177312.62 (+8914.67) (+5.29%) @ 14:59 CDT
+Min Equity:                 $163981.46 (-4416.49) (-2.62%) @ 12:35 CDT
+Original Equity:            $168397.95
+[1m[36m[4m
+Friday, June 10 2022[24m[31m
+Current Equity:             $171171.40 (-6141.22) (-3.46%)
+Max Equity:                 $178942.36 (+1629.74) (+0.92%) @ 08:46 CDT
+Min Equity:                 $171171.40 (-6141.22) (-3.46%) @ 09:18 CDT
+Original Equity:            $177312.62
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$618.88
+[1m[32mAvg Daily % Return:         +0.63%
+[1m[32mTotal Return:               +$71171.40
+Win Rate:                   64W (55.65%) 51L (Total: 115)
+
+[1m[36m⌚ Finished in 00:04
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

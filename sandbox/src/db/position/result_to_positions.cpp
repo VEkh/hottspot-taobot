@@ -26,7 +26,7 @@ DB::Position::result_to_positions(const query_result_t &result) {
         record.close_order_quantity = std::stod(value);
       }
 
-      if (field == "closed_at") {
+      if (field == "closed_at" || field == "closed_at_epoch") {
         record.closed_at = std::stod(value);
       }
 
@@ -50,7 +50,7 @@ DB::Position::result_to_positions(const query_result_t &result) {
         record.min_profit_at = std::stod(value);
       }
 
-      if (field == "opened_at") {
+      if (field == "opened_at" || field == "opened_at_epoch") {
         record.opened_at = std::stod(value);
       }
 

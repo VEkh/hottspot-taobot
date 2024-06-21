@@ -29,9 +29,14 @@ void Alpaca::TaoBot::set_profit(order_t *order) {
   }
 }
 
-void Alpaca::TaoBot::set_profit(order_t *close_order_,
-                                const order_t *open_order_) {
+void Alpaca::TaoBot::set_profit(order_t *close_order_, order_t *open_order_) {
   close_order_->profit = compute_profit(close_order_, open_order_);
+
+  close_order_->max_position_profit = open_order_->max_position_profit;
+  close_order_->max_profit = open_order_->max_profit;
+  close_order_->max_profit_at = open_order_->max_profit_at;
+  close_order_->min_profit = open_order_->min_profit;
+  close_order_->min_profit_at = open_order_->min_profit_at;
   close_order_->stop_loss = open_order_->stop_loss;
   close_order_->stop_profit = open_order_->stop_profit;
 }

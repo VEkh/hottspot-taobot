@@ -8,6 +8,10 @@
 bool Alpaca::TaoBot::is_within_entry_window(const reversal_t reversal) {
   const double mid = current_mid();
 
+  if (!reversal.at || !reversal.mid) {
+    return false;
+  }
+
   if (reversal.type == reversal_type_t::REVERSAL_HIGH && mid < reversal.mid) {
     return true;
   }

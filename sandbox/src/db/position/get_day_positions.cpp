@@ -23,7 +23,9 @@ DB::Position::get_day_positions(const get_day_positions_args_t args) {
 
   const char *query_format = R"(
     select
-      *
+      *,
+      extract(epoch from closed_at) as closed_at_epoch,
+      extract(epoch from opened_at) as opened_at_epoch
     from
       positions
     where

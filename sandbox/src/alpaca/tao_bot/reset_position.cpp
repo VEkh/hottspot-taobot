@@ -24,11 +24,31 @@ void Alpaca::TaoBot::reset_position() {
     return;
   }
 
-  if (should_toggle_is_trending(this->close_order)) {
+  // TODO: Decide
+  if (should_toggle_is_trending(this->close_order, this->open_order)) {
     toggle_is_trending(this->close_order);
-  } else {
-    this->current_trend = trend_meta_t();
+    // } else {
+    //   this->current_trend = trend_meta_t();
   }
+
+  // if (this->should_stop_profit) {
+  //   trend_t new_trend = trend_t::TREND_CONSOLIDATION;
+
+  //   if (this->close_order.profit > 0) {
+  //     new_trend = this->close_order.action == order_action_t::BUY
+  //                     ? trend_t::TREND_DOWN
+  //                     : trend_t::TREND_UP;
+  //   } else {
+  //     new_trend = this->close_order.action == order_action_t::BUY
+  //                     ? trend_t::TREND_UP
+  //                     : trend_t::TREND_DOWN;
+  //   }
+
+  //   this->current_trend.at = this->current_epoch;
+  //   this->current_trend.trend = new_trend;
+  // } else if (should_toggle_is_trending(this->close_order)) {
+  //   toggle_is_trending(this->close_order);
+  // }
 
   const position_t position = {
       .close_order = this->close_order,

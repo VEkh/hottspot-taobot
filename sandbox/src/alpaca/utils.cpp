@@ -79,14 +79,17 @@ bool is_end_of_trading_period(const double epoch) {
 }
 
 bool is_holiday(const double epoch) {
+  // TODO: Make separate BAD_DATA map and add 2022-03-15 to it
   std::map<std::string, bool> HOLIDAYS = {
-      {"2023-01-02", true}, {"2023-01-16", true}, {"2023-02-20", true},
-      {"2023-04-07", true}, {"2023-05-29", true}, {"2023-06-19", true},
-      {"2023-07-04", true}, {"2023-09-04", true}, {"2023-11-23", true},
-      {"2023-12-25", true}, {"2024-01-01", true}, {"2024-01-15", true},
-      {"2024-02-19", true}, {"2024-03-29", true}, {"2024-05-27", true},
-      {"2024-06-19", true}, {"2024-07-04", true}, {"2024-09-02", true},
-      {"2024-11-28", true}, {"2024-12-25", true},
+      {"2022-01-17", true}, {"2022-03-15", true}, {"2022-04-15", true},
+      {"2022-06-20", true}, {"2022-12-26", true}, {"2023-01-02", true},
+      {"2023-01-16", true}, {"2023-02-20", true}, {"2023-04-07", true},
+      {"2023-05-29", true}, {"2023-06-19", true}, {"2023-07-04", true},
+      {"2023-09-04", true}, {"2023-11-23", true}, {"2023-12-25", true},
+      {"2024-01-01", true}, {"2024-01-15", true}, {"2024-02-19", true},
+      {"2024-03-29", true}, {"2024-05-27", true}, {"2024-06-19", true},
+      {"2024-07-04", true}, {"2024-09-02", true}, {"2024-11-28", true},
+      {"2024-12-25", true},
   };
 
   const std::string date_string = ::utils::time_::date_string(epoch);
