@@ -7,9 +7,11 @@
 #include "lib/utils/float.cpp"          // ::utils::float_
 #include "lib/utils/integer.cpp"        // ::utils::integer_
 #include "lib/utils/io.cpp"             // ::utils::io
+#include "lib/utils/time.cpp"           // ::utils::time_
 #include "position.h" // DB::Position, fmt, net_return_args_t, position_t
 #include <iostream>   // std::cout, std::endl
 #include <list>       // std::list
+#include <map>        // std::map
 #include <math.h>     // INFINITY, abs
 #include <stdio.h>    // printf
 #include <string>     // std::string
@@ -20,6 +22,8 @@ void DB::Position::net_return(const net_return_args_t args) {
   const double timer_start_epoch = time(nullptr);
   const std::string api_key = args.api_key;
   double net_return_ = 0.0;
+
+  std::map<std::string, int> day_positions_count;
 
   json config_json = ::utils::io::load_config(args.project, api_key);
   json api_key_json = config_json[api_key];
@@ -48,41 +52,69 @@ void DB::Position::net_return(const net_return_args_t args) {
 
   if (args.log_positions) {
     std::cout << fmt.bold << fmt.magenta;
-    printf("Max Profit | Min Profit | Avg One Sec Variance | #\n");
-    printf("------------------------------------------------------------\n");
+    printf(
+        "Opened At                | Current Profit | Min Profit | Max Profit | "
+        "#\n");
+    printf("-------------------------------------------------------------------"
+           "---------------\n");
   }
 
   int position_i = 0;
 
   for (const position_t position : positions) {
-    const avg_one_sec_variances_t avg_one_sec_variances =
-        db_quote.get_avg_one_sec_variances({
-            .debug = args.debug,
-            .symbol = args.symbol,
-            .timestamp_upper_bound = position.opened_at,
-        });
-
     net_return_ += position.current_profit * abs(position.close_order_quantity);
+
+    const std::string date_string = ::utils::time_::date_string(
+        position.opened_at, "%F", "America/Chicago");
+
+    day_positions_count[date_string]++;
 
     position_i++;
 
     std::cout << fmt.bold << fmt.magenta;
 
     if (args.log_positions) {
-      printf("%.2f       |  %.2f     | %.5f              | %i of %i \n",
-             position.max_profit, position.min_profit,
-             avg_one_sec_variances.running, position_i, total_positions);
-      printf("------------------------------------------------------------\n");
+      printf("%s      | %+.2f          | %+.2f      | %+.2f      | %i of %i \n",
+             ::utils::time_::date_string(position.opened_at, "%F %R CT",
+                                         "America/Chicago")
+                 .c_str(),
+             position.current_profit, position.max_profit, position.min_profit,
+             position_i, total_positions);
+      printf("-----------------------------------------------------------------"
+             "-----------------\n");
     } else {
       std::cout << "Positions Processed: " << position_i << " of "
                 << total_positions << "\r";
     }
   }
 
+  int days_n = 0;
+  int single_position_days_n = 0;
+  std::map<std::string, int>::iterator day_count;
+
+  for (day_count = day_positions_count.begin();
+       day_count != day_positions_count.end(); day_count++) {
+    if (day_count->second == 1) {
+      single_position_days_n++;
+    }
+
+    days_n++;
+  }
+
   if (!args.log_positions) {
     std::cout << std::endl;
   }
 
+  std::cout << std::endl;
+
+  const double single_position_days_percent =
+      100.0 * ((float)single_position_days_n / days_n);
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("# Single-Position Days: ");
+  std::cout << fmt.bold << fmt.cyan;
+  printf("%i of %i (%.2f%%)\n", single_position_days_n, days_n,
+         single_position_days_percent);
   std::cout << std::endl;
 
   std::cout << fmt.bold << fmt.cyan;
