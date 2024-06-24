@@ -94,7 +94,6 @@ struct reversals_t {
 
 struct order_t {
   order_action_t action = order_action_t::BUY;
-  double day_range = 0.00; // TODO: Decide
   reversal_t entry_reversal;
   double execution_price = 0.00;
   std::string id = "";
@@ -109,11 +108,10 @@ struct order_t {
   order_status_t status = order_status_t::ORDER_INIT;
   double stop_loss = 0.00;
   double stop_profit = 0.00;
-  reversal_t stop_profit_reversal; // TODO: Decide
+  reversal_t stop_profit_reversal;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::DAY;
   double timestamp = 0;
-  trend_meta_t trend; // TODO: Decide
   order_type_t type = order_type_t::MARKET;
 };
 

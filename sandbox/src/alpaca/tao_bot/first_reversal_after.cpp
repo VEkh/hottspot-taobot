@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_first_reversal_after
 #define ALPACA__TAO_BOT_first_reversal_after
 

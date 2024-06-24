@@ -2,7 +2,7 @@
 #define ALPACA__TAO_BOT_toggle_is_trending
 
 #include "is_trending.cpp" // is_trending
-#include "tao_bot.h"       // Alpaca::TaoBot, trend_t
+#include "tao_bot.h"       // Alpaca::TaoBot, order_t, trend_t
 
 void Alpaca::TaoBot::toggle_is_trending(const order_t &order) {
   double new_trend_at = 0;
@@ -13,12 +13,6 @@ void Alpaca::TaoBot::toggle_is_trending(const order_t &order) {
   } else {
     new_trend = order.action == order_action_t::BUY ? trend_t::TREND_UP
                                                     : trend_t::TREND_DOWN;
-
-    // TODO: Decide
-    if (this->should_stop_profit && order.profit > 0) {
-      new_trend = order.action == order_action_t::BUY ? trend_t::TREND_DOWN
-                                                      : trend_t::TREND_UP;
-    }
 
     new_trend_at = this->current_epoch;
   }

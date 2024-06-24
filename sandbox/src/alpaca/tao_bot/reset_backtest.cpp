@@ -1,9 +1,8 @@
 #ifndef ALPACA__TAO_BOT_reset_backtest
 #define ALPACA__TAO_BOT_reset_backtest
 
-#include "advance_current_epoch.cpp"  // advance_current_epoch
-#include "force_init_trend_await.cpp" // force_init_trend_await // TODO: Decide
-#include "set_market_open_epoch.cpp"  // set_market_open_epoch
+#include "advance_current_epoch.cpp" // advance_current_epoch
+#include "set_market_open_epoch.cpp" // set_market_open_epoch
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversals_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
@@ -19,9 +18,7 @@ void Alpaca::TaoBot::reset_backtest() {
 
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
-  this->day_candle = candle_t(); // TODO: Decide
-  this->dynamic_trend_type =
-      this->api_client.config.dynamic_trend_type; // TODO: Decide
+  this->day_candle = candle_t();
   this->performance = performance_t();
   this->reversals = reversals_t();
   this->reversals.timeframe_minutes =
@@ -30,12 +27,7 @@ void Alpaca::TaoBot::reset_backtest() {
   this->secondary_reversals.timeframe_minutes =
       this->api_client.config.secondary_reversal_timeframe_minutes;
   this->started_at = this->current_epoch;
-  // TODO: Decide
-  this->tertiary_reversals = reversals_t();
-  this->tertiary_reversals.timeframe_minutes =
-      this->api_client.config.tertiary_reversal_timeframe_minutes;
 
-  force_init_trend_await(); // TODO: Decide
   set_market_open_epoch();
 }
 

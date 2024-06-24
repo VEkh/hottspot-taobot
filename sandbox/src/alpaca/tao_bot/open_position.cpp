@@ -25,14 +25,11 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
                               const double quantity_) {
   order_t new_open_order;
   new_open_order.action = open_action;
-  new_open_order.day_range = this->day_candle.range(); // TODO: Decide
   new_open_order.entry_reversal = this->entry_reversal;
   new_open_order.max_profit_at = this->current_epoch;
   new_open_order.min_profit_at = this->current_epoch;
   new_open_order.quantity = quantity_;
-  new_open_order.stop_profit_reversal = this->entry_reversal; // TODO: Decide
   new_open_order.symbol = this->symbol;
-  new_open_order.trend = this->current_trend; // TODO: Decide
   new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;

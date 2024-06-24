@@ -76,7 +76,6 @@ enum trend_t {
 
 struct trend_meta_t {
   double at = 0;
-  bool is_initialized = false; // TODO: Decide
   trend_t trend = trend_t::TREND_CONSOLIDATION;
 };
 } // namespace t

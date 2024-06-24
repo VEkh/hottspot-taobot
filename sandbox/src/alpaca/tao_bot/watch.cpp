@@ -2,7 +2,7 @@
 #define ALPACA__TAO_BOT_watch
 
 #include "advance_current_epoch.cpp"     // advance_current_epoch
-#include "build_day_candle.cpp"          // build_day_candle // TODO: Decide
+#include "build_day_candle.cpp"          // build_day_candle
 #include "build_reversals.cpp"           // build_reversals
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
@@ -22,15 +22,11 @@
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
-#include "set_open_order_reversals.cpp" // set_open_order_reversals // TODO: Decide
-#include "set_position_status.cpp"      // set_order_statuses
-#include "set_stop_profit_reversals_timeframe.cpp" // set_stop_profit_reversals_timeframe // TODO: Decide
-#include "set_stop_profit_win_percentile.cpp" // set_stop_profit_win_percentile // TODO: Decide
-#include "set_trend_type.cpp"                 // set_trend_type // TODO: Decide
-#include "should_terminate.cpp"        // should_terminate
-#include "tao_bot.h"                   // Alpaca::TaoBot
-#include "update_account_snapshot.cpp" // update_account_snapshot
-#include <iostream>                    // std::cout, std::flush
+#include "set_position_status.cpp"       // set_order_statuses
+#include "should_terminate.cpp"          // should_terminate
+#include "tao_bot.h"                     // Alpaca::TaoBot
+#include "update_account_snapshot.cpp"   // update_account_snapshot
+#include <iostream>                      // std::cout, std::flush
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
@@ -40,11 +36,9 @@ void Alpaca::TaoBot::watch() {
 
     read_quotes();
     read_candles();
-    build_day_candle(); // TODO: Decide
+    build_day_candle();
     build_reversals(this->reversals);
     build_reversals(this->secondary_reversals, true);
-    build_reversals(this->tertiary_reversals, true); // TODO: Decide
-    set_trend_type();                                // TODO: Decide
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
@@ -56,7 +50,6 @@ void Alpaca::TaoBot::watch() {
       log_quote();
       log_reversals(this->reversals);
       log_reversals(this->secondary_reversals);
-      log_reversals(this->tertiary_reversals); // TODO: Decide
       log_reversal_metadata();
       log_position();
       log_performance();
@@ -66,9 +59,6 @@ void Alpaca::TaoBot::watch() {
     cancel_stale_open_order();
     open_and_persist_position();
     set_open_order_prices();
-    set_stop_profit_reversals_timeframe(); // TODO: Decide
-    set_stop_profit_win_percentile();      // TODO: Decide
-    set_open_order_reversals();            // TODO: Decide
 
     close_position();
     set_close_order_prices();

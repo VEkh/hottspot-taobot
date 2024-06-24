@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_build_day_candle
 #define ALPACA__TAO_BOT_build_day_candle
 

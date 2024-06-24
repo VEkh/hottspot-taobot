@@ -10,19 +10,19 @@
 #include "db/candle/candle.cpp"             // DB::Candle
 #include "db/position/position.cpp"         // DB::Position
 #include "db/utils/utils.cpp"               // DB::Utils
-#include "initialize_current_trend.cpp" // initialize_current_trend // TODO: Decide
-#include "lib/formatted.cpp"            // Formatted::error_message
-#include "lib/pg/pg.cpp"                // Pg
-#include "lib/utils/boolean.cpp"        // ::utils::boolean
-#include "lib/utils/io.cpp"             // ::utils::io
-#include "lib/utils/string.cpp"         // ::utils::string
-#include "read_closed_positions.cpp"    // read_closed_positions
-#include "set_market_open_epoch.cpp"    // set_market_open_epoch
-#include "tao_bot.h"                    // Alpaca::TaoBot
-#include "update_account_snapshot.cpp" // update_account_snapshot
-#include <iostream>                    // std::cout, std::endl
-#include <locale.h>                    // setlocale
-#include <map>                         // std::map
+#include "initialize_current_trend.cpp"     // initialize_current_trend
+#include "lib/formatted.cpp"                // Formatted::error_message
+#include "lib/pg/pg.cpp"                    // Pg
+#include "lib/utils/boolean.cpp"            // ::utils::boolean
+#include "lib/utils/io.cpp"                 // ::utils::io
+#include "lib/utils/string.cpp"             // ::utils::string
+#include "read_closed_positions.cpp"        // read_closed_positions
+#include "set_market_open_epoch.cpp"        // set_market_open_epoch
+#include "tao_bot.h"                        // Alpaca::TaoBot
+#include "update_account_snapshot.cpp"      // update_account_snapshot
+#include <iostream>                         // std::cout, std::endl
+#include <locale.h>                         // setlocale
+#include <map>                              // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
 #include <vector>    // std::vector
@@ -79,22 +79,11 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     std::vector<std::string> tradeable_symbols =
         ::utils::io::tradeable_symbols("alpaca");
 
-    // TODO: Decide
-    this->dynamic_trend_type = this->api_client.config.dynamic_trend_type;
-
     this->reversals.timeframe_minutes =
         this->api_client.config.reversal_timeframe_minutes;
 
     this->secondary_reversals.timeframe_minutes =
         this->api_client.config.secondary_reversal_timeframe_minutes;
-
-    // TODO: Decide
-    this->tertiary_reversals.timeframe_minutes =
-        this->api_client.config.tertiary_reversal_timeframe_minutes;
-
-    // TODO: Decide
-    this->should_stop_profit =
-        this->api_client.config.stop_profit_symbols[this->symbol];
 
     this->tradeable_symbols_count = tradeable_symbols.size();
 
@@ -104,7 +93,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
     this->performance = build_performance();
 
-    initialize_current_trend(); // TODO: Decide
+    initialize_current_trend();
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(
              "❌ JSON type error during initialization. Retrying.")

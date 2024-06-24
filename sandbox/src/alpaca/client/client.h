@@ -26,30 +26,13 @@ public:
     std::string base_url;
     std::string data_base_url;
     bool debug_sql = false;
-    std::string dynamic_trend_type = ""; // TODO: Decide
     bool is_live;
-    int late_start_seconds = 6;                      // Production's average
-    double non_init_reversing_stop_loss_ratio = 0.0; // TODO: Decide
-    double non_init_reversing_trailing_stop_loss_ratio = 0.0; // TODO: Decide
-    double peak_padding_ratio = 0.0;                          // TODO: Decide
+    int late_start_seconds = 6;      // Production's average
+    double peak_padding_ratio = 0.0; // TODO: Decide
     int reversal_timeframe_minutes = 3;
-    std::string reverse_profit_during = "";    // TODO: Decide
-    std::string second_reversal_ref_type = ""; // TODO: Decide
+    std::string reverse_profit_during = ""; // TODO: Decide
     int secondary_reversal_timeframe_minutes = 0;
-    bool should_await_after_no_max_loss = false;                // TODO: Decide
-    bool should_await_init_trend = false;                       // TODO: Decide
-    bool should_immediately_reverse_non_init_reversing = false; // TODO: Decide
-    bool should_toggle_dynamic_trend_type = false;              // TODO: Decide
-    bool should_trend_enter_at_record = false;                  // TODO: Decide
-    bool should_trend_entry_await_correction = true;            // TODO: Decide
-    std::map<std::string, bool> stop_profit_symbols = {};       // TODO: Decide
-    std::map<double, int> stop_profit_percentile_tiers = {};    // TODO: Decide
-    std::map<double, int> stop_profit_tiers = {};               // TODO: Decide
-    int tertiary_reversal_timeframe_minutes = 0;                // TODO: Decide
-    double trend_entry_percentile = 0.0;                        // TODO: Decide
-    double trend_slip_percentile = 0.0;                         // TODO: Decide
-    double win_percentile = 0.0;                                // TODO: Decide
-    std::string win_percentile_range = "DAY";                   // TODO: Decide
+    double win_percentile = 0.0; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_day_range_percentile
 #define ALPACA__TAO_BOT_day_range_percentile
 
