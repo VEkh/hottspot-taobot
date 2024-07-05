@@ -39,6 +39,7 @@ void Alpaca::TaoBot::watch() {
     build_day_candle();
     build_reversals(this->reversals);
     build_reversals(this->secondary_reversals, true);
+    build_reversals(this->tertiary_reversals); // TODO: Decide
 
     if (!this->backtest.is_active ||
         !this->backtest.config.force_exec_slow_queries) {
@@ -50,6 +51,7 @@ void Alpaca::TaoBot::watch() {
       log_quote();
       log_reversals(this->reversals);
       log_reversals(this->secondary_reversals);
+      log_reversals(this->tertiary_reversals); // TODO: Decide
       log_reversal_metadata();
       log_position();
       log_performance();

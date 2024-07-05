@@ -79,6 +79,7 @@ private:
   reversal_t entry_reversal;
   reversals_t reversals;
   reversals_t secondary_reversals;
+  reversals_t tertiary_reversals; // TODO: Decide
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::map<std::string, std::string> flags;
@@ -129,6 +130,7 @@ private:
   reversal_t latest_reversal(reversals_t &, const reversal_type_t);
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);
+  reversal_t opening_trend_reversal(); // TODO: Decide
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
@@ -141,6 +143,7 @@ private:
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote(const bool);
+  void force_init_trend_await(); // TODO: Decide
   void initialize(std::string, std::map<std::string, std::string> &);
   void initialize_current_trend();
   void log_account_snapshot();

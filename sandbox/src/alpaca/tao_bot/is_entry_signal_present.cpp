@@ -8,6 +8,9 @@
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
+// TODO: Decide
+// #include "opening_trend_reversal.cpp" // opening_trend_reversal
+
 bool Alpaca::TaoBot::is_entry_signal_present() {
   if (this->reversals.any_empty()) {
     return false;
@@ -50,14 +53,16 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       secondary_reversal = last_position.close_order.stop_profit_reversal;
     } else {
       const double equator_percentile = 50.0;
+      reversals_t reversals_ =
+          this->api_client.config.should_await_asymmetric_reversal
+              ? this->tertiary_reversals
+              : this->secondary_reversals;
 
       const reversal_t first_high = first_reversal_after(
-          this->secondary_reversals, this->current_trend.at,
-          reversal_type_t::REVERSAL_HIGH);
+          reversals_, this->current_trend.at, reversal_type_t::REVERSAL_HIGH);
 
       const reversal_t first_low = first_reversal_after(
-          this->secondary_reversals, this->current_trend.at,
-          reversal_type_t::REVERSAL_LOW);
+          reversals_, this->current_trend.at, reversal_type_t::REVERSAL_LOW);
 
       if (first_high.mid &&
           day_range_percentile(first_high.mid) >= equator_percentile) {

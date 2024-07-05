@@ -16,6 +16,12 @@ bool Alpaca::TaoBot::should_reverse_profit() {
     return false;
   }
 
+  // TODO: Decide
+  if (this->api_client.config.should_hold_first_position &&
+      this->closed_positions.empty()) {
+    return false;
+  }
+
   reversal_t stop_profit_reversal = latest_reversal_after(
       this->secondary_reversals, this->open_order_ptr->timestamp,
       this->open_order_ptr->entry_reversal.opposite_type());
@@ -23,7 +29,10 @@ bool Alpaca::TaoBot::should_reverse_profit() {
   if (stop_profit_reversal.at) {
     bool should_close = false;
 
-    if (!this->closed_positions.empty()) {
+    // TODO: Decide
+    if (!this->closed_positions.empty() ||
+        this->api_client.config.should_await_asymmetric_reversal ||
+        this->api_client.config.should_await_symmetric_reversal) {
       if (config == "RECORD_AFTER_INIT_AND_SLIP") {
         const reversal_t record_reversal =
             latest_record_reversal(this->reversals, stop_profit_reversal.type);

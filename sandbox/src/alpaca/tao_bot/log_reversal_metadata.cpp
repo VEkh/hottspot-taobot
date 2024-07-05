@@ -56,10 +56,49 @@ void Alpaca::TaoBot::log_reversal_metadata() {
               << std::endl;
   }
 
+  // TODO: Decide
+  Formatted::Stream asymmetric_reversal_color =
+      this->api_client.config.should_await_asymmetric_reversal ? fmt.green
+                                                               : fmt.red;
+
+  const std::string asymmetric_reversal_text =
+      this->api_client.config.should_await_asymmetric_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should await asymmetric reversal? ");
+  std::cout << asymmetric_reversal_color << asymmetric_reversal_text
+            << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream symmetric_reversal_color =
+      this->api_client.config.should_await_symmetric_reversal ? fmt.green
+                                                              : fmt.red;
+
+  const std::string symmetric_reversal_text =
+      this->api_client.config.should_await_symmetric_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should await symmetric reversal? ");
+  std::cout << symmetric_reversal_color << symmetric_reversal_text << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_hold_first_position_color =
+      this->api_client.config.should_hold_first_position ? fmt.green : fmt.red;
+
+  const std::string should_hold_first_position_text =
+      this->api_client.config.should_hold_first_position ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should hold first position? ");
+  std::cout << should_hold_first_position_color
+            << should_hold_first_position_text << std::endl;
+
   std::cout << fmt.bold << fmt.yellow;
   printf("Trend Slip Percentile: ");
   std::cout << fmt.cyan;
-  printf("%.2f\n", this->EQUATOR_PERCENTILE);
+  printf("%.2f\n", this->api_client.config.trend_slip_percentile
+                       ? this->api_client.config.trend_slip_percentile
+                       : this->EQUATOR_PERCENTILE);
 
   if (this->api_client.config.win_percentile) {
     std::cout << fmt.bold << fmt.yellow;

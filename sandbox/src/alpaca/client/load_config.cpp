@@ -84,6 +84,36 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_await_asymmetric_reversal")) {
+    config.should_await_asymmetric_reversal =
+        (bool)api_key_json["should_await_asymmetric_reversal"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_await_symmetric_reversal")) {
+    config.should_await_symmetric_reversal =
+        (bool)api_key_json["should_await_symmetric_reversal"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_hold_first_position")) {
+    config.should_hold_first_position =
+        (bool)api_key_json["should_hold_first_position"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("tertiary_reversal_timeframe_minutes")) {
+    config.tertiary_reversal_timeframe_minutes =
+        (int)api_key_json["tertiary_reversal_timeframe_minutes"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("trend_slip_percentile")) {
+    config.trend_slip_percentile =
+        (double)api_key_json["trend_slip_percentile"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("win_percentile")) {
     config.win_percentile = (double)api_key_json["win_percentile"];
   }
@@ -103,7 +133,16 @@ void Alpaca::Client::load_config() {
       .reverse_profit_during = config.reverse_profit_during, // TODO: Decide
       .secondary_reversal_timeframe_minutes =
           config.secondary_reversal_timeframe_minutes,
-      .win_percentile = config.win_percentile, // TODO: Decide
+      .should_await_asymmetric_reversal =
+          config.should_await_asymmetric_reversal, // TODO: Decide
+      .should_await_symmetric_reversal =
+          config.should_await_symmetric_reversal, // TODO: Decide
+      .should_hold_first_position =
+          config.should_hold_first_position, // TODO: Decide
+      .tertiary_reversal_timeframe_minutes =
+          config.tertiary_reversal_timeframe_minutes,        // TODO: Decide
+      .trend_slip_percentile = config.trend_slip_percentile, // TODO: Decide
+      .win_percentile = config.win_percentile,               // TODO: Decide
   };
 }
 

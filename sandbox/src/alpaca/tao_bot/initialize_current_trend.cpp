@@ -1,10 +1,14 @@
 #ifndef ALPACA__TAO_BOT_initialize_current_trend
 #define ALPACA__TAO_BOT_initialize_current_trend
 
-#include "tao_bot.h" // Alpaca::TaoBot, order_action_t, trend_t
+#include "force_init_trend_await.cpp" // force_init_trend_await // TODO: Decide
+#include "tao_bot.h"                  // Alpaca::TaoBot, order_action_t, trend_t
 
 void Alpaca::TaoBot::initialize_current_trend() {
   if (this->closed_positions.empty()) {
+    // TODO: Decide
+    force_init_trend_await();
+
     return;
   }
 
