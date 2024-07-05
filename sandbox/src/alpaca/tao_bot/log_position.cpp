@@ -3,7 +3,6 @@
 
 #include "alpaca/constants.cpp"     // Alpaca::constants
 #include "day_range_percentile.cpp" // day_range_percentile
-#include "is_in_win_percentile.cpp" // is_in_win_percentile // TODO: Decide
 #include "is_position_closed.cpp"   // is_position_closed
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/integer.cpp"    // utils::integer_
@@ -92,15 +91,6 @@ void Alpaca::TaoBot::log_position() {
          "Unit Deficit: %.2f\n",
          this->exit_prices.stop_profit, this->exit_prices.stop_loss,
          unit_deficit);
-
-  // TODO: Decide
-  printf("Max Profit Day Range %%: %.2f%%%s\n",
-         day_range_percentile(this->open_order_ptr,
-                              this->open_order_ptr->max_profit),
-         is_in_win_percentile(this->open_order_ptr,
-                              this->open_order_ptr->max_profit)
-             ? " ✅"
-             : "");
 
   printf("Quantity: %.5f\n", this->open_order_ptr->quantity);
 

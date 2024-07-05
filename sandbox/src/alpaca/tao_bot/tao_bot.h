@@ -79,11 +79,9 @@ private:
   reversal_t entry_reversal;
   reversals_t reversals;
   reversals_t secondary_reversals;
-  reversals_t tertiary_reversals; // TODO: Decide
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::map<std::string, std::string> flags;
-  std::string dynamic_trend_type = "FIRST_TRANS"; // TODO: Decide
   std::string symbol;
   std::vector<position_t> closed_positions;
   trend_meta_t current_trend;
@@ -92,7 +90,6 @@ private:
   bool is_early_close_day();
   bool is_end_of_trading_period();
   bool is_entry_signal_present();
-  bool is_in_win_percentile(const order_t *, const double); // TODO: Decide
   bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
@@ -130,7 +127,6 @@ private:
   reversal_t latest_reversal(reversals_t &, const reversal_type_t);
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);
-  reversal_t opening_trend_reversal(); // TODO: Decide
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
@@ -143,7 +139,7 @@ private:
   void cancel_stale_open_order();
   void close_position();
   void fetch_and_persist_quote(const bool);
-  void force_init_trend_await(); // TODO: Decide
+  void force_init_reversal_await();
   void initialize(std::string, std::map<std::string, std::string> &);
   void initialize_current_trend();
   void log_account_snapshot();

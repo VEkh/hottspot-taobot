@@ -30,14 +30,8 @@ public:
     int late_start_seconds = 6;      // Production's average
     double peak_padding_ratio = 0.0; // TODO: Decide
     int reversal_timeframe_minutes = 3;
-    std::string reverse_profit_during = ""; // TODO: Decide
     int secondary_reversal_timeframe_minutes = 0;
-    bool should_await_asymmetric_reversal = false; // TODO: Decide
-    bool should_await_symmetric_reversal = false;  // TODO: Decide
-    bool should_hold_first_position = false;       // TODO: Decide
-    int tertiary_reversal_timeframe_minutes = 0;   // TODO: Decide
-    double trend_slip_percentile = 0.0;            // TODO: Decide
-    double win_percentile = 0.0;                   // TODO: Decide
+    bool should_hold_first_position = false; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
