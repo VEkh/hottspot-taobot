@@ -34,9 +34,7 @@ window=0
 tmux -2 new-session -d -s "${session}" -n code
 tmux send-keys -t "${session}:${window}" "${app_dir}/bin/cron restart &&" "Enter"
 tmux send-keys -t "${session}:${window}" "${app_dir}/bin/ssh restart" "Enter"
-tmux split-window -h -p 75 -t "${session}:${window}" "vim ."
-
-window_i=0
+tmux split-window -h -p 66 -t "${session}:${window}" "vim ."
 
 for api_key in "${api_keys[@]}"; do
   api_key_log_dir="${app_dir}/log/${project}/${api_key}"
@@ -48,15 +46,17 @@ for api_key in "${api_keys[@]}"; do
 
     touch "${log_filepath}"
 
-    if [[ $((window_i % 2)) == 0 ]]; then
+    if [[ $((new_window_i % 2)) == 0 ]]; then
       tmux new-window -t "${session}" -n "${api_key}" "tail -f ${log_filepath}"
+      window=$((window + 1))
     else
-      window=$(((window_i / 2) + 1))
       tmux split-window -t "${session}:${window}" -h "tail -f ${log_filepath}"
     fi
 
-    window_i=$((window_i + 1))
+    new_window_i=$((new_window_i + 1))
   done
+
+  new_window_i=0
 done
 
 tmux new-window -t "${session}" \
@@ -73,7 +73,8 @@ tmux new-window -t "${session}" \
 tmux split-window -t "${session}:stock-account-streams" -h \
   "$(tail_cmd "${project}/${api_keys[1]}"  "account_stream")"
 
-window_i=$((window_i + 4))
+window=$((window + 2))
+
 for symbol in "${symbols[@]}"; do
   log_dir="${app_dir}/../sandbox/log/${project}/ml/candle_predict"
 
@@ -83,14 +84,14 @@ for symbol in "${symbols[@]}"; do
 
   touch "${log_filepath}"
 
-  if [[ $((window_i % 2)) == 0 ]]; then
+  if [[ $((new_window_i % 2)) == 0 ]]; then
     tmux new-window -t "${session}" -n "ml" "tail -f ${log_filepath}"
+    window=$((window + 1))
   else
-    window=$(((window_i / 2) + 1))
     tmux split-window -t "${session}:${window}" -h "tail -f ${log_filepath}"
   fi
 
-  window_i=$((window_i + 1))
+  new_window_i=$((new_window_i + 1))
 done
 
 
