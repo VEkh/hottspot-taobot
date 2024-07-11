@@ -3,10 +3,12 @@
 
 #include "alpaca/types.cpp"                 // Alpaca::t
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/market_close/market_close.cpp" // DB::MarketClose
 #include "db/quote/quote.cpp"               // DB::Quote
 #include "db/utils/utils.cpp"               // DB::Utils
 #include "lib/pg/pg.cpp"                    // Pg
 #include "types.cpp"                        // Global::t
+#include <list>                             // std::list
 #include <map>                              // std::map
 #include <string>                           // std::string
 #include <time.h>                           // time
@@ -52,6 +54,8 @@ public:
   TaoBotBacktest(){};
   TaoBotBacktest(const init_args_t);
 
+  DB::MarketClose db_market_close;
+
   bool is_active = false;
   int slow_query_countdown = 0;
   long int started_at = time(nullptr);
@@ -76,13 +80,10 @@ private:
 
   static constexpr int SLOW_QUERY_EVERY = 100;
 
+  std::list<std::string> tradeable_symbols;
   std::map<std::string, std::string> flags;
 
-  std::string pub_sub_clock_key();
-  std::string subscribe_clock(const bool);
-
   void load_config();
-  void publish_clock(const double, const bool);
 };
 } // namespace Alpaca
 

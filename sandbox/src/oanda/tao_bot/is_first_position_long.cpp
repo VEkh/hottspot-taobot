@@ -4,15 +4,15 @@
 #include "lib/utils/io.cpp" // ::utils::io
 #include "tao_bot.h"        // Oanda::TaoBot
 #include <ctime>            // std::localtime, std::time, std::time_t
+#include <list>             // std::list
 #include <string>           // std::string
-#include <vector>           // std::vector
 
 bool Oanda::TaoBot::is_first_position_long() {
-  std::vector<std::string> symbols = ::utils::io::tradeable_symbols("oanda");
+  std::list<std::string> symbols = ::utils::io::tradeable_symbols("oanda");
   int index = 0;
   int i = 0;
 
-  for (std::vector<std::string>::iterator it = symbols.begin();
+  for (std::list<std::string>::iterator it = symbols.begin();
        it != symbols.end(); it++, i++) {
     if (*it == std::string(this->symbol)) {
       index = i;

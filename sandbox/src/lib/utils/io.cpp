@@ -176,13 +176,13 @@ std::string system_exec(const std::string &cmd) {
   return system_exec(cmd.c_str());
 }
 
-std::vector<std::string> tradeable_symbols(const std::string project) {
+std::list<std::string> tradeable_symbols(const std::string project) {
   const std::string symbols_filepath =
       std::string(APP_DIR) + "/bin/" + project + "/trade_symbols";
 
   std::ifstream file(symbols_filepath.c_str(), std::ios::in);
   std::string line;
-  std::vector<std::string> out;
+  std::list<std::string> out;
 
   while (std::getline(file, line)) {
     out.push_back(line);

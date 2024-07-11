@@ -21,11 +21,11 @@
 #include "tao_bot.h"                        // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"      // update_account_snapshot
 #include <iostream>                         // std::cout, std::endl
+#include <list>                             // std::list
 #include <locale.h>                         // setlocale
 #include <map>                              // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
-#include <vector>    // std::vector
 
 void Alpaca::TaoBot::initialize(std::string symbol_,
                                 std::map<std::string, std::string> &flags_) {
@@ -76,7 +76,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       throw std::runtime_error(message);
     }
 
-    std::vector<std::string> tradeable_symbols =
+    std::list<std::string> tradeable_symbols =
         ::utils::io::tradeable_symbols("alpaca");
 
     this->reversals.timeframe_minutes =
