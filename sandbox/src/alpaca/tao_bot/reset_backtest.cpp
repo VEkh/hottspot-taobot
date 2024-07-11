@@ -28,6 +28,7 @@ void Alpaca::TaoBot::reset_backtest() {
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
   this->day_candle = candle_t();
+  this->latest_candles = {};
   this->performance = performance_t();
   this->reversals = reversals_t();
   this->reversals.timeframe_minutes =

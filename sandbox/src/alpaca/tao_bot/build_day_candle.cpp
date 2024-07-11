@@ -2,7 +2,7 @@
 #define ALPACA__TAO_BOT_build_day_candle
 
 #include "current_mid.cpp" // current_mid
-#include "tao_bot.h"       // Alpaca::TaoBot
+#include "tao_bot.h"       // Alpaca::TaoBot, candle_t
 #include <valarray>        // std::valarray
 
 void Alpaca::TaoBot::build_day_candle() {

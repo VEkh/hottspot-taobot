@@ -60,6 +60,8 @@ public:
 
   static candle_bounds_t timestamp_to_bounds(const int, const long int);
 
+  int duration_minutes = 0;
+
   std::list<candle_t> get_latest(const time_range_args_t);
 
   void build(const build_args_t);
@@ -72,7 +74,6 @@ private:
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
-  int duration_minutes = 0;
   std::string symbol;
 
   std::list<candle_t> result_to_candles(const query_result_t &);

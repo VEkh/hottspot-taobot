@@ -29,6 +29,7 @@ public:
 
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;
+  using candle_bounds_t = DB::Candle::candle_bounds_t;
   using candle_t = DB::Candle::candle_t;
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
@@ -101,6 +102,7 @@ private:
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
+  bool should_read_candles();
   bool should_reverse_profit();
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
