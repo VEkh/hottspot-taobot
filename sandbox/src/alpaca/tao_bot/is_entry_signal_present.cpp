@@ -49,8 +49,6 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
 
       secondary_reversal = last_position.close_order.stop_profit_reversal;
     } else {
-      const double equator_percentile = 50.0;
-
       const reversal_t first_high = first_reversal_after(
           this->secondary_reversals, this->current_trend.at,
           reversal_type_t::REVERSAL_HIGH);
@@ -60,10 +58,10 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
           reversal_type_t::REVERSAL_LOW);
 
       if (first_high.mid &&
-          day_range_percentile(first_high.mid) >= equator_percentile) {
+          day_range_percentile(first_high.mid) >= this->EQUATOR_PERCENTILE) {
         secondary_reversal = first_high;
-      } else if (first_low.mid &&
-                 day_range_percentile(first_low.mid) <= equator_percentile) {
+      } else if (first_low.mid && day_range_percentile(first_low.mid) <=
+                                      this->EQUATOR_PERCENTILE) {
         secondary_reversal = first_low;
       }
 

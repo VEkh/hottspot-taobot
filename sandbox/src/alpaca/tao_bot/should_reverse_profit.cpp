@@ -9,9 +9,7 @@
 #include <string>                     // std::string
 
 bool Alpaca::TaoBot::should_reverse_profit() {
-  // TODO: Decide
-  if (this->api_client.config.should_hold_first_position &&
-      this->closed_positions.empty()) {
+  if (this->closed_positions.empty()) {
     return false;
   }
 

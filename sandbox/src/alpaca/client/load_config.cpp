@@ -73,12 +73,6 @@ void Alpaca::Client::load_config() {
         (int)api_key_json["secondary_reversal_timeframe_minutes"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("should_hold_first_position")) {
-    config.should_hold_first_position =
-        (bool)api_key_json["should_hold_first_position"];
-  }
-
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -93,8 +87,6 @@ void Alpaca::Client::load_config() {
       .reversal_timeframe_minutes = config.reversal_timeframe_minutes,
       .secondary_reversal_timeframe_minutes =
           config.secondary_reversal_timeframe_minutes,
-      .should_hold_first_position =
-          config.should_hold_first_position, // TODO: Decide
   };
 }
 

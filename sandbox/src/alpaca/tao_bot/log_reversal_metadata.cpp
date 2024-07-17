@@ -38,36 +38,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Dynamic Trend Type: ");
-  std::cout << fmt.cyan << "FIRST_TRANS" << std::endl;
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Peak Padding Ratio: ");
-  std::cout << fmt.cyan << this->api_client.config.peak_padding_ratio
-            << std::endl;
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Reverse profit during: ");
-  std::cout << fmt.cyan << "RECORD_AFTER_INIT_AND_SLIP" << std::endl;
-
-  // TODO: Decide
-  Formatted::Stream should_hold_first_position_color =
-      this->api_client.config.should_hold_first_position ? fmt.green : fmt.red;
-
-  const std::string should_hold_first_position_text =
-      this->api_client.config.should_hold_first_position ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should hold first position? ");
-  std::cout << should_hold_first_position_color
-            << should_hold_first_position_text << std::endl;
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Trend Slip Percentile: ");
-  std::cout << fmt.cyan;
-  printf("%.2f\n", this->EQUATOR_PERCENTILE);
-
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
     printf("Open Position Entry Reversal\n");

@@ -33,7 +33,6 @@ public:
     int late_start_seconds = 6; // Production's average
     int reversal_timeframe_minutes = 3;
     int secondary_reversal_timeframe_minutes = 0;
-    bool should_hold_first_position = false; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
