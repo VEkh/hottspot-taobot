@@ -8,7 +8,7 @@
 #include <string>           // std::string
 
 bool Oanda::TaoBot::is_first_position_long() {
-  std::list<std::string> symbols = ::utils::io::tradeable_symbols("oanda");
+  std::list<std::string> symbols = this->env_symbols;
   int index = 0;
   int i = 0;
 

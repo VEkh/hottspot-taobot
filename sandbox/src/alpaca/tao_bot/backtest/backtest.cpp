@@ -25,9 +25,9 @@ Alpaca::TaoBotBacktest::TaoBotBacktest(const init_args_t args) {
   this->db_market_close = DB::MarketClose(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->db_utils = DB::Utils(this->pg);
+  this->env_symbols = args.env_symbols;
   this->flags = args.flags;
   this->symbol = args.symbol;
-  this->tradeable_symbols = ::utils::io::tradeable_symbols("alpaca");
 
   this->db_utils.set_param({"statement_timeout", "1000"});
 

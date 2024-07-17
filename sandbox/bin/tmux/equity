@@ -5,16 +5,10 @@ filename=$(basename "${BASH_SOURCE[0]}")
 project="alpaca"
 
 # shellcheck disable=1090,1091
-source "${app_dir}/bin/utils" # active_api_keys
+source "${app_dir}/bin/utils" # active_api_keys, read_env_symbols
 
 # shellcheck disable=2207
 api_keys=($(active_api_keys "${project}"))
-
-symbols=()
-while IFS="" read -r line; do
-  symbol="${line}"
-  symbols+=("${symbol}")
-done < <(cat "${app_dir}/bin/${project}/trade_symbols")
 
 function tail_cmd() {
   log_file_dir="${app_dir}/log/${1}"
@@ -40,6 +34,9 @@ for api_key in "${api_keys[@]}"; do
   api_key_log_dir="${app_dir}/log/${project}/${api_key}"
 
   mkdir -p "${api_key_log_dir}"
+
+  # shellcheck disable=2207
+  symbols=($(read_env_symbols "${api_key}" "${project}"))
 
   for symbol in "${symbols[@]}"; do
     log_filepath="${api_key_log_dir}/${symbol}.log"

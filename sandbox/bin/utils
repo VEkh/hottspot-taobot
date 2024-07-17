@@ -204,6 +204,14 @@ function mk_file_dir() {
   mkdir -p "${dir}"
 }
 
+function read_env_symbols() {
+  env="${1}"
+  scope="${2}"
+  config="$(load_config "${scope}" "${env}")"
+
+  echo -e "${config}" | jq -j ".env_symbols // empty | join(\" \")"
+}
+
 function to_lower() {
   echo -e "$1" | awk '{ print tolower($0) }'
 }

@@ -41,7 +41,7 @@ bool Alpaca::TaoBotBacktest::should_await_epoch_advance(
       });
 
   return !::utils::iterable::are_equal(market_closed_symbols,
-                                       this->tradeable_symbols);
+                                       this->env_symbols);
 }
 
 #endif

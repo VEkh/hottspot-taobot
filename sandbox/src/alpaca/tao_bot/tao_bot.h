@@ -70,7 +70,6 @@ private:
   double market_open_epoch;
   double quantity;
   double started_at = time(nullptr);
-  int tradeable_symbols_count = 1;
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
@@ -82,6 +81,7 @@ private:
   reversals_t secondary_reversals;
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
+  std::list<std::string> env_symbols;
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::vector<position_t> closed_positions;
@@ -146,6 +146,7 @@ private:
   void initialize_current_trend();
   void log_account_snapshot();
   void log_end_of_trading_period();
+  void log_env_symbols();
   void log_performance();
   void log_position();
   void log_position_results();

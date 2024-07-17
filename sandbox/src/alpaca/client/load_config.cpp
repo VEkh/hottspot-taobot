@@ -1,15 +1,16 @@
 #ifndef ALPACA__CLIENT_load_config
 #define ALPACA__CLIENT_load_config
 
-#include "client.h"           // Alpaca::Client
-#include "deps.cpp"           // json
-#include "lib/formatted.cpp"  // Formatted::error_message
-#include "lib/utils/io.cpp"   // ::utils::io
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <map>                // std::map
-#include <stdexcept>          // std::invalid_argument
-#include <string>             // std::string
-#include <time.h>             // mktime, time, tm
+#include "client.h"             // Alpaca::Client
+#include "deps.cpp"             // json
+#include "lib/formatted.cpp"    // Formatted::error_message
+#include "lib/utils/io.cpp"     // ::utils::io
+#include "lib/utils/time.cpp"   // ::utils::time_
+#include "read_env_symbols.cpp" // read_env_symbols
+#include <map>                  // std::map
+#include <stdexcept>            // std::invalid_argument
+#include <string>               // std::string
+#include <time.h>               // mktime, time, tm
 
 void Alpaca::Client::load_config() {
   const std::string config_path =
@@ -41,7 +42,7 @@ void Alpaca::Client::load_config() {
   json api_key_json = config_json[api_key];
 
   std::vector<std::string> nested_required_keys = {
-      "account_stop_loss_ratio", "base_url",   "is_live",
+      "account_stop_loss_ratio", "base_url",   "env_symbols", "is_live",
       "late_start_seconds",      "secret_key",
   };
 
@@ -91,6 +92,7 @@ void Alpaca::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .data_base_url = config_json["data_base_url"],
       .debug_sql = config.debug_sql,
+      .env_symbols = read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
       .late_start_seconds = api_key_json["late_start_seconds"],
       .peak_padding_ratio = config.peak_padding_ratio, // TODO: Decide

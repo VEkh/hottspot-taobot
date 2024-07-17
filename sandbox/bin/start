@@ -7,12 +7,14 @@ shopt -s extglob
 app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
 project=$(dirname "${0}" | xargs basename)
 
-# ASCII, ascii_print, extract_flags, to_lower, to_upper
+# ASCII, ascii_print, extract_flags, read_env_symbols, to_lower, to_upper
 source "${app_dir}/bin/utils"
 
 flags=($(extract_flags "${@}"))
 declare -A flag_map
 extract_flags_to_map flag_map "${flags[@]}"
+
+api_key="${flag_map["api-key"]}"
 
 if [[ "${project}" = "bin" ]]; then
   cmd=$(basename "${0}")
@@ -25,8 +27,6 @@ fi
 ascii_print "$(date)\n" "cyan"
 
 function symbol_start() {
-  api_key="${flag_map["api-key"]}"
-
   if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
     ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
     exit 1
@@ -55,10 +55,13 @@ case $1 in
     ;;
 
   *)
-    symbols=()
-    while IFS="" read -r line; do
-      symbols+=("$line")
-    done < <(cat "$app_dir/bin/$project/trade_symbols")
+    symbols=($(read_env_symbols "${api_key}" "${project}"))
+
+    if [[ ("${#symbols[@]}" == 0) ]]; then
+      ascii_print "You must provide the \"${api_key}\" env with \`env_symbols\`" "red" >&2
+
+      exit 1
+    fi
 
     for symbol in "${symbols[@]}"; do
       symbol_start "${symbol}"

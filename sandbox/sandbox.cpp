@@ -6,13 +6,9 @@
 
 #include "db/market_close/market_close.cpp" // DB::MarketClose
 #include "lib/pg/pg.cpp"                    // Pg
-#include "lib/utils/io.cpp"                 // ::utils::io
 #include "lib/utils/iterable.cpp"           // ::utils::iterable
 
 int main(int argc, char *argv[]) {
-  std::list<std::string> tradeable_symbols =
-      ::utils::io::tradeable_symbols("alpaca");
-
   Pg pg((std::map<std::string, std::string>){
       {"env", "backtest"},
   });
@@ -30,7 +26,4 @@ int main(int argc, char *argv[]) {
   pg.disconnect();
 
   ::utils::iterable::print(symbols);
-
-  printf("are equal?: %i\n",
-         ::utils::iterable::are_equal(symbols, tradeable_symbols));
 }

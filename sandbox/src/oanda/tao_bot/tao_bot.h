@@ -116,7 +116,6 @@ private:
   int compute_quantity();
   int order_duration(const order_t *);
   int runtime();
-  int tradeable_symbols_count();
   json fetch_account_snapshot();
   json fetch_order(const order_t *);
   json fetch_trade(const int);

@@ -2,9 +2,11 @@
 #define ALPACA__CLIENT_H
 
 #include "alpaca/types.cpp"                // Alpaca::t
+#include "deps.cpp"                        // json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "types.cpp"                       // Global::t
+#include <list>                            // std::list
 #include <map>                             // std::map
 #include <string>                          // std::string
 
@@ -26,9 +28,9 @@ public:
     std::string base_url;
     std::string data_base_url;
     bool debug_sql = false;
+    std::list<std::string> env_symbols;
     bool is_live;
-    int late_start_seconds = 6;      // Production's average
-    double peak_padding_ratio = 0.0; // TODO: Decide
+    int late_start_seconds = 6; // Production's average
     int reversal_timeframe_minutes = 3;
     int secondary_reversal_timeframe_minutes = 0;
     bool should_hold_first_position = false; // TODO: Decide
@@ -74,6 +76,9 @@ private:
 
   CurlClient fetch(const fetch_params_t);
   CurlClient post(const post_params_t);
+
+  std::list<std::string> read_env_symbols(json &);
+
   void load_config();
 };
 } // namespace Alpaca

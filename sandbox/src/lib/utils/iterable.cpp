@@ -1,7 +1,8 @@
 #ifndef UTILS__ITERABLE
 #define UTILS__ITERABLE
 
-#include <map> // std::map
+#include <map>    // std::map
+#include <string> // std::string
 
 namespace utils {
 namespace iterable {
@@ -27,9 +28,10 @@ bool are_equal(IterableType<ItemType> a, IterableType<ItemType> b) {
 }
 
 template <template <typename> class IterableType, class ItemType>
-void print(IterableType<ItemType> collection) {
+void print(IterableType<ItemType> collection, const bool newline = true) {
   for (const ItemType item : collection) {
-    std::cout << item << std::endl;
+    const std::string whitespace = newline ? "\n" : " ";
+    std::cout << item << whitespace;
   }
 }
 

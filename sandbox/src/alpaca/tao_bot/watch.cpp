@@ -8,6 +8,7 @@
 #include "close_position.cpp"            // close_position
 #include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
+#include "log_env_symbols.cpp"           // log_env_symbols
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
@@ -47,6 +48,7 @@ void Alpaca::TaoBot::watch() {
 
     if (this->backtest.should_exec_slow_query(this->current_epoch)) {
       log_account_snapshot();
+      log_env_symbols();
       log_quote();
       log_reversals(this->reversals);
       log_reversals(this->secondary_reversals);

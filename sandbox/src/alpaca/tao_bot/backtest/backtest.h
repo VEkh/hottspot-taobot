@@ -41,6 +41,7 @@ public:
 
   struct init_args_t {
     Pg conn;
+    std::list<std::string> env_symbols;
     std::map<std::string, std::string> flags;
     std::string symbol;
   };
@@ -80,7 +81,7 @@ private:
 
   static constexpr int SLOW_QUERY_EVERY = 100;
 
-  std::list<std::string> tradeable_symbols;
+  std::list<std::string> env_symbols;
   std::map<std::string, std::string> flags;
 
   void load_config();

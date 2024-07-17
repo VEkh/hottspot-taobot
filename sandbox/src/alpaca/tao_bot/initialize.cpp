@@ -14,7 +14,6 @@
 #include "lib/formatted.cpp"                // Formatted::error_message
 #include "lib/pg/pg.cpp"                    // Pg
 #include "lib/utils/boolean.cpp"            // ::utils::boolean
-#include "lib/utils/io.cpp"                 // ::utils::io
 #include "lib/utils/string.cpp"             // ::utils::string
 #include "read_closed_positions.cpp"        // read_closed_positions
 #include "set_market_open_epoch.cpp"        // set_market_open_epoch
@@ -45,12 +44,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   this->pg = Pg(this->flags);
   this->pg.connect();
 
-  this->backtest = Alpaca::TaoBotBacktest({
-      .conn = this->pg,
-      .flags = this->flags,
-      .symbol = this->symbol,
-  });
-
   this->db_account_stat = DB::AccountStat(this->pg);
   this->db_candle = DB::Candle(this->pg, 1, this->symbol);
   this->db_position = DB::Position(this->pg);
@@ -60,6 +53,15 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   try {
     this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
+
+    this->env_symbols = this->api_client.config.env_symbols;
+
+    this->backtest = Alpaca::TaoBotBacktest({
+        .conn = this->pg,
+        .env_symbols = this->env_symbols,
+        .flags = this->flags,
+        .symbol = this->symbol,
+    });
 
     if (this->backtest.is_active) {
       this->current_epoch = this->backtest.config.start_epoch +
@@ -76,16 +78,11 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       throw std::runtime_error(message);
     }
 
-    std::list<std::string> tradeable_symbols =
-        ::utils::io::tradeable_symbols("alpaca");
-
     this->reversals.timeframe_minutes =
         this->api_client.config.reversal_timeframe_minutes;
 
     this->secondary_reversals.timeframe_minutes =
         this->api_client.config.secondary_reversal_timeframe_minutes;
-
-    this->tradeable_symbols_count = tradeable_symbols.size();
 
     set_market_open_epoch();
     update_account_snapshot(true);
