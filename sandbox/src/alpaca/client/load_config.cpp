@@ -68,11 +68,6 @@ void Alpaca::Client::load_config() {
         (int)api_key_json["reversal_timeframe_minutes"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("peak_padding_ratio")) {
-    config.peak_padding_ratio = (double)api_key_json["peak_padding_ratio"];
-  }
-
   if (api_key_json.contains("secondary_reversal_timeframe_minutes")) {
     config.secondary_reversal_timeframe_minutes =
         (int)api_key_json["secondary_reversal_timeframe_minutes"];
@@ -95,7 +90,6 @@ void Alpaca::Client::load_config() {
       .env_symbols = read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
       .late_start_seconds = api_key_json["late_start_seconds"],
-      .peak_padding_ratio = config.peak_padding_ratio, // TODO: Decide
       .reversal_timeframe_minutes = config.reversal_timeframe_minutes,
       .secondary_reversal_timeframe_minutes =
           config.secondary_reversal_timeframe_minutes,
