@@ -16,7 +16,7 @@ bool Alpaca::TaoBot::should_close_position() {
     return false;
   }
 
-  if (Alpaca::Utils::is_end_of_trading_period(this->current_epoch)) {
+  if (this->market_availability.is_end_of_trading_period(this->current_epoch)) {
     return true;
   }
 

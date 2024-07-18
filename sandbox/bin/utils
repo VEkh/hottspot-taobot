@@ -15,34 +15,6 @@ declare -A ASCII=(
 
 export ASCII
 
-EQUITY_MARKET_HOLIDAYS=(
-  "2022-01-17"
-  "2022-03-15"
-  "2022-04-15"
-  "2022-06-20"
-  "2022-12-26"
-  "2023-01-02"
-  "2023-01-16"
-  "2023-02-20"
-  "2023-04-07"
-  "2023-05-29"
-  "2023-06-19"
-  "2023-07-04"
-  "2023-09-04"
-  "2023-11-23"
-  "2023-12-25"
-  "2024-01-01"
-  "2024-01-15"
-  "2024-02-19"
-  "2024-03-29"
-  "2024-05-27"
-  "2024-06-19"
-  "2024-07-04"
-  "2024-09-02"
-  "2024-11-28"
-  "2024-12-25"
-)
-
 function active_api_keys() {
   app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
   project="${1}"
@@ -87,6 +59,7 @@ function extract_flags() {
   flags=()
 
   for flag in "${@}"; do
+    # shellcheck disable=2190
     [[ "${flag}" =~ ^-- ]] && flags+=("${flag}")
   done
 
@@ -103,6 +76,7 @@ function extract_flags_to_map() {
   local -n map=${1} 2>/dev/null
 
   for flag in "${@:2}"; do
+    # shellcheck disable=2207
     key_value=($(
       echo -e "${flag}" |
       awk '{ gsub("--", "", $0); gsub("=", " ", $0); print $0 }'
@@ -113,7 +87,7 @@ function extract_flags_to_map() {
     if [[ -n "${key}" ]]; then
       [[ -z "${key_value[1]}" ]] && value="1" || value="${key_value[1]}"
 
-      # shellcheck disable=SC2034
+      # shellcheck disable=2034
       map["${key}"]="${value}"
     fi
   done
@@ -126,8 +100,16 @@ function is_market_open() {
   project="${1}"
 
   if [[ "${project}" = "alpaca" ]]; then
+    # shellcheck disable=2207
+    holidays=($(read_json_array "${app_dir}/src/lib/nyse_availability/holidays.json"))
+
+    # shellcheck disable=2207
+    bad_data_days=($(read_json_array "${app_dir}/src/lib/nyse_availability/bad_data.json"))
+
+    closed_days=("${holidays[*]} ${bad_data_days[*]}")
+
     # shellcheck disable=2076
-    if [[ " ${EQUITY_MARKET_HOLIDAYS[*]} " =~ " ${iso_date} " ]]; then
+    if [[ " ${closed_days[*]} " =~ " ${iso_date} " ]]; then
       ascii_print "It's a holiday yabish! Go have fun 🎉" "red" >&2
 
       exit 0
@@ -210,6 +192,12 @@ function read_env_symbols() {
   config="$(load_config "${scope}" "${env}")"
 
   echo -e "${config}" | jq -j ".env_symbols // empty | join(\" \")"
+}
+
+function read_json_array() {
+  path="${1}"
+
+  jq -r ". | join(\" \")" "${path}"
 }
 
 function to_lower() {

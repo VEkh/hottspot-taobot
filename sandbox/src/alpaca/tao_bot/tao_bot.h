@@ -63,6 +63,7 @@ private:
   DB::Position db_position;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
+  NyseAvailability market_availability;
   Pg pg;
   account_snapshot_t account_snapshot;
   candle_t day_candle;
@@ -89,7 +90,6 @@ private:
 
   bool has_reversal_been_used(const reversal_t);
   bool is_early_close_day();
-  bool is_end_of_trading_period();
   bool is_entry_signal_present();
   bool is_market_open();
   bool is_next_position_long();

@@ -72,6 +72,11 @@ tmux split-window -t "${session}:stock-account-streams" -h \
 
 window=$((window + 2))
 
+symbols=()
+while IFS="" read -r line; do
+  symbols+=("${line}")
+done < <(cat "${app_dir}/bin/${project}/stream_symbols")
+
 for symbol in "${symbols[@]}"; do
   log_dir="${app_dir}/../sandbox/log/${project}/ml/candle_predict"
 

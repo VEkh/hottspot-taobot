@@ -6,6 +6,7 @@
 #include "string.cpp"        // ::utils::string
 #include <cstring>           // strcpy, strlen
 #include <fstream>           // std::ifstream, std::ios, std::ofstream
+#include <iostream>          // std::cout, std::endl
 #include <libgen.h>          // dirname
 #include <list>              // std::list
 #include <map>               // std::map
@@ -13,6 +14,7 @@
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <stdio.h>   // fgets, popen
 #include <string>    // std::getline, std::string
+#include <unistd.h>  // usleep
 #include <utility>   // std::pair
 #include <vector>    // std::vector
 
@@ -127,8 +129,8 @@ json load_config(const std::string project, const std::string api_key) {
   return config_json;
 }
 
-std::ifstream read_file(const char *filepath) {
-  std::ifstream file(filepath, std::ios::in);
+std::ifstream read_file(const std::string filepath) {
+  std::ifstream file(filepath.c_str(), std::ios::in);
 
   if (!file.good()) {
     std::string error_message =
@@ -138,6 +140,26 @@ std::ifstream read_file(const char *filepath) {
   }
 
   return file;
+}
+
+json read_file_to_json(const std::string filepath) {
+  json out;
+
+  try {
+    std::ifstream file = read_file(filepath);
+    file >> out;
+  } catch (...) {
+    std::string error_message = Formatted::error_message(
+        std::string("Something went wrong parsing: ") + filepath);
+
+    std::cout << error_message << std::endl;
+
+    usleep(5e5);
+
+    return read_file_to_json(filepath);
+  }
+
+  return out;
 }
 
 std::string system_exec(const char *cmd) {

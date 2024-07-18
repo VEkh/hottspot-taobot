@@ -12,15 +12,15 @@ bool Alpaca::TaoBot::should_terminate() {
       (!this->close_order_ptr ||
        this->close_order_ptr->status == order_status_t::ORDER_FILLED);
 
-  if (Alpaca::Utils::is_holiday(this->current_epoch)) {
+  if (this->market_availability.is_holiday(this->current_epoch)) {
     return are_positions_closed;
   }
 
-  if (!Alpaca::Utils::is_market_day(this->current_epoch)) {
+  if (!this->market_availability.is_market_day(this->current_epoch)) {
     return are_positions_closed;
   }
 
-  if (Alpaca::Utils::is_end_of_trading_period(this->current_epoch)) {
+  if (this->market_availability.is_end_of_trading_period(this->current_epoch)) {
     return are_positions_closed;
   }
 
