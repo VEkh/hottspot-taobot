@@ -78,6 +78,8 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  quote_t current_quote;
+  quote_t previous_quote;
   reversal_t entry_reversal;
   reversals_t reversals;
   reversals_t secondary_reversals;

@@ -22,6 +22,7 @@ DB::Quote::get_last_from_db(get_last_args_t args) {
   const double end_at = args.end_at;
   const int limit = args.limit;
   const long int limit_offset = args.limit_offset;
+  const std::string sort_direction = args.sort_direction;
   const std::string symbol = args.symbol;
 
   const std::string limit_clause =
@@ -52,21 +53,21 @@ DB::Quote::get_last_from_db(get_last_args_t args) {
       and timestamp <= to_timestamp(%f)
       %s
     order by
-      timestamp desc
+      timestamp %s
     %s
     %s
   )";
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
                          std::to_string(end_at).size() +
-                         start_at_clause.size() + limit_clause.size() +
-                         limit_offset_clause.size();
+                         start_at_clause.size() + sort_direction.size() +
+                         limit_clause.size() + limit_offset_clause.size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_symbol, end_at,
-           start_at_clause.c_str(), limit_clause.c_str(),
-           limit_offset_clause.c_str());
+           start_at_clause.c_str(), sort_direction.c_str(),
+           limit_clause.c_str(), limit_offset_clause.c_str());
 
   query_result_t query_result = this->conn.exec(query, args.debug);
   PQfreemem(sanitized_symbol);

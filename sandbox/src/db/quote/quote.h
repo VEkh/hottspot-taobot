@@ -36,6 +36,7 @@ public:
     int limit = 0;
     long int limit_offset = 0;
     bool read_cache = false;
+    std::string sort_direction = "desc";
     double start_at = 0.0;
     std::string symbol;
     bool write_cache = false;

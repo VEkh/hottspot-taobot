@@ -19,12 +19,17 @@ void Alpaca::TaoBot::read_quotes() {
     });
   }
 
+  if (!this->quotes.empty()) {
+    this->previous_quote = this->quotes.back();
+  }
+
   const std::list<quote_t> quotes_ = this->quoter.db_quote.get_last({
       .debug = this->api_client.config.debug_sql,
       .end_at = this->current_epoch,
-      .limit = 2,
+      .limit = 1,
       .limit_offset = 0,
       .read_cache = this->backtest.is_active,
+      .sort_direction = "desc",
       .symbol = this->symbol,
   });
 
@@ -41,6 +46,7 @@ void Alpaca::TaoBot::read_quotes() {
     return read_quotes();
   }
 
+  this->current_quote = quotes_.front();
   this->quotes = quotes_;
 }
 

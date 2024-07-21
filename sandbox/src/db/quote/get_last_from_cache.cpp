@@ -12,17 +12,16 @@ DB::Quote::get_last_from_cache(const get_last_args_t args) {
   std::list<quote_t> out;
   std::list<quote_t>::reverse_iterator quote;
 
-  for (quote = this->cache.cache.rbegin(); quote != this->cache.cache.rend();
-       quote++) {
-    if (quote->timestamp < start_at) {
+  for (const quote_t quote : this->cache.cache) {
+    if (quote.timestamp < start_at) {
       continue;
     }
 
-    if (quote->timestamp > end_at) {
+    if (quote.timestamp > end_at) {
       break;
     }
 
-    out.push_front(*quote);
+    out.push_back(quote);
   }
 
   return out;
