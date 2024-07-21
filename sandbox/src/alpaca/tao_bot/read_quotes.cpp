@@ -7,19 +7,6 @@
 #include <string>            // std::string
 
 void Alpaca::TaoBot::read_quotes() {
-  // TODO: Delete
-  // if (this->backtest.is_active &&
-  //     this->quoter.db_quote.cache.is_expired(this->current_epoch)) {
-  //   this->quoter.db_quote.get_last({
-  //       .debug = this->api_client.config.debug_sql,
-  //       .end_at = this->market_close_epoch,
-  //       .sort_direction = "asc",
-  //       .start_at = this->current_epoch,
-  //       .symbol = this->symbol,
-  //       .write_cache = true,
-  //   });
-  // }
-
   double end_at = this->current_epoch;
   double start_at = 0;
   int limit = 1;
