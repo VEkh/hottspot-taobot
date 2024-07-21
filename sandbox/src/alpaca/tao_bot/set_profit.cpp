@@ -7,7 +7,7 @@
 #include <algorithm>                // std::max, std::min
 
 void Alpaca::TaoBot::set_profit(order_t *order) {
-  const double profit = compute_profit(order, &(this->quotes.front()));
+  const double profit = compute_profit(order, &(this->current_quote));
 
   const double position_profit = open_position_profit(this->open_order_ptr);
 

@@ -4,11 +4,11 @@
 #include "tao_bot.h" // Alpaca::TaoBot, quote_t
 
 double Alpaca::TaoBot::current_mid() {
-  if (this->quotes.empty()) {
+  if (!this->current_quote.ask) {
     return quote_t().mid();
   }
 
-  return this->quotes.front().mid();
+  return this->current_quote.mid();
 }
 
 #endif

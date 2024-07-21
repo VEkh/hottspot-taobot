@@ -6,7 +6,6 @@
 #include <math.h>    // floor
 
 double Alpaca::TaoBot::compute_quantity() {
-  const quote_t quote = this->quotes.front();
   const double margin_throttle = 1.0;
 
   const double max_buying_power =
@@ -14,7 +13,7 @@ double Alpaca::TaoBot::compute_quantity() {
 
   const double buying_power = max_buying_power / this->env_symbols.size();
 
-  return floor(buying_power / (1.3 * quote.ask));
+  return floor(buying_power / (1.3 * this->current_quote.ask));
 }
 
 #endif

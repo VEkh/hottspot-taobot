@@ -24,7 +24,7 @@ json Alpaca::TaoBot::fetch_order(const order_t *order) {
 
   const std::string order_response =
       this->backtest.is_active
-          ? this->backtest.fetch_order(order, this->quotes.front())
+          ? this->backtest.fetch_order(order, this->current_quote)
           : this->api_client.fetch_order(order->id);
 
   return ::utils::json::parse_with_catch(order_response,
