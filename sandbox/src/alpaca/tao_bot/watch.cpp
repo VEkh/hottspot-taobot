@@ -31,48 +31,54 @@
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
-    if (this->backtest.should_exec_slow_query(this->current_epoch)) {
-      log_timestamps();
-    }
-
     read_quotes();
-    read_candles();
-    build_day_candle();
-    build_reversals(this->reversals);
-    build_reversals(this->secondary_reversals, true);
 
-    if (!this->backtest.is_active ||
-        !this->backtest.config.force_exec_slow_queries) {
-      update_account_snapshot();
+    for (const quote_t quote : this->quotes) {
+      this->previous_quote = this->current_quote;
+      this->current_quote = quote;
+
+      if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+        log_timestamps();
+      }
+
+      read_candles();
+      build_day_candle();
+      build_reversals(this->reversals);
+      build_reversals(this->secondary_reversals, true);
+
+      if (!this->backtest.is_active ||
+          !this->backtest.config.force_exec_slow_queries) {
+        update_account_snapshot();
+      }
+
+      if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+        log_account_snapshot();
+        log_env_symbols();
+        log_quote();
+        log_reversals(this->reversals);
+        log_reversals(this->secondary_reversals);
+        log_reversal_metadata();
+        log_position();
+        log_performance();
+      }
+
+      set_position_status();
+      cancel_stale_open_order();
+      open_and_persist_position();
+      set_open_order_prices();
+
+      close_position();
+      set_close_order_prices();
+
+      log_position_results();
+      reset_position();
+
+      if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+        std::cout << "\n\n" << std::flush;
+      }
+
+      advance_current_epoch();
     }
-
-    if (this->backtest.should_exec_slow_query(this->current_epoch)) {
-      log_account_snapshot();
-      log_env_symbols();
-      log_quote();
-      log_reversals(this->reversals);
-      log_reversals(this->secondary_reversals);
-      log_reversal_metadata();
-      log_position();
-      log_performance();
-    }
-
-    set_position_status();
-    cancel_stale_open_order();
-    open_and_persist_position();
-    set_open_order_prices();
-
-    close_position();
-    set_close_order_prices();
-
-    log_position_results();
-    reset_position();
-
-    if (this->backtest.should_exec_slow_query(this->current_epoch)) {
-      std::cout << "\n\n" << std::flush;
-    }
-
-    advance_current_epoch();
   }
 
   update_account_snapshot(true);

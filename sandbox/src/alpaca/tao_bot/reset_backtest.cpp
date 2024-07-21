@@ -6,7 +6,7 @@
 #include "lib/utils/time.cpp"            // ::utils::time_
 #include "set_market_close_epoch.cpp"    // set_market_close_epoch
 #include "set_market_open_epoch.cpp"     // set_market_open_epoch
-#include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversals_t, trend_meta_t
+#include "tao_bot.h" // Alpaca::TaoBot, candle_t, quote_t, reversals_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
 void Alpaca::TaoBot::reset_backtest() {
@@ -32,6 +32,10 @@ void Alpaca::TaoBot::reset_backtest() {
 
   this->db_candle.clear_cache();
   this->quoter.db_quote.clear_cache();
+
+  this->current_quote = quote_t();
+  this->previous_quote = quote_t();
+  this->quotes = {};
 
   this->latest_candles = {};
   this->performance = performance_t();

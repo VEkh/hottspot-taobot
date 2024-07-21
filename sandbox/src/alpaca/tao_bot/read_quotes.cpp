@@ -4,32 +4,40 @@
 #include "lib/formatted.cpp" // Formatted
 #include "tao_bot.h"         // Alpaca::TaoBot, quote_t
 #include <list>              // std::list
-
-#include "advance_current_epoch.cpp" // advance_current_epoch
+#include <string>            // std::string
 
 void Alpaca::TaoBot::read_quotes() {
-  if (this->backtest.is_active &&
-      this->quoter.db_quote.cache.is_expired(this->current_epoch)) {
-    this->quoter.db_quote.get_last({
-        .debug = this->api_client.config.debug_sql,
-        .end_at = this->market_close_epoch,
-        .start_at = this->current_epoch,
-        .symbol = this->symbol,
-        .write_cache = true,
-    });
-  }
+  // TODO: Delete
+  // if (this->backtest.is_active &&
+  //     this->quoter.db_quote.cache.is_expired(this->current_epoch)) {
+  //   this->quoter.db_quote.get_last({
+  //       .debug = this->api_client.config.debug_sql,
+  //       .end_at = this->market_close_epoch,
+  //       .sort_direction = "asc",
+  //       .start_at = this->current_epoch,
+  //       .symbol = this->symbol,
+  //       .write_cache = true,
+  //   });
+  // }
 
-  if (!this->quotes.empty()) {
-    this->previous_quote = this->quotes.back();
+  double end_at = this->current_epoch;
+  double start_at = 0;
+  int limit = 1;
+  std::string sort_direction = "desc";
+
+  if (this->backtest.is_active) {
+    end_at = this->market_close_epoch;
+    limit = 0;
+    sort_direction = "asc";
+    start_at = this->current_epoch;
   }
 
   const std::list<quote_t> quotes_ = this->quoter.db_quote.get_last({
       .debug = this->api_client.config.debug_sql,
-      .end_at = this->current_epoch,
-      .limit = 1,
-      .limit_offset = 0,
-      .read_cache = this->backtest.is_active,
-      .sort_direction = "desc",
+      .end_at = end_at,
+      .limit = limit,
+      .sort_direction = sort_direction,
+      .start_at = start_at,
       .symbol = this->symbol,
   });
 
@@ -37,16 +45,11 @@ void Alpaca::TaoBot::read_quotes() {
     const std::string error_message = Formatted::error_message(
         "No available quotes for " + this->symbol + " in the database.");
 
-    printf("%s\n", error_message.c_str());
-
-    if (this->backtest.is_active) {
-      advance_current_epoch();
-    }
+    printf("%s @ %f\n", error_message.c_str(), this->current_epoch);
 
     return read_quotes();
   }
 
-  this->current_quote = quotes_.front();
   this->quotes = quotes_;
 }
 

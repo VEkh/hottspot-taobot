@@ -3,6 +3,7 @@
 
 #include "alpaca/utils.cpp"             // Alpaca::Utils
 #include "build_exit_prices.cpp"        // build_exit_prices
+#include "is_end_of_quotes.cpp"         // is_end_of_quotes
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_reverse_profit.cpp"    // should_reverse_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
@@ -17,6 +18,10 @@ bool Alpaca::TaoBot::should_close_position() {
   }
 
   if (this->market_availability.is_end_of_trading_period(this->current_epoch)) {
+    return true;
+  }
+
+  if (is_end_of_quotes()) {
     return true;
   }
 

@@ -93,6 +93,7 @@ private:
 
   bool has_reversal_been_used(const reversal_t);
   bool is_early_close_day();
+  bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_market_open();
   bool is_next_position_long();

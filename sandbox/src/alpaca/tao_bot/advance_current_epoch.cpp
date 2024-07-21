@@ -8,9 +8,8 @@
 
 void Alpaca::TaoBot::advance_current_epoch() {
   if (this->backtest.is_active) {
-    const double clock_tick_seconds = 1.0;
+    advance_current_epoch(this->current_quote.timestamp);
 
-    advance_current_epoch(this->current_epoch + clock_tick_seconds);
     this->backtest.slow_query_countdown += 1;
     return;
   }
