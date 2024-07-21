@@ -1,12 +1,13 @@
 #ifndef NYSE_AVAILABILITY_is_end_of_trading_period
 #define NYSE_AVAILABILITY_is_end_of_trading_period
 
-#include "is_in_date_lookup.cpp" // is_in_date_lookup
-#include "lib/utils/time.cpp"    // ::utils::time_
-#include "nyse_availability.h"   // NyseAvailability
+#include "is_early_close_day.cpp" // is_early_close_day
+#include "is_in_date_lookup.cpp"  // is_in_date_lookup
+#include "lib/utils/time.cpp"     // ::utils::time_
+#include "nyse_availability.h"    // NyseAvailability
 
 bool NyseAvailability::is_end_of_trading_period(const double epoch) {
-  if (is_in_date_lookup(this->early_closes, epoch)) {
+  if (is_early_close_day(epoch)) {
     return ::utils::time_::is_at_least(epoch,
                                        {
                                            .tm_sec = 0,

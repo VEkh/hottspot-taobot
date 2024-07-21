@@ -16,6 +16,7 @@
 #include "lib/utils/boolean.cpp"            // ::utils::boolean
 #include "lib/utils/string.cpp"             // ::utils::string
 #include "read_closed_positions.cpp"        // read_closed_positions
+#include "set_market_close_epoch.cpp"       // set_market_close_epoch
 #include "set_market_open_epoch.cpp"        // set_market_open_epoch
 #include "tao_bot.h"                        // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"      // update_account_snapshot
@@ -84,6 +85,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->secondary_reversals.timeframe_minutes =
         this->api_client.config.secondary_reversal_timeframe_minutes;
 
+    set_market_close_epoch();
     set_market_open_epoch();
     update_account_snapshot(true);
     read_closed_positions();

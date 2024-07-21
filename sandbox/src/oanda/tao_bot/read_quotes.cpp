@@ -7,10 +7,10 @@
 
 void Oanda::TaoBot::read_quotes() {
   const std::vector<quote_t> quotes_ = this->db_quote.get_last({
+      .end_at = this->current_epoch,
       .limit = 2,
       .limit_offset = 0,
       .symbol = this->symbol,
-      .timestamp_upper_bound = this->current_epoch,
   });
 
   if (quotes_.empty()) {

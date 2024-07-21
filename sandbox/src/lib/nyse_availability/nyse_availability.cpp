@@ -8,6 +8,7 @@
 #include <list>                // std::list
 #include <string>              // std::string
 
+#include "is_early_close_day.cpp"
 #include "is_end_of_trading_period.cpp"
 #include "is_holiday.cpp"
 #include "is_market_day.cpp"

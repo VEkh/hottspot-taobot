@@ -10,7 +10,7 @@
 
 DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
     const get_avg_one_sec_variances_args_t args) {
-  const double timestamp_upper_bound = args.timestamp_upper_bound;
+  const double end_at = args.end_at;
   const std::string symbol = args.symbol;
 
   const char *query_format = R"(
@@ -50,11 +50,10 @@ DB::Quote::avg_one_sec_variances_t DB::Quote::get_avg_one_sec_variances(
       PQescapeLiteral(this->conn.conn, symbol.c_str(), symbol.size());
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
-                         2 * std::to_string(timestamp_upper_bound).size();
+                         2 * std::to_string(end_at).size();
 
   char query[query_l];
-  snprintf(query, query_l, query_format, sanitized_symbol,
-           timestamp_upper_bound, timestamp_upper_bound);
+  snprintf(query, query_l, query_format, sanitized_symbol, end_at, end_at);
 
   query_result_t result = this->conn.exec(query, args.debug);
 

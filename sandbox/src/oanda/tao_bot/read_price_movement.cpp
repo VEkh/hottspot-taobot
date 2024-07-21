@@ -5,8 +5,8 @@
 
 void Oanda::TaoBot::read_price_movement() {
   this->avg_one_sec_variances = this->db_quote.get_avg_one_sec_variances({
+      .end_at = this->current_epoch,
       .symbol = this->symbol,
-      .timestamp_upper_bound = this->current_epoch,
   });
 }
 

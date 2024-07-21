@@ -26,11 +26,11 @@ void DB::Quote::upsert_all_avg_one_sec_variances(
 
   const std::list<quote_t> quotes = get_last({
       .debug = debug,
+      .end_at = end_at,
       .limit = 0,
       .limit_offset = 0,
+      .start_at = start_at,
       .symbol = symbol,
-      .timestamp_upper_bound = end_at,
-      .timestamp_lower_bound = start_at,
   });
 
   for (const quote_t quote : quotes) {

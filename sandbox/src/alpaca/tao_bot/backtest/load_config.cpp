@@ -113,10 +113,10 @@ void Alpaca::TaoBotBacktest::load_config() {
 
   } else {
     const std::list<quote_t> last_quotes = this->db_quote.get_last({
+        .end_at = (double)time(nullptr),
         .limit = 1,
         .limit_offset = 0,
         .symbol = this->symbol,
-        .timestamp_upper_bound = (double)time(nullptr),
     });
 
     if (last_quotes.empty()) {

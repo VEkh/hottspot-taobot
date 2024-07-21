@@ -5,9 +5,10 @@
 #include "build.cpp"
 #include "db/quote/quote.cpp" // DB::Quote
 #include "db/utils/utils.cpp" // DB::Utils
+#include "lib/pg/pg.cpp"      // Pg
+#include <string>             // std::string
+
 #include "get_latest.cpp"
-#include "lib/pg/pg.cpp" // Pg
-#include <string>        // std::string
 
 DB::Candle::Candle(const Pg c, const int duration_minutes_,
                    const std::string symbol_) {

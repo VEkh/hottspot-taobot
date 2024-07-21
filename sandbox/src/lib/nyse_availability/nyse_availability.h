@@ -9,6 +9,7 @@ class NyseAvailability {
 public:
   NyseAvailability();
 
+  bool is_early_close_day(const double);
   bool is_end_of_trading_period(const double);
   bool is_holiday(const double);
   bool is_market_day(const double);

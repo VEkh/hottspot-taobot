@@ -68,6 +68,7 @@ private:
   account_snapshot_t account_snapshot;
   candle_t day_candle;
   double current_epoch = time(nullptr);
+  double market_close_epoch;
   double market_open_epoch;
   double quantity;
   double started_at = time(nullptr);
@@ -164,6 +165,7 @@ private:
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);
+  void set_market_close_epoch();
   void set_market_open_epoch();
   void set_open_order_prices();
   void set_position_status();
