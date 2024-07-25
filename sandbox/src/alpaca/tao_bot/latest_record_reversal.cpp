@@ -2,27 +2,26 @@
 #define ALPACA__TAO_BOT_latest_record_reversal
 
 #include "tao_bot.h" // Alpaca::TaoBot, reversal_t, reversal_type_t
-#include <map>       // std::map
-#include <string>    // std::string
 
 Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_record_reversal(
-    reversals_t &reversals_,
     const reversal_type_t type = reversal_type_t::REVERSAL_NULL) {
-  std::map<double, reversal_t>::reverse_iterator it;
-  reversal_t record_high;
-  reversal_t record_low;
+  reversal_t record_high = {
+      .at = this->day_candle.high_at,
+      .is_record = true,
+      .is_running_record = true,
+      .mid = this->day_candle.high,
+      .timeframe_minutes = 1,
+      .type = reversal_type_t::REVERSAL_HIGH,
+  };
 
-  for (it = reversals_.highs.rbegin(); it != reversals_.highs.rend(); it++) {
-    if (it->second.is_running_record) {
-      record_high = it->second;
-    }
-  }
-
-  for (it = reversals_.lows.rbegin(); it != reversals_.lows.rend(); it++) {
-    if (it->second.is_running_record) {
-      record_low = it->second;
-    }
-  }
+  reversal_t record_low = {
+      .at = this->day_candle.low_at,
+      .is_record = true,
+      .is_running_record = true,
+      .mid = this->day_candle.low,
+      .timeframe_minutes = 1,
+      .type = reversal_type_t::REVERSAL_LOW,
+  };
 
   if (type == reversal_type_t::REVERSAL_HIGH) {
     return record_high;

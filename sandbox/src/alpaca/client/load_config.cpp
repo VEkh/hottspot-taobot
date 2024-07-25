@@ -42,8 +42,13 @@ void Alpaca::Client::load_config() {
   json api_key_json = config_json[api_key];
 
   std::vector<std::string> nested_required_keys = {
-      "account_stop_loss_ratio", "base_url",   "env_symbols", "is_live",
-      "late_start_seconds",      "secret_key",
+      "account_stop_loss_ratio",
+      "base_url",
+      "env_symbols",
+      "is_live",
+      "late_start_seconds",
+      "reversal_timeframe_minutes",
+      "secret_key",
   };
 
   for (std::string key : nested_required_keys) {
@@ -63,16 +68,6 @@ void Alpaca::Client::load_config() {
     config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
-  if (api_key_json.contains("reversal_timeframe_minutes")) {
-    config.reversal_timeframe_minutes =
-        (int)api_key_json["reversal_timeframe_minutes"];
-  }
-
-  if (api_key_json.contains("secondary_reversal_timeframe_minutes")) {
-    config.secondary_reversal_timeframe_minutes =
-        (int)api_key_json["secondary_reversal_timeframe_minutes"];
-  }
-
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -84,9 +79,8 @@ void Alpaca::Client::load_config() {
       .env_symbols = read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
       .late_start_seconds = api_key_json["late_start_seconds"],
-      .reversal_timeframe_minutes = config.reversal_timeframe_minutes,
-      .secondary_reversal_timeframe_minutes =
-          config.secondary_reversal_timeframe_minutes,
+      .reversal_timeframe_minutes =
+          (int)api_key_json["reversal_timeframe_minutes"],
   };
 }
 

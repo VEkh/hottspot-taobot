@@ -82,9 +82,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->reversals.timeframe_minutes =
         this->api_client.config.reversal_timeframe_minutes;
 
-    this->secondary_reversals.timeframe_minutes =
-        this->api_client.config.secondary_reversal_timeframe_minutes;
-
     set_market_close_epoch();
     set_market_open_epoch();
     update_account_snapshot(true);

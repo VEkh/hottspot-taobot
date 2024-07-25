@@ -40,9 +40,6 @@ void Alpaca::TaoBot::reset_backtest() {
   this->reversals = reversals_t();
   this->reversals.timeframe_minutes =
       this->api_client.config.reversal_timeframe_minutes;
-  this->secondary_reversals = reversals_t();
-  this->secondary_reversals.timeframe_minutes =
-      this->api_client.config.secondary_reversal_timeframe_minutes;
   this->started_at = this->current_epoch;
 
   force_init_reversal_await();

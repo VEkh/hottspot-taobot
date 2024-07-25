@@ -82,7 +82,6 @@ private:
   quote_t previous_quote;
   reversal_t entry_reversal;
   reversals_t reversals;
-  reversals_t secondary_reversals;
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
@@ -102,7 +101,6 @@ private:
   bool is_trend_slipping(const order_t *);
   bool is_trending();
   bool is_trending(const trend_meta_t);
-  bool is_within_entry_window(const reversal_t);
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
@@ -129,7 +127,7 @@ private:
   performance_t build_performance();
   reversal_t first_reversal_after(reversals_t &, const double,
                                   const reversal_type_t, const bool);
-  reversal_t latest_record_reversal(reversals_t &, const reversal_type_t);
+  reversal_t latest_record_reversal(const reversal_type_t);
   reversal_t latest_reversal(reversals_t &, const reversal_type_t);
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);

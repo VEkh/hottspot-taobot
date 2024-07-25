@@ -6,6 +6,7 @@
 #include "build_reversals.cpp"           // build_reversals
 #include "cancel_stale_open_order.cpp"   // cancel_stale_open_order
 #include "close_position.cpp"            // close_position
+#include "lib/utils/io.cpp"              // ::utils::io
 #include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_env_symbols.cpp"           // log_env_symbols
@@ -43,8 +44,7 @@ void Alpaca::TaoBot::watch() {
 
       read_candles();
       build_day_candle();
-      build_reversals(this->reversals);
-      build_reversals(this->secondary_reversals, true);
+      build_reversals(this->reversals, true);
 
       if (!this->backtest.is_active ||
           !this->backtest.config.force_exec_slow_queries) {
@@ -56,7 +56,6 @@ void Alpaca::TaoBot::watch() {
         log_env_symbols();
         log_quote();
         log_reversals(this->reversals);
-        log_reversals(this->secondary_reversals);
         log_reversal_metadata();
         log_position();
         log_performance();
@@ -74,7 +73,7 @@ void Alpaca::TaoBot::watch() {
       reset_position();
 
       if (this->backtest.should_exec_slow_query(this->current_epoch)) {
-        std::cout << "\n\n" << std::flush;
+        ::utils::io::print_newlines(10);
       }
 
       advance_current_epoch();

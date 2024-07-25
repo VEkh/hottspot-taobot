@@ -2,13 +2,12 @@
 #define ALPACA__TAO_BOT_build_day_candle
 
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t
-#include <valarray>  // std::valarray
+#include <algorithm> // std::max, std::min
 
 void Alpaca::TaoBot::build_day_candle() {
-  this->day_candle.closed_at = this->current_epoch;
-
   for (const candle_t candle : this->latest_candles) {
-    this->day_candle.close = this->day_candle.close;
+    this->day_candle.close = candle.close;
+    this->day_candle.closed_at = candle.closed_at;
 
     this->day_candle.open =
         this->day_candle.open ? this->day_candle.open : candle.open;
@@ -17,11 +16,16 @@ void Alpaca::TaoBot::build_day_candle() {
                                      ? this->day_candle.opened_at
                                      : candle.opened_at;
 
-    std::valarray<double> highs = {this->day_candle.high, candle.high};
-    std::valarray<double> lows = {this->day_candle.low, candle.low};
+    this->day_candle.high = std::max(this->day_candle.high, candle.high);
+    this->day_candle.low = std::min(this->day_candle.low, candle.low);
 
-    this->day_candle.high = highs.max();
-    this->day_candle.low = lows.min();
+    if (this->day_candle.high == candle.high) {
+      this->day_candle.high_at = candle.opened_at;
+    }
+
+    if (this->day_candle.low == candle.low) {
+      this->day_candle.low_at = candle.opened_at;
+    }
   }
 }
 

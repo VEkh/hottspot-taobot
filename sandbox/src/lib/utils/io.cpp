@@ -12,7 +12,7 @@
 #include <map>               // std::map
 #include <regex>     // std::regex, std::regex_replace, std::regex_search
 #include <stdexcept> // std::invalid_argument, std::runtime_error
-#include <stdio.h>   // fgets, popen
+#include <stdio.h>   // fgets, popen, puts
 #include <string>    // std::getline, std::string
 #include <unistd.h>  // usleep
 #include <utility>   // std::pair
@@ -127,6 +127,14 @@ json load_config(const std::string project, const std::string api_key) {
   }
 
   return config_json;
+}
+
+void print_newlines(const int n) {
+  for (int i = 0; i < n; i++) {
+    puts("");
+  }
+
+  std::cout << std::flush;
 }
 
 std::ifstream read_file(const std::string filepath) {

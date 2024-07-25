@@ -31,8 +31,7 @@ public:
     std::list<std::string> env_symbols;
     bool is_live;
     int late_start_seconds = 6; // Production's average
-    int reversal_timeframe_minutes = 3;
-    int secondary_reversal_timeframe_minutes = 0;
+    int reversal_timeframe_minutes = 60;
   } config;
 
   struct fetch_historical_quotes_args_t {

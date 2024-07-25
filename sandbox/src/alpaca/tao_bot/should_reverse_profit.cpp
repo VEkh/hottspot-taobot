@@ -14,16 +14,16 @@ bool Alpaca::TaoBot::should_reverse_profit() {
   }
 
   reversal_t stop_profit_reversal = latest_reversal_after(
-      this->secondary_reversals, this->open_order_ptr->timestamp,
+      this->reversals, this->open_order_ptr->timestamp,
       this->open_order_ptr->entry_reversal.opposite_type());
 
   if (stop_profit_reversal.at) {
     const reversal_t record_reversal =
-        latest_record_reversal(this->reversals, stop_profit_reversal.type);
+        latest_record_reversal(stop_profit_reversal.type);
 
-    stop_profit_reversal = first_reversal_after(
-        this->secondary_reversals, this->open_order_ptr->timestamp,
-        stop_profit_reversal.type, true);
+    stop_profit_reversal =
+        first_reversal_after(this->reversals, this->open_order_ptr->timestamp,
+                             stop_profit_reversal.type, true);
 
     if (record_reversal.mid == stop_profit_reversal.mid &&
         is_trend_slipping(this->open_order_ptr)) {
