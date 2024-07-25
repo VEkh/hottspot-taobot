@@ -24,6 +24,7 @@ private:
   std::map<KeyType, bool> list_to_lookup(const std::list<KeyType>);
 
   bool is_in_date_lookup(std::map<std::string, bool>, const double);
+  bool is_market_day_of_week(const double);
 };
 
 #endif

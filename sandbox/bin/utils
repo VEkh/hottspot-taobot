@@ -101,10 +101,10 @@ function is_market_open() {
 
   if [[ "${project}" = "alpaca" ]]; then
     # shellcheck disable=2207
-    holidays=($(read_json_array "${app_dir}/src/lib/nyse_availability/holidays.json"))
+    holidays=($(read_json_array "${app_dir}/src/lib/nyse_availability/data/holidays.json"))
 
     # shellcheck disable=2207
-    bad_data_days=($(read_json_array "${app_dir}/src/lib/nyse_availability/bad_data.json"))
+    bad_data_days=($(read_json_array "${app_dir}/src/lib/nyse_availability/data/bad_data.json"))
 
     closed_days=("${holidays[*]} ${bad_data_days[*]}")
 
