@@ -4,15 +4,28 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "lib/pg/pg.cpp"                    // Pg
 
 int main(int argc, char *argv[]) {
-  NyseAvailability nyse_availability;
+  Pg pg((std::map<std::string, std::string>){
+      {"env", "backtest"},
+  });
 
-  double epoch = 1721344263.037384;
-  epoch = 1721314800.000000;
-  epoch = 1720105200.000000;
-  epoch = 1647356400.000000;
+  pg.connect();
 
-  printf("is market open: %i\n", nyse_availability.is_market_open(epoch));
+  DB::AccountStat db_account_stat(pg);
+
+  const DB::AccountStat::account_snapshot_t snapshot =
+      db_account_stat.get_snapshot({
+          .api_key_id = "backtest-0",
+          .debug = false,
+          .starting_from = 1711584000.000000,
+      });
+
+  printf("Equity: %.2f • Original: %.2f • Max: %.2f • Min: %.2f\n",
+         snapshot.equity, snapshot.original_equity, snapshot.max_equity,
+         snapshot.min_equity);
+
+  pg.disconnect();
 }

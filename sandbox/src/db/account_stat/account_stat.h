@@ -11,6 +11,14 @@ class AccountStat {
 public:
   using account_snapshot_t = Global::t::account_snapshot_t;
 
+  struct account_stat_t {
+    std::string api_key_id;
+    double equity;
+    double inserted_at;
+    double margin_buying_power;
+    double margin_multiplier;
+  };
+
   struct get_daily_snapshots_args_t {
     std::string api_key_id;
     bool debug = false;
@@ -55,8 +63,15 @@ private:
 
   Pg conn;
 
+  account_snapshot_t build_account_snapshot(const std::list<account_stat_t> &);
+
+  std::list<account_stat_t>
+  get_snapshot_account_stats(const get_snapshot_args_t);
+
   std::list<account_snapshot_t>
   result_to_account_snapshots(const query_result_t &);
+
+  std::list<account_stat_t> result_to_account_stats(const query_result_t &);
 };
 } // namespace DB
 

@@ -91,9 +91,8 @@ DB::AccountStat::get_snapshot_with_computed_equity(
     )
     select
       coalesce(day.equity, latest.equity) as equity,
-      coalesce(day.inserted_at_epoch, latest.inserted_at_epoch, 0.0) as
-      timestamp_epoch, coalesce(day.original_margin_buying_power, 0.0) as
-      original_margin_buying_power
+      coalesce(day.inserted_at_epoch, latest.inserted_at_epoch, 0.0) as timestamp_epoch,
+      coalesce(day.original_margin_buying_power, 0.0) as original_margin_buying_power
     from
       latest
       left join day on day.api_key_id = latest.api_key_id
