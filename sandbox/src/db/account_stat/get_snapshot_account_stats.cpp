@@ -11,7 +11,7 @@
 
 std::list<DB::AccountStat::account_stat_t>
 DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
-  const double starting_from = args.starting_from;
+  const double start_at = args.start_at;
   const std::string api_key_id = args.api_key_id;
 
   char *sanitized_api_key_id =
@@ -33,11 +33,11 @@ DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
   )";
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_api_key_id) +
-                         std::to_string(starting_from).size();
+                         std::to_string(start_at).size();
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, sanitized_api_key_id, starting_from);
+  snprintf(query, query_l, query_format, sanitized_api_key_id, start_at);
 
   PQfreemem(sanitized_api_key_id);
 

@@ -20,7 +20,7 @@ int main(int argc, char *argv[]) {
       db_account_stat.get_snapshot({
           .api_key_id = "backtest-0",
           .debug = false,
-          .starting_from = 1711584000.000000,
+          .start_at = 1711584000.000000,
       });
 
   printf("Equity: %.2f • Original: %.2f • Max: %.2f • Min: %.2f\n",

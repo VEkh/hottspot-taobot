@@ -21,9 +21,10 @@ void Alpaca::TaoBotBacktest::upsert_account_stat(
   const account_snapshot_t current_snapshot =
       this->db_account_stat.get_snapshot_with_computed_equity({
           .api_key_id = this->config.api_key_id,
+          .current_snapshot = args.current_snapshot,
           .debug = args.debug,
-          .starting_from =
-              ::utils::time_::beginning_of_day_to_epoch(current_epoch),
+          .end_at = args.end_at,
+          .start_at = ::utils::time_::beginning_of_day_to_epoch(current_epoch),
       });
 
   bool is_new_day =

@@ -8,7 +8,7 @@
 void Oanda::TaoBot::update_account_snapshot() {
   this->account_snapshot = this->db_account_stat.get_snapshot({
       .api_key_id = this->api_client.config.account_id,
-      .starting_from =
+      .start_at =
           ::utils::time_::beginning_of_day_to_epoch((long int)time(nullptr)),
   });
 }

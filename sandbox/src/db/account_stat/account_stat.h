@@ -29,13 +29,15 @@ public:
   struct get_snapshot_args_t {
     std::string api_key_id;
     bool debug = false;
-    double starting_from;
+    double start_at;
   };
 
   struct get_snapshot_with_computed_equity_args_t {
     std::string api_key_id;
+    account_snapshot_t current_snapshot;
     bool debug = false;
-    double starting_from;
+    double end_at;
+    double start_at;
   };
 
   struct upsert_args_t {
@@ -72,6 +74,8 @@ private:
   result_to_account_snapshots(const query_result_t &);
 
   std::list<account_stat_t> result_to_account_stats(const query_result_t &);
+
+  std::list<double> result_to_computed_profits(const query_result_t &);
 };
 } // namespace DB
 

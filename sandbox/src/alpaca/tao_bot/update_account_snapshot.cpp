@@ -7,7 +7,9 @@
 void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
   this->backtest.upsert_account_stat({
       .current_epoch = this->current_epoch,
+      .current_snapshot = this->account_snapshot,
       .debug = this->api_client.config.debug_sql,
+      .end_at = this->market_close_epoch,
       .force = force,
   });
 
@@ -19,7 +21,7 @@ void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
       this->db_account_stat.get_snapshot({
           .api_key_id = this->api_client.config.api_key_id,
           .debug = this->api_client.config.debug_sql,
-          .starting_from =
+          .start_at =
               ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
       });
 

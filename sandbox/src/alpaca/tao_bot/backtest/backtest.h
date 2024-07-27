@@ -48,7 +48,9 @@ public:
 
   struct upsert_account_stat_args_t {
     double current_epoch;
+    account_snapshot_t current_snapshot;
     bool debug = false;
+    double end_at = 0.0;
     bool force = false;
   };
 
