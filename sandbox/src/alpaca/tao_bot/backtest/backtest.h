@@ -6,6 +6,7 @@
 #include "db/market_close/market_close.cpp" // DB::MarketClose
 #include "db/quote/quote.cpp"               // DB::Quote
 #include "db/utils/utils.cpp"               // DB::Utils
+#include "lib/formatted.cpp"                // Formatted
 #include "lib/pg/pg.cpp"                    // Pg
 #include "types.cpp"                        // Global::t
 #include <list>                             // std::list
@@ -65,13 +66,13 @@ public:
   std::string symbol;
 
   bool has_reached_end(const double);
-  bool should_await_epoch_advance(const long int, const long int);
   bool should_exec_slow_query(const double);
 
-  int next_day_market_open_epoch(const double, const int);
+  double next_market_open_epoch(const double, const int);
 
   std::string fetch_order(const order_t *, const quote_t &);
 
+  void await_env_market_close(const double, const double);
   void place_order(const long int, order_t *);
   void upsert_account_stat(const upsert_account_stat_args_t);
 
@@ -79,12 +80,15 @@ private:
   DB::AccountStat db_account_stat;
   DB::Quote db_quote;
   DB::Utils db_utils;
+  Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;
 
   static constexpr int SLOW_QUERY_EVERY = 100;
 
   std::list<std::string> env_symbols;
   std::map<std::string, std::string> flags;
+
+  bool should_await_env_market_close(const double, const double);
 
   void load_config();
 };

@@ -1,7 +1,8 @@
 #ifndef ALPACA__TAO_BOT_BACKTEST
 #define ALPACA__TAO_BOT_BACKTEST
 
-#include "backtest.h"                       // Alpaca::TaoBotBacktest
+#include "backtest.h" // Alpaca::TaoBotBacktest
+#include "await_env_market_close.cpp"
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/market_close/market_close.cpp" // DB::MarketClose
 #include "db/quote/quote.cpp"               // DB::Quote
@@ -11,9 +12,8 @@
 #include "lib/pg/pg.cpp"       // Pg
 #include "lib/utils/io.cpp"    // ::utils::io
 #include "load_config.cpp"     // load_config
-#include "next_day_market_open_epoch.cpp"
+#include "next_market_open_epoch.cpp"
 #include "place_order.cpp"
-#include "should_await_epoch_advance.cpp"
 #include "should_exec_slow_query.cpp"
 #include "upsert_account_stat.cpp"
 

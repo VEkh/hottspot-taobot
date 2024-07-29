@@ -10,8 +10,6 @@
 #include "update_account_snapshot.cpp" // update_account_snapshot
 
 void Alpaca::TaoBot::reset_backtest() {
-  update_account_snapshot(true);
-
   this->backtest.db_market_close.upsert({
       .api_key_id = this->api_client.config.api_key_id,
       .closed_at =
@@ -19,12 +17,14 @@ void Alpaca::TaoBot::reset_backtest() {
       .symbol = this->symbol,
   });
 
-  advance_current_epoch(this->backtest.next_day_market_open_epoch(
-      this->current_epoch, this->api_client.config.late_start_seconds));
+  const double next_market_open_epoch = this->backtest.next_market_open_epoch(
+      this->current_epoch, this->api_client.config.late_start_seconds);
 
-  // `slow_query_countdown` may cause skipping of first daily quote. This
-  // will falsely reset the next day's equity to the initial equity.
+  this->backtest.await_env_market_close(this->current_epoch,
+                                        next_market_open_epoch);
+
   update_account_snapshot(true);
+  advance_current_epoch(next_market_open_epoch);
 
   this->closed_positions = {};
   this->current_trend = trend_meta_t();

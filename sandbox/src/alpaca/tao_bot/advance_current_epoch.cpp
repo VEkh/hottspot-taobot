@@ -20,16 +20,6 @@ void Alpaca::TaoBot::advance_current_epoch() {
 }
 
 void Alpaca::TaoBot::advance_current_epoch(const double epoch) {
-  if (this->backtest.should_await_epoch_advance(this->current_epoch, epoch)) {
-    std::cout << fmt.bold << fmt.yellow;
-    printf("😴 Awaiting epoch advance...");
-    std::cout << fmt.reset << std::endl;
-
-    usleep(5e5);
-
-    return advance_current_epoch(epoch);
-  }
-
   this->current_epoch = epoch;
 }
 

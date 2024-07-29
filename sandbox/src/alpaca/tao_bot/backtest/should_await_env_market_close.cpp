@@ -1,5 +1,5 @@
-#ifndef ALPACA__TAO_BOT_BACKTEST_should_await_epoch_advance
-#define ALPACA__TAO_BOT_BACKTEST_should_await_epoch_advance
+#ifndef ALPACA__TAO_BOT_BACKTEST_should_await_env_market_close
+#define ALPACA__TAO_BOT_BACKTEST_should_await_env_market_close
 
 #include "backtest.h"             // Alpaca::TaoBotBacktest
 #include "has_reached_end.cpp"    // has_reached_end
@@ -8,8 +8,8 @@
 #include <string>                 // std::stod, std::string
 #include <time.h>                 // localtime
 
-bool Alpaca::TaoBotBacktest::should_await_epoch_advance(
-    const long int current_epoch, const long int new_epoch) {
+bool Alpaca::TaoBotBacktest::should_await_env_market_close(
+    const double current_epoch, const double next_market_open_epoch) {
   if (!this->is_active) {
     return false;
   }
@@ -18,7 +18,7 @@ bool Alpaca::TaoBotBacktest::should_await_epoch_advance(
     return false;
   }
 
-  if (has_reached_end(new_epoch)) {
+  if (has_reached_end(next_market_open_epoch)) {
     return false;
   }
 
@@ -26,7 +26,7 @@ bool Alpaca::TaoBotBacktest::should_await_epoch_advance(
       ::utils::time_::beginning_of_day_to_epoch(current_epoch);
 
   const double new_begin_day_epoch =
-      ::utils::time_::beginning_of_day_to_epoch(new_epoch);
+      ::utils::time_::beginning_of_day_to_epoch(next_market_open_epoch);
 
   const bool is_new_day = new_begin_day_epoch != current_begin_day_epoch;
 
