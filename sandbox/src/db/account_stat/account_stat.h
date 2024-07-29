@@ -29,6 +29,7 @@ public:
   struct get_snapshot_args_t {
     std::string api_key_id;
     bool debug = false;
+    double end_at;
     double start_at;
   };
 

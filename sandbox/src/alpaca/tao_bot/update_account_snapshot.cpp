@@ -17,15 +17,13 @@ void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
     return;
   }
 
-  const account_snapshot_t current_snapshot =
-      this->db_account_stat.get_snapshot({
-          .api_key_id = this->api_client.config.api_key_id,
-          .debug = this->api_client.config.debug_sql,
-          .start_at =
-              ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
-      });
-
-  this->account_snapshot = current_snapshot;
+  this->account_snapshot = this->db_account_stat.get_snapshot({
+      .api_key_id = this->api_client.config.api_key_id,
+      .debug = this->api_client.config.debug_sql,
+      .end_at = this->current_epoch,
+      .start_at =
+          ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
+  });
 }
 
 #endif

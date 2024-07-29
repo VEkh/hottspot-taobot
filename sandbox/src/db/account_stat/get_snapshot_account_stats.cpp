@@ -11,6 +11,7 @@
 
 std::list<DB::AccountStat::account_stat_t>
 DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
+  const double end_at = args.end_at;
   const double start_at = args.start_at;
   const std::string api_key_id = args.api_key_id;
 
@@ -27,17 +28,20 @@ DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
       account_stats
     where
       api_key_id = %s
-      and inserted_at >= to_timestamp(%f)
+      and inserted_at between to_timestamp(%f)
+      and to_timestamp(%f)
     order by
       inserted_at asc
   )";
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_api_key_id) +
-                         std::to_string(start_at).size();
+                         std::to_string(start_at).size() +
+                         std::to_string(end_at).size();
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, sanitized_api_key_id, start_at);
+  snprintf(query, query_l, query_format, sanitized_api_key_id, start_at,
+           end_at);
 
   PQfreemem(sanitized_api_key_id);
 
