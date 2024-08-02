@@ -42,9 +42,9 @@ void Alpaca::TaoBot::reset_backtest() {
       this->api_client.config.reversal_timeframe_minutes;
   this->started_at = this->current_epoch;
 
-  force_init_reversal_await();
   set_market_close_epoch();
   set_market_open_epoch();
+  force_init_reversal_await();
 }
 
 #endif
