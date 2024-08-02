@@ -18,6 +18,10 @@ DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
   char *sanitized_api_key_id =
       PQescapeLiteral(this->conn.conn, api_key_id.c_str(), api_key_id.size());
 
+  const std::string end_at_clause =
+      end_at ? "and inserted_at <= to_timestamp(" + std::to_string(end_at) + ")"
+             : "";
+
   const char *query_format = R"(
     select
       api_key_id,
@@ -28,20 +32,19 @@ DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
       account_stats
     where
       api_key_id = %s
-      and inserted_at between to_timestamp(%f)
-      and to_timestamp(%f)
+      and inserted_at >= to_timestamp(%f)
+      %s
     order by
       inserted_at asc
   )";
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_api_key_id) +
-                         std::to_string(start_at).size() +
-                         std::to_string(end_at).size();
+                         std::to_string(start_at).size() + end_at_clause.size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_api_key_id, start_at,
-           end_at);
+           end_at_clause.c_str());
 
   PQfreemem(sanitized_api_key_id);
 
