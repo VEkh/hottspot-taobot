@@ -75,7 +75,6 @@ int main(int argc, char *argv[]) {
 
     std::map<std::string, std::string> default_flags = {
         {"end-at", ""},
-        {"market-hours", ""},
         {"start-at", ""},
     };
 
@@ -89,8 +88,6 @@ int main(int argc, char *argv[]) {
 
     candle.build({
         .end_at = flags["end-at"],
-        .only_market_hours =
-            ::utils::io::flag_to_bool("market-hours", flags["market-hours"]),
         .start_at = flags["start-at"],
     });
 

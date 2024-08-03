@@ -1,15 +1,14 @@
 #ifndef DB__CANDLE_H
 #define DB__CANDLE_H
 
-#include "db/quote/quote.cpp"                          // DB::Quote
-#include "db/utils/utils.cpp"                          // DB::Utils
-#include "lib/formatted.cpp"                           // Formatted
-#include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
-#include "lib/pg/pg.cpp"                               // Pg
-#include "types.cpp"                                   // Global::t
-#include <list>                                        // std::list
-#include <math.h>                                      // INFINITY
-#include <string>                                      // std::string
+#include "db/quote/quote.cpp" // DB::Quote
+#include "db/utils/utils.cpp" // DB::Utils
+#include "lib/formatted.cpp"  // Formatted
+#include "lib/pg/pg.cpp"      // Pg
+#include "types.cpp"          // Global::t
+#include <list>               // std::list
+#include <math.h>             // INFINITY
+#include <string>             // std::string
 
 namespace DB {
 class Candle {
@@ -49,7 +48,6 @@ public:
 
   struct build_args_t {
     std::string end_at;
-    bool only_market_hours = false;
     std::string start_at;
   };
 
@@ -89,7 +87,6 @@ private:
   DB::Quote db_quote;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  NyseAvailability market_availability;
   Pg conn;
   std::string symbol;
 

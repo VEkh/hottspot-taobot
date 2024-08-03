@@ -19,7 +19,6 @@
 #include <time.h>                  // time
 
 void DB::Candle::build(const build_args_t args) {
-  const bool only_market_hours = args.only_market_hours;
   double end_at = 0.0;
   double start_at = 0.0;
 
@@ -50,31 +49,18 @@ void DB::Candle::build(const build_args_t args) {
   std::cout << fmt.reset << std::endl;
 
   for (; quote != latest_quotes.end(); quote++, quotes_count++) {
-    const bool should_market_hours_skip =
-        only_market_hours &&
-        !this->market_availability.is_market_open(quote->timestamp);
-
-    if (!candle.closed_at && should_market_hours_skip) {
-      continue;
-    }
-
     const candle_bounds_t bounds =
         timestamp_to_bounds(this->duration_minutes, quote->timestamp);
 
     const double mid = quote->mid();
 
     const bool should_close_candle = quote->timestamp >= candle.closed_at ||
-                                     std::next(quote) == latest_quotes.end() ||
-                                     should_market_hours_skip;
+                                     std::next(quote) == latest_quotes.end();
 
     if (candle.closed_at && should_close_candle) {
       upsert(candle);
       candle = candle_t();
       candles_count++;
-
-      if (should_market_hours_skip) {
-        continue;
-      }
     }
 
     candle.close = mid;
