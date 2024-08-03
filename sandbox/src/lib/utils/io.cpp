@@ -90,6 +90,10 @@ bool flag_to_bool(const std::string key, const std::string val) {
     return true;
   }
 
+  if (val == "true") {
+    return true;
+  }
+
   return val == "1";
 }
 
