@@ -23,7 +23,7 @@
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <iostream>                    // std::cout, std::endl
 #include <list>                        // std::list
-#include <locale.h>                    // setlocale
+#include <locale.h>                    // std::locale
 #include <map>                         // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
@@ -37,8 +37,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     throw std::invalid_argument(message);
   }
 
-  // Support comma separation in print output
-  setlocale(LC_NUMERIC, "");
+  std::locale::global(std::locale("en_US.UTF-8"));
 
   this->flags = flags_;
   this->symbol = ::utils::string::upcase(symbol_);

@@ -88,6 +88,62 @@ function install_cpp_dependencies() {
   install_nlohmann_json
 }
 
+function install_linux_dependencies() {
+  [[ ! "${OSTYPE}" =~ ^linux.* ]] && return 0
+
+  packages=(
+    "clang-format" # C Formatting
+    "g++" # C++
+    "gcc" # C++
+    "jq"
+    "libcurl4-openssl-dev" # Curl Client
+    "libpq-dev" # LibPQ
+    "netplan.io"
+    "ntpdate"
+    "openssh-server" # sshd
+    "openssl"
+    "shellcheck" # Shell Formatting
+  )
+
+  sudo apt-get update
+  install_apt_packages "${packages[@]}"
+}
+
+function install_locale() {
+  [[ ! "${OSTYPE}" =~ ^linux.* ]] && return 0
+
+  existing_locales=("$(locale -a)")
+  locale_name="${1}"
+
+  log_install_start "${locale_name} locale"
+
+  if [[ " ${existing_locales[*]} " =~ [[:space:]]${locale_name}[[:space:]] ]]; then
+    ascii_print "${locale_name} locale already installed" "cyan"
+    return 0
+  fi
+
+  sudo locale-gen "${locale_name}"
+  sudo update-locale
+
+  updated_locales=("$(locale -a)")
+
+  ascii_print "\nInstalled locales:\n${updated_locales[*]}" "magenta"
+}
+
+function install_mac_dependencies() {
+  [[ "${OSTYPE}" =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3"
+}
+
+function install_nlohmann_json() {
+  [ -d "${app_dir}/deps/nlohmann" ] && return 0
+
+  log_install_start "{} nlohmann/json"
+
+  git clone "https://github.com/nlohmann/json.git" /tmp/nlohmann/
+  mv /tmp/nlohmann/single_include/nlohmann "${app_dir}/deps/"
+  'rm' -rf /tmp/nlohmann/
+}
+
 function install_pgformatter() {
   if [[ -n $(which pg_format) ]]; then
     return 0
@@ -124,16 +180,6 @@ function install_postgresql() {
   fi
 }
 
-function install_nlohmann_json() {
-  [ -d "${app_dir}/deps/nlohmann" ] && return 0
-
-  log_install_start "{} nlohmann/json"
-
-  git clone "https://github.com/nlohmann/json.git" /tmp/nlohmann/
-  mv /tmp/nlohmann/single_include/nlohmann "${app_dir}/deps/"
-  'rm' -rf /tmp/nlohmann/
-}
-
 function set_cron_timezone() {
   ascii_print "⌚ Setting cron time zone" "yellow"
   # shellcheck disable=1012
@@ -141,31 +187,13 @@ function set_cron_timezone() {
   sudo ln -s /usr/share/zoneinfo/America/Chicago /etc/localtime
 }
 
-if [[ $OSTYPE =~ ^linux.* ]]; then
-  packages=(
-    "clang-format" # C Formatting
-    "g++" # C++
-    "gcc" # C++
-    "jq"
-    "libcurl4-openssl-dev" # Curl Client
-    "libpq-dev" # LibPQ
-    "netplan.io"
-    "ntpdate"
-    "openssh-server" # sshd
-    "openssl"
-    "shellcheck" # Shell Formatting
-  )
-
-  sudo apt-get update
-  install_apt_packages "${packages[@]}"
-fi
-
-[[ $OSTYPE =~ ^darwin.* ]] && install_brew_packages coreutils "openssl@3"
-
+install_linux_dependencies
+install_mac_dependencies
 install_postgresql
 install_pgformatter
 install_cpp_dependencies
 install_python_dependencies
+install_locale "en_US.utf8"
 exempt_service_passwords
 set_cron_timezone
 

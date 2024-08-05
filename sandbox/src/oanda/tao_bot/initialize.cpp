@@ -12,7 +12,7 @@
 #include "spread_limit.cpp"                 // spread_limit
 #include "tao_bot.h"                        // Oanda::TaoBot, quantity, symbol
 #include "update_account_snapshot.cpp"      // update_account_snapshot
-#include <locale.h>                         // setlocale
+#include <locale.h>                         // std::locale
 #include <map>                              // std::map
 #include <stdexcept>                        // std::invalid_argument
 #include <string>                           // std::map
@@ -34,8 +34,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
     throw std::invalid_argument(message);
   }
 
-  // Support comma separation in print output
-  setlocale(LC_NUMERIC, "");
+  std::locale::global(std::locale("en_US.UTF-8"));
 
   this->flags = flags_;
   this->pg = Pg(this->flags);

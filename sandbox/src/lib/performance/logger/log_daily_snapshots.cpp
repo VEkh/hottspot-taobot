@@ -11,7 +11,7 @@
 #include "logger.h"              // Performance::Logger, account_snapshot_t
 #include <iostream>              // std::cout, std::endl
 #include <list>                  // std::list
-#include <locale.h>              // setlocale
+#include <locale.h>              // std::locale
 #include <map>                   // std::map
 #include <math.h>                // abs
 #include <stdio.h>               // printf
@@ -38,7 +38,7 @@ void Performance::Logger::log_daily_snapshots(
   int loss_count = 0;
   int win_count = 0;
 
-  setlocale(LC_NUMERIC, "");
+  std::locale::global(std::locale("en_US.UTF-8"));
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   json config_json = ::utils::io::load_config(flags["project"], api_key);

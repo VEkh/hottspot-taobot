@@ -9,13 +9,13 @@
 #include "read_json_file.cpp"  // read_json_file
 #include <algorithm>           // std::max
 #include <iostream>            // std::cout, std::endl
-#include <locale.h>            // setlocale
+#include <locale.h>            // std::locale
 #include <math.h>              // abs
 #include <stdio.h>             // printf
 #include <time.h>              // tm
 
 void Alpaca::Performance::Logger::log_benchmark() {
-  setlocale(LC_NUMERIC, "");
+  std::locale::global(std::locale("en_US.UTF-8"));
   Formatted::fmt_stream_t fmt = Formatted::stream();
 
   json returns = read_json_file("benchmark.json");

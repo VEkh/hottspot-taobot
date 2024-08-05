@@ -8,11 +8,14 @@
 #include "quote.h"   // DB::Quote, candle_t, fmt, price_action_args_t, quote_t
 #include <algorithm> // std::max, std::min
 #include <iostream>  // std::cout, std::endl
+#include <locale.h>  // std::locale
 #include <stdio.h>   // printf
 #include <string>    // std::stod, std::string
 #include <time.h>    // time
 
 double DB::Quote::price_action(const price_action_args_t args) {
+  std::locale::global(std::locale("en_US.UTF-8"));
+
   const double process_timer_start = time(nullptr);
 
   const std::string symbol = args.symbol;
