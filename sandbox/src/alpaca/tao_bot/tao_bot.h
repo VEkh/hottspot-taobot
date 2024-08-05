@@ -30,7 +30,7 @@ public:
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using candle_bounds_t = DB::Candle::candle_bounds_t;
-  using candle_t = DB::Candle::candle_t;
+  using candle_t = Global::t::candle_t;
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using order_action_t = Alpaca::t::order_action_t;

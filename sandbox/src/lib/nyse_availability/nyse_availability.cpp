@@ -13,8 +13,12 @@
 #include "is_holiday.cpp"
 #include "is_market_day.cpp"
 #include "is_market_open.cpp"
+#include "market_close_epoch.cpp"
+#include "market_open_epoch.cpp"
 
-NyseAvailability::NyseAvailability() {
+NyseAvailability::NyseAvailability(const Pg conn) {
+  this->conn = conn;
+
   const std::string dir =
       std::string(APP_DIR) + "/src/lib/nyse_availability/data";
 
@@ -31,6 +35,8 @@ NyseAvailability::NyseAvailability() {
   this->bad_data = list_to_lookup(bad_data_);
   this->early_closes = list_to_lookup(early_closes_);
   this->holidays = list_to_lookup(holidays_);
+
+  this->db_utils = DB::Utils(this->conn);
 }
 
 #endif

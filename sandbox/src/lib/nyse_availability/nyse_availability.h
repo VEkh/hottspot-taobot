@@ -1,13 +1,16 @@
 #ifndef NYSE_AVAILABILITY_H
 #define NYSE_AVAILABILITY_H
 
-#include <list>   // std::list
-#include <map>    // std::map
-#include <string> // std::string
+#include "db/utils/utils.cpp" // DB::Utils
+#include "lib/pg/pg.cpp"      // Pg
+#include <list>               // std::list
+#include <map>                // std::map
+#include <string>             // std::string
 
 class NyseAvailability {
 public:
-  NyseAvailability();
+  NyseAvailability(const Pg);
+  NyseAvailability(){};
 
   bool is_early_close_day(const double);
   bool is_end_of_trading_period(const double);
@@ -15,7 +18,13 @@ public:
   bool is_market_day(const double);
   bool is_market_open(const double, const int);
 
+  double market_close_epoch(const double);
+  double market_open_epoch(const double);
+
 private:
+  DB::Utils db_utils;
+  Pg conn;
+
   std::map<std::string, bool> bad_data;
   std::map<std::string, bool> early_closes;
   std::map<std::string, bool> holidays;

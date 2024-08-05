@@ -2,10 +2,28 @@
 #define GLOBAL__types
 
 #include <map>    // std::map
+#include <math.h> // INFINITY
 #include <string> // std::string
 
 namespace Global {
 namespace t {
+enum order_action_t {
+  BUY,
+  SELL,
+};
+
+enum order_win_result_t {
+  LOSS,
+  TIE,
+  WIN,
+};
+
+enum trend_t {
+  TREND_CONSOLIDATION = 0,
+  TREND_DOWN = -1,
+  TREND_UP = 1,
+};
+
 struct account_snapshot_t {
   double equity = 0.00;
   double margin_buying_power = 0.00;
@@ -25,20 +43,35 @@ struct avg_one_sec_variances_t {
   double running = 0.00;
 };
 
-enum order_win_result_t {
-  LOSS,
-  TIE,
-  WIN,
+struct candle_t {
+  double close = 0.0;
+  double closed_at = 0.0;
+  double high = -INFINITY;
+  double high_at = 0.0;
+  double low = INFINITY;
+  double low_at = 0.0;
+  double open = 0.0;
+  double opened_at = 0.0;
+  std::string symbol;
+
+  double range() { return this->high - this->low; };
+
+  trend_t trend() {
+    if (this->close > this->open) {
+      return trend_t::TREND_UP;
+    }
+
+    if (this->close < this->open) {
+      return trend_t::TREND_DOWN;
+    }
+
+    return trend_t::TREND_CONSOLIDATION;
+  };
 };
 
 struct exit_prices_t {
   double stop_loss = 0.00;
   double stop_profit = 0.00;
-};
-
-enum order_action_t {
-  BUY,
-  SELL,
 };
 
 struct order_win_result_streak_t {
@@ -66,12 +99,6 @@ struct quote_t {
   double timestamp;
 
   double mid() const { return (this->ask + this->bid) / 2.0; };
-};
-
-enum trend_t {
-  TREND_CONSOLIDATION = 0,
-  TREND_DOWN = -1,
-  TREND_UP = 1,
 };
 
 struct trend_meta_t {

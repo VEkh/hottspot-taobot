@@ -12,18 +12,19 @@
 #include "db/utils/utils.cpp"               // DB::Utils
 #include "initialize_current_trend.cpp"     // initialize_current_trend
 #include "lib/formatted.cpp"                // Formatted::error_message
-#include "lib/pg/pg.cpp"                    // Pg
-#include "lib/utils/boolean.cpp"            // ::utils::boolean
-#include "lib/utils/string.cpp"             // ::utils::string
-#include "read_closed_positions.cpp"        // read_closed_positions
-#include "set_market_close_epoch.cpp"       // set_market_close_epoch
-#include "set_market_open_epoch.cpp"        // set_market_open_epoch
-#include "tao_bot.h"                        // Alpaca::TaoBot
-#include "update_account_snapshot.cpp"      // update_account_snapshot
-#include <iostream>                         // std::cout, std::endl
-#include <list>                             // std::list
-#include <locale.h>                         // setlocale
-#include <map>                              // std::map
+#include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
+#include "lib/pg/pg.cpp"                               // Pg
+#include "lib/utils/boolean.cpp"                       // ::utils::boolean
+#include "lib/utils/string.cpp"                        // ::utils::string
+#include "read_closed_positions.cpp"                   // read_closed_positions
+#include "set_market_close_epoch.cpp"                  // set_market_close_epoch
+#include "set_market_open_epoch.cpp"                   // set_market_open_epoch
+#include "tao_bot.h"                                   // Alpaca::TaoBot
+#include "update_account_snapshot.cpp" // update_account_snapshot
+#include <iostream>                    // std::cout, std::endl
+#include <list>                        // std::list
+#include <locale.h>                    // setlocale
+#include <map>                         // std::map
 #include <stdexcept> // std::invalid_argument, std::runtime_error
 #include <string>    // std::string
 
@@ -49,6 +50,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   this->db_candle = DB::Candle(this->pg, 1, this->symbol);
   this->db_position = DB::Position(this->pg);
   this->db_utils = DB::Utils(this->pg);
+  this->market_availability = NyseAvailability(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
 
   try {

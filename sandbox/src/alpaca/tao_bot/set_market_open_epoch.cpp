@@ -6,11 +6,8 @@
 #include <string>             // std::string
 
 void Alpaca::TaoBot::set_market_open_epoch() {
-  const std::string iso_date =
-      ::utils::time_::date_string(this->current_epoch, "%F", "America/Chicago");
-
-  this->market_open_epoch = this->db_utils.timestamp_to_epoch(
-      iso_date + " 08:30:00", "America/Chicago");
+  this->market_open_epoch =
+      this->market_availability.market_open_epoch(this->current_epoch);
 }
 
 #endif

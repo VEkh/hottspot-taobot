@@ -8,6 +8,7 @@
 #include "get.cpp"
 #include "get_avg_one_sec_variances.cpp"
 #include "get_last.cpp"
+#include "price_action.cpp"
 #include "upsert.cpp"
 #include "upsert_all_avg_one_sec_variances.cpp"
 

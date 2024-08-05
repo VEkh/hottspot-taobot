@@ -21,6 +21,8 @@ void print_usage() {
        "Import symbol's historical quotes"},
       {"net_return                             <SYMBOL> <OPTS>",
        "Compute symbol's net return"},
+      {"price_action                           <SYMBOL> <OPTS>",
+       "Compute symbol's price action"},
       {"quote:upsert_all_avg_one_sec_variances <SYMBOL> <OPTS> ",
        "Retroactively upsert a symbol's average one second variances"},
   };
@@ -157,6 +159,38 @@ int main(int argc, char *argv[]) {
         .log_positions =
             ::utils::io::flag_to_bool("log-positions", flags["log-positions"]),
         .project = flags["project"],
+        .start_at = flags["start-at"],
+        .symbol = upcased_args.front(),
+    });
+
+    pg.disconnect();
+
+    exit(0);
+  }
+
+  if (command == "price_action") {
+    if (upcased_args.empty()) {
+      std::string message =
+          Formatted::error_message("Please provide at least one symbol.");
+
+      throw std::invalid_argument(message);
+    }
+
+    std::map<std::string, std::string> default_flags = {
+        {"end-at", ""},
+        {"start-at", ""},
+    };
+
+    flags = ::utils::map::merge(default_flags, flags);
+
+    Pg pg(flags);
+    pg.connect();
+
+    DB::Quote db_quote(pg);
+
+    db_quote.price_action({
+        .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
+        .end_at = flags["end-at"],
         .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
     });

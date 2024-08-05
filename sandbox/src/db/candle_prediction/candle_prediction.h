@@ -3,13 +3,14 @@
 
 #include "db/candle/candle.cpp" // DB::Candle
 #include "lib/pg/pg.cpp"        // Pg
+#include "types.cpp"            // Global::t
 #include <list>                 // std::list
 #include <string>               // std::string
 
 namespace DB {
 class CandlePrediction {
 public:
-  using candle_t = DB::Candle::candle_t;
+  using candle_t = Global::t::candle_t;
 
   struct prediction_t {
     candle_t candle;
