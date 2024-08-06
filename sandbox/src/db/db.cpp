@@ -1,6 +1,7 @@
 #include "db/candle/candle.cpp"                     // DB::Candle
 #include "db/historical_quote/historical_quote.cpp" // DB::HistoricalQuote
 #include "db/position/position.cpp"                 // DB::Position
+#include "db/price_action/price_action.cpp"         // DB::PriceAction
 #include "db/quote/quote.cpp"                       // DB::Quote
 #include "lib/formatted.cpp"                        // Formatted
 #include "lib/pg/pg.cpp"                            // Pg
@@ -186,14 +187,15 @@ int main(int argc, char *argv[]) {
     Pg pg(flags);
     pg.connect();
 
-    DB::Quote db_quote(pg);
-
-    db_quote.price_action({
+    DB::PriceAction db_price_action({
+        .conn = pg,
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
         .end_at = flags["end-at"],
         .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
     });
+
+    db_price_action.run();
 
     pg.disconnect();
 
