@@ -98,7 +98,7 @@ void Alpaca::TaoBot::log_performance() {
       special_char = "💣";
     }
 
-    printf("%+.2f%s", profit, special_char.c_str());
+    printf("%+'.2f%s", profit, special_char.c_str());
   }
 
   puts("]");

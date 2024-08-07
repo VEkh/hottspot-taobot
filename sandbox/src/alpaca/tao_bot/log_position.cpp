@@ -37,7 +37,7 @@ void Alpaca::TaoBot::log_position() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << log_color;
-  printf("Open   => Execution: %.2f @ %s • Profit    : %+.2f (%+.2f%%)\n",
+  printf("Open   => Execution: %'.2f @ %s • Profit    : %+'.2f (%+.2f%%)\n",
          this->open_order_ptr->execution_price,
          ::utils::time_::date_string(this->open_order_ptr->timestamp,
                                      "%H:%M %Z", "America/Chicago")
@@ -45,30 +45,30 @@ void Alpaca::TaoBot::log_position() {
          this->open_order_ptr->profit,
          profit_percentage(this->open_order_ptr, "profit"));
 
-  printf(
-      "                                          Max Profit: %+.2f (%+.2f%%) @ "
-      "%s%s\n",
-      this->open_order_ptr->max_profit,
-      profit_percentage(this->open_order_ptr, "max_profit"),
-      ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
-                                  "%H:%M %Z", "America/Chicago")
-          .c_str(),
-      this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
-                                                                       : "");
+  printf("                                          Max Profit: %+'.2f "
+         "(%+.2f%%) @ "
+         "%s%s\n",
+         this->open_order_ptr->max_profit,
+         profit_percentage(this->open_order_ptr, "max_profit"),
+         ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
+                                     "%H:%M %Z", "America/Chicago")
+             .c_str(),
+         this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
+                                                                          : "");
 
-  printf(
-      "                                          Min Profit: %+.2f (%+.2f%%) @ "
-      "%s%s\n",
-      this->open_order_ptr->min_profit,
-      profit_percentage(this->open_order_ptr, "min_profit"),
-      ::utils::time_::date_string(this->open_order_ptr->min_profit_at,
-                                  "%H:%M %Z", "America/Chicago")
-          .c_str(),
-      this->open_order_ptr->profit == this->open_order_ptr->min_profit ? " 💦"
-                                                                       : "");
+  printf("                                          Min Profit: %+'.2f "
+         "(%+.2f%%) @ "
+         "%s%s\n",
+         this->open_order_ptr->min_profit,
+         profit_percentage(this->open_order_ptr, "min_profit"),
+         ::utils::time_::date_string(this->open_order_ptr->min_profit_at,
+                                     "%H:%M %Z", "America/Chicago")
+             .c_str(),
+         this->open_order_ptr->profit == this->open_order_ptr->min_profit ? " 💦"
+                                                                          : "");
 
   if (this->close_order_ptr->execution_price) {
-    printf("Close  => Execution: %.2f • Profit: %.2f (%.2f%%)\n",
+    printf("Close  => Execution: %'.2f • Profit: %'.2f (%.2f%%)\n",
            this->close_order_ptr->execution_price,
            this->close_order_ptr->profit,
            profit_percentage(this->close_order_ptr));
@@ -87,12 +87,12 @@ void Alpaca::TaoBot::log_position() {
 
   const double unit_deficit = asset_deficit / this->open_order_ptr->quantity;
 
-  printf("Stop Profit: %.2f • Stop Loss: %.2f • "
-         "Unit Deficit: %.2f\n",
+  printf("Stop Profit: %'.2f • Stop Loss: %'.2f • "
+         "Unit Deficit: %'.2f\n",
          this->exit_prices.stop_profit, this->exit_prices.stop_loss,
          unit_deficit);
 
-  printf("Quantity: %.5f\n", this->open_order_ptr->quantity);
+  printf("Quantity: %'.5f\n", this->open_order_ptr->quantity);
 
   const int duration = order_duration(this->open_order_ptr);
   const int max_profit_duration =
@@ -116,7 +116,7 @@ void Alpaca::TaoBot::log_position() {
   std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << log_color;
-  printf("Current: %.2f • Max: %.2f\n", position_profit,
+  printf("Current: %'.2f • Max: %'.2f\n", position_profit,
          this->open_order_ptr->max_position_profit);
   std::cout << fmt.reset << std::endl;
 }
