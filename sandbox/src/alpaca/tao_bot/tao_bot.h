@@ -121,6 +121,7 @@ private:
   int order_duration(const order_t *, const std::string);
   int profit_duration(const double);
   int runtime();
+  json fetch_asset();
   json fetch_order(const order_t *);
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
@@ -142,6 +143,7 @@ private:
   void build_reversals(reversals_t &, const bool);
   void cancel_stale_open_order();
   void close_position();
+  void ensure_is_shortable();
   void fetch_and_persist_quote(const bool);
   void force_init_reversal_await();
   void initialize(std::string, std::map<std::string, std::string> &);

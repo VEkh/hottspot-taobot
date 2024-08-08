@@ -70,6 +70,7 @@ public:
 
   double next_market_open_epoch(const double, const int);
 
+  std::string fetch_asset();
   std::string fetch_order(const order_t *, const quote_t &);
 
   void await_env_market_close(const double, const double);

@@ -1,18 +1,10 @@
 #ifndef ALPACA__TAO_BOT_fetch_order
 #define ALPACA__TAO_BOT_fetch_order
 
-/*
- * Alpaca::TaoBot
- * fmt
- * order_t
- */
-#include "tao_bot.h"
-
 #include "alpaca/client/client.cpp" // Alpaca::Client
 #include "deps.cpp"                 // json
 #include "lib/utils/json.cpp"       // ::utils::json
-#include <iostream>                 // std::cout, std::endl
-#include <stdio.h>                  // printf
+#include "tao_bot.h"                // Alpaca::TaoBot, fmt, order_t
 #include <string>                   // std::string
 
 json Alpaca::TaoBot::fetch_order(const order_t *order) {

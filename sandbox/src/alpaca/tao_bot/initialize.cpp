@@ -10,6 +10,7 @@
 #include "db/candle/candle.cpp"             // DB::Candle
 #include "db/position/position.cpp"         // DB::Position
 #include "db/utils/utils.cpp"               // DB::Utils
+#include "ensure_is_shortable.cpp"          // ensure_is_shortable
 #include "initialize_current_trend.cpp"     // initialize_current_trend
 #include "lib/formatted.cpp"                // Formatted::error_message
 #include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
@@ -71,6 +72,8 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
       this->started_at = this->backtest.config.start_epoch;
     }
+
+    ensure_is_shortable();
 
     if (this->market_availability.is_holiday(this->current_epoch)) {
       const std::string message = Formatted::error_message(

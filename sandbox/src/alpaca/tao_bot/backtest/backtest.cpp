@@ -7,6 +7,7 @@
 #include "db/market_close/market_close.cpp" // DB::MarketClose
 #include "db/quote/quote.cpp"               // DB::Quote
 #include "db/utils/utils.cpp"               // DB::Utils
+#include "fetch_asset.cpp"
 #include "fetch_order.cpp"
 #include "has_reached_end.cpp" // has_reached_end
 #include "lib/pg/pg.cpp"       // Pg
