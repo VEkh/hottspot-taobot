@@ -33,7 +33,7 @@ DB::PriceAction::PriceAction(const init_args_t args) {
     this->start_at = this->db_utils.timestamp_to_epoch(args.start_at, "UTC");
   }
 
-  this->db_utils.set_param({"statement_timeout", "600000"});
+  this->db_utils.set_param({"statement_timeout", "6000000"});
 }
 
 #endif

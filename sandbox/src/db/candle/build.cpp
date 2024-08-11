@@ -13,12 +13,15 @@
 #include <iostream>                // std::cout, std::endl
 #include <iterator>                // std::next
 #include <list>                    // std::list
+#include <locale.h>                // std::locale
 #include <math.h>                  // INFINITY
 #include <stdio.h>                 // printf
 #include <string>                  // std::string
 #include <time.h>                  // time
 
 void DB::Candle::build(const build_args_t args) {
+  std::locale::global(std::locale("en_US.UTF-8"));
+
   double end_at = 0.0;
   double start_at = 0.0;
 
@@ -77,12 +80,12 @@ void DB::Candle::build(const build_args_t args) {
       printf(" %i Min Candle Build Report\n", this->duration_minutes);
 
       std::cout << fmt.no_underline << fmt.cyan;
-      printf("Candles Upserted: %i\n", candles_count);
+      printf("Candles Upserted: %'i\n", candles_count);
       printf("Latest Opened At: %s\n",
              ::utils::time_::date_string(
                  candle.opened_at, "%a, %b %d, %Y %X %Z", "America/Chicago")
                  .c_str());
-      printf("Quotes Processed: %i\n", quotes_count);
+      printf("Quotes Processed: %'i\n", quotes_count);
       std::cout << fmt.reset << std::endl;
     }
   }
@@ -90,7 +93,7 @@ void DB::Candle::build(const build_args_t args) {
   const long int duration = time(nullptr) - clock_start;
 
   std::cout << fmt.bold << fmt.green;
-  printf("🎉 Successfully built %i candle(s) in %s\n", candles_count,
+  printf("🎉 Successfully built %'i candle(s) in %s\n", candles_count,
          ::utils::integer_::seconds_to_clock(duration).c_str());
   std::cout << fmt.reset;
 }
