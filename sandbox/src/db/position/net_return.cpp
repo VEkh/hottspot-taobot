@@ -11,6 +11,7 @@
 #include "position.h" // DB::Position, fmt, net_return_args_t, position_t
 #include <iostream>   // std::cout, std::endl
 #include <list>       // std::list
+#include <locale.h>   // std::locale
 #include <map>        // std::map
 #include <math.h>     // INFINITY, abs
 #include <stdio.h>    // printf
@@ -19,6 +20,8 @@
 #include <utility>    // std::pair
 
 void DB::Position::net_return(const net_return_args_t args) {
+  std::locale::global(std::locale("en_US.UTF-8"));
+
   const double timer_start_epoch = time(nullptr);
   const std::string api_key = args.api_key;
   double net_return_ = 0.0;
@@ -107,13 +110,20 @@ void DB::Position::net_return(const net_return_args_t args) {
 
   std::cout << std::endl;
 
+  const double avg_daily_positions_n = (double)total_positions / days_n;
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("📅 Average Positions Per Day: ");
+  std::cout << fmt.bold << fmt.cyan;
+  printf("%.2f\n", avg_daily_positions_n);
+
   const double single_position_days_percent =
       100.0 * ((float)single_position_days_n / days_n);
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("# Single-Position Days: ");
+  printf("💖 Single-Position Days:      ");
   std::cout << fmt.bold << fmt.cyan;
-  printf("%i of %i (%.2f%%)\n", single_position_days_n, days_n,
+  printf("%'i of %'i (%.2f%%)\n", single_position_days_n, days_n,
          single_position_days_percent);
   std::cout << std::endl;
 
@@ -123,7 +133,7 @@ void DB::Position::net_return(const net_return_args_t args) {
   Formatted::Stream net_return_color = net_return_ >= 0.0 ? fmt.green : fmt.red;
 
   std::cout << fmt.bold << net_return_color;
-  printf("Total Return: %c$%.2f\n", ::utils::float_::sign_char(net_return_),
+  printf("Total Return: %c$%'.2f\n", ::utils::float_::sign_char(net_return_),
          abs(net_return_));
   std::cout << fmt.reset << std::endl;
 
