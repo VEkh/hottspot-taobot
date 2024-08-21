@@ -2,11 +2,9 @@
 #define DB__PRICE_ACTION_run
 
 #include "lib/utils/integer.cpp" // ::utils::integer_
-#include "log_day_candle.cpp"    // log_day_candle
 #include "price_action.h"        // DB::PriceAction, duration, fmt
 #include "process_quotes.cpp"    // process_quotes
 #include "read_quotes.cpp"       // read_quotes
-#include "update_avg.cpp"        // update_avg
 #include <iostream>              // std::cout, std::endl
 #include <stdio.h>               // printf
 
@@ -20,8 +18,6 @@ void DB::PriceAction::run() {
 
   read_quotes();
   process_quotes();
-  update_avg();
-  log_day_candle();
 
   std::cout << fmt.bold << fmt.cyan;
   printf("🎉 Completed in %s\n",

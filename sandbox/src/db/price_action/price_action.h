@@ -57,6 +57,7 @@ private:
   void process_quotes();
   void read_quotes();
   void update_avg();
+  void upsert();
 };
 } // namespace DB
 

@@ -4,6 +4,7 @@
 #include "log_day_candle.cpp" // log_day_candle
 #include "price_action.h"     // DB::PriceAction, candle_t, quote_t
 #include "update_avg.cpp"     // update_avg
+#include "upsert.cpp"         // upsert
 #include <algorithm>          // std::max, std::min
 
 void DB::PriceAction::process_quotes() {
@@ -14,6 +15,7 @@ void DB::PriceAction::process_quotes() {
 
     if (this->day_candle.closed_at &&
         quote.timestamp > this->day_candle.closed_at) {
+      upsert();
       update_avg();
       log_day_candle();
 
@@ -49,6 +51,10 @@ void DB::PriceAction::process_quotes() {
       this->day_candle.low_at = quote.timestamp;
     }
   }
+
+  upsert();
+  update_avg();
+  log_day_candle();
 }
 
 #endif
