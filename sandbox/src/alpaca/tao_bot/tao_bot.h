@@ -155,6 +155,7 @@ private:
   void log_position();
   void log_position_results();
   void log_positions();
+  void log_price_action();
   void log_quote();
   void log_start_message();
   void log_timestamps();

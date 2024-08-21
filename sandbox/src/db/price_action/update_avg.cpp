@@ -5,7 +5,7 @@
 
 void DB::PriceAction::update_avg() {
   this->days_n++;
-  this->price_action_sum += this->day_candle.price_action();
+  this->price_action_sum += this->day_candle.range_open_percent();
 
   this->avg_price_action =
       this->days_n ? this->price_action_sum / this->days_n : 0.0;

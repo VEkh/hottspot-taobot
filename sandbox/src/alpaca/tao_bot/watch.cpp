@@ -13,6 +13,7 @@
 #include "log_performance.cpp"           // log_performance
 #include "log_position.cpp"              // log_position
 #include "log_position_results.cpp"      // log_position_results
+#include "log_price_action.cpp"          // log_price_action
 #include "log_quote.cpp"                 // log_quote
 #include "log_reversal_metadata.cpp"     // log_reversal_metadata
 #include "log_reversals.cpp"             // log_reversals
@@ -55,6 +56,7 @@ void Alpaca::TaoBot::watch() {
         log_account_snapshot();
         log_env_symbols();
         log_quote();
+        log_price_action();
         log_reversals(this->reversals);
         log_reversal_metadata();
         log_position();

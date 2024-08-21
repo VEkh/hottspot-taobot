@@ -143,7 +143,7 @@ void Performance::Logger::log_daily_snapshots(
   printf("Total Return:               %c$%'.2f\n",
          ::utils::float_::sign_char(daily_dollars), abs(daily_dollars));
 
-  printf("Win Rate:                   %iW (%.2f%%) %iL (Total: %i)\n",
+  printf("Win Rate:                   %'iW (%.2f%%) %'iL (Total: %'i)\n",
          win_count, win_rate_percent, loss_count, day_count);
 
   std::cout << std::endl;

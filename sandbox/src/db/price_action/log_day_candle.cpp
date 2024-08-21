@@ -40,7 +40,7 @@ void DB::PriceAction::log_day_candle() {
   printf("--------------------------------------\n");
 
   std::cout << fmt.bold << fmt.green;
-  printf("💸 Price Action: %.2f%%\n", this->day_candle.price_action());
+  printf("💸 Price Action: %.2f%%\n", this->day_candle.range_open_percent());
   std::cout << std::endl << fmt.reset;
 
   std::cout << fmt.bold << fmt.yellow;

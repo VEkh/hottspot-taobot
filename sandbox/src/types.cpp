@@ -54,9 +54,9 @@ struct candle_t {
   double opened_at = 0.0;
   std::string symbol;
 
-  double price_action() { return 100.0 * this->range() / this->open; };
-
   double range() { return this->high - this->low; };
+
+  double range_open_percent() { return 100.0 * this->range() / this->open; };
 
   trend_t trend() {
     if (this->close > this->open) {

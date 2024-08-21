@@ -18,7 +18,7 @@ void Alpaca::TaoBot::log_reversals(reversals_t &reversals_) {
   const int lows_n = reversals_.lows.size();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("%i-Min 🔀 Reversals\n", reversals_.timeframe_minutes);
+  printf("🔀 %i-Min Reversals\n", reversals_.timeframe_minutes);
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << fmt.green;
