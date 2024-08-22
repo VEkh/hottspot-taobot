@@ -4,6 +4,7 @@
 #include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
 #include "lib/utils/time.cpp"            // ::utils::time_
+#include "read_price_action_stats.cpp"   // read_price_action_stats
 #include "set_market_close_epoch.cpp"    // set_market_close_epoch
 #include "set_market_open_epoch.cpp"     // set_market_open_epoch
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, quote_t, reversals_t, trend_meta_t
@@ -45,6 +46,7 @@ void Alpaca::TaoBot::reset_backtest() {
   set_market_close_epoch();
   set_market_open_epoch();
   force_init_reversal_await();
+  read_price_action_stats();
 }
 
 #endif

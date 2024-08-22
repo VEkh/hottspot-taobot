@@ -13,51 +13,66 @@
 namespace DB {
 class PriceAction {
 public:
+  using candle_t = Global::t::candle_t;
+  using quote_t = Global::t::quote_t;
+
+  struct build_args_t {
+    std::string end_at;
+    std::string start_at;
+  };
+
+  struct build_state_t {
+    double avg_price_action = 0.0;
+    candle_t day_candle;
+    int days_n = 0;
+    double end_at;
+    double price_action_sum = 0.0;
+    std::list<quote_t> quotes;
+    double start_at;
+    double timer_start;
+
+    int duration() { return time(nullptr) - this->timer_start; };
+  };
+
   struct init_args_t {
     Pg conn;
     bool debug = false;
-    std::string end_at;
-    std::string start_at;
     std::string symbol;
+  };
+
+  struct price_action_stats_t {
+    double avg = 0.0;
+    double std = 0.0;
   };
 
   PriceAction(const init_args_t);
   PriceAction(){};
 
-  void run();
+  price_action_stats_t get_stats(const double);
+
+  void build(const build_args_t);
 
 private:
-  using candle_t = Global::t::candle_t;
-  using quote_t = Global::t::quote_t;
+  using query_result_t = Pg::query_result_t;
 
   DB::Quote db_quote;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   NyseAvailability market_availability;
   Pg conn;
-
   bool debug;
-
-  candle_t day_candle;
-
-  double avg_price_action = 0.0;
-  double end_at;
-  double price_action_sum = 0.0;
-  double start_at;
-  double timer_start;
-
-  int days_n = 0;
-
-  std::list<quote_t> quotes;
+  build_state_t build_state;
   std::string symbol;
 
-  int duration() { return time(nullptr) - this->timer_start; };
+  price_action_stats_t result_to_stats(const query_result_t &);
 
-  void log_day_candle();
+  void init_build_state(const build_args_t);
+  void log_build_summary(build_state_t &);
+  void log_candle(candle_t &);
   void process_quotes();
   void read_quotes();
-  void update_avg();
-  void upsert();
+  void update_avg(build_state_t &);
+  void upsert(candle_t &);
 };
 } // namespace DB
 

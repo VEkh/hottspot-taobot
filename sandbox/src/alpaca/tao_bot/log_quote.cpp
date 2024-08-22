@@ -26,7 +26,8 @@ void Alpaca::TaoBot::log_quote() {
   printf("%s Quote\n", this->current_quote.symbol.c_str());
   std::cout << fmt.no_underline;
 
-  printf("Current: %'.2f (p%'.2f%%) • High: %'.2f @ %s • Low: %'.2f @ %s\n",
+  printf("Current: %'.2f (p%'.2f%%) • High: %'.2f @ %s • Low: %'.2f @ %s • "
+         "Δ: %'.2f\n",
          this->current_quote.price, day_range_percentile(current_mid()),
          this->day_candle.high,
          ::utils::time_::date_string(this->day_candle.high_at, "%R CT",
@@ -35,7 +36,8 @@ void Alpaca::TaoBot::log_quote() {
          this->day_candle.low,
          ::utils::time_::date_string(this->day_candle.low_at, "%R CT",
                                      "America/Chicago")
-             .c_str());
+             .c_str(),
+         this->day_candle.range());
 
   std::cout << fmt.reset << std::endl;
 }

@@ -7,10 +7,10 @@
 #include <string.h>       // strlen
 #include <string>         // std::string, std::to_string
 
-void DB::PriceAction::upsert() {
-  const double closed_at = this->day_candle.closed_at;
-  const double opened_at = this->day_candle.opened_at;
-  const double range_open_percent = this->day_candle.range_open_percent();
+void DB::PriceAction::upsert(candle_t &candle) {
+  const double closed_at = candle.closed_at;
+  const double opened_at = candle.opened_at;
+  const double range_open_percent = candle.range_open_percent();
 
   char *sanitized_symbol = PQescapeLiteral(
       this->conn.conn, this->symbol.c_str(), this->symbol.size());

@@ -75,7 +75,7 @@ void Alpaca::TaoBot::watch() {
       reset_position();
 
       if (this->backtest.should_exec_slow_query(this->current_epoch)) {
-        ::utils::io::print_newlines(10);
+        ::utils::io::print_newlines(7);
       }
 
       advance_current_epoch();

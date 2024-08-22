@@ -9,6 +9,7 @@
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/candle/candle.cpp"             // DB::Candle
 #include "db/position/position.cpp"         // DB::Position
+#include "db/price_action/price_action.cpp" // DB::PriceAction
 #include "db/utils/utils.cpp"               // DB::Utils
 #include "ensure_is_shortable.cpp"          // ensure_is_shortable
 #include "initialize_current_trend.cpp"     // initialize_current_trend
@@ -18,9 +19,10 @@
 #include "lib/utils/boolean.cpp"                       // ::utils::boolean
 #include "lib/utils/string.cpp"                        // ::utils::string
 #include "read_closed_positions.cpp"                   // read_closed_positions
-#include "set_market_close_epoch.cpp"                  // set_market_close_epoch
-#include "set_market_open_epoch.cpp"                   // set_market_open_epoch
-#include "tao_bot.h"                                   // Alpaca::TaoBot
+#include "read_price_action_stats.cpp" // read_price_action_stats
+#include "set_market_close_epoch.cpp"  // set_market_close_epoch
+#include "set_market_open_epoch.cpp"   // set_market_open_epoch
+#include "tao_bot.h"                   // Alpaca::TaoBot
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <iostream>                    // std::cout, std::endl
 #include <list>                        // std::list
@@ -56,6 +58,12 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   try {
     this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
+
+    this->db_price_action = DB::PriceAction({
+        .conn = this->pg,
+        .debug = this->api_client.config.debug_sql,
+        .symbol = this->symbol,
+    });
 
     this->env_symbols = this->api_client.config.env_symbols;
 
@@ -94,6 +102,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->performance = build_performance();
 
     initialize_current_trend();
+    read_price_action_stats();
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(
              "❌ JSON type error during initialization. Retrying.")

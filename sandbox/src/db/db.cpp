@@ -190,12 +190,13 @@ int main(int argc, char *argv[]) {
     DB::PriceAction db_price_action({
         .conn = pg,
         .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
-        .end_at = flags["end-at"],
-        .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
     });
 
-    db_price_action.run();
+    db_price_action.build({
+        .end_at = flags["end-at"],
+        .start_at = flags["start-at"],
+    });
 
     pg.disconnect();
 
