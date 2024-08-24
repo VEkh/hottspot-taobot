@@ -68,6 +68,10 @@ void Alpaca::Client::load_config() {
     config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
+  if (api_key_json.contains("should_stop_loss")) {
+    config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
+  }
+
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -81,6 +85,7 @@ void Alpaca::Client::load_config() {
       .late_start_seconds = api_key_json["late_start_seconds"],
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .should_stop_loss = config.should_stop_loss,
   };
 }
 
