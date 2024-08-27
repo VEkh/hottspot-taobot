@@ -38,11 +38,21 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
-  Formatted::Stream stop_loss_color =
-      this->api_client.config.should_stop_loss ? fmt.green : fmt.red;
+  // TODO: Decide
+  Formatted::Stream dynamic_stop_loss_color =
+      this->api_client.config.is_should_stop_loss_dynamic ? fmt.green : fmt.red;
 
-  std::string stop_loss_text =
-      this->api_client.config.should_stop_loss ? "YES" : "NO";
+  std::string dynamic_stop_loss_text =
+      this->api_client.config.is_should_stop_loss_dynamic ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Is should stop loss dynamic? ");
+  std::cout << dynamic_stop_loss_color << dynamic_stop_loss_text << std::endl;
+
+  Formatted::Stream stop_loss_color =
+      this->should_stop_loss ? fmt.green : fmt.red;
+
+  std::string stop_loss_text = this->should_stop_loss ? "YES" : "NO";
 
   std::cout << fmt.bold << fmt.yellow;
   printf("Should stop loss? ");

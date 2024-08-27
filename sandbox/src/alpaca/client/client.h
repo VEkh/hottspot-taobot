@@ -2,7 +2,6 @@
 #define ALPACA__CLIENT_H
 
 #include "alpaca/types.cpp"                // Alpaca::t
-#include "deps.cpp"                        // json
 #include "lib/curl_client/curl_client.cpp" // CurlClient
 #include "lib/formatted.cpp"               // Formatted
 #include "types.cpp"                       // Global::t
@@ -30,9 +29,9 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     bool is_live;
-    int late_start_seconds = 6; // Production's average
+    bool is_should_stop_loss_dynamic = false; // TODO: Decide
+    int late_start_seconds = 6;               // Production's average
     int reversal_timeframe_minutes = 60;
-    bool should_stop_loss = true;
   } config;
 
   struct fetch_historical_quotes_args_t {

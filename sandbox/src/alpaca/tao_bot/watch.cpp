@@ -26,10 +26,11 @@
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
-#include "should_terminate.cpp"          // should_terminate
-#include "tao_bot.h"                     // Alpaca::TaoBot
-#include "update_account_snapshot.cpp"   // update_account_snapshot
-#include <iostream>                      // std::cout, std::flush
+#include "set_should_stop_loss.cpp"    // set_close_order_prices // TODO: Decide
+#include "should_terminate.cpp"        // should_terminate
+#include "tao_bot.h"                   // Alpaca::TaoBot
+#include "update_account_snapshot.cpp" // update_account_snapshot
+#include <iostream>                    // std::cout, std::flush
 
 void Alpaca::TaoBot::watch() {
   while (!should_terminate()) {
@@ -45,6 +46,7 @@ void Alpaca::TaoBot::watch() {
 
       read_candles();
       build_day_candle();
+      set_should_stop_loss(); // TODO: Decide
       build_reversals(this->reversals, true);
 
       if (!this->backtest.is_active ||

@@ -68,8 +68,10 @@ void Alpaca::Client::load_config() {
     config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
-  if (api_key_json.contains("should_stop_loss")) {
-    config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
+  // TODO: Decide
+  if (api_key_json.contains("is_should_stop_loss_dynamic")) {
+    config.is_should_stop_loss_dynamic =
+        (bool)api_key_json["is_should_stop_loss_dynamic"];
   }
 
   this->config = {
@@ -80,12 +82,13 @@ void Alpaca::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .data_base_url = config_json["data_base_url"],
       .debug_sql = config.debug_sql,
-      .env_symbols = read_env_symbols(api_key_json),
+      .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
+      .is_should_stop_loss_dynamic =
+          config.is_should_stop_loss_dynamic, // TODO: Decide
       .late_start_seconds = api_key_json["late_start_seconds"],
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
-      .should_stop_loss = config.should_stop_loss,
   };
 }
 

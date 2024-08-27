@@ -69,6 +69,7 @@ private:
   NyseAvailability market_availability;
   Pg pg;
   account_snapshot_t account_snapshot;
+  bool should_stop_loss = true; // TODO: Decide
   candle_t day_candle;
   double current_epoch = time(nullptr);
   double market_close_epoch;
@@ -180,6 +181,7 @@ private:
   void set_position_status();
   void set_profit(order_t *);
   void set_profit(order_t *, order_t *);
+  void set_should_stop_loss(); // TODO: Decide
   void set_status(order_t *);
   void toggle_is_trending(const order_t &);
   void update_account_snapshot(const bool);
