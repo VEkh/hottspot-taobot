@@ -74,6 +74,12 @@ void Alpaca::Client::load_config() {
         (bool)api_key_json["is_should_stop_loss_dynamic"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("price_action_stats_time_range_weeks")) {
+    config.price_action_stats_time_range_weeks =
+        (int)api_key_json["price_action_stats_time_range_weeks"];
+  }
+
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -87,6 +93,8 @@ void Alpaca::Client::load_config() {
       .is_should_stop_loss_dynamic =
           config.is_should_stop_loss_dynamic, // TODO: Decide
       .late_start_seconds = api_key_json["late_start_seconds"],
+      .price_action_stats_time_range_weeks =
+          config.price_action_stats_time_range_weeks, // TODO: Decide
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
   };

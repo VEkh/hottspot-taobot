@@ -34,6 +34,11 @@ public:
     int duration() { return time(nullptr) - this->timer_start; };
   };
 
+  struct get_stats_args_t {
+    double end_at;
+    int time_range_weeks;
+  };
+
   struct init_args_t {
     Pg conn;
     bool debug = false;
@@ -48,7 +53,7 @@ public:
   PriceAction(const init_args_t);
   PriceAction(){};
 
-  price_action_stats_t get_stats(const double);
+  price_action_stats_t get_stats(const get_stats_args_t);
 
   void build(const build_args_t);
 
