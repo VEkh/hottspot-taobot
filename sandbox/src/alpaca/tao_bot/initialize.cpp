@@ -75,9 +75,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     });
 
     if (this->backtest.is_active) {
-      this->current_epoch = this->backtest.config.start_epoch +
-                            this->api_client.config.late_start_seconds;
-
+      this->current_epoch = this->backtest.config.start_epoch;
       this->started_at = this->backtest.config.start_epoch;
     }
 

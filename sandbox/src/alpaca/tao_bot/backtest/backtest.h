@@ -68,7 +68,7 @@ public:
   bool has_reached_end(const double);
   bool should_exec_slow_query(const double);
 
-  double next_market_open_epoch(const double, const int);
+  double next_market_open_epoch(const double);
 
   std::string fetch_asset();
   std::string fetch_order(const order_t *, const quote_t &);

@@ -6,17 +6,15 @@
 #include <algorithm>          // std::min
 #include <string>             // std::string
 
-double Alpaca::TaoBotBacktest::next_market_open_epoch(
-    const double current_epoch, const int late_start_seconds = 0) {
+double
+Alpaca::TaoBotBacktest::next_market_open_epoch(const double current_epoch) {
   const double tomorrow_epoch = current_epoch + (24 * 60 * 60);
 
   const std::string tomorrow_date_string =
       ::utils::time_::date_string(tomorrow_epoch, "%F", "America/Chicago");
 
-  const double next_open_epoch =
-      this->db_utils.timestamp_to_epoch(tomorrow_date_string + " 08:30:00",
-                                        "America/Chicago") +
-      late_start_seconds;
+  const double next_open_epoch = this->db_utils.timestamp_to_epoch(
+      tomorrow_date_string + " 08:30:00", "America/Chicago");
 
   const double now = time(nullptr);
 

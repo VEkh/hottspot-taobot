@@ -18,8 +18,8 @@ void Alpaca::TaoBot::reset_backtest() {
       .symbol = this->symbol,
   });
 
-  const double next_market_open_epoch = this->backtest.next_market_open_epoch(
-      this->current_epoch, this->api_client.config.late_start_seconds);
+  const double next_market_open_epoch =
+      this->backtest.next_market_open_epoch(this->current_epoch);
 
   this->backtest.await_env_market_close(this->current_epoch,
                                         next_market_open_epoch);

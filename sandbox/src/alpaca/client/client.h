@@ -30,7 +30,6 @@ public:
     std::list<std::string> env_symbols;
     bool is_live;
     bool is_should_stop_loss_dynamic = false;    // TODO: Decide
-    int late_start_seconds = 6;                  // Production's average
     int price_action_stats_time_range_weeks = 0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
   } config;
