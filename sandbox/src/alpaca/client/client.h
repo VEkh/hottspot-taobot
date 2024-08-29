@@ -29,9 +29,9 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     bool is_live;
-    bool is_should_stop_loss_dynamic = false;    // TODO: Decide
-    int price_action_stats_time_range_weeks = 0; // TODO: Decide
+    bool is_should_stop_loss_dynamic = false; // TODO: Decide
     int reversal_timeframe_minutes = 60;
+    bool should_stop_loss = true; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

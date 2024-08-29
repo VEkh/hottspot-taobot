@@ -69,9 +69,8 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("price_action_stats_time_range_weeks")) {
-    config.price_action_stats_time_range_weeks =
-        (int)api_key_json["price_action_stats_time_range_weeks"];
+  if (api_key_json.contains("should_stop_loss")) {
+    config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
   }
 
   this->config = {
@@ -86,10 +85,9 @@ void Alpaca::Client::load_config() {
       .is_live = api_key_json["is_live"],
       .is_should_stop_loss_dynamic =
           config.is_should_stop_loss_dynamic, // TODO: Decide
-      .price_action_stats_time_range_weeks =
-          config.price_action_stats_time_range_weeks, // TODO: Decide
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .should_stop_loss = config.should_stop_loss, // TODO: Decide
   };
 }
 

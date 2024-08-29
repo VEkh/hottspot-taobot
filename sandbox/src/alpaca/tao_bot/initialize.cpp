@@ -98,6 +98,8 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     read_closed_positions();
 
     this->performance = build_performance();
+    this->should_stop_loss =
+        this->api_client.config.should_stop_loss; // TODO: Decide
 
     initialize_current_trend();
     read_price_action_stats();

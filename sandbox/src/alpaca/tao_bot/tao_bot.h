@@ -69,7 +69,7 @@ private:
   NyseAvailability market_availability;
   Pg pg;
   account_snapshot_t account_snapshot;
-  bool should_stop_loss = true; // TODO: Decide
+  bool should_stop_loss; // TODO: Decide
   candle_t day_candle;
   double current_epoch = time(nullptr);
   double market_close_epoch;
