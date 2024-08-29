@@ -14,7 +14,6 @@
 #include "log_quote.cpp"                 // log_quote
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_and_persist_position.cpp" // open_and_persist_position
-#include "read_price_movement.cpp"       // price_movement
 #include "read_quotes.cpp"               // read_quotes
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
@@ -31,7 +30,6 @@ void Oanda::TaoBot::watch() {
     log_timestamps();
 
     read_quotes();
-    read_price_movement();
     update_account_snapshot();
 
     log_account_snapshot();

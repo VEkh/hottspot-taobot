@@ -12,10 +12,21 @@ enum order_action_t {
   SELL,
 };
 
+enum order_type_t {
+  LIMIT,
+  MARKET,
+};
+
 enum order_win_result_t {
   LOSS,
   TIE,
   WIN,
+};
+
+enum reversal_type_t {
+  REVERSAL_HIGH,
+  REVERSAL_LOW,
+  REVERSAL_NULL,
 };
 
 enum trend_t {
@@ -101,6 +112,55 @@ struct quote_t {
   double timestamp;
 
   double mid() const { return (this->ask + this->bid) / 2.0; };
+  double spread() const { return this->ask - this->bid; };
+};
+
+struct reversal_t {
+  double at = 0;
+  bool is_record = false;
+  bool is_running_record = false;
+  double mid = 0;
+  int timeframe_minutes = 0;
+  reversal_type_t type;
+
+  reversal_type_t opposite_type() {
+    switch (this->type) {
+    case reversal_type_t::REVERSAL_HIGH: {
+      return reversal_type_t::REVERSAL_LOW;
+    }
+    case reversal_type_t::REVERSAL_LOW: {
+      return reversal_type_t::REVERSAL_HIGH;
+    }
+    default: {
+      return reversal_type_t::REVERSAL_NULL;
+    }
+    }
+  }
+
+  trend_t to_trend_type() {
+    switch (this->type) {
+    case reversal_type_t::REVERSAL_HIGH: {
+      return trend_t::TREND_DOWN;
+    }
+    case reversal_type_t::REVERSAL_LOW: {
+      return trend_t::TREND_UP;
+    }
+    default: {
+      return trend_t::TREND_CONSOLIDATION;
+    }
+    }
+  }
+};
+
+struct reversals_t {
+  int candles_count = 0;
+  std::map<double, reversal_t> highs;
+  std::map<double, reversal_t> lows;
+  std::map<std::string, int> record_counts;
+  int timeframe_minutes = 0;
+
+  bool any_empty() { return this->highs.empty() || this->lows.empty(); }
+  bool every_empty() { return this->highs.empty() && this->lows.empty(); }
 };
 
 struct trend_meta_t {

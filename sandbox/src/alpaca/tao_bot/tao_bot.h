@@ -44,9 +44,9 @@ private:
   using performance_t = Global::t::performance_t;
   using price_action_stats_t = DB::PriceAction::price_action_stats_t;
   using quote_t = Global::t::quote_t;
-  using reversal_t = Alpaca::t::reversal_t;
-  using reversal_type_t = Alpaca::t::reversal_type_t;
-  using reversals_t = Alpaca::t::reversals_t;
+  using reversal_t = Global::t::reversal_t;
+  using reversal_type_t = Global::t::reversal_type_t;
+  using reversals_t = Global::t::reversals_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
@@ -121,7 +121,7 @@ private:
   double day_range_percentile(const double);
   double day_range_percentile(const order_t *, double);
   double open_position_profit(const order_t *);
-  double profit_percentage(const order_t *, std::string);
+  double profit_percentage(const order_t *, const std::string);
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *, const std::string);
   int profit_duration(const double);

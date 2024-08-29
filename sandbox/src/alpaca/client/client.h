@@ -75,8 +75,6 @@ private:
   CurlClient fetch(const fetch_params_t);
   CurlClient post(const post_params_t);
 
-  std::list<std::string> read_env_symbols(json &);
-
   void load_config();
 };
 } // namespace Alpaca

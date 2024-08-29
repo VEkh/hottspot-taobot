@@ -5,7 +5,6 @@
 #include "current_spread.cpp"           // current_spread
 #include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
-#include "should_stop_profit.cpp"       // should_stop_profit
 #include "spread_limit.cpp"             // spread_limit
 #include "tao_bot.h"                    // Oanda::TaoBot, order_status_t
 
@@ -26,16 +25,7 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  if (should_stop_profit()) {
-    return true;
-  }
-
   this->exit_prices = build_exit_prices();
-
-  if (this->open_order_ptr->max_profit >= this->exit_prices.stop_profit &&
-      this->open_order_ptr->profit <= this->exit_prices.trailing_stop_profit) {
-    return true;
-  }
 
   if (current_spread() > spread_limit()) {
     return false;

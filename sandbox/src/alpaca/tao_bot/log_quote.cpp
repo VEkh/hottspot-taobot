@@ -28,7 +28,7 @@ void Alpaca::TaoBot::log_quote() {
 
   printf("Current: %'.2f (p%'.2f%%) • High: %'.2f @ %s • Low: %'.2f @ %s • "
          "Δ: %'.2f\n",
-         this->current_quote.price, day_range_percentile(current_mid()),
+         this->current_quote.mid(), day_range_percentile(current_mid()),
          this->day_candle.high,
          ::utils::time_::date_string(this->day_candle.high_at, "%R CT",
                                      "America/Chicago")

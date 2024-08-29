@@ -1,16 +1,15 @@
 #ifndef ALPACA__CLIENT_load_config
 #define ALPACA__CLIENT_load_config
 
-#include "client.h"             // Alpaca::Client
-#include "deps.cpp"             // json
-#include "lib/formatted.cpp"    // Formatted::error_message
-#include "lib/utils/io.cpp"     // ::utils::io
-#include "lib/utils/time.cpp"   // ::utils::time_
-#include "read_env_symbols.cpp" // read_env_symbols
-#include <map>                  // std::map
-#include <stdexcept>            // std::invalid_argument
-#include <string>               // std::string
-#include <time.h>               // mktime, time, tm
+#include "client.h"          // Alpaca::Client
+#include "deps.cpp"          // json
+#include "lib/formatted.cpp" // Formatted::error_message
+#include "lib/utils/io.cpp"  // ::utils::io
+#include <list>              // std::list
+#include <map>               // std::map
+#include <stdexcept>         // std::invalid_argument
+#include <string>            // std::string
+#include <time.h>            // mktime, time, tm
 
 void Alpaca::Client::load_config() {
   const std::string config_path =
@@ -21,12 +20,12 @@ void Alpaca::Client::load_config() {
   const std::string api_key = this->flags["api-key"];
   json config_json = ::utils::io::load_config("alpaca", api_key);
 
-  const char *required_keys[] = {
+  const std::list<std::string> required_keys = {
       "data_base_url",
-      api_key.c_str(),
+      api_key,
   };
 
-  for (const char *key : required_keys) {
+  for (const std::string key : required_keys) {
     if (config_json.contains(key)) {
       continue;
     }
@@ -46,7 +45,7 @@ void Alpaca::Client::load_config() {
       "reversal_timeframe_minutes", "secret_key",
   };
 
-  for (std::string key : nested_required_keys) {
+  for (const std::string key : nested_required_keys) {
     if (api_key_json.contains(key)) {
       continue;
     }

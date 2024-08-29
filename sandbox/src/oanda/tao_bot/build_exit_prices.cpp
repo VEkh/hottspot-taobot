@@ -2,27 +2,24 @@
 #define OANDA__TAO_BOT_build_exit_prices
 
 #include "tao_bot.h" // Oanda::TaoBot
+#include <algorithm> // std::min
 #include <math.h>    // abs
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
-  const double static_one_sec_variance = this->avg_one_sec_variances.running;
+  const double entry_reversal_mid = this->open_order_ptr->entry_reversal.mid;
+  const double execution_mid = this->open_order_ptr->execution_price;
+  const order_action_t action = this->open_order_ptr->action;
 
-  const double stop_profit_stop_loss_ratio = 2.5;
-  const double trailing_stop_profit_ratio = 1 / 1.1;
-  const int stop_loss_coefficient = -80;
+  const double reversal_delta = action == order_action_t::BUY
+                                    ? entry_reversal_mid - execution_mid
+                                    : execution_mid - entry_reversal_mid;
 
-  const double stop_loss = stop_loss_coefficient * static_one_sec_variance;
-  const double stop_profit = abs(stop_profit_stop_loss_ratio * stop_loss);
-
-  const double adjusted_stop_profit = stop_profit / trailing_stop_profit_ratio;
-
-  const double trailing_stop_profit =
-      this->open_order_ptr->max_profit * trailing_stop_profit_ratio;
+  double stop_loss = std::min(-0.00001, reversal_delta);
+  double stop_profit = 0.0;
 
   return {
       .stop_loss = stop_loss,
-      .stop_profit = adjusted_stop_profit,
-      .trailing_stop_profit = trailing_stop_profit,
+      .stop_profit = stop_profit,
   };
 }
 

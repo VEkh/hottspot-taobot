@@ -30,7 +30,7 @@ if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
   exit 1
 fi
 
-case $1 in
+case "${1}" in
   +([[:alpha:]_[:alpha:]]))
     symbol="$(to_upper "${1}")"
 

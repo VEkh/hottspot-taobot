@@ -25,9 +25,9 @@ public:
   void run();
 
 private:
-  using account_exit_prices_t = Global::t::account_exit_prices_t;
   using account_snapshot_t = Global::t::account_snapshot_t;
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
+  using candle_t = Global::t::candle_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
   using order_action_t = Oanda::t::order_action_t;
@@ -76,6 +76,7 @@ private:
   account_snapshot_t account_snapshot;
   avg_one_sec_variances_t avg_one_sec_variances;
   exit_prices_t exit_prices;
+  candle_t day_candle;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
@@ -83,13 +84,15 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  quote_t current_quote;
+  quote_t previous_quote;
+  std::list<std::string> env_symbols;
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::vector<position_t> closed_positions;
-  std::vector<quote_t> quotes;
+  std::list<quote_t> quotes;
   time_t started_at = std::time(nullptr);
 
-  account_exit_prices_t build_account_exit_prices();
   bool has_super_profited();
   bool is_end_of_trading_period();
   bool is_first_position_long();
@@ -99,22 +102,23 @@ private:
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
-  bool should_stop_profit();
   bool should_terminate();
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
   double convert_price(const double, const std::string, const std::string);
-  double current_price();
+  double current_mid();
   double current_spread();
+  double day_range_percentile(const double);
+  double day_range_percentile(const order_t *, double);
   double margin_buying_power();
   double open_position_profit(const order_t *);
-  double profit_percentage(const order_t *);
+  double profit_percentage(const order_t *, const std::string);
   double spread_limit();
   exit_prices_t build_exit_prices();
   int compute_quantity();
-  int order_duration(const order_t *);
+  int order_duration(const order_t *, const std::string);
   int runtime();
   json fetch_account_snapshot();
   json fetch_order(const order_t *);
@@ -149,7 +153,6 @@ private:
   void open_and_persist_position();
   void read_quotes();
   void reset_orders();
-  void read_price_movement();
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);

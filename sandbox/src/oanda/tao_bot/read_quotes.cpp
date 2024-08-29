@@ -1,25 +1,40 @@
 #ifndef OANDA__TAO_BOT_read_quotes
 #define OANDA__TAO_BOT_read_quotes
 
-#include "lib/formatted.cpp" // Formatted
-#include "tao_bot.h"         // Oanda::TaoBot, quote_t
-#include <vector>            // std::vector
+#include "is_end_of_trading_period.cpp" // is_end_of_trading_period
+#include "lib/utils/time.cpp"           // ::utils::time_
+#include "tao_bot.h"                    // Oanda::TaoBot, quote_t
+#include <list>                         // std::list
+#include <string>                       // std::string
 
 void Oanda::TaoBot::read_quotes() {
-  const std::vector<quote_t> quotes_ = this->db_quote.get_last({
-      .end_at = this->current_epoch,
-      .limit = 2,
-      .limit_offset = 0,
+  double end_at = this->current_epoch;
+  double start_at = 0;
+  int limit = 1;
+  std::string sort_direction = "desc";
+
+  const std::list<quote_t> quotes_ = this->quoter.db_quote.get_last({
+      .debug = this->api_client.config.debug_sql,
+      .end_at = end_at,
+      .limit = limit,
+      .sort_direction = sort_direction,
+      .start_at = start_at,
       .symbol = this->symbol,
   });
 
   if (quotes_.empty()) {
-    const std::string error_message = Formatted::error_message(
-        "No available quotes for " + this->symbol + " in the database.");
+    std::cout << fmt.bold << fmt.red;
+    printf("No available quotes for %s in the database @ %s\n",
+           this->symbol.c_str(),
+           ::utils::time_::date_string(this->current_epoch, "%F %R CT",
+                                       "America/Chicago")
+               .c_str());
 
-    printf("%s\n", error_message.c_str());
+    std::cout << fmt.yellow;
+    printf("⌛ Advancing epoch...\n");
+    std::cout << fmt.reset << std::endl;
 
-    return read_quotes();
+    return is_end_of_trading_period() ? void() : read_quotes();
   }
 
   this->quotes = quotes_;

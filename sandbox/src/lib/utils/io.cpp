@@ -141,6 +141,17 @@ void print_newlines(const int n) {
   std::cout << std::flush;
 }
 
+std::list<std::string> read_env_symbols(json &config) {
+  std::list<std::string> formatted_symbols;
+  std::list<std::string> symbols = config["env_symbols"];
+
+  for (const std::string symbol : symbols) {
+    formatted_symbols.push_back(::utils::string::upcase(symbol));
+  }
+
+  return formatted_symbols;
+}
+
 std::ifstream read_file(const std::string filepath) {
   std::ifstream file(filepath.c_str(), std::ios::in);
 

@@ -84,10 +84,7 @@ int main(int argc, char *argv[]) {
 
     Performance::Logger logger(pg);
 
-    logger.log_daily_snapshots({
-        .api_key_id = api_client.config.account_id,
-        .flags = flags,
-    });
+    logger.log_daily_snapshots(flags);
 
     pg.disconnect();
 
@@ -128,9 +125,7 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    const std::string symbol = upcased_args.front();
-
-    Oanda::TaoBot tao_bot(symbol, flags);
+    Oanda::TaoBot tao_bot(upcased_args.front(), flags);
     tao_bot.run();
 
     exit(0);

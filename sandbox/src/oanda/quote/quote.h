@@ -20,12 +20,13 @@ public:
   Quote(Pg, std::map<std::string, std::string>);
   Quote(std::map<std::string, std::string>);
 
+  DB::Quote db_quote;
+
   void watch(const std::list<std::string> &);
 
 private:
   constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
 
-  DB::Quote db_quote;
   Oanda::Client api_client;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg pg;

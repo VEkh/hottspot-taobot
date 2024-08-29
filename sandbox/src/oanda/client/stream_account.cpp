@@ -52,11 +52,11 @@ void Oanda::Client::stream_account() {
 
       db_account_stat.upsert({
           .api_key_id = this->config.account_id,
+          .debug = true,
           .equity = equity,
           .inserted_at = 0.00,
           .margin_buying_power = 0.00,
           .margin_multiplier = 0.00,
-          .debug = true,
       });
 
       usleep(1e6);

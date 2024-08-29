@@ -9,7 +9,6 @@
 #include <math.h>                  // floor
 
 int Oanda::TaoBot::compute_quantity() {
-  const quote_t quote = this->quotes.back();
   const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
 
   update_margin_rate();

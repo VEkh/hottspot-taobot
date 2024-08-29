@@ -23,12 +23,6 @@ void Oanda::Quote::watch(const std::list<std::string> &symbols) {
       fetch_and_persist_quote(symbol);
 
       const quote_t current_quote = this->current_quotes[symbol];
-
-      this->db_quote.upsert_avg_one_sec_variance({
-          .id = current_quote.id,
-          .symbol = symbol,
-          .debug = true,
-      });
     }
 
     std::cout << std::flush;

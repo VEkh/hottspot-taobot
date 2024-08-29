@@ -2,7 +2,6 @@
 #define ALPACA__TAO_BOT_log_position
 
 #include "alpaca/constants.cpp"     // Alpaca::constants
-#include "day_range_percentile.cpp" // day_range_percentile
 #include "is_position_closed.cpp"   // is_position_closed
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/integer.cpp"    // utils::integer_
@@ -12,7 +11,6 @@
 #include "order_duration.cpp"       // order_duration
 #include "profit_percentage.cpp"    // profit_percentage
 #include "tao_bot.h"                // Alpaca::TaoBot, fmt, order_action_t
-#include <algorithm>                // std::max
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 

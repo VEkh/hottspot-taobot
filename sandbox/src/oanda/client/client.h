@@ -6,6 +6,7 @@
 #include "lib/formatted.cpp"               // Formatted
 #include "oanda/types.cpp"                 // Oanda::t
 #include "types.cpp"                       // Global::t
+#include <list>                            // std::list
 #include <map>                             // std::map
 #include <string>                          // std::string
 #include <vector>                          // std::vector
@@ -21,11 +22,15 @@ public:
 
   struct config_t {
     std::string account_id;
+    double account_stop_loss_ratio = 0.0;
     std::string authentication_token;
     std::string base_url;
+    bool debug_sql = false;
+    std::list<std::string> env_symbols;
   } config;
 
-  Client(std::map<std::string, std::string> = {});
+  Client(){};
+  Client(std::map<std::string, std::string>);
 
   CurlClient place_order(order_t *order);
 

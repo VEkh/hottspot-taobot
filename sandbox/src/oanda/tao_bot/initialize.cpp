@@ -26,6 +26,8 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
     throw std::invalid_argument(message);
   }
 
+  std::locale::global(std::locale("en_US.UTF-8"));
+
   this->symbol = symbol_;
 
   if (spread_limit() <= 0) {
@@ -46,6 +48,8 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->db_quote = DB::Quote(this->pg);
   this->quoter = Oanda::Quote(this->pg, this->flags);
   this->symbol = symbol_;
+
+  this->env_symbols = this->api_client.config.env_symbols;
 
   update_account_snapshot();
 

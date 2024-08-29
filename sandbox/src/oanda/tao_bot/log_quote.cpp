@@ -1,46 +1,43 @@
 #ifndef OANDA__TAO_BOT_log_quote
 #define OANDA__TAO_BOT_log_quote
 
-/*
- * Oanda::TaoBot
- * fmt
- * quote_t
- */
-#include "tao_bot.h"
-
-#include "lib/formatted.cpp"     // Formatted
-#include "lib/utils/integer.cpp" // utils::integer_
-#include <iostream>              // std::cout, std::endl
-#include <stdio.h>               // printf
+#include "current_mid.cpp"          // current_mid
+#include "day_range_percentile.cpp" // day_range_percentile
+#include "lib/formatted.cpp"        // Formatted
+#include "lib/utils/time.cpp"       // ::utils::time_
+#include "tao_bot.h"                // Oanda::TaoBot, fmt
+#include <iostream>                 // std::cout, std::endl
+#include <stdio.h>                  // printf
 
 void Oanda::TaoBot::log_quote() {
   Formatted::Stream log_color = fmt.yellow;
-  const int ticks = this->quotes.size();
 
-  if (!ticks) {
+  if (!this->previous_quote.ask) {
     return;
   }
 
-  const quote_t *previous_quote =
-      ticks > 1 ? &(this->quotes.at(ticks - 2)) : nullptr;
-  const quote_t current_quote = this->quotes.back();
-  const quote_t first_quote = this->quotes.front();
-
-  if (previous_quote) {
-    if (current_quote.price > previous_quote->price) {
-      log_color = fmt.green;
-    } else if (current_quote.price < previous_quote->price) {
-      log_color = fmt.red;
-    }
+  if (this->current_quote.mid() > this->previous_quote.mid()) {
+    log_color = fmt.green;
+  } else if (this->current_quote.mid() < this->previous_quote.mid()) {
+    log_color = fmt.red;
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote\n", this->symbol.c_str());
+  printf("%s Quote\n", this->current_quote.symbol.c_str());
   std::cout << fmt.no_underline;
 
-  printf("Bid: %'.5f • Mid: %'.5f • Ask: %'.5f • Spread: %'.5f\n",
-         current_quote.bid, current_quote.price, current_quote.ask,
-         current_quote.ask - current_quote.bid);
+  printf("Current: %'.5f (p%'.2f%%) • High: %'.5f @ %s • Low: %'.5f @ %s • "
+         "Spread: %'.5f • Δ: %'.5f\n",
+         this->current_quote.mid(), day_range_percentile(current_mid()),
+         this->day_candle.high,
+         ::utils::time_::date_string(this->day_candle.high_at, "%R CT",
+                                     "America/Chicago")
+             .c_str(),
+         this->day_candle.low,
+         ::utils::time_::date_string(this->day_candle.low_at, "%R CT",
+                                     "America/Chicago")
+             .c_str(),
+         this->current_quote.spread(), this->day_candle.range());
 
   std::cout << fmt.reset << std::endl;
 }
