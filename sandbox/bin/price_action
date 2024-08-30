@@ -1,0 +1,50 @@
+#!/bin/bash
+# shellcheck disable=1090,1091,2207
+
+set -e
+
+project=$(dirname "${0}" | xargs basename)
+
+
+if [[ "${project}" = "bin" ]]; then
+  app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
+  cmd=$(basename "${0}")
+
+  source "${app_dir}/bin/utils" # ascii_print
+
+  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
+
+  exit 1;
+fi
+
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
+log_dir="${app_dir}/log/${project}"
+
+source "${app_dir}/bin/utils" # ASCII, ascii_print
+
+ascii_print "$(date)\n" "cyan"
+
+mkdir -p "${log_dir}"
+
+function build_each() {
+  ascii_print "🔨 Building latest price actions for each symbol" "cyan"
+
+  log_file="${log_dir}/price_actions.log"
+  symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
+
+  echo "" > "${log_file}"
+
+  for symbol in "${symbols[@]}"; do
+    "${app_dir}/build/db" price_action "${symbol}" "${@}" >> "${log_file}"
+  done
+}
+
+case "${1}" in
+  build_each)
+    build_each "${@:2}"
+    ;;
+  *)
+    ascii_print "🤖 ${ASCII["underline"]}PRICE ACTIONS" "yellow"
+    ascii_print "Commands: " "yellow"
+    ascii_print "build_each [--env]....Build price actions for all symbols" "yellow"
+esac

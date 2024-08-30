@@ -6,12 +6,15 @@
 #include "db/quote/quote.cpp"       // DB::Quote
 #include "db/utils/utils.cpp"       // DB::Utils
 #include "lib/pg/pg.h"              // Pg
+#include <locale.h>                 // std::locale
 #include <string>                   // std::stod, std::stoi
 #include <time.h>                   // time
 
 #include "download.cpp"
 
 DB::HistoricalQuote::HistoricalQuote(const init_args_t args) {
+  std::locale::global(std::locale("en_US.UTF-8"));
+
   this->conn = args.conn;
   this->db_quote = DB::Quote(this->conn);
   this->db_utils = DB::Utils(this->conn);

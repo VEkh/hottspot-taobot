@@ -9,8 +9,15 @@
 #include <time.h>                // time
 
 void DB::PriceAction::read_quotes() {
+  const std::string end_at_string = ::utils::time_::date_string(
+      this->build_state.end_at, "%F %R CT", "America/Chicago");
+
+  const std::string start_at_string = ::utils::time_::date_string(
+      this->build_state.start_at, "%F %R CT", "America/Chicago");
+
   std::cout << fmt.bold << fmt.yellow;
-  printf("💿 Reading Quotes...\n");
+  printf("💿 Reading Quotes from %s to %s...\n", start_at_string.c_str(),
+         end_at_string.c_str());
   std::cout << std::endl << fmt.reset;
 
   const int batch_size = 1e6;

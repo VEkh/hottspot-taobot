@@ -64,6 +64,8 @@ private:
   build_state_t build_state;
   std::string symbol;
 
+  double latest_opened_at();
+
   price_action_stats_t result_to_stats(const query_result_t &);
 
   void init_build_state(const build_args_t);

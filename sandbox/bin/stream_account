@@ -24,6 +24,7 @@ if [[ $project = "bin" ]]; then
   exit 1;
 fi
 
+# shellcheck disable=2207
 flags=($(extract_flags "${@}"))
 
 declare -A flag_map

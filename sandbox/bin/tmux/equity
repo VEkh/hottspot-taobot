@@ -57,17 +57,17 @@ for api_key in "${api_keys[@]}"; do
 done
 
 tmux new-window -t "${session}" \
-  -n "stock-quote-streams" \
+  -n "quote streams" \
   "$(tail_cmd "${project}"  "quotes_stream")"
 
-tmux split-window -t "${session}:stock-quote-streams" -h \
+tmux split-window -t "${session}:quote streams" -h \
   "$(tail_cmd "${project}" "quotes_watch")"
 
 tmux new-window -t "${session}" \
-  -n "stock-account-streams" \
+  -n "account streams" \
   "$(tail_cmd "${project}/${api_keys[0]}"  "account_stream")"
 
-tmux split-window -t "${session}:stock-account-streams" -h \
+tmux split-window -t "${session}:account streams" -h \
   "$(tail_cmd "${project}/${api_keys[1]}"  "account_stream")"
 
 window=$((window + 2))
@@ -96,6 +96,9 @@ for symbol in "${symbols[@]}"; do
   new_window_i=$((new_window_i + 1))
 done
 
+tmux new-window -t "${session}" \
+  -n "price action" \
+  "$(tail_cmd "${project}"  "price_actions")"
 
 tmux select-window -t "${session}:0"
 tmux attach-session -t "${session}"
