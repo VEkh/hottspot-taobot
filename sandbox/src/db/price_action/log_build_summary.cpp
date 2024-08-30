@@ -8,7 +8,7 @@
 
 void DB::PriceAction::log_build_summary(build_state_t &state) {
   std::cout << fmt.bold << fmt.yellow;
-  printf("📅 Days Processed:     %i\n", state.days_n);
+  printf("📅 Days Processed:     %'i\n", state.days_n);
 
   printf("🤑 Avg Price Action:   ");
   std::cout << fmt.green;

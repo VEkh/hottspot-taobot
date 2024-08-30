@@ -60,7 +60,7 @@ void DB::HistoricalQuote::download() {
   const long int duration = time(nullptr) - clock_start;
 
   std::cout << fmt.bold << fmt.green;
-  printf("🎉 Successfully downloaded %i historical quotes(s) in %s\n", quotes_n,
+  printf("🎉 Successfully downloaded %'i historical quotes(s) in %s\n", quotes_n,
          ::utils::integer_::seconds_to_clock(duration).c_str());
   std::cout << fmt.reset;
 }
