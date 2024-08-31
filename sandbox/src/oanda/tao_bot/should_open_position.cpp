@@ -20,10 +20,6 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
-  if (!this->avg_one_sec_variances.latest) {
-    return false;
-  }
-
   return true;
 }
 

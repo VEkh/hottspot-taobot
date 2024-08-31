@@ -49,11 +49,6 @@ struct account_snapshot_t {
   std::string api_key_id = "";
 };
 
-struct avg_one_sec_variances_t {
-  double latest = 0.00;
-  double running = 0.00;
-};
-
 struct candle_t {
   double close = 0.0;
   double closed_at = 0.0;

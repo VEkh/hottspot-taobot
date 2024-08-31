@@ -28,7 +28,6 @@ public:
 
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;
-  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using candle_bounds_t = DB::Candle::candle_bounds_t;
   using candle_t = Global::t::candle_t;
   using exit_prices_t = Global::t::exit_prices_t;
@@ -50,7 +49,6 @@ private:
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
-  static constexpr double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   static constexpr double MAX_ACCOUNT_LOSS_RATIO = -0.04;
   static constexpr double TARGET_ACCOUNT_PROFIT_RATIO = 0.04;
   static constexpr double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
@@ -84,7 +82,6 @@ private:
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
-  avg_one_sec_variances_t avg_one_sec_variances;
   exit_prices_t exit_prices;
   candle_t day_candle;
   double current_epoch = time(nullptr);

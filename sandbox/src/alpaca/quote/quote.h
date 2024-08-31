@@ -40,8 +40,6 @@ public:
   void watch(const std::list<std::string> &);
 
 private:
-  constexpr static double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
-
   Alpaca::Client api_client;
   DB::StreamedQuote db_streamed_quote;
   Formatted::fmt_stream_t fmt = Formatted::stream();

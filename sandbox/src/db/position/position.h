@@ -102,7 +102,6 @@ public:
   void open(const open_args_t);
 
 private:
-  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using query_result_t = Pg::query_result_t;
 
   Formatted::fmt_stream_t fmt = Formatted::stream();

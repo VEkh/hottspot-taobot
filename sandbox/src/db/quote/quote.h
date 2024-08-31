@@ -11,9 +11,13 @@
 namespace DB {
 class Quote {
 public:
-  using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
   using query_result_t = Pg::query_result_t;
   using quote_t = Global::t::quote_t;
+
+  struct avg_one_sec_variances_t {
+    double latest = 0.00;
+    double running = 0.00;
+  };
 
   struct get_last_args_t {
     bool debug = false;
