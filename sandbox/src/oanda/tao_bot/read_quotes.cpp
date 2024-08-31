@@ -1,11 +1,10 @@
 #ifndef OANDA__TAO_BOT_read_quotes
 #define OANDA__TAO_BOT_read_quotes
 
-#include "is_end_of_trading_period.cpp" // is_end_of_trading_period
-#include "lib/utils/time.cpp"           // ::utils::time_
-#include "tao_bot.h"                    // Oanda::TaoBot, quote_t
-#include <list>                         // std::list
-#include <string>                       // std::string
+#include "lib/utils/time.cpp" // ::utils::time_
+#include "tao_bot.h"          // Oanda::TaoBot, quote_t
+#include <list>               // std::list
+#include <string>             // std::string
 
 void Oanda::TaoBot::read_quotes() {
   double end_at = this->current_epoch;
@@ -34,7 +33,10 @@ void Oanda::TaoBot::read_quotes() {
     printf("⌛ Advancing epoch...\n");
     std::cout << fmt.reset << std::endl;
 
-    return is_end_of_trading_period() ? void() : read_quotes();
+    return this->market_availability.is_end_of_trading_period(
+               this->current_epoch)
+               ? void()
+               : read_quotes();
   }
 
   this->quotes = quotes_;

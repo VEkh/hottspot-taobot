@@ -4,7 +4,7 @@
 #include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "clear_stale_open_order.cpp"    // clear_stale_open_order
 #include "close_position.cpp"            // close_position
-#include "is_market_open.cpp"            // is_market_open
+#include "lib/utils/io.cpp"              // ::utils::io
 #include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
 #include "log_performance.cpp"           // log_performance
@@ -14,6 +14,7 @@
 #include "log_quote.cpp"                 // log_quote
 #include "log_timestamps.cpp"            // log_timestamps
 #include "open_and_persist_position.cpp" // open_and_persist_position
+#include "read_candles.cpp"              // read_candles
 #include "read_quotes.cpp"               // read_quotes
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
@@ -27,31 +28,38 @@
 
 void Oanda::TaoBot::watch() {
   while (!should_terminate()) {
-    log_timestamps();
-
     read_quotes();
-    update_account_snapshot();
 
-    log_account_snapshot();
-    log_quote();
-    log_price_movement();
-    log_position();
-    log_performance();
+    for (const quote_t quote : this->quotes) {
+      this->previous_quote = this->current_quote;
+      this->current_quote = quote;
 
-    set_position_status();
-    clear_stale_open_order();
-    open_and_persist_position();
-    set_open_order_prices();
+      log_timestamps();
+      read_candles();
 
-    close_position();
-    set_close_order_prices();
+      update_account_snapshot();
 
-    log_position_results();
-    reset_position();
+      log_account_snapshot();
+      log_quote();
+      log_price_movement();
+      log_position();
+      log_performance();
 
-    std::cout << std::flush;
+      set_position_status();
+      clear_stale_open_order();
+      // open_and_persist_position();
+      set_open_order_prices();
 
-    advance_current_epoch();
+      close_position();
+      set_close_order_prices();
+
+      log_position_results();
+      reset_position();
+
+      ::utils::io::print_newlines(7);
+
+      advance_current_epoch();
+    }
   }
 
   log_end_of_trading_period();

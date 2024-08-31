@@ -1,21 +1,23 @@
 #ifndef OANDA__TAO_BOT_H
 #define OANDA__TAO_BOT_H
 
-#include "db/account_stat/account_stat.h" // DB::AccountStat
-#include "db/margin_rate/margin_rate.h"   // DB::MarginRate
-#include "db/quote/quote.h"               // DB::Quote
-#include "deps.cpp"                       // json
-#include "lib/formatted.cpp"              // Formatted
-#include "lib/pg/pg.cpp"                  // Pg
-#include "oanda/client/client.cpp"        // Oanda::Client
-#include "oanda/quote/quote.cpp"          // Oanda::Quote
-#include "oanda/types.cpp"                // Oanda::t
-#include "types.cpp"                      // Global::t
-#include <list>                           // std::list
-#include <map>                            // std::map
-#include <string>                         // std::string
-#include <time.h>                         // time_t
-#include <vector>                         // std::map
+#include "db/account_stat/account_stat.h"                // DB::AccountStat
+#include "db/candle/candle.cpp"                          // DB::Candle
+#include "db/margin_rate/margin_rate.h"                  // DB::MarginRate
+#include "db/quote/quote.h"                              // DB::Quote
+#include "deps.cpp"                                      // json
+#include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
+#include "lib/formatted.cpp"                             // Formatted
+#include "lib/pg/pg.cpp"                                 // Pg
+#include "oanda/client/client.cpp"                       // Oanda::Client
+#include "oanda/quote/quote.cpp"                         // Oanda::Quote
+#include "oanda/types.cpp"                               // Oanda::t
+#include "types.cpp"                                     // Global::t
+#include <list>                                          // std::list
+#include <map>                                           // std::map
+#include <string>                                        // std::string
+#include <time.h>                                        // time_t
+#include <vector>                                        // std::map
 
 namespace Oanda {
 class TaoBot {
@@ -27,6 +29,7 @@ public:
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using avg_one_sec_variances_t = Global::t::avg_one_sec_variances_t;
+  using candle_bounds_t = DB::Candle::candle_bounds_t;
   using candle_t = Global::t::candle_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
@@ -67,8 +70,10 @@ private:
   };
 
   DB::AccountStat db_account_stat;
+  DB::Candle db_candle;
   DB::MarginRate db_margin_rate;
   DB::Quote db_quote;
+  ForexAvailability market_availability;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   Oanda::Quote quoter;
@@ -78,6 +83,7 @@ private:
   exit_prices_t exit_prices;
   candle_t day_candle;
   double current_epoch = time(nullptr);
+  double market_open_epoch;
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
@@ -86,22 +92,22 @@ private:
   performance_t performance;
   quote_t current_quote;
   quote_t previous_quote;
+  std::list<candle_t> latest_candles;
+  std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
   std::map<std::string, std::string> flags;
   std::string symbol;
   std::vector<position_t> closed_positions;
-  std::list<quote_t> quotes;
   time_t started_at = std::time(nullptr);
 
   bool has_super_profited();
-  bool is_end_of_trading_period();
   bool is_first_position_long();
-  bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
+  bool should_read_candles();
   bool should_terminate();
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
@@ -151,12 +157,14 @@ private:
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
+  void read_candles();
   void read_quotes();
   void reset_orders();
   void reset_position();
   void set_close_order_prices();
   void set_execution_price(order_t *);
   void set_execution_price(order_t *, json);
+  void set_market_open_epoch();
   void set_open_order_prices();
   void set_position_status();
   void set_profit(order_t *);

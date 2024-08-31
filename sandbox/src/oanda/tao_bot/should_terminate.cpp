@@ -1,7 +1,6 @@
 #ifndef OANDA__TAO_BOT_should_terminate
 #define OANDA__TAO_BOT_should_terminate
 
-#include "is_end_of_trading_period.cpp" // is_end_of_trading_period
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "tao_bot.h"                    // Oanda::TaoBot, order_status_t
 #include <iostream>                     // std::cout, std::endl
@@ -12,7 +11,7 @@ bool Oanda::TaoBot::should_terminate() {
       !this->close_order_ptr ||
       this->close_order.status == order_status_t::ORDER_FILLED;
 
-  if (is_end_of_trading_period()) {
+  if (this->market_availability.is_end_of_trading_period(this->current_epoch)) {
     return are_positions_closed;
   }
 

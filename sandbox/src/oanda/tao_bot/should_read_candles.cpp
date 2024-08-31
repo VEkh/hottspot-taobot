@@ -1,10 +1,10 @@
-#ifndef ALPACA__TAO_BOT_should_read_candles
-#define ALPACA__TAO_BOT_should_read_candles
+#ifndef OANDA__TAO_BOT_should_read_candles
+#define OANDA__TAO_BOT_should_read_candles
 
 #include "db/candle/candle.cpp" // DB::Candle
-#include "tao_bot.h"            // Alpaca::TaoBot, candle_bounds_t, candle_t
+#include "tao_bot.h"            // Oanda::TaoBot, candle_bounds_t, candle_t
 
-bool Alpaca::TaoBot::should_read_candles() {
+bool Oanda::TaoBot::should_read_candles() {
   const candle_bounds_t current_epoch_bounds = DB::Candle::timestamp_to_bounds(
       this->db_candle.duration_minutes, this->current_epoch);
 

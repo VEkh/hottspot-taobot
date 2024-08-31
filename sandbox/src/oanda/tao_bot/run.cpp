@@ -7,7 +7,7 @@
 
 void Oanda::TaoBot::run() {
   log_start_message();
-  // watch();
+  watch();
 }
 
 #endif

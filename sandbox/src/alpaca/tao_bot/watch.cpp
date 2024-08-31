@@ -27,7 +27,7 @@
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
 #include "should_terminate.cpp"          // should_terminate
-#include "tao_bot.h"                     // Alpaca::TaoBot
+#include "tao_bot.h"                     // Alpaca::TaoBot, quote_t
 #include "update_account_snapshot.cpp"   // update_account_snapshot
 #include <iostream>                      // std::cout, std::flush
 

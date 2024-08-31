@@ -2,7 +2,6 @@
 #define NYSE_AVAILABILITY_is_end_of_trading_period
 
 #include "is_early_close_day.cpp" // is_early_close_day
-#include "is_in_date_lookup.cpp"  // is_in_date_lookup
 #include "lib/utils/time.cpp"     // ::utils::time_
 #include "nyse_availability.h"    // NyseAvailability
 
