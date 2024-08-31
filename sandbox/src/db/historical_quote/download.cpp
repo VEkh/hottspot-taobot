@@ -50,7 +50,7 @@ void DB::HistoricalQuote::download() {
 
     this->db_quote.upsert(quotes);
 
-    if (quotes.size() == 1) {
+    if (quotes.size() < 10) {
       this->start_at = this->end_at;
     }
 
