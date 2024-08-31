@@ -12,7 +12,6 @@ Alpaca::Client::parse_quote(const std::string &response_body) {
 
   const double ask = quote_json["quote"]["ap"];
   const double bid = quote_json["quote"]["bp"];
-  const double price = (ask + bid) * 0.5;
 
   // The quote's timestamp at "t" is sometimes wildly inaccurate, so you'll
   // have to settle for the system's current time.
@@ -21,7 +20,6 @@ Alpaca::Client::parse_quote(const std::string &response_body) {
   quote_t quote;
   quote.ask = ask;
   quote.bid = bid;
-  quote.price = price;
   quote.timestamp = now;
 
   return quote;

@@ -35,8 +35,6 @@ DB::StreamedQuote::result_to_quote(const query_result_t &result) {
         out.timestamp = std::stod(value);
       }
     }
-
-    out.price = (out.ask + out.bid) * 0.5;
   }
 
   return out;

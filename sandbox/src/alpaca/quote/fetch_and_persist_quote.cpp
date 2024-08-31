@@ -14,13 +14,13 @@ void Alpaca::Quote::fetch_and_persist_quote(
 
   const double current_mid_ = this->current_quotes[symbol].mid();
 
-  const double delta_ratio = (new_quote.price - current_mid_) / current_mid_;
+  const double delta_ratio = (new_quote.mid() - current_mid_) / current_mid_;
 
   if (!skip_anomaly_check && abs(delta_ratio) >= 0.01) {
     std::cout << fmt.bold << fmt.yellow;
     puts("🧐 STRANGE PRICE MOVEMENT");
     printf("Last Quote: %.2f • New Quote: %.2f\n", current_mid_,
-           new_quote.price);
+           new_quote.mid());
     std::cout << fmt.reset << std::endl;
 
     usleep(5e5);

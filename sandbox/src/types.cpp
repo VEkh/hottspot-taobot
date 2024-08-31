@@ -107,7 +107,6 @@ struct quote_t {
   double ask = 0.00;
   double bid = 0.00;
   long int id = 0;
-  double price = 0.00;
   std::string symbol = "";
   double timestamp;
 

@@ -33,7 +33,7 @@ double Oanda::TaoBot::convert_price(const double price, const std::string from,
   const quote_t exchange_rate_quote =
       this->api_client.parse_quote(quote_string);
 
-  return exchange_rate_quote.price * price;
+  return exchange_rate_quote.mid() * price;
 }
 
 #endif

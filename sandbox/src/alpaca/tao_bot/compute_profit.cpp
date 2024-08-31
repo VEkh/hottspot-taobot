@@ -5,13 +5,13 @@
 
 double Alpaca::TaoBot::compute_profit(const order_t *order,
                                       const quote_t *quote) {
-  const double price = quote->price;
+  const double mid = quote->mid();
 
   if (order->action == order_action_t::BUY) {
-    return price - order->execution_price;
+    return mid - order->execution_price;
   }
 
-  return order->execution_price - price;
+  return order->execution_price - mid;
 }
 
 double Alpaca::TaoBot::compute_profit(const order_t *close_order_,
