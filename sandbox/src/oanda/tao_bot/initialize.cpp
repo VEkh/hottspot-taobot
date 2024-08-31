@@ -1,11 +1,12 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
-#include "build_performance.cpp"                         // build_performance
-#include "db/account_stat/account_stat.cpp"              // DB::AccountStat
-#include "db/candle/candle.cpp"                          // DB::Candle
-#include "db/margin_rate/margin_rate.cpp"                // DB::MarginRate
-#include "db/quote/quote.cpp"                            // DB::Quote
+#include "build_performance.cpp"            // build_performance
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/candle/candle.cpp"             // DB::Candle
+#include "db/margin_rate/margin_rate.cpp"   // DB::MarginRate
+#include "db/quote/quote.cpp"               // DB::Quote
+#include "initialize_current_trend.cpp"     // initialize_current_trend
 #include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
 #include "lib/formatted.cpp"           // Formatted::error_message
 #include "lib/pg/pg.cpp"               // Pg
@@ -56,9 +57,14 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
 
   this->env_symbols = this->api_client.config.env_symbols;
 
-  update_account_snapshot();
+  this->reversals.timeframe_minutes =
+      this->api_client.config.reversal_timeframe_minutes;
 
   set_market_open_epoch();
+
+  initialize_current_trend();
+  update_account_snapshot();
+
   this->performance = build_performance();
 }
 

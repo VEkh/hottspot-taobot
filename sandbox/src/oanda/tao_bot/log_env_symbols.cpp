@@ -1,13 +1,13 @@
-#ifndef ALPACA__TAO_BOT_log_env_symbols
-#define ALPACA__TAO_BOT_log_env_symbols
+#ifndef OANDA__TAO_BOT_log_env_symbols
+#define OANDA__TAO_BOT_log_env_symbols
 
-#include "tao_bot.h" // Alpaca::TaoBot, fmt
+#include "tao_bot.h" // Oanda::TaoBot, fmt
 #include <iostream>  // std::cout, std::endl
 #include <list>      // std::list
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
-void Alpaca::TaoBot::log_env_symbols() {
+void Oanda::TaoBot::log_env_symbols() {
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
   printf("Environment Symbols\n");
   std::cout << fmt.reset;

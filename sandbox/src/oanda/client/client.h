@@ -15,8 +15,8 @@ namespace Oanda {
 class Client {
 public:
   using order_action_t = Oanda::t::order_action_t;
-  using order_t = Oanda::t::order_t;
   using order_status_t = Oanda::t::order_status_t;
+  using order_t = Oanda::t::order_t;
   using post_params_t = CurlClient::post_params_t;
   using quote_t = Global::t::quote_t;
 
@@ -27,6 +27,7 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
+    int reversal_timeframe_minutes = 60;
   } config;
 
   Client(){};

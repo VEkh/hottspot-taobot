@@ -67,6 +67,12 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
 
     this->env_symbols = this->api_client.config.env_symbols;
 
+    this->reversals.timeframe_minutes =
+        this->api_client.config.reversal_timeframe_minutes;
+
+    this->should_stop_loss =
+        this->api_client.config.should_stop_loss; // TODO: Decide
+
     this->backtest = Alpaca::TaoBotBacktest({
         .conn = this->pg,
         .env_symbols = this->env_symbols,
@@ -89,20 +95,15 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       throw std::runtime_error(message);
     }
 
-    this->reversals.timeframe_minutes =
-        this->api_client.config.reversal_timeframe_minutes;
-
     set_market_close_epoch();
     set_market_open_epoch();
     update_account_snapshot(true);
     read_closed_positions();
-
-    this->performance = build_performance();
-    this->should_stop_loss =
-        this->api_client.config.should_stop_loss; // TODO: Decide
+    read_price_action_stats();
 
     initialize_current_trend();
-    read_price_action_stats();
+
+    this->performance = build_performance();
   } catch (nlohmann::detail::type_error) {
     puts(Formatted::error_message(
              "❌ JSON type error during initialization. Retrying.")

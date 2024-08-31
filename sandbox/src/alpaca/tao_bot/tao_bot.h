@@ -163,10 +163,10 @@ private:
   void log_positions();
   void log_price_action();
   void log_quote();
-  void log_start_message();
-  void log_timestamps();
   void log_reversal_metadata();
   void log_reversals(reversals_t &);
+  void log_start_message();
+  void log_timestamps();
   void open_and_persist_position();
   void read_candles();
   void read_closed_positions();

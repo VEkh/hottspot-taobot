@@ -1,13 +1,13 @@
-#ifndef ALPACA__TAO_BOT_build_reversals
-#define ALPACA__TAO_BOT_build_reversals
+#ifndef OANDA__TAO_BOT_build_reversals
+#define OANDA__TAO_BOT_build_reversals
 
-#include "tao_bot.h" // Alpaca::TaoBot, candle_t, reversal_t, reversal_type_t
+#include "tao_bot.h" // Oanda::TaoBot, candle_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max, std::min
 #include <list>      // std::list
 #include <math.h>    // INFINITY, abs
 
-void Alpaca::TaoBot::build_reversals(reversals_t &reversals_,
-                                     const bool enforce_symmetry = false) {
+void Oanda::TaoBot::build_reversals(reversals_t &reversals_,
+                                    const bool enforce_symmetry = false) {
   const int timeframe_minutes = reversals_.timeframe_minutes;
 
   if (!timeframe_minutes) {

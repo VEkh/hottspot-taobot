@@ -43,7 +43,12 @@ private:
   using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
   using quote_t = Global::t::quote_t;
+  using reversal_t = Global::t::reversal_t;
+  using reversal_type_t = Global::t::reversal_type_t;
+  using reversals_t = Global::t::reversals_t;
   using trade_status_t = Oanda::t::trade_status_t;
+  using trend_meta_t = Global::t::trend_meta_t;
+  using trend_t = Global::t::trend_t;
 
   static constexpr double AVG_ONE_SEC_VARIANCE_TIMEFRAME = 3.0 * 60.0;
   static constexpr double MAX_ACCOUNT_LOSS_RATIO = -0.04;
@@ -92,6 +97,7 @@ private:
   performance_t performance;
   quote_t current_quote;
   quote_t previous_quote;
+  reversals_t reversals;
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
@@ -99,11 +105,14 @@ private:
   std::string symbol;
   std::vector<position_t> closed_positions;
   time_t started_at = std::time(nullptr);
+  trend_meta_t current_trend;
 
   bool has_super_profited();
   bool is_first_position_long();
   bool is_next_position_long();
   bool is_position_closed();
+  bool is_trending();
+  bool is_trending(const trend_meta_t);
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
@@ -141,19 +150,25 @@ private:
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void await_market_open();
+  void build_day_candle();
+  void build_reversals(reversals_t &, const bool);
   void clear_stale_open_order();
   void close_position();
   void complete_filled_order(order_t *);
   void fetch_and_persist_margin_rates(const std::list<std::string>);
+  void force_init_reversal_await();
   void handle_partially_filled_close_order(const order_t *);
   void initialize(const std::string, std::map<std::string, std::string> &);
+  void initialize_current_trend();
   void log_account_snapshot();
   void log_end_of_trading_period();
+  void log_env_symbols();
   void log_performance();
   void log_position();
   void log_position_results();
-  void log_price_movement();
   void log_quote();
+  void log_reversal_metadata();
+  void log_reversals(reversals_t &);
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();

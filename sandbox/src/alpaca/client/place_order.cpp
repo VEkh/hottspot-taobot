@@ -7,6 +7,7 @@
  * order_action_t
  * order_status_t
  * order_t
+ * order_type_t
  */
 #include "client.h"
 

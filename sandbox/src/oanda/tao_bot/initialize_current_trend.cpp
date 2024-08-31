@@ -1,10 +1,10 @@
-#ifndef ALPACA__TAO_BOT_initialize_current_trend
-#define ALPACA__TAO_BOT_initialize_current_trend
+#ifndef OANDA__TAO_BOT_initialize_current_trend
+#define OANDA__TAO_BOT_initialize_current_trend
 
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
-#include "tao_bot.h" // Alpaca::TaoBot, order_action_t, position_t, trend_t
+#include "tao_bot.h" // Oanda::TaoBot, order_action_t, position_t, trend_t
 
-void Alpaca::TaoBot::initialize_current_trend() {
+void Oanda::TaoBot::initialize_current_trend() {
   if (this->closed_positions.empty()) {
     force_init_reversal_await();
 

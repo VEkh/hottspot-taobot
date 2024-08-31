@@ -40,7 +40,7 @@ void Oanda::Client::load_config() {
   const std::list<std::string> nested_required_keys = {
       "account_id",           "account_stop_loss_ratio",
       "authentication_token", "base_url",
-      "env_symbols",
+      "env_symbols",          "reversal_timeframe_minutes",
   };
 
   for (const std::string key : nested_required_keys) {
@@ -67,6 +67,8 @@ void Oanda::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .debug_sql = config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
+      .reversal_timeframe_minutes =
+          (int)api_key_json["reversal_timeframe_minutes"],
   };
 }
 

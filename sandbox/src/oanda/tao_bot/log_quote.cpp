@@ -26,9 +26,11 @@ void Oanda::TaoBot::log_quote() {
   printf("%s Quote\n", this->current_quote.symbol.c_str());
   std::cout << fmt.no_underline;
 
-  printf("Current: %'.5f (p%'.2f%%) • High: %'.5f @ %s • Low: %'.5f @ %s • "
-         "Spread: %'.5f • Δ: %'.5f\n",
+  printf("Current: %'.5f (p%'.2f%%) • Spread: %'.5f\n",
          this->current_quote.mid(), day_range_percentile(current_mid()),
+         this->current_quote.spread());
+
+  printf("High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f\n",
          this->day_candle.high,
          ::utils::time_::date_string(this->day_candle.high_at, "%R CT",
                                      "America/Chicago")
@@ -37,7 +39,7 @@ void Oanda::TaoBot::log_quote() {
          ::utils::time_::date_string(this->day_candle.low_at, "%R CT",
                                      "America/Chicago")
              .c_str(),
-         this->current_quote.spread(), this->day_candle.range());
+         this->day_candle.range());
 
   std::cout << fmt.reset << std::endl;
 }
