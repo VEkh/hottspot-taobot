@@ -43,6 +43,10 @@ public:
   struct price_action_stats_t {
     double avg = 0.0;
     double std = 0.0;
+
+    double avg_delta_std_multiple(const double range_open_percent) {
+      return this->std ? (range_open_percent - this->avg) / this->std : 0;
+    }
   };
 
   PriceAction(const init_args_t);

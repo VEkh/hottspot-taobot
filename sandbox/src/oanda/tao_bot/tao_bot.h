@@ -4,7 +4,9 @@
 #include "db/account_stat/account_stat.h"                // DB::AccountStat
 #include "db/candle/candle.cpp"                          // DB::Candle
 #include "db/margin_rate/margin_rate.h"                  // DB::MarginRate
+#include "db/price_action/price_action.cpp"              // DB::PriceAction
 #include "db/quote/quote.h"                              // DB::Quote
+#include "db/utils/utils.cpp"                            // DB::Utils
 #include "deps.cpp"                                      // json
 #include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
 #include "lib/formatted.cpp"                             // Formatted
@@ -41,6 +43,7 @@ private:
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
   using position_t = Oanda::t::position_t;
+  using price_action_stats_t = DB::PriceAction::price_action_stats_t;
   using quote_t = Global::t::quote_t;
   using reversal_t = Global::t::reversal_t;
   using reversal_type_t = Global::t::reversal_type_t;
@@ -75,7 +78,9 @@ private:
   DB::AccountStat db_account_stat;
   DB::Candle db_candle;
   DB::MarginRate db_margin_rate;
+  DB::PriceAction db_price_action;
   DB::Quote db_quote;
+  DB::Utils db_utils;
   ForexAvailability market_availability;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
@@ -92,6 +97,7 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
+  price_action_stats_t price_action_stats;
   quote_t current_quote;
   quote_t previous_quote;
   reversals_t reversals;
@@ -152,6 +158,8 @@ private:
   void clear_stale_open_order();
   void close_position();
   void complete_filled_order(order_t *);
+  void ensure_spread_limit();
+  void ensure_symbol(const std::string);
   void fetch_and_persist_margin_rates(const std::list<std::string>);
   void force_init_reversal_await();
   void handle_partially_filled_close_order(const order_t *);
@@ -163,6 +171,7 @@ private:
   void log_performance();
   void log_position();
   void log_position_results();
+  void log_price_action();
   void log_quote();
   void log_reversal_metadata();
   void log_reversals(reversals_t &);
@@ -170,6 +179,7 @@ private:
   void log_timestamps();
   void open_and_persist_position();
   void read_candles();
+  void read_price_action_stats();
   void read_quotes();
   void reset_orders();
   void reset_position();

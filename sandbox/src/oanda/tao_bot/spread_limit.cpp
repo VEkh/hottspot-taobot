@@ -4,7 +4,7 @@
 #include "tao_bot.h" // Oanda::TaoBot
 
 double Oanda::TaoBot::spread_limit() {
-  return this->SPREAD_LIMITS[std::string(this->symbol)];
+  return this->SPREAD_LIMITS[this->symbol];
 }
 
 #endif

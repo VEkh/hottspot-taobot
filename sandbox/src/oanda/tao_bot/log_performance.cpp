@@ -84,7 +84,7 @@ void Oanda::TaoBot::log_performance() {
 
     const double profit = closed_position_profit(position);
 
-    printf("%+.5f", profit);
+    printf("%+'.5f", profit);
   }
 
   puts("]");

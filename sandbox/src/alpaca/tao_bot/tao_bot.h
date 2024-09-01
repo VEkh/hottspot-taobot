@@ -150,6 +150,8 @@ private:
   void cancel_stale_open_order();
   void close_position();
   void ensure_is_shortable();
+  void ensure_market_is_open();
+  void ensure_symbol(const std::string);
   void fetch_and_persist_quote(const bool);
   void force_init_reversal_await();
   void initialize(std::string, std::map<std::string, std::string> &);

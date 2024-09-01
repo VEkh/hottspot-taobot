@@ -12,6 +12,8 @@
 #include "db/price_action/price_action.cpp" // DB::PriceAction
 #include "db/utils/utils.cpp"               // DB::Utils
 #include "ensure_is_shortable.cpp"          // ensure_is_shortable
+#include "ensure_market_is_open.cpp"        // ensure_market_is_open
+#include "ensure_symbol.cpp"                // ensure_symbol
 #include "initialize_current_trend.cpp"     // initialize_current_trend
 #include "lib/formatted.cpp"                // Formatted::error_message
 #include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
@@ -28,19 +30,13 @@
 #include <list>                        // std::list
 #include <locale.h>                    // std::locale
 #include <map>                         // std::map
-#include <stdexcept> // std::invalid_argument, std::runtime_error
-#include <string>    // std::string
+#include <string>                      // std::string
 
 void Alpaca::TaoBot::initialize(std::string symbol_,
                                 std::map<std::string, std::string> &flags_) {
-  if (symbol_.empty()) {
-    const std::string message =
-        Formatted::error_message("Must provide a symbol");
-
-    throw std::invalid_argument(message);
-  }
-
   std::locale::global(std::locale("en_US.UTF-8"));
+
+  ensure_symbol(symbol_);
 
   this->flags = flags_;
   this->symbol = ::utils::string::upcase(symbol_);
@@ -85,23 +81,16 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       this->started_at = this->backtest.config.start_epoch;
     }
 
+    ensure_market_is_open();
     ensure_is_shortable();
-
-    if (this->market_availability.is_holiday(this->current_epoch)) {
-      const std::string message = Formatted::error_message(
-          "🎉 Today is a holiday! The markets are closed, so go have "
-          "fun yabish!! 🥳 ");
-
-      throw std::runtime_error(message);
-    }
 
     set_market_close_epoch();
     set_market_open_epoch();
-    update_account_snapshot(true);
     read_closed_positions();
-    read_price_action_stats();
 
     initialize_current_trend();
+    read_price_action_stats();
+    update_account_snapshot(true);
 
     this->performance = build_performance();
   } catch (nlohmann::detail::type_error) {

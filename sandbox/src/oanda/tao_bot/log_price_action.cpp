@@ -1,13 +1,13 @@
-#ifndef ALPACA__TAO_BOT_log_price_action
-#define ALPACA__TAO_BOT_log_price_action
+#ifndef OANDA__TAO_BOT_log_price_action
+#define OANDA__TAO_BOT_log_price_action
 
 #include "lib/formatted.cpp" // Formatted
-#include "tao_bot.h"         // Alpaca::TaoBot, fmt
+#include "tao_bot.h"         // Oanda::TaoBot, fmt
 #include <iostream>          // std::cout, std::endl
 #include <stdio.h>           // printf
 #include <string>            // std::string
 
-void Alpaca::TaoBot::log_price_action() {
+void Oanda::TaoBot::log_price_action() {
   if (!this->day_candle.open) {
     return;
   }
