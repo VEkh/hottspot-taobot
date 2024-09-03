@@ -1,10 +1,10 @@
-#ifndef ALPACA__TAO_BOT_should_toggle_is_trending
-#define ALPACA__TAO_BOT_should_toggle_is_trending
+#ifndef OANDA__TAO_BOT_should_toggle_is_trending
+#define OANDA__TAO_BOT_should_toggle_is_trending
 
-#include "tao_bot.h" // Alpaca::TaoBot
+#include "tao_bot.h" // Oanda::TaoBot
 
-bool Alpaca::TaoBot::should_toggle_is_trending(order_t &close_order,
-                                               order_t &open_order) {
+bool Oanda::TaoBot::should_toggle_is_trending(order_t &close_order,
+                                              order_t &open_order) {
   if (!this->open_order_ptr) {
     return false;
   }

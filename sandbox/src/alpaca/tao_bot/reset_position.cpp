@@ -6,10 +6,12 @@
  * exit_prices_t
  * order_status_t
  * position_t
+ * reversal_t
  */
 #include "tao_bot.h"
 
 #include "build_performance.cpp"         // build_performance
+#include "reset_orders.cpp"              // reset_orders
 #include "should_toggle_is_trending.cpp" // should_toggle_is_trending
 #include "toggle_is_trending.cpp"        // toggle_is_trending
 
@@ -35,10 +37,9 @@ void Alpaca::TaoBot::reset_position() {
   this->closed_positions.push_back(position);
   this->entry_reversal = reversal_t();
 
-  this->close_order_ptr = nullptr;
-  this->exit_prices = exit_prices_t();
-  this->open_order_ptr = nullptr;
+  reset_orders();
 
+  this->exit_prices = exit_prices_t();
   this->performance = build_performance();
 }
 

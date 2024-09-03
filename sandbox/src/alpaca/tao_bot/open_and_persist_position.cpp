@@ -5,7 +5,6 @@
  * Alpaca::TaoBot
  * fmt
  * order_action_t
- * order_type_t
  * order_t
  */
 #include "tao_bot.h"

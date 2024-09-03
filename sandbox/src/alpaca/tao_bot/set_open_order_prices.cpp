@@ -1,19 +1,10 @@
 #ifndef ALPACA__TAO_BOT_set_open_order_prices
 #define ALPACA__TAO_BOT_set_open_order_prices
 
-/*
- * Alpaca::TaoBot
- * order_status_t
- * order_t
- * quote_t
- */
-#include "tao_bot.h"
-
-#include "alpaca/client/client.cpp" // Alpaca::Client
-#include "set_execution_price.cpp"  // set_execution_price
-#include "set_profit.cpp"           // set_profit
-#include "write_open_position.cpp"  // write_open_position
-#include <vector>                   // std::vector
+#include "set_execution_price.cpp" // set_execution_price
+#include "set_profit.cpp"          // set_profit
+#include "tao_bot.h"               // Alpaca::TaoBot, order_status_t
+#include "write_open_position.cpp" // write_open_position
 
 void Alpaca::TaoBot::set_open_order_prices() {
   if (!this->open_order_ptr) {

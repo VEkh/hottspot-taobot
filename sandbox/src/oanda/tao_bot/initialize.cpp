@@ -5,6 +5,7 @@
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/candle/candle.cpp"             // DB::Candle
 #include "db/margin_rate/margin_rate.cpp"   // DB::MarginRate
+#include "db/position/position.cpp"         // DB::Position
 #include "db/quote/quote.cpp"               // DB::Quote
 #include "db/utils/utils.cpp"               // DB::Utils
 #include "ensure_spread_limit.cpp"          // ensure_spread_limit
@@ -43,6 +44,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->db_account_stat = DB::AccountStat(this->pg);
   this->db_candle = DB::Candle(this->pg, 1, this->symbol);
   this->db_margin_rate = DB::MarginRate(this->pg);
+  this->db_position = DB::Position(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->market_availability = ForexAvailability(this->pg);

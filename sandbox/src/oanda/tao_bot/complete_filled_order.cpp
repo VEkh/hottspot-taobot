@@ -1,16 +1,11 @@
 #ifndef OANDA__TAO_BOT_complete_filled_order
 #define OANDA__TAO_BOT_complete_filled_order
 
-/*
- * Oanda::TaoBot
- * order_status_t
- */
-#include "tao_bot.h"
-
 #include "deps.cpp"                                // json
 #include "fetch_order.cpp"                         // fetch_order
 #include "handle_partially_filled_close_order.cpp" // handle_partially_filled_close_order
-#include <string>                                  // std::stoi, std::string
+#include "tao_bot.h" // Oanda::TaoBot, order_status_t
+#include <string>    // std::stoi, std::string
 
 void Oanda::TaoBot::complete_filled_order(order_t *order) {
   if (!order) {

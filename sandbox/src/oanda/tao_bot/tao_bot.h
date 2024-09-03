@@ -4,6 +4,7 @@
 #include "db/account_stat/account_stat.h"                // DB::AccountStat
 #include "db/candle/candle.cpp"                          // DB::Candle
 #include "db/margin_rate/margin_rate.h"                  // DB::MarginRate
+#include "db/position/position.cpp"                      // DB::Position
 #include "db/price_action/price_action.cpp"              // DB::PriceAction
 #include "db/quote/quote.h"                              // DB::Quote
 #include "db/utils/utils.cpp"                            // DB::Utils
@@ -78,6 +79,7 @@ private:
   DB::AccountStat db_account_stat;
   DB::Candle db_candle;
   DB::MarginRate db_margin_rate;
+  DB::Position db_position;
   DB::PriceAction db_price_action;
   DB::Quote db_quote;
   DB::Utils db_utils;
@@ -100,6 +102,7 @@ private:
   price_action_stats_t price_action_stats;
   quote_t current_quote;
   quote_t previous_quote;
+  reversal_t entry_reversal;
   reversals_t reversals;
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
@@ -121,6 +124,7 @@ private:
   bool should_open_position();
   bool should_read_candles();
   bool should_terminate();
+  bool should_toggle_is_trending(order_t &, order_t &);
   double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
@@ -192,9 +196,12 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, const order_t *);
   void set_status(order_t *, order_t *);
+  void toggle_is_trending(const order_t &);
   void update_account_snapshot();
   void update_margin_rate();
   void watch();
+  void write_close_position();
+  void write_open_position();
 };
 } // namespace Oanda
 

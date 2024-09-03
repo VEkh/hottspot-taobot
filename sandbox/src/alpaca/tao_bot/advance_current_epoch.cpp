@@ -1,8 +1,7 @@
 #ifndef ALPACA__TAO_BOT_advance_current_epoch
 #define ALPACA__TAO_BOT_advance_current_epoch
 
-#include "tao_bot.h" // Alpaca::TaoBot, fmt
-#include <iostream>  // std::cout, std::endl
+#include "tao_bot.h" // Alpaca::TaoBot
 #include <time.h>    // time
 #include <unistd.h>  // usleep
 
