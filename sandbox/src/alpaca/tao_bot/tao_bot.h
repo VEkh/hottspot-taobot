@@ -142,7 +142,6 @@ private:
 
   void advance_current_epoch();
   void advance_current_epoch(const double);
-  void await_market_open();
   void build_day_candle();
   void build_reversals(reversals_t &, const bool);
   void cancel_stale_open_order();

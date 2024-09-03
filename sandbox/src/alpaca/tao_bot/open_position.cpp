@@ -11,7 +11,6 @@
 #include "tao_bot.h"
 
 #include "alpaca/constants.cpp" // Alpaca::constants
-#include "is_trending.cpp"      // is_trending
 #include "lib/utils/string.cpp" // ::utils::string
 #include <iostream>             // std::cout, std::endl
 #include <stdio.h>              // printf
@@ -22,13 +21,13 @@ std::pair<Alpaca::TaoBot::order_t, Alpaca::TaoBot::order_t>
 Alpaca::TaoBot::open_position(const order_action_t close_action,
                               const order_action_t open_action,
                               const char *order_description,
-                              const double quantity_) {
+                              const double quantity) {
   order_t new_open_order;
   new_open_order.action = open_action;
   new_open_order.entry_reversal = this->entry_reversal;
   new_open_order.max_profit_at = this->current_epoch;
   new_open_order.min_profit_at = this->current_epoch;
-  new_open_order.quantity = quantity_;
+  new_open_order.quantity = quantity;
   new_open_order.symbol = this->symbol;
   new_open_order.type = order_type_t::MARKET;
 
@@ -36,7 +35,7 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
   new_close_order.action = close_action;
   new_close_order.max_profit_at = this->current_epoch;
   new_close_order.min_profit_at = this->current_epoch;
-  new_close_order.quantity = quantity_;
+  new_close_order.quantity = quantity;
   new_close_order.symbol = this->symbol;
   new_close_order.type = order_type_t::MARKET;
 

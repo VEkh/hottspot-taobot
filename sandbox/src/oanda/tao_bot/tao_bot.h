@@ -111,15 +111,18 @@ private:
   time_t started_at = std::time(nullptr);
   trend_meta_t current_trend;
 
+  bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();
   bool is_position_closed();
+  bool is_trend_slipping(const order_t *);
   bool is_trending();
   bool is_trending(const trend_meta_t);
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
   bool should_read_candles();
+  bool should_reverse_profit();
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);
@@ -138,7 +141,6 @@ private:
   int compute_quantity();
   int order_duration(const order_t *, const std::string);
   int runtime();
-  json fetch_account_snapshot();
   json fetch_order(const order_t *);
   json fetch_trade(const int);
   order_action_t opposite_direction(const order_action_t);
@@ -150,6 +152,11 @@ private:
 
   reversal_t latest_record_reversal(const reversal_type_t);
 
+  reversal_t latest_reversal(reversals_t &, const reversal_type_t);
+
+  reversal_t latest_reversal_after(reversals_t &, const double,
+                                   const reversal_type_t);
+
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const int);
@@ -157,7 +164,6 @@ private:
   std::string base_currency();
   void advance_current_epoch();
   void advance_current_epoch(const double);
-  void await_market_open();
   void build_day_candle();
   void build_reversals(reversals_t &, const bool);
   void clear_stale_open_order();

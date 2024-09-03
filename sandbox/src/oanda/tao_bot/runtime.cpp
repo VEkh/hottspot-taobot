@@ -2,8 +2,7 @@
 #define OANDA__TAO_BOT_runtime
 
 #include "tao_bot.h" // Oanda::TaoBot
-#include <ctime>     // std::time
 
-int Oanda::TaoBot::runtime() { return std::time(nullptr) - this->started_at; }
+int Oanda::TaoBot::runtime() { return this->current_epoch - this->started_at; }
 
 #endif
