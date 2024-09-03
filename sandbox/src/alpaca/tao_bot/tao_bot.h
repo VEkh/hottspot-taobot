@@ -75,7 +75,6 @@ private:
   double current_epoch = time(nullptr);
   double market_close_epoch;
   double market_open_epoch;
-  double quantity;
   double started_at = time(nullptr);
   exit_prices_t exit_prices;
   order_t *close_order_ptr = nullptr;
@@ -100,7 +99,6 @@ private:
   bool is_early_close_day();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
-  bool is_market_open();
   bool is_next_position_long();
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);

@@ -2,11 +2,10 @@
 #define ALPACA__TAO_BOT_should_open_position
 
 #include "is_entry_signal_present.cpp" // is_entry_signal_present
-#include "is_market_open.cpp"          // is_market_open
 #include "tao_bot.h"                   // Alpaca::TaoBot
 
 bool Alpaca::TaoBot::should_open_position() {
-  if (!is_market_open()) {
+  if (!this->market_availability.is_market_open(this->current_epoch)) {
     return false;
   }
 

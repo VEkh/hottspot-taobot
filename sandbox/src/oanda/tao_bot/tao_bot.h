@@ -53,9 +53,7 @@ private:
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
-  static constexpr double MAX_ACCOUNT_LOSS_RATIO = -0.04;
-  static constexpr double TARGET_ACCOUNT_PROFIT_RATIO = 0.04;
-  static constexpr double TARGET_ACCOUNT_PROFIT_TRAILING_STOP = 0.001;
+  static constexpr double EQUATOR_PERCENTILE = 50.0;
 
   std::map<const char *, const char *> ICONS = {
       {"BUY", "📈"},
@@ -113,8 +111,7 @@ private:
   time_t started_at = std::time(nullptr);
   trend_meta_t current_trend;
 
-  bool has_super_profited();
-  bool is_first_position_long();
+  bool is_entry_signal_present();
   bool is_next_position_long();
   bool is_position_closed();
   bool is_trending();
@@ -125,7 +122,6 @@ private:
   bool should_read_candles();
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
-  double account_profit_expanding_trailing_stop_ratio(const double);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -148,6 +144,11 @@ private:
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
+
+  reversal_t first_reversal_after(reversals_t &, const double,
+                                  const reversal_type_t, const bool);
+
+  reversal_t latest_record_reversal(const reversal_type_t);
 
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,

@@ -58,7 +58,7 @@ void Oanda::TaoBot::watch() {
 
       set_position_status();
       clear_stale_open_order();
-      // open_and_persist_position();
+      open_and_persist_position();
       set_open_order_prices();
 
       close_position();
