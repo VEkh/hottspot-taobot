@@ -7,6 +7,7 @@
 #include <list>                        // std::list
 #include <stdio.h>                     // printf, puts
 #include <string>                      // std::string
+#include <time.h>                      // time
 #include <unistd.h>                    // usleep
 
 void Alpaca::Quote::watch(const std::list<std::string> &symbols) {

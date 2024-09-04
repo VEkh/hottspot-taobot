@@ -54,8 +54,6 @@ private:
   quote_t get_streamed_quote(const std::string);
 
   void fetch_and_persist_quote(const std::string, const bool);
-  void read(const std::string);
-  void write();
   void write_streamed(const beast::flat_buffer &);
 };
 } // namespace Alpaca

@@ -10,8 +10,12 @@
 #include <unistd.h>                    // usleep
 
 void Oanda::Quote::watch(const std::list<std::string> &symbols) {
-  for (const std::string symbol : symbols) {
-    fetch_and_persist_quote(symbol, true);
+  bool is_market_open = this->market_availability.is_market_open(time(nullptr));
+
+  if (is_market_open) {
+    for (const std::string symbol : symbols) {
+      fetch_and_persist_quote(symbol, true);
+    }
   }
 
   while (true) {
@@ -21,13 +25,17 @@ void Oanda::Quote::watch(const std::list<std::string> &symbols) {
       std::cout << fmt.reset;
 
       fetch_and_persist_quote(symbol);
-
-      const quote_t current_quote = this->current_quotes[symbol];
     }
 
     std::cout << std::flush;
     usleep(1e6);
+
+    is_market_open = this->market_availability.is_market_open(time(nullptr));
   }
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("😴 Market is closed\n");
+  std::cout << fmt.reset;
 }
 
 #endif

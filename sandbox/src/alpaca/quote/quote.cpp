@@ -16,6 +16,7 @@
 Alpaca::Quote::Quote(Pg p, std::map<std::string, std::string> flags) {
   this->api_client = Alpaca::Client(flags);
   this->pg = p;
+
   this->db_quote = DB::Quote(this->pg);
   this->db_streamed_quote = DB::StreamedQuote(this->pg);
   this->market_availability = NyseAvailability(this->pg);
