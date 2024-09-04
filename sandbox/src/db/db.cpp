@@ -90,6 +90,7 @@ int main(int argc, char *argv[]) {
                       upcased_args.front());
 
     candle.build({
+        .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
         .end_at = flags["end-at"],
         .start_at = flags["start-at"],
     });

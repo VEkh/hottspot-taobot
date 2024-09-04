@@ -1,23 +1,25 @@
 #ifndef DB__CANDLE_build
 #define DB__CANDLE_build
 
-#include "candle.h"                // DB::Candle, candle_t, fmt, quote_t
-#include "db/quote/quote.cpp"      // DB::Quote
-#include "get_latest_quotes.cpp"   // get_latest_quotes
-#include "lib/utils/integer.cpp"   // ::utils::integer_
-#include "lib/utils/time.cpp"      // ::utils::time_
-#include "print_build_intro.cpp"   // print_build_intro
-#include "timestamp_to_bounds.cpp" // timestamp_to_bounds
-#include "upsert.cpp"              // upsert
-#include <algorithm>               // std::max, std::min
-#include <iostream>                // std::cout, std::endl
-#include <iterator>                // std::next
-#include <list>                    // std::list
-#include <locale.h>                // std::locale
-#include <math.h>                  // INFINITY
-#include <stdio.h>                 // printf
-#include <string>                  // std::string
-#include <time.h>                  // time
+#include "batch_get_build_quotes.cpp"     // batch_get_build_quotes
+#include "candle.h"                       // DB::Candle, candle_t, fmt, quote_t
+#include "db/quote/quote.cpp"             // DB::Quote
+#include "get_build_quotes.cpp"           // get_build_quotes
+#include "get_default_build_start_at.cpp" // get_default_build_start_at
+#include "lib/utils/integer.cpp"          // ::utils::integer_
+#include "lib/utils/time.cpp"             // ::utils::time_
+#include "print_build_intro.cpp"          // print_build_intro
+#include "timestamp_to_bounds.cpp"        // timestamp_to_bounds
+#include "upsert.cpp"                     // upsert
+#include <algorithm>                      // std::max, std::min
+#include <iostream>                       // std::cout, std::endl
+#include <iterator>                       // std::next
+#include <list>                           // std::list
+#include <locale.h>                       // std::locale
+#include <math.h>                         // INFINITY
+#include <stdio.h>                        // printf
+#include <string>                         // std::string
+#include <time.h>                         // time
 
 void DB::Candle::build(const build_args_t args) {
   std::locale::global(std::locale("en_US.UTF-8"));
@@ -37,7 +39,8 @@ void DB::Candle::build(const build_args_t args) {
 
   const long int clock_start = time(nullptr);
 
-  const std::list<quote_t> latest_quotes = get_latest_quotes({
+  const std::list<quote_t> build_quotes = batch_get_build_quotes({
+      .debug = args.debug,
       .end_at = end_at,
       .start_at = start_at,
   });
@@ -45,20 +48,16 @@ void DB::Candle::build(const build_args_t args) {
   candle_t candle;
   int candles_count = 0;
   int quotes_count = 1;
-  std::list<quote_t>::const_iterator quote = latest_quotes.begin();
+  std::list<quote_t>::const_iterator quote = build_quotes.begin();
 
-  std::cout << fmt.bold << fmt.cyan;
-  printf("💲 %i quotes loaded\n", (int)latest_quotes.size());
-  std::cout << fmt.reset << std::endl;
-
-  for (; quote != latest_quotes.end(); quote++, quotes_count++) {
+  for (; quote != build_quotes.end(); quote++, quotes_count++) {
     const candle_bounds_t bounds =
         timestamp_to_bounds(this->duration_minutes, quote->timestamp);
 
     const double mid = quote->mid();
 
     const bool should_close_candle = quote->timestamp >= candle.closed_at ||
-                                     std::next(quote) == latest_quotes.end();
+                                     std::next(quote) == build_quotes.end();
 
     if (candle.closed_at && should_close_candle) {
       upsert(candle);

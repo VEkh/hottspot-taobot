@@ -20,8 +20,16 @@ public:
   };
 
   struct build_args_t {
+    bool debug = false; // Optional
     std::string end_at;
     std::string start_at;
+  };
+
+  struct get_build_quotes_args_t {
+    bool debug = false; // Optional
+    double end_at = 0.0;
+    int limit = 0;
+    double start_at = 0.0;
   };
 
   struct get_latest_args_t {
@@ -63,11 +71,14 @@ private:
   Pg conn;
   std::string symbol;
 
+  double get_default_build_start_at(const bool);
+
   std::list<candle_t> get_latest_from_cache(const get_latest_args_t);
   std::list<candle_t> get_latest_from_db(const get_latest_args_t);
 
   std::list<candle_t> result_to_candles(const query_result_t &);
-  std::list<quote_t> get_latest_quotes(const time_range_args_t);
+  std::list<quote_t> batch_get_build_quotes(const time_range_args_t);
+  std::list<quote_t> get_build_quotes(const get_build_quotes_args_t);
 
   void print_build_intro(const time_range_args_t);
   void upsert(const candle_t, const bool);
