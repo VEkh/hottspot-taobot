@@ -7,8 +7,6 @@
 #include "tao_bot.h"                   // Oanda::TaoBot, fmt, order_action_t
 
 bool Oanda::TaoBot::should_open_position() {
-  return false;
-
   if (!this->market_availability.is_market_open(this->current_epoch)) {
     return false;
   }
@@ -21,7 +19,7 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
-  return true;
+  return is_entry_signal_present();
 }
 
 #endif

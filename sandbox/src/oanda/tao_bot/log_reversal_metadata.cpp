@@ -48,14 +48,14 @@ void Oanda::TaoBot::log_reversal_metadata() {
     if (reversal.type == reversal_type_t::REVERSAL_LOW) {
       std::cout << fmt.bold << fmt.red;
       printf(
-          "Low: %.2f p%.2f%% @ %s", reversal.mid,
+          "Low: %'.5f p%.2f%% @ %s", reversal.mid,
           day_range_percentile(reversal.mid),
           ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
               .c_str());
     } else {
       std::cout << fmt.bold << fmt.green;
       printf(
-          "High: %.2f p%.2f%% @ %s", reversal.mid,
+          "High: %'.5f p%.2f%% @ %s", reversal.mid,
           day_range_percentile(reversal.mid),
           ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
               .c_str());

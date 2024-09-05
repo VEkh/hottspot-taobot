@@ -201,7 +201,7 @@ private:
   void set_open_order_prices();
   void set_position_status();
   void set_profit(order_t *);
-  void set_profit(order_t *, const order_t *);
+  void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
   void toggle_is_trending(const order_t &);
   void update_account_snapshot();

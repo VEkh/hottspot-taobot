@@ -4,6 +4,8 @@
 #include "tao_bot.h" // Oanda::TaoBot
 
 bool Oanda::TaoBot::is_end_of_quotes() {
+  return false;
+
   if (this->quotes.empty()) {
     return false;
   }

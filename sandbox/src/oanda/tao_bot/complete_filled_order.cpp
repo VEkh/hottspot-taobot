@@ -40,7 +40,7 @@ void Oanda::TaoBot::complete_filled_order(order_t *order) {
 
     order->trade_id = std::stoi(trade_id_string);
   } catch (nlohmann::detail::type_error &) {
-    complete_filled_order(order);
+    return complete_filled_order(order);
   }
 }
 
