@@ -18,7 +18,7 @@ void Oanda::Quote::watch(const std::list<std::string> &symbols) {
     }
   }
 
-  while (true) {
+  while (is_market_open) {
     for (const std::string symbol : symbols) {
       std::cout << fmt.bold << fmt.cyan << fmt.underline;
       puts(symbol.c_str());

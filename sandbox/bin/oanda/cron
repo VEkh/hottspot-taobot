@@ -9,12 +9,28 @@ env=$(get_env_flag "${@}")
 
 case "${1}" in
   "generate")
-    cmd="# * 8-14 * * 1-5 ${app_dir}/bin/${project}/heartbeat --paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
-    cmd+="\n# * 8-14 * * 1-5 ${app_dir}/bin/${project}/stream_account heartbeat --paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
-    cmd+="\n# 0 15 * * 1-5 ${app_dir}/bin/${project}/stream_account stop >> ${app_dir}/log/${env}.log 2>&1"
-    cmd+="\n0-59 16-23 * * 7 ${app_dir}/bin/${project}/quotes watch heartbeat start --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
-    cmd+="\n0-59 0-23 * * 1-4 ${app_dir}/bin/${project}/quotes watch heartbeat start --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
-    cmd+="\n0-59 0-15 * * 5 ${app_dir}/bin/${project}/quotes watch heartbeat start --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd="# Oanda Paper"
+    cmd+="\n* 16-23 * * 0 ${app_dir}/bin/${project}/heartbeat --api-key=paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 16-23 * * 0 ${app_dir}/bin/${project}/stream_account restart --api-key=paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 0-23 * * 1-4 ${app_dir}/bin/${project}/heartbeat --api-key=paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 0-23 * * 1-4 ${app_dir}/bin/${project}/stream_account restart --api-key=paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 0-15 * * 5 ${app_dir}/bin/${project}/heartbeat --api-key=paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 0-15 * * 5 ${app_dir}/bin/${project}/stream_account restart --api-key=paper --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n0 16 * * 5 ${app_dir}/bin/${project}/stream_account stop --api-key=paper >> ${app_dir}/log/${env}.log 2>&1"
+
+    cmd+="\n\n# Oanda Quotes"
+    cmd+="\n* 16-23 * * 0 ${app_dir}/bin/${project}/candle_predict build_candles_each --duration-min=1 --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 16-23 * * 0 ${app_dir}/bin/${project}/quotes watch restart --api-key=live --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+
+    cmd+="\n* 0-23 * * 1-4 ${app_dir}/bin/${project}/candle_predict build_candles_each --duration-min=1 --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 0-23 * * 1-4 ${app_dir}/bin/${project}/quotes watch restart --api-key=live --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+
+    cmd+="\n* 0-15 * * 5 ${app_dir}/bin/${project}/candle_predict build_candles_each --duration-min=1 --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n* 0-15 * * 5 ${app_dir}/bin/${project}/quotes watch restart --api-key=live --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+
+    cmd+="\n\n# Oanda Auxilary Data"
+    cmd+="\n0 16 * * 0 ${app_dir}/bin/${project}/price_action build_each --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
+    cmd+="\n30 7 * * 1-5 ${app_dir}/bin/${project}/price_action build_each --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
 
     echo -e "$cmd"
   ;;

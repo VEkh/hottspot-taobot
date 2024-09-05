@@ -32,7 +32,7 @@ extract_flags_to_map flag_map "${flags[@]}"
 
 api_key="${flag_map["api-key"]}"
 
-if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
+if [[ -z "${api_key}" ]]; then
   ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
   exit 1
 fi
