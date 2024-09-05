@@ -22,13 +22,12 @@ void Alpaca::TaoBot::log_price_action() {
   const double avg = this->price_action_stats.avg;
   const double std = this->price_action_stats.std;
 
-  const double avg_delta_std_multiple =
-      this->price_action_stats.avg_delta_std_multiple(
-          current_range_open_percent);
+  const double z_score =
+      this->price_action_stats.z_score(current_range_open_percent);
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Current: %.2f%% (δμ/σ: %+.2f) • μ: %.2f%% • σ: %.2f%%\n",
-         current_range_open_percent, avg_delta_std_multiple, avg, std);
+  printf("Current: %.2f%% • μ: %.2f%% • σ: %.2f%% • Ζ: %+.2f\n",
+         current_range_open_percent, avg, std, z_score);
   std::cout << fmt.reset << std::endl;
 }
 

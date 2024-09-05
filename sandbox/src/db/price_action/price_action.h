@@ -44,8 +44,8 @@ public:
     double avg = 0.0;
     double std = 0.0;
 
-    double avg_delta_std_multiple(const double range_open_percent) {
-      return this->std ? (range_open_percent - this->avg) / this->std : 0;
+    double z_score(const double x) {
+      return this->std ? (x - this->avg) / this->std : 0;
     }
   };
 
