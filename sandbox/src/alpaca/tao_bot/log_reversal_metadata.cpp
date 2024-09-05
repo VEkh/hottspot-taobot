@@ -44,10 +44,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   std::string stop_loss_text = this->should_stop_loss ? "YES" : "NO";
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Reversal Delay: ");
-  std::cout << fmt.cyan << this->api_client.config.reversal_delay << std::endl;
-
-  std::cout << fmt.bold << fmt.yellow;
   printf("Should stop loss? ");
   std::cout << stop_loss_color << stop_loss_text << std::endl;
 

@@ -29,7 +29,6 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     bool is_live;
-    int reversal_delay = 1; // TODO: Decide
     int reversal_timeframe_minutes = 60;
     bool should_stop_loss = true; // TODO: Decide
   } config;
