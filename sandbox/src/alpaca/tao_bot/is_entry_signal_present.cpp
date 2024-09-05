@@ -7,7 +7,18 @@
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
+// TODO: Decide
+#include "latest_reversal.cpp" // latest_reversal
+
 bool Alpaca::TaoBot::is_entry_signal_present() {
+  // TODO: Decide
+  const int reversals_n =
+      this->reversals.highs.size() + this->reversals.lows.size();
+
+  if (reversals_n < this->api_client.config.reversal_delay) {
+    return false;
+  }
+
   const bool is_trending_ = is_trending();
 
   reversal_t entry_reversal_ = latest_record_reversal();
@@ -40,13 +51,24 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
 
       reversal = last_position.close_order.stop_profit_reversal;
     } else {
-      const reversal_t first_high =
+      reversal_t first_high =
           first_reversal_after(this->reversals, this->current_trend.at,
                                reversal_type_t::REVERSAL_HIGH);
 
-      const reversal_t first_low =
+      reversal_t first_low =
           first_reversal_after(this->reversals, this->current_trend.at,
                                reversal_type_t::REVERSAL_LOW);
+
+      // TODO: Decide
+      if (reversals_n > 1) {
+        const reversal_t latest_reversal_ = latest_reversal(this->reversals);
+
+        first_high = first_reversal_after(this->reversals, latest_reversal_.at,
+                                          reversal_type_t::REVERSAL_HIGH);
+
+        first_low = first_reversal_after(this->reversals, latest_reversal_.at,
+                                         reversal_type_t::REVERSAL_LOW);
+      }
 
       if (first_high.mid &&
           day_range_percentile(first_high.mid) >= this->EQUATOR_PERCENTILE) {
