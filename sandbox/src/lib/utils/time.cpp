@@ -87,6 +87,12 @@ int day_of_week() {
   return day_of_week(now);
 }
 
+tm epoch_to_tm(const long int epoch,
+               const char *time_zone = "America/New_York") {
+  return in_time_zone<tm>(time_zone,
+                          [&]() -> tm { return *localtime(&epoch); });
+}
+
 bool is_at_least(const long int epoch, const tm time_parts,
                  const char *time_zone = "America/New_York") {
   return in_time_zone<bool>(time_zone, [&]() -> bool {

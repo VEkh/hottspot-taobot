@@ -69,6 +69,12 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_market_open_trend_start")) {
+    config.should_market_open_trend_start =
+        (bool)api_key_json["should_market_open_trend_start"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_stop_loss")) {
     config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
   }
@@ -87,6 +93,8 @@ void Alpaca::Client::load_config() {
           (int)api_key_json["reversal_timeframe_minutes"],
       .should_always_reverse_profit =
           config.should_always_reverse_profit, // TODO: Decide
+      .should_market_open_trend_start =
+          config.should_market_open_trend_start,   // TODO: Decide
       .should_stop_loss = config.should_stop_loss, // TODO: Decide
   };
 }

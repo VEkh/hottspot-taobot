@@ -38,6 +38,18 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
+  Formatted::Stream should_market_open_trend_start_color =
+      this->api_client.config.should_market_open_trend_start ? fmt.green
+                                                             : fmt.red;
+
+  const std::string should_market_open_trend_start_text =
+      this->api_client.config.should_market_open_trend_start ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should open trend start? ");
+  std::cout << should_market_open_trend_start_color
+            << should_market_open_trend_start_text << std::endl;
+
   Formatted::Stream should_always_reverse_profit_color =
       this->api_client.config.should_always_reverse_profit ? fmt.green
                                                            : fmt.red;

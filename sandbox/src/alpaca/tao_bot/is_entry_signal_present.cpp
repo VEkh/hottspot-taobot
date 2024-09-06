@@ -7,6 +7,8 @@
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
+#include <time.h> // tm
+
 bool Alpaca::TaoBot::is_entry_signal_present() {
   const bool is_trending_ = is_trending();
 
@@ -60,16 +62,60 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
       const int trend_at_minute = this->current_trend.at / 60;
 
       if (reversal_at_minute < trend_at_minute) {
-        return false;
+        reversal = reversal_t();
       }
     }
 
     entry_reversal_ = reversal;
   }
 
-  this->entry_reversal = entry_reversal_;
+  // TODO: Decide
+  if (this->api_client.config.should_market_open_trend_start &&
+      this->closed_positions.empty()) {
+    const int market_open_trend_duration =
+        this->reversals.timeframe_minutes / 2;
 
-  return true;
+    tm market_open_tm =
+        ::utils::time_::epoch_to_tm(this->market_open_epoch, "America/Chicago");
+
+    tm trend_at = {
+        .tm_sec = 0,
+        .tm_min = market_open_tm.tm_min + market_open_trend_duration,
+        .tm_hour = market_open_tm.tm_hour,
+    };
+
+    if (::utils::time_::is_at_least(this->current_epoch, trend_at,
+                                    "America/Chicago")) {
+      const long int trend_at_epoch =
+          this->market_open_epoch + market_open_trend_duration;
+
+      const reversal_type_t reversal_type =
+          current_mid() >= this->day_candle.open
+              ? reversal_type_t::REVERSAL_LOW
+              : reversal_type_t::REVERSAL_HIGH;
+
+      const double reversal_mid = reversal_type == reversal_type_t::REVERSAL_LOW
+                                      ? this->day_candle.low
+                                      : this->day_candle.high;
+
+      this->current_trend.trend = trend_t::TREND_CONSOLIDATION;
+
+      entry_reversal_ = reversal_t({
+          .at = (double)trend_at_epoch,
+          .mid = reversal_mid,
+          .type = reversal_type,
+
+      });
+    }
+  }
+
+  if (entry_reversal_.at) {
+    this->entry_reversal = entry_reversal_;
+
+    return true;
+  }
+
+  return false;
 }
 
 #endif

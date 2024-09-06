@@ -31,6 +31,7 @@ public:
     bool is_live;
     int reversal_timeframe_minutes = 60;
     bool should_always_reverse_profit = false;   // TODO: Decide
+    bool should_market_open_trend_start = false; // TODO: Decide
     bool should_stop_loss = true;                // TODO: Decide
   } config;
 
