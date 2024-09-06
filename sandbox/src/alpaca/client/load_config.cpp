@@ -63,6 +63,12 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_always_reverse_profit")) {
+    config.should_always_reverse_profit =
+        (bool)api_key_json["should_always_reverse_profit"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_stop_loss")) {
     config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
   }
@@ -79,6 +85,8 @@ void Alpaca::Client::load_config() {
       .is_live = api_key_json["is_live"],
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .should_always_reverse_profit =
+          config.should_always_reverse_profit, // TODO: Decide
       .should_stop_loss = config.should_stop_loss, // TODO: Decide
   };
 }

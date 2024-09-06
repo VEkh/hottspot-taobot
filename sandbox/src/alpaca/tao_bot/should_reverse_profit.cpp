@@ -9,7 +9,9 @@
 #include <string>                     // std::string
 
 bool Alpaca::TaoBot::should_reverse_profit() {
-  if (this->closed_positions.empty()) {
+  // TODO: Decide
+  if (!this->api_client.config.should_always_reverse_profit &&
+      this->closed_positions.empty()) {
     return false;
   }
 
