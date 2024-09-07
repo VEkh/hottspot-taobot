@@ -22,8 +22,6 @@
 #include "lib/utils/string.cpp"                        // ::utils::string
 #include "read_closed_positions.cpp"                   // read_closed_positions
 #include "read_price_action_stats.cpp" // read_price_action_stats
-#include "set_market_close_epoch.cpp"  // set_market_close_epoch
-#include "set_market_open_epoch.cpp"   // set_market_open_epoch
 #include "tao_bot.h"                   // Alpaca::TaoBot
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <iostream>                    // std::cout, std::endl
@@ -84,8 +82,9 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     ensure_market_is_open();
     ensure_is_shortable();
 
-    set_market_close_epoch();
-    set_market_open_epoch();
+    this->market_availability.set_market_close_epoch(this->current_epoch);
+    this->market_availability.set_market_open_epoch(this->current_epoch);
+
     read_closed_positions();
 
     initialize_current_trend();

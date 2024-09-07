@@ -75,8 +75,8 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
     const int market_open_trend_duration =
         this->reversals.timeframe_minutes / 2;
 
-    tm market_open_tm =
-        ::utils::time_::epoch_to_tm(this->market_open_epoch, "America/Chicago");
+    tm market_open_tm = ::utils::time_::epoch_to_tm(
+        this->market_availability.market_open_epoch, "America/Chicago");
 
     tm trend_at = {
         .tm_sec = 0,
@@ -87,7 +87,8 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
     if (::utils::time_::is_at_least(this->current_epoch, trend_at,
                                     "America/Chicago")) {
       const long int trend_at_epoch =
-          this->market_open_epoch + market_open_trend_duration;
+          this->market_availability.market_open_epoch +
+          market_open_trend_duration;
 
       const reversal_type_t reversal_type =
           current_mid() >= this->day_candle.open

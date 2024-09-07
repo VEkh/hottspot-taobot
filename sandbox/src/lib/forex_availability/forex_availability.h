@@ -12,12 +12,15 @@ public:
   ForexAvailability(const Pg);
   ForexAvailability(){};
 
+  double market_close_epoch;
+  double market_open_epoch;
+
   bool is_end_of_trading_period(const double);
   bool is_holiday(const double);
   bool is_market_open(const double);
 
-  double market_close_epoch(const double);
-  double market_open_epoch(const double);
+  void set_market_close_epoch(const double);
+  void set_market_open_epoch(const double);
 
 private:
   DB::Utils db_utils;
@@ -31,6 +34,7 @@ private:
   std::map<KeyType, bool> list_to_lookup(const std::list<KeyType>);
 
   bool is_in_date_lookup(std::map<std::string, bool>, const double);
+  bool is_market_day(const double);
 };
 
 #endif

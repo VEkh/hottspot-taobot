@@ -75,7 +75,7 @@ std::string date_string(const long int timestamp_seconds,
 }
 
 int day_of_week(const long int epoch) {
-  return in_time_zone<int>("America/New_York", [&]() -> int {
+  return in_time_zone<int>("America/Chicago", [&]() -> int {
     tm local_time = *localtime(&epoch);
 
     return local_time.tm_wday;

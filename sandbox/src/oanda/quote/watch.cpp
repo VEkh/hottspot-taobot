@@ -10,7 +10,12 @@
 #include <unistd.h>                    // usleep
 
 void Oanda::Quote::watch(const std::list<std::string> &symbols) {
-  bool is_market_open = this->market_availability.is_market_open(time(nullptr));
+  const double now = time(nullptr);
+
+  this->market_availability.set_market_close_epoch(now);
+  this->market_availability.set_market_open_epoch(now);
+
+  bool is_market_open = this->market_availability.is_market_open(now);
 
   if (is_market_open) {
     for (const std::string symbol : symbols) {

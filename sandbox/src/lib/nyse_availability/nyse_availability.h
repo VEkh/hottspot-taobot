@@ -12,14 +12,17 @@ public:
   NyseAvailability(const Pg);
   NyseAvailability(){};
 
+  double market_close_epoch;
+  double market_open_epoch;
+
   bool is_early_close_day(const double);
   bool is_end_of_trading_period(const double);
   bool is_holiday(const double);
   bool is_market_day(const double);
-  bool is_market_open(const double, const int);
+  bool is_market_open(const double);
 
-  double market_close_epoch(const double);
-  double market_open_epoch(const double);
+  void set_market_close_epoch(const double);
+  void set_market_open_epoch(const double, const int);
 
 private:
   DB::Utils db_utils;

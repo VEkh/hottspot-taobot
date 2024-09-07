@@ -13,7 +13,7 @@ void Oanda::TaoBot::read_candles() {
       .debug = this->api_client.config.debug_sql,
       .end_at = this->current_epoch,
       .read_cache = false,
-      .start_at = this->market_open_epoch,
+      .start_at = this->market_availability.market_open_epoch,
   });
 }
 

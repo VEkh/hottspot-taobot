@@ -9,7 +9,7 @@ void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
       .current_epoch = this->current_epoch,
       .current_snapshot = this->account_snapshot,
       .debug = this->api_client.config.debug_sql,
-      .end_at = this->market_close_epoch,
+      .end_at = this->market_availability.market_close_epoch,
       .force = force,
   });
 

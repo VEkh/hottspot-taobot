@@ -8,7 +8,8 @@ bool Oanda::TaoBot::should_read_candles() {
   const candle_bounds_t current_epoch_bounds = DB::Candle::timestamp_to_bounds(
       this->db_candle.duration_minutes, this->current_epoch);
 
-  if (current_epoch_bounds.opened_at <= this->market_open_epoch) {
+  if (current_epoch_bounds.opened_at <=
+      this->market_availability.market_open_epoch) {
     return false;
   }
 

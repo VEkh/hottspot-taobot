@@ -90,7 +90,6 @@ private:
   exit_prices_t exit_prices;
   candle_t day_candle;
   double current_epoch = time(nullptr);
-  double market_open_epoch;
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
@@ -197,7 +196,6 @@ private:
   void set_close_order_prices();
   void set_execution_price(order_t *);
   void set_execution_price(order_t *, json);
-  void set_market_open_epoch();
   void set_open_order_prices();
   void set_position_status();
   void set_profit(order_t *);

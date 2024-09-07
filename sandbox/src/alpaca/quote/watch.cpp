@@ -11,8 +11,12 @@
 #include <unistd.h>                    // usleep
 
 void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
-  bool is_market_open =
-      this->market_availability.is_market_open(time(nullptr), -30 * 60);
+  const double now = time(nullptr);
+
+  this->market_availability.set_market_close_epoch(now);
+  this->market_availability.set_market_open_epoch(now, -30 * 60);
+
+  bool is_market_open = this->market_availability.is_market_open(now);
 
   if (is_market_open) {
     for (const std::string symbol : symbols) {
@@ -32,8 +36,7 @@ void Alpaca::Quote::watch(const std::list<std::string> &symbols) {
     std::cout << std::flush;
     usleep(5e5);
 
-    is_market_open =
-        this->market_availability.is_market_open(time(nullptr), -30 * 60);
+    is_market_open = this->market_availability.is_market_open(time(nullptr));
   }
 
   std::cout << fmt.bold << fmt.yellow;

@@ -18,7 +18,6 @@
 #include "lib/utils/string.cpp"        // ::utils::string
 #include "oanda/quote/quote.cpp"       // Oanda::Quote
 #include "read_price_action_stats.cpp" // read_price_action_stats
-#include "set_market_open_epoch.cpp"   // set_market_open_epoch
 #include "tao_bot.h"                   // Oanda::TaoBot, quantity, symbol
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <locale.h>                    // std::locale
@@ -65,7 +64,8 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->reversals.timeframe_minutes =
       this->api_client.config.reversal_timeframe_minutes;
 
-  set_market_open_epoch();
+  this->market_availability.set_market_close_epoch(this->current_epoch);
+  this->market_availability.set_market_open_epoch(this->current_epoch);
 
   initialize_current_trend();
   read_price_action_stats();
