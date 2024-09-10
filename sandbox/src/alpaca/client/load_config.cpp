@@ -59,24 +59,24 @@ void Alpaca::Client::load_config() {
   }
 
   if (api_key_json.contains("debug_sql")) {
-    config.debug_sql = (bool)api_key_json["debug_sql"];
+    this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
   // TODO: Decide
   if (api_key_json.contains("should_always_reverse_profit")) {
-    config.should_always_reverse_profit =
+    this->config.should_always_reverse_profit =
         (bool)api_key_json["should_always_reverse_profit"];
   }
 
   // TODO: Decide
   if (api_key_json.contains("should_market_open_trend_start")) {
-    config.should_market_open_trend_start =
+    this->config.should_market_open_trend_start =
         (bool)api_key_json["should_market_open_trend_start"];
   }
 
   // TODO: Decide
   if (api_key_json.contains("should_stop_loss")) {
-    config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
+    this->config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
   }
 
   this->config = {
@@ -86,16 +86,16 @@ void Alpaca::Client::load_config() {
       .api_secret_key = api_key_json["secret_key"],
       .base_url = api_key_json["base_url"],
       .data_base_url = config_json["data_base_url"],
-      .debug_sql = config.debug_sql,
+      .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
       .should_always_reverse_profit =
-          config.should_always_reverse_profit, // TODO: Decide
+          this->config.should_always_reverse_profit, // TODO: Decide
       .should_market_open_trend_start =
-          config.should_market_open_trend_start,   // TODO: Decide
-      .should_stop_loss = config.should_stop_loss, // TODO: Decide
+          this->config.should_market_open_trend_start,   // TODO: Decide
+      .should_stop_loss = this->config.should_stop_loss, // TODO: Decide
   };
 }
 
