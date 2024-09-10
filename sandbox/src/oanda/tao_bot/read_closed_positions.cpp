@@ -1,14 +1,15 @@
-#ifndef ALPACA__TAO_BOT_read_closed_positions
-#define ALPACA__TAO_BOT_read_closed_positions
+#ifndef OANDA__TAO_BOT_read_closed_positions
+#define OANDA__TAO_BOT_read_closed_positions
 
-#include "tao_bot.h" // Alpaca::TaoBot, db_position_t, order_time_in_force_t
+#include "tao_bot.h" // Oanda::TaoBot, db_position_t, order_time_in_force_t
 #include <list>      // std::list
 #include <math.h>    // abs
+#include <string>    // std::stoi
 
-void Alpaca::TaoBot::read_closed_positions() {
+void Oanda::TaoBot::read_closed_positions() {
   std::list<db_position_t> day_positions =
       this->db_position.get_closed_positions({
-          .api_key_id = this->api_client.config.api_key_id,
+          .api_key_id = this->api_client.config.account_id,
           .debug = this->api_client.config.debug_sql,
           .market_open_epoch = this->market_availability.market_epochs.open,
           .symbol = this->symbol,
@@ -19,7 +20,7 @@ void Alpaca::TaoBot::read_closed_positions() {
         .action = db_position.close_order_quantity > 0 ? order_action_t::BUY
                                                        : order_action_t::SELL,
         .execution_price = db_position.close_order_execution_mid,
-        .id = db_position.close_order_id,
+        .id = std::stoi(db_position.close_order_id),
         .max_position_profit =
             db_position.max_profit * abs(db_position.close_order_quantity),
         .max_profit = db_position.max_profit,
@@ -27,12 +28,12 @@ void Alpaca::TaoBot::read_closed_positions() {
         .min_profit = db_position.min_profit,
         .min_profit_at = db_position.min_profit_at,
         .profit = db_position.current_profit,
-        .quantity = abs(db_position.close_order_quantity),
+        .quantity = (int)abs(db_position.close_order_quantity),
         .status = order_status_t::ORDER_FILLED,
         .stop_loss = db_position.stop_loss,
         .stop_profit = db_position.stop_profit,
         .symbol = db_position.symbol,
-        .time_in_force = order_time_in_force_t::DAY,
+        .time_in_force = order_time_in_force_t::FOK,
         .timestamp = db_position.closed_at,
         .type = order_type_t::MARKET,
     };
@@ -41,7 +42,7 @@ void Alpaca::TaoBot::read_closed_positions() {
         .action = db_position.open_order_quantity > 0 ? order_action_t::BUY
                                                       : order_action_t::SELL,
         .execution_price = db_position.open_order_execution_mid,
-        .id = db_position.open_order_id,
+        .id = std::stoi(db_position.open_order_id),
         .max_position_profit =
             db_position.max_profit * abs(db_position.open_order_quantity),
         .max_profit = db_position.max_profit,
@@ -49,12 +50,12 @@ void Alpaca::TaoBot::read_closed_positions() {
         .min_profit = db_position.min_profit,
         .min_profit_at = db_position.min_profit_at,
         .profit = db_position.current_profit,
-        .quantity = abs(db_position.open_order_quantity),
+        .quantity = (int)abs(db_position.open_order_quantity),
         .status = order_status_t::ORDER_FILLED,
         .stop_loss = db_position.stop_loss,
         .stop_profit = db_position.stop_profit,
         .symbol = db_position.symbol,
-        .time_in_force = order_time_in_force_t::DAY,
+        .time_in_force = order_time_in_force_t::FOK,
         .timestamp = db_position.opened_at,
         .type = order_type_t::MARKET,
     };

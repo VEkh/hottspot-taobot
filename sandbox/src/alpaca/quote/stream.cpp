@@ -95,10 +95,9 @@ void Alpaca::Quote::stream(const std::list<std::string> &symbols) {
 
   const double now = time(nullptr);
 
-  this->market_availability.set_market_close_epoch(now);
-  this->market_availability.set_market_open_epoch(now, -30 * 60);
+  this->market_availability.set_market_epochs(now);
 
-  bool is_market_open = this->market_availability.is_market_open(now);
+  bool is_market_open = this->market_availability.is_market_open(now, true);
 
   while (!stream_error && is_market_open) {
     try {
@@ -106,7 +105,8 @@ void Alpaca::Quote::stream(const std::list<std::string> &symbols) {
       write_streamed(buffer);
       ::utils::websocket::log_and_consume_buffer(buffer);
 
-      is_market_open = this->market_availability.is_market_open(time(nullptr));
+      is_market_open =
+          this->market_availability.is_market_open(time(nullptr), true);
     } catch (boost::wrapexcept<boost::system::system_error> &) {
       puts("❌ Websocket Stream failed.");
       continue;

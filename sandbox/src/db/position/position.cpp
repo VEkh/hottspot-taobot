@@ -3,7 +3,7 @@
 
 #include "position.h"
 #include "close.cpp"
-#include "get_day_positions.cpp"
+#include "get_closed_positions.cpp"
 #include "net_return.cpp"
 #include "open.cpp"
 

@@ -19,7 +19,8 @@ DB::PriceAction::PriceAction(const init_args_t args) {
 
   this->db_quote = DB::Quote(this->conn);
   this->db_utils = DB::Utils(this->conn);
-  this->market_availability = NyseAvailability(this->conn);
+  this->market_availability =
+      NyseAvailability(this->conn); // TODO: Extend to forex
 
   this->db_utils.set_param({"statement_timeout", "6000000"});
 }

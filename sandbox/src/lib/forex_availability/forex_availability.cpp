@@ -11,8 +11,7 @@
 #include "is_end_of_trading_period.cpp"
 #include "is_holiday.cpp"
 #include "is_market_open.cpp"
-#include "set_market_close_epoch.cpp"
-#include "set_market_open_epoch.cpp"
+#include "set_market_epochs.cpp"
 
 ForexAvailability::ForexAvailability(const Pg conn) {
   this->conn = conn;

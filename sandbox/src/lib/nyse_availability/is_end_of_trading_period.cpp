@@ -4,7 +4,7 @@
 #include "nyse_availability.h" // NyseAvailability
 
 bool NyseAvailability::is_end_of_trading_period(const double epoch) {
-  return epoch >= this->market_close_epoch - 60;
+  return epoch >= this->market_epochs.close - 60;
 }
 
 #endif

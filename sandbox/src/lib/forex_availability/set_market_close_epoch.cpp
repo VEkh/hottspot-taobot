@@ -1,9 +1,10 @@
 #ifndef FOREX_AVAILABILITY_set_market_close_epoch
 #define FOREX_AVAILABILITY_set_market_close_epoch
 
-#include "forex_availability.h" // ForexAvailability
-#include "lib/utils/time.cpp"   // ::utils::time_
-#include <string>               // std::string
+#include "forex_availability.h"      // ForexAvailability
+#include "get_market_open_epoch.cpp" // get_market_open_epoch
+#include "lib/utils/time.cpp"        // ::utils::time_
+#include <string>                    // std::string
 
 void ForexAvailability::set_market_close_epoch(const double epoch) {
   const double day_of_week = ::utils::time_::day_of_week(epoch);
@@ -19,16 +20,19 @@ void ForexAvailability::set_market_close_epoch(const double epoch) {
   } else if (day_of_week == 6) {
     close_epoch = epoch;
   } else {
+    const double today_market_open_epoch = get_market_open_epoch(epoch);
     const int one_day_seconds = 24 * 60 * 60;
 
-    const std::string close_iso_date = ::utils::time_::date_string(
-        epoch + one_day_seconds, "%F", "America/Chicago");
+    const int offset = epoch >= today_market_open_epoch ? one_day_seconds : 0;
+
+    const std::string close_iso_date =
+        ::utils::time_::date_string(epoch + offset, "%F", "America/Chicago");
 
     close_epoch = this->db_utils.timestamp_to_epoch(
         close_iso_date + " 07:30:00", "America/Chicago");
   }
 
-  this->market_close_epoch = close_epoch;
+  this->market_epochs.close = close_epoch;
 }
 
 #endif

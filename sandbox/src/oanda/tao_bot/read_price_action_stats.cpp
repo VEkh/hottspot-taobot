@@ -5,7 +5,7 @@
 
 void Oanda::TaoBot::read_price_action_stats() {
   this->price_action_stats = this->db_price_action.get_stats(
-      this->market_availability.market_open_epoch);
+      this->market_availability.market_epochs.open);
 }
 
 #endif

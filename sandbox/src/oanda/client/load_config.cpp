@@ -38,9 +38,12 @@ void Oanda::Client::load_config() {
   json api_key_json = config_json[api_key];
 
   const std::list<std::string> nested_required_keys = {
-      "account_id",           "account_stop_loss_ratio",
-      "authentication_token", "base_url",
-      "env_symbols",          "reversal_timeframe_minutes",
+      "account_stop_loss_ratio",
+      "authentication_token",
+      "base_url",
+      "env_symbols",
+      "id",
+      "reversal_timeframe_minutes",
   };
 
   for (const std::string key : nested_required_keys) {
@@ -61,7 +64,7 @@ void Oanda::Client::load_config() {
   }
 
   this->config = {
-      .account_id = api_key_json["account_id"],
+      .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .authentication_token = api_key_json["authentication_token"],
       .base_url = api_key_json["base_url"],

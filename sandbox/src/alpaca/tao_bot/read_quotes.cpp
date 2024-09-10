@@ -13,7 +13,7 @@ void Alpaca::TaoBot::read_quotes() {
   std::string sort_direction = "desc";
 
   if (this->backtest.is_active) {
-    end_at = this->market_availability.market_close_epoch;
+    end_at = this->market_availability.market_epochs.close;
     start_at = this->current_epoch;
     limit = 0;
     sort_direction = "asc";

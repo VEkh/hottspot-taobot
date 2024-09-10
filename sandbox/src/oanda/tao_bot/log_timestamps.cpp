@@ -21,16 +21,17 @@ void Oanda::TaoBot::log_timestamps() {
   std::cout << fmt.green;
   printf(
       "🚀 Market Open:     %s\n",
-      ::utils::time_::date_string(this->market_availability.market_open_epoch,
+      ::utils::time_::date_string(this->market_availability.market_epochs.open,
                                   "%a, %b %d, %Y %X %Z", "America/Chicago")
           .c_str());
 
   std::cout << fmt.red;
   printf(
       "🏁 Market Close:    %s\n",
-      ::utils::time_::date_string(this->market_availability.market_close_epoch,
+      ::utils::time_::date_string(this->market_availability.market_epochs.close,
                                   "%a, %b %d, %Y %X %Z", "America/Chicago")
           .c_str());
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

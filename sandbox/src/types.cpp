@@ -82,6 +82,12 @@ struct exit_prices_t {
   double stop_profit = 0.00;
 };
 
+struct market_epochs_t {
+  double close = 0.0;
+  double open = 0.0;
+  double pre = 0.0;
+};
+
 struct order_win_result_streak_t {
   std::map<int, int> counts;
   int current = 0;

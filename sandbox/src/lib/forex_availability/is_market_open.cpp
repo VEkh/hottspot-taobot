@@ -13,7 +13,7 @@ bool ForexAvailability::is_market_open(const double epoch) {
     return false;
   }
 
-  return epoch >= this->market_open_epoch && epoch < this->market_close_epoch;
+  return epoch >= this->market_epochs.open && epoch < this->market_epochs.close;
 }
 
 #endif

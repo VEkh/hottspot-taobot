@@ -22,8 +22,7 @@ void DB::PriceAction::process_quotes() {
       log_build_summary(this->build_state);
 
       this->build_state.day_candle = candle_t();
-      this->market_availability.set_market_close_epoch(quote.timestamp);
-      this->market_availability.set_market_open_epoch(quote.timestamp);
+      this->market_availability.set_market_epochs(quote.timestamp);
 
       if (!this->market_availability.is_market_open(quote.timestamp)) {
         continue;
@@ -32,10 +31,10 @@ void DB::PriceAction::process_quotes() {
 
     if (!this->build_state.day_candle.opened_at) {
       this->build_state.day_candle.closed_at =
-          this->market_availability.market_close_epoch;
+          this->market_availability.market_epochs.close;
 
       this->build_state.day_candle.opened_at =
-          this->market_availability.market_open_epoch;
+          this->market_availability.market_epochs.open;
     }
 
     const double mid = quote.mid();

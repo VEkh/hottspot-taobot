@@ -3,24 +3,25 @@
 
 #include "db/utils/utils.cpp" // DB::Utils
 #include "lib/pg/pg.cpp"      // Pg
+#include "types.cpp"          // Global::t
 #include <list>               // std::list
 #include <map>                // std::map
 #include <string>             // std::string
 
 class ForexAvailability {
 public:
+  using market_epochs_t = Global::t::market_epochs_t;
+
   ForexAvailability(const Pg);
   ForexAvailability(){};
 
-  double market_close_epoch;
-  double market_open_epoch;
+  market_epochs_t market_epochs;
 
   bool is_end_of_trading_period(const double);
   bool is_holiday(const double);
   bool is_market_open(const double);
 
-  void set_market_close_epoch(const double);
-  void set_market_open_epoch(const double);
+  void set_market_epochs(const double);
 
 private:
   DB::Utils db_utils;
@@ -35,6 +36,11 @@ private:
 
   bool is_in_date_lookup(std::map<std::string, bool>, const double);
   bool is_market_day(const double);
+
+  double get_market_open_epoch(const double);
+
+  void set_market_close_epoch(const double);
+  void set_market_open_epoch(const double);
 };
 
 #endif

@@ -33,6 +33,7 @@ private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using candle_bounds_t = DB::Candle::candle_bounds_t;
   using candle_t = Global::t::candle_t;
+  using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
   using order_action_t = Oanda::t::order_action_t;
@@ -189,6 +190,7 @@ private:
   void log_timestamps();
   void open_and_persist_position();
   void read_candles();
+  void read_closed_positions();
   void read_price_action_stats();
   void read_quotes();
   void reset_orders();

@@ -27,10 +27,10 @@ public:
     bool debug = false;
   };
 
-  struct get_day_positions_args_t {
+  struct get_closed_positions_args_t {
     std::string api_key_id;
     bool debug = false;
-    double epoch = 0;
+    double market_open_epoch = 0;
     std::string symbol;
   };
 
@@ -95,7 +95,7 @@ public:
   Position(){};
   Position(Pg c) : conn(c){};
 
-  std::list<position_t> get_day_positions(const get_day_positions_args_t);
+  std::list<position_t> get_closed_positions(const get_closed_positions_args_t);
 
   void close(const close_args_t);
   void net_return(const net_return_args_t);

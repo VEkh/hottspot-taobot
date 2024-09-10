@@ -82,8 +82,7 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     ensure_market_is_open();
     ensure_is_shortable();
 
-    this->market_availability.set_market_close_epoch(this->current_epoch);
-    this->market_availability.set_market_open_epoch(this->current_epoch);
+    this->market_availability.set_market_epochs(this->current_epoch);
 
     read_closed_positions();
 

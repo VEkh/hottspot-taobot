@@ -3,21 +3,22 @@
 
 #include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
-#include "lib/utils/time.cpp"            // ::utils::time_
 #include "read_price_action_stats.cpp"   // read_price_action_stats
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, quote_t, reversals_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
+#include <algorithm>                   // std::min
+#include <time.h>                      // time
 
 void Alpaca::TaoBot::reset_backtest() {
   this->backtest.db_market_close.upsert({
       .api_key_id = this->api_client.config.api_key_id,
-      .closed_at =
-          ::utils::time_::beginning_of_day_to_epoch(this->current_epoch),
+      .closed_at = this->market_availability.market_epochs.close,
       .symbol = this->symbol,
   });
 
-  const double next_market_open_epoch =
-      this->backtest.next_market_open_epoch(this->current_epoch);
+  const double next_market_open_epoch = std::min(
+      (double)time(nullptr),
+      this->market_availability.next_market_open_epoch(this->current_epoch));
 
   this->backtest.await_env_market_close(this->current_epoch,
                                         next_market_open_epoch);
@@ -41,8 +42,7 @@ void Alpaca::TaoBot::reset_backtest() {
       this->api_client.config.reversal_timeframe_minutes;
   this->started_at = this->current_epoch;
 
-  this->market_availability.set_market_close_epoch(this->current_epoch);
-  this->market_availability.set_market_open_epoch(this->current_epoch);
+  this->market_availability.set_market_epochs(this->current_epoch);
 
   force_init_reversal_await();
   read_price_action_stats();

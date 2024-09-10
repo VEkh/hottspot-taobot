@@ -1,5 +1,5 @@
-#ifndef DB__POSITION_get_day_positions
-#define DB__POSITION_get_day_positions
+#ifndef DB__POSITION_get_closed_positions
+#define DB__POSITION_get_closed_positions
 
 #include "position.h"              // DB::Position, query_result_t
 #include "result_to_positions.cpp" // result_to_positions
@@ -10,8 +10,8 @@
 #include <string>                  // std::to_string
 
 std::list<DB::Position::position_t>
-DB::Position::get_day_positions(const get_day_positions_args_t args) {
-  const double epoch = args.epoch;
+DB::Position::get_closed_positions(const get_closed_positions_args_t args) {
+  const double market_open_epoch = args.market_open_epoch;
   const std::string api_key_id = args.api_key_id;
   const std::string symbol = args.symbol;
 
@@ -31,19 +31,20 @@ DB::Position::get_day_positions(const get_day_positions_args_t args) {
     where
       api_key_id = %s
       and symbol = %s
-      and opened_at >= date_trunc('day', to_timestamp(%f))
+      and closed_at is not null
+      and opened_at >= to_timestamp(%f)
     order by
       opened_at asc
   )";
 
   const size_t query_l = strlen(query_format) + strlen(sanitized_symbol) +
                          strlen(sanitized_api_key_id) +
-                         std::to_string(epoch).size();
+                         std::to_string(market_open_epoch).size();
 
   char query[query_l];
 
   snprintf(query, query_l, query_format, sanitized_api_key_id, sanitized_symbol,
-           epoch);
+           market_open_epoch);
 
   PQfreemem(sanitized_api_key_id);
   PQfreemem(sanitized_symbol);

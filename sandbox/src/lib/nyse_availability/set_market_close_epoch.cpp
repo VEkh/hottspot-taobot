@@ -13,7 +13,7 @@ void NyseAvailability::set_market_close_epoch(const double epoch) {
   const std::string close_time =
       is_early_close_day(epoch) ? " 12:00:00" : " 15:00:00";
 
-  this->market_close_epoch = this->db_utils.timestamp_to_epoch(
+  this->market_epochs.close = this->db_utils.timestamp_to_epoch(
       close_iso_date + close_time, "America/Chicago");
 }
 
