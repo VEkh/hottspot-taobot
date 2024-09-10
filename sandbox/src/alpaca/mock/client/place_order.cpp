@@ -1,14 +1,13 @@
-#ifndef ALPACA__TAO_BOT_BACKTEST_place_order
-#define ALPACA__TAO_BOT_BACKTEST_place_order
+#ifndef ALPACA__MOCK__CLIENT_place_order
+#define ALPACA__MOCK__CLIENT_place_order
 
-#include "backtest.h" // Alpaca::TaoBotBacktest, order_action_t, order_status_t, order_t
+#include "client.h" // Alpaca::Mock::Client, order_action_t, order_status_t, order_t
 #include <stdio.h>  // snprintf
 #include <string.h> // strlen
 #include <string>   // std::to_string
-#include <time.h>   // time
 
-void Alpaca::TaoBotBacktest::place_order(const long int current_epoch,
-                                         order_t *order) {
+void Alpaca::Mock::Client::place_order(const long int current_epoch,
+                                       order_t *order) {
   const char *action = order->action == order_action_t::BUY ? "buy" : "sell";
   const char *id_format = "%s-%s-%li";
 

@@ -1,28 +1,24 @@
-#ifndef ALPACA__TAO_BOT_BACKTEST_load_config
-#define ALPACA__TAO_BOT_BACKTEST_load_config
+#ifndef BACKTEST_load_config
+#define BACKTEST_load_config
 
-#include "backtest.h"         // Alpaca::TaoBotBacktest, quote_t
-#include "deps.cpp"           // json
-#include "lib/formatted.cpp"  // Formatted::error_message
-#include "lib/utils/time.cpp" // ::utils::time_
-#include <fstream>            // std::ifstream, std::ios
-#include <list>               // std::list
-#include <stdexcept>          // std::invalid_argument, std::runtime_error
-#include <stdio.h>            // printf
-#include <string>             // std::string
-#include <time.h>             // time
-#include <vector>             // std::vector
+#include "backtest.h"        // Alpaca::TaoBotBacktest, quote_t
+#include "deps.cpp"          // json
+#include "lib/formatted.cpp" // Formatted::error_message
+#include <fstream>           // std::ifstream, std::ios
+#include <list>              // std::list
+#include <stdexcept>         // std::invalid_argument
+#include <stdio.h>           // printf
+#include <string>            // std::string
+#include <time.h>            // time
 
-void Alpaca::TaoBotBacktest::load_config() {
-  std::string config_path =
-      std::string(APP_DIR) + "/config/alpaca/credentials.json";
+void Backtest::load_config() {
   std::string error_message;
 
-  std::ifstream config_file(config_path.c_str(), std::ios::in);
+  std::ifstream config_file(this->config_path.c_str(), std::ios::in);
 
   if (!config_file.good()) {
     error_message = Formatted::error_message("Config file missing at " +
-                                             std::string(config_path));
+                                             std::string(this->config_path));
     throw std::invalid_argument(error_message);
   }
 
@@ -58,7 +54,7 @@ void Alpaca::TaoBotBacktest::load_config() {
     error_message = Formatted::error_message(
         "Config file is missing the `" + std::string(key) +
         "` key. Please ensure it is in the config file at " +
-        std::string(config_path));
+        std::string(this->config_path));
 
     throw std::invalid_argument(error_message);
   }
@@ -78,14 +74,14 @@ void Alpaca::TaoBotBacktest::load_config() {
     return;
   }
 
-  std::vector<std::string> nested_required_keys = {
+  std::list<std::string> nested_required_keys = {
       "account_margin_multiplier",
       "account_starting_equity",
       "is_active",
       "start_at",
   };
 
-  for (std::string key : nested_required_keys) {
+  for (const std::string key : nested_required_keys) {
     if (backtest_json.contains(key)) {
       continue;
     }
@@ -93,7 +89,7 @@ void Alpaca::TaoBotBacktest::load_config() {
     error_message = Formatted::error_message(
         "Config file is missing the `" + api_key + std::string(".backtest.") +
         std::string(key) + "` key. Please ensure it is in the config file at " +
-        std::string(config_path));
+        std::string(this->config_path));
 
     throw std::invalid_argument(error_message);
   }
@@ -131,23 +127,23 @@ void Alpaca::TaoBotBacktest::load_config() {
     end_epoch = last_quotes.front().timestamp;
   }
 
-  const bool clock_sync = backtest_json.contains("clock_sync")
-                              ? (bool)backtest_json["clock_sync"]
-                              : this->config.clock_sync;
+  if (backtest_json.contains("clock_sync")) {
+    this->config.clock_sync = (bool)backtest_json["clock_sync"];
+  }
 
-  const bool force_exec_slow_queries =
-      backtest_json.contains("force_exec_slow_queries")
-          ? (bool)backtest_json["force_exec_slow_queries"]
-          : this->config.force_exec_slow_queries;
+  if (backtest_json.contains("force_exec_slow_queries")) {
+    this->config.force_exec_slow_queries =
+        (bool)backtest_json["force_exec_slow_queries"];
+  }
 
   this->config = {
       .account_margin_multiplier = backtest_json["account_margin_multiplier"],
       .account_starting_equity = backtest_json["account_starting_equity"],
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
-      .clock_sync = clock_sync,
+      .clock_sync = this->config.clock_sync,
       .end_epoch = end_epoch,
-      .force_exec_slow_queries = force_exec_slow_queries,
+      .force_exec_slow_queries = this->config.force_exec_slow_queries,
       .start_epoch = start_epoch,
   };
 }

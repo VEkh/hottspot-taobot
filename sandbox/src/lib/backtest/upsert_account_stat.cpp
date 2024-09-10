@@ -1,14 +1,12 @@
-#ifndef ALPACA__TAO_BOT_BACKTEST_upsert_account_stat
-#define ALPACA__TAO_BOT_BACKTEST_upsert_account_stat
+#ifndef BACKTEST_upsert_account_stat
+#define BACKTEST_upsert_account_stat
 
-#include "backtest.h"         // Alpaca::TaoBotBacktest, account_snapshot_t
-#include "lib/utils/time.cpp" // ::utils::time_
-#include "should_exec_slow_query.cpp" // should_exec_slow_query
+#include "backtest.h" // Backtest, account_snapshot_t, market_epochs_t
 
-void Alpaca::TaoBotBacktest::upsert_account_stat(
-    const upsert_account_stat_args_t args) {
+void Backtest::upsert_account_stat(const upsert_account_stat_args_t args) {
   const double current_epoch = args.current_epoch;
   const bool force = args.force;
+  const market_epochs_t market_epochs = args.market_epochs;
 
   if (!this->is_active) {
     return;
@@ -18,22 +16,20 @@ void Alpaca::TaoBotBacktest::upsert_account_stat(
     return;
   }
 
-  const account_snapshot_t current_snapshot =
+  const account_snapshot_t updated_current_snapshot =
       this->db_account_stat.get_snapshot_with_computed_equity({
           .api_key_id = this->config.api_key_id,
           .current_snapshot = args.current_snapshot,
           .debug = args.debug,
-          .end_at = args.end_at,
-          .start_at = ::utils::time_::beginning_of_day_to_epoch(current_epoch),
+          .end_at = market_epochs.close,
+          .start_at = market_epochs.open,
       });
 
-  bool is_new_day =
-      ::utils::time_::beginning_of_day_to_epoch(current_epoch) >
-      ::utils::time_::beginning_of_day_to_epoch(current_snapshot.timestamp);
+  const bool is_new_day = current_epoch > market_epochs.close;
+  const double current_equity = updated_current_snapshot.equity;
 
-  const double current_equity = current_snapshot.equity;
   const double original_margin_buying_power =
-      current_snapshot.original_margin_buying_power;
+      updated_current_snapshot.original_margin_buying_power;
 
   const double equity =
       current_equity ? current_equity : this->config.account_starting_equity;

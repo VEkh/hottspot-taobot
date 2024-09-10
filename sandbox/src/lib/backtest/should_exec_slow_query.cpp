@@ -1,11 +1,10 @@
-#ifndef ALPACA__TAO_BOT_BACKTEST_should_exec_slow_query
-#define ALPACA__TAO_BOT_BACKTEST_should_exec_slow_query
+#ifndef BACKTEST_should_exec_slow_query
+#define BACKTEST_should_exec_slow_query
 
 #include "backtest.h"          // Alpaca::TaoBotBacktest
 #include "has_reached_end.cpp" // has_reached_end
 
-bool Alpaca::TaoBotBacktest::should_exec_slow_query(
-    const double current_epoch) {
+bool Backtest::should_exec_slow_query(const double current_epoch) {
   if (this->config.force_exec_slow_queries) {
     return true;
   }

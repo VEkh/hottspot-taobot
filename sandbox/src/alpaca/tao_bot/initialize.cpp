@@ -4,7 +4,6 @@
 #include "alpaca/client/client.cpp"         // Alpaca::Client
 #include "alpaca/quote/quote.cpp"           // Alpaca::Quote
 #include "alpaca/utils.cpp"                 // Alpaca::Utils
-#include "backtest/backtest.cpp"            // Alpaca::TaoBotBacktest
 #include "build_performance.cpp"            // build_performance
 #include "db/account_stat/account_stat.cpp" // DB::AccountStat
 #include "db/candle/candle.cpp"             // DB::Candle
@@ -15,6 +14,7 @@
 #include "ensure_market_is_open.cpp"        // ensure_market_is_open
 #include "ensure_symbol.cpp"                // ensure_symbol
 #include "initialize_current_trend.cpp"     // initialize_current_trend
+#include "lib/backtest/backtest.cpp"        // Backtest
 #include "lib/formatted.cpp"                // Formatted::error_message
 #include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
 #include "lib/pg/pg.cpp"                               // Pg
@@ -67,7 +67,8 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->should_stop_loss =
         this->api_client.config.should_stop_loss; // TODO: Decide
 
-    this->backtest = Alpaca::TaoBotBacktest({
+    this->backtest = Backtest({
+        .api_client_name = "alpaca",
         .conn = this->pg,
         .env_symbols = this->env_symbols,
         .flags = this->flags,

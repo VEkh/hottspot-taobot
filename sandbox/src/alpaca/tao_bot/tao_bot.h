@@ -2,15 +2,16 @@
 #define ALPACA__TAO_BOT_H
 
 #include "alpaca/client/client.cpp"                    // Alpaca::Client
+#include "alpaca/mock/client/client.cpp"               // Alpaca::Mock::Client
 #include "alpaca/quote/quote.cpp"                      // Alpaca::Quote
 #include "alpaca/types.cpp"                            // Alpaca::t
-#include "backtest/backtest.cpp"                       // Alpaca::TaoBotBacktest
 #include "db/account_stat/account_stat.cpp"            // DB::AccountStat
 #include "db/candle/candle.cpp"                        // DB::Candle
 #include "db/position/position.cpp"                    // DB::Position
 #include "db/price_action/price_action.cpp"            // DB::PriceAction
 #include "db/utils/utils.cpp"                          // DB::Utils
 #include "deps.cpp"                                    // json
+#include "lib/backtest/backtest.cpp"                   // Backtest
 #include "lib/formatted.cpp"                           // Formatted
 #include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
 #include "lib/pg/pg.cpp"                               // Pg
@@ -59,8 +60,9 @@ private:
   };
 
   Alpaca::Client api_client;
+  Alpaca::Mock::Client mock_api_client;
   Alpaca::Quote quoter;
-  Alpaca::TaoBotBacktest backtest;
+  Backtest backtest;
   DB::AccountStat db_account_stat;
   DB::Candle db_candle;
   DB::Position db_position;

@@ -20,8 +20,8 @@ void Alpaca::TaoBot::reset_backtest() {
       (double)time(nullptr),
       this->market_availability.next_market_open_epoch(this->current_epoch));
 
-  this->backtest.await_env_market_close(this->current_epoch,
-                                        next_market_open_epoch);
+  this->backtest.await_env_market_close(
+      this->market_availability.market_epochs.close, next_market_open_epoch);
 
   update_account_snapshot(true);
   advance_current_epoch(next_market_open_epoch);
