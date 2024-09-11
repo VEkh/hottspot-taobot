@@ -1,8 +1,7 @@
 #ifndef ALPACA__TAO_BOT_update_account_snapshot
 #define ALPACA__TAO_BOT_update_account_snapshot
 
-#include "lib/utils/time.cpp" // ::utils::time_
-#include "tao_bot.h"          // Alpaca::TaoBot
+#include "tao_bot.h" // Alpaca::TaoBot
 
 void Alpaca::TaoBot::update_account_snapshot(const bool force = false) {
   this->backtest.upsert_account_stat({

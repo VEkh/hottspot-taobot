@@ -1,7 +1,6 @@
 #ifndef ALPACA__TAO_BOT_should_terminate
 #define ALPACA__TAO_BOT_should_terminate
 
-#include "alpaca/utils.cpp"             // Alpaca::Utils
 #include "is_end_of_quotes.cpp"         // is_end_of_quotes
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t

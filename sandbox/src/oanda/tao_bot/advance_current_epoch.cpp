@@ -6,6 +6,13 @@
 #include <unistd.h>  // usleep
 
 void Oanda::TaoBot::advance_current_epoch() {
+  if (this->backtest.is_active) {
+    advance_current_epoch(this->current_quote.timestamp);
+
+    this->backtest.slow_query_countdown += 1;
+    return;
+  }
+
   usleep(5e5);
 
   advance_current_epoch(time(nullptr));

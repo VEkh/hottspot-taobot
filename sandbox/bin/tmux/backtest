@@ -3,17 +3,22 @@
 api_keys=()
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")"
 filename=$(basename "${BASH_SOURCE[0]}")
-project="alpaca"
-
-log_dir="${app_dir}/log/${project}"
 
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils" # active_api_keys, read_env_symbols
 
+default_project="alpaca"
+ascii_print "Project to backtest: (Default: '${default_project}')" "yellow"
+
+read -r project
+project=${project:-${default_project}}
+
+log_dir="${app_dir}/log/${project}"
+
 # shellcheck disable=2207
 api_keys=($(active_api_keys "${project}" "backtest"))
 
-session="hottspot_taobot-${filename}"
+session="hottspot_taobot-${filename}_${project}"
 window=0
 
 tmux -2 new-session -d -s "${session}" -n code

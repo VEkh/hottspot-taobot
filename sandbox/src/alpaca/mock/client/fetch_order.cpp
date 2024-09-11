@@ -4,7 +4,7 @@
 #include "client.h" // Alpaca::Mock::Client, order_action_t, order_t, quote_t
 #include <stdio.h>  // snprintf
 #include <string.h> // strlen
-#include <string>   // std::string
+#include <string>   // std::string, std::to_string
 
 std::string Alpaca::Mock::Client::fetch_order(const order_t *order,
                                               const quote_t &quote) {

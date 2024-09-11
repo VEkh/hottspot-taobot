@@ -12,6 +12,10 @@ void Oanda::TaoBot::clear_stale_open_order() {
     return;
   }
 
+  if (this->backtest.is_active) {
+    return;
+  }
+
   if (this->open_order_ptr->status == order_status_t::ORDER_CANCELLED) {
     std::cout << fmt.yellow << fmt.bold;
     printf("🔁 Resetting cancelled order %i.\n", this->open_order_ptr->id);

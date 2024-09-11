@@ -8,9 +8,11 @@
 #include "db/position/position.cpp"         // DB::Position
 #include "db/quote/quote.cpp"               // DB::Quote
 #include "db/utils/utils.cpp"               // DB::Utils
+#include "ensure_market_is_open.cpp"        // ensure_market_is_open
 #include "ensure_spread_limit.cpp"          // ensure_spread_limit
 #include "ensure_symbol.cpp"                // ensure_symbol
 #include "initialize_current_trend.cpp"     // initialize_current_trend
+#include "lib/backtest/backtest.cpp"        // Backtest
 #include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
 #include "lib/formatted.cpp"           // Formatted::error_message
 #include "lib/pg/pg.cpp"               // Pg
@@ -62,11 +64,25 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
 
   this->env_symbols = this->api_client.config.env_symbols;
 
-  this->reversals.timeframe_minutes =
-      this->api_client.config.reversal_timeframe_minutes;
+  this->backtest = Backtest({
+      .api_client_name = "oanda",
+      .conn = this->pg,
+      .env_symbols = this->env_symbols,
+      .flags = this->flags,
+      .symbol = this->symbol,
+  });
+
+  if (this->backtest.is_active) {
+    this->current_epoch = this->backtest.config.start_epoch;
+    this->started_at = this->backtest.config.start_epoch;
+  }
 
   this->market_availability.set_market_epochs(this->current_epoch);
 
+  this->reversals.timeframe_minutes =
+      this->api_client.config.reversal_timeframe_minutes;
+
+  ensure_market_is_open();
   read_closed_positions();
 
   initialize_current_trend();

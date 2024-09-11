@@ -31,6 +31,19 @@ void Oanda::TaoBot::log_timestamps() {
       ::utils::time_::date_string(this->market_availability.market_epochs.close,
                                   "%a, %b %d, %Y %X %Z", "America/Chicago")
           .c_str());
+
+  if (this->backtest.is_active) {
+    const long int backtest_duration =
+        time(nullptr) - this->backtest.started_at;
+
+    std::cout << fmt.cyan;
+    printf("⌛ Backtest Start:  %s • Runtime: %s\n",
+           ::utils::time_::date_string(this->backtest.config.start_epoch,
+                                       "%a, %b %d, %Y %X %Z", "America/Chicago")
+               .c_str(),
+           ::utils::integer_::seconds_to_clock(backtest_duration).c_str());
+  }
+
   std::cout << fmt.reset << std::endl;
 }
 

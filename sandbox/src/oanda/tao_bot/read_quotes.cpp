@@ -12,6 +12,13 @@ void Oanda::TaoBot::read_quotes() {
   int limit = 1;
   std::string sort_direction = "desc";
 
+  if (this->backtest.is_active) {
+    end_at = this->market_availability.market_epochs.close;
+    start_at = this->current_epoch;
+    limit = 0;
+    sort_direction = "asc";
+  }
+
   const std::list<quote_t> quotes_ = this->quoter.db_quote.get_last({
       .debug = this->api_client.config.debug_sql,
       .end_at = end_at,
@@ -32,6 +39,12 @@ void Oanda::TaoBot::read_quotes() {
     std::cout << fmt.yellow;
     printf("⌛ Advancing epoch...\n");
     std::cout << fmt.reset << std::endl;
+
+    if (this->backtest.is_active) {
+      advance_current_epoch(this->current_epoch + 1);
+    } else {
+      advance_current_epoch();
+    }
 
     return this->market_availability.is_end_of_trading_period(
                this->current_epoch)

@@ -21,6 +21,7 @@
 #include "open_and_persist_position.cpp" // open_and_persist_position
 #include "read_candles.cpp"              // read_candles
 #include "read_quotes.cpp"               // read_quotes
+#include "reset_backtest.cpp"            // reset_backtest
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
@@ -39,22 +40,29 @@ void Oanda::TaoBot::watch() {
       this->previous_quote = this->current_quote;
       this->current_quote = quote;
 
-      log_timestamps();
+      if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+        log_timestamps();
+      }
 
       read_candles();
       build_day_candle();
       build_reversals(this->reversals, true);
 
-      update_account_snapshot();
+      if (!this->backtest.is_active ||
+          !this->backtest.config.force_exec_slow_queries) {
+        update_account_snapshot();
+      }
 
-      log_account_snapshot();
-      log_env_symbols();
-      log_quote();
-      log_price_action();
-      log_reversals(this->reversals);
-      log_reversal_metadata();
-      log_position();
-      log_performance();
+      if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+        log_account_snapshot();
+        log_env_symbols();
+        log_quote();
+        log_price_action();
+        log_reversals(this->reversals);
+        log_reversal_metadata();
+        log_position();
+        log_performance();
+      }
 
       set_position_status();
       clear_stale_open_order();
@@ -67,16 +75,25 @@ void Oanda::TaoBot::watch() {
       log_position_results();
       reset_position();
 
-      ::utils::io::print_newlines(7);
+      if (this->backtest.should_exec_slow_query(this->current_epoch)) {
+        ::utils::io::print_newlines(this->open_order_ptr ? 7 : 15);
+      }
 
       advance_current_epoch();
     }
   }
 
-  update_account_snapshot();
+  update_account_snapshot(true);
   log_timestamps();
   log_account_snapshot();
   log_end_of_trading_period();
+
+  if (this->backtest.is_active &&
+      !this->backtest.has_reached_end(this->current_epoch)) {
+    reset_backtest();
+
+    return watch();
+  }
 
   this->pg.disconnect();
 }

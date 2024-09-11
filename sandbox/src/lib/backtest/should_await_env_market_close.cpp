@@ -1,12 +1,10 @@
 #ifndef BACKTEST_should_await_env_market_close
 #define BACKTEST_should_await_env_market_close
 
-#include "backtest.h"             // Alpaca::TaoBotBacktest
+#include "backtest.h"             // Backtest
 #include "has_reached_end.cpp"    // has_reached_end
 #include "lib/utils/iterable.cpp" // ::utils::iterable
-#include "lib/utils/time.cpp"     // ::utils::time_
-#include <string>                 // std::stod, std::string
-#include <time.h>                 // localtime
+#include <string>                 // std::string
 
 bool Backtest::should_await_env_market_close(
     const double market_close_epoch, const double next_market_open_epoch) {

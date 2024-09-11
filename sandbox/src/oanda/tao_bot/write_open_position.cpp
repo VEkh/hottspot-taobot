@@ -27,7 +27,7 @@ void Oanda::TaoBot::write_open_position() {
       .open_order_id = std::to_string(this->open_order_ptr->id),
       .open_order_quantity =
           (double)(quantity_multiplier * this->open_order_ptr->quantity),
-      .opened_at = 0,
+      .opened_at = this->backtest.is_active ? this->current_epoch : 0,
       .stop_loss = this->exit_prices.stop_loss,
       .stop_profit = this->exit_prices.stop_profit,
       .symbol = this->symbol,

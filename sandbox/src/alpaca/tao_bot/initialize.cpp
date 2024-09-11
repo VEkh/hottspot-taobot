@@ -49,8 +49,9 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   this->market_availability = NyseAvailability(this->pg);
   this->quoter = Alpaca::Quote(this->pg, this->flags);
 
+  this->db_utils.set_param({"force_parallel_mode", "on"});
+
   try {
-    this->db_utils.set_param({"force_parallel_mode", "on"});
     this->api_client = Alpaca::Client(this->flags);
 
     this->db_price_action = DB::PriceAction({
@@ -60,12 +61,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     });
 
     this->env_symbols = this->api_client.config.env_symbols;
-
-    this->reversals.timeframe_minutes =
-        this->api_client.config.reversal_timeframe_minutes;
-
-    this->should_stop_loss =
-        this->api_client.config.should_stop_loss; // TODO: Decide
 
     this->backtest = Backtest({
         .api_client_name = "alpaca",
@@ -80,11 +75,16 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
       this->started_at = this->backtest.config.start_epoch;
     }
 
-    ensure_market_is_open();
-    ensure_is_shortable();
-
     this->market_availability.set_market_epochs(this->current_epoch);
 
+    this->reversals.timeframe_minutes =
+        this->api_client.config.reversal_timeframe_minutes;
+
+    this->should_stop_loss =
+        this->api_client.config.should_stop_loss; // TODO: Decide
+
+    ensure_market_is_open();
+    ensure_is_shortable();
     read_closed_positions();
 
     initialize_current_trend();

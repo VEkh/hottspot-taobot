@@ -9,10 +9,12 @@
 #include "db/quote/quote.h"                              // DB::Quote
 #include "db/utils/utils.cpp"                            // DB::Utils
 #include "deps.cpp"                                      // json
+#include "lib/backtest/backtest.cpp"                     // Backtest
 #include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
 #include "lib/formatted.cpp"                             // Formatted
 #include "lib/pg/pg.cpp"                                 // Pg
 #include "oanda/client/client.cpp"                       // Oanda::Client
+#include "oanda/mock/client/client.cpp"                  // Oanda::Mock::Client
 #include "oanda/quote/quote.cpp"                         // Oanda::Quote
 #include "oanda/types.cpp"                               // Oanda::t
 #include "types.cpp"                                     // Global::t
@@ -75,6 +77,7 @@ private:
       {"USD_JPY", 1.8e-2}, {"USD_SEK", 4.2e-3},
   };
 
+  Backtest backtest;
   DB::AccountStat db_account_stat;
   DB::Candle db_candle;
   DB::MarginRate db_margin_rate;
@@ -85,6 +88,7 @@ private:
   ForexAvailability market_availability;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
+  Oanda::Mock::Client mock_api_client;
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
@@ -169,6 +173,7 @@ private:
   void clear_stale_open_order();
   void close_position();
   void complete_filled_order(order_t *);
+  void ensure_market_is_open();
   void ensure_spread_limit();
   void ensure_symbol(const std::string);
   void fetch_and_persist_margin_rates(const std::list<std::string>);
@@ -193,6 +198,7 @@ private:
   void read_closed_positions();
   void read_price_action_stats();
   void read_quotes();
+  void reset_backtest();
   void reset_orders();
   void reset_position();
   void set_close_order_prices();
@@ -204,7 +210,7 @@ private:
   void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
   void toggle_is_trending(const order_t &);
-  void update_account_snapshot();
+  void update_account_snapshot(const bool);
   void update_margin_rate();
   void watch();
   void write_close_position();

@@ -30,6 +30,11 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
+  if (this->backtest.is_active &&
+      this->backtest.has_reached_end(this->current_epoch)) {
+    return true;
+  }
+
   this->exit_prices = build_exit_prices();
 
   if (current_spread() > spread_limit()) {
