@@ -1,38 +1,24 @@
-#ifndef DB__HISTORICAL_QUOTE_download
-#define DB__HISTORICAL_QUOTE_download
+#ifndef DB__HISTORICAL_QUOTE__BASE_download
+#define DB__HISTORICAL_QUOTE__BASE_download
 
-#include "deps.cpp"                 // nlohmann, json
-#include "historical_quote.h"       // DB::HistoricalQuote, quote_t
-#include "prepare_for_upsert.cpp"   // prepare_for_upsert
+#include "base.h"                   // DB::HistoricalQuote::Base, quote_t
+#include "deps.cpp"                 // json
 #include "print_download_intro.cpp" // print_download_intro
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf
 #include <string>                   // std::string
 #include <time.h>                   // time
 
-void DB::HistoricalQuote::download() {
+void DB::HistoricalQuote::Base::download() {
   const long int clock_start = time(nullptr);
   int quotes_n = 0;
 
   while (this->start_at < this->end_at) {
     print_download_intro();
 
-    std::string quotes_resp = this->api_client.fetch_historical_quotes({
-        .batch = this->batch,
-        .end_at = this->end_at,
-        .start_at = this->start_at,
-        .symbol = this->symbol,
-    });
+    json quotes_json = fetch_historical_quotes();
 
-    json quotes_json;
-
-    try {
-      quotes_json = json::parse(quotes_resp)["quotes"][this->symbol];
-    } catch (nlohmann::json_abi_v3_11_2::detail::parse_error &) {
-      std::cout << fmt.bold << fmt.red;
-      printf("❌ Error parsing json:\n\n%s\n\nRetrying.", quotes_resp.c_str());
-      std::cout << fmt.reset << std::endl;
-
+    if (quotes_json.empty()) {
       continue;
     }
 

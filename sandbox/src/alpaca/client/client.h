@@ -36,7 +36,7 @@ public:
   } config;
 
   struct fetch_historical_quotes_args_t {
-    int batch = 10000;
+    int batch_size = 10000;
     double end_at = 0;
     double start_at = 0;
     std::string symbol;

@@ -1,13 +1,13 @@
-#ifndef DB__HISTORICAL_QUOTE_print_download_intro
-#define DB__HISTORICAL_QUOTE_print_download_intro
+#ifndef DB__HISTORICAL_QUOTE__BASE_print_download_intro
+#define DB__HISTORICAL_QUOTE__BASE_print_download_intro
 
-#include "historical_quote.h" // DB::HistoricalQuote, fmt
+#include "base.h"             // DB::HistoricalQuote::Base, fmt
 #include "lib/utils/time.cpp" // :utils::time_
 #include <iostream>           // std::cout, std::endl
 #include <list>               // std::list
 #include <string>             // std::string
 
-void DB::HistoricalQuote::print_download_intro() {
+void DB::HistoricalQuote::Base::print_download_intro() {
   std::cout << fmt.bold << fmt.yellow << std::endl;
   printf("Importing historical quotes for ");
   std::cout << fmt.cyan << this->symbol;

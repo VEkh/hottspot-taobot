@@ -1,14 +1,14 @@
-#ifndef DB__HISTORICAL_QUOTE_prepare_for_upsert
-#define DB__HISTORICAL_QUOTE_prepare_for_upsert
+#ifndef DB__HISTORICAL_QUOTE__ALPACA_prepare_for_upsert
+#define DB__HISTORICAL_QUOTE__ALPACA_prepare_for_upsert
 
-#include "deps.cpp"           // json
-#include "historical_quote.h" // DB::HistoricalQuote, quote_t
-#include <iostream>           // std::cout, std::endl
-#include <stdio.h>            // printf
-#include <string>             // std::string
+#include "alpaca.h" // DB::HistoricalQuote::Alpaca, quote_t
+#include "deps.cpp" // json
+#include <iostream> // std::cout, std::endl
+#include <stdio.h>  // printf
+#include <string>   // std::string
 
-DB::HistoricalQuote::quote_t
-DB::HistoricalQuote::prepare_for_upsert(json &quote_json) {
+DB::HistoricalQuote::Alpaca::quote_t
+DB::HistoricalQuote::Alpaca::prepare_for_upsert(json &quote_json) {
   json wrapper;
 
   wrapper["quote"] = quote_json;

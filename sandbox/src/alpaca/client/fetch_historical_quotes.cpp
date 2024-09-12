@@ -30,7 +30,7 @@ std::string Alpaca::Client::fetch_historical_quotes(
                     {"end", ::utils::time_::date_string(args.end_at,
                                                         "%FT%H:%M:%SZ", "UTC")},
                     {"feed", "sip"},
-                    {"limit", std::to_string(args.batch)},
+                    {"limit", std::to_string(args.batch_size)},
                     {"sort", "asc"},
                     {"start", ::utils::time_::date_string(
                                   args.start_at, "%FT%H:%M:%SZ", "UTC")},

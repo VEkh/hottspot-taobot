@@ -1,18 +1,18 @@
-#include "db/candle/candle.cpp"                     // DB::Candle
-#include "db/historical_quote/historical_quote.cpp" // DB::HistoricalQuote
-#include "db/position/position.cpp"                 // DB::Position
-#include "db/price_action/price_action.cpp"         // DB::PriceAction
-#include "db/quote/quote.cpp"                       // DB::Quote
-#include "lib/formatted.cpp"                        // Formatted
-#include "lib/pg/pg.cpp"                            // Pg
-#include "lib/utils/io.cpp"                         // ::utils::io
-#include <iostream>                                 // std::cout, std::endl
-#include <list>                                     // std::list
-#include <map>                                      // std::map
-#include <sstream>                                  // std::ostringstream
-#include <stdexcept>                                // std::invalid_argument
-#include <stdio.h>                                  // printf
-#include <string>                                   // std::string, std::stoi
+#include "db/candle/candle.cpp"                  // DB::Candle
+#include "db/historical_quote/alpaca/alpaca.cpp" // DB::HistoricalQuote::Alpaca
+#include "db/position/position.cpp"              // DB::Position
+#include "db/price_action/price_action.cpp"      // DB::PriceAction
+#include "db/quote/quote.cpp"                    // DB::Quote
+#include "lib/formatted.cpp"                     // Formatted
+#include "lib/pg/pg.cpp"                         // Pg
+#include "lib/utils/io.cpp"                      // ::utils::io
+#include <iostream>                              // std::cout, std::endl
+#include <list>                                  // std::list
+#include <map>                                   // std::map
+#include <sstream>                               // std::ostringstream
+#include <stdexcept>                             // std::invalid_argument
+#include <stdio.h>                               // printf
+#include <string>                                // std::string, std::stoi
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -117,8 +117,8 @@ int main(int argc, char *argv[]) {
 
     flags = ::utils::map::merge(default_flags, flags);
 
-    DB::HistoricalQuote db_historical_quote({
-        .batch = flags["batch"],
+    DB::HistoricalQuote::Alpaca db_historical_quote({
+        .batch_size = flags["batch"],
         .conn = pg,
         .end_at = flags["end-at"],
         .start_at = flags["start-at"],
