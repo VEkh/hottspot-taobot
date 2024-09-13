@@ -1,25 +1,25 @@
 #ifndef ALPACA__TAO_BOT_H
 #define ALPACA__TAO_BOT_H
 
-#include "alpaca/client/client.cpp"                    // Alpaca::Client
-#include "alpaca/mock/client/client.cpp"               // Alpaca::Mock::Client
-#include "alpaca/quote/quote.cpp"                      // Alpaca::Quote
-#include "alpaca/types.cpp"                            // Alpaca::t
-#include "db/account_stat/account_stat.cpp"            // DB::AccountStat
-#include "db/candle/candle.cpp"                        // DB::Candle
-#include "db/position/position.cpp"                    // DB::Position
-#include "db/price_action/price_action.cpp"            // DB::PriceAction
-#include "db/utils/utils.cpp"                          // DB::Utils
-#include "deps.cpp"                                    // json
-#include "lib/backtest/backtest.cpp"                   // Backtest
-#include "lib/formatted.cpp"                           // Formatted
-#include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
-#include "lib/pg/pg.cpp"                               // Pg
-#include "types.cpp"                                   // Global::t
-#include <list>                                        // std::list
-#include <time.h>                                      // time
-#include <utility>                                     // std::pair
-#include <vector>                                      // std::vector
+#include "alpaca/client/client.cpp"              // Alpaca::Client
+#include "alpaca/mock/client/client.cpp"         // Alpaca::Mock::Client
+#include "alpaca/quote/quote.cpp"                // Alpaca::Quote
+#include "alpaca/types.cpp"                      // Alpaca::t
+#include "db/account_stat/account_stat.cpp"      // DB::AccountStat
+#include "db/candle/candle.cpp"                  // DB::Candle
+#include "db/position/position.cpp"              // DB::Position
+#include "db/price_action/price_action.cpp"      // DB::PriceAction
+#include "db/utils/utils.cpp"                    // DB::Utils
+#include "deps.cpp"                              // json
+#include "lib/backtest/backtest.cpp"             // Backtest
+#include "lib/formatted.cpp"                     // Formatted
+#include "lib/market_availability/nyse/nyse.cpp" // MarketAvailability::Nyse
+#include "lib/pg/pg.cpp"                         // Pg
+#include "types.cpp"                             // Global::t
+#include <list>                                  // std::list
+#include <time.h>                                // time
+#include <utility>                               // std::pair
+#include <vector>                                // std::vector
 
 namespace Alpaca {
 class TaoBot {
@@ -69,7 +69,7 @@ private:
   DB::PriceAction db_price_action;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  NyseAvailability market_availability;
+  MarketAvailability::Nyse market_availability;
   Pg pg;
   account_snapshot_t account_snapshot;
   bool should_stop_loss; // TODO: Decide

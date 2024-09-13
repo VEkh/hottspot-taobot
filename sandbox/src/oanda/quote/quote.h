@@ -1,16 +1,16 @@
 #ifndef OANDA__QUOTE_H
 #define OANDA__QUOTE_H
 
-#include "db/quote/quote.h"                              // DB::Quote
-#include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
-#include "lib/formatted.cpp"                             // Formatted
-#include "lib/pg/pg.cpp"                                 // Pg
-#include "oanda/client/client.cpp"                       // Oanda::Client
-#include "oanda/types.cpp"                               // Oanda::t
-#include "types.cpp"                                     // Global::t
-#include <list>                                          // std::list
-#include <map>                                           // std::map
-#include <string>                                        // std::string
+#include "db/quote/quote.h"                        // DB::Quote
+#include "lib/formatted.cpp"                       // Formatted
+#include "lib/market_availability/forex/forex.cpp" // MarketAvailability::Forex
+#include "lib/pg/pg.cpp"                           // Pg
+#include "oanda/client/client.cpp"                 // Oanda::Client
+#include "oanda/types.cpp"                         // Oanda::t
+#include "types.cpp"                               // Global::t
+#include <list>                                    // std::list
+#include <map>                                     // std::map
+#include <string>                                  // std::string
 
 namespace Oanda {
 class Quote {
@@ -26,7 +26,7 @@ public:
   void watch(const std::list<std::string> &);
 
 private:
-  ForexAvailability market_availability;
+  MarketAvailability::Forex market_availability;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   Pg pg;

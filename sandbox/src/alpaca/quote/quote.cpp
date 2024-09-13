@@ -1,14 +1,14 @@
 #ifndef ALPACA__QUOTE
 #define ALPACA__QUOTE
 
-#include "quote.h"                                     // Alpaca::Quote
-#include "alpaca/client/client.cpp"                    // Alpaca::Client
-#include "db/quote/quote.cpp"                          // DB::Quote
-#include "db/streamed_quote/streamed_quote.cpp"        // DB::StreamedQuote
-#include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
-#include "lib/pg/pg.cpp"                               // Pg
-#include <map>                                         // std::map
-#include <string>                                      // std::string
+#include "quote.h"                               // Alpaca::Quote
+#include "alpaca/client/client.cpp"              // Alpaca::Client
+#include "db/quote/quote.cpp"                    // DB::Quote
+#include "db/streamed_quote/streamed_quote.cpp"  // DB::StreamedQuote
+#include "lib/market_availability/nyse/nyse.cpp" // MarketAvailability::Nyse
+#include "lib/pg/pg.cpp"                         // Pg
+#include <map>                                   // std::map
+#include <string>                                // std::string
 
 #include "stream.cpp"
 #include "watch.cpp"
@@ -19,7 +19,7 @@ Alpaca::Quote::Quote(Pg p, std::map<std::string, std::string> flags) {
 
   this->db_quote = DB::Quote(this->pg);
   this->db_streamed_quote = DB::StreamedQuote(this->pg);
-  this->market_availability = NyseAvailability(this->pg);
+  this->market_availability = MarketAvailability::Nyse(this->pg);
 }
 
 Alpaca::Quote::Quote(std::map<std::string, std::string> flags) {

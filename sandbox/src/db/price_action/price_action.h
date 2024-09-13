@@ -1,14 +1,14 @@
 #ifndef DB__PRICE_ACTION_H
 #define DB__PRICE_ACTION_H
 
-#include "db/quote/quote.cpp"                          // DB::Quote
-#include "db/utils/utils.cpp"                          // DB::Utils
-#include "lib/formatted.cpp"                           // Formatted
-#include "lib/nyse_availability/nyse_availability.cpp" // NyseAvailability
-#include "lib/pg/pg.cpp"                               // Pg
-#include "types.cpp"                                   // Global::t
-#include <string>                                      // std::string
-#include <time.h>                                      // time
+#include "db/quote/quote.cpp"                    // DB::Quote
+#include "db/utils/utils.cpp"                    // DB::Utils
+#include "lib/formatted.cpp"                     // Formatted
+#include "lib/market_availability/nyse/nyse.cpp" // MarketAvailability::Nyse
+#include "lib/pg/pg.cpp"                         // Pg
+#include "types.cpp"                             // Global::t
+#include <string>                                // std::string
+#include <time.h>                                // time
 
 namespace DB {
 class PriceAction {
@@ -62,7 +62,7 @@ private:
   DB::Quote db_quote;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
-  NyseAvailability market_availability;
+  MarketAvailability::Nyse market_availability;
   Pg conn;
   bool debug;
   build_state_t build_state;

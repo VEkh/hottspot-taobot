@@ -1,12 +1,12 @@
-#ifndef FOREX_AVAILABILITY_set_market_close_epoch
-#define FOREX_AVAILABILITY_set_market_close_epoch
+#ifndef MARKET_AVAILABILITY__FOREX_set_market_close_epoch
+#define MARKET_AVAILABILITY__FOREX_set_market_close_epoch
 
-#include "forex_availability.h"      // ForexAvailability
+#include "forex.h"                   // MarketAvailability::Forex
 #include "get_market_open_epoch.cpp" // get_market_open_epoch
 #include "lib/utils/time.cpp"        // ::utils::time_
 #include <string>                    // std::string
 
-void ForexAvailability::set_market_close_epoch(const double epoch) {
+void MarketAvailability::Forex::set_market_close_epoch(const double epoch) {
   const double day_of_week = ::utils::time_::day_of_week(epoch);
 
   double close_epoch;

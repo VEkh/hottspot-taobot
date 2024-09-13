@@ -1,26 +1,26 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
-#include "build_performance.cpp"            // build_performance
-#include "db/account_stat/account_stat.cpp" // DB::AccountStat
-#include "db/candle/candle.cpp"             // DB::Candle
-#include "db/margin_rate/margin_rate.cpp"   // DB::MarginRate
-#include "db/position/position.cpp"         // DB::Position
-#include "db/quote/quote.cpp"               // DB::Quote
-#include "db/utils/utils.cpp"               // DB::Utils
-#include "ensure_market_is_open.cpp"        // ensure_market_is_open
-#include "ensure_spread_limit.cpp"          // ensure_spread_limit
-#include "ensure_symbol.cpp"                // ensure_symbol
-#include "initialize_current_trend.cpp"     // initialize_current_trend
-#include "lib/backtest/backtest.cpp"        // Backtest
-#include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
-#include "lib/formatted.cpp"           // Formatted::error_message
-#include "lib/pg/pg.cpp"               // Pg
-#include "lib/utils/boolean.cpp"       // ::utils::boolean
-#include "lib/utils/string.cpp"        // ::utils::string
-#include "oanda/quote/quote.cpp"       // Oanda::Quote
-#include "read_closed_positions.cpp"   // read_closed_positions
-#include "read_price_action_stats.cpp" // read_price_action_stats
+#include "build_performance.cpp"                   // build_performance
+#include "db/account_stat/account_stat.cpp"        // DB::AccountStat
+#include "db/candle/candle.cpp"                    // DB::Candle
+#include "db/margin_rate/margin_rate.cpp"          // DB::MarginRate
+#include "db/position/position.cpp"                // DB::Position
+#include "db/quote/quote.cpp"                      // DB::Quote
+#include "db/utils/utils.cpp"                      // DB::Utils
+#include "ensure_market_is_open.cpp"               // ensure_market_is_open
+#include "ensure_spread_limit.cpp"                 // ensure_spread_limit
+#include "ensure_symbol.cpp"                       // ensure_symbol
+#include "initialize_current_trend.cpp"            // initialize_current_trend
+#include "lib/backtest/backtest.cpp"               // Backtest
+#include "lib/formatted.cpp"                       // Formatted::error_message
+#include "lib/market_availability/forex/forex.cpp" // MarketAvailability::Forex
+#include "lib/pg/pg.cpp"                           // Pg
+#include "lib/utils/boolean.cpp"                   // ::utils::boolean
+#include "lib/utils/string.cpp"                    // ::utils::string
+#include "oanda/quote/quote.cpp"                   // Oanda::Quote
+#include "read_closed_positions.cpp"               // read_closed_positions
+#include "read_price_action_stats.cpp"             // read_price_action_stats
 #include "tao_bot.h"                   // Oanda::TaoBot, quantity, symbol
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <locale.h>                    // std::locale
@@ -49,7 +49,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->db_position = DB::Position(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->db_utils = DB::Utils(this->pg);
-  this->market_availability = ForexAvailability(this->pg);
+  this->market_availability = MarketAvailability::Forex(this->pg);
   this->quoter = Oanda::Quote(this->pg, this->flags);
 
   this->db_utils.set_param({"force_parallel_mode", "on"});

@@ -1,11 +1,11 @@
-#ifndef FOREX_AVAILABILITY_get_market_open_epoch
-#define FOREX_AVAILABILITY_get_market_open_epoch
+#ifndef MARKET_AVAILABILITY__FOREX_get_market_open_epoch
+#define MARKET_AVAILABILITY__FOREX_get_market_open_epoch
 
-#include "forex_availability.h" // ForexAvailability
-#include "lib/utils/time.cpp"   // ::utils::time_
-#include <string>               // std::string
+#include "forex.h"            // MarketAvailability::Forex
+#include "lib/utils/time.cpp" // ::utils::time_
+#include <string>             // std::string
 
-double ForexAvailability::get_market_open_epoch(const double epoch) {
+double MarketAvailability::Forex::get_market_open_epoch(const double epoch) {
   const std::string open_iso_date =
       ::utils::time_::date_string(epoch, "%F", "America/Chicago");
 

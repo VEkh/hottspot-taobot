@@ -1,28 +1,28 @@
 #ifndef OANDA__TAO_BOT_H
 #define OANDA__TAO_BOT_H
 
-#include "db/account_stat/account_stat.h"                // DB::AccountStat
-#include "db/candle/candle.cpp"                          // DB::Candle
-#include "db/margin_rate/margin_rate.h"                  // DB::MarginRate
-#include "db/position/position.cpp"                      // DB::Position
-#include "db/price_action/price_action.cpp"              // DB::PriceAction
-#include "db/quote/quote.h"                              // DB::Quote
-#include "db/utils/utils.cpp"                            // DB::Utils
-#include "deps.cpp"                                      // json
-#include "lib/backtest/backtest.cpp"                     // Backtest
-#include "lib/forex_availability/forex_availability.cpp" // ForexAvailability
-#include "lib/formatted.cpp"                             // Formatted
-#include "lib/pg/pg.cpp"                                 // Pg
-#include "oanda/client/client.cpp"                       // Oanda::Client
-#include "oanda/mock/client/client.cpp"                  // Oanda::Mock::Client
-#include "oanda/quote/quote.cpp"                         // Oanda::Quote
-#include "oanda/types.cpp"                               // Oanda::t
-#include "types.cpp"                                     // Global::t
-#include <list>                                          // std::list
-#include <map>                                           // std::map
-#include <string>                                        // std::string
-#include <time.h>                                        // time_t
-#include <vector>                                        // std::map
+#include "db/account_stat/account_stat.h"          // DB::AccountStat
+#include "db/candle/candle.cpp"                    // DB::Candle
+#include "db/margin_rate/margin_rate.h"            // DB::MarginRate
+#include "db/position/position.cpp"                // DB::Position
+#include "db/price_action/price_action.cpp"        // DB::PriceAction
+#include "db/quote/quote.h"                        // DB::Quote
+#include "db/utils/utils.cpp"                      // DB::Utils
+#include "deps.cpp"                                // json
+#include "lib/backtest/backtest.cpp"               // Backtest
+#include "lib/formatted.cpp"                       // Formatted
+#include "lib/market_availability/forex/forex.cpp" // MarketAvailability::Forex
+#include "lib/pg/pg.cpp"                           // Pg
+#include "oanda/client/client.cpp"                 // Oanda::Client
+#include "oanda/mock/client/client.cpp"            // Oanda::Mock::Client
+#include "oanda/quote/quote.cpp"                   // Oanda::Quote
+#include "oanda/types.cpp"                         // Oanda::t
+#include "types.cpp"                               // Global::t
+#include <list>                                    // std::list
+#include <map>                                     // std::map
+#include <string>                                  // std::string
+#include <time.h>                                  // time_t
+#include <vector>                                  // std::map
 
 namespace Oanda {
 class TaoBot {
@@ -85,7 +85,7 @@ private:
   DB::PriceAction db_price_action;
   DB::Quote db_quote;
   DB::Utils db_utils;
-  ForexAvailability market_availability;
+  MarketAvailability::Forex market_availability;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Oanda::Client api_client;
   Oanda::Mock::Client mock_api_client;
