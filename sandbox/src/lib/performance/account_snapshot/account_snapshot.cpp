@@ -1,13 +1,13 @@
-#ifndef PERFORMANCE__LOGGER
-#define PERFORMANCE__LOGGER
+#ifndef PERFORMANCE__ACCOUNT_SNAPSHOT
+#define PERFORMANCE__ACCOUNT_SNAPSHOT
 
-#include "logger.h"
-#include "log_daily_snapshots.cpp"
+#include "account_snapshot.h"
+#include "log_daily.cpp"
 
 #include "validate.cpp" // validate
 #include <locale.h>     // std::locale
 
-Performance::Logger::Logger(const init_args_t args) {
+Performance::AccountSnapshot::AccountSnapshot(const init_args_t args) {
   std::locale::global(std::locale("en_US.UTF-8"));
 
   this->api_key = args.api_key;

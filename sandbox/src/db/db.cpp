@@ -6,16 +6,16 @@
 #include "db/price_action/price_action.cpp"      // DB::PriceAction
 #include "db/quote/quote.cpp"                    // DB::Quote
 #include "lib/formatted.cpp"                     // Formatted
-#include "lib/performance/logger/logger.cpp"     // Performance::Logger
-#include "lib/pg/pg.cpp"                         // Pg
-#include "lib/utils/io.cpp"                      // ::utils::io
-#include <iostream>                              // std::cout, std::endl
-#include <list>                                  // std::list
-#include <map>                                   // std::map
-#include <sstream>                               // std::ostringstream
-#include <stdexcept>                             // std::invalid_argument
-#include <stdio.h>                               // printf
-#include <string>                                // std::string, std::stoi
+#include "lib/performance/account_snapshot/account_snapshot.cpp" // Performance::AccountSnapshot
+#include "lib/pg/pg.cpp"                                         // Pg
+#include "lib/utils/io.cpp"                                      // ::utils::io
+#include <iostream>  // std::cout, std::endl
+#include <list>      // std::list
+#include <map>       // std::map
+#include <sstream>   // std::ostringstream
+#include <stdexcept> // std::invalid_argument
+#include <stdio.h>   // printf
+#include <string>    // std::string, std::stoi
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -161,7 +161,7 @@ int main(int argc, char *argv[]) {
     Pg pg(flags);
     pg.connect();
 
-    Performance::Logger logger({
+    Performance::AccountSnapshot account_snapshot({
         .api_key = flags["api-key"],
         .api_name = flags["api"],
         .conn = pg,
@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
         .start_at = flags["start-at"],
     });
 
-    logger.log_daily_snapshots();
+    account_snapshot.log_daily();
 
     pg.disconnect();
 

@@ -1,17 +1,16 @@
-#include "client/client.cpp"                 // Oanda::Client
-#include "db/quote/quote.cpp"                // DB::Quote
-#include "lib/formatted.cpp"                 // Formatted
-#include "lib/performance/logger/logger.cpp" // Performance::Logger
-#include "lib/pg/pg.cpp"                     // Pg
-#include "lib/utils/io.cpp"                  // ::utils::io
-#include "quote/quote.cpp"                   // Oanda::Quote
-#include "tao_bot/tao_bot.cpp"               // Oanda::TaoBot
-#include <iostream>                          // std::cout, std::endl
-#include <list>                              // std::list
-#include <map>                               // std::map
-#include <sstream>                           // std::ostringstream
-#include <stdio.h>                           // printf
-#include <string>                            // std::string
+#include "client/client.cpp"   // Oanda::Client
+#include "db/quote/quote.cpp"  // DB::Quote
+#include "lib/formatted.cpp"   // Formatted
+#include "lib/pg/pg.cpp"       // Pg
+#include "lib/utils/io.cpp"    // ::utils::io
+#include "quote/quote.cpp"     // Oanda::Quote
+#include "tao_bot/tao_bot.cpp" // Oanda::TaoBot
+#include <iostream>            // std::cout, std::endl
+#include <list>                // std::list
+#include <map>                 // std::map
+#include <sstream>             // std::ostringstream
+#include <stdio.h>             // printf
+#include <string>              // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {

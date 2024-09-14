@@ -1,5 +1,5 @@
-#ifndef PERFORMANCE__LOGGER_H
-#define PERFORMANCE__LOGGER_H
+#ifndef PERFORMANCE__ACCOUNT_SNAPSHOT_H
+#define PERFORMANCE__ACCOUNT_SNAPSHOT_H
 
 #include "db/account_stat/account_stat.h" // DB::AccountStat
 #include "lib/pg/pg.cpp"                  // Pg
@@ -9,7 +9,7 @@
 #include <time.h>                         // time
 
 namespace Performance {
-class Logger {
+class AccountSnapshot {
 public:
   struct init_args_t {
     std::string api_key;
@@ -20,10 +20,10 @@ public:
     std::string start_at;
   };
 
-  Logger(){};
-  Logger(const init_args_t);
+  AccountSnapshot(){};
+  AccountSnapshot(const init_args_t);
 
-  void log_daily_snapshots();
+  void log_daily();
 
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;

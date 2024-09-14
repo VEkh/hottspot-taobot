@@ -1,14 +1,14 @@
-#ifndef PERFORMANCE__LOGGER_log_daily_snapshots
-#define PERFORMANCE__LOGGER_log_daily_snapshots
+#ifndef PERFORMANCE__ACCOUNT_SNAPSHOT_log_daily
+#define PERFORMANCE__ACCOUNT_SNAPSHOT_log_daily
 
-#include "deps.cpp"              // json
+#include "account_snapshot.h" // Performance::AccountSnapshot, account_snapshot_t, fmt
+#include "deps.cpp"           // json
 #include "lib/formatted.cpp"     // Formatted
 #include "lib/utils/float.cpp"   // ::utils::float_
 #include "lib/utils/integer.cpp" // ::utils::integer_
 #include "lib/utils/io.cpp"      // ::utils::io
 #include "lib/utils/map.cpp"     // ::utils::map
 #include "lib/utils/time.cpp"    // ::utils::time_
-#include "logger.h"              // Performance::Logger, account_snapshot_t, fmt
 #include <iostream>              // std::cout, std::endl
 #include <list>                  // std::list
 #include <map>                   // std::map
@@ -17,25 +17,19 @@
 #include <string>                // std::stod, std::stoi, std::string
 #include <time.h>                // time
 
-void Performance::Logger::log_daily_snapshots() {
-  double daily_dollars = 0.0;
-  double daily_ratio = 0.0;
-  int day_count = 0;
-  int loss_count = 0;
-  int win_count = 0;
-
+void Performance::AccountSnapshot::log_daily() {
   const json config_json =
       ::utils::io::load_config(this->api_name, this->api_key);
 
   const json api_key_json = config_json[this->api_key];
-
-  const std::string api_key_id = api_key_json["id"];
 
   std::cout << fmt.bold << fmt.cyan;
   std::cout << "\nEnvironment: " << fmt.yellow << api_key.c_str();
   std::cout << fmt.cyan << std::endl << std::endl;
   puts(api_key_json.dump(2).c_str());
   std::cout << fmt.reset;
+
+  const std::string api_key_id = api_key_json["id"];
 
   std::list<account_snapshot_t> snapshots =
       this->db_account_stat.get_daily_snapshots({
@@ -51,6 +45,12 @@ void Performance::Logger::log_daily_snapshots() {
     std::cout << fmt.reset << std::endl;
     return;
   }
+
+  double daily_dollars = 0.0;
+  double daily_ratio = 0.0;
+  int day_count = 0;
+  int loss_count = 0;
+  int win_count = 0;
 
   for (std::list<account_snapshot_t>::iterator it = snapshots.begin();
        it != snapshots.end(); it++, day_count++) {
