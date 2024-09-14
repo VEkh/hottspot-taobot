@@ -77,21 +77,6 @@ int main(int argc, char *argv[]) {
     exit(0);
   }
 
-  if (command == "log_snapshots") {
-    Oanda::Client api_client(flags);
-
-    Pg pg(flags);
-    pg.connect();
-
-    Performance::Logger logger(pg);
-
-    logger.log_daily_snapshots(flags);
-
-    pg.disconnect();
-
-    exit(0);
-  }
-
   if (command == "quotes_watch") {
     if (upcased_args.empty()) {
       std::string message = Formatted::error_message(

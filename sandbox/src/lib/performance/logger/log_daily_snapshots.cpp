@@ -8,41 +8,26 @@
 #include "lib/utils/io.cpp"      // ::utils::io
 #include "lib/utils/map.cpp"     // ::utils::map
 #include "lib/utils/time.cpp"    // ::utils::time_
-#include "logger.h"              // Performance::Logger, account_snapshot_t
+#include "logger.h"              // Performance::Logger, account_snapshot_t, fmt
 #include <iostream>              // std::cout, std::endl
 #include <list>                  // std::list
-#include <locale.h>              // std::locale
 #include <map>                   // std::map
 #include <math.h>                // abs
 #include <stdio.h>               // printf
 #include <string>                // std::stod, std::stoi, std::string
 #include <time.h>                // time
 
-void Performance::Logger::log_daily_snapshots(
-    std::map<std::string, std::string> args) {
-  std::map<std::string, std::string> default_flags = {
-      {"debug", "0"},
-      {"project", "alpaca"},
-  };
-
-  std::map<std::string, std::string> flags =
-      ::utils::map::merge(default_flags, args);
-
-  const bool debug = ::utils::io::flag_to_bool("debug", flags["debug"]);
-  const double start_epoch = time(nullptr);
-  const std::string api_key = flags["api-key"];
-
+void Performance::Logger::log_daily_snapshots() {
   double daily_dollars = 0.0;
   double daily_ratio = 0.0;
   int day_count = 0;
   int loss_count = 0;
   int win_count = 0;
 
-  std::locale::global(std::locale("en_US.UTF-8"));
-  Formatted::fmt_stream_t fmt = Formatted::stream();
+  const json config_json =
+      ::utils::io::load_config(this->api_name, this->api_key);
 
-  json config_json = ::utils::io::load_config(flags["project"], api_key);
-  json api_key_json = config_json[api_key];
+  const json api_key_json = config_json[this->api_key];
 
   const std::string api_key_id = api_key_json["id"];
 
@@ -55,9 +40,9 @@ void Performance::Logger::log_daily_snapshots(
   std::list<account_snapshot_t> snapshots =
       this->db_account_stat.get_daily_snapshots({
           .api_key_id = api_key_id,
-          .debug = debug,
-          .end_at = flags["end-at"],
-          .start_at = flags["start-at"],
+          .debug = this->debug,
+          .end_at = this->end_at,
+          .start_at = this->start_at,
       });
 
   if (snapshots.empty()) {
@@ -148,11 +133,11 @@ void Performance::Logger::log_daily_snapshots(
 
   std::cout << std::endl;
 
-  const double end_epoch = time(nullptr);
+  const double duration = time(nullptr) - this->timer_start;
 
   std::cout << fmt.bold << fmt.cyan;
   printf("⌚ Finished in %s\n",
-         ::utils::integer_::seconds_to_clock(end_epoch - start_epoch).c_str());
+         ::utils::integer_::seconds_to_clock(duration).c_str());
   std::cout << fmt.reset << std::endl;
 }
 

@@ -6,6 +6,7 @@
 #include "db/price_action/price_action.cpp"      // DB::PriceAction
 #include "db/quote/quote.cpp"                    // DB::Quote
 #include "lib/formatted.cpp"                     // Formatted
+#include "lib/performance/logger/logger.cpp"     // Performance::Logger
 #include "lib/pg/pg.cpp"                         // Pg
 #include "lib/utils/io.cpp"                      // ::utils::io
 #include <iostream>                              // std::cout, std::endl
@@ -23,6 +24,8 @@ void print_usage() {
       {"import_historical_quotes               <SYMBOL> --api=<API_NAME> "
        "<OPTS>",
        "Import symbol's historical quotes"},
+      {"log_snapshots                          --api=<API_NAME> <FLAGS>",
+       "Print daily account performance for the given api key"},
       {"net_return                             <SYMBOL> <OPTS>",
        "Compute symbol's net return"},
       {"price_action                           <SYMBOL> <OPTS>",
@@ -148,6 +151,26 @@ int main(int argc, char *argv[]) {
 
       db_historical_quote.download();
     }
+
+    pg.disconnect();
+
+    exit(0);
+  }
+
+  if (command == "log_snapshots") {
+    Pg pg(flags);
+    pg.connect();
+
+    Performance::Logger logger({
+        .api_key = flags["api-key"],
+        .api_name = flags["api"],
+        .conn = pg,
+        .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
+        .end_at = flags["end-at"],
+        .start_at = flags["start-at"],
+    });
+
+    logger.log_daily_snapshots();
 
     pg.disconnect();
 

@@ -1,19 +1,18 @@
-#include "client/client.cpp"                 // Alpaca::Client
-#include "db/quote/quote.cpp"                // DB::Quote
-#include "lib/formatted.cpp"                 // Formatted
-#include "lib/performance/logger/logger.cpp" // Performance::Logger
-#include "lib/pg/pg.cpp"                     // Pg
-#include "lib/utils/io.cpp"                  // utils::io
-#include "performance/logger/logger.cpp"     // Alpaca::Performance::Logger
-#include "quote/quote.cpp"                   // Alpaca::Quote
-#include "tao_bot/tao_bot.cpp"               // Alpaca::TaoBot
-#include <iostream>                          // std::cout, std::endl
-#include <list>                              // std::list
-#include <map>                               // std::map
-#include <sstream>                           // std::ostringstream
-#include <stdexcept>                         // std::invalid_argument
-#include <stdio.h>                           // printf
-#include <string>                            // std::string
+#include "client/client.cpp"             // Alpaca::Client
+#include "db/quote/quote.cpp"            // DB::Quote
+#include "lib/formatted.cpp"             // Formatted
+#include "lib/pg/pg.cpp"                 // Pg
+#include "lib/utils/io.cpp"              // utils::io
+#include "performance/logger/logger.cpp" // Alpaca::Performance::Logger
+#include "quote/quote.cpp"               // Alpaca::Quote
+#include "tao_bot/tao_bot.cpp"           // Alpaca::TaoBot
+#include <iostream>                      // std::cout, std::endl
+#include <list>                          // std::list
+#include <map>                           // std::map
+#include <sstream>                       // std::ostringstream
+#include <stdexcept>                     // std::invalid_argument
+#include <stdio.h>                       // printf
+#include <string>                        // std::string
 
 void print_usage() {
   std::map<std::string, const char *> commands = {
@@ -25,8 +24,6 @@ void print_usage() {
        "Get quote for the given symbol"},
       {"log_benchmark                                 ",
        "Print cumulative return and compare to benchmark indexes"},
-      {"log_snapshots <FLAGS>                         ",
-       "Print daily account performance for the given api key"},
       {"quotes_stream <SYMBOLS>                       ",
        "Stream quotes for given symbol(s)"},
       {"quotes_watch <SYMBOLS>                        ",
@@ -133,19 +130,6 @@ int main(int argc, char *argv[]) {
     Alpaca::Performance::Logger logger;
 
     logger.log_benchmark();
-
-    exit(0);
-  }
-
-  if (command == "log_snapshots") {
-    Pg pg(flags);
-    pg.connect();
-
-    Performance::Logger logger(pg);
-
-    logger.log_daily_snapshots(flags);
-
-    pg.disconnect();
 
     exit(0);
   }
