@@ -4,11 +4,20 @@
 set -e
 shopt -s extglob
 
-app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-project=$(dirname "${0}" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
-# ASCII, ascii_print, extract_flags, read_env_symbols, to_lower, to_upper
+# ASCII
+# ascii_print
+# extract_flags
+# read_env_symbols
+# to_lower
+# to_upper
+# validate_api_scope
 source "${app_dir}/bin/utils"
+
+validate_api_scope "${api_name}"
 
 flags=($(extract_flags "${@}"))
 declare -A flag_map
@@ -16,23 +25,15 @@ extract_flags_to_map flag_map "${flags[@]}"
 
 api_key="${flag_map["api-key"]}"
 
-if [[ "${project}" = "bin" ]]; then
-  cmd=$(basename "${0}")
-
-  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
-
-  exit 1;
-fi
-
 ascii_print "$(date)\n" "cyan"
 
 function symbol_start() {
-  if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
+  if [[ "${api_name}" = "alpaca" && -z "${api_key}" ]]; then
     ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
     exit 1
   fi
 
-  log_dir="${app_dir}/log/${project}/${api_key}"
+  log_dir="${app_dir}/log/${api_name}/${api_key}"
   symbol=$(to_upper "$1")
 
   mkdir -p "${log_dir}"
@@ -42,7 +43,7 @@ function symbol_start() {
   ascii_print "Starting TaoBot for ${ASCII["normal"]}${ASCII["cyan"]}${symbol}" "yellow"
   echo "" > "${log_file}"
 
-  "${app_dir}/build/${project}" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
+  "${app_dir}/build/${api_name}" tao_bot "${symbol}" "${flags[@]}" >> "$log_file" 2>&1 &
 }
 
 case $1 in
@@ -55,7 +56,7 @@ case $1 in
     ;;
 
   *)
-    symbols=($(read_env_symbols "${api_key}" "${project}"))
+    symbols=($(read_env_symbols "${api_key}" "${api_name}"))
 
     if [[ ("${#symbols[@]}" == 0) ]]; then
       ascii_print "You must provide the \"${api_key}\" env with \`env_symbols\`" "red" >&2

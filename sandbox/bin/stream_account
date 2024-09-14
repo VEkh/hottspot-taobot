@@ -4,8 +4,9 @@
 set -e
 shopt -s extglob
 
-app_dir=$(realpath "$(dirname "$0")/../../")
-project=$(dirname "$0" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
 # ASCII
 # ascii_print
@@ -13,16 +14,12 @@ project=$(dirname "$0" | xargs basename)
 # is_market_open
 # to_lower
 # to_upper
+# validate_api_scope
+
 # shellcheck disable=1090,1091
 source "${app_dir}/bin/utils"
 
-if [[ $project = "bin" ]]; then
-  cmd=$(basename "$0")
-
-  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
-
-  exit 1;
-fi
+validate_api_scope "${api_name}"
 
 # shellcheck disable=2207
 flags=($(extract_flags "${@}"))
@@ -44,7 +41,7 @@ function get_status() {
     ps aux |
     grep "[s]tream_account" |
     grep -vE "heartbeat|restart|status|stop" |
-    grep "${project}" |
+    grep "${api_name}" |
     grep --color "${api_key}" || true
   )
 
@@ -74,18 +71,18 @@ function start_if_stopped() {
 }
 
 function start_stream() {
-  if [[ $(is_market_open "${project}") != "true" ]]; then
+  if [[ $(is_market_open "${api_name}") != "true" ]]; then
     exit 1
   fi
 
-  log_dir="${app_dir}/log/${project}/${api_key}"
+  log_dir="${app_dir}/log/${api_name}/${api_key}"
   log_file="${log_dir}/account_stream.log"
 
   mkdir -p "${log_dir}"
 
   ascii_print "Starting ${ASCII["normal"]}${ASCII["cyan"]}${api_key} ${ASCII["bold"]}${ASCII["yellow"]}Account Stream" "yellow"
 
-  "${app_dir}/build/${project}" stream_account "${@}" > "${log_file}" 2>&1 &
+  "${app_dir}/build/${api_name}" stream_account "${@}" > "${log_file}" 2>&1 &
 }
 
 function stop_stream() {
@@ -124,7 +121,7 @@ case $1 in
     ;;
 
   *)
-    ascii_print "${ASCII["underline"]}$(to_upper "${project}") ACCOUNT STREAM\n" "yellow"
+    ascii_print "${ASCII["underline"]}$(to_upper "${api_name}") ACCOUNT STREAM\n" "yellow"
     ascii_print "Description: Stream the brokerage account info.\n" "cyan"
     ascii_print "Usage: stream_account [COMMAND]\n" "yellow"
     ascii_print "Commands:" "yellow"

@@ -1,0 +1,136 @@
+#!/bin/bash
+
+set -e
+
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
+
+# ASCII
+# ascii_print
+# active_api_keys
+# build_db_uri
+# extract_flags_to_map
+# to_title
+# to_upper
+# validate_api_scope
+
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils"
+
+validate_api_scope "${api_name}"
+
+# shellcheck disable=1090,1091
+source "${app_dir}/db/utils" # build_db_uri
+
+declare -A flags=(["reset-db"]="1")
+extract_flags_to_map flags "${@}"
+
+function reset_db() {
+  backtest_db_name="hottspot_capital_backtest"
+  master_db_env="production"
+  master_db_name="hottspot_capital_${master_db_env}"
+  master_db_uri=$(build_db_uri "${master_db_env}")
+
+
+  if psql -lqt | cut -d \| -f 1 | grep -qw "${backtest_db_name}"; then
+    ascii_print "🐘 Dropping Old ${ASCII["red"]}Backtest ${ASCII["yellow"]}Database" "yellow"
+
+    dropdb -f "${backtest_db_name}"
+  fi
+
+  ascii_print "🐘 Re-Creating Backtest Database From ${ASCII["red"]}$(to_title "${master_db_env}")" "yellow"
+
+  psql "${master_db_uri}" -c "create database ${backtest_db_name} template ${master_db_name}"
+}
+
+function restart_all() {
+  stop_all
+  start_all
+}
+
+function restart_single() {
+  stop_single "${@}"
+  start_single "${@}"
+}
+
+function start_all() {
+  # shellcheck disable=2207
+  api_keys=($(active_api_keys "${api_name}" "backtest"))
+
+  if (( "${#api_keys[@]}" == 0 )); then
+    ascii_print "❗ There are no configured backtests" "red" >&2
+
+    exit 1
+  fi
+
+  (( "${flags["reset-db"]}" == 1 )) && reset_db
+
+  for api_key in "${api_keys[@]}"; do
+    start_single "--api-key=${api_key}"
+  done
+}
+
+function start_single() {
+  "${app_dir}/db/backtest" truncate "${@}" --api="${api_name}" --env=backtest &&
+  "${app_dir}/bin/${api_name}/restart" "${@}" --env=backtest
+}
+
+function stop_all() {
+  # shellcheck disable=2207
+  api_keys=($(active_api_keys "${api_name}" "backtest"))
+
+  if (( "${#api_keys[@]}" == 0 )); then
+    ascii_print "❗ There are no configured backtests" "red" >&2
+
+    exit 1
+  fi
+
+  for api_key in "${api_keys[@]}"; do
+    stop_single "--api-key=${api_key}"
+  done
+}
+
+function stop_single() {
+  "${app_dir}/bin/${api_name}/stop" "${@}"
+}
+
+ascii_print "\n$(date)\n" "cyan"
+
+case "${1}" in
+  reset_db)
+    reset_db
+    ;;
+  restart)
+    if [[ -z "${flags["api-key"]}" ]]; then
+      restart_all
+    else
+      restart_single "${@:2}"
+    fi
+    ;;
+  start)
+    if [[ -z "${flags["api-key"]}" ]]; then
+      start_all
+    else
+      start_single "${@:2}"
+    fi
+    ;;
+  stop)
+    if [[ -z "${2}" ]]; then
+      stop_all
+    else
+      stop_single "${@:2}"
+    fi
+    ;;
+  *)
+    ascii_print "⌛ $(to_upper "${api_name}") BACKTESTING\n" "underline" "yellow"
+    ascii_print "Description: Control backtest operations\n" "cyan"
+    ascii_print "Usage: backtest [COMMAND] [ARGS]" "yellow"
+    ascii_print "  reset_db                       Drop backtest database and re-create it from master." "yellow"
+    ascii_print "  restart (--api-key=<API_KEY>)  Restart all (single) backtest(s)." "yellow"
+    ascii_print "  start (--api-key=<API_KEY>)    Start all (single) backtest(s)." "yellow"
+    ascii_print "  stop  (--api-key=<API_KEY>)    Stop all (single) currently running backtest(s)." "yellow"
+    ;;
+esac
+
+printf "%b" "${ASCII["reset"]}"

@@ -127,10 +127,6 @@ void Backtest::load_config() {
     end_epoch = last_quotes.front().timestamp;
   }
 
-  if (backtest_json.contains("clock_sync")) {
-    this->config.clock_sync = (bool)backtest_json["clock_sync"];
-  }
-
   if (backtest_json.contains("force_exec_slow_queries")) {
     this->config.force_exec_slow_queries =
         (bool)backtest_json["force_exec_slow_queries"];
@@ -141,7 +137,6 @@ void Backtest::load_config() {
       .account_starting_equity = backtest_json["account_starting_equity"],
       .api_key = api_key,
       .api_key_id = api_key_json["id"],
-      .clock_sync = this->config.clock_sync,
       .end_epoch = end_epoch,
       .force_exec_slow_queries = this->config.force_exec_slow_queries,
       .start_epoch = start_epoch,

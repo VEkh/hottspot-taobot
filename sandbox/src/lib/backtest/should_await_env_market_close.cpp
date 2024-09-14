@@ -12,10 +12,6 @@ bool Backtest::should_await_env_market_close(
     return false;
   }
 
-  if (!this->config.clock_sync) {
-    return false;
-  }
-
   if (has_reached_end(next_market_open_epoch)) {
     return false;
   }

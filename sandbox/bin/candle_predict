@@ -3,24 +3,15 @@
 
 set -e
 
-project=$(dirname "${0}" | xargs basename)
-
-
-if [[ "${project}" = "bin" ]]; then
-  app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
-  cmd=$(basename "${0}")
-
-  source "${app_dir}/bin/utils" # ascii_print
-
-  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
-
-  exit 1;
-fi
-
-app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-log_dir="${app_dir}/log/${project}/ml/candle_predict"
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
 source "${app_dir}/bin/utils" # ASCII, ascii_print
+
+validate_api_scope "${api_name}"
+
+log_dir="${app_dir}/log/${api_name}/ml/candle_predict"
 
 ascii_print "$(date)\n" "cyan"
 
@@ -29,7 +20,7 @@ mkdir -p "${log_dir}"
 function build_candles_each() {
   ascii_print "🔨 Building candles for each symbol" "cyan"
 
-  symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
+  symbols=($(cat "${app_dir}/bin/${api_name}/stream_symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/build/db" build_candles "${symbol}" "${@}" > "${log_dir}/${symbol}.log"
@@ -41,7 +32,7 @@ function predict_all() {
 
   build_candles_each "${@}"
 
-  symbols=($(cat "${app_dir}/bin/${project}/trade_symbols"))
+  symbols=($(cat "${app_dir}/bin/${api_name}/trade_symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/bin/ml/candle_predict" predict "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null
@@ -61,7 +52,7 @@ function train_each() {
 
   build_candles_each "${@}"
 
-  symbols=($(cat "${app_dir}/bin/${project}/trade_symbols"))
+  symbols=($(cat "${app_dir}/bin/${api_name}/trade_symbols"))
 
   for symbol in "${symbols[@]}"; do
     "${app_dir}/bin/ml/candle_predict" train "${symbol}" "${@}" >> "${log_dir}/${symbol}.log" 2>/dev/null

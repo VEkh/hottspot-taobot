@@ -3,34 +3,24 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "$0")/../../")
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_green="\033[32m"
-fmt_red="\033[31m"
-fmt_reset="\033[0m"
-project=$(dirname "$0" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
-# shellcheck disable=1090
-source "${app_dir}/bin/utils" # extract_flags, extract_flags_to_map
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # extract_flags, extract_flags_to_map, validate_api_scope
 
-if [[ $project = "bin" ]]; then
-  cmd=$(basename "$0")
-
-  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
-  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
-
-  exit 1;
-fi
+validate_api_scope "${api_name}"
 
 function get_status() {
+  # shellcheck disable=2207
   flags=($(extract_flags "${@}"))
   local -A flag_map
   extract_flags_to_map flag_map "${flags[@]}"
 
   api_key="${flag_map["api-key"]}"
 
-  if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
+  if [[ "${api_name}" = "alpaca" && -z "${api_key}" ]]; then
     ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
     exit 1
   fi
@@ -38,7 +28,7 @@ function get_status() {
   state=$(
     ps aux |
     grep "[t]ao_bot" |
-    grep "${project}" |
+    grep "${api_name}" |
     grep --color "${api_key}"
   )
 
@@ -48,9 +38,9 @@ function get_status() {
 state=$(get_status "${@}")
 
 if [[ -z "${state}" ]]; then
-  echo -e "${fmt_bold}${fmt_cyan}No running instances of TaoBot. Starting.${fmt_reset}"
+  ascii_print "No running instances of TaoBot. Starting." "cyan"
 
-  "${app_dir}/bin/${project}/restart" "${@}"
+  "${app_dir}/bin/${api_name}/restart" "${@}"
 else
-  echo -e "${fmt_bold}${fmt_green}💖 TaoBot is already running. Doing nothing.${fmt_reset}"
+  ascii_print "💖 TaoBot is already running. Doing nothing." "green"
 fi

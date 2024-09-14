@@ -18,18 +18,11 @@ public:
   using market_epochs_t = Global::t::market_epochs_t;
   using quote_t = Global::t::quote_t;
 
-  // NOTES:
-  // * clock_sync - Ensures that all tradeable assets' clocks are synced.
-  //                However, it slows backtest runs. If set to `false`, spurious
-  //                account max stop losses may trigger. A `false` setting
-  //                should therefore accompany an `..account_stop_loss_ratio`
-  //                setting of `0.0`.
   struct config_t {
     double account_margin_multiplier = 0.00;
     double account_starting_equity = 0.00;
     std::string api_key;
     std::string api_key_id;
-    bool clock_sync = true;
     double end_epoch = 0;
     bool force_exec_slow_queries = false;
     double start_epoch = 0;

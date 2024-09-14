@@ -3,24 +3,15 @@
 
 set -e
 
-project=$(dirname "${0}" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
+source "${app_dir}/bin/utils" # ASCII, ascii_print, validate_api_scope
 
-if [[ "${project}" = "bin" ]]; then
-  app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
-  cmd=$(basename "${0}")
+validate_api_scope "${api_name}"
 
-  source "${app_dir}/bin/utils" # ascii_print
-
-  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
-
-  exit 1;
-fi
-
-app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-log_dir="${app_dir}/log/${project}"
-
-source "${app_dir}/bin/utils" # ASCII, ascii_print
+log_dir="${app_dir}/log/${api_name}"
 
 ascii_print "$(date)\n" "cyan"
 
@@ -30,7 +21,7 @@ function build_each() {
   ascii_print "🔨 Building latest price actions for each symbol" "cyan"
 
   log_file="${log_dir}/price_actions.log"
-  symbols=($(cat "${app_dir}/bin/${project}/stream_symbols"))
+  symbols=($(cat "${app_dir}/bin/${api_name}/stream_symbols"))
 
   echo "" > "${log_file}"
 

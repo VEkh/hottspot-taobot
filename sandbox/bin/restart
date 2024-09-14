@@ -2,20 +2,14 @@
 
 set -e
 
-app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../../")
-project=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
-if [[ $project = "bin" ]]; then
-  app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")
-  cmd=$(basename "${BASH_SOURCE[0]}")
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # validate_api_scope
 
-  # shellcheck disable=1090,1091
-  source "${app_dir}/bin/utils" # ascii_print
+validate_api_scope "${api_name}"
 
-  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
-
-  exit 1;
-fi
-
-"${app_dir}/bin/${project}/stop" "${@}"
-"${app_dir}/bin/${project}/start" "${@}"
+"${app_dir}/bin/${api_name}/stop" "${@}"
+"${app_dir}/bin/${api_name}/start" "${@}"

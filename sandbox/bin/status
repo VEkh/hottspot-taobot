@@ -1,30 +1,23 @@
 #!/bin/bash
 # shellcheck disable=2009
 
-app_dir=$(realpath "$(dirname "$0")/../../")
-fmt_bold="\033[1m"
-fmt_cyan="\033[36m"
-fmt_red="\033[31m"
-fmt_reset="\033[0m"
-project=$(dirname "$0" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
 
-if [[ ! -d "$app_dir/bin/$project" ]]; then
-  cmd=$(basename "$0")
+# shellcheck disable=1090,1091
+source "${app_dir}/bin/utils" # ASCII, validate_api_scope
 
-  echo -e "${fmt_bold}${fmt_red}Please run in the context of" \
-  "a project (e.g. ./bin/<project>/$cmd)${fmt_reset}"
+validate_api_scope "${api_name}"
 
-  exit 1;
-fi
-
-echo -e "${fmt_bold}${fmt_cyan}"
+echo -e "${ASCII["bold"]}${ASCII["cyan"]}"
 echo "Running TaoBot instances$([[ -n $1 ]] && echo " for ${1}"):"
-echo -e "$fmt_reset"
+echo -e "${ASCII["reset"]}"
 
 if [[ -n "${1}" ]]; then
-  ps aux | grep "[t]ao_bot" | grep "${project}" | grep "${1}"
+  ps aux | grep "[t]ao_bot" | grep "${api_name}" | grep "${1}"
 else
-  ps aux | grep "[t]ao_bot" | grep "${project}"
+  ps aux | grep "[t]ao_bot" | grep "${api_name}"
 fi
 
 echo

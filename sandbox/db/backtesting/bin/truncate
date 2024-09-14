@@ -13,6 +13,12 @@ function bt_truncate() {
   extract_flags_to_map flags "${@}"
 
   api_key="${flags["api-key"]}"
+  api_name="${flags["api"]}"
+
+  if [[ -z "${api_name}" ]]; then
+    ascii_print "Provide an --api=<api_name> option" "red" >&2
+    exit 1
+  fi
 
   if [[ -z "${api_key}" ]]; then
     ascii_print "Provide an --api-key=<api_key> option" "red" >&2
@@ -20,7 +26,7 @@ function bt_truncate() {
   fi
 
   env="$(get_env_flag "${@}")"
-  app_config=$(load_config "alpaca" "${api_key}")
+  app_config=$(load_config "${api_name}" "${api_key}")
   db_config=$(load_config "db" "${env}")
 
   api_key_id=$(echo -e "${app_config}" | jq -r ".id")

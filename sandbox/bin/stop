@@ -4,28 +4,29 @@
 set -e
 shopt -s extglob
 
-app_dir=$(realpath "$(dirname "${0}")/../../")
-project=$(dirname "$0" | xargs basename)
+api_name=$(dirname "${BASH_SOURCE[0]}" | xargs basename)
+[[ "${api_name}" = "bin" ]] && rel_path="/../" || rel_path="/../../"
+app_dir=$(realpath "$(dirname "${BASH_SOURCE[0]}")${rel_path}")
+
+# ascii_print
+# extract_flags
+# to_lower
+# to_upper
+# validate_api_scope
 
 # shellcheck disable=1090,1091
-source "${app_dir}/bin/utils" # ascii_print, extract_flags, to_lower, to_upper
+source "${app_dir}/bin/utils"
+
+validate_api_scope "${api_name}"
 
 # shellcheck disable=2207
 flags=($(extract_flags "${@}"))
 declare -A flag_map
 extract_flags_to_map flag_map "${flags[@]}"
 
-if [[ $project = "bin" ]]; then
-  cmd=$(basename "$0")
-
-  ascii_print "Please run in the context of a project (e.g. ./bin/<project>/${cmd})" "red" >&2
-
-  exit 1;
-fi
-
 api_key="${flag_map["api-key"]}"
 
-if [[ "${project}" = "alpaca" && -z "${api_key}" ]]; then
+if [[ "${api_name}" = "alpaca" && -z "${api_key}" ]]; then
   ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
   exit 1
 fi
@@ -37,12 +38,12 @@ case "${1}" in
     state=$(
       ps aux |
       grep "[t]ao_bot" |
-      grep "${project}" |
+      grep "${api_name}" |
       grep -i "$(to_lower "${symbol}")" ||
       true
     )
 
-    if [[ "${project}" = "alpaca" ]]; then
+    if [[ "${api_name}" = "alpaca" ]]; then
       state=$(
         echo -e "${state}" |
         grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
@@ -61,9 +62,9 @@ case "${1}" in
     ;;
 
   *)
-    state=$(ps aux | grep "[t]ao_bot" | grep "${project}" || true)
+    state=$(ps aux | grep "[t]ao_bot" | grep "${api_name}" || true)
 
-    if [[ "${project}" = "alpaca" ]]; then
+    if [[ "${api_name}" = "alpaca" ]]; then
       state=$(
         echo -e "${state}" |
         grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
