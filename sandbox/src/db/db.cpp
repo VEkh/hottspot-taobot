@@ -170,7 +170,7 @@ int main(int argc, char *argv[]) {
         .start_at = flags["start-at"],
     });
 
-    account_snapshot.log_daily();
+    account_snapshot.daily();
 
     pg.disconnect();
 

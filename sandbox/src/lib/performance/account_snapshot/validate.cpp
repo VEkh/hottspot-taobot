@@ -7,7 +7,7 @@
 #include <string>             // std::string
 
 void Performance::AccountSnapshot::validate() {
-  if (this->api_name.empty()) {
+  if (this->config.api_name.empty()) {
     const std::string message =
         Formatted::error_message("Please specify an api (--api=<API_NAME>).");
 

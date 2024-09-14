@@ -4,7 +4,7 @@
 #include "db/account_stat/account_stat.h" // DB::AccountStat
 #include "lib/pg/pg.cpp"                  // Pg
 #include "types.cpp"                      // Global::t
-#include <map>                            // std::map
+#include <list>                           // std::list
 #include <string>                         // std::string
 #include <time.h>                         // time
 
@@ -23,22 +23,40 @@ public:
   AccountSnapshot(){};
   AccountSnapshot(const init_args_t);
 
-  void log_daily();
+  void daily();
 
 private:
   using account_snapshot_t = Global::t::account_snapshot_t;
 
+  struct config_t {
+    std::string api_key;
+    std::string api_key_id;
+    std::string api_name;
+    bool debug;
+    std::string end_at;
+    std::string start_at;
+  };
+
+  struct stats_t {
+    double daily_dollars = 0.0;
+    double daily_ratio = 0.0;
+    int day_count = 0;
+    int loss_count = 0;
+    int win_count = 0;
+  };
+
   DB::AccountStat db_account_stat;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   Pg conn;
-  bool debug;
-  std::string api_key;
-  std::string api_name;
-  std::string end_at;
-  std::string start_at;
+  config_t config;
+  stats_t stats;
 
   const double timer_start = time(nullptr);
 
+  void build_stats(std::list<account_snapshot_t> &);
+  void load_env();
+  void log_duration();
+  void log_stats();
   void validate();
 }; // namespace Performance
 } // namespace Performance
