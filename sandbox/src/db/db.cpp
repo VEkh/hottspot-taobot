@@ -1,5 +1,7 @@
 #include "db/candle/candle.cpp"                  // DB::Candle
 #include "db/historical_quote/alpaca/alpaca.cpp" // DB::HistoricalQuote::Alpaca
+#include "db/historical_quote/base/base.cpp"     // DB::HistoricalQuote::Base
+#include "db/historical_quote/oanda/oanda.cpp"   // DB::HistoricalQuote::Oanda
 #include "db/position/position.cpp"              // DB::Position
 #include "db/price_action/price_action.cpp"      // DB::PriceAction
 #include "db/quote/quote.cpp"                    // DB::Quote
@@ -18,7 +20,8 @@ void print_usage() {
   std::map<std::string, const char *> commands = {
       {"build_candles                          <SYMBOL> <OPTS>",
        "Build five minute candles for the given symbol"},
-      {"import_historical_quotes               <SYMBOL> <OPTS>",
+      {"import_historical_quotes               <SYMBOL> --api=<API_NAME> "
+       "<OPTS>",
        "Import symbol's historical quotes"},
       {"net_return                             <SYMBOL> <OPTS>",
        "Compute symbol's net return"},
@@ -42,6 +45,7 @@ void print_usage() {
   std::cout << message.str();
 }
 
+// TODO: Re-factor into DB::Cli class
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     print_usage();
@@ -108,24 +112,42 @@ int main(int argc, char *argv[]) {
       throw std::invalid_argument(message);
     }
 
-    Pg pg(flags);
-    pg.connect();
-
     std::map<std::string, std::string> default_flags = {
         {"batch", "10000"},
     };
 
     flags = ::utils::map::merge(default_flags, flags);
 
-    DB::HistoricalQuote::Alpaca db_historical_quote({
+    const std::string api_name = flags["api"];
+
+    if (api_name.empty()) {
+      std::string message =
+          Formatted::error_message("Please specify an api (--api=<API_NAME>).");
+
+      throw std::invalid_argument(message);
+    }
+
+    Pg pg(flags);
+    pg.connect();
+
+    DB::HistoricalQuote::Base::init_args_t args = {
         .batch_size = flags["batch"],
         .conn = pg,
+        .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
         .end_at = flags["end-at"],
         .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
-    });
+    };
 
-    db_historical_quote.download();
+    if (api_name == "alpaca") {
+      DB::HistoricalQuote::Alpaca db_historical_quote(args);
+
+      db_historical_quote.download();
+    } else if (api_name == "oanda") {
+      DB::HistoricalQuote::Oanda db_historical_quote(args);
+
+      db_historical_quote.download();
+    }
 
     pg.disconnect();
 

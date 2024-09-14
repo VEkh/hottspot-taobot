@@ -60,7 +60,7 @@ CurlClient Oanda::Client::fetch(const fetch_params_t params) {
                                           this->config.authentication_token},
                 },
             .method = CurlClient::http_method_t::GET,
-            .query_params = {},
+            .query_params = params.query_params,
             .timeout_seconds = 0,
             .url = url,
         });

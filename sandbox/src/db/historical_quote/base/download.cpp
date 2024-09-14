@@ -3,6 +3,7 @@
 
 #include "base.h"                   // DB::HistoricalQuote::Base, quote_t
 #include "deps.cpp"                 // json
+#include "lib/utils/integer.cpp"    // ::utils::integer_
 #include "print_download_intro.cpp" // print_download_intro
 #include <iostream>                 // std::cout, std::endl
 #include <stdio.h>                  // printf

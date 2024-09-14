@@ -156,21 +156,6 @@ double beginning_of_day_to_epoch(const long int now) {
   return day_start_epoch;
 }
 
-double quote_timestamp_to_epoch_double(const char *timestamp) {
-  tm parsed = parse_timestamp(timestamp, "%Y-%m-%dT%H:%M:%SZ");
-  const int epoch = mktime(&parsed);
-  double seconds_decimal = 0;
-
-  std::cmatch match;
-
-  if (std::regex_search(timestamp, match, std::regex("\\d{2}(\\.\\d+)Z$")) &&
-      match.size() > 1) {
-    seconds_decimal = std::stod(match[1]);
-  }
-
-  return epoch + seconds_decimal;
-}
-
 std::string timestamp_to_clock(time_t timestamp,
                                const char *time_zone = "America/New_York") {
   return in_time_zone<std::string>(time_zone, [&]() -> std::string {

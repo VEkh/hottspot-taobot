@@ -1,15 +1,16 @@
 #ifndef OANDA__CLIENT_H
 #define OANDA__CLIENT_H
 
-#include "deps.cpp"                        // json
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include "oanda/types.cpp"                 // Oanda::t
-#include "types.cpp"                       // Global::t
-#include <list>                            // std::list
-#include <map>                             // std::map
-#include <string>                          // std::string
-#include <vector>                          // std::vector
+#include "db/historical_quote/base/base.cpp" // DB::HistoricalQuote::Base
+#include "deps.cpp"                          // json
+#include "lib/curl_client/curl_client.cpp"   // CurlClient
+#include "lib/formatted.cpp"                 // Formatted
+#include "oanda/types.cpp"                   // Oanda::t
+#include "types.cpp"                         // Global::t
+#include <list>                              // std::list
+#include <map>                               // std::map
+#include <string>                            // std::string
+#include <vector>                            // std::vector
 
 namespace Oanda {
 class Client {
@@ -30,6 +31,13 @@ public:
     int reversal_timeframe_minutes = 60;
   } config;
 
+  struct fetch_historical_quotes_args_t {
+    int batch_size = 10000;
+    int granularity_seconds = 0;
+    double start_at = 0;
+    std::string symbol;
+  };
+
   Client(){};
   Client(std::map<std::string, std::string>);
 
@@ -38,6 +46,7 @@ public:
   std::string cancel_order(const int);
   std::string cancel_order(order_t *order);
   std::string fetch_account();
+  std::string fetch_historical_quotes(const fetch_historical_quotes_args_t);
   std::string fetch_instruments(const std::vector<std::string>);
   std::string fetch_order(const int);
   std::string fetch_quote(char *);
@@ -50,6 +59,7 @@ public:
 
 private:
   struct fetch_params_t {
+    std::map<std::string, std::string> query_params;
     int timeout_seconds = 0;
     std::string url;
   };

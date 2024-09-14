@@ -50,6 +50,7 @@ void print_usage() {
   std::cout << message.str();
 }
 
+// TODO: Re-factor into Alpaca::Cli class
 int main(int argc, char *argv[]) {
   if (argc < 2) {
     print_usage();

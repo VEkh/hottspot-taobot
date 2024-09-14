@@ -1,13 +1,14 @@
 #ifndef ALPACA__CLIENT_H
 #define ALPACA__CLIENT_H
 
-#include "alpaca/types.cpp"                // Alpaca::t
-#include "lib/curl_client/curl_client.cpp" // CurlClient
-#include "lib/formatted.cpp"               // Formatted
-#include "types.cpp"                       // Global::t
-#include <list>                            // std::list
-#include <map>                             // std::map
-#include <string>                          // std::string
+#include "alpaca/types.cpp"                  // Alpaca::t
+#include "db/historical_quote/base/base.cpp" // DB::HistoricalQuote::Base
+#include "lib/curl_client/curl_client.cpp"   // CurlClient
+#include "lib/formatted.cpp"                 // Formatted
+#include "types.cpp"                         // Global::t
+#include <list>                              // std::list
+#include <map>                               // std::map
+#include <string>                            // std::string
 
 namespace Alpaca {
 class Client {
