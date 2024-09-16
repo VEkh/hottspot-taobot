@@ -38,10 +38,11 @@ private:
   };
 
   struct stats_t {
-    double daily_dollars = 0.0;
-    double daily_ratio = 0.0;
+    double daily_net_pl_ratio = 0.0;
     int day_count = 0;
     int loss_count = 0;
+    double net_pl = 0.0;
+    account_snapshot_t original_snapshot;
     int win_count = 0;
   };
 
