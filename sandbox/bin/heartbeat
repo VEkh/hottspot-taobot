@@ -20,7 +20,7 @@ function get_status() {
 
   api_key="${flag_map["api-key"]}"
 
-  if [[ "${api_name}" = "alpaca" && -z "${api_key}" ]]; then
+  if [[ -z "${api_key}" ]]; then
     ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
     exit 1
   fi

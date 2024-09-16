@@ -28,7 +28,7 @@ api_key="${flag_map["api-key"]}"
 ascii_print "$(date)\n" "cyan"
 
 function symbol_start() {
-  if [[ "${api_name}" = "alpaca" && -z "${api_key}" ]]; then
+  if [[ -z "${api_key}" ]]; then
     ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
     exit 1
   fi

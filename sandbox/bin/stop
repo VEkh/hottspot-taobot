@@ -26,7 +26,7 @@ extract_flags_to_map flag_map "${flags[@]}"
 
 api_key="${flag_map["api-key"]}"
 
-if [[ "${api_name}" = "alpaca" && -z "${api_key}" ]]; then
+if [[ -z "${api_key}" ]]; then
   ascii_print "You must provide an --api-key=<API_KEY> option" "red" >&2
   exit 1
 fi
@@ -39,17 +39,10 @@ case "${1}" in
       ps aux |
       grep "[t]ao_bot" |
       grep "${api_name}" |
-      grep -i "$(to_lower "${symbol}")" ||
+      grep -i "$(to_lower "${symbol}")" |
+      grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
       true
     )
-
-    if [[ "${api_name}" = "alpaca" ]]; then
-      state=$(
-        echo -e "${state}" |
-        grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
-        true
-      )
-    fi
 
     if [[ -z "${state}" ]]; then
       ascii_print "✅ TaoBot is not running for ${symbol}" "green"
@@ -62,15 +55,13 @@ case "${1}" in
     ;;
 
   *)
-    state=$(ps aux | grep "[t]ao_bot" | grep "${api_name}" || true)
-
-    if [[ "${api_name}" = "alpaca" ]]; then
-      state=$(
-        echo -e "${state}" |
-        grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
-        true
-      )
-    fi
+    state=$(
+      ps aux |
+      grep "[t]ao_bot" |
+      grep "${api_name}" |
+      grep -- "--api-key=.*${api_key}\(\s\|\$\)" ||
+      true
+    )
 
     if [[ -z "${state}" ]]; then
       ascii_print "✅ No TaoBot instances are running" "green"
