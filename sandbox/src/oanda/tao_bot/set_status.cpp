@@ -51,7 +51,7 @@ void Oanda::TaoBot::set_status(order_t *order,
     return;
   }
 
-  json trade_json = fetch_trade(order->trade_id);
+  json trade_json = fetch_trade(order);
 
   if (original_status == order_status_t::ORDER_PENDING) {
     std::cout << fmt.bold << fmt.yellow;

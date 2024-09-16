@@ -111,6 +111,7 @@ struct quote_t {
   std::string symbol = "";
   double timestamp;
 
+  bool empty() const { return !this->ask && !this->bid; };
   double mid() const { return (this->ask + this->bid) / 2.0; };
   double spread() const { return this->ask - this->bid; };
 };

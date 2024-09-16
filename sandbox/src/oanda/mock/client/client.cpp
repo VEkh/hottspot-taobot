@@ -3,6 +3,7 @@
 
 #include "client.h"
 #include "fetch_order.cpp"
+#include "fetch_trade.cpp"
 #include "place_order.cpp"
 
 #endif

@@ -19,7 +19,7 @@
 
 void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
   try {
-    json trade_json = fetch_trade(order->trade_id);
+    json trade_json = fetch_trade(order);
 
     const std::string status = trade_json["state"];
 

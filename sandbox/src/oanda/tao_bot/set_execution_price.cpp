@@ -1,15 +1,9 @@
 #ifndef OANDA__TAO_BOT_set_execution_price
 #define OANDA__TAO_BOT_set_execution_price
 
-/*
- * Oanda::TaoBot
- * fmt
- * order_t
- */
-#include "tao_bot.h"
-
 #include "deps.cpp"        // json, nlohmann
 #include "fetch_trade.cpp" // fetch_trade
+#include "tao_bot.h"       // Oanda::TaoBot, fmt, order_t
 #include <iostream>        // std::cout, std::endl
 #include <stdio.h>         // printf
 #include <string>          // std::stod, std::string
@@ -19,7 +13,7 @@ void Oanda::TaoBot::set_execution_price(order_t *order) {
     return;
   }
 
-  json trade_json = fetch_trade(order->trade_id);
+  const json trade_json = fetch_trade(order);
 
   set_execution_price(order, trade_json);
 }

@@ -8,7 +8,9 @@
 #include <string>                             // std::string
 
 void Oanda::TaoBot::update_margin_rate() {
-  fetch_and_persist_margin_rates({this->symbol});
+  if (!this->backtest.is_active) {
+    fetch_and_persist_margin_rates({this->symbol});
+  }
 
   this->margin_rate = this->db_margin_rate.get(this->symbol);
 

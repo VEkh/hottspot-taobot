@@ -146,10 +146,11 @@ private:
   int order_duration(const order_t *, const std::string);
   int runtime();
   json fetch_order(const order_t *);
-  json fetch_trade(const int);
+  json fetch_trade(const order_t *);
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
+  quote_t get_real_time_quote(const std::string);
 
   reversal_t first_reversal_after(reversals_t &, const double,
                                   const reversal_type_t, const bool);

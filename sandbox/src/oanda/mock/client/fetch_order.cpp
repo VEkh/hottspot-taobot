@@ -10,7 +10,7 @@ std::string Oanda::Mock::Client::fetch_order(const long int epoch) {
   const char *response_format = R"(
     {
       "tradeOpenedID": "%li",
-      "state": "filled"
+      "state": "FILLED"
     }
   )";
 

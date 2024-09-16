@@ -57,7 +57,7 @@ void Oanda::TaoBot::open_and_persist_position() {
       puts("❗ Failed to open order. Retrying.\n");
       std::cout << fmt.reset << std::endl;
 
-      usleep(0.5e6);
+      usleep(5e5);
 
       continue;
     }
