@@ -134,7 +134,6 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double convert_price(const double, const std::string, const std::string);
   double current_mid();
-  double current_spread();
   double day_range_percentile(const double);
   double day_range_percentile(const order_t *, double);
   double margin_buying_power();

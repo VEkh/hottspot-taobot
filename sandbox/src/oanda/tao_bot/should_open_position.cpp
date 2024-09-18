@@ -1,7 +1,6 @@
 #ifndef OANDA__TAO_BOT_should_open_position
 #define OANDA__TAO_BOT_should_open_position
 
-#include "current_spread.cpp"          // current_spread
 #include "is_entry_signal_present.cpp" // is_entry_signal_present
 #include "spread_limit.cpp"            // spread_limit
 #include "tao_bot.h"                   // Oanda::TaoBot, fmt, order_action_t
@@ -15,7 +14,7 @@ bool Oanda::TaoBot::should_open_position() {
     return false;
   }
 
-  if (current_spread() > spread_limit()) {
+  if (this->current_quote.spread() > spread_limit()) {
     return false;
   }
 

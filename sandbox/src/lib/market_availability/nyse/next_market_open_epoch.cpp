@@ -5,9 +5,7 @@
 #include "nyse.h"                    // MarketAvailability::Nyse
 
 double MarketAvailability::Nyse::next_market_open_epoch(const double epoch) {
-  const int one_day_seconds = 24 * 60 * 60;
-
-  return get_market_open_epoch(epoch + one_day_seconds);
+  return get_market_open_epoch(epoch + this->ONE_DAY_SECONDS);
 }
 
 #endif

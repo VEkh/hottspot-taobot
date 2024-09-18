@@ -31,6 +31,8 @@ protected:
   DB::Utils db_utils;
   Pg conn;
 
+  static constexpr int ONE_DAY_SECONDS = 24 * 60 * 60;
+
   std::map<std::string, bool> bad_data;
   std::map<std::string, bool> holidays;
 

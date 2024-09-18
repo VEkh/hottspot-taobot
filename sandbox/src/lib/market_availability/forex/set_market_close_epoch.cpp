@@ -21,9 +21,9 @@ void MarketAvailability::Forex::set_market_close_epoch(const double epoch) {
     close_epoch = epoch;
   } else {
     const double today_market_open_epoch = get_market_open_epoch(epoch);
-    const int one_day_seconds = 24 * 60 * 60;
 
-    const int offset = epoch >= today_market_open_epoch ? one_day_seconds : 0;
+    const int offset =
+        epoch >= today_market_open_epoch ? this->ONE_DAY_SECONDS : 0;
 
     const std::string close_iso_date =
         ::utils::time_::date_string(epoch + offset, "%F", "America/Chicago");

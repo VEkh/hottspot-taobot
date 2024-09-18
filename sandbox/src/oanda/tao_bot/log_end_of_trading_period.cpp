@@ -8,7 +8,7 @@
 
 void Oanda::TaoBot::log_end_of_trading_period() {
   std::cout << fmt.bold << fmt.green << std::endl;
-  puts("🎊 The week's over! Hope you made some guap 🤑");
+  puts("🎊 The market session is over! Hope you made some guap 🤑");
   std::cout << fmt.reset;
 
   log_performance();

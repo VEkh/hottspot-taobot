@@ -2,7 +2,6 @@
 #define OANDA__TAO_BOT_should_close_position
 
 #include "build_exit_prices.cpp"        // build_exit_prices
-#include "current_spread.cpp"           // current_spread
 #include "is_end_of_quotes.cpp"         // is_end_of_quotes
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_reverse_profit.cpp"    // should_reverse_profit
@@ -37,7 +36,7 @@ bool Oanda::TaoBot::should_close_position() {
 
   this->exit_prices = build_exit_prices();
 
-  if (current_spread() > spread_limit()) {
+  if (this->current_quote.spread() > spread_limit()) {
     return false;
   }
 
