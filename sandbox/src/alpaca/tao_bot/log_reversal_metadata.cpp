@@ -38,18 +38,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
-  Formatted::Stream should_market_open_trend_start_color =
-      this->api_client.config.should_market_open_trend_start ? fmt.green
-                                                             : fmt.red;
-
-  const std::string should_market_open_trend_start_text =
-      this->api_client.config.should_market_open_trend_start ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should open trend start? ");
-  std::cout << should_market_open_trend_start_color
-            << should_market_open_trend_start_text << std::endl;
-
   Formatted::Stream should_always_reverse_profit_color =
       this->api_client.config.should_always_reverse_profit ? fmt.green
                                                            : fmt.red;
@@ -60,15 +48,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   printf("Should always reverse profit? ");
   std::cout << should_always_reverse_profit_color
             << should_always_reverse_profit_text << std::endl;
-
-  Formatted::Stream stop_loss_color =
-      this->should_stop_loss ? fmt.green : fmt.red;
-
-  std::string stop_loss_text = this->should_stop_loss ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should stop loss? ");
-  std::cout << stop_loss_color << stop_loss_text << std::endl;
 
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;

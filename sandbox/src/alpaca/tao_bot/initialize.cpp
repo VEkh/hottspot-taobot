@@ -80,9 +80,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     this->reversals.timeframe_minutes =
         this->api_client.config.reversal_timeframe_minutes;
 
-    this->should_stop_loss =
-        this->api_client.config.should_stop_loss; // TODO: Decide
-
     ensure_market_is_open();
     ensure_is_shortable();
     read_closed_positions();

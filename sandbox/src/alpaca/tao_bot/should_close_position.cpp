@@ -36,7 +36,7 @@ bool Alpaca::TaoBot::should_close_position() {
 
   this->exit_prices = build_exit_prices();
 
-  if (this->should_stop_loss && this->exit_prices.stop_loss &&
+  if (this->exit_prices.stop_loss &&
       this->open_order_ptr->profit <= this->exit_prices.stop_loss) {
     return true;
   }
