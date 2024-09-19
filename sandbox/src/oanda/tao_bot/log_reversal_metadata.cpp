@@ -38,6 +38,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
+  Formatted::Stream should_always_reverse_profit_color =
+      this->api_client.config.should_always_reverse_profit ? fmt.green
+                                                           : fmt.red;
+  const std::string should_always_reverse_profit_text =
+      this->api_client.config.should_always_reverse_profit ? "YES" : "NO";
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should always reverse profit? ");
+  std::cout << should_always_reverse_profit_color
+            << should_always_reverse_profit_text << std::endl;
+
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
     printf("Open Position Entry Reversal\n");

@@ -29,6 +29,7 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     int reversal_timeframe_minutes = 60;
+    bool should_always_reverse_profit = false; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

@@ -38,6 +38,7 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
+  // TODO: Decide
   Formatted::Stream should_always_reverse_profit_color =
       this->api_client.config.should_always_reverse_profit ? fmt.green
                                                            : fmt.red;

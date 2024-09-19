@@ -63,6 +63,12 @@ void Oanda::Client::load_config() {
     config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("should_always_reverse_profit")) {
+    this->config.should_always_reverse_profit =
+        (bool)api_key_json["should_always_reverse_profit"];
+  }
+
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -72,6 +78,8 @@ void Oanda::Client::load_config() {
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .should_always_reverse_profit =
+          this->config.should_always_reverse_profit, // TODO: Decide
   };
 }
 
