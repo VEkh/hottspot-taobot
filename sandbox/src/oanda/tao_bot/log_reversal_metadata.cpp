@@ -44,16 +44,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
             << fmt.reset << std::endl;
 
-  Formatted::Stream stop_loss_color =
-      this->api_client.config.should_stop_loss ? fmt.green : fmt.red;
-
-  std::string stop_loss_text =
-      this->api_client.config.should_stop_loss ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should stop loss? ");
-  std::cout << stop_loss_color << stop_loss_text << std::endl;
-
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
     printf("Open Position Entry Reversal\n");

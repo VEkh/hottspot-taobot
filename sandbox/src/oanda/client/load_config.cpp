@@ -69,11 +69,6 @@ void Oanda::Client::load_config() {
         (int)api_key_json["market_duration_hours"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("should_stop_loss")) {
-    this->config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
-  }
-
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -85,7 +80,6 @@ void Oanda::Client::load_config() {
           this->config.market_duration_hours, // TODO: Decide
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
-      .should_stop_loss = this->config.should_stop_loss, // TODO: Decide
   };
 }
 

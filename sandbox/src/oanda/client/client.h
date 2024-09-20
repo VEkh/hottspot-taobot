@@ -30,7 +30,6 @@ public:
     std::list<std::string> env_symbols;
     int market_duration_hours = 0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
-    bool should_stop_loss = true; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
