@@ -40,7 +40,7 @@ bool Oanda::TaoBot::should_close_position() {
     return false;
   }
 
-  if (this->exit_prices.stop_loss &&
+  if (this->api_client.config.should_stop_loss && this->exit_prices.stop_loss &&
       this->open_order_ptr->profit <= this->exit_prices.stop_loss) {
     return true;
   }
