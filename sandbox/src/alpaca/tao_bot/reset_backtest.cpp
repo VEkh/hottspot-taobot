@@ -16,9 +16,10 @@ void Alpaca::TaoBot::reset_backtest() {
       .symbol = this->symbol,
   });
 
-  const double next_market_open_epoch = std::min(
-      (double)time(nullptr),
-      this->market_availability.next_market_open_epoch(this->current_epoch));
+  const double next_market_open_epoch =
+      std::min((double)time(nullptr),
+               this->market_availability.next_market_open_epoch(
+                   this->market_availability.market_epochs.close));
 
   this->backtest.await_env_market_close(
       this->market_availability.market_epochs.close, next_market_open_epoch);

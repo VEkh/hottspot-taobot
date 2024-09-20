@@ -169,6 +169,11 @@ std::string timestamp_to_clock(time_t timestamp,
   });
 };
 
+double tm_to_epoch(tm in, const char *time_zone = "America/New_York") {
+  return in_time_zone<double>(time_zone,
+                              [&]() -> double { return mktime(&in); });
+}
+
 } // namespace time_
 } // namespace utils
 

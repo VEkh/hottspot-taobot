@@ -44,15 +44,15 @@ std::list<DB::Quote::quote_t> DB::Quote::get_last(get_last_args_t args) {
       bid,
       id,
       symbol,
-      extract(epoch from timestamp) as timestamp_epoch
+      extract(epoch from "timestamp") as timestamp_epoch
     from
       quotes
     where
       symbol = upper(%s)
-      and timestamp <= to_timestamp(%f)
+      and "timestamp" <= to_timestamp(%f)
       %s
     order by
-      timestamp %s
+      "timestamp" %s
     %s
     %s
   )";

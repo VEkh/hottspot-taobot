@@ -35,4 +35,31 @@ void MarketAvailability::Forex::set_market_close_epoch(const double epoch) {
   this->market_epochs.close = close_epoch;
 }
 
+// TODO: Decide
+#include "seconds_since_first_open_of_week.cpp" // seconds_since_first_open_of_week
+#include "week_market_bound_epoch.cpp"          // week_market_bound_epoch
+
+void MarketAvailability::Forex::set_market_close_epoch(
+    const double epoch, const int market_duration_hours) {
+  const double day_of_week = ::utils::time_::day_of_week(epoch);
+
+  if (day_of_week == 6) {
+    this->market_epochs.close = epoch;
+    return;
+  }
+
+  const double close_epoch =
+      week_market_bound_epoch(epoch, 0) +
+      seconds_since_first_open_of_week(epoch, market_duration_hours, 1);
+
+  const double last_close_of_week = week_market_bound_epoch(epoch, 5);
+
+  this->market_epochs.close = std::min(close_epoch, last_close_of_week);
+
+  printf("💦 market close: %s\n",
+         ::utils::time_::date_string(this->market_epochs.close, "%F %T",
+                                     "America/Chicago")
+             .c_str());
+}
+
 #endif

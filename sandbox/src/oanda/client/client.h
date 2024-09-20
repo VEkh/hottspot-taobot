@@ -28,6 +28,7 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
+    int market_duration_hours = 0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
   } config;
 

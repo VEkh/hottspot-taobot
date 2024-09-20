@@ -14,4 +14,20 @@ void MarketAvailability::Forex::set_market_open_epoch(const double epoch) {
                                  : today_market_open_epoch;
 }
 
+// TODO: Decide
+#include "seconds_since_first_open_of_week.cpp" // seconds_since_first_open_of_week
+#include "week_market_bound_epoch.cpp"          // week_market_bound_epoch
+
+void MarketAvailability::Forex::set_market_open_epoch(
+    const double epoch, const int market_duration_hours) {
+  this->market_epochs.open =
+      week_market_bound_epoch(epoch, 0) +
+      seconds_since_first_open_of_week(epoch, market_duration_hours);
+
+  printf("🔥 market open: %s\n",
+         ::utils::time_::date_string(this->market_epochs.open, "%F %T",
+                                     "America/Chicago")
+             .c_str());
+}
+
 #endif
