@@ -29,16 +29,6 @@ void Oanda::TaoBot::log_price_action() {
   printf("Current: %.2f%% • μ: %.2f%% • σ: %.2f%% Z: %+.2f\n",
          current_range_open_percent, avg, std, z_score);
 
-  if (this->open_order_ptr) {
-    const double open_order_range_open_percent =
-        this->open_order_ptr->day_candle.range_open_percent();
-    const double ratio =
-        current_range_open_percent / open_order_range_open_percent;
-
-    printf("Open Order: %.2f%% • Current-Open Order Ratio: %.3f\n",
-           open_order_range_open_percent, ratio);
-  }
-
   std::cout << fmt.reset << std::endl;
 }
 

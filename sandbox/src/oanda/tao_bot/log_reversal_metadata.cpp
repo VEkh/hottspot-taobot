@@ -57,17 +57,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << should_always_reverse_profit_text << fmt.reset << std::endl;
 
   // TODO: Decide
-  Formatted::Stream should_enter_near_reversal_color =
-      this->api_client.config.should_enter_near_reversal ? fmt.green : fmt.red;
-  const std::string should_enter_near_reversal_text =
-      this->api_client.config.should_enter_near_reversal ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should enter near reversal? ");
-  std::cout << should_enter_near_reversal_color
-            << should_enter_near_reversal_text << fmt.reset << std::endl;
-
-  // TODO: Decide
   Formatted::Stream should_stop_loss_color =
       this->should_stop_loss ? fmt.green : fmt.red;
   const std::string should_stop_loss_text =

@@ -26,7 +26,6 @@
 #include "set_close_order_prices.cpp"    // set_close_order_prices
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
-#include "set_should_stop_loss.cpp"      // set_should_stop_loss
 #include "should_terminate.cpp"          // should_terminate
 #include "tao_bot.h"                     // Oanda::TaoBot
 #include "update_account_snapshot.cpp"   // update_account_snapshot
@@ -68,7 +67,6 @@ void Oanda::TaoBot::watch() {
       set_position_status();
       clear_stale_open_order();
       open_and_persist_position();
-      // set_should_stop_loss(); // TODO
       set_open_order_prices();
 
       close_position();

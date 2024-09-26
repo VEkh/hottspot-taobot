@@ -5,7 +5,6 @@
 
 namespace Oanda {
 namespace t {
-using candle_t = Global::t::candle_t; // TODO: Decide
 using order_action_t = Global::t::order_action_t;
 using order_type_t = Global::t::order_type_t;
 using quote_t = Global::t::quote_t;
@@ -31,7 +30,6 @@ enum trade_status_t {
 
 struct order_t {
   order_action_t action;
-  candle_t day_candle; // TODO: Decide
   reversal_t entry_reversal;
   double execution_price = 0.00;
   int id = 0;

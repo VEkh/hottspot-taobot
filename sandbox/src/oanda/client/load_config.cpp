@@ -76,12 +76,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_enter_near_reversal")) {
-    this->config.should_enter_near_reversal =
-        (bool)api_key_json["should_enter_near_reversal"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_stop_loss")) {
     this->config.should_stop_loss = (bool)api_key_json["should_stop_loss"];
   }
@@ -99,8 +93,6 @@ void Oanda::Client::load_config() {
           (int)api_key_json["reversal_timeframe_minutes"],
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit, // TODO: Decide
-      .should_enter_near_reversal =
-          this->config.should_enter_near_reversal,       // TODO: Decide
       .should_stop_loss = this->config.should_stop_loss, // TODO: Decide
   };
 }

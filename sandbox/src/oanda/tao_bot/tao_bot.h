@@ -211,7 +211,6 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
-  void set_should_stop_loss(); // TODO: Decide
   void toggle_is_trending(const order_t &);
   void update_account_snapshot(const bool);
   void update_margin_rate();
