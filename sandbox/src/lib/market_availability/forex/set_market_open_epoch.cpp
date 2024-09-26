@@ -23,11 +23,6 @@ void MarketAvailability::Forex::set_market_open_epoch(
   this->market_epochs.open =
       week_market_bound_epoch(epoch, 0) +
       seconds_since_first_open_of_week(epoch, market_duration_hours);
-
-  printf("🔥 market open: %s\n",
-         ::utils::time_::date_string(this->market_epochs.open, "%F %T",
-                                     "America/Chicago")
-             .c_str());
 }
 
 #endif

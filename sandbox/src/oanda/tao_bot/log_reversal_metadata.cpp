@@ -44,6 +44,40 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
             << fmt.reset << std::endl;
 
+  // TODO: Decide
+  Formatted::Stream should_always_reverse_profit_color =
+      this->api_client.config.should_always_reverse_profit ? fmt.green
+                                                           : fmt.red;
+  const std::string should_always_reverse_profit_text =
+      this->api_client.config.should_always_reverse_profit ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should always reverse profit? ");
+  std::cout << should_always_reverse_profit_color
+            << should_always_reverse_profit_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_enter_near_reversal_color =
+      this->api_client.config.should_enter_near_reversal ? fmt.green : fmt.red;
+  const std::string should_enter_near_reversal_text =
+      this->api_client.config.should_enter_near_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should enter near reversal? ");
+  std::cout << should_enter_near_reversal_color
+            << should_enter_near_reversal_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_stop_loss_color =
+      this->should_stop_loss ? fmt.green : fmt.red;
+  const std::string should_stop_loss_text =
+      this->should_stop_loss ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should stop loss? ");
+  std::cout << should_stop_loss_color << should_stop_loss_text << fmt.reset
+            << std::endl;
+
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
     printf("Open Position Entry Reversal\n");

@@ -55,11 +55,6 @@ void MarketAvailability::Forex::set_market_close_epoch(
   const double last_close_of_week = week_market_bound_epoch(epoch, 5);
 
   this->market_epochs.close = std::min(close_epoch, last_close_of_week);
-
-  printf("💦 market close: %s\n",
-         ::utils::time_::date_string(this->market_epochs.close, "%F %T",
-                                     "America/Chicago")
-             .c_str());
 }
 
 #endif

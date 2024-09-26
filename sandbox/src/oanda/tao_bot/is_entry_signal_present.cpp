@@ -3,11 +3,17 @@
 
 #include "day_range_percentile.cpp"   // day_range_percentile
 #include "first_reversal_after.cpp"   // first_reversal_after
+#include "is_near_reversal.cpp"       // is_near_reversal // TODO: Decide
 #include "is_trending.cpp"            // is_trending
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Oanda::TaoBot, position_t, reversal_t, reversal_type_t
 
 bool Oanda::TaoBot::is_entry_signal_present() {
+  // TODO: Decide
+  if (this->closed_positions.size() >= 2) {
+    return false;
+  }
+
   const bool is_trending_ = is_trending();
 
   reversal_t entry_reversal_ = latest_record_reversal();
@@ -60,16 +66,25 @@ bool Oanda::TaoBot::is_entry_signal_present() {
       const int trend_at_minute = this->current_trend.at / 60;
 
       if (reversal_at_minute < trend_at_minute) {
-        return false;
+        reversal = reversal_t();
+      }
+
+      // TODO: Decide
+      if (!is_near_reversal(entry_reversal_)) {
+        reversal = reversal_t();
       }
     }
 
     entry_reversal_ = reversal;
   }
 
-  this->entry_reversal = entry_reversal_;
+  if (entry_reversal_.at) {
+    this->entry_reversal = entry_reversal_;
 
-  return true;
+    return true;
+  }
+
+  return false;
 }
 
 #endif

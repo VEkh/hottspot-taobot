@@ -92,6 +92,7 @@ private:
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
+  bool should_stop_loss = false; // TODO: Decide
   exit_prices_t exit_prices;
   candle_t day_candle;
   double current_epoch = time(nullptr);
@@ -117,6 +118,7 @@ private:
 
   bool is_end_of_quotes();
   bool is_entry_signal_present();
+  bool is_near_reversal(const reversal_t &);
   bool is_next_position_long();
   bool is_position_closed();
   bool is_trend_slipping(const order_t *);
@@ -209,6 +211,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
+  void set_should_stop_loss(); // TODO: Decide
   void toggle_is_trending(const order_t &);
   void update_account_snapshot(const bool);
   void update_margin_rate();
