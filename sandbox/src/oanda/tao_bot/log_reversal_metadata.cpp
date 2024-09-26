@@ -5,6 +5,7 @@
 #include "is_trending.cpp"          // is_trending
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/time.cpp"       // ::utils::time_
+#include "ready_to_stop_loss.cpp"   // ready_to_stop_loss // TODO: Decide
 #include "tao_bot.h" // Oanda::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
 #include <stdio.h>   // printf
@@ -57,15 +58,20 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << should_always_reverse_profit_text << fmt.reset << std::endl;
 
   // TODO: Decide
-  Formatted::Stream should_stop_loss_color =
-      this->should_stop_loss ? fmt.green : fmt.red;
-  const std::string should_stop_loss_text =
-      this->should_stop_loss ? "YES" : "NO";
+  if (!this->api_client.config.should_immediately_stop_loss) {
+    const bool ready_to_stop_loss_ = ready_to_stop_loss();
 
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should stop loss? ");
-  std::cout << should_stop_loss_color << should_stop_loss_text << fmt.reset
-            << std::endl;
+    Formatted::Stream ready_to_stop_loss_color =
+        ready_to_stop_loss_ ? fmt.green : fmt.red;
+
+    const std::string ready_to_stop_loss_text =
+        ready_to_stop_loss_ ? "YES" : "NO";
+
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Ready to stop loss? ");
+    std::cout << ready_to_stop_loss_color << ready_to_stop_loss_text
+              << fmt.reset << std::endl;
+  }
 
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;

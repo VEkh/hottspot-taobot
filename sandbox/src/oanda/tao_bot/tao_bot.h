@@ -92,7 +92,6 @@ private:
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
-  bool should_stop_loss = false; // TODO: Decide
   exit_prices_t exit_prices;
   candle_t day_candle;
   double current_epoch = time(nullptr);
@@ -129,6 +128,7 @@ private:
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_profit();
+  bool ready_to_stop_loss(); // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);
