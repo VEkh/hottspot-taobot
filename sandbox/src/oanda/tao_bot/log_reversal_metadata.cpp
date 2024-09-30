@@ -46,17 +46,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  Formatted::Stream should_loss_toggle_trend_color =
-      this->api_client.config.should_loss_toggle_trend ? fmt.green : fmt.red;
-  const std::string should_loss_toggle_trend_text =
-      this->api_client.config.should_loss_toggle_trend ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should loss toggle trend? ");
-  std::cout << should_loss_toggle_trend_color << should_loss_toggle_trend_text
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
   Formatted::Stream should_stop_profit_color =
       this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
   const std::string should_stop_profit_text =

@@ -82,12 +82,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_loss_toggle_trend")) {
-    this->config.should_loss_toggle_trend =
-        (bool)api_key_json["should_loss_toggle_trend"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
@@ -106,9 +100,7 @@ void Oanda::Client::load_config() {
       .secondary_reversal_timeframe_minutes =
           this->config.secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_immediately_stop_loss =
-          this->config.should_immediately_stop_loss, // TODO: Decide
-      .should_loss_toggle_trend =
-          this->config.should_loss_toggle_trend,             // TODO: Decide
+          this->config.should_immediately_stop_loss,         // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
   };
 }
