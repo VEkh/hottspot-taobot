@@ -32,6 +32,7 @@ public:
     int reversal_timeframe_minutes = 60;
     int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
     bool should_immediately_stop_loss = true;     // TODO: Decide
+    bool should_loss_toggle_trend = true;         // TODO: Decide
     bool should_stop_profit = false;              // TODO: Decide
   } config;
 
