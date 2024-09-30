@@ -70,9 +70,21 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("secondary_reversal_timeframe_minutes")) {
+    this->config.secondary_reversal_timeframe_minutes =
+        (int)api_key_json["secondary_reversal_timeframe_minutes"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_immediately_stop_loss")) {
     this->config.should_immediately_stop_loss =
         (bool)api_key_json["should_immediately_stop_loss"];
+  }
+
+
+  // TODO: Decide
+  if (api_key_json.contains("should_stop_profit")) {
+    this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
 
   this->config = {
@@ -86,8 +98,11 @@ void Oanda::Client::load_config() {
           this->config.market_duration_hours, // TODO: Decide
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .secondary_reversal_timeframe_minutes =
+          this->config.secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_immediately_stop_loss =
           this->config.should_immediately_stop_loss, // TODO: Decide
+      .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
   };
 }
 

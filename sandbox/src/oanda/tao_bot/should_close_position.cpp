@@ -4,8 +4,9 @@
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "is_end_of_quotes.cpp"         // is_end_of_quotes
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
-#include "ready_to_stop_loss.cpp"       // ready_to_stop_loss
+#include "ready_to_stop_loss.cpp"       // ready_to_stop_loss // TODO: Decide
 #include "should_reverse_profit.cpp"    // should_reverse_profit
+#include "should_stop_profit.cpp"       // should_stop_profit // TODO: Decide
 #include "spread_limit.cpp"             // spread_limit
 #include "tao_bot.h"                    // Oanda::TaoBot, order_status_t
 
@@ -44,6 +45,11 @@ bool Oanda::TaoBot::should_close_position() {
   // TODO: Decide
   if (ready_to_stop_loss() && this->exit_prices.stop_loss &&
       this->open_order_ptr->profit <= this->exit_prices.stop_loss) {
+    return true;
+  }
+
+  // TODO: Decide
+  if (should_stop_profit()) {
     return true;
   }
 

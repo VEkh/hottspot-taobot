@@ -106,6 +106,7 @@ private:
   quote_t previous_quote;
   reversal_t entry_reversal;
   reversals_t reversals;
+  reversals_t secondary_reversals; // TODO: Decide
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
@@ -129,6 +130,7 @@ private:
   bool should_read_candles();
   bool should_reverse_profit();
   bool ready_to_stop_loss(); // TODO: Decide
+  bool should_stop_profit(); // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);

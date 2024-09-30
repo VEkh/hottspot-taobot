@@ -10,9 +10,15 @@ bool Oanda::TaoBot::should_toggle_is_trending(order_t &close_order,
   }
 
   if (close_order.min_profit > close_order.stop_loss) {
-    this->current_trend.at = close_order.stop_profit_reversal.at;
-    this->current_trend.trend =
-        close_order.stop_profit_reversal.to_trend_type();
+    // TODO: Decide
+    if (close_order.stop_profit_reversal.at) {
+      this->current_trend.at = close_order.stop_profit_reversal.at;
+      this->current_trend.trend =
+          close_order.stop_profit_reversal.to_trend_type();
+    } else {
+      this->current_trend.at = close_order.timestamp;
+      this->current_trend.trend = open_order.entry_reversal.to_trend_type();
+    }
 
     return false;
   }

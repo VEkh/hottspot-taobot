@@ -84,6 +84,10 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->reversals.timeframe_minutes =
       this->api_client.config.reversal_timeframe_minutes;
 
+  // TODO: Decide
+  this->secondary_reversals.timeframe_minutes =
+      this->api_client.config.secondary_reversal_timeframe_minutes;
+
   ensure_market_is_open();
   read_closed_positions();
 
