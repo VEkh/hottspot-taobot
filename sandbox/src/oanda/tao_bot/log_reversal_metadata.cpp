@@ -46,6 +46,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Reversal Proximity Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.reversal_proximity_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_stop_profit_color =
       this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
   const std::string should_stop_profit_text =

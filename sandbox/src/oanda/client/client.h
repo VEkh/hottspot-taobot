@@ -27,12 +27,17 @@ public:
     std::string authentication_token;
     std::string base_url;
     bool debug_sql = false;
+    std::string entry_reversal_at_type = "first"; // TODO: Decide
     std::list<std::string> env_symbols;
-    int market_duration_hours = 0; // TODO: Decide
+    int market_duration_hours = 0;         // TODO: Decide
+    double reversal_proximity_ratio = 0.0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
-    int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
-    bool should_immediately_stop_loss = true;     // TODO: Decide
-    bool should_stop_profit = false;              // TODO: Decide
+    int secondary_reversal_timeframe_minutes = 0;       // TODO: Decide
+    bool should_entry_predict_reversal = true;          // TODO: Decide
+    bool should_immediately_stop_loss = true;           // TODO: Decide
+    bool should_stop_profit = false;                    // TODO: Decide
+    std::string stop_loss_reversals_name = "secondary"; // TODO: Decide
+    double stop_profit_ratio = 0.8;                     // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

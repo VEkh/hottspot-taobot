@@ -7,6 +7,9 @@
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Oanda::TaoBot, position_t, reversal_t, reversal_type_t
 
+// TODO: Decide
+#include "is_near_reversal.cpp"      // is_near_reversal
+
 bool Oanda::TaoBot::is_entry_signal_present() {
   const bool is_trending_ = is_trending();
 
@@ -60,6 +63,11 @@ bool Oanda::TaoBot::is_entry_signal_present() {
       const int trend_at_minute = this->current_trend.at / 60;
 
       if (reversal_at_minute < trend_at_minute) {
+        reversal = reversal_t();
+      }
+
+      // TODO: Decide
+      if (!is_near_reversal(reversal)) {
         reversal = reversal_t();
       }
     }

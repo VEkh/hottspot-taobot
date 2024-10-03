@@ -70,6 +70,12 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("reversal_proximity_ratio")) {
+    this->config.reversal_proximity_ratio =
+        (double)api_key_json["reversal_proximity_ratio"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("secondary_reversal_timeframe_minutes")) {
     this->config.secondary_reversal_timeframe_minutes =
         (int)api_key_json["secondary_reversal_timeframe_minutes"];
@@ -95,6 +101,8 @@ void Oanda::Client::load_config() {
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .market_duration_hours =
           this->config.market_duration_hours, // TODO: Decide
+      .reversal_proximity_ratio =
+          this->config.reversal_proximity_ratio, // TODO: Decide
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
       .secondary_reversal_timeframe_minutes =

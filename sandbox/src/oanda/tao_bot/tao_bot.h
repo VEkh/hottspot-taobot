@@ -118,7 +118,7 @@ private:
 
   bool is_end_of_quotes();
   bool is_entry_signal_present();
-  bool is_near_reversal(const reversal_t &);
+  bool is_near_reversal(reversal_t &);
   bool is_next_position_long();
   bool is_position_closed();
   bool is_trend_slipping(const order_t *);

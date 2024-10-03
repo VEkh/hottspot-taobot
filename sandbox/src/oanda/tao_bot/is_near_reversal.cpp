@@ -6,8 +6,11 @@
 #include "tao_bot.h"       // Oanda::TaoBot, reversal_t
 #include <math.h>          // abs
 
-bool Oanda::TaoBot::is_near_reversal(const reversal_t &reversal) {
-  if (!this->api_client.config.should_enter_near_reversal) {
+bool Oanda::TaoBot::is_near_reversal(reversal_t &reversal) {
+  const double reversal_proximity_ratio =
+      this->api_client.config.reversal_proximity_ratio;
+
+  if (!reversal_proximity_ratio) {
     return true;
   }
 
@@ -16,9 +19,13 @@ bool Oanda::TaoBot::is_near_reversal(const reversal_t &reversal) {
   }
 
   const double delta = abs(current_mid() - reversal.mid);
-  const double threshold = 0.01 * this->day_candle.range();
+  const double threshold = reversal_proximity_ratio * this->day_candle.range();
 
-  return delta <= threshold;
+  if (delta <= threshold) {
+    return true;
+  }
+
+  return false;
 }
 
 #endif
