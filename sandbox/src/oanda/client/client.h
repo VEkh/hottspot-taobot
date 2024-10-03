@@ -33,7 +33,6 @@ public:
     double reversal_proximity_ratio = 0.0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
     int secondary_reversal_timeframe_minutes = 0;       // TODO: Decide
-    bool should_entry_predict_reversal = true;          // TODO: Decide
     bool should_immediately_stop_loss = true;           // TODO: Decide
     bool should_stop_profit = false;                    // TODO: Decide
     std::string stop_loss_reversals_name = "secondary"; // TODO: Decide

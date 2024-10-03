@@ -21,15 +21,7 @@ bool Oanda::TaoBot::is_near_reversal(reversal_t &reversal) {
   const double delta = abs(current_mid() - reversal.mid);
   const double threshold = reversal_proximity_ratio * this->day_candle.range();
 
-  if (delta <= threshold) {
-    if (!this->api_client.config.should_entry_predict_reversal) {
-      reversal.type = reversal.opposite_type();
-    }
-
-    return true;
-  }
-
-  return false;
+  return delta <= threshold;
 }
 
 #endif
