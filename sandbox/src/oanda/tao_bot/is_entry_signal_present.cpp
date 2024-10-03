@@ -9,6 +9,7 @@
 
 // TODO: Decide
 #include "is_near_reversal.cpp"      // is_near_reversal
+#include "latest_reversal_after.cpp" // latest_reversal_after
 
 bool Oanda::TaoBot::is_entry_signal_present() {
   const bool is_trending_ = is_trending();
@@ -43,22 +44,41 @@ bool Oanda::TaoBot::is_entry_signal_present() {
 
       reversal = last_position.close_order.stop_profit_reversal;
     } else {
-      const reversal_t first_high =
-          first_reversal_after(this->reversals, this->current_trend.at,
-                               reversal_type_t::REVERSAL_HIGH);
+      const std::string entry_reversal_at_type =
+          this->api_client.config.entry_reversal_at_type;
 
-      const reversal_t first_low =
-          first_reversal_after(this->reversals, this->current_trend.at,
-                               reversal_type_t::REVERSAL_LOW);
+      if (entry_reversal_at_type == "latest") {
+        reversal =
+            latest_reversal_after(this->reversals, this->current_trend.at);
 
-      if (first_high.mid &&
-          day_range_percentile(first_high.mid) >= this->EQUATOR_PERCENTILE) {
-        reversal = first_high;
-      } else if (first_low.mid && day_range_percentile(first_low.mid) <=
-                                      this->EQUATOR_PERCENTILE) {
-        reversal = first_low;
+        if (reversal.type == reversal_type_t::REVERSAL_HIGH &&
+            day_range_percentile(reversal.mid) < this->EQUATOR_PERCENTILE) {
+          reversal = reversal_t();
+        }
+
+        if (reversal.type == reversal_type_t::REVERSAL_LOW &&
+            day_range_percentile(reversal.mid) > this->EQUATOR_PERCENTILE) {
+          reversal = reversal_t();
+        }
+      } else {
+        const reversal_t first_high =
+            first_reversal_after(this->reversals, this->current_trend.at,
+                                 reversal_type_t::REVERSAL_HIGH);
+
+        const reversal_t first_low =
+            first_reversal_after(this->reversals, this->current_trend.at,
+                                 reversal_type_t::REVERSAL_LOW);
+
+        if (first_high.mid &&
+            day_range_percentile(first_high.mid) >= this->EQUATOR_PERCENTILE) {
+          reversal = first_high;
+        } else if (first_low.mid && day_range_percentile(first_low.mid) <=
+                                        this->EQUATOR_PERCENTILE) {
+          reversal = first_low;
+        }
       }
 
+      // TODO: Delete since being after the current trend is already enforced
       const int reversal_at_minute = reversal.at / 60;
       const int trend_at_minute = this->current_trend.at / 60;
 

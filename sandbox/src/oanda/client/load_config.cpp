@@ -64,6 +64,12 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("entry_reversal_at_type")) {
+    this->config.entry_reversal_at_type =
+        (std::string)api_key_json["entry_reversal_at_type"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("market_duration_hours")) {
     this->config.market_duration_hours =
         (int)api_key_json["market_duration_hours"];
@@ -115,6 +121,8 @@ void Oanda::Client::load_config() {
       .authentication_token = api_key_json["authentication_token"],
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
+      .entry_reversal_at_type =
+          this->config.entry_reversal_at_type, // TODO: Decide
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .market_duration_hours =
           this->config.market_duration_hours, // TODO: Decide

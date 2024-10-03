@@ -41,6 +41,14 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Entry Reversal At Type: ");
+  std::cout << fmt.cyan
+            << ::utils::string::upcase(
+                   this->api_client.config.entry_reversal_at_type)
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Market Duration Hours: ");
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
             << fmt.reset << std::endl;

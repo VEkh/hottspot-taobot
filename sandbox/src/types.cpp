@@ -122,7 +122,7 @@ struct reversal_t {
   bool is_running_record = false;
   double mid = 0;
   int timeframe_minutes = 0;
-  reversal_type_t type;
+  reversal_type_t type = reversal_type_t::REVERSAL_NULL;
 
   reversal_type_t opposite_type() {
     switch (this->type) {
