@@ -3,7 +3,7 @@
 #define OANDA__TAO_BOT_ready_to_stop_loss
 
 #include "latest_reversal_after.cpp" // latest_reversal_after
-#include "tao_bot.h" // Oanda::TaoBot,  reversal_t, reversal_type_t
+#include "tao_bot.h" // Oanda::TaoBot,  reversal_t, reversal_type_t, reversals_t
 
 bool Oanda::TaoBot::ready_to_stop_loss() {
   if (!this->open_order_ptr) {
@@ -16,8 +16,14 @@ bool Oanda::TaoBot::ready_to_stop_loss() {
 
   const reversal_t entry_reversal_ = this->open_order_ptr->entry_reversal;
 
+  reversals_t stop_loss_reversals =
+      this->api_client.config.stop_loss_reversals_name == "secondary"
+          ? this->secondary_reversals
+          : this->reversals;
+
   const reversal_t latest_reversal_ = latest_reversal_after(
-      this->reversals, entry_reversal_.at + 60, entry_reversal_.type);
+      stop_loss_reversals, this->open_order_ptr->timestamp,
+      entry_reversal_.type);
 
   if (!latest_reversal_.at) {
     return false;

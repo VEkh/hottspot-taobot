@@ -76,6 +76,14 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Loss Reversals: ");
+  std::cout << fmt.cyan
+            << ::utils::string::upcase(
+                   this->api_client.config.stop_loss_reversals_name)
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Stop Profit Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_profit_ratio
             << fmt.reset << std::endl;
