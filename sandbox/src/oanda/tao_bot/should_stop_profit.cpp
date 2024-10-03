@@ -36,9 +36,10 @@ bool Oanda::TaoBot::should_stop_profit() {
           : execution_mid - stop_profit_reversal.mid;
 
   const double current_profit = this->open_order_ptr->profit;
+  const double stop_profit_ratio = this->api_client.config.stop_profit_ratio;
 
   if (stop_profit_reversal_profit > 0 &&
-      current_profit >= 0.8 * stop_profit_reversal_profit) {
+      current_profit >= stop_profit_ratio * stop_profit_reversal_profit) {
     return true;
   }
 

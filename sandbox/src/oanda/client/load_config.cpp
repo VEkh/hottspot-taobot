@@ -98,6 +98,11 @@ void Oanda::Client::load_config() {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("stop_profit_ratio")) {
+    this->config.stop_profit_ratio = (double)api_key_json["stop_profit_ratio"];
+  }
+
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -118,6 +123,7 @@ void Oanda::Client::load_config() {
       .should_immediately_stop_loss =
           this->config.should_immediately_stop_loss,         // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
+      .stop_profit_ratio = this->config.stop_profit_ratio, // TODO: Decide
   };
 }
 
