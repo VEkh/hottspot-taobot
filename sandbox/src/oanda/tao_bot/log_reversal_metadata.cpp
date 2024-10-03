@@ -52,6 +52,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream should_entry_predict_reversal_color =
+      this->api_client.config.should_entry_predict_reversal ? fmt.green
+                                                            : fmt.red;
+  const std::string should_entry_predict_reversal_text =
+      this->api_client.config.should_entry_predict_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should entry predict reversal? ");
+  std::cout << should_entry_predict_reversal_color
+            << should_entry_predict_reversal_text << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_stop_profit_color =
       this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
   const std::string should_stop_profit_text =
