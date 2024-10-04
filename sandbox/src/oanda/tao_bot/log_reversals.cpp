@@ -27,7 +27,12 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
   std::map<double, reversal_t>::reverse_iterator it = reversals_.highs.rbegin();
   int i = 0;
 
-  for (; it != reversals_.highs.rend() && i < limit; it++, i++) {
+  for (; it != reversals_.highs.rend() && i < limit; it++) {
+    if (it->first + reversals_.timeframe_seconds() * 0.5 >
+        this->current_epoch) {
+      continue;
+    }
+
     Formatted::Stream log_color = it->second.is_record ? fmt.yellow : fmt.green;
     const std::string all_time_text = it->second.is_running_record ? "🌟" : "";
 
@@ -37,6 +42,8 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
            ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago")
                .c_str(),
            all_time_text.c_str());
+
+    i++;
   }
 
   std::cout << fmt.reset << std::endl;
@@ -47,7 +54,12 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
   it = reversals_.lows.rbegin();
   i = 0;
 
-  for (; it != reversals_.lows.rend() && i < limit; it++, i++) {
+  for (; it != reversals_.lows.rend() && i < limit; it++) {
+    if (it->first + reversals_.timeframe_seconds() * 0.5 >
+        this->current_epoch) {
+      continue;
+    }
+
     Formatted::Stream log_color = it->second.is_record ? fmt.yellow : fmt.red;
     const std::string all_time_text = it->second.is_running_record ? "🌟" : "";
 
@@ -57,6 +69,8 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
            ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago")
                .c_str(),
            all_time_text.c_str());
+
+    i++;
   }
 
   std::cout << fmt.bold << fmt.magenta << std::endl;

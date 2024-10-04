@@ -18,6 +18,10 @@ void Oanda::TaoBot::build_reversals(reversals_t &reversals_,
     return;
   }
 
+  if (this->backtest.is_active && !reversals_.every_empty()) {
+    return;
+  }
+
   const bool are_reversals_updated =
       reversals_.candles_count == this->latest_candles.size();
 

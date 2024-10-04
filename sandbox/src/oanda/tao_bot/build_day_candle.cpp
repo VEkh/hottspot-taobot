@@ -6,6 +6,10 @@
 
 void Oanda::TaoBot::build_day_candle() {
   for (const candle_t candle : this->latest_candles) {
+    if (candle.opened_at > this->current_epoch) {
+      break;
+    }
+
     this->day_candle.close = candle.close;
     this->day_candle.closed_at = candle.closed_at;
 

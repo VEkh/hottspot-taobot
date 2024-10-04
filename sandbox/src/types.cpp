@@ -162,6 +162,7 @@ struct reversals_t {
 
   bool any_empty() { return this->highs.empty() || this->lows.empty(); }
   bool every_empty() { return this->highs.empty() && this->lows.empty(); }
+  int timeframe_seconds() { return this->timeframe_minutes * 60; }
 };
 
 struct trend_meta_t {
