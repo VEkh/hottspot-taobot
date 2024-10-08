@@ -31,8 +31,8 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   if (is_trending()) {
     trend_status_text +=
-        (" @ " + ::utils::time_::date_string(this->current_trend.at, "%H:%M",
-                                             "America/Chicago"));
+        (" @ " + ::utils::time_::date_string(this->current_trend.at,
+                                             "%m/%d %R %Z", "America/Chicago"));
   }
 
   std::cout << fmt.bold << fmt.yellow;
@@ -109,18 +109,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
     if (reversal.type == reversal_type_t::REVERSAL_LOW) {
       std::cout << fmt.bold << fmt.red;
-      printf(
-          "Low: %'.5f p%.2f%% @ %s", reversal.mid,
-          day_range_percentile(reversal.mid),
-          ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-              .c_str());
+      printf("Low: %'.5f p%.2f%% @ %s", reversal.mid,
+             day_range_percentile(reversal.mid),
+             ::utils::time_::date_string(reversal.at, "%m/%d %R %Z",
+                                         "America/Chicago")
+                 .c_str());
     } else {
       std::cout << fmt.bold << fmt.green;
-      printf(
-          "High: %'.5f p%.2f%% @ %s", reversal.mid,
-          day_range_percentile(reversal.mid),
-          ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
-              .c_str());
+      printf("High: %'.5f p%.2f%% @ %s", reversal.mid,
+             day_range_percentile(reversal.mid),
+             ::utils::time_::date_string(reversal.at, "%m/%d %R %Z",
+                                         "America/Chicago")
+                 .c_str());
     }
 
     std::cout << std::endl;

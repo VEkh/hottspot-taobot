@@ -38,7 +38,7 @@ void Oanda::TaoBot::log_position() {
   printf("Open   => Execution: %'.5f @ %s • Profit    : %+'.5f (%+.2f%%)\n",
          this->open_order_ptr->execution_price,
          ::utils::time_::date_string(this->open_order_ptr->timestamp,
-                                     "%H:%M %Z", "America/Chicago")
+                                     "%m/%d %R %Z", "America/Chicago")
              .c_str(),
          this->open_order_ptr->profit,
          profit_percentage(this->open_order_ptr, "profit"));
@@ -49,7 +49,7 @@ void Oanda::TaoBot::log_position() {
          this->open_order_ptr->max_profit,
          profit_percentage(this->open_order_ptr, "max_profit"),
          ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
-                                     "%H:%M %Z", "America/Chicago")
+                                     "%m/%d %R %Z", "America/Chicago")
              .c_str(),
          this->open_order_ptr->profit == this->open_order_ptr->max_profit ? " 🔥"
                                                                           : "");
@@ -60,7 +60,7 @@ void Oanda::TaoBot::log_position() {
          this->open_order_ptr->min_profit,
          profit_percentage(this->open_order_ptr, "min_profit"),
          ::utils::time_::date_string(this->open_order_ptr->min_profit_at,
-                                     "%H:%M %Z", "America/Chicago")
+                                     "%m/%d %R %Z", "America/Chicago")
              .c_str(),
          this->open_order_ptr->profit == this->open_order_ptr->min_profit ? " 💦"
                                                                           : "");

@@ -32,11 +32,11 @@ void Oanda::TaoBot::log_quote() {
 
   printf("High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f\n",
          this->day_candle.high,
-         ::utils::time_::date_string(this->day_candle.high_at, "%R CT",
+         ::utils::time_::date_string(this->day_candle.high_at, "%m/%d %R %Z",
                                      "America/Chicago")
              .c_str(),
          this->day_candle.low,
-         ::utils::time_::date_string(this->day_candle.low_at, "%R CT",
+         ::utils::time_::date_string(this->day_candle.low_at, "%m/%d %R %Z",
                                      "America/Chicago")
              .c_str(),
          this->day_candle.range());

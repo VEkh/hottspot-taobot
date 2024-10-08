@@ -39,7 +39,7 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
     std::cout << log_color;
 
     printf(" %s%s",
-           ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago")
+           ::utils::time_::date_string(it->first, "%m/%d %R", "America/Chicago")
                .c_str(),
            all_time_text.c_str());
 
@@ -66,7 +66,7 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
     std::cout << log_color;
 
     printf(" %s%s",
-           ::utils::time_::date_string(it->first, "%H:%M", "America/Chicago")
+           ::utils::time_::date_string(it->first, "%m/%d %R", "America/Chicago")
                .c_str(),
            all_time_text.c_str());
 

@@ -48,14 +48,14 @@ void Oanda::TaoBot::log_account_snapshot() {
       "Max Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
       this->account_snapshot.max_equity, max_profit, max_profit_percentage,
       ::utils::time_::date_string(this->account_snapshot.max_equity_timestamp,
-                                  "%H:%M %Z", "America/Chicago")
+                                  "%m/%d %R %Z", "America/Chicago")
           .c_str());
 
   printf(
       "Min Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
       this->account_snapshot.min_equity, min_profit, min_profit_percentage,
       ::utils::time_::date_string(this->account_snapshot.min_equity_timestamp,
-                                  "%H:%M %Z", "America/Chicago")
+                                  "%m/%d %R %Z", "America/Chicago")
           .c_str());
 
   printf("Original Equity:                  $%'.5f\n",
