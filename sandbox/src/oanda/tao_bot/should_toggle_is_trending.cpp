@@ -24,6 +24,15 @@ bool Oanda::TaoBot::should_toggle_is_trending(order_t &close_order,
   }
 
   // TODO: Decide
+  if (this->api_client.config.should_stop_profit &&
+      this->close_order.profit > 0) {
+    this->current_trend.at = close_order.timestamp;
+    this->current_trend.trend = open_order.entry_reversal.to_trend_type();
+
+    return false;
+  }
+
+  // TODO: Decide
   if (!this->api_client.config.should_immediately_stop_loss) {
     this->current_trend.at = close_order.timestamp;
     this->current_trend.trend = open_order.entry_reversal.to_trend_type();

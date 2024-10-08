@@ -94,6 +94,12 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_reverse_after_loss")) {
+    this->config.should_reverse_after_loss =
+        (bool)api_key_json["should_reverse_after_loss"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
@@ -107,6 +113,12 @@ void Oanda::Client::load_config() {
   // TODO: Decide
   if (api_key_json.contains("stop_profit_ratio")) {
     this->config.stop_profit_ratio = (double)api_key_json["stop_profit_ratio"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("tertiary_reversal_timeframe_minutes")) {
+    this->config.tertiary_reversal_timeframe_minutes =
+        (int)api_key_json["tertiary_reversal_timeframe_minutes"];
   }
 
   this->config = {
@@ -127,11 +139,15 @@ void Oanda::Client::load_config() {
       .secondary_reversal_timeframe_minutes =
           this->config.secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_immediately_stop_loss =
-          this->config.should_immediately_stop_loss,         // TODO: Decide
+          this->config.should_immediately_stop_loss, // TODO: Decide
+      .should_reverse_after_loss =
+          this->config.should_reverse_after_loss,            // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .stop_loss_reversals_name =
           this->config.stop_loss_reversals_name,           // TODO: Decide
       .stop_profit_ratio = this->config.stop_profit_ratio, // TODO: Decide
+      .tertiary_reversal_timeframe_minutes =
+          this->config.tertiary_reversal_timeframe_minutes, // TODO: Decide
   };
 }
 

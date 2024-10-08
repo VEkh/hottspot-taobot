@@ -34,9 +34,11 @@ public:
     int reversal_timeframe_minutes = 60;
     int secondary_reversal_timeframe_minutes = 0;       // TODO: Decide
     bool should_immediately_stop_loss = true;           // TODO: Decide
+    bool should_reverse_after_loss = false;             // TODO: Decide
     bool should_stop_profit = false;                    // TODO: Decide
     std::string stop_loss_reversals_name = "secondary"; // TODO: Decide
     double stop_profit_ratio = 0.8;                     // TODO: Decide
+    int tertiary_reversal_timeframe_minutes = 0;        // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

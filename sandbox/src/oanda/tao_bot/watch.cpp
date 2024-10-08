@@ -48,6 +48,7 @@ void Oanda::TaoBot::watch() {
       build_day_candle();
       build_reversals(this->reversals, true);
       build_reversals(this->secondary_reversals, true); // TODO: Decide
+      build_reversals(this->tertiary_reversals, true);  // TODO: Decide
 
       if (!this->backtest.is_active ||
           !this->backtest.config.force_exec_slow_queries) {
@@ -61,6 +62,7 @@ void Oanda::TaoBot::watch() {
         log_price_action();
         log_reversals(this->reversals);
         log_reversals(this->secondary_reversals); // TODO: Decide
+        log_reversals(this->tertiary_reversals);  // TODO: Decide
         log_reversal_metadata();
         log_position();
         log_performance();

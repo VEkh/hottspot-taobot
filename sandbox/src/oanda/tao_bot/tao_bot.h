@@ -107,6 +107,7 @@ private:
   reversal_t entry_reversal;
   reversals_t reversals;
   reversals_t secondary_reversals; // TODO: Decide
+  reversals_t tertiary_reversals;  // TODO: Decide
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
@@ -165,11 +166,15 @@ private:
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);
 
+  reversal_t nearer_reversal(const reversal_t, const reversal_t, const double);
+
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const int);
 
   std::string base_currency();
+  std::string stop_loss_reversals_name(); // TODO: Decide
+
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void build_day_candle();

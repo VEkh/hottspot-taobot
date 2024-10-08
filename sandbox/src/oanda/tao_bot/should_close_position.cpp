@@ -45,6 +45,15 @@ bool Oanda::TaoBot::should_close_position() {
   // TODO: Decide
   if (ready_to_stop_loss() && this->exit_prices.stop_loss &&
       this->open_order_ptr->profit <= this->exit_prices.stop_loss) {
+    // TODO: Decide
+    if (this->api_client.config.should_reverse_after_loss) {
+      reversal_t stop_profit_reversal = this->open_order_ptr->entry_reversal;
+
+      this->close_order_ptr->stop_profit_reversal = stop_profit_reversal;
+      this->close_order_ptr->stop_profit_reversal.type =
+          stop_profit_reversal.opposite_type();
+    }
+
     return true;
   }
 

@@ -51,6 +51,11 @@ void Oanda::TaoBot::reset_backtest() {
   this->started_at = this->current_epoch;
 
   // TODO: Decide
+  this->tertiary_reversals = reversals_t();
+  this->tertiary_reversals.timeframe_minutes =
+      this->api_client.config.tertiary_reversal_timeframe_minutes;
+
+  // TODO: Decide
   this->market_availability.set_market_epochs(
       this->current_epoch, this->api_client.config.market_duration_hours);
 

@@ -5,6 +5,7 @@
 #include "first_reversal_after.cpp"   // first_reversal_after
 #include "is_trending.cpp"            // is_trending
 #include "latest_record_reversal.cpp" // latest_record_reversal
+#include "nearer_reversal.cpp"        // nearer_reversal
 #include "tao_bot.h" // Oanda::TaoBot, position_t, reversal_t, reversal_type_t
 
 // TODO: Decide
@@ -60,6 +61,33 @@ bool Oanda::TaoBot::is_entry_signal_present() {
             day_range_percentile(reversal.mid) > this->EQUATOR_PERCENTILE) {
           reversal = reversal_t();
         }
+      } else if (entry_reversal_at_type == "first_xor") {
+        reversal_t first_high =
+            first_reversal_after(this->reversals, this->current_trend.at,
+                                 reversal_type_t::REVERSAL_HIGH);
+
+        reversal_t first_low =
+            first_reversal_after(this->reversals, this->current_trend.at,
+                                 reversal_type_t::REVERSAL_LOW);
+        if (!first_high.mid) {
+          first_high = reversal_t();
+        }
+
+        if (first_high.mid &&
+            day_range_percentile(first_high.mid) < this->EQUATOR_PERCENTILE) {
+          first_high = reversal_t();
+        }
+
+        if (!first_low.mid) {
+          first_low = reversal_t();
+        }
+
+        if (first_low.mid &&
+            day_range_percentile(first_low.mid) > this->EQUATOR_PERCENTILE) {
+          first_low = reversal_t();
+        }
+
+        reversal = nearer_reversal(first_high, first_low, current_mid());
       } else {
         const reversal_t first_high =
             first_reversal_after(this->reversals, this->current_trend.at,

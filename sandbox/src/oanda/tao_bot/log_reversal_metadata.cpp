@@ -11,6 +11,8 @@
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
+#include "stop_loss_reversals_name.cpp" // TODO: Decide
+
 void Oanda::TaoBot::log_reversal_metadata() {
   Formatted::Stream trend_status_color = fmt.cyan;
   std::string trend_status_text = "REVERSING";
@@ -60,6 +62,17 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream should_reverse_after_loss_color =
+      this->api_client.config.should_reverse_after_loss ? fmt.green : fmt.red;
+  const std::string should_reverse_after_loss_text =
+      this->api_client.config.should_reverse_after_loss ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should reverse after loss? ");
+  std::cout << should_reverse_after_loss_color << should_reverse_after_loss_text
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_stop_profit_color =
       this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
   const std::string should_stop_profit_text =
@@ -73,9 +86,7 @@ void Oanda::TaoBot::log_reversal_metadata() {
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Reversals: ");
-  std::cout << fmt.cyan
-            << ::utils::string::upcase(
-                   this->api_client.config.stop_loss_reversals_name)
+  std::cout << fmt.cyan << ::utils::string::upcase(stop_loss_reversals_name())
             << fmt.reset << std::endl;
 
   // TODO: Decide
