@@ -27,16 +27,19 @@ public:
     std::string authentication_token;
     std::string base_url;
     bool debug_sql = false;
-    std::string entry_reversal_at_type = "first"; // TODO: Decide
     std::list<std::string> env_symbols;
     int market_duration_hours = 0;         // TODO: Decide
     double reversal_proximity_ratio = 0.0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
     int secondary_reversal_timeframe_minutes = 0;       // TODO: Decide
     bool should_immediately_stop_loss = true;           // TODO: Decide
-    bool should_reverse_after_loss = false;             // TODO: Decide
+    bool should_only_reverse_loss = false;              // TODO: Decide
+    bool should_reverse_profit = false;                 // TODO: Decide
     bool should_stop_profit = false;                    // TODO: Decide
+    bool should_toggle_entry_direction = false;         // TODO: Decide
+    double stop_loss_padding_ratio = 0.0;               // TODO: Decide
     std::string stop_loss_reversals_name = "secondary"; // TODO: Decide
+    double stop_profit_day_range_ratio = 0.0;           // TODO: Decide
     double stop_profit_ratio = 0.8;                     // TODO: Decide
     int tertiary_reversal_timeframe_minutes = 0;        // TODO: Decide
   } config;

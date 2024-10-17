@@ -44,86 +44,63 @@ bool Oanda::TaoBot::is_entry_signal_present() {
       const position_t last_position = this->closed_positions.back();
 
       reversal = last_position.close_order.stop_profit_reversal;
-    } else {
-      const std::string entry_reversal_at_type =
-          this->api_client.config.entry_reversal_at_type;
+      // TODO: Decide
+    } else if (!this->context_entry_reversal.mid) {
+      reversal_t first_high =
+          first_reversal_after(this->reversals, this->current_trend.at,
+                               reversal_type_t::REVERSAL_HIGH);
 
-      if (entry_reversal_at_type == "latest") {
-        reversal =
-            latest_reversal_after(this->reversals, this->current_trend.at);
-
-        if (reversal.type == reversal_type_t::REVERSAL_HIGH &&
-            day_range_percentile(reversal.mid) < this->EQUATOR_PERCENTILE) {
-          reversal = reversal_t();
-        }
-
-        if (reversal.type == reversal_type_t::REVERSAL_LOW &&
-            day_range_percentile(reversal.mid) > this->EQUATOR_PERCENTILE) {
-          reversal = reversal_t();
-        }
-      } else if (entry_reversal_at_type == "first_xor") {
-        reversal_t first_high =
-            first_reversal_after(this->reversals, this->current_trend.at,
-                                 reversal_type_t::REVERSAL_HIGH);
-
-        reversal_t first_low =
-            first_reversal_after(this->reversals, this->current_trend.at,
-                                 reversal_type_t::REVERSAL_LOW);
-        if (!first_high.mid) {
-          first_high = reversal_t();
-        }
-
-        if (first_high.mid &&
-            day_range_percentile(first_high.mid) < this->EQUATOR_PERCENTILE) {
-          first_high = reversal_t();
-        }
-
-        if (!first_low.mid) {
-          first_low = reversal_t();
-        }
-
-        if (first_low.mid &&
-            day_range_percentile(first_low.mid) > this->EQUATOR_PERCENTILE) {
-          first_low = reversal_t();
-        }
-
-        reversal = nearer_reversal(first_high, first_low, current_mid());
-      } else {
-        const reversal_t first_high =
-            first_reversal_after(this->reversals, this->current_trend.at,
-                                 reversal_type_t::REVERSAL_HIGH);
-
-        const reversal_t first_low =
-            first_reversal_after(this->reversals, this->current_trend.at,
-                                 reversal_type_t::REVERSAL_LOW);
-
-        if (first_high.mid &&
-            day_range_percentile(first_high.mid) >= this->EQUATOR_PERCENTILE) {
-          reversal = first_high;
-        } else if (first_low.mid && day_range_percentile(first_low.mid) <=
-                                        this->EQUATOR_PERCENTILE) {
-          reversal = first_low;
-        }
+      reversal_t first_low =
+          first_reversal_after(this->reversals, this->current_trend.at,
+                               reversal_type_t::REVERSAL_LOW);
+      if (!first_high.mid) {
+        first_high = reversal_t();
       }
 
-      // TODO: Delete since being after the current trend is already enforced
-      const int reversal_at_minute = reversal.at / 60;
-      const int trend_at_minute = this->current_trend.at / 60;
-
-      if (reversal_at_minute < trend_at_minute) {
-        reversal = reversal_t();
+      if (first_high.mid &&
+          day_range_percentile(first_high.mid) < this->EQUATOR_PERCENTILE) {
+        first_high = reversal_t();
       }
+
+      if (!first_low.mid) {
+        first_low = reversal_t();
+      }
+
+      if (first_low.mid &&
+          day_range_percentile(first_low.mid) > this->EQUATOR_PERCENTILE) {
+        first_low = reversal_t();
+      }
+
+      reversal = nearer_reversal(first_high, first_low, current_mid());
 
       // TODO: Decide
       if (!is_near_reversal(reversal)) {
         reversal = reversal_t();
       }
+
+      // // TODO: Decide
+      // if (reversal.mid) {
+      //   this->context_entry_reversal = reversal;
+      //   this->current_trend.at = this->current_epoch;
+      //   this->current_trend.trend = reversal.to_trend_type();
+
+      //   reversal = reversal_t();
+      // }
+      // TODO: Decide
+    } else if (this->context_entry_reversal.mid) {
+      reversal = latest_reversal_after(this->reversals, this->current_trend.at,
+                                       this->context_entry_reversal.type);
     }
 
     entry_reversal_ = reversal;
   }
 
   if (entry_reversal_.at) {
+    // TODO: Decide
+    if (!this->is_entry_reversal) {
+      entry_reversal_.type = entry_reversal_.opposite_type();
+    }
+
     this->entry_reversal = entry_reversal_;
 
     return true;

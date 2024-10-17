@@ -11,6 +11,13 @@ double Oanda::TaoBot::day_range_percentile(const double mid) {
   return isnan(percentile) ? 0.0 : percentile;
 }
 
+double Oanda::TaoBot::day_range_percentile(const double mid,
+                                           const bool invert) {
+  const double percentile = day_range_percentile(mid);
+
+  return invert ? 100.0 - percentile : percentile;
+}
+
 double Oanda::TaoBot::day_range_percentile(const order_t *order,
                                            const double profit) {
   const double execution_mid = order->execution_price;
@@ -18,13 +25,8 @@ double Oanda::TaoBot::day_range_percentile(const order_t *order,
                                 ? execution_mid + profit
                                 : execution_mid - profit;
 
-  const double percentile = day_range_percentile(profit_mid);
-
-  if (order->action == order_action_t::BUY) {
-    return percentile;
-  }
-
-  return 100.0 - percentile;
+  return day_range_percentile(profit_mid,
+                              order->action == order_action_t::SELL);
 }
 
 #endif

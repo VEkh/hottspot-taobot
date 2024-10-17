@@ -44,6 +44,11 @@ void Oanda::TaoBot::reset_backtest() {
       this->api_client.config.reversal_timeframe_minutes;
 
   // TODO: Decide
+  if (this->api_client.config.should_toggle_entry_direction) {
+    this->is_entry_reversal = true;
+  }
+
+  // TODO: Decide
   this->secondary_reversals = reversals_t();
   this->secondary_reversals.timeframe_minutes =
       this->api_client.config.secondary_reversal_timeframe_minutes;

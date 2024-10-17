@@ -94,6 +94,7 @@ private:
   account_snapshot_t account_snapshot;
   exit_prices_t exit_prices;
   candle_t day_candle;
+  bool is_entry_reversal = true; // TODO: Decide
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
@@ -105,6 +106,7 @@ private:
   quote_t current_quote;
   quote_t previous_quote;
   reversal_t entry_reversal;
+  reversal_t context_entry_reversal; // TODO: Decide
   reversals_t reversals;
   reversals_t secondary_reversals; // TODO: Decide
   reversals_t tertiary_reversals;  // TODO: Decide
@@ -140,6 +142,7 @@ private:
   double convert_price(const double, const std::string, const std::string);
   double current_mid();
   double day_range_percentile(const double);
+  double day_range_percentile(const double, const bool);
   double day_range_percentile(const order_t *, double);
   double margin_buying_power();
   double open_position_profit(const order_t *);

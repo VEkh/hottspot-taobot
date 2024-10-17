@@ -64,12 +64,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("entry_reversal_at_type")) {
-    this->config.entry_reversal_at_type =
-        (std::string)api_key_json["entry_reversal_at_type"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("market_duration_hours")) {
     this->config.market_duration_hours =
         (int)api_key_json["market_duration_hours"];
@@ -94,9 +88,15 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_reverse_after_loss")) {
-    this->config.should_reverse_after_loss =
-        (bool)api_key_json["should_reverse_after_loss"];
+  if (api_key_json.contains("should_only_reverse_loss")) {
+    this->config.should_only_reverse_loss =
+        (bool)api_key_json["should_only_reverse_loss"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_reverse_profit")) {
+    this->config.should_reverse_profit =
+        (bool)api_key_json["should_reverse_profit"];
   }
 
   // TODO: Decide
@@ -105,9 +105,27 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_toggle_entry_direction")) {
+    this->config.should_toggle_entry_direction =
+        (bool)api_key_json["should_toggle_entry_direction"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("stop_loss_reversals_name")) {
     this->config.stop_loss_reversals_name =
         (std::string)api_key_json["stop_loss_reversals_name"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("stop_loss_padding_ratio")) {
+    this->config.stop_loss_padding_ratio =
+        (double)api_key_json["stop_loss_padding_ratio"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("stop_profit_day_range_ratio")) {
+    this->config.stop_profit_day_range_ratio =
+        (double)api_key_json["stop_profit_day_range_ratio"];
   }
 
   // TODO: Decide
@@ -127,8 +145,6 @@ void Oanda::Client::load_config() {
       .authentication_token = api_key_json["authentication_token"],
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
-      .entry_reversal_at_type =
-          this->config.entry_reversal_at_type, // TODO: Decide
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .market_duration_hours =
           this->config.market_duration_hours, // TODO: Decide
@@ -140,11 +156,19 @@ void Oanda::Client::load_config() {
           this->config.secondary_reversal_timeframe_minutes, // TODO: Decide
       .should_immediately_stop_loss =
           this->config.should_immediately_stop_loss, // TODO: Decide
-      .should_reverse_after_loss =
-          this->config.should_reverse_after_loss,            // TODO: Decide
+      .should_only_reverse_loss =
+          this->config.should_only_reverse_loss, // TODO: Decide
+      .should_reverse_profit =
+          this->config.should_reverse_profit,                // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
+      .should_toggle_entry_direction =
+          this->config.should_toggle_entry_direction, // TODO: Decide
+      .stop_loss_padding_ratio =
+          this->config.stop_loss_padding_ratio, // TODO: Decide
       .stop_loss_reversals_name =
-          this->config.stop_loss_reversals_name,           // TODO: Decide
+          this->config.stop_loss_reversals_name, // TODO: Decide
+      .stop_profit_day_range_ratio =
+          this->config.stop_profit_day_range_ratio,        // TODO: Decide
       .stop_profit_ratio = this->config.stop_profit_ratio, // TODO: Decide
       .tertiary_reversal_timeframe_minutes =
           this->config.tertiary_reversal_timeframe_minutes, // TODO: Decide

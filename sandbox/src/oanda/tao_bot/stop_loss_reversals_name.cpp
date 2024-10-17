@@ -16,7 +16,6 @@ std::string Oanda::TaoBot::stop_loss_reversals_name() {
   const position_t last_position = this->closed_positions.back();
 
   if (last_position.close_order.stop_profit_reversal.mid) {
-    // return "secondary";
     return "primary";
   }
 

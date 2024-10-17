@@ -29,12 +29,19 @@ void Oanda::TaoBot::reset_position() {
     toggle_is_trending(this->close_order);
   }
 
+  // TODO: Decide
+  if (this->api_client.config.should_toggle_entry_direction &&
+      this->close_order_ptr->profit < 0) {
+    this->is_entry_reversal = !this->is_entry_reversal;
+  }
+
   const position_t position = {
       .close_order = this->close_order,
       .open_order = this->open_order,
   };
 
   this->closed_positions.push_back(position);
+  this->context_entry_reversal = reversal_t(); // TODO: Decide
   this->entry_reversal = reversal_t();
 
   reset_orders();
