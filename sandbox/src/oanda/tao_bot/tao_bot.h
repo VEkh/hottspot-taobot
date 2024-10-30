@@ -52,6 +52,8 @@ private:
   using reversal_t = Global::t::reversal_t;
   using reversal_type_t = Global::t::reversal_type_t;
   using reversals_t = Global::t::reversals_t;
+  using spike_candles_t = Oanda::t::spike_candles_t;        // TODO: Decide
+  using stop_profit_type_t = Global::t::stop_profit_type_t; // TODO: Decide
   using trade_status_t = Oanda::t::trade_status_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
@@ -93,8 +95,8 @@ private:
   Pg pg;
   account_snapshot_t account_snapshot;
   exit_prices_t exit_prices;
+  bool is_entry_signal_trans = true; // TODO: Decide
   candle_t day_candle;
-  bool is_entry_reversal = true; // TODO: Decide
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
@@ -106,10 +108,10 @@ private:
   quote_t current_quote;
   quote_t previous_quote;
   reversal_t entry_reversal;
-  reversal_t context_entry_reversal; // TODO: Decide
   reversals_t reversals;
   reversals_t secondary_reversals; // TODO: Decide
   reversals_t tertiary_reversals;  // TODO: Decide
+  spike_candles_t spike_candles;   // TODO: Decide
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
@@ -124,15 +126,18 @@ private:
   bool is_near_reversal(reversal_t &);
   bool is_next_position_long();
   bool is_position_closed();
+  bool is_reversal_after(const reversal_t, const double);
+  bool is_spiking(); // TODO: Decide
   bool is_trend_slipping(const order_t *);
   bool is_trending();
   bool is_trending(const trend_meta_t);
+  bool is_within_reversal_bounds(const reversal_t &);
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
   bool should_read_candles();
+  bool should_reverse_loss(); // TODO: Decide
   bool should_reverse_profit();
-  bool ready_to_stop_loss(); // TODO: Decide
   bool should_stop_profit(); // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
@@ -143,11 +148,14 @@ private:
   double current_mid();
   double day_range_percentile(const double);
   double day_range_percentile(const double, const bool);
+  double day_range_percentile(const double, candle_t);
   double day_range_percentile(const order_t *, double);
   double margin_buying_power();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
+  double spike_score(spike_candles_t); // TODO: Decide
   double spread_limit();
+
   exit_prices_t build_exit_prices();
   int compute_quantity();
   int order_duration(const order_t *, const std::string);
@@ -176,11 +184,11 @@ private:
                                             const int);
 
   std::string base_currency();
-  std::string stop_loss_reversals_name(); // TODO: Decide
 
   void advance_current_epoch();
   void advance_current_epoch(const double);
   void build_day_candle();
+  void build_spike_candles(); // TODO: Decide
   void build_reversals(reversals_t &, const bool);
   void clear_stale_open_order();
   void close_position();
@@ -203,6 +211,7 @@ private:
   void log_quote();
   void log_reversal_metadata();
   void log_reversals(reversals_t &);
+  void log_spike_candles(); // TODO: Decide
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();

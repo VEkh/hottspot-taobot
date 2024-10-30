@@ -23,23 +23,20 @@ bool Oanda::TaoBot::should_toggle_is_trending(order_t &close_order_,
     return false;
   }
 
+  this->current_trend.at = close_order_.timestamp;
+  this->current_trend.trend = open_order_.entry_reversal.to_trend_type();
+
   // TODO: Decide
   if (this->api_client.config.should_stop_profit && close_order_.profit > 0) {
-    this->current_trend.at = close_order_.timestamp;
-    this->current_trend.trend = open_order_.entry_reversal.to_trend_type();
-
     return false;
   }
 
   // TODO: Decide
-  if (!this->api_client.config.should_immediately_stop_loss) {
-    this->current_trend.at = close_order_.timestamp;
-    this->current_trend.trend = open_order_.entry_reversal.to_trend_type();
-
-    return false;
+  if (this->api_client.config.should_reverse_loss && close_order_.profit < 0) {
+    return true;
   }
 
-  return true;
+  return false;
 }
 
 #endif

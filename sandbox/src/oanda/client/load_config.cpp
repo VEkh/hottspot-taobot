@@ -82,15 +82,26 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_immediately_stop_loss")) {
-    this->config.should_immediately_stop_loss =
-        (bool)api_key_json["should_immediately_stop_loss"];
+  if (api_key_json.contains("should_await_spike")) {
+    this->config.should_await_spike = (bool)api_key_json["should_await_spike"];
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_only_reverse_loss")) {
-    this->config.should_only_reverse_loss =
-        (bool)api_key_json["should_only_reverse_loss"];
+  if (api_key_json.contains("should_enter_as_reversal")) {
+    this->config.should_enter_as_reversal =
+        (bool)api_key_json["should_enter_as_reversal"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_enter_at_spike")) {
+    this->config.should_enter_at_spike =
+        (bool)api_key_json["should_enter_at_spike"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_reverse_loss")) {
+    this->config.should_reverse_loss =
+        (bool)api_key_json["should_reverse_loss"];
   }
 
   // TODO: Decide
@@ -100,20 +111,14 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_slow_reverse_loss")) {
+    this->config.should_slow_reverse_loss =
+        (bool)api_key_json["should_slow_reverse_loss"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("should_toggle_entry_direction")) {
-    this->config.should_toggle_entry_direction =
-        (bool)api_key_json["should_toggle_entry_direction"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("stop_loss_reversals_name")) {
-    this->config.stop_loss_reversals_name =
-        (std::string)api_key_json["stop_loss_reversals_name"];
   }
 
   // TODO: Decide
@@ -139,6 +144,12 @@ void Oanda::Client::load_config() {
         (int)api_key_json["tertiary_reversal_timeframe_minutes"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("trend_slip_percentile")) {
+    this->config.trend_slip_percentile =
+        (double)api_key_json["trend_slip_percentile"];
+  }
+
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -154,24 +165,26 @@ void Oanda::Client::load_config() {
           (int)api_key_json["reversal_timeframe_minutes"],
       .secondary_reversal_timeframe_minutes =
           this->config.secondary_reversal_timeframe_minutes, // TODO: Decide
-      .should_immediately_stop_loss =
-          this->config.should_immediately_stop_loss, // TODO: Decide
-      .should_only_reverse_loss =
-          this->config.should_only_reverse_loss, // TODO: Decide
+      .should_await_spike = this->config.should_await_spike, // TODO: Decide
+      .should_enter_as_reversal =
+          this->config.should_enter_as_reversal, // TODO: Decide
+      .should_enter_at_spike =
+          this->config.should_enter_at_spike,                  // TODO: Decide
+      .should_reverse_loss = this->config.should_reverse_loss, // TODO: Decide
       .should_reverse_profit =
-          this->config.should_reverse_profit,                // TODO: Decide
+          this->config.should_reverse_profit, // TODO: Decide
+      .should_slow_reverse_loss =
+          this->config.should_slow_reverse_loss,             // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
-      .should_toggle_entry_direction =
-          this->config.should_toggle_entry_direction, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio, // TODO: Decide
-      .stop_loss_reversals_name =
-          this->config.stop_loss_reversals_name, // TODO: Decide
       .stop_profit_day_range_ratio =
           this->config.stop_profit_day_range_ratio,        // TODO: Decide
       .stop_profit_ratio = this->config.stop_profit_ratio, // TODO: Decide
       .tertiary_reversal_timeframe_minutes =
           this->config.tertiary_reversal_timeframe_minutes, // TODO: Decide
+      .trend_slip_percentile =
+          this->config.trend_slip_percentile, // TODO: Decide
   };
 }
 

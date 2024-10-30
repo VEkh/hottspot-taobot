@@ -1,14 +1,11 @@
 #ifndef OANDA__TAO_BOT_day_range_percentile
 #define OANDA__TAO_BOT_day_range_percentile
 
-#include "tao_bot.h" // Oanda::TaoBot, order_t
+#include "tao_bot.h" // Oanda::TaoBot, candle_t, order_t
 #include <math.h>    // isnan
 
 double Oanda::TaoBot::day_range_percentile(const double mid) {
-  const double percentile =
-      100.0 * ((mid - this->day_candle.low) / this->day_candle.range());
-
-  return isnan(percentile) ? 0.0 : percentile;
+  return day_range_percentile(mid, this->day_candle);
 }
 
 double Oanda::TaoBot::day_range_percentile(const double mid,
@@ -16,6 +13,12 @@ double Oanda::TaoBot::day_range_percentile(const double mid,
   const double percentile = day_range_percentile(mid);
 
   return invert ? 100.0 - percentile : percentile;
+}
+
+double Oanda::TaoBot::day_range_percentile(const double mid, candle_t candle) {
+  const double percentile = 100.0 * ((mid - candle.low) / candle.range());
+
+  return isnan(percentile) ? 0.0 : percentile;
 }
 
 double Oanda::TaoBot::day_range_percentile(const order_t *order,

@@ -1,7 +1,8 @@
 #ifndef OANDA__TAO_BOT_latest_reversal_after
 #define OANDA__TAO_BOT_latest_reversal_after
 
-#include "latest_reversal.cpp" // latest_reversal
+#include "is_reversal_after.cpp" // is_reversal_after
+#include "latest_reversal.cpp"   // latest_reversal
 #include "tao_bot.h" // Oanda::TaoBot,  reversal_t, reversals_t, reversal_type_t
 
 Oanda::TaoBot::reversal_t Oanda::TaoBot::latest_reversal_after(
@@ -18,10 +19,8 @@ Oanda::TaoBot::reversal_t Oanda::TaoBot::latest_reversal_after(
   const reversal_t latest_reversal_ =
       latest_reversal(reversals_, reversal_type);
 
-  const int reversal_minute = latest_reversal_.at / 60;
-  const int ref_epoch_minute = ref_epoch / 60;
-
-  return reversal_minute >= ref_epoch_minute ? latest_reversal_ : reversal_t();
+  return is_reversal_after(latest_reversal_, ref_epoch) ? latest_reversal_
+                                                        : reversal_t();
 }
 
 #endif

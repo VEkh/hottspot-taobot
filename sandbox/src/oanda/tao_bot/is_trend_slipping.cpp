@@ -7,7 +7,8 @@
 bool Oanda::TaoBot::is_trend_slipping(const order_t *order) {
   // return day_range_percentile(order, order->profit) <
   // this->EQUATOR_PERCENTILE;
-  return day_range_percentile(order, order->profit) < 75.0;
+  return day_range_percentile(order, order->profit) <
+         this->api_client.config.trend_slip_percentile;
 }
 
 #endif

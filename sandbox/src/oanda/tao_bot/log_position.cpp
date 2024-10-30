@@ -85,10 +85,16 @@ void Oanda::TaoBot::log_position() {
 
   const double unit_deficit = asset_deficit / this->open_order_ptr->quantity;
 
-  printf("Stop Profit: %'.5f • Stop Loss: %'.5f • "
+  const double max_profit = this->open_order_ptr->max_profit;
+  const double stop_profit = this->exit_prices.stop_profit;
+
+  const std::string stop_profit_icon =
+      stop_profit && max_profit >= stop_profit ? " ✅" : "";
+
+  printf("Stop Profit: %'.5f%s • Stop Loss: %'.5f • "
          "Unit Deficit: %'.5f\n",
-         this->exit_prices.stop_profit, this->exit_prices.stop_loss,
-         unit_deficit);
+         this->exit_prices.stop_profit, stop_profit_icon.c_str(),
+         this->exit_prices.stop_loss, unit_deficit);
 
   printf("Quantity: %'.5i\n", this->open_order_ptr->quantity);
 
