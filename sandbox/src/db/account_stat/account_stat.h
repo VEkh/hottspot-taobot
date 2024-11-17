@@ -51,7 +51,7 @@ public:
   };
 
   AccountStat(){};
-  AccountStat(Pg c) : conn(c){};
+  AccountStat(const Pg c) : conn(c){};
 
   std::list<account_snapshot_t>
   get_daily_snapshots(const get_daily_snapshots_args_t);

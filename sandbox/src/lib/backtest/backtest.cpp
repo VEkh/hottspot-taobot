@@ -26,7 +26,7 @@ Backtest::Backtest(const init_args_t args) {
   this->flags = args.flags;
   this->symbol = args.symbol;
 
-  this->db_utils.set_param({"statement_timeout", "1000"});
+  this->db_utils.set_param({"statement_timeout", "10000"});
 
   this->config_path = std::string(APP_DIR) + "/config/" + args.api_client_name +
                       "/credentials.json";
