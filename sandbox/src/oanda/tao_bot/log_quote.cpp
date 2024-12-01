@@ -23,12 +23,13 @@ void Oanda::TaoBot::log_quote() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("%s Quote\n", this->current_quote.symbol.c_str());
-  std::cout << fmt.no_underline;
+  printf("%s Quote", this->current_quote.symbol.c_str());
+  std::cout << fmt.no_underline << std::endl;
 
-  printf("Current: %'.5f (p%'.2f%%) • Spread: %'.5f\n",
-         this->current_quote.mid(), day_range_percentile(current_mid()),
+  printf("Current: %'.5f (p%'.2f%%) • Spread: %'.5f", this->current_quote.mid(),
+         day_range_percentile(this->day_candle, current_mid()),
          this->current_quote.spread());
+  std::cout << std::endl;
 
   printf("High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f\n",
          this->day_candle.high,

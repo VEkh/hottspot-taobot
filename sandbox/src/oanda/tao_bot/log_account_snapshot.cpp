@@ -35,33 +35,37 @@ void Oanda::TaoBot::log_account_snapshot() {
   }
 
   std::cout << fmt.bold << fmt.underline << log_color;
-  printf("💰 Account Snapshot\n");
-  std::cout << fmt.reset << fmt.bold << log_color;
+  printf("💰 Account Snapshot");
+  std::cout << fmt.reset << fmt.bold << log_color << std::endl;
 
-  printf("Current Equity:                   $%'.5f (%+'.5f) (%+'.2f%%)%s\n",
+  printf("Current Equity:                   $%'.5f (%+'.5f) (%+'.2f%%)%s",
          this->account_snapshot.equity, current_profit, equity_delta_percentage,
          this->account_snapshot.equity == this->account_snapshot.max_equity
              ? " 🔥"
              : "");
+  std::cout << std::endl;
 
   printf(
-      "Max Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
+      "Max Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s",
       this->account_snapshot.max_equity, max_profit, max_profit_percentage,
       ::utils::time_::date_string(this->account_snapshot.max_equity_timestamp,
                                   "%m/%d %R %Z", "America/Chicago")
           .c_str());
+  std::cout << std::endl;
 
   printf(
-      "Min Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s\n",
+      "Min Equity:                       $%'.5f (%+'.5f) (%+'.2f%%) @ %s",
       this->account_snapshot.min_equity, min_profit, min_profit_percentage,
       ::utils::time_::date_string(this->account_snapshot.min_equity_timestamp,
                                   "%m/%d %R %Z", "America/Chicago")
           .c_str());
+  std::cout << std::endl;
 
-  printf("Original Equity:                  $%'.5f\n",
+  printf("Original Equity:                  $%'.5f",
          this->account_snapshot.original_equity);
+  std::cout << std::endl;
 
-  printf("Margin Buying Power:              $%'.5f\n",
+  printf("Margin Buying Power:              $%'.5f",
          this->account_snapshot.margin_buying_power);
 
   std::cout << fmt.reset << std::endl;

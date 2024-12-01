@@ -36,20 +36,23 @@ void Oanda::TaoBot::log_position_results() {
   switch (win_result) {
   case order_win_result_t::LOSS: {
     std::cout << fmt.bold << fmt.red << std::endl;
-    printf("😭 %s: Closed order at a loss. Better luck next time!\n",
+    printf("😭 %s: Closed order at a loss. Better luck next time!",
            order_action.c_str());
+    std::cout << std::endl;
 
     break;
   }
   case order_win_result_t::TIE: {
     std::cout << fmt.bold << fmt.yellow << std::endl;
-    printf("😅 %s: Closed order at no loss, no gain.\n", order_action.c_str());
+    printf("😅 %s: Closed order at no loss, no gain.", order_action.c_str());
+    std::cout << std::endl;
 
     break;
   }
   case order_win_result_t::WIN: {
     std::cout << fmt.bold << fmt.green << std::endl;
-    printf("🎉 %s: Closed order at a gain.\n", order_action.c_str());
+    printf("🎉 %s: Closed order at a gain.", order_action.c_str());
+    std::cout << std::endl;
 
     break;
   }

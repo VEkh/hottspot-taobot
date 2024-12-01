@@ -49,26 +49,29 @@ void Oanda::TaoBot::log_performance() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << fmt.magenta;
-  printf("Wins: %d (%.2f%%) • Losses: %d • Total: %d\n", win_count,
+  printf("Wins: %d (%.2f%%) • Losses: %d • Total: %d", win_count,
          win_percentage, closed_positions_results[order_win_result_t::LOSS],
          total_count);
+  std::cout << std::endl;
 
   printf("Loss Streak => Current: %d • Longest: %d • ",
          stats.loss_streaks.current, stats.loss_streaks.longest);
   print_counts(stats.loss_streaks.counts);
-  puts("");
+  std::cout << std::endl;
 
   printf("Win  Streak => Current: %d • Longest: %d • ",
          stats.win_streaks.current, stats.win_streaks.longest);
   print_counts(stats.win_streaks.counts);
-  puts("\n");
+  std::cout << "\n" << std::endl;
 
-  printf("Current Balance: %+'.5f • Max Balance: %+'.5f\n",
-         stats.current_balance, stats.max_balance);
+  printf("Current Balance: %+'.5f • Max Balance: %+'.5f", stats.current_balance,
+         stats.max_balance);
+  std::cout << std::endl;
 
-  printf("Current Loss Streak Deficit: %+'.5f • Total Deficit: %+'.5f\n\n",
+  printf("Current Loss Streak Deficit: %+'.5f • Total Deficit: %+'.5f\n",
          stats.current_loss_streak_balance,
          stats.current_balance - stats.max_balance);
+  std::cout << std::endl;
 
   printf("Profits (Last 20): [");
 

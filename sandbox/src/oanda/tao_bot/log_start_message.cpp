@@ -10,9 +10,9 @@ void Oanda::TaoBot::log_start_message() {
   printf("Started TaoBot for ");
 
   std::cout << fmt.blue;
-  printf("%s\n\n", this->symbol.c_str());
+  printf("%s\n", this->symbol.c_str());
 
-  std::cout << fmt.reset;
+  std::cout << fmt.reset << std::endl;
 }
 
 #endif

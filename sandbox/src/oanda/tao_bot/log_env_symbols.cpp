@@ -2,15 +2,15 @@
 #define OANDA__TAO_BOT_log_env_symbols
 
 #include "tao_bot.h" // Oanda::TaoBot, fmt
-#include <iostream>  // std::cout, std::endl
+#include <iostream>  // std::cout, std::flush, std::endl
 #include <list>      // std::list
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
 void Oanda::TaoBot::log_env_symbols() {
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("Environment Symbols\n");
-  std::cout << fmt.reset;
+  printf("Environment Symbols");
+  std::cout << fmt.reset << std::endl;
 
   std::list<std::string>::iterator symbol_it;
 
@@ -30,7 +30,7 @@ void Oanda::TaoBot::log_env_symbols() {
 
     printf("%s", symbol_it->c_str());
 
-    std::cout << fmt.reset;
+    std::cout << fmt.reset << std::flush;
   }
 
   std::cout << fmt.reset << std::endl << std::endl;

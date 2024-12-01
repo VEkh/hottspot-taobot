@@ -12,25 +12,28 @@ void Oanda::TaoBot::log_timestamps() {
   std::cout << fmt.bold;
 
   std::cout << fmt.yellow;
-  printf("⌚ Current Time:    %s • Runtime: %s\n",
+  printf("⌚ Current Time:    %s • Runtime: %s",
          ::utils::time_::date_string(this->current_epoch, "%a, %b %d, %Y %X %Z",
                                      "America/Chicago")
              .c_str(),
          ::utils::integer_::seconds_to_clock(runtime()).c_str());
+  std::cout << std::endl;
 
   std::cout << fmt.green;
   printf(
-      "🚀 Market Open:     %s\n",
+      "🚀 Market Open:     %s",
       ::utils::time_::date_string(this->market_availability.market_epochs.open,
                                   "%a, %b %d, %Y %X %Z", "America/Chicago")
           .c_str());
+  std::cout << std::endl;
 
   std::cout << fmt.red;
   printf(
-      "🏁 Market Close:    %s\n",
+      "🏁 Market Close:    %s",
       ::utils::time_::date_string(this->market_availability.market_epochs.close,
                                   "%a, %b %d, %Y %X %Z", "America/Chicago")
           .c_str());
+  std::cout << std::endl;
 
   if (this->backtest.is_active) {
     const long int backtest_duration =
