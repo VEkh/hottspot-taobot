@@ -24,8 +24,9 @@ void Alpaca::TaoBot::reset_backtest() {
   this->backtest.await_env_market_close(
       this->market_availability.market_epochs.close, next_market_open_epoch);
 
-  update_account_snapshot(true);
   advance_current_epoch(next_market_open_epoch);
+
+  this->market_availability.set_market_epochs(this->current_epoch);
 
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
@@ -43,10 +44,9 @@ void Alpaca::TaoBot::reset_backtest() {
       this->api_client.config.reversal_timeframe_minutes;
   this->started_at = this->current_epoch;
 
-  this->market_availability.set_market_epochs(this->current_epoch);
-
   force_init_reversal_await();
   read_price_action_stats();
+  update_account_snapshot(true);
 }
 
 #endif

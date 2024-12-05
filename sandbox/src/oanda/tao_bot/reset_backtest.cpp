@@ -25,7 +25,6 @@ void Oanda::TaoBot::reset_backtest() {
   this->backtest.await_env_market_close(
       this->market_availability.market_epochs.close, next_market_open_epoch);
 
-  update_account_snapshot(true);
   advance_current_epoch(next_market_open_epoch);
 
   this->closed_positions = {};
@@ -66,6 +65,7 @@ void Oanda::TaoBot::reset_backtest() {
 
   force_init_reversal_await();
   read_price_action_stats();
+  update_account_snapshot(true);
 }
 
 #endif
