@@ -25,15 +25,19 @@ void Oanda::TaoBot::reset_position() {
     return;
   }
 
+  // TODO: Decide
+  if (this->api_client.config.should_await_spike) {
+    this->current_trend.is_initialized = false;
+  }
+
   if (should_toggle_is_trending(this->close_order, this->open_order)) {
     toggle_is_trending(this->close_order);
   }
 
   // TODO: Decide
-  if (this->api_client.config.should_toggle_entry_direction &&
-      this->close_order_ptr->profit < 0) {
-    this->is_entry_reversal = !this->is_entry_reversal;
-  }
+  // if (this->close_order.profit < 0) {
+  //   this->is_entry_signal_trans = !this->is_entry_signal_trans;
+  // }
 
   const position_t position = {
       .close_order = this->close_order,
@@ -41,7 +45,6 @@ void Oanda::TaoBot::reset_position() {
   };
 
   this->closed_positions.push_back(position);
-  this->context_entry_reversal = reversal_t(); // TODO: Decide
   this->entry_reversal = reversal_t();
 
   reset_orders();

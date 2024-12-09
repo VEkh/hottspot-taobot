@@ -18,8 +18,8 @@ void Oanda::TaoBot::log_reversals(reversals_t &reversals_) {
   const int lows_n = reversals_.lows.size();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("🔀 %i-Min Reversals\n", reversals_.timeframe_minutes);
-  std::cout << fmt.reset;
+  printf("🔀 %i-Min Reversals", reversals_.timeframe_minutes);
+  std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.green;
   printf("Latest 5 of %i High(s):", highs_n);

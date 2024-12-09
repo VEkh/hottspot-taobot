@@ -8,6 +8,8 @@
  * order_time_in_force_t
  * order_type_t
  * order_t
+ * reversal_type_t // TODO: Decide
+ * stop_profit_type_t // TODO: Decide
  */
 #include "tao_bot.h"
 
@@ -19,6 +21,10 @@
 #include <string>               // std::string
 #include <utility>              // std::pair
 
+// TODO: Decide
+#include "current_mid.cpp"          // current_mid
+#include "day_range_percentile.cpp" // day_range_percentile
+
 std::pair<Oanda::TaoBot::order_t, Oanda::TaoBot::order_t>
 Oanda::TaoBot::open_position(const order_action_t close_action,
                              const order_action_t open_action,
@@ -26,6 +32,7 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
                              const int quantity) {
   order_t new_open_order;
   new_open_order.action = open_action;
+  new_open_order.day_candle = this->day_candle; // TODO: Decide
   new_open_order.entry_reversal = this->entry_reversal;
   new_open_order.max_profit_at = this->current_epoch;
   new_open_order.min_profit_at = this->current_epoch;
@@ -33,6 +40,34 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
   new_open_order.symbol = this->symbol;
   new_open_order.time_in_force = order_time_in_force_t::FOK;
   new_open_order.type = order_type_t::MARKET;
+
+  // TODO: Decide
+  // if (this->api_client.config.should_reverse_profit ||
+  //     this->api_client.config.should_stop_profit) {
+  //   new_open_order.stop_profit_type =
+  //       stop_profit_type_t::STOP_PROFIT_RETURN_TO_PEAK;
+  // }
+  if (this->api_client.config.should_reverse_profit ||
+      this->api_client.config.should_stop_profit) {
+    const reversal_type_t reversal_type = new_open_order.entry_reversal.type;
+
+    const bool is_reversal_above_threshold =
+        day_range_percentile(this->day_candle, current_mid()) >=
+        this->EQUATOR_PERCENTILE;
+
+    if (reversal_type == reversal_type_t::REVERSAL_LOW &&
+        is_reversal_above_threshold) {
+      new_open_order.stop_profit_type =
+          stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE;
+    } else if (reversal_type == reversal_type_t::REVERSAL_HIGH &&
+               !is_reversal_above_threshold) {
+      new_open_order.stop_profit_type =
+          stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE;
+    } else {
+      new_open_order.stop_profit_type =
+          stop_profit_type_t::STOP_PROFIT_CROSS_RANGE;
+    }
+  }
 
   order_t new_close_order;
   new_close_order.action = close_action;

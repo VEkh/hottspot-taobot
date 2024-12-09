@@ -1,0 +1,1521 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-eur_usd-3[36m
+
+{
+  "account_stop_loss_ratio": -0.15,
+  "authentication_token": "authentication_token",
+  "backtest": {
+    "account_margin_multiplier": 1,
+    "account_starting_equity": 100000,
+    "end_at": "2021-12-31 16:00:00",
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2021-01-03 16:00:00"
+  },
+  "base_url": "no spike score, just range percentage",
+  "env_symbols": [
+    "EUR_USD"
+  ],
+  "id": "backtest-eur_usd-3",
+  "is_active": false,
+  "market_duration_hours": 240,
+  "max_slow_reverse_loss_count": 4,
+  "note": "no spike score, just range percentage",
+  "reversal_proximity_ratio": 0.0,
+  "reversal_timeframe_minutes": 120,
+  "secondary_reversal_timeframe_minutes": 120,
+  "should_await_spike": true,
+  "should_enter_as_reversal": true,
+  "should_enter_at_spike": true,
+  "should_reverse_loss": false,
+  "should_reverse_profit": false,
+  "should_stop_profit": true,
+  "spike_duration_minutes": 60,
+  "spike_height_ratio": 0.4,
+  "stop_loss_padding_ratio": 0.2,
+  "stop_profit_day_range_ratio": 0.0,
+  "stop_profit_ratio": 0.95,
+  "stop_profit_target_percentile": 100.0,
+  "trend_slip_percentile": 80.0
+}
+[0m[0m[1m[36m[4m
+Monday, January  4 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January  5 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January  6 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January  7 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January  8 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 11 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 12 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January 13 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January 14 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 15 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 18 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 19 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January 20 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January 21 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 22 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 25 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:52 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 26 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January 27 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January 28 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 29 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, February  1 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, February  2 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, February  3 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, February  4 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, February  5 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, February  8 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, February  9 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, February 10 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, February 11 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, February 12 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, February 15 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, February 16 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, February 17 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, February 18 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, February 19 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, February 22 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, February 23 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, February 24 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, February 25 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, February 26 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, March  1 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, March  2 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, March  3 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, March  4 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, March  5 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, March  8 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, March  9 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, March 10 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, March 11 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, March 12 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, March 15 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, March 16 2021[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, March 17 2021[24m[31m
+Current Equity:             $98,774.59 (-1,225.41) (-1.23%)
+Max Equity:                 $101,432.79 (+1,432.79) (+1.43%) @ 14:53 CDT
+Min Equity:                 $93,696.41 (-6,303.59) (-6.30%) @ 14:21 CDT
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, March 18 2021[24m[32m
+Current Equity:             $125,440.96 (+26,455.40) (+26.73%)
+Max Equity:                 $129,660.32 (+30,674.76) (+30.99%) @ 14:47 CDT
+Min Equity:                 $95,399.10 (-3,586.46) (-3.62%) @ 02:10 CDT
+Original Equity:            $98,985.56
+[1m[36m[4m
+Friday, March 19 2021[24m[32m
+Current Equity:             $134,343.81 (+7,974.59) (+6.31%)
+Max Equity:                 $142,909.12 (+16,539.90) (+13.09%) @ 08:43 CDT
+Min Equity:                 $117,508.56 (-8,860.66) (-7.01%) @ 03:02 CDT
+Original Equity:            $126,369.22
+[1m[36m[4m
+Monday, March 22 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Tuesday, March 23 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Wednesday, March 24 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Thursday, March 25 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Friday, March 26 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Monday, March 29 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Tuesday, March 30 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Wednesday, March 31 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Thursday, April  1 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Friday, April  2 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Monday, April  5 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Tuesday, April  6 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Wednesday, April  7 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Thursday, April  8 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Friday, April  9 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Monday, April 12 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Tuesday, April 13 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Wednesday, April 14 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Thursday, April 15 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Friday, April 16 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Monday, April 19 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Tuesday, April 20 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Wednesday, April 21 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Thursday, April 22 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Friday, April 23 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Monday, April 26 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Tuesday, April 27 2021[24m[32m
+Current Equity:             $134,343.81 (+0.00) (+0.00%)
+Max Equity:                 $134,343.81 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $134,343.81 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Wednesday, April 28 2021[24m[31m
+Current Equity:             $127,970.12 (-6,373.69) (-4.74%)
+Max Equity:                 $136,615.43 (+2,271.61) (+1.69%) @ 14:42 CDT
+Min Equity:                 $127,141.14 (-7,202.68) (-5.36%) @ 14:07 CDT
+Original Equity:            $134,343.81
+[1m[36m[4m
+Thursday, April 29 2021[24m[32m
+Current Equity:             $133,401.60 (+5,764.02) (+4.52%)
+Max Equity:                 $145,760.99 (+18,123.41) (+14.20%) @ 09:00 CDT
+Min Equity:                 $120,321.71 (-7,315.87) (-5.73%) @ 20:51 CDT
+Original Equity:            $127,637.58
+[1m[36m[4m
+Friday, April 30 2021[24m[32m
+Current Equity:             $189,933.34 (+55,755.81) (+41.55%)
+Max Equity:                 $193,480.43 (+59,302.90) (+44.20%) @ 14:47 CDT
+Min Equity:                 $133,124.48 (-1,053.04) (-0.78%) @ 19:28 CDT
+Original Equity:            $134,177.53
+[1m[36m[4m
+Monday, May  3 2021[24m[32m
+Current Equity:             $189,933.34 (+0.00) (+0.00%)
+Max Equity:                 $189,933.34 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $189,933.34 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $189,933.34
+[1m[36m[4m
+Tuesday, May  4 2021[24m[32m
+Current Equity:             $189,933.34 (+0.00) (+0.00%)
+Max Equity:                 $189,933.34 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $189,933.34 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $189,933.34
+[1m[36m[4m
+Wednesday, May  5 2021[24m[32m
+Current Equity:             $189,933.34 (+0.00) (+0.00%)
+Max Equity:                 $189,933.34 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $189,933.34 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $189,933.34
+[1m[36m[4m
+Thursday, May  6 2021[24m[32m
+Current Equity:             $189,933.34 (+0.00) (+0.00%)
+Max Equity:                 $189,933.34 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $189,933.34 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $189,933.34
+[1m[36m[4m
+Friday, May  7 2021[24m[31m
+Current Equity:             $159,554.03 (-30,379.30) (-15.99%)
+Max Equity:                 $189,933.34 (+0.00) (+0.00%) @ 07:59 CDT
+Min Equity:                 $159,554.03 (-30,379.30) (-15.99%) @ 09:37 CDT
+Original Equity:            $189,933.34
+[1m[36m[4m
+Monday, May 17 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Tuesday, May 18 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Wednesday, May 19 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Thursday, May 20 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Friday, May 21 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Monday, May 24 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Tuesday, May 25 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Wednesday, May 26 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Thursday, May 27 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Friday, May 28 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Monday, May 31 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Tuesday, June  1 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Wednesday, June  2 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Thursday, June  3 2021[24m[32m
+Current Equity:             $159,554.03 (+0.00) (+0.00%)
+Max Equity:                 $159,554.03 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $159,554.03 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Friday, June  4 2021[24m[31m
+Current Equity:             $152,598.51 (-6,955.52) (-4.36%)
+Max Equity:                 $169,192.14 (+9,638.11) (+6.04%) @ 09:02 CDT
+Min Equity:                 $147,760.03 (-11,794.00) (-7.39%) @ 11:13 CDT
+Original Equity:            $159,554.03
+[1m[36m[4m
+Monday, June  7 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Tuesday, June  8 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Wednesday, June  9 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Thursday, June 10 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Friday, June 11 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Monday, June 14 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Tuesday, June 15 2021[24m[32m
+Current Equity:             $152,598.51 (+0.00) (+0.00%)
+Max Equity:                 $152,598.51 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $152,598.51 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Wednesday, June 16 2021[24m[32m
+Current Equity:             $165,676.34 (+13,077.82) (+8.57%)
+Max Equity:                 $170,437.68 (+17,839.16) (+11.69%) @ 18:39 CDT
+Min Equity:                 $141,615.68 (-10,982.83) (-7.20%) @ 14:10 CDT
+Original Equity:            $152,598.51
+[1m[36m[4m
+Thursday, June 17 2021[24m[32m
+Current Equity:             $217,035.35 (+49,835.39) (+29.81%)
+Max Equity:                 $229,097.42 (+61,897.46) (+37.02%) @ 11:40 CDT
+Min Equity:                 $159,327.88 (-7,872.09) (-4.71%) @ 00:57 CDT
+Original Equity:            $167,199.97
+[1m[36m[4m
+Friday, June 18 2021[24m[32m
+Current Equity:             $248,142.79 (+30,472.59) (+14.00%)
+Max Equity:                 $256,459.27 (+38,789.07) (+17.82%) @ 09:57 CDT
+Min Equity:                 $210,242.50 (-7,427.69) (-3.41%) @ 22:36 CDT
+Original Equity:            $217,670.20
+[1m[36m[4m
+Monday, June 21 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Tuesday, June 22 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Wednesday, June 23 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Thursday, June 24 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Friday, June 25 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Monday, June 28 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Tuesday, June 29 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Wednesday, June 30 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:49 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Thursday, July  1 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Friday, July  2 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Monday, July  5 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Tuesday, July  6 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Wednesday, July  7 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Thursday, July  8 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Friday, July  9 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Monday, July 12 2021[24m[32m
+Current Equity:             $248,142.79 (+0.00) (+0.00%)
+Max Equity:                 $248,142.79 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $248,142.79 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Tuesday, July 13 2021[24m[31m
+Current Equity:             $210,294.75 (-37,848.05) (-15.25%)
+Max Equity:                 $252,348.74 (+4,205.95) (+1.69%) @ 08:15 CDT
+Min Equity:                 $210,294.75 (-37,848.05) (-15.25%) @ 09:49 CDT
+Original Equity:            $248,142.79
+[1m[36m[4m
+Wednesday, July 14 2021[24m[32m
+Current Equity:             $210,294.75 (+0.00) (+0.00%)
+Max Equity:                 $210,294.75 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $210,294.75 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $210,294.75
+[1m[36m[4m
+Thursday, July 15 2021[24m[32m
+Current Equity:             $210,294.75 (+0.00) (+0.00%)
+Max Equity:                 $210,294.75 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $210,294.75 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $210,294.75
+[1m[36m[4m
+Friday, July 16 2021[24m[32m
+Current Equity:             $210,294.75 (+0.00) (+0.00%)
+Max Equity:                 $210,294.75 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $210,294.75 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $210,294.75
+[1m[36m[4m
+Monday, July 26 2021[24m[32m
+Current Equity:             $210,294.75 (+0.00) (+0.00%)
+Max Equity:                 $210,294.75 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $210,294.75 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $210,294.75
+[1m[36m[4m
+Tuesday, July 27 2021[24m[32m
+Current Equity:             $210,294.75 (+0.00) (+0.00%)
+Max Equity:                 $210,294.75 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $210,294.75 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $210,294.75
+[1m[36m[4m
+Wednesday, July 28 2021[24m[32m
+Current Equity:             $216,245.76 (+5,951.02) (+2.83%)
+Max Equity:                 $218,555.11 (+8,260.37) (+3.93%) @ 15:16 CDT
+Min Equity:                 $204,077.27 (-6,217.48) (-2.96%) @ 14:02 CDT
+Original Equity:            $210,294.75
+[1m[36m[4m
+Thursday, July 29 2021[24m[32m
+Current Equity:             $255,682.35 (+38,992.48) (+17.99%)
+Max Equity:                 $258,524.63 (+41,834.76) (+19.31%) @ 18:43 CDT
+Min Equity:                 $212,071.17 (-4,618.70) (-2.13%) @ 19:43 CDT
+Original Equity:            $216,689.87
+[1m[36m[4m
+Friday, July 30 2021[24m[31m
+Current Equity:             $232,411.21 (-23,182.32) (-9.07%)
+Max Equity:                 $271,137.23 (+15,543.70) (+6.08%) @ 04:39 CDT
+Min Equity:                 $222,463.24 (-33,130.29) (-12.96%) @ 09:58 CDT
+Original Equity:            $255,593.53
+[1m[36m[4m
+Monday, August  2 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Tuesday, August  3 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Wednesday, August  4 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Thursday, August  5 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Friday, August  6 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Monday, August  9 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Tuesday, August 10 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Wednesday, August 11 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Thursday, August 12 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Friday, August 13 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Monday, August 16 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Tuesday, August 17 2021[24m[32m
+Current Equity:             $232,411.21 (+0.00) (+0.00%)
+Max Equity:                 $232,411.21 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $232,411.21 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Wednesday, August 18 2021[24m[32m
+Current Equity:             $236,724.04 (+4,312.83) (+1.86%)
+Max Equity:                 $236,724.04 (+4,312.83) (+1.86%) @ 18:59 CDT
+Min Equity:                 $225,016.81 (-7,394.40) (-3.18%) @ 17:30 CDT
+Original Equity:            $232,411.21
+[1m[36m[4m
+Thursday, August 19 2021[24m[32m
+Current Equity:             $263,188.29 (+25,775.59) (+10.86%)
+Max Equity:                 $270,566.80 (+33,154.10) (+13.96%) @ 22:13 CDT
+Min Equity:                 $236,527.28 (-885.42) (-0.37%) @ 07:35 CDT
+Original Equity:            $237,412.70
+[1m[36m[4m
+Friday, August 20 2021[24m[31m
+Current Equity:             $240,167.35 (-22,135.52) (-8.44%)
+Max Equity:                 $274,797.14 (+12,494.27) (+4.76%) @ 08:03 CDT
+Min Equity:                 $236,035.38 (-26,267.49) (-10.01%) @ 15:29 CDT
+Original Equity:            $262,302.87
+[1m[36m[4m
+Monday, August 23 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, August 24 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, August 25 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, August 26 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, August 27 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, August 30 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, August 31 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, September  1 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, September  2 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, September  3 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, September  6 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, September  7 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, September  8 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, September  9 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, September 10 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, September 13 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, September 14 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, September 15 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, September 16 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, September 17 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, September 20 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, September 21 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, September 22 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, September 23 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, September 24 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, September 27 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, September 28 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, September 29 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, September 30 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, October  1 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, October  4 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, October  5 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, October  6 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, October  7 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, October  8 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, October 11 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, October 12 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, October 13 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, October 14 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, October 15 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, October 18 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, October 19 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, October 20 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, October 21 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, October 22 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, October 25 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, October 26 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, October 27 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, October 28 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, October 29 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, November  1 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, November  2 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, November  3 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, November  4 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, November  5 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, November  8 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, November  9 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, November 10 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, November 11 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, November 12 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, November 15 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, November 16 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, November 17 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, November 18 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, November 19 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, November 22 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:08 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, November 23 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, November 24 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:47 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Thursday, November 25 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Friday, November 26 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Monday, November 29 2021[24m[32m
+Current Equity:             $240,167.35 (+0.00) (+0.00%)
+Max Equity:                 $240,167.35 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $240,167.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Tuesday, November 30 2021[24m[31m
+Current Equity:             $203,933.76 (-36,233.59) (-15.09%)
+Max Equity:                 $247,633.31 (+7,465.97) (+3.11%) @ 10:01 CST
+Min Equity:                 $203,102.07 (-37,065.28) (-15.43%) @ 11:03 CST
+Original Equity:            $240,167.35
+[1m[36m[4m
+Wednesday, December  1 2021[24m[32m
+Current Equity:             $203,933.76 (+0.00) (+0.00%)
+Max Equity:                 $203,933.76 (+0.00) (+0.00%) @ 17:51 CST
+Min Equity:                 $203,933.76 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $203,933.76
+[1m[36m[4m
+Thursday, December  2 2021[24m[32m
+Current Equity:             $203,933.76 (+0.00) (+0.00%)
+Max Equity:                 $203,933.76 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $203,933.76 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $203,933.76
+[1m[36m[4m
+Friday, December  3 2021[24m[32m
+Current Equity:             $203,933.76 (+0.00) (+0.00%)
+Max Equity:                 $203,933.76 (+0.00) (+0.00%) @ 15:58 CST
+Min Equity:                 $203,933.76 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $203,933.76
+[1m[36m[4m
+Monday, December 13 2021[24m[32m
+Current Equity:             $203,933.76 (+0.00) (+0.00%)
+Max Equity:                 $203,933.76 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $203,933.76 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $203,933.76
+[1m[36m[4m
+Tuesday, December 14 2021[24m[32m
+Current Equity:             $203,933.76 (+0.00) (+0.00%)
+Max Equity:                 $203,933.76 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $203,933.76 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $203,933.76
+[1m[36m[4m
+Wednesday, December 15 2021[24m[32m
+Current Equity:             $220,125.36 (+16,191.61) (+7.94%)
+Max Equity:                 $227,180.92 (+23,247.17) (+11.40%) @ 14:35 CST
+Min Equity:                 $196,516.37 (-7,417.38) (-3.64%) @ 14:01 CST
+Original Equity:            $203,933.76
+[1m[36m[4m
+Thursday, December 16 2021[24m[32m
+Current Equity:             $259,111.86 (+37,810.57) (+17.09%)
+Max Equity:                 $280,549.91 (+59,248.62) (+26.77%) @ 08:02 CST
+Min Equity:                 $212,165.24 (-9,136.05) (-4.13%) @ 18:53 CST
+Original Equity:            $221,301.29
+[1m[36m[4m
+Friday, December 17 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 15:58 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Monday, December 20 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Tuesday, December 21 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Wednesday, December 22 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Thursday, December 23 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Friday, December 24 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 15:58 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Monday, December 27 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:51 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Tuesday, December 28 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Wednesday, December 29 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Thursday, December 30 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+Friday, December 31 2021[24m[32m
+Current Equity:             $259,111.86 (+0.00) (+0.00%)
+Max Equity:                 $259,111.86 (+0.00) (+0.00%) @ 15:58 CST
+Min Equity:                 $259,111.86 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $259,111.86
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$628.72
+[1m[32mAvg Daily % Return:         +0.47%
+[1m[32mTotal Return:               +$154,036.32 (154.04%)
+Win Rate:                   237W (96.73%) 8L (Total: 245)
+
+[1m[36m⌚ Finished in 00:16
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

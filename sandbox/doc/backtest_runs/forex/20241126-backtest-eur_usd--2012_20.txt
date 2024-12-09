@@ -1,0 +1,1540 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-eur_usd-1[36m
+
+{
+  "account_stop_loss_ratio": -0.2,
+  "authentication_token": "authentication_token",
+  "backtest": {
+    "account_margin_multiplier": 1,
+    "account_starting_equity": 100000,
+    "end_at": "2013-01-04 16:00:00",
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2012-01-01 16:00:00"
+  },
+  "base_url": "",
+  "env_symbols": [
+    "EUR_USD"
+  ],
+  "id": "backtest-eur_usd-1",
+  "is_active": false,
+  "market_duration_hours": 240,
+  "max_slow_reverse_loss_count": 4,
+  "note": "",
+  "reversal_proximity_ratio": 0.0,
+  "reversal_timeframe_minutes": 360,
+  "secondary_reversal_timeframe_minutes": 120,
+  "should_await_spike": true,
+  "should_enter_as_reversal": true,
+  "should_enter_at_spike": true,
+  "should_reverse_loss": false,
+  "should_reverse_profit": false,
+  "should_stop_profit": true,
+  "spike_duration_minutes": 60,
+  "spike_entry_score": 5.0,
+  "spike_height_ratio": 0.4,
+  "stop_loss_padding_ratio": 0.2,
+  "stop_profit_day_range_ratio": 0.0,
+  "stop_profit_ratio": 0.95,
+  "stop_profit_target_percentile": 100.0,
+  "trend_slip_percentile": 80.0
+}
+[0m[0m[1m[36m[4m
+Monday, January  2 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January  3 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January  4 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January  5 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January  6 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January  9 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 10 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January 11 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January 12 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:08 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 13 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 16 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 17 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January 18 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January 19 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 20 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 23 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 24 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January 25 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January 26 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 27 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 30 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January 31 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, February  1 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, February  2 2012[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, February  3 2012[24m[32m
+Current Equity:             $111,663.95 (+11,663.95) (+11.66%)
+Max Equity:                 $115,668.75 (+15,668.75) (+15.67%) @ 13:39 CST
+Min Equity:                 $93,550.50 (-6,449.50) (-6.45%) @ 11:05 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, February  6 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Tuesday, February  7 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Wednesday, February  8 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Thursday, February  9 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Friday, February 10 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Monday, February 13 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Tuesday, February 14 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Wednesday, February 15 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Thursday, February 16 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Friday, February 17 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Monday, February 20 2012[24m[32m
+Current Equity:             $111,663.95 (+0.00) (+0.00%)
+Max Equity:                 $111,663.95 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $111,663.95 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Tuesday, February 21 2012[24m[32m
+Current Equity:             $111,707.94 (+44.00) (+0.04%)
+Max Equity:                 $130,184.96 (+18,521.01) (+16.59%) @ 05:58 CST
+Min Equity:                 $93,101.72 (-18,562.23) (-16.62%) @ 03:13 CST
+Original Equity:            $111,663.95
+[1m[36m[4m
+Wednesday, February 22 2012[24m[31m
+Current Equity:             $106,324.20 (-3,402.53) (-3.10%)
+Max Equity:                 $125,231.91 (+15,505.19) (+14.13%) @ 19:32 CST
+Min Equity:                 $103,481.58 (-6,245.15) (-5.69%) @ 02:05 CST
+Original Equity:            $109,726.72
+[1m[36m[4m
+Thursday, February 23 2012[24m[31m
+Current Equity:             $89,182.35 (-18,132.46) (-16.90%)
+Max Equity:                 $114,895.12 (+7,580.31) (+7.06%) @ 19:15 CST
+Min Equity:                 $89,096.21 (-18,218.60) (-16.98%) @ 02:12 CST
+Original Equity:            $107,314.81
+[1m[36m[4m
+Friday, February 24 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $89,182.35
+[1m[36m[4m
+Monday, March  5 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $89,182.35
+[1m[36m[4m
+Tuesday, March  6 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $89,182.35
+[1m[36m[4m
+Wednesday, March  7 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $89,182.35
+[1m[36m[4m
+Thursday, March  8 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $89,182.35
+[1m[36m[4m
+Friday, March  9 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $89,182.35
+[1m[36m[4m
+Monday, March 12 2012[24m[32m
+Current Equity:             $89,182.35 (+0.00) (+0.00%)
+Max Equity:                 $89,182.35 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $89,182.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $89,182.35
+[1m[36m[4m
+Tuesday, March 13 2012[24m[31m
+Current Equity:             $86,736.55 (-2,445.80) (-2.74%)
+Max Equity:                 $92,593.83 (+3,411.48) (+3.83%) @ 14:32 CDT
+Min Equity:                 $83,621.63 (-5,560.72) (-6.24%) @ 14:06 CDT
+Original Equity:            $89,182.35
+[1m[36m[4m
+Wednesday, March 14 2012[24m[31m
+Current Equity:             $71,478.43 (-16,488.08) (-18.74%)
+Max Equity:                 $91,390.45 (+3,423.94) (+3.89%) @ 06:16 CDT
+Min Equity:                 $70,846.83 (-17,119.68) (-19.46%) @ 10:07 CDT
+Original Equity:            $87,966.51
+[1m[36m[4m
+Thursday, March 15 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Friday, March 16 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Monday, March 26 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Tuesday, March 27 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Wednesday, March 28 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Thursday, March 29 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Friday, March 30 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Monday, April  2 2012[24m[32m
+Current Equity:             $71,478.43 (+0.00) (+0.00%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $71,478.43 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Tuesday, April  3 2012[24m[31m
+Current Equity:             $63,856.22 (-7,622.21) (-10.66%)
+Max Equity:                 $71,478.43 (+0.00) (+0.00%) @ 13:58 CDT
+Min Equity:                 $63,283.61 (-8,194.82) (-11.46%) @ 17:54 CDT
+Original Equity:            $71,478.43
+[1m[36m[4m
+Wednesday, April  4 2012[24m[31m
+Current Equity:             $57,084.43 (-8,688.80) (-13.21%)
+Max Equity:                 $65,872.82 (+99.59) (+0.15%) @ 19:44 CDT
+Min Equity:                 $57,009.74 (-8,763.49) (-13.32%) @ 20:45 CDT
+Original Equity:            $65,773.24
+[1m[36m[4m
+Thursday, April  5 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Friday, April  6 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Monday, April 16 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:49 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Tuesday, April 17 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Wednesday, April 18 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Thursday, April 19 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Friday, April 20 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Monday, April 23 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Tuesday, April 24 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Wednesday, April 25 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Thursday, April 26 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Friday, April 27 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Monday, April 30 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Tuesday, May  1 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Wednesday, May  2 2012[24m[32m
+Current Equity:             $57,084.43 (+0.00) (+0.00%)
+Max Equity:                 $57,084.43 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $57,084.43 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Thursday, May  3 2012[24m[31m
+Current Equity:             $50,418.27 (-6,666.16) (-11.68%)
+Max Equity:                 $58,471.62 (+1,387.19) (+2.43%) @ 08:18 CDT
+Min Equity:                 $50,254.39 (-6,830.04) (-11.96%) @ 18:30 CDT
+Original Equity:            $57,084.43
+[1m[36m[4m
+Friday, May  4 2012[24m[32m
+Current Equity:             $63,692.61 (+12,680.27) (+24.86%)
+Max Equity:                 $65,065.11 (+14,052.77) (+27.55%) @ 12:38 CDT
+Min Equity:                 $46,177.86 (-4,834.48) (-9.48%) @ 08:52 CDT
+Original Equity:            $51,012.34
+[1m[36m[4m
+Monday, May  7 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, May  8 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, May  9 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, May 10 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, May 11 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, May 14 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, May 15 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, May 16 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, May 17 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, May 18 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, May 21 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, May 22 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, May 23 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, May 24 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, May 25 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, May 28 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, May 29 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, May 30 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, May 31 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, June  1 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, June  4 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, June  5 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, June  6 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, June  7 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, June  8 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, June 11 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, June 12 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, June 13 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, June 14 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, June 15 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, June 18 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, June 19 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, June 20 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, June 21 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, June 22 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, June 25 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Tuesday, June 26 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Wednesday, June 27 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Thursday, June 28 2012[24m[32m
+Current Equity:             $63,692.61 (+0.00) (+0.00%)
+Max Equity:                 $63,692.61 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Friday, June 29 2012[24m[32m
+Current Equity:             $80,715.16 (+17,022.55) (+26.73%)
+Max Equity:                 $86,338.45 (+22,645.85) (+35.55%) @ 22:01 CDT
+Min Equity:                 $63,692.61 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $63,692.61
+[1m[36m[4m
+Monday, July  2 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Tuesday, July  3 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Wednesday, July  4 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Thursday, July  5 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Friday, July  6 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Monday, July  9 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Tuesday, July 10 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Wednesday, July 11 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Thursday, July 12 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Friday, July 13 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Monday, July 16 2012[24m[32m
+Current Equity:             $80,715.16 (+0.00) (+0.00%)
+Max Equity:                 $80,715.16 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,715.16 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Tuesday, July 17 2012[24m[32m
+Current Equity:             $101,788.20 (+21,073.04) (+26.11%)
+Max Equity:                 $102,138.85 (+21,423.69) (+26.54%) @ 15:16 CDT
+Min Equity:                 $76,552.06 (-4,163.10) (-5.16%) @ 10:06 CDT
+Original Equity:            $80,715.16
+[1m[36m[4m
+Wednesday, July 18 2012[24m[31m
+Current Equity:             $95,317.23 (-5,865.32) (-5.80%)
+Max Equity:                 $104,529.60 (+3,347.06) (+3.31%) @ 19:28 CDT
+Min Equity:                 $77,785.03 (-23,397.51) (-23.12%) @ 08:06 CDT
+Original Equity:            $101,182.55
+[1m[36m[4m
+Thursday, July 19 2012[24m[32m
+Current Equity:             $101,660.70 (+5,387.17) (+5.60%)
+Max Equity:                 $109,566.12 (+13,292.59) (+13.81%) @ 02:23 CDT
+Min Equity:                 $95,763.50 (-510.03) (-0.53%) @ 01:02 CDT
+Original Equity:            $96,273.53
+[1m[36m[4m
+Friday, July 20 2012[24m[32m
+Current Equity:             $101,660.70 (+0.00) (+0.00%)
+Max Equity:                 $101,660.70 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $101,660.70 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $101,660.70
+[1m[36m[4m
+Monday, July 23 2012[24m[32m
+Current Equity:             $101,660.70 (+0.00) (+0.00%)
+Max Equity:                 $101,660.70 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $101,660.70 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $101,660.70
+[1m[36m[4m
+Tuesday, July 24 2012[24m[32m
+Current Equity:             $101,660.70 (+0.00) (+0.00%)
+Max Equity:                 $101,660.70 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $101,660.70 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $101,660.70
+[1m[36m[4m
+Wednesday, July 25 2012[24m[32m
+Current Equity:             $101,660.70 (+0.00) (+0.00%)
+Max Equity:                 $101,660.70 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $101,660.70 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $101,660.70
+[1m[36m[4m
+Thursday, July 26 2012[24m[32m
+Current Equity:             $124,075.08 (+22,414.39) (+22.05%)
+Max Equity:                 $143,495.34 (+41,834.64) (+41.15%) @ 09:09 CDT
+Min Equity:                 $101,660.70 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $101,660.70
+[1m[36m[4m
+Friday, July 27 2012[24m[32m
+Current Equity:             $140,418.04 (+16,550.88) (+13.36%)
+Max Equity:                 $168,987.02 (+45,119.87) (+36.43%) @ 12:32 CDT
+Min Equity:                 $110,310.40 (-13,556.75) (-10.94%) @ 03:51 CDT
+Original Equity:            $123,867.16
+[1m[36m[4m
+Monday, July 30 2012[24m[32m
+Current Equity:             $140,418.04 (+0.00) (+0.00%)
+Max Equity:                 $140,418.04 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $140,418.04 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $140,418.04
+[1m[36m[4m
+Tuesday, July 31 2012[24m[32m
+Current Equity:             $140,418.04 (+0.00) (+0.00%)
+Max Equity:                 $140,418.04 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $140,418.04 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $140,418.04
+[1m[36m[4m
+Wednesday, August  1 2012[24m[32m
+Current Equity:             $144,046.25 (+3,628.21) (+2.58%)
+Max Equity:                 $147,303.30 (+6,885.26) (+4.90%) @ 14:59 CDT
+Min Equity:                 $135,426.22 (-4,991.81) (-3.55%) @ 14:07 CDT
+Original Equity:            $140,418.04
+[1m[36m[4m
+Thursday, August  2 2012[24m[31m
+Current Equity:             $125,037.80 (-15,955.58) (-11.32%)
+Max Equity:                 $230,390.70 (+89,397.33) (+63.41%) @ 07:35 CDT
+Min Equity:                 $119,680.87 (-21,312.51) (-15.12%) @ 07:54 CDT
+Original Equity:            $140,993.38
+[1m[36m[4m
+Friday, August  3 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Monday, August  6 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Tuesday, August  7 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Wednesday, August  8 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Thursday, August  9 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Friday, August 10 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Monday, August 13 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Tuesday, August 14 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Wednesday, August 15 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Thursday, August 16 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Friday, August 17 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Monday, August 20 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Tuesday, August 21 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Wednesday, August 22 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Thursday, August 23 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Friday, August 24 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Monday, August 27 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Tuesday, August 28 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Wednesday, August 29 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Thursday, August 30 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Friday, August 31 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Monday, September  3 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Tuesday, September  4 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Wednesday, September  5 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Thursday, September  6 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Friday, September  7 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Monday, September 10 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Tuesday, September 11 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Wednesday, September 12 2012[24m[32m
+Current Equity:             $125,037.80 (+0.00) (+0.00%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $125,037.80 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Thursday, September 13 2012[24m[31m
+Current Equity:             $116,223.74 (-8,814.06) (-7.05%)
+Max Equity:                 $125,037.80 (+0.00) (+0.00%) @ 11:59 CDT
+Min Equity:                 $100,744.35 (-24,293.45) (-19.43%) @ 12:39 CDT
+Original Equity:            $125,037.80
+[1m[36m[4m
+Friday, September 14 2012[24m[32m
+Current Equity:             $169,748.39 (+53,801.78) (+46.40%)
+Max Equity:                 $184,554.77 (+68,608.15) (+59.17%) @ 09:13 CDT
+Min Equity:                 $113,690.03 (-2,256.59) (-1.95%) @ 19:34 CDT
+Original Equity:            $115,946.62
+[1m[36m[4m
+Monday, September 17 2012[24m[32m
+Current Equity:             $169,748.39 (+0.00) (+0.00%)
+Max Equity:                 $169,748.39 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $169,748.39 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Tuesday, September 18 2012[24m[32m
+Current Equity:             $169,748.39 (+0.00) (+0.00%)
+Max Equity:                 $169,748.39 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $169,748.39 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Wednesday, September 19 2012[24m[32m
+Current Equity:             $169,748.39 (+0.00) (+0.00%)
+Max Equity:                 $169,748.39 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $169,748.39 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Thursday, September 20 2012[24m[32m
+Current Equity:             $169,748.39 (+0.00) (+0.00%)
+Max Equity:                 $169,748.39 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $169,748.39 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Friday, September 21 2012[24m[32m
+Current Equity:             $169,748.39 (+0.00) (+0.00%)
+Max Equity:                 $169,748.39 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $169,748.39 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Monday, September 24 2012[24m[32m
+Current Equity:             $169,748.39 (+0.00) (+0.00%)
+Max Equity:                 $169,748.39 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $169,748.39 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Tuesday, September 25 2012[24m[31m
+Current Equity:             $166,606.59 (-3,141.80) (-1.85%)
+Max Equity:                 $212,204.05 (+42,455.66) (+25.01%) @ 10:05 CDT
+Min Equity:                 $158,761.02 (-10,987.38) (-6.47%) @ 01:50 CDT
+Original Equity:            $169,748.39
+[1m[36m[4m
+Wednesday, September 26 2012[24m[31m
+Current Equity:             $141,361.65 (-27,919.48) (-16.49%)
+Max Equity:                 $175,673.90 (+6,392.78) (+3.78%) @ 20:31 CDT
+Min Equity:                 $141,361.65 (-27,919.48) (-16.49%) @ 01:19 CDT
+Original Equity:            $169,281.12
+[1m[36m[4m
+Thursday, September 27 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, September 28 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, October  1 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, October  2 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, October  3 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, October  4 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, October  5 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, October  8 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, October  9 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, October 10 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, October 11 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, October 12 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, October 15 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, October 16 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, October 17 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, October 18 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, October 19 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, October 22 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, October 23 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, October 24 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, October 25 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, October 26 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, October 29 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, October 30 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, October 31 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, November  1 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:43 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, November  2 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, November  5 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, November  6 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, November  7 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, November  8 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, November  9 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, November 12 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, November 13 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Wednesday, November 14 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Thursday, November 15 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Friday, November 16 2012[24m[32m
+Current Equity:             $141,361.65 (+0.00) (+0.00%)
+Max Equity:                 $141,361.65 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $141,361.65 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Monday, November 19 2012[24m[31m
+Current Equity:             $135,433.22 (-5,928.43) (-4.19%)
+Max Equity:                 $145,730.53 (+4,368.88) (+3.09%) @ 17:34 CST
+Min Equity:                 $135,433.22 (-5,928.43) (-4.19%) @ 17:58 CST
+Original Equity:            $141,361.65
+[1m[36m[4m
+Tuesday, November 20 2012[24m[32m
+Current Equity:             $157,288.17 (+24,090.75) (+18.09%)
+Max Equity:                 $163,548.41 (+30,350.99) (+22.79%) @ 04:35 CST
+Min Equity:                 $133,197.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $133,197.42
+[1m[36m[4m
+Wednesday, November 21 2012[24m[32m
+Current Equity:             $188,629.10 (+31,340.93) (+19.93%)
+Max Equity:                 $196,403.82 (+39,115.65) (+24.87%) @ 08:08 CST
+Min Equity:                 $145,241.11 (-12,047.06) (-7.66%) @ 01:25 CST
+Original Equity:            $157,288.17
+[1m[36m[4m
+Thursday, November 22 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Friday, November 23 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Monday, November 26 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Tuesday, November 27 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Wednesday, November 28 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Thursday, November 29 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Friday, November 30 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Monday, December  3 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Tuesday, December  4 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Wednesday, December  5 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Thursday, December  6 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:07 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Friday, December  7 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Monday, December 10 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:48 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Tuesday, December 11 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Wednesday, December 12 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:51 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:07 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Thursday, December 13 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Friday, December 14 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Monday, December 17 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Tuesday, December 18 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Wednesday, December 19 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Thursday, December 20 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Friday, December 21 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Monday, December 24 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 11:58 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Wednesday, December 26 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 07:00 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Thursday, December 27 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Friday, December 28 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Monday, December 31 2012[24m[32m
+Current Equity:             $188,629.10 (+0.00) (+0.00%)
+Max Equity:                 $188,629.10 (+0.00) (+0.00%) @ 11:59 CST
+Min Equity:                 $188,629.10 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Wednesday, January  2 2013[24m[32m
+Current Equity:             $253,656.51 (+65,027.42) (+34.47%)
+Max Equity:                 $271,672.04 (+83,042.94) (+44.02%) @ 12:05 CST
+Min Equity:                 $177,055.62 (-11,573.48) (-6.14%) @ 21:52 CST
+Original Equity:            $188,629.10
+[1m[36m[4m
+Thursday, January  3 2013[24m[32m
+Current Equity:             $253,656.51 (+0.00) (+0.00%)
+Max Equity:                 $253,656.51 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $253,656.51 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $253,656.51
+[1m[36m[4m
+Friday, January  4 2013[24m[32m
+Current Equity:             $253,656.51 (+0.00) (+0.00%)
+Max Equity:                 $253,656.51 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $253,656.51 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $253,656.51
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$619.58
+[1m[32mAvg Daily % Return:         +0.52%
+[1m[32mTotal Return:               +$153,654.63 (153.65%)
+Win Rate:                   235W (94.76%) 13L (Total: 248)
+
+[1m[36m⌚ Finished in 00:04
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

@@ -1,0 +1,1510 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-eur_usd-3[36m
+
+{
+  "account_stop_loss_ratio": -0.2,
+  "authentication_token": "authentication_token",
+  "backtest": {
+    "account_margin_multiplier": 1,
+    "account_starting_equity": 100000,
+    "end_at": "2015-01-02 16:00:00",
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2014-01-01 00:00:00"
+  },
+  "base_url": "",
+  "env_symbols": [
+    "EUR_USD"
+  ],
+  "id": "backtest-eur_usd-3",
+  "is_active": false,
+  "market_duration_hours": 240,
+  "max_slow_reverse_loss_count": 4,
+  "note": "",
+  "reversal_proximity_ratio": 0.0,
+  "reversal_timeframe_minutes": 360,
+  "secondary_reversal_timeframe_minutes": 120,
+  "should_await_spike": true,
+  "should_enter_as_reversal": true,
+  "should_enter_at_spike": true,
+  "should_reverse_loss": false,
+  "should_reverse_profit": false,
+  "should_stop_profit": true,
+  "spike_duration_minutes": 60,
+  "spike_entry_score": 5.0,
+  "spike_height_ratio": 0.4,
+  "stop_loss_padding_ratio": 0.2,
+  "stop_profit_day_range_ratio": 0.0,
+  "stop_profit_ratio": 0.95,
+  "stop_profit_target_percentile": 100.0,
+  "trend_slip_percentile": 80.0
+}
+[0m[0m[1m[36m[4m
+Wednesday, January  1 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 00:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January  2 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January  3 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January  6 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January  7 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January  8 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January  9 2014[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Friday, January 10 2014[24m[32m
+Current Equity:             $110,999.49 (+10,999.49) (+11.00%)
+Max Equity:                 $117,305.86 (+17,305.86) (+17.31%) @ 09:06 CST
+Min Equity:                 $95,820.20 (-4,179.80) (-4.18%) @ 08:05 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Monday, January 13 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Tuesday, January 14 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Wednesday, January 15 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Thursday, January 16 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Friday, January 17 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Monday, January 20 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Tuesday, January 21 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Wednesday, January 22 2014[24m[32m
+Current Equity:             $110,999.49 (+0.00) (+0.00%)
+Max Equity:                 $110,999.49 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Thursday, January 23 2014[24m[32m
+Current Equity:             $151,519.33 (+40,519.85) (+36.50%)
+Max Equity:                 $155,195.53 (+44,196.04) (+39.82%) @ 15:11 CST
+Min Equity:                 $110,999.49 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $110,999.49
+[1m[36m[4m
+Friday, January 24 2014[24m[31m
+Current Equity:             $142,778.16 (-8,863.72) (-5.85%)
+Max Equity:                 $156,420.93 (+4,779.05) (+3.15%) @ 00:18 CST
+Min Equity:                 $142,778.16 (-8,863.72) (-5.85%) @ 03:18 CST
+Original Equity:            $151,641.87
+[1m[36m[4m
+Monday, January 27 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Tuesday, January 28 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Wednesday, January 29 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Thursday, January 30 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Friday, January 31 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Monday, February  3 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Tuesday, February  4 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Wednesday, February  5 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Thursday, February  6 2014[24m[32m
+Current Equity:             $142,778.16 (+0.00) (+0.00%)
+Max Equity:                 $142,778.16 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $142,778.16 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Friday, February  7 2014[24m[31m
+Current Equity:             $117,232.59 (-25,545.57) (-17.89%)
+Max Equity:                 $145,771.75 (+2,993.59) (+2.10%) @ 08:26 CST
+Min Equity:                 $114,987.18 (-27,790.98) (-19.46%) @ 14:48 CST
+Original Equity:            $142,778.16
+[1m[36m[4m
+Monday, February 10 2014[24m[32m
+Current Equity:             $117,232.59 (+0.00) (+0.00%)
+Max Equity:                 $117,232.59 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $117,232.59 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $117,232.59
+[1m[36m[4m
+Tuesday, February 11 2014[24m[32m
+Current Equity:             $117,232.59 (+0.00) (+0.00%)
+Max Equity:                 $117,232.59 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $117,232.59 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $117,232.59
+[1m[36m[4m
+Wednesday, February 12 2014[24m[32m
+Current Equity:             $117,232.59 (+0.00) (+0.00%)
+Max Equity:                 $117,232.59 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $117,232.59 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $117,232.59
+[1m[36m[4m
+Thursday, February 13 2014[24m[31m
+Current Equity:             $112,588.06 (-4,644.53) (-3.96%)
+Max Equity:                 $119,805.34 (+2,572.75) (+2.19%) @ 06:15 CST
+Min Equity:                 $107,620.87 (-9,611.72) (-8.20%) @ 07:32 CST
+Original Equity:            $117,232.59
+[1m[36m[4m
+Friday, February 14 2014[24m[31m
+Current Equity:             $105,285.87 (-6,580.46) (-5.88%)
+Max Equity:                 $112,927.70 (+1,061.36) (+0.95%) @ 20:34 CST
+Min Equity:                 $96,794.95 (-15,071.38) (-13.47%) @ 06:23 CST
+Original Equity:            $111,866.33
+[1m[36m[4m
+Monday, February 17 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Tuesday, February 18 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Wednesday, February 19 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Thursday, February 20 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Friday, February 21 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Monday, February 24 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Tuesday, February 25 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Wednesday, February 26 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Thursday, February 27 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Friday, February 28 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Monday, March  3 2014[24m[32m
+Current Equity:             $105,285.87 (+0.00) (+0.00%)
+Max Equity:                 $105,285.87 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $105,285.87 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Tuesday, March  4 2014[24m[31m
+Current Equity:             $95,253.07 (-10,032.79) (-9.53%)
+Max Equity:                 $107,958.70 (+2,672.83) (+2.54%) @ 03:09 CST
+Min Equity:                 $95,253.07 (-10,032.79) (-9.53%) @ 07:42 CST
+Original Equity:            $105,285.87
+[1m[36m[4m
+Wednesday, March  5 2014[24m[32m
+Current Equity:             $95,253.07 (+0.00) (+0.00%)
+Max Equity:                 $95,253.07 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $95,253.07 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $95,253.07
+[1m[36m[4m
+Thursday, March  6 2014[24m[32m
+Current Equity:             $95,253.07 (+0.00) (+0.00%)
+Max Equity:                 $95,253.07 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $95,253.07 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $95,253.07
+[1m[36m[4m
+Friday, March  7 2014[24m[32m
+Current Equity:             $95,253.07 (+0.00) (+0.00%)
+Max Equity:                 $95,253.07 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $95,253.07 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $95,253.07
+[1m[36m[4m
+Monday, March 10 2014[24m[32m
+Current Equity:             $95,253.07 (+0.00) (+0.00%)
+Max Equity:                 $95,253.07 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $95,253.07 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $95,253.07
+[1m[36m[4m
+Tuesday, March 11 2014[24m[32m
+Current Equity:             $95,253.07 (+0.00) (+0.00%)
+Max Equity:                 $95,253.07 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $95,253.07 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $95,253.07
+[1m[36m[4m
+Wednesday, March 12 2014[24m[32m
+Current Equity:             $95,253.07 (+0.00) (+0.00%)
+Max Equity:                 $95,253.07 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $95,253.07 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $95,253.07
+[1m[36m[4m
+Thursday, March 13 2014[24m[32m
+Current Equity:             $118,264.89 (+23,011.82) (+24.16%)
+Max Equity:                 $124,300.43 (+29,047.36) (+30.49%) @ 13:29 CDT
+Min Equity:                 $83,973.60 (-11,279.48) (-11.84%) @ 04:29 CDT
+Original Equity:            $95,253.07
+[1m[36m[4m
+Friday, March 14 2014[24m[31m
+Current Equity:             $101,844.18 (-16,420.71) (-13.88%)
+Max Equity:                 $123,592.35 (+5,327.46) (+4.50%) @ 01:00 CDT
+Min Equity:                 $94,999.41 (-23,265.48) (-19.67%) @ 09:15 CDT
+Original Equity:            $118,264.89
+[1m[36m[4m
+Monday, March 17 2014[24m[32m
+Current Equity:             $101,844.18 (+0.00) (+0.00%)
+Max Equity:                 $101,844.18 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $101,844.18 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $101,844.18
+[1m[36m[4m
+Tuesday, March 18 2014[24m[32m
+Current Equity:             $101,844.18 (+0.00) (+0.00%)
+Max Equity:                 $101,844.18 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $101,844.18 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $101,844.18
+[1m[36m[4m
+Wednesday, March 19 2014[24m[31m
+Current Equity:             $97,312.19 (-4,531.99) (-4.45%)
+Max Equity:                 $105,968.67 (+4,124.48) (+4.05%) @ 14:10 CDT
+Min Equity:                 $95,852.39 (-5,991.79) (-5.88%) @ 16:58 CDT
+Original Equity:            $101,844.18
+[1m[36m[4m
+Thursday, March 20 2014[24m[31m
+Current Equity:             $81,181.42 (-16,897.17) (-17.23%)
+Max Equity:                 $106,545.42 (+8,466.83) (+8.63%) @ 01:10 CDT
+Min Equity:                 $81,181.42 (-16,897.17) (-17.23%) @ 05:37 CDT
+Original Equity:            $98,078.59
+[1m[36m[4m
+Friday, March 21 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Monday, March 31 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Tuesday, April  1 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Wednesday, April  2 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Thursday, April  3 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Friday, April  4 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Monday, April  7 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Tuesday, April  8 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Wednesday, April  9 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Thursday, April 10 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Friday, April 11 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Monday, April 14 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Tuesday, April 15 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Wednesday, April 16 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Thursday, April 17 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Friday, April 18 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Monday, April 21 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Tuesday, April 22 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Wednesday, April 23 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Thursday, April 24 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Friday, April 25 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Monday, April 28 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Tuesday, April 29 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Wednesday, April 30 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Thursday, May  1 2014[24m[32m
+Current Equity:             $81,181.42 (+0.00) (+0.00%)
+Max Equity:                 $81,181.42 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $81,181.42 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Friday, May  2 2014[24m[31m
+Current Equity:             $80,854.92 (-326.50) (-0.40%)
+Max Equity:                 $85,202.73 (+4,021.31) (+4.95%) @ 08:37 CDT
+Min Equity:                 $75,310.90 (-5,870.52) (-7.23%) @ 09:36 CDT
+Original Equity:            $81,181.42
+[1m[36m[4m
+Monday, May  5 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:08 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Tuesday, May  6 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Wednesday, May  7 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Thursday, May  8 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Friday, May  9 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Monday, May 12 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Tuesday, May 13 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Wednesday, May 14 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Thursday, May 15 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Friday, May 16 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Monday, May 19 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Tuesday, May 20 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Wednesday, May 21 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Thursday, May 22 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Friday, May 23 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Monday, May 26 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Tuesday, May 27 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Wednesday, May 28 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Thursday, May 29 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Friday, May 30 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Monday, June  2 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Tuesday, June  3 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Wednesday, June  4 2014[24m[32m
+Current Equity:             $80,854.92 (+0.00) (+0.00%)
+Max Equity:                 $80,854.92 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $80,854.92 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Thursday, June  5 2014[24m[32m
+Current Equity:             $97,833.82 (+16,978.90) (+21.00%)
+Max Equity:                 $100,915.86 (+20,060.94) (+24.81%) @ 09:26 CDT
+Min Equity:                 $78,948.11 (-1,906.81) (-2.36%) @ 07:23 CDT
+Original Equity:            $80,854.92
+[1m[36m[4m
+Friday, June  6 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Monday, June  9 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Tuesday, June 10 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Wednesday, June 11 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Thursday, June 12 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Friday, June 13 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Monday, June 16 2014[24m[32m
+Current Equity:             $97,833.82 (+0.00) (+0.00%)
+Max Equity:                 $97,833.82 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $97,833.82 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Tuesday, June 17 2014[24m[31m
+Current Equity:             $94,668.65 (-3,165.16) (-3.24%)
+Max Equity:                 $98,267.29 (+433.48) (+0.44%) @ 08:21 CDT
+Min Equity:                 $91,224.30 (-6,609.52) (-6.76%) @ 09:45 CDT
+Original Equity:            $97,833.82
+[1m[36m[4m
+Wednesday, June 18 2014[24m[32m
+Current Equity:             $115,741.72 (+21,319.09) (+22.58%)
+Max Equity:                 $117,866.37 (+23,443.74) (+24.83%) @ 15:56 CDT
+Min Equity:                 $92,805.89 (-1,616.74) (-1.71%) @ 01:15 CDT
+Original Equity:            $94,422.63
+[1m[36m[4m
+Thursday, June 19 2014[24m[32m
+Current Equity:             $126,635.36 (+10,507.34) (+9.05%)
+Max Equity:                 $135,713.39 (+19,585.37) (+16.87%) @ 04:04 CDT
+Min Equity:                 $114,273.78 (-1,854.24) (-1.60%) @ 21:19 CDT
+Original Equity:            $116,128.02
+[1m[36m[4m
+Friday, June 20 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Monday, June 23 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Tuesday, June 24 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Wednesday, June 25 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:48 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Thursday, June 26 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Friday, June 27 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Monday, June 30 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Tuesday, July  1 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Wednesday, July  2 2014[24m[32m
+Current Equity:             $126,635.36 (+0.00) (+0.00%)
+Max Equity:                 $126,635.36 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $126,635.36 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Thursday, July  3 2014[24m[31m
+Current Equity:             $118,960.15 (-7,675.21) (-6.06%)
+Max Equity:                 $127,193.94 (+558.58) (+0.44%) @ 08:10 CDT
+Min Equity:                 $116,156.68 (-10,478.68) (-8.27%) @ 11:49 CDT
+Original Equity:            $126,635.36
+[1m[36m[4m
+Friday, July  4 2014[24m[31m
+Current Equity:             $111,617.74 (-7,119.91) (-6.00%)
+Max Equity:                 $119,761.14 (+1,023.49) (+0.86%) @ 22:31 CDT
+Min Equity:                 $109,036.77 (-9,700.88) (-8.17%) @ 08:03 CDT
+Original Equity:            $118,737.65
+[1m[36m[4m
+Monday, July  7 2014[24m[32m
+Current Equity:             $111,617.74 (+0.00) (+0.00%)
+Max Equity:                 $111,617.74 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $111,617.74 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $111,617.74
+[1m[36m[4m
+Tuesday, July  8 2014[24m[32m
+Current Equity:             $111,617.74 (+0.00) (+0.00%)
+Max Equity:                 $111,617.74 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $111,617.74 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $111,617.74
+[1m[36m[4m
+Wednesday, July  9 2014[24m[31m
+Current Equity:             $110,999.68 (-618.06) (-0.55%)
+Max Equity:                 $111,617.74 (+0.00) (+0.00%) @ 13:59 CDT
+Min Equity:                 $110,067.83 (-1,549.91) (-1.39%) @ 14:34 CDT
+Original Equity:            $111,617.74
+[1m[36m[4m
+Thursday, July 10 2014[24m[32m
+Current Equity:             $126,111.87 (+15,598.37) (+14.11%)
+Max Equity:                 $131,946.06 (+21,432.57) (+19.39%) @ 09:08 CDT
+Min Equity:                 $107,312.79 (-3,200.70) (-2.90%) @ 01:27 CDT
+Original Equity:            $110,513.50
+[1m[36m[4m
+Friday, July 11 2014[24m[31m
+Current Equity:             $124,167.13 (-1,701.64) (-1.35%)
+Max Equity:                 $130,365.97 (+4,497.19) (+3.57%) @ 08:10 CDT
+Min Equity:                 $118,616.55 (-7,252.23) (-5.76%) @ 03:25 CDT
+Original Equity:            $125,868.77
+[1m[36m[4m
+Monday, July 14 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Tuesday, July 15 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:07 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Wednesday, July 16 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Thursday, July 17 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Friday, July 18 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Monday, July 21 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Tuesday, July 22 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Wednesday, July 23 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:48 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Thursday, July 24 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Friday, July 25 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Monday, July 28 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Tuesday, July 29 2014[24m[32m
+Current Equity:             $124,167.13 (+0.00) (+0.00%)
+Max Equity:                 $124,167.13 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $124,167.13 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Wednesday, July 30 2014[24m[32m
+Current Equity:             $133,053.13 (+8,886.00) (+7.16%)
+Max Equity:                 $136,986.86 (+12,819.72) (+10.32%) @ 13:33 CDT
+Min Equity:                 $121,020.55 (-3,146.59) (-2.53%) @ 09:51 CDT
+Original Equity:            $124,167.13
+[1m[36m[4m
+Thursday, July 31 2014[24m[31m
+Current Equity:             $130,368.94 (-3,100.70) (-2.32%)
+Max Equity:                 $135,413.37 (+1,943.72) (+1.46%) @ 22:05 CDT
+Min Equity:                 $122,547.76 (-10,921.88) (-8.18%) @ 07:41 CDT
+Original Equity:            $133,469.64
+[1m[36m[4m
+Friday, August  1 2014[24m[32m
+Current Equity:             $148,973.16 (+18,835.62) (+14.47%)
+Max Equity:                 $155,128.29 (+24,990.75) (+19.20%) @ 09:51 CDT
+Min Equity:                 $125,694.74 (-4,442.80) (-3.41%) @ 02:56 CDT
+Original Equity:            $130,137.54
+[1m[36m[4m
+Monday, August  4 2014[24m[32m
+Current Equity:             $148,973.16 (+0.00) (+0.00%)
+Max Equity:                 $148,973.16 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $148,973.16 (+0.00) (+0.00%) @ 19:11 CDT
+Original Equity:            $148,973.16
+[1m[36m[4m
+Tuesday, August  5 2014[24m[32m
+Current Equity:             $148,973.16 (+0.00) (+0.00%)
+Max Equity:                 $148,973.16 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $148,973.16 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $148,973.16
+[1m[36m[4m
+Wednesday, August  6 2014[24m[32m
+Current Equity:             $148,973.16 (+0.00) (+0.00%)
+Max Equity:                 $148,973.16 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $148,973.16 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $148,973.16
+[1m[36m[4m
+Thursday, August  7 2014[24m[32m
+Current Equity:             $148,973.16 (+0.00) (+0.00%)
+Max Equity:                 $148,973.16 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $148,973.16 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $148,973.16
+[1m[36m[4m
+Friday, August  8 2014[24m[31m
+Current Equity:             $118,921.76 (-30,051.40) (-20.17%)
+Max Equity:                 $149,418.05 (+444.89) (+0.30%) @ 02:08 CDT
+Min Equity:                 $118,921.76 (-30,051.40) (-20.17%) @ 09:35 CDT
+Original Equity:            $148,973.16
+[1m[36m[4m
+Monday, August 18 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Tuesday, August 19 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Wednesday, August 20 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:47 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:08 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Thursday, August 21 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:26 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Friday, August 22 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Monday, August 25 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Tuesday, August 26 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:40 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Wednesday, August 27 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Thursday, August 28 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:29 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Friday, August 29 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Monday, September  1 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:49 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Tuesday, September  2 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:47 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:08 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Wednesday, September  3 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:34 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Thursday, September  4 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:11 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Friday, September  5 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Monday, September  8 2014[24m[32m
+Current Equity:             $118,921.76 (+0.00) (+0.00%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $118,921.76 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Tuesday, September  9 2014[24m[31m
+Current Equity:             $114,101.40 (-4,820.37) (-4.05%)
+Max Equity:                 $118,921.76 (+0.00) (+0.00%) @ 14:57 CDT
+Min Equity:                 $112,578.86 (-6,342.90) (-5.33%) @ 16:07 CDT
+Original Equity:            $118,921.76
+[1m[36m[4m
+Wednesday, September 10 2014[24m[32m
+Current Equity:             $123,908.33 (+9,851.71) (+8.64%)
+Max Equity:                 $135,954.29 (+21,897.67) (+19.20%) @ 11:25 CDT
+Min Equity:                 $104,473.59 (-9,583.03) (-8.40%) @ 04:28 CDT
+Original Equity:            $114,056.62
+[1m[36m[4m
+Thursday, September 11 2014[24m[31m
+Current Equity:             $120,101.99 (-1,791.22) (-1.47%)
+Max Equity:                 $132,685.31 (+10,792.11) (+8.85%) @ 01:28 CDT
+Min Equity:                 $109,041.20 (-12,852.01) (-10.54%) @ 08:04 CDT
+Original Equity:            $121,893.21
+[1m[36m[4m
+Friday, September 12 2014[24m[31m
+Current Equity:             $102,816.71 (-18,001.77) (-14.90%)
+Max Equity:                 $125,699.55 (+4,881.08) (+4.04%) @ 08:31 CDT
+Min Equity:                 $97,622.17 (-23,196.31) (-19.20%) @ 11:25 CDT
+Original Equity:            $120,818.48
+[1m[36m[4m
+Monday, September 15 2014[24m[32m
+Current Equity:             $102,816.71 (+0.00) (+0.00%)
+Max Equity:                 $102,816.71 (+0.00) (+0.00%) @ 18:40 CDT
+Min Equity:                 $102,816.71 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $102,816.71
+[1m[36m[4m
+Tuesday, September 16 2014[24m[32m
+Current Equity:             $102,816.71 (+0.00) (+0.00%)
+Max Equity:                 $102,816.71 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $102,816.71 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $102,816.71
+[1m[36m[4m
+Wednesday, September 17 2014[24m[31m
+Current Equity:             $84,301.94 (-18,514.77) (-18.01%)
+Max Equity:                 $104,593.23 (+1,776.53) (+1.73%) @ 14:09 CDT
+Min Equity:                 $84,301.94 (-18,514.77) (-18.01%) @ 14:33 CDT
+Original Equity:            $102,816.71
+[1m[36m[4m
+Thursday, September 18 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Friday, September 19 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Monday, September 22 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Tuesday, September 23 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Wednesday, September 24 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Thursday, September 25 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Friday, September 26 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Monday, September 29 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Tuesday, September 30 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Wednesday, October  1 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Thursday, October  2 2014[24m[32m
+Current Equity:             $84,301.94 (+0.00) (+0.00%)
+Max Equity:                 $84,301.94 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $84,301.94 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Friday, October  3 2014[24m[32m
+Current Equity:             $91,260.15 (+6,958.21) (+8.25%)
+Max Equity:                 $95,730.88 (+11,428.95) (+13.56%) @ 09:52 CDT
+Min Equity:                 $79,999.28 (-4,302.66) (-5.10%) @ 08:06 CDT
+Original Equity:            $84,301.94
+[1m[36m[4m
+Monday, October  6 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Tuesday, October  7 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Wednesday, October  8 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Thursday, October  9 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Friday, October 10 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Monday, October 13 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Tuesday, October 14 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Wednesday, October 15 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Thursday, October 16 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Friday, October 17 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Monday, October 20 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:45 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Tuesday, October 21 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:42 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Wednesday, October 22 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Thursday, October 23 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:41 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Friday, October 24 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Monday, October 27 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Tuesday, October 28 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:48 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Wednesday, October 29 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Thursday, October 30 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Friday, October 31 2014[24m[32m
+Current Equity:             $91,260.15 (+0.00) (+0.00%)
+Max Equity:                 $91,260.15 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $91,260.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $91,260.15
+[1m[36m[4m
+Monday, November  3 2014[24m[32m
+Current Equity:             $103,668.02 (+12,407.87) (+13.60%)
+Max Equity:                 $108,029.42 (+16,769.27) (+18.38%) @ 07:53 CST
+Min Equity:                 $85,915.29 (-5,344.86) (-5.86%) @ 19:17 CST
+Original Equity:            $91,260.15
+[1m[36m[4m
+Tuesday, November  4 2014[24m[32m
+Current Equity:             $109,557.78 (+8,089.09) (+7.97%)
+Max Equity:                 $115,335.70 (+13,867.02) (+13.67%) @ 22:06 CST
+Min Equity:                 $101,468.68 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $101,468.68
+[1m[36m[4m
+Wednesday, November  5 2014[24m[32m
+Current Equity:             $109,557.78 (+0.00) (+0.00%)
+Max Equity:                 $109,557.78 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $109,557.78 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $109,557.78
+[1m[36m[4m
+Thursday, November  6 2014[24m[31m
+Current Equity:             $83,872.81 (-25,684.97) (-23.44%)
+Max Equity:                 $113,968.88 (+4,411.11) (+4.03%) @ 08:02 CST
+Min Equity:                 $78,323.48 (-31,234.29) (-28.51%) @ 15:36 CST
+Original Equity:            $109,557.78
+[1m[36m[4m
+Friday, November  7 2014[24m[32m
+Current Equity:             $115,150.83 (+32,707.39) (+39.67%)
+Max Equity:                 $119,649.15 (+37,205.71) (+45.13%) @ 12:51 CST
+Min Equity:                 $78,575.72 (-3,867.71) (-4.69%) @ 07:49 CST
+Original Equity:            $82,443.44
+[1m[36m[4m
+Monday, November 10 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Tuesday, November 11 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Wednesday, November 12 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Thursday, November 13 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:50 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Friday, November 14 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Monday, November 17 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Tuesday, November 18 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:46 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Wednesday, November 19 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Thursday, November 20 2014[24m[32m
+Current Equity:             $115,150.83 (+0.00) (+0.00%)
+Max Equity:                 $115,150.83 (+0.00) (+0.00%) @ 17:47 CST
+Min Equity:                 $115,150.83 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Friday, November 21 2014[24m[32m
+Current Equity:             $146,419.35 (+31,268.52) (+27.15%)
+Max Equity:                 $153,809.25 (+38,658.42) (+33.57%) @ 12:13 CST
+Min Equity:                 $111,132.57 (-4,018.26) (-3.49%) @ 03:10 CST
+Original Equity:            $115,150.83
+[1m[36m[4m
+Monday, November 24 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Tuesday, November 25 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Wednesday, November 26 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:45 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Thursday, November 27 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Friday, November 28 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Monday, December  1 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:50 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Tuesday, December  2 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Wednesday, December  3 2014[24m[32m
+Current Equity:             $146,419.35 (+0.00) (+0.00%)
+Max Equity:                 $146,419.35 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $146,419.35 (+0.00) (+0.00%) @ 18:06 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Thursday, December  4 2014[24m[31m
+Current Equity:             $114,712.28 (-31,707.07) (-21.65%)
+Max Equity:                 $150,788.66 (+4,369.32) (+2.98%) @ 08:00 CST
+Min Equity:                 $112,999.98 (-33,419.37) (-22.82%) @ 08:19 CST
+Original Equity:            $146,419.35
+[1m[36m[4m
+Friday, December  5 2014[24m[32m
+Current Equity:             $114,712.28 (+0.00) (+0.00%)
+Max Equity:                 $114,712.28 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $114,712.28 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $114,712.28
+[1m[36m[4m
+Monday, December 15 2014[24m[32m
+Current Equity:             $114,712.28 (+0.00) (+0.00%)
+Max Equity:                 $114,712.28 (+0.00) (+0.00%) @ 17:43 CST
+Min Equity:                 $114,712.28 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $114,712.28
+[1m[36m[4m
+Tuesday, December 16 2014[24m[32m
+Current Equity:             $114,712.28 (+0.00) (+0.00%)
+Max Equity:                 $114,712.28 (+0.00) (+0.00%) @ 17:45 CST
+Min Equity:                 $114,712.28 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $114,712.28
+[1m[36m[4m
+Wednesday, December 17 2014[24m[31m
+Current Equity:             $103,455.06 (-11,257.22) (-9.81%)
+Max Equity:                 $114,712.28 (+0.00) (+0.00%) @ 13:58 CST
+Min Equity:                 $93,909.99 (-20,802.28) (-18.13%) @ 14:08 CST
+Original Equity:            $114,712.28
+[1m[36m[4m
+Thursday, December 18 2014[24m[31m
+Current Equity:             $92,273.07 (-7,468.73) (-7.49%)
+Max Equity:                 $108,307.62 (+8,565.83) (+8.59%) @ 21:32 CST
+Min Equity:                 $91,175.97 (-8,565.83) (-8.59%) @ 01:05 CST
+Original Equity:            $99,741.79
+[1m[36m[4m
+Friday, December 19 2014[24m[32m
+Current Equity:             $92,273.07 (+0.00) (+0.00%)
+Max Equity:                 $92,273.07 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $92,273.07 (+0.00) (+0.00%) @ 18:07 CST
+Original Equity:            $92,273.07
+[1m[36m[4m
+Monday, December 29 2014[24m[32m
+Current Equity:             $92,273.07 (+0.00) (+0.00%)
+Max Equity:                 $92,273.07 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $92,273.07 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $92,273.07
+[1m[36m[4m
+Tuesday, December 30 2014[24m[32m
+Current Equity:             $92,273.07 (+0.00) (+0.00%)
+Max Equity:                 $92,273.07 (+0.00) (+0.00%) @ 17:36 CST
+Min Equity:                 $92,273.07 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $92,273.07
+[1m[36m[4m
+Wednesday, December 31 2014[24m[32m
+Current Equity:             $92,273.07 (+0.00) (+0.00%)
+Max Equity:                 $92,273.07 (+0.00) (+0.00%) @ 12:58 CST
+Min Equity:                 $92,273.07 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $92,273.07
+[1m[36m[4m
+Thursday, January  1 2015[24m[32m
+Current Equity:             $92,273.07 (+0.00) (+0.00%)
+Max Equity:                 $92,273.07 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $92,273.07 (+0.00) (+0.00%) @ 16:04 CST
+Original Equity:            $92,273.07
+[1m[36m[4m
+Friday, January  2 2015[24m[32m
+Current Equity:             $92,273.07 (+0.00) (+0.00%)
+Max Equity:                 $92,273.07 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $92,273.07 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $92,273.07
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$5.83
+[1m[32mAvg Daily % Return:         +0.19%
+[1m[32mTotal Return:               +$1,417.63 (1.42%)
+Win Rate:                   219W (90.12%) 24L (Total: 243)
+
+[1m[36m⌚ Finished in 00:03
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

@@ -5,13 +5,10 @@
 #include "is_trending.cpp"          // is_trending
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/time.cpp"       // ::utils::time_
-#include "ready_to_stop_loss.cpp"   // ready_to_stop_loss // TODO: Decide
 #include "tao_bot.h" // Oanda::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
 #include <stdio.h>   // printf
 #include <string>    // std::string
-
-#include "stop_loss_reversals_name.cpp" // TODO: Decide
 
 void Oanda::TaoBot::log_reversal_metadata() {
   Formatted::Stream trend_status_color = fmt.cyan;
@@ -42,15 +39,15 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << trend_status_color << trend_status_text << std::endl;
 
   // TODO: Decide
-  Formatted::Stream is_entry_reversal_color =
-      this->is_entry_reversal ? fmt.green : fmt.red;
-  const std::string is_entry_reversal_text =
-      this->is_entry_reversal ? "YES" : "NO";
+  Formatted::Stream is_entry_signal_trans_color =
+      this->is_entry_signal_trans ? fmt.green : fmt.red;
+  const std::string is_entry_signal_trans_text =
+      this->is_entry_signal_trans ? "YES" : "NO";
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Is entry reversal? ");
-  std::cout << is_entry_reversal_color << is_entry_reversal_text << fmt.reset
-            << std::endl;
+  printf("Is entry signal trans? ");
+  std::cout << is_entry_signal_trans_color << is_entry_signal_trans_text
+            << fmt.reset << std::endl;
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
@@ -65,15 +62,59 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  Formatted::Stream should_only_reverse_loss_color =
-      this->api_client.config.should_only_reverse_loss ? fmt.green : fmt.red;
-  const std::string should_only_reverse_loss_text =
-      this->api_client.config.should_only_reverse_loss ? "YES" : "NO";
+  Formatted::Stream should_await_spike_color =
+      this->api_client.config.should_await_spike ? fmt.green : fmt.red;
+  const std::string should_await_spike_text =
+      this->api_client.config.should_await_spike ? "YES" : "NO";
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Should only reverse loss? ");
-  std::cout << should_only_reverse_loss_color << should_only_reverse_loss_text
+  printf("Should await spike? ");
+  std::cout << should_await_spike_color << should_await_spike_text << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_await_complete_spike_color =
+      this->api_client.config.should_await_complete_spike ? fmt.green : fmt.red;
+  const std::string should_await_complete_spike_text =
+      this->api_client.config.should_await_complete_spike ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should await complete spike? ");
+  std::cout << should_await_complete_spike_color
+            << should_await_complete_spike_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_enter_as_reversal_color =
+      this->api_client.config.should_enter_as_reversal ? fmt.green : fmt.red;
+  const std::string should_enter_as_reversal_text =
+      this->api_client.config.should_enter_as_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should enter as reversal? ");
+  std::cout << should_enter_as_reversal_color << should_enter_as_reversal_text
             << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_enter_at_spike_color =
+      this->api_client.config.should_enter_at_spike ? fmt.green : fmt.red;
+  const std::string should_enter_at_spike_text =
+      this->api_client.config.should_enter_at_spike ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should enter at spike? ");
+  std::cout << should_enter_at_spike_color << should_enter_at_spike_text
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_always_reverse_loss_color =
+      this->api_client.config.should_always_reverse_loss ? fmt.green : fmt.red;
+  const std::string should_always_reverse_loss_text =
+      this->api_client.config.should_always_reverse_loss ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should always reverse loss? ");
+  std::cout << should_always_reverse_loss_color
+            << should_always_reverse_loss_text << fmt.reset << std::endl;
 
   // TODO: Decide
   Formatted::Stream should_reverse_profit_color =
@@ -99,15 +140,49 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Slow reverse loss count: ");
+  std::cout << fmt.cyan;
+  printf("%i / %i", this->slow_reverse_loss_count,
+         this->api_client.config.max_slow_reverse_loss_count);
+  std::cout << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Spike Entry Score: ");
+  std::cout << fmt.cyan << this->api_client.config.spike_entry_score
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Spike Height Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.spike_height_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Loss Reversals: ");
-  std::cout << fmt.cyan << ::utils::string::upcase(stop_loss_reversals_name())
-            << fmt.reset << std::endl;
+  if (this->open_order_ptr) {
+    std::string stop_profit_type_name = "STOP_PROFIT_NULL";
+
+    if (this->open_order_ptr->stop_profit_type ==
+        stop_profit_type_t::STOP_PROFIT_CROSS_RANGE) {
+      stop_profit_type_name = "STOP_PROFIT_CROSS_RANGE";
+    } else if (this->open_order_ptr->stop_profit_type ==
+               stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE) {
+      stop_profit_type_name = "STOP_PROFIT_EXTEND_RANGE";
+    } else if (this->open_order_ptr->stop_profit_type ==
+               stop_profit_type_t::STOP_PROFIT_RETURN_TO_PEAK) {
+      stop_profit_type_name = "STOP_PROFIT_RETURN_TO_PEAK";
+    }
+
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Stop Profit Type: ");
+    std::cout << fmt.cyan << stop_profit_type_name << fmt.reset << std::endl;
+  }
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
@@ -122,44 +197,16 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  if (!this->api_client.config.should_immediately_stop_loss) {
-    const bool ready_to_stop_loss_ = ready_to_stop_loss();
-
-    Formatted::Stream ready_to_stop_loss_color =
-        ready_to_stop_loss_ ? fmt.green : fmt.red;
-
-    const std::string ready_to_stop_loss_text =
-        ready_to_stop_loss_ ? "YES" : "NO";
-
-    std::cout << fmt.bold << fmt.yellow;
-    printf("Ready to stop loss? ");
-    std::cout << ready_to_stop_loss_color << ready_to_stop_loss_text
-              << fmt.reset << std::endl;
-  }
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit Target Precentile: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_profit_target_percentile
+            << fmt.reset << std::endl;
 
   // TODO: Decide
-  if (this->context_entry_reversal.mid) {
-    std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
-    printf("Context Reversal\n");
-    std::cout << fmt.reset;
-
-    Formatted::Stream context_entry_reversal_color =
-        this->context_entry_reversal.type == reversal_type_t::REVERSAL_LOW
-            ? fmt.green
-            : fmt.red;
-
-    const std::string context_entry_reversal_type =
-        this->context_entry_reversal.type == reversal_type_t::REVERSAL_LOW
-            ? "Low"
-            : "High";
-
-    std::cout << fmt.bold << context_entry_reversal_color;
-    printf("%s @ %s", context_entry_reversal_type.c_str(),
-           ::utils::time_::date_string(this->context_entry_reversal.at,
-                                       "%m/%d %R %Z", "America/Chicago")
-               .c_str());
-    std::cout << fmt.reset << std::endl;
-  }
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Trend Slip Percentile: ");
+  std::cout << fmt.cyan << this->api_client.config.trend_slip_percentile
+            << fmt.reset << std::endl;
 
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
@@ -171,14 +218,14 @@ void Oanda::TaoBot::log_reversal_metadata() {
     if (reversal.type == reversal_type_t::REVERSAL_LOW) {
       std::cout << fmt.bold << fmt.red;
       printf("Low: %'.5f p%.2f%% @ %s", reversal.mid,
-             day_range_percentile(reversal.mid),
+             day_range_percentile(this->day_candle, reversal.mid),
              ::utils::time_::date_string(reversal.at, "%m/%d %R %Z",
                                          "America/Chicago")
                  .c_str());
     } else {
       std::cout << fmt.bold << fmt.green;
       printf("High: %'.5f p%.2f%% @ %s", reversal.mid,
-             day_range_percentile(reversal.mid),
+             day_range_percentile(this->day_candle, reversal.mid),
              ::utils::time_::date_string(reversal.at, "%m/%d %R %Z",
                                          "America/Chicago")
                  .c_str());

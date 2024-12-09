@@ -29,19 +29,27 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     int market_duration_hours = 0;         // TODO: Decide
+    int max_slow_reverse_loss_count = 20;  // TODO: Decide
     double reversal_proximity_ratio = 0.0; // TODO: Decide
     int reversal_timeframe_minutes = 60;
-    int secondary_reversal_timeframe_minutes = 0;       // TODO: Decide
-    bool should_immediately_stop_loss = true;           // TODO: Decide
-    bool should_only_reverse_loss = false;              // TODO: Decide
-    bool should_reverse_profit = false;                 // TODO: Decide
-    bool should_stop_profit = false;                    // TODO: Decide
-    bool should_toggle_entry_direction = false;         // TODO: Decide
-    double stop_loss_padding_ratio = 0.0;               // TODO: Decide
-    std::string stop_loss_reversals_name = "secondary"; // TODO: Decide
-    double stop_profit_day_range_ratio = 0.0;           // TODO: Decide
-    double stop_profit_ratio = 0.8;                     // TODO: Decide
-    int tertiary_reversal_timeframe_minutes = 0;        // TODO: Decide
+    int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
+    bool should_always_reverse_loss = false;      // TODO: Decide
+    bool should_await_complete_spike = true;      // TODO: Decide
+    bool should_await_spike = false;              // TODO: Decide
+    bool should_enter_as_reversal = true;         // TODO: Decide
+    bool should_enter_at_spike = false;           // TODO: Decide
+    bool should_reverse_loss = false;             // TODO: Decide
+    bool should_reverse_profit = false;           // TODO: Decide
+    bool should_stop_profit = false;              // TODO: Decide
+    int spike_duration_minutes = 30;              // TODO: Decide
+    double spike_entry_score = 5.0;               // TODO: Decide
+    double spike_height_ratio = 0.4;              // TODO: Decide
+    double stop_loss_padding_ratio = 0.0;         // TODO: Decide
+    double stop_profit_day_range_ratio = 0.0;     // TODO: Decide
+    double stop_profit_ratio = 0.8;               // TODO: Decide
+    double stop_profit_target_percentile = 100.0; // TODO: Decide
+    int tertiary_reversal_timeframe_minutes = 0;  // TODO: Decide
+    double trend_slip_percentile = 50.0;          // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
