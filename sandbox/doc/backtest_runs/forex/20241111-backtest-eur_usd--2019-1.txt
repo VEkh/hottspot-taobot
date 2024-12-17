@@ -1,0 +1,1635 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-eur_usd-2[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "authentication_token": "authentication_token",
+  "backtest": {
+    "account_margin_multiplier": 1,
+    "account_starting_equity": 100000,
+    "end_at": "2020-01-03 16:00:00",
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2019-01-01 00:00:00"
+  },
+  "base_url": "",
+  "env_symbols": [
+    "EUR_USD"
+  ],
+  "id": "backtest-eur_usd-2",
+  "is_active": false,
+  "market_duration_hours": 240,
+  "max_slow_reverse_loss_count": 4,
+  "note": "",
+  "reversal_proximity_ratio": 0.0,
+  "reversal_timeframe_minutes": 120,
+  "secondary_reversal_timeframe_minutes": 120,
+  "should_await_spike": true,
+  "should_enter_as_reversal": true,
+  "should_enter_at_spike": true,
+  "should_reverse_loss": false,
+  "should_reverse_profit": false,
+  "should_stop_profit": true,
+  "spike_duration_minutes": 60,
+  "spike_height_ratio": 0.4,
+  "stop_loss_padding_ratio": 0.2,
+  "stop_profit_day_range_ratio": 0.0,
+  "stop_profit_ratio": 0.95,
+  "stop_profit_target_percentile": 55.0,
+  "trend_slip_percentile": 80.0
+}
+[0m[0m[1m[36m[4m
+Tuesday, January  1 2019[24m[32m
+Current Equity:             $100,000.00 (+0.00) (+0.00%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $100,000.00 (+0.00) (+0.00%) @ 00:00 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Wednesday, January  2 2019[24m[32m
+Current Equity:             $172,977.95 (+72,977.95) (+72.98%)
+Max Equity:                 $172,977.95 (+72,977.95) (+72.98%) @ 17:59 CST
+Min Equity:                 $97,088.27 (-2,911.73) (-2.91%) @ 01:38 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Thursday, January  3 2019[24m[31m
+Current Equity:             $133,975.41 (-33,141.14) (-19.83%)
+Max Equity:                 $167,116.55 (+0.00) (+0.00%) @ 18:01 CST
+Min Equity:                 $133,975.41 (-33,141.14) (-19.83%) @ 09:09 CST
+Original Equity:            $167,116.55
+[1m[36m[4m
+Friday, January  4 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Monday, January  7 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Tuesday, January  8 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Wednesday, January  9 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Thursday, January 10 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Friday, January 11 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Monday, January 14 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Tuesday, January 15 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Wednesday, January 16 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Thursday, January 17 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Friday, January 18 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Monday, January 21 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Tuesday, January 22 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Wednesday, January 23 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Thursday, January 24 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Friday, January 25 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Monday, January 28 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Tuesday, January 29 2019[24m[32m
+Current Equity:             $133,975.41 (+0.00) (+0.00%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $133,975.41 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Wednesday, January 30 2019[24m[31m
+Current Equity:             $124,433.82 (-9,541.60) (-7.12%)
+Max Equity:                 $133,975.41 (+0.00) (+0.00%) @ 14:03 CST
+Min Equity:                 $122,040.66 (-11,934.75) (-8.91%) @ 16:12 CST
+Original Equity:            $133,975.41
+[1m[36m[4m
+Thursday, January 31 2019[24m[32m
+Current Equity:             $144,859.13 (+22,484.54) (+18.37%)
+Max Equity:                 $150,758.54 (+28,383.95) (+23.19%) @ 11:20 CST
+Min Equity:                 $109,017.44 (-13,357.15) (-10.91%) @ 01:29 CST
+Original Equity:            $122,374.59
+[1m[36m[4m
+Friday, February  1 2019[24m[31m
+Current Equity:             $143,523.42 (-1,669.64) (-1.15%)
+Max Equity:                 $152,595.15 (+7,402.09) (+5.10%) @ 23:42 CST
+Min Equity:                 $143,523.42 (-1,669.64) (-1.15%) @ 02:34 CST
+Original Equity:            $145,193.06
+[1m[36m[4m
+Monday, February  4 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, February  5 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, February  6 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, February  7 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Friday, February  8 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Monday, February 11 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, February 12 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, February 13 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, February 14 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Friday, February 15 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Monday, February 18 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, February 19 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, February 20 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, February 21 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Friday, February 22 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Monday, February 25 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, February 26 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:49 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, February 27 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:50 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, February 28 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Friday, March  1 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Monday, March  4 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, March  5 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, March  6 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, March  7 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Friday, March  8 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $143,523.42
+[1m[36m[4m
+Monday, March 11 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, March 12 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, March 13 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, March 14 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Friday, March 15 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Monday, March 18 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Tuesday, March 19 2019[24m[32m
+Current Equity:             $143,523.42 (+0.00) (+0.00%)
+Max Equity:                 $143,523.42 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $143,523.42 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Wednesday, March 20 2019[24m[31m
+Current Equity:             $135,980.64 (-7,542.78) (-5.26%)
+Max Equity:                 $145,823.09 (+2,299.67) (+1.60%) @ 15:56 CDT
+Min Equity:                 $127,096.59 (-16,426.82) (-11.45%) @ 14:30 CDT
+Original Equity:            $143,523.42
+[1m[36m[4m
+Thursday, March 21 2019[24m[32m
+Current Equity:             $162,661.98 (+27,985.76) (+20.78%)
+Max Equity:                 $166,338.08 (+31,661.86) (+23.51%) @ 09:22 CDT
+Min Equity:                 $131,533.75 (-3,142.47) (-2.33%) @ 20:39 CDT
+Original Equity:            $134,676.22
+[1m[36m[4m
+Friday, March 22 2019[24m[31m
+Current Equity:             $155,556.08 (-7,105.90) (-4.37%)
+Max Equity:                 $168,459.49 (+5,797.51) (+3.56%) @ 05:41 CDT
+Min Equity:                 $138,351.54 (-24,310.44) (-14.95%) @ 10:02 CDT
+Original Equity:            $162,661.98
+[1m[36m[4m
+Monday, March 25 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Tuesday, March 26 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Wednesday, March 27 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Thursday, March 28 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Friday, March 29 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Monday, April  1 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Tuesday, April  2 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Wednesday, April  3 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Thursday, April  4 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Friday, April  5 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Monday, April  8 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Tuesday, April  9 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Wednesday, April 10 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Thursday, April 11 2019[24m[32m
+Current Equity:             $155,556.08 (+0.00) (+0.00%)
+Max Equity:                 $155,556.08 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $155,556.08 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Friday, April 12 2019[24m[31m
+Current Equity:             $137,267.17 (-18,288.91) (-11.76%)
+Max Equity:                 $156,591.31 (+1,035.22) (+0.67%) @ 02:13 CDT
+Min Equity:                 $137,267.17 (-18,288.91) (-11.76%) @ 04:10 CDT
+Original Equity:            $155,556.08
+[1m[36m[4m
+Monday, April 15 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Tuesday, April 16 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Wednesday, April 17 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Thursday, April 18 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Friday, April 19 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:15 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Monday, April 22 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Tuesday, April 23 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Wednesday, April 24 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Thursday, April 25 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Friday, April 26 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Monday, April 29 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:47 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Tuesday, April 30 2019[24m[32m
+Current Equity:             $137,267.17 (+0.00) (+0.00%)
+Max Equity:                 $137,267.17 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $137,267.17 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Wednesday, May  1 2019[24m[32m
+Current Equity:             $140,128.00 (+2,860.83) (+2.08%)
+Max Equity:                 $141,956.93 (+4,689.76) (+3.42%) @ 17:54 CDT
+Min Equity:                 $132,730.18 (-4,536.99) (-3.31%) @ 14:14 CDT
+Original Equity:            $137,267.17
+[1m[36m[4m
+Thursday, May  2 2019[24m[32m
+Current Equity:             $143,176.22 (+2,072.79) (+1.47%)
+Max Equity:                 $150,735.81 (+9,632.38) (+6.83%) @ 02:51 CDT
+Min Equity:                 $134,946.02 (-6,157.41) (-4.36%) @ 02:03 CDT
+Original Equity:            $141,103.43
+[1m[36m[4m
+Friday, May  3 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Monday, May  6 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Tuesday, May  7 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Wednesday, May  8 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Thursday, May  9 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Friday, May 10 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Monday, May 13 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Tuesday, May 14 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Wednesday, May 15 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Thursday, May 16 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Friday, May 17 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Monday, May 20 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Tuesday, May 21 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:47 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Wednesday, May 22 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Thursday, May 23 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Friday, May 24 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Monday, May 27 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Tuesday, May 28 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Wednesday, May 29 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Thursday, May 30 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Friday, May 31 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Monday, June  3 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Tuesday, June  4 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Wednesday, June  5 2019[24m[32m
+Current Equity:             $143,176.22 (+0.00) (+0.00%)
+Max Equity:                 $143,176.22 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $143,176.22 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Thursday, June  6 2019[24m[31m
+Current Equity:             $116,062.96 (-27,113.26) (-18.94%)
+Max Equity:                 $168,406.46 (+25,230.24) (+17.62%) @ 07:53 CDT
+Min Equity:                 $102,811.49 (-40,364.73) (-28.19%) @ 11:39 CDT
+Original Equity:            $143,176.22
+[1m[36m[4m
+Friday, June  7 2019[24m[31m
+Current Equity:             $75,896.27 (-40,696.75) (-34.90%)
+Max Equity:                 $129,785.60 (+13,192.58) (+11.32%) @ 05:01 CDT
+Min Equity:                 $75,896.27 (-40,696.75) (-34.90%) @ 09:50 CDT
+Original Equity:            $116,593.02
+[1m[36m[4m
+Monday, June 10 2019[24m[32m
+Current Equity:             $75,896.27 (+0.00) (+0.00%)
+Max Equity:                 $75,896.27 (+0.00) (+0.00%) @ 18:51 CDT
+Min Equity:                 $75,896.27 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Tuesday, June 11 2019[24m[32m
+Current Equity:             $75,896.27 (+0.00) (+0.00%)
+Max Equity:                 $75,896.27 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $75,896.27 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Wednesday, June 12 2019[24m[32m
+Current Equity:             $75,896.27 (+0.00) (+0.00%)
+Max Equity:                 $75,896.27 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $75,896.27 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Thursday, June 13 2019[24m[32m
+Current Equity:             $75,896.27 (+0.00) (+0.00%)
+Max Equity:                 $75,896.27 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $75,896.27 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Friday, June 14 2019[24m[32m
+Current Equity:             $75,896.27 (+0.00) (+0.00%)
+Max Equity:                 $75,896.27 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $75,896.27 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Monday, June 17 2019[24m[32m
+Current Equity:             $75,896.27 (+0.00) (+0.00%)
+Max Equity:                 $75,896.27 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $75,896.27 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Tuesday, June 18 2019[24m[31m
+Current Equity:             $74,329.00 (-1,567.27) (-2.07%)
+Max Equity:                 $77,241.55 (+1,345.28) (+1.77%) @ 10:25 CDT
+Min Equity:                 $69,976.54 (-5,919.73) (-7.80%) @ 10:01 CDT
+Original Equity:            $75,896.27
+[1m[36m[4m
+Wednesday, June 19 2019[24m[32m
+Current Equity:             $80,186.82 (+5,563.29) (+7.46%)
+Max Equity:                 $81,692.18 (+7,068.66) (+9.47%) @ 10:45 CDT
+Min Equity:                 $71,154.65 (-3,468.88) (-4.65%) @ 23:58 CDT
+Original Equity:            $74,623.53
+[1m[36m[4m
+Thursday, June 20 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Friday, June 21 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Monday, June 24 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Tuesday, June 25 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Wednesday, June 26 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Thursday, June 27 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Friday, June 28 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Monday, July  1 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Tuesday, July  2 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Wednesday, July  3 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Thursday, July  4 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Friday, July  5 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Monday, July  8 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Tuesday, July  9 2019[24m[32m
+Current Equity:             $80,186.82 (+0.00) (+0.00%)
+Max Equity:                 $80,186.82 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $80,186.82 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Wednesday, July 10 2019[24m[31m
+Current Equity:             $69,123.90 (-11,062.93) (-13.80%)
+Max Equity:                 $80,507.56 (+320.74) (+0.40%) @ 08:31 CDT
+Min Equity:                 $68,066.25 (-12,120.58) (-15.12%) @ 10:45 CDT
+Original Equity:            $80,186.82
+[1m[36m[4m
+Thursday, July 11 2019[24m[31m
+Current Equity:             $65,200.35 (-3,821.19) (-5.54%)
+Max Equity:                 $69,226.25 (+204.71) (+0.30%) @ 20:09 CDT
+Min Equity:                 $65,200.35 (-3,821.19) (-5.54%) @ 21:54 CDT
+Original Equity:            $69,021.54
+[1m[36m[4m
+Friday, July 12 2019[24m[32m
+Current Equity:             $65,200.35 (+0.00) (+0.00%)
+Max Equity:                 $65,200.35 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $65,200.35 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $65,200.35
+[1m[36m[4m
+Monday, July 15 2019[24m[32m
+Current Equity:             $65,200.35 (+0.00) (+0.00%)
+Max Equity:                 $65,200.35 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $65,200.35 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $65,200.35
+[1m[36m[4m
+Tuesday, July 16 2019[24m[32m
+Current Equity:             $65,200.35 (+0.00) (+0.00%)
+Max Equity:                 $65,200.35 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $65,200.35 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $65,200.35
+[1m[36m[4m
+Wednesday, July 17 2019[24m[32m
+Current Equity:             $65,200.35 (+0.00) (+0.00%)
+Max Equity:                 $65,200.35 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $65,200.35 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $65,200.35
+[1m[36m[4m
+Thursday, July 18 2019[24m[31m
+Current Equity:             $60,748.26 (-4,452.10) (-6.83%)
+Max Equity:                 $65,200.35 (+0.00) (+0.00%) @ 17:55 CDT
+Min Equity:                 $60,748.26 (-4,452.10) (-6.83%) @ 18:58 CDT
+Original Equity:            $65,200.35
+[1m[36m[4m
+Friday, July 19 2019[24m[32m
+Current Equity:             $66,340.15 (+5,536.53) (+9.11%)
+Max Equity:                 $67,226.00 (+6,422.37) (+10.56%) @ 04:55 CDT
+Min Equity:                 $58,782.79 (-2,020.83) (-3.32%) @ 22:10 CDT
+Original Equity:            $60,803.62
+[1m[36m[4m
+Monday, July 22 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Tuesday, July 23 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 18:49 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Wednesday, July 24 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Thursday, July 25 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Friday, July 26 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Monday, July 29 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Tuesday, July 30 2019[24m[32m
+Current Equity:             $66,340.15 (+0.00) (+0.00%)
+Max Equity:                 $66,340.15 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $66,340.15 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Wednesday, July 31 2019[24m[32m
+Current Equity:             $69,571.93 (+3,231.78) (+4.87%)
+Max Equity:                 $72,235.16 (+5,895.01) (+8.89%) @ 15:15 CDT
+Min Equity:                 $63,706.85 (-2,633.30) (-3.97%) @ 14:03 CDT
+Original Equity:            $66,340.15
+[1m[36m[4m
+Thursday, August  1 2019[24m[31m
+Current Equity:             $65,656.02 (-4,723.86) (-6.71%)
+Max Equity:                 $82,439.22 (+12,059.34) (+17.13%) @ 08:12 CDT
+Min Equity:                 $65,047.01 (-5,332.87) (-7.58%) @ 17:55 CDT
+Original Equity:            $70,379.88
+[1m[36m[4m
+Friday, August  2 2019[24m[32m
+Current Equity:             $70,680.36 (+3,745.42) (+5.60%)
+Max Equity:                 $76,618.22 (+9,683.28) (+14.47%) @ 02:59 CDT
+Min Equity:                 $63,402.68 (-3,532.27) (-5.28%) @ 21:51 CDT
+Original Equity:            $66,934.94
+[1m[36m[4m
+Monday, August  5 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Tuesday, August  6 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Wednesday, August  7 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Thursday, August  8 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Friday, August  9 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Monday, August 12 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Tuesday, August 13 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Wednesday, August 14 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Thursday, August 15 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Friday, August 16 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Monday, August 19 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Tuesday, August 20 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Wednesday, August 21 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:46 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Thursday, August 22 2019[24m[32m
+Current Equity:             $70,680.36 (+0.00) (+0.00%)
+Max Equity:                 $70,680.36 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $70,680.36 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Friday, August 23 2019[24m[32m
+Current Equity:             $78,887.32 (+8,206.96) (+11.61%)
+Max Equity:                 $83,754.24 (+13,073.87) (+18.50%) @ 13:38 CDT
+Min Equity:                 $70,107.79 (-572.58) (-0.81%) @ 10:03 CDT
+Original Equity:            $70,680.36
+[1m[36m[4m
+Monday, August 26 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Tuesday, August 27 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Wednesday, August 28 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Thursday, August 29 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Friday, August 30 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Monday, September  2 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Tuesday, September  3 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Wednesday, September  4 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Thursday, September  5 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Friday, September  6 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Monday, September  9 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Tuesday, September 10 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Wednesday, September 11 2019[24m[32m
+Current Equity:             $78,887.32 (+0.00) (+0.00%)
+Max Equity:                 $78,887.32 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $78,887.32 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Thursday, September 12 2019[24m[31m
+Current Equity:             $50,640.83 (-28,246.49) (-35.81%)
+Max Equity:                 $90,721.35 (+11,834.03) (+15.00%) @ 07:49 CDT
+Min Equity:                 $43,070.72 (-35,816.60) (-45.40%) @ 12:13 CDT
+Original Equity:            $78,887.32
+[1m[36m[4m
+Friday, September 13 2019[24m[31m
+Current Equity:             $44,944.00 (-4,850.00) (-9.74%)
+Max Equity:                 $50,204.59 (+410.58) (+0.82%) @ 19:34 CDT
+Min Equity:                 $37,502.20 (-12,291.81) (-24.69%) @ 02:14 CDT
+Original Equity:            $49,794.00
+[1m[36m[4m
+Monday, September 16 2019[24m[32m
+Current Equity:             $44,944.00 (+0.00) (+0.00%)
+Max Equity:                 $44,944.00 (+0.00) (+0.00%) @ 18:56 CDT
+Min Equity:                 $44,944.00 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $44,944.00
+[1m[36m[4m
+Tuesday, September 17 2019[24m[32m
+Current Equity:             $44,944.00 (+0.00) (+0.00%)
+Max Equity:                 $44,944.00 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $44,944.00 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $44,944.00
+[1m[36m[4m
+Wednesday, September 18 2019[24m[31m
+Current Equity:             $43,497.86 (-1,446.14) (-3.22%)
+Max Equity:                 $47,388.18 (+2,444.18) (+5.44%) @ 14:23 CDT
+Min Equity:                 $43,436.76 (-1,507.24) (-3.35%) @ 14:43 CDT
+Original Equity:            $44,944.00
+[1m[36m[4m
+Thursday, September 19 2019[24m[32m
+Current Equity:             $43,497.86 (+0.00) (+0.00%)
+Max Equity:                 $43,497.86 (+0.00) (+0.00%) @ 18:53 CDT
+Min Equity:                 $43,497.86 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $43,497.86
+[1m[36m[4m
+Friday, September 20 2019[24m[32m
+Current Equity:             $43,497.86 (+0.00) (+0.00%)
+Max Equity:                 $43,497.86 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $43,497.86 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $43,497.86
+[1m[36m[4m
+Monday, September 23 2019[24m[32m
+Current Equity:             $43,497.86 (+0.00) (+0.00%)
+Max Equity:                 $43,497.86 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $43,497.86 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $43,497.86
+[1m[36m[4m
+Tuesday, September 24 2019[24m[32m
+Current Equity:             $43,497.86 (+0.00) (+0.00%)
+Max Equity:                 $43,497.86 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $43,497.86 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $43,497.86
+[1m[36m[4m
+Wednesday, September 25 2019[24m[32m
+Current Equity:             $44,589.29 (+1,091.42) (+2.51%)
+Max Equity:                 $47,426.99 (+3,929.13) (+9.03%) @ 13:51 CDT
+Min Equity:                 $43,497.86 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $43,497.86
+[1m[36m[4m
+Thursday, September 26 2019[24m[31m
+Current Equity:             $37,754.06 (-7,073.35) (-15.78%)
+Max Equity:                 $45,065.54 (+238.13) (+0.53%) @ 19:48 CDT
+Min Equity:                 $37,754.06 (-7,073.35) (-15.78%) @ 04:37 CDT
+Original Equity:            $44,827.41
+[1m[36m[4m
+Friday, September 27 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, September 30 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:49 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, October  1 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, October  2 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, October  3 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, October  4 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, October  7 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, October  8 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:52 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, October  9 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, October 10 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, October 11 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 16:00 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, October 14 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, October 15 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, October 16 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, October 17 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, October 18 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:05 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, October 21 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:58 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, October 22 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:06 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, October 23 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, October 24 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:39 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, October 25 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, October 28 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:50 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:03 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, October 29 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:54 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, October 30 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:57 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, October 31 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:55 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, November  1 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CDT
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, November  4 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:06 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, November  5 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:48 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, November  6 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, November  7 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, November  8 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, November 11 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:51 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:04 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, November 12 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, November 13 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:50 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, November 14 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, November 15 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, November 18 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, November 19 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:06 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, November 20 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, November 21 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, November 22 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, November 25 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:50 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, November 26 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, November 27 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:52 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, November 28 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:52 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, November 29 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:06 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, December  2 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:51 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, December  3 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, December  4 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, December  5 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:47 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, December  6 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Monday, December  9 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Tuesday, December 10 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:50 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Wednesday, December 11 2019[24m[32m
+Current Equity:             $37,754.06 (+0.00) (+0.00%)
+Max Equity:                 $37,754.06 (+0.00) (+0.00%) @ 17:49 CST
+Min Equity:                 $37,754.06 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Thursday, December 12 2019[24m[32m
+Current Equity:             $38,530.91 (+776.84) (+2.06%)
+Max Equity:                 $39,696.17 (+1,942.11) (+5.14%) @ 17:22 CST
+Min Equity:                 $37,450.08 (-303.98) (-0.81%) @ 17:01 CST
+Original Equity:            $37,754.06
+[1m[36m[4m
+Friday, December 13 2019[24m[32m
+Current Equity:             $46,989.57 (+8,813.31) (+23.09%)
+Max Equity:                 $48,372.50 (+10,196.24) (+26.71%) @ 10:12 CST
+Min Equity:                 $36,933.44 (-1,242.82) (-3.26%) @ 05:21 CST
+Original Equity:            $38,176.26
+[1m[36m[4m
+Monday, December 16 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Tuesday, December 17 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:58 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Wednesday, December 18 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:54 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Thursday, December 19 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:44 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Friday, December 20 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Monday, December 23 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:55 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Tuesday, December 24 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 15:55 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Wednesday, December 25 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:34 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 16:39 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Thursday, December 26 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:53 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Friday, December 27 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:00 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Monday, December 30 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:56 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Tuesday, December 31 2019[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 15:57 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:01 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Wednesday, January  1 2020[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:57 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 16:14 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Thursday, January  2 2020[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 17:59 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+Friday, January  3 2020[24m[32m
+Current Equity:             $46,989.57 (+0.00) (+0.00%)
+Max Equity:                 $46,989.57 (+0.00) (+0.00%) @ 15:59 CST
+Min Equity:                 $46,989.57 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $46,989.57
+[1m[36m[4m
+📊 Stats
+[0m[1m[31mAvg Daily Return:           -$178.01
+[1m[31mAvg Daily % Return:         -0.08%
+[1m[31mTotal Return:               -$46,995.87 (-47.00%)
+Win Rate:                   247W (93.56%) 17L (Total: 264)
+
+[1m[36m⌚ Finished in 00:13
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

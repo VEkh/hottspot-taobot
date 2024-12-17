@@ -2,7 +2,7 @@
 #define GLOBAL__types
 
 #include <map>    // std::map
-#include <math.h> // INFINITY
+#include <math.h> // INFINITY, abs
 #include <string> // std::string
 
 namespace Global {
@@ -27,6 +27,13 @@ enum reversal_type_t {
   REVERSAL_HIGH,
   REVERSAL_LOW,
   REVERSAL_NULL,
+};
+
+enum stop_profit_type_t {
+  STOP_PROFIT_CROSS_RANGE,
+  STOP_PROFIT_EXTEND_RANGE,
+  STOP_PROFIT_NULL,
+  STOP_PROFIT_RETURN_TO_PEAK,
 };
 
 enum trend_t {
@@ -59,6 +66,8 @@ struct candle_t {
   double open = 0.0;
   double opened_at = 0.0;
   std::string symbol;
+
+  double duration_seconds() { return this->closed_at - this->opened_at; };
 
   double range() { return this->high - this->low; };
 
@@ -119,6 +128,8 @@ struct quote_t {
 struct reversal_t {
   double at = 0;
   bool is_record = false;
+  bool is_record_only_reversible = true; // TODO: Decide
+  bool is_reversible = false;            // TODO: Decide
   bool is_running_record = false;
   double mid = 0;
   int timeframe_minutes = 0;
@@ -167,6 +178,7 @@ struct reversals_t {
 
 struct trend_meta_t {
   double at = 0;
+  bool is_initialized = false; // TODO: Decide
   trend_t trend = trend_t::TREND_CONSOLIDATION;
 };
 } // namespace t

@@ -65,7 +65,7 @@ void Oanda::TaoBot::log_account_snapshot() {
          this->account_snapshot.original_equity);
   std::cout << std::endl;
 
-  printf("Margin Buying Power:              $%'.5f",
+  printf("Margin Buying Power:              $%'.5f\n",
          this->account_snapshot.margin_buying_power);
 
   std::cout << fmt.reset << std::endl;

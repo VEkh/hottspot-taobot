@@ -4,7 +4,7 @@
 #include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
 #include "read_price_action_stats.cpp"   // read_price_action_stats
-#include "tao_bot.h" // Oanda::TaoBot, candle_t, quote_t, reversals_t, trend_meta_t
+#include "tao_bot.h" // Oanda::TaoBot, candle_t, quote_t, reversals_t, spike_candles_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <algorithm>                   // std::min
 #include <time.h>                      // time
@@ -27,10 +27,17 @@ void Oanda::TaoBot::reset_backtest() {
 
   advance_current_epoch(next_market_open_epoch);
 
+  // TODO: Decide
+  this->market_availability.set_market_epochs(
+      this->current_epoch, this->api_client.config.market_duration_hours);
+
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
   this->day_candle = candle_t();
+  this->is_entry_signal_trans = true; // TODO: Decide
   this->db_candle.clear_cache();
+  this->slow_reverse_loss_count = 0;       // TODO: Decide
+  this->spike_candles = spike_candles_t(); // TODO: Decide
 
   this->current_quote = quote_t();
   this->previous_quote = quote_t();
@@ -42,12 +49,6 @@ void Oanda::TaoBot::reset_backtest() {
   this->reversals.timeframe_minutes =
       this->api_client.config.reversal_timeframe_minutes;
 
-  // TODO: Decide
-  if (this->api_client.config.should_toggle_entry_direction) {
-    this->is_entry_reversal = true;
-  }
-
-  // TODO: Decide
   this->secondary_reversals = reversals_t();
   this->secondary_reversals.timeframe_minutes =
       this->api_client.config.secondary_reversal_timeframe_minutes;
@@ -58,10 +59,6 @@ void Oanda::TaoBot::reset_backtest() {
   this->tertiary_reversals = reversals_t();
   this->tertiary_reversals.timeframe_minutes =
       this->api_client.config.tertiary_reversal_timeframe_minutes;
-
-  // TODO: Decide
-  this->market_availability.set_market_epochs(
-      this->current_epoch, this->api_client.config.market_duration_hours);
 
   force_init_reversal_await();
   read_price_action_stats();
