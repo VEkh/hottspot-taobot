@@ -9,7 +9,6 @@
 #include "tao_bot.h" // Oanda::TaoBot, position_t, reversal_t, reversal_type_t
 
 // TODO: Decide
-#include "is_near_reversal.cpp"          // is_near_reversal
 #include "is_within_reversal_bounds.cpp" // is_within_reversal_bounds
 #include "latest_reversal_after.cpp"     // latest_reversal_after
 
@@ -51,11 +50,6 @@ bool Oanda::TaoBot::is_entry_signal_present() {
       const position_t last_position = this->closed_positions.back();
 
       reversal = last_position.close_order.stop_profit_reversal;
-
-      // TODO: Decide
-      if (this->api_client.config.should_always_reverse_loss) {
-        reversal.is_record_only_reversible = false;
-      }
     } else {
       reversal_t first_high =
           first_reversal_after(this->reversals, this->current_trend.at,
@@ -72,43 +66,16 @@ bool Oanda::TaoBot::is_entry_signal_present() {
         first_low = reversal_t();
       }
 
-      // if (first_high.mid &&
-      //     day_range_percentile(this->day_candle, first_high.mid) <
-      //     this->EQUATOR_PERCENTILE) {
-      //   first_high = reversal_t();
-      // }
+      if (first_high.mid &&
+          day_range_percentile(this->day_candle, first_high.mid) <
+              this->EQUATOR_PERCENTILE) {
+        first_high = reversal_t();
+      }
 
-      // if (first_low.mid &&
-      //     day_range_percentile(this->day_candle, first_low.mid) >
-      //     this->EQUATOR_PERCENTILE) {
-      //   first_low = reversal_t();
-      // }
-
-      // TODO: Decide
-      if (this->is_entry_signal_trans) {
-        if (first_high.mid &&
-            day_range_percentile(this->day_candle, first_high.mid) <
-                this->EQUATOR_PERCENTILE) {
-          first_high = reversal_t();
-        }
-
-        if (first_low.mid &&
-            day_range_percentile(this->day_candle, first_low.mid) >
-                this->EQUATOR_PERCENTILE) {
-          first_low = reversal_t();
-        }
-      } else {
-        if (first_high.mid &&
-            day_range_percentile(this->day_candle, first_high.mid) >
-                this->EQUATOR_PERCENTILE) {
-          first_high = reversal_t();
-        }
-
-        if (first_low.mid &&
-            day_range_percentile(this->day_candle, first_low.mid) <
-                this->EQUATOR_PERCENTILE) {
-          first_low = reversal_t();
-        }
+      if (first_low.mid &&
+          day_range_percentile(this->day_candle, first_low.mid) >
+              this->EQUATOR_PERCENTILE) {
+        first_low = reversal_t();
       }
 
       reversal = nearer_reversal(first_high, first_low, current_mid());
@@ -118,33 +85,14 @@ bool Oanda::TaoBot::is_entry_signal_present() {
       reversal.is_reversible = true;
 
       // TODO: Decide
-      if (!is_near_reversal(reversal)) {
-        reversal = reversal_t();
-      }
-
-      // TODO: Decide
       if (!is_within_reversal_bounds(reversal)) {
         reversal = reversal_t();
       }
-
-      // TODO: Decide
-      if (!this->api_client.config.should_enter_as_reversal) {
-        reversal.type = reversal.opposite_type();
-      }
     }
 
-    // TODO: Decide
     const bool is_after_entry_epoch =
-        this->api_client.config.should_await_complete_spike
-            ? this->current_epoch >=
-                  this->current_trend.at +
-                      this->spike_candles.current.duration_seconds()
-            : this->current_epoch >= this->current_trend.at;
-
-    // const bool is_after_entry_epoch =
-    //     this->current_epoch >=
-    //     this->current_trend.at +
-    //     this->spike_candles.current.duration_seconds();
+        this->current_epoch >=
+        this->current_trend.at + this->spike_candles.current.duration_seconds();
 
     if (this->api_client.config.should_await_spike &&
         this->api_client.config.should_enter_at_spike &&
@@ -160,32 +108,9 @@ bool Oanda::TaoBot::is_entry_signal_present() {
         reversal.mid = this->spike_candles.previous.low;
         reversal.type = reversal_type_t::REVERSAL_LOW;
       }
-
-      // // TODO: Decide
-      // reversal.type =
-      //     day_range_percentile(this->day_candle, current_mid()) >=
-      //     this->EQUATOR_PERCENTILE
-      //         ? reversal_type_t::REVERSAL_HIGH
-      //         : reversal_type_t::REVERSAL_LOW;
-
-      // TODO: Decide
-      if (!this->api_client.config.should_enter_as_reversal) {
-        reversal.type = reversal.opposite_type();
-      }
-
-      // reversal.mid = latest_record_reversal(reversal.type).mid;
     }
 
     entry_reversal_ = reversal;
-  }
-
-  // TODO: Decide
-  const double max_slow_reverse_loss_count =
-      this->api_client.config.max_slow_reverse_loss_count;
-
-  if (max_slow_reverse_loss_count &&
-      this->slow_reverse_loss_count > max_slow_reverse_loss_count) {
-    entry_reversal_ = reversal_t();
   }
 
   if (entry_reversal_.at) {

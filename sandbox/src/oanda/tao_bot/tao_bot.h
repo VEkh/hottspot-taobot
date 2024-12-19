@@ -95,10 +95,8 @@ private:
   Pg pg;
   account_snapshot_t account_snapshot;
   exit_prices_t exit_prices;
-  bool is_entry_signal_trans = true; // TODO: Decide
   candle_t day_candle;
   double current_epoch = time(nullptr);
-  int slow_reverse_loss_count = 0; // TODO: Decide
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
@@ -125,7 +123,6 @@ private:
   bool can_open_position();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
-  bool is_near_reversal(reversal_t &);
   bool is_next_position_long();
   bool is_position_closed();
   bool is_reversal_after(const reversal_t, const double);
@@ -139,8 +136,7 @@ private:
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_loss(); // TODO: Decide
-  bool should_reverse_profit();
-  bool should_stop_profit(); // TODO: Decide
+  bool should_stop_profit();  // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);

@@ -34,11 +34,6 @@ void Oanda::TaoBot::reset_position() {
     toggle_is_trending(this->close_order);
   }
 
-  // TODO: Decide
-  // if (this->close_order.profit < 0) {
-  //   this->is_entry_signal_trans = !this->is_entry_signal_trans;
-  // }
-
   const position_t position = {
       .close_order = this->close_order,
       .open_order = this->open_order,

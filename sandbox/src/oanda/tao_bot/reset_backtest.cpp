@@ -34,9 +34,7 @@ void Oanda::TaoBot::reset_backtest() {
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
   this->day_candle = candle_t();
-  this->is_entry_signal_trans = true; // TODO: Decide
   this->db_candle.clear_cache();
-  this->slow_reverse_loss_count = 0;       // TODO: Decide
   this->spike_candles = spike_candles_t(); // TODO: Decide
 
   this->current_quote = quote_t();

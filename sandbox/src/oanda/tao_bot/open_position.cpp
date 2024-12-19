@@ -41,14 +41,7 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
   new_open_order.time_in_force = order_time_in_force_t::FOK;
   new_open_order.type = order_type_t::MARKET;
 
-  // TODO: Decide
-  // if (this->api_client.config.should_reverse_profit ||
-  //     this->api_client.config.should_stop_profit) {
-  //   new_open_order.stop_profit_type =
-  //       stop_profit_type_t::STOP_PROFIT_RETURN_TO_PEAK;
-  // }
-  if (this->api_client.config.should_reverse_profit ||
-      this->api_client.config.should_stop_profit) {
+  if (this->api_client.config.should_stop_profit) {
     const reversal_type_t reversal_type = new_open_order.entry_reversal.type;
 
     const bool is_reversal_above_threshold =

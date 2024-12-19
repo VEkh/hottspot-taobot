@@ -70,44 +70,14 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("max_slow_reverse_loss_count")) {
-    this->config.max_slow_reverse_loss_count =
-        (int)api_key_json["max_slow_reverse_loss_count"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("reversal_proximity_ratio")) {
-    this->config.reversal_proximity_ratio =
-        (double)api_key_json["reversal_proximity_ratio"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("secondary_reversal_timeframe_minutes")) {
     this->config.secondary_reversal_timeframe_minutes =
         (int)api_key_json["secondary_reversal_timeframe_minutes"];
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_always_reverse_loss")) {
-    this->config.should_always_reverse_loss =
-        (bool)api_key_json["should_always_reverse_loss"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("should_await_complete_spike")) {
-    this->config.should_await_complete_spike =
-        (bool)api_key_json["should_await_complete_spike"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_await_spike")) {
     this->config.should_await_spike = (bool)api_key_json["should_await_spike"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("should_enter_as_reversal")) {
-    this->config.should_enter_as_reversal =
-        (bool)api_key_json["should_enter_as_reversal"];
   }
 
   // TODO: Decide
@@ -120,12 +90,6 @@ void Oanda::Client::load_config() {
   if (api_key_json.contains("should_reverse_loss")) {
     this->config.should_reverse_loss =
         (bool)api_key_json["should_reverse_loss"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("should_reverse_profit")) {
-    this->config.should_reverse_profit =
-        (bool)api_key_json["should_reverse_profit"];
   }
 
   // TODO: Decide
@@ -157,17 +121,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("stop_profit_day_range_ratio")) {
-    this->config.stop_profit_day_range_ratio =
-        (double)api_key_json["stop_profit_day_range_ratio"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("stop_profit_ratio")) {
-    this->config.stop_profit_ratio = (double)api_key_json["stop_profit_ratio"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("stop_profit_target_percentile")) {
     this->config.stop_profit_target_percentile =
         (double)api_key_json["stop_profit_target_percentile"];
@@ -194,36 +147,21 @@ void Oanda::Client::load_config() {
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .market_duration_hours =
           this->config.market_duration_hours, // TODO: Decide
-      .max_slow_reverse_loss_count =
-          this->config.max_slow_reverse_loss_count, // TODO: Decide
-      .reversal_proximity_ratio =
-          this->config.reversal_proximity_ratio, // TODO: Decide
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
       .secondary_reversal_timeframe_minutes =
           this->config.secondary_reversal_timeframe_minutes, // TODO: Decide
-      .should_always_reverse_loss =
-          this->config.should_always_reverse_loss, // TODO: Decide
-      .should_await_complete_spike =
-          this->config.should_await_complete_spike,          // TODO: Decide
       .should_await_spike = this->config.should_await_spike, // TODO: Decide
-      .should_enter_as_reversal =
-          this->config.should_enter_as_reversal, // TODO: Decide
       .should_enter_at_spike =
           this->config.should_enter_at_spike,                  // TODO: Decide
       .should_reverse_loss = this->config.should_reverse_loss, // TODO: Decide
-      .should_reverse_profit =
-          this->config.should_reverse_profit,                // TODO: Decide
-      .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
+      .should_stop_profit = this->config.should_stop_profit,   // TODO: Decide
       .spike_duration_minutes =
           this->config.spike_duration_minutes,               // TODO: Decide
       .spike_entry_score = this->config.spike_entry_score,   // TODO: Decide
       .spike_height_ratio = this->config.spike_height_ratio, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio, // TODO: Decide
-      .stop_profit_day_range_ratio =
-          this->config.stop_profit_day_range_ratio,        // TODO: Decide
-      .stop_profit_ratio = this->config.stop_profit_ratio, // TODO: Decide
       .stop_profit_target_percentile =
           this->config.stop_profit_target_percentile, // TODO: Decide
       .tertiary_reversal_timeframe_minutes =

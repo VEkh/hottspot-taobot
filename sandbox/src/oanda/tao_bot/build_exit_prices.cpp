@@ -29,12 +29,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   double stop_profit = 0.0;
 
   // TODO: Decide
-  if (this->api_client.config.stop_profit_day_range_ratio && is_trending()) {
-    stop_profit = this->open_order_ptr->day_candle.range() *
-                  this->api_client.config.stop_profit_day_range_ratio;
-  }
-
-  // TODO: Decide
   if (this->api_client.config.should_stop_profit &&
       (this->open_order_ptr->stop_profit_type ==
            stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE ||
@@ -54,10 +48,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
 
     const double adjusted_percentile =
         std::max(percentile_delta, inv_percentile_delta) / 100.0;
-
-    // const double adjusted_percentile =
-    //     std::max(execution_mid_percentile, 100.0 - execution_mid_percentile)
-    //     / 100.0;
 
     stop_profit =
         this->open_order_ptr->day_candle.range() * adjusted_percentile;

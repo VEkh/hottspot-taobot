@@ -33,7 +33,6 @@ enum stop_profit_type_t {
   STOP_PROFIT_CROSS_RANGE,
   STOP_PROFIT_EXTEND_RANGE,
   STOP_PROFIT_NULL,
-  STOP_PROFIT_RETURN_TO_PEAK,
 };
 
 enum trend_t {

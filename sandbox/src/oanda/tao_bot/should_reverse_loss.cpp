@@ -11,10 +11,6 @@
 #include "day_range_percentile.cpp" // day_range_percentile
 
 bool Oanda::TaoBot::should_reverse_loss() {
-  if (!this->api_client.config.max_slow_reverse_loss_count) {
-    return false;
-  }
-
   if (!this->open_order_ptr->entry_reversal.is_reversible) {
     return false;
   }
@@ -51,13 +47,6 @@ bool Oanda::TaoBot::should_reverse_loss() {
     if (!latest_reversal.at) {
       stop_loss_reversal = reversal_t();
     }
-
-    // stop_loss_reversal = latest_record_reversal(
-    //     this->open_order_ptr->entry_reversal.opposite_type());
-
-    // if (!is_reversal_after(stop_loss_reversal, ref_epoch)) {
-    //   stop_loss_reversal = reversal_t();
-    // }
   } else {
     const double ref_epoch =
         this->api_client.config.should_enter_at_spike
@@ -78,10 +67,8 @@ bool Oanda::TaoBot::should_reverse_loss() {
     return false;
   }
 
-  // TODO: Decide
   stop_loss_reversal.is_reversible = true;
   this->close_order_ptr->stop_profit_reversal = stop_loss_reversal;
-  this->slow_reverse_loss_count++;
 
   return true;
 }
