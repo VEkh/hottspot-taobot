@@ -1,9 +1,8 @@
 #ifndef OANDA__TAO_BOT_reset_backtest
 #define OANDA__TAO_BOT_reset_backtest
 
-#include "advance_current_epoch.cpp"   // advance_current_epoch
-#include "read_price_action_stats.cpp" // read_price_action_stats
-#include "set_current_trend.cpp"       // set_current_trend
+#include "advance_current_epoch.cpp" // advance_current_epoch
+#include "set_current_trend.cpp"     // set_current_trend
 #include "tao_bot.h" // Oanda::TaoBot, candle_t, quote_t, reversals_t, spike_candles_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <algorithm>                   // std::min
@@ -45,7 +44,6 @@ void Oanda::TaoBot::reset_backtest() {
 
   this->started_at = this->current_epoch;
 
-  read_price_action_stats();
   set_current_trend();
   update_account_snapshot(true);
 }

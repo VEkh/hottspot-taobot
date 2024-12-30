@@ -19,7 +19,6 @@
 #include "lib/utils/string.cpp"                    // ::utils::string
 #include "oanda/quote/quote.cpp"                   // Oanda::Quote
 #include "read_closed_positions.cpp"               // read_closed_positions
-#include "read_price_action_stats.cpp"             // read_price_action_stats
 #include "tao_bot.h"                   // Oanda::TaoBot, quantity, symbol
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <locale.h>                    // std::locale
@@ -55,12 +54,6 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
 
   this->api_client = Oanda::Client(this->flags);
 
-  this->db_price_action = DB::PriceAction({
-      .conn = this->pg,
-      .debug = this->api_client.config.debug_sql,
-      .symbol = this->symbol,
-  });
-
   this->env_symbols = this->api_client.config.env_symbols;
 
   this->backtest = Backtest({
@@ -82,7 +75,6 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   ensure_market_is_open();
   read_closed_positions();
 
-  read_price_action_stats();
   update_account_snapshot();
 
   this->performance = build_performance();

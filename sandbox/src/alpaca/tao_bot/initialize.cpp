@@ -8,7 +8,6 @@
 #include "db/account_stat/account_stat.cpp"      // DB::AccountStat
 #include "db/candle/candle.cpp"                  // DB::Candle
 #include "db/position/position.cpp"              // DB::Position
-#include "db/price_action/price_action.cpp"      // DB::PriceAction
 #include "db/utils/utils.cpp"                    // DB::Utils
 #include "ensure_is_shortable.cpp"               // ensure_is_shortable
 #include "ensure_market_is_open.cpp"             // ensure_market_is_open
@@ -21,7 +20,6 @@
 #include "lib/utils/boolean.cpp"                 // ::utils::boolean
 #include "lib/utils/string.cpp"                  // ::utils::string
 #include "read_closed_positions.cpp"             // read_closed_positions
-#include "read_price_action_stats.cpp"           // read_price_action_stats
 #include "tao_bot.h"                             // Alpaca::TaoBot
 #include "update_account_snapshot.cpp"           // update_account_snapshot
 #include <iostream>                              // std::cout, std::endl
@@ -54,12 +52,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
   try {
     this->api_client = Alpaca::Client(this->flags);
 
-    this->db_price_action = DB::PriceAction({
-        .conn = this->pg,
-        .debug = this->api_client.config.debug_sql,
-        .symbol = this->symbol,
-    });
-
     this->env_symbols = this->api_client.config.env_symbols;
 
     this->backtest = Backtest({
@@ -85,7 +77,6 @@ void Alpaca::TaoBot::initialize(std::string symbol_,
     read_closed_positions();
 
     initialize_current_trend();
-    read_price_action_stats();
     update_account_snapshot(true);
 
     this->performance = build_performance();

@@ -3,7 +3,6 @@
 #include "db/historical_quote/base/base.cpp"     // DB::HistoricalQuote::Base
 #include "db/historical_quote/oanda/oanda.cpp"   // DB::HistoricalQuote::Oanda
 #include "db/position/position.cpp"              // DB::Position
-#include "db/price_action/price_action.cpp"      // DB::PriceAction
 #include "db/quote/quote.cpp"                    // DB::Quote
 #include "lib/formatted.cpp"                     // Formatted
 #include "lib/performance/account_snapshot/account_snapshot.cpp" // Performance::AccountSnapshot
@@ -28,8 +27,6 @@ void print_usage() {
        "Print daily account performance for the given api key"},
       {"net_return                             <SYMBOL> <OPTS>",
        "Compute symbol's net return"},
-      {"price_action                           <SYMBOL> <OPTS>",
-       "Compute symbol's price action"},
       {"quote:upsert_all_avg_one_sec_variances <SYMBOL> <OPTS> ",
        "Retroactively upsert a symbol's average one second variances"},
   };
@@ -208,40 +205,6 @@ int main(int argc, char *argv[]) {
         .project = flags["project"],
         .start_at = flags["start-at"],
         .symbol = upcased_args.front(),
-    });
-
-    pg.disconnect();
-
-    exit(0);
-  }
-
-  if (command == "price_action") {
-    if (upcased_args.empty()) {
-      std::string message =
-          Formatted::error_message("Please provide at least one symbol.");
-
-      throw std::invalid_argument(message);
-    }
-
-    std::map<std::string, std::string> default_flags = {
-        {"end-at", ""},
-        {"start-at", ""},
-    };
-
-    flags = ::utils::map::merge(default_flags, flags);
-
-    Pg pg(flags);
-    pg.connect();
-
-    DB::PriceAction db_price_action({
-        .conn = pg,
-        .debug = ::utils::io::flag_to_bool("debug", flags["debug"]),
-        .symbol = upcased_args.front(),
-    });
-
-    db_price_action.build({
-        .end_at = flags["end-at"],
-        .start_at = flags["start-at"],
     });
 
     pg.disconnect();

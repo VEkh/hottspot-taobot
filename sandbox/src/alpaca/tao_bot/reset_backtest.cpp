@@ -3,7 +3,6 @@
 
 #include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
-#include "read_price_action_stats.cpp"   // read_price_action_stats
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, quote_t, reversals_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <algorithm>                   // std::min
@@ -45,7 +44,6 @@ void Alpaca::TaoBot::reset_backtest() {
   this->started_at = this->current_epoch;
 
   force_init_reversal_await();
-  read_price_action_stats();
   update_account_snapshot(true);
 }
 

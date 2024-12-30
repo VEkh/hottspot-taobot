@@ -28,10 +28,6 @@ case "${1}" in
     cmd+="\n* 0-15 * * 5 ${app_dir}/bin/${project}/candle_predict build_candles_each --duration-min=1 --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
     cmd+="\n* 0-15 * * 5 ${app_dir}/bin/${project}/quotes watch restart --api-key=live --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
 
-    cmd+="\n\n# Oanda Auxilary Data"
-    cmd+="\n0 16 * * 0 ${app_dir}/bin/${project}/price_action build_each --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
-    cmd+="\n30 7 * * 1-5 ${app_dir}/bin/${project}/price_action build_each --env=${env} >> ${app_dir}/log/${env}.log 2>&1"
-
     echo -e "$cmd"
   ;;
 esac

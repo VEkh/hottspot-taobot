@@ -8,7 +8,6 @@
 #include "db/account_stat/account_stat.cpp"      // DB::AccountStat
 #include "db/candle/candle.cpp"                  // DB::Candle
 #include "db/position/position.cpp"              // DB::Position
-#include "db/price_action/price_action.cpp"      // DB::PriceAction
 #include "db/utils/utils.cpp"                    // DB::Utils
 #include "deps.cpp"                              // json
 #include "lib/backtest/backtest.cpp"             // Backtest
@@ -44,7 +43,6 @@ private:
   using order_win_result_streak_t = Global::t::order_win_result_streak_t;
   using order_win_result_t = Global::t::order_win_result_t;
   using performance_t = Global::t::performance_t;
-  using price_action_stats_t = DB::PriceAction::price_action_stats_t;
   using quote_t = Global::t::quote_t;
   using reversal_t = Global::t::reversal_t;
   using reversal_type_t = Global::t::reversal_type_t;
@@ -66,7 +64,6 @@ private:
   DB::AccountStat db_account_stat;
   DB::Candle db_candle;
   DB::Position db_position;
-  DB::PriceAction db_price_action;
   DB::Utils db_utils;
   Formatted::fmt_stream_t fmt = Formatted::stream();
   MarketAvailability::Nyse market_availability;
@@ -81,7 +78,6 @@ private:
   order_t close_order;
   order_t open_order;
   performance_t performance;
-  price_action_stats_t price_action_stats;
   quote_t current_quote;
   quote_t previous_quote;
   reversal_t entry_reversal;
@@ -168,7 +164,6 @@ private:
   void open_and_persist_position();
   void read_candles();
   void read_closed_positions();
-  void read_price_action_stats();
   void read_quotes();
   void reset_backtest();
   void reset_orders();

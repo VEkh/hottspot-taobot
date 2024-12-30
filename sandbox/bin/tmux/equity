@@ -96,9 +96,5 @@ for symbol in "${symbols[@]}"; do
   new_window_i=$((new_window_i + 1))
 done
 
-tmux new-window -t "${session}" \
-  -n "price action" \
-  "$(tail_cmd "${project}"  "price_actions")"
-
 tmux select-window -t "${session}:0"
 tmux attach-session -t "${session}"
