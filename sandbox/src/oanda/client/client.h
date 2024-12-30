@@ -28,20 +28,6 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
-    int market_duration_hours = 0; // TODO: Decide
-    int reversal_timeframe_minutes = 60;
-    int secondary_reversal_timeframe_minutes = 0; // TODO: Decide
-    bool should_await_spike = false;              // TODO: Decide
-    bool should_enter_at_spike = false;           // TODO: Decide
-    bool should_reverse_loss = false;             // TODO: Decide
-    bool should_stop_profit = false;              // TODO: Decide
-    int spike_duration_minutes = 30;              // TODO: Decide
-    double spike_entry_score = 5.0;               // TODO: Decide
-    double spike_height_ratio = 0.4;              // TODO: Decide
-    double stop_loss_padding_ratio = 0.0;         // TODO: Decide
-    double stop_profit_target_percentile = 100.0; // TODO: Decide
-    int tertiary_reversal_timeframe_minutes = 0;  // TODO: Decide
-    double trend_slip_percentile = 50.0;          // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

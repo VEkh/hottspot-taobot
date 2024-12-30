@@ -1,19 +1,14 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_log_spike_candles
 #define OANDA__TAO_BOT_log_spike_candles
 
 #include "lib/formatted.cpp"  // Formatted
 #include "lib/utils/time.cpp" // ::utils::time_
-#include "spike_score.cpp"    // spike_score // TODO: Decide
+#include "spike_score.cpp"    // spike_score
 #include "tao_bot.h"          // Oanda::TaoBot, spike_candles_t, trend_t
 #include <iostream>           // std::cout, std::endl
 #include <stdio.h>            // printf
 
 void Oanda::TaoBot::log_spike_candles() {
-  if (!this->api_client.config.should_await_spike) {
-    return;
-  }
-
   candle_t current_candle = this->spike_candles.current;
   candle_t day_candle_ = this->spike_candles.day;
   candle_t previous_candle = this->spike_candles.previous;
@@ -27,8 +22,7 @@ void Oanda::TaoBot::log_spike_candles() {
       100.0 * current_candle.range() / day_candle_.range();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("🧨 Spike %i-Min Candles",
-         this->api_client.config.spike_duration_minutes);
+  printf("🧨 Spike %i-Min Candles", this->SPIKE_DURATION_MINUTES);
   std::cout << fmt.reset << std::endl;
 
   Formatted::Stream previous_color =

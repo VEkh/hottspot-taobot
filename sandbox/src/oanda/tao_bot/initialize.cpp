@@ -11,7 +11,6 @@
 #include "ensure_market_is_open.cpp"               // ensure_market_is_open
 #include "ensure_spread_limit.cpp"                 // ensure_spread_limit
 #include "ensure_symbol.cpp"                       // ensure_symbol
-#include "initialize_current_trend.cpp"            // initialize_current_trend
 #include "lib/backtest/backtest.cpp"               // Backtest
 #include "lib/formatted.cpp"                       // Formatted::error_message
 #include "lib/market_availability/forex/forex.cpp" // MarketAvailability::Forex
@@ -77,25 +76,12 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
     this->started_at = this->backtest.config.start_epoch;
   }
 
-  // TODO: Decide
-  this->market_availability.set_market_epochs(
-      this->current_epoch, this->api_client.config.market_duration_hours);
-
-  this->reversals.timeframe_minutes =
-      this->api_client.config.reversal_timeframe_minutes;
-
-  // TODO: Decide
-  this->secondary_reversals.timeframe_minutes =
-      this->api_client.config.secondary_reversal_timeframe_minutes;
-
-  // TODO: Decide
-  this->tertiary_reversals.timeframe_minutes =
-      this->api_client.config.tertiary_reversal_timeframe_minutes;
+  this->market_availability.set_market_epochs(this->current_epoch);
+  this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
 
   ensure_market_is_open();
   read_closed_positions();
 
-  initialize_current_trend();
   read_price_action_stats();
   update_account_snapshot();
 

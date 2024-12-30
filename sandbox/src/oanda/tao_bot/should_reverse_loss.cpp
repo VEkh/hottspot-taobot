@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_should_reverse_loss
 #define OANDA__TAO_BOT_should_reverse_loss
 
@@ -7,52 +6,25 @@
 #include "latest_reversal_after.cpp"  // latest_reversal_after
 #include "tao_bot.h"                  // Oanda::TaoBot, reversal_t
 
-// TODO: Decide
-#include "day_range_percentile.cpp" // day_range_percentile
-
 bool Oanda::TaoBot::should_reverse_loss() {
   if (!this->open_order_ptr->entry_reversal.is_reversible) {
     return false;
   }
 
   reversal_t stop_loss_reversal;
-  reversals_t stop_reversals = this->secondary_reversals;
+  reversals_t stop_reversals = this->reversals;
 
   if (this->open_order_ptr->entry_reversal.is_record_only_reversible) {
-    const double execution_mid = this->open_order_ptr->execution_price;
-    const double max_profit = this->open_order_ptr->max_profit;
-    const double ref_epoch = this->open_order_ptr->max_profit_at;
-    const order_action_t action = this->open_order_ptr->action;
-
-    const double max_profit_percentile = day_range_percentile(
-        this->open_order_ptr->day_candle, this->open_order_ptr, max_profit);
-
-    stop_loss_reversal.at = this->open_order_ptr->max_profit_at;
-    stop_loss_reversal.mid = action == order_action_t::BUY
-                                 ? execution_mid + max_profit
-                                 : execution_mid - max_profit;
-
-    stop_loss_reversal.type =
-        this->open_order_ptr->entry_reversal.opposite_type();
-
-    if (max_profit_percentile <
-        this->api_client.config.stop_profit_target_percentile) {
-      stop_loss_reversal = reversal_t();
-    }
-
-    const reversal_t latest_reversal = latest_reversal_after(
-        stop_reversals, this->open_order_ptr->timestamp,
+    stop_loss_reversal = latest_record_reversal(
         this->open_order_ptr->entry_reversal.opposite_type());
 
-    if (!latest_reversal.at) {
+    if (!is_reversal_after(stop_loss_reversal,
+                           this->open_order_ptr->timestamp)) {
       stop_loss_reversal = reversal_t();
     }
   } else {
-    const double ref_epoch =
-        this->api_client.config.should_enter_at_spike
-            ? this->open_order_ptr->timestamp -
-                  (stop_reversals.timeframe_minutes * 0.5 * 60)
-            : this->open_order_ptr->timestamp;
+    const double ref_epoch = this->open_order_ptr->timestamp -
+                             (stop_reversals.timeframe_minutes * 0.5 * 60);
 
     stop_loss_reversal = latest_reversal_after(
         stop_reversals, ref_epoch,

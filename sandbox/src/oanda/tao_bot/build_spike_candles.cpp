@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_build_spike_candles
 #define OANDA__TAO_BOT_build_spike_candles
 
@@ -8,16 +7,12 @@
 #include <algorithm>            // std::max
 
 void Oanda::TaoBot::build_spike_candles() {
-  if (!this->api_client.config.should_await_spike) {
-    return;
-  }
-
   if (this->open_order_ptr) {
     return;
   }
 
   const candle_bounds_t bounds = DB::Candle::timestamp_to_bounds(
-      this->api_client.config.spike_duration_minutes, this->current_epoch);
+      this->SPIKE_DURATION_MINUTES, this->current_epoch);
 
   if (this->spike_candles.current.opened_at &&
       bounds.opened_at != this->spike_candles.current.opened_at) {

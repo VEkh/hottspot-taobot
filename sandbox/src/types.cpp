@@ -127,8 +127,8 @@ struct quote_t {
 struct reversal_t {
   double at = 0;
   bool is_record = false;
-  bool is_record_only_reversible = true; // TODO: Decide
-  bool is_reversible = false;            // TODO: Decide
+  bool is_record_only_reversible = true;
+  bool is_reversible = false;
   bool is_running_record = false;
   double mid = 0;
   int timeframe_minutes = 0;
@@ -177,7 +177,7 @@ struct reversals_t {
 
 struct trend_meta_t {
   double at = 0;
-  bool is_initialized = false; // TODO: Decide
+  bool is_initialized = false;
   trend_t trend = trend_t::TREND_CONSOLIDATION;
 };
 } // namespace t

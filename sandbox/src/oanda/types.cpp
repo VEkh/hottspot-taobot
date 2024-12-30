@@ -10,7 +10,6 @@ using order_action_t = Global::t::order_action_t;
 using order_type_t = Global::t::order_type_t;
 using quote_t = Global::t::quote_t;
 using reversal_t = Global::t::reversal_t;
-using stop_profit_type_t = Global::t::stop_profit_type_t;
 
 enum order_status_t {
   ORDER_CANCELLED,
@@ -30,7 +29,6 @@ enum trade_status_t {
   TRADE_OPEN,
 };
 
-// TODO: Decide
 struct spike_candles_t {
   candle_t current;
   candle_t day;
@@ -40,7 +38,7 @@ struct spike_candles_t {
 
 struct order_t {
   order_action_t action;
-  candle_t day_candle; // TODO: Decide
+  candle_t day_candle;
   reversal_t entry_reversal;
   double execution_price = 0.00;
   int id = 0;
@@ -55,7 +53,6 @@ struct order_t {
   double stop_loss = 0.00;
   double stop_profit = 0.00;
   reversal_t stop_profit_reversal;
-  stop_profit_type_t stop_profit_type = stop_profit_type_t::STOP_PROFIT_NULL;
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::FOK;
   double timestamp = 0;

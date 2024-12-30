@@ -8,11 +8,6 @@
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
-  // TODO: Decide
-  // if (this->closed_positions.size() >= 2) {
-  //   return false;
-  // }
-
   const bool is_trending_ = is_trending();
 
   reversal_t entry_reversal_ = latest_record_reversal();

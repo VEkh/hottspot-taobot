@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_spike_score
 #define OANDA__TAO_BOT_spike_score
 

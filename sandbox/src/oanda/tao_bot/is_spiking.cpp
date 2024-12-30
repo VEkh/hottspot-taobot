@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_is_spiking
 #define OANDA__TAO_BOT_is_spiking
 
@@ -12,12 +11,12 @@ bool Oanda::TaoBot::is_spiking() {
 
   const double spike_score_ = spike_score(this->spike_candles);
 
-  if (spike_score_ < this->api_client.config.spike_entry_score) {
+  if (spike_score_ < this->SPIKE_ENTRY_SCORE) {
     return false;
   }
 
   return this->spike_candles.current.range() >=
-         this->api_client.config.spike_height_ratio * this->day_candle.range();
+         this->SPIKE_HEIGHT_RATIO * this->day_candle.range();
 }
 
 #endif

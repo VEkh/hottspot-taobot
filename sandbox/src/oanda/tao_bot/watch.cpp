@@ -1,13 +1,12 @@
 #ifndef OANDA__TAO_BOT_watch
 #define OANDA__TAO_BOT_watch
 
-#include "advance_current_epoch.cpp"  // advance_current_epoch
-#include "build_day_candle.cpp"       // build_day_candle
-#include "build_reversals.cpp"        // build_reversals
-#include "build_spike_candles.cpp"    // build_spike_candles // TODO: Decide
-#include "clear_stale_open_order.cpp" // clear_stale_open_order
-#include "close_position.cpp"         // close_position
-#include "force_init_reversal_await.cpp" // force_init_reversal_await // TODO: Decide
+#include "advance_current_epoch.cpp"     // advance_current_epoch
+#include "build_day_candle.cpp"          // build_day_candle
+#include "build_reversals.cpp"           // build_reversals
+#include "build_spike_candles.cpp"       // build_spike_candles
+#include "clear_stale_open_order.cpp"    // clear_stale_open_order
+#include "close_position.cpp"            // close_position
 #include "lib/utils/io.cpp"              // ::utils::io
 #include "log_account_snapshot.cpp"      // log_account_snapshot
 #include "log_end_of_trading_period.cpp" // log_end_of_trading_period
@@ -27,6 +26,7 @@
 #include "reset_backtest.cpp"            // reset_backtest
 #include "reset_position.cpp"            // reset_position
 #include "set_close_order_prices.cpp"    // set_close_order_prices
+#include "set_current_trend.cpp"         // set_current_trend
 #include "set_open_order_prices.cpp"     // set_open_order_prices
 #include "set_position_status.cpp"       // set_order_statuses
 #include "should_terminate.cpp"          // should_terminate
@@ -49,11 +49,9 @@ void Oanda::TaoBot::watch() {
 
       read_candles();
       build_day_candle();
-      build_spike_candles(); // TODO: Decide
+      build_spike_candles();
       build_reversals(this->reversals, true);
-      build_reversals(this->secondary_reversals, true); // TODO: Decide
-      build_reversals(this->tertiary_reversals, true);  // TODO: Decide
-      force_init_reversal_await();                      // TODO: Decide
+      set_current_trend();
 
       if (!this->backtest.is_active ||
           !this->backtest.config.force_exec_slow_queries) {
@@ -65,13 +63,8 @@ void Oanda::TaoBot::watch() {
         log_env_symbols();
         log_quote();
         log_price_action();
-
-        // TODO: Decide
         log_spike_candles();
-
         log_reversals(this->reversals);
-        log_reversals(this->secondary_reversals); // TODO: Decide
-        log_reversals(this->tertiary_reversals);  // TODO: Decide
         log_reversal_metadata();
         log_position();
         log_performance();

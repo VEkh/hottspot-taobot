@@ -35,7 +35,6 @@ bool Oanda::TaoBot::should_terminate() {
     return are_positions_closed;
   }
 
-  // TODO: FIX: If this happens on Friday in backtest, it skips the next week
   if (max_account_loss_reached()) {
     if (are_positions_closed) {
       std::cout << fmt.bold << fmt.red << std::endl;
