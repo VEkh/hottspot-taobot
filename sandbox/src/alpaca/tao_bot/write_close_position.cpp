@@ -45,6 +45,7 @@ void Alpaca::TaoBot::write_close_position() {
       .open_order_id = this->open_order_ptr->id,
       .stop_loss = this->exit_prices.stop_loss,
       .stop_profit = this->exit_prices.stop_profit,
+      .to_account_currency_ratio = 1.00,
   });
 }
 

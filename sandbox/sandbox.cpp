@@ -1,31 +1,22 @@
 #include <iostream> // std::cout, std::endl
-#include <list>     // std::list
-#include <map>      // std::map
+#include <regex>    // std::regex, std::regex_search, std::smatch
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
-#include "db/account_stat/account_stat.cpp" // DB::AccountStat
-#include "lib/pg/pg.cpp"                    // Pg
-
 int main(int argc, char *argv[]) {
-  Pg pg((std::map<std::string, std::string>){
-      {"env", "backtest"},
-  });
+  std::string symbol = "USD_JPY";
 
-  pg.connect();
+  std::smatch match;
+  std::regex_search(symbol, match, std::regex("^(\\w+)_(\\w+)$"));
 
-  DB::AccountStat db_account_stat(pg);
+  std::smatch::iterator it;
 
-  const DB::AccountStat::account_snapshot_t snapshot =
-      db_account_stat.get_snapshot({
-          .api_key_id = "backtest-0",
-          .debug = false,
-          .start_at = 1711584000.000000,
-      });
+  for (it = match.begin(); it != match.end(); it++) {
+    if (it == match.begin()) {
+      continue;
+    }
 
-  printf("Equity: %.2f • Original: %.2f • Max: %.2f • Min: %.2f\n",
-         snapshot.equity, snapshot.original_equity, snapshot.max_equity,
-         snapshot.min_equity);
-
-  pg.disconnect();
+    printf("match: %s", it->str().c_str());
+    std::cout << std::endl;
+  }
 }

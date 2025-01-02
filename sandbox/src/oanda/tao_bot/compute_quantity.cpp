@@ -1,7 +1,6 @@
 #ifndef OANDA__TAO_BOT_compute_quantity
 #define OANDA__TAO_BOT_compute_quantity
 
-#include "base_currency.cpp"       // base_currency
 #include "convert_price.cpp"       // convert_price
 #include "margin_buying_power.cpp" // margin_buying_power
 #include "tao_bot.h"               // Alpaca::TaoBot
@@ -9,7 +8,12 @@
 #include <math.h>                  // floor
 
 int Oanda::TaoBot::compute_quantity() {
-  const double dollars_per_unit = convert_price(1.0, base_currency(), "USD");
+  const double dollars_per_unit = convert_price({
+      .debug = true,
+      .from = this->currency.base,
+      .price = 1.0,
+      .to = "USD",
+  });
 
   update_margin_rate();
 

@@ -4,9 +4,7 @@
 #include "tao_bot.h" // Oanda::TaoBot, order_t
 
 double Oanda::TaoBot::open_position_profit(const order_t *order_ptr) {
-  double total = order_ptr->profit * order_ptr->quantity;
-
-  return total;
+  return order_ptr->profit * order_ptr->quantity;
 }
 
 #endif

@@ -16,6 +16,7 @@ public:
     double close_order_quantity = 0.00;
     double closed_at = 0.00;
     double current_profit = 0.00;
+    bool debug = false;
     double max_profit = 0.00;
     double max_profit_at = 0.00;
     double min_profit = 0.00;
@@ -23,8 +24,7 @@ public:
     std::string open_order_id;
     double stop_loss = 0.00;
     double stop_profit = 0.00;
-    // Optional
-    bool debug = false;
+    double to_account_currency_ratio = 1.00;
   };
 
   struct get_closed_positions_args_t {
@@ -55,8 +55,11 @@ public:
   };
 
   struct open_args_t {
+    std::string account_currency = "USD";
     std::string api_key_id;
+    std::string currency = "USD";
     double current_profit = 0.00;
+    bool debug = false;
     double max_profit = 0.00;
     double max_profit_at = 0.00;
     double min_profit = 0.00;
@@ -68,15 +71,16 @@ public:
     double stop_loss = 0.00;
     double stop_profit = 0.00;
     std::string symbol;
-    // Optional
-    bool debug = false;
+    double to_account_currency_ratio = 1.00;
   };
 
   struct position_t {
+    std::string account_currency;
     double close_order_quantity;
     double close_order_execution_mid;
     double closed_at;
     std::string close_order_id;
+    std::string currency;
     double current_profit;
     double max_position_profit;
     double max_profit;
@@ -90,6 +94,7 @@ public:
     double stop_loss;
     double stop_profit;
     std::string symbol;
+    double to_account_currency_ratio;
   };
 
   Position(){};

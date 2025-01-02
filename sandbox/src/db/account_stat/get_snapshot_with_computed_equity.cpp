@@ -28,7 +28,7 @@ DB::AccountStat::get_snapshot_with_computed_equity(
     from (
       select
         api_key_id,
-        sum((current_profit * abs(open_order_quantity))) as profit
+        sum((current_profit * to_account_currency_ratio * abs(open_order_quantity))) as profit
       from
         positions
         where

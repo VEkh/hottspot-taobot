@@ -17,8 +17,10 @@ void Oanda::TaoBot::read_closed_positions() {
 
   for (const db_position_t db_position : day_positions) {
     order_t close_order_ = {
+        .account_currency = db_position.account_currency,
         .action = db_position.close_order_quantity > 0 ? order_action_t::BUY
                                                        : order_action_t::SELL,
+        .currency = db_position.currency,
         .execution_price = db_position.close_order_execution_mid,
         .id = std::stoi(db_position.close_order_id),
         .max_position_profit =
@@ -35,12 +37,15 @@ void Oanda::TaoBot::read_closed_positions() {
         .symbol = db_position.symbol,
         .time_in_force = order_time_in_force_t::FOK,
         .timestamp = db_position.closed_at,
+        .to_account_currency_ratio = db_position.to_account_currency_ratio,
         .type = order_type_t::MARKET,
     };
 
     order_t open_order_ = {
+        .account_currency = db_position.account_currency,
         .action = db_position.open_order_quantity > 0 ? order_action_t::BUY
                                                       : order_action_t::SELL,
+        .currency = db_position.currency,
         .execution_price = db_position.open_order_execution_mid,
         .id = std::stoi(db_position.open_order_id),
         .max_position_profit =
@@ -57,6 +62,7 @@ void Oanda::TaoBot::read_closed_positions() {
         .symbol = db_position.symbol,
         .time_in_force = order_time_in_force_t::FOK,
         .timestamp = db_position.opened_at,
+        .to_account_currency_ratio = db_position.to_account_currency_ratio,
         .type = order_type_t::MARKET,
     };
 

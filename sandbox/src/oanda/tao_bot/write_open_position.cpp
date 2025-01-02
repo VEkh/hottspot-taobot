@@ -17,7 +17,9 @@ void Oanda::TaoBot::write_open_position() {
       this->open_order_ptr->action == order_action_t::BUY ? 1 : -1;
 
   this->db_position.open({
+      .account_currency = this->ACCOUNT_CURRENCY,
       .api_key_id = this->api_client.config.account_id,
+      .currency = this->currency.quote,
       .current_profit = this->open_order_ptr->profit,
       .max_profit = this->open_order_ptr->max_profit,
       .max_profit_at = this->open_order_ptr->max_profit_at,
@@ -31,6 +33,8 @@ void Oanda::TaoBot::write_open_position() {
       .stop_loss = this->exit_prices.stop_loss,
       .stop_profit = this->exit_prices.stop_profit,
       .symbol = this->symbol,
+      .to_account_currency_ratio =
+          this->open_order_ptr->to_account_currency_ratio,
   });
 }
 

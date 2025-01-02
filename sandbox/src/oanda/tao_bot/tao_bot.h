@@ -34,6 +34,7 @@ private:
   using account_snapshot_t = Global::t::account_snapshot_t;
   using candle_bounds_t = DB::Candle::candle_bounds_t;
   using candle_t = Global::t::candle_t;
+  using currency_t = Oanda::t::currency_t;
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
@@ -56,6 +57,14 @@ private:
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
+  struct convert_price_args_t {
+    bool debug = false;
+    std::string from;
+    double price;
+    std::string to;
+  };
+
+  static constexpr const char *ACCOUNT_CURRENCY = "USD";
   static constexpr double EQUATOR_PERCENTILE = 50.0;
   static constexpr double SPIKE_ENTRY_SCORE = 5.0;
   static constexpr double SPIKE_HEIGHT_RATIO = 0.5;
@@ -99,6 +108,7 @@ private:
   account_snapshot_t account_snapshot;
   exit_prices_t exit_prices;
   candle_t day_candle;
+  currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
   order_t *close_order_ptr = nullptr;
@@ -138,7 +148,7 @@ private:
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
-  double convert_price(const double, const std::string, const std::string);
+  double convert_price(const convert_price_args_t);
   double current_mid();
   double day_range_percentile(candle_t, const double, const bool);
   double day_range_percentile(candle_t, const order_t *, double);
@@ -175,13 +185,13 @@ private:
                                             const order_action_t, const char *,
                                             const int);
 
-  std::string base_currency();
   std::string stop_profit_type_name(const order_t *);
 
   stop_profit_type_t stop_profit_type(const order_t *);
 
   void advance_current_epoch();
   void advance_current_epoch(const double);
+  void build_currency();
   void build_day_candle();
   void build_spike_candles();
   void build_reversals(reversals_t &, const bool);
@@ -223,6 +233,7 @@ private:
   void set_profit(order_t *);
   void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
+  void set_to_account_currency_ratio(order_t *);
   void update_account_snapshot(const bool);
   void update_margin_rate();
   void watch();

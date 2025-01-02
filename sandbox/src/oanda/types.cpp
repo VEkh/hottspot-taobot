@@ -29,6 +29,11 @@ enum trade_status_t {
   TRADE_OPEN,
 };
 
+struct currency_t {
+  std::string base;
+  std::string quote;
+};
+
 struct spike_candles_t {
   candle_t current;
   candle_t day;
@@ -37,7 +42,9 @@ struct spike_candles_t {
 };
 
 struct order_t {
+  std::string account_currency;
   order_action_t action;
+  std::string currency;
   candle_t day_candle;
   reversal_t entry_reversal;
   double execution_price = 0.00;
@@ -56,6 +63,7 @@ struct order_t {
   std::string symbol;
   order_time_in_force_t time_in_force = order_time_in_force_t::FOK;
   double timestamp = 0;
+  double to_account_currency_ratio = 1.00;
   int trade_id = 0;
   order_type_t type = order_type_t::MARKET;
 };

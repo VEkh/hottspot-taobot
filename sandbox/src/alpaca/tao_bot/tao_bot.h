@@ -50,6 +50,7 @@ private:
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
+  static constexpr const char *ACCOUNT_CURRENCY = "USD";
   static constexpr double EQUATOR_PERCENTILE = 50.0;
 
   std::map<const char *, const char *> ICONS = {

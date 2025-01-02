@@ -1,6 +1,7 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
+#include "build_currency.cpp"                      // build_currency
 #include "build_performance.cpp"                   // build_performance
 #include "db/account_stat/account_stat.cpp"        // DB::AccountStat
 #include "db/candle/candle.cpp"                    // DB::Candle
@@ -33,6 +34,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   ensure_symbol(symbol_);
 
   this->symbol = ::utils::string::upcase(symbol_);
+  build_currency();
 
   ensure_spread_limit();
 

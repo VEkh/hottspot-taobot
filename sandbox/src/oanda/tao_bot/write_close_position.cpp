@@ -46,6 +46,8 @@ void Oanda::TaoBot::write_close_position() {
       .open_order_id = std::to_string(this->open_order_ptr->id),
       .stop_loss = this->exit_prices.stop_loss,
       .stop_profit = this->exit_prices.stop_profit,
+      .to_account_currency_ratio =
+          this->open_order_ptr->to_account_currency_ratio,
   });
 }
 

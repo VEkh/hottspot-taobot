@@ -128,8 +128,23 @@ void Oanda::TaoBot::log_position() {
   std::cout << fmt.reset << std::endl;
 
   std::cout << fmt.bold << log_color;
-  printf("Current: %'.5f • Max: %'.5f\n", position_profit,
-         this->open_order_ptr->max_position_profit);
+  printf("Current: %'.5f %s • Max: %'.5f %s\n", position_profit,
+         this->open_order_ptr->currency.c_str(),
+         this->open_order_ptr->max_position_profit,
+         this->open_order_ptr->currency.c_str());
+
+  if (this->open_order_ptr->currency !=
+      this->open_order_ptr->account_currency) {
+    const double convert_ratio =
+        this->open_order_ptr->to_account_currency_ratio;
+
+    printf("Current: %'.5f %s • Max: %'.5f %s\n",
+           position_profit * convert_ratio,
+           this->open_order_ptr->account_currency.c_str(),
+           this->open_order_ptr->max_position_profit * convert_ratio,
+           this->open_order_ptr->account_currency.c_str());
+  }
+
   std::cout << fmt.reset << std::endl;
 }
 

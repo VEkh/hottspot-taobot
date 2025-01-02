@@ -11,6 +11,7 @@
  */
 #include "tao_bot.h"
 
+#include "convert_price.cpp"        // convert_price
 #include "current_mid.cpp"          // current_mid
 #include "day_range_percentile.cpp" // day_range_percentile
 #include "lib/utils/string.cpp"     // ::utils::string
@@ -27,7 +28,9 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
                              const char *order_description,
                              const int quantity) {
   order_t new_open_order;
+  new_open_order.account_currency = this->ACCOUNT_CURRENCY;
   new_open_order.action = open_action;
+  new_open_order.currency = this->currency.quote;
   new_open_order.day_candle = this->day_candle;
   new_open_order.entry_reversal = this->entry_reversal;
   new_open_order.max_profit_at = this->current_epoch;
@@ -35,15 +38,24 @@ Oanda::TaoBot::open_position(const order_action_t close_action,
   new_open_order.quantity = quantity;
   new_open_order.symbol = this->symbol;
   new_open_order.time_in_force = order_time_in_force_t::FOK;
+  new_open_order.to_account_currency_ratio = convert_price({
+      .from = new_open_order.currency,
+      .price = 1.0,
+      .to = new_open_order.account_currency,
+  });
   new_open_order.type = order_type_t::MARKET;
 
   order_t new_close_order;
+  new_close_order.account_currency = new_open_order.account_currency;
   new_close_order.action = close_action;
+  new_close_order.currency = new_open_order.currency;
   new_close_order.max_profit_at = this->current_epoch;
   new_close_order.min_profit_at = this->current_epoch;
   new_close_order.quantity = quantity;
   new_close_order.symbol = this->symbol;
   new_close_order.time_in_force = order_time_in_force_t::FOK;
+  new_close_order.to_account_currency_ratio =
+      new_open_order.to_account_currency_ratio;
   new_close_order.type = order_type_t::MARKET;
 
   const char *order_action =
