@@ -30,6 +30,7 @@ void Alpaca::TaoBot::reset_backtest() {
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
   this->day_candle = candle_t();
+  this->db_account_stat.clear_snapshot_stats_cache();
   this->db_candle.clear_cache();
 
   this->current_quote = quote_t();

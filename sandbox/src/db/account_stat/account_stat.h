@@ -31,6 +31,7 @@ public:
     bool debug = false;
     double end_at;
     double start_at;
+    bool use_cache = false;
   };
 
   struct get_snapshot_with_computed_equity_args_t {
@@ -55,16 +56,19 @@ public:
 
   std::list<account_snapshot_t>
   get_daily_snapshots(const get_daily_snapshots_args_t);
+
   account_snapshot_t get_snapshot(const get_snapshot_args_t);
   account_snapshot_t get_snapshot_with_computed_equity(
       const get_snapshot_with_computed_equity_args_t);
 
+  void clear_snapshot_stats_cache() { this->cached_snapshot_stats = {}; }
   void upsert(const upsert_args_t);
 
 private:
   using query_result_t = Pg::query_result_t;
 
   Pg conn;
+  std::list<account_stat_t> cached_snapshot_stats;
 
   account_snapshot_t build_account_snapshot(const std::list<account_stat_t> &);
 

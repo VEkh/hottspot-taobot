@@ -12,8 +12,7 @@
 
 DB::AccountStat::account_snapshot_t
 DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
-  const std::list<account_stat_t> account_stats =
-      get_snapshot_account_stats(args);
+  std::list<account_stat_t> account_stats = get_snapshot_account_stats(args);
 
   if (account_stats.empty()) {
     const std::string error_message = Formatted::error_message(
@@ -25,6 +24,13 @@ DB::AccountStat::get_snapshot(const get_snapshot_args_t args) {
     usleep(5e5);
 
     return get_snapshot(args);
+  }
+
+  if (args.use_cache) {
+    this->cached_snapshot_stats.splice(this->cached_snapshot_stats.end(),
+                                       account_stats);
+
+    account_stats = this->cached_snapshot_stats;
   }
 
   return build_account_snapshot(account_stats);

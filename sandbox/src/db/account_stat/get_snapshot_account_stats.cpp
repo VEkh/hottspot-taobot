@@ -12,8 +12,13 @@
 std::list<DB::AccountStat::account_stat_t>
 DB::AccountStat::get_snapshot_account_stats(const get_snapshot_args_t args) {
   const double end_at = args.end_at;
-  const double start_at = args.start_at;
   const std::string api_key_id = args.api_key_id;
+
+  double start_at = args.start_at;
+
+  if (args.use_cache && !this->cached_snapshot_stats.empty()) {
+    start_at = this->cached_snapshot_stats.back().inserted_at;
+  }
 
   char *sanitized_api_key_id =
       PQescapeLiteral(this->conn.conn, api_key_id.c_str(), api_key_id.size());

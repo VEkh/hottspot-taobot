@@ -21,6 +21,7 @@ void Oanda::TaoBot::update_account_snapshot(const bool force = false) {
       .debug = this->api_client.config.debug_sql,
       .end_at = this->backtest.is_active ? this->current_epoch : 0,
       .start_at = this->market_availability.market_epochs.open,
+      .use_cache = true,
   });
 }
 
