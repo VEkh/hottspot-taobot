@@ -13,10 +13,10 @@ double Alpaca::TaoBot::day_range_percentile(const double mid) {
 
 double Alpaca::TaoBot::day_range_percentile(const order_t *order,
                                             const double profit) {
-  const double execution_mid = order->execution_price;
+  const double execution_price = order->execution_price;
   const double profit_mid = order->action == order_action_t::BUY
-                                ? execution_mid + profit
-                                : execution_mid - profit;
+                                ? execution_price + profit
+                                : execution_price - profit;
 
   const double percentile = day_range_percentile(profit_mid);
 

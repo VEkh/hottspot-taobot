@@ -22,8 +22,8 @@ DB::Position::result_to_positions(const query_result_t &result) {
       const std::string field = fields.at(i);
       const std::string value = values.at(i);
 
-      if (field == "close_order_execution_mid") {
-        record.close_order_execution_mid = std::stod(value);
+      if (field == "close_order_execution_price") {
+        record.close_order_execution_price = std::stod(value);
       }
 
       if (field == "close_order_id") {
@@ -58,8 +58,8 @@ DB::Position::result_to_positions(const query_result_t &result) {
         record.min_profit_at = std::stod(value);
       }
 
-      if (field == "open_order_execution_mid") {
-        record.open_order_execution_mid = std::stod(value);
+      if (field == "open_order_execution_price") {
+        record.open_order_execution_price = std::stod(value);
       }
 
       if (field == "open_order_id") {

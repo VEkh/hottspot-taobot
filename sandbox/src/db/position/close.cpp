@@ -8,7 +8,7 @@
 #include <string>     // std::string, std::to_string
 
 void DB::Position::close(const close_args_t args) {
-  const double close_order_execution_mid = args.close_order_execution_mid;
+  const double close_order_execution_price = args.close_order_execution_price;
   const double close_order_quantity = args.close_order_quantity;
   const double closed_at = args.closed_at;
   const double current_profit = args.current_profit;
@@ -28,7 +28,7 @@ void DB::Position::close(const close_args_t args) {
     update
       positions
     set
-      close_order_execution_mid = %f,
+      close_order_execution_price = %f,
       close_order_id = %s,
       close_order_quantity = %f,
       closed_at = to_timestamp(%f),
@@ -55,7 +55,8 @@ void DB::Position::close(const close_args_t args) {
       this->conn.conn, open_order_id.c_str(), open_order_id.size());
 
   const size_t query_l =
-      strlen(query_format) + std::to_string(close_order_execution_mid).size() +
+      strlen(query_format) +
+      std::to_string(close_order_execution_price).size() +
       strlen(sanitized_close_order_id) +
       std::to_string(close_order_quantity).size() +
       std::to_string(closed_at).size() + std::to_string(current_profit).size() +
@@ -67,7 +68,7 @@ void DB::Position::close(const close_args_t args) {
 
   char query[query_l];
 
-  snprintf(query, query_l, query_format, close_order_execution_mid,
+  snprintf(query, query_l, query_format, close_order_execution_price,
            sanitized_close_order_id, close_order_quantity, closed_at,
            current_profit, max_profit, max_profit_at, min_profit, min_profit_at,
            stop_loss, stop_profit, sanitized_api_key_id,

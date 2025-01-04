@@ -13,7 +13,7 @@ void DB::Position::open(const open_args_t args) {
   const double max_profit_at = args.max_profit_at;
   const double min_profit = args.min_profit;
   const double min_profit_at = args.min_profit_at;
-  const double open_order_execution_mid = args.open_order_execution_mid;
+  const double open_order_execution_price = args.open_order_execution_price;
   const double open_order_quantity = args.open_order_quantity;
   const double opened_at = args.opened_at;
   const double stop_loss = args.stop_loss;
@@ -27,7 +27,7 @@ void DB::Position::open(const open_args_t args) {
   const std::string symbol = args.symbol;
 
   const char *query_format = R"(
-    insert into positions(account_currency, api_key_id, currency, current_profit, max_profit, max_profit_at, min_profit, min_profit_at, open_order_execution_mid, open_order_id, open_order_quantity, opened_at, stop_loss, stop_profit, symbol, to_account_currency_ratio)
+    insert into positions(account_currency, api_key_id, currency, current_profit, max_profit, max_profit_at, min_profit, min_profit_at, open_order_execution_price, open_order_id, open_order_quantity, opened_at, stop_loss, stop_profit, symbol, to_account_currency_ratio)
       values (%s, %s, %s, %f, %f, to_timestamp(%f), %f, to_timestamp(%f), %f, %s, %f, %s, %f, %f, %s, %f)
     on conflict (api_key_id, open_order_id)
       do update set
@@ -59,7 +59,7 @@ void DB::Position::open(const open_args_t args) {
       std::to_string(current_profit).size() +
       std::to_string(max_profit).size() + std::to_string(max_profit_at).size() +
       std::to_string(min_profit).size() + std::to_string(min_profit_at).size() +
-      std::to_string(open_order_execution_mid).size() +
+      std::to_string(open_order_execution_price).size() +
       strlen(sanitized_open_order_id) +
       std::to_string(open_order_quantity).size() + opened_at_str.size() +
       std::to_string(stop_loss).size() + std::to_string(stop_profit).size() +
@@ -70,7 +70,7 @@ void DB::Position::open(const open_args_t args) {
 
   snprintf(query, query_l, query_format, sanitized_account_currency,
            sanitized_api_key_id, sanitized_currency, current_profit, max_profit,
-           max_profit_at, min_profit, min_profit_at, open_order_execution_mid,
+           max_profit_at, min_profit, min_profit_at, open_order_execution_price,
            sanitized_open_order_id, open_order_quantity, opened_at_str.c_str(),
            stop_loss, stop_profit, sanitized_symbol, to_account_currency_ratio);
 

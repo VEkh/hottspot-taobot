@@ -15,10 +15,10 @@ double Oanda::TaoBot::day_range_percentile(candle_t candle, const double mid,
 double Oanda::TaoBot::day_range_percentile(candle_t candle,
                                            const order_t *order,
                                            const double profit) {
-  const double execution_mid = order->execution_price;
+  const double execution_price = order->execution_price;
   const double profit_mid = order->action == order_action_t::BUY
-                                ? execution_mid + profit
-                                : execution_mid - profit;
+                                ? execution_price + profit
+                                : execution_price - profit;
 
   return day_range_percentile(candle, profit_mid,
                               order->action == order_action_t::SELL);

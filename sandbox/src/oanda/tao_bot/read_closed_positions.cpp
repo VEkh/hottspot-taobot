@@ -21,7 +21,7 @@ void Oanda::TaoBot::read_closed_positions() {
         .action = db_position.close_order_quantity > 0 ? order_action_t::BUY
                                                        : order_action_t::SELL,
         .currency = db_position.currency,
-        .execution_price = db_position.close_order_execution_mid,
+        .execution_price = db_position.close_order_execution_price,
         .id = std::stoi(db_position.close_order_id),
         .max_position_profit =
             db_position.max_profit * abs(db_position.close_order_quantity),
@@ -46,7 +46,7 @@ void Oanda::TaoBot::read_closed_positions() {
         .action = db_position.open_order_quantity > 0 ? order_action_t::BUY
                                                       : order_action_t::SELL,
         .currency = db_position.currency,
-        .execution_price = db_position.open_order_execution_mid,
+        .execution_price = db_position.open_order_execution_price,
         .id = std::stoi(db_position.open_order_id),
         .max_position_profit =
             db_position.max_profit * abs(db_position.open_order_quantity),

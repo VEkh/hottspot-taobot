@@ -11,7 +11,7 @@ class Position {
 public:
   struct close_args_t {
     std::string api_key_id;
-    double close_order_execution_mid = 0.00;
+    double close_order_execution_price = 0.00;
     std::string close_order_id;
     double close_order_quantity = 0.00;
     double closed_at = 0.00;
@@ -64,7 +64,7 @@ public:
     double max_profit_at = 0.00;
     double min_profit = 0.00;
     double min_profit_at = 0.00;
-    double open_order_execution_mid = 0.00;
+    double open_order_execution_price = 0.00;
     std::string open_order_id;
     double open_order_quantity = 0.00;
     double opened_at = 0.00;
@@ -77,7 +77,7 @@ public:
   struct position_t {
     std::string account_currency;
     double close_order_quantity;
-    double close_order_execution_mid;
+    double close_order_execution_price;
     double closed_at;
     std::string close_order_id;
     std::string currency;
@@ -87,7 +87,7 @@ public:
     double max_profit_at;
     double min_profit;
     double min_profit_at;
-    double open_order_execution_mid;
+    double open_order_execution_price;
     double open_order_quantity;
     double opened_at;
     std::string open_order_id;

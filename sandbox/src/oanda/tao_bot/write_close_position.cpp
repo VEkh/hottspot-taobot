@@ -33,7 +33,7 @@ void Oanda::TaoBot::write_close_position() {
 
   this->db_position.close({
       .api_key_id = this->api_client.config.account_id,
-      .close_order_execution_mid = this->close_order_ptr->execution_price,
+      .close_order_execution_price = this->close_order_ptr->execution_price,
       .close_order_id = std::to_string(this->close_order_ptr->id),
       .close_order_quantity =
           (double)(quantity_multiplier * this->close_order_ptr->quantity),
