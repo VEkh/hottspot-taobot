@@ -3,20 +3,9 @@
 #include <stdio.h>  // printf
 #include <string>   // std::string
 
+#include "lib/cli/cli.cpp" // ::Cli
+
 int main(int argc, char *argv[]) {
-  std::string symbol = "USD_JPY";
-
-  std::smatch match;
-  std::regex_search(symbol, match, std::regex("^(\\w+)_(\\w+)$"));
-
-  std::smatch::iterator it;
-
-  for (it = match.begin(); it != match.end(); it++) {
-    if (it == match.begin()) {
-      continue;
-    }
-
-    printf("match: %s", it->str().c_str());
-    std::cout << std::endl;
-  }
+  ::Cli cli(argc, argv);
+  cli.run();
 }

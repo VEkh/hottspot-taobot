@@ -3,7 +3,7 @@
 
 app_dir="$(realpath "$(dirname "${BASH_SOURCE[0]}")/../")"
 data_dir="${app_dir}/data/"
-srcs="${*:-./sandbox.cpp}"
+srcs="./sandbox.cpp"
 
 args=(
   "-D'APP_DIR=\"${app_dir}\"'"
@@ -24,6 +24,6 @@ args=(
   "-lssl"
 )
 
-echo -e "${args[@]}" | xargs g++ && ./.output
+echo -e "${args[@]}" | xargs g++ && ./.output "${@}"
 
 'rm' -f ./.output

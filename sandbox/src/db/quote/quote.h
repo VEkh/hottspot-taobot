@@ -29,30 +29,8 @@ public:
     std::string symbol;
   };
 
-  struct get_avg_one_sec_variances_args_t {
-    bool debug = false;
-    std::string symbol;
-    double end_at;
-  };
-
-  struct upsert_avg_one_sec_variance_args_t {
-    bool debug = true;
-    long int id = 0;
-    std::string symbol;
-  };
-
-  struct upsert_all_avg_one_sec_variances_args_t {
-    bool debug = false;
-    std::string end_at;
-    std::string start_at;
-    std::string symbol;
-  };
-
   Quote(){};
   Quote(Pg c);
-
-  avg_one_sec_variances_t
-  get_avg_one_sec_variances(const get_avg_one_sec_variances_args_t);
 
   std::list<quote_t> get(const std::string, const double);
   std::list<quote_t> get_last(const get_last_args_t);
@@ -60,9 +38,6 @@ public:
 
   void upsert(const quote_t);
   void upsert(const std::list<quote_t>);
-  void upsert_all_avg_one_sec_variances(
-      const upsert_all_avg_one_sec_variances_args_t);
-  void upsert_avg_one_sec_variance(const upsert_avg_one_sec_variance_args_t);
 
 private:
   using candle_t = Global::t::candle_t;
