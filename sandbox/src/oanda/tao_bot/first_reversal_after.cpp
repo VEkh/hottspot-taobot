@@ -17,7 +17,7 @@ Oanda::TaoBot::reversal_t Oanda::TaoBot::first_reversal_after(
   }
 
   const int ref_timestamp_minute = ref_timestamp / 60;
-  const double current_minute = this->current_epoch / 60;
+  const int current_minute = this->current_epoch / 60;
 
   reversal_t newer_high;
   reversal_t newer_low;
@@ -30,7 +30,7 @@ Oanda::TaoBot::reversal_t Oanda::TaoBot::first_reversal_after(
       const int shifted_reversal_minute =
           reversal_minute + reversals_.timeframe_minutes * 0.5;
 
-      if (current_minute < shifted_reversal_minute) {
+      if (current_minute <= shifted_reversal_minute) {
         break;
       }
 
@@ -52,7 +52,7 @@ Oanda::TaoBot::reversal_t Oanda::TaoBot::first_reversal_after(
       const int shifted_reversal_minute =
           reversal_minute + reversals_.timeframe_minutes * 0.5;
 
-      if (current_minute < shifted_reversal_minute) {
+      if (current_minute <= shifted_reversal_minute) {
         break;
       }
 

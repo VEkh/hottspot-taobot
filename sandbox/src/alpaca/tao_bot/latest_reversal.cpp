@@ -5,18 +5,48 @@
 
 Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_reversal(
     reversals_t &reversals_,
-    const reversal_type_t type = reversal_type_t::REVERSAL_NULL) {
-  const reversal_t recent_high = reversals_.highs.empty()
-                                     ? reversal_t()
-                                     : reversals_.highs.rbegin()->second;
-  const reversal_t recent_low =
-      reversals_.lows.empty() ? reversal_t() : reversals_.lows.rbegin()->second;
+    const reversal_type_t reversal_type = reversal_type_t::REVERSAL_NULL) {
+  reversal_t recent_high;
+  reversal_t recent_low;
+  std::map<double, reversal_t>::reverse_iterator it;
 
-  if (type == reversal_type_t::REVERSAL_HIGH) {
+  const int ref_epoch_minute = this->current_epoch / 60;
+
+  if (reversal_type == reversal_type_t::REVERSAL_HIGH ||
+      reversal_type == reversal_type_t::REVERSAL_NULL) {
+    for (it = reversals_.highs.rbegin(); it != reversals_.highs.rend(); it++) {
+      const int reversal_minute = it->first / 60;
+      const int shifted_reversal_minute =
+          reversal_minute + reversals_.timeframe_minutes * 0.5;
+
+      if (shifted_reversal_minute < ref_epoch_minute) {
+        recent_high = it->second;
+
+        break;
+      }
+    }
+  }
+
+  if (reversal_type == reversal_type_t::REVERSAL_LOW ||
+      reversal_type == reversal_type_t::REVERSAL_NULL) {
+    for (it = reversals_.lows.rbegin(); it != reversals_.lows.rend(); it++) {
+      const int reversal_minute = it->first / 60;
+      const int shifted_reversal_minute =
+          reversal_minute + reversals_.timeframe_minutes * 0.5;
+
+      if (shifted_reversal_minute < ref_epoch_minute) {
+        recent_low = it->second;
+
+        break;
+      }
+    }
+  }
+
+  if (reversal_type == reversal_type_t::REVERSAL_HIGH) {
     return recent_high;
   }
 
-  if (type == reversal_type_t::REVERSAL_LOW) {
+  if (reversal_type == reversal_type_t::REVERSAL_LOW) {
     return recent_low;
   }
 
