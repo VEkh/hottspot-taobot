@@ -3,6 +3,7 @@
 
 #include "tao_bot.h" // Oanda::TaoBot, candle_t, reversal_t, reversal_type_t
 #include <algorithm> // std::max, std::min
+#include <iterator>  // std::next, std::prev
 #include <list>      // std::list
 #include <math.h>    // INFINITY, abs
 
@@ -38,51 +39,41 @@ void Oanda::TaoBot::build_reversals(reversals_t &reversals_,
   double running_record_high = -INFINITY;
   double running_record_low = INFINITY;
 
-  const int seek_n = timeframe_minutes / 2;
+  const int end_opened_at_minute = this->latest_candles.back().opened_at / 60;
+  const int seek_minutes = timeframe_minutes / 2;
 
-  int i = 0;
+  candle_t begin_candle;
   std::list<candle_t>::iterator it;
+  std::list<candle_t>::iterator peek_ahead;
+  std::list<candle_t>::iterator peek_behind;
 
   for (it = this->latest_candles.begin(); it != this->latest_candles.end();
-       it++, i++) {
+       it++) {
     if (it->opened_at < start_epoch) {
       continue;
     }
 
-    bool near_end = false;
-    int end_seek_n = 1;
-
-    while (end_seek_n <= seek_n) {
-      if (std::next(it, end_seek_n) == this->latest_candles.end()) {
-        near_end = true;
-        break;
-      }
-
-      end_seek_n++;
+    if (!begin_candle.opened_at) {
+      begin_candle = *it;
     }
+
+    const int opened_at_minute = it->opened_at / 60;
+
+    const int end_delta_minutes = abs(opened_at_minute - end_opened_at_minute);
+
+    const bool near_end = end_delta_minutes < seek_minutes;
 
     if (near_end) {
       continue;
     }
 
     if (enforce_symmetry) {
-      bool near_begin = false;
-      int begin_seek_n = 1;
+      const int begin_opened_at_minute = begin_candle.opened_at / 60;
 
-      while (begin_seek_n <= seek_n) {
-        if (it == this->latest_candles.begin()) {
-          near_begin = true;
-          break;
-        }
+      const int begin_delta_minutes =
+          abs(opened_at_minute - begin_opened_at_minute);
 
-        if (std::next(it, -(begin_seek_n - 1)) ==
-            this->latest_candles.begin()) {
-          near_begin = true;
-          break;
-        }
-
-        begin_seek_n++;
-      }
+      const bool near_begin = begin_delta_minutes < seek_minutes;
 
       if (near_begin) {
         continue;
@@ -95,15 +86,25 @@ void Oanda::TaoBot::build_reversals(reversals_t &reversals_,
     double high = it->high;
     double low = it->low;
 
-    int back_seek_i = 0;
-    int front_seek_i = 0;
+    peek_ahead = std::next(it, 0);
+    peek_behind = std::next(it, 0);
 
-    for (; it != this->latest_candles.end() && front_seek_i < seek_n;
-         front_seek_i++) {
-      std::advance(it, 1);
+    while (true) {
+      peek_ahead = std::next(peek_ahead, 1);
 
-      double next_high = it->high;
-      double next_low = it->low;
+      if (peek_ahead == this->latest_candles.end()) {
+        break;
+      }
+
+      const int peek_minute = peek_ahead->opened_at / 60;
+      const int peek_delta_minutes = abs(peek_minute - opened_at_minute);
+
+      if (peek_delta_minutes > seek_minutes) {
+        break;
+      }
+
+      double next_high = peek_ahead->high;
+      double next_low = peek_ahead->low;
 
       if (next_high > high) {
         is_high = false;
@@ -118,14 +119,18 @@ void Oanda::TaoBot::build_reversals(reversals_t &reversals_,
       }
     }
 
-    std::advance(it, -front_seek_i);
+    while (true) {
+      peek_behind = std::prev(peek_behind, 1);
 
-    for (; it != this->latest_candles.begin() && back_seek_i < seek_n;
-         back_seek_i++) {
-      std::advance(it, -1);
+      const int peek_minute = peek_behind->opened_at / 60;
+      const int peek_delta_minutes = abs(peek_minute - opened_at_minute);
 
-      double next_high = it->high;
-      double next_low = it->low;
+      if (peek_delta_minutes > seek_minutes) {
+        break;
+      }
+
+      double next_high = peek_behind->high;
+      double next_low = peek_behind->low;
 
       if (next_high >= high) {
         is_high = false;
@@ -138,9 +143,11 @@ void Oanda::TaoBot::build_reversals(reversals_t &reversals_,
       if (!next_high && !next_low) {
         break;
       }
-    }
 
-    std::advance(it, back_seek_i);
+      if (peek_behind == this->latest_candles.begin()) {
+        break;
+      }
+    }
 
     if (is_high) {
       running_record_high = std::max(running_record_high, high);
