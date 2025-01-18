@@ -9,19 +9,21 @@ void Alpaca::TaoBot::read_candles() {
     return;
   }
 
-  if (this->backtest.is_active && this->db_candle.cache.empty()) {
-    this->db_candle.get_latest({
-        .debug = this->api_client.config.debug_sql,
-        .end_at = this->market_availability.market_epochs.close,
-        .start_at = this->market_availability.market_epochs.open,
-        .write_cache = true,
-    });
+  if (this->backtest.is_active) {
+    if (this->latest_candles.empty()) {
+      this->latest_candles = this->db_candle.get_latest({
+          .debug = this->api_client.config.debug_sql,
+          .end_at = this->market_availability.market_epochs.close,
+          .start_at = this->market_availability.market_epochs.open,
+      });
+    }
+
+    return;
   }
 
   this->latest_candles = this->db_candle.get_latest({
       .debug = this->api_client.config.debug_sql,
       .end_at = this->current_epoch,
-      .read_cache = this->backtest.is_active,
       .start_at = this->market_availability.market_epochs.open,
   });
 }

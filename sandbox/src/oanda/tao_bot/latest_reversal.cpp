@@ -19,11 +19,7 @@ Oanda::TaoBot::reversal_t Oanda::TaoBot::latest_reversal(
       const int shifted_reversal_minute =
           reversal_minute + reversals_.timeframe_minutes * 0.5;
 
-      if (shifted_reversal_minute > ref_epoch_minute) {
-        continue;
-      }
-
-      if (shifted_reversal_minute <= ref_epoch_minute) {
+      if (shifted_reversal_minute < ref_epoch_minute) {
         recent_high = it->second;
 
         break;
@@ -38,11 +34,7 @@ Oanda::TaoBot::reversal_t Oanda::TaoBot::latest_reversal(
       const int shifted_reversal_minute =
           reversal_minute + reversals_.timeframe_minutes * 0.5;
 
-      if (shifted_reversal_minute > ref_epoch_minute) {
-        continue;
-      }
-
-      if (shifted_reversal_minute <= ref_epoch_minute) {
+      if (shifted_reversal_minute < ref_epoch_minute) {
         recent_low = it->second;
 
         break;

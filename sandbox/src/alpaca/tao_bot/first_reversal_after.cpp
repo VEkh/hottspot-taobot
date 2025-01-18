@@ -17,6 +17,7 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::first_reversal_after(
   }
 
   const int ref_timestamp_minute = ref_timestamp / 60;
+  const int current_minute = this->current_epoch / 60;
 
   reversal_t newer_high;
   reversal_t newer_low;
@@ -26,6 +27,12 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::first_reversal_after(
       reversal_type == reversal_type_t::REVERSAL_NULL) {
     for (it = reversals_.highs.begin(); it != reversals_.highs.end(); it++) {
       const int reversal_minute = it->first / 60;
+      const int shifted_reversal_minute =
+          reversal_minute + reversals_.timeframe_minutes * 0.5;
+
+      if (current_minute <= shifted_reversal_minute) {
+        break;
+      }
 
       if (matching_mid && it->second.mid != matching_mid) {
         continue;
@@ -42,6 +49,12 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::first_reversal_after(
       reversal_type == reversal_type_t::REVERSAL_NULL) {
     for (it = reversals_.lows.begin(); it != reversals_.lows.end(); it++) {
       const int reversal_minute = it->first / 60;
+      const int shifted_reversal_minute =
+          reversal_minute + reversals_.timeframe_minutes * 0.5;
+
+      if (current_minute <= shifted_reversal_minute) {
+        break;
+      }
 
       if (matching_mid && it->second.mid != matching_mid) {
         continue;

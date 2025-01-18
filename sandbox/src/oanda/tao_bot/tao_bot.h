@@ -169,9 +169,6 @@ private:
   performance_t build_performance();
   quote_t get_real_time_quote(const std::string);
 
-  reversal_t first_reversal_after(reversals_t &, const double,
-                                  const reversal_type_t, const bool);
-
   reversal_t latest_record_reversal(const reversal_type_t);
 
   reversal_t latest_reversal(reversals_t &, const reversal_type_t);
