@@ -7,7 +7,7 @@
 Alpaca::TaoBot::reversal_t Alpaca::TaoBot::first_reversal_after(
     reversals_t &reversals_, const double ref_timestamp,
     const reversal_type_t reversal_type = reversal_type_t::REVERSAL_NULL,
-    const bool only_running_record = false) {
+    const double matching_mid = 0.0) {
   if (!ref_timestamp) {
     return reversal_t();
   }
@@ -27,7 +27,7 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::first_reversal_after(
     for (it = reversals_.highs.begin(); it != reversals_.highs.end(); it++) {
       const int reversal_minute = it->first / 60;
 
-      if (only_running_record && !it->second.is_running_record) {
+      if (matching_mid && it->second.mid != matching_mid) {
         continue;
       }
 
@@ -43,7 +43,7 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::first_reversal_after(
     for (it = reversals_.lows.begin(); it != reversals_.lows.end(); it++) {
       const int reversal_minute = it->first / 60;
 
-      if (only_running_record && !it->second.is_running_record) {
+      if (matching_mid && it->second.mid != matching_mid) {
         continue;
       }
 

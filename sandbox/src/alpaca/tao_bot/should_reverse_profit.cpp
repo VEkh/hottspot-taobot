@@ -23,7 +23,7 @@ bool Alpaca::TaoBot::should_reverse_profit() {
 
     stop_profit_reversal =
         first_reversal_after(this->reversals, this->open_order_ptr->timestamp,
-                             stop_profit_reversal.type, true);
+                             stop_profit_reversal.type, record_reversal.mid);
 
     if (record_reversal.mid == stop_profit_reversal.mid &&
         is_trend_slipping(this->open_order_ptr)) {
