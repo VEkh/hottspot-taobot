@@ -62,6 +62,11 @@ void Alpaca::Client::load_config() {
     this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("should_stop_profit")) {
+    this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
+  }
+
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -74,6 +79,7 @@ void Alpaca::Client::load_config() {
       .is_live = api_key_json["is_live"],
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
   };
 }
 

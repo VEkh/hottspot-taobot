@@ -30,7 +30,8 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     bool is_live;
-    int reversal_timeframe_minutes = 60;
+    int reversal_timeframe_minutes = 60; // TODO: Delete
+    bool should_stop_profit = false;     // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

@@ -9,6 +9,15 @@ bool Alpaca::TaoBot::should_toggle_is_trending(order_t &close_order,
     return false;
   }
 
+  // TODO: Decide
+  if (this->api_client.config.should_stop_profit && open_order.stop_profit &&
+      open_order.max_profit >= open_order.stop_profit) {
+    this->current_trend.at = close_order.timestamp;
+    this->current_trend.trend = open_order.entry_reversal.to_trend_type();
+
+    return false;
+  }
+
   if (close_order.min_profit > close_order.stop_loss) {
     this->current_trend.at = close_order.stop_profit_reversal.at;
     this->current_trend.trend =

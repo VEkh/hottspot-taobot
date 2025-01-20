@@ -49,10 +49,12 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
                                reversal_type_t::REVERSAL_LOW);
 
       if (first_high.mid &&
-          day_range_percentile(first_high.mid) >= this->EQUATOR_PERCENTILE) {
+          day_range_percentile(this->day_candle, first_high.mid) >=
+              this->EQUATOR_PERCENTILE) {
         reversal = first_high;
-      } else if (first_low.mid && day_range_percentile(first_low.mid) <=
-                                      this->EQUATOR_PERCENTILE) {
+      } else if (first_low.mid &&
+                 day_range_percentile(this->day_candle, first_low.mid) <=
+                     this->EQUATOR_PERCENTILE) {
         reversal = first_low;
       }
 

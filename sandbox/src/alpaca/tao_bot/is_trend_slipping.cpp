@@ -5,7 +5,19 @@
 #include "tao_bot.h"                // Alpaca::TaoBot, order_action_t
 
 bool Alpaca::TaoBot::is_trend_slipping(const order_t *order) {
-  return day_range_percentile(order, order->profit) < this->EQUATOR_PERCENTILE;
+  // TODO: Decide
+  const double threshold = this->api_client.config.should_stop_profit
+                               ? this->TREND_SLIP_PERCENTILE
+                               : this->EQUATOR_PERCENTILE;
+
+  return is_trend_slipping(order, threshold);
+}
+
+// TODO: Decide
+bool Alpaca::TaoBot::is_trend_slipping(const order_t *order,
+                                       const double threshold) {
+  return day_range_percentile(this->day_candle, order, order->profit) <
+         threshold;
 }
 
 #endif

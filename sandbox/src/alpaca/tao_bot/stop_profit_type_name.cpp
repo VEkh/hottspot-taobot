@@ -1,11 +1,12 @@
-#ifndef OANDA__TAO_BOT_stop_profit_type_name
-#define OANDA__TAO_BOT_stop_profit_type_name
+// TODO: Decide
+#ifndef ALPACA__TAO_BOT_stop_profit_type_name
+#define ALPACA__TAO_BOT_stop_profit_type_name
 
 #include "stop_profit_type.cpp" // stop_profit_type
-#include "tao_bot.h"            // Oanda::TaoBot, stop_profit_type_t
+#include "tao_bot.h"            // Alpaca::TaoBot, stop_profit_type_t
 #include <string>               // std::string
 
-std::string Oanda::TaoBot::stop_profit_type_name(const order_t *order) {
+std::string Alpaca::TaoBot::stop_profit_type_name(const order_t *order) {
   const stop_profit_type_t type = stop_profit_type(order);
 
   switch (type) {

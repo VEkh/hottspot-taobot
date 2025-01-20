@@ -24,6 +24,7 @@ Alpaca::TaoBot::open_position(const order_action_t close_action,
                               const double quantity) {
   order_t new_open_order;
   new_open_order.action = open_action;
+  new_open_order.day_candle = this->day_candle; // TODO: Decide
   new_open_order.entry_reversal = this->entry_reversal;
   new_open_order.max_profit_at = this->current_epoch;
   new_open_order.min_profit_at = this->current_epoch;

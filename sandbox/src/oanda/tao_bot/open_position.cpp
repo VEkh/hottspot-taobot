@@ -11,16 +11,15 @@
  */
 #include "tao_bot.h"
 
-#include "convert_price.cpp"        // convert_price
-#include "current_mid.cpp"          // current_mid
-#include "day_range_percentile.cpp" // day_range_percentile
-#include "lib/utils/string.cpp"     // ::utils::string
-#include "oanda/constants.cpp"      // Oanda::constants
-#include <ctime>                    // std::time
-#include <iostream>                 // std::cout, std::endl
-#include <stdio.h>                  // printf
-#include <string>                   // std::string
-#include <utility>                  // std::pair
+#include "convert_price.cpp"    // convert_price
+#include "current_mid.cpp"      // current_mid
+#include "lib/utils/string.cpp" // ::utils::string
+#include "oanda/constants.cpp"  // Oanda::constants
+#include <ctime>                // std::time
+#include <iostream>             // std::cout, std::endl
+#include <stdio.h>              // printf
+#include <string>               // std::string
+#include <utility>              // std::pair
 
 std::pair<Oanda::TaoBot::order_t, Oanda::TaoBot::order_t>
 Oanda::TaoBot::open_position(const order_action_t close_action,

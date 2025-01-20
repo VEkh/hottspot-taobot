@@ -1,11 +1,12 @@
-#ifndef OANDA__TAO_BOT_stop_profit_type
-#define OANDA__TAO_BOT_stop_profit_type
+// TODO: Decide
+#ifndef ALPACA__TAO_BOT_stop_profit_type
+#define ALPACA__TAO_BOT_stop_profit_type
 
 #include "day_range_percentile.cpp" // day_range_percentile
-#include "tao_bot.h" // Oanda::TaoBot, reversal_type_t, stop_profit_type_t
+#include "tao_bot.h" // Alpaca::TaoBot, reversal_type_t, stop_profit_type_t
 
-Oanda::TaoBot::stop_profit_type_t
-Oanda::TaoBot::stop_profit_type(const order_t *order) {
+Alpaca::TaoBot::stop_profit_type_t
+Alpaca::TaoBot::stop_profit_type(const order_t *order) {
   const reversal_type_t reversal_type = order->entry_reversal.type;
 
   const bool is_reversal_above_threshold =

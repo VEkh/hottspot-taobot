@@ -1,18 +1,27 @@
 #ifndef ALPACA__TAO_BOT_log_reversal_metadata
 #define ALPACA__TAO_BOT_log_reversal_metadata
 
-#include "day_range_percentile.cpp" // day_range_percentile
-#include "is_trending.cpp"          // is_trending
-#include "lib/formatted.cpp"        // Formatted
-#include "lib/utils/time.cpp"       // ::utils::time_
+#include "day_range_percentile.cpp"  // day_range_percentile
+#include "is_trending.cpp"           // is_trending
+#include "lib/formatted.cpp"         // Formatted
+#include "lib/utils/time.cpp"        // ::utils::time_
+#include "stop_profit_type_name.cpp" // stop_profit_type_name
 #include "tao_bot.h" // Alpaca::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
 void Alpaca::TaoBot::log_reversal_metadata() {
+  // TODO: Decide
+  if (this->api_client.config.should_stop_profit && this->open_order_ptr) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Stop Profit Type: ");
+    std::cout << fmt.cyan << stop_profit_type_name(this->open_order_ptr)
+              << fmt.reset << std::endl;
+  }
+
   Formatted::Stream trend_status_color = fmt.cyan;
-  std::string trend_status_text = "REVERSING";
+  std::string trend_status_text = "NONE";
 
   switch (this->current_trend.trend) {
   case trend_t::TREND_DOWN: {
@@ -49,14 +58,14 @@ void Alpaca::TaoBot::log_reversal_metadata() {
       std::cout << fmt.bold << fmt.red;
       printf(
           "Low: %.2f p%.2f%% @ %s", reversal.mid,
-          day_range_percentile(reversal.mid),
+          day_range_percentile(this->day_candle, reversal.mid),
           ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
               .c_str());
     } else {
       std::cout << fmt.bold << fmt.green;
       printf(
           "High: %.2f p%.2f%% @ %s", reversal.mid,
-          day_range_percentile(reversal.mid),
+          day_range_percentile(this->day_candle, reversal.mid),
           ::utils::time_::date_string(reversal.at, "%H:%M", "America/Chicago")
               .c_str());
     }

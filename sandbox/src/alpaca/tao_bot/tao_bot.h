@@ -47,11 +47,13 @@ private:
   using reversal_t = Global::t::reversal_t;
   using reversal_type_t = Global::t::reversal_type_t;
   using reversals_t = Global::t::reversals_t;
+  using stop_profit_type_t = Global::t::stop_profit_type_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
   static constexpr const char *ACCOUNT_CURRENCY = "USD";
   static constexpr double EQUATOR_PERCENTILE = 50.0;
+  static constexpr double TREND_SLIP_PERCENTILE = 80.0; // TODO: Decide
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -100,6 +102,7 @@ private:
   bool is_quote_stale(const quote_t, const double);
   bool is_reversal_after(const reversal_t, const double);
   bool is_trend_slipping(const order_t *);
+  bool is_trend_slipping(const order_t *, const double); // TODO: Decide
   bool is_trending();
   bool is_trending(const trend_meta_t);
   bool max_account_loss_reached();
@@ -107,6 +110,7 @@ private:
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_profit();
+  bool should_stop_profit(); // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);
@@ -114,8 +118,8 @@ private:
   double compute_profit(const order_t *, const quote_t *);
   double compute_quantity();
   double current_mid();
-  double day_range_percentile(const double);
-  double day_range_percentile(const order_t *, double);
+  double day_range_percentile(candle_t, const double, const bool);
+  double day_range_percentile(candle_t, const order_t *, double);
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
   exit_prices_t build_exit_prices();
@@ -136,6 +140,12 @@ private:
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
                                             const double);
+
+  // TODO: Decide
+  std::string stop_profit_type_name(const order_t *);
+
+  // TODO: Decide
+  stop_profit_type_t stop_profit_type(const order_t *);
 
   void advance_current_epoch();
   void advance_current_epoch(const double);
