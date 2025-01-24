@@ -25,7 +25,7 @@ void Backtest::upsert_account_stat(const upsert_account_stat_args_t args) {
           .start_at = market_epochs.open,
       });
 
-  const bool is_new_day = current_epoch > market_epochs.close;
+  const bool is_new_day = current_epoch == market_epochs.open;
   const double current_equity = updated_current_snapshot.equity;
 
   const double original_margin_buying_power =
