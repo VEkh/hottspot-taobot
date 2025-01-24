@@ -20,6 +20,14 @@ void Alpaca::TaoBot::log_reversal_metadata() {
               << fmt.reset << std::endl;
   }
 
+  // TODO: Decide
+  const std::string trend_entry_text =
+      this->api_client.config.should_enter_cis_trend ? "CIS" : "TRANS";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Trend Entry Direction: ");
+  std::cout << fmt.cyan << trend_entry_text << std::endl;
+
   Formatted::Stream trend_status_color = fmt.cyan;
   std::string trend_status_text = "NONE";
 

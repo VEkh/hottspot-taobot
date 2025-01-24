@@ -63,6 +63,12 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_enter_cis_trend")) {
+    this->config.should_enter_cis_trend =
+        (bool)api_key_json["should_enter_cis_trend"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
@@ -79,6 +85,8 @@ void Alpaca::Client::load_config() {
       .is_live = api_key_json["is_live"],
       .reversal_timeframe_minutes =
           (int)api_key_json["reversal_timeframe_minutes"],
+      .should_enter_cis_trend =
+          this->config.should_enter_cis_trend,               // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
   };
 }

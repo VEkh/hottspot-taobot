@@ -31,6 +31,7 @@ public:
     std::list<std::string> env_symbols;
     bool is_live;
     int reversal_timeframe_minutes = 60; // TODO: Delete
+    bool should_enter_cis_trend = false; // TODO: Decide
     bool should_stop_profit = false;     // TODO: Decide
   } config;
 

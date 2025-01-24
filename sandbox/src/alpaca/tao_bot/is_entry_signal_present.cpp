@@ -7,6 +7,9 @@
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
+// TODO: Decide
+#include "latest_reversal_after.cpp" // latest_reversal_after
+
 bool Alpaca::TaoBot::is_entry_signal_present() {
   const bool is_trending_ = is_trending();
 
@@ -23,7 +26,9 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
     entry_reversal_ = latest_record_reversal(type);
   }
 
-  if (is_trending_ && this->reversals.timeframe_minutes) {
+  // TODO: Decide
+  if (is_trending_ && !this->api_client.config.should_enter_cis_trend &&
+      this->reversals.timeframe_minutes) {
     reversal_t reversal;
 
     bool did_last_position_stop_profit = false;
@@ -63,6 +68,62 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
 
       if (reversal_at_minute < trend_at_minute) {
         reversal = reversal_t();
+      }
+    }
+
+    entry_reversal_ = reversal;
+  }
+
+  if (is_trending_ && this->api_client.config.should_enter_cis_trend &&
+      this->reversals.timeframe_minutes) {
+    reversal_t reversal;
+
+    bool did_last_position_stop_profit = false;
+
+    if (!this->closed_positions.empty()) {
+      const position_t last_position = this->closed_positions.back();
+
+      did_last_position_stop_profit =
+          (bool)last_position.close_order.stop_profit_reversal.at;
+    }
+
+    if (did_last_position_stop_profit) {
+      const position_t last_position = this->closed_positions.back();
+
+      reversal = last_position.close_order.stop_profit_reversal;
+    } else {
+      const reversal_t latest_high =
+          latest_reversal_after(this->reversals, this->current_trend.at,
+                                reversal_type_t::REVERSAL_HIGH);
+
+      const reversal_t latest_low =
+          latest_reversal_after(this->reversals, this->current_trend.at,
+                                reversal_type_t::REVERSAL_LOW);
+
+      if (latest_high.at &&
+          day_range_percentile(this->day_candle, latest_high.mid) >=
+              this->EQUATOR_PERCENTILE) {
+        reversal = latest_reversal_after(this->reversals, latest_high.at,
+                                         reversal_type_t::REVERSAL_LOW);
+
+        if (reversal.mid &&
+            day_range_percentile(this->day_candle, reversal.mid) <
+                this->EQUATOR_PERCENTILE) {
+          reversal = reversal_t();
+        }
+      }
+
+      if (latest_low.at &&
+          day_range_percentile(this->day_candle, latest_low.mid) <=
+              this->EQUATOR_PERCENTILE) {
+        reversal = latest_reversal_after(this->reversals, latest_low.at,
+                                         reversal_type_t::REVERSAL_HIGH);
+
+        if (reversal.mid &&
+            day_range_percentile(this->day_candle, reversal.mid) >
+                this->EQUATOR_PERCENTILE) {
+          reversal = reversal_t();
+        }
       }
     }
 
