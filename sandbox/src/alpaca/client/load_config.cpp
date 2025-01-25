@@ -73,6 +73,12 @@ void Alpaca::Client::load_config() {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("should_stop_profit_once")) {
+    this->config.should_stop_profit_once =
+        (bool)api_key_json["should_stop_profit_once"];
+  }
+
   this->config = {
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
       .api_key = api_key,
@@ -88,6 +94,8 @@ void Alpaca::Client::load_config() {
       .should_enter_cis_trend =
           this->config.should_enter_cis_trend,               // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
+      .should_stop_profit_once =
+          this->config.should_stop_profit_once, // TODO: Decide
   };
 }
 

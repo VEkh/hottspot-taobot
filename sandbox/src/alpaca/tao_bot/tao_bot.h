@@ -93,6 +93,7 @@ private:
   std::vector<position_t> closed_positions;
   trend_meta_t current_trend;
 
+  bool has_already_stopped_profit(); // TODO: Decide
   bool has_reversal_been_used(const reversal_t);
   bool is_early_close_day();
   bool is_end_of_quotes();
