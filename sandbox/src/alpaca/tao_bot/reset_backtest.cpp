@@ -3,6 +3,7 @@
 
 #include "advance_current_epoch.cpp"     // advance_current_epoch
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
+#include "set_current_trend.cpp"         // set_current_trend // TODO: Decide
 #include "tao_bot.h" // Alpaca::TaoBot, candle_t, quote_t, reversals_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <algorithm>                   // std::min
@@ -32,6 +33,7 @@ void Alpaca::TaoBot::reset_backtest() {
   this->day_candle = candle_t();
   this->db_account_stat.clear_snapshot_stats_cache();
   this->db_candle.clear_cache();
+  this->spike_candles = spike_candles_t(); // TODO: Decide
 
   this->current_quote = quote_t();
   this->previous_quote = quote_t();
@@ -45,6 +47,7 @@ void Alpaca::TaoBot::reset_backtest() {
   this->started_at = this->current_epoch;
 
   force_init_reversal_await();
+  set_current_trend(); // TODO: Decide
   update_account_snapshot(true);
 }
 

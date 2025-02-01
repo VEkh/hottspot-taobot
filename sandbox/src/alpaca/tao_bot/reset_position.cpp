@@ -39,6 +39,7 @@ void Alpaca::TaoBot::reset_position() {
 
   reset_orders();
 
+  this->current_trend.is_initialized = false; // TODO: Decide
   this->exit_prices = exit_prices_t();
   this->performance = build_performance();
 }

@@ -1,16 +1,16 @@
 #ifndef OANDA__TAO_BOT_is_entry_signal_present
 #define OANDA__TAO_BOT_is_entry_signal_present
 
-#include "tao_bot.h" // Oanda::TaoBot, position_t, reversal_t, reversal_type_t
+#include "tao_bot.h" // Oanda::TaoBot, order_t, reversal_t, reversal_type_t
 
 bool Oanda::TaoBot::is_entry_signal_present() {
   reversal_t entry_reversal_;
 
   if (!this->closed_positions.empty()) {
-    const position_t last_position = this->closed_positions.back();
+    const order_t last_close_order = this->closed_positions.back().close_order;
 
-    if (last_position.close_order.stop_profit_reversal.at) {
-      entry_reversal_ = last_position.close_order.stop_profit_reversal;
+    if (last_close_order.stop_profit_reversal.at) {
+      entry_reversal_ = last_close_order.stop_profit_reversal;
     }
   }
 

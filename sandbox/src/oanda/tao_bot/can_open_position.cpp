@@ -1,7 +1,6 @@
 #ifndef OANDA__TAO_BOT_can_open_position
 #define OANDA__TAO_BOT_can_open_position
 
-#include "is_entry_signal_present.cpp"  // is_entry_signal_present
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "spread_limit.cpp"             // spread_limit
 #include "tao_bot.h"                    // Oanda::TaoBot, fmt, order_action_t

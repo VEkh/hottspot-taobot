@@ -175,6 +175,13 @@ struct reversals_t {
   int timeframe_seconds() { return this->timeframe_minutes * 60; }
 };
 
+struct spike_candles_t {
+  candle_t current;
+  candle_t day;
+  candle_t penultimate;
+  candle_t previous;
+};
+
 struct trend_meta_t {
   double at = 0;
   bool is_initialized = false;

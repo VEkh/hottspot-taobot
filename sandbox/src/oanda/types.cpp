@@ -34,13 +34,6 @@ struct currency_t {
   std::string quote;
 };
 
-struct spike_candles_t {
-  candle_t current;
-  candle_t day;
-  candle_t penultimate;
-  candle_t previous;
-};
-
 struct order_t {
   std::string account_currency;
   order_action_t action;

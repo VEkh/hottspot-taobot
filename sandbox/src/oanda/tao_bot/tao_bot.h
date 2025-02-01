@@ -51,7 +51,7 @@ private:
   using reversal_t = Global::t::reversal_t;
   using reversal_type_t = Global::t::reversal_type_t;
   using reversals_t = Global::t::reversals_t;
-  using spike_candles_t = Oanda::t::spike_candles_t;
+  using spike_candles_t = Global::t::spike_candles_t;
   using stop_profit_type_t = Global::t::stop_profit_type_t;
   using trade_status_t = Oanda::t::trade_status_t;
   using trend_meta_t = Global::t::trend_meta_t;

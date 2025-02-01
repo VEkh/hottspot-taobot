@@ -4,7 +4,7 @@
 #include "current_mid.cpp"      // current_mid
 #include "db/candle/candle.cpp" // DB::Candle
 #include "tao_bot.h"            // Oanda::TaoBot, candle_t
-#include <algorithm>            // std::max
+#include <algorithm>            // std::max, std::min
 
 void Oanda::TaoBot::build_spike_candles() {
   if (this->open_order_ptr) {

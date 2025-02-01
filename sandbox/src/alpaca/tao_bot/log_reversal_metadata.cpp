@@ -13,6 +13,22 @@
 
 void Alpaca::TaoBot::log_reversal_metadata() {
   // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Spike Entry Score: ");
+  std::cout << fmt.cyan << this->api_client.config.spike_entry_score
+            << fmt.reset << std::endl;
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Spike Height Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.spike_height_ratio
+            << fmt.reset << std::endl;
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Loss Padding Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   if (this->api_client.config.should_stop_profit) {
     if (this->open_order_ptr) {
       std::cout << fmt.bold << fmt.yellow;
@@ -58,11 +74,9 @@ void Alpaca::TaoBot::log_reversal_metadata() {
   }
   }
 
-  if (is_trending()) {
-    trend_status_text +=
-        (" @ " + ::utils::time_::date_string(this->current_trend.at, "%H:%M",
-                                             "America/Chicago"));
-  }
+  trend_status_text +=
+      (" @ " + ::utils::time_::date_string(this->current_trend.at, "%H:%M",
+                                           "America/Chicago"));
 
   std::cout << fmt.bold << fmt.yellow;
   printf("Trend Status: ");

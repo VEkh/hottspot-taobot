@@ -5,6 +5,11 @@
 
 bool Alpaca::TaoBot::should_toggle_is_trending(order_t &close_order,
                                                order_t &open_order) {
+  // TODO: Decide
+  if (this->api_client.config.should_enter_at_spike) {
+    return false;
+  }
+
   if (!this->open_order_ptr) {
     return false;
   }

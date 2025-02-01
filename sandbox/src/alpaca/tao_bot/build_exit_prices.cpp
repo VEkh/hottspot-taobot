@@ -17,7 +17,10 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
                                     ? entry_reversal_mid - execution_price
                                     : execution_price - entry_reversal_mid;
 
-  double stop_loss = std::min(-0.01, reversal_delta);
+  const double stop_loss = std::min(-0.01, reversal_delta) -
+                           this->api_client.config.stop_loss_padding_ratio *
+                               this->day_candle.range();
+
   double stop_profit = 0.0;
 
   // TODO: Decide
