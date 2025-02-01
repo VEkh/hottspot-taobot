@@ -32,7 +32,6 @@ public:
     bool is_live;
     int reversal_timeframe_minutes = 60;  // TODO: Delete
     bool should_enter_at_spike = false;   // TODO: Decide
-    bool should_enter_cis_trend = false;  // TODO: Decide
     bool should_stop_profit = false;      // TODO: Decide
     bool should_stop_profit_once = false; // TODO: Decide
     int spike_duration_minutes = 0;       // TODO: Decide
