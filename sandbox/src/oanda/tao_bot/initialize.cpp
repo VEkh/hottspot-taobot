@@ -72,7 +72,10 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   }
 
   this->market_availability.set_market_epochs(this->current_epoch);
-  this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
+  // TODO: Decide
+  // this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
+  this->reversals.timeframe_minutes =
+      this->api_client.config.reversal_timeframe_minutes;
 
   ensure_market_is_open();
   read_closed_positions();

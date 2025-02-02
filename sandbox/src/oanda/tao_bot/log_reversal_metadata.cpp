@@ -11,18 +11,38 @@
 #include <string>    // std::string
 
 void Oanda::TaoBot::log_reversal_metadata() {
+  // std::cout << fmt.bold << fmt.yellow;
+  // printf("Spike Entry Score: ");
+  // std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
+
+  // std::cout << fmt.bold << fmt.yellow;
+  // printf("Spike Height Ratio: ");
+  // std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset <<
+  // std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Margin Buy Power Multiplier: ");
+  std::cout << fmt.cyan << this->api_client.config.margin_throttle << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
-  std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
+  std::cout << fmt.cyan << this->api_client.config.spike_entry_score
+            << fmt.reset << std::endl;
 
+  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Height Ratio: ");
-  std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset << std::endl;
+  std::cout << fmt.cyan << this->api_client.config.spike_height_ratio
+            << fmt.reset << std::endl;
 
+  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Loss Padding Ratio: ");
-  std::cout << fmt.cyan << this->STOP_LOSS_PADDING_RATIO << fmt.reset
-            << std::endl;
+  printf("Spike Min Price Action: ");
+  std::cout << fmt.cyan << this->api_client.config.spike_min_price_action
+            << fmt.reset << std::endl;
 
   if (this->open_order_ptr) {
     std::cout << fmt.bold << fmt.yellow;
@@ -31,6 +51,16 @@ void Oanda::TaoBot::log_reversal_metadata() {
               << fmt.reset << std::endl;
   }
 
+  Formatted::Stream should_stop_profit_once_color =
+      this->api_client.config.should_stop_profit_once ? fmt.green : fmt.red;
+
+  const std::string should_stop_profit_once_text =
+      this->api_client.config.should_stop_profit_once ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit Once? ");
+  std::cout << should_stop_profit_once_color << should_stop_profit_once_text
+            << fmt.reset << std::endl;
   std::cout << fmt.bold << fmt.yellow;
   printf("Trend Slip Percentile: ");
   std::cout << fmt.cyan << this->TREND_SLIP_PERCENTILE << fmt.reset

@@ -41,7 +41,10 @@ void Oanda::TaoBot::reset_backtest() {
   this->latest_candles = {};
   this->performance = performance_t();
   this->reversals = reversals_t();
-  this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
+  // TODO: Decide
+  // this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
+  this->reversals.timeframe_minutes =
+      this->api_client.config.reversal_timeframe_minutes;
 
   this->started_at = this->current_epoch;
 

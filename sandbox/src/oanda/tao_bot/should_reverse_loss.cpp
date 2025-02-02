@@ -23,8 +23,11 @@ bool Oanda::TaoBot::should_reverse_loss() {
       stop_loss_reversal = reversal_t();
     }
   } else {
-    const double ref_epoch = this->open_order_ptr->timestamp -
-                             (stop_reversals.timeframe_minutes * 0.5 * 60);
+    // TODO: Decide
+    // const double ref_epoch = this->open_order_ptr->timestamp -
+    //                          (stop_reversals.timeframe_minutes * 0.5 * 60);
+
+    const double ref_epoch = this->open_order_ptr->timestamp;
 
     stop_loss_reversal = latest_reversal_after(
         stop_reversals, ref_epoch,
