@@ -71,7 +71,9 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
     this->started_at = this->backtest.config.start_epoch;
   }
 
-  this->market_availability.set_market_epochs(this->current_epoch);
+  // TODO: Decide
+  this->market_availability.set_market_epochs(
+      this->current_epoch, this->api_client.config.market_duration_hours);
   // TODO: Decide
   // this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
   this->reversals.timeframe_minutes =

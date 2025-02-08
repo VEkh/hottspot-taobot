@@ -28,6 +28,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Market Duration Hours: ");
+  std::cout << fmt.cyan << this->api_client.config.market_duration_hours
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
   std::cout << fmt.cyan << this->api_client.config.spike_entry_score
             << fmt.reset << std::endl;

@@ -68,6 +68,12 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("market_duration_hours")) {
+    this->config.market_duration_hours =
+        (int)api_key_json["market_duration_hours"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("reversal_timeframe_minutes")) {
     this->config.reversal_timeframe_minutes =
         (int)api_key_json["reversal_timeframe_minutes"];
@@ -110,6 +116,8 @@ void Oanda::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .margin_throttle = this->config.margin_throttle, // TODO: Decide
+      .market_duration_hours =
+          this->config.market_duration_hours, // TODO: Decide
       .reversal_timeframe_minutes =
           this->config.reversal_timeframe_minutes, // TODO: Decide
       .should_stop_profit_once =
