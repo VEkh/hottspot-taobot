@@ -22,7 +22,10 @@ void Oanda::TaoBot::log_spike_candles() {
       100.0 * current_candle.range() / day_candle_.range();
 
   std::cout << fmt.bold << fmt.cyan << fmt.underline;
-  printf("🧨 Spike %i-Min Candles", this->SPIKE_DURATION_MINUTES);
+  // TODO: Decide
+  // printf("🧨 Spike %i-Min Candles", this->SPIKE_DURATION_MINUTES);
+  printf("🧨 Spike %i-Min Candles",
+         this->api_client.config.spike_duration_minutes);
   std::cout << fmt.reset << std::endl;
 
   Formatted::Stream previous_color =
