@@ -10,11 +10,12 @@
 
 void Oanda::TaoBot::log_spike_candles() {
   candle_t current_candle = this->spike_candles.current;
-  candle_t day_candle_ = this->spike_candles.day;
+  candle_t day_candle_ = this->day_candle;
   candle_t previous_candle = this->spike_candles.previous;
 
   if (this->open_order_ptr) {
     current_candle = this->spike_candles.previous;
+    day_candle_ = this->open_order_ptr->day_candle;
     previous_candle = this->spike_candles.penultimate;
   }
 
