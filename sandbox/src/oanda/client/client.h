@@ -36,6 +36,7 @@ public:
     double spike_entry_score = 5.0;       // TODO: Decide
     double spike_height_ratio = 0.5;      // TODO: Decide
     double spike_min_price_action = 0.5;  // TODO: Decide
+    std::string reverse_loss_ref_epoch = "TREND"; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

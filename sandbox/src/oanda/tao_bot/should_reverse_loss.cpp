@@ -27,7 +27,12 @@ bool Oanda::TaoBot::should_reverse_loss() {
     // const double ref_epoch = this->open_order_ptr->timestamp -
     //                          (stop_reversals.timeframe_minutes * 0.5 * 60);
 
-    const double ref_epoch = this->open_order_ptr->timestamp;
+    const double ref_epoch_shift =
+        this->api_client.config.reverse_loss_ref_epoch == "OPEN"
+            ? 0.0
+            : stop_reversals.timeframe_minutes * 0.5 * 60;
+
+    const double ref_epoch = this->open_order_ptr->timestamp - ref_epoch_shift;
 
     stop_loss_reversal = latest_reversal_after(
         stop_reversals, ref_epoch,

@@ -32,23 +32,19 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
             << fmt.reset << std::endl;
 
+  printf("Reverse Loss Ref Epoch: ");
+  std::cout << fmt.cyan << this->api_client.config.reverse_loss_ref_epoch
+            << fmt.reset << std::endl;
+
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
-  std::cout << fmt.cyan << this->api_client.config.spike_entry_score
-            << fmt.reset << std::endl;
+  std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Height Ratio: ");
-  std::cout << fmt.cyan << this->api_client.config.spike_height_ratio
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Spike Min Price Action: ");
-  std::cout << fmt.cyan << this->api_client.config.spike_min_price_action
-            << fmt.reset << std::endl;
+  std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset << std::endl;
 
   if (this->open_order_ptr) {
     std::cout << fmt.bold << fmt.yellow;
