@@ -15,21 +15,17 @@ void Oanda::TaoBot::reset_backtest() {
       .symbol = this->symbol,
   });
 
-  // TODO: Decide
   const double next_market_open_epoch =
       std::min((double)time(nullptr),
                this->market_availability.next_market_open_epoch(
-                   this->market_availability.market_epochs.close,
-                   this->api_client.config.market_duration_hours));
+                   this->market_availability.market_epochs.close));
 
   this->backtest.await_env_market_close(
       this->market_availability.market_epochs.close, next_market_open_epoch);
 
   advance_current_epoch(next_market_open_epoch);
 
-  // TODO: Decide
-  this->market_availability.set_market_epochs(
-      this->current_epoch, this->api_client.config.market_duration_hours);
+  this->market_availability.set_market_epochs(this->current_epoch);
 
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
@@ -45,10 +41,7 @@ void Oanda::TaoBot::reset_backtest() {
   this->latest_candles = {};
   this->performance = performance_t();
   this->reversals = reversals_t();
-  // TODO: Decide
-  // this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
-  this->reversals.timeframe_minutes =
-      this->api_client.config.reversal_timeframe_minutes;
+  this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
 
   this->started_at = this->current_epoch;
 

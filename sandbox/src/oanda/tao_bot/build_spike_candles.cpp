@@ -11,12 +11,8 @@ void Oanda::TaoBot::build_spike_candles() {
     return;
   }
 
-  // TODO: Decide
-  // const candle_bounds_t bounds = DB::Candle::timestamp_to_bounds(
-  //     this->SPIKE_DURATION_MINUTES, this->current_epoch);
-
   const candle_bounds_t bounds = DB::Candle::timestamp_to_bounds(
-      this->api_client.config.spike_duration_minutes, this->current_epoch);
+      this->SPIKE_DURATION_MINUTES, this->current_epoch);
 
   if (this->spike_candles.current.opened_at &&
       bounds.opened_at != this->spike_candles.current.opened_at) {

@@ -47,7 +47,6 @@ private:
   using reversal_t = Global::t::reversal_t;
   using reversal_type_t = Global::t::reversal_type_t;
   using reversals_t = Global::t::reversals_t;
-  using spike_candles_t = Global::t::spike_candles_t; // TODO: Decide
   using stop_profit_type_t = Global::t::stop_profit_type_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
@@ -55,6 +54,7 @@ private:
   static constexpr const char *ACCOUNT_CURRENCY = "USD";
   static constexpr double EQUATOR_PERCENTILE = 50.0;
   static constexpr double TREND_SLIP_PERCENTILE = 80.0; // TODO: Decide
+  static constexpr int REVERSAL_TIMEFRAME_MINUTES = 60;
 
   std::map<const char *, const char *> ICONS = {
       {"buy", "📈"},
@@ -86,7 +86,6 @@ private:
   quote_t previous_quote;
   reversal_t entry_reversal;
   reversals_t reversals;
-  spike_candles_t spike_candles; // TODO: Decide
   std::list<candle_t> latest_candles;
   std::list<quote_t> quotes;
   std::list<std::string> env_symbols;
@@ -105,8 +104,6 @@ private:
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);
   bool is_reversal_after(const reversal_t, const double);
-  bool is_spike_entry_signal_present(); // TODO: Decide
-  bool is_spiking();                    // TODO: Decide
   bool is_trend_slipping(const order_t *);
   bool is_trend_slipping(const order_t *, const double); // TODO: Decide
   bool is_trending();
@@ -116,8 +113,7 @@ private:
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_profit();
-  bool should_reverse_loss(); // TODO: Decide
-  bool should_stop_profit();  // TODO: Decide
+  bool should_stop_profit(); // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);
@@ -129,7 +125,6 @@ private:
   double day_range_percentile(candle_t, const order_t *, double);
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
-  double spike_score(spike_candles_t); // TODO: Decide
   exit_prices_t build_exit_prices();
   int order_duration(const order_t *, const std::string);
   int profit_duration(const double);
@@ -159,7 +154,6 @@ private:
   void advance_current_epoch(const double);
   void build_day_candle();
   void build_reversals(reversals_t &, const bool);
-  void build_spike_candles(); // TODO: Decide
   void cancel_stale_open_order();
   void close_position();
   void ensure_is_shortable();
@@ -180,7 +174,6 @@ private:
   void log_quote();
   void log_reversal_metadata();
   void log_reversals(reversals_t &);
-  void log_spike_candles(); // TODO: Decide
   void log_start_message();
   void log_timestamps();
   void open_and_persist_position();
@@ -191,7 +184,6 @@ private:
   void reset_orders();
   void reset_position();
   void set_close_order_prices();
-  void set_current_trend(); // TODO: Decide
   void set_execution_price(order_t *);
   void set_open_order_prices();
   void set_position_status();

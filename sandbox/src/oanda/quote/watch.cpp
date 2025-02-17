@@ -12,9 +12,7 @@
 void Oanda::Quote::watch(const std::list<std::string> &symbols) {
   const double now = time(nullptr);
 
-  // TODO: Decide
-  this->market_availability.set_market_epochs(
-      now, this->api_client.config.market_duration_hours);
+  this->market_availability.set_market_epochs(now);
 
   bool is_market_open = this->market_availability.is_market_open(now);
 

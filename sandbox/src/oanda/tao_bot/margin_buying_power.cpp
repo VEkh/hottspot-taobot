@@ -5,9 +5,7 @@
 #include "tao_bot.h"               // Alpaca::TaoBot
 
 double Oanda::TaoBot::margin_buying_power() {
-  // TODO: Decide
-  return this->account_snapshot.equity * this->margin_rate.multiplier *
-         this->api_client.config.margin_throttle;
+  return this->account_snapshot.equity * this->margin_rate.multiplier;
 }
 
 #endif

@@ -17,7 +17,6 @@ int Oanda::TaoBot::compute_quantity() {
 
   update_margin_rate();
 
-  // TODO: Decide
   const double buying_power = margin_buying_power() / this->env_symbols.size();
 
   return floor(buying_power / dollars_per_unit);

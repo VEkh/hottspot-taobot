@@ -11,33 +11,10 @@
 #include <string>    // std::string
 
 void Oanda::TaoBot::log_reversal_metadata() {
-  // std::cout << fmt.bold << fmt.yellow;
-  // printf("Spike Entry Score: ");
-  // std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
-
-  // std::cout << fmt.bold << fmt.yellow;
-  // printf("Spike Height Ratio: ");
-  // std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset <<
-  // std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Margin Buy Power Multiplier: ");
-  std::cout << fmt.cyan << this->api_client.config.margin_throttle << fmt.reset
-            << std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Market Duration Hours: ");
-  std::cout << fmt.cyan << this->api_client.config.market_duration_hours
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
   std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
 
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Height Ratio: ");
   std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset << std::endl;

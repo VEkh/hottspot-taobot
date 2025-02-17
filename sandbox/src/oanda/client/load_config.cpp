@@ -62,46 +62,6 @@ void Oanda::Client::load_config() {
     this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("margin_throttle")) {
-    this->config.margin_throttle = (double)api_key_json["margin_throttle"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("market_duration_hours")) {
-    this->config.market_duration_hours =
-        (int)api_key_json["market_duration_hours"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("reversal_timeframe_minutes")) {
-    this->config.reversal_timeframe_minutes =
-        (int)api_key_json["reversal_timeframe_minutes"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_duration_minutes")) {
-    this->config.spike_duration_minutes =
-        (int)api_key_json["spike_duration_minutes"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_entry_score")) {
-    this->config.spike_entry_score = (double)api_key_json["spike_entry_score"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_height_ratio")) {
-    this->config.spike_height_ratio =
-        (double)api_key_json["spike_height_ratio"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_min_price_action")) {
-    this->config.spike_min_price_action =
-        (double)api_key_json["spike_min_price_action"];
-  }
-
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -109,17 +69,6 @@ void Oanda::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
-      .margin_throttle = this->config.margin_throttle, // TODO: Decide
-      .market_duration_hours =
-          this->config.market_duration_hours, // TODO: Decide
-      .reversal_timeframe_minutes =
-          this->config.reversal_timeframe_minutes, // TODO: Decide
-      .spike_duration_minutes =
-          this->config.spike_duration_minutes,               // TODO: Decide
-      .spike_entry_score = this->config.spike_entry_score,   // TODO: Decide
-      .spike_height_ratio = this->config.spike_height_ratio, // TODO: Decide
-      .spike_min_price_action =
-          this->config.spike_min_price_action, // TODO: Decide
   };
 }
 

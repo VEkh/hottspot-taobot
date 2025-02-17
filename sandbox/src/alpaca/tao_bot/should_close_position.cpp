@@ -5,7 +5,6 @@
 #include "build_exit_prices.cpp"        // build_exit_prices
 #include "is_end_of_quotes.cpp"         // is_end_of_quotes
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
-#include "should_reverse_loss.cpp"      // should_reverse_loss // TODO: Decide
 #include "should_reverse_profit.cpp"    // should_reverse_profit
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "tao_bot.h"                    // Alpaca::TaoBot, order_status_t
@@ -49,11 +48,6 @@ bool Alpaca::TaoBot::should_close_position() {
   }
 
   if (should_reverse_profit()) {
-    return true;
-  }
-
-  // TODO: Decide
-  if (should_reverse_loss()) {
     return true;
   }
 
