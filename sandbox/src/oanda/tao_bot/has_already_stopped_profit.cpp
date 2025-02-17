@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_has_already_stopped_profit
 #define OANDA__TAO_BOT_has_already_stopped_profit
 

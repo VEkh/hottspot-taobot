@@ -53,16 +53,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
               << fmt.reset << std::endl;
   }
 
-  Formatted::Stream should_stop_profit_once_color =
-      this->api_client.config.should_stop_profit_once ? fmt.green : fmt.red;
-
-  const std::string should_stop_profit_once_text =
-      this->api_client.config.should_stop_profit_once ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Profit Once? ");
-  std::cout << should_stop_profit_once_color << should_stop_profit_once_text
-            << fmt.reset << std::endl;
   std::cout << fmt.bold << fmt.yellow;
   printf("Trend Slip Percentile: ");
   std::cout << fmt.cyan << this->TREND_SLIP_PERCENTILE << fmt.reset

@@ -131,7 +131,7 @@ private:
   trend_meta_t current_trend;
 
   bool can_open_position();
-  bool has_already_stopped_profit(); // TODO: Decide
+  bool has_already_stopped_profit();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();
