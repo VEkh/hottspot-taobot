@@ -102,11 +102,6 @@ void Oanda::Client::load_config() {
         (double)api_key_json["spike_min_price_action"];
   }
 
-  if (api_key_json.contains("reverse_loss_ref_epoch")) {
-    this->config.reverse_loss_ref_epoch =
-        (std::string)api_key_json["reverse_loss_ref_epoch"];
-  }
-
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -125,8 +120,6 @@ void Oanda::Client::load_config() {
       .spike_height_ratio = this->config.spike_height_ratio, // TODO: Decide
       .spike_min_price_action =
           this->config.spike_min_price_action, // TODO: Decide
-      .reverse_loss_ref_epoch =
-          this->config.reverse_loss_ref_epoch, // TODO: Decide
   };
 }
 

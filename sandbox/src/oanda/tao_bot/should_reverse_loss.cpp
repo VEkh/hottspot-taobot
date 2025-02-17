@@ -14,26 +14,16 @@ bool Oanda::TaoBot::should_reverse_loss() {
   reversal_t stop_loss_reversal;
   reversals_t stop_reversals = this->reversals;
 
+  const double ref_epoch = this->open_order_ptr->timestamp;
+
   if (this->open_order_ptr->entry_reversal.is_record_only_reversible) {
     stop_loss_reversal = latest_record_reversal(
         this->open_order_ptr->entry_reversal.opposite_type());
 
-    if (!is_reversal_after(stop_loss_reversal,
-                           this->open_order_ptr->timestamp)) {
+    if (!is_reversal_after(stop_loss_reversal, ref_epoch)) {
       stop_loss_reversal = reversal_t();
     }
   } else {
-    // TODO: Decide
-    // const double ref_epoch = this->open_order_ptr->timestamp -
-    //                          (stop_reversals.timeframe_minutes * 0.5 * 60);
-
-    const double ref_epoch_shift =
-        this->api_client.config.reverse_loss_ref_epoch == "OPEN"
-            ? 0.0
-            : stop_reversals.timeframe_minutes * 0.5 * 60;
-
-    const double ref_epoch = this->open_order_ptr->timestamp - ref_epoch_shift;
-
     stop_loss_reversal = latest_reversal_after(
         stop_reversals, ref_epoch,
         this->open_order_ptr->entry_reversal.opposite_type());
