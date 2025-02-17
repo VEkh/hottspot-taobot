@@ -7,7 +7,7 @@
 
 namespace Alpaca {
 namespace t {
-using candle_t = Global::t::candle_t; // TODO: Decide
+using candle_t = Global::t::candle_t;
 using order_action_t = Global::t::order_action_t;
 using order_win_result_t = Global::t::order_win_result_t;
 using order_type_t = Global::t::order_type_t;
@@ -38,7 +38,7 @@ enum order_time_in_force_t {
 
 struct order_t {
   order_action_t action = order_action_t::BUY;
-  candle_t day_candle; // TODO: Decide
+  candle_t day_candle;
   reversal_t entry_reversal;
   double execution_price = 0.00;
   std::string id = "";

@@ -5,11 +5,6 @@
 #include "tao_bot.h" // Alpaca::TaoBot, order_action_t, position_t, trend_t
 
 void Alpaca::TaoBot::initialize_current_trend() {
-  // TODO: Decide
-  if (this->api_client.config.should_enter_at_spike) {
-    return;
-  }
-
   if (this->closed_positions.empty()) {
     force_init_reversal_await();
 

@@ -41,8 +41,11 @@ void Alpaca::Client::load_config() {
   json api_key_json = config_json[api_key];
 
   const std::list<std::string> nested_required_keys = {
-      "account_stop_loss_ratio",    "base_url",   "env_symbols", "is_live",
-      "reversal_timeframe_minutes", "secret_key",
+      "account_stop_loss_ratio",
+      "base_url",
+      "env_symbols",
+      "is_live",
+      "secret_key",
   };
 
   for (const std::string key : nested_required_keys) {
@@ -63,12 +66,6 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_enter_at_spike")) {
-    this->config.should_enter_at_spike =
-        (bool)api_key_json["should_enter_at_spike"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
@@ -77,29 +74,6 @@ void Alpaca::Client::load_config() {
   if (api_key_json.contains("should_stop_profit_once")) {
     this->config.should_stop_profit_once =
         (bool)api_key_json["should_stop_profit_once"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_duration_minutes")) {
-    this->config.spike_duration_minutes =
-        (double)api_key_json["spike_duration_minutes"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_entry_score")) {
-    this->config.spike_entry_score = (double)api_key_json["spike_entry_score"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("spike_height_ratio")) {
-    this->config.spike_height_ratio =
-        (double)api_key_json["spike_height_ratio"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("stop_loss_padding_ratio")) {
-    this->config.stop_loss_padding_ratio =
-        (double)api_key_json["stop_loss_padding_ratio"];
   }
 
   this->config = {
@@ -112,19 +86,9 @@ void Alpaca::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
-      .reversal_timeframe_minutes =
-          (int)api_key_json["reversal_timeframe_minutes"],
-      .should_enter_at_spike =
-          this->config.should_enter_at_spike,                // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .should_stop_profit_once =
           this->config.should_stop_profit_once, // TODO: Decide
-      .spike_duration_minutes =
-          this->config.spike_duration_minutes,               // TODO: Decide
-      .spike_entry_score = this->config.spike_entry_score,   // TODO: Decide
-      .spike_height_ratio = this->config.spike_height_ratio, // TODO: Decide
-      .stop_loss_padding_ratio =
-          this->config.stop_loss_padding_ratio, // TODO: Decide
   };
 }
 

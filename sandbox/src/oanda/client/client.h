@@ -28,14 +28,6 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
-    double margin_throttle = 1.0;         // TODO: Decide
-    int market_duration_hours = 120;      // TODO: Decide
-    int reversal_timeframe_minutes = 120; // TODO: Decide
-    bool should_stop_profit_once = false; // TODO: Decide
-    int spike_duration_minutes = 60;      // TODO: Decide
-    double spike_entry_score = 5.0;       // TODO: Decide
-    double spike_height_ratio = 0.5;      // TODO: Decide
-    double spike_min_price_action = 0.5;  // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

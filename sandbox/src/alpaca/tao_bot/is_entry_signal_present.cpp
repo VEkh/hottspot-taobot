@@ -7,14 +7,7 @@
 #include "latest_record_reversal.cpp" // latest_record_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
-// TODO: Decide
-#include "latest_reversal_after.cpp" // latest_reversal_after
-
 bool Alpaca::TaoBot::is_entry_signal_present() {
-  if (this->api_client.config.should_enter_at_spike) {
-    return false;
-  }
-
   const bool is_trending_ = is_trending();
 
   reversal_t entry_reversal_ = latest_record_reversal();

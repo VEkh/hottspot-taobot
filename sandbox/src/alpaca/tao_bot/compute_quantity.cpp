@@ -6,10 +6,8 @@
 #include <math.h>    // floor
 
 double Alpaca::TaoBot::compute_quantity() {
-  const double margin_throttle = 1.0;
-
   const double max_buying_power =
-      this->account_snapshot.original_margin_buying_power / margin_throttle;
+      this->account_snapshot.original_margin_buying_power;
 
   const double buying_power = max_buying_power / this->env_symbols.size();
 
