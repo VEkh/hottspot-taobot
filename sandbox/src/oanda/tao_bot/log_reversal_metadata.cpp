@@ -32,10 +32,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
             << fmt.reset << std::endl;
 
-  printf("Reverse Loss Ref Epoch: ");
-  std::cout << fmt.cyan << this->api_client.config.reverse_loss_ref_epoch
-            << fmt.reset << std::endl;
-
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
