@@ -80,12 +80,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_stop_profit_once")) {
-    this->config.should_stop_profit_once =
-        (bool)api_key_json["should_stop_profit_once"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("spike_duration_minutes")) {
     this->config.spike_duration_minutes =
         (int)api_key_json["spike_duration_minutes"];
@@ -125,8 +119,6 @@ void Oanda::Client::load_config() {
           this->config.market_duration_hours, // TODO: Decide
       .reversal_timeframe_minutes =
           this->config.reversal_timeframe_minutes, // TODO: Decide
-      .should_stop_profit_once =
-          this->config.should_stop_profit_once, // TODO: Decide
       .spike_duration_minutes =
           this->config.spike_duration_minutes,               // TODO: Decide
       .spike_entry_score = this->config.spike_entry_score,   // TODO: Decide
