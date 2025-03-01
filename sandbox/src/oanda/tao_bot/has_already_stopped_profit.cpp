@@ -4,10 +4,6 @@
 #include "tao_bot.h" // Oanda::TaoBot, order_t
 
 bool Oanda::TaoBot::has_already_stopped_profit() {
-  if (!this->api_client.config.should_stop_profit_once) {
-    return false;
-  }
-
   if (this->closed_positions.empty()) {
     return false;
   }

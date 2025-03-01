@@ -7,7 +7,7 @@
 #include "update_margin_rate.cpp"  // update_margin_rate
 #include <math.h>                  // floor
 
-int Oanda::TaoBot::compute_quantity() {
+long int Oanda::TaoBot::compute_quantity() {
   const double dollars_per_unit = convert_price({
       .debug = true,
       .from = this->currency.base,

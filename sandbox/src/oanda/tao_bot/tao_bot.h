@@ -160,11 +160,11 @@ private:
   double spread_limit();
 
   exit_prices_t build_exit_prices();
-  int compute_quantity();
   int order_duration(const order_t *, const std::string);
   int runtime();
   json fetch_order(const order_t *);
   json fetch_trade(const order_t *);
+  long int compute_quantity();
   order_action_t opposite_direction(const order_action_t);
   order_win_result_t order_win_result(const position_t);
   performance_t build_performance();
@@ -181,7 +181,7 @@ private:
 
   std::pair<order_t, order_t> open_position(const order_action_t,
                                             const order_action_t, const char *,
-                                            const int);
+                                            const long int);
 
   std::string stop_profit_type_name(const order_t *);
 

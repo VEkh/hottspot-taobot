@@ -15,7 +15,7 @@
 #include "lib/formatted.cpp"                       // Formatted
 #include "oanda/utils.cpp"                         // Oanda::utils
 #include <iostream>                                // std::cout, std::endl
-#include <string>                                  // std::stoi, std::string
+#include <string>                                  // std::stol, std::string
 
 void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
   try {
@@ -32,7 +32,7 @@ void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
 
     order_t new_close_order;
     new_close_order.action = order->action;
-    new_close_order.quantity = -std::stoi(current_units);
+    new_close_order.quantity = -std::stol(current_units);
     new_close_order.symbol = order->symbol;
     new_close_order.time_in_force = order->time_in_force;
     new_close_order.type = order->type;
@@ -42,7 +42,7 @@ void Oanda::TaoBot::handle_partially_filled_close_order(const order_t *order) {
 
     std::cout << fmt.bold << fmt.yellow;
     printf("🙄 Order %i partially filled. Placing another order to close the "
-           "remaining %i units.\n",
+           "remaining %li units.\n",
            order->id, new_close_order.quantity);
     std::cout << fmt.reset << std::endl;
 

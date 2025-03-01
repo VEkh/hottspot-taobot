@@ -103,7 +103,7 @@ void Oanda::TaoBot::log_position() {
          this->exit_prices.stop_loss, unit_deficit);
   std::cout << std::endl;
 
-  printf("Quantity: %'.5i", this->open_order_ptr->quantity);
+  printf("Quantity: %'li", this->open_order_ptr->quantity);
   std::cout << std::endl;
 
   const int duration = order_duration(this->open_order_ptr);

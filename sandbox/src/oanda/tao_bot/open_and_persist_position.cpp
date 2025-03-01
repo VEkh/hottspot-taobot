@@ -30,12 +30,13 @@ void Oanda::TaoBot::open_and_persist_position() {
   while (!open_order_opened) {
     update_account_snapshot();
 
-    const int quantity = compute_quantity();
+    const long int quantity = compute_quantity();
 
     if (quantity <= 0) {
       std::cout << fmt.bold << fmt.yellow;
-      puts("Can't open an order with 0 quantity 🤐.\nThis may be because you "
-           "have insufficient margin buying power.");
+      printf("Can't open an order with %li quantity 🤐.\nThis may be because "
+             "you have insufficient margin buying power.\n",
+             quantity);
       std::cout << fmt.reset << std::endl;
 
       return;

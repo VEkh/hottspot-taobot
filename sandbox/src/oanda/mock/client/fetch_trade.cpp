@@ -10,7 +10,7 @@ std::string Oanda::Mock::Client::fetch_trade(const order_t *order,
                                              const quote_t &quote) {
   const char *response_format = R"(
     {
-      "initialUnits": "%i",
+      "initialUnits": "%li",
       "price": "%f",
       "state": "OPEN"
     }

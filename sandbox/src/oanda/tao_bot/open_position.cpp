@@ -25,7 +25,7 @@ std::pair<Oanda::TaoBot::order_t, Oanda::TaoBot::order_t>
 Oanda::TaoBot::open_position(const order_action_t close_action,
                              const order_action_t open_action,
                              const char *order_description,
-                             const int quantity) {
+                             const long int quantity) {
   order_t new_open_order;
   new_open_order.account_currency = this->ACCOUNT_CURRENCY;
   new_open_order.action = open_action;

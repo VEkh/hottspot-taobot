@@ -48,7 +48,7 @@ struct order_t {
   double min_profit = 0.00;
   double min_profit_at = 0;
   double profit = 0.00;
-  int quantity;
+  long int quantity;
   order_status_t status = order_status_t::ORDER_INIT;
   double stop_loss = 0.00;
   double stop_profit = 0.00;

@@ -23,7 +23,7 @@ CurlClient Oanda::Client::place_order(order_t *order) {
   std::string url = this->config.base_url + "/v3/accounts/" +
                     this->config.account_id + "/orders";
 
-  int quantity_sign = order->action == order_action_t::SELL ? -1 : 1;
+  const int quantity_sign = order->action == order_action_t::SELL ? -1 : 1;
 
   json body = R"(
     {
