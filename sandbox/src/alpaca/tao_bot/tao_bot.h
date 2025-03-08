@@ -110,6 +110,7 @@ private:
   bool is_trending(const trend_meta_t);
   bool max_account_loss_reached();
   bool should_close_position();
+  bool should_invert_reversal(const reversal_t); // TODO: Decide
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_profit();
@@ -192,6 +193,7 @@ private:
   void set_status(order_t *);
   void toggle_is_trending(const order_t &);
   void update_account_snapshot(const bool);
+  void update_inverted_reversal(order_t *); // TODO: Decide
   void watch();
   void write_close_position();
   void write_open_position();

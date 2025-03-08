@@ -13,7 +13,45 @@
 
 void Alpaca::TaoBot::log_reversal_metadata() {
   // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Conditional Invert Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.conditional_invert_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  if (this->open_order_ptr) {
+    Formatted::Stream is_inverted_color =
+        this->open_order_ptr->entry_reversal.is_inverted ? fmt.green : fmt.red;
+
+    const std::string is_inverted_text =
+        this->open_order_ptr->entry_reversal.is_inverted ? "YES" : "NO";
+
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Is inverted? ");
+    std::cout << is_inverted_color << is_inverted_text << fmt.reset
+              << std::endl;
+  }
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Entry Proximity Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.entry_proximity_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Loss Padding Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   if (this->api_client.config.should_stop_profit) {
+    // TODO: Decide
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Stop Profit Multiplier: ");
+    std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
+              << fmt.reset << std::endl;
+
     if (this->open_order_ptr) {
       std::cout << fmt.bold << fmt.yellow;
       printf("Stop Profit Type: ");

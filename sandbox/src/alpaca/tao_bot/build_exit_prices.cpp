@@ -6,18 +6,26 @@
 #include <math.h>    // abs
 
 // TODO: Decide
-#include "day_range_percentile.cpp" // day_range_percentile
+#include "day_range_percentile.cpp"     // day_range_percentile
+#include "update_inverted_reversal.cpp" // update_inverted_reversal
 
 Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
+  update_inverted_reversal(this->open_order_ptr); // TODO: Decide
+
   const double entry_reversal_mid = this->open_order_ptr->entry_reversal.mid;
   const double execution_price = this->open_order_ptr->execution_price;
   const order_action_t action = this->open_order_ptr->action;
 
-  const double reversal_delta = action == order_action_t::BUY
-                                    ? entry_reversal_mid - execution_price
-                                    : execution_price - entry_reversal_mid;
+  // TODO: Decide
+  // const double reversal_delta = action == order_action_t::BUY
+  //                                   ? entry_reversal_mid - execution_price
+  //                                   : execution_price - entry_reversal_mid;
 
-  const double stop_loss = std::min(-0.01, reversal_delta);
+  const double reversal_delta = -abs(entry_reversal_mid - execution_price);
+
+  const double stop_loss = std::min(-0.01, reversal_delta) -
+                           this->api_client.config.stop_loss_padding_ratio *
+                               this->day_candle.range();
 
   double stop_profit = 0.0;
 
@@ -33,8 +41,10 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
         std::max(execution_price_percentile, inv_execution_price_percentile) /
         100.0;
 
-    stop_profit =
-        this->open_order_ptr->day_candle.range() * max_percentile_delta;
+    // TODO: Decide
+    stop_profit = this->api_client.config.stop_profit_multiplier *
+                  this->open_order_ptr->day_candle.range() *
+                  max_percentile_delta;
   }
 
   return {

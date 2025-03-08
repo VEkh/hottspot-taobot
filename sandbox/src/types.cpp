@@ -126,6 +126,7 @@ struct quote_t {
 
 struct reversal_t {
   double at = 0;
+  bool is_inverted = false; // TODO: Decide
   bool is_record = false;
   bool is_record_only_reversible = true;
   bool is_reversible = false;

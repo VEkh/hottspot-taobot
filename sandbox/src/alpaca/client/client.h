@@ -26,12 +26,16 @@ public:
     std::string api_key_id;
     std::string api_secret_key;
     std::string base_url;
+    double conditional_invert_ratio = 0.0; // TODO: Decide
     std::string data_base_url;
     bool debug_sql = false;
+    double entry_proximity_ratio = 0.0; // TODO: Decide
     std::list<std::string> env_symbols;
     bool is_live;
     bool should_stop_profit = false;      // TODO: Decide
     bool should_stop_profit_once = false; // TODO: Decide
+    double stop_loss_padding_ratio = 0.0; // TODO: Decide
+    double stop_profit_multiplier = 1.0;  // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
