@@ -136,7 +136,7 @@ private:
   performance_t build_performance();
   reversal_t first_reversal_after(reversals_t &, const double,
                                   const reversal_type_t, const double);
-  reversal_t latest_record_reversal(const reversal_type_t);
+  reversal_t latest_record_as_reversal(const reversal_type_t);
   reversal_t latest_reversal(reversals_t &, const reversal_type_t);
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);

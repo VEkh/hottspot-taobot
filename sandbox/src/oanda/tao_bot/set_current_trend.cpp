@@ -7,6 +7,11 @@
 #include "tao_bot.h"                   // Oanda::TaoBot
 
 void Oanda::TaoBot::set_current_trend() {
+  // TODO: Decide
+  if (!this->api_client.config.should_enter_at_spike) {
+    return;
+  }
+
   if (this->open_order_ptr) {
     return;
   }

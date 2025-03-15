@@ -62,6 +62,52 @@ void Oanda::Client::load_config() {
     this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("margin_multiplier")) {
+    this->config.margin_multiplier = (double)api_key_json["margin_multiplier"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("post_win_reverse_profit_percentile")) {
+    this->config.post_win_reverse_profit_percentile =
+        (double)api_key_json["post_win_reverse_profit_percentile"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("range_min_height")) {
+    this->config.range_min_height = (double)api_key_json["range_min_height"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_always_reverse_profit")) {
+    this->config.should_always_reverse_profit =
+        (bool)api_key_json["should_always_reverse_profit"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_enter_at_spike")) {
+    this->config.should_enter_at_spike =
+        (bool)api_key_json["should_enter_at_spike"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_enter_in_trend_direction")) {
+    this->config.should_enter_in_trend_direction =
+        (bool)api_key_json["should_enter_in_trend_direction"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_only_enter_at_record")) {
+    this->config.should_only_enter_at_record =
+        (bool)api_key_json["should_only_enter_at_record"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("should_only_win_once")) {
+    this->config.should_only_win_once =
+        (bool)api_key_json["should_only_win_once"];
+  }
+
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -69,6 +115,19 @@ void Oanda::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
+      .margin_multiplier = this->config.margin_multiplier, // TODO: Decide
+      .post_win_reverse_profit_percentile =
+          this->config.post_win_reverse_profit_percentile, // TODO: Decide
+      .range_min_height = this->config.range_min_height,   // TODO: Decide
+      .should_always_reverse_profit =
+          this->config.should_always_reverse_profit, // TODO: Decide
+      .should_enter_at_spike =
+          this->config.should_enter_at_spike, // TODO: Decide
+      .should_enter_in_trend_direction =
+          this->config.should_enter_in_trend_direction, // TODO: Decide
+      .should_only_enter_at_record =
+          this->config.should_only_enter_at_record,              // TODO: Decide
+      .should_only_win_once = this->config.should_only_win_once, // TODO: Decide
   };
 }
 

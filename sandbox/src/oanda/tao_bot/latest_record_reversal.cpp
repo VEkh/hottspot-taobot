@@ -1,41 +1,18 @@
+// TODO: Decide
 #ifndef OANDA__TAO_BOT_latest_record_reversal
 #define OANDA__TAO_BOT_latest_record_reversal
 
+#include "latest_record_as_reversal.cpp" // latest_record_as_reversal
+#include "latest_reversal.cpp"           // latest_reversal
 #include "tao_bot.h" // Oanda::TaoBot, reversal_t, reversal_type_t
 
 Oanda::TaoBot::reversal_t Oanda::TaoBot::latest_record_reversal(
+    reversals_t &reversals_,
     const reversal_type_t type = reversal_type_t::REVERSAL_NULL) {
-  reversal_t record_high = {
-      .at = this->day_candle.high_at,
-      .is_record = true,
-      .is_running_record = true,
-      .mid = this->day_candle.high,
-      .timeframe_minutes = 1,
-      .type = reversal_type_t::REVERSAL_HIGH,
-  };
+  const reversal_t reversal = latest_reversal(reversals_, type, true);
+  const reversal_t record = latest_record_as_reversal(type);
 
-  reversal_t record_low = {
-      .at = this->day_candle.low_at,
-      .is_record = true,
-      .is_running_record = true,
-      .mid = this->day_candle.low,
-      .timeframe_minutes = 1,
-      .type = reversal_type_t::REVERSAL_LOW,
-  };
-
-  if (type == reversal_type_t::REVERSAL_HIGH) {
-    return record_high;
-  }
-
-  if (type == reversal_type_t::REVERSAL_LOW) {
-    return record_low;
-  }
-
-  if (record_high.at > record_low.at) {
-    return record_high;
-  }
-
-  return record_low;
+  return reversal.mid == record.mid ? reversal : reversal_t();
 }
 
 #endif

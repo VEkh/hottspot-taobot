@@ -1,16 +1,18 @@
 #ifndef ALPACA__TAO_BOT_is_entry_signal_present
 #define ALPACA__TAO_BOT_is_entry_signal_present
 
-#include "day_range_percentile.cpp"   // day_range_percentile
-#include "first_reversal_after.cpp"   // first_reversal_after
-#include "is_trending.cpp"            // is_trending
-#include "latest_record_reversal.cpp" // latest_record_reversal
+#include "day_range_percentile.cpp"      // day_range_percentile
+#include "first_reversal_after.cpp"      // first_reversal_after
+#include "is_trending.cpp"               // is_trending
+#include "latest_record_as_reversal.cpp" // latest_record_as_reversal
 #include "tao_bot.h" // Alpaca::TaoBot, position_t, reversal_t, reversal_type_t
 
 bool Alpaca::TaoBot::is_entry_signal_present() {
   const bool is_trending_ = is_trending();
 
-  reversal_t entry_reversal_ = latest_record_reversal();
+  // TODO: Decide
+  reversal_t entry_reversal_;
+  // reversal_t entry_reversal_ = latest_record_as_reversal();
 
   if (!is_trending_ && !this->closed_positions.empty()) {
     const position_t last_position = this->closed_positions.back();
@@ -20,7 +22,7 @@ bool Alpaca::TaoBot::is_entry_signal_present() {
             ? reversal_type_t::REVERSAL_HIGH
             : reversal_type_t::REVERSAL_LOW;
 
-    entry_reversal_ = latest_record_reversal(type);
+    entry_reversal_ = latest_record_as_reversal(type);
   }
 
   if (is_trending_ && this->reversals.timeframe_minutes) {

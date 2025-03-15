@@ -11,6 +11,87 @@
 #include <string>    // std::string
 
 void Oanda::TaoBot::log_reversal_metadata() {
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Margin Multiplier: ");
+  std::cout << fmt.cyan << this->api_client.config.margin_multiplier
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Post Win Reverse Profit Percentile: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.post_win_reverse_profit_percentile
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Range Min Height (%%): ");
+  std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_always_reverse_profit_color =
+      this->api_client.config.should_always_reverse_profit ? fmt.green
+                                                           : fmt.red;
+
+  const std::string should_always_reverse_profit_text =
+      this->api_client.config.should_always_reverse_profit ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should always reverse profit? ");
+  std::cout << should_always_reverse_profit_color
+            << should_always_reverse_profit_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_enter_at_spike_color =
+      this->api_client.config.should_enter_at_spike ? fmt.green : fmt.red;
+
+  const std::string should_enter_at_spike_text =
+      this->api_client.config.should_enter_at_spike ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should enter at spike? ");
+  std::cout << should_enter_at_spike_color << should_enter_at_spike_text
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_enter_in_trend_direction_color =
+      this->api_client.config.should_enter_in_trend_direction ? fmt.green
+                                                              : fmt.red;
+
+  const std::string should_enter_in_trend_direction_text =
+      this->api_client.config.should_enter_in_trend_direction ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should enter in trend direction? ");
+  std::cout << should_enter_in_trend_direction_color
+            << should_enter_in_trend_direction_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_only_enter_at_record_color =
+      this->api_client.config.should_only_enter_at_record ? fmt.green : fmt.red;
+
+  const std::string should_only_enter_at_record_text =
+      this->api_client.config.should_only_enter_at_record ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should only enter at record? ");
+  std::cout << should_only_enter_at_record_color
+            << should_only_enter_at_record_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_only_win_once_color =
+      this->api_client.config.should_only_win_once ? fmt.green : fmt.red;
+
+  const std::string should_only_win_once_text =
+      this->api_client.config.should_only_win_once ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should only win once? ");
+  std::cout << should_only_win_once_color << should_only_win_once_text
+            << fmt.reset << std::endl;
+
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
   std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;

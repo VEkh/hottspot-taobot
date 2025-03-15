@@ -1,19 +1,20 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
-#include "build_currency.cpp"                      // build_currency
-#include "build_performance.cpp"                   // build_performance
-#include "db/account_stat/account_stat.cpp"        // DB::AccountStat
-#include "db/candle/candle.cpp"                    // DB::Candle
-#include "db/margin_rate/margin_rate.cpp"          // DB::MarginRate
-#include "db/position/position.cpp"                // DB::Position
-#include "db/quote/quote.cpp"                      // DB::Quote
-#include "db/utils/utils.cpp"                      // DB::Utils
-#include "ensure_market_is_open.cpp"               // ensure_market_is_open
-#include "ensure_spread_limit.cpp"                 // ensure_spread_limit
-#include "ensure_symbol.cpp"                       // ensure_symbol
-#include "lib/backtest/backtest.cpp"               // Backtest
-#include "lib/formatted.cpp"                       // Formatted::error_message
+#include "build_currency.cpp"               // build_currency
+#include "build_performance.cpp"            // build_performance
+#include "db/account_stat/account_stat.cpp" // DB::AccountStat
+#include "db/candle/candle.cpp"             // DB::Candle
+#include "db/margin_rate/margin_rate.cpp"   // DB::MarginRate
+#include "db/position/position.cpp"         // DB::Position
+#include "db/quote/quote.cpp"               // DB::Quote
+#include "db/utils/utils.cpp"               // DB::Utils
+#include "ensure_market_is_open.cpp"        // ensure_market_is_open
+#include "ensure_spread_limit.cpp"          // ensure_spread_limit
+#include "ensure_symbol.cpp"                // ensure_symbol
+#include "initialize_current_trend.cpp" // initialize_current_trend // TODO: Decide
+#include "lib/backtest/backtest.cpp"    // Backtest
+#include "lib/formatted.cpp"            // Formatted::error_message
 #include "lib/market_availability/forex/forex.cpp" // MarketAvailability::Forex
 #include "lib/pg/pg.cpp"                           // Pg
 #include "lib/utils/boolean.cpp"                   // ::utils::boolean
@@ -77,6 +78,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   ensure_market_is_open();
   read_closed_positions();
 
+  initialize_current_trend(); // TODO: Decide
   update_account_snapshot();
 
   this->performance = build_performance();

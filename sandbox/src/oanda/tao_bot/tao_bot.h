@@ -135,17 +135,24 @@ private:
   bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();
+  bool is_non_spike_entry_signal_present(); // TODO: Decide
   bool is_position_closed();
+  bool is_range_min_height(); // TODO: Decide
   bool is_reversal_after(const reversal_t, const double);
   bool is_spiking();
   bool is_trend_slipping(const order_t *);
+  bool is_trend_slipping(const order_t *, const double); // TODO: Decide
+  bool is_trending();                                    // TODO: Decide
+  bool is_trending(const trend_meta_t);                  // TODO: Decide
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_loss();
+  bool should_reverse_profit(); // TODO: Decide
   bool should_stop_profit();
   bool should_terminate();
+  bool should_toggle_is_trending(order_t &, order_t &); // TODO: Decide
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -170,9 +177,18 @@ private:
   performance_t build_performance();
   quote_t get_real_time_quote(const std::string);
 
-  reversal_t latest_record_reversal(const reversal_type_t);
+  // TODO: Decide
+  reversal_t first_reversal_after(reversals_t &, const double,
+                                  const reversal_type_t, const double);
+  reversal_t latest_record_as_reversal(const reversal_type_t);
+  reversal_t latest_record_reversal(reversals_t &,
+                                    const reversal_type_t); // TODO: Decide
+  reversal_t
+  latest_record_reversal_after(reversals_t &, const double,
+                               const reversal_type_t); // TODO: Decide
 
-  reversal_t latest_reversal(reversals_t &, const reversal_type_t);
+  reversal_t latest_reversal(reversals_t &, const reversal_type_t,
+                             const bool); // TODO: Decide
 
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);
@@ -200,8 +216,10 @@ private:
   void ensure_spread_limit();
   void ensure_symbol(const std::string);
   void fetch_and_persist_margin_rates(const std::list<std::string>);
+  void force_init_reversal_await(); // TODO: Decide
   void handle_partially_filled_close_order(const order_t *);
   void initialize(const std::string, std::map<std::string, std::string> &);
+  void initialize_current_trend(); // TODO: Decide
   void log_account_snapshot();
   void log_end_of_trading_period();
   void log_env_symbols();
@@ -232,6 +250,7 @@ private:
   void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
   void set_to_account_currency_ratio(order_t *);
+  void toggle_is_trending(const order_t &); // TODO: Decide
   void update_account_snapshot(const bool);
   void update_margin_rate();
   void watch();

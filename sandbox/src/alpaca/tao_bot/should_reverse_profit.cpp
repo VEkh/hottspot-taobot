@@ -1,12 +1,12 @@
 #ifndef ALPACA__TAO_BOT_should_reverse_profit
 #define ALPACA__TAO_BOT_should_reverse_profit
 
-#include "first_reversal_after.cpp"   // first_reversal_after
-#include "is_trend_slipping.cpp"      // is_trend_slipping
-#include "latest_record_reversal.cpp" // latest_record_reversal
-#include "latest_reversal_after.cpp"  // latest_reversal_after
-#include "tao_bot.h"                  // Alpaca::TaoBot, reversal_t
-#include <string>                     // std::string
+#include "first_reversal_after.cpp"      // first_reversal_after
+#include "is_trend_slipping.cpp"         // is_trend_slipping
+#include "latest_record_as_reversal.cpp" // latest_record_as_reversal
+#include "latest_reversal_after.cpp"     // latest_reversal_after
+#include "tao_bot.h"                     // Alpaca::TaoBot, reversal_t
+#include <string>                        // std::string
 
 bool Alpaca::TaoBot::should_reverse_profit() {
   if (this->closed_positions.empty()) {
@@ -19,7 +19,7 @@ bool Alpaca::TaoBot::should_reverse_profit() {
 
   if (stop_profit_reversal.at) {
     const reversal_t record_reversal =
-        latest_record_reversal(stop_profit_reversal.type);
+        latest_record_as_reversal(stop_profit_reversal.type);
 
     stop_profit_reversal =
         first_reversal_after(this->reversals, this->open_order_ptr->timestamp,
