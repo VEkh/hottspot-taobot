@@ -32,6 +32,7 @@ public:
     bool is_live;
     bool should_stop_profit = false;      // TODO: Decide
     bool should_stop_profit_once = false; // TODO: Decide
+    double stop_loss_padding_ratio = 0.0; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
