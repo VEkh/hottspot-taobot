@@ -9,7 +9,12 @@ void Oanda::TaoBot::force_init_reversal_await() {
     return;
   }
 
-  this->current_trend.at = this->market_availability.market_epochs.open;
+  // TODO: Decide
+  // this->current_trend.at = this->market_availability.market_epochs.open;
+  this->current_trend.at =
+      this->market_availability.market_epochs.open +
+      this->api_client.config.warm_up_period_hours * 60.0 * 60.0;
+
   this->current_trend.trend = trend_t::TREND_UP;
 }
 

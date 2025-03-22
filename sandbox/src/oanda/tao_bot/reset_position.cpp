@@ -13,7 +13,7 @@
 #include "build_performance.cpp" // build_performance
 #include "reset_orders.cpp"      // reset_orders
 
-#include "has_already_stopped_profit.cpp" // has_already_stopped_profit // TODO: Decide
+#include "has_just_stopped_profit.cpp" // has_just_stopped_profit // TODO: Decide
 #include "initialize_current_trend.cpp" // initialize_current_trend // TODO: Decide
 #include "should_toggle_is_trending.cpp" // should_toggle_is_trending // TODO: Decide
 #include "toggle_is_trending.cpp"        // toggle_is_trending // TODO: Decide
@@ -47,7 +47,9 @@ void Oanda::TaoBot::reset_position() {
   this->current_trend.is_initialized = false;
 
   // TODO: Decide
-  if (has_already_stopped_profit()) {
+  this->has_stopped_profit = has_just_stopped_profit();
+
+  if (this->has_stopped_profit) {
     const position_t last_position = this->closed_positions.back();
 
     this->current_trend.at = last_position.close_order.timestamp;

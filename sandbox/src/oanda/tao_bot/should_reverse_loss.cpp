@@ -7,11 +7,6 @@
 #include "tao_bot.h"                     // Oanda::TaoBot, reversal_t
 
 bool Oanda::TaoBot::should_reverse_loss() {
-  // TODO: Decide
-  if (!this->api_client.config.should_enter_at_spike) {
-    return false;
-  }
-
   if (!this->open_order_ptr->entry_reversal.is_reversible) {
     return false;
   }
@@ -42,7 +37,10 @@ bool Oanda::TaoBot::should_reverse_loss() {
     return false;
   }
 
-  stop_loss_reversal.is_reversible = true;
+  stop_loss_reversal.is_record_only_reversible = true;
+  // stop_loss_reversal.is_reversible = true; // TODO: Decide
+  stop_loss_reversal.is_reversible =
+      this->api_client.config.should_enter_at_spike;
   this->close_order_ptr->stop_profit_reversal = stop_loss_reversal;
 
   return true;

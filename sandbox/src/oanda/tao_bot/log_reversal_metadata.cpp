@@ -44,6 +44,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << should_always_reverse_profit_text << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream should_await_record_break_color =
+      this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
+
+  const std::string should_await_record_break_text =
+      this->api_client.config.should_await_record_break ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should await record break? ");
+  std::cout << should_await_record_break_color << should_await_record_break_text
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_enter_at_spike_color =
       this->api_client.config.should_enter_at_spike ? fmt.green : fmt.red;
 
@@ -92,6 +104,19 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << should_only_win_once_color << should_only_win_once_text
             << fmt.reset << std::endl;
 
+  // TODO: Decide
+  Formatted::Stream should_reverse_loss_at_equator_color =
+      this->api_client.config.should_reverse_loss_at_equator ? fmt.green
+                                                             : fmt.red;
+
+  const std::string should_reverse_loss_at_equator_text =
+      this->api_client.config.should_reverse_loss_at_equator ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should reverse loss at equator? ");
+  std::cout << should_reverse_loss_at_equator_color
+            << should_reverse_loss_at_equator_text << fmt.reset << std::endl;
+
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
   std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
@@ -99,6 +124,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Height Ratio: ");
   std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Loss Padding Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit Multiplier: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
+            << fmt.reset << std::endl;
 
   if (this->open_order_ptr) {
     std::cout << fmt.bold << fmt.yellow;
@@ -162,6 +199,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
     std::cout << std::endl;
   }
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Warm up period (hours): ");
+  std::cout << fmt.cyan << this->api_client.config.warm_up_period_hours;
+  std::cout << std::endl;
 
   std::cout << fmt.reset << std::endl;
 }

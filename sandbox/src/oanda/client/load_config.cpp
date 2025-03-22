@@ -85,6 +85,12 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_await_record_break")) {
+    this->config.should_await_record_break =
+        (bool)api_key_json["should_await_record_break"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_enter_at_spike")) {
     this->config.should_enter_at_spike =
         (bool)api_key_json["should_enter_at_spike"];
@@ -108,6 +114,30 @@ void Oanda::Client::load_config() {
         (bool)api_key_json["should_only_win_once"];
   }
 
+  // TODO: Decide
+  if (api_key_json.contains("should_reverse_loss_at_equator")) {
+    this->config.should_reverse_loss_at_equator =
+        (bool)api_key_json["should_reverse_loss_at_equator"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("stop_loss_padding_ratio")) {
+    this->config.stop_loss_padding_ratio =
+        (double)api_key_json["stop_loss_padding_ratio"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("stop_profit_multiplier")) {
+    this->config.stop_profit_multiplier =
+        (double)api_key_json["stop_profit_multiplier"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("warm_up_period_hours")) {
+    this->config.warm_up_period_hours =
+        (double)api_key_json["warm_up_period_hours"];
+  }
+
   this->config = {
       .account_id = api_key_json["id"],
       .account_stop_loss_ratio = api_key_json["account_stop_loss_ratio"],
@@ -121,6 +151,8 @@ void Oanda::Client::load_config() {
       .range_min_height = this->config.range_min_height,   // TODO: Decide
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit, // TODO: Decide
+      .should_await_record_break =
+          this->config.should_await_record_break, // TODO: Decide
       .should_enter_at_spike =
           this->config.should_enter_at_spike, // TODO: Decide
       .should_enter_in_trend_direction =
@@ -128,6 +160,13 @@ void Oanda::Client::load_config() {
       .should_only_enter_at_record =
           this->config.should_only_enter_at_record,              // TODO: Decide
       .should_only_win_once = this->config.should_only_win_once, // TODO: Decide
+      .should_reverse_loss_at_equator =
+          this->config.should_reverse_loss_at_equator, // TODO: Decide
+      .stop_loss_padding_ratio =
+          this->config.stop_loss_padding_ratio, // TODO: Decide
+      .stop_profit_multiplier =
+          this->config.stop_profit_multiplier,                   // TODO: Decide
+      .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide
   };
 }
 

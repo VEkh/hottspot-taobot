@@ -106,6 +106,7 @@ private:
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
+  bool has_stopped_profit = false; // TODO: Decide
   exit_prices_t exit_prices;
   candle_t day_candle;
   currency_t currency;
@@ -131,7 +132,7 @@ private:
   trend_meta_t current_trend;
 
   bool can_open_position();
-  bool has_already_stopped_profit();
+  bool has_just_stopped_profit();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();

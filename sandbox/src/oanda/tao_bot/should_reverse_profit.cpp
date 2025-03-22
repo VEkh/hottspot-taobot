@@ -10,9 +10,6 @@
 #include "tao_bot.h"                        // Oanda::TaoBot, reversal_t
 #include <string>                           // std::string
 
-// TODO: Decide
-#include "has_already_stopped_profit.cpp" // has_already_stopped_profit
-
 bool Oanda::TaoBot::should_reverse_profit() {
   if (this->api_client.config.should_enter_at_spike) {
     return false;
@@ -33,12 +30,21 @@ bool Oanda::TaoBot::should_reverse_profit() {
   double trend_slipping_percentile = this->EQUATOR_PERCENTILE;
 
   if (!this->api_client.config.should_only_win_once &&
-      has_already_stopped_profit() && post_win_reverse_profit_percentile) {
+      this->has_stopped_profit && post_win_reverse_profit_percentile) {
     trend_slipping_percentile = post_win_reverse_profit_percentile;
   }
 
   if (stop_profit_reversal.at &&
       is_trend_slipping(this->open_order_ptr, trend_slipping_percentile)) {
+    // TODO: Decide
+    if (this->api_client.config.should_reverse_loss_at_equator) {
+      stop_profit_reversal.is_reversible =
+          trend_slipping_percentile == this->EQUATOR_PERCENTILE;
+
+      stop_profit_reversal.is_record_only_reversible =
+          !stop_profit_reversal.is_reversible;
+    }
+
     this->close_order_ptr->stop_profit_reversal = stop_profit_reversal;
 
     return true;
