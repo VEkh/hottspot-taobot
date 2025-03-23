@@ -1,7 +1,6 @@
 #ifndef ALPACA__TAO_BOT_can_open_position
 #define ALPACA__TAO_BOT_can_open_position
 
-#include "has_already_stopped_profit.cpp" // has_already_stopped_profit // TODO: Decide
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "tao_bot.h"                    // Alpaca::TaoBot, fmt, order_action_t
 
@@ -19,7 +18,8 @@ bool Alpaca::TaoBot::can_open_position() {
   }
 
   // TODO: Decide
-  if (has_already_stopped_profit()) {
+  if (this->api_client.config.should_stop_profit_once &&
+      this->has_stopped_profit) {
     return false;
   }
 

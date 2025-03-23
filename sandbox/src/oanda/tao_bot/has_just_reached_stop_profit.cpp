@@ -1,9 +1,9 @@
-#ifndef OANDA__TAO_BOT_has_just_stopped_profit
-#define OANDA__TAO_BOT_has_just_stopped_profit
+#ifndef OANDA__TAO_BOT_has_just_reached_stop_profit
+#define OANDA__TAO_BOT_has_just_reached_stop_profit
 
 #include "tao_bot.h" // Oanda::TaoBot, order_t
 
-bool Oanda::TaoBot::has_just_stopped_profit() {
+bool Oanda::TaoBot::has_just_reached_stop_profit() {
   if (this->closed_positions.empty()) {
     return false;
   }

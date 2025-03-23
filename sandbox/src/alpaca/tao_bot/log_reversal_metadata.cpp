@@ -13,6 +13,31 @@
 
 void Alpaca::TaoBot::log_reversal_metadata() {
   // TODO: Decide
+  Formatted::Stream should_always_reverse_profit_color =
+      this->api_client.config.should_always_reverse_profit ? fmt.green
+                                                           : fmt.red;
+
+  const std::string should_always_reverse_profit_text =
+      this->api_client.config.should_always_reverse_profit ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should always reverse profit? ");
+  std::cout << should_always_reverse_profit_color
+            << should_always_reverse_profit_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream should_await_record_break_color =
+      this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
+
+  const std::string should_await_record_break_text =
+      this->api_client.config.should_await_record_break ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should await record break? ");
+  std::cout << should_await_record_break_color << should_await_record_break_text
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio

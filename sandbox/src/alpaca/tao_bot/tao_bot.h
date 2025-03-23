@@ -54,6 +54,7 @@ private:
   static constexpr const char *ACCOUNT_CURRENCY = "USD";
   static constexpr double EQUATOR_PERCENTILE = 50.0;
   static constexpr double TREND_SLIP_PERCENTILE = 80.0; // TODO: Decide
+  static constexpr double WARM_UP_HOURS = 0.5;          // TODO: Decide
   static constexpr int REVERSAL_TIMEFRAME_MINUTES = 60;
 
   std::map<const char *, const char *> ICONS = {
@@ -73,6 +74,7 @@ private:
   MarketAvailability::Nyse market_availability;
   Pg pg;
   account_snapshot_t account_snapshot;
+  bool has_stopped_profit = false; // TODO: Decide
   candle_t day_candle;
   double current_epoch = time(nullptr);
   double started_at = time(nullptr);
@@ -95,11 +97,13 @@ private:
   trend_meta_t current_trend;
 
   bool can_open_position();
-  bool has_already_stopped_profit(); // TODO: Decide
+  bool did_last_position_stop_profit(); // TODO: Decide
+  bool has_just_reached_stop_profit();  // TODO: Decide
   bool has_reversal_been_used(const reversal_t);
   bool is_early_close_day();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
+  bool is_record_break_entry_signal_present(); // TODO: Decide
   bool is_next_position_long();
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);
@@ -110,6 +114,7 @@ private:
   bool is_trending(const trend_meta_t);
   bool max_account_loss_reached();
   bool should_close_position();
+  bool should_nullify_entry_reversal(); // TODO: Decide
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_profit();
@@ -137,7 +142,13 @@ private:
   reversal_t first_reversal_after(reversals_t &, const double,
                                   const reversal_type_t, const double);
   reversal_t latest_record_as_reversal(const reversal_type_t);
-  reversal_t latest_reversal(reversals_t &, const reversal_type_t);
+  reversal_t latest_record_reversal(reversals_t &,
+                                    const reversal_type_t); // TODO: Decide
+  reversal_t
+  latest_record_reversal_after(reversals_t &, const double,
+                               const reversal_type_t); // TODO: Decide
+  reversal_t latest_reversal(reversals_t &, const reversal_type_t,
+                             const bool); // TODO: Decide
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);
   std::pair<order_t, order_t> open_position(const order_action_t,

@@ -10,8 +10,9 @@
  */
 #include "tao_bot.h"
 
-#include "build_performance.cpp"         // build_performance
-#include "reset_orders.cpp"              // reset_orders
+#include "build_performance.cpp"            // build_performance
+#include "has_just_reached_stop_profit.cpp" // has_just_reached_stop_profit // TODO: Decide
+#include "reset_orders.cpp"                 // reset_orders
 #include "should_toggle_is_trending.cpp" // should_toggle_is_trending
 #include "toggle_is_trending.cpp"        // toggle_is_trending
 
@@ -38,6 +39,20 @@ void Alpaca::TaoBot::reset_position() {
   this->entry_reversal = reversal_t();
 
   reset_orders();
+
+  // TODO: Decide
+  this->has_stopped_profit = has_just_reached_stop_profit();
+
+  // TODO: Decide
+  if (this->has_stopped_profit) {
+    const position_t last_position = this->closed_positions.back();
+
+    this->current_trend.at = last_position.close_order.timestamp;
+    this->current_trend.trend =
+        last_position.close_order.action == order_action_t::SELL
+            ? trend_t::TREND_DOWN
+            : trend_t::TREND_UP;
+  }
 
   this->exit_prices = exit_prices_t();
   this->performance = build_performance();

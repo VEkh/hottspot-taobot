@@ -1,14 +1,10 @@
 // TODO: Decide
-#ifndef ALPACA__TAO_BOT_has_already_stopped_profit
-#define ALPACA__TAO_BOT_has_already_stopped_profit
+#ifndef ALPACA__TAO_BOT_has_just_reached_stop_profit
+#define ALPACA__TAO_BOT_has_just_reached_stop_profit
 
 #include "tao_bot.h" // Alpaca::TaoBot, order_t
 
-bool Alpaca::TaoBot::has_already_stopped_profit() {
-  if (!this->api_client.config.should_stop_profit_once) {
-    return false;
-  }
-
+bool Alpaca::TaoBot::has_just_reached_stop_profit() {
   if (this->closed_positions.empty()) {
     return false;
   }

@@ -132,7 +132,8 @@ private:
   trend_meta_t current_trend;
 
   bool can_open_position();
-  bool has_just_stopped_profit();
+  bool did_last_position_stop_profit(); // TODO: Decide
+  bool has_just_reached_stop_profit();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();
@@ -178,9 +179,6 @@ private:
   performance_t build_performance();
   quote_t get_real_time_quote(const std::string);
 
-  // TODO: Decide
-  reversal_t first_reversal_after(reversals_t &, const double,
-                                  const reversal_type_t, const double);
   reversal_t latest_record_as_reversal(const reversal_type_t);
   reversal_t latest_record_reversal(reversals_t &,
                                     const reversal_type_t); // TODO: Decide

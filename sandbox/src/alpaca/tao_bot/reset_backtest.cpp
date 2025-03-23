@@ -32,6 +32,7 @@ void Alpaca::TaoBot::reset_backtest() {
   this->day_candle = candle_t();
   this->db_account_stat.clear_snapshot_stats_cache();
   this->db_candle.clear_cache();
+  this->has_stopped_profit = false; // TODO: Decide
 
   this->current_quote = quote_t();
   this->previous_quote = quote_t();
