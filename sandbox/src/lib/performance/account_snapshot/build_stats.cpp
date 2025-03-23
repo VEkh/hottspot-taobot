@@ -38,11 +38,16 @@ void Performance::AccountSnapshot::build_stats(
     const double current_profit_percent =
         100 * (current_equity - original_equity) / original_equity;
     const double min_profit = min_equity - original_equity;
-    const double min_profit_percent =
-        100 * (min_equity - original_equity) / original_equity;
+    const double min_profit_ratio =
+        (min_equity - original_equity) / original_equity;
+    const double min_profit_percent = 100 * min_profit_ratio;
     const double max_profit = max_equity - original_equity;
     const double max_profit_percent =
         100 * (max_equity - original_equity) / original_equity;
+
+    if (current_profit > 0) {
+      this->stats.daily_win_min_equity_ratios.push_back(min_profit_ratio);
+    }
 
     this->stats.daily_net_pl_ratio += current_profit / original_equity;
     this->stats.net_pl += current_profit;
