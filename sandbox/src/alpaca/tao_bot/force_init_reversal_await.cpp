@@ -8,7 +8,8 @@ void Alpaca::TaoBot::force_init_reversal_await() {
 
   // TODO: Decide
   if (this->api_client.config.should_await_record_break) {
-    this->current_trend.at += this->WARM_UP_HOURS * 60.0 * 60.0;
+    this->current_trend.at +=
+        this->api_client.config.warm_up_period_hours * 60.0 * 60.0;
   }
 
   this->current_trend.trend = trend_t::TREND_UP;

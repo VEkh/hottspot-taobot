@@ -23,6 +23,7 @@ bool Oanda::TaoBot::should_reverse_profit() {
   // TODO: Decide
   const double post_win_reverse_profit_percentile =
       this->api_client.config.post_win_reverse_profit_percentile;
+
   double trend_slipping_percentile = this->EQUATOR_PERCENTILE;
 
   if (!this->api_client.config.should_only_win_once &&

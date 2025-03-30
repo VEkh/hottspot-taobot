@@ -13,6 +13,19 @@
 
 void Alpaca::TaoBot::log_reversal_metadata() {
   // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Post Win Reverse Profit Percentile: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.post_win_reverse_profit_percentile
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Reverse Profit Percentile: ");
+  std::cout << fmt.cyan << this->api_client.config.reverse_profit_percentile
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_always_reverse_profit_color =
       this->api_client.config.should_always_reverse_profit ? fmt.green
                                                            : fmt.red;
@@ -63,6 +76,12 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     std::cout << should_stop_profit_once_color << should_stop_profit_once_text
               << fmt.reset << std::endl;
   }
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Warm Up Period Hours: ");
+  std::cout << fmt.cyan << this->api_client.config.warm_up_period_hours
+            << fmt.reset << std::endl;
 
   Formatted::Stream trend_status_color = fmt.cyan;
   std::string trend_status_text = "NONE";

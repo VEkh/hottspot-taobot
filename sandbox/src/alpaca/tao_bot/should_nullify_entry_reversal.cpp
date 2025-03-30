@@ -7,8 +7,8 @@
 
 bool Alpaca::TaoBot::should_nullify_entry_reversal() {
   if (this->api_client.config.should_await_record_break &&
-      !this->api_client.config.should_stop_profit_once &&
-      this->has_stopped_profit) {
+      (!this->api_client.config.should_stop_profit_once &&
+       this->has_stopped_profit)) {
     const reversal_t record_high =
         latest_record_as_reversal(reversal_type_t::REVERSAL_HIGH);
 
@@ -17,10 +17,8 @@ bool Alpaca::TaoBot::should_nullify_entry_reversal() {
 
     const order_t last_close_order = this->closed_positions.back().close_order;
 
-    if (record_high.at < last_close_order.timestamp &&
-        record_low.at < last_close_order.timestamp) {
-      return true;
-    }
+    return record_high.at < last_close_order.timestamp &&
+           record_low.at < last_close_order.timestamp;
   }
 
   const int current_epoch_minute = this->current_epoch / 60;
