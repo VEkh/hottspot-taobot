@@ -66,18 +66,6 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("post_win_reverse_profit_percentile")) {
-    this->config.post_win_reverse_profit_percentile =
-        (double)api_key_json["post_win_reverse_profit_percentile"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("reverse_profit_percentile")) {
-    this->config.reverse_profit_percentile =
-        (double)api_key_json["reverse_profit_percentile"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_always_reverse_profit")) {
     this->config.should_always_reverse_profit =
         (bool)api_key_json["should_always_reverse_profit"];
@@ -122,10 +110,6 @@ void Alpaca::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
-      .post_win_reverse_profit_percentile =
-          this->config.post_win_reverse_profit_percentile, // TODO: Decide
-      .reverse_profit_percentile =
-          this->config.reverse_profit_percentile, // TODO: Decide
       .should_await_record_break =
           this->config.should_await_record_break, // TODO: Decide
       .should_always_reverse_profit =
