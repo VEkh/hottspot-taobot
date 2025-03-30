@@ -38,6 +38,7 @@ private:
   };
 
   struct stats_t {
+    std::list<double> daily_win_max_equity_ratios;
     std::list<double> daily_win_min_equity_ratios;
     double daily_net_pl_ratio = 0.0;
     int day_count = 0;

@@ -6,11 +6,11 @@
 
 namespace utils {
 namespace stats {
-template <typename DataType> double mean(const std::list<DataType> data) {
+template <typename Numeric> double mean(const std::list<Numeric> data) {
   int count = 0;
   double sum = 0;
 
-  for (const DataType datum : data) {
+  for (const Numeric datum : data) {
     sum += datum;
     count++;
   }
@@ -18,12 +18,12 @@ template <typename DataType> double mean(const std::list<DataType> data) {
   return sum / count;
 }
 
-template <typename DataType> double median(const std::list<DataType> data) {
+template <typename Numeric> double median(const std::list<Numeric> data) {
   int i = 0;
   const int count = data.size();
   const int median_i = count / 2;
 
-  for (const DataType datum : data) {
+  for (const Numeric datum : data) {
     if (i == median_i) {
       return datum;
     }
@@ -34,13 +34,13 @@ template <typename DataType> double median(const std::list<DataType> data) {
   return 0.0;
 }
 
-template <typename DataType> double std(const std::list<DataType> data) {
+template <typename Numeric> double std(const std::list<Numeric> data) {
   const double avg = mean(data);
 
   double sum = 0;
   int count = data.size();
 
-  for (const DataType datum : data) {
+  for (const Numeric datum : data) {
     sum += pow((datum - avg), 2);
   }
 

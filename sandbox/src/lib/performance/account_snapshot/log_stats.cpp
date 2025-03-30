@@ -16,6 +16,12 @@ void Performance::AccountSnapshot::log_stats() {
 
   const double avg_net_pl = this->stats.net_pl / this->stats.day_count;
 
+  const double avg_daily_win_max_equity_percent =
+      100.0 * ::utils::stats::mean(this->stats.daily_win_max_equity_ratios);
+
+  const double std_daily_win_max_equity_percent =
+      100.0 * ::utils::stats::std(this->stats.daily_win_max_equity_ratios);
+
   const double avg_daily_win_min_equity_percent =
       100.0 * ::utils::stats::mean(this->stats.daily_win_min_equity_ratios);
 
@@ -45,6 +51,10 @@ void Performance::AccountSnapshot::log_stats() {
   std::cout << fmt.bold << avg_daily_net_pl_ratio_color;
   printf("Avg Daily %% Return:         %+'.2f%%\n",
          avg_daily_net_pl_ratio * 100.0);
+
+  std::cout << fmt.bold << fmt.green;
+  printf("Avg Win Max Equity %%:       %+'.2f%% (σ: %+'.4f%%)\n",
+         avg_daily_win_max_equity_percent, std_daily_win_max_equity_percent);
 
   std::cout << fmt.bold << fmt.red;
   printf("Avg Win Min Equity %%:       %+'.2f%% (σ: %+'.4f%%)\n",

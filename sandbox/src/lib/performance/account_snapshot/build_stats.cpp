@@ -24,7 +24,7 @@ void Performance::AccountSnapshot::build_stats(
   this->stats.original_snapshot = snapshots.front();
 
   for (std::list<account_snapshot_t>::iterator it = snapshots.begin();
-       it != snapshots.end(); it++, this->stats.day_count++) {
+       it != snapshots.end(); it++) {
     const account_snapshot_t snapshot = *it;
 
     const double current_equity = snapshot.equity;
@@ -42,16 +42,21 @@ void Performance::AccountSnapshot::build_stats(
         (min_equity - original_equity) / original_equity;
     const double min_profit_percent = 100 * min_profit_ratio;
     const double max_profit = max_equity - original_equity;
-    const double max_profit_percent =
-        100 * (max_equity - original_equity) / original_equity;
+    const double max_profit_ratio =
+        (max_equity - original_equity) / original_equity;
+    const double max_profit_percent = 100 * max_profit_ratio;
 
     if (current_profit > 0) {
+      this->stats.daily_win_max_equity_ratios.push_back(max_profit_ratio);
       this->stats.daily_win_min_equity_ratios.push_back(min_profit_ratio);
     }
 
     this->stats.daily_net_pl_ratio += current_profit / original_equity;
     this->stats.net_pl += current_profit;
 
+    if (max_equity != original_equity || min_equity != original_equity) {
+      this->stats.day_count++;
+    }
     this->stats.loss_count += (int)current_profit < 0;
     this->stats.win_count += (int)current_profit >= 0;
 
