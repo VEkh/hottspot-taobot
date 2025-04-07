@@ -38,6 +38,19 @@ void Alpaca::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream should_dynamically_stop_loss_color =
+      this->api_client.config.should_dynamically_stop_loss ? fmt.green
+                                                           : fmt.red;
+
+  const std::string should_dynamically_stop_loss_text =
+      this->api_client.config.should_dynamically_stop_loss ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should dynamically trigger account stop loss? ");
+  std::cout << should_dynamically_stop_loss_color
+            << should_dynamically_stop_loss_text << fmt.reset << std::endl;
+
+  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio

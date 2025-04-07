@@ -6,6 +6,12 @@
 #include "tao_bot.h"                     // Alpaca::TaoBot, order_t, reversal_t
 
 bool Alpaca::TaoBot::should_nullify_entry_reversal() {
+  // TODO: Decide
+  if (this->api_client.config.should_dynamically_stop_loss &&
+      this->has_triggered_dynamic_stop_loss) {
+    return true;
+  }
+
   if (this->api_client.config.should_await_record_break &&
       (!this->api_client.config.should_stop_profit_once &&
        this->has_stopped_profit)) {
