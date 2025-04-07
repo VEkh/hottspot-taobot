@@ -1,5 +1,4 @@
 // TODO: Decide
-
 #ifndef OANDA__CLIENT_is_trending
 #define OANDA__CLIENT_is_trending
 

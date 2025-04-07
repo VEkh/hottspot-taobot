@@ -28,19 +28,17 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
-    double margin_multiplier = 1.0;                  // TODO: Decide
-    double post_win_reverse_profit_percentile = 0.0; // TODO: Decide
-    double range_min_height = 0.5;                   // TODO: Decide
-    bool should_always_reverse_profit = false;       // TODO: Decide
-    bool should_await_record_break = false;          // TODO: Decide
-    bool should_enter_at_spike = true;               // TODO: Decide
-    bool should_enter_in_trend_direction = false;    // TODO: Decide
-    bool should_only_enter_at_record = false;        // TODO: Decide
-    bool should_only_win_once = true;                // TODO: Decide
-    bool should_reverse_loss_at_equator = false;     // TODO: Decide
-    double stop_loss_padding_ratio = 0.2;            // TODO: Decide
-    double stop_profit_multiplier = 1.0;             // TODO: Decide
-    double warm_up_period_hours = 0.0;               // TODO: Decide
+    double margin_multiplier = 1.0;               // TODO: Decide
+    double range_min_height = 0.5;                // TODO: Decide
+    bool should_always_reverse_profit = false;    // TODO: Decide
+    bool should_await_record_break = false;       // TODO: Decide
+    bool should_enter_at_spike = true;            // TODO: Decide
+    bool should_enter_in_trend_direction = false; // TODO: Decide
+    bool should_only_enter_at_record = false;     // TODO: Decide
+    bool should_only_win_once = true;             // TODO: Decide
+    double stop_loss_padding_ratio = 0.2;         // TODO: Decide
+    double stop_profit_multiplier = 1.0;          // TODO: Decide
+    double warm_up_period_hours = 0.0;            // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

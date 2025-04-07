@@ -68,12 +68,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("post_win_reverse_profit_percentile")) {
-    this->config.post_win_reverse_profit_percentile =
-        (double)api_key_json["post_win_reverse_profit_percentile"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("range_min_height")) {
     this->config.range_min_height = (double)api_key_json["range_min_height"];
   }
@@ -115,12 +109,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_reverse_loss_at_equator")) {
-    this->config.should_reverse_loss_at_equator =
-        (bool)api_key_json["should_reverse_loss_at_equator"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("stop_loss_padding_ratio")) {
     this->config.stop_loss_padding_ratio =
         (double)api_key_json["stop_loss_padding_ratio"];
@@ -146,8 +134,6 @@ void Oanda::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .margin_multiplier = this->config.margin_multiplier, // TODO: Decide
-      .post_win_reverse_profit_percentile =
-          this->config.post_win_reverse_profit_percentile, // TODO: Decide
       .range_min_height = this->config.range_min_height,   // TODO: Decide
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit, // TODO: Decide
@@ -160,8 +146,6 @@ void Oanda::Client::load_config() {
       .should_only_enter_at_record =
           this->config.should_only_enter_at_record,              // TODO: Decide
       .should_only_win_once = this->config.should_only_win_once, // TODO: Decide
-      .should_reverse_loss_at_equator =
-          this->config.should_reverse_loss_at_equator, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio, // TODO: Decide
       .stop_profit_multiplier =

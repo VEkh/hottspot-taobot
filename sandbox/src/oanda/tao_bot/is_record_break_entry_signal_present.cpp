@@ -1,6 +1,6 @@
 // TODO: Decide
-#ifndef OANDA__TAO_BOT_is_non_spike_entry_signal_present
-#define OANDA__TAO_BOT_is_non_spike_entry_signal_present
+#ifndef OANDA__TAO_BOT_is_record_break_entry_signal_present
+#define OANDA__TAO_BOT_is_record_break_entry_signal_present
 
 #include "current_mid.cpp"          // current_mid
 #include "day_range_percentile.cpp" // day_range_percentile
@@ -10,7 +10,7 @@
 #include "latest_record_reversal_after.cpp" // latest_record_reversal_after
 #include "tao_bot.h" // Oanda::TaoBot, position_t, reversal_t, reversal_type_t
 
-bool Oanda::TaoBot::is_non_spike_entry_signal_present() {
+bool Oanda::TaoBot::is_record_break_entry_signal_present() {
   const bool is_trending_ = is_trending();
 
   reversal_t entry_reversal_;

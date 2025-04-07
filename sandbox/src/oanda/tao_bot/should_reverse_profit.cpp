@@ -20,28 +20,8 @@ bool Oanda::TaoBot::should_reverse_profit() {
       this->reversals, this->open_order_ptr->timestamp,
       this->open_order_ptr->entry_reversal.opposite_type());
 
-  // TODO: Decide
-  const double post_win_reverse_profit_percentile =
-      this->api_client.config.post_win_reverse_profit_percentile;
-
-  double trend_slipping_percentile = this->EQUATOR_PERCENTILE;
-
-  if (!this->api_client.config.should_only_win_once &&
-      this->has_stopped_profit && post_win_reverse_profit_percentile) {
-    trend_slipping_percentile = post_win_reverse_profit_percentile;
-  }
-
   if (stop_profit_reversal.at &&
-      is_trend_slipping(this->open_order_ptr, trend_slipping_percentile)) {
-    // TODO: Decide
-    if (this->api_client.config.should_reverse_loss_at_equator) {
-      stop_profit_reversal.is_reversible =
-          trend_slipping_percentile == this->EQUATOR_PERCENTILE;
-
-      stop_profit_reversal.is_record_only_reversible =
-          !stop_profit_reversal.is_reversible;
-    }
-
+      is_trend_slipping(this->open_order_ptr, this->EQUATOR_PERCENTILE)) {
     this->close_order_ptr->stop_profit_reversal = stop_profit_reversal;
 
     return true;

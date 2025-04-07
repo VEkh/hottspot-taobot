@@ -19,13 +19,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
-  printf("Post Win Reverse Profit Percentile: ");
-  std::cout << fmt.cyan
-            << this->api_client.config.post_win_reverse_profit_percentile
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
             << std::endl;
@@ -103,19 +96,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   printf("Should only win once? ");
   std::cout << should_only_win_once_color << should_only_win_once_text
             << fmt.reset << std::endl;
-
-  // TODO: Decide
-  Formatted::Stream should_reverse_loss_at_equator_color =
-      this->api_client.config.should_reverse_loss_at_equator ? fmt.green
-                                                             : fmt.red;
-
-  const std::string should_reverse_loss_at_equator_text =
-      this->api_client.config.should_reverse_loss_at_equator ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should reverse loss at equator? ");
-  std::cout << should_reverse_loss_at_equator_color
-            << should_reverse_loss_at_equator_text << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
