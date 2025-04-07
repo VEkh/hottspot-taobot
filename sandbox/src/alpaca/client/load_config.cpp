@@ -78,12 +78,6 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_dynamically_stop_loss")) {
-    this->config.should_dynamically_stop_loss =
-        (bool)api_key_json["should_dynamically_stop_loss"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
@@ -119,9 +113,7 @@ void Alpaca::Client::load_config() {
       .should_await_record_break =
           this->config.should_await_record_break, // TODO: Decide
       .should_always_reverse_profit =
-          this->config.should_always_reverse_profit, // TODO: Decide
-      .should_dynamically_stop_loss =
-          this->config.should_dynamically_stop_loss,         // TODO: Decide
+          this->config.should_always_reverse_profit,         // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .should_stop_profit_once =
           this->config.should_stop_profit_once, // TODO: Decide

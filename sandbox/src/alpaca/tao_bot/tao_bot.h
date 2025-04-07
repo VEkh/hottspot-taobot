@@ -74,8 +74,7 @@ private:
   MarketAvailability::Nyse market_availability;
   Pg pg;
   account_snapshot_t account_snapshot;
-  bool has_stopped_profit = false;              // TODO: Decide
-  bool has_triggered_dynamic_stop_loss = false; // TODO: Decide
+  bool has_stopped_profit = false; // TODO: Decide
   candle_t day_candle;
   double current_epoch = time(nullptr);
   double started_at = time(nullptr);
@@ -119,8 +118,7 @@ private:
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_profit();
-  bool should_stop_profit();               // TODO: Decide
-  bool should_trigger_dynamic_stop_loss(); // TODO: Decide
+  bool should_stop_profit(); // TODO: Decide
   bool should_terminate();
   bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);
