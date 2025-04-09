@@ -18,8 +18,7 @@ bool Alpaca::TaoBot::can_open_position() {
   }
 
   // TODO: Decide
-  if (this->api_client.config.should_stop_profit_once &&
-      this->has_stopped_profit) {
+  if (this->has_stopped_profit) {
     return false;
   }
 

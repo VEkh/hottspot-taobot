@@ -51,17 +51,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
       std::cout << fmt.cyan << stop_profit_type_name(this->open_order_ptr)
                 << fmt.reset << std::endl;
     }
-
-    Formatted::Stream should_stop_profit_once_color =
-        this->api_client.config.should_stop_profit_once ? fmt.green : fmt.red;
-
-    const std::string should_stop_profit_once_text =
-        this->api_client.config.should_stop_profit_once ? "YES" : "NO";
-
-    std::cout << fmt.bold << fmt.yellow;
-    printf("Stop Profit Once? ");
-    std::cout << should_stop_profit_once_color << should_stop_profit_once_text
-              << fmt.reset << std::endl;
   }
 
   // TODO: Decide

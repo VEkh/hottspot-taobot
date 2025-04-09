@@ -3,9 +3,7 @@
 #define ALPACA__TAO_BOT_is_record_break_entry_signal_present
 
 #include "current_mid.cpp"                   // current_mid
-#include "day_range_percentile.cpp"          // day_range_percentile
 #include "did_last_position_stop_profit.cpp" // did_last_position_stop_profit
-#include "first_reversal_after.cpp"          // first_reversal_after
 #include "is_trending.cpp"                   // is_trending
 #include "latest_record_as_reversal.cpp"     // latest_record_as_reversal
 #include "should_nullify_entry_reversal.cpp" // should_nullify_entry_reversal

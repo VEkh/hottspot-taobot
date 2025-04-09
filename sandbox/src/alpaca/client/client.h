@@ -33,7 +33,6 @@ public:
     bool should_await_record_break = false;    // TODO: Decide
     bool should_always_reverse_profit = false; // TODO: Decide
     bool should_stop_profit = false;           // TODO: Decide
-    bool should_stop_profit_once = false;      // TODO: Decide
     double stop_loss_padding_ratio = 0.0;      // TODO: Decide
     double warm_up_period_hours = 0.0;         // TODO: Decide
   } config;

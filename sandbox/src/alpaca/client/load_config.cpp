@@ -83,12 +83,6 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_stop_profit_once")) {
-    this->config.should_stop_profit_once =
-        (bool)api_key_json["should_stop_profit_once"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("stop_loss_padding_ratio")) {
     this->config.stop_loss_padding_ratio =
         (double)api_key_json["stop_loss_padding_ratio"];
@@ -115,8 +109,6 @@ void Alpaca::Client::load_config() {
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit,         // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
-      .should_stop_profit_once =
-          this->config.should_stop_profit_once, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio,                  // TODO: Decide
       .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide
