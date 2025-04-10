@@ -29,12 +29,12 @@ public:
     std::string data_base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
+    double first_position_trend_slip_percentile = 0.0; // TODO: Decide
     bool is_live;
-    bool should_await_record_break = false;    // TODO: Decide
-    bool should_always_reverse_profit = false; // TODO: Decide
-    bool should_stop_profit = false;           // TODO: Decide
-    double stop_loss_padding_ratio = 0.0;      // TODO: Decide
-    double warm_up_period_hours = 0.0;         // TODO: Decide
+    bool should_await_record_break = false; // TODO: Decide
+    bool should_stop_profit = false;        // TODO: Decide
+    double stop_loss_padding_ratio = 0.0;   // TODO: Decide
+    double warm_up_period_hours = 0.0;      // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
