@@ -66,9 +66,9 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_always_reverse_profit")) {
-    this->config.should_always_reverse_profit =
-        (bool)api_key_json["should_always_reverse_profit"];
+  if (api_key_json.contains("first_position_trend_slip_percentile")) {
+    this->config.first_position_trend_slip_percentile =
+        (double)api_key_json["first_position_trend_slip_percentile"];
   }
 
   // TODO: Decide
@@ -103,11 +103,11 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
+      .first_position_trend_slip_percentile =
+          this->config.first_position_trend_slip_percentile, // TODO: Decide
       .is_live = api_key_json["is_live"],
       .should_await_record_break =
-          this->config.should_await_record_break, // TODO: Decide
-      .should_always_reverse_profit =
-          this->config.should_always_reverse_profit,         // TODO: Decide
+          this->config.should_await_record_break,            // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio,                  // TODO: Decide

@@ -13,17 +13,13 @@
 
 void Alpaca::TaoBot::log_reversal_metadata() {
   // TODO: Decide
-  Formatted::Stream should_always_reverse_profit_color =
-      this->api_client.config.should_always_reverse_profit ? fmt.green
-                                                           : fmt.red;
-
-  const std::string should_always_reverse_profit_text =
-      this->api_client.config.should_always_reverse_profit ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should always reverse profit? ");
-  std::cout << should_always_reverse_profit_color
-            << should_always_reverse_profit_text << fmt.reset << std::endl;
+  if (this->api_client.config.first_position_trend_slip_percentile) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("First Position Trend Slip Percentile: ");
+    std::cout << fmt.cyan
+              << this->api_client.config.first_position_trend_slip_percentile
+              << fmt.reset << std::endl;
+  }
 
   // TODO: Decide
   Formatted::Stream should_await_record_break_color =
