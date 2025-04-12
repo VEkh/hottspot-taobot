@@ -16,14 +16,11 @@ bool Alpaca::TaoBot::should_reverse_profit() {
       this->reversals, this->open_order_ptr->timestamp,
       this->open_order_ptr->entry_reversal.opposite_type());
 
-  double trends_slip_percentile = this->EQUATOR_PERCENTILE;
+  // reversal_t stop_profit_reversal = latest_record_reversal_after(
+  //     this->reversals, this->open_order_ptr->timestamp,
+  //     this->open_order_ptr->entry_reversal.opposite_type());
 
-  // TODO: Decide
-  if (this->api_client.config.first_position_trend_slip_percentile &&
-      this->closed_positions.empty()) {
-    trends_slip_percentile =
-        this->api_client.config.first_position_trend_slip_percentile;
-  }
+  double trends_slip_percentile = this->EQUATOR_PERCENTILE;
 
   if (stop_profit_reversal.at &&
       is_trend_slipping(this->open_order_ptr, trends_slip_percentile)) {

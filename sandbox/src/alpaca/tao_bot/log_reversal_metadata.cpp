@@ -13,15 +13,6 @@
 
 void Alpaca::TaoBot::log_reversal_metadata() {
   // TODO: Decide
-  if (this->api_client.config.first_position_trend_slip_percentile) {
-    std::cout << fmt.bold << fmt.yellow;
-    printf("First Position Trend Slip Percentile: ");
-    std::cout << fmt.cyan
-              << this->api_client.config.first_position_trend_slip_percentile
-              << fmt.reset << std::endl;
-  }
-
-  // TODO: Decide
   Formatted::Stream should_await_record_break_color =
       this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
 

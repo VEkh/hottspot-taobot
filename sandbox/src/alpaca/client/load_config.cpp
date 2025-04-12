@@ -66,12 +66,6 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("first_position_trend_slip_percentile")) {
-    this->config.first_position_trend_slip_percentile =
-        (double)api_key_json["first_position_trend_slip_percentile"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_await_record_break")) {
     this->config.should_await_record_break =
         (bool)api_key_json["should_await_record_break"];
@@ -103,8 +97,6 @@ void Alpaca::Client::load_config() {
       .data_base_url = config_json["data_base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
-      .first_position_trend_slip_percentile =
-          this->config.first_position_trend_slip_percentile, // TODO: Decide
       .is_live = api_key_json["is_live"],
       .should_await_record_break =
           this->config.should_await_record_break,            // TODO: Decide
