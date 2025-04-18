@@ -72,20 +72,8 @@ void Alpaca::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_reverse_at_trend_slip")) {
-    this->config.should_reverse_at_trend_slip =
-        (bool)api_key_json["should_reverse_at_trend_slip"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_stop_profit")) {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("stop_loss_day_range_ratio")) {
-    this->config.stop_loss_day_range_ratio =
-        (double)api_key_json["stop_loss_day_range_ratio"];
   }
 
   // TODO: Decide
@@ -111,12 +99,8 @@ void Alpaca::Client::load_config() {
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
       .should_await_record_break =
-          this->config.should_await_record_break, // TODO: Decide
-      .should_reverse_at_trend_slip =
-          this->config.should_reverse_at_trend_slip,         // TODO: Decide
+          this->config.should_await_record_break,            // TODO: Decide
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
-      .stop_loss_day_range_ratio =
-          this->config.stop_loss_day_range_ratio, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio,                  // TODO: Decide
       .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide

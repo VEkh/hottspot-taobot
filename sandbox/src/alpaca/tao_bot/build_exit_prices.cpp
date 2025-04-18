@@ -38,12 +38,6 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
         this->open_order_ptr->day_candle.range() * max_percentile_delta;
   }
 
-  // TODO: Decide
-  if (this->api_client.config.stop_loss_day_range_ratio) {
-    stop_loss = -(this->api_client.config.stop_loss_day_range_ratio *
-                  this->open_order_ptr->day_candle.range());
-  }
-
   return {
       .stop_loss = stop_loss,
       .stop_profit = stop_profit,

@@ -11,11 +11,6 @@ bool Alpaca::TaoBot::should_reverse_profit() {
     return false;
   }
 
-  // TODO: Decide
-  if (!this->api_client.config.should_reverse_at_trend_slip) {
-    return false;
-  }
-
   reversal_t stop_profit_reversal = latest_record_reversal_after(
       this->reversals, this->open_order_ptr->max_profit_at,
       this->open_order_ptr->entry_reversal.opposite_type());
