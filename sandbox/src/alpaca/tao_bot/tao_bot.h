@@ -108,6 +108,7 @@ private:
   bool is_position_closed();
   bool is_quote_stale(const quote_t, const double);
   bool is_reversal_after(const reversal_t, const double);
+  bool is_spread_too_wide();
   bool is_trend_slipping(const order_t *);
   bool is_trend_slipping(const order_t *, const double); // TODO: Decide
   bool is_trending();
