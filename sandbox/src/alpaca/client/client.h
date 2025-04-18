@@ -30,10 +30,10 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     bool is_live;
-    bool should_await_record_break = false; // TODO: Decide
-    bool should_stop_profit = false;        // TODO: Decide
-    double stop_loss_padding_ratio = 0.0;   // TODO: Decide
-    double warm_up_period_hours = 0.0;      // TODO: Decide
+    bool should_await_record_break = false;
+    bool should_stop_profit = false;      // TODO: Decide
+    double stop_loss_padding_ratio = 0.0; // TODO: Decide
+    double warm_up_period_hours = 0.0;
   } config;
 
   struct fetch_historical_quotes_args_t {

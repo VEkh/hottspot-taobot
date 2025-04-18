@@ -6,7 +6,6 @@
 void Alpaca::TaoBot::force_init_reversal_await() {
   this->current_trend.at = this->market_availability.market_epochs.open;
 
-  // TODO: Decide
   if (this->api_client.config.should_await_record_break) {
     this->current_trend.at +=
         this->api_client.config.warm_up_period_hours * 60.0 * 60.0;

@@ -12,7 +12,6 @@
 #include <string>    // std::string
 
 void Alpaca::TaoBot::log_reversal_metadata() {
-  // TODO: Decide
   Formatted::Stream should_await_record_break_color =
       this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
 
@@ -40,7 +39,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
     }
   }
 
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Warm Up Period Hours: ");
   std::cout << fmt.cyan << this->api_client.config.warm_up_period_hours

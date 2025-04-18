@@ -6,7 +6,7 @@
 Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_reversal(
     reversals_t &reversals_,
     const reversal_type_t reversal_type = reversal_type_t::REVERSAL_NULL,
-    const bool only_records = false) { // TODO: Decide
+    const bool only_records = false) {
   reversal_t recent_high;
   reversal_t recent_low;
   std::map<double, reversal_t>::reverse_iterator it;
@@ -21,7 +21,6 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_reversal(
           reversal_minute + reversals_.timeframe_minutes * 0.5;
 
       if (shifted_reversal_minute < ref_epoch_minute) {
-        // TODO: Decide
         if (only_records && !it->second.is_record) {
           continue;
         }
@@ -41,7 +40,6 @@ Alpaca::TaoBot::reversal_t Alpaca::TaoBot::latest_reversal(
           reversal_minute + reversals_.timeframe_minutes * 0.5;
 
       if (shifted_reversal_minute < ref_epoch_minute) {
-        // TODO: Decide
         if (only_records && !it->second.is_record) {
           continue;
         }

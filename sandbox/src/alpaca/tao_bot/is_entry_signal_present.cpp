@@ -10,9 +10,7 @@
 bool Alpaca::TaoBot::is_entry_signal_present() {
   const bool is_trending_ = is_trending();
 
-  // TODO: Decide
   reversal_t entry_reversal_;
-  // reversal_t entry_reversal_ = latest_record_as_reversal();
 
   if (!is_trending_ && !this->closed_positions.empty()) {
     const position_t last_position = this->closed_positions.back();

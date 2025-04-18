@@ -65,7 +65,6 @@ void Alpaca::Client::load_config() {
     this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("should_await_record_break")) {
     this->config.should_await_record_break =
         (bool)api_key_json["should_await_record_break"];
@@ -82,7 +81,6 @@ void Alpaca::Client::load_config() {
         (double)api_key_json["stop_loss_padding_ratio"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("warm_up_period_hours")) {
     this->config.warm_up_period_hours =
         (double)api_key_json["warm_up_period_hours"];
@@ -98,12 +96,11 @@ void Alpaca::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
-      .should_await_record_break =
-          this->config.should_await_record_break,            // TODO: Decide
+      .should_await_record_break = this->config.should_await_record_break,
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .stop_loss_padding_ratio =
-          this->config.stop_loss_padding_ratio,                  // TODO: Decide
-      .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide
+          this->config.stop_loss_padding_ratio, // TODO: Decide
+      .warm_up_period_hours = this->config.warm_up_period_hours,
   };
 }
 

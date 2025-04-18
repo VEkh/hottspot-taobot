@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_did_last_position_stop_profit
 #define ALPACA__TAO_BOT_did_last_position_stop_profit
 

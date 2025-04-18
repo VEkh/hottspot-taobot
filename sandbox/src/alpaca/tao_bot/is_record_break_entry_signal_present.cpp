@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef ALPACA__TAO_BOT_is_record_break_entry_signal_present
 #define ALPACA__TAO_BOT_is_record_break_entry_signal_present
 
