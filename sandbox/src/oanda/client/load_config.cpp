@@ -97,27 +97,9 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_only_enter_at_record")) {
-    this->config.should_only_enter_at_record =
-        (bool)api_key_json["should_only_enter_at_record"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("should_only_win_once")) {
-    this->config.should_only_win_once =
-        (bool)api_key_json["should_only_win_once"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("stop_loss_padding_ratio")) {
     this->config.stop_loss_padding_ratio =
         (double)api_key_json["stop_loss_padding_ratio"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("stop_profit_multiplier")) {
-    this->config.stop_profit_multiplier =
-        (double)api_key_json["stop_profit_multiplier"];
   }
 
   // TODO: Decide
@@ -143,13 +125,8 @@ void Oanda::Client::load_config() {
           this->config.should_enter_at_spike, // TODO: Decide
       .should_enter_in_trend_direction =
           this->config.should_enter_in_trend_direction, // TODO: Decide
-      .should_only_enter_at_record =
-          this->config.should_only_enter_at_record,              // TODO: Decide
-      .should_only_win_once = this->config.should_only_win_once, // TODO: Decide
       .stop_loss_padding_ratio =
-          this->config.stop_loss_padding_ratio, // TODO: Decide
-      .stop_profit_multiplier =
-          this->config.stop_profit_multiplier,                   // TODO: Decide
+          this->config.stop_loss_padding_ratio,                  // TODO: Decide
       .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide
   };
 }

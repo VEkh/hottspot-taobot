@@ -24,8 +24,7 @@ bool Oanda::TaoBot::can_open_position() {
   }
 
   // TODO: Decide
-  if (this->api_client.config.should_only_win_once &&
-      this->has_stopped_profit) {
+  if (this->has_stopped_profit) {
     return false;
   }
 

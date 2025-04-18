@@ -32,10 +32,8 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
       std::max(execution_price_percentile, inv_execution_price_percentile) /
       100.0;
 
-  // TODO: Decide
-  const double stop_profit = this->open_order_ptr->day_candle.range() *
-                             max_percentile_delta *
-                             this->api_client.config.stop_profit_multiplier;
+  const double stop_profit =
+      this->open_order_ptr->day_candle.range() * max_percentile_delta;
 
   return {
       .stop_loss = stop_loss,

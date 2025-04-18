@@ -34,10 +34,7 @@ public:
     bool should_await_record_break = false;       // TODO: Decide
     bool should_enter_at_spike = true;            // TODO: Decide
     bool should_enter_in_trend_direction = false; // TODO: Decide
-    bool should_only_enter_at_record = false;     // TODO: Decide
-    bool should_only_win_once = true;             // TODO: Decide
     double stop_loss_padding_ratio = 0.2;         // TODO: Decide
-    double stop_profit_multiplier = 1.0;          // TODO: Decide
     double warm_up_period_hours = 0.0;            // TODO: Decide
   } config;
 

@@ -73,30 +73,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << should_enter_in_trend_direction_color
             << should_enter_in_trend_direction_text << fmt.reset << std::endl;
 
-  // TODO: Decide
-  Formatted::Stream should_only_enter_at_record_color =
-      this->api_client.config.should_only_enter_at_record ? fmt.green : fmt.red;
-
-  const std::string should_only_enter_at_record_text =
-      this->api_client.config.should_only_enter_at_record ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should only enter at record? ");
-  std::cout << should_only_enter_at_record_color
-            << should_only_enter_at_record_text << fmt.reset << std::endl;
-
-  // TODO: Decide
-  Formatted::Stream should_only_win_once_color =
-      this->api_client.config.should_only_win_once ? fmt.green : fmt.red;
-
-  const std::string should_only_win_once_text =
-      this->api_client.config.should_only_win_once ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should only win once? ");
-  std::cout << should_only_win_once_color << should_only_win_once_text
-            << fmt.reset << std::endl;
-
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
   std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
@@ -109,12 +85,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Profit Multiplier: ");
-  std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
             << fmt.reset << std::endl;
 
   if (this->open_order_ptr) {

@@ -148,6 +148,7 @@ private:
   bool is_trending(const trend_meta_t);                  // TODO: Decide
   bool max_account_loss_reached();
   bool should_close_position();
+  bool should_nullify_entry_reversal(); // TODO: Decide
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_loss();
