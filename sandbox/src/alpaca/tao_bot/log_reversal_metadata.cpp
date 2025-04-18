@@ -25,6 +25,25 @@ void Alpaca::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream should_reverse_at_trend_slip_color =
+      this->api_client.config.should_reverse_at_trend_slip ? fmt.green
+                                                           : fmt.red;
+
+  const std::string should_reverse_at_trend_slip_text =
+      this->api_client.config.should_reverse_at_trend_slip ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should reverse at trend slip? ");
+  std::cout << should_reverse_at_trend_slip_color
+            << should_reverse_at_trend_slip_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Loss Day Range Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_loss_day_range_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio

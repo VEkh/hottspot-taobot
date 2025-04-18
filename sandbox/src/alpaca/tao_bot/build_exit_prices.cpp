@@ -15,9 +15,10 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
   const double reversal_delta = -abs(entry_reversal_mid - execution_price);
 
-  const double stop_loss = std::min(-0.01, reversal_delta) -
-                           this->api_client.config.stop_loss_padding_ratio *
-                               this->day_candle.range();
+  // TODO: Decide
+  double stop_loss = std::min(-0.01, reversal_delta) -
+                     this->api_client.config.stop_loss_padding_ratio *
+                         this->day_candle.range();
 
   double stop_profit = 0.0;
 
@@ -35,6 +36,12 @@ Alpaca::TaoBot::exit_prices_t Alpaca::TaoBot::build_exit_prices() {
 
     stop_profit =
         this->open_order_ptr->day_candle.range() * max_percentile_delta;
+  }
+
+  // TODO: Decide
+  if (this->api_client.config.stop_loss_day_range_ratio) {
+    stop_loss = -(this->api_client.config.stop_loss_day_range_ratio *
+                  this->open_order_ptr->day_candle.range());
   }
 
   return {
