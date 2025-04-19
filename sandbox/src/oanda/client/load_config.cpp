@@ -68,6 +68,18 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("market_duration_hours")) {
+    this->config.market_duration_hours =
+        (int)api_key_json["market_duration_hours"];
+  }
+
+  // TODO: Decide
+  if (api_key_json.contains("market_standard_open_time")) {
+    this->config.market_standard_open_time =
+        (std::string)api_key_json["market_standard_open_time"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("range_min_height")) {
     this->config.range_min_height = (double)api_key_json["range_min_height"];
   }
@@ -116,7 +128,11 @@ void Oanda::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .margin_multiplier = this->config.margin_multiplier, // TODO: Decide
-      .range_min_height = this->config.range_min_height,   // TODO: Decide
+      .market_duration_hours =
+          this->config.market_duration_hours, // TODO: Decide
+      .market_standard_open_time =
+          this->config.market_standard_open_time,        // TODO: Decide
+      .range_min_height = this->config.range_min_height, // TODO: Decide
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit, // TODO: Decide
       .should_await_record_break =

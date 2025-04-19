@@ -19,6 +19,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Market Duration Hours: ");
+  std::cout << fmt.cyan << this->api_client.config.market_duration_hours
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
             << std::endl;

@@ -2,10 +2,37 @@
 #define MARKET_AVAILABILITY__FOREX_next_market_open_epoch
 
 #include "forex.h"                     // MarketAvailability::Forex
+#include "get_market_open_epoch.cpp"   // get_market_open_epoch
 #include "lib/utils/time.cpp"          // ::utils::time_
 #include "week_market_bound_epoch.cpp" // week_market_bound_epoch
+#include <string>                      // std::string
 
-double MarketAvailability::Forex::next_market_open_epoch(const double epoch) {
+double MarketAvailability::Forex::next_market_open_epoch(
+    const double epoch, const std::string standard_open_time) {
+  const int day_of_week = ::utils::time_::day_of_week(epoch);
+
+  const double today_market_open_epoch =
+      get_market_open_epoch(epoch, standard_open_time);
+
+  const double tomorrow_market_open_epoch =
+      get_market_open_epoch(epoch + this->ONE_DAY_SECONDS, standard_open_time);
+
+  if (day_of_week == 6) {
+    return week_market_bound_epoch(epoch + this->ONE_DAY_SECONDS, 0);
+  }
+
+  return epoch <= today_market_open_epoch ? today_market_open_epoch
+                                          : tomorrow_market_open_epoch;
+}
+
+// TODO: Decide
+double MarketAvailability::Forex::next_market_open_epoch(
+    const double epoch, const int market_duration_hours,
+    const std::string standard_open_time) {
+  if (!market_duration_hours) {
+    return next_market_open_epoch(epoch, standard_open_time);
+  }
+
   const int day_of_week = ::utils::time_::day_of_week(epoch);
 
   if (day_of_week == 5 && epoch == week_market_bound_epoch(epoch, 5)) {

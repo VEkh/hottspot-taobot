@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef MARKET_AVAILABILITY__FOREX_week_market_bound_epoch
 #define MARKET_AVAILABILITY__FOREX_week_market_bound_epoch
 
