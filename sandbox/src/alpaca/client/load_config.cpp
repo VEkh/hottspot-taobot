@@ -75,12 +75,6 @@ void Alpaca::Client::load_config() {
     this->config.should_stop_profit = (bool)api_key_json["should_stop_profit"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("stop_loss_padding_ratio")) {
-    this->config.stop_loss_padding_ratio =
-        (double)api_key_json["stop_loss_padding_ratio"];
-  }
-
   if (api_key_json.contains("warm_up_period_hours")) {
     this->config.warm_up_period_hours =
         (double)api_key_json["warm_up_period_hours"];
@@ -98,8 +92,6 @@ void Alpaca::Client::load_config() {
       .is_live = api_key_json["is_live"],
       .should_await_record_break = this->config.should_await_record_break,
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
-      .stop_loss_padding_ratio =
-          this->config.stop_loss_padding_ratio, // TODO: Decide
       .warm_up_period_hours = this->config.warm_up_period_hours,
   };
 }

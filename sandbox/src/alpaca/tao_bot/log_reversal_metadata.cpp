@@ -24,12 +24,6 @@ void Alpaca::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Loss Padding Ratio: ");
-  std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
   if (this->api_client.config.should_stop_profit) {
     if (this->open_order_ptr) {
       std::cout << fmt.bold << fmt.yellow;
