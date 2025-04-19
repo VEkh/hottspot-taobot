@@ -61,6 +61,17 @@ void Alpaca::TaoBot::log_account_snapshot() {
   printf("Original Equity:                  $%'.2f\n",
          this->account_snapshot.original_equity);
 
+  const double account_stop_loss_ratio =
+      this->api_client.config.account_stop_loss_ratio;
+
+  if (account_stop_loss_ratio) {
+    const double stop_loss_equity =
+        this->account_snapshot.original_equity * (1 + account_stop_loss_ratio);
+
+    printf("Stop Loss Equity:                 $%'.2f (%.2f%%)\n",
+           stop_loss_equity, 100.0 * account_stop_loss_ratio);
+  }
+
   printf("Margin Buying Power:              $%'.2f\n",
          this->account_snapshot.margin_buying_power);
 
