@@ -92,6 +92,7 @@ struct exit_prices_t {
 
 struct market_epochs_t {
   double close = 0.0;
+  double next = 0.0;
   double open = 0.0;
   double pre = 0.0;
 };

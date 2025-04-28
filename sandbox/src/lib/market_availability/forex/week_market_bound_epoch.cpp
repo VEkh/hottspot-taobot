@@ -2,15 +2,15 @@
 #ifndef MARKET_AVAILABILITY__FOREX_week_market_bound_epoch
 #define MARKET_AVAILABILITY__FOREX_week_market_bound_epoch
 
-#include "forex.h"            // MarketAvailability::Forex
+#include "forex.h"            // MarketAvailability::Forex, market_weekdays_t
 #include "lib/utils/time.cpp" // ::utils::time_
 #include <string>             // std::string
 
 double MarketAvailability::Forex::week_market_bound_epoch(
-    const double epoch, const int bound_day_of_week) {
+    const double epoch, const market_weekdays_t bound_day_of_week) {
   const int day_of_week = ::utils::time_::day_of_week(epoch);
 
-  const int bound_day_delta = bound_day_of_week - day_of_week;
+  const int bound_day_delta = (int)bound_day_of_week - day_of_week;
 
   const double week_bound_epoch =
       epoch + (bound_day_delta * this->ONE_DAY_SECONDS);

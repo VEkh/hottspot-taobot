@@ -28,16 +28,16 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
-    double margin_multiplier = 1.0;                     // TODO: Decide
-    int market_duration_hours = 120;                    // TODO: Decide
-    std::string market_standard_open_time = "07:00:00"; // TODO: Decide
-    double range_min_height = 0.5;                      // TODO: Decide
-    bool should_always_reverse_profit = false;          // TODO: Decide
-    bool should_await_record_break = false;             // TODO: Decide
-    bool should_enter_at_spike = true;                  // TODO: Decide
-    bool should_enter_in_trend_direction = false;       // TODO: Decide
-    double stop_loss_padding_ratio = 0.2;               // TODO: Decide
-    double warm_up_period_hours = 0.0;                  // TODO: Decide
+    double margin_multiplier = 1.0; // TODO: Decide
+    double market_duration_hours = 120.0;
+    std::string market_open_central_time = "07:00:00";
+    double range_min_height = 0.5;             // TODO: Decide
+    bool should_always_reverse_profit = false; // TODO: Decide
+    bool should_await_record_break = false;    // TODO: Decide
+    bool should_enter_at_spike = true;         // TODO: Decide
+    bool should_stop_profit = true;            // TODO: Decide
+    double stop_loss_padding_ratio = 0.2;      // TODO: Decide
+    double warm_up_period_hours = 0.0;         // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

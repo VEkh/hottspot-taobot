@@ -16,23 +16,17 @@ void Oanda::TaoBot::reset_backtest() {
       .symbol = this->symbol,
   });
 
-  // TODO: Decide
-  const double next_market_open_epoch =
-      std::min((double)time(nullptr),
-               this->market_availability.next_market_open_epoch(
-                   this->market_availability.market_epochs.close,
-                   this->api_client.config.market_duration_hours,
-                   this->api_client.config.market_standard_open_time));
-
   this->backtest.await_env_market_close(
-      this->market_availability.market_epochs.close, next_market_open_epoch);
+      this->market_availability.market_epochs.close,
+      this->market_availability.market_epochs.next);
 
-  advance_current_epoch(next_market_open_epoch);
+  advance_current_epoch(this->market_availability.market_epochs.next);
 
-  // TODO: Decide
-  this->market_availability.set_market_epochs(
-      this->current_epoch, this->api_client.config.market_duration_hours,
-      this->api_client.config.market_standard_open_time);
+  this->market_availability.set_market_epochs({
+      .current_epoch = this->current_epoch,
+      .market_duration_hours = this->api_client.config.market_duration_hours,
+      .open_central_time = this->api_client.config.market_open_central_time,
+  });
 
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
