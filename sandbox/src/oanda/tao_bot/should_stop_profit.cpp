@@ -6,6 +6,11 @@
 #include "tao_bot.h"                 // Oanda::TaoBot, reversal_t
 
 bool Oanda::TaoBot::should_stop_profit() {
+  // TODO: Decide
+  if (!this->api_client.config.should_stop_profit) {
+    return false;
+  }
+
   if (!this->open_order_ptr) {
     return false;
   }

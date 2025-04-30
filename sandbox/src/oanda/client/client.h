@@ -35,7 +35,9 @@ public:
     bool should_always_reverse_profit = false; // TODO: Decide
     bool should_await_record_break = false;    // TODO: Decide
     bool should_enter_at_spike = true;         // TODO: Decide
+    bool should_reverse_at_trend_slip = true;  // TODO: Decide
     bool should_stop_profit = true;            // TODO: Decide
+    double stop_loss_day_range_ratio = 0.0;    // TODO: Decide
     double stop_loss_padding_ratio = 0.2;      // TODO: Decide
     double warm_up_period_hours = 0.0;         // TODO: Decide
   } config;

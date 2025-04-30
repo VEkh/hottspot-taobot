@@ -67,17 +67,17 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  Formatted::Stream should_enter_in_trend_direction_color =
-      this->api_client.config.should_enter_in_trend_direction ? fmt.green
-                                                              : fmt.red;
+  Formatted::Stream should_reverse_at_trend_slip_color =
+      this->api_client.config.should_reverse_at_trend_slip ? fmt.green
+                                                           : fmt.red;
 
-  const std::string should_enter_in_trend_direction_text =
-      this->api_client.config.should_enter_in_trend_direction ? "YES" : "NO";
+  const std::string should_reverse_at_trend_slip_text =
+      this->api_client.config.should_reverse_at_trend_slip ? "YES" : "NO";
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Should enter in trend direction? ");
-  std::cout << should_enter_in_trend_direction_color
-            << should_enter_in_trend_direction_text << fmt.reset << std::endl;
+  printf("Should reverse at trend slip? ");
+  std::cout << should_reverse_at_trend_slip_color
+            << should_reverse_at_trend_slip_text << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
@@ -89,11 +89,29 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Loss Day Range Ratio: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_loss_day_range_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
             << fmt.reset << std::endl;
 
-  if (this->open_order_ptr) {
+  // TODO: Decide
+  Formatted::Stream should_stop_profit_color =
+      this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
+
+  const std::string should_stop_profit_text =
+      this->api_client.config.should_stop_profit ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should stop profit? ");
+  std::cout << should_stop_profit_color << should_stop_profit_text << fmt.reset
+            << std::endl;
+
+  if (this->api_client.config.should_stop_profit && this->open_order_ptr) {
     std::cout << fmt.bold << fmt.yellow;
     printf("Stop Profit Type: ");
     std::cout << fmt.cyan << stop_profit_type_name(this->open_order_ptr)
@@ -130,6 +148,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Warm up period (hours): ");
+  std::cout << fmt.cyan << this->api_client.config.warm_up_period_hours;
+  std::cout << std::endl;
+
   if (this->open_order_ptr && this->open_order_ptr->entry_reversal.at) {
     std::cout << fmt.bold << fmt.magenta << fmt.underline << std::endl;
     printf("Open Position Entry Reversal\n");
@@ -155,12 +179,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
     std::cout << std::endl;
   }
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Warm up period (hours): ");
-  std::cout << fmt.cyan << this->api_client.config.warm_up_period_hours;
-  std::cout << std::endl;
 
   std::cout << fmt.reset << std::endl;
 }
