@@ -33,7 +33,6 @@ public:
     std::string market_open_central_time = "07:00:00";
     double range_min_height = 0.5;             // TODO: Decide
     bool should_always_reverse_profit = false; // TODO: Decide
-    bool should_avoid_double_reverse = false;  // TODO: Decide
     bool should_await_record_break = false;    // TODO: Decide
     bool should_enter_at_spike = true;         // TODO: Decide
     bool should_reverse_at_trend_slip = true;  // TODO: Decide

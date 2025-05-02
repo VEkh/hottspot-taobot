@@ -29,16 +29,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   }
 
   // TODO: Decide
-  if (this->api_client.config.should_avoid_double_reverse &&
-      !this->closed_positions.empty()) {
-    const order_t last_close_order = this->closed_positions.back().close_order;
-
-    if (last_close_order.stop_profit_reversal.at) {
-      stop_loss = -0.5 * reversal_delta;
-    }
-  }
-
-  // TODO: Decide
   double stop_profit = 0.0;
 
   if (this->api_client.config.should_stop_profit) {
