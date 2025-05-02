@@ -89,6 +89,12 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
+  if (api_key_json.contains("should_avoid_double_reverse")) {
+    this->config.should_avoid_double_reverse =
+        (bool)api_key_json["should_avoid_double_reverse"];
+  }
+
+  // TODO: Decide
   if (api_key_json.contains("should_await_record_break")) {
     this->config.should_await_record_break =
         (bool)api_key_json["should_await_record_break"];
@@ -142,6 +148,8 @@ void Oanda::Client::load_config() {
       .range_min_height = this->config.range_min_height, // TODO: Decide
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit, // TODO: Decide
+      .should_avoid_double_reverse =
+          this->config.should_avoid_double_reverse, // TODO: Decide
       .should_await_record_break =
           this->config.should_await_record_break, // TODO: Decide
       .should_enter_at_spike =

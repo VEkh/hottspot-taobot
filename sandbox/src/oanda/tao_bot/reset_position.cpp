@@ -14,6 +14,7 @@
 #include "reset_orders.cpp"      // reset_orders
 
 #include "has_just_reached_stop_profit.cpp" // has_just_reached_stop_profit // TODO: Decide
+#include "has_just_stopped_double_reverse.cpp" // has_just_stopped_double_reverse // TODO: Decide
 #include "initialize_current_trend.cpp" // initialize_current_trend // TODO: Decide
 #include "should_toggle_is_trending.cpp" // should_toggle_is_trending // TODO: Decide
 #include "toggle_is_trending.cpp"        // toggle_is_trending // TODO: Decide
@@ -51,7 +52,8 @@ void Oanda::TaoBot::reset_position() {
 
   // TODO: Decide
   if (this->has_stopped_profit ||
-      !this->api_client.config.should_reverse_at_trend_slip) {
+      !this->api_client.config.should_reverse_at_trend_slip ||
+      has_just_stopped_double_reverse()) {
     const position_t last_position = this->closed_positions.back();
 
     this->current_trend.at = last_position.close_order.timestamp;

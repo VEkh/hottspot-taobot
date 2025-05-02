@@ -4,9 +4,14 @@
 
 #include "tao_bot.h" // Oanda::TaoBot, order_t, reversal_t
 
+// TODO: Decide
+#include "has_just_stopped_double_reverse.cpp" // has_just_stopped_double_reverse
+
 bool Oanda::TaoBot::should_nullify_entry_reversal() {
-  if (!this->api_client.config.should_reverse_at_trend_slip &&
-      !this->closed_positions.empty()) {
+  // TODO: Decide
+  if ((!this->api_client.config.should_reverse_at_trend_slip &&
+       !this->closed_positions.empty()) ||
+      has_just_stopped_double_reverse()) {
     const reversal_t record_high =
         latest_record_as_reversal(reversal_type_t::REVERSAL_HIGH);
 
