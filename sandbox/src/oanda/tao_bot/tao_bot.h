@@ -134,6 +134,7 @@ private:
   bool can_open_position();
   bool did_last_position_stop_profit(); // TODO: Decide
   bool has_just_reached_stop_profit();
+  bool has_just_stopped_double_reverse(); // TODO: Decide
   bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();

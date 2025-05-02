@@ -43,6 +43,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << should_always_reverse_profit_text << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream should_avoid_double_reverse_color =
+      this->api_client.config.should_avoid_double_reverse ? fmt.green : fmt.red;
+
+  const std::string should_avoid_double_reverse_text =
+      this->api_client.config.should_avoid_double_reverse ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should avoid double reverse? ");
+  std::cout << should_avoid_double_reverse_color
+            << should_avoid_double_reverse_text << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_await_record_break_color =
       this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
 
