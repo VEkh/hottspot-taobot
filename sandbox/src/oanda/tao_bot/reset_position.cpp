@@ -50,8 +50,7 @@ void Oanda::TaoBot::reset_position() {
   this->has_stopped_profit = has_just_reached_stop_profit();
 
   // TODO: Decide
-  if (this->has_stopped_profit ||
-      !this->api_client.config.should_reverse_at_trend_slip) {
+  if (this->has_stopped_profit) {
     const position_t last_position = this->closed_positions.back();
 
     this->current_trend.at = last_position.close_order.timestamp;

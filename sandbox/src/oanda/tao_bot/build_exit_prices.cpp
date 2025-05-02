@@ -23,12 +23,6 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   //     this->STOP_LOSS_PADDING_RATIO * this->day_candle.range();
 
   // TODO: Decide
-  if (this->api_client.config.stop_loss_day_range_ratio) {
-    stop_loss = -(this->api_client.config.stop_loss_day_range_ratio *
-                  this->open_order_ptr->day_candle.range());
-  }
-
-  // TODO: Decide
   double stop_profit = 0.0;
 
   if (this->api_client.config.should_stop_profit) {
