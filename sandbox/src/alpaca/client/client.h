@@ -30,6 +30,7 @@ public:
     bool debug_sql = false;
     std::list<std::string> env_symbols;
     bool is_live;
+    std::string reverse_profit_ref_epoch = "opened_at";
     bool should_await_record_break = false;
     bool should_stop_profit = false; // TODO: Decide
     double warm_up_period_hours = 0.0;

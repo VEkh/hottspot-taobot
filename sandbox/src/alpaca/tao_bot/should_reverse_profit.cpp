@@ -11,8 +11,14 @@ bool Alpaca::TaoBot::should_reverse_profit() {
     return false;
   }
 
+  double ref_epoch = this->open_order_ptr->timestamp;
+
+  if (this->api_client.config.reverse_profit_ref_epoch == "max_profit_at") {
+    ref_epoch = this->open_order_ptr->max_profit_at;
+  }
+
   reversal_t stop_profit_reversal = latest_record_reversal_after(
-      this->reversals, this->open_order_ptr->max_profit_at,
+      this->reversals, ref_epoch,
       this->open_order_ptr->entry_reversal.opposite_type());
 
   if (stop_profit_reversal.at &&
