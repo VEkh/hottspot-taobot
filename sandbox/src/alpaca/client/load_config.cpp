@@ -65,6 +65,11 @@ void Alpaca::Client::load_config() {
     this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
+  if (api_key_json.contains("reverse_profit_ref_epoch")) {
+    this->config.reverse_profit_ref_epoch =
+        (std::string)api_key_json["reverse_profit_ref_epoch"];
+  }
+
   if (api_key_json.contains("should_await_record_break")) {
     this->config.should_await_record_break =
         (bool)api_key_json["should_await_record_break"];
@@ -90,6 +95,7 @@ void Alpaca::Client::load_config() {
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],
+      .reverse_profit_ref_epoch = this->config.reverse_profit_ref_epoch,
       .should_await_record_break = this->config.should_await_record_break,
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .warm_up_period_hours = this->config.warm_up_period_hours,

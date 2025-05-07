@@ -12,6 +12,11 @@
 #include <string>    // std::string
 
 void Alpaca::TaoBot::log_reversal_metadata() {
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Reverse profit ref epoch: ");
+  std::cout << fmt.cyan << this->api_client.config.reverse_profit_ref_epoch
+            << fmt.reset << std::endl;
+
   Formatted::Stream should_await_record_break_color =
       this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
 
