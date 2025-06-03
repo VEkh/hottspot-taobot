@@ -27,17 +27,26 @@ public:
     std::string authentication_token;
     std::string base_url;
     bool debug_sql = false;
+    int consolidate_after_losses = 0;              // TODO: Decide
+    double dynamic_reverse_percentile = 0.0;       // TODO: Decide
+    double dynamic_reverse_percentile_ratio = 0.0; // TODO: Decide
     std::list<std::string> env_symbols;
     double margin_multiplier = 1.0; // TODO: Decide
     double market_duration_hours = 120.0;
     std::string market_open_central_time = "07:00:00";
-    double range_min_height = 0.5;             // TODO: Decide
-    bool should_always_reverse_profit = false; // TODO: Decide
-    bool should_await_record_break = false;    // TODO: Decide
-    bool should_enter_at_spike = true;         // TODO: Decide
-    bool should_stop_profit = true;            // TODO: Decide
-    double stop_loss_padding_ratio = 0.2;      // TODO: Decide
-    double warm_up_period_hours = 0.0;         // TODO: Decide
+    int max_loss_streak = 0;                        // TODO: Decide
+    bool only_stop_profit_in_consolidation = false; // TODO: Decide
+    double range_min_height = 0.5;                  // TODO: Decide
+    double reverse_percentile = 50.0;               // TODO: Decide
+    bool should_always_reverse_profit = false;      // TODO: Decide
+    bool should_await_record_break = false;         // TODO: Decide
+    bool should_enter_at_spike = true;              // TODO: Decide
+    bool should_stop_profit = true;                 // TODO: Decide
+    double stop_loss_padding_ratio = 0.2;           // TODO: Decide
+    bool stop_profit_is_always_range = false;       // TODO: Decide
+    double stop_profit_multiplier = 1.0;            // TODO: Decide
+    double warm_up_max_height = 0.0;                // TODO: Decide
+    double warm_up_period_hours = 0.0;              // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {

@@ -146,6 +146,7 @@ private:
   bool is_trend_slipping(const order_t *, const double); // TODO: Decide
   bool is_trending();                                    // TODO: Decide
   bool is_trending(const trend_meta_t);                  // TODO: Decide
+  bool is_warm_up_within_max_height();                   // TODO: Decide
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_nullify_entry_reversal(); // TODO: Decide
@@ -166,6 +167,7 @@ private:
   double margin_buying_power();
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
+  double reverse_percentile(); // TODO: Decide
   double spike_score(spike_candles_t);
   double spread_limit();
 

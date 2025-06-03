@@ -4,6 +4,7 @@
 #include "day_range_percentile.cpp"  // day_range_percentile
 #include "lib/formatted.cpp"         // Formatted
 #include "lib/utils/time.cpp"        // ::utils::time_
+#include "reverse_percentile.cpp"    // reverse_percentile // TODO: Decide
 #include "stop_profit_type_name.cpp" // stop_profit_type_name
 #include "tao_bot.h" // Oanda::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
@@ -11,6 +12,25 @@
 #include <string>    // std::string
 
 void Oanda::TaoBot::log_reversal_metadata() {
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Consolidate After Losses: ");
+  std::cout << fmt.cyan << this->api_client.config.consolidate_after_losses
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Dynamic Reverse Percentile Ratio: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.dynamic_reverse_percentile_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Dynamic Reverse Percentile: ");
+  std::cout << fmt.cyan << this->api_client.config.dynamic_reverse_percentile
+            << fmt.reset << std::endl;
+
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Margin Multiplier: ");
@@ -25,9 +45,33 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Max Loss Streak: ");
+  std::cout << fmt.cyan << this->api_client.config.max_loss_streak << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream only_stop_profit_in_consolidation_color =
+      this->api_client.config.only_stop_profit_in_consolidation ? fmt.green
+                                                                : fmt.red;
+
+  const std::string only_stop_profit_in_consolidation_text =
+      this->api_client.config.only_stop_profit_in_consolidation ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Only stop profit in consolidation? ");
+  std::cout << only_stop_profit_in_consolidation_color
+            << only_stop_profit_in_consolidation_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
             << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Reverse Percentile (%%): ");
+  std::cout << fmt.cyan << reverse_percentile() << fmt.reset << std::endl;
 
   // TODO: Decide
   Formatted::Stream should_always_reverse_profit_color =
@@ -81,6 +125,24 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  Formatted::Stream stop_profit_is_always_range_color =
+      this->api_client.config.stop_profit_is_always_range ? fmt.green : fmt.red;
+
+  const std::string stop_profit_is_always_range_text =
+      this->api_client.config.stop_profit_is_always_range ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit is always range? ");
+  std::cout << stop_profit_is_always_range_color
+            << stop_profit_is_always_range_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit Multiplier: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_stop_profit_color =
       this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
 
@@ -128,6 +190,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.bold << fmt.yellow;
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Warm Up Range Max Height %%: ");
+  std::cout << fmt.cyan << this->api_client.config.warm_up_max_height * 100.0;
+  std::cout << std::endl;
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
