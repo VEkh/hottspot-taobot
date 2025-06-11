@@ -38,7 +38,15 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
 
     stop_profit =
         this->open_order_ptr->day_candle.range() * max_percentile_delta;
+
+    // TODO: Decide
+    if (this->api_client.config.stop_profit_is_always_range) {
+      stop_profit = this->open_order_ptr->day_candle.range();
+    }
   }
+
+  // TODO: Decide
+  stop_profit *= this->api_client.config.stop_profit_multiplier;
 
   return {
       .stop_loss = stop_loss,
