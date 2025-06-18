@@ -28,6 +28,9 @@ void Oanda::TaoBot::reset_backtest() {
       .open_central_time = this->api_client.config.market_open_central_time,
   });
 
+  // TODO: Decide
+  this->market_availability.session_count += 1;
+
   this->closed_positions = {};
   this->current_trend = trend_meta_t();
   this->day_candle = candle_t();
@@ -35,6 +38,7 @@ void Oanda::TaoBot::reset_backtest() {
   this->db_candle.clear_cache();
   this->has_stopped_profit = false; // TODO: Decide
   this->spike_candles = spike_candles_t();
+  this->warm_up_candle = candle_t(); // TODO: Decide
 
   this->current_quote = quote_t();
   this->previous_quote = quote_t();

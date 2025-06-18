@@ -1,9 +1,11 @@
 #ifndef OANDA__TAO_BOT_log_reversal_metadata
 #define OANDA__TAO_BOT_log_reversal_metadata
 
-#include "day_range_percentile.cpp"  // day_range_percentile
-#include "lib/formatted.cpp"         // Formatted
-#include "lib/utils/time.cpp"        // ::utils::time_
+#include "day_range_percentile.cpp" // day_range_percentile
+#include "lib/formatted.cpp"        // Formatted
+#include "lib/utils/time.cpp"       // ::utils::time_
+#include "normalized_margin_multiplier.cpp" // normalized_margin_multiplier // TODO: Decide
+#include "reverse_percentile.cpp"    // reverse_percentile // TODO: Decide
 #include "stop_profit_type_name.cpp" // stop_profit_type_name
 #include "tao_bot.h" // Oanda::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
@@ -13,8 +15,35 @@
 void Oanda::TaoBot::log_reversal_metadata() {
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Dynamic Reverse Percentile Ratio: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.dynamic_reverse_percentile_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Dynamic Reverse Percentile: ");
+  std::cout << fmt.cyan << this->api_client.config.dynamic_reverse_percentile
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Entry Padding: ");
+  std::cout << fmt.cyan << this->api_client.config.entry_padding << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Margin Multiplier: ");
-  std::cout << fmt.cyan << this->api_client.config.margin_multiplier
+  std::cout << fmt.cyan << normalized_margin_multiplier() << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Margin Normalization Base %%: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.margin_normalization_base_price_action *
+                   100.0
             << fmt.reset << std::endl;
 
   // TODO: Decide
@@ -25,9 +54,33 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Market Session Count: ");
+  std::cout << fmt.cyan << this->market_availability.session_count << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream only_stop_profit_in_consolidation_color =
+      this->api_client.config.only_stop_profit_in_consolidation ? fmt.green
+                                                                : fmt.red;
+
+  const std::string only_stop_profit_in_consolidation_text =
+      this->api_client.config.only_stop_profit_in_consolidation ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Only stop profit in consolidation? ");
+  std::cout << only_stop_profit_in_consolidation_color
+            << only_stop_profit_in_consolidation_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
             << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Reverse Percentile (%%): ");
+  std::cout << fmt.cyan << reverse_percentile() << fmt.reset << std::endl;
 
   // TODO: Decide
   Formatted::Stream should_always_reverse_profit_color =
@@ -81,6 +134,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit Multiplier: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
   Formatted::Stream should_stop_profit_color =
       this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
 
@@ -128,6 +187,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.bold << fmt.yellow;
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Warm Up Range Max Height %%: ");
+  std::cout << fmt.cyan << this->api_client.config.warm_up_max_height * 100.0;
+  std::cout << std::endl;
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;

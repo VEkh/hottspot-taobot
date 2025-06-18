@@ -38,15 +38,29 @@ bool Oanda::TaoBot::is_record_break_entry_signal_present() {
     } else {
       const double current_mid_ = current_mid();
 
-      if (current_mid_ >= record_high.mid) {
+      // TODO: Decide
+      const double entry_padding =
+          this->api_client.config.entry_padding * this->warm_up_candle.range();
+
+      if (current_mid_ >= this->warm_up_candle.high + entry_padding) {
         reversal = record_low;
-      } else if (current_mid_ <= record_low.mid) {
+      } else if (current_mid_ <= this->warm_up_candle.low - entry_padding) {
         reversal = record_high;
       }
 
       if (should_nullify_entry_reversal()) {
         reversal = reversal_t();
       }
+
+      // if (current_mid_ >= record_high.mid ) {
+      //   reversal = record_low;
+      // } else if (current_mid_ <= record_low.mid) {
+      //   reversal = record_high;
+      // }
+
+      // if (should_nullify_entry_reversal()) {
+      //   reversal = reversal_t();
+      // }
     }
 
     entry_reversal_ = reversal;

@@ -1,7 +1,8 @@
 #ifndef OANDA__TAO_BOT_can_open_position
 #define OANDA__TAO_BOT_can_open_position
 
-#include "is_range_min_height.cpp"      // is_range_min_height // TODO: Decide
+#include "is_range_min_height.cpp" // is_range_min_height // TODO: Decide
+#include "is_warm_up_within_max_height.cpp" // is_warm_up_within_max_height // TODO: Decide
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "spread_limit.cpp"             // spread_limit
 #include "tao_bot.h"                    // Oanda::TaoBot, fmt, order_action_t
@@ -30,6 +31,18 @@ bool Oanda::TaoBot::can_open_position() {
 
   // TODO: Decide
   if (!is_range_min_height()) {
+    return false;
+  }
+
+  // TODO: Decide
+  if (this->api_client.config.max_loss_streak &&
+      this->performance.loss_streaks.current >=
+          this->api_client.config.max_loss_streak) {
+    return false;
+  }
+
+  // TODO: Decide
+  if (this->closed_positions.empty() && !is_warm_up_within_max_height()) {
     return false;
   }
 

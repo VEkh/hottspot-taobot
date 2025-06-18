@@ -109,6 +109,7 @@ private:
   bool has_stopped_profit = false; // TODO: Decide
   exit_prices_t exit_prices;
   candle_t day_candle;
+  candle_t warm_up_candle; // TODO: Decide
   currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
@@ -146,6 +147,7 @@ private:
   bool is_trend_slipping(const order_t *, const double); // TODO: Decide
   bool is_trending();                                    // TODO: Decide
   bool is_trending(const trend_meta_t);                  // TODO: Decide
+  bool is_warm_up_within_max_height();                   // TODO: Decide
   bool max_account_loss_reached();
   bool should_close_position();
   bool should_nullify_entry_reversal(); // TODO: Decide
@@ -164,8 +166,11 @@ private:
   double day_range_percentile(candle_t, const double, const bool);
   double day_range_percentile(candle_t, const order_t *, double);
   double margin_buying_power();
+  double margin_normalization_factor();  // TODO: Decide
+  double normalized_margin_multiplier(); // TODO: Decide
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
+  double reverse_percentile(); // TODO: Decide
   double spike_score(spike_candles_t);
   double spread_limit();
 

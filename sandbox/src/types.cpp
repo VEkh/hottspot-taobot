@@ -66,6 +66,19 @@ struct candle_t {
   double opened_at = 0.0;
   std::string symbol;
 
+  double body_wick_ratio() {
+    const double range_ = this->range();
+
+    if (!range_) {
+      return 0.0;
+    }
+
+    const double body_height = abs(this->close - this->open);
+    const double wick_height = range_ - body_height;
+
+    return body_height / wick_height;
+  };
+
   double duration_seconds() { return this->closed_at - this->opened_at; };
 
   double range() { return this->high - this->low; };
