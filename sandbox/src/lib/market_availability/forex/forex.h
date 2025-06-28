@@ -19,6 +19,8 @@ public:
     std::string open_central_time;
   };
 
+  int session_count = 0; // TODO: Decide
+
   bool is_market_day(const double) override;
   bool is_market_open(const double);
 

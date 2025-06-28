@@ -1,20 +1,59 @@
 #ifndef OANDA__TAO_BOT_log_reversal_metadata
 #define OANDA__TAO_BOT_log_reversal_metadata
 
-#include "day_range_percentile.cpp"  // day_range_percentile
-#include "lib/formatted.cpp"         // Formatted
-#include "lib/utils/time.cpp"        // ::utils::time_
+#include "day_range_percentile.cpp" // day_range_percentile
+#include "lib/formatted.cpp"        // Formatted
+#include "lib/utils/time.cpp"       // ::utils::time_
+#include "normalized_margin_multiplier.cpp" // normalized_margin_multiplier // TODO: Decide
+#include "reverse_percentile.cpp"    // reverse_percentile // TODO: Decide
 #include "stop_profit_type_name.cpp" // stop_profit_type_name
 #include "tao_bot.h" // Oanda::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
+#include "execution_strategy.cpp" // TODO: Decide
+
 void Oanda::TaoBot::log_reversal_metadata() {
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Dynamic Reverse Percentile Ratio: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.dynamic_reverse_percentile_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Dynamic Reverse Percentile: ");
+  std::cout << fmt.cyan << this->api_client.config.dynamic_reverse_percentile
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  const std::string computed_execution_strategy =
+      execution_strategy() ==
+              execution_strategy_t::EXECUTION_STRATEGY_CONSOLIDATION
+          ? "CONSOLIDATION"
+          : "TREND";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Execution Strategy: ");
+  std::cout << fmt.cyan;
+  printf("%s|%s", this->api_client.config.execution_strategy.c_str(),
+         computed_execution_strategy.c_str());
+  std::cout << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Margin Multiplier: ");
-  std::cout << fmt.cyan << this->api_client.config.margin_multiplier
+  std::cout << fmt.cyan << normalized_margin_multiplier() << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Margin Normalization Base %%: ");
+  std::cout << fmt.cyan
+            << this->api_client.config.margin_normalization_base_price_action *
+                   100.0
             << fmt.reset << std::endl;
 
   // TODO: Decide
@@ -25,9 +64,39 @@ void Oanda::TaoBot::log_reversal_metadata() {
 
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
+  printf("Market Session Count: ");
+  std::cout << fmt.cyan << this->market_availability.session_count << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Max Loss Streak: ");
+  std::cout << fmt.cyan << this->api_client.config.max_loss_streak << fmt.reset
+            << std::endl;
+
+  // TODO: Decide
+  Formatted::Stream only_stop_profit_in_consolidation_color =
+      this->api_client.config.only_stop_profit_in_consolidation ? fmt.green
+                                                                : fmt.red;
+
+  const std::string only_stop_profit_in_consolidation_text =
+      this->api_client.config.only_stop_profit_in_consolidation ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Only stop profit in consolidation? ");
+  std::cout << only_stop_profit_in_consolidation_color
+            << only_stop_profit_in_consolidation_text << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
             << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Reverse Percentile (%%): ");
+  std::cout << fmt.cyan << reverse_percentile() << fmt.reset << std::endl;
 
   // TODO: Decide
   Formatted::Stream should_always_reverse_profit_color =
@@ -66,6 +135,18 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << should_enter_at_spike_color << should_enter_at_spike_text
             << fmt.reset << std::endl;
 
+  // TODO: Decide
+  Formatted::Stream should_trade_into_reversal_color =
+      this->api_client.config.should_trade_into_reversal ? fmt.green : fmt.red;
+
+  const std::string should_trade_into_reversal_text =
+      this->api_client.config.should_trade_into_reversal ? "YES" : "NO";
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Should trade into reversal? ");
+  std::cout << should_trade_into_reversal_color
+            << should_trade_into_reversal_text << fmt.reset << std::endl;
+
   std::cout << fmt.bold << fmt.yellow;
   printf("Spike Entry Score: ");
   std::cout << fmt.cyan << this->SPIKE_ENTRY_SCORE << fmt.reset << std::endl;
@@ -78,6 +159,12 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
+            << fmt.reset << std::endl;
+
+  // TODO: Decide
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Stop Profit Multiplier: ");
+  std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
             << fmt.reset << std::endl;
 
   // TODO: Decide

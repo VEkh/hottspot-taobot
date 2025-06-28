@@ -7,6 +7,8 @@
 #include "update_margin_rate.cpp"  // update_margin_rate
 #include <math.h>                  // floor
 
+#include "normalized_margin_multiplier.cpp" // normalized_margin_multiplier // TODO: Decide
+
 long int Oanda::TaoBot::compute_quantity() {
   const double dollars_per_unit = convert_price({
       .debug = true,
@@ -19,7 +21,7 @@ long int Oanda::TaoBot::compute_quantity() {
 
   // TODO: Decide
   const double buying_power =
-      (margin_buying_power() * this->api_client.config.margin_multiplier) /
+      (margin_buying_power() * normalized_margin_multiplier()) /
       this->env_symbols.size();
 
   return floor(buying_power / dollars_per_unit);
