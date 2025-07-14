@@ -43,10 +43,10 @@ bool Oanda::TaoBot::is_record_break_entry_signal_present() {
       } else if (current_mid_ <= record_low.mid) {
         reversal = record_high;
       }
+    }
 
-      if (should_nullify_entry_reversal()) {
-        reversal = reversal_t();
-      }
+    if (should_nullify_entry_reversal()) {
+      reversal = reversal_t();
     }
 
     entry_reversal_ = reversal;

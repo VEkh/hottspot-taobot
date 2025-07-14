@@ -16,11 +16,13 @@ void Oanda::TaoBot::log_price_action() {
   printf("💥 Price Action (Range Open Percent)\n");
   std::cout << fmt.reset;
 
-  const double current_range_open_percent =
-      this->day_candle.range_open_percent();
-
   std::cout << fmt.bold << fmt.yellow;
-  printf("Current: %.2f%%\n", current_range_open_percent);
+  printf("Current: %.2f%%\n", this->day_candle.range_open_percent());
+
+  if (this->warm_up_candle.range_open_percent() > 0) {
+    std::cout << fmt.bold << fmt.yellow;
+    printf("Warm Up: %.2f%%\n", this->warm_up_candle.range_open_percent());
+  }
 
   std::cout << fmt.reset << std::endl;
 }

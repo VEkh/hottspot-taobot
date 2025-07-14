@@ -2,9 +2,11 @@
 #define OANDA__TAO_BOT_build_exit_prices
 
 #include "day_range_percentile.cpp" // day_range_percentile
-#include "tao_bot.h"                // Oanda::TaoBot
-#include <algorithm>                // std::max
-#include <math.h>                   // abs
+#include "tao_bot.h" // Oanda::TaoBot, execution_strategy_t // TODO: Decide
+#include <algorithm> // std::max
+#include <math.h>    // abs
+
+#include "execution_strategy.cpp" // TODO: Decide
 
 Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   const double entry_reversal_mid = this->open_order_ptr->entry_reversal.mid;
@@ -25,6 +27,7 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
   // TODO: Decide
   double stop_profit = 0.0;
 
+  // v0.1
   if (this->api_client.config.should_stop_profit) {
     const double execution_price_percentile =
         day_range_percentile(this->open_order_ptr->day_candle, execution_price);
@@ -38,6 +41,29 @@ Oanda::TaoBot::exit_prices_t Oanda::TaoBot::build_exit_prices() {
 
     stop_profit =
         this->open_order_ptr->day_candle.range() * max_percentile_delta;
+  }
+
+  // TODO: Decide
+  if (this->api_client.config.stop_profit_version == 0.2 &&
+      this->api_client.config.execution_strategy == "DYNAMIC" &&
+      execution_strategy() == execution_strategy_t::EXECUTION_STRATEGY_TREND) {
+    stop_profit = 0.0;
+  }
+
+  // TODO: Decide
+  // v0.1
+  // stop_profit *= this->api_client.config.stop_profit_multiplier;
+
+  // v0.2
+  if (this->api_client.config.stop_profit_multiplier != 1.0 &&
+      this->api_client.config.margin_normalization_base_price_action) {
+    const double normalization_base =
+        this->api_client.config.margin_normalization_base_price_action * 100.0;
+
+    const double multiplier =
+        normalization_base / this->warm_up_candle.range_open_percent();
+
+    stop_profit *= std::max(1.0, multiplier);
   }
 
   return {

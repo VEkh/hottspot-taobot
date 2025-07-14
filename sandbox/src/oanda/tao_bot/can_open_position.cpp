@@ -33,6 +33,13 @@ bool Oanda::TaoBot::can_open_position() {
     return false;
   }
 
+  // TODO: Decide
+  if (this->api_client.config.max_loss_streak &&
+      this->performance.loss_streaks.current >=
+          this->api_client.config.max_loss_streak) {
+    return false;
+  }
+
   return true;
 }
 

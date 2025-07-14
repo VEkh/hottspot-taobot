@@ -1,0 +1,1349 @@
+[1m[33m🚪 Successfully connected to [32mhottspot_capital_backtest[0m
+[1m[36m
+Environment: [33mbacktest-eur_usd-0[36m
+
+{
+  "account_stop_loss_ratio": -0.0,
+  "authentication_token": "authentication_token",
+  "backtest": {
+    "account_margin_multiplier": 1,
+    "account_starting_equity": 100000,
+    "force_exec_slow_queries": false,
+    "is_active": true,
+    "start_at": "2005-01-02 16:00:00"
+  },
+  "base_url": "",
+  "dynamic_reverse_percentile": 50.0,
+  "dynamic_reverse_percentile_ratio": 1.0,
+  "env_symbols": [
+    "EUR_USD"
+  ],
+  "execution_strategy": "DYNAMIC",
+  "id": "backtest-eur_usd-0",
+  "is_active": false,
+  "margin_multiplier": 0.25,
+  "margin_normalization_base_price_action": 0.0015,
+  "market_duration_hours": 24,
+  "market_open_central_time": "00:00:00",
+  "max_loss_streak": 2,
+  "note": "dynamic reverse percentile v0.8; execution_strategy v0.1",
+  "only_stop_profit_in_consolidation": false,
+  "range_min_height": 0.0,
+  "reverse_percentile": 0.0,
+  "should_always_normalize": true,
+  "should_always_reverse_profit": true,
+  "should_await_record_break": true,
+  "should_enter_at_spike": false,
+  "should_stop_profit": true,
+  "stop_loss_padding_ratio": 0.0,
+  "stop_profit_version": 0.1,
+  "warm_up_period_hours": 4.0
+}
+[0m[0m[1m[36m[4m
+Monday, January  3 2005[24m[31m
+Current Equity:             $99,625.03 (-374.97) (-0.37%)
+Max Equity:                 $100,000.00 (+0.00) (+0.00%) @ 18:02 CST
+Min Equity:                 $99,183.89 (-816.11) (-0.82%) @ 09:04 CST
+Original Equity:            $100,000.00
+[1m[36m[4m
+Tuesday, January  4 2005[24m[32m
+Current Equity:             $100,483.83 (+873.50) (+0.88%)
+Max Equity:                 $100,701.82 (+1,091.50) (+1.10%) @ 13:45 CST
+Min Equity:                 $98,677.59 (-932.74) (-0.94%) @ 05:14 CST
+Original Equity:            $99,610.33
+[1m[36m[4m
+Wednesday, January  5 2005[24m[31m
+Current Equity:             $98,860.39 (-1,496.04) (-1.49%)
+Max Equity:                 $100,918.46 (+562.03) (+0.56%) @ 05:42 CST
+Min Equity:                 $98,860.39 (-1,496.04) (-1.49%) @ 07:21 CST
+Original Equity:            $100,356.43
+[1m[36m[4m
+Thursday, January  6 2005[24m[31m
+Current Equity:             $98,680.02 (-180.36) (-0.18%)
+Max Equity:                 $99,042.67 (+182.28) (+0.18%) @ 11:38 CST
+Min Equity:                 $97,958.57 (-901.82) (-0.91%) @ 08:56 CST
+Original Equity:            $98,860.39
+[1m[36m[4m
+Friday, January  7 2005[24m[31m
+Current Equity:             $98,538.57 (-64.70) (-0.07%)
+Max Equity:                 $99,469.80 (+866.53) (+0.88%) @ 11:49 CST
+Min Equity:                 $96,624.38 (-1,978.90) (-2.01%) @ 09:06 CST
+Original Equity:            $98,603.27
+[1m[36m[4m
+Monday, January 10 2005[24m[31m
+Current Equity:             $98,457.83 (-80.74) (-0.08%)
+Max Equity:                 $98,813.83 (+275.26) (+0.28%) @ 07:57 CST
+Min Equity:                 $97,033.81 (-1,504.76) (-1.53%) @ 16:01 CST
+Original Equity:            $98,538.57
+[1m[36m[4m
+Tuesday, January 11 2005[24m[32m
+Current Equity:             $99,527.45 (+959.51) (+0.97%)
+Max Equity:                 $99,914.62 (+1,346.68) (+1.37%) @ 16:08 CST
+Min Equity:                 $97,817.44 (-750.49) (-0.76%) @ 10:52 CST
+Original Equity:            $98,567.93
+[1m[36m[4m
+Wednesday, January 12 2005[24m[32m
+Current Equity:             $102,413.18 (+2,885.73) (+2.90%)
+Max Equity:                 $103,272.26 (+3,744.81) (+3.76%) @ 07:33 CST
+Min Equity:                 $99,464.97 (-62.48) (-0.06%) @ 07:29 CST
+Original Equity:            $99,527.45
+[1m[36m[4m
+Thursday, January 13 2005[24m[32m
+Current Equity:             $102,908.06 (+494.89) (+0.48%)
+Max Equity:                 $103,280.29 (+867.11) (+0.85%) @ 10:00 CST
+Min Equity:                 $101,059.64 (-1,353.54) (-1.32%) @ 06:31 CST
+Original Equity:            $102,413.18
+[1m[36m[4m
+Friday, January 14 2005[24m[32m
+Current Equity:             $103,855.68 (+1,074.51) (+1.05%)
+Max Equity:                 $106,579.54 (+3,798.37) (+3.70%) @ 20:49 CST
+Min Equity:                 $102,781.17 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $102,781.17
+[1m[36m[4m
+Monday, January 17 2005[24m[31m
+Current Equity:             $102,208.75 (-1,646.93) (-1.59%)
+Max Equity:                 $104,111.21 (+255.53) (+0.25%) @ 04:01 CST
+Min Equity:                 $102,208.75 (-1,646.93) (-1.59%) @ 06:01 CST
+Original Equity:            $103,855.68
+[1m[36m[4m
+Tuesday, January 18 2005[24m[31m
+Current Equity:             $101,943.17 (-265.58) (-0.26%)
+Max Equity:                 $103,049.45 (+840.70) (+0.82%) @ 07:29 CST
+Min Equity:                 $101,059.38 (-1,149.37) (-1.12%) @ 10:44 CST
+Original Equity:            $102,208.75
+[1m[36m[4m
+Wednesday, January 19 2005[24m[31m
+Current Equity:             $99,811.25 (-2,156.01) (-2.11%)
+Max Equity:                 $101,967.26 (+0.00) (+0.00%) @ 18:02 CST
+Min Equity:                 $99,491.69 (-2,475.57) (-2.43%) @ 11:48 CST
+Original Equity:            $101,967.26
+[1m[36m[4m
+Thursday, January 20 2005[24m[32m
+Current Equity:             $99,769.41 (+26.52) (+0.03%)
+Max Equity:                 $101,090.63 (+1,347.73) (+1.35%) @ 06:03 CST
+Min Equity:                 $99,258.54 (-484.35) (-0.49%) @ 09:05 CST
+Original Equity:            $99,742.89
+[1m[36m[4m
+Friday, January 21 2005[24m[32m
+Current Equity:             $101,064.22 (+1,224.34) (+1.23%)
+Max Equity:                 $101,745.45 (+1,905.57) (+1.91%) @ 11:46 CST
+Min Equity:                 $98,299.77 (-1,540.11) (-1.54%) @ 06:15 CST
+Original Equity:            $99,839.88
+[1m[36m[4m
+Monday, January 24 2005[24m[31m
+Current Equity:             $99,179.35 (-1,884.87) (-1.87%)
+Max Equity:                 $101,083.58 (+19.36) (+0.02%) @ 04:45 CST
+Min Equity:                 $98,304.10 (-2,760.12) (-2.73%) @ 14:47 CST
+Original Equity:            $101,064.22
+[1m[36m[4m
+Tuesday, January 25 2005[24m[32m
+Current Equity:             $100,361.86 (+1,149.74) (+1.16%)
+Max Equity:                 $100,985.67 (+1,773.55) (+1.79%) @ 10:57 CST
+Min Equity:                 $98,753.19 (-458.93) (-0.46%) @ 23:50 CST
+Original Equity:            $99,212.13
+[1m[36m[4m
+Wednesday, January 26 2005[24m[32m
+Current Equity:             $101,572.76 (+1,210.90) (+1.21%)
+Max Equity:                 $102,229.52 (+1,867.65) (+1.86%) @ 08:12 CST
+Min Equity:                 $99,910.34 (-451.52) (-0.45%) @ 04:40 CST
+Original Equity:            $100,361.86
+[1m[36m[4m
+Thursday, January 27 2005[24m[31m
+Current Equity:             $100,857.29 (-715.47) (-0.70%)
+Max Equity:                 $103,044.66 (+1,471.90) (+1.45%) @ 08:04 CST
+Min Equity:                 $100,754.38 (-818.38) (-0.81%) @ 16:44 CST
+Original Equity:            $101,572.76
+[1m[36m[4m
+Friday, January 28 2005[24m[32m
+Current Equity:             $101,369.99 (+581.30) (+0.58%)
+Max Equity:                 $101,640.61 (+851.93) (+0.85%) @ 09:22 CST
+Min Equity:                 $99,611.16 (-1,177.52) (-1.17%) @ 08:27 CST
+Original Equity:            $100,788.68
+[1m[36m[4m
+Monday, January 31 2005[24m[32m
+Current Equity:             $101,972.78 (+602.79) (+0.59%)
+Max Equity:                 $102,267.08 (+897.10) (+0.88%) @ 10:52 CST
+Min Equity:                 $100,891.30 (-478.69) (-0.47%) @ 08:10 CST
+Original Equity:            $101,369.99
+[1m[36m[4m
+Tuesday, February  1 2005[24m[32m
+Current Equity:             $102,185.49 (+106.33) (+0.10%)
+Max Equity:                 $102,940.15 (+860.99) (+0.84%) @ 10:11 CST
+Min Equity:                 $101,703.90 (-375.25) (-0.37%) @ 11:56 CST
+Original Equity:            $102,079.15
+[1m[36m[4m
+Wednesday, February  2 2005[24m[32m
+Current Equity:             $105,374.69 (+3,094.15) (+3.03%)
+Max Equity:                 $106,308.20 (+4,027.66) (+3.94%) @ 11:06 CST
+Min Equity:                 $101,862.93 (-417.61) (-0.41%) @ 08:06 CST
+Original Equity:            $102,280.54
+[1m[36m[4m
+Thursday, February  3 2005[24m[32m
+Current Equity:             $105,500.03 (+125.34) (+0.12%)
+Max Equity:                 $105,524.28 (+149.59) (+0.14%) @ 04:53 CST
+Min Equity:                 $104,261.26 (-1,113.43) (-1.06%) @ 05:55 CST
+Original Equity:            $105,374.69
+[1m[36m[4m
+Friday, February  4 2005[24m[32m
+Current Equity:             $107,075.18 (+1,575.15) (+1.49%)
+Max Equity:                 $107,182.33 (+1,682.30) (+1.59%) @ 12:39 CST
+Min Equity:                 $105,090.70 (-409.32) (-0.39%) @ 09:07 CST
+Original Equity:            $105,500.03
+[1m[36m[4m
+Monday, February  7 2005[24m[32m
+Current Equity:             $107,407.67 (+332.50) (+0.31%)
+Max Equity:                 $107,689.83 (+614.66) (+0.57%) @ 10:10 CST
+Min Equity:                 $105,759.85 (-1,315.32) (-1.23%) @ 07:43 CST
+Original Equity:            $107,075.18
+[1m[36m[4m
+Tuesday, February  8 2005[24m[32m
+Current Equity:             $108,718.84 (+1,311.16) (+1.22%)
+Max Equity:                 $109,252.39 (+1,844.72) (+1.72%) @ 05:06 CST
+Min Equity:                 $106,657.11 (-750.56) (-0.70%) @ 09:01 CST
+Original Equity:            $107,407.67
+[1m[36m[4m
+Wednesday, February  9 2005[24m[31m
+Current Equity:             $108,426.73 (-292.11) (-0.27%)
+Max Equity:                 $108,904.65 (+185.81) (+0.17%) @ 07:51 CST
+Min Equity:                 $107,152.26 (-1,566.57) (-1.44%) @ 06:53 CST
+Original Equity:            $108,718.84
+[1m[36m[4m
+Thursday, February 10 2005[24m[32m
+Current Equity:             $109,916.49 (+1,489.76) (+1.37%)
+Max Equity:                 $110,458.22 (+2,031.49) (+1.87%) @ 07:37 CST
+Min Equity:                 $108,237.12 (-189.61) (-0.17%) @ 06:01 CST
+Original Equity:            $108,426.73
+[1m[36m[4m
+Friday, February 11 2005[24m[31m
+Current Equity:             $108,051.84 (-1,864.64) (-1.70%)
+Max Equity:                 $110,397.14 (+480.66) (+0.44%) @ 04:03 CST
+Min Equity:                 $108,051.84 (-1,864.64) (-1.70%) @ 05:46 CST
+Original Equity:            $109,916.49
+[1m[36m[4m
+Monday, February 14 2005[24m[31m
+Current Equity:             $107,634.71 (-417.13) (-0.39%)
+Max Equity:                 $108,051.84 (+0.00) (+0.00%) @ 00:00 CST
+Min Equity:                 $106,696.16 (-1,355.68) (-1.25%) @ 09:21 CST
+Original Equity:            $108,051.84
+[1m[36m[4m
+Tuesday, February 15 2005[24m[32m
+Current Equity:             $109,480.47 (+2,003.76) (+1.86%)
+Max Equity:                 $110,220.02 (+2,743.31) (+2.55%) @ 07:32 CST
+Min Equity:                 $106,226.44 (-1,250.27) (-1.16%) @ 06:00 CST
+Original Equity:            $107,476.71
+[1m[36m[4m
+Wednesday, February 16 2005[24m[32m
+Current Equity:             $110,437.11 (+956.64) (+0.87%)
+Max Equity:                 $111,065.83 (+1,585.36) (+1.45%) @ 07:28 CST
+Min Equity:                 $108,706.70 (-773.77) (-0.71%) @ 08:39 CST
+Original Equity:            $109,480.47
+[1m[36m[4m
+Thursday, February 17 2005[24m[31m
+Current Equity:             $108,345.26 (-2,091.85) (-1.89%)
+Max Equity:                 $110,832.39 (+395.28) (+0.36%) @ 04:22 CST
+Min Equity:                 $108,252.39 (-2,184.71) (-1.98%) @ 09:04 CST
+Original Equity:            $110,437.11
+[1m[36m[4m
+Friday, February 18 2005[24m[32m
+Current Equity:             $109,985.04 (+1,639.78) (+1.51%)
+Max Equity:                 $110,563.78 (+2,218.53) (+2.05%) @ 06:09 CST
+Min Equity:                 $108,031.77 (-313.49) (-0.29%) @ 04:37 CST
+Original Equity:            $108,345.26
+[1m[36m[4m
+Monday, February 21 2005[24m[31m
+Current Equity:             $108,712.20 (-1,272.84) (-1.16%)
+Max Equity:                 $109,985.04 (+0.00) (+0.00%) @ 00:00 CST
+Min Equity:                 $108,253.02 (-1,732.01) (-1.57%) @ 17:09 CST
+Original Equity:            $109,985.04
+[1m[36m[4m
+Tuesday, February 22 2005[24m[32m
+Current Equity:             $115,885.09 (+7,244.64) (+6.67%)
+Max Equity:                 $116,315.51 (+7,675.05) (+7.06%) @ 04:52 CST
+Min Equity:                 $108,288.90 (-351.56) (-0.32%) @ 19:12 CST
+Original Equity:            $108,640.45
+[1m[36m[4m
+Wednesday, February 23 2005[24m[31m
+Current Equity:             $111,901.10 (-3,983.99) (-3.44%)
+Max Equity:                 $116,650.36 (+765.27) (+0.66%) @ 08:48 CST
+Min Equity:                 $111,901.10 (-3,983.99) (-3.44%) @ 17:59 CST
+Original Equity:            $115,885.09
+[1m[36m[4m
+Thursday, February 24 2005[24m[32m
+Current Equity:             $113,445.72 (+1,548.24) (+1.38%)
+Max Equity:                 $113,895.14 (+1,997.66) (+1.79%) @ 08:43 CST
+Min Equity:                 $111,720.21 (-177.27) (-0.16%) @ 18:05 CST
+Original Equity:            $111,897.48
+[1m[36m[4m
+Friday, February 25 2005[24m[32m
+Current Equity:             $113,908.71 (+462.99) (+0.41%)
+Max Equity:                 $115,374.12 (+1,928.39) (+1.70%) @ 06:18 CST
+Min Equity:                 $111,793.77 (-1,651.95) (-1.46%) @ 08:53 CST
+Original Equity:            $113,445.72
+[1m[36m[4m
+Monday, February 28 2005[24m[32m
+Current Equity:             $115,245.49 (+1,336.78) (+1.17%)
+Max Equity:                 $115,591.21 (+1,682.50) (+1.48%) @ 17:25 CST
+Min Equity:                 $113,395.89 (-512.82) (-0.45%) @ 13:50 CST
+Original Equity:            $113,908.71
+[1m[36m[4m
+Tuesday, March  1 2005[24m[31m
+Current Equity:             $114,405.38 (-782.49) (-0.68%)
+Max Equity:                 $117,786.52 (+2,598.65) (+2.26%) @ 21:03 CST
+Min Equity:                 $114,405.38 (-782.49) (-0.68%) @ 09:18 CST
+Original Equity:            $115,187.87
+[1m[36m[4m
+Wednesday, March  2 2005[24m[31m
+Current Equity:             $113,264.46 (-1,140.92) (-1.00%)
+Max Equity:                 $114,550.59 (+145.21) (+0.13%) @ 07:59 CST
+Min Equity:                 $113,157.77 (-1,247.60) (-1.09%) @ 16:00 CST
+Original Equity:            $114,405.38
+[1m[36m[4m
+Thursday, March  3 2005[24m[31m
+Current Equity:             $112,054.06 (-1,151.12) (-1.02%)
+Max Equity:                 $113,732.68 (+527.49) (+0.47%) @ 19:24 CST
+Min Equity:                 $110,495.97 (-2,709.22) (-2.39%) @ 09:52 CST
+Original Equity:            $113,205.19
+[1m[36m[4m
+Friday, March  4 2005[24m[32m
+Current Equity:             $112,106.59 (+335.81) (+0.30%)
+Max Equity:                 $114,585.49 (+2,814.72) (+2.52%) @ 07:31 CST
+Min Equity:                 $111,030.67 (-740.10) (-0.66%) @ 05:50 CST
+Original Equity:            $111,770.77
+[1m[36m[4m
+Monday, March  7 2005[24m[32m
+Current Equity:             $113,813.60 (+1,707.02) (+1.52%)
+Max Equity:                 $114,607.95 (+2,501.37) (+2.23%) @ 08:09 CST
+Min Equity:                 $111,700.96 (-405.63) (-0.36%) @ 06:08 CST
+Original Equity:            $112,106.59
+[1m[36m[4m
+Tuesday, March  8 2005[24m[32m
+Current Equity:             $116,833.27 (+3,019.67) (+2.65%)
+Max Equity:                 $118,062.21 (+4,248.61) (+3.73%) @ 10:23 CST
+Min Equity:                 $113,813.60 (+0.00) (+0.00%) @ 18:02 CST
+Original Equity:            $113,813.60
+[1m[36m[4m
+Wednesday, March  9 2005[24m[31m
+Current Equity:             $112,508.40 (-4,324.87) (-3.70%)
+Max Equity:                 $117,084.04 (+250.76) (+0.21%) @ 05:42 CST
+Min Equity:                 $112,508.40 (-4,324.87) (-3.70%) @ 11:35 CST
+Original Equity:            $116,833.27
+[1m[36m[4m
+Thursday, March 10 2005[24m[31m
+Current Equity:             $110,871.52 (-1,636.88) (-1.45%)
+Max Equity:                 $113,693.92 (+1,185.51) (+1.05%) @ 04:42 CST
+Min Equity:                 $110,871.52 (-1,636.88) (-1.45%) @ 09:56 CST
+Original Equity:            $112,508.40
+[1m[36m[4m
+Friday, March 11 2005[24m[32m
+Current Equity:             $112,657.63 (+1,786.11) (+1.61%)
+Max Equity:                 $113,336.80 (+2,465.28) (+2.22%) @ 07:37 CST
+Min Equity:                 $108,969.75 (-1,901.77) (-1.72%) @ 06:35 CST
+Original Equity:            $110,871.52
+[1m[36m[4m
+Monday, March 14 2005[24m[32m
+Current Equity:             $114,664.54 (+2,006.91) (+1.78%)
+Max Equity:                 $115,516.99 (+2,859.37) (+2.54%) @ 11:25 CST
+Min Equity:                 $111,366.77 (-1,290.85) (-1.15%) @ 05:24 CST
+Original Equity:            $112,657.63
+[1m[36m[4m
+Tuesday, March 15 2005[24m[32m
+Current Equity:             $116,310.76 (+1,646.22) (+1.44%)
+Max Equity:                 $116,983.85 (+2,319.31) (+2.02%) @ 07:32 CST
+Min Equity:                 $114,664.54 (+0.00) (+0.00%) @ 18:03 CST
+Original Equity:            $114,664.54
+[1m[36m[4m
+Wednesday, March 16 2005[24m[32m
+Current Equity:             $117,957.71 (+1,646.95) (+1.42%)
+Max Equity:                 $118,859.62 (+2,548.85) (+2.19%) @ 07:53 CST
+Min Equity:                 $116,095.09 (-215.67) (-0.19%) @ 05:46 CST
+Original Equity:            $116,310.76
+[1m[36m[4m
+Thursday, March 17 2005[24m[31m
+Current Equity:             $116,172.23 (-1,785.49) (-1.51%)
+Max Equity:                 $118,734.89 (+777.18) (+0.66%) @ 04:53 CST
+Min Equity:                 $116,172.23 (-1,785.49) (-1.51%) @ 07:33 CST
+Original Equity:            $117,957.71
+[1m[36m[4m
+Friday, March 18 2005[24m[31m
+Current Equity:             $115,347.73 (-824.49) (-0.71%)
+Max Equity:                 $117,725.51 (+1,553.28) (+1.34%) @ 08:35 CST
+Min Equity:                 $115,347.73 (-824.49) (-0.71%) @ 15:59 CST
+Original Equity:            $116,172.23
+[1m[36m[4m
+Monday, March 21 2005[24m[32m
+Current Equity:             $116,898.30 (+1,550.57) (+1.34%)
+Max Equity:                 $117,378.16 (+2,030.43) (+1.76%) @ 11:14 CST
+Min Equity:                 $115,200.84 (-146.90) (-0.13%) @ 05:13 CST
+Original Equity:            $115,347.73
+[1m[36m[4m
+Tuesday, March 22 2005[24m[31m
+Current Equity:             $114,744.07 (-1,991.01) (-1.71%)
+Max Equity:                 $117,281.36 (+546.28) (+0.47%) @ 05:22 CST
+Min Equity:                 $114,744.07 (-1,991.01) (-1.71%) @ 08:44 CST
+Original Equity:            $116,735.08
+[1m[36m[4m
+Wednesday, March 23 2005[24m[31m
+Current Equity:             $114,573.12 (-170.95) (-0.15%)
+Max Equity:                 $115,075.28 (+331.22) (+0.29%) @ 13:14 CST
+Min Equity:                 $114,455.59 (-288.48) (-0.25%) @ 12:14 CST
+Original Equity:            $114,744.07
+[1m[36m[4m
+Thursday, March 24 2005[24m[31m
+Current Equity:             $112,720.18 (-1,831.56) (-1.60%)
+Max Equity:                 $115,254.58 (+702.84) (+0.61%) @ 04:53 CST
+Min Equity:                 $112,720.18 (-1,831.56) (-1.60%) @ 09:22 CST
+Original Equity:            $114,551.75
+[1m[36m[4m
+Friday, March 25 2005[24m[32m
+Current Equity:             $112,720.18 (+0.00) (+0.00%)
+Max Equity:                 $112,720.18 (+0.00) (+0.00%) @ 18:05 CST
+Min Equity:                 $112,720.18 (+0.00) (+0.00%) @ 18:05 CST
+Original Equity:            $112,720.18
+[1m[36m[4m
+Monday, March 28 2005[24m[32m
+Current Equity:             $114,088.52 (+1,368.34) (+1.21%)
+Max Equity:                 $114,454.83 (+1,734.65) (+1.54%) @ 07:55 CST
+Min Equity:                 $112,041.48 (-678.70) (-0.60%) @ 07:16 CST
+Original Equity:            $112,720.18
+[1m[36m[4m
+Tuesday, March 29 2005[24m[31m
+Current Equity:             $112,042.34 (-2,046.18) (-1.79%)
+Max Equity:                 $114,221.90 (+133.39) (+0.12%) @ 06:08 CST
+Min Equity:                 $112,042.34 (-2,046.18) (-1.79%) @ 07:51 CST
+Original Equity:            $114,088.52
+[1m[36m[4m
+Wednesday, March 30 2005[24m[31m
+Current Equity:             $109,030.23 (-3,012.11) (-2.69%)
+Max Equity:                 $112,042.34 (+0.00) (+0.00%) @ 18:03 CST
+Min Equity:                 $108,883.83 (-3,158.51) (-2.82%) @ 08:52 CST
+Original Equity:            $112,042.34
+[1m[36m[4m
+Thursday, March 31 2005[24m[32m
+Current Equity:             $109,070.98 (+40.75) (+0.04%)
+Max Equity:                 $110,957.52 (+1,927.29) (+1.77%) @ 08:30 CST
+Min Equity:                 $108,357.92 (-672.31) (-0.62%) @ 07:19 CST
+Original Equity:            $109,030.23
+[1m[36m[4m
+Friday, April  1 2005[24m[32m
+Current Equity:             $113,268.65 (+4,564.39) (+4.20%)
+Max Equity:                 $114,846.41 (+6,142.15) (+5.65%) @ 07:34 CST
+Min Equity:                 $108,039.50 (-664.77) (-0.61%) @ 07:14 CST
+Original Equity:            $108,704.26
+[1m[36m[4m
+Monday, April  4 2005[24m[31m
+Current Equity:             $110,428.46 (-2,840.19) (-2.51%)
+Max Equity:                 $113,268.65 (+0.00) (+0.00%) @ 01:00 CDT
+Min Equity:                 $110,428.46 (-2,840.19) (-2.51%) @ 08:00 CDT
+Original Equity:            $113,268.65
+[1m[36m[4m
+Tuesday, April  5 2005[24m[31m
+Current Equity:             $109,615.43 (-813.04) (-0.74%)
+Max Equity:                 $110,707.72 (+279.25) (+0.25%) @ 06:31 CDT
+Min Equity:                 $108,408.88 (-2,019.58) (-1.83%) @ 07:30 CDT
+Original Equity:            $110,428.46
+[1m[36m[4m
+Wednesday, April  6 2005[24m[32m
+Current Equity:             $110,631.71 (+1,016.28) (+0.93%)
+Max Equity:                 $111,112.88 (+1,497.45) (+1.37%) @ 07:47 CDT
+Min Equity:                 $108,846.57 (-768.86) (-0.70%) @ 05:52 CDT
+Original Equity:            $109,615.43
+[1m[36m[4m
+Thursday, April  7 2005[24m[31m
+Current Equity:             $110,114.57 (-517.14) (-0.47%)
+Max Equity:                 $110,631.71 (+0.00) (+0.00%) @ 19:00 CDT
+Min Equity:                 $108,415.88 (-2,215.83) (-2.00%) @ 12:08 CDT
+Original Equity:            $110,631.71
+[1m[36m[4m
+Friday, April  8 2005[24m[31m
+Current Equity:             $110,041.76 (-735.71) (-0.66%)
+Max Equity:                 $112,546.18 (+1,768.70) (+1.60%) @ 04:44 CDT
+Min Equity:                 $109,999.28 (-778.19) (-0.70%) @ 09:12 CDT
+Original Equity:            $110,777.47
+[1m[36m[4m
+Monday, April 11 2005[24m[32m
+Current Equity:             $110,098.87 (+57.10) (+0.05%)
+Max Equity:                 $110,871.67 (+829.90) (+0.75%) @ 11:24 CDT
+Min Equity:                 $108,846.40 (-1,195.37) (-1.09%) @ 10:07 CDT
+Original Equity:            $110,041.76
+[1m[36m[4m
+Tuesday, April 12 2005[24m[31m
+Current Equity:             $107,983.42 (-2,229.65) (-2.02%)
+Max Equity:                 $110,403.42 (+190.35) (+0.17%) @ 21:05 CDT
+Min Equity:                 $107,047.25 (-3,165.83) (-2.87%) @ 07:34 CDT
+Original Equity:            $110,213.07
+[1m[36m[4m
+Wednesday, April 13 2005[24m[32m
+Current Equity:             $109,577.58 (+1,594.16) (+1.48%)
+Max Equity:                 $110,388.64 (+2,405.22) (+2.23%) @ 08:05 CDT
+Min Equity:                 $106,389.26 (-1,594.16) (-1.48%) @ 07:35 CDT
+Original Equity:            $107,983.42
+[1m[36m[4m
+Thursday, April 14 2005[24m[32m
+Current Equity:             $111,006.96 (+1,429.38) (+1.30%)
+Max Equity:                 $111,189.99 (+1,612.41) (+1.47%) @ 04:48 CDT
+Min Equity:                 $108,270.22 (-1,307.36) (-1.19%) @ 04:23 CDT
+Original Equity:            $109,577.58
+[1m[36m[4m
+Friday, April 15 2005[24m[32m
+Current Equity:             $112,634.10 (+1,627.14) (+1.47%)
+Max Equity:                 $113,471.00 (+2,464.05) (+2.22%) @ 10:19 CDT
+Min Equity:                 $110,971.96 (-34.99) (-0.03%) @ 08:03 CDT
+Original Equity:            $111,006.96
+[1m[36m[4m
+Monday, April 18 2005[24m[32m
+Current Equity:             $113,179.37 (+545.27) (+0.48%)
+Max Equity:                 $113,749.05 (+1,114.95) (+0.99%) @ 10:50 CDT
+Min Equity:                 $112,107.14 (-526.96) (-0.47%) @ 07:39 CDT
+Original Equity:            $112,634.10
+[1m[36m[4m
+Tuesday, April 19 2005[24m[31m
+Current Equity:             $112,321.50 (-776.49) (-0.69%)
+Max Equity:                 $113,549.66 (+451.68) (+0.40%) @ 21:11 CDT
+Min Equity:                 $110,554.11 (-2,543.88) (-2.25%) @ 11:20 CDT
+Original Equity:            $113,097.99
+[1m[36m[4m
+Wednesday, April 20 2005[24m[31m
+Current Equity:             $111,056.02 (-1,225.67) (-1.09%)
+Max Equity:                 $114,312.44 (+2,030.75) (+1.81%) @ 08:19 CDT
+Min Equity:                 $110,120.64 (-2,161.04) (-1.92%) @ 10:08 CDT
+Original Equity:            $112,281.69
+[1m[36m[4m
+Thursday, April 21 2005[24m[31m
+Current Equity:             $110,982.69 (-122.56) (-0.11%)
+Max Equity:                 $111,751.61 (+646.36) (+0.58%) @ 06:57 CDT
+Min Equity:                 $109,826.43 (-1,278.82) (-1.15%) @ 08:55 CDT
+Original Equity:            $111,105.25
+[1m[36m[4m
+Friday, April 22 2005[24m[31m
+Current Equity:             $110,215.05 (-767.64) (-0.69%)
+Max Equity:                 $111,687.16 (+704.48) (+0.63%) @ 07:59 CDT
+Min Equity:                 $109,112.18 (-1,870.50) (-1.69%) @ 12:20 CDT
+Original Equity:            $110,982.69
+[1m[36m[4m
+Monday, April 25 2005[24m[31m
+Current Equity:             $109,345.01 (-870.04) (-0.79%)
+Max Equity:                 $111,005.68 (+790.63) (+0.72%) @ 09:35 CDT
+Min Equity:                 $109,345.01 (-870.04) (-0.79%) @ 18:55 CDT
+Original Equity:            $110,215.05
+[1m[36m[4m
+Tuesday, April 26 2005[24m[32m
+Current Equity:             $109,636.43 (+361.37) (+0.33%)
+Max Equity:                 $110,981.69 (+1,706.62) (+1.56%) @ 09:21 CDT
+Min Equity:                 $108,531.03 (-744.04) (-0.68%) @ 08:19 CDT
+Original Equity:            $109,275.07
+[1m[36m[4m
+Wednesday, April 27 2005[24m[31m
+Current Equity:             $108,748.86 (-991.86) (-0.90%)
+Max Equity:                 $110,588.00 (+847.28) (+0.77%) @ 08:08 CDT
+Min Equity:                 $108,427.33 (-1,313.38) (-1.20%) @ 17:56 CDT
+Original Equity:            $109,740.72
+[1m[36m[4m
+Thursday, April 28 2005[24m[31m
+Current Equity:             $104,601.42 (-4,179.59) (-3.84%)
+Max Equity:                 $110,276.61 (+1,495.60) (+1.37%) @ 07:31 CDT
+Min Equity:                 $104,601.42 (-4,179.59) (-3.84%) @ 08:05 CDT
+Original Equity:            $108,781.01
+[1m[36m[4m
+Friday, April 29 2005[24m[32m
+Current Equity:             $105,849.84 (+1,248.42) (+1.19%)
+Max Equity:                 $106,491.52 (+1,890.09) (+1.81%) @ 13:38 CDT
+Min Equity:                 $104,013.75 (-587.68) (-0.56%) @ 10:22 CDT
+Original Equity:            $104,601.42
+[1m[36m[4m
+Monday, May  2 2005[24m[31m
+Current Equity:             $103,537.82 (-2,312.01) (-2.18%)
+Max Equity:                 $106,312.55 (+462.71) (+0.44%) @ 05:35 CDT
+Min Equity:                 $102,930.45 (-2,919.39) (-2.76%) @ 15:55 CDT
+Original Equity:            $105,849.84
+[1m[36m[4m
+Tuesday, May  3 2005[24m[32m
+Current Equity:             $106,856.65 (+2,971.75) (+2.86%)
+Max Equity:                 $107,604.23 (+3,719.33) (+3.58%) @ 11:40 CDT
+Min Equity:                 $103,624.59 (-260.30) (-0.25%) @ 19:30 CDT
+Original Equity:            $103,884.90
+[1m[36m[4m
+Wednesday, May  4 2005[24m[31m
+Current Equity:             $104,873.38 (-1,983.26) (-1.86%)
+Max Equity:                 $106,856.65 (+0.00) (+0.00%) @ 19:06 CDT
+Min Equity:                 $104,873.38 (-1,983.26) (-1.86%) @ 10:52 CDT
+Original Equity:            $106,856.65
+[1m[36m[4m
+Thursday, May  5 2005[24m[31m
+Current Equity:             $104,801.85 (-71.53) (-0.07%)
+Max Equity:                 $105,622.07 (+748.69) (+0.71%) @ 10:51 CDT
+Min Equity:                 $103,953.02 (-920.36) (-0.88%) @ 12:07 CDT
+Original Equity:            $104,873.38
+[1m[36m[4m
+Friday, May  6 2005[24m[31m
+Current Equity:             $99,092.47 (-5,709.39) (-5.45%)
+Max Equity:                 $105,808.14 (+1,006.29) (+0.96%) @ 05:27 CDT
+Min Equity:                 $97,694.25 (-7,107.60) (-6.78%) @ 07:36 CDT
+Original Equity:            $104,801.85
+[1m[36m[4m
+Monday, May  9 2005[24m[32m
+Current Equity:             $100,992.39 (+1,899.92) (+1.92%)
+Max Equity:                 $101,389.39 (+2,296.92) (+2.32%) @ 16:13 CDT
+Min Equity:                 $98,077.29 (-1,015.18) (-1.02%) @ 07:51 CDT
+Original Equity:            $99,092.47
+[1m[36m[4m
+Tuesday, May 10 2005[24m[32m
+Current Equity:             $102,373.50 (+1,381.11) (+1.37%)
+Max Equity:                 $102,930.40 (+1,938.01) (+1.92%) @ 11:38 CDT
+Min Equity:                 $100,407.64 (-584.74) (-0.58%) @ 05:31 CDT
+Original Equity:            $100,992.39
+[1m[36m[4m
+Wednesday, May 11 2005[24m[32m
+Current Equity:             $102,823.40 (+449.91) (+0.44%)
+Max Equity:                 $103,271.12 (+897.62) (+0.88%) @ 09:04 CDT
+Min Equity:                 $102,136.47 (-237.02) (-0.23%) @ 11:07 CDT
+Original Equity:            $102,373.50
+[1m[36m[4m
+Thursday, May 12 2005[24m[32m
+Current Equity:             $103,475.11 (+585.87) (+0.57%)
+Max Equity:                 $103,744.89 (+855.65) (+0.83%) @ 16:27 CDT
+Min Equity:                 $102,649.18 (-240.07) (-0.23%) @ 10:17 CDT
+Original Equity:            $102,889.24
+[1m[36m[4m
+Friday, May 13 2005[24m[32m
+Current Equity:             $104,981.57 (+1,527.21) (+1.48%)
+Max Equity:                 $105,531.44 (+2,077.08) (+2.01%) @ 05:10 CDT
+Min Equity:                 $103,098.27 (-356.09) (-0.34%) @ 04:13 CDT
+Original Equity:            $103,454.36
+[1m[36m[4m
+Monday, May 16 2005[24m[31m
+Current Equity:             $103,284.79 (-1,696.78) (-1.62%)
+Max Equity:                 $105,691.98 (+710.41) (+0.68%) @ 04:31 CDT
+Min Equity:                 $103,144.73 (-1,836.84) (-1.75%) @ 08:00 CDT
+Original Equity:            $104,981.57
+[1m[36m[4m
+Tuesday, May 17 2005[24m[32m
+Current Equity:             $104,115.57 (+830.78) (+0.80%)
+Max Equity:                 $104,155.51 (+870.72) (+0.84%) @ 18:54 CDT
+Min Equity:                 $101,902.82 (-1,381.97) (-1.34%) @ 11:32 CDT
+Original Equity:            $103,284.79
+[1m[36m[4m
+Wednesday, May 18 2005[24m[31m
+Current Equity:             $101,096.64 (-3,178.69) (-3.05%)
+Max Equity:                 $104,513.95 (+238.62) (+0.23%) @ 07:52 CDT
+Min Equity:                 $101,096.64 (-3,178.69) (-3.05%) @ 10:43 CDT
+Original Equity:            $104,275.33
+[1m[36m[4m
+Thursday, May 19 2005[24m[32m
+Current Equity:             $102,741.90 (+1,645.26) (+1.63%)
+Max Equity:                 $103,541.22 (+2,444.58) (+2.42%) @ 08:19 CDT
+Min Equity:                 $100,930.12 (-166.52) (-0.16%) @ 05:13 CDT
+Original Equity:            $101,096.64
+[1m[36m[4m
+Friday, May 20 2005[24m[32m
+Current Equity:             $107,231.78 (+4,489.88) (+4.37%)
+Max Equity:                 $108,759.94 (+6,018.04) (+5.86%) @ 10:26 CDT
+Min Equity:                 $102,370.78 (-371.12) (-0.36%) @ 06:15 CDT
+Original Equity:            $102,741.90
+[1m[36m[4m
+Monday, May 23 2005[24m[32m
+Current Equity:             $108,877.88 (+1,646.10) (+1.54%)
+Max Equity:                 $109,727.48 (+2,495.71) (+2.33%) @ 09:33 CDT
+Min Equity:                 $106,541.48 (-690.30) (-0.64%) @ 08:03 CDT
+Original Equity:            $107,231.78
+[1m[36m[4m
+Tuesday, May 24 2005[24m[31m
+Current Equity:             $106,909.96 (-1,967.92) (-1.81%)
+Max Equity:                 $110,253.97 (+1,376.09) (+1.26%) @ 07:34 CDT
+Min Equity:                 $106,779.96 (-2,097.93) (-1.93%) @ 18:05 CDT
+Original Equity:            $108,877.88
+[1m[36m[4m
+Wednesday, May 25 2005[24m[31m
+Current Equity:             $103,831.72 (-3,110.74) (-2.91%)
+Max Equity:                 $106,974.97 (+32.50) (+0.03%) @ 20:01 CDT
+Min Equity:                 $103,313.81 (-3,628.66) (-3.39%) @ 13:13 CDT
+Original Equity:            $106,942.46
+[1m[36m[4m
+Thursday, May 26 2005[24m[31m
+Current Equity:             $102,675.86 (-1,116.93) (-1.08%)
+Max Equity:                 $104,104.31 (+311.53) (+0.30%) @ 19:24 CDT
+Min Equity:                 $101,220.32 (-2,572.46) (-2.48%) @ 04:59 CDT
+Original Equity:            $103,792.78
+[1m[36m[4m
+Friday, May 27 2005[24m[31m
+Current Equity:             $101,223.12 (-1,452.74) (-1.41%)
+Max Equity:                 $103,615.04 (+939.19) (+0.91%) @ 06:42 CDT
+Min Equity:                 $101,223.12 (-1,452.74) (-1.41%) @ 10:20 CDT
+Original Equity:            $102,675.86
+[1m[36m[4m
+Monday, May 30 2005[24m[32m
+Current Equity:             $104,066.64 (+2,843.53) (+2.81%)
+Max Equity:                 $105,194.39 (+3,971.27) (+3.92%) @ 09:01 CDT
+Min Equity:                 $100,884.79 (-338.32) (-0.33%) @ 04:57 CDT
+Original Equity:            $101,223.12
+[1m[36m[4m
+Tuesday, May 31 2005[24m[32m
+Current Equity:             $106,272.72 (+2,206.07) (+2.12%)
+Max Equity:                 $107,004.17 (+2,937.53) (+2.82%) @ 05:26 CDT
+Min Equity:                 $104,066.64 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $104,066.64
+[1m[36m[4m
+Wednesday, June  1 2005[24m[32m
+Current Equity:             $108,137.58 (+1,864.86) (+1.75%)
+Max Equity:                 $108,937.95 (+2,665.23) (+2.51%) @ 15:28 CDT
+Min Equity:                 $106,011.26 (-261.45) (-0.25%) @ 09:56 CDT
+Original Equity:            $106,272.72
+[1m[36m[4m
+Thursday, June  2 2005[24m[31m
+Current Equity:             $107,848.58 (-289.00) (-0.27%)
+Max Equity:                 $108,312.97 (+175.39) (+0.16%) @ 10:09 CDT
+Min Equity:                 $107,117.10 (-1,020.48) (-0.94%) @ 08:55 CDT
+Original Equity:            $108,137.58
+[1m[36m[4m
+Friday, June  3 2005[24m[32m
+Current Equity:             $107,982.74 (+94.30) (+0.09%)
+Max Equity:                 $108,545.91 (+657.47) (+0.61%) @ 12:44 CDT
+Min Equity:                 $107,828.64 (-59.79) (-0.06%) @ 19:06 CDT
+Original Equity:            $107,888.44
+[1m[36m[4m
+Monday, June  6 2005[24m[31m
+Current Equity:             $105,884.85 (-2,097.89) (-1.94%)
+Max Equity:                 $108,013.39 (+30.65) (+0.03%) @ 04:05 CDT
+Min Equity:                 $105,884.85 (-2,097.89) (-1.94%) @ 08:32 CDT
+Original Equity:            $107,982.74
+[1m[36m[4m
+Tuesday, June  7 2005[24m[31m
+Current Equity:             $105,023.03 (-861.82) (-0.81%)
+Max Equity:                 $105,978.86 (+94.02) (+0.09%) @ 09:18 CDT
+Min Equity:                 $104,948.60 (-936.25) (-0.88%) @ 16:22 CDT
+Original Equity:            $105,884.85
+[1m[36m[4m
+Wednesday, June  8 2005[24m[31m
+Current Equity:             $102,361.50 (-2,700.70) (-2.57%)
+Max Equity:                 $105,101.37 (+39.17) (+0.04%) @ 19:32 CDT
+Min Equity:                 $102,361.50 (-2,700.70) (-2.57%) @ 10:43 CDT
+Original Equity:            $105,062.20
+[1m[36m[4m
+Thursday, June  9 2005[24m[31m
+Current Equity:             $100,229.14 (-2,132.36) (-2.08%)
+Max Equity:                 $102,675.06 (+313.56) (+0.31%) @ 05:47 CDT
+Min Equity:                 $100,229.14 (-2,132.36) (-2.08%) @ 09:05 CDT
+Original Equity:            $102,361.50
+[1m[36m[4m
+Friday, June 10 2005[24m[31m
+Current Equity:             $99,653.52 (-575.62) (-0.57%)
+Max Equity:                 $100,899.09 (+669.95) (+0.67%) @ 07:30 CDT
+Min Equity:                 $98,496.92 (-1,732.22) (-1.73%) @ 07:22 CDT
+Original Equity:            $100,229.14
+[1m[36m[4m
+Monday, June 13 2005[24m[31m
+Current Equity:             $97,477.47 (-2,176.05) (-2.18%)
+Max Equity:                 $100,487.32 (+833.80) (+0.84%) @ 09:48 CDT
+Min Equity:                 $97,477.47 (-2,176.05) (-2.18%) @ 18:57 CDT
+Original Equity:            $99,653.52
+[1m[36m[4m
+Tuesday, June 14 2005[24m[31m
+Current Equity:             $94,305.30 (-3,193.29) (-3.28%)
+Max Equity:                 $98,375.07 (+876.47) (+0.90%) @ 20:41 CDT
+Min Equity:                 $94,305.30 (-3,193.29) (-3.28%) @ 08:07 CDT
+Original Equity:            $97,498.59
+[1m[36m[4m
+Wednesday, June 15 2005[24m[31m
+Current Equity:             $93,521.67 (-783.63) (-0.83%)
+Max Equity:                 $94,438.55 (+133.25) (+0.14%) @ 07:37 CDT
+Min Equity:                 $92,677.20 (-1,628.10) (-1.73%) @ 08:32 CDT
+Original Equity:            $94,305.30
+[1m[36m[4m
+Thursday, June 16 2005[24m[32m
+Current Equity:             $95,966.14 (+2,444.47) (+2.61%)
+Max Equity:                 $96,455.04 (+2,933.37) (+3.14%) @ 08:27 CDT
+Min Equity:                 $92,896.97 (-624.70) (-0.67%) @ 04:36 CDT
+Original Equity:            $93,521.67
+[1m[36m[4m
+Friday, June 17 2005[24m[32m
+Current Equity:             $97,054.43 (+1,088.29) (+1.13%)
+Max Equity:                 $97,782.16 (+1,816.02) (+1.89%) @ 07:49 CDT
+Min Equity:                 $95,966.14 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $95,966.14
+[1m[36m[4m
+Monday, June 20 2005[24m[32m
+Current Equity:             $98,928.15 (+1,873.72) (+1.93%)
+Max Equity:                 $99,769.67 (+2,715.24) (+2.80%) @ 09:36 CDT
+Min Equity:                 $96,867.89 (-186.54) (-0.19%) @ 07:40 CDT
+Original Equity:            $97,054.43
+[1m[36m[4m
+Tuesday, June 21 2005[24m[31m
+Current Equity:             $97,983.53 (-944.62) (-0.95%)
+Max Equity:                 $99,394.00 (+465.85) (+0.47%) @ 06:08 CDT
+Min Equity:                 $96,535.88 (-2,392.27) (-2.42%) @ 10:38 CDT
+Original Equity:            $98,928.15
+[1m[36m[4m
+Wednesday, June 22 2005[24m[32m
+Current Equity:             $99,785.85 (+1,825.67) (+1.86%)
+Max Equity:                 $100,556.81 (+2,596.63) (+2.65%) @ 06:31 CDT
+Min Equity:                 $97,430.15 (-530.03) (-0.54%) @ 22:48 CDT
+Original Equity:            $97,960.18
+[1m[36m[4m
+Thursday, June 23 2005[24m[32m
+Current Equity:             $101,186.77 (+1,400.92) (+1.40%)
+Max Equity:                 $101,844.03 (+2,058.18) (+2.06%) @ 13:48 CDT
+Min Equity:                 $99,579.28 (-206.57) (-0.21%) @ 07:04 CDT
+Original Equity:            $99,785.85
+[1m[36m[4m
+Friday, June 24 2005[24m[32m
+Current Equity:             $101,591.34 (+404.57) (+0.40%)
+Max Equity:                 $102,328.64 (+1,141.88) (+1.13%) @ 09:33 CDT
+Min Equity:                 $100,400.31 (-786.46) (-0.78%) @ 07:53 CDT
+Original Equity:            $101,186.77
+[1m[36m[4m
+Monday, June 27 2005[24m[31m
+Current Equity:             $101,190.91 (-400.43) (-0.39%)
+Max Equity:                 $101,890.73 (+299.39) (+0.29%) @ 06:15 CDT
+Min Equity:                 $100,285.27 (-1,306.07) (-1.29%) @ 10:10 CDT
+Original Equity:            $101,591.34
+[1m[36m[4m
+Tuesday, June 28 2005[24m[32m
+Current Equity:             $101,836.57 (+608.23) (+0.60%)
+Max Equity:                 $102,370.50 (+1,142.17) (+1.13%) @ 16:02 CDT
+Min Equity:                 $100,566.37 (-661.97) (-0.65%) @ 05:42 CDT
+Original Equity:            $101,228.33
+[1m[36m[4m
+Wednesday, June 29 2005[24m[32m
+Current Equity:             $102,110.03 (+273.46) (+0.27%)
+Max Equity:                 $102,375.44 (+538.87) (+0.53%) @ 05:32 CDT
+Min Equity:                 $100,921.54 (-915.03) (-0.90%) @ 07:36 CDT
+Original Equity:            $101,836.57
+[1m[36m[4m
+Thursday, June 30 2005[24m[32m
+Current Equity:             $102,423.75 (+313.73) (+0.31%)
+Max Equity:                 $102,902.22 (+792.19) (+0.78%) @ 05:31 CDT
+Min Equity:                 $101,446.40 (-663.62) (-0.65%) @ 06:41 CDT
+Original Equity:            $102,110.03
+[1m[36m[4m
+Friday, July  1 2005[24m[32m
+Current Equity:             $103,166.55 (+742.80) (+0.73%)
+Max Equity:                 $104,020.26 (+1,596.50) (+1.56%) @ 04:39 CDT
+Min Equity:                 $102,256.96 (-166.80) (-0.16%) @ 04:18 CDT
+Original Equity:            $102,423.75
+[1m[36m[4m
+Monday, July  4 2005[24m[32m
+Current Equity:             $103,198.82 (+32.27) (+0.03%)
+Max Equity:                 $104,215.33 (+1,048.77) (+1.02%) @ 07:16 CDT
+Min Equity:                 $102,467.37 (-699.18) (-0.68%) @ 05:13 CDT
+Original Equity:            $103,166.55
+[1m[36m[4m
+Tuesday, July  5 2005[24m[31m
+Current Equity:             $102,503.78 (-748.82) (-0.73%)
+Max Equity:                 $103,521.52 (+268.92) (+0.26%) @ 19:32 CDT
+Min Equity:                 $102,344.28 (-908.33) (-0.88%) @ 22:28 CDT
+Original Equity:            $103,252.61
+[1m[36m[4m
+Wednesday, July  6 2005[24m[31m
+Current Equity:             $102,217.37 (-286.41) (-0.28%)
+Max Equity:                 $103,472.92 (+969.13) (+0.95%) @ 04:42 CDT
+Min Equity:                 $101,531.69 (-972.09) (-0.95%) @ 11:06 CDT
+Original Equity:            $102,503.78
+[1m[36m[4m
+Thursday, July  7 2005[24m[32m
+Current Equity:             $104,250.71 (+2,127.70) (+2.08%)
+Max Equity:                 $104,574.93 (+2,451.92) (+2.40%) @ 04:26 CDT
+Min Equity:                 $101,588.31 (-534.70) (-0.52%) @ 21:44 CDT
+Original Equity:            $102,123.01
+[1m[36m[4m
+Friday, July  8 2005[24m[32m
+Current Equity:             $105,038.69 (+787.97) (+0.76%)
+Max Equity:                 $105,562.97 (+1,312.25) (+1.26%) @ 09:05 CDT
+Min Equity:                 $103,295.22 (-955.49) (-0.92%) @ 07:44 CDT
+Original Equity:            $104,250.71
+[1m[36m[4m
+Monday, July 11 2005[24m[32m
+Current Equity:             $105,058.99 (+20.30) (+0.02%)
+Max Equity:                 $105,433.75 (+395.07) (+0.38%) @ 09:21 CDT
+Min Equity:                 $103,933.37 (-1,105.32) (-1.05%) @ 06:52 CDT
+Original Equity:            $105,038.69
+[1m[36m[4m
+Tuesday, July 12 2005[24m[32m
+Current Equity:             $106,367.11 (+1,308.12) (+1.25%)
+Max Equity:                 $107,148.93 (+2,089.94) (+1.99%) @ 13:06 CDT
+Min Equity:                 $103,266.52 (-1,792.47) (-1.71%) @ 06:31 CDT
+Original Equity:            $105,058.99
+[1m[36m[4m
+Wednesday, July 13 2005[24m[32m
+Current Equity:             $108,174.78 (+1,807.67) (+1.70%)
+Max Equity:                 $108,857.68 (+2,490.57) (+2.34%) @ 08:24 CDT
+Min Equity:                 $105,684.21 (-682.90) (-0.64%) @ 05:36 CDT
+Original Equity:            $106,367.11
+[1m[36m[4m
+Thursday, July 14 2005[24m[31m
+Current Equity:             $103,857.54 (-4,317.24) (-3.99%)
+Max Equity:                 $108,174.78 (+0.00) (+0.00%) @ 19:00 CDT
+Min Equity:                 $103,857.54 (-4,317.24) (-3.99%) @ 07:58 CDT
+Original Equity:            $108,174.78
+[1m[36m[4m
+Friday, July 15 2005[24m[32m
+Current Equity:             $106,584.09 (+2,726.55) (+2.63%)
+Max Equity:                 $107,492.94 (+3,635.40) (+3.50%) @ 08:24 CDT
+Min Equity:                 $103,831.57 (-25.97) (-0.03%) @ 04:55 CDT
+Original Equity:            $103,857.54
+[1m[36m[4m
+Monday, July 18 2005[24m[31m
+Current Equity:             $103,350.99 (-3,233.10) (-3.03%)
+Max Equity:                 $106,584.09 (+0.00) (+0.00%) @ 00:00 CDT
+Min Equity:                 $102,771.48 (-3,812.61) (-3.58%) @ 13:23 CDT
+Original Equity:            $106,584.09
+[1m[36m[4m
+Tuesday, July 19 2005[24m[31m
+Current Equity:             $100,441.12 (-2,933.43) (-2.84%)
+Max Equity:                 $103,374.55 (+0.00) (+0.00%) @ 19:04 CDT
+Min Equity:                 $100,207.87 (-3,166.68) (-3.06%) @ 12:03 CDT
+Original Equity:            $103,374.55
+[1m[36m[4m
+Wednesday, July 20 2005[24m[32m
+Current Equity:             $101,512.69 (+1,071.57) (+1.07%)
+Max Equity:                 $101,928.08 (+1,486.96) (+1.48%) @ 20:10 CDT
+Min Equity:                 $100,441.12 (+0.00) (+0.00%) @ 19:01 CDT
+Original Equity:            $100,441.12
+[1m[36m[4m
+Thursday, July 21 2005[24m[31m
+Current Equity:             $100,575.43 (-937.26) (-0.92%)
+Max Equity:                 $101,920.64 (+407.95) (+0.40%) @ 10:42 CDT
+Min Equity:                 $100,442.17 (-1,070.53) (-1.05%) @ 18:39 CDT
+Original Equity:            $101,512.69
+[1m[36m[4m
+Friday, July 22 2005[24m[32m
+Current Equity:             $103,255.13 (+2,679.70) (+2.66%)
+Max Equity:                 $104,124.04 (+3,548.61) (+3.53%) @ 08:55 CDT
+Min Equity:                 $100,381.60 (-193.84) (-0.19%) @ 19:57 CDT
+Original Equity:            $100,575.43
+[1m[36m[4m
+Monday, July 25 2005[24m[31m
+Current Equity:             $102,739.46 (-515.67) (-0.50%)
+Max Equity:                 $103,694.00 (+438.87) (+0.43%) @ 08:20 CDT
+Min Equity:                 $102,008.39 (-1,246.74) (-1.21%) @ 14:41 CDT
+Original Equity:            $103,255.13
+[1m[36m[4m
+Tuesday, July 26 2005[24m[31m
+Current Equity:             $102,752.50 (-19.17) (-0.02%)
+Max Equity:                 $104,068.18 (+1,296.51) (+1.26%) @ 07:48 CDT
+Min Equity:                 $102,181.08 (-590.59) (-0.57%) @ 09:32 CDT
+Original Equity:            $102,771.67
+[1m[36m[4m
+Wednesday, July 27 2005[24m[32m
+Current Equity:             $103,239.30 (+451.52) (+0.44%)
+Max Equity:                 $103,880.74 (+1,092.96) (+1.06%) @ 13:49 CDT
+Min Equity:                 $101,249.59 (-1,538.18) (-1.50%) @ 07:53 CDT
+Original Equity:            $102,787.78
+[1m[36m[4m
+Thursday, July 28 2005[24m[31m
+Current Equity:             $101,437.04 (-2,047.39) (-1.98%)
+Max Equity:                 $104,404.79 (+920.36) (+0.89%) @ 06:51 CDT
+Min Equity:                 $101,437.04 (-2,047.39) (-1.98%) @ 10:22 CDT
+Original Equity:            $103,484.43
+[1m[36m[4m
+Friday, July 29 2005[24m[31m
+Current Equity:             $98,977.48 (-2,459.56) (-2.42%)
+Max Equity:                 $101,619.36 (+182.32) (+0.18%) @ 04:40 CDT
+Min Equity:                 $98,562.66 (-2,874.38) (-2.83%) @ 10:16 CDT
+Original Equity:            $101,437.04
+[1m[36m[4m
+Monday, August  1 2005[24m[31m
+Current Equity:             $97,938.73 (-1,038.75) (-1.05%)
+Max Equity:                 $99,805.24 (+827.76) (+0.84%) @ 09:40 CDT
+Min Equity:                 $97,370.66 (-1,606.82) (-1.62%) @ 16:37 CDT
+Original Equity:            $98,977.48
+[1m[36m[4m
+Tuesday, August  2 2005[24m[32m
+Current Equity:             $98,668.73 (+665.08) (+0.68%)
+Max Equity:                 $99,023.15 (+1,019.50) (+1.04%) @ 07:52 CDT
+Min Equity:                 $97,776.42 (-227.23) (-0.23%) @ 19:12 CDT
+Original Equity:            $98,003.65
+[1m[36m[4m
+Wednesday, August  3 2005[24m[32m
+Current Equity:             $101,102.29 (+2,405.70) (+2.44%)
+Max Equity:                 $101,380.26 (+2,683.67) (+2.72%) @ 13:37 CDT
+Min Equity:                 $98,696.59 (+0.00) (+0.00%) @ 19:00 CDT
+Original Equity:            $98,696.59
+[1m[36m[4m
+Thursday, August  4 2005[24m[31m
+Current Equity:             $98,540.69 (-2,540.21) (-2.51%)
+Max Equity:                 $102,075.17 (+994.26) (+0.98%) @ 20:25 CDT
+Min Equity:                 $98,540.69 (-2,540.21) (-2.51%) @ 06:58 CDT
+Original Equity:            $101,080.91
+[1m[36m[4m
+Friday, August  5 2005[24m[31m
+Current Equity:             $97,706.36 (-834.34) (-0.85%)
+Max Equity:                 $99,056.47 (+515.77) (+0.52%) @ 11:16 CDT
+Min Equity:                 $97,676.02 (-864.68) (-0.88%) @ 15:10 CDT
+Original Equity:            $98,540.69
+[1m[36m[4m
+Monday, August  8 2005[24m[31m
+Current Equity:             $97,373.18 (-333.18) (-0.34%)
+Max Equity:                 $98,166.46 (+460.10) (+0.47%) @ 04:46 CDT
+Min Equity:                 $96,881.34 (-825.01) (-0.84%) @ 16:57 CDT
+Original Equity:            $97,706.36
+[1m[36m[4m
+Tuesday, August  9 2005[24m[31m
+Current Equity:             $96,739.44 (-633.74) (-0.65%)
+Max Equity:                 $98,269.89 (+896.71) (+0.92%) @ 08:40 CDT
+Min Equity:                 $96,678.50 (-694.68) (-0.71%) @ 13:41 CDT
+Original Equity:            $97,373.18
+[1m[36m[4m
+Wednesday, August 10 2005[24m[31m
+Current Equity:             $94,276.12 (-2,419.79) (-2.50%)
+Max Equity:                 $97,989.49 (+1,293.58) (+1.34%) @ 04:28 CDT
+Min Equity:                 $94,149.66 (-2,546.25) (-2.63%) @ 16:29 CDT
+Original Equity:            $96,695.91
+[1m[36m[4m
+Thursday, August 11 2005[24m[32m
+Current Equity:             $94,558.01 (+307.17) (+0.33%)
+Max Equity:                 $95,295.81 (+1,044.98) (+1.11%) @ 15:31 CDT
+Min Equity:                 $93,190.78 (-1,060.05) (-1.12%) @ 12:03 CDT
+Original Equity:            $94,250.83
+[1m[36m[4m
+Friday, August 12 2005[24m[32m
+Current Equity:             $95,858.54 (+1,300.54) (+1.38%)
+Max Equity:                 $96,012.76 (+1,454.75) (+1.54%) @ 07:50 CDT
+Min Equity:                 $94,558.01 (+0.00) (+0.00%) @ 19:02 CDT
+Original Equity:            $94,558.01
+[1m[36m[4m
+Monday, August 15 2005[24m[32m
+Current Equity:             $96,883.70 (+1,025.16) (+1.07%)
+Max Equity:                 $97,065.86 (+1,207.32) (+1.26%) @ 08:37 CDT
+Min Equity:                 $95,329.02 (-529.53) (-0.55%) @ 07:40 CDT
+Original Equity:            $95,858.54
+[1m[36m[4m
+Tuesday, August 16 2005[24m[32m
+Current Equity:             $97,298.63 (+372.56) (+0.38%)
+Max Equity:                 $98,387.00 (+1,460.93) (+1.51%) @ 07:58 CDT
+Min Equity:                 $96,675.28 (-250.78) (-0.26%) @ 11:01 CDT
+Original Equity:            $96,926.07
+[1m[36m[4m
+Wednesday, August 17 2005[24m[31m
+Current Equity:             $97,131.17 (-214.86) (-0.22%)
+Max Equity:                 $97,488.24 (+142.21) (+0.15%) @ 19:21 CDT
+Min Equity:                 $95,074.09 (-2,271.94) (-2.33%) @ 08:13 CDT
+Original Equity:            $97,346.03
+[1m[36m[4m
+Thursday, August 18 2005[24m[32m
+Current Equity:             $100,313.05 (+3,377.79) (+3.48%)
+Max Equity:                 $101,490.83 (+4,555.57) (+4.70%) @ 09:47 CDT
+Min Equity:                 $95,889.09 (-1,046.17) (-1.08%) @ 23:15 CDT
+Original Equity:            $96,935.26
+[1m[36m[4m
+Friday, August 19 2005[24m[31m
+Current Equity:             $99,731.51 (-581.54) (-0.58%)
+Max Equity:                 $101,073.05 (+760.00) (+0.76%) @ 06:46 CDT
+Min Equity:                 $99,197.83 (-1,115.22) (-1.11%) @ 11:57 CDT
+Original Equity:            $100,313.05
+[1m[36m[4m
+Monday, August 22 2005[24m[32m
+Current Equity:             $101,976.47 (+2,244.96) (+2.25%)
+Max Equity:                 $102,818.33 (+3,086.82) (+3.10%) @ 07:05 CDT
+Min Equity:                 $99,731.51 (+0.00) (+0.00%) @ 00:00 CDT
+Original Equity:            $99,731.51
+[1m[36m[4m
+Tuesday, August 23 2005[24m[31m
+Current Equity:             $100,971.73 (-1,004.74) (-0.99%)
+Max Equity:                 $101,976.47 (+0.00) (+0.00%) @ 19:06 CDT
+Min Equity:                 $100,479.21 (-1,497.25) (-1.47%) @ 13:10 CDT
+Original Equity:            $101,976.47
+[1m[36m[4m
+Wednesday, August 24 2005[24m[32m
+Current Equity:             $103,661.47 (+2,480.79) (+2.45%)
+Max Equity:                 $104,459.14 (+3,278.46) (+3.24%) @ 05:46 CDT
+Min Equity:                 $101,120.98 (-59.70) (-0.06%) @ 21:43 CDT
+Original Equity:            $101,180.68
+[1m[36m[4m
+Thursday, August 25 2005[24m[32m
+Current Equity:             $103,892.54 (+231.08) (+0.22%)
+Max Equity:                 $104,444.47 (+783.00) (+0.76%) @ 08:11 CDT
+Min Equity:                 $102,691.03 (-970.44) (-0.94%) @ 09:32 CDT
+Original Equity:            $103,661.47
+[1m[36m[4m
+Friday, August 26 2005[24m[31m
+Current Equity:             $103,815.70 (-76.85) (-0.07%)
+Max Equity:                 $104,152.13 (+259.59) (+0.25%) @ 06:02 CDT
+Min Equity:                 $102,543.61 (-1,348.94) (-1.30%) @ 08:52 CDT
+Original Equity:            $103,892.54
+[1m[36m[4m
+Monday, August 29 2005[24m[32m
+Current Equity:             $108,111.42 (+4,295.72) (+4.14%)
+Max Equity:                 $108,506.37 (+4,690.67) (+4.52%) @ 11:17 CDT
+Min Equity:                 $103,772.42 (-43.28) (-0.04%) @ 05:35 CDT
+Original Equity:            $103,815.70
+[1m[36m[4m
+Tuesday, August 30 2005[24m[32m
+Current Equity:             $110,163.35 (+1,943.73) (+1.80%)
+Max Equity:                 $110,924.82 (+2,705.20) (+2.50%) @ 07:27 CDT
+Min Equity:                 $107,840.91 (-378.72) (-0.35%) @ 19:21 CDT
+Original Equity:            $108,219.63
+[1m[36m[4m
+Wednesday, August 31 2005[24m[32m
+Current Equity:             $116,322.36 (+6,159.01) (+5.59%)
+Max Equity:                 $117,002.15 (+6,838.80) (+6.21%) @ 11:33 CDT
+Min Equity:                 $109,261.80 (-901.55) (-0.82%) @ 08:39 CDT
+Original Equity:            $110,163.35
+[1m[36m[4m
+Thursday, September  1 2005[24m[32m
+Current Equity:             $118,931.34 (+2,814.98) (+2.42%)
+Max Equity:                 $120,241.97 (+4,125.61) (+3.55%) @ 10:15 CDT
+Min Equity:                 $115,627.12 (-489.24) (-0.42%) @ 21:58 CDT
+Original Equity:            $116,116.36
+[1m[36m[4m
+Friday, September  2 2005[24m[31m
+Current Equity:             $117,826.61 (-1,104.73) (-0.93%)
+Max Equity:                 $119,168.07 (+236.73) (+0.20%) @ 04:14 CDT
+Min Equity:                 $117,195.33 (-1,736.00) (-1.46%) @ 08:32 CDT
+Original Equity:            $118,931.34
+[1m[36m[4m
+Monday, September  5 2005[24m[32m
+Current Equity:             $118,636.14 (+809.53) (+0.69%)
+Max Equity:                 $118,636.14 (+809.53) (+0.69%) @ 18:57 CDT
+Min Equity:                 $117,228.61 (-598.00) (-0.51%) @ 16:00 CDT
+Original Equity:            $117,826.61
+[1m[36m[4m
+Tuesday, September  6 2005[24m[32m
+Current Equity:             $118,597.56 (+2.09) (+0.00%)
+Max Equity:                 $119,653.14 (+1,057.68) (+0.89%) @ 23:36 CDT
+Min Equity:                 $117,479.54 (-1,115.92) (-0.94%) @ 11:12 CDT
+Original Equity:            $118,595.46
+[1m[36m[4m
+Wednesday, September  7 2005[24m[32m
+Current Equity:             $119,672.67 (+951.23) (+0.80%)
+Max Equity:                 $120,012.24 (+1,290.81) (+1.09%) @ 17:17 CDT
+Min Equity:                 $117,712.22 (-1,009.21) (-0.85%) @ 05:27 CDT
+Original Equity:            $118,721.44
+[1m[36m[4m
+Thursday, September  8 2005[24m[31m
+Current Equity:             $118,883.36 (-789.31) (-0.66%)
+Max Equity:                 $120,134.77 (+462.10) (+0.39%) @ 19:56 CDT
+Min Equity:                 $118,738.29 (-934.38) (-0.78%) @ 08:27 CDT
+Original Equity:            $119,672.67
+[1m[36m[4m
+Friday, September  9 2005[24m[31m
+Current Equity:             $115,265.97 (-3,617.39) (-3.04%)
+Max Equity:                 $120,813.24 (+1,929.88) (+1.62%) @ 06:21 CDT
+Min Equity:                 $115,140.60 (-3,742.76) (-3.15%) @ 13:52 CDT
+Original Equity:            $118,883.36
+[1m[36m[4m
+Monday, September 12 2005[24m[32m
+Current Equity:             $116,069.50 (+803.53) (+0.70%)
+Max Equity:                 $117,286.11 (+2,020.14) (+1.75%) @ 14:01 CDT
+Min Equity:                 $114,586.93 (-679.04) (-0.59%) @ 07:02 CDT
+Original Equity:            $115,265.97
+[1m[36m[4m
+Tuesday, September 13 2005[24m[31m
+Current Equity:             $113,264.22 (-2,748.69) (-2.37%)
+Max Equity:                 $117,144.64 (+1,131.73) (+0.98%) @ 20:01 CDT
+Min Equity:                 $113,264.22 (-2,748.69) (-2.37%) @ 07:35 CDT
+Original Equity:            $116,012.91
+[1m[36m[4m
+Wednesday, September 14 2005[24m[32m
+Current Equity:             $114,445.86 (+1,181.63) (+1.04%)
+Max Equity:                 $115,001.92 (+1,737.70) (+1.53%) @ 07:23 CDT
+Min Equity:                 $112,790.31 (-473.92) (-0.42%) @ 06:41 CDT
+Original Equity:            $113,264.22
+[1m[36m[4m
+Thursday, September 15 2005[24m[31m
+Current Equity:             $112,005.31 (-2,440.54) (-2.13%)
+Max Equity:                 $114,536.47 (+90.61) (+0.08%) @ 07:01 CDT
+Min Equity:                 $112,005.31 (-2,440.54) (-2.13%) @ 09:39 CDT
+Original Equity:            $114,445.86
+[1m[36m[4m
+Friday, September 16 2005[24m[32m
+Current Equity:             $113,759.86 (+1,754.55) (+1.57%)
+Max Equity:                 $114,583.74 (+2,578.42) (+2.30%) @ 08:04 CDT
+Min Equity:                 $111,776.46 (-228.85) (-0.20%) @ 05:07 CDT
+Original Equity:            $112,005.31
+[1m[36m[4m
+Monday, September 19 2005[24m[31m
+Current Equity:             $113,152.50 (-607.37) (-0.53%)
+Max Equity:                 $113,759.86 (+0.00) (+0.00%) @ 00:00 CDT
+Min Equity:                 $112,684.17 (-1,075.70) (-0.95%) @ 17:27 CDT
+Original Equity:            $113,759.86
+[1m[36m[4m
+Tuesday, September 20 2005[24m[32m
+Current Equity:             $114,152.23 (+853.38) (+0.75%)
+Max Equity:                 $114,464.94 (+1,166.09) (+1.03%) @ 13:25 CDT
+Min Equity:                 $112,643.04 (-655.81) (-0.58%) @ 13:19 CDT
+Original Equity:            $113,298.85
+[1m[36m[4m
+Wednesday, September 21 2005[24m[32m
+Current Equity:             $115,247.24 (+1,095.02) (+0.96%)
+Max Equity:                 $115,413.79 (+1,261.56) (+1.11%) @ 18:47 CDT
+Min Equity:                 $112,424.35 (-1,727.88) (-1.51%) @ 11:40 CDT
+Original Equity:            $114,152.23
+[1m[36m[4m
+Thursday, September 22 2005[24m[31m
+Current Equity:             $112,057.16 (-3,148.45) (-2.73%)
+Max Equity:                 $115,413.79 (+208.18) (+0.18%) @ 19:08 CDT
+Min Equity:                 $109,906.93 (-5,298.68) (-4.60%) @ 08:48 CDT
+Original Equity:            $115,205.61
+[1m[36m[4m
+Friday, September 23 2005[24m[32m
+Current Equity:             $112,713.25 (+656.09) (+0.59%)
+Max Equity:                 $112,825.50 (+768.34) (+0.69%) @ 15:58 CDT
+Min Equity:                 $109,645.00 (-2,412.16) (-2.15%) @ 04:47 CDT
+Original Equity:            $112,057.16
+[1m[36m[4m
+Monday, September 26 2005[24m[31m
+Current Equity:             $108,399.25 (-4,314.00) (-3.83%)
+Max Equity:                 $112,713.25 (+0.00) (+0.00%) @ 00:00 CDT
+Min Equity:                 $108,399.25 (-4,314.00) (-3.83%) @ 13:53 CDT
+Original Equity:            $112,713.25
+[1m[36m[4m
+Tuesday, September 27 2005[24m[31m
+Current Equity:             $107,526.97 (-872.28) (-0.80%)
+Max Equity:                 $108,658.05 (+258.80) (+0.24%) @ 11:39 CDT
+Min Equity:                 $107,320.82 (-1,078.43) (-0.99%) @ 17:24 CDT
+Original Equity:            $108,399.25
+[1m[36m[4m
+Wednesday, September 28 2005[24m[31m
+Current Equity:             $106,495.12 (-1,090.75) (-1.01%)
+Max Equity:                 $109,168.21 (+1,582.34) (+1.47%) @ 10:40 CDT
+Min Equity:                 $105,121.81 (-2,464.06) (-2.29%) @ 14:24 CDT
+Original Equity:            $107,585.87
+[1m[36m[4m
+Thursday, September 29 2005[24m[31m
+Current Equity:             $105,444.99 (-1,007.87) (-0.95%)
+Max Equity:                 $107,409.05 (+956.19) (+0.90%) @ 09:44 CDT
+Min Equity:                 $105,415.85 (-1,037.02) (-0.97%) @ 17:51 CDT
+Original Equity:            $106,452.86
+[1m[36m[4m
+Friday, September 30 2005[24m[31m
+Current Equity:             $103,565.56 (-1,966.87) (-1.86%)
+Max Equity:                 $107,777.37 (+2,244.94) (+2.13%) @ 10:33 CDT
+Min Equity:                 $103,543.86 (-1,988.57) (-1.88%) @ 15:49 CDT
+Original Equity:            $105,532.43
+[1m[36m[4m
+Monday, October  3 2005[24m[32m
+Current Equity:             $103,892.75 (+327.19) (+0.32%)
+Max Equity:                 $104,475.42 (+909.86) (+0.88%) @ 09:35 CDT
+Min Equity:                 $102,942.55 (-623.01) (-0.60%) @ 05:11 CDT
+Original Equity:            $103,565.56
+[1m[36m[4m
+Tuesday, October  4 2005[24m[31m
+Current Equity:             $100,846.83 (-2,866.64) (-2.76%)
+Max Equity:                 $104,206.50 (+493.03) (+0.48%) @ 20:13 CDT
+Min Equity:                 $100,846.83 (-2,866.64) (-2.76%) @ 06:52 CDT
+Original Equity:            $103,713.47
+[1m[36m[4m
+Wednesday, October  5 2005[24m[31m
+Current Equity:             $99,515.84 (-1,330.98) (-1.32%)
+Max Equity:                 $100,874.35 (+27.53) (+0.03%) @ 07:51 CDT
+Min Equity:                 $99,178.76 (-1,668.06) (-1.65%) @ 09:11 CDT
+Original Equity:            $100,846.83
+[1m[36m[4m
+Thursday, October  6 2005[24m[31m
+Current Equity:             $99,342.92 (-172.93) (-0.17%)
+Max Equity:                 $99,679.75 (+163.91) (+0.16%) @ 05:18 CDT
+Min Equity:                 $97,946.37 (-1,569.47) (-1.58%) @ 07:20 CDT
+Original Equity:            $99,515.84
+[1m[36m[4m
+Friday, October  7 2005[24m[32m
+Current Equity:             $101,716.68 (+2,373.76) (+2.39%)
+Max Equity:                 $101,987.97 (+2,645.05) (+2.66%) @ 07:42 CDT
+Min Equity:                 $98,868.17 (-474.75) (-0.48%) @ 04:23 CDT
+Original Equity:            $99,342.92
+[1m[36m[4m
+Monday, October 10 2005[24m[32m
+Current Equity:             $104,358.47 (+2,641.79) (+2.60%)
+Max Equity:                 $105,412.07 (+3,695.39) (+3.63%) @ 09:55 CDT
+Min Equity:                 $101,327.42 (-389.26) (-0.38%) @ 06:15 CDT
+Original Equity:            $101,716.68
+[1m[36m[4m
+Tuesday, October 11 2005[24m[32m
+Current Equity:             $104,632.70 (+274.23) (+0.26%)
+Max Equity:                 $105,261.37 (+902.90) (+0.87%) @ 09:11 CDT
+Min Equity:                 $102,435.10 (-1,923.38) (-1.84%) @ 06:17 CDT
+Original Equity:            $104,358.47
+[1m[36m[4m
+Wednesday, October 12 2005[24m[32m
+Current Equity:             $105,868.24 (+1,235.54) (+1.18%)
+Max Equity:                 $106,527.19 (+1,894.49) (+1.81%) @ 06:32 CDT
+Min Equity:                 $104,367.94 (-264.76) (-0.25%) @ 04:09 CDT
+Original Equity:            $104,632.70
+[1m[36m[4m
+Thursday, October 13 2005[24m[32m
+Current Equity:             $107,732.71 (+1,864.47) (+1.76%)
+Max Equity:                 $108,567.95 (+2,699.71) (+2.55%) @ 09:26 CDT
+Min Equity:                 $105,868.24 (+0.00) (+0.00%) @ 19:04 CDT
+Original Equity:            $105,868.24
+[1m[36m[4m
+Friday, October 14 2005[24m[32m
+Current Equity:             $109,102.07 (+1,369.36) (+1.27%)
+Max Equity:                 $109,871.37 (+2,138.66) (+1.99%) @ 06:16 CDT
+Min Equity:                 $107,540.39 (-192.33) (-0.18%) @ 04:09 CDT
+Original Equity:            $107,732.71
+[1m[36m[4m
+Monday, October 17 2005[24m[32m
+Current Equity:             $110,794.43 (+1,692.36) (+1.55%)
+Max Equity:                 $111,008.65 (+1,906.58) (+1.75%) @ 18:55 CDT
+Min Equity:                 $108,698.62 (-403.45) (-0.37%) @ 12:08 CDT
+Original Equity:            $109,102.07
+[1m[36m[4m
+Tuesday, October 18 2005[24m[32m
+Current Equity:             $112,062.14 (+1,267.71) (+1.14%)
+Max Equity:                 $112,682.81 (+1,888.38) (+1.70%) @ 07:32 CDT
+Min Equity:                 $110,555.65 (-238.78) (-0.22%) @ 04:39 CDT
+Original Equity:            $110,794.43
+[1m[36m[4m
+Wednesday, October 19 2005[24m[32m
+Current Equity:             $113,214.83 (+1,152.69) (+1.03%)
+Max Equity:                 $113,755.71 (+1,693.57) (+1.51%) @ 14:59 CDT
+Min Equity:                 $111,716.33 (-345.81) (-0.31%) @ 08:30 CDT
+Original Equity:            $112,062.14
+[1m[36m[4m
+Thursday, October 20 2005[24m[31m
+Current Equity:             $112,979.36 (-235.47) (-0.21%)
+Max Equity:                 $113,214.83 (+0.00) (+0.00%) @ 19:03 CDT
+Min Equity:                 $111,059.31 (-2,155.52) (-1.90%) @ 07:40 CDT
+Original Equity:            $113,214.83
+[1m[36m[4m
+Friday, October 21 2005[24m[31m
+Current Equity:             $111,510.27 (-1,469.10) (-1.30%)
+Max Equity:                 $114,144.11 (+1,164.75) (+1.03%) @ 07:01 CDT
+Min Equity:                 $111,510.27 (-1,469.10) (-1.30%) @ 10:16 CDT
+Original Equity:            $112,979.36
+[1m[36m[4m
+Monday, October 24 2005[24m[32m
+Current Equity:             $113,004.11 (+1,493.84) (+1.34%)
+Max Equity:                 $113,711.72 (+2,201.45) (+1.97%) @ 10:02 CDT
+Min Equity:                 $111,313.71 (-196.56) (-0.18%) @ 07:59 CDT
+Original Equity:            $111,510.27
+[1m[36m[4m
+Tuesday, October 25 2005[24m[32m
+Current Equity:             $114,396.06 (+1,391.95) (+1.23%)
+Max Equity:                 $114,713.18 (+1,709.07) (+1.51%) @ 13:27 CDT
+Min Equity:                 $112,606.11 (-398.00) (-0.35%) @ 07:11 CDT
+Original Equity:            $113,004.11
+[1m[36m[4m
+Wednesday, October 26 2005[24m[31m
+Current Equity:             $112,081.22 (-2,314.84) (-2.02%)
+Max Equity:                 $114,576.97 (+180.91) (+0.16%) @ 20:52 CDT
+Min Equity:                 $112,081.22 (-2,314.84) (-2.02%) @ 18:38 CDT
+Original Equity:            $114,396.06
+[1m[36m[4m
+Thursday, October 27 2005[24m[31m
+Current Equity:             $111,136.09 (-945.13) (-0.84%)
+Max Equity:                 $112,681.15 (+599.93) (+0.54%) @ 07:50 CDT
+Min Equity:                 $111,018.83 (-1,062.39) (-0.95%) @ 14:24 CDT
+Original Equity:            $112,081.22
+[1m[36m[4m
+Friday, October 28 2005[24m[31m
+Current Equity:             $109,541.94 (-1,523.80) (-1.37%)
+Max Equity:                 $111,797.25 (+731.51) (+0.66%) @ 07:53 CDT
+Min Equity:                 $109,541.94 (-1,523.80) (-1.37%) @ 10:02 CDT
+Original Equity:            $111,065.74
+[1m[36m[4m
+Monday, October 31 2005[24m[32m
+Current Equity:             $109,541.94 (+0.00) (+0.00%)
+Max Equity:                 $109,541.94 (+0.00) (+0.00%) @ 23:00 CST
+Min Equity:                 $109,541.94 (+0.00) (+0.00%) @ 23:00 CST
+Original Equity:            $109,541.94
+[1m[36m[4m
+📊 Stats
+[0m[1m[32mAvg Daily Return:           +$42.29
+[1m[32mAvg Daily % Return:         +0.06%
+[1m[32mAvg Win Max Equity %:       +2.03% (σ: +1.2333%)
+[1m[31mAvg Win Min Equity %:       -0.58% (σ: +0.4700%)
+[1m[32mTotal Return:               +$9,050.31 (9.08%)
+Win Rate:                   115W (53.74%) 101L (Total: 214)
+
+[1m[36m⌚ Finished in 00:26
+[0m
+[1m[33m👋 Successfully disconnected from [32mhottspot_capital_backtest[0m

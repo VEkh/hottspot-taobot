@@ -35,6 +35,7 @@ void Oanda::TaoBot::reset_backtest() {
   this->db_candle.clear_cache();
   this->has_stopped_profit = false; // TODO: Decide
   this->spike_candles = spike_candles_t();
+  this->warm_up_candle = candle_t(); // TODO: Decide
 
   this->current_quote = quote_t();
   this->previous_quote = quote_t();
