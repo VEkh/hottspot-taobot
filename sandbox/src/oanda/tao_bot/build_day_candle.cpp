@@ -5,6 +5,15 @@
 #include <algorithm> // std::max, std::min
 
 void Oanda::TaoBot::build_day_candle() {
+  // TODO: Decide
+  const double warm_up_period_hours =
+      this->api_client.config.warm_up_period_hours;
+
+  const bool is_warming_up =
+      warm_up_period_hours &&
+      (this->current_epoch < this->market_availability.market_epochs.open +
+                                 warm_up_period_hours * 60.0 * 60.0);
+
   for (const candle_t candle : this->latest_candles) {
     if (candle.closed_at > this->current_epoch) {
       break;
@@ -29,6 +38,11 @@ void Oanda::TaoBot::build_day_candle() {
 
     if (this->day_candle.low == candle.low) {
       this->day_candle.low_at = candle.opened_at;
+    }
+
+    // TODO: Decide
+    if (is_warming_up) {
+      this->warm_up_candle = this->day_candle;
     }
   }
 }

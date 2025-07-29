@@ -36,7 +36,13 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  this->exit_prices = build_exit_prices();
+  // TODO: Decide
+  this->exit_prices = build_exit_prices({
+      .action = this->open_order_ptr->action,
+      .day_candle = this->open_order_ptr->day_candle,
+      .entry_reversal = this->open_order_ptr->entry_reversal,
+      .execution_price = this->open_order_ptr->execution_price,
+  });
 
   if (this->current_quote.spread() > spread_limit()) {
     return false;

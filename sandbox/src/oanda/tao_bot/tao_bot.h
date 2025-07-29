@@ -36,6 +36,7 @@ private:
   using candle_t = Global::t::candle_t;
   using currency_t = Oanda::t::currency_t;
   using db_position_t = DB::Position::position_t;
+  using execution_strategy_t = Global::t::execution_strategy_t; // TODO: Decide
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
   using order_action_t = Oanda::t::order_action_t;
@@ -56,6 +57,14 @@ private:
   using trade_status_t = Oanda::t::trade_status_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
+
+  // TODO: Decide
+  struct build_exit_prices_args_t {
+    order_action_t action;
+    candle_t day_candle;
+    reversal_t entry_reversal;
+    double execution_price;
+  };
 
   struct convert_price_args_t {
     bool debug = false;
@@ -109,6 +118,7 @@ private:
   bool has_stopped_profit = false; // TODO: Decide
   exit_prices_t exit_prices;
   candle_t day_candle;
+  candle_t warm_up_candle; // TODO: Decide
   currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
@@ -164,12 +174,19 @@ private:
   double day_range_percentile(candle_t, const double, const bool);
   double day_range_percentile(candle_t, const order_t *, double);
   double margin_buying_power();
+  double margin_normalization_factor();  // TODO: Decide
+  double normalized_margin_multiplier(); // TODO: Decide
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
+  double reverse_percentile(); // TODO: Decide
   double spike_score(spike_candles_t);
   double spread_limit();
+  double stop_profit_version(); // TODO: Decide
 
-  exit_prices_t build_exit_prices();
+  execution_strategy_t execution_strategy(); // TODO: Decide
+
+  exit_prices_t build_exit_prices(build_exit_prices_args_t); // TODO: Decide
+  int max_loss_streak();                                     // TODO: Decide
   int order_duration(const order_t *, const std::string);
   int runtime();
   json fetch_order(const order_t *);
@@ -201,6 +218,7 @@ private:
 
   std::string stop_profit_type_name(const order_t *);
 
+  stop_profit_type_t stop_profit_type(candle_t, const double);
   stop_profit_type_t stop_profit_type(const order_t *);
 
   void advance_current_epoch();
