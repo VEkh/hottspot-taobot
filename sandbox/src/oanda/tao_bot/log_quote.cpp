@@ -31,16 +31,32 @@ void Oanda::TaoBot::log_quote() {
          this->current_quote.spread());
   std::cout << std::endl;
 
-  printf("High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f\n",
-         this->day_candle.high,
-         ::utils::time_::date_string(this->day_candle.high_at, "%m/%d %R %Z",
-                                     "America/Chicago")
-             .c_str(),
-         this->day_candle.low,
-         ::utils::time_::date_string(this->day_candle.low_at, "%m/%d %R %Z",
-                                     "America/Chicago")
-             .c_str(),
-         this->day_candle.range());
+  printf(
+      "☀  High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f • Body:Wick: %'.3f\n",
+      this->day_candle.high,
+      ::utils::time_::date_string(this->day_candle.high_at, "%m/%d %R %Z",
+                                  "America/Chicago")
+          .c_str(),
+      this->day_candle.low,
+      ::utils::time_::date_string(this->day_candle.low_at, "%m/%d %R %Z",
+                                  "America/Chicago")
+          .c_str(),
+      this->day_candle.range(), this->day_candle.body_wick_ratio());
+
+  // TODO: Decide
+  if (this->api_client.config.warm_up_period_hours) {
+    printf(
+        "😴 High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f • Body:Wick: %'.3f\n",
+        this->warm_up_candle.high,
+        ::utils::time_::date_string(this->warm_up_candle.high_at, "%m/%d %R %Z",
+                                    "America/Chicago")
+            .c_str(),
+        this->warm_up_candle.low,
+        ::utils::time_::date_string(this->warm_up_candle.low_at, "%m/%d %R %Z",
+                                    "America/Chicago")
+            .c_str(),
+        this->warm_up_candle.range(), this->warm_up_candle.body_wick_ratio());
+  }
 
   std::cout << fmt.reset << std::endl;
 }

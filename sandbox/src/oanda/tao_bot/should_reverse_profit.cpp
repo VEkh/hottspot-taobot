@@ -4,6 +4,7 @@
 
 #include "is_trend_slipping.cpp"            // is_trend_slipping
 #include "latest_record_reversal_after.cpp" // latest_record_reversal_after
+#include "reverse_percentile.cpp"           // reverse_percentile
 #include "tao_bot.h"                        // Oanda::TaoBot, reversal_t
 
 bool Oanda::TaoBot::should_reverse_profit() {
@@ -20,8 +21,9 @@ bool Oanda::TaoBot::should_reverse_profit() {
       this->reversals, this->open_order_ptr->timestamp,
       this->open_order_ptr->entry_reversal.opposite_type());
 
+  // TODO: Decide
   if (stop_profit_reversal.at &&
-      is_trend_slipping(this->open_order_ptr, this->EQUATOR_PERCENTILE)) {
+      is_trend_slipping(this->open_order_ptr, reverse_percentile())) {
     this->close_order_ptr->stop_profit_reversal = stop_profit_reversal;
 
     return true;
