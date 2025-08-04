@@ -12,44 +12,7 @@
 #include <stdio.h>   // printf
 #include <string>    // std::string
 
-#include "execution_strategy.cpp"  // execution_strategy // TODO: Decide
-#include "stop_profit_version.cpp" // stop_profit_version // TODO: Decide
-
 void Oanda::TaoBot::log_reversal_metadata() {
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Dynamic Reverse Percentile Ratio: ");
-  std::cout << fmt.cyan
-            << this->api_client.config.dynamic_reverse_percentile_ratio
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Dynamic Reverse Percentile: ");
-  std::cout << fmt.cyan << this->api_client.config.dynamic_reverse_percentile
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Dynamic Stop Profit Version Limit %%: ");
-  std::cout << fmt.cyan
-            << this->api_client.config.dynamic_stop_profit_version_limit
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  const std::string computed_execution_strategy =
-      execution_strategy() ==
-              execution_strategy_t::EXECUTION_STRATEGY_CONSOLIDATION
-          ? "CONSOLIDATION"
-          : "TREND";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Execution Strategy: ");
-  std::cout << fmt.cyan;
-  printf("%s|%s", this->api_client.config.execution_strategy.c_str(),
-         computed_execution_strategy.c_str());
-  std::cout << fmt.reset << std::endl;
-
   // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Margin Multiplier: ");
@@ -103,10 +66,14 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
             << std::endl;
 
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Reverse Percentile (%%): ");
   std::cout << fmt.cyan << reverse_percentile() << fmt.reset << std::endl;
+
+  std::cout << fmt.bold << fmt.yellow;
+  printf("Secondary Reverse Percentile: ");
+  std::cout << fmt.cyan << this->api_client.config.secondary_reverse_percentile
+            << fmt.reset << std::endl;
 
   // TODO: Decide
   Formatted::Stream should_always_reverse_profit_color =
@@ -173,13 +140,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
             << fmt.reset << std::endl;
 
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Profit Multiplier: ");
-  std::cout << fmt.cyan << this->api_client.config.stop_profit_multiplier
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Profit Target Price Action %%: ");
   std::cout << fmt.cyan
@@ -193,14 +153,9 @@ void Oanda::TaoBot::log_reversal_metadata() {
               << fmt.reset << std::endl;
   }
 
-  // TODO: Decide
-  const char *stop_profit_version_prefix =
-      this->api_client.config.dynamic_stop_profit_version_limit ? "DYNAMIC|"
-                                                                : "";
-
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Profit Version: ");
-  std::cout << fmt.cyan << stop_profit_version_prefix << stop_profit_version()
+  std::cout << fmt.cyan << this->api_client.config.stop_profit_version
             << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.yellow;

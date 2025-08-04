@@ -27,10 +27,6 @@ public:
     std::string authentication_token;
     std::string base_url;
     bool debug_sql = false;
-    double dynamic_reverse_percentile = 0.0;        // TODO: Decide
-    double dynamic_reverse_percentile_ratio = 0.0;  // TODO: Decide
-    double dynamic_stop_profit_version_limit = 0.0; // TODO: Decide
-    std::string execution_strategy = "TREND";
     std::list<std::string> env_symbols;
     double margin_multiplier = 1.0;                      // TODO: Decide
     double margin_normalization_base_price_action = 0.0; // TODO: Decide
@@ -40,18 +36,18 @@ public:
     bool only_stop_profit_in_consolidation = false; // TODO: Decide
     double quantity_decay_throttle = 0.0;           // TODO: Decide
     double range_min_height = 0.5;                  // TODO: Decide
-    double reverse_percentile = 50.0;               // TODO: Decide
-    bool should_always_normalize = false;           // TODO: Decide
-    bool should_always_reverse_profit = false;      // TODO: Decide
-    bool should_await_record_break = false;         // TODO: Decide
-    bool should_enter_at_spike = true;              // TODO: Decide
-    bool should_stop_profit = true;                 // TODO: Decide
-    bool should_trade_into_reversal = true;         // TODO: Decide
-    double stop_loss_padding_ratio = 0.2;           // TODO: Decide
-    double stop_profit_multiplier = 1.0;            // TODO: Decide
-    double stop_profit_target_price_action = 0.0;   // TODO: Decide
-    double stop_profit_version = 0.1;               // TODO: Decide
-    double warm_up_period_hours = 0.0;              // TODO: Decide
+    double reverse_percentile = 50.0;
+    double secondary_reverse_percentile = 0.0;
+    bool should_always_normalize = false;      // TODO: Decide
+    bool should_always_reverse_profit = false; // TODO: Decide
+    bool should_await_record_break = false;    // TODO: Decide
+    bool should_enter_at_spike = true;         // TODO: Decide
+    bool should_stop_profit = true;            // TODO: Decide
+    bool should_trade_into_reversal = true;    // TODO: Decide
+    double stop_loss_padding_ratio = 0.2;      // TODO: Decide
+    double stop_profit_target_price_action = 0.0;
+    double stop_profit_version = 0.1;
+    double warm_up_period_hours = 0.0; // TODO: Decide
   } config;
 
   struct fetch_historical_quotes_args_t {
