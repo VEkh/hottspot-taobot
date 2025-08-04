@@ -151,7 +151,6 @@ void Oanda::Client::load_config() {
         (bool)api_key_json["should_trade_into_reversal"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("stop_loss_padding_ratio")) {
     this->config.stop_loss_padding_ratio =
         (double)api_key_json["stop_loss_padding_ratio"];
@@ -206,8 +205,7 @@ void Oanda::Client::load_config() {
       .should_stop_profit = this->config.should_stop_profit, // TODO: Decide
       .should_trade_into_reversal =
           this->config.should_trade_into_reversal, // TODO: Decide
-      .stop_loss_padding_ratio =
-          this->config.stop_loss_padding_ratio, // TODO: Decide
+      .stop_loss_padding_ratio = this->config.stop_loss_padding_ratio,
       .stop_profit_target_price_action =
           this->config.stop_profit_target_price_action,
       .stop_profit_version = this->config.stop_profit_version,
