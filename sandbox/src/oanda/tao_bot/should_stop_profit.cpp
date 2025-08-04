@@ -3,9 +3,8 @@
 
 #include "is_trend_slipping.cpp"     // is_trend_slipping
 #include "latest_reversal_after.cpp" // latest_reversal_after
-#include "tao_bot.h" // Oanda::TaoBot, execution_strategy_t, reversal_t
+#include "tao_bot.h"                 // Oanda::TaoBot, reversal_t
 
-#include "execution_strategy.cpp" // execution_strategy  // TODO: Decide
 #include "reverse_percentile.cpp" // reverse_percentile  // TODO: Decide
 
 bool Oanda::TaoBot::should_stop_profit() {

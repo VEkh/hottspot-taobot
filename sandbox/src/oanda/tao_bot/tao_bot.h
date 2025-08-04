@@ -36,7 +36,6 @@ private:
   using candle_t = Global::t::candle_t;
   using currency_t = Oanda::t::currency_t;
   using db_position_t = DB::Position::position_t;
-  using execution_strategy_t = Global::t::execution_strategy_t; // TODO: Decide
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
   using order_action_t = Oanda::t::order_action_t;
@@ -182,9 +181,6 @@ private:
   double reverse_percentile(); // TODO: Decide
   double spike_score(spike_candles_t);
   double spread_limit();
-  double stop_profit_version(); // TODO: Decide
-
-  execution_strategy_t execution_strategy(); // TODO: Decide
 
   exit_prices_t build_exit_prices(build_exit_prices_args_t); // TODO: Decide
   int order_duration(const order_t *, const std::string);

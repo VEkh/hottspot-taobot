@@ -63,30 +63,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("dynamic_reverse_percentile")) {
-    this->config.dynamic_reverse_percentile =
-        (double)api_key_json["dynamic_reverse_percentile"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("dynamic_reverse_percentile_ratio")) {
-    this->config.dynamic_reverse_percentile_ratio =
-        (double)api_key_json["dynamic_reverse_percentile_ratio"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("dynamic_stop_profit_version_limit")) {
-    this->config.dynamic_stop_profit_version_limit =
-        (double)api_key_json["dynamic_stop_profit_version_limit"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("execution_strategy")) {
-    this->config.execution_strategy =
-        (std::string)api_key_json["execution_strategy"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("margin_normalization_base_price_action")) {
     this->config.margin_normalization_base_price_action =
         (double)api_key_json["margin_normalization_base_price_action"];
@@ -130,10 +106,14 @@ void Oanda::Client::load_config() {
     this->config.range_min_height = (double)api_key_json["range_min_height"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("reverse_percentile")) {
     this->config.reverse_percentile =
         (double)api_key_json["reverse_percentile"];
+  }
+
+  if (api_key_json.contains("secondary_reverse_percentile")) {
+    this->config.secondary_reverse_percentile =
+        (double)api_key_json["secondary_reverse_percentile"];
   }
 
   // TODO: Decide
@@ -177,19 +157,11 @@ void Oanda::Client::load_config() {
         (double)api_key_json["stop_loss_padding_ratio"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("stop_profit_multiplier")) {
-    this->config.stop_profit_multiplier =
-        (double)api_key_json["stop_profit_multiplier"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("stop_profit_target_price_action")) {
     this->config.stop_profit_target_price_action =
         (double)api_key_json["stop_profit_target_price_action"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("stop_profit_version")) {
     this->config.stop_profit_version =
         (double)api_key_json["stop_profit_version"];
@@ -207,13 +179,6 @@ void Oanda::Client::load_config() {
       .authentication_token = api_key_json["authentication_token"],
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
-      .dynamic_reverse_percentile =
-          this->config.dynamic_reverse_percentile, // TODO: Decide
-      .dynamic_reverse_percentile_ratio =
-          this->config.dynamic_reverse_percentile_ratio, // TODO: Decide
-      .dynamic_stop_profit_version_limit =
-          this->config.dynamic_stop_profit_version_limit,    // TODO: Decide
-      .execution_strategy = this->config.execution_strategy, // TODO: Decide
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .margin_multiplier = this->config.margin_multiplier, // TODO: Decide
       .margin_normalization_base_price_action =
@@ -225,9 +190,11 @@ void Oanda::Client::load_config() {
       .only_stop_profit_in_consolidation =
           this->config.only_stop_profit_in_consolidation,
       .quantity_decay_throttle =
-          this->config.quantity_decay_throttle,              // TODO: Decide
-      .range_min_height = this->config.range_min_height,     // TODO: Decide
-      .reverse_percentile = this->config.reverse_percentile, // TODO: Decide
+          this->config.quantity_decay_throttle,          // TODO: Decide
+      .range_min_height = this->config.range_min_height, // TODO: Decide
+      .reverse_percentile = this->config.reverse_percentile,
+      .secondary_reverse_percentile =
+          this->config.secondary_reverse_percentile, // TODO: Decide
       .should_always_normalize =
           this->config.should_always_normalize, // TODO: Decide
       .should_always_reverse_profit =
@@ -241,11 +208,9 @@ void Oanda::Client::load_config() {
           this->config.should_trade_into_reversal, // TODO: Decide
       .stop_loss_padding_ratio =
           this->config.stop_loss_padding_ratio, // TODO: Decide
-      .stop_profit_multiplier =
-          this->config.stop_profit_multiplier, // TODO: Decide
       .stop_profit_target_price_action =
-          this->config.stop_profit_target_price_action,          // TODO: Decide
-      .stop_profit_version = this->config.stop_profit_version,   // TODO: Decide
+          this->config.stop_profit_target_price_action,
+      .stop_profit_version = this->config.stop_profit_version,
       .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide
   };
 }
