@@ -13,7 +13,6 @@
 #include <string>    // std::string
 
 #include "execution_strategy.cpp"  // execution_strategy // TODO: Decide
-#include "max_loss_streak.cpp"     // max_loss_streak // TODO: Decide
 #include "stop_profit_version.cpp" // stop_profit_version // TODO: Decide
 
 void Oanda::TaoBot::log_reversal_metadata() {
@@ -69,15 +68,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.bold << fmt.yellow;
   printf("Market Duration Hours: ");
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
-            << fmt.reset << std::endl;
-
-  // TODO: Decide
-  const char *max_loss_streak_prefix =
-      this->api_client.config.dynamic_max_loss_streak ? "DYNAMIC|" : "";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Max Loss Streak: ");
-  std::cout << fmt.cyan << max_loss_streak_prefix << max_loss_streak()
             << fmt.reset << std::endl;
 
   // TODO: Decide
