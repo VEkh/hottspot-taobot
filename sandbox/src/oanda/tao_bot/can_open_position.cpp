@@ -6,8 +6,6 @@
 #include "spread_limit.cpp"             // spread_limit
 #include "tao_bot.h"                    // Oanda::TaoBot, fmt, order_action_t
 
-#include "max_loss_streak.cpp" // max_loss_streak // TODO: Decide
-
 bool Oanda::TaoBot::can_open_position() {
   if (!this->market_availability.is_market_open(this->current_epoch)) {
     return false;
@@ -35,11 +33,7 @@ bool Oanda::TaoBot::can_open_position() {
     return false;
   }
 
-  // TODO: Decide
-  const int max_loss_streak_ = max_loss_streak();
-
-  if (max_loss_streak_ &&
-      this->performance.loss_streaks.current >= max_loss_streak_) {
+  if (this->performance.loss_streaks.current >= this->MAX_LOSS_STREAK) {
     return false;
   }
 

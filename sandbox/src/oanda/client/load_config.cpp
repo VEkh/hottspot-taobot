@@ -63,12 +63,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("dynamic_max_loss_streak")) {
-    this->config.dynamic_max_loss_streak =
-        (int)api_key_json["dynamic_max_loss_streak"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("dynamic_reverse_percentile")) {
     this->config.dynamic_reverse_percentile =
         (double)api_key_json["dynamic_reverse_percentile"];
@@ -111,11 +105,6 @@ void Oanda::Client::load_config() {
   if (api_key_json.contains("market_open_central_time")) {
     this->config.market_open_central_time =
         (std::string)api_key_json["market_open_central_time"];
-  }
-
-  // TODO: Decide
-  if (api_key_json.contains("max_loss_streak")) {
-    this->config.max_loss_streak = (int)api_key_json["max_loss_streak"];
   }
 
   // TODO: Decide
@@ -218,8 +207,6 @@ void Oanda::Client::load_config() {
       .authentication_token = api_key_json["authentication_token"],
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
-      .dynamic_max_loss_streak =
-          this->config.dynamic_max_loss_streak, // TODO: Decide
       .dynamic_reverse_percentile =
           this->config.dynamic_reverse_percentile, // TODO: Decide
       .dynamic_reverse_percentile_ratio =
@@ -233,7 +220,6 @@ void Oanda::Client::load_config() {
           this->config.margin_normalization_base_price_action, // TODO: Decide
       .market_duration_hours = this->config.market_duration_hours,
       .market_open_central_time = this->config.market_open_central_time,
-      .max_loss_streak = this->config.max_loss_streak, // TODO: Decide
       .normalized_account_loss_ratio =
           this->config.normalized_account_loss_ratio, // TODO: Decide
       .only_stop_profit_in_consolidation =

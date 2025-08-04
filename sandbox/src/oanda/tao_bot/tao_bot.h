@@ -79,6 +79,7 @@ private:
   static constexpr double SPIKE_HEIGHT_RATIO = 0.5;
   static constexpr double STOP_LOSS_PADDING_RATIO = 0.2;
   static constexpr double TREND_SLIP_PERCENTILE = 80.0;
+  static constexpr int MAX_LOSS_STREAK = 2;
   static constexpr int REVERSAL_TIMEFRAME_MINUTES = 120;
   static constexpr int SPIKE_DURATION_MINUTES = 60;
 
@@ -186,7 +187,6 @@ private:
   execution_strategy_t execution_strategy(); // TODO: Decide
 
   exit_prices_t build_exit_prices(build_exit_prices_args_t); // TODO: Decide
-  int max_loss_streak();                                     // TODO: Decide
   int order_duration(const order_t *, const std::string);
   int runtime();
   json fetch_order(const order_t *);

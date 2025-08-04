@@ -27,7 +27,6 @@ public:
     std::string authentication_token;
     std::string base_url;
     bool debug_sql = false;
-    int dynamic_max_loss_streak = 0;                // TODO: Decide
     double dynamic_reverse_percentile = 0.0;        // TODO: Decide
     double dynamic_reverse_percentile_ratio = 0.0;  // TODO: Decide
     double dynamic_stop_profit_version_limit = 0.0; // TODO: Decide
@@ -37,7 +36,6 @@ public:
     double margin_normalization_base_price_action = 0.0; // TODO: Decide
     double market_duration_hours = 120.0;
     std::string market_open_central_time = "07:00:00";
-    int max_loss_streak = 0;                        // TODO: Decide
     double normalized_account_loss_ratio = 0.0;     // TODO: Decide
     bool only_stop_profit_in_consolidation = false; // TODO: Decide
     double quantity_decay_throttle = 0.0;           // TODO: Decide
