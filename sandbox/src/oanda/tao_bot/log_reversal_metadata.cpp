@@ -55,12 +55,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   //           std::endl;
 
   // TODO: Decide
-  // std::cout << fmt.bold << fmt.yellow;
-  // printf("Quantity Decay Throttle: ");
-  // std::cout << fmt.cyan << this->api_client.config.quantity_decay_throttle
-  //           << fmt.reset << std::endl;
-
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
