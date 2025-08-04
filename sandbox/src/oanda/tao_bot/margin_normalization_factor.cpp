@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_margin_normalization_factor
 #define OANDA__TAO_BOT_margin_normalization_factor
 
@@ -22,19 +21,13 @@ double Oanda::TaoBot::margin_normalization_factor() {
     return 1.0;
   }
 
-  const double ref_price_action =
-      this->api_client.config.should_always_normalize
-          ? this->day_candle.range_open_percent()
-          : this->warm_up_candle.range_open_percent();
-
+  const double ref_price_action = this->day_candle.range_open_percent();
   double factor = (base_price_action * 100.0) / ref_price_action;
-
-  // v0.1
-  // const double max_factor = 1.0 / margin_multiplier;
 
   // v0.2
   const double max_factor = 1.0;
 
+  // TODO: Decide
   // v0.3
   if (this->api_client.config.quantity_decay_throttle) {
     const double throttle_rate =

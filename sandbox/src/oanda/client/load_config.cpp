@@ -117,12 +117,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("should_always_normalize")) {
-    this->config.should_always_normalize =
-        (bool)api_key_json["should_always_normalize"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("should_always_reverse_profit")) {
     this->config.should_always_reverse_profit =
         (bool)api_key_json["should_always_reverse_profit"];
@@ -194,8 +188,6 @@ void Oanda::Client::load_config() {
       .reverse_percentile = this->config.reverse_percentile,
       .secondary_reverse_percentile =
           this->config.secondary_reverse_percentile, // TODO: Decide
-      .should_always_normalize =
-          this->config.should_always_normalize, // TODO: Decide
       .should_always_reverse_profit =
           this->config.should_always_reverse_profit, // TODO: Decide
       .should_await_record_break =

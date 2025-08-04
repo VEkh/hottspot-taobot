@@ -38,7 +38,6 @@ public:
     double range_min_height = 0.5;                  // TODO: Decide
     double reverse_percentile = 50.0;
     double secondary_reverse_percentile = 0.0;
-    bool should_always_normalize = false;      // TODO: Decide
     bool should_always_reverse_profit = false; // TODO: Decide
     bool should_await_record_break = false;    // TODO: Decide
     bool should_enter_at_spike = true;         // TODO: Decide
