@@ -17,14 +17,9 @@ Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {
 
   const double reversal_delta = abs(entry_reversal_mid - execution_price);
 
-  // TODO: Decide
   double stop_loss = -std::max(0.00001, reversal_delta) -
                      this->api_client.config.stop_loss_padding_ratio *
                          this->day_candle.range();
-
-  // const double stop_loss =
-  //     -std::max(0.00001, reversal_delta) -
-  //     this->STOP_LOSS_PADDING_RATIO * this->day_candle.range();
 
   const double stop_profit_version_ =
       this->api_client.config.stop_profit_version;
