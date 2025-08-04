@@ -39,7 +39,6 @@ public:
     double secondary_reverse_percentile = 0.0;
     bool should_await_record_break = false; // TODO: Decide
     bool should_enter_at_spike = true;      // TODO: Decide
-    bool should_stop_profit = true;         // TODO: Decide
     double stop_loss_padding_ratio = 0.2;   // TODO: Delete after ML switch
     double stop_profit_target_price_action = 0.0;
     double stop_profit_version = 0.1;
