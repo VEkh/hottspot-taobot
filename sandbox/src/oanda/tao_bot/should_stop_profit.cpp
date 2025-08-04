@@ -3,16 +3,10 @@
 
 #include "is_trend_slipping.cpp"     // is_trend_slipping
 #include "latest_reversal_after.cpp" // latest_reversal_after
+#include "reverse_percentile.cpp"    // reverse_percentile
 #include "tao_bot.h"                 // Oanda::TaoBot, reversal_t
 
-#include "reverse_percentile.cpp" // reverse_percentile  // TODO: Decide
-
 bool Oanda::TaoBot::should_stop_profit() {
-  // TODO: Decide
-  if (!this->api_client.config.should_stop_profit) {
-    return false;
-  }
-
   // TODO: Decide
   if (this->api_client.config.only_stop_profit_in_consolidation &&
       !reverse_percentile()) {

@@ -26,50 +26,48 @@ Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {
 
   double stop_profit = 0.0;
 
-  if (this->api_client.config.should_stop_profit) {
-    const stop_profit_type_t stop_profit_type_ =
-        stop_profit_type(day_candle_, execution_price);
+  const stop_profit_type_t stop_profit_type_ =
+      stop_profit_type(day_candle_, execution_price);
 
-    // v0.1, v0.2 (STOP_PROFIT_CROSS_RANGE), v0.3 (STOP_PROFIT_CROSS_RANGE)
-    const double execution_price_percentile =
-        day_range_percentile(day_candle_, execution_price);
+  // v0.1, v0.2 (STOP_PROFIT_CROSS_RANGE), v0.3 (STOP_PROFIT_CROSS_RANGE)
+  const double execution_price_percentile =
+      day_range_percentile(day_candle_, execution_price);
 
-    const double inv_execution_price_percentile =
-        abs(100.0 - execution_price_percentile);
+  const double inv_execution_price_percentile =
+      abs(100.0 - execution_price_percentile);
 
-    const double max_percentile_delta =
-        std::max(execution_price_percentile, inv_execution_price_percentile) /
-        100.0;
+  const double max_percentile_delta =
+      std::max(execution_price_percentile, inv_execution_price_percentile) /
+      100.0;
 
-    stop_profit = day_candle_.range() * max_percentile_delta;
+  stop_profit = day_candle_.range() * max_percentile_delta;
 
-    if (stop_profit_type_ == stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE) {
-      // v0.2
-      if (stop_profit_version_ == 0.2) {
-        stop_profit = 0.0;
-      }
+  if (stop_profit_type_ == stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE) {
+    // v0.2
+    if (stop_profit_version_ == 0.2) {
+      stop_profit = 0.0;
+    }
 
-      // v0.3
-      if (stop_profit_version_ == 0.3 &&
-          this->api_client.config.stop_profit_target_price_action) {
-        const double target_price_action =
-            this->api_client.config.stop_profit_target_price_action;
+    // v0.3
+    if (stop_profit_version_ == 0.3 &&
+        this->api_client.config.stop_profit_target_price_action) {
+      const double target_price_action =
+          this->api_client.config.stop_profit_target_price_action;
 
-        const double target_price_action_day_candle_ratio =
-            (target_price_action / day_candle_.range_open_percent()) - 1.0;
+      const double target_price_action_day_candle_ratio =
+          (target_price_action / day_candle_.range_open_percent()) - 1.0;
 
-        const double target_price_action_delta =
-            target_price_action_day_candle_ratio * day_candle_.range();
+      const double target_price_action_delta =
+          target_price_action_day_candle_ratio * day_candle_.range();
 
-        const double min_stop_profit =
-            ((1.0 / (this->TREND_SLIP_PERCENTILE * 0.01) - 1.0)) *
-            day_candle_.range();
+      const double min_stop_profit =
+          ((1.0 / (this->TREND_SLIP_PERCENTILE * 0.01) - 1.0)) *
+          day_candle_.range();
 
-        const double max_stop_profit =
-            std::max(min_stop_profit, target_price_action_delta);
+      const double max_stop_profit =
+          std::max(min_stop_profit, target_price_action_delta);
 
-        stop_profit = max_stop_profit;
-      }
+      stop_profit = max_stop_profit;
     }
   }
 

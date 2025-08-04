@@ -93,18 +93,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << should_enter_at_spike_color << should_enter_at_spike_text
             << fmt.reset << std::endl;
 
-  // TODO: Decide
-  Formatted::Stream should_stop_profit_color =
-      this->api_client.config.should_stop_profit ? fmt.green : fmt.red;
-
-  const std::string should_stop_profit_text =
-      this->api_client.config.should_stop_profit ? "YES" : "NO";
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Should stop profit? ");
-  std::cout << should_stop_profit_color << should_stop_profit_text << fmt.reset
-            << std::endl;
-
   if (this->api_client.config.should_enter_at_spike) {
     std::cout << fmt.bold << fmt.yellow;
     printf("Spike Entry Score: ");
@@ -127,7 +115,7 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << this->api_client.config.stop_profit_target_price_action
             << fmt.reset << std::endl;
 
-  if (this->api_client.config.should_stop_profit && this->open_order_ptr) {
+  if (this->open_order_ptr) {
     std::cout << fmt.bold << fmt.yellow;
     printf("Stop Profit Type: ");
     std::cout << fmt.cyan << stop_profit_type_name(this->open_order_ptr)
