@@ -37,11 +37,10 @@ public:
     double range_min_height = 0.5;                  // TODO: Decide
     double reverse_percentile = 50.0;
     double secondary_reverse_percentile = 0.0;
-    bool should_always_reverse_profit = false; // TODO: Decide
-    bool should_await_record_break = false;    // TODO: Decide
-    bool should_enter_at_spike = true;         // TODO: Decide
-    bool should_stop_profit = true;            // TODO: Decide
-    double stop_loss_padding_ratio = 0.2;      // TODO: Delete after ML switch
+    bool should_await_record_break = false; // TODO: Decide
+    bool should_enter_at_spike = true;      // TODO: Decide
+    bool should_stop_profit = true;         // TODO: Decide
+    double stop_loss_padding_ratio = 0.2;   // TODO: Delete after ML switch
     double stop_profit_target_price_action = 0.0;
     double stop_profit_version = 0.1;
     double warm_up_period_hours = 0.0; // TODO: Decide
