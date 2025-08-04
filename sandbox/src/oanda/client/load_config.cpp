@@ -96,12 +96,6 @@ void Oanda::Client::load_config() {
   }
 
   // TODO: Decide
-  if (api_key_json.contains("quantity_decay_throttle")) {
-    this->config.quantity_decay_throttle =
-        (double)api_key_json["quantity_decay_throttle"];
-  }
-
-  // TODO: Decide
   if (api_key_json.contains("range_min_height")) {
     this->config.range_min_height = (double)api_key_json["range_min_height"];
   }
@@ -182,8 +176,6 @@ void Oanda::Client::load_config() {
           this->config.normalized_account_loss_ratio, // TODO: Decide
       .only_stop_profit_in_consolidation =
           this->config.only_stop_profit_in_consolidation,
-      .quantity_decay_throttle =
-          this->config.quantity_decay_throttle,          // TODO: Decide
       .range_min_height = this->config.range_min_height, // TODO: Decide
       .reverse_percentile = this->config.reverse_percentile,
       .secondary_reverse_percentile =

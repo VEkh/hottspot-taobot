@@ -34,7 +34,6 @@ public:
     std::string market_open_central_time = "07:00:00";
     double normalized_account_loss_ratio = 0.0;     // TODO: Decide
     bool only_stop_profit_in_consolidation = false; // TODO: Decide
-    double quantity_decay_throttle = 0.0;           // TODO: Decide
     double range_min_height = 0.5;                  // TODO: Decide
     double reverse_percentile = 50.0;
     double secondary_reverse_percentile = 0.0;
