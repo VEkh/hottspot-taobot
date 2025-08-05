@@ -40,21 +40,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
             << fmt.reset << std::endl;
 
   // TODO: Decide
-  // Formatted::Stream only_stop_profit_in_consolidation_color =
-  //     this->api_client.config.only_stop_profit_in_consolidation ? fmt.green
-  //                                                               : fmt.red;
-
-  // const std::string only_stop_profit_in_consolidation_text =
-  //     this->api_client.config.only_stop_profit_in_consolidation ? "YES" :
-  //     "NO";
-
-  // std::cout << fmt.bold << fmt.yellow;
-  // printf("Only stop profit in consolidation? ");
-  // std::cout << only_stop_profit_in_consolidation_color
-  //           << only_stop_profit_in_consolidation_text << fmt.reset <<
-  //           std::endl;
-
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Range Min Height (%%): ");
   std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
