@@ -145,8 +145,7 @@ void Oanda::Client::load_config() {
       .normalized_account_loss_ratio =
           this->config.normalized_account_loss_ratio, // TODO: Decide
       .reverse_percentile = this->config.reverse_percentile,
-      .secondary_reverse_percentile =
-          this->config.secondary_reverse_percentile, // TODO: Decide
+      .secondary_reverse_percentile = this->config.secondary_reverse_percentile,
       .should_await_record_break =
           this->config.should_await_record_break, // TODO: Decide
       .should_enter_at_spike =
