@@ -68,7 +68,6 @@ void Oanda::Client::load_config() {
         (double)api_key_json["margin_normalization_base_price_action"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("margin_multiplier")) {
     this->config.margin_multiplier = (double)api_key_json["margin_multiplier"];
   }
@@ -144,7 +143,7 @@ void Oanda::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
-      .margin_multiplier = this->config.margin_multiplier, // TODO: Decide
+      .margin_multiplier = this->config.margin_multiplier,
       .margin_normalization_base_price_action =
           this->config.margin_normalization_base_price_action, // TODO: Decide
       .market_duration_hours = this->config.market_duration_hours,

@@ -13,7 +13,6 @@
 #include <string>    // std::string
 
 void Oanda::TaoBot::log_reversal_metadata() {
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Margin Multiplier: ");
   std::cout << fmt.cyan << normalized_margin_multiplier() << fmt.reset
