@@ -125,7 +125,6 @@ void Oanda::Client::load_config() {
         (double)api_key_json["stop_profit_version"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("warm_up_period_hours")) {
     this->config.warm_up_period_hours =
         (double)api_key_json["warm_up_period_hours"];
@@ -156,7 +155,7 @@ void Oanda::Client::load_config() {
       .stop_profit_target_price_action =
           this->config.stop_profit_target_price_action,
       .stop_profit_version = this->config.stop_profit_version,
-      .warm_up_period_hours = this->config.warm_up_period_hours, // TODO: Decide
+      .warm_up_period_hours = this->config.warm_up_period_hours,
   };
 }
 
