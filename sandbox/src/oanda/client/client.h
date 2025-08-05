@@ -28,7 +28,7 @@ public:
     std::string base_url;
     bool debug_sql = false;
     std::list<std::string> env_symbols;
-    double margin_multiplier = 1.0;                      // TODO: Decide
+    double margin_multiplier = 1.0;
     double margin_normalization_base_price_action = 0.0; // TODO: Decide
     double market_duration_hours = 120.0;
     std::string market_open_central_time = "07:00:00";
