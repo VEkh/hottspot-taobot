@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_force_init_reversal_await
 #define OANDA__TAO_BOT_force_init_reversal_await
 

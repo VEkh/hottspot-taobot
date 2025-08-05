@@ -40,7 +40,7 @@ public:
     double stop_loss_padding_ratio = 0.2;   // TODO: Delete after ML switch
     double stop_profit_target_price_action = 0.0;
     double stop_profit_version = 0.1;
-    double warm_up_period_hours = 0.0; // TODO: Decide
+    double warm_up_period_hours = 0.0;
   } config;
 
   struct fetch_historical_quotes_args_t {

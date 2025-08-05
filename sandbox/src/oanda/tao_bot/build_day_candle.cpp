@@ -5,7 +5,6 @@
 #include <algorithm> // std::max, std::min
 
 void Oanda::TaoBot::build_day_candle() {
-  // TODO: Decide
   const double warm_up_period_hours =
       this->api_client.config.warm_up_period_hours;
 
@@ -40,7 +39,6 @@ void Oanda::TaoBot::build_day_candle() {
       this->day_candle.low_at = candle.opened_at;
     }
 
-    // TODO: Decide
     if (is_warming_up) {
       this->warm_up_candle = this->day_candle;
     }

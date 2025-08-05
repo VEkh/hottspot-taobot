@@ -135,7 +135,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   printf("Trend Status: ");
   std::cout << trend_status_color << trend_status_text << std::endl;
 
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Warm up period (hours): ");
   std::cout << fmt.cyan << this->api_client.config.warm_up_period_hours;

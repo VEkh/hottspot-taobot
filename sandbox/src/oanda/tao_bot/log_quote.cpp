@@ -43,7 +43,6 @@ void Oanda::TaoBot::log_quote() {
           .c_str(),
       this->day_candle.range(), this->day_candle.body_wick_ratio());
 
-  // TODO: Decide
   if (this->api_client.config.warm_up_period_hours) {
     printf(
         "😴 High: %'.5f @ %s • Low: %'.5f @ %s • Δ: %'.5f • Body:Wick: %'.3f\n",
