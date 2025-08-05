@@ -4,8 +4,11 @@
 #include "tao_bot.h" // Oanda::TaoBot
 
 bool Oanda::TaoBot::is_range_min_height() {
-  return this->day_candle.range_open_percent() >=
-         this->api_client.config.range_min_height;
+  if (!this->api_client.config.should_enter_at_spike) {
+    return true;
+  }
+
+  return this->day_candle.range_open_percent() >= 0.5;
 }
 
 #endif

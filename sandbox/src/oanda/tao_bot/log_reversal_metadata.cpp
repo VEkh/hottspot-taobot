@@ -38,12 +38,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.normalized_account_loss_ratio
             << fmt.reset << std::endl;
 
-  // TODO: Decide
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Range Min Height (%%): ");
-  std::cout << fmt.cyan << this->api_client.config.range_min_height << fmt.reset
-            << std::endl;
-
   std::cout << fmt.bold << fmt.yellow;
   printf("Reverse Percentile (%%): ");
   std::cout << fmt.cyan << reverse_percentile() << fmt.reset << std::endl;
