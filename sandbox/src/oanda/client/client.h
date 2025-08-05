@@ -33,7 +33,6 @@ public:
     double market_duration_hours = 120.0;
     std::string market_open_central_time = "07:00:00";
     double normalized_account_loss_ratio = 0.0; // TODO: Decide
-    double range_min_height = 0.5;              // TODO: Decide
     double reverse_percentile = 50.0;
     double secondary_reverse_percentile = 0.0;
     bool should_await_record_break = false; // TODO: Decide

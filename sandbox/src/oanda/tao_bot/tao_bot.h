@@ -149,7 +149,7 @@ private:
   bool is_next_position_long();
   bool is_record_break_entry_signal_present(); // TODO: Decide
   bool is_position_closed();
-  bool is_range_min_height(); // TODO: Decide
+  bool is_range_min_height();
   bool is_reversal_after(const reversal_t, const double);
   bool is_spiking();
   bool is_trend_slipping(const order_t *);

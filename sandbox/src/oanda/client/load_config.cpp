@@ -88,11 +88,6 @@ void Oanda::Client::load_config() {
         (double)api_key_json["normalized_account_loss_ratio"];
   }
 
-  // TODO: Decide
-  if (api_key_json.contains("range_min_height")) {
-    this->config.range_min_height = (double)api_key_json["range_min_height"];
-  }
-
   if (api_key_json.contains("reverse_percentile")) {
     this->config.reverse_percentile =
         (double)api_key_json["reverse_percentile"];
@@ -149,8 +144,7 @@ void Oanda::Client::load_config() {
       .market_duration_hours = this->config.market_duration_hours,
       .market_open_central_time = this->config.market_open_central_time,
       .normalized_account_loss_ratio =
-          this->config.normalized_account_loss_ratio,    // TODO: Decide
-      .range_min_height = this->config.range_min_height, // TODO: Decide
+          this->config.normalized_account_loss_ratio, // TODO: Decide
       .reverse_percentile = this->config.reverse_percentile,
       .secondary_reverse_percentile =
           this->config.secondary_reverse_percentile, // TODO: Decide
