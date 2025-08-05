@@ -7,12 +7,6 @@
 #include "tao_bot.h"                 // Oanda::TaoBot, reversal_t
 
 bool Oanda::TaoBot::should_stop_profit() {
-  // TODO: Decide
-  if (this->api_client.config.only_stop_profit_in_consolidation &&
-      !reverse_percentile()) {
-    return false;
-  }
-
   if (!this->open_order_ptr) {
     return false;
   }
