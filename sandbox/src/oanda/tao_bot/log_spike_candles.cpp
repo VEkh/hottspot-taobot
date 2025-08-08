@@ -9,7 +9,6 @@
 #include <stdio.h>            // printf
 
 void Oanda::TaoBot::log_spike_candles() {
-  // TODO: Decide
   if (!this->api_client.config.should_enter_at_spike) {
     return;
   }

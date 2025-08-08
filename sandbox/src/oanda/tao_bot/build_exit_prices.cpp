@@ -2,11 +2,10 @@
 #define OANDA__TAO_BOT_build_exit_prices
 
 #include "day_range_percentile.cpp" // day_range_percentile
-#include "tao_bot.h" // Oanda::TaoBot, order_action_t, stop_profit_type_t // TODO: Decide
+#include "stop_profit_type.cpp"     // stop_profit_type
+#include "tao_bot.h" // Oanda::TaoBot, order_action_t, stop_profit_type_t
 #include <algorithm> // std::max
 #include <math.h>    // abs
-
-#include "stop_profit_type.cpp" // stop_profit_type // TODO: Decide
 
 Oanda::TaoBot::exit_prices_t
 Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {

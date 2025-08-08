@@ -11,7 +11,6 @@ void Oanda::TaoBot::build_spike_candles() {
     return;
   }
 
-  // TODO: Decide
   if (!this->api_client.config.should_enter_at_spike) {
     return;
   }

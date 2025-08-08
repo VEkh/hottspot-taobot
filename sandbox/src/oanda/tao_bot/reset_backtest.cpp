@@ -1,8 +1,8 @@
 #ifndef OANDA__TAO_BOT_reset_backtest
 #define OANDA__TAO_BOT_reset_backtest
 
-#include "advance_current_epoch.cpp" // advance_current_epoch
-#include "force_init_reversal_await.cpp" // force_init_reversal_await // TODO: Decide
+#include "advance_current_epoch.cpp"     // advance_current_epoch
+#include "force_init_reversal_await.cpp" // force_init_reversal_await
 #include "set_current_trend.cpp"         // set_current_trend
 #include "tao_bot.h" // Oanda::TaoBot, candle_t, quote_t, reversals_t, spike_candles_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
@@ -33,9 +33,8 @@ void Oanda::TaoBot::reset_backtest() {
   this->day_candle = candle_t();
   this->db_account_stat.clear_snapshot_stats_cache();
   this->db_candle.clear_cache();
-  this->has_stopped_profit = false; // TODO: Decide
   this->spike_candles = spike_candles_t();
-  this->warm_up_candle = candle_t(); // TODO: Decide
+  this->warm_up_candle = candle_t();
 
   this->current_quote = quote_t();
   this->previous_quote = quote_t();
@@ -49,7 +48,7 @@ void Oanda::TaoBot::reset_backtest() {
   this->started_at = this->current_epoch;
 
   set_current_trend();
-  force_init_reversal_await(); // TODO: Decide
+  force_init_reversal_await();
   update_account_snapshot(true);
 }
 

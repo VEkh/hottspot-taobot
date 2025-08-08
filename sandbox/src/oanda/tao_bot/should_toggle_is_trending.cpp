@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_should_toggle_is_trending
 #define OANDA__TAO_BOT_should_toggle_is_trending
 

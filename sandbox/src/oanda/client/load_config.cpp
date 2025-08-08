@@ -98,13 +98,11 @@ void Oanda::Client::load_config() {
         (double)api_key_json["secondary_reverse_percentile"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("should_await_record_break")) {
     this->config.should_await_record_break =
         (bool)api_key_json["should_await_record_break"];
   }
 
-  // TODO: Decide
   if (api_key_json.contains("should_enter_at_spike")) {
     this->config.should_enter_at_spike =
         (bool)api_key_json["should_enter_at_spike"];
@@ -146,10 +144,8 @@ void Oanda::Client::load_config() {
           this->config.normalized_account_loss_ratio, // TODO: Decide
       .reverse_percentile = this->config.reverse_percentile,
       .secondary_reverse_percentile = this->config.secondary_reverse_percentile,
-      .should_await_record_break =
-          this->config.should_await_record_break, // TODO: Decide
-      .should_enter_at_spike =
-          this->config.should_enter_at_spike, // TODO: Decide
+      .should_await_record_break = this->config.should_await_record_break,
+      .should_enter_at_spike = this->config.should_enter_at_spike,
       .stop_loss_padding_ratio = this->config.stop_loss_padding_ratio,
       .stop_profit_target_price_action =
           this->config.stop_profit_target_price_action,

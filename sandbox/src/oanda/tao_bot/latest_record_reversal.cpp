@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_latest_record_reversal
 #define OANDA__TAO_BOT_latest_record_reversal
 
