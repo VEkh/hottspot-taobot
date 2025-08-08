@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_is_record_break_entry_signal_present
 #define OANDA__TAO_BOT_is_record_break_entry_signal_present
 

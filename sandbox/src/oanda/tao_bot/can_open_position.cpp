@@ -1,6 +1,7 @@
 #ifndef OANDA__TAO_BOT_can_open_position
 #define OANDA__TAO_BOT_can_open_position
 
+#include "has_reached_stop_profit.cpp"  // has_reached_stop_profit
 #include "is_range_min_height.cpp"      // is_range_min_height
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "spread_limit.cpp"             // spread_limit
@@ -23,8 +24,7 @@ bool Oanda::TaoBot::can_open_position() {
     return false;
   }
 
-  // TODO: Decide
-  if (this->has_stopped_profit) {
+  if (has_reached_stop_profit()) {
     return false;
   }
 

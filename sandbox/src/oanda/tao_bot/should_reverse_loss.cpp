@@ -38,7 +38,6 @@ bool Oanda::TaoBot::should_reverse_loss() {
   }
 
   stop_loss_reversal.is_record_only_reversible = true;
-  // stop_loss_reversal.is_reversible = true; // TODO: Decide
   stop_loss_reversal.is_reversible =
       this->api_client.config.should_enter_at_spike;
   this->close_order_ptr->stop_profit_reversal = stop_loss_reversal;

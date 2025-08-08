@@ -57,7 +57,6 @@ private:
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
 
-  // TODO: Decide
   struct build_exit_prices_args_t {
     order_action_t action;
     candle_t day_candle;
@@ -115,10 +114,9 @@ private:
   Oanda::Quote quoter;
   Pg pg;
   account_snapshot_t account_snapshot;
-  bool has_stopped_profit = false; // TODO: Decide
   exit_prices_t exit_prices;
   candle_t day_candle;
-  candle_t warm_up_candle; // TODO: Decide
+  candle_t warm_up_candle;
   currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
@@ -142,30 +140,29 @@ private:
   trend_meta_t current_trend;
 
   bool can_open_position();
-  bool did_last_position_stop_profit(); // TODO: Decide
-  bool has_just_reached_stop_profit();
+  bool did_last_position_stop_profit();
+  bool has_reached_stop_profit();
   bool is_end_of_quotes();
   bool is_entry_signal_present();
   bool is_next_position_long();
-  bool is_record_break_entry_signal_present(); // TODO: Decide
+  bool is_record_break_entry_signal_present();
   bool is_position_closed();
   bool is_range_min_height();
   bool is_reversal_after(const reversal_t, const double);
   bool is_spiking();
   bool is_trend_slipping(const order_t *);
-  bool is_trend_slipping(const order_t *, const double); // TODO: Decide
-  bool is_trending();                                    // TODO: Decide
-  bool is_trending(const trend_meta_t);                  // TODO: Decide
+  bool is_trend_slipping(const order_t *, const double);
+  bool is_trending();
   bool max_account_loss_reached();
   bool should_close_position();
-  bool should_nullify_entry_reversal(); // TODO: Decide
+  bool should_nullify_entry_reversal();
   bool should_open_position();
   bool should_read_candles();
   bool should_reverse_loss();
-  bool should_reverse_profit(); // TODO: Decide
+  bool should_reverse_profit();
   bool should_stop_profit();
   bool should_terminate();
-  bool should_toggle_is_trending(order_t &, order_t &); // TODO: Decide
+  bool should_toggle_is_trending(order_t &, order_t &);
   double closed_position_profit(const position_t &);
   double compute_profit(const order_t *, const order_t *);
   double compute_profit(const order_t *, const quote_t *);
@@ -178,11 +175,11 @@ private:
   double normalized_margin_multiplier(); // TODO: Decide
   double open_position_profit(const order_t *);
   double profit_percentage(const order_t *, const std::string);
-  double reverse_percentile(); // TODO: Decide
+  double reverse_percentile();
   double spike_score(spike_candles_t);
   double spread_limit();
 
-  exit_prices_t build_exit_prices(build_exit_prices_args_t); // TODO: Decide
+  exit_prices_t build_exit_prices(build_exit_prices_args_t);
   int order_duration(const order_t *, const std::string);
   int runtime();
   json fetch_order(const order_t *);
@@ -194,14 +191,13 @@ private:
   quote_t get_real_time_quote(const std::string);
 
   reversal_t latest_record_as_reversal(const reversal_type_t);
-  reversal_t latest_record_reversal(reversals_t &,
-                                    const reversal_type_t); // TODO: Decide
-  reversal_t
-  latest_record_reversal_after(reversals_t &, const double,
-                               const reversal_type_t); // TODO: Decide
 
-  reversal_t latest_reversal(reversals_t &, const reversal_type_t,
-                             const bool); // TODO: Decide
+  reversal_t latest_record_reversal(reversals_t &, const reversal_type_t);
+
+  reversal_t latest_record_reversal_after(reversals_t &, const double,
+                                          const reversal_type_t);
+
+  reversal_t latest_reversal(reversals_t &, const reversal_type_t, const bool);
 
   reversal_t latest_reversal_after(reversals_t &, const double,
                                    const reversal_type_t);
@@ -230,10 +226,10 @@ private:
   void ensure_spread_limit();
   void ensure_symbol(const std::string);
   void fetch_and_persist_margin_rates(const std::list<std::string>);
-  void force_init_reversal_await(); // TODO: Decide
+  void force_init_reversal_await();
   void handle_partially_filled_close_order(const order_t *);
   void initialize(const std::string, std::map<std::string, std::string> &);
-  void initialize_current_trend(); // TODO: Decide
+  void initialize_current_trend();
   void log_account_snapshot();
   void log_end_of_trading_period();
   void log_env_symbols();
@@ -264,7 +260,7 @@ private:
   void set_profit(order_t *, order_t *);
   void set_status(order_t *, order_t *);
   void set_to_account_currency_ratio(order_t *);
-  void toggle_is_trending(const order_t &); // TODO: Decide
+  void toggle_is_trending(const order_t &);
   void update_account_snapshot(const bool);
   void update_margin_rate();
   void watch();

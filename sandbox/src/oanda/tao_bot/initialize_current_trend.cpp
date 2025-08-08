@@ -1,4 +1,3 @@
-// TODO: Decide
 #ifndef OANDA__TAO_BOT_initialize_current_trend
 #define OANDA__TAO_BOT_initialize_current_trend
 

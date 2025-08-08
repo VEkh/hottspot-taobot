@@ -5,7 +5,7 @@
 #include "is_end_of_quotes.cpp"         // is_end_of_quotes
 #include "max_account_loss_reached.cpp" // max_account_loss_reached
 #include "should_reverse_loss.cpp"      // should_reverse_loss
-#include "should_reverse_profit.cpp"    // should_reverse_profit // TODO: Decide
+#include "should_reverse_profit.cpp"    // should_reverse_profit
 #include "should_stop_profit.cpp"       // should_stop_profit
 #include "spread_limit.cpp"             // spread_limit
 #include "tao_bot.h"                    // Oanda::TaoBot, order_status_t
@@ -36,7 +36,6 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  // TODO: Decide
   this->exit_prices = build_exit_prices({
       .action = this->open_order_ptr->action,
       .day_candle = this->open_order_ptr->day_candle,
@@ -57,7 +56,6 @@ bool Oanda::TaoBot::should_close_position() {
     return true;
   }
 
-  // TODO: Decide
   if (should_reverse_profit()) {
     return true;
   }

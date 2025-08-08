@@ -44,15 +44,10 @@ void Oanda::TaoBot::log_position() {
          profit_percentage(this->open_order_ptr, "profit"));
   std::cout << std::endl;
 
-  // TODO: Decide
-  const bool is_max_profit_stop_loss =
-      this->open_order_ptr->max_profit >= abs(this->exit_prices.stop_loss);
-
-  printf("                                           Max Profit: %+'.5f%s"
+  printf("                                           Max Profit: %+'.5f"
          "(%+.2f%%) @ "
          "%s%s",
          this->open_order_ptr->max_profit,
-         is_max_profit_stop_loss ? " ✅ " : " ",
          profit_percentage(this->open_order_ptr, "max_profit"),
          ::utils::time_::date_string(this->open_order_ptr->max_profit_at,
                                      "%m/%d %R %Z", "America/Chicago")

@@ -5,7 +5,7 @@
 #include "lib/formatted.cpp"        // Formatted
 #include "lib/utils/time.cpp"       // ::utils::time_
 #include "normalized_margin_multiplier.cpp" // normalized_margin_multiplier // TODO: Decide
-#include "reverse_percentile.cpp"    // reverse_percentile // TODO: Decide
+#include "reverse_percentile.cpp"    // reverse_percentile
 #include "stop_profit_type_name.cpp" // stop_profit_type_name
 #include "tao_bot.h" // Oanda::TaoBot, fmt, reversal_t, reversal_type_t
 #include <iostream>  // std::cout, std::endl
@@ -26,7 +26,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
                    100.0
             << fmt.reset << std::endl;
 
-  // TODO: Decide
   std::cout << fmt.bold << fmt.yellow;
   printf("Market Duration Hours: ");
   std::cout << fmt.cyan << this->api_client.config.market_duration_hours
@@ -47,7 +46,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << fmt.cyan << this->api_client.config.secondary_reverse_percentile
             << fmt.reset << std::endl;
 
-  // TODO: Decide
   Formatted::Stream should_await_record_break_color =
       this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
 
@@ -59,7 +57,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   std::cout << should_await_record_break_color << should_await_record_break_text
             << fmt.reset << std::endl;
 
-  // TODO: Decide
   Formatted::Stream should_enter_at_spike_color =
       this->api_client.config.should_enter_at_spike ? fmt.green : fmt.red;
 
@@ -81,7 +78,7 @@ void Oanda::TaoBot::log_reversal_metadata() {
     std::cout << fmt.cyan << this->SPIKE_HEIGHT_RATIO << fmt.reset << std::endl;
   }
 
-  // TODO: Decide
+  // TODO: Delete after ML switch
   std::cout << fmt.bold << fmt.yellow;
   printf("Stop Loss Padding Ratio: ");
   std::cout << fmt.cyan << this->api_client.config.stop_loss_padding_ratio
