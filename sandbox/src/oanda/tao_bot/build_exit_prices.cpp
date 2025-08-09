@@ -20,8 +20,7 @@ Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {
                      this->api_client.config.stop_loss_padding_ratio *
                          this->day_candle.range();
 
-  const double stop_profit_version_ =
-      this->api_client.config.stop_profit_version;
+  const int stop_profit_id = this->api_client.config.trade_setup_stop_profit_id;
 
   double stop_profit = 0.0;
 
@@ -43,12 +42,12 @@ Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {
 
   if (stop_profit_type_ == stop_profit_type_t::STOP_PROFIT_EXTEND_RANGE) {
     // v0.2
-    if (stop_profit_version_ == 0.2) {
+    if (stop_profit_id == 2) {
       stop_profit = 0.0;
     }
 
     // v0.3
-    if (stop_profit_version_ == 0.3 &&
+    if (stop_profit_id == 3 &&
         this->api_client.config.stop_profit_target_price_action) {
       const double target_price_action =
           this->api_client.config.stop_profit_target_price_action;
