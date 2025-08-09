@@ -4,26 +4,33 @@
 #include "tao_bot.h" // Oanda::TaoBot
 
 double Oanda::TaoBot::reverse_percentile() {
-  const double primary_reverse_percentile =
-      this->api_client.config.reverse_percentile;
+  const int reverse_percentile_id =
+      this->api_client.config.trade_setup_reverse_percentile_id;
 
-  const double secondary_reverse_percentile =
-      this->api_client.config.secondary_reverse_percentile;
+  const int stop_profit_id = this->api_client.config.trade_setup_stop_profit_id;
+
+  std::map<int, double> id_map = {
+      {1, 0.0},
+      {2, 50.0},
+  };
 
   if (!this->open_order_ptr) {
-    return primary_reverse_percentile;
+    return id_map[1];
   }
 
-  if (!secondary_reverse_percentile) {
-    return primary_reverse_percentile;
+  if (!reverse_percentile_id) {
+    return id_map[1];
   }
 
-  if (this->api_client.config.stop_profit_version == 0.2 &&
-      this->open_order_ptr->max_profit >= abs(this->exit_prices.stop_loss)) {
-    return secondary_reverse_percentile;
+  if (stop_profit_id == 2) {
+    if (this->open_order_ptr->max_profit >= abs(this->exit_prices.stop_loss)) {
+      return id_map[2];
+    }
+
+    return id_map[1];
   }
 
-  return primary_reverse_percentile;
+  return id_map[reverse_percentile_id];
 }
 
 #endif

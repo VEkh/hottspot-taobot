@@ -7,12 +7,6 @@
 
 namespace Global {
 namespace t {
-// TODO: Decide
-enum execution_strategy_t {
-  EXECUTION_STRATEGY_CONSOLIDATION,
-  EXECUTION_STRATEGY_TREND,
-};
-
 enum order_action_t {
   BUY,
   SELL,

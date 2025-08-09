@@ -41,11 +41,6 @@ void Oanda::TaoBot::log_reversal_metadata() {
   printf("Reverse Percentile (%%): ");
   std::cout << fmt.cyan << reverse_percentile() << fmt.reset << std::endl;
 
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Secondary Reverse Percentile: ");
-  std::cout << fmt.cyan << this->api_client.config.secondary_reverse_percentile
-            << fmt.reset << std::endl;
-
   Formatted::Stream should_await_record_break_color =
       this->api_client.config.should_await_record_break ? fmt.green : fmt.red;
 
@@ -98,8 +93,8 @@ void Oanda::TaoBot::log_reversal_metadata() {
   }
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Profit Version: ");
-  std::cout << fmt.cyan << this->api_client.config.stop_profit_version
+  printf("Stop Profit ID: ");
+  std::cout << fmt.cyan << this->api_client.config.trade_setup_stop_profit_id
             << fmt.reset << std::endl;
 
   std::cout << fmt.bold << fmt.yellow;
