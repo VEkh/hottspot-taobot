@@ -62,6 +62,16 @@ void Oanda::Client::load_config() {
     this->config.debug_sql = (bool)api_key_json["debug_sql"];
   }
 
+  if (api_key_json.contains("execution_strategy_reverse_percentile_id")) {
+    this->config.execution_strategy_reverse_percentile_id =
+        (int)api_key_json["execution_strategy_reverse_percentile_id"];
+  }
+
+  if (api_key_json.contains("execution_strategy_stop_profit_id")) {
+    this->config.execution_strategy_stop_profit_id =
+        (int)api_key_json["execution_strategy_stop_profit_id"];
+  }
+
   // TODO: Decide
   if (api_key_json.contains("margin_normalization_base_price_action")) {
     this->config.margin_normalization_base_price_action =
@@ -88,16 +98,6 @@ void Oanda::Client::load_config() {
         (double)api_key_json["normalized_account_loss_ratio"];
   }
 
-  if (api_key_json.contains("reverse_percentile")) {
-    this->config.reverse_percentile =
-        (double)api_key_json["reverse_percentile"];
-  }
-
-  if (api_key_json.contains("secondary_reverse_percentile")) {
-    this->config.secondary_reverse_percentile =
-        (double)api_key_json["secondary_reverse_percentile"];
-  }
-
   if (api_key_json.contains("should_await_record_break")) {
     this->config.should_await_record_break =
         (bool)api_key_json["should_await_record_break"];
@@ -118,11 +118,6 @@ void Oanda::Client::load_config() {
         (double)api_key_json["stop_profit_target_price_action"];
   }
 
-  if (api_key_json.contains("stop_profit_version")) {
-    this->config.stop_profit_version =
-        (double)api_key_json["stop_profit_version"];
-  }
-
   if (api_key_json.contains("warm_up_period_hours")) {
     this->config.warm_up_period_hours =
         (double)api_key_json["warm_up_period_hours"];
@@ -135,6 +130,10 @@ void Oanda::Client::load_config() {
       .base_url = api_key_json["base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
+      .execution_strategy_reverse_percentile_id =
+          this->config.execution_strategy_reverse_percentile_id,
+      .execution_strategy_stop_profit_id =
+          this->config.execution_strategy_stop_profit_id,
       .margin_multiplier = this->config.margin_multiplier,
       .margin_normalization_base_price_action =
           this->config.margin_normalization_base_price_action, // TODO: Decide
@@ -142,14 +141,11 @@ void Oanda::Client::load_config() {
       .market_open_central_time = this->config.market_open_central_time,
       .normalized_account_loss_ratio =
           this->config.normalized_account_loss_ratio, // TODO: Decide
-      .reverse_percentile = this->config.reverse_percentile,
-      .secondary_reverse_percentile = this->config.secondary_reverse_percentile,
       .should_await_record_break = this->config.should_await_record_break,
       .should_enter_at_spike = this->config.should_enter_at_spike,
       .stop_loss_padding_ratio = this->config.stop_loss_padding_ratio,
       .stop_profit_target_price_action =
           this->config.stop_profit_target_price_action,
-      .stop_profit_version = this->config.stop_profit_version,
       .warm_up_period_hours = this->config.warm_up_period_hours,
   };
 }
