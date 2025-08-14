@@ -30,7 +30,7 @@ public:
   };
 
   Quote(){};
-  Quote(Pg c);
+  Quote(Pg);
 
   std::list<quote_t> get(const std::string, const double);
   std::list<quote_t> get_last(const get_last_args_t);

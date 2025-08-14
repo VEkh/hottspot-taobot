@@ -37,6 +37,7 @@ public:
     bool should_enter_at_spike = true;
     double stop_loss_padding_ratio = 0.0; // TODO: Delete after ML switch
     double stop_profit_target_price_action = 0.0;
+    std::string trade_setup_ml_mode = "";
     int trade_setup_reverse_percentile_id = 1;
     int trade_setup_stop_profit_id = 1;
     double warm_up_period_hours = 0.0;

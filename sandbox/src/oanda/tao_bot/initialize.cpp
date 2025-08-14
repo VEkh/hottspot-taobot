@@ -8,6 +8,7 @@
 #include "db/margin_rate/margin_rate.cpp"          // DB::MarginRate
 #include "db/position/position.cpp"                // DB::Position
 #include "db/quote/quote.cpp"                      // DB::Quote
+#include "db/trade_setup/trade_setup.cpp"          // DB::TradeSetup
 #include "db/utils/utils.cpp"                      // DB::Utils
 #include "ensure_market_is_open.cpp"               // ensure_market_is_open
 #include "ensure_spread_limit.cpp"                 // ensure_spread_limit
@@ -49,6 +50,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->db_margin_rate = DB::MarginRate(this->pg);
   this->db_position = DB::Position(this->pg);
   this->db_quote = DB::Quote(this->pg);
+  this->db_trade_setup = DB::TradeSetup(this->pg);
   this->db_utils = DB::Utils(this->pg);
   this->market_availability = MarketAvailability::Forex(this->pg);
   this->quoter = Oanda::Quote(this->pg, this->flags);
@@ -79,6 +81,15 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   });
 
   this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
+
+  if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+    this->trade_setup = this->db_trade_setup.find_or_create_by({
+        .debug = this->api_client.config.debug_sql,
+        .reverse_percentile_id =
+            this->api_client.config.trade_setup_reverse_percentile_id,
+        .stop_profit_id = this->api_client.config.trade_setup_stop_profit_id,
+    });
+  }
 
   ensure_market_is_open();
   read_closed_positions();
