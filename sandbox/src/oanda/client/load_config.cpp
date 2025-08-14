@@ -108,6 +108,11 @@ void Oanda::Client::load_config() {
         (double)api_key_json["stop_profit_target_price_action"];
   }
 
+  if (api_key_json.contains("trade_setup_ml_mode")) {
+    this->config.trade_setup_ml_mode =
+        (std::string)api_key_json["trade_setup_ml_mode"];
+  }
+
   if (api_key_json.contains("trade_setup_reverse_percentile_id")) {
     this->config.trade_setup_reverse_percentile_id =
         (int)api_key_json["trade_setup_reverse_percentile_id"];
@@ -142,6 +147,7 @@ void Oanda::Client::load_config() {
       .stop_loss_padding_ratio = this->config.stop_loss_padding_ratio,
       .stop_profit_target_price_action =
           this->config.stop_profit_target_price_action,
+      .trade_setup_ml_mode = this->config.trade_setup_ml_mode,
       .trade_setup_reverse_percentile_id =
           this->config.trade_setup_reverse_percentile_id,
       .trade_setup_stop_profit_id = this->config.trade_setup_stop_profit_id,

@@ -6,6 +6,7 @@
 #include "db/margin_rate/margin_rate.h"            // DB::MarginRate
 #include "db/position/position.cpp"                // DB::Position
 #include "db/quote/quote.h"                        // DB::Quote
+#include "db/trade_setup/trade_setup.cpp"          // DB::TradeSetup
 #include "db/utils/utils.cpp"                      // DB::Utils
 #include "deps.cpp"                                // json
 #include "lib/backtest/backtest.cpp"               // Backtest
@@ -53,6 +54,7 @@ private:
   using reversals_t = Global::t::reversals_t;
   using spike_candles_t = Global::t::spike_candles_t;
   using stop_profit_type_t = Global::t::stop_profit_type_t;
+  using trade_setup_t = DB::TradeSetup::trade_setup_t;
   using trade_status_t = Oanda::t::trade_status_t;
   using trend_meta_t = Global::t::trend_meta_t;
   using trend_t = Global::t::trend_t;
@@ -106,6 +108,7 @@ private:
   DB::MarginRate db_margin_rate;
   DB::Position db_position;
   DB::Quote db_quote;
+  DB::TradeSetup db_trade_setup;
   DB::Utils db_utils;
   MarketAvailability::Forex market_availability;
   Formatted::fmt_stream_t fmt = Formatted::stream();
@@ -137,6 +140,7 @@ private:
   std::string symbol;
   std::vector<position_t> closed_positions;
   time_t started_at = std::time(nullptr);
+  trade_setup_t trade_setup;
   trend_meta_t current_trend;
 
   bool can_open_position();
