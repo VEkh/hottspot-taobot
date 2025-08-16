@@ -5,14 +5,6 @@
 #include <algorithm> // std::max, std::min
 
 void Oanda::TaoBot::build_day_candle() {
-  const double warm_up_period_hours =
-      this->api_client.config.warm_up_period_hours;
-
-  const bool is_warming_up =
-      warm_up_period_hours &&
-      (this->current_epoch < this->market_availability.market_epochs.open +
-                                 warm_up_period_hours * 60.0 * 60.0);
-
   for (const candle_t candle : this->latest_candles) {
     if (candle.closed_at > this->current_epoch) {
       break;
@@ -39,9 +31,21 @@ void Oanda::TaoBot::build_day_candle() {
       this->day_candle.low_at = candle.opened_at;
     }
 
-    if (is_warming_up) {
+    if (!this->api_client.config.trade_setup_ml_mode.empty() &&
+        this->current_epoch <= this->market_session.warm_up_closed_at) {
       this->warm_up_candle = this->day_candle;
     }
+  }
+
+  if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+    this->market_session.close = this->day_candle.close;
+    this->market_session.high = this->day_candle.high;
+    this->market_session.low = this->day_candle.low;
+    this->market_session.open = this->day_candle.open;
+    this->market_session.warm_up_close = this->warm_up_candle.close;
+    this->market_session.warm_up_high = this->warm_up_candle.high;
+    this->market_session.warm_up_low = this->warm_up_candle.low;
+    this->market_session.warm_up_open = this->warm_up_candle.open;
   }
 }
 
