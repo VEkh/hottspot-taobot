@@ -22,11 +22,27 @@ void Oanda::TaoBot::reset_backtest() {
 
   advance_current_epoch(this->market_availability.market_epochs.next);
 
+  if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+    this->db_market_session.upsert(this->market_session,
+                                   this->api_client.config.debug_sql);
+  }
+
   this->market_availability.set_market_epochs({
       .current_epoch = this->current_epoch,
       .market_duration_hours = this->api_client.config.market_duration_hours,
       .open_central_time = this->api_client.config.market_open_central_time,
   });
+
+  if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+    this->market_session = this->db_market_session.find_or_create_by({
+        .closed_at = this->market_availability.market_epochs.close,
+        .debug = this->api_client.config.debug_sql,
+        .opened_at = this->market_availability.market_epochs.open,
+        .symbol = this->symbol,
+        .warm_up_period_seconds =
+            this->api_client.config.warm_up_period_hours * 60 * 60,
+    });
+  }
 
   this->closed_positions = {};
   this->current_trend = trend_meta_t();

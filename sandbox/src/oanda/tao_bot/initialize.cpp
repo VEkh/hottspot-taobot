@@ -6,6 +6,7 @@
 #include "db/account_stat/account_stat.cpp"        // DB::AccountStat
 #include "db/candle/candle.cpp"                    // DB::Candle
 #include "db/margin_rate/margin_rate.cpp"          // DB::MarginRate
+#include "db/market_session/market_session.cpp"    // DB::MarketSession
 #include "db/position/position.cpp"                // DB::Position
 #include "db/quote/quote.cpp"                      // DB::Quote
 #include "db/trade_setup/trade_setup.cpp"          // DB::TradeSetup
@@ -48,6 +49,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->db_account_stat = DB::AccountStat(this->pg);
   this->db_candle = DB::Candle(this->pg, 1, this->symbol);
   this->db_margin_rate = DB::MarginRate(this->pg);
+  this->db_market_session = DB::MarketSession(this->pg);
   this->db_position = DB::Position(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->db_trade_setup = DB::TradeSetup(this->pg);
@@ -83,6 +85,15 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->reversals.timeframe_minutes = this->REVERSAL_TIMEFRAME_MINUTES;
 
   if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+    this->market_session = this->db_market_session.find_or_create_by({
+        .closed_at = this->market_availability.market_epochs.close,
+        .debug = this->api_client.config.debug_sql,
+        .opened_at = this->market_availability.market_epochs.open,
+        .symbol = this->symbol,
+        .warm_up_period_seconds =
+            this->api_client.config.warm_up_period_hours * 60 * 60,
+    });
+
     this->trade_setup = this->db_trade_setup.find_or_create_by({
         .debug = this->api_client.config.debug_sql,
         .reverse_percentile_id =

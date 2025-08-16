@@ -4,6 +4,7 @@
 #include "db/account_stat/account_stat.h"          // DB::AccountStat
 #include "db/candle/candle.cpp"                    // DB::Candle
 #include "db/margin_rate/margin_rate.h"            // DB::MarginRate
+#include "db/market_session/market_session.cpp"    // DB::MarketSession
 #include "db/position/position.cpp"                // DB::Position
 #include "db/quote/quote.h"                        // DB::Quote
 #include "db/trade_setup/trade_setup.cpp"          // DB::TradeSetup
@@ -39,6 +40,7 @@ private:
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
+  using market_session_t = DB::MarketSession::market_session_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
   using order_t = Oanda::t::order_t;
@@ -106,6 +108,7 @@ private:
   DB::AccountStat db_account_stat;
   DB::Candle db_candle;
   DB::MarginRate db_margin_rate;
+  DB::MarketSession db_market_session;
   DB::Position db_position;
   DB::Quote db_quote;
   DB::TradeSetup db_trade_setup;
@@ -123,6 +126,7 @@ private:
   currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
+  market_session_t market_session;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;
   order_t close_order;

@@ -93,14 +93,11 @@ void Oanda::TaoBot::log_reversal_metadata() {
   }
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Stop Profit ID: ");
-  std::cout << fmt.cyan << this->api_client.config.trade_setup_stop_profit_id
+  printf("Trade Setup [ML Mode|Reverse Percentile ID|Stop Profit ID]: ");
+  std::cout << fmt.cyan << "[" << this->api_client.config.trade_setup_ml_mode
+            << "|" << this->api_client.config.trade_setup_reverse_percentile_id
+            << "|" << this->api_client.config.trade_setup_stop_profit_id << "]"
             << fmt.reset << std::endl;
-
-  std::cout << fmt.bold << fmt.yellow;
-  printf("Trend Slip Percentile: ");
-  std::cout << fmt.cyan << this->TREND_SLIP_PERCENTILE << fmt.reset
-            << std::endl;
 
   Formatted::Stream trend_status_color = fmt.cyan;
   std::string trend_status_text = "NONE";
