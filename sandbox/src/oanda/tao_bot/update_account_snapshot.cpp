@@ -3,16 +3,20 @@
 
 #include "tao_bot.h" // Oanda::TaoBot
 
-void Oanda::TaoBot::update_account_snapshot(const bool force = false) {
+void Oanda::TaoBot::update_account_snapshot(
+    const update_account_snapshot_args_t args =
+        update_account_snapshot_args_t()) {
   this->backtest.upsert_account_stat({
       .current_epoch = this->current_epoch,
       .current_snapshot = this->account_snapshot,
       .debug = this->api_client.config.debug_sql,
-      .force = force,
+      .force = args.force,
       .market_epochs = this->market_availability.market_epochs,
+      .reset_equity = args.reset_equity,
   });
 
-  if (!force && !this->backtest.should_exec_slow_query(this->current_epoch)) {
+  if (!args.force &&
+      !this->backtest.should_exec_slow_query(this->current_epoch)) {
     return;
   }
 

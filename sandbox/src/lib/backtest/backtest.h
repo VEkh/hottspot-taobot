@@ -42,6 +42,7 @@ public:
     bool debug = false;
     bool force = false;
     market_epochs_t market_epochs;
+    bool reset_equity = false;
   };
 
   Backtest(){};

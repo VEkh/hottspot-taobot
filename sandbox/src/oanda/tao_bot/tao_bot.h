@@ -75,6 +75,11 @@ private:
     std::string to;
   };
 
+  struct update_account_snapshot_args_t {
+    bool force = false;
+    bool reset_equity = false;
+  };
+
   static constexpr const char *ACCOUNT_CURRENCY = "USD";
   static constexpr double EQUATOR_PERCENTILE = 50.0;
   static constexpr double SPIKE_ENTRY_SCORE = 5.0;
@@ -269,7 +274,7 @@ private:
   void set_status(order_t *, order_t *);
   void set_to_account_currency_ratio(order_t *);
   void toggle_is_trending(const order_t &);
-  void update_account_snapshot(const bool);
+  void update_account_snapshot(const update_account_snapshot_args_t);
   void update_margin_rate();
   void watch();
   void write_close_position();

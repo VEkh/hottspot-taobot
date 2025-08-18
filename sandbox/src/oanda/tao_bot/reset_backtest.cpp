@@ -7,9 +7,13 @@
 #include "tao_bot.h" // Oanda::TaoBot, candle_t, quote_t, reversals_t, spike_candles_t, trend_meta_t
 #include "update_account_snapshot.cpp" // update_account_snapshot
 #include <algorithm>                   // std::min
+#include <string>                      // std::string
 #include <time.h>                      // time
 
 void Oanda::TaoBot::reset_backtest() {
+  const std::string trade_setup_ml_mode =
+      this->api_client.config.trade_setup_ml_mode;
+
   this->backtest.db_market_close.upsert({
       .api_key_id = this->api_client.config.account_id,
       .closed_at = this->market_availability.market_epochs.close,
@@ -22,7 +26,7 @@ void Oanda::TaoBot::reset_backtest() {
 
   advance_current_epoch(this->market_availability.market_epochs.next);
 
-  if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+  if (!trade_setup_ml_mode.empty()) {
     this->db_market_session.update(this->market_session,
                                    this->api_client.config.debug_sql);
   }
@@ -33,7 +37,7 @@ void Oanda::TaoBot::reset_backtest() {
       .open_central_time = this->api_client.config.market_open_central_time,
   });
 
-  if (!this->api_client.config.trade_setup_ml_mode.empty()) {
+  if (!trade_setup_ml_mode.empty()) {
     this->market_session = this->db_market_session.find_or_create_by({
         .closed_at = this->market_availability.market_epochs.close,
         .debug = this->api_client.config.debug_sql,
@@ -65,7 +69,10 @@ void Oanda::TaoBot::reset_backtest() {
 
   set_current_trend();
   force_init_reversal_await();
-  update_account_snapshot(true);
+  update_account_snapshot({
+      .force = true,
+      .reset_equity = trade_setup_ml_mode == "TRAIN",
+  });
 }
 
 #endif

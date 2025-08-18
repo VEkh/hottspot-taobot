@@ -31,8 +31,15 @@ void Backtest::upsert_account_stat(const upsert_account_stat_args_t args) {
   const double original_margin_buying_power =
       updated_current_snapshot.original_margin_buying_power;
 
-  const double equity =
-      current_equity ? current_equity : this->config.account_starting_equity;
+  double equity = current_equity;
+
+  if (!equity) {
+    equity = this->config.account_starting_equity;
+  }
+
+  if (args.reset_equity) {
+    equity = this->config.account_starting_equity;
+  }
 
   double margin_buying_power;
 
