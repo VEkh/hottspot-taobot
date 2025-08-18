@@ -1,10 +1,11 @@
 #ifndef OANDA__TAO_BOT_H
 #define OANDA__TAO_BOT_H
 
-#include "db/account_stat/account_stat.h"          // DB::AccountStat
-#include "db/candle/candle.cpp"                    // DB::Candle
-#include "db/margin_rate/margin_rate.h"            // DB::MarginRate
-#include "db/market_session/market_session.cpp"    // DB::MarketSession
+#include "db/account_stat/account_stat.h"       // DB::AccountStat
+#include "db/candle/candle.cpp"                 // DB::Candle
+#include "db/margin_rate/margin_rate.h"         // DB::MarginRate
+#include "db/market_session/market_session.cpp" // DB::MarketSession
+#include "db/market_session_performance/market_session_performance.cpp" // DB::MarketSessionPerformance
 #include "db/position/position.cpp"                // DB::Position
 #include "db/quote/quote.h"                        // DB::Quote
 #include "db/trade_setup/trade_setup.cpp"          // DB::TradeSetup
@@ -114,6 +115,7 @@ private:
   DB::Candle db_candle;
   DB::MarginRate db_margin_rate;
   DB::MarketSession db_market_session;
+  DB::MarketSessionPerformance db_market_session_performance;
   DB::Position db_position;
   DB::Quote db_quote;
   DB::TradeSetup db_trade_setup;
@@ -278,6 +280,7 @@ private:
   void update_margin_rate();
   void watch();
   void write_close_position();
+  void write_market_session_performance();
   void write_open_position();
 };
 } // namespace Oanda

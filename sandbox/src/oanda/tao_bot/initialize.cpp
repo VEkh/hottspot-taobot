@@ -1,12 +1,13 @@
 #ifndef OANDA__TAO_BOT_initialize
 #define OANDA__TAO_BOT_initialize
 
-#include "build_currency.cpp"                      // build_currency
-#include "build_performance.cpp"                   // build_performance
-#include "db/account_stat/account_stat.cpp"        // DB::AccountStat
-#include "db/candle/candle.cpp"                    // DB::Candle
-#include "db/margin_rate/margin_rate.cpp"          // DB::MarginRate
-#include "db/market_session/market_session.cpp"    // DB::MarketSession
+#include "build_currency.cpp"                   // build_currency
+#include "build_performance.cpp"                // build_performance
+#include "db/account_stat/account_stat.cpp"     // DB::AccountStat
+#include "db/candle/candle.cpp"                 // DB::Candle
+#include "db/margin_rate/margin_rate.cpp"       // DB::MarginRate
+#include "db/market_session/market_session.cpp" // DB::MarketSession
+#include "db/market_session_performance/market_session_performance.cpp" // DB::MarketSession
 #include "db/position/position.cpp"                // DB::Position
 #include "db/quote/quote.cpp"                      // DB::Quote
 #include "db/trade_setup/trade_setup.cpp"          // DB::TradeSetup
@@ -50,6 +51,7 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
   this->db_candle = DB::Candle(this->pg, 1, this->symbol);
   this->db_margin_rate = DB::MarginRate(this->pg);
   this->db_market_session = DB::MarketSession(this->pg);
+  this->db_market_session_performance = DB::MarketSessionPerformance(this->pg);
   this->db_position = DB::Position(this->pg);
   this->db_quote = DB::Quote(this->pg);
   this->db_trade_setup = DB::TradeSetup(this->pg);
