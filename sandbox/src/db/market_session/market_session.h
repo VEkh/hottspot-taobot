@@ -38,8 +38,7 @@ public:
   MarketSession(Pg);
 
   market_session_t find_or_create_by(const find_or_create_by_args_t);
-
-  void update(const market_session_t, const bool);
+  void upsert(const market_session_t, const bool);
 
 private:
   using query_result_t = Pg::query_result_t;
@@ -48,8 +47,6 @@ private:
   Pg conn;
 
   std::list<market_session_t> result_to_market_sessions(const query_result_t &);
-
-  void upsert(const market_session_t, const bool);
 };
 }; // namespace DB
 
