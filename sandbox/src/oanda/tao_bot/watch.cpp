@@ -89,7 +89,7 @@ void Oanda::TaoBot::watch() {
     }
   }
 
-  update_account_snapshot(true);
+  update_account_snapshot({.force = true});
   log_timestamps();
   log_account_snapshot();
   log_end_of_trading_period();
