@@ -49,9 +49,9 @@ select
         max(priority)
       from trade_setups));
 create table market_session_performances(
-  id bigserial primary key,
+  id serial primary key,
   market_session_id int not null references market_sessions(id),
-  profit_loss double precision not null,
+  profit_loss_percent double precision not null,
   trade_setup_id int not null references trade_setups(id)
 );
 create index market_session_performances_market_session_id_idx on market_session_performances(market_session_id);

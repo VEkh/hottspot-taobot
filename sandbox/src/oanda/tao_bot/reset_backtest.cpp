@@ -11,6 +11,7 @@
 #include <time.h>                      // time
 
 void Oanda::TaoBot::reset_backtest() {
+  const bool debug_sql = this->api_client.config.debug_sql;
   const std::string trade_setup_ml_mode =
       this->api_client.config.trade_setup_ml_mode;
 
@@ -27,8 +28,7 @@ void Oanda::TaoBot::reset_backtest() {
   advance_current_epoch(this->market_availability.market_epochs.next);
 
   if (!trade_setup_ml_mode.empty()) {
-    this->db_market_session.upsert(this->market_session,
-                                   this->api_client.config.debug_sql);
+    this->db_market_session.upsert(this->market_session, debug_sql);
   }
 
   this->market_availability.set_market_epochs({
@@ -40,7 +40,7 @@ void Oanda::TaoBot::reset_backtest() {
   if (!trade_setup_ml_mode.empty()) {
     this->market_session = this->db_market_session.find_or_create_by({
         .closed_at = this->market_availability.market_epochs.close,
-        .debug = this->api_client.config.debug_sql,
+        .debug = debug_sql,
         .opened_at = this->market_availability.market_epochs.open,
         .symbol = this->symbol,
         .warm_up_period_seconds =
