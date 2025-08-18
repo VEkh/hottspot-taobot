@@ -72,8 +72,8 @@ function start_all() {
 }
 
 function start_single() {
-  "${app_dir}/db/backtest" truncate "${@}" --api="${api_name}" --env=backtest &&
-  "${app_dir}/bin/${api_name}/restart" "${@}" --env=backtest
+  "${app_dir}/db/backtest" truncate "${@}" --api="${api_name}" &&
+  "${app_dir}/bin/${api_name}/restart" "${@}"
 }
 
 function stop_all() {
