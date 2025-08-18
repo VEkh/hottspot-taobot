@@ -23,7 +23,7 @@ void Oanda::TaoBot::reset_backtest() {
   advance_current_epoch(this->market_availability.market_epochs.next);
 
   if (!this->api_client.config.trade_setup_ml_mode.empty()) {
-    this->db_market_session.upsert(this->market_session,
+    this->db_market_session.update(this->market_session,
                                    this->api_client.config.debug_sql);
   }
 
