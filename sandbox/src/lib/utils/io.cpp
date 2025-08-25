@@ -130,7 +130,7 @@ json load_config(const std::string project, const std::string api_key) {
     throw std::invalid_argument(error_message);
   }
 
-  return config_json;
+  return config_json[api_key];
 }
 
 void print_newlines(const int n) {

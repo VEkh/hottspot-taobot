@@ -28,8 +28,7 @@ void DB::Position::net_return(const net_return_args_t args) {
 
   std::map<std::string, int> day_positions_count;
 
-  json config_json = ::utils::io::load_config(args.project, api_key);
-  json api_key_json = config_json[api_key];
+  json api_key_json = ::utils::io::load_config(args.project, api_key);
 
   std::cout << fmt.bold << fmt.cyan;
   std::cout << "\nEnvironment: " << fmt.yellow << api_key.c_str();

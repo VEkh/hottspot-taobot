@@ -55,6 +55,10 @@ public:
 
   CurlClient place_order(order_t *order);
 
+  json load_env();
+
+  quote_t parse_quote(const std::string &);
+
   std::string cancel_order(const int);
   std::string cancel_order(order_t *order);
   std::string fetch_account();
@@ -64,8 +68,6 @@ public:
   std::string fetch_quote(char *);
   std::string fetch_quote(std::string);
   std::string fetch_trade(const int);
-
-  quote_t parse_quote(const std::string &);
 
   void stream_account();
 

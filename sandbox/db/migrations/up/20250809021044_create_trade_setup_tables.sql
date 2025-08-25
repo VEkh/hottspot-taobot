@@ -49,6 +49,7 @@ select
         max(priority)
       from trade_setups));
 create table market_session_performances(
+  env jsonb not null,
   id serial primary key,
   market_session_id int not null references market_sessions(id),
   profit_loss_percent double precision not null,

@@ -18,29 +18,9 @@ void Alpaca::Client::load_config() {
   std::string error_message;
 
   const std::string api_key = this->flags["api-key"];
-  json config_json = ::utils::io::load_config("alpaca", api_key);
+  json api_key_json = ::utils::io::load_config("alpaca", api_key);
 
   const std::list<std::string> required_keys = {
-      "data_base_url",
-      api_key,
-  };
-
-  for (const std::string key : required_keys) {
-    if (config_json.contains(key)) {
-      continue;
-    }
-
-    error_message = Formatted::error_message(
-        "Config file is missing the `" + std::string(key) +
-        "` key. Please ensure it is in the config file at " +
-        std::string(config_path));
-
-    throw std::invalid_argument(error_message);
-  }
-
-  json api_key_json = config_json[api_key];
-
-  const std::list<std::string> nested_required_keys = {
       "account_stop_loss_ratio",
       "base_url",
       "env_symbols",
@@ -48,7 +28,7 @@ void Alpaca::Client::load_config() {
       "secret_key",
   };
 
-  for (const std::string key : nested_required_keys) {
+  for (const std::string key : required_keys) {
     if (api_key_json.contains(key)) {
       continue;
     }
@@ -91,7 +71,7 @@ void Alpaca::Client::load_config() {
       .api_key_id = api_key_json["id"],
       .api_secret_key = api_key_json["secret_key"],
       .base_url = api_key_json["base_url"],
-      .data_base_url = config_json["data_base_url"],
+      .data_base_url = api_key_json["data_base_url"],
       .debug_sql = this->config.debug_sql,
       .env_symbols = ::utils::io::read_env_symbols(api_key_json),
       .is_live = api_key_json["is_live"],

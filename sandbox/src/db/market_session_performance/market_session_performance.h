@@ -3,11 +3,14 @@
 
 #include "db/utils/utils.h" // DB::Utils
 #include "lib/pg/pg.h"      // Pg
+#include <string>           // std::string
 
 namespace DB {
 class MarketSessionPerformance {
 public:
-  struct market_session_performance_t {
+  struct upsert_args_t {
+    bool debug = false;
+    std::string env;
     int id;
     int market_session_id;
     double profit_loss_percent;
@@ -17,7 +20,7 @@ public:
   MarketSessionPerformance(){};
   MarketSessionPerformance(Pg);
 
-  void upsert(const market_session_performance_t, const bool);
+  void upsert(const upsert_args_t);
 
 private:
   using query_result_t = Pg::query_result_t;

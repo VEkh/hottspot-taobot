@@ -44,7 +44,7 @@ void Oanda::TaoBot::log_position() {
          profit_percentage(this->open_order_ptr, "profit"));
   std::cout << std::endl;
 
-  printf("                                           Max Profit: %+'.5f"
+  printf("                                           Max Profit: %+'.5f "
          "(%+.2f%%) @ "
          "%s%s",
          this->open_order_ptr->max_profit,
