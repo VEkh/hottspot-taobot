@@ -8,10 +8,8 @@
 #include <stdio.h>            // puts
 
 void Performance::AccountSnapshot::load_env() {
-  const json config_json =
+  const json api_key_json =
       ::utils::io::load_config(this->config.api_name, this->config.api_key);
-
-  const json api_key_json = config_json[this->config.api_key];
 
   this->config.api_key_id = api_key_json["id"];
 
