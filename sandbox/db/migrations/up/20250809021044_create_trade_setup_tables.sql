@@ -41,8 +41,10 @@ insert into trade_setups(priority, reverse_percentile_id, stop_profit_id)
   values (2, 1, 1),
 (1, 1, 2),
 (3, 1, 3),
-(4, 2, 1),
-(5, 2, 3);
+(4, 1, 4),
+(5, 2, 1),
+(6, 2, 3),
+(7, 2, 4);
 select
   setval('trade_setups_priority_seq',(
       select

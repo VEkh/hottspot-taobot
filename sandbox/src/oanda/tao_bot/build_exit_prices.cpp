@@ -61,14 +61,15 @@ Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {
       const double target_price_action_delta =
           target_price_action_day_candle_ratio * day_candle_.range();
 
-      const double min_stop_profit =
-          ((1.0 / (this->TREND_SLIP_PERCENTILE * 0.01) - 1.0)) *
-          day_candle_.range();
-
       const double max_stop_profit =
           std::max(min_stop_profit, target_price_action_delta);
 
       stop_profit = max_stop_profit;
+    }
+
+    // v0.4
+    if (stop_profit_id == 4) {
+      stop_profit = min_stop_profit;
     }
   }
 
