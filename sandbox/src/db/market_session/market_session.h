@@ -17,6 +17,19 @@ public:
     double warm_up_period_seconds;
   };
 
+  struct get_stats_args_t {
+    bool debug = false;
+    double ref_epoch;
+    std::string symbol;
+  };
+
+  struct market_session_stats_t {
+    double range_open_percent_median = 0.0;
+    double range_open_percent_std_dev = 0.0;
+    double warm_up_range_open_percent_median = 0.0;
+    double warm_up_range_open_percent_std_dev = 0.0;
+  };
+
   struct market_session_t {
     double close;
     double closed_at;
@@ -38,6 +51,7 @@ public:
   MarketSession(Pg);
 
   market_session_t find_or_create_by(const find_or_create_by_args_t);
+  market_session_stats_t get_stats(const get_stats_args_t);
   void upsert(const market_session_t, const bool);
 
 private:
@@ -45,6 +59,8 @@ private:
 
   DB::Utils db_utils;
   Pg conn;
+
+  market_session_stats_t result_to_market_session_stats(const query_result_t &);
 
   std::list<market_session_t> result_to_market_sessions(const query_result_t &);
 };

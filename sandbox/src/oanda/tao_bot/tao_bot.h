@@ -41,6 +41,7 @@ private:
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
+  using market_session_stats_t = DB::MarketSession::market_session_stats_t;
   using market_session_t = DB::MarketSession::market_session_t;
   using order_action_t = Oanda::t::order_action_t;
   using order_status_t = Oanda::t::order_status_t;
@@ -133,6 +134,7 @@ private:
   currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
+  market_session_stats_t market_session_stats;
   market_session_t market_session;
   order_t *close_order_ptr = nullptr;
   order_t *open_order_ptr = nullptr;

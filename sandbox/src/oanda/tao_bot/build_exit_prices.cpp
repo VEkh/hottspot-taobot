@@ -46,11 +46,14 @@ Oanda::TaoBot::build_exit_prices(build_exit_prices_args_t args) {
       stop_profit = 0.0;
     }
 
+    const double min_stop_profit =
+        ((1.0 / (this->TREND_SLIP_PERCENTILE * 0.01) - 1.0)) *
+        day_candle_.range();
+
     // v0.3
-    if (stop_profit_id == 3 &&
-        this->api_client.config.stop_profit_target_price_action) {
+    if (stop_profit_id == 3) {
       const double target_price_action =
-          this->api_client.config.stop_profit_target_price_action;
+          this->market_session_stats.range_open_percent_median;
 
       const double target_price_action_day_candle_ratio =
           (target_price_action / day_candle_.range_open_percent()) - 1.0;
