@@ -46,6 +46,12 @@ void Oanda::TaoBot::reset_backtest() {
         .warm_up_period_seconds =
             this->api_client.config.warm_up_period_hours * 60 * 60,
     });
+
+    this->market_session_stats = this->db_market_session.get_stats({
+        .debug = this->api_client.config.debug_sql,
+        .ref_epoch = this->current_epoch,
+        .symbol = this->symbol,
+    });
   }
 
   this->closed_positions = {};

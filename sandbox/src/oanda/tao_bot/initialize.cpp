@@ -96,6 +96,12 @@ void Oanda::TaoBot::initialize(const std::string symbol_,
             this->api_client.config.warm_up_period_hours * 60 * 60,
     });
 
+    this->market_session_stats = this->db_market_session.get_stats({
+        .debug = this->api_client.config.debug_sql,
+        .ref_epoch = this->current_epoch,
+        .symbol = this->symbol,
+    });
+
     this->trade_setup = this->db_trade_setup.find_or_create_by({
         .debug = this->api_client.config.debug_sql,
         .reverse_percentile_id =

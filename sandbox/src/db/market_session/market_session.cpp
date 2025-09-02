@@ -5,6 +5,7 @@
 #include "db/utils/utils.cpp" // DB::Utils
 
 #include "find_or_create_by.cpp"
+#include "get_stats.cpp"
 #include "upsert.cpp"
 
 DB::MarketSession::MarketSession(Pg c) {

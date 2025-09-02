@@ -17,11 +17,17 @@ void Oanda::TaoBot::log_price_action() {
   std::cout << fmt.reset;
 
   std::cout << fmt.bold << fmt.yellow;
-  printf("Current: %.2f%%\n", this->day_candle.range_open_percent());
+  printf("Current: %.2f%% • Median: %.4f%% • σ: %.4f%%\n",
+         this->day_candle.range_open_percent(),
+         this->market_session_stats.range_open_percent_median,
+         this->market_session_stats.range_open_percent_std_dev);
 
   if (this->warm_up_candle.range_open_percent() > 0) {
     std::cout << fmt.bold << fmt.yellow;
-    printf("Warm Up: %.2f%%\n", this->warm_up_candle.range_open_percent());
+    printf("Warm Up: %.2f%% • Median: %.4f%% • σ: %.4f%%\n",
+           this->warm_up_candle.range_open_percent(),
+           this->market_session_stats.warm_up_range_open_percent_median,
+           this->market_session_stats.warm_up_range_open_percent_std_dev);
   }
 
   std::cout << fmt.reset << std::endl;
