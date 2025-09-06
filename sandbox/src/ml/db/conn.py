@@ -1,6 +1,6 @@
 import json
 import os
-import psycopg2
+import psycopg
 
 import ml.utils as u
 
@@ -13,7 +13,7 @@ class Conn:
         self.config = self.__read_config()
 
     def connect(self):
-        self.conn = psycopg2.connect(**self.config)
+        self.conn = psycopg.connect(**self.config)
 
         u.ascii.puts(
             f"🚪 Successfully connected to {u.ascii.GREEN}{self.config['dbname']}",

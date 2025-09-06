@@ -68,6 +68,7 @@ function install_conda() {
 function install_pip_packages() {
   log_install_start "🐍📦 Python Packages"
 
+  pip install --upgrade pip
   pip3 install -r "${app_dir}/deps/requirements.txt"
 
   activate_conda_env "${conda_env}"
