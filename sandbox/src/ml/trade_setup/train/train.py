@@ -1,4 +1,5 @@
 import ml.utils as u
+from .label_loader import LabelLoader
 
 
 class Train:
@@ -16,6 +17,13 @@ class Train:
         )
         self.symbol = symbol
 
+        self.label_loader = LabelLoader(
+            db_conn=self.db_conn,
+            market_session_duration_seconds=self.market_session_duration_seconds,
+            market_session_warm_up_duration_seconds=self.market_session_warm_up_duration_seconds,
+            symbol=self.symbol,
+        )
+
     def run(self):
         description = f"""
         🤖 Training model for predicting {u.ascii.CYAN}{self.symbol}{u.ascii.YELLOW} trade setups.
@@ -25,3 +33,5 @@ class Train:
         """
 
         u.ascii.puts(description, u.ascii.YELLOW)
+
+        self.labels = self.label_loader.load()
