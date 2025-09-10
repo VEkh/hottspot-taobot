@@ -1,4 +1,5 @@
 import ml.utils as u
+from .input_loader import InputLoader
 from .label_loader import LabelLoader
 
 
@@ -11,11 +12,20 @@ class Train:
         symbol=None,
     ):
         self.db_conn = db_conn
+        self.inputs = []
         self.market_session_duration_seconds = market_session_duration_seconds
+        self.labels = []
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
         self.symbol = symbol
+
+        self.input_loader = InputLoader(
+            db_conn=self.db_conn,
+            market_session_duration_seconds=self.market_session_duration_seconds,
+            market_session_warm_up_duration_seconds=self.market_session_warm_up_duration_seconds,
+            symbol=self.symbol,
+        )
 
         self.label_loader = LabelLoader(
             db_conn=self.db_conn,
@@ -34,4 +44,5 @@ class Train:
 
         u.ascii.puts(description, u.ascii.YELLOW)
 
+        self.inputs = self.input_loader.load()
         self.labels = self.label_loader.load()

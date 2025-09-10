@@ -1,3 +1,4 @@
+import json
 import ml.utils as u
 
 
@@ -18,7 +19,6 @@ class LabelLoader:
         self.symbol = symbol
 
     def load(self):
-
         self.__get_labels()
 
     def __get_labels(self):
@@ -40,8 +40,8 @@ class LabelLoader:
                     join trade_setups on trade_setups.id = market_session_performances.trade_setup_id
                   where
                     market_sessions.symbol = %(symbol)s
-                    and extract(epoch from upper(market_sessions.open_period) - lower(market_sessions.open_period)) =%(market_session_duration_seconds)s
-                    and extract(epoch from upper(market_sessions.warm_up_period) - lower(market_sessions.warm_up_period)) =%(market_session_warm_up_duration_seconds)s)
+                    and extract(epoch from upper(market_sessions.open_period) - lower(market_sessions.open_period)) = %(market_session_duration_seconds)s
+                    and extract(epoch from upper(market_sessions.warm_up_period) - lower(market_sessions.warm_up_period)) = %(market_session_warm_up_duration_seconds)s)
                 select
                   market_session_id,
                   trade_setup_id
@@ -68,3 +68,6 @@ class LabelLoader:
         self.labels = [dict(zip(columns, row)) for row in rows]
 
         u.ascii.puts("✅ Finished loading labels", u.ascii.YELLOW)
+        u.ascii.puts(
+            f"Example: {json.dumps(self.labels[-1], indent=2)}", u.ascii.YELLOW
+        )
