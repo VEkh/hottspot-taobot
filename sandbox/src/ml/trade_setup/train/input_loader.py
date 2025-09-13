@@ -21,6 +21,8 @@ class InputLoader:
     def load(self):
         self.__get_inputs()
 
+        return self.inputs
+
     def __get_inputs(self):
         u.ascii.puts("💿 Loading inpus", u.ascii.YELLOW)
 
