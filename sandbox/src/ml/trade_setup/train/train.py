@@ -27,6 +27,11 @@ class Train:
             symbol=self.symbol,
         )
 
+        self.label_loader = LabelLoader(
+            db_conn=self.db_conn,
+            inputs=self.inputs,
+        )
+
     def run(self):
         description = f"""
         🤖 Training model for predicting {u.ascii.CYAN}{self.symbol}{u.ascii.YELLOW} trade setups.
@@ -38,10 +43,6 @@ class Train:
         u.ascii.puts(description, u.ascii.YELLOW)
 
         self.inputs = self.input_loader.load()
+        # self.label_loader.inputs = self.inputs
 
-        label_loader = LabelLoader(
-            db_conn=self.db_conn,
-            inputs=self.inputs,
-        )
-
-        self.labels = label_loader.load()
+        self.labels = self.label_loader.load()
