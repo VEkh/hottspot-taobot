@@ -63,12 +63,19 @@ class LabelLoader:
 
         self.labels = [dict(zip(columns, row)) for row in rows]
 
+        if not self.labels:
+            u.ascii.puts("🛑 No labels loaded.", u.ascii.RED)
+            return
+
         u.ascii.puts("✅ Finished loading labels", u.ascii.YELLOW)
         u.ascii.puts(
             f"Example: {json.dumps(self.labels[-1], indent=2)}", u.ascii.YELLOW
         )
 
     def __print_label_grouping(self):
+        if not self.labels:
+            return
+
         groupings = {}
 
         for label in self.labels:

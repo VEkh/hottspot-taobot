@@ -24,7 +24,7 @@ class InputLoader:
         return self.inputs
 
     def __get_inputs(self):
-        u.ascii.puts("💿 Loading inpus", u.ascii.YELLOW)
+        u.ascii.puts("💿 Loading inputs", u.ascii.YELLOW)
 
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
@@ -59,6 +59,10 @@ class InputLoader:
             rows = cursor.fetchall()
 
             self.inputs = [dict(zip(columns, row)) for row in rows]
+
+            if not self.inputs:
+                u.ascii.puts("🛑 No inputs loaded.", u.ascii.RED)
+                return
 
             u.ascii.puts("✅ Finished loading inputs", u.ascii.YELLOW)
             u.ascii.puts(
