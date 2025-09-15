@@ -77,6 +77,7 @@ class LabelLoader:
             return
 
         groupings = {}
+        total_count = 0
 
         for label in self.labels:
             slice_keys = ["trade_setup_id", "reverse_percentile_id", "stop_profit_id"]
@@ -86,11 +87,19 @@ class LabelLoader:
             )
 
             group["count"] = group["count"] + 1
+            total_count += 1
 
             groupings[label["trade_setup_id"]] = group
 
         table = [groupings[k] for k in groupings]
         table = sorted(table, key=lambda i: i["count"], reverse=True)
+
+        for row in table:
+            count = row["count"]
+
+            percentage = 100.0 * (count / total_count) if total_count else 0
+
+            row["count"] = f"{count} ({percentage:.2f}%)"
 
         u.ascii.puts("Label Counts:", u.ascii.YELLOW)
         u.ascii.puts(tabulate(table, headers="keys", tablefmt="psql"), u.ascii.YELLOW)

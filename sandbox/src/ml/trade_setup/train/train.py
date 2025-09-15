@@ -43,6 +43,6 @@ class Train:
         u.ascii.puts(description, u.ascii.YELLOW)
 
         self.inputs = self.input_loader.load()
-        # self.label_loader.inputs = self.inputs
+        self.label_loader.inputs = self.inputs
 
         self.labels = self.label_loader.load()
