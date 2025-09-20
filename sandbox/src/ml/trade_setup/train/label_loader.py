@@ -1,28 +1,54 @@
 from tabulate import tabulate
 import json
 import ml.utils as u
+import pandas as pd
 
 
 class LabelLoader:
     def __init__(
         self,
         db_conn=None,
-        inputs=[],
+        features=pd.DataFrame(),
     ):
         self.db_conn = db_conn
-        self.inputs = inputs
-        self.labels = []
+        self.features = features
+        self.labels = pd.DataFrame()
+
+    def filter_sparse_classes(self, min_percentage=0.05):
+        u.ascii.puts("🤖 Filtering Sparse Label Classes", u.ascii.YELLOW)
+
+        u.ascii.puts("Original Class Distribution:", u.ascii.MAGENTA)
+        self.__print_label_distribution()
+
+        target_column = "trade_setup_id"
+
+        class_counts = self.labels[target_column].value_counts()
+        total_count = len(self.labels)
+        valid_classes = class_counts[
+            (class_counts / total_count >= min_percentage)
+        ].index
+
+        removed_classes = set(class_counts.index) - set(valid_classes)
+
+        u.ascii.puts(f"Removed Classes: {removed_classes}", u.ascii.MAGENTA)
+
+        self.labels = self.labels[self.labels[target_column].isin(valid_classes)]
+
+        u.ascii.puts("Filtered Class Distribution:", u.ascii.MAGENTA)
+        self.__print_label_distribution()
 
     def load(self):
         self.__get_labels()
-        self.__print_label_grouping()
+        self.labels = pd.DataFrame(self.labels)
 
         return self.labels
 
     def __get_labels(self):
         u.ascii.puts("💿 Loading labels", u.ascii.YELLOW)
 
-        market_session_ids = [row["market_session_id"] for row in self.inputs]
+        market_session_ids = (
+            self.features["market_session_id"].to_numpy(dtype=int).tolist()
+        )
 
         with self.db_conn.conn.cursor() as cursor:
             query = """
@@ -72,34 +98,30 @@ class LabelLoader:
             f"Example: {json.dumps(self.labels[-1], indent=2)}", u.ascii.YELLOW
         )
 
-    def __print_label_grouping(self):
-        if not self.labels:
+    def __print_label_distribution(self):
+        if self.labels.empty:
             return
 
-        groupings = {}
-        total_count = 0
+        slice_keys = ["trade_setup_id", "reverse_percentile_id", "stop_profit_id"]
 
-        for label in self.labels:
-            slice_keys = ["trade_setup_id", "reverse_percentile_id", "stop_profit_id"]
+        grouped = (
+            self.labels[slice_keys].groupby(slice_keys).size().reset_index(name="count")
+        )
 
-            group = groupings.get(label["trade_setup_id"]) or (
-                {k: label[k] for k in slice_keys} | {"count": 0}
-            )
+        grouped = grouped.sort_values("count", ascending=False)
 
-            group["count"] = group["count"] + 1
-            total_count += 1
+        total_count = len(self.labels)
 
-            groupings[label["trade_setup_id"]] = group
+        grouped["percentage"] = (
+            100.0 * (grouped["count"] / total_count) if total_count else 0
+        )
 
-        table = [groupings[k] for k in groupings]
-        table = sorted(table, key=lambda i: i["count"], reverse=True)
+        grouped["count"] = grouped.apply(
+            lambda row: f"{row['count']} ({row['percentage']:.2f}%)", axis=1
+        )
 
-        for row in table:
-            count = row["count"]
+        grouped = grouped.drop("percentage", axis=1)
 
-            percentage = 100.0 * (count / total_count) if total_count else 0
+        table = grouped.to_dict("records")
 
-            row["count"] = f"{count} ({percentage:.2f}%)"
-
-        u.ascii.puts("Label Counts:", u.ascii.YELLOW)
-        u.ascii.puts(tabulate(table, headers="keys", tablefmt="psql"), u.ascii.YELLOW)
+        u.ascii.puts(tabulate(table, headers="keys", tablefmt="psql"), u.ascii.MAGENTA)

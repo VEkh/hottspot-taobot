@@ -1,8 +1,9 @@
 import json
 import ml.utils as u
+import pandas as pd
 
 
-class InputLoader:
+class FeatureLoader:
     def __init__(
         self,
         db_conn=None,
@@ -11,7 +12,7 @@ class InputLoader:
         symbol=None,
     ):
         self.db_conn = db_conn
-        self.inputs = []
+        self.features = []
         self.market_session_duration_seconds = market_session_duration_seconds
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
@@ -19,12 +20,13 @@ class InputLoader:
         self.symbol = symbol
 
     def load(self):
-        self.__get_inputs()
+        self.__get_features()
+        self.features = pd.DataFrame(self.features)
 
-        return self.inputs
+        return self.features
 
-    def __get_inputs(self):
-        u.ascii.puts("💿 Loading inputs", u.ascii.YELLOW)
+    def __get_features(self):
+        u.ascii.puts("💿 Loading features", u.ascii.YELLOW)
 
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
@@ -58,13 +60,13 @@ class InputLoader:
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()
 
-            self.inputs = [dict(zip(columns, row)) for row in rows]
+            self.features = [dict(zip(columns, row)) for row in rows]
 
-            if not self.inputs:
-                u.ascii.puts("🛑 No inputs loaded.", u.ascii.RED)
+            if not self.features:
+                u.ascii.puts("🛑 No features loaded.", u.ascii.RED)
                 return
 
-            u.ascii.puts("✅ Finished loading inputs", u.ascii.YELLOW)
+            u.ascii.puts("✅ Finished loading features", u.ascii.YELLOW)
             u.ascii.puts(
-                f"Example: {json.dumps(self.inputs[-1], indent=2)}", u.ascii.YELLOW
+                f"Example: {json.dumps(self.features[-1], indent=2)}", u.ascii.YELLOW
             )
