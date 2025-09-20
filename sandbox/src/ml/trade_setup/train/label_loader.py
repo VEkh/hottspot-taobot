@@ -15,7 +15,7 @@ class LabelLoader:
         self.labels = pd.DataFrame()
 
     def filter_sparse_classes(self, min_percentage=0.05):
-        u.ascii.puts("🤖 Filtering Sparse Label Classes", u.ascii.YELLOW)
+        u.ascii.puts("ℹ  Filtering Sparse Label Classes", u.ascii.CYAN)
 
         u.ascii.puts("Original Class Distribution:", u.ascii.MAGENTA)
         self.__print_label_distribution()
