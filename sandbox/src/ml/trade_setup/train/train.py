@@ -1,8 +1,10 @@
+from .feature_loader import FeatureLoader
+from .label_loader import LabelLoader
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+import matplotlib.pyplot as plt
 import ml.utils as u
 import pandas as pd
 import xgboost as xgb
-from .feature_loader import FeatureLoader
-from .label_loader import LabelLoader
 
 
 class Train:
@@ -26,9 +28,11 @@ class Train:
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
+        self.model = None
         self.reverse_label_mapping = {}
         self.symbol = symbol
         self.y = pd.DataFrame()
+        self.y_predictions = None
         self.y_test = pd.DataFrame()
         self.y_train = pd.DataFrame()
         self.y_val = pd.DataFrame()
@@ -65,6 +69,59 @@ class Train:
         self.__merge_features_and_labels()
         self.__prepare_data()
         self.__train_xgboost_model()
+        self.__evaluate_model()
+
+    def __evaluate_model(self):
+        u.ascii.puts("ℹ  Evaluating model.", u.ascii.CYAN)
+
+        if not self.model:
+            return
+
+        self.y_predictions = self.model.predict(self.X_test)
+        y_predictions_probability = self.model.predict_proba(self.X_test)
+
+        if self.reverse_label_mapping:
+            self.y_test = self.y_test.map(self.reverse_label_mapping)
+            self.y_predictions = pd.Series(self.y_predictions).map(
+                self.reverse_label_mapping
+            )
+
+        u.ascii.puts(
+            f"Accuracy: {accuracy_score(self.y_test, self.y_predictions):.4f}",
+            u.ascii.MAGENTA,
+        )
+
+        u.ascii.puts("Classification Report:", u.ascii.MAGENTA)
+        u.ascii.puts(
+            classification_report(self.y_test, self.y_predictions), u.ascii.MAGENTA
+        )
+
+        u.ascii.puts("Confusion Matrix:", u.ascii.MAGENTA)
+        u.ascii.puts(
+            str(confusion_matrix(self.y_test, self.y_predictions)), u.ascii.MAGENTA
+        )
+
+        importance = self.model.feature_importances_
+        importance_df = pd.DataFrame(
+            {
+                "feature": self.feature_loader.columns,
+                "importance": importance,
+            }
+        ).sort_values("importance", ascending=False)
+
+        u.ascii.puts("Feature Importance:", u.ascii.MAGENTA)
+        u.ascii.puts(importance_df.to_string(), u.ascii.MAGENTA)
+
+        plt.figure(figsize=(10, 6))
+        plt.barh(importance_df["feature"], importance_df["importance"])
+        plt.title("Feature Importance")
+        plt.xlabel("Importance Score")
+        plt.tight_layout()
+        plt.savefig(
+            f"tmp/{self.symbol}_feature_importance.png", dpi=300, bbox_inches="tight"
+        )
+
+        u.ascii.puts("🎉 Finished evaluating model", u.ascii.GREEN)
 
     def __merge_features_and_labels(self):
         u.ascii.puts("ℹ  Merging features and labels.", u.ascii.CYAN)
@@ -83,15 +140,9 @@ class Train:
     def __prepare_data(self):
         u.ascii.puts("ℹ  Prepare data for model.", u.ascii.CYAN)
 
-        feature_columns = [
-            "warm_up_body_to_range_ratio",
-            "warm_up_body_to_lower_wick_ratio",
-            "warm_up_body_to_upper_wick_ratio",
-        ]
-
         target_column = "trade_setup_id"
 
-        self.X = self.features_and_labels[feature_columns]
+        self.X = self.features_and_labels[self.feature_loader.columns]
         self.y = self.features_and_labels[target_column]
 
         unique_labels = sorted(self.y.unique())
@@ -103,6 +154,8 @@ class Train:
 
         self.y = self.y.map(self.label_mapping)
 
+        # Split data (important: use temporal split for trading data)
+        # For time series data, don't shuffle!
         split_index = int(0.7 * len(self.X))
         val_split_index = int(0.85 * len(self.X))
 
@@ -113,7 +166,9 @@ class Train:
         self.y_train = self.y.iloc[:split_index]
         self.y_val = self.y.iloc[split_index:val_split_index]
 
-        u.ascii.puts(f"Features Columns: {feature_columns}", u.ascii.MAGENTA)
+        u.ascii.puts(
+            f"Features Columns: {self.feature_loader.columns}", u.ascii.MAGENTA
+        )
         u.ascii.puts(f"X: {self.X.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Training Set: {self.X_train.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Validation Set: {self.X_val.shape[0]} samples", u.ascii.MAGENTA)
@@ -122,7 +177,7 @@ class Train:
     def __train_xgboost_model(self):
         u.ascii.puts("ℹ  Training XGBoost model.", u.ascii.CYAN)
 
-        model = xgb.XGBClassifier(
+        self.model = xgb.XGBClassifier(
             colsample_bytree=0.8,
             early_stopping_rounds=50,
             eval_metric="mlogloss",
@@ -137,7 +192,7 @@ class Train:
             subsample=0.8,
         )
 
-        model.fit(
+        self.model.fit(
             self.X_train,
             self.y_train,
             eval_set=[(self.X_val, self.y_val)],

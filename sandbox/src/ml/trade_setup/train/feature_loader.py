@@ -11,6 +11,12 @@ class FeatureLoader:
         market_session_warm_up_duration_seconds=0,
         symbol=None,
     ):
+        self.columns = [
+            "warm_up_body_to_range_ratio",
+            "warm_up_body_to_lower_wick_ratio",
+            "warm_up_body_to_upper_wick_ratio",
+        ]
+
         self.db_conn = db_conn
         self.features = []
         self.market_session_duration_seconds = market_session_duration_seconds
