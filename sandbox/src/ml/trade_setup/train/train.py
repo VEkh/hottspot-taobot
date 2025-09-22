@@ -1,8 +1,10 @@
 from .feature_loader import FeatureLoader
 from .label_loader import LabelLoader
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
+from sklearn.model_selection import TimeSeriesSplit
 import matplotlib.pyplot as plt
 import ml.utils as u
+import numpy as np
 import pandas as pd
 import xgboost as xgb
 
@@ -32,6 +34,7 @@ class Train:
         self.reverse_label_mapping = {}
         self.symbol = symbol
         self.y = pd.DataFrame()
+        self.y_class_mapped = pd.DataFrame()
         self.y_predictions = None
         self.y_test = pd.DataFrame()
         self.y_train = pd.DataFrame()
@@ -70,6 +73,7 @@ class Train:
         self.__prepare_data()
         self.__train_xgboost_model()
         self.__evaluate_model()
+        self.__time_series_validation(n_splits=5)
 
     def __evaluate_model(self):
         u.ascii.puts("ℹ  Evaluating model.", u.ascii.CYAN)
@@ -152,7 +156,7 @@ class Train:
             idx: label for label, idx in self.label_mapping.items()
         }
 
-        self.y = self.y.map(self.label_mapping)
+        self.y_class_mapped = self.y.map(self.label_mapping)
 
         # Split data (important: use temporal split for trading data)
         # For time series data, don't shuffle!
@@ -162,9 +166,9 @@ class Train:
         self.X_test = self.X.iloc[val_split_index:]
         self.X_train = self.X.iloc[:split_index]
         self.X_val = self.X.iloc[split_index:val_split_index]
-        self.y_test = self.y.iloc[val_split_index:]
-        self.y_train = self.y.iloc[:split_index]
-        self.y_val = self.y.iloc[split_index:val_split_index]
+        self.y_test = self.y_class_mapped.iloc[val_split_index:]
+        self.y_train = self.y_class_mapped.iloc[:split_index]
+        self.y_val = self.y_class_mapped.iloc[split_index:val_split_index]
 
         u.ascii.puts(
             f"Features Columns: {self.feature_loader.columns}", u.ascii.MAGENTA
@@ -173,6 +177,42 @@ class Train:
         u.ascii.puts(f"Training Set: {self.X_train.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Validation Set: {self.X_val.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Test Set: {self.X_test.shape[0]} samples", u.ascii.MAGENTA)
+
+    def __time_series_validation(self, n_splits=5):
+        u.ascii.puts("ℹ  Using TimeSeriesSplit for temporal validation.", u.ascii.CYAN)
+
+        time_series_cv = TimeSeriesSplit(n_splits)
+        cross_validation_scores = []
+
+        for train_idx, val_idx in time_series_cv.split(self.X):
+            X_train_cv, X_val_cv = self.X.iloc[train_idx], self.X.iloc[val_idx]
+            y_train_cv, y_val_cv = (
+                self.y_class_mapped.iloc[train_idx],
+                self.y_class_mapped.iloc[val_idx],
+            )
+
+            model = xgb.XGBClassifier(
+                learning_rate=0.1,
+                max_depth=4,
+                n_estimators=100,
+                random_state=42,
+            )
+
+            model.fit(X_train_cv, y_train_cv)
+
+            score = model.score(X_val_cv, y_val_cv)
+            cross_validation_scores.append(score)
+
+        u.ascii.puts(
+            f"Time Series Cross Validation Scores: {cross_validation_scores}",
+            u.ascii.MAGENTA,
+        )
+
+        u.ascii.puts(
+            f"Mean Cross Validation Score: {np.mean(cross_validation_scores):.4f} (+/- {(np.std(cross_validation_scores) * 2):.4f})",
+            u.ascii.MAGENTA,
+        )
+        u.ascii.puts("🎉 Finished time series cross validation.", u.ascii.GREEN)
 
     def __train_xgboost_model(self):
         u.ascii.puts("ℹ  Training XGBoost model.", u.ascii.CYAN)
