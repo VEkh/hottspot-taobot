@@ -1,11 +1,14 @@
 from .feature_loader import FeatureLoader
 from .label_loader import LabelLoader
+from pathlib import Path
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import TimeSeriesSplit
 import matplotlib.pyplot as plt
 import ml.utils as u
 import numpy as np
+import os
 import pandas as pd
+import textwrap
 import xgboost as xgb
 
 
@@ -53,12 +56,12 @@ class Train:
         )
 
     def run(self):
-        description = f"""
+        description = textwrap.dedent(f"""
         🤖 Training model for predicting {u.ascii.CYAN}{self.symbol}{u.ascii.YELLOW} trade setups.
 
         ✅ Market Session Duration (Seconds): {self.market_session_duration_seconds}
         ✅ Market Session Warm Up Duration (Seconds): {self.market_session_warm_up_duration_seconds}
-        """
+        """).strip()
 
         u.ascii.puts(description, u.ascii.YELLOW)
 
@@ -74,6 +77,7 @@ class Train:
         self.__train_xgboost_model()
         self.__evaluate_model()
         self.__time_series_validation(n_splits=5)
+        self.__save_model()
 
     def __evaluate_model(self):
         u.ascii.puts("ℹ  Evaluating model.", u.ascii.CYAN)
@@ -177,6 +181,18 @@ class Train:
         u.ascii.puts(f"Training Set: {self.X_train.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Validation Set: {self.X_val.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Test Set: {self.X_test.shape[0]} samples", u.ascii.MAGENTA)
+
+    def __save_model(self):
+        u.ascii.puts("ℹ  Saving model.", u.ascii.CYAN)
+
+        ml_dir = Path(__file__).resolve().parent.parent.parent
+        save_dir = os.path.join(ml_dir, "models", self.symbol)
+        os.makedirs(save_dir, exist_ok=True)
+
+        save_path = os.path.join(save_dir, "trade_setup_xgboost_model.json")
+        self.model.save_model(save_path)
+
+        u.ascii.puts(f"🎉 Model saved as {save_path}.", u.ascii.GREEN)
 
     def __time_series_validation(self, n_splits=5):
         u.ascii.puts("ℹ  Using TimeSeriesSplit for temporal validation.", u.ascii.CYAN)
