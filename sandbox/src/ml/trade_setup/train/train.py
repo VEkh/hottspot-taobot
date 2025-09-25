@@ -56,12 +56,14 @@ class Train:
         )
 
     def run(self):
-        description = textwrap.dedent(f"""
+        description = textwrap.dedent(
+            f"""
         🤖 Training model for predicting {u.ascii.CYAN}{self.symbol}{u.ascii.YELLOW} trade setups.
 
         ✅ Market Session Duration (Seconds): {self.market_session_duration_seconds}
         ✅ Market Session Warm Up Duration (Seconds): {self.market_session_warm_up_duration_seconds}
-        """).strip()
+        """
+        ).strip()
 
         u.ascii.puts(description, u.ascii.YELLOW)
 
@@ -101,7 +103,8 @@ class Train:
 
         u.ascii.puts("Classification Report:", u.ascii.MAGENTA)
         u.ascii.puts(
-            classification_report(self.y_test, self.y_predictions), u.ascii.MAGENTA
+            classification_report(self.y_test, self.y_predictions, zero_division=0),
+            u.ascii.MAGENTA,
         )
 
         u.ascii.puts("Confusion Matrix:", u.ascii.MAGENTA)

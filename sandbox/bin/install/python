@@ -38,15 +38,6 @@ function create_conda_env() {
   "${conda_bin}" create --name "${conda_env}" -y python="${python_version}"
 }
 
-function install_gpu_support() {
-  log_install_start "📺 GPU Support"
-
-  activate_conda_env "${conda_env}"
-  conda install -y -c conda-forge cudatoolkit
-  conda install -y -c nvidia cuda-nvcc
-  set_gpu_env_vars
-}
-
 function install_conda() {
   if [[ -n "$(which conda)" || -f "${conda_dir}/bin/conda" ]]; then
     return 0
@@ -63,6 +54,15 @@ function install_conda() {
   conda_bin="${conda_dir}/bin/conda"
 
   conda config --set auto_activate_base false
+}
+
+function install_gpu_support() {
+  log_install_start "📺 GPU Support"
+
+  activate_conda_env "${conda_env}"
+  conda install -y -c conda-forge cudatoolkit
+  conda install -y -c nvidia cuda-nvcc
+  set_gpu_env_vars
 }
 
 function install_pip_packages() {
