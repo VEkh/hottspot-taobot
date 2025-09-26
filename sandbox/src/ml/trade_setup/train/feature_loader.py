@@ -12,8 +12,8 @@ class FeatureLoader:
         symbol=None,
     ):
         self.columns = [
-            "warm_up_body_to_range_ratio",
             "warm_up_body_to_lower_wick_ratio",
+            "warm_up_body_to_range_ratio",
             "warm_up_body_to_upper_wick_ratio",
         ]
 
@@ -40,7 +40,8 @@ class FeatureLoader:
                   id as market_session_id,
                   (abs(warm_up_close - warm_up_open) / abs(warm_up_high - warm_up_low)) as warm_up_body_to_range_ratio,
                   (abs(warm_up_close - warm_up_open) / abs(least(warm_up_close, warm_up_open) - warm_up_low)) as warm_up_body_to_lower_wick_ratio,
-                  (abs(warm_up_close - warm_up_open) / abs(warm_up_high - greatest(warm_up_close, warm_up_open))) as warm_up_body_to_upper_wick_ratio
+                  (abs(warm_up_close - warm_up_open) / abs(warm_up_high - greatest(warm_up_close, warm_up_open))) as warm_up_body_to_upper_wick_ratio,
+                  (abs(warm_up_close - warm_up_open) / (abs(warm_up_high - warm_up_low) - abs(warm_up_close - warm_up_open))) as warm_up_body_to_wick_ratio
                 from
                   market_sessions
                 where
