@@ -3,6 +3,7 @@ from .label_loader import LabelLoader
 from pathlib import Path
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import TimeSeriesSplit
+from sklearn.utils.class_weight import compute_class_weight
 import matplotlib.pyplot as plt
 import ml.utils as u
 import numpy as np
@@ -24,6 +25,7 @@ class Train:
         self.X_test = pd.DataFrame()
         self.X_train = pd.DataFrame()
         self.X_val = pd.DataFrame()
+        self.class_weight_dict = {}
         self.db_conn = db_conn
         self.features = []
         self.features_and_labels = pd.DataFrame()
@@ -76,6 +78,7 @@ class Train:
 
         self.__merge_features_and_labels()
         self.__prepare_data()
+        self.__set_class_weights()
         self.__train_xgboost_model()
         self.__evaluate_model()
         self.__time_series_validation(n_splits=5)
@@ -184,6 +187,10 @@ class Train:
         u.ascii.puts(f"Training Set: {self.X_train.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Validation Set: {self.X_val.shape[0]} samples", u.ascii.MAGENTA)
         u.ascii.puts(f"Test Set: {self.X_test.shape[0]} samples", u.ascii.MAGENTA)
+        u.ascii.puts(
+            f"Y Train Class Distribution:\n\n{self.y_train.value_counts(normalize=True)}",
+            u.ascii.MAGENTA,
+        )
 
     def __save_model(self):
         u.ascii.puts("ℹ  Saving model.", u.ascii.CYAN)
@@ -196,6 +203,23 @@ class Train:
         self.model.save_model(save_path)
 
         u.ascii.puts(f"🎉 Model saved as {save_path}.", u.ascii.GREEN)
+
+    def __set_class_weights(self):
+        u.ascii.puts("ℹ  Setting class weights.", u.ascii.CYAN)
+
+        classes = np.unique(self.y_train)
+        class_weights = compute_class_weight(
+            "balanced",
+            classes=classes,
+            y=self.y_train,
+        )
+
+        self.class_weight_dict = dict(zip(classes, class_weights))
+
+        u.ascii.puts("Class Weights:", u.ascii.MAGENTA)
+        u.ascii.puts(f"{self.class_weight_dict}", u.ascii.MAGENTA)
+
+        u.ascii.puts(f"🎉 Finished setting class weights.", u.ascii.GREEN)
 
     def __time_series_validation(self, n_splits=5):
         u.ascii.puts("ℹ  Using TimeSeriesSplit for temporal validation.", u.ascii.CYAN)
@@ -251,10 +275,15 @@ class Train:
             subsample=0.8,
         )
 
+        sample_weights = np.array(
+            [self.class_weight_dict[label] for label in self.y_train]
+        )
+
         self.model.fit(
             self.X_train,
             self.y_train,
             eval_set=[(self.X_val, self.y_val)],
+            sample_weight=sample_weights,
             verbose=True,
         )
 
