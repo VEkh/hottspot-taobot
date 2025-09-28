@@ -15,6 +15,7 @@ class FeatureLoader:
             "warm_up_body_to_lower_wick_ratio",
             "warm_up_body_to_range_ratio",
             "warm_up_body_to_upper_wick_ratio",
+            "warm_up_body_to_wick_ratio",
         ]
 
         self.db_conn = db_conn
