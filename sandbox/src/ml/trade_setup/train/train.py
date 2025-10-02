@@ -1,6 +1,7 @@
 from .feature_loader import FeatureLoader
 from .label_loader import LabelLoader
 from pathlib import Path
+from scipy import stats
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import TimeSeriesSplit
 from sklearn.utils.class_weight import compute_class_weight
@@ -77,12 +78,52 @@ class Train:
         self.labels = self.label_loader.labels
 
         self.__merge_features_and_labels()
+        self.__analyze_features()  # TODO: Delete
         self.__prepare_data()
         self.__set_class_weights()
         self.__train_xgboost_model()
         self.__evaluate_model()
         self.__time_series_validation(n_splits=5)
         self.__save_model()
+
+    def __analyze_features(self):
+        self.features_and_labels["manual_rule"] = (
+            self.features_and_labels["warm_up_body_to_wick_ratio"] > 1.0
+        )
+
+        u.ascii.puts("Manual Rule vs. Reversal Strategy", u.ascii.MAGENTA)
+        u.ascii.puts(
+            pd.crosstab(
+                self.features_and_labels["manual_rule"],
+                self.features_and_labels["reverse_percentile_id"],
+                normalize="columns",
+            ).to_string(),
+            u.ascii.MAGENTA,
+        )
+
+        u.ascii.puts("Reverse Percentile x Body-Wick Ratio Groupings", u.ascii.MAGENTA)
+        u.ascii.puts(
+            self.features_and_labels.groupby("reverse_percentile_id")[
+                "warm_up_body_to_wick_ratio"
+            ]
+            .describe()
+            .to_string(),
+            u.ascii.MAGENTA,
+        )
+
+        reverse_percentile_id_1_group = self.features_and_labels[
+            self.features_and_labels["reverse_percentile_id"] == 1
+        ]["warm_up_body_to_wick_ratio"]
+
+        reverse_percentile_id_2_group = self.features_and_labels[
+            self.features_and_labels["reverse_percentile_id"] == 2
+        ]["warm_up_body_to_wick_ratio"]
+
+        t_stat, p_value = stats.ttest_ind(
+            reverse_percentile_id_1_group, reverse_percentile_id_2_group
+        )
+
+        u.ascii.puts(f"Reverse Percentile P-Value: {p_value}", u.ascii.MAGENTA)
 
     def __evaluate_model(self):
         u.ascii.puts("ℹ  Evaluating model.", u.ascii.CYAN)
