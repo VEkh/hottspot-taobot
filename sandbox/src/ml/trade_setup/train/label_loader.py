@@ -9,10 +9,12 @@ class LabelLoader:
         self,
         db_conn=None,
         features=pd.DataFrame(),
+        stop_profit_id=1,
     ):
         self.db_conn = db_conn
         self.features = features
         self.labels = pd.DataFrame()
+        self.stop_profit_id = stop_profit_id
 
     def filter_sparse_classes(self, min_percentage=0.05):
         u.ascii.puts("ℹ  Filtering Sparse Label Classes", u.ascii.CYAN)
@@ -60,14 +62,19 @@ class LabelLoader:
                     trade_setups.reverse_percentile_id,
                     trade_setups.stop_profit_id,
                     market_session_performances.trade_setup_id,
-                    row_number() over (partition by market_session_performances.market_session_id order by market_session_performances.profit_loss_percent desc,
-                      trade_setups.priority asc) as rn
+                    row_number() over (
+                        partition by market_session_performances.market_session_id
+                        order by
+                            market_session_performances.profit_loss_percent desc,
+                            trade_setups.priority asc
+                    ) as rn
                   from
                     market_sessions
                     join market_session_performances on market_session_performances.market_session_id = market_sessions.id
                     join trade_setups on trade_setups.id = market_session_performances.trade_setup_id
                   where
                     market_sessions.id = any(%(market_session_ids)s)
+                    and trade_setups.stop_profit_id = %(stop_profit_id)s
                 )
                 select
                   market_session_id,
@@ -82,7 +89,13 @@ class LabelLoader:
                   open_period asc
             """
 
-            cursor.execute(query, {"market_session_ids": market_session_ids})
+            cursor.execute(
+                query,
+                {
+                    "market_session_ids": market_session_ids,
+                    "stop_profit_id": self.stop_profit_id,
+                },
+            )
 
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()

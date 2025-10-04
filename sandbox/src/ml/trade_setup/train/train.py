@@ -72,10 +72,13 @@ class Train:
 
         self.features = self.feature_loader.load()
         self.label_loader.features = self.features
+        self.label_loader.stop_profit_id = 1
 
         self.labels = self.label_loader.load()
-        self.label_loader.filter_sparse_classes(min_percentage=0.1)
-        self.labels = self.label_loader.labels
+
+        # TODO: Decide
+        # self.label_loader.filter_sparse_classes(min_percentage=0.1)
+        # self.labels = self.label_loader.labels
 
         self.__merge_features_and_labels()
         self.__analyze_features()  # TODO: Delete
@@ -87,43 +90,112 @@ class Train:
         self.__save_model()
 
     def __analyze_features(self):
-        self.features_and_labels["manual_rule"] = (
-            self.features_and_labels["warm_up_body_to_wick_ratio"] > 1.0
+        threshold = 1.0
+        print(f"Dataset size after merge: {len(self.features_and_labels)}")
+
+        # Apply the manual rule (note: your code used < for CONSOLIDATION → reverse_id=2)
+        self.features_and_labels["manual_rule_prediction"] = self.features_and_labels[
+            "warm_up_body_to_wick_ratio"
+        ].apply(lambda x: 2 if x < threshold else 1)
+
+        # Calculate accuracy
+        accuracy = (
+            self.features_and_labels["manual_rule_prediction"]
+            == self.features_and_labels["reverse_percentile_id"]
+        ).mean()
+
+        print(f"\n{'='*60}")
+        print(f"MANUAL RULE VALIDATION (threshold = {threshold})")
+        print(f"{'='*60}")
+        print(f"Rule accuracy: {accuracy:.2%}")
+
+        # Show label distribution
+        print(f"\nActual label distribution:")
+        print(self.features_and_labels["reverse_percentile_id"].value_counts())
+        print(f"\nActual label distribution (%):")
+        print(
+            self.features_and_labels["reverse_percentile_id"].value_counts(
+                normalize=True
+            )
         )
 
-        u.ascii.puts("Manual Rule vs. Reversal Strategy", u.ascii.MAGENTA)
-        u.ascii.puts(
-            pd.crosstab(
-                self.features_and_labels["manual_rule"],
-                self.features_and_labels["reverse_percentile_id"],
-                normalize="columns",
-            ).to_string(),
-            u.ascii.MAGENTA,
+        print(f"\nConfusion Matrix:")
+        confusion = pd.crosstab(
+            self.features_and_labels["manual_rule_prediction"],
+            self.features_and_labels["reverse_percentile_id"],
+            rownames=["Predicted (Manual Rule)"],
+            colnames=["Actual (Best Performer)"],
+            margins=True,
         )
+        print(confusion)
 
-        u.ascii.puts("Reverse Percentile x Body-Wick Ratio Groupings", u.ascii.MAGENTA)
-        u.ascii.puts(
-            self.features_and_labels.groupby("reverse_percentile_id")[
-                "warm_up_body_to_wick_ratio"
+        # Crosstab with normalization by columns
+        print(f"\nNormalized by actual label (columns):")
+        confusion_norm = pd.crosstab(
+            self.features_and_labels["manual_rule_prediction"],
+            self.features_and_labels["reverse_percentile_id"],
+            normalize="columns",
+        )
+        print(confusion_norm)
+
+        # Distribution statistics by label
+        print(f"\nBody-to-wick ratio statistics by reversal strategy:")
+        stats_by_label = self.features_and_labels.groupby("reverse_percentile_id")[
+            "warm_up_body_to_wick_ratio"
+        ].agg(
+            [
+                "count",
+                "mean",
+                "std",
+                "min",
+                ("25%", lambda x: x.quantile(0.25)),
+                ("50%", lambda x: x.quantile(0.50)),
+                ("75%", lambda x: x.quantile(0.75)),
+                "max",
             ]
-            .describe()
-            .to_string(),
-            u.ascii.MAGENTA,
         )
+        print(stats_by_label)
 
-        reverse_percentile_id_1_group = self.features_and_labels[
+        # Statistical significance test
+        group1 = self.features_and_labels[
             self.features_and_labels["reverse_percentile_id"] == 1
         ]["warm_up_body_to_wick_ratio"]
-
-        reverse_percentile_id_2_group = self.features_and_labels[
+        group2 = self.features_and_labels[
             self.features_and_labels["reverse_percentile_id"] == 2
         ]["warm_up_body_to_wick_ratio"]
 
-        t_stat, p_value = stats.ttest_ind(
-            reverse_percentile_id_1_group, reverse_percentile_id_2_group
-        )
+        t_stat, p_value = stats.ttest_ind(group1, group2)
+        print(f"\nStatistical significance test:")
+        print(f"T-statistic: {t_stat:.4f}")
+        print(f"P-value: {p_value:.4f}")
 
-        u.ascii.puts(f"Reverse Percentile P-Value: {p_value}", u.ascii.MAGENTA)
+        if p_value < 0.05:
+            print("✓ Statistically significant relationship detected!")
+        else:
+            print("✗ No statistically significant relationship")
+
+        # Try different thresholds
+        print(f"\n{'='*60}")
+        print("TESTING ALTERNATIVE THRESHOLDS")
+        print(f"{'='*60}")
+
+        thresholds_to_test = [0.5, 0.8, 1.0, 1.5, 2.0]
+        results = []
+
+        for test_threshold in thresholds_to_test:
+            test_pred = self.features_and_labels["warm_up_body_to_wick_ratio"].apply(
+                lambda x: 2 if x < test_threshold else 1
+            )
+            test_accuracy = (
+                test_pred == self.features_and_labels["reverse_percentile_id"]
+            ).mean()
+            results.append(
+                {"threshold": test_threshold, "accuracy": f"{test_accuracy:.2%}"}
+            )
+
+        print(pd.DataFrame(results).to_string(index=False))
+
+        return accuracy
 
     def __evaluate_model(self):
         u.ascii.puts("ℹ  Evaluating model.", u.ascii.CYAN)
