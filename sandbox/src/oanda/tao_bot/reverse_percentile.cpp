@@ -30,6 +30,16 @@ double Oanda::TaoBot::reverse_percentile() {
     return id_map[1];
   }
 
+  // TODO: Delete
+  if (reverse_percentile_id == 3) {
+    return this->warm_up_candle.body_wick_ratio() > 1.0 ? id_map[1] : id_map[2];
+  }
+
+  // TODO: Delete
+  if (reverse_percentile_id == 4) {
+    return this->warm_up_candle.body_wick_ratio() > 0.5 ? id_map[1] : id_map[2];
+  }
+
   return id_map[reverse_percentile_id];
 }
 
