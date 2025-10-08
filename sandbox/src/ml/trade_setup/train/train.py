@@ -81,10 +81,10 @@ class Train:
         # self.labels = self.label_loader.labels
 
         self.__merge_features_and_labels()
-        self.__analyze_features()  # TODO: Delete
+        # self.__analyze_features()  # TODO: Delete
         self.__prepare_data()
         self.__set_class_weights()
-        self.__train_xgboost_model()
+        self.__train_single_class_xgboost_model()
         self.__evaluate_model()
         self.__time_series_validation(n_splits=5)
         self.__save_model()
@@ -267,7 +267,7 @@ class Train:
     def __prepare_data(self):
         u.ascii.puts("ℹ  Prepare data for model.", u.ascii.CYAN)
 
-        target_column = "trade_setup_id"
+        target_column = "reverse_percentile_id"
 
         self.X = self.features_and_labels[self.feature_loader.columns]
         self.y = self.features_and_labels[target_column]
@@ -370,7 +370,7 @@ class Train:
         )
         u.ascii.puts("🎉 Finished time series cross validation.", u.ascii.GREEN)
 
-    def __train_xgboost_model(self):
+    def __train_multi_class_xgboost_model(self):
         u.ascii.puts("ℹ  Training XGBoost model.", u.ascii.CYAN)
 
         self.model = xgb.XGBClassifier(
@@ -382,6 +382,38 @@ class Train:
             min_child_weight=3,
             n_estimators=1000,
             objective="multi:softprob",
+            random_state=42,
+            reg_alpha=0.1,
+            reg_lambda=1.0,
+            subsample=0.8,
+        )
+
+        sample_weights = np.array(
+            [self.class_weight_dict[label] for label in self.y_train]
+        )
+
+        self.model.fit(
+            self.X_train,
+            self.y_train,
+            eval_set=[(self.X_val, self.y_val)],
+            sample_weight=sample_weights,
+            verbose=True,
+        )
+
+        u.ascii.puts("🎉 Finished training XGBClassifier model.", u.ascii.GREEN)
+
+    def __train_single_class_xgboost_model(self):
+        u.ascii.puts("ℹ  Training XGBoost model.", u.ascii.CYAN)
+
+        self.model = xgb.XGBClassifier(
+            colsample_bytree=0.8,
+            early_stopping_rounds=50,
+            eval_metric="logloss",
+            learning_rate=0.1,
+            max_depth=4,
+            min_child_weight=3,
+            n_estimators=1000,
+            objective="binary:logistic",
             random_state=42,
             reg_alpha=0.1,
             reg_lambda=1.0,
