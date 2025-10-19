@@ -1,37 +1,39 @@
 #ifndef OANDA__TAO_BOT_watch
 #define OANDA__TAO_BOT_watch
 
-#include "advance_current_epoch.cpp"            // advance_current_epoch
-#include "build_day_candle.cpp"                 // build_day_candle
-#include "build_reversals.cpp"                  // build_reversals
-#include "build_spike_candles.cpp"              // build_spike_candles
-#include "clear_stale_open_order.cpp"           // clear_stale_open_order
-#include "close_position.cpp"                   // close_position
-#include "lib/utils/io.cpp"                     // ::utils::io
-#include "log_account_snapshot.cpp"             // log_account_snapshot
-#include "log_end_of_trading_period.cpp"        // log_end_of_trading_period
-#include "log_env_symbols.cpp"                  // log_env_symbols
-#include "log_performance.cpp"                  // log_performance
-#include "log_position.cpp"                     // log_position
-#include "log_position_results.cpp"             // log_position_results
-#include "log_price_action.cpp"                 // log_price_action
-#include "log_quote.cpp"                        // log_quote
-#include "log_reversal_metadata.cpp"            // log_reversal_metadata
-#include "log_reversals.cpp"                    // log_reversals
-#include "log_spike_candles.cpp"                // log_spike_candles
-#include "log_timestamps.cpp"                   // log_timestamps
-#include "open_and_persist_position.cpp"        // open_and_persist_position
-#include "read_candles.cpp"                     // read_candles
-#include "read_quotes.cpp"                      // read_quotes
-#include "reset_backtest.cpp"                   // reset_backtest
-#include "reset_position.cpp"                   // reset_position
-#include "set_close_order_prices.cpp"           // set_close_order_prices
-#include "set_current_trend.cpp"                // set_current_trend
-#include "set_open_order_prices.cpp"            // set_open_order_prices
-#include "set_position_status.cpp"              // set_order_statuses
-#include "should_terminate.cpp"                 // should_terminate
-#include "tao_bot.h"                            // Oanda::TaoBot
-#include "update_account_snapshot.cpp"          // update_account_snapshot
+#include "advance_current_epoch.cpp"          // advance_current_epoch
+#include "build_day_candle.cpp"               // build_day_candle
+#include "build_reversals.cpp"                // build_reversals
+#include "build_spike_candles.cpp"            // build_spike_candles
+#include "clear_stale_open_order.cpp"         // clear_stale_open_order
+#include "close_position.cpp"                 // close_position
+#include "lib/utils/io.cpp"                   // ::utils::io
+#include "log_account_snapshot.cpp"           // log_account_snapshot
+#include "log_end_of_trading_period.cpp"      // log_end_of_trading_period
+#include "log_env_symbols.cpp"                // log_env_symbols
+#include "log_market_session_performance.cpp" // log_market_session_performance
+#include "log_performance.cpp"                // log_performance
+#include "log_position.cpp"                   // log_position
+#include "log_position_results.cpp"           // log_position_results
+#include "log_price_action.cpp"               // log_price_action
+#include "log_quote.cpp"                      // log_quote
+#include "log_reversal_metadata.cpp"          // log_reversal_metadata
+#include "log_reversals.cpp"                  // log_reversals
+#include "log_spike_candles.cpp"              // log_spike_candles
+#include "log_timestamps.cpp"                 // log_timestamps
+#include "open_and_persist_position.cpp"      // open_and_persist_position
+#include "read_candles.cpp"                   // read_candles
+#include "read_quotes.cpp"                    // read_quotes
+#include "reset_backtest.cpp"                 // reset_backtest
+#include "reset_position.cpp"                 // reset_position
+#include "set_close_order_prices.cpp"         // set_close_order_prices
+#include "set_current_trend.cpp"              // set_current_trend
+#include "set_open_order_prices.cpp"          // set_open_order_prices
+#include "set_position_status.cpp"            // set_order_statuses
+#include "should_terminate.cpp"               // should_terminate
+#include "tao_bot.h"                          // Oanda::TaoBot
+#include "update_account_snapshot.cpp"        // update_account_snapshot
+#include "update_market_session_performance.cpp" // update_market_session_performance
 #include "write_market_session_performance.cpp" // write_market_session_performance
 #include <iostream>                             // std::cout, std::flush
 #include <unistd.h>                             // usleep
@@ -64,6 +66,7 @@ void Oanda::TaoBot::watch() {
         log_env_symbols();
         log_quote();
         log_price_action();
+        log_market_session_performance();
         log_spike_candles();
         log_reversals(this->reversals);
         log_reversal_metadata();
@@ -75,6 +78,7 @@ void Oanda::TaoBot::watch() {
       clear_stale_open_order();
       open_and_persist_position();
       set_open_order_prices();
+      update_market_session_performance();
 
       close_position();
       set_close_order_prices();

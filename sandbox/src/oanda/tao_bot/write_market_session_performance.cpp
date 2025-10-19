@@ -8,17 +8,17 @@ void Oanda::TaoBot::write_market_session_performance() {
     return;
   }
 
-  const double initial_equity = this->account_snapshot.original_equity;
-  const double current_equity = this->account_snapshot.equity;
-  const double profit_loss_percent =
-      ((current_equity - initial_equity) / initial_equity) * 100.0;
-
   this->db_market_session_performance.upsert({
       .debug = this->api_client.config.debug_sql,
       .env = this->api_client.load_env().dump(),
-      .market_session_id = this->market_session.id,
-      .profit_loss_percent = profit_loss_percent,
-      .trade_setup_id = this->trade_setup.id,
+      .market_session_id = this->market_session_performance.market_session_id,
+      .max_drawdown_percent =
+          this->market_session_performance.max_drawdown_percent,
+      .profit_loss_percent =
+          this->market_session_performance.profit_loss_percent,
+      .time_to_max_drawdown_seconds =
+          this->market_session_performance.time_to_max_drawdown_seconds,
+      .trade_setup_id = this->market_session_performance.trade_setup_id,
   });
 }
 

@@ -58,7 +58,9 @@ class LabelLoader:
                   select
                     market_sessions.open_period,
                     market_session_performances.market_session_id,
+                    market_session_performances.max_drawdown_percent,
                     market_session_performances.profit_loss_percent,
+                    market_session_performances.time_to_max_drawdown_seconds,
                     trade_setups.reverse_percentile_id,
                     trade_setups.stop_profit_id,
                     market_session_performances.trade_setup_id,

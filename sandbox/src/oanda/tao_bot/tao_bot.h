@@ -41,6 +41,8 @@ private:
   using db_position_t = DB::Position::position_t;
   using exit_prices_t = Global::t::exit_prices_t;
   using margin_rate_t = DB::MarginRate::margin_rate_t;
+  using market_session_performance_t =
+      DB::MarketSessionPerformance::market_session_performance_t;
   using market_session_stats_t = DB::MarketSession::market_session_stats_t;
   using market_session_t = DB::MarketSession::market_session_t;
   using order_action_t = Oanda::t::order_action_t;
@@ -134,6 +136,7 @@ private:
   currency_t currency;
   double current_epoch = time(nullptr);
   margin_rate_t margin_rate;
+  market_session_performance_t market_session_performance;
   market_session_stats_t market_session_stats;
   market_session_t market_session;
   order_t *close_order_ptr = nullptr;
@@ -250,6 +253,7 @@ private:
   void log_account_snapshot();
   void log_end_of_trading_period();
   void log_env_symbols();
+  void log_market_session_performance();
   void log_performance();
   void log_position();
   void log_position_results();
@@ -280,6 +284,7 @@ private:
   void toggle_is_trending(const order_t &);
   void update_account_snapshot(const update_account_snapshot_args_t);
   void update_margin_rate();
+  void update_market_session_performance();
   void watch();
   void write_close_position();
   void write_market_session_performance();
