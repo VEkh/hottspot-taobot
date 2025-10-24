@@ -1,9 +1,12 @@
+from .asymmetric_loss_model import AsymmetricLossModel
 from .feature_loader import FeatureLoader
 from .label_loader import LabelLoader
+from .risk_weighted_labeler import RiskWeightedLabeler
+from .weighted_model import WeightedModel
 from pathlib import Path
 from scipy import stats
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
-from sklearn.model_selection import TimeSeriesSplit
+from sklearn.model_selection import TimeSeriesSplit, train_test_split
 from sklearn.utils.class_weight import compute_class_weight
 import matplotlib.pyplot as plt
 import ml.utils as u
@@ -27,21 +30,23 @@ class Train:
         self.X_train = pd.DataFrame()
         self.X_val = pd.DataFrame()
         self.class_weight_dict = {}
+        self.confidence_scores = pd.DataFrame()
+        self.confidence_test = pd.DataFrame()
+        self.confidence_train = pd.DataFrame()
+        self.confidence_val = pd.DataFrame()
         self.db_conn = db_conn
         self.features = []
-        self.features_and_labels = pd.DataFrame()
+        self.training_data = pd.DataFrame()
         self.label_mapping = {}
         self.labels = []
         self.market_session_duration_seconds = market_session_duration_seconds
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
-        self.model = None
         self.reverse_label_mapping = {}
         self.symbol = symbol
         self.y = pd.DataFrame()
         self.y_class_mapped = pd.DataFrame()
-        self.y_predictions = None
         self.y_test = pd.DataFrame()
         self.y_train = pd.DataFrame()
         self.y_val = pd.DataFrame()
@@ -56,6 +61,11 @@ class Train:
         self.label_loader = LabelLoader(
             db_conn=self.db_conn,
             features=self.features,
+        )
+
+        self.risk_weighted_labeler = RiskWeightedLabeler(
+            catastrophic_loss_percentile=5.0,
+            max_drawdown_weight=2.0,
         )
 
     def run(self):
@@ -74,7 +84,10 @@ class Train:
         self.label_loader.features = self.features
         self.label_loader.stop_profit_id = 1
 
-        self.labels = self.label_loader.load()
+        self.label_loader.load()
+        self.labels = self.risk_weighted_labeler.generate_labels(
+            self.label_loader.labels
+        )
 
         # TODO: Decide
         # self.label_loader.filter_sparse_classes(min_percentage=0.1)
@@ -83,25 +96,50 @@ class Train:
         self.__merge_features_and_labels()
         # self.__analyze_features()  # TODO: Delete
         self.__prepare_data()
-        self.__set_class_weights()
-        self.__train_single_class_xgboost_model()
-        self.__evaluate_model()
+        profit_loss_data = self.training_data.iloc[self.X_test.index][
+            ["profit_loss_percent_1", "profit_loss_percent_2"]
+        ]
+
+        class_weighted_model_class = self.__train_class_weighted_model()
+        self.__evaluate_model(class_weighted_model_class)
+        self.__calculate_trading_metrics(
+            profit_loss_data=profit_loss_data,
+            y_predictions=class_weighted_model_class.predictions,
+            y_true=self.y_test,
+        )
+
+        confidence_weighted_model_class = self.__train_confidence_weighted_model()
+        self.__evaluate_model(confidence_weighted_model_class)
+        self.__calculate_trading_metrics(
+            profit_loss_data=profit_loss_data,
+            y_predictions=confidence_weighted_model_class.predictions,
+            y_true=self.y_test,
+        )
+
+        asymmetric_loss_model_class = self.__train_asymmetric_loss_model()
+        self.__evaluate_model(asymmetric_loss_model_class)
+        self.__calculate_trading_metrics(
+            profit_loss_data=profit_loss_data,
+            y_predictions=asymmetric_loss_model_class.predictions,
+            y_true=self.y_test,
+        )
+
         self.__time_series_validation(n_splits=5)
-        self.__save_model()
+        # self.__save_model()
 
     def __analyze_features(self):
         threshold = 1.0
-        print(f"Dataset size after merge: {len(self.features_and_labels)}")
+        print(f"Dataset size after merge: {len(self.training_data)}")
 
         # Apply the manual rule (note: your code used < for CONSOLIDATION → reverse_id=2)
-        self.features_and_labels["manual_rule_prediction"] = self.features_and_labels[
+        self.training_data["manual_rule_prediction"] = self.training_data[
             "warm_up_body_to_wick_ratio"
         ].apply(lambda x: 2 if x < threshold else 1)
 
         # Calculate accuracy
         accuracy = (
-            self.features_and_labels["manual_rule_prediction"]
-            == self.features_and_labels["reverse_percentile_id"]
+            self.training_data["manual_rule_prediction"]
+            == self.training_data["reverse_percentile_id"]
         ).mean()
 
         print(f"\n{'='*60}")
@@ -111,18 +149,14 @@ class Train:
 
         # Show label distribution
         print(f"\nActual label distribution:")
-        print(self.features_and_labels["reverse_percentile_id"].value_counts())
+        print(self.training_data["reverse_percentile_id"].value_counts())
         print(f"\nActual label distribution (%):")
-        print(
-            self.features_and_labels["reverse_percentile_id"].value_counts(
-                normalize=True
-            )
-        )
+        print(self.training_data["reverse_percentile_id"].value_counts(normalize=True))
 
         print(f"\nConfusion Matrix:")
         confusion = pd.crosstab(
-            self.features_and_labels["manual_rule_prediction"],
-            self.features_and_labels["reverse_percentile_id"],
+            self.training_data["manual_rule_prediction"],
+            self.training_data["reverse_percentile_id"],
             rownames=["Predicted (Manual Rule)"],
             colnames=["Actual (Best Performer)"],
             margins=True,
@@ -132,15 +166,15 @@ class Train:
         # Crosstab with normalization by columns
         print(f"\nNormalized by actual label (columns):")
         confusion_norm = pd.crosstab(
-            self.features_and_labels["manual_rule_prediction"],
-            self.features_and_labels["reverse_percentile_id"],
+            self.training_data["manual_rule_prediction"],
+            self.training_data["reverse_percentile_id"],
             normalize="columns",
         )
         print(confusion_norm)
 
         # Distribution statistics by label
         print(f"\nBody-to-wick ratio statistics by reversal strategy:")
-        stats_by_label = self.features_and_labels.groupby("reverse_percentile_id")[
+        stats_by_label = self.training_data.groupby("reverse_percentile_id")[
             "warm_up_body_to_wick_ratio"
         ].agg(
             [
@@ -157,12 +191,12 @@ class Train:
         print(stats_by_label)
 
         # Statistical significance test
-        group1 = self.features_and_labels[
-            self.features_and_labels["reverse_percentile_id"] == 1
-        ]["warm_up_body_to_wick_ratio"]
-        group2 = self.features_and_labels[
-            self.features_and_labels["reverse_percentile_id"] == 2
-        ]["warm_up_body_to_wick_ratio"]
+        group1 = self.training_data[self.training_data["reverse_percentile_id"] == 1][
+            "warm_up_body_to_wick_ratio"
+        ]
+        group2 = self.training_data[self.training_data["reverse_percentile_id"] == 2][
+            "warm_up_body_to_wick_ratio"
+        ]
 
         t_stat, p_value = stats.ttest_ind(group1, group2)
         print(f"\nStatistical significance test:")
@@ -183,11 +217,11 @@ class Train:
         results = []
 
         for test_threshold in thresholds_to_test:
-            test_pred = self.features_and_labels["warm_up_body_to_wick_ratio"].apply(
+            test_pred = self.training_data["warm_up_body_to_wick_ratio"].apply(
                 lambda x: 2 if x < test_threshold else 1
             )
             test_accuracy = (
-                test_pred == self.features_and_labels["reverse_percentile_id"]
+                test_pred == self.training_data["reverse_percentile_id"]
             ).mean()
             results.append(
                 {"threshold": test_threshold, "accuracy": f"{test_accuracy:.2%}"}
@@ -197,80 +231,201 @@ class Train:
 
         return accuracy
 
-    def __evaluate_model(self):
-        u.ascii.puts("ℹ  Evaluating model.", u.ascii.CYAN)
+    def __calculate_trading_metrics(
+        self,
+        profit_loss_data=pd.DataFrame(),
+        y_predictions=pd.DataFrame(),
+        y_true=pd.DataFrame(),
+    ):
+        unmapped_y_predictions = (
+            pd.Series(y_predictions, name="unmapped_y_predictions")
+            .map(self.reverse_label_mapping)
+            .to_numpy(dtype=int)
+        )
 
-        if not self.model:
-            return
+        unmapped_y_true = (
+            pd.Series(y_true, name="unmapped_y_true")
+            .map(self.reverse_label_mapping)
+            .to_numpy(dtype=int)
+        )
 
-        self.y_predictions = self.model.predict(self.X_test)
-        y_predictions_probability = self.model.predict_proba(self.X_test)
+        actual_profit_losses = []
+        predicted_profit_losses = []
 
-        if self.reverse_label_mapping:
-            self.y_test = self.y_test.map(self.reverse_label_mapping)
-            self.y_predictions = pd.Series(self.y_predictions).map(
-                self.reverse_label_mapping
+        for i in range(len(unmapped_y_true)):
+            session_data = profit_loss_data.iloc[i]
+
+            # P&L if we followed true best strategy
+            true_strategy = unmapped_y_true[i]
+            actual_profit_losses.append(
+                session_data[f"profit_loss_percent_{true_strategy}"]
             )
 
+            # P&L if we followed predicted strategy
+            predicted_strategy = unmapped_y_predictions[i]
+            predicted_profit_losses.append(
+                session_data[f"profit_loss_percent_{predicted_strategy}"]
+            )
+
+        cumulative_actual = np.cumsum(actual_profit_losses)
+        cumulative_predicted = np.cumsum(predicted_profit_losses)
+
+        total_return_actual = sum(actual_profit_losses)
+        total_return_predicted = sum(predicted_profit_losses)
+
+        running_max_predicted = np.maximum.accumulate(cumulative_predicted)
+        drawdown_predicted = running_max_predicted - cumulative_predicted
+        max_drawdown_predicted = (
+            np.max(drawdown_predicted) if len(drawdown_predicted) > 0 else 0
+        )
+
+        # Sharpe ratio (annualized, assuming weekly data)
+        if len(predicted_profit_losses) > 1:
+            returns_std = np.std(predicted_profit_losses)
+
+            if returns_std > 0:
+                sharpe_predicted = (
+                    np.mean(predicted_profit_losses) / returns_std
+                ) * np.sqrt(52)
+            else:
+                sharpe_predicted = 0
+        else:
+            sharpe_predicted = 0
+
+        u.ascii.puts("=" * 60, u.ascii.MAGENTA, print_end="")
+        u.ascii.puts("TRADING PERFORMANCE METRICS", u.ascii.MAGENTA, print_end="")
+        u.ascii.puts("=" * 60, u.ascii.MAGENTA, print_end="")
         u.ascii.puts(
-            f"Accuracy: {accuracy_score(self.y_test, self.y_predictions):.4f}",
+            f"Optimal Strategy Return: ${total_return_actual:,.2f}",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(
+            f"Model Strategy Return: ${total_return_predicted:,.2f}",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(
+            f"Return Capture: {(total_return_predicted/total_return_actual)*100:.1f}%",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(
+            f"Max Drawdown: ${max_drawdown_predicted:,.2f}",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(
+            f"Sharpe Ratio: {sharpe_predicted:.3f}", u.ascii.MAGENTA, print_end=""
+        )
+        u.ascii.puts("=" * 60, u.ascii.MAGENTA)
+
+    def __evaluate_model(self, model_class=None):
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts("💡  Evaluating model", u.ascii.CYAN, print_end="")
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
+
+        if model_class is None:
+            u.ascii.puts(
+                "！ Failed to evaluate model. model_class is empty",
+                u.ascii.RED,
+            )
+
+            return
+
+        model = model_class.model
+
+        if model is None:
+            u.ascii.puts(
+                "！ Failed to evaluate model. model is empty",
+                u.ascii.RED,
+            )
+
+            return
+
+        y_predictions = model_class.predict(self.X_test)
+        y_test = self.y_test
+
+        if self.reverse_label_mapping:
+            y_test = y_test.map(self.reverse_label_mapping)
+            y_predictions = pd.Series(y_predictions).map(self.reverse_label_mapping)
+
+        u.ascii.puts(
+            f"Accuracy: {accuracy_score(y_test, y_predictions):.4f}",
             u.ascii.MAGENTA,
         )
 
         u.ascii.puts("Classification Report:", u.ascii.MAGENTA)
         u.ascii.puts(
-            classification_report(self.y_test, self.y_predictions, zero_division=0),
+            classification_report(y_test, y_predictions, zero_division=0),
             u.ascii.MAGENTA,
         )
 
         u.ascii.puts("Confusion Matrix:", u.ascii.MAGENTA)
-        u.ascii.puts(
-            str(confusion_matrix(self.y_test, self.y_predictions)), u.ascii.MAGENTA
-        )
+        u.ascii.puts(str(confusion_matrix(y_test, y_predictions)), u.ascii.MAGENTA)
 
-        importance = self.model.feature_importances_
-        importance_df = pd.DataFrame(
-            {
-                "feature": self.feature_loader.columns,
-                "importance": importance,
-            }
-        ).sort_values("importance", ascending=False)
+        if hasattr(model, "feature_importances_"):
+            importance = model.feature_importances_
+            importance_df = pd.DataFrame(
+                {
+                    "feature": self.feature_loader.columns,
+                    "importance": importance,
+                }
+            ).sort_values("importance", ascending=False)
 
-        u.ascii.puts("Feature Importance:", u.ascii.MAGENTA)
-        u.ascii.puts(importance_df.to_string(), u.ascii.MAGENTA)
+            u.ascii.puts("Feature Importance:", u.ascii.MAGENTA)
+            u.ascii.puts(importance_df.to_string(), u.ascii.MAGENTA)
 
-        plt.figure(figsize=(10, 6))
-        plt.barh(importance_df["feature"], importance_df["importance"])
-        plt.title("Feature Importance")
-        plt.xlabel("Importance Score")
-        plt.tight_layout()
-        plt.savefig(
-            f"tmp/{self.symbol}_feature_importance.png", dpi=300, bbox_inches="tight"
-        )
+            plt.figure(figsize=(10, 6))
+            plt.barh(importance_df["feature"], importance_df["importance"])
+            plt.title("Feature Importance")
+            plt.xlabel("Importance Score")
+            plt.tight_layout()
+            plt.savefig(
+                f"tmp/{self.symbol}_feature_importance.png",
+                dpi=300,
+                bbox_inches="tight",
+            )
 
-        u.ascii.puts("🎉 Finished evaluating model", u.ascii.GREEN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
+        u.ascii.puts("🎉 Finished evaluating model", u.ascii.GREEN, print_end="")
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
     def __merge_features_and_labels(self):
-        u.ascii.puts("ℹ  Merging features and labels.", u.ascii.CYAN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "💡  Merging features and labels into training data.",
+            u.ascii.CYAN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
-        self.features_and_labels = pd.merge(
+        self.training_data = pd.merge(
             self.features,
             self.labels,
             how="inner",
             on="market_session_id",
         )
 
-        u.ascii.puts(self.features_and_labels[:10].to_string(), u.ascii.YELLOW)
+        u.ascii.puts(self.training_data[:10].to_string(), u.ascii.YELLOW)
         u.ascii.puts("...", u.ascii.YELLOW)
-        u.ascii.puts("🎉 Finished merging features and labels.", u.ascii.GREEN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
+        u.ascii.puts(
+            "🎉 Finished merging features and labels into training data.",
+            u.ascii.GREEN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
     def __prepare_data(self):
-        u.ascii.puts("ℹ  Prepare data for model.", u.ascii.CYAN)
+        u.ascii.puts("💡  Prepare data for model.", u.ascii.CYAN)
 
         target_column = "reverse_percentile_id"
 
-        self.X = self.features_and_labels[self.feature_loader.columns]
-        self.y = self.features_and_labels[target_column]
+        self.X = self.training_data[self.feature_loader.columns]
+        self.y = self.training_data[target_column]
+
+        self.__set_confidence_scores()
 
         unique_labels = sorted(self.y.unique())
 
@@ -281,44 +436,76 @@ class Train:
 
         self.y_class_mapped = self.y.map(self.label_mapping)
 
-        # Split data (important: use temporal split for trading data)
-        # For time series data, don't shuffle!
-        split_index = int(0.7 * len(self.X))
-        val_split_index = int(0.85 * len(self.X))
+        X_train, X_temp, y_train, y_temp, confidence_train, confidence_temp = (
+            train_test_split(
+                self.X,
+                self.y_class_mapped,
+                self.confidence_scores,
+                random_state=42,
+                shuffle=False,  # Don't shuffle time series!
+                test_size=0.3,
+            )
+        )
 
-        self.X_test = self.X.iloc[val_split_index:]
-        self.X_train = self.X.iloc[:split_index]
-        self.X_val = self.X.iloc[split_index:val_split_index]
-        self.y_test = self.y_class_mapped.iloc[val_split_index:]
-        self.y_train = self.y_class_mapped.iloc[:split_index]
-        self.y_val = self.y_class_mapped.iloc[split_index:val_split_index]
+        self.X_train = X_train
+        self.confidence_train = confidence_train
+        self.y_train = y_train
+
+        X_val, X_test, y_val, y_test, confidence_val, confidence_test = (
+            train_test_split(
+                X_temp,
+                y_temp,
+                confidence_temp,
+                random_state=42,
+                shuffle=False,
+                test_size=0.5,  # 0.5 of 0.3 = 0.15 each
+            )
+        )
+
+        self.X_test = X_test
+        self.X_val = X_val
+        self.confidence_test = confidence_test
+        self.confidence_val = confidence_val
+        self.y_test = y_test
+        self.y_val = y_val
 
         u.ascii.puts(
             f"Features Columns: {self.feature_loader.columns}", u.ascii.MAGENTA
         )
-        u.ascii.puts(f"X: {self.X.shape[0]} samples", u.ascii.MAGENTA)
-        u.ascii.puts(f"Training Set: {self.X_train.shape[0]} samples", u.ascii.MAGENTA)
-        u.ascii.puts(f"Validation Set: {self.X_val.shape[0]} samples", u.ascii.MAGENTA)
-        u.ascii.puts(f"Test Set: {self.X_test.shape[0]} samples", u.ascii.MAGENTA)
+        u.ascii.puts(f"X: {self.X.shape[0]} samples", u.ascii.MAGENTA, print_end="")
         u.ascii.puts(
-            f"Y Train Class Distribution:\n\n{self.y_train.value_counts(normalize=True)}",
+            f"Training Set: {self.X_train.shape[0]} samples",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(
+            f"Validation Set: {self.X_val.shape[0]} samples",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(f"Test Set: {self.X_test.shape[0]} samples", u.ascii.MAGENTA)
+
+        u.ascii.puts(
+            f"Y Train Class Distribution:\n{self.y_train.value_counts(normalize=True)}",
             u.ascii.MAGENTA,
         )
 
-    def __save_model(self):
-        u.ascii.puts("ℹ  Saving model.", u.ascii.CYAN)
+    def __save_model(self, model):
+        u.ascii.puts("💡  Saving model.", u.ascii.CYAN)
 
         ml_dir = Path(__file__).resolve().parent.parent.parent
         save_dir = os.path.join(ml_dir, "models", self.symbol)
         os.makedirs(save_dir, exist_ok=True)
 
         save_path = os.path.join(save_dir, "trade_setup_xgboost_model.json")
-        self.model.save_model(save_path)
+        model.save_model(save_path)
 
         u.ascii.puts(f"🎉 Model saved as {save_path}.", u.ascii.GREEN)
 
     def __set_class_weights(self):
-        u.ascii.puts("ℹ  Setting class weights.", u.ascii.CYAN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts("💡  Setting class weights.", u.ascii.CYAN, print_end="")
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
         classes = np.unique(self.y_train)
         class_weights = compute_class_weight(
@@ -329,13 +516,38 @@ class Train:
 
         self.class_weight_dict = dict(zip(classes, class_weights))
 
-        u.ascii.puts("Class Weights:", u.ascii.MAGENTA)
+        u.ascii.puts("Class Weights:", u.ascii.MAGENTA, print_end="")
         u.ascii.puts(f"{self.class_weight_dict}", u.ascii.MAGENTA)
 
-        u.ascii.puts(f"🎉 Finished setting class weights.", u.ascii.GREEN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
+        u.ascii.puts(f"🎉 Finished setting class weights.", u.ascii.GREEN, print_end="")
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
+
+    def __set_confidence_scores(self):
+        self.confidence_scores = self.training_data["confidence"].values
+
+        u.ascii.puts(f"Confidence Score Statistics:", u.ascii.MAGENTA, print_end="")
+        u.ascii.puts(
+            f"  Mean: {self.confidence_scores.mean():.3f}",
+            u.ascii.MAGENTA,
+            print_end="",
+        )
+        u.ascii.puts(
+            f"  Std: {self.confidence_scores.std():.3f}", u.ascii.MAGENTA, print_end=""
+        )
+        u.ascii.puts(
+            f"  Min: {self.confidence_scores.min():.3f}", u.ascii.MAGENTA, print_end=""
+        )
+        u.ascii.puts(f"  Max: {self.confidence_scores.max():.3f}", u.ascii.MAGENTA)
 
     def __time_series_validation(self, n_splits=5):
-        u.ascii.puts("ℹ  Using TimeSeriesSplit for temporal validation.", u.ascii.CYAN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "💡  Using TimeSeriesSplit for temporal validation.",
+            u.ascii.CYAN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
         time_series_cv = TimeSeriesSplit(n_splits)
         cross_validation_scores = []
@@ -368,68 +580,88 @@ class Train:
             f"Mean Cross Validation Score: {np.mean(cross_validation_scores):.4f} (+/- {(np.std(cross_validation_scores) * 2):.4f})",
             u.ascii.MAGENTA,
         )
-        u.ascii.puts("🎉 Finished time series cross validation.", u.ascii.GREEN)
-
-    def __train_multi_class_xgboost_model(self):
-        u.ascii.puts("ℹ  Training XGBoost model.", u.ascii.CYAN)
-
-        self.model = xgb.XGBClassifier(
-            colsample_bytree=0.8,
-            early_stopping_rounds=50,
-            eval_metric="mlogloss",
-            learning_rate=0.1,
-            max_depth=4,
-            min_child_weight=3,
-            n_estimators=1000,
-            objective="multi:softprob",
-            random_state=42,
-            reg_alpha=0.1,
-            reg_lambda=1.0,
-            subsample=0.8,
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
+        u.ascii.puts(
+            "🎉 Finished time series cross validation.", u.ascii.GREEN, print_end=""
         )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
+
+    def __train_asymmetric_loss_model(self):
+        model_class = AsymmetricLossModel(false_negative_weight=5.0)
+
+        model_class.train(
+            X_train=self.X_train,
+            X_val=self.X_val,
+            sample_weights=self.confidence_train,
+            y_train=self.y_train,
+            y_val=self.y_val,
+        )
+
+        return model_class
+
+    def __train_class_weighted_model(self):
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "💡  Training class-weighted XGBClassifier model.",
+            u.ascii.CYAN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
+
+        model_class = WeightedModel()
+
+        self.__set_class_weights()
 
         sample_weights = np.array(
             [self.class_weight_dict[label] for label in self.y_train]
         )
 
-        self.model.fit(
-            self.X_train,
-            self.y_train,
-            eval_set=[(self.X_val, self.y_val)],
-            sample_weight=sample_weights,
-            verbose=True,
+        model_class.train(
+            X_train=self.X_train,
+            X_val=self.X_val,
+            sample_weights=sample_weights,
+            y_train=self.y_train,
+            y_val=self.y_val,
         )
 
-        u.ascii.puts("🎉 Finished training XGBClassifier model.", u.ascii.GREEN)
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
+        u.ascii.puts(
+            "🎉 Finished training class-weighted XGBClassifier model.",
+            u.ascii.GREEN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-    def __train_single_class_xgboost_model(self):
-        u.ascii.puts("ℹ  Training XGBoost model.", u.ascii.CYAN)
+        return model_class
 
-        self.model = xgb.XGBClassifier(
-            colsample_bytree=0.8,
-            early_stopping_rounds=50,
-            eval_metric="logloss",
-            learning_rate=0.1,
-            max_depth=4,
-            min_child_weight=3,
-            n_estimators=1000,
-            objective="binary:logistic",
-            random_state=42,
-            reg_alpha=0.1,
-            reg_lambda=1.0,
-            subsample=0.8,
+    def __train_confidence_weighted_model(self):
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "💡  Training confidence-weighted XGBClassifier model.",
+            u.ascii.CYAN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
+
+        model_class = WeightedModel()
+
+        sample_weights = np.array(self.confidence_train)
+        sample_weights = sample_weights / sample_weights.mean()
+
+        model_class.train(
+            X_train=self.X_train,
+            X_val=self.X_val,
+            sample_weights=sample_weights,
+            y_train=self.y_train,
+            y_val=self.y_val,
         )
 
-        sample_weights = np.array(
-            [self.class_weight_dict[label] for label in self.y_train]
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
+        u.ascii.puts(
+            "🎉 Finished training confidence-weighted XGBClassifier model.",
+            u.ascii.GREEN,
+            print_end="",
         )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-        self.model.fit(
-            self.X_train,
-            self.y_train,
-            eval_set=[(self.X_val, self.y_val)],
-            sample_weight=sample_weights,
-            verbose=True,
-        )
-
-        u.ascii.puts("🎉 Finished training XGBClassifier model.", u.ascii.GREEN)
+        return model_class

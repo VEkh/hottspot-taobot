@@ -17,7 +17,7 @@ class LabelLoader:
         self.stop_profit_id = stop_profit_id
 
     def filter_sparse_classes(self, min_percentage=0.05):
-        u.ascii.puts("ℹ  Filtering Sparse Label Classes", u.ascii.CYAN)
+        u.ascii.puts("💡 Filtering Sparse Label Classes", u.ascii.CYAN)
 
         u.ascii.puts("Original Class Distribution:", u.ascii.MAGENTA)
         self.__print_label_distribution()
@@ -54,41 +54,36 @@ class LabelLoader:
 
         with self.db_conn.conn.cursor() as cursor:
             query = """
-                with session_performances as (
-                  select
-                    market_sessions.open_period,
-                    market_session_performances.market_session_id,
-                    market_session_performances.max_drawdown_percent,
-                    market_session_performances.profit_loss_percent,
-                    market_session_performances.time_to_max_drawdown_seconds,
-                    trade_setups.reverse_percentile_id,
-                    trade_setups.stop_profit_id,
-                    market_session_performances.trade_setup_id,
-                    row_number() over (
-                        partition by market_session_performances.market_session_id
-                        order by
-                            market_session_performances.profit_loss_percent desc,
-                            trade_setups.priority asc
-                    ) as rn
-                  from
-                    market_sessions
-                    join market_session_performances on market_session_performances.market_session_id = market_sessions.id
-                    join trade_setups on trade_setups.id = market_session_performances.trade_setup_id
-                  where
-                    market_sessions.id = any(%(market_session_ids)s)
-                    and trade_setups.stop_profit_id = %(stop_profit_id)s
-                )
-                select
-                  market_session_id,
-                  reverse_percentile_id,
-                  stop_profit_id,
-                  trade_setup_id
-                from
-                  session_performances
-                where
-                  rn = 1
-                order by
-                  open_period asc
+            with session_performances as (
+              select
+                market_sessions.open_period,
+                market_session_performances.market_session_id,
+                market_session_performances.max_drawdown_percent,
+                market_session_performances.profit_loss_percent,
+                market_session_performances.time_to_max_drawdown_seconds,
+                trade_setups.reverse_percentile_id,
+                trade_setups.stop_profit_id,
+                market_session_performances.trade_setup_id
+              from
+                market_sessions
+                join market_session_performances on market_session_performances.market_session_id = market_sessions.id
+                join trade_setups on trade_setups.id = market_session_performances.trade_setup_id
+              where
+                market_sessions.id = any(%(market_session_ids)s)
+                and trade_setups.stop_profit_id = %(stop_profit_id)s
+            )
+            select
+              market_session_id,
+              max_drawdown_percent,
+              profit_loss_percent,
+              reverse_percentile_id,
+              stop_profit_id,
+              time_to_max_drawdown_seconds,
+              trade_setup_id
+            from
+              session_performances
+            order by
+              open_period asc
             """
 
             cursor.execute(
