@@ -97,23 +97,30 @@ class RiskWeightedLabeler:
         u.ascii.puts(
             f"Generated {len(risk_weighted_labels)} risk-weighted labels",
             u.ascii.MAGENTA,
-            print_end="",
         )
+
         u.ascii.puts("Label distribution:", u.ascii.MAGENTA, print_end="")
         u.ascii.puts(
             risk_weighted_labels["reverse_percentile_id"].value_counts().to_string(),
+            u.ascii.MAGENTA,
+        )
+
+        u.ascii.puts(
+            f"Average confidence: {risk_weighted_labels['confidence'].mean():.3f}",
             u.ascii.MAGENTA,
             print_end="",
         )
         u.ascii.puts(
             f"Catastrophic losses avoided: {risk_weighted_labels['is_catastrophic_avoided'].sum()}",
             u.ascii.MAGENTA,
-            print_end="",
         )
+
+        u.ascii.puts("Confidence By Class:", u.ascii.MAGENTA, print_end="")
         u.ascii.puts(
-            f"Average confidence: {risk_weighted_labels['confidence'].mean():.3f}",
+            risk_weighted_labels.groupby("reverse_percentile_id")["confidence"]
+            .describe()
+            .to_string(),
             u.ascii.MAGENTA,
-            print_end="",
         )
 
         return risk_weighted_labels

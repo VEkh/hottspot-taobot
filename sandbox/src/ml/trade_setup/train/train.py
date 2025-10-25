@@ -131,6 +131,13 @@ class Train:
         threshold = 1.0
         print(f"Dataset size after merge: {len(self.training_data)}")
 
+        print("\nFeature distributions by class:")
+        for feature in self.feature_loader.columns:
+            print(f"\n{feature}:")
+            print(
+                self.training_data.groupby("reverse_percentile_id")[feature].describe()
+            )
+
         # Apply the manual rule (note: your code used < for CONSOLIDATION → reverse_id=2)
         self.training_data["manual_rule_prediction"] = self.training_data[
             "warm_up_body_to_wick_ratio"
