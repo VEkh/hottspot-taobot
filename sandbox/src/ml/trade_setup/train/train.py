@@ -1,7 +1,6 @@
-from .asymmetric_loss_model import AsymmetricLossModel
 from .feature_loader import FeatureLoader
+from .label_builder import LabelBuilder
 from .label_loader import LabelLoader
-from .risk_weighted_labeler import RiskWeightedLabeler
 from .weighted_model import WeightedModel
 from pathlib import Path
 from scipy import stats
@@ -63,10 +62,7 @@ class Train:
             features=self.features,
         )
 
-        self.risk_weighted_labeler = RiskWeightedLabeler(
-            catastrophic_loss_percentile=5.0,
-            max_drawdown_weight=2.0,
-        )
+        self.label_builder = LabelBuilder()
 
     def run(self):
         description = textwrap.dedent(
@@ -85,13 +81,7 @@ class Train:
         self.label_loader.stop_profit_id = 1
 
         self.label_loader.load()
-        self.labels = self.risk_weighted_labeler.generate_labels(
-            self.label_loader.labels
-        )
-
-        # TODO: Decide
-        # self.label_loader.filter_sparse_classes(min_percentage=0.1)
-        # self.labels = self.label_loader.labels
+        self.labels = self.label_builder.build(self.label_loader.labels)
 
         self.__merge_features_and_labels()
         # self.__analyze_features()  # TODO: Delete
@@ -113,14 +103,6 @@ class Train:
         self.__calculate_trading_metrics(
             profit_loss_data=profit_loss_data,
             y_predictions=confidence_weighted_model_class.predictions,
-            y_true=self.y_test,
-        )
-
-        asymmetric_loss_model_class = self.__train_asymmetric_loss_model()
-        self.__evaluate_model(asymmetric_loss_model_class)
-        self.__calculate_trading_metrics(
-            profit_loss_data=profit_loss_data,
-            y_predictions=asymmetric_loss_model_class.predictions,
             y_true=self.y_test,
         )
 
@@ -414,6 +396,12 @@ class Train:
             on="market_session_id",
         )
 
+        self.training_data = self.training_data.sort_values(
+            "market_session_opened_at", ascending=True
+        )
+
+        self.training_data = self.training_data.reset_index(drop=True)
+
         u.ascii.puts(self.training_data[:10].to_string(), u.ascii.YELLOW)
         u.ascii.puts("...", u.ascii.YELLOW)
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
@@ -592,19 +580,6 @@ class Train:
             "🎉 Finished time series cross validation.", u.ascii.GREEN, print_end=""
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
-
-    def __train_asymmetric_loss_model(self):
-        model_class = AsymmetricLossModel(false_negative_weight=5.0)
-
-        model_class.train(
-            X_train=self.X_train,
-            X_val=self.X_val,
-            sample_weights=self.confidence_train,
-            y_train=self.y_train,
-            y_val=self.y_val,
-        )
-
-        return model_class
 
     def __train_class_weighted_model(self):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")

@@ -42,6 +42,7 @@ class LabelLoader:
     def load(self):
         self.__get_labels()
         self.labels = pd.DataFrame(self.labels)
+        self.__print_label_distribution()
 
         return self.labels
 
@@ -58,6 +59,7 @@ class LabelLoader:
               select
                 market_sessions.open_period,
                 market_session_performances.market_session_id,
+                lower(market_sessions.open_period) as market_session_opened_at,
                 market_session_performances.max_drawdown_percent,
                 market_session_performances.profit_loss_percent,
                 market_session_performances.time_to_max_drawdown_seconds,
@@ -74,6 +76,7 @@ class LabelLoader:
             )
             select
               market_session_id,
+              market_session_opened_at::text as market_session_opened_at,
               max_drawdown_percent,
               profit_loss_percent,
               reverse_percentile_id,

@@ -11,12 +11,17 @@ class FeatureLoader:
         market_session_warm_up_duration_seconds=0,
         symbol=None,
     ):
-        self.columns = [
-            "avg_true_range_26",
+        self.candle_feature_columns = [
             "warm_up_body_to_lower_wick_ratio",
             "warm_up_body_to_upper_wick_ratio",
             "warm_up_body_to_wick_ratio",
         ]
+
+        self.market_regime_feature_colums = [
+            "avg_true_range_26",
+        ]
+
+        self.columns = self.market_regime_feature_colums + self.candle_feature_columns
 
         self.candle_features = []
         self.db_conn = db_conn
@@ -39,9 +44,14 @@ class FeatureLoader:
             on="market_session_id",
         )
 
-        self.__normalize_features_by_atr()
+        self.__cap_outliers()
 
         return self.features
+
+    def __cap_outliers(self):
+        for column in self.candle_feature_columns:
+            cap = self.features[column].quantile(0.99)
+            self.features[column] = self.features[column].clip(upper=cap)
 
     def __get_candle_features(self):
         u.ascii.puts("💿 Loading candle features", u.ascii.YELLOW)
@@ -174,16 +184,4 @@ class FeatureLoader:
             u.ascii.puts(
                 f"Example: {json.dumps(self.market_regime_features[-1], indent=2)}",
                 u.ascii.YELLOW,
-            )
-
-    def __normalize_features_by_atr(self):
-        features_to_normalize = [
-            "warm_up_body_to_lower_wick_ratio",
-            "warm_up_body_to_upper_wick_ratio",
-            "warm_up_body_to_wick_ratio",
-        ]
-
-        for feature in features_to_normalize:
-            self.features[f"{feature}_normalized"] = (
-                self.features[feature] / self.features["avg_true_range_26"]
             )
