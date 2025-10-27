@@ -9,9 +9,11 @@ class LabelBuilder:
         self.confidence_scale = 0.0
         self.original_labels = pd.DataFrame()
 
-    def build(self, original_labels=pd.DataFrame()):
+    def build(self, original_labels=None):
+        if original_labels is None:
+            original_labels = pd.DataFrame()
         self.original_labels = original_labels
-        self.__analyze_profit_loss_distribution()
+        self._analyze_profit_loss_distribution()
 
         results = []
         profit_loss_diffs_for_scale = []
@@ -57,7 +59,7 @@ class LabelBuilder:
                 }
             )
 
-        self.confidence_scale = self.__calculate_confidence_scale(
+        self.confidence_scale = self._calculate_confidence_scale(
             profit_loss_diffs_for_scale
         )
 
@@ -103,7 +105,7 @@ class LabelBuilder:
 
         return labels
 
-    def __analyze_profit_loss_distribution(self):
+    def _analyze_profit_loss_distribution(self):
         all_profit_losses = self.original_labels["profit_loss_percent"].values
 
         u.ascii.puts(f"Profit Loss Distribution:", u.ascii.MAGENTA, print_end="")
@@ -118,7 +120,7 @@ class LabelBuilder:
         )
         u.ascii.puts(f"  Min: {np.min(all_profit_losses):.2f}%", u.ascii.MAGENTA)
 
-    def __calculate_confidence_scale(self, profit_loss_differences):
+    def _calculate_confidence_scale(self, profit_loss_differences):
         profit_loss_differences = np.array(profit_loss_differences)
         scale = np.percentile(profit_loss_differences, self.confidence_percentile)
 

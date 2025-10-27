@@ -24,12 +24,21 @@ class WeightedModel:
 
     def train(
         self,
-        X_train=pd.DataFrame(),
-        X_val=pd.DataFrame(),
+        X_train=None,
+        X_val=None,
         sample_weights=None,
-        y_train=pd.DataFrame(),
-        y_val=pd.DataFrame(),
+        y_train=None,
+        y_val=None,
     ):
+        if X_train is None:
+            X_train = pd.DataFrame()
+        if X_val is None:
+            X_val = pd.DataFrame()
+        if y_train is None:
+            y_train = pd.DataFrame()
+        if y_val is None:
+            y_val = pd.DataFrame()
+
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
             "💡  Training weighted XGBClassifier model.",

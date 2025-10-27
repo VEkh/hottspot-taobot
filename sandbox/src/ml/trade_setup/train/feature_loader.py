@@ -21,7 +21,7 @@ class FeatureLoader:
             "avg_true_range_26",
         ]
 
-        self.columns = self.market_regime_feature_colums + self.candle_feature_columns
+        self.columns = self.candle_feature_columns
 
         self.candle_features = []
         self.db_conn = db_conn
@@ -34,8 +34,8 @@ class FeatureLoader:
         self.symbol = symbol
 
     def load(self):
-        self.__get_candle_features()
-        self.__get_market_regime_features()
+        self._get_candle_features()
+        self._get_market_regime_features()
 
         self.features = pd.merge(
             pd.DataFrame(self.candle_features),
@@ -44,16 +44,16 @@ class FeatureLoader:
             on="market_session_id",
         )
 
-        self.__cap_outliers()
+        self._cap_outliers()
 
         return self.features
 
-    def __cap_outliers(self):
+    def _cap_outliers(self):
         for column in self.candle_feature_columns:
             cap = self.features[column].quantile(0.99)
             self.features[column] = self.features[column].clip(upper=cap)
 
-    def __get_candle_features(self):
+    def _get_candle_features(self):
         u.ascii.puts("💿 Loading candle features", u.ascii.YELLOW)
 
         with self.db_conn.conn.cursor() as cursor:
@@ -101,7 +101,7 @@ class FeatureLoader:
                 u.ascii.YELLOW,
             )
 
-    def __get_market_regime_features(self):
+    def _get_market_regime_features(self):
         u.ascii.puts("💿 Loading regime features", u.ascii.YELLOW)
 
         with self.db_conn.conn.cursor() as cursor:

@@ -8,11 +8,11 @@ class LabelLoader:
     def __init__(
         self,
         db_conn=None,
-        features=pd.DataFrame(),
+        features=None,
         stop_profit_id=1,
     ):
         self.db_conn = db_conn
-        self.features = features
+        self.features = features if features is not None else pd.DataFrame()
         self.labels = pd.DataFrame()
         self.stop_profit_id = stop_profit_id
 
@@ -20,7 +20,7 @@ class LabelLoader:
         u.ascii.puts("💡 Filtering Sparse Label Classes", u.ascii.CYAN)
 
         u.ascii.puts("Original Class Distribution:", u.ascii.MAGENTA)
-        self.__print_label_distribution()
+        self._print_label_distribution()
 
         target_column = "trade_setup_id"
 
@@ -37,16 +37,16 @@ class LabelLoader:
         self.labels = self.labels[self.labels[target_column].isin(valid_classes)]
 
         u.ascii.puts("Filtered Class Distribution:", u.ascii.MAGENTA)
-        self.__print_label_distribution()
+        self._print_label_distribution()
 
     def load(self):
-        self.__get_labels()
+        self._get_labels()
         self.labels = pd.DataFrame(self.labels)
-        self.__print_label_distribution()
+        self._print_label_distribution()
 
         return self.labels
 
-    def __get_labels(self):
+    def _get_labels(self):
         u.ascii.puts("💿 Loading labels", u.ascii.YELLOW)
 
         market_session_ids = (
@@ -111,7 +111,7 @@ class LabelLoader:
             f"Example: {json.dumps(self.labels[-1], indent=2)}", u.ascii.YELLOW
         )
 
-    def __print_label_distribution(self):
+    def _print_label_distribution(self):
         if self.labels.empty:
             return
 

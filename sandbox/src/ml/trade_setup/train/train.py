@@ -1,6 +1,7 @@
 from .feature_loader import FeatureLoader
 from .label_builder import LabelBuilder
 from .label_loader import LabelLoader
+from .regime_history_feature_extractor import RegimeHistoryFeatureExtractor
 from .weighted_model import WeightedModel
 from pathlib import Path
 from scipy import stats
@@ -34,6 +35,7 @@ class Train:
         self.confidence_train = pd.DataFrame()
         self.confidence_val = pd.DataFrame()
         self.db_conn = db_conn
+        self.feature_columns = []
         self.features = []
         self.training_data = pd.DataFrame()
         self.label_mapping = {}
@@ -42,6 +44,7 @@ class Train:
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
+        self.regime_history_features = pd.DataFrame()
         self.reverse_label_mapping = {}
         self.symbol = symbol
         self.y = pd.DataFrame()
@@ -64,6 +67,12 @@ class Train:
 
         self.label_builder = LabelBuilder()
 
+        self.regime_history_feature_extractor = RegimeHistoryFeatureExtractor(
+            lookback_windows=[3, 5, 10, 20],
+            ranging_label=2,
+            trending_label=1,
+        )
+
     def run(self):
         description = textwrap.dedent(
             f"""
@@ -82,39 +91,42 @@ class Train:
 
         self.label_loader.load()
         self.labels = self.label_builder.build(self.label_loader.labels)
+        self.regime_history_features = (
+            self.regime_history_feature_extractor.fit_transform(self.labels)
+        )
 
-        self.__merge_features_and_labels()
-        # self.__analyze_features()  # TODO: Delete
-        self.__prepare_data()
+        self._merge_features_and_labels()
+        # self._analyze_features()  # TODO: Delete
+        self._prepare_data()
         profit_loss_data = self.training_data.iloc[self.X_test.index][
             ["profit_loss_percent_1", "profit_loss_percent_2"]
         ]
 
-        class_weighted_model_class = self.__train_class_weighted_model()
-        self.__evaluate_model(class_weighted_model_class)
-        self.__calculate_trading_metrics(
+        class_weighted_model_class = self._train_class_weighted_model()
+        self._evaluate_model(class_weighted_model_class)
+        self._calculate_trading_metrics(
             profit_loss_data=profit_loss_data,
             y_predictions=class_weighted_model_class.predictions,
             y_true=self.y_test,
         )
 
-        confidence_weighted_model_class = self.__train_confidence_weighted_model()
-        self.__evaluate_model(confidence_weighted_model_class)
-        self.__calculate_trading_metrics(
+        confidence_weighted_model_class = self._train_confidence_weighted_model()
+        self._evaluate_model(confidence_weighted_model_class)
+        self._calculate_trading_metrics(
             profit_loss_data=profit_loss_data,
             y_predictions=confidence_weighted_model_class.predictions,
             y_true=self.y_test,
         )
 
-        self.__time_series_validation(n_splits=5)
-        # self.__save_model()
+        self._time_series_validation(n_splits=5)
+        # self._save_model()
 
-    def __analyze_features(self):
+    def _analyze_features(self):
         threshold = 1.0
         print(f"Dataset size after merge: {len(self.training_data)}")
 
         print("\nFeature distributions by class:")
-        for feature in self.feature_loader.columns:
+        for feature in self.feature_columns:
             print(f"\n{feature}:")
             print(
                 self.training_data.groupby("reverse_percentile_id")[feature].describe()
@@ -220,12 +232,19 @@ class Train:
 
         return accuracy
 
-    def __calculate_trading_metrics(
+    def _calculate_trading_metrics(
         self,
-        profit_loss_data=pd.DataFrame(),
-        y_predictions=pd.DataFrame(),
-        y_true=pd.DataFrame(),
+        profit_loss_data=None,
+        y_predictions=None,
+        y_true=None,
     ):
+        if profit_loss_data is None:
+            profit_loss_data = pd.DataFrame()
+        if y_predictions is None:
+            y_predictions = pd.DataFrame()
+        if y_true is None:
+            y_true = pd.DataFrame()
+
         unmapped_y_predictions = (
             pd.Series(y_predictions, name="unmapped_y_predictions")
             .map(self.reverse_label_mapping)
@@ -309,7 +328,7 @@ class Train:
         )
         u.ascii.puts("=" * 60, u.ascii.MAGENTA)
 
-    def __evaluate_model(self, model_class=None):
+    def _evaluate_model(self, model_class=None):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts("💡  Evaluating model", u.ascii.CYAN, print_end="")
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
@@ -357,7 +376,7 @@ class Train:
             importance = model.feature_importances_
             importance_df = pd.DataFrame(
                 {
-                    "feature": self.feature_loader.columns,
+                    "feature": self.feature_columns,
                     "importance": importance,
                 }
             ).sort_values("importance", ascending=False)
@@ -370,6 +389,9 @@ class Train:
             plt.title("Feature Importance")
             plt.xlabel("Importance Score")
             plt.tight_layout()
+
+            os.makedirs("tmp", exist_ok=True)
+
             plt.savefig(
                 f"tmp/{self.symbol}_feature_importance.png",
                 dpi=300,
@@ -380,7 +402,7 @@ class Train:
         u.ascii.puts("🎉 Finished evaluating model", u.ascii.GREEN, print_end="")
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-    def __merge_features_and_labels(self):
+    def _merge_features_and_labels(self):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
             "💡  Merging features and labels into training data.",
@@ -388,6 +410,13 @@ class Train:
             print_end="",
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
+
+        self.features = pd.merge(
+            self.features,
+            self.regime_history_features,
+            how="inner",
+            on="market_session_id",
+        )
 
         self.training_data = pd.merge(
             self.features,
@@ -412,15 +441,16 @@ class Train:
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-    def __prepare_data(self):
+    def _prepare_data(self):
         u.ascii.puts("💡  Prepare data for model.", u.ascii.CYAN)
 
         target_column = "reverse_percentile_id"
 
-        self.X = self.training_data[self.feature_loader.columns]
+        self._set_feature_columns()
+        self.X = self.training_data[self.feature_columns]
         self.y = self.training_data[target_column]
 
-        self.__set_confidence_scores()
+        self._set_confidence_scores()
 
         unique_labels = sorted(self.y.unique())
 
@@ -464,9 +494,7 @@ class Train:
         self.y_test = y_test
         self.y_val = y_val
 
-        u.ascii.puts(
-            f"Features Columns: {self.feature_loader.columns}", u.ascii.MAGENTA
-        )
+        u.ascii.puts(f"Features Columns: {self.feature_columns}", u.ascii.MAGENTA)
         u.ascii.puts(f"X: {self.X.shape[0]} samples", u.ascii.MAGENTA, print_end="")
         u.ascii.puts(
             f"Training Set: {self.X_train.shape[0]} samples",
@@ -485,7 +513,7 @@ class Train:
             u.ascii.MAGENTA,
         )
 
-    def __save_model(self, model):
+    def _save_model(self, model):
         u.ascii.puts("💡  Saving model.", u.ascii.CYAN)
 
         ml_dir = Path(__file__).resolve().parent.parent.parent
@@ -497,7 +525,7 @@ class Train:
 
         u.ascii.puts(f"🎉 Model saved as {save_path}.", u.ascii.GREEN)
 
-    def __set_class_weights(self):
+    def _set_class_weights(self):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts("💡  Setting class weights.", u.ascii.CYAN, print_end="")
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
@@ -518,7 +546,7 @@ class Train:
         u.ascii.puts(f"🎉 Finished setting class weights.", u.ascii.GREEN, print_end="")
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-    def __set_confidence_scores(self):
+    def _set_confidence_scores(self):
         self.confidence_scores = self.training_data["confidence"].values
 
         u.ascii.puts(f"Confidence Score Statistics:", u.ascii.MAGENTA, print_end="")
@@ -535,7 +563,13 @@ class Train:
         )
         u.ascii.puts(f"  Max: {self.confidence_scores.max():.3f}", u.ascii.MAGENTA)
 
-    def __time_series_validation(self, n_splits=5):
+    def _set_feature_columns(self):
+        self.feature_columns = (
+            self.feature_loader.columns
+            + self.regime_history_feature_extractor.get_feature_names()
+        )
+
+    def _time_series_validation(self, n_splits=5):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
             "💡  Using TimeSeriesSplit for temporal validation.",
@@ -581,7 +615,7 @@ class Train:
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-    def __train_class_weighted_model(self):
+    def _train_class_weighted_model(self):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
             "💡  Training class-weighted XGBClassifier model.",
@@ -592,7 +626,7 @@ class Train:
 
         model_class = WeightedModel()
 
-        self.__set_class_weights()
+        self._set_class_weights()
 
         sample_weights = np.array(
             [self.class_weight_dict[label] for label in self.y_train]
@@ -616,7 +650,7 @@ class Train:
 
         return model_class
 
-    def __train_confidence_weighted_model(self):
+    def _train_confidence_weighted_model(self):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
             "💡  Training confidence-weighted XGBClassifier model.",
