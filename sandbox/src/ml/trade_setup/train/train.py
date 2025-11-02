@@ -8,6 +8,7 @@ from scipy import stats
 from sklearn.metrics import accuracy_score, classification_report, confusion_matrix
 from sklearn.model_selection import TimeSeriesSplit, train_test_split
 from sklearn.utils.class_weight import compute_class_weight
+import json
 import matplotlib.pyplot as plt
 import ml.utils as u
 import numpy as np
@@ -97,28 +98,11 @@ class Train:
 
         self._merge_features_and_labels()
         # self._analyze_features()  # TODO: Delete
-        self._prepare_data()
-        profit_loss_data = self.training_data.iloc[self.X_test.index][
-            ["profit_loss_percent_1", "profit_loss_percent_2"]
-        ]
+        feature_elimination_results = self._greedy_backward_feature_elimination()
 
-        class_weighted_model_class = self._train_class_weighted_model()
-        self._evaluate_model(class_weighted_model_class)
-        self._calculate_trading_metrics(
-            profit_loss_data=profit_loss_data,
-            y_predictions=class_weighted_model_class.predictions,
-            y_true=self.y_test,
+        self._evaluate_feature_subset(
+            exclude=feature_elimination_results["excluded_features"]
         )
-
-        confidence_weighted_model_class = self._train_confidence_weighted_model()
-        self._evaluate_model(confidence_weighted_model_class)
-        self._calculate_trading_metrics(
-            profit_loss_data=profit_loss_data,
-            y_predictions=confidence_weighted_model_class.predictions,
-            y_true=self.y_test,
-        )
-
-        self._time_series_validation(n_splits=5)
         # self._save_model()
 
     def _analyze_features(self):
@@ -275,11 +259,11 @@ class Train:
                 session_data[f"profit_loss_percent_{predicted_strategy}"]
             )
 
-        cumulative_actual = np.cumsum(actual_profit_losses)
         cumulative_predicted = np.cumsum(predicted_profit_losses)
 
         total_return_actual = sum(actual_profit_losses)
         total_return_predicted = sum(predicted_profit_losses)
+        return_capture = (total_return_predicted / total_return_actual) * 100
 
         running_max_predicted = np.maximum.accumulate(cumulative_predicted)
         drawdown_predicted = running_max_predicted - cumulative_predicted
@@ -327,6 +311,40 @@ class Train:
             f"Sharpe Ratio: {sharpe_predicted:.3f}", u.ascii.MAGENTA, print_end=""
         )
         u.ascii.puts("=" * 60, u.ascii.MAGENTA)
+
+        return return_capture
+
+    def _evaluate_feature_subset(self, exclude=None):
+        if exclude is None:
+            exclude = []
+
+        self._prepare_data(exclude=exclude)
+        profit_loss_data = self.training_data.iloc[self.X_test.index][
+            ["profit_loss_percent_1", "profit_loss_percent_2"]
+        ]
+
+        class_weighted_model_class = self._train_class_weighted_model()
+        self._evaluate_model(class_weighted_model_class)
+        class_weighted_return_capture = self._calculate_trading_metrics(
+            profit_loss_data=profit_loss_data,
+            y_predictions=class_weighted_model_class.predictions,
+            y_true=self.y_test,
+        )
+
+        confidence_weighted_model_class = self._train_confidence_weighted_model()
+        self._evaluate_model(confidence_weighted_model_class)
+        confidence_weighted_return_capture = self._calculate_trading_metrics(
+            profit_loss_data=profit_loss_data,
+            y_predictions=confidence_weighted_model_class.predictions,
+            y_true=self.y_test,
+        )
+
+        self._time_series_validation(n_splits=5)
+
+        return {
+            "class_weighted": class_weighted_return_capture,
+            "confidence_weighted": confidence_weighted_return_capture,
+        }
 
     def _evaluate_model(self, model_class=None):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
@@ -402,6 +420,166 @@ class Train:
         u.ascii.puts("🎉 Finished evaluating model", u.ascii.GREEN, print_end="")
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
+    def _greedy_backward_feature_elimination(self):
+        u.ascii.puts("=" * 60, u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "🔬 Starting Greedy Backward Elimination", u.ascii.CYAN, print_end=""
+        )
+        u.ascii.puts("=" * 60, u.ascii.CYAN)
+
+        all_features = (
+            self.feature_loader.columns
+            + self.regime_history_feature_extractor.get_feature_names()
+        )
+
+        excluded_features = []
+
+        # TODO: Temporary additional exclusion. Delete late.
+        excluded_features.extend(
+            [
+                "ratio_ranging_last_5",
+                "warm_up_body_to_lower_wick_ratio",
+                "warm_up_body_to_upper_wick_ratio",
+                "warm_up_body_to_wick_ratio",
+            ]
+        )
+        remaining_features = all_features.copy()
+
+        baseline_performance = self._evaluate_feature_subset(exclude=[])[
+            "confidence_weighted"
+        ]
+        best_performance = baseline_performance
+
+        u.ascii.puts(f"\nBaseline (All {len(all_features)} Features):", u.ascii.YELLOW)
+        u.ascii.puts(
+            f"  Confidence-Weighted P/L: {baseline_performance:.2f}%", u.ascii.YELLOW
+        )
+
+        elimination_log = []
+        iteration = 0
+        max_iterations = len(all_features)
+
+        while iteration < max_iterations and len(remaining_features) > 0:
+            iteration += 1
+
+            u.ascii.puts(f"\n{'='*60}", u.ascii.CYAN, print_end="")
+            u.ascii.puts(
+                f"Round {iteration}: Testing {len(remaining_features)} features",
+                u.ascii.CYAN,
+                print_end="",
+            )
+            u.ascii.puts(f"{'='*60}", u.ascii.CYAN)
+
+            results = {}
+
+            for i, feature in enumerate(remaining_features, 1):
+                test_exclude = excluded_features + [feature]
+
+                u.ascii.puts(
+                    f"[{i}/{len(remaining_features)}] Testing exclusion of: {feature}",
+                    u.ascii.YELLOW,
+                )
+
+                performance = self._evaluate_feature_subset(exclude=test_exclude)[
+                    "confidence_weighted"
+                ]
+                results[feature] = performance
+
+            best_feature_to_exclude = max(results, key=results.get)
+            best_round_performance = results[best_feature_to_exclude]
+
+            improvement = best_round_performance - best_performance
+
+            # TODO: Maybe do just <, not <=
+            if best_round_performance <= best_performance:
+                u.ascii.puts(
+                    f"\n🛑  No improvement in Round {iteration}. Stopping elimination.",
+                    u.ascii.YELLOW,
+                )
+                break
+
+            excluded_features.append(best_feature_to_exclude)
+            remaining_features.remove(best_feature_to_exclude)
+            best_performance = best_round_performance
+
+            elimination_log.append(
+                {
+                    "excluded_feature": best_feature_to_exclude,
+                    "improvement": improvement,
+                    "performance": best_round_performance,
+                    "remaining_features": len(remaining_features),
+                    "round": iteration,
+                }
+            )
+
+            u.ascii.puts(
+                f"\n Permanently excluded: {best_feature_to_exclude}", u.ascii.GREEN
+            )
+            u.ascii.puts(
+                f"Remaining Features: {len(remaining_features)}", u.ascii.GREEN
+            )
+            u.ascii.puts(
+                f"New Best Performance: {best_performance:.2f}%", u.ascii.GREEN
+            )
+
+        u.ascii.puts(f"\n{'='*60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "🎉 Greedy Backward Elimination Complete", u.ascii.CYAN, print_end=""
+        )
+        u.ascii.puts(f"{'='*60}", u.ascii.CYAN)
+
+        u.ascii.puts(f"\nTotal Rounds: {iteration}", u.ascii.YELLOW)
+        u.ascii.puts(f"Features Excluded: {len(excluded_features)}", u.ascii.YELLOW)
+        u.ascii.puts(f"Features Remaining: {len(remaining_features)}", u.ascii.YELLOW)
+        u.ascii.puts(f"Final Performance: {best_performance:.2f}%", u.ascii.YELLOW)
+        u.ascii.puts(
+            f"Total Improvement: {best_performance - baseline_performance:+.2f}%",
+            u.ascii.YELLOW,
+        )
+
+        u.ascii.puts("\nElimination Sequence:", u.ascii.MAGENTA)
+
+        for log_entry in elimination_log:
+            u.ascii.puts(
+                (
+                    f"  Round {log_entry['round']}: "
+                    f"Excluded '{log_entry['excluded_feature']}' → "
+                    f"{log_entry['performance']:.2f}% "
+                    f"({log_entry['improvement']:+.2f}%)"
+                ),
+                u.ascii.MAGENTA,
+            )
+
+        u.ascii.puts("\nOptimal Feature Subset:", u.ascii.GREEN)
+
+        for feature in remaining_features:
+            u.ascii.puts(f"• {feature}", u.ascii.GREEN)
+
+        u.ascii.puts("\nTo use this subset, set:", u.ascii.CYAN)
+        u.ascii.puts(f"exclude={excluded_features}", u.ascii.CYAN)
+
+        out = {
+            "baseline_performance": baseline_performance,
+            "elimination_log": elimination_log,
+            "excluded_features": excluded_features,
+            "final_performance": best_performance,
+            "improvement": best_performance - baseline_performance,
+            "remaining_features": remaining_features,
+        }
+
+        current_dir = Path(__file__).resolve().parent
+        save_dir = os.path.join(current_dir, "feature_selection")
+        os.makedirs(save_dir, exist_ok=True)
+
+        save_path = os.path.join(
+            save_dir, f"greedy_backward_feature_elimination_{self.symbol}.json"
+        )
+
+        with open(save_path, "w") as f:
+            json.dump(out, f, indent=2, default=str)
+
+        return out
+
     def _merge_features_and_labels(self):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
@@ -441,12 +619,15 @@ class Train:
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN)
 
-    def _prepare_data(self):
+    def _prepare_data(self, exclude=None):
+        if exclude is None:
+            exclude = []
+
         u.ascii.puts("💡  Prepare data for model.", u.ascii.CYAN)
 
         target_column = "reverse_percentile_id"
 
-        self._set_feature_columns()
+        self._set_feature_columns(exclude=exclude)
         self.X = self.training_data[self.feature_columns]
         self.y = self.training_data[target_column]
 
@@ -563,11 +744,18 @@ class Train:
         )
         u.ascii.puts(f"  Max: {self.confidence_scores.max():.3f}", u.ascii.MAGENTA)
 
-    def _set_feature_columns(self):
+    def _set_feature_columns(self, exclude=None):
+        if exclude is None:
+            exclude = []
+
         self.feature_columns = (
             self.feature_loader.columns
             + self.regime_history_feature_extractor.get_feature_names()
         )
+
+        self.feature_columns = [
+            col for col in self.feature_columns if col not in exclude
+        ]
 
     def _time_series_validation(self, n_splits=5):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")

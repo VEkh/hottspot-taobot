@@ -1,0 +1,56 @@
+{
+  "baseline_performance": -0.7272901415284801,
+  "elimination_log": [
+    {
+      "excluded_feature": "warm_up_body_to_wick_ratio",
+      "improvement": 0.32213286391627827,
+      "performance": -0.4051572776122019,
+      "remaining_features": 33,
+      "round": 1
+    },
+    {
+      "excluded_feature": "ratio_trending_last_3",
+      "improvement": 15.082021876852133,
+      "performance": 14.67686459923993,
+      "remaining_features": 32,
+      "round": 2
+    }
+  ],
+  "excluded_features": ["warm_up_body_to_wick_ratio", "ratio_trending_last_3"],
+  "final_performance": 14.67686459923993,
+  "improvement": 15.40415474076841,
+  "remaining_features": [
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "count_ranging_last_3",
+    "count_trending_last_3",
+    "ratio_ranging_last_3",
+    "count_ranging_last_5",
+    "count_trending_last_5",
+    "ratio_ranging_last_5",
+    "ratio_trending_last_5",
+    "count_ranging_last_10",
+    "count_trending_last_10",
+    "ratio_ranging_last_10",
+    "ratio_trending_last_10",
+    "count_ranging_last_20",
+    "count_trending_last_20",
+    "ratio_ranging_last_20",
+    "ratio_trending_last_20",
+    "consecutive_ranging",
+    "consecutive_trending",
+    "max_consecutive_either",
+    "sessions_since_regime_change",
+    "regime_just_switched",
+    "regime_changes_last_3",
+    "regime_stability_last_3",
+    "regime_changes_last_5",
+    "regime_stability_last_5",
+    "regime_changes_last_10",
+    "regime_stability_last_10",
+    "regime_changes_last_20",
+    "regime_stability_last_20",
+    "exponential_trending_score",
+    "trending_momentum"
+  ]
+}

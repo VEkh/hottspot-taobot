@@ -1,0 +1,155 @@
+shed training class-weighted XGBClassifier model.
+============================================================
+
+============================================================
+💡  Evaluating model
+============================================================
+
+Accuracy: 0.5484
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           1       0.48      0.44      0.46        68
+           2       0.59      0.63      0.61        87
+
+    accuracy                           0.55       155
+   macro avg       0.54      0.54      0.54       155
+weighted avg       0.54      0.55      0.55       155
+
+
+Confusion Matrix:
+
+[[30 38]
+ [32 55]]
+
+Feature Importance:
+
+                         feature  importance
+19         regime_changes_last_3    0.050648
+18          regime_just_switched    0.049894
+0           count_ranging_last_3    0.048321
+17  sessions_since_regime_change    0.045462
+10         ratio_ranging_last_10    0.044327
+5          count_trending_last_5    0.043271
+23        regime_changes_last_10    0.042630
+8          count_ranging_last_10    0.042164
+4           count_ranging_last_5    0.041914
+14        ratio_trending_last_20    0.041672
+9         count_trending_last_10    0.040829
+26    exponential_trending_score    0.040675
+20       regime_stability_last_3    0.040382
+25        regime_changes_last_20    0.039870
+12        count_trending_last_20    0.038460
+22       regime_stability_last_5    0.038397
+16        max_consecutive_either    0.038227
+13         ratio_ranging_last_20    0.036988
+7          ratio_trending_last_5    0.036561
+21         regime_changes_last_5    0.036266
+15          consecutive_trending    0.034023
+1          count_trending_last_3    0.033514
+24      regime_stability_last_10    0.032691
+2           ratio_ranging_last_3    0.032102
+11        ratio_trending_last_10    0.030711
+3          ratio_trending_last_3    0.000000
+6           ratio_ranging_last_5    0.000000
+
+============================================================
+🎉 Finished evaluating model
+============================================================
+
+============================================================
+TRADING PERFORMANCE METRICS
+============================================================
+Optimal Strategy Return: $455.61
+Model Strategy Return: $-44.98
+Return Capture: -9.9%
+Max Drawdown: $103.89
+Sharpe Ratio: -0.264
+============================================================
+
+============================================================
+🎉 Finished training confidence-weighted XGBClassifier model.
+============================================================
+
+============================================================
+💡  Evaluating model
+============================================================
+
+Accuracy: 0.6000
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           1       0.57      0.37      0.45        68
+           2       0.61      0.78      0.69        87
+
+    accuracy                           0.60       155
+   macro avg       0.59      0.57      0.57       155
+weighted avg       0.59      0.60      0.58       155
+
+
+Confusion Matrix:
+
+[[25 43]
+ [19 68]]
+
+Feature Importance:
+
+                         feature  importance
+13         ratio_ranging_last_20    0.054411
+14        ratio_trending_last_20    0.054363
+12        count_trending_last_20    0.053695
+24      regime_stability_last_10    0.053095
+21         regime_changes_last_5    0.048467
+26    exponential_trending_score    0.048303
+2           ratio_ranging_last_3    0.046639
+18          regime_just_switched    0.044103
+25        regime_changes_last_20    0.043713
+23        regime_changes_last_10    0.043630
+10         ratio_ranging_last_10    0.043246
+1          count_trending_last_3    0.043037
+16        max_consecutive_either    0.042431
+5          count_trending_last_5    0.041283
+4           count_ranging_last_5    0.040026
+8          count_ranging_last_10    0.037994
+9         count_trending_last_10    0.035800
+19         regime_changes_last_3    0.033778
+11        ratio_trending_last_10    0.033527
+22       regime_stability_last_5    0.033222
+17  sessions_since_regime_change    0.032682
+20       regime_stability_last_3    0.031892
+0           count_ranging_last_3    0.030722
+15          consecutive_trending    0.029941
+7          ratio_trending_last_5    0.000000
+3          ratio_trending_last_3    0.000000
+6           ratio_ranging_last_5    0.000000
+
+============================================================
+🎉 Finished evaluating model
+============================================================
+
+============================================================
+TRADING PERFORMANCE METRICS
+============================================================
+Optimal Strategy Return: $455.61
+Model Strategy Return: $99.89
+Return Capture: 21.9%
+Max Drawdown: $50.59
+Sharpe Ratio: 0.614
+============================================================
+
+============================================================
+💡  Using TimeSeriesSplit for temporal validation.
+============================================================
+
+Time Series Cross Validation Scores: [0.45614035087719296, 0.49707602339181284, 0.6023391812865497, 0.5029239766081871, 0
+.543859649122807]
+
+Mean Cross Validation Score: 0.5205 (+/- 0.0990)
+
+============================================================
+🎉 Finished time series cross validation.
+============================================================

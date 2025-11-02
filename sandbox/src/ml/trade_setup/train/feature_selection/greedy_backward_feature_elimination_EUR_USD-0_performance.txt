@@ -1,0 +1,166 @@
+============================================================
+🎉 Finished training class-weighted XGBClassifier model.
+============================================================
+
+============================================================
+💡  Evaluating model
+============================================================
+
+Accuracy: 0.5290
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           1       0.46      0.43      0.44        68
+           2       0.58      0.61      0.59        87
+
+    accuracy                           0.53       155
+   macro avg       0.52      0.52      0.52       155
+weighted avg       0.53      0.53      0.53       155
+
+
+Confusion Matrix:
+
+[[29 39]
+ [34 53]]
+
+Feature Importance:
+
+                             feature  importance
+10            count_trending_last_10    0.044702
+21              regime_just_switched    0.044354
+7               ratio_ranging_last_5    0.042376
+11             ratio_ranging_last_10    0.042043
+5               count_ranging_last_5    0.042041
+12            ratio_trending_last_10    0.039350
+27          regime_stability_last_10    0.039027
+1   warm_up_body_to_upper_wick_ratio    0.036500
+24             regime_changes_last_5    0.036271
+23           regime_stability_last_3    0.035434
+30        exponential_trending_score    0.035388
+25           regime_stability_last_5    0.033903
+28            regime_changes_last_20    0.033732
+16            ratio_trending_last_20    0.033612
+15             ratio_ranging_last_20    0.033475
+0   warm_up_body_to_lower_wick_ratio    0.033458
+18              consecutive_trending    0.032929
+14            count_trending_last_20    0.031906
+26            regime_changes_last_10    0.031784
+29          regime_stability_last_20    0.031000
+2               count_ranging_last_3    0.030313
+31                 trending_momentum    0.029642
+9              count_ranging_last_10    0.029331
+19            max_consecutive_either    0.029132
+6              count_trending_last_5    0.027676
+22             regime_changes_last_3    0.026958
+17               consecutive_ranging    0.026160
+13             count_ranging_last_20    0.024870
+3              count_trending_last_3    0.023692
+8              ratio_trending_last_5    0.018942
+4               ratio_ranging_last_3    0.000000
+20      sessions_since_regime_change    0.000000
+
+============================================================
+🎉 Finished evaluating model
+============================================================
+
+============================================================
+TRADING PERFORMANCE METRICS
+============================================================
+Optimal Strategy Return: $455.61
+Model Strategy Return: $-23.84
+Return Capture: -5.2%
+Max Drawdown: $133.18
+Sharpe Ratio: -0.150
+============================================================
+
+============================================================
+🎉 Finished training confidence-weighted XGBClassifier model.
+============================================================
+
+============================================================
+💡  Evaluating model
+============================================================
+
+Accuracy: 0.6000
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           1       0.57      0.34      0.43        68
+           2       0.61      0.80      0.69        87
+
+    accuracy                           0.60       155
+   macro avg       0.59      0.57      0.56       155
+weighted avg       0.59      0.60      0.58       155
+
+
+Confusion Matrix:
+
+[[23 45]
+ [17 70]]
+
+Feature Importance:
+
+                             feature  importance
+15             ratio_ranging_last_20    0.053475
+18              consecutive_trending    0.052708
+14            count_trending_last_20    0.050424
+7               ratio_ranging_last_5    0.038318
+30        exponential_trending_score    0.037998
+9              count_ranging_last_10    0.037868
+5               count_ranging_last_5    0.037859
+16            ratio_trending_last_20    0.037210
+12            ratio_trending_last_10    0.035801
+13             count_ranging_last_20    0.035753
+11             ratio_ranging_last_10    0.035396
+28            regime_changes_last_20    0.035090
+1   warm_up_body_to_upper_wick_ratio    0.034631
+29          regime_stability_last_20    0.033601
+31                 trending_momentum    0.033322
+0   warm_up_body_to_lower_wick_ratio    0.033004
+27          regime_stability_last_10    0.032755
+19            max_consecutive_either    0.032387
+24             regime_changes_last_5    0.031413
+17               consecutive_ranging    0.029422
+26            regime_changes_last_10    0.028852
+21              regime_just_switched    0.027922
+23           regime_stability_last_3    0.027642
+10            count_trending_last_10    0.027221
+2               count_ranging_last_3    0.026939
+22             regime_changes_last_3    0.024678
+6              count_trending_last_5    0.024464
+25           regime_stability_last_5    0.023431
+20      sessions_since_regime_change    0.022260
+8              ratio_trending_last_5    0.018156
+3              count_trending_last_3    0.000000
+4               ratio_ranging_last_3    0.000000
+
+============================================================
+🎉 Finished evaluating model
+============================================================
+
+============================================================
+TRADING PERFORMANCE METRICS
+============================================================
+Optimal Strategy Return: $455.61
+Model Strategy Return: $66.87
+Return Capture: 14.7%
+Max Drawdown: $48.53
+Sharpe Ratio: 0.440
+============================================================
+
+============================================================
+💡  Using TimeSeriesSplit for temporal validation.
+============================================================
+
+Time Series Cross Validation Scores: [0.43859649122807015, 0.5321637426900585, 0.52046783625731, 0.5146198830409356, 0.59
+64912280701754]
+
+Mean Cross Validation Score: 0.5205 (+/- 0.1006)
+
+============================================================
+🎉 Finished time series cross validation.
+============================================================

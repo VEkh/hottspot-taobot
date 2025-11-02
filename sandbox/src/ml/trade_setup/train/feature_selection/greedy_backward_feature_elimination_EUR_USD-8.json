@@ -1,0 +1,76 @@
+{
+  "baseline_performance": -0.7272901415284801,
+  "elimination_log": [
+    {
+      "excluded_feature": "trending_momentum",
+      "improvement": 10.681100446351785,
+      "performance": 9.953810304823305,
+      "remaining_features": 33,
+      "round": 1
+    },
+    {
+      "excluded_feature": "ratio_ranging_last_10",
+      "improvement": 1.2066665756832506,
+      "performance": 11.160476880506556,
+      "remaining_features": 32,
+      "round": 2
+    },
+    {
+      "excluded_feature": "count_trending_last_3",
+      "improvement": 7.698501647593597,
+      "performance": 18.858978528100153,
+      "remaining_features": 31,
+      "round": 3
+    }
+  ],
+  "init_excluded_features": [
+    "ratio_trending_last_5",
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "warm_up_body_to_wick_ratio"
+  ],
+  "excluded_features": [
+    "ratio_trending_last_5",
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "warm_up_body_to_wick_ratio",
+    "trending_momentum",
+    "ratio_ranging_last_10",
+    "count_trending_last_3"
+  ],
+  "final_performance": 18.858978528100153,
+  "improvement": 19.586268669628634,
+  "remaining_features": [
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "warm_up_body_to_wick_ratio",
+    "count_ranging_last_3",
+    "ratio_ranging_last_3",
+    "ratio_trending_last_3",
+    "count_ranging_last_5",
+    "count_trending_last_5",
+    "ratio_ranging_last_5",
+    "ratio_trending_last_5",
+    "count_ranging_last_10",
+    "count_trending_last_10",
+    "ratio_trending_last_10",
+    "count_ranging_last_20",
+    "count_trending_last_20",
+    "ratio_ranging_last_20",
+    "ratio_trending_last_20",
+    "consecutive_ranging",
+    "consecutive_trending",
+    "max_consecutive_either",
+    "sessions_since_regime_change",
+    "regime_just_switched",
+    "regime_changes_last_3",
+    "regime_stability_last_3",
+    "regime_changes_last_5",
+    "regime_stability_last_5",
+    "regime_changes_last_10",
+    "regime_stability_last_10",
+    "regime_changes_last_20",
+    "regime_stability_last_20",
+    "exponential_trending_score"
+  ]
+}
