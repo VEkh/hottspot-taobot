@@ -17,11 +17,11 @@ class FeatureLoader:
             "warm_up_body_to_wick_ratio",
         ]
 
-        self.market_regime_feature_colums = [
+        self.market_regime_feature_columns = [
             "avg_true_range_26",
         ]
 
-        self.columns = self.candle_feature_columns
+        self.columns = self.candle_feature_columns + self.market_regime_feature_columns
 
         self.candle_features = []
         self.db_conn = db_conn
