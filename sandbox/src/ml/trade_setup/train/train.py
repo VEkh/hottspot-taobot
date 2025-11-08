@@ -97,21 +97,68 @@ class Train:
 
         self._merge_features_and_labels()
 
-        feature_elimination_results = self._greedy_backward_feature_elimination()
-        self._evaluate_feature_subset(
-            exclude=feature_elimination_results["excluded_features"]
+        # feature_elimination_results = self._greedy_backward_feature_elimination()
+        # self._evaluate_feature_subset(
+        #     exclude=feature_elimination_results["excluded_features"]
+        # )
+
+        # Run 2
+        excluded_features = [
+            "avg_true_range_26",
+            "count_ranging_last_10",
+            "ratio_ranging_last_3",
+            "ratio_trending_last_3",
+            "warm_up_body_to_upper_wick_ratio",
+            "warm_up_body_to_wick_ratio",
+        ]
+
+        self._evaluate_feature_subset(exclude=excluded_features)
+        # self._save_model()
+
+    def _analyze_cv_fold_conditions(self, fold_data=None, fold_idx=0):
+        if fold_data is None:
+            fold_data = pd.DataFrame()
+
+        avg_atr = fold_data["avg_true_range_26"].mean()
+        atr_std = fold_data["avg_true_range_26"].std()
+        atr_75th = fold_data["avg_true_range_26"].quantile(0.75)
+
+        fold_data["consecutive_same_regime"] = self._compute_consecutive_same_regime(
+            fold_data["reverse_percentile_id"]
+        )
+        avg_consecutive = fold_data["consecutive_same_regime"].mean()
+        max_consecutive = fold_data["consecutive_same_regime"].max()
+
+        regime_switches = self._count_regime_changes(fold_data["reverse_percentile_id"])
+        switch_rate = regime_switches / len(fold_data) if len(fold_data) > 0 else 0
+
+        label_counts = fold_data["reverse_percentile_id"].value_counts()
+        label_balance = (
+            label_counts.min() / label_counts.max() if len(label_counts) > 1 else 1.0
         )
 
-        # excluded_features = [
-        #     "count_ranging_last_10",
-        #     "ratio_ranging_last_3",
-        #     "ratio_trending_last_3",
-        #     "warm_up_body_to_upper_wick_ratio",
-        #     "warm_up_body_to_wick_ratio",
-        # ]
+        start_date = fold_data["market_session_opened_at"].min()
+        end_date = fold_data["market_session_opened_at"].max()
 
-        # self._evaluate_feature_subset(exclude=excluded_features)
-        # self._save_model()
+        avg_confidence = fold_data["confidence"].mean()
+
+        return {
+            "fold": fold_idx,
+            "start_date": start_date,
+            "end_date": end_date,
+            "n_samples": len(fold_data),
+            "atr_75th": atr_75th,
+            "atr_std": atr_std,
+            "avg_atr": avg_atr,
+            "avg_confidence": avg_confidence,
+            "avg_consecutive_regime": avg_consecutive,
+            "label_balance": label_balance,
+            "max_consecutive_regime": max_consecutive,
+            "pct_ranging": (fold_data["reverse_percentile_id"] == 2).mean(),
+            "pct_trending": (fold_data["reverse_percentile_id"] == 1).mean(),
+            "regime_switches": regime_switches,
+            "switch_rate": switch_rate,
+        }
 
     # NOTE: Dead code
     def _analyze_features(self):
@@ -326,6 +373,31 @@ class Train:
             "sharpe_ratio": sharpe_predicted,
         }
 
+    def _compute_consecutive_same_regime(self, label_series):
+        consecutive_count = []
+        current_count = 1
+
+        for i in range(len(label_series)):
+            if i == 0:
+                consecutive_count.append(1)
+            elif label_series.iloc[i] == label_series.iloc[i - 1]:
+                current_count += 1
+                consecutive_count.append(current_count)
+            else:
+                current_count = 1
+                consecutive_count.append(1)
+
+        return pd.Series(consecutive_count, index=label_series.index)
+
+    def _count_regime_changes(self, label_series):
+        switches = 0
+
+        for i in range(1, len(label_series)):
+            if label_series.iloc[i] != label_series.iloc[i - 1]:
+                switches += 1
+
+        return switches
+
     def _evaluate_feature_subset(self, exclude=None):
         if exclude is None:
             exclude = []
@@ -514,16 +586,13 @@ class Train:
 
         excluded_features = []
 
-        # TODO: Temporary additional exclusion. Delete late.
+        # TODO: Initial exclusion for greedy elimination. Delete later.
         excluded_features.extend(
             [
-                "ratio_ranging_last_10",
-                "ratio_ranging_last_5",
-                "ratio_trending_last_10",
+                "avg_true_range_26",
+                "count_ranging_last_10",
+                "ratio_ranging_last_3",
                 "ratio_trending_last_3",
-                "ratio_trending_last_5",
-                "trending_momentum",
-                "warm_up_body_to_lower_wick_ratio",
                 "warm_up_body_to_upper_wick_ratio",
                 "warm_up_body_to_wick_ratio",
             ]
@@ -575,7 +644,6 @@ class Train:
 
             improvement = best_round_performance - best_performance
 
-            # TODO: Maybe do just <, not <=
             if best_round_performance <= best_performance:
                 u.ascii.puts(
                     f"\n🛑  No improvement in Round {iteration}. Stopping elimination.",
@@ -830,8 +898,9 @@ class Train:
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
-        time_series_cv = TimeSeriesSplit(n_splits)
+        fold_conditions = []
         results = []
+        time_series_cv = TimeSeriesSplit(n_splits)
 
         for fold, (train_idx, val_idx) in enumerate(time_series_cv.split(self.X), 1):
             X_train_cv, X_val_cv = self.X.iloc[train_idx], self.X.iloc[val_idx]
@@ -880,6 +949,19 @@ class Train:
                 }
             )
 
+            val_fold_data = self.training_data.iloc[val_idx]
+            fold_condition = self._analyze_cv_fold_conditions(
+                fold_idx=fold,
+                fold_data=val_fold_data,
+            )
+            fold_condition["accuracy"] = accuracy
+            fold_condition["profit_loss_capture"] = trade_performance[
+                "profit_loss_capture"
+            ]
+            fold_condition["sharpe_ratio"] = trade_performance["sharpe_ratio"]
+            fold_conditions.append(fold_condition)
+
+        fold_conditions = pd.DataFrame(fold_conditions)
         results = pd.DataFrame(results)
 
         u.ascii.puts(
@@ -896,6 +978,31 @@ class Train:
             f"Mean Score: {results['score'].mean():.4f} (+/- {(results['score'].std() * 2):.4f})",
             u.ascii.MAGENTA,
         )
+
+        u.ascii.puts("Market Conditions By Fold", u.ascii.CYAN, print_end="")
+        u.ascii.puts("-" * 60, u.ascii.CYAN, print_end="")
+        u.ascii.puts(fold_conditions.to_string(), u.ascii.MAGENTA)
+
+        u.ascii.puts("Condition-Performance Correlations", u.ascii.CYAN, print_end="")
+        u.ascii.puts("-" * 60, u.ascii.CYAN)
+
+        correlations = (
+            fold_conditions[
+                [
+                    "avg_atr",
+                    "switch_rate",
+                    "label_balance",
+                    "avg_consecutive_regime",
+                    "profit_loss_capture",
+                ]
+            ]
+            .corr()["profit_loss_capture"]
+            .sort_values(ascending=False)
+        )
+
+        u.ascii.puts(f"Correlation with P/L Capture:", u.ascii.MAGENTA, print_end="")
+        u.ascii.puts(correlations.to_string(), u.ascii.MAGENTA)
+
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")
         u.ascii.puts(
             "🎉 Finished time series cross validation.", u.ascii.GREEN, print_end=""
