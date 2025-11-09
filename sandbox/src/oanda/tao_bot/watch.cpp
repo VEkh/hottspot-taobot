@@ -34,9 +34,8 @@
 #include "tao_bot.h"                          // Oanda::TaoBot
 #include "update_account_snapshot.cpp"        // update_account_snapshot
 #include "update_market_session_performance.cpp" // update_market_session_performance
-#include "write_market_session_performance.cpp" // write_market_session_performance
-#include <iostream>                             // std::cout, std::flush
-#include <unistd.h>                             // usleep
+#include <iostream>                              // std::cout, std::flush
+#include <unistd.h>                              // usleep
 
 void Oanda::TaoBot::watch() {
   while (!should_terminate()) {
@@ -95,7 +94,6 @@ void Oanda::TaoBot::watch() {
   }
 
   update_account_snapshot({.force = true});
-  write_market_session_performance();
 
   log_timestamps();
   log_account_snapshot();

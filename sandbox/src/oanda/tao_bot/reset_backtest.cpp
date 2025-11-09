@@ -5,10 +5,11 @@
 #include "force_init_reversal_await.cpp" // force_init_reversal_await
 #include "set_current_trend.cpp"         // set_current_trend
 #include "tao_bot.h" // Oanda::TaoBot, candle_t, quote_t, reversals_t, spike_candles_t, trend_meta_t
-#include "update_account_snapshot.cpp" // update_account_snapshot
-#include <algorithm>                   // std::min
-#include <string>                      // std::string
-#include <time.h>                      // time
+#include "update_account_snapshot.cpp"          // update_account_snapshot
+#include "write_market_session_performance.cpp" // write_market_session_performance
+#include <algorithm>                            // std::min
+#include <string>                               // std::string
+#include <time.h>                               // time
 
 void Oanda::TaoBot::reset_backtest() {
   const bool debug_sql = this->api_client.config.debug_sql;
@@ -20,6 +21,8 @@ void Oanda::TaoBot::reset_backtest() {
       .closed_at = this->market_availability.market_epochs.close,
       .symbol = this->symbol,
   });
+
+  write_market_session_performance();
 
   this->backtest.await_env_market_close(
       this->market_availability.market_epochs.close,
