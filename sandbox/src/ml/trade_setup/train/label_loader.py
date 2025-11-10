@@ -9,12 +9,10 @@ class LabelLoader:
         self,
         db_conn=None,
         features=None,
-        stop_profit_id=1,
     ):
         self.db_conn = db_conn
         self.features = features if features is not None else pd.DataFrame()
         self.labels = pd.DataFrame()
-        self.stop_profit_id = stop_profit_id
 
     def filter_sparse_classes(self, min_percentage=0.05):
         u.ascii.puts("💡 Filtering Sparse Label Classes", u.ascii.CYAN)
@@ -72,7 +70,7 @@ class LabelLoader:
                 join trade_setups on trade_setups.id = market_session_performances.trade_setup_id
               where
                 market_sessions.id = any(%(market_session_ids)s)
-                and trade_setups.stop_profit_id = %(stop_profit_id)s
+                and trade_setups.stop_profit_id not in (4)
             )
             select
               market_session_id,

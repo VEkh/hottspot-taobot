@@ -18,6 +18,9 @@ import pandas as pd
 import textwrap
 import xgboost as xgb
 
+# TODO: Delete
+from .trade_setup_redundancy_analyzer import TradeSetupRedundancyAnalyzer
+
 
 class Train:
     def __init__(
@@ -94,43 +97,49 @@ class Train:
 
         self.features = self.feature_loader.load()
 
-        self.label_loader.features = self.features
-        self.label_loader.stop_profit_id = 2
-
-        self.label_loader.load()
-        self.labels = self.label_builder.build(self.label_loader.labels)
-        # self.regime_history_features = (
-        #     self.regime_history_feature_extractor.fit_transform(self.labels)
-        # )
-        self.volatility_features = self.volatility_feature_extractor.fit_transform(
-            pd.merge(
-                self.features,
-                self.labels,
-                how="inner",
-                on="market_session_id",
-            )
+        # TODO: Delete
+        market_session_ids = (
+            self.features["market_session_id"].to_numpy(dtype=int).tolist()
         )
+        analyzer = TradeSetupRedundancyAnalyzer(self.db_conn, market_session_ids)
+        results = analyzer.run_full_analysis()
 
-        self._merge_features_and_labels()
+        # self.label_loader.features = self.features
 
-        # feature_elimination_results = self._greedy_backward_feature_elimination()
-        # self._evaluate_feature_subset(
-        #     exclude=feature_elimination_results["excluded_features"]
+        # self.label_loader.load()
+        # self.labels = self.label_builder.build(self.label_loader.labels)
+        # # self.regime_history_features = (
+        # #     self.regime_history_feature_extractor.fit_transform(self.labels)
+        # # )
+        # self.volatility_features = self.volatility_feature_extractor.fit_transform(
+        #     pd.merge(
+        #         self.features,
+        #         self.labels,
+        #         how="inner",
+        #         on="market_session_id",
+        #     )
         # )
 
-        # Run 2
-        # excluded_features = [
-        #     "avg_true_range_26",
-        #     "count_ranging_last_10",
-        #     "ratio_ranging_last_3",
-        #     "ratio_trending_last_3",
-        #     "warm_up_body_to_upper_wick_ratio",
-        #     "warm_up_body_to_wick_ratio",
-        # ]
-        # self._evaluate_feature_subset(exclude=excluded_features)
+        # self._merge_features_and_labels()
 
-        self._evaluate_feature_subset()
-        # self._save_model()
+        # # feature_elimination_results = self._greedy_backward_feature_elimination()
+        # # self._evaluate_feature_subset(
+        # #     exclude=feature_elimination_results["excluded_features"]
+        # # )
+
+        # # Run 2
+        # # excluded_features = [
+        # #     "avg_true_range_26",
+        # #     "count_ranging_last_10",
+        # #     "ratio_ranging_last_3",
+        # #     "ratio_trending_last_3",
+        # #     "warm_up_body_to_upper_wick_ratio",
+        # #     "warm_up_body_to_wick_ratio",
+        # # ]
+        # # self._evaluate_feature_subset(exclude=excluded_features)
+
+        # self._evaluate_feature_subset()
+        # # self._save_model()
 
     def _analyze_cv_fold_conditions(self, fold_data=None, fold_idx=0):
         if fold_data is None:
