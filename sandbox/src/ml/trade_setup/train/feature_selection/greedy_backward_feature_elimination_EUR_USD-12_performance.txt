@@ -1,0 +1,217 @@
+============================================================
+🎉 Finished training class-weighted XGBClassifier model.
+============================================================
+
+============================================================
+💡  Evaluating model
+============================================================
+
+Accuracy: 0.4277
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           1       0.32      0.24      0.27        72
+           2       0.48      0.59      0.53        87
+
+    accuracy                           0.43       159
+   macro avg       0.40      0.41      0.40       159
+weighted avg       0.41      0.43      0.41       159
+
+
+Confusion Matrix:
+
+[[17 55]
+ [36 51]]
+
+Feature Importance:
+
+                             feature  importance
+13             ratio_trending_last_5    0.044714
+6               count_ranging_last_3    0.041642
+43          volatility_momentum_long    0.039483
+3                         true_range    0.030720
+18             count_ranging_last_20    0.028528
+10              count_ranging_last_5    0.028342
+33          regime_stability_last_20    0.028334
+44                    atr_percentile    0.027957
+29             regime_changes_last_5    0.026953
+22               consecutive_ranging    0.026433
+35                 trending_momentum    0.026179
+42                    atr_ratio_long    0.025978
+30           regime_stability_last_5    0.025930
+4                      warm_up_range    0.025812
+38                 avg_true_range_14    0.025568
+14             count_ranging_last_10    0.025392
+37                  avg_true_range_8    0.025285
+12              ratio_ranging_last_5    0.024821
+15            count_trending_last_10    0.024606
+36                  avg_true_range_4    0.024335
+1   warm_up_body_to_upper_wick_ratio    0.023167
+40                   atr_ratio_short    0.023119
+2         warm_up_body_to_wick_ratio    0.023080
+17            ratio_trending_last_10    0.023073
+31            regime_changes_last_10    0.022954
+21            ratio_trending_last_20    0.022770
+45     normalized_warm_up_true_range    0.022162
+34        exponential_trending_score    0.021901
+41         volatility_momentum_short    0.021673
+39                 avg_true_range_26    0.021646
+0   warm_up_body_to_lower_wick_ratio    0.020923
+46                 warm_up_gap_ratio    0.020738
+19            count_trending_last_20    0.019958
+32          regime_stability_last_10    0.019016
+5                 warm_up_true_range    0.018715
+27             regime_changes_last_3    0.018693
+20             ratio_ranging_last_20    0.017396
+24            max_consecutive_either    0.016469
+16             ratio_ranging_last_10    0.015698
+28           regime_stability_last_3    0.015161
+23              consecutive_trending    0.014678
+8               ratio_ranging_last_3    0.000000
+9              ratio_trending_last_3    0.000000
+11             count_trending_last_5    0.000000
+7              count_trending_last_3    0.000000
+25      sessions_since_regime_change    0.000000
+26              regime_just_switched    0.000000
+
+============================================================
+🎉 Finished evaluating model
+============================================================
+
+============================================================
+TRADING PERFORMANCE METRICS
+============================================================
+Optimal Strategy Return: $469.92
+Model Strategy Return: $-215.67
+Return Capture: -45.9%
+Max Drawdown: $245.19
+Sharpe Ratio: -1.140
+============================================================
+
+============================================================
+🎉 Finished training confidence-weighted XGBClassifier model.
+============================================================
+
+============================================================
+💡  Evaluating model
+============================================================
+
+Accuracy: 0.5409
+
+Classification Report:
+
+              precision    recall  f1-score   support
+
+           1       0.49      0.28      0.35        72
+           2       0.56      0.76      0.64        87
+
+    accuracy                           0.54       159
+   macro avg       0.52      0.52      0.50       159
+weighted avg       0.53      0.54      0.51       159
+
+
+Confusion Matrix:
+
+[[20 52]
+ [21 66]]
+
+Feature Importance:
+
+                             feature  importance
+15            count_trending_last_10    0.052493
+13             ratio_trending_last_5    0.046273
+21            ratio_trending_last_20    0.042859
+14             count_ranging_last_10    0.031179
+43          volatility_momentum_long    0.030540
+19            count_trending_last_20    0.028881
+6               count_ranging_last_3    0.028291
+35                 trending_momentum    0.027812
+37                  avg_true_range_8    0.027484
+29             regime_changes_last_5    0.027197
+2         warm_up_body_to_wick_ratio    0.027010
+3                         true_range    0.026386
+41         volatility_momentum_short    0.025048
+39                 avg_true_range_26    0.024708
+36                  avg_true_range_4    0.024477
+38                 avg_true_range_14    0.024356
+42                    atr_ratio_long    0.024346
+10              count_ranging_last_5    0.024151
+28           regime_stability_last_3    0.023538
+0   warm_up_body_to_lower_wick_ratio    0.023239
+5                 warm_up_true_range    0.023212
+44                    atr_percentile    0.023009
+31            regime_changes_last_10    0.022738
+34        exponential_trending_score    0.022323
+46                 warm_up_gap_ratio    0.022179
+18             count_ranging_last_20    0.021780
+1   warm_up_body_to_upper_wick_ratio    0.021708
+40                   atr_ratio_short    0.021537
+17            ratio_trending_last_10    0.021493
+30           regime_stability_last_5    0.021281
+24            max_consecutive_either    0.020628
+45     normalized_warm_up_true_range    0.020272
+22               consecutive_ranging    0.018796
+32          regime_stability_last_10    0.018046
+11             count_trending_last_5    0.017900
+20             ratio_ranging_last_20    0.017855
+33          regime_stability_last_20    0.015734
+4                      warm_up_range    0.015731
+27             regime_changes_last_3    0.015684
+7              count_trending_last_3    0.014298
+23              consecutive_trending    0.013529
+8               ratio_ranging_last_3    0.000000
+9              ratio_trending_last_3    0.000000
+12              ratio_ranging_last_5    0.000000
+25      sessions_since_regime_change    0.000000
+16             ratio_ranging_last_10    0.000000
+26              regime_just_switched    0.000000
+
+============================================================
+🎉 Finished evaluating model
+============================================================
+
+============================================================
+TRADING PERFORMANCE METRICS
+============================================================
+Optimal Strategy Return: $469.92
+Model Strategy Return: $14.00
+Return Capture: 3.0%
+Max Drawdown: $72.07
+Sharpe Ratio: 0.084
+============================================================
+
+Time Series Cross Validation Results:
+   accuracy  fold  profit_loss_capture     score  sharpe_ratio  train_size  val_size
+0  0.520000     1            17.120386  0.520000      0.581461         179       175
+1  0.554286     2            17.622759  0.554286      0.588970         354       175
+2  0.594286     3            22.287482  0.594286      0.760084         529       175
+3  0.525714     4            -6.801797  0.525714     -0.208674         704       175
+4  0.565714     5            -9.032248  0.565714     -0.241711         879       175
+
+Mean Profit Loss Capture: 8.2393 (+/- 29.8130)
+Mean Score: 0.5520 (+/- 0.0608)
+
+Market Conditions By Fold
+------------------------------------------------------------
+   fold              start_date                end_date  n_samples  atr_75th   atr_std   avg_atr  avg_confidence  avg_consecutive_regime  label_balance  max_consecutive_regime  pct_ranging  pct_trending  regime_switches  switch_rate  accuracy  profit_loss_capture  sharpe_ratio
+0     1  2008-07-06 21:00:00+00  2011-11-20 22:00:00+00        175  0.039057  0.007797  0.038048        0.525685                1.891429       0.944444                       8     0.514286      0.485714               87     0.497143  0.520000            17.120386      0.581461
+1     2  2011-11-27 22:00:00+00  2015-04-12 21:00:00+00        175  0.025212  0.005920  0.023043        0.480077                1.948571       0.966292                       8     0.491429      0.508571               89     0.508571  0.554286            17.622759      0.588970
+2     3  2015-04-19 21:00:00+00  2018-09-09 21:00:00+00        175  0.024051  0.004979  0.022274        0.502421                2.165714       0.750000                      13     0.571429      0.428571               95     0.542857  0.594286            22.287482      0.760084
+3     4  2018-09-16 21:00:00+00  2022-03-06 22:00:00+00        175  0.018020  0.002905  0.015801        0.400116                1.885714       0.944444                      10     0.485714      0.514286               98     0.560000  0.525714            -6.801797     -0.208674
+4     5  2022-03-13 21:00:00+00  2025-10-12 21:00:00+00        175  0.020550  0.003528  0.017769        0.445832                2.005714       0.842105                       7     0.542857      0.457143               87     0.497143  0.565714            -9.032248     -0.241711
+
+Condition-Performance Correlations
+------------------------------------------------------------
+
+Correlation with P/L Capture:
+profit_loss_capture       1.000000
+avg_atr                   0.618945
+avg_consecutive_regime    0.364902
+switch_rate              -0.114593
+label_balance            -0.138807
+
+============================================================
+🎉 Finished time series cross validation.
+============================================================

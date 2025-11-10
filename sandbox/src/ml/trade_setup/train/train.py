@@ -2,6 +2,7 @@ from .feature_loader import FeatureLoader
 from .label_builder import LabelBuilder
 from .label_loader import LabelLoader
 from .regime_history_feature_extractor import RegimeHistoryFeatureExtractor
+from .volatility_feature_extractor import VolatilityFeatureExtractor
 from .weighted_model import WeightedModel
 from pathlib import Path
 from scipy import stats
@@ -47,6 +48,7 @@ class Train:
         self.regime_history_features = pd.DataFrame()
         self.reverse_label_mapping = {}
         self.symbol = symbol
+        self.volatility_features = pd.DataFrame()
         self.y = pd.DataFrame()
         self.y_class_mapped = pd.DataFrame()
         self.y_test = pd.DataFrame()
@@ -73,6 +75,11 @@ class Train:
             trending_label=1,
         )
 
+        self.volatility_feature_extractor = VolatilityFeatureExtractor(
+            atr_windows=[4, 8, 14, 26],
+            percentile_window=100,
+        )
+
     def run(self):
         description = textwrap.dedent(
             f"""
@@ -86,13 +93,22 @@ class Train:
         u.ascii.puts(description, u.ascii.YELLOW)
 
         self.features = self.feature_loader.load()
+
         self.label_loader.features = self.features
-        self.label_loader.stop_profit_id = 1
+        self.label_loader.stop_profit_id = 2
 
         self.label_loader.load()
         self.labels = self.label_builder.build(self.label_loader.labels)
-        self.regime_history_features = (
-            self.regime_history_feature_extractor.fit_transform(self.labels)
+        # self.regime_history_features = (
+        #     self.regime_history_feature_extractor.fit_transform(self.labels)
+        # )
+        self.volatility_features = self.volatility_feature_extractor.fit_transform(
+            pd.merge(
+                self.features,
+                self.labels,
+                how="inner",
+                on="market_session_id",
+            )
         )
 
         self._merge_features_and_labels()
@@ -103,16 +119,17 @@ class Train:
         # )
 
         # Run 2
-        excluded_features = [
-            "avg_true_range_26",
-            "count_ranging_last_10",
-            "ratio_ranging_last_3",
-            "ratio_trending_last_3",
-            "warm_up_body_to_upper_wick_ratio",
-            "warm_up_body_to_wick_ratio",
-        ]
+        # excluded_features = [
+        #     "avg_true_range_26",
+        #     "count_ranging_last_10",
+        #     "ratio_ranging_last_3",
+        #     "ratio_trending_last_3",
+        #     "warm_up_body_to_upper_wick_ratio",
+        #     "warm_up_body_to_wick_ratio",
+        # ]
+        # self._evaluate_feature_subset(exclude=excluded_features)
 
-        self._evaluate_feature_subset(exclude=excluded_features)
+        self._evaluate_feature_subset()
         # self._save_model()
 
     def _analyze_cv_fold_conditions(self, fold_data=None, fold_idx=0):
@@ -579,24 +596,26 @@ class Train:
         )
         u.ascii.puts("=" * 60, u.ascii.CYAN)
 
+        # NOTE: Feature Modify
         all_features = (
             self.feature_loader.columns
-            + self.regime_history_feature_extractor.get_feature_names()
+            # + self.regime_history_feature_extractor.get_feature_names()
+            + self.volatility_feature_extractor.get_feature_names()
         )
 
         excluded_features = []
 
         # TODO: Initial exclusion for greedy elimination. Delete later.
-        excluded_features.extend(
-            [
-                "avg_true_range_26",
-                "count_ranging_last_10",
-                "ratio_ranging_last_3",
-                "ratio_trending_last_3",
-                "warm_up_body_to_upper_wick_ratio",
-                "warm_up_body_to_wick_ratio",
-            ]
-        )
+        # excluded_features.extend(
+        #     [
+        #         "avg_true_range_26",
+        #         "count_ranging_last_10",
+        #         "ratio_ranging_last_3",
+        #         "ratio_trending_last_3",
+        #         "warm_up_body_to_upper_wick_ratio",
+        #         "warm_up_body_to_wick_ratio",
+        #     ]
+        # )
         remaining_features = all_features.copy()
 
         baseline_performance = self._evaluate_feature_subset(exclude=[])[
@@ -742,9 +761,17 @@ class Train:
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
+        # NOTE: Feature Modify
+        # self.features = pd.merge(
+        #     self.features,
+        #     self.regime_history_features,
+        #     how="inner",
+        #     on="market_session_id",
+        # )
+
         self.features = pd.merge(
             self.features,
-            self.regime_history_features,
+            self.volatility_features,
             how="inner",
             on="market_session_id",
         )
@@ -880,9 +907,11 @@ class Train:
         if exclude is None:
             exclude = []
 
+        # NOTE: Feature Modify
         self.feature_columns = (
             self.feature_loader.columns
-            + self.regime_history_feature_extractor.get_feature_names()
+            # + self.regime_history_feature_extractor.get_feature_names()
+            + self.volatility_feature_extractor.get_feature_names()
         )
 
         self.feature_columns = [
@@ -949,7 +978,7 @@ class Train:
                 }
             )
 
-            val_fold_data = self.training_data.iloc[val_idx]
+            val_fold_data = self.training_data.iloc[val_idx].copy()
             fold_condition = self._analyze_cv_fold_conditions(
                 fold_idx=fold,
                 fold_data=val_fold_data,

@@ -1,0 +1,35 @@
+{
+  "baseline_performance": -19.74252586713451,
+  "elimination_log": [
+    {
+      "excluded_feature": "avg_true_range_8",
+      "improvement": 19.140954603632494,
+      "performance": -0.6015712635020155,
+      "remaining_features": 16,
+      "round": 1
+    }
+  ],
+  "excluded_features": [
+    "avg_true_range_8"
+  ],
+  "final_performance": -0.6015712635020155,
+  "improvement": 19.140954603632494,
+  "remaining_features": [
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "warm_up_body_to_wick_ratio",
+    "true_range",
+    "warm_up_range",
+    "warm_up_true_range",
+    "avg_true_range_4",
+    "avg_true_range_14",
+    "avg_true_range_26",
+    "atr_ratio_short",
+    "volatility_momentum_short",
+    "atr_ratio_long",
+    "volatility_momentum_long",
+    "atr_percentile",
+    "normalized_warm_up_true_range",
+    "warm_up_gap_ratio"
+  ]
+}

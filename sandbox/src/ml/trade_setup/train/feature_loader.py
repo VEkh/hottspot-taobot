@@ -11,35 +11,35 @@ class FeatureLoader:
         market_session_warm_up_duration_seconds=0,
         symbol=None,
     ):
-        self.candle_feature_columns = [
-            "warm_up_body_to_lower_wick_ratio",
-            "warm_up_body_to_upper_wick_ratio",
-            "warm_up_body_to_wick_ratio",
-        ]
-
-        self.market_regime_feature_columns = [
-            "avg_true_range_26",
-        ]
-
-        self.columns = self.candle_feature_columns + self.market_regime_feature_columns
 
         self.candle_features = []
         self.db_conn = db_conn
         self.features = pd.DataFrame()
-        self.market_regime_features = []
+        self.volatility_features = []
         self.market_session_duration_seconds = market_session_duration_seconds
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
+        self.outlier_capped_columns = [
+            "warm_up_body_to_lower_wick_ratio",
+            "warm_up_body_to_upper_wick_ratio",
+            "warm_up_body_to_wick_ratio",
+        ]
         self.symbol = symbol
+
+        self.columns = self.outlier_capped_columns + [
+            "true_range",
+            "warm_up_range",
+            "warm_up_true_range",
+        ]
 
     def load(self):
         self._get_candle_features()
-        self._get_market_regime_features()
+        self._get_volatility_features()
 
         self.features = pd.merge(
             pd.DataFrame(self.candle_features),
-            pd.DataFrame(self.market_regime_features),
+            pd.DataFrame(self.volatility_features),
             how="inner",
             on="market_session_id",
         )
@@ -49,7 +49,7 @@ class FeatureLoader:
         return self.features
 
     def _cap_outliers(self):
-        for column in self.candle_feature_columns:
+        for column in self.outlier_capped_columns:
             cap = self.features[column].quantile(0.99)
             self.features[column] = self.features[column].clip(upper=cap)
 
@@ -101,7 +101,7 @@ class FeatureLoader:
                 u.ascii.YELLOW,
             )
 
-    def _get_market_regime_features(self):
+    def _get_volatility_features(self):
         u.ascii.puts("💿 Loading regime features", u.ascii.YELLOW)
 
         with self.db_conn.conn.cursor() as cursor:
@@ -113,7 +113,10 @@ class FeatureLoader:
                     high,
                     low,
                     lag(close) over (order by open_period asc) as previous_close,
-                    (high - low) as range
+                    (high - low) as range,
+                    warm_up_high,
+                    warm_up_low,
+                    (warm_up_high - warm_up_low) as warm_up_range
                   from
                     market_sessions
                   where
@@ -129,35 +132,27 @@ class FeatureLoader:
                         with_previous_close.range,
                         abs(with_previous_close.high - with_previous_close.previous_close),
                         abs(with_previous_close.low - with_previous_close.previous_close)
-                    ) as true_range
+                    ) as true_range,
+                    with_previous_close.warm_up_range,
+                    greatest(
+                        with_previous_close.warm_up_range,
+                        abs(with_previous_close.warm_up_high - with_previous_close.previous_close),
+                        abs(with_previous_close.warm_up_low - with_previous_close.previous_close)
+                    ) as warm_up_true_range
                   from
                     market_sessions
                     join with_previous_close on with_previous_close.market_session_id = market_sessions.id
                   where
                     with_previous_close.previous_close is not null
                     and with_previous_close.range > 0.0
-                ),
-                with_avg_true_ranges_calc as (
-                  select
-                    *,
-                    count(*) over (
-                        order by open_period asc
-                        rows between 26 preceding and 1 preceding
-                    ) as session_count,
-                    avg(true_range) over (
-                        order by open_period asc
-                        rows between 26 preceding and 1 preceding
-                    ) as avg_true_range_26_raw
-                  from
-                    with_true_ranges
                 )
                 select
                   market_session_id,
-                  avg_true_range_26_raw as avg_true_range_26
+                  true_range,
+                  warm_up_range,
+                  warm_up_true_range
                 from
-                  with_avg_true_ranges_calc
-                where
-                  session_count = 26
+                  with_true_ranges
                 order by
                   open_period desc
             """
@@ -174,14 +169,14 @@ class FeatureLoader:
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()
 
-            self.market_regime_features = [dict(zip(columns, row)) for row in rows]
+            self.volatility_features = [dict(zip(columns, row)) for row in rows]
 
-            if not self.market_regime_features:
+            if not self.volatility_features:
                 u.ascii.puts("🛑 No market regime features loaded.", u.ascii.RED)
                 return
 
             u.ascii.puts("✅ Finished loading market regime features", u.ascii.YELLOW)
             u.ascii.puts(
-                f"Example: {json.dumps(self.market_regime_features[-1], indent=2)}",
+                f"Example: {json.dumps(self.volatility_features[-1], indent=2)}",
                 u.ascii.YELLOW,
             )

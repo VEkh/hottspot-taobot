@@ -1,0 +1,55 @@
+{
+  "baseline_performance": -23.49705188243607,
+  "elimination_log": [
+    {
+      "excluded_feature": "regime_changes_last_20",
+      "improvement": 26.477167367937103,
+      "performance": 2.98011548550103,
+      "remaining_features": 36,
+      "round": 1
+    }
+  ],
+  "excluded_features": [
+    "regime_changes_last_20"
+  ],
+  "final_performance": 2.98011548550103,
+  "improvement": 26.477167367937103,
+  "remaining_features": [
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "warm_up_body_to_wick_ratio",
+    "true_range",
+    "warm_up_range",
+    "warm_up_true_range",
+    "count_ranging_last_3",
+    "count_trending_last_3",
+    "ratio_ranging_last_3",
+    "ratio_trending_last_3",
+    "count_ranging_last_5",
+    "count_trending_last_5",
+    "ratio_ranging_last_5",
+    "ratio_trending_last_5",
+    "count_ranging_last_10",
+    "count_trending_last_10",
+    "ratio_ranging_last_10",
+    "ratio_trending_last_10",
+    "count_ranging_last_20",
+    "count_trending_last_20",
+    "ratio_ranging_last_20",
+    "ratio_trending_last_20",
+    "consecutive_ranging",
+    "consecutive_trending",
+    "max_consecutive_either",
+    "sessions_since_regime_change",
+    "regime_just_switched",
+    "regime_changes_last_3",
+    "regime_stability_last_3",
+    "regime_changes_last_5",
+    "regime_stability_last_5",
+    "regime_changes_last_10",
+    "regime_stability_last_10",
+    "regime_stability_last_20",
+    "exponential_trending_score",
+    "trending_momentum"
+  ]
+}
