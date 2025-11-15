@@ -5,37 +5,10 @@ import pandas as pd
 
 
 class LabelLoader:
-    def __init__(
-        self,
-        db_conn=None,
-        features=None,
-    ):
+    def __init__(self, db_conn, market_session_ids=None):
         self.db_conn = db_conn
-        self.features = features if features is not None else pd.DataFrame()
         self.labels = pd.DataFrame()
-
-    def filter_sparse_classes(self, min_percentage=0.05):
-        u.ascii.puts("💡 Filtering Sparse Label Classes", u.ascii.CYAN)
-
-        u.ascii.puts("Original Class Distribution:", u.ascii.MAGENTA)
-        self._print_label_distribution()
-
-        target_column = "trade_setup_id"
-
-        class_counts = self.labels[target_column].value_counts()
-        total_count = len(self.labels)
-        valid_classes = class_counts[
-            (class_counts / total_count >= min_percentage)
-        ].index
-
-        removed_classes = set(class_counts.index) - set(valid_classes)
-
-        u.ascii.puts(f"Removed Classes: {removed_classes}", u.ascii.MAGENTA)
-
-        self.labels = self.labels[self.labels[target_column].isin(valid_classes)]
-
-        u.ascii.puts("Filtered Class Distribution:", u.ascii.MAGENTA)
-        self._print_label_distribution()
+        self.market_session_ids = market_session_ids if market_session_ids else []
 
     def load(self):
         self._get_labels()
@@ -46,10 +19,6 @@ class LabelLoader:
 
     def _get_labels(self):
         u.ascii.puts("💿 Loading labels", u.ascii.YELLOW)
-
-        market_session_ids = (
-            self.features["market_session_id"].to_numpy(dtype=int).tolist()
-        )
 
         with self.db_conn.conn.cursor() as cursor:
             query = """
@@ -70,7 +39,8 @@ class LabelLoader:
                 join trade_setups on trade_setups.id = market_session_performances.trade_setup_id
               where
                 market_sessions.id = any(%(market_session_ids)s)
-                and trade_setups.stop_profit_id not in (4)
+                and trade_setups.reverse_percentile_id in (1,2)
+                and trade_setups.stop_profit_id in (1,2,3)
             )
             select
               market_session_id,
@@ -87,13 +57,7 @@ class LabelLoader:
               open_period asc
             """
 
-            cursor.execute(
-                query,
-                {
-                    "market_session_ids": market_session_ids,
-                    "stop_profit_id": self.stop_profit_id,
-                },
-            )
+            cursor.execute(query, {"market_session_ids": self.market_session_ids})
 
             columns = [column.name for column in cursor.description]
             rows = cursor.fetchall()

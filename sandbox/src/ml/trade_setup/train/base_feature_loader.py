@@ -3,37 +3,33 @@ import ml.utils as u
 import pandas as pd
 
 
-class FeatureLoader:
+class BaseFeatureLoader:
     def __init__(
         self,
-        db_conn=None,
-        market_session_duration_seconds=0,
-        market_session_warm_up_duration_seconds=0,
-        symbol=None,
+        db_conn,
+        market_session_duration_seconds,
+        market_session_warm_up_duration_seconds,
+        symbol,
     ):
-
         self.candle_features = []
         self.db_conn = db_conn
+        self.feature_names_ = None
         self.features = pd.DataFrame()
-        self.volatility_features = []
         self.market_session_duration_seconds = market_session_duration_seconds
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
-        self.outlier_capped_columns = [
-            "warm_up_body_to_lower_wick_ratio",
-            "warm_up_body_to_upper_wick_ratio",
-            "warm_up_body_to_wick_ratio",
-        ]
         self.symbol = symbol
+        self.volatility_features = []
 
-        self.columns = self.outlier_capped_columns + [
-            "true_range",
-            "warm_up_range",
-            "warm_up_true_range",
-        ]
+    def get_feature_names(self):
+        if self.feature_names_ is None:
+            self.feature_names_ = self._generate_feature_names()
+
+        return self.feature_names_.copy()
 
     def load(self):
+        self.feature_names_ = self._generate_feature_names()
         self._get_candle_features()
         self._get_volatility_features()
 
@@ -180,3 +176,23 @@ class FeatureLoader:
                 f"Example: {json.dumps(self.volatility_features[-1], indent=2)}",
                 u.ascii.YELLOW,
             )
+
+    def _generate_feature_names(self):
+        names = []
+
+        self.outlier_capped_columns = [
+            "warm_up_body_to_lower_wick_ratio",
+            "warm_up_body_to_upper_wick_ratio",
+            "warm_up_body_to_wick_ratio",
+        ]
+
+        names.extend(self.outlier_capped_columns)
+        names.extend(
+            [
+                "true_range",
+                "warm_up_range",
+                "warm_up_true_range",
+            ],
+        )
+
+        return names

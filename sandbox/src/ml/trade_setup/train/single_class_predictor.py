@@ -4,7 +4,7 @@ import pandas as pd
 import xgboost as xgb
 
 
-class WeightedModel:
+class SingleClassPredictor:
     def __init__(self):
         self.model = None
         self.predictions = pd.DataFrame()
@@ -12,7 +12,7 @@ class WeightedModel:
     def predict(self, X):
         if self.model is None:
             u.ascii.puts(
-                "！ WeightedModel failed to predict because model is empty",
+                "！ SingleClassPredictor failed to predict because model is empty",
                 u.ascii.RED,
             )
 
