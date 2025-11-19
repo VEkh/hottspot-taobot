@@ -1,4 +1,4 @@
-from .training_data_builder import TrainingData
+from .training_data_builder import TrainingDataBuilder
 from .trainer import Trainer
 from pathlib import Path
 from sklearn.metrics import classification_report, confusion_matrix
@@ -22,7 +22,7 @@ class Train:
         )
         self.symbol = symbol
 
-:       self.training_data_builder = TrainingData(
+        self.training_data_builder = TrainingDataBuilder(
             db_conn=db_conn,
             market_session_duration_seconds=market_session_duration_seconds,
             market_session_warm_up_duration_seconds=market_session_warm_up_duration_seconds,
@@ -34,8 +34,8 @@ class Train:
             f"""
         🤖 Training model for predicting {u.ascii.CYAN}{self.symbol}{u.ascii.YELLOW} trade setups.
 
-        ✅ Market Session Duration (Seconds): {self.market_session_duration_seconds}
-        ✅ Market Session Warm Up Duration (Seconds): {self.market_session_warm_up_duration_seconds}
+        Market Session Duration (Seconds): {self.market_session_duration_seconds}
+        Market Session Warm Up Duration (Seconds): {self.market_session_warm_up_duration_seconds}
         """
         ).strip()
 

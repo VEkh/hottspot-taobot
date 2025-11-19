@@ -21,25 +21,19 @@ class RegimeHistoryFeatureExtractor:
         trending_label=1,
     ):
         self.feature_names_ = None
-        self.lookback_windows = lookback_windows if lookback_windows is not None else [3, 5, 10, 20]
+        self.lookback_windows = (
+            lookback_windows if lookback_windows is not None else [3, 5, 10, 20]
+        )
         self.ranging_label = ranging_label
         self.trending_label = trending_label
 
     # Keep unused data arg to maintain scikit convention
     def fit(self, data):
-        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
-        u.ascii.puts(
-            "💡  Extracting regime history features from labels.",
-            u.ascii.CYAN,
-            print_end="",
-        )
-        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
-
         self.feature_names_ = self._generate_feature_names()
         return self
 
-    def fit_transform(self, labels):
-        return self.fit(labels).transform(labels)
+    def fit_transform(self, data):
+        return self.fit(data).transform(data)
 
     def get_feature_names(self):
         if self.feature_names_ is None:
@@ -48,6 +42,14 @@ class RegimeHistoryFeatureExtractor:
         return self.feature_names_.copy()
 
     def transform(self, data):
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
+        u.ascii.puts(
+            "💡  Extracting regime history features from labels.",
+            u.ascii.CYAN,
+            print_end="",
+        )
+        u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
+
         if self.feature_names_ is None:
             self.fit(data)
 
@@ -239,9 +241,16 @@ class RegimeHistoryFeatureExtractor:
         return exp_moving_avg
 
     def _generate_feature_names(self):
-        names = []
+        names = [
+            "consecutive_ranging",
+            "consecutive_trending",
+            "exponential_trending_score",
+            "max_consecutive_either",
+            "regime_just_switched",
+            "sessions_since_regime_change",
+            "trending_momentum",
+        ]
 
-        # Layer 1: Counts and ratios
         for window in self.lookback_windows:
             names.extend(
                 [
@@ -252,19 +261,6 @@ class RegimeHistoryFeatureExtractor:
                 ]
             )
 
-        # Layer 2: Streaks
-        names.extend(
-            [
-                "consecutive_ranging",
-                "consecutive_trending",
-                "max_consecutive_either",
-                "sessions_since_regime_change",
-            ]
-        )
-
-        # Layer 3: Transitions
-        names.append("regime_just_switched")
-
         for window in self.lookback_windows:
             if window >= 2:
                 names.extend(
@@ -273,14 +269,6 @@ class RegimeHistoryFeatureExtractor:
                         f"regime_stability_last_{window}",
                     ]
                 )
-
-        # Layer 4: Weighted history
-        names.extend(
-            [
-                "exponential_trending_score",
-                "trending_momentum",
-            ]
-        )
 
         return names
 

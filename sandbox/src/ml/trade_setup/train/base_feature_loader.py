@@ -55,7 +55,11 @@ class BaseFeatureLoader:
         with self.db_conn.conn.cursor() as cursor:
             query = f"""
                 select
+                  high,
+                  low,
                   id as market_session_id,
+                  lower(market_sessions.open_period)::text as market_session_opened_at,
+                  (high - low) as range,
                   (abs(warm_up_close - warm_up_open) / abs(warm_up_high - warm_up_low)) as warm_up_body_to_range_ratio,
                   (abs(warm_up_close - warm_up_open) / abs(least(warm_up_close, warm_up_open) - warm_up_low)) as warm_up_body_to_lower_wick_ratio,
                   (abs(warm_up_close - warm_up_open) / abs(warm_up_high - greatest(warm_up_close, warm_up_open))) as warm_up_body_to_upper_wick_ratio,
@@ -129,6 +133,8 @@ class BaseFeatureLoader:
                         abs(with_previous_close.high - with_previous_close.previous_close),
                         abs(with_previous_close.low - with_previous_close.previous_close)
                     ) as true_range,
+                    with_previous_close.warm_up_high,
+                    with_previous_close.warm_up_low,
                     with_previous_close.warm_up_range,
                     greatest(
                         with_previous_close.warm_up_range,
@@ -145,6 +151,8 @@ class BaseFeatureLoader:
                 select
                   market_session_id,
                   true_range,
+                  warm_up_high,
+                  warm_up_low,
                   warm_up_range,
                   warm_up_true_range
                 from
