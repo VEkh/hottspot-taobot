@@ -186,7 +186,6 @@ class TrainingDataBuilder:
 
         self.feature_columns = (
             self.base_feature_loader.get_feature_names()
-            + self.price_memory_feature_extractor.get_feature_names()
             + self.regime_history_feature_extractor.get_feature_names()
             + self.volatility_feature_extractor.get_feature_names()
         )
