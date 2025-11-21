@@ -2,7 +2,7 @@ from argparse import ArgumentParser
 
 usage = """
         main.h {predict} symbol [--env] [--market-session-id]
-        main.h {train}   symbol [--env] [--market-session-duration-seconds] [--market-session-warm-up-duration-seconds]
+        main.h {train}   symbol [--eliminate-features] [--env] [--market-session-duration-seconds] [--market-session-warm-up-duration-seconds]
 """
 
 description = """
@@ -40,6 +40,15 @@ arg_parser.add_argument(
 )
 
 arg_parser.add_argument(
+    "--eliminate-features",
+    "-xf",
+    action="store_true",
+    default=False,
+    dest="eliminate_features",
+    help="Run greedy backward feature elimination before final training",
+)
+
+arg_parser.add_argument(
     "--market-session-duration-seconds",
     "-d",
     default=0,
@@ -69,6 +78,7 @@ match args.command:
 
         trainer = Train(
             db_conn=conn,
+            eliminate_features=args.eliminate_features,
             market_session_duration_seconds=args.market_session_duration_seconds,
             market_session_warm_up_duration_seconds=args.market_session_warm_up_duration_seconds,
             symbol=args.symbol,

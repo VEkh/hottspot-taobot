@@ -8,7 +8,8 @@ import xgboost as xgb
 
 
 class Trainer:
-    def __init__(self, training_data_builder):
+    def __init__(self, training_data_builder, excluded_features=None):
+        self.excluded_features = excluded_features if excluded_features else []
         self.model = None
         self.n_splits = 5
         self.training_data_builder = training_data_builder
@@ -36,7 +37,7 @@ class Trainer:
         )
         u.ascii.puts("=" * 60, u.ascii.CYAN)
 
-        feature_names = self.training_data_builder.feature_columns
+        feature_names = self._included_features()
         training_data = self.training_data_builder.training_data
 
         X = training_data[feature_names].values
@@ -168,7 +169,7 @@ class Trainer:
         u.ascii.puts("🎓 Training final model on all data", u.ascii.CYAN)
         u.ascii.puts("=" * 60, u.ascii.CYAN)
 
-        feature_names = self.training_data_builder.feature_columns
+        feature_names = self._included_features()
         training_data = self.training_data_builder.training_data
 
         X = training_data[feature_names].values
@@ -297,6 +298,13 @@ class Trainer:
         ).sort_values("importance", ascending=False)
 
         return importance
+
+    def _included_features(self):
+        return [
+            f
+            for f in self.training_data_builder.feature_columns
+            if f not in self.excluded_features
+        ]
 
     def _print_cv_summary(self, cv):
         u.ascii.puts("=" * 60, u.ascii.CYAN, print_end="")

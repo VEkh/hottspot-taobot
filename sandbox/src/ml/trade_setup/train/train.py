@@ -1,10 +1,7 @@
-from .training_data_builder import TrainingDataBuilder
+from .feature_eliminator import FeatureEliminator
 from .trainer import Trainer
-from pathlib import Path
-from sklearn.metrics import classification_report, confusion_matrix
-import json
+from .training_data_builder import TrainingDataBuilder
 import ml.utils as u
-import os
 import textwrap
 
 
@@ -12,10 +9,12 @@ class Train:
     def __init__(
         self,
         db_conn,
+        eliminate_features,
         market_session_duration_seconds,
         market_session_warm_up_duration_seconds,
         symbol,
     ):
+        self.eliminate_features = eliminate_features
         self.market_session_duration_seconds = market_session_duration_seconds
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
@@ -43,5 +42,19 @@ class Train:
 
         self.training_data_builder.build()
 
-        trainer = Trainer(self.training_data_builder)
+        excluded_features = []
+
+        if self.eliminate_features:
+            feature_eliminator = FeatureEliminator(
+                training_data_builder=self.training_data_builder
+            )
+
+            feature_eliminator.run()
+            excluded_features = feature_eliminator.features_removed
+
+        trainer = Trainer(
+            excluded_features=excluded_features,
+            training_data_builder=self.training_data_builder,
+        )
+
         trainer.train_with_cv()
