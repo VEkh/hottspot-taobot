@@ -1,4 +1,5 @@
 from .base_feature_loader import BaseFeatureLoader
+from .choppiness_feature_extractor import ChoppinessFeatureExtractor
 from .label_extractor import LabelExtractor
 from .label_loader import LabelLoader
 from .price_memory_feature_extractor import PriceMemoryFeatureExtractor
@@ -19,6 +20,7 @@ class TrainingDataBuilder:
         symbol,
     ):
         self.base_features = []
+        self.choppiness_features = pd.DataFrame()
         self.db_conn = db_conn
         self.feature_columns = []
         self.features = pd.DataFrame()
@@ -44,6 +46,8 @@ class TrainingDataBuilder:
             market_session_warm_up_duration_seconds=self.market_session_warm_up_duration_seconds,
             symbol=self.symbol,
         )
+
+        self.choppiness_feature_extractor = ChoppinessFeatureExtractor()
 
         self.label_loader = LabelLoader(db_conn=self.db_conn)
         self.label_extractor = LabelExtractor(confidence_percentile=75.0)
@@ -111,6 +115,16 @@ class TrainingDataBuilder:
         self.trend_quality_features = (
             self.trend_quality_feature_extractor.fit_transform(features_merge_2)
         )
+
+        features_merge_3 = pd.merge(
+            features_merge_2,
+            self.trend_quality_features,
+            how="inner",
+            on="market_session_id",
+        )
+
+        self.choppiness_features = self.choppiness_feature_extractor.fit_transform(
+            features_merge_3
         )
 
         self._merge_features_and_labels()
@@ -149,6 +163,13 @@ class TrainingDataBuilder:
         self.features = pd.merge(
             self.features,
             self.volatility_features,
+            how="inner",
+            on="market_session_id",
+        )
+
+        self.features = pd.merge(
+            self.features,
+            self.choppiness_features,
             how="inner",
             on="market_session_id",
         )
@@ -221,6 +242,7 @@ class TrainingDataBuilder:
 
         self.feature_columns = (
             self.base_feature_loader.get_feature_names()
+            + self.choppiness_feature_extractor.get_feature_names()
             + self.regime_history_feature_extractor.get_feature_names()
             # + self.price_memory_feature_extractor.get_feature_names()
             + self.trend_quality_feature_extractor.get_feature_names()
