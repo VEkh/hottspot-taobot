@@ -28,12 +28,12 @@ class RegimeHistoryFeatureExtractor:
         self.trending_label = trending_label
 
     # Keep unused data arg to maintain scikit convention
-    def fit(self, data):
+    def fit(self, raw_data):
         self.feature_names_ = self._generate_feature_names()
         return self
 
-    def fit_transform(self, data):
-        return self.fit(data).transform(data)
+    def fit_transform(self, raw_data):
+        return self.fit(raw_data).transform(raw_data)
 
     def get_feature_names(self):
         if self.feature_names_ is None:
@@ -41,19 +41,19 @@ class RegimeHistoryFeatureExtractor:
 
         return self.feature_names_.copy()
 
-    def transform(self, data):
+    def transform(self, raw_data):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
-            "💡  Extracting regime history features from labels.",
+            "💡  Extracting regime history features",
             u.ascii.CYAN,
             print_end="",
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
         if self.feature_names_ is None:
-            self.fit(data)
+            self.fit(raw_data)
 
-        if not isinstance(data, pd.DataFrame):
+        if not isinstance(raw_data, pd.DataFrame):
             raise TypeError("Input must be a pandas DataFrame with required columns")
 
         required_cols = [
@@ -62,19 +62,19 @@ class RegimeHistoryFeatureExtractor:
             "reverse_percentile_id",
         ]
 
-        missing_cols = [col for col in required_cols if col not in data.columns]
+        missing_cols = [col for col in required_cols if col not in raw_data.columns]
 
         if missing_cols:
             raise ValueError(f"Missing required columns: {missing_cols}")
 
         # Sort by time to ensure chronological order (oldest to newest)
         # This is CRITICAL - features must be computed in time order
-        data_sorted = data.sort_values(
+        data = raw_data.sort_values(
             "market_session_opened_at", ascending=True
         ).reset_index(drop=True)
 
-        session_ids = data_sorted["market_session_id"].values
-        labels = data_sorted["reverse_percentile_id"].values
+        session_ids = data["market_session_id"].values
+        labels = data["reverse_percentile_id"].values
 
         n_sessions = len(labels)
         features = pd.DataFrame()

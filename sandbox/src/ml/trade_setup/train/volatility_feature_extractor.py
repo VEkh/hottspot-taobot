@@ -22,7 +22,7 @@ class VolatilityFeatureExtractor:
         self.feature_names_ = None
         self.percentile_window = percentile_window
 
-    def fit(self, data):
+    def fit(self, raw_data):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
             "📊  Extracting volatility features from true ranges.",
@@ -35,8 +35,8 @@ class VolatilityFeatureExtractor:
 
         return self
 
-    def fit_transform(self, data):
-        return self.fit(data).transform(data)
+    def fit_transform(self, raw_data):
+        return self.fit(raw_data).transform(raw_data)
 
     def get_feature_names(self):
         if self.feature_names_ is None:
@@ -44,11 +44,11 @@ class VolatilityFeatureExtractor:
 
         return self.feature_names_.copy()
 
-    def transform(self, data):
+    def transform(self, raw_data):
         if self.feature_names_ is None:
-            self.fit(data)
+            self.fit(raw_data)
 
-        if not isinstance(data, pd.DataFrame):
+        if not isinstance(raw_data, pd.DataFrame):
             raise TypeError("Input must be a pandas DataFrame with required columns")
 
         required_cols = [
@@ -59,25 +59,25 @@ class VolatilityFeatureExtractor:
             "warm_up_true_range",
         ]
 
-        missing_cols = [col for col in required_cols if col not in data.columns]
+        missing_cols = [col for col in required_cols if col not in raw_data.columns]
 
         if missing_cols:
             raise ValueError(f"Missing required columns: {missing_cols}")
 
-        data_sorted = data.sort_values(
+        data = raw_data.sort_values(
             "market_session_opened_at",
             ascending=True,
         ).reset_index(drop=True)
 
         features = pd.DataFrame()
-        features["market_session_id"] = data_sorted["market_session_id"]
+        features["market_session_id"] = data["market_session_id"]
 
         # === LAYER 1: AVERAGE TRUE RANGE AT MULTIPLE HORIZONS ===
         for window in self.atr_windows:
             col_name = f"avg_true_range_{window}"
 
             features[col_name] = (
-                data_sorted["true_range"]
+                data["true_range"]
                 .rolling(
                     window=window,
                     min_periods=window,  # Only compute when we have full window
@@ -122,7 +122,7 @@ class VolatilityFeatureExtractor:
             # Normalized warm-up true range: How volatile was warm-up vs typical?
             # Value of 1.5 = warm-up was 50% more volatile than normal
             features["normalized_warm_up_true_range"] = (
-                data_sorted["warm_up_true_range"] / features["avg_true_range_26"]
+                data["warm_up_true_range"] / features["avg_true_range_26"]
             )
 
         # === LAYER 5: GAP DETECTION ===
@@ -130,8 +130,8 @@ class VolatilityFeatureExtractor:
         # ~1.0 = no gap, >>1.0 = significant gap from previous session
         # Handle division by zero (though should be filtered in SQL)
         features["warm_up_gap_ratio"] = np.where(
-            data_sorted["warm_up_range"] > 0,
-            data_sorted["warm_up_true_range"] / data_sorted["warm_up_range"],
+            data["warm_up_range"] > 0,
+            data["warm_up_true_range"] / data["warm_up_range"],
             1.0,  # Default to no gap if range is zero
         )
 

@@ -31,13 +31,13 @@ class PriceMemoryFeatureExtractor:
         )
         self.proximity_threshold = proximity_threshold
 
-    def fit(self, _base_features):
+    def fit(self, _raw_data):
         self.feature_names_ = self._generate_feature_names()
 
         return self
 
-    def fit_transform(self, base_features):
-        return self.fit(base_features).transform(base_features)
+    def fit_transform(self, raw_data):
+        return self.fit(raw_data).transform(raw_data)
 
     def get_feature_names(self):
         if self.feature_names_ is None:
@@ -45,34 +45,32 @@ class PriceMemoryFeatureExtractor:
 
         return self.feature_names_.copy()
 
-    def transform(self, base_features):
+    def transform(self, raw_data):
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN, print_end="")
         u.ascii.puts(
-            "💰 Extracting price memory features from historical ranges...",
+            "💰 Extracting price memory features",
             u.ascii.CYAN,
             print_end="",
         )
         u.ascii.puts(f"{'=' * 60}", u.ascii.CYAN)
 
         required_cols = [
-            "market_session_id",
-            "market_session_opened_at",
             "high",
             "low",
+            "market_session_id",
+            "market_session_opened_at",
             "range",
             "warm_up_high",
             "warm_up_low",
             "warm_up_range",
         ]
 
-        missing_cols = [
-            col for col in required_cols if col not in base_features.columns
-        ]
+        missing_cols = [col for col in required_cols if col not in raw_data.columns]
 
         if missing_cols:
             raise ValueError(f"Missing required columns: {missing_cols}")
 
-        data = base_features.copy()
+        data = raw_data.copy()
         data = data.sort_values("market_session_opened_at").reset_index(drop=True)
 
         features = pd.DataFrame(index=data.index)
