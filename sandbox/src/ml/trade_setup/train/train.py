@@ -3,6 +3,7 @@ from .trainer import Trainer
 from .training_data_builder import TrainingDataBuilder
 import ml.utils as u
 import textwrap
+import time
 
 
 class Train:
@@ -19,6 +20,7 @@ class Train:
         self.market_session_warm_up_duration_seconds = (
             market_session_warm_up_duration_seconds
         )
+        self.start_epoch = time.time()
         self.symbol = symbol
 
         self.training_data_builder = TrainingDataBuilder(
@@ -59,3 +61,4 @@ class Train:
         )
 
         trainer.train_with_cv()
+        u.time.log_duration(end=time.time(), start=self.start_epoch)

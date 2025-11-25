@@ -1,3 +1,11 @@
+from . import ascii
+
+
+def log_duration(end, start):
+    duration = end - start
+    ascii.puts(f"⏰ Completed in {seconds_to_clock(duration)}", ascii.CYAN)
+
+
 def seconds_to_clock(duration):
     hours = int(duration / (60 * 60))
     minutes = int((duration % (60 * 60)) / 60)
