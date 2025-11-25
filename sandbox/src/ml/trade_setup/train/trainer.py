@@ -56,6 +56,21 @@ class Trainer:
             X_train, X_val = X[train_idx], X[val_idx]
             y_train, y_val = y[train_idx], y[val_idx]
 
+            train_dates = training_data.iloc[train_idx]["market_session_opened_at"]
+            val_dates = training_data.iloc[val_idx]["market_session_opened_at"]
+
+            train_start = train_dates.min()
+            train_end = train_dates.max()
+            val_start = val_dates.min()
+            val_end = val_dates.max()
+
+            u.ascii.puts(
+                f"    Train period: {train_start} to {train_end}",
+                u.ascii.YELLOW,
+                print_end="",
+            )
+            u.ascii.puts(f"    Val period:   {val_start} to {val_end}", u.ascii.YELLOW)
+
             if use_confidence_weighting:
                 weights_train = weights[train_idx]
             else:
@@ -95,6 +110,10 @@ class Trainer:
                 {
                     "fold": fold_idx + 1,
                     "accuracy": accuracy,
+                    "train_start": train_start,
+                    "train_end": train_end,
+                    "val_start": val_start,
+                    "val_end": val_end,
                     "total_optimal_profit_loss": trading_metrics[
                         "total_optimal_profit_loss"
                     ],

@@ -58,7 +58,7 @@ class BaseFeatureLoader:
                   high,
                   low,
                   id as market_session_id,
-                  lower(market_sessions.open_period)::text as market_session_opened_at,
+                  (lower(market_sessions.open_period)::date)::text as market_session_opened_at,
                   (high - low) as range,
                   (abs(warm_up_close - warm_up_open) / abs(warm_up_high - warm_up_low)) as warm_up_body_to_range_ratio,
                   (abs(warm_up_close - warm_up_open) / abs(least(warm_up_close, warm_up_open) - warm_up_low)) as warm_up_body_to_lower_wick_ratio,
