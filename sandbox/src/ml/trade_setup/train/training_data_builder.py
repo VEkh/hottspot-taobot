@@ -3,6 +3,7 @@ from .label_extractor import LabelExtractor
 from .label_loader import LabelLoader
 from .price_memory_feature_extractor import PriceMemoryFeatureExtractor
 from .regime_history_feature_extractor import RegimeHistoryFeatureExtractor
+from .trend_quality_feature_extractor import TrendQualityFeatureExtractor
 from .volatility_feature_extractor import VolatilityFeatureExtractor
 from tabulate import tabulate
 import ml.utils as u
@@ -34,6 +35,7 @@ class TrainingDataBuilder:
         self.reverse_label_mapping = {}
         self.symbol = symbol
         self.training_data = pd.DataFrame()
+        self.trend_quality_features = pd.DataFrame()
         self.volatility_features = pd.DataFrame()
 
         self.base_feature_loader = BaseFeatureLoader(
@@ -57,6 +59,8 @@ class TrainingDataBuilder:
             trending_label=1,
         )
 
+        self.trend_quality_feature_extractor = TrendQualityFeatureExtractor()
+
         self.volatility_feature_extractor = VolatilityFeatureExtractor(
             atr_windows=[4, 8, 14, 26],
             percentile_window=100,
@@ -70,19 +74,43 @@ class TrainingDataBuilder:
 
         self.raw_labels = self.label_loader.load()
         self.labels = self.label_extractor.transform(self.raw_labels)
+
         self.price_memory_features = self.price_memory_feature_extractor.fit_transform(
             self.base_features
         )
+
         self.regime_history_features = (
             self.regime_history_feature_extractor.fit_transform(self.labels)
         )
+
+        features_merge_1 = pd.merge(
+            self.base_features,
+            self.labels,
+            how="inner",
+            on=["market_session_id", "market_session_opened_at"],
+        )
+
         self.volatility_features = self.volatility_feature_extractor.fit_transform(
-            pd.merge(
-                self.base_features,
-                self.labels,
-                how="inner",
-                on=["market_session_id", "market_session_opened_at"],
-            )
+            features_merge_1
+        )
+
+        features_merge_2 = pd.merge(
+            features_merge_1,
+            self.regime_history_features,
+            how="inner",
+            on="market_session_id",
+        )
+
+        features_merge_2 = pd.merge(
+            features_merge_2,
+            self.volatility_features,
+            how="inner",
+            on="market_session_id",
+        )
+
+        self.trend_quality_features = (
+            self.trend_quality_feature_extractor.fit_transform(features_merge_2)
+        )
         )
 
         self._merge_features_and_labels()
@@ -100,6 +128,13 @@ class TrainingDataBuilder:
         self.features = pd.merge(
             self.base_features,
             self.regime_history_features,
+            how="inner",
+            on="market_session_id",
+        )
+
+        self.features = pd.merge(
+            self.features,
+            self.trend_quality_features,
             how="inner",
             on="market_session_id",
         )
@@ -187,6 +222,8 @@ class TrainingDataBuilder:
         self.feature_columns = (
             self.base_feature_loader.get_feature_names()
             + self.regime_history_feature_extractor.get_feature_names()
+            # + self.price_memory_feature_extractor.get_feature_names()
+            + self.trend_quality_feature_extractor.get_feature_names()
             + self.volatility_feature_extractor.get_feature_names()
         )
 

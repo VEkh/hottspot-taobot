@@ -130,22 +130,40 @@ class Trainer:
 
             fold_predictions.append(val_data)
 
-            u.ascii.puts(f"    Accuracy: {accuracy:.1%}", u.ascii.GREEN, print_end="")
+            u.ascii.puts(f"    Accuracy: {accuracy:.1%}", u.ascii.YELLOW, print_end="")
 
-            u.ascii.puts("    Classification Report:", u.ascii.GREEN, print_end="")
+            u.ascii.puts("    Classification Report:", u.ascii.YELLOW, print_end="")
             u.ascii.puts(
                 classification_report(y_val, val_pred, zero_division=0),
-                u.ascii.GREEN,
+                u.ascii.YELLOW,
             )
 
-            u.ascii.puts("    Confusion Matrix:", u.ascii.GREEN, print_end="")
+            u.ascii.puts("    Confusion Matrix:", u.ascii.YELLOW, print_end="")
             u.ascii.puts(
                 str(confusion_matrix(y_val, val_pred)),
-                u.ascii.GREEN,
+                u.ascii.YELLOW,
             )
 
             u.ascii.puts(
                 f"    Mean Confidence: {mean_confidence:.3f}",
+                u.ascii.GREEN,
+                print_end="",
+            )
+
+            u.ascii.puts(
+                f"    Mean Regime Stability: {val_data['regime_stability_last_10'].mean():.3f}",
+                u.ascii.GREEN,
+                print_end="",
+            )
+
+            u.ascii.puts(
+                f"    Mean True Range: {val_data['true_range'].mean():.3f}",
+                u.ascii.GREEN,
+                print_end="",
+            )
+
+            u.ascii.puts(
+                f"    Percent Trending: {((val_data['consecutive_trending'] > 0).mean()):.3%}",
                 u.ascii.GREEN,
                 print_end="",
             )
