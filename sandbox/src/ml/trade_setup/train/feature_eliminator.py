@@ -19,11 +19,15 @@ class FeatureEliminator:
     def __init__(
         self,
         training_data_builder,
+        init_features_removed=None,
         optimization_metric="profit_loss_capture",  # or 'accuracy'
     ):
         self.baseline_performance = None
         self.elimination_history = []
-        self.feature_removed = []
+        self.features_removed = []
+        self.init_features_removed = (
+            init_features_removed if init_features_removed else []
+        )
         self.optimization_metric = optimization_metric
         self.training_data_builder = training_data_builder
 
@@ -99,6 +103,7 @@ class FeatureEliminator:
                 "iteration": iteration,
                 "features_removed": self.features_removed,
                 "features_remaining": current_features.copy(),
+                "init_features_removed": self.init_features_removed,
                 "n_features": len(current_features),
                 "mean_accuracy": best_candidate["mean_accuracy"],
                 "std_accuracy": best_candidate["std_accuracy"],
@@ -184,20 +189,27 @@ class FeatureEliminator:
         u.ascii.puts("📊 BASELINE: Training with ALL Features", u.ascii.CYAN)
         u.ascii.puts(f"{'='*60}", u.ascii.CYAN)
 
+        excluded_features = self.init_features_removed
+
         trainer = Trainer(
-            excluded_features=[],
+            excluded_features=excluded_features,
             training_data_builder=self.training_data_builder,
         )
 
         results = trainer.train_with_cv()
         cv = results["cv"]
 
-        features_remaining = self.training_data_builder.feature_columns.copy()
+        features_remaining = [
+            f
+            for f in self.training_data_builder.feature_columns.copy()
+            if f not in excluded_features
+        ]
 
         baseline = {
             "iteration": 0,
-            "features_removed": [],
+            "features_removed": excluded_features,
             "features_remaining": features_remaining,
+            "init_features_removed": self.init_features_removed,
             "n_features": len(features_remaining),
             "mean_accuracy": cv["accuracy"].mean(),
             "std_accuracy": cv["accuracy"].std(),

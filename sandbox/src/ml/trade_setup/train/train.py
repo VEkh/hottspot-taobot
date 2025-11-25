@@ -46,7 +46,8 @@ class Train:
 
         if self.eliminate_features:
             feature_eliminator = FeatureEliminator(
-                training_data_builder=self.training_data_builder
+                init_features_removed=excluded_features,
+                training_data_builder=self.training_data_builder,
             )
 
             feature_eliminator.run()
