@@ -304,7 +304,7 @@ class FeatureEliminator:
 
         save_path = os.path.join(
             save_dir,
-            f"greedy_backward_feature_elimination_{self.training_data_builder.symbol}.json",
+            f"feature_elimination_{self.training_data_builder.symbol}.json",
         )
 
         with open(save_path, "w") as f:

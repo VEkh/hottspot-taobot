@@ -78,7 +78,9 @@ class TrendQualityFeatureExtractor:
         # High value = stable, clean trend
         # Low value = choppy, uncertain market
         features["trend_cleanliness"] = data["regime_stability_last_10"].values * (
-            1 - data["regime_changes_last_10"].values / 10
+            1
+            - data["regime_changes_last_10"].values
+            / 10  # NOTE: Shouldn't this be 9 since the max number of changes is 9 in a 10-session period?
         )
 
         # Feature 2: Volatility Shock Indicator
@@ -97,6 +99,10 @@ class TrendQualityFeatureExtractor:
             data["regime_changes_last_5"].values
             - data["regime_changes_last_10"].values / 2
         )
+
+        # NOTE: Why is this max_consecutive_either? If high value -> trends
+        # persist, good for rp_id=1, wouldn't that only be the case if we were
+        # normalizing max_consecutive_trending
 
         # Feature 4: Max Consecutive Ratio
         # How long do trends persist?

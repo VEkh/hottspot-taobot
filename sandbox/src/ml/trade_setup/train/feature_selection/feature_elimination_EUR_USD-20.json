@@ -1,7 +1,8 @@
 {
-  "iteration": 0,
+  "iteration": 1,
   "features_removed": [
     "atr_ratio_long",
+    "avg_true_range_14",
     "avg_true_range_4",
     "consecutive_ranging",
     "count_ranging_last_10",
@@ -11,7 +12,6 @@
     "count_trending_last_5",
     "exponential_trending_score",
     "normalized_warm_up_true_range",
-    "ratio_ranging_last_10",
     "ratio_trending_last_10",
     "ratio_trending_last_5",
     "regime_changes_last_20",
@@ -22,13 +22,23 @@
     "volatility_momentum_long",
     "warm_up_body_to_upper_wick_ratio",
     "warm_up_true_range",
-    "avg_true_range_14"
+    "avg_true_range_8"
   ],
   "features_remaining": [
     "warm_up_body_to_lower_wick_ratio",
     "warm_up_body_to_wick_ratio",
     "true_range",
     "warm_up_range",
+    "conservative_conditions_met",
+    "momentum_exhaustion",
+    "ranging_dominance_long",
+    "ranging_dominance_medium",
+    "ranging_dominance_short",
+    "regime_uncertainty_score",
+    "volatility_acceleration",
+    "volatility_regime_shift",
+    "warm_up_volatility_acceleration",
+    "whipsaw_indicator",
     "consecutive_trending",
     "max_consecutive_either",
     "regime_just_switched",
@@ -36,6 +46,7 @@
     "ratio_ranging_last_3",
     "ratio_trending_last_3",
     "ratio_ranging_last_5",
+    "ratio_ranging_last_10",
     "count_ranging_last_20",
     "count_trending_last_20",
     "ratio_ranging_last_20",
@@ -50,7 +61,6 @@
     "regime_switch_acceleration",
     "trend_cleanliness",
     "vol_shock_recent",
-    "avg_true_range_8",
     "avg_true_range_26",
     "atr_ratio_short",
     "volatility_momentum_short",
@@ -59,6 +69,7 @@
   ],
   "init_features_removed": [
     "atr_ratio_long",
+    "avg_true_range_14",
     "avg_true_range_4",
     "consecutive_ranging",
     "count_ranging_last_10",
@@ -68,7 +79,6 @@
     "count_trending_last_5",
     "exponential_trending_score",
     "normalized_warm_up_true_range",
-    "ratio_ranging_last_10",
     "ratio_trending_last_10",
     "ratio_trending_last_5",
     "regime_changes_last_20",
@@ -78,13 +88,12 @@
     "trending_momentum",
     "volatility_momentum_long",
     "warm_up_body_to_upper_wick_ratio",
-    "warm_up_true_range",
-    "avg_true_range_14"
+    "warm_up_true_range"
   ],
-  "n_features": 31,
-  "mean_accuracy": 0.19880239520958085,
-  "std_accuracy": 0.023726482342705336,
-  "mean_profit_loss_capture": 0.09511955650307205,
-  "std_profit_loss_capture": 0.17783359731169693,
-  "mean_confidence": "0.24001308"
+  "n_features": 41,
+  "mean_accuracy": 0.2215568862275449,
+  "std_accuracy": 0.020743123443938645,
+  "mean_profit_loss_capture": 0.10750641316653904,
+  "std_profit_loss_capture": 0.18946773977515993,
+  "mean_confidence": "0.25867784"
 }

@@ -87,7 +87,7 @@ class TrainingDataBuilder:
             self.regime_history_feature_extractor.fit_transform(self.labels)
         )
 
-        features_merge_1 = pd.merge(
+        extraction_input_features = pd.merge(
             self.base_features,
             self.labels,
             how="inner",
@@ -95,36 +95,38 @@ class TrainingDataBuilder:
         )
 
         self.volatility_features = self.volatility_feature_extractor.fit_transform(
-            features_merge_1
+            extraction_input_features
         )
 
-        features_merge_2 = pd.merge(
-            features_merge_1,
+        extraction_input_features = pd.merge(
+            extraction_input_features,
             self.regime_history_features,
             how="inner",
             on="market_session_id",
         )
 
-        features_merge_2 = pd.merge(
-            features_merge_2,
+        extraction_input_features = pd.merge(
+            extraction_input_features,
             self.volatility_features,
             how="inner",
             on="market_session_id",
         )
 
         self.trend_quality_features = (
-            self.trend_quality_feature_extractor.fit_transform(features_merge_2)
+            self.trend_quality_feature_extractor.fit_transform(
+                extraction_input_features
+            )
         )
 
-        features_merge_3 = pd.merge(
-            features_merge_2,
+        extraction_input_features = pd.merge(
+            extraction_input_features,
             self.trend_quality_features,
             how="inner",
             on="market_session_id",
         )
 
         self.choppiness_features = self.choppiness_feature_extractor.fit_transform(
-            features_merge_3
+            extraction_input_features
         )
 
         self._merge_features_and_labels()
@@ -243,10 +245,10 @@ class TrainingDataBuilder:
         self.feature_columns = (
             self.base_feature_loader.get_feature_names()
             + self.choppiness_feature_extractor.get_feature_names()
-            + self.regime_history_feature_extractor.get_feature_names()
+            # + self.regime_history_feature_extractor.get_feature_names()
             # + self.price_memory_feature_extractor.get_feature_names()
-            + self.trend_quality_feature_extractor.get_feature_names()
-            + self.volatility_feature_extractor.get_feature_names()
+            # + self.trend_quality_feature_extractor.get_feature_names()
+            # + self.volatility_feature_extractor.get_feature_names()
         )
 
         u.ascii.puts(f"{'=' * 60}", u.ascii.GREEN, print_end="")

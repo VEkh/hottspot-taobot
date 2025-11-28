@@ -44,29 +44,70 @@ class Train:
 
         self.training_data_builder.build()
 
-        excluded_features = [
-            "atr_ratio_long",
-            "avg_true_range_14",
-            "avg_true_range_4",
-            "consecutive_ranging",
-            "count_ranging_last_10",
-            "count_ranging_last_3",
-            "count_ranging_last_5",
-            "count_trending_last_10",
-            "count_trending_last_5",
-            "exponential_trending_score",
-            "normalized_warm_up_true_range",
-            "ratio_trending_last_10",
-            "ratio_trending_last_5",
-            "regime_changes_last_20",
-            "regime_changes_last_5",
-            "regime_stability_last_5",
-            "sessions_since_regime_change",
-            "trending_momentum",
-            "volatility_momentum_long",
-            "warm_up_body_to_upper_wick_ratio",
-            "warm_up_true_range",
-        ]
+        # 18
+        # excluded_features = [
+        #     "atr_ratio_long",
+        #     "avg_true_range_14",
+        #     "avg_true_range_4",
+        #     "consecutive_ranging",
+        #     "count_ranging_last_10",
+        #     "count_ranging_last_3",
+        #     "count_ranging_last_5",
+        #     "count_trending_last_10",
+        #     "count_trending_last_5",
+        #     "exponential_trending_score",
+        #     "normalized_warm_up_true_range",
+        #     "ratio_trending_last_10",
+        #     "ratio_trending_last_5",
+        #     "regime_changes_last_20",
+        #     "regime_changes_last_5",
+        #     "regime_stability_last_5",
+        #     "sessions_since_regime_change",
+        #     "trending_momentum",
+        #     "volatility_momentum_long",
+        #     "warm_up_body_to_upper_wick_ratio",
+        #     "warm_up_true_range",
+        # ]
+
+        # 21
+        # excluded_features = [
+        #     "atr_ratio_long",
+        #     "avg_true_range_14",
+        #     "avg_true_range_26",
+        #     "avg_true_range_4",
+        #     "consecutive_ranging",
+        #     "count_ranging_last_10",
+        #     "count_ranging_last_3",
+        #     "count_ranging_last_5",
+        #     "count_trending_last_10",
+        #     "count_trending_last_5",
+        #     "exponential_trending_score",
+        #     "normalized_warm_up_true_range",
+        #     "ranging_dominance_medium",
+        #     "ratio_trending_last_10",
+        #     "ratio_trending_last_5",
+        #     "regime_changes_last_20",
+        #     "regime_changes_last_5",
+        #     "regime_stability_last_5",
+        #     "sessions_since_regime_change",
+        #     "trending_momentum",
+        #     "volatility_momentum_long",
+        #     "warm_up_body_to_upper_wick_ratio",
+        #     "warm_up_range",
+        #     "warm_up_true_range",
+        # ]
+
+        # 22
+        excluded_features = ["volatility_regime_shift"]
+
+        # 23
+        # excluded_features = [
+        #     "max_consecutive_ratio",
+        #     "ranging_dominance_long",
+        #     "ranging_dominance_medium",
+        #     "warm_up_range",
+        #     "warm_up_true_range",
+        # ]
 
         if self.eliminate_features:
             feature_eliminator = FeatureEliminator(

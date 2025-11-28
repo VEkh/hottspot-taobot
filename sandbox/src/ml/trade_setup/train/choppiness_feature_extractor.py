@@ -62,7 +62,6 @@ class ChoppinessFeatureExtractor:
             "regime_changes_last_5",
             "trend_cleanliness",
             "true_range",
-            "warm_up_true_range",
         ]
 
         missing = [col for col in required_cols if col not in raw_data.columns]
@@ -116,8 +115,12 @@ class ChoppinessFeatureExtractor:
         # Many switches = whipsawing market = use conservative strategies
         # Combines short-term and medium-term switching rates
 
-        whipsaw_short = data["regime_changes_last_5"] / 5.0
-        whipsaw_medium = data["regime_changes_last_10"] / 10.0
+        whipsaw_short = (
+            data["regime_changes_last_5"] / 5.0
+        )  # NOTE: Shouldn't the divisor be 4?
+        whipsaw_medium = (
+            data["regime_changes_last_10"] / 10.0
+        )  # NOTE: Shouldn't the divisor be 9?
 
         # Combined indicator: average of short and medium term
         features["whipsaw_indicator"] = (whipsaw_short + whipsaw_medium) / 2.0
@@ -149,6 +152,9 @@ class ChoppinessFeatureExtractor:
         #
         # Low values (< 0.3) = momentum exhausted = use conservative
 
+        # NOTE: Isn't the value of this always going to be either 0 or 1?
+        # If consecutive_trending > 0, consecutive_ranging must be 0, right?
+        # This would make max_consecutive_either = consecutive_trending.
         features["momentum_exhaustion"] = np.where(
             data["max_consecutive_either"] > 0,
             data["consecutive_trending"] / data["max_consecutive_either"],
@@ -167,12 +173,6 @@ class ChoppinessFeatureExtractor:
         features["volatility_acceleration"] = np.where(
             data["avg_true_range_8"] > 0,
             data["true_range"] / data["avg_true_range_8"],
-            1.0,  # Default to neutral
-        )
-
-        features["warm_up_volatility_acceleration"] = np.where(
-            data["avg_true_range_8"] > 0,
-            data["warm_up_true_range"] / data["avg_true_range_8"],
             1.0,  # Default to neutral
         )
 
@@ -235,6 +235,5 @@ class ChoppinessFeatureExtractor:
             "regime_uncertainty_score",
             "volatility_acceleration",
             "volatility_regime_shift",
-            "warm_up_volatility_acceleration",
             "whipsaw_indicator",
         ]
