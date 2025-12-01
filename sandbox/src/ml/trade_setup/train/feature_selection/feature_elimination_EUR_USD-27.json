@@ -1,34 +1,32 @@
 {
-  "iteration": 5,
-  "features_removed": [
-    "ranging_dominance_long",
-    "warm_up_true_range",
-    "ranging_dominance_medium",
-    "warm_up_range",
-    "max_consecutive_ratio"
-  ],
+  "iteration": 2,
+  "features_removed": ["warm_up_body_to_upper_wick_ratio", "warm_up_range"],
   "features_remaining": [
     "warm_up_body_to_lower_wick_ratio",
-    "warm_up_body_to_upper_wick_ratio",
     "warm_up_body_to_wick_ratio",
     "true_range",
+    "warm_up_true_range",
     "conservative_conditions_met",
     "momentum_exhaustion",
+    "ranging_dominance_long",
+    "ranging_dominance_medium",
     "ranging_dominance_short",
     "regime_uncertainty_score",
     "volatility_acceleration",
     "volatility_regime_shift",
     "whipsaw_indicator",
     "regime_conviction",
+    "regime_momentum",
+    "regime_persistence",
     "regime_switch_acceleration",
     "trend_cleanliness",
     "vol_shock_recent"
   ],
   "init_features_removed": [],
-  "n_features": 15,
-  "mean_accuracy": 0.22035928143712574,
-  "std_accuracy": 0.03235749960744024,
-  "mean_profit_loss_capture": 0.18619677929494052,
-  "std_profit_loss_capture": 0.15142614129800594,
-  "mean_confidence": "0.24633141"
+  "n_features": 19,
+  "mean_accuracy": 0.21317365269461078,
+  "std_accuracy": 0.02763588205799838,
+  "mean_profit_loss_capture": 0.15473629736603695,
+  "std_profit_loss_capture": 0.10497911530127355,
+  "mean_confidence": "0.25582275"
 }

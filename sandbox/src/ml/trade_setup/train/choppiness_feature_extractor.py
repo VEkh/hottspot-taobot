@@ -115,12 +115,8 @@ class ChoppinessFeatureExtractor:
         # Many switches = whipsawing market = use conservative strategies
         # Combines short-term and medium-term switching rates
 
-        whipsaw_short = (
-            data["regime_changes_last_5"] / 5.0
-        )  # NOTE: Shouldn't the divisor be 4?
-        whipsaw_medium = (
-            data["regime_changes_last_10"] / 10.0
-        )  # NOTE: Shouldn't the divisor be 9?
+        whipsaw_short = data["regime_changes_last_5"] / 4.0
+        whipsaw_medium = data["regime_changes_last_10"] / 9.0
 
         # Combined indicator: average of short and medium term
         features["whipsaw_indicator"] = (whipsaw_short + whipsaw_medium) / 2.0
@@ -152,13 +148,20 @@ class ChoppinessFeatureExtractor:
         #
         # Low values (< 0.3) = momentum exhausted = use conservative
 
-        # NOTE: Isn't the value of this always going to be either 0 or 1?
-        # If consecutive_trending > 0, consecutive_ranging must be 0, right?
-        # This would make max_consecutive_either = consecutive_trending.
+        rolling_max_consecutive = (
+            pd.concat(
+                [data["consecutive_trending"], data["consecutive_ranging"]],
+                axis=1,
+            )
+            .max(axis=1)
+            .rolling(window=20, min_periods=5)
+            .max()
+        )
+
         features["momentum_exhaustion"] = np.where(
-            data["max_consecutive_either"] > 0,
-            data["consecutive_trending"] / data["max_consecutive_either"],
-            0.5,  # Default to neutral if max_consecutive_either is 0
+            rolling_max_consecutive > 0,
+            data["consecutive_trending"] / rolling_max_consecutive,
+            0.5,  # Default to neutral
         )
 
         # ================================================================

@@ -51,6 +51,8 @@ class TrendQualityFeatureExtractor:
         required_cols = [
             "avg_true_range_26",
             "avg_true_range_8",
+            "consecutive_ranging",
+            "consecutive_trending",
             "count_ranging_last_10",
             "count_trending_last_10",
             "market_session_id",
@@ -78,9 +80,7 @@ class TrendQualityFeatureExtractor:
         # High value = stable, clean trend
         # Low value = choppy, uncertain market
         features["trend_cleanliness"] = data["regime_stability_last_10"].values * (
-            1
-            - data["regime_changes_last_10"].values
-            / 10  # NOTE: Shouldn't this be 9 since the max number of changes is 9 in a 10-session period?
+            1 - data["regime_changes_last_10"].values / 9
         )
 
         # Feature 2: Volatility Shock Indicator
@@ -100,17 +100,28 @@ class TrendQualityFeatureExtractor:
             - data["regime_changes_last_10"].values / 2
         )
 
-        # NOTE: Why is this max_consecutive_either? If high value -> trends
-        # persist, good for rp_id=1, wouldn't that only be the case if we were
-        # normalizing max_consecutive_trending
-
-        # Feature 4: Max Consecutive Ratio
-        # How long do trends persist?
-        # High value = trends persist (good for rp_id=1)
-        # Low value = frequent reversals (better for rp_id=2)
+        # Feature 4a: Regime Persistence
+        # How long does the market stay in one regime (trend OR range)?
+        # High value = market committed to current regime
+        # Low value = frequent regime changes
         divisor = data["max_consecutive_either"].quantile(0.95)
-        features["max_consecutive_ratio"] = (
-            data["max_consecutive_either"].values / divisor
+        features["regime_persistence"] = data["max_consecutive_either"].values / divisor
+
+        # Feature 4b: Trend Persistence
+        # How long does the market stay in one regime (trend OR range)?
+        # High value = market committed to current regime
+        # Low value = frequent regime changes
+        features["trend_persistence"] = data["consecutive_trending"].values / divisor
+
+        # Feature 4c: Regime Momentum
+        # How long does the market stay in one regime (trend OR range)?
+        # >0 = Strong trending streak
+        # 0 = Just changed regimes
+        # <0= Strong ranging streak
+        features["regime_momentum"] = np.where(
+            data["consecutive_trending"] > 0,
+            data["consecutive_trending"].values / divisor,
+            -data["consecutive_ranging"].values / divisor,
         )
 
         # Feature 5: Regime Conviction Score
@@ -129,9 +140,11 @@ class TrendQualityFeatureExtractor:
 
     def _generate_feature_names(self):
         return [
-            "max_consecutive_ratio",
             "regime_conviction",
+            "regime_momentum",
+            "regime_persistence",
             "regime_switch_acceleration",
             "trend_cleanliness",
+            "trend_persistence",
             "vol_shock_recent",
         ]

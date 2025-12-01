@@ -1,0 +1,31 @@
+{
+  "iteration": 3,
+  "features_removed": [
+    "ranging_dominance_medium",
+    "whipsaw_indicator",
+    "momentum_exhaustion"
+  ],
+  "features_remaining": [
+    "true_range",
+    "conservative_conditions_met",
+    "ranging_dominance_long",
+    "ranging_dominance_short",
+    "regime_uncertainty_score",
+    "volatility_acceleration",
+    "volatility_regime_shift",
+    "regime_conviction",
+    "regime_momentum",
+    "regime_persistence",
+    "regime_switch_acceleration",
+    "trend_cleanliness",
+    "trend_persistence",
+    "vol_shock_recent"
+  ],
+  "init_features_removed": [],
+  "n_features": 14,
+  "mean_accuracy": 0.21904761904761907,
+  "std_accuracy": 0.03271102777150972,
+  "mean_profit_loss_capture": 0.17412191341944544,
+  "std_profit_loss_capture": 0.08911618107965452,
+  "mean_confidence": "0.24754047"
+}

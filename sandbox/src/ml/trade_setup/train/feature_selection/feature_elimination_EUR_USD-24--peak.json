@@ -1,0 +1,29 @@
+{
+  "iteration": 1,
+  "features_removed": [
+    "whipsaw_indicator"
+  ],
+  "features_remaining": [
+    "warm_up_body_to_lower_wick_ratio",
+    "warm_up_body_to_upper_wick_ratio",
+    "warm_up_body_to_wick_ratio",
+    "true_range",
+    "warm_up_range",
+    "warm_up_true_range",
+    "conservative_conditions_met",
+    "momentum_exhaustion",
+    "ranging_dominance_long",
+    "ranging_dominance_medium",
+    "ranging_dominance_short",
+    "regime_uncertainty_score",
+    "volatility_acceleration",
+    "volatility_regime_shift"
+  ],
+  "init_features_removed": [],
+  "n_features": 14,
+  "mean_accuracy": 0.20718562874251498,
+  "std_accuracy": 0.011672807598573608,
+  "mean_profit_loss_capture": 0.1483780471758313,
+  "std_profit_loss_capture": 0.11731520604316055,
+  "mean_confidence": "0.24550936"
+}
